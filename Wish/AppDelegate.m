@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ECSlidingViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    // configure anchored layout
+    ECSlidingViewController *root = (ECSlidingViewController *)self.window.rootViewController;
+    root.anchorRightPeekAmount = root.view.frame.size.width * 350/640;
+    
+    root.underLeftViewController.edgesForExtendedLayout = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeLeft;
+
+    
     return YES;
 }
 

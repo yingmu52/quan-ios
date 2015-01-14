@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MenuViewController.h
 //  Wish
 //
 //  Created by Xinyi Zhuang on 2015-01-13.
@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
 
+@interface MenuViewController : UITableViewController
 
 @end
-
