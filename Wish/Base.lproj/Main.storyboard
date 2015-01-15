@@ -22,24 +22,6 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VWi-LI-d2K" id="SMG-fP-SrU">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tab-ic-login-default" translatesAutoresizingMaskIntoConstraints="NO" id="r7v-7a-au2">
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="r7v-7a-au2" secondAttribute="height" multiplier="1:1" id="od5-Xy-RQf">
-                                                    <variation key="heightClass=regular-widthClass=compact" constant="1"/>
-                                                </constraint>
-                                            </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="od5-Xy-RQf"/>
-                                                </mask>
-                                            </variation>
-                                            <variation key="heightClass=regular-widthClass=compact">
-                                                <mask key="constraints">
-                                                    <include reference="od5-Xy-RQf"/>
-                                                </mask>
-                                            </variation>
-                                        </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVN-KS-zHa">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                             <constraints>
@@ -59,6 +41,24 @@
                                                 </mask>
                                             </variation>
                                         </label>
+                                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tab-bg-avatar" highlightedImage="tab-bg-avatar" translatesAutoresizingMaskIntoConstraints="NO" id="r7v-7a-au2">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="r7v-7a-au2" secondAttribute="height" multiplier="1:1" id="od5-Xy-RQf">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="1"/>
+                                                </constraint>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="od5-Xy-RQf"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <mask key="constraints">
+                                                    <include reference="od5-Xy-RQf"/>
+                                                </mask>
+                                            </variation>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="dVN-KS-zHa" firstAttribute="top" secondItem="r7v-7a-au2" secondAttribute="bottom" constant="8" symbolic="YES" id="D5z-kd-cSB"/>
@@ -77,38 +77,38 @@
                                     </constraints>
                                     <variation key="default">
                                         <mask key="subviews">
-                                            <exclude reference="r7v-7a-au2"/>
                                             <exclude reference="dVN-KS-zHa"/>
+                                            <exclude reference="r7v-7a-au2"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="tzV-Lc-Xhp"/>
                                             <exclude reference="D5z-kd-cSB"/>
                                             <exclude reference="Qfn-SS-2b3"/>
                                             <exclude reference="Wwf-FV-LlB"/>
                                             <exclude reference="eI6-YZ-Bph"/>
                                             <exclude reference="pKy-EF-36A"/>
                                             <exclude reference="w7N-xk-6Pj"/>
+                                            <exclude reference="tzV-Lc-Xhp"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=compact">
                                         <mask key="subviews">
-                                            <include reference="r7v-7a-au2"/>
                                             <include reference="dVN-KS-zHa"/>
+                                            <include reference="r7v-7a-au2"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="tzV-Lc-Xhp"/>
                                             <include reference="D5z-kd-cSB"/>
                                             <include reference="Qfn-SS-2b3"/>
                                             <include reference="Wwf-FV-LlB"/>
                                             <include reference="eI6-YZ-Bph"/>
                                             <include reference="pKy-EF-36A"/>
                                             <include reference="w7N-xk-6Pj"/>
+                                            <include reference="tzV-Lc-Xhp"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="menuImageView" destination="r7v-7a-au2" id="DeO-EU-Va6"/>
-                                    <outlet property="menuTitle" destination="dVN-KS-zHa" id="Nbf-ZI-JAr"/>
+                                    <outlet property="menuImageView" destination="r7v-7a-au2" id="4mY-wP-foB"/>
+                                    <outlet property="menuTitle" destination="dVN-KS-zHa" id="qMQ-M9-AGH"/>
                                     <segue destination="81G-fy-O9t" kind="custom" customClass="ECSlidingSegue" id="VzD-ti-XQw"/>
                                 </connections>
                             </tableViewCell>
@@ -194,6 +194,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="tab-ic-login-default" width="120" height="128"/>
+        <image name="tab-bg-avatar" width="120" height="128"/>
     </resources>
 </document>

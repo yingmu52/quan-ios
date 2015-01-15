@@ -8,15 +8,10 @@
 
 #import "MenuCell.h"
 
+@interface MenuCell ()
+
+@end
+
 @implementation MenuCell
 
-
-- (void)setMenuImageView:(UIView *)menuImageView
-{
-    _menuImageView = menuImageView;
-    if (_menuImageView) {
-        NSLog(@"no menue image");
-    }
-    NSLog(@"%@",NSStringFromCGRect(self.menuImageView.frame));
-}
 @end
