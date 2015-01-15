@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "ECSlidingViewController.h"
-
 @interface AppDelegate ()
 
 @end
@@ -21,10 +20,10 @@
     
     // configure anchored layout
     ECSlidingViewController *root = (ECSlidingViewController *)self.window.rootViewController;
-    root.anchorRightPeekAmount = root.view.frame.size.width * 400/640;
+    root.anchorRightPeekAmount = root.view.frame.size.width * (640-278)/640;
     
     root.underLeftViewController.edgesForExtendedLayout = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeLeft;
-
+    
     
     return YES;
 }
