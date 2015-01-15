@@ -32,25 +32,6 @@
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     
 }
-//
-//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    CGFloat heightRef = self.tableView.frame.size.height;
-//    CGFloat ratioHead = 278 / 1136;
-//    CGFloat ratioBody = ( 100 + 10 + 32 + 26 ) / 1136;
-//    CGFloat ratioFoot = 1 - ratioHead - ratioBody;
-//    
-//    NSInteger section = indexPath.section;
-//    if (section == 0){
-//        return heightRef * ratioHead;
-//    }else if (section == 1){
-//        return heightRef * ratioBody;
-//    }else if (section == 2){
-//        return heightRef * ratioFoot;
-//    }else{
-//        return 0;
-//    }
-//}
-
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -61,15 +42,16 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat heightRef = tableView.frame.size.height;
-    CGFloat heightLogin = heightRef * 278 / 1136;
-    CGFloat heightOther = heightRef * ( 100 + 10 + 32 + 30 ) / 1136;
+    CGFloat heightLogin = heightRef * 220 / 1136;
+    CGFloat heightOther = heightLogin - 10;
+
     
     if (indexPath.row == 0){
         return heightLogin;
     }else if (indexPath.row >= 1 || indexPath.row <=4){
         return heightOther;
     }else return 0;
-
+    return heightLogin;
 
 }
 
@@ -82,6 +64,7 @@
     
 }
 
+
 - (MenuCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MenuCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MenuCell"
                                                             forIndexPath:indexPath];
@@ -91,7 +74,29 @@
     cell.backgroundColor = [UIColor clearColor];
     cell.layer.backgroundColor = cell.backgroundColor.CGColor;
     
-//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    if (indexPath.row == 0) {
+//        cell.imageView.image = [UIImage imageNamed:@"tab-ic-login-default"];
+
+        cell.menuTitle.text = @"登录";
+    }else if (indexPath.row == 1){
+//        cell.imageView.image = [UIImage imageNamed:@"tab-ic-home-default"];
+//        cell.imageView.highlightedImage = [UIImage imageNamed:@"tab-ic-home-selected"];
+        cell.menuTitle.text = @"愿望列表";
+    }else if (indexPath.row == 2){
+//        cell.imageView.image = [UIImage imageNamed:@"tab-ic-achieve-default"];
+//        cell.imageView.highlightedImage = [UIImage imageNamed:@"tab-ic-achieve-selected"];
+        cell.menuTitle.text = @"我的历程";
+    }else if (indexPath.row == 3){
+//        cell.imageView.image = [UIImage imageNamed:@"tab-ic-discover-default"];
+//        cell.imageView.highlightedImage = [UIImage imageNamed:@"tab-ic-discover-selected"];
+        cell.menuTitle.text = @"发现愿望";
+    }else if (indexPath.row == 4){
+        cell.menuTitle.text = @"关注动态";
+//        cell.imageView.image = [UIImage imageNamed:@"tab-ic-follow-selected"];
+//        cell.imageView.highlightedImage = [UIImage imageNamed:@"tab-ic-follow-selected"];
+
+    }
 
     return cell;
 }

@@ -10,14 +10,13 @@
 
 @implementation MenuCell
 
-- (void)awakeFromNib {
-    // Initialization code
+
+- (void)setMenuImageView:(UIView *)menuImageView
+{
+    _menuImageView = menuImageView;
+    if (_menuImageView) {
+        NSLog(@"no menue image");
+    }
+    NSLog(@"%@",NSStringFromCGRect(self.menuImageView.frame));
 }
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-
 @end
