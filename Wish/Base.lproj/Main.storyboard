@@ -98,7 +98,7 @@
                                         <mask key="constraints">
                                             <include reference="D5z-kd-cSB"/>
                                             <include reference="Qfn-SS-2b3"/>
-                                            <include reference="Wwf-FV-LlB"/>
+                                            <exclude reference="Wwf-FV-LlB"/>
                                             <include reference="eI6-YZ-Bph"/>
                                             <include reference="pKy-EF-36A"/>
                                             <include reference="w7N-xk-6Pj"/>
@@ -255,8 +255,75 @@
                     <view key="view" contentMode="scaleToFill" id="v3t-7r-vWJ">
                         <rect key="frame" x="0.0" y="0.0" width="640" height="1136"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ESj-Tz-rhG" customClass="HomeCardView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GnW-tC-6ma">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="GnW-tC-6ma" secondAttribute="height" multiplier="236:51" id="J9s-HD-Bid"/>
+                                </constraints>
+                                <state key="normal" image="home-ic-camera">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="J9s-HD-Bid"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="J9s-HD-Bid"/>
+                                    </mask>
+                                </variation>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="0.95686274509803926" green="0.97647058823529409" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ESj-Tz-rhG" firstAttribute="leading" secondItem="v3t-7r-vWJ" secondAttribute="leadingMargin" constant="-4" id="Fdf-cj-kMb"/>
+                            <constraint firstItem="ESj-Tz-rhG" firstAttribute="centerX" secondItem="GnW-tC-6ma" secondAttribute="centerX" id="G7f-Jo-Z7a"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="GnW-tC-6ma" secondAttribute="trailing" constant="68" id="HmV-Xo-RKt"/>
+                            <constraint firstItem="GnW-tC-6ma" firstAttribute="bottom" secondItem="eUx-6Z-ly2" secondAttribute="top" id="OHb-le-kX3"/>
+                            <constraint firstItem="ESj-Tz-rhG" firstAttribute="centerY" secondItem="v3t-7r-vWJ" secondAttribute="centerY" id="S4F-Ad-ptO"/>
+                            <constraint firstItem="GnW-tC-6ma" firstAttribute="leading" secondItem="v3t-7r-vWJ" secondAttribute="leadingMargin" constant="68" id="d9o-rT-LlJ"/>
+                            <constraint firstItem="GnW-tC-6ma" firstAttribute="top" secondItem="ESj-Tz-rhG" secondAttribute="bottom" constant="28" id="pcA-r0-wq8"/>
+                            <constraint firstAttribute="centerX" secondItem="GnW-tC-6ma" secondAttribute="centerX" id="sms-kP-tKL"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="ESj-Tz-rhG"/>
+                                <exclude reference="GnW-tC-6ma"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Fdf-cj-kMb"/>
+                                <exclude reference="G7f-Jo-Z7a"/>
+                                <exclude reference="S4F-Ad-ptO"/>
+                                <exclude reference="HmV-Xo-RKt"/>
+                                <exclude reference="OHb-le-kX3"/>
+                                <exclude reference="d9o-rT-LlJ"/>
+                                <exclude reference="pcA-r0-wq8"/>
+                                <exclude reference="sms-kP-tKL"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="ESj-Tz-rhG"/>
+                                <include reference="GnW-tC-6ma"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="Fdf-cj-kMb"/>
+                                <include reference="G7f-Jo-Z7a"/>
+                                <include reference="S4F-Ad-ptO"/>
+                                <include reference="HmV-Xo-RKt"/>
+                                <include reference="OHb-le-kX3"/>
+                                <include reference="d9o-rT-LlJ"/>
+                                <include reference="pcA-r0-wq8"/>
+                                <include reference="sms-kP-tKL"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="bN0-AG-8Es">
                         <nil key="title"/>
@@ -266,7 +333,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d1T-ay-k77" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1752" y="942.75"/>
+            <point key="canvasLocation" x="1609.5" y="877.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FbS-uZ-glk">
@@ -292,6 +359,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="home-ic-camera" width="472" height="102"/>
         <image name="tab-bg-avatar" width="120" height="128"/>
         <image name="tab-ic-message-default" width="50" height="50"/>
         <image name="tab-ic-setting-default" width="50" height="50"/>

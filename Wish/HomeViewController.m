@@ -8,14 +8,15 @@
 
 #import "HomeViewController.h"
 #import "UINavigationItem+CustomItem.h"
-#import "CustomBarItem.h"
 #import "Theme.h"
 #import "MenuViewController.h"
 #import "UIViewController+ECSlidingViewController.h"
+#import "ZLSwipeableView.h"
+@interface HomeViewController () <ZLSwipeableViewDataSource,ZLSwipeableViewDelegate>
 
-@interface HomeViewController ()
+@property  (nonatomic,strong) CustomBarItem *menuButton;
+@property (nonatomic,strong) CustomBarItem *addButton;
 
-@property  (nonatomic,weak) CustomBarItem *menuButton;
 @end
 
 @implementation HomeViewController
@@ -24,49 +25,86 @@
     [super viewDidLoad];
     [self setUpNavigationItem];
 }
-
-- (void)setUpNavigationItem
+- (void)setMenuButton:(CustomBarItem *)menuButton
 {
-    
-    self.menuButton = [self.navigationItem setItemWithImage:[Theme navMenuDefault]
-                                                       size:CGSizeMake(30, 30)
-                                                   itemType:left];
-    [self.menuButton addTarget:self
-                      selector:@selector(menuButtonPressed)
-                         event:UIControlEventTouchUpInside];
-//    MenuViewController *menuVC = (MenuViewController *)self.slidingViewController.underLeftViewController;
-//    [self.menuButton addTarget:self
-//                      selector:@selector(openmenu)
-//                         event:UIControlEventTouchUpInside];
-//    [[UIApplication sharedApplication] keyWindow].rootViewController
-//    [self.navigationItem setItemWithImage:@"nav-ic-tab-default" size:CGSizeMake(30, 30) itemType:left];
-//    
-//    CustomBarItem *centerItem = [self.navigationItem setItemWithTitle:@"中间的中间的中" textColor:[UIColor whiteColor] fontSize:19 itemType:center];
-//    [centerItem addTarget:self selector:@selector(clickTitleView) event:(UIControlEventTouchUpInside)];
-//    
-//    CustomBarItem *rightItem = [self.navigationItem setItemWithTitle:@"右边右边" textColor:[UIColor whiteColor] fontSize:17 itemType:right];
-//    [rightItem setOffset:10];//设置item偏移量(正值向左偏，负值向右偏)
-    
-    //[self setUpLeftNavigationItem];//多个item
+    _menuButton = menuButton;
+    [_menuButton addTarget:self
+                  selector:@selector(openMenu)
+                     event:UIControlEventTouchUpInside];
+    [_menuButton setOffset:5];
 }
 
-- (void)menuButtonPressed{
-    NSLog(@"test");
+- (void)setAddButton:(CustomBarItem *)addButton
+{
+    _addButton = addButton;
+    [_addButton addTarget:self
+                 selector:@selector(addWish)
+                    event:UIControlEventTouchUpInside];
+    [_addButton setOffset:-5];
+}
+- (void)setUpNavigationItem
+{
+    self.menuButton = [self.navigationItem setItemWithImage:[Theme navMenuDefault]
+                                                       size:CGSizeMake(30,30)
+                                                   itemType:left];
+    self.addButton = [self.navigationItem setItemWithImage:[Theme navAddDefault]
+                                                       size:CGSizeMake(30,30)
+                                                   itemType:right];
+}
+
+- (void)addWish{
     
+}
+- (void)openMenu{
+    [self.slidingViewController anchorTopViewToRightAnimated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - ZLSwipeableViewDelegate
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)swipeableView:(ZLSwipeableView *)swipeableView
+         didSwipeLeft:(UIView *)view {
+    NSLog(@"did swipe left");
 }
-*/
+
+- (void)swipeableView:(ZLSwipeableView *)swipeableView
+        didSwipeRight:(UIView *)view {
+    NSLog(@"did swipe right");
+}
+
+- (void)swipeableView:(ZLSwipeableView *)swipeableView
+       didCancelSwipe:(UIView *)view {
+    NSLog(@"did cancel swipe");
+}
+
+- (void)swipeableView:(ZLSwipeableView *)swipeableView
+  didStartSwipingView:(UIView *)view
+           atLocation:(CGPoint)location {
+    NSLog(@"did start swiping at location: x %f, y %f", location.x, location.y);
+}
+
+- (void)swipeableView:(ZLSwipeableView *)swipeableView
+          swipingView:(UIView *)view
+           atLocation:(CGPoint)location
+          translation:(CGPoint)translation {
+    NSLog(@"swiping at location: x %f, y %f, translation: x %f, y %f",
+          location.x, location.y, translation.x, translation.y);
+}
+
+- (void)swipeableView:(ZLSwipeableView *)swipeableView
+    didEndSwipingView:(UIView *)view
+           atLocation:(CGPoint)location {
+    NSLog(@"did end swiping at location: x %f, y %f", location.x, location.y);
+}
+
+#pragma mark - ZLSwipeableViewDataSource
+
+- (UIView *)nextViewForSwipeableView:(ZLSwipeableView *)swipeableView {
+    return nil;
+}
+
 
 @end

@@ -11,6 +11,10 @@
 @implementation Theme
 
 
++ (UIImage *)navAddDefault{
+    return [UIImage imageNamed:@"nav-ic-add-default"];
+}
+
 + (UIImage *)navMenuDefault{
     return [UIImage imageNamed:@"nav-ic-tab-default"];
 }

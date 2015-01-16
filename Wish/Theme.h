@@ -10,6 +10,7 @@
 
 @interface Theme : UIColor
 
+
 +(UIColor *)menuBackground;
 
 +(UIColor *)homeBackground;
@@ -17,4 +18,7 @@
 + (UIColor *)naviBackground;
 
 + (UIImage *)navMenuDefault;
+
++ (UIImage *)navAddDefault;
+
 @end
