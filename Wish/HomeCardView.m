@@ -9,7 +9,7 @@
 #import "HomeCardView.h"
 
 @interface HomeCardView ()
-
+@property (nonatomic,weak) IBOutlet UIView *moreView;
 @end
 
 @implementation HomeCardView
@@ -28,4 +28,13 @@
     //    self.layer.cornerRadius = 10.0;
 }
 
+- (IBAction)dismissMoreView:(id)sender
+{
+    self.moreView.hidden = YES;
+}
+
+- (IBAction)showMoreView:(id)sender
+{
+    self.moreView.hidden = NO;
+}
 @end

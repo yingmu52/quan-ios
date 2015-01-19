@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
-    [self.view layoutIfNeeded];
+    [self.cardView layoutIfNeeded];
 }
 
 - (void)viewDidLayoutSubviews
