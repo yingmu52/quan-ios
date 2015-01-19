@@ -13,7 +13,7 @@
 #import "UIViewController+ECSlidingViewController.h"
 #import "ZLSwipeableView.h"
 #import "HomeCardView.h"
-@interface HomeViewController () <ZLSwipeableViewDataSource,ZLSwipeableViewDelegate>
+@interface HomeViewController () <ZLSwipeableViewDataSource>
 
 @property  (nonatomic,strong) CustomBarItem *menuButton;
 @property (nonatomic,strong) CustomBarItem *addButton;
