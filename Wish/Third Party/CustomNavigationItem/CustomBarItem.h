@@ -13,11 +13,11 @@ typedef enum{
 
     left,
     center,
-    right
+    right,
 
 }ItemType;
 
-@interface CustomBarItem : NSObject
+@interface CustomBarItem : UIBarButtonItem
 
 @property (nonatomic, strong) UIBarButtonItem *fixBarItem;
 @property (nonatomic, strong) UIButton *contentBarItem;

@@ -14,6 +14,13 @@
 
 @implementation HomeCardView
 
+
++ (instancetype)instantiateFromNib
+{
+    return [[[NSBundle mainBundle] loadNibNamed:[NSString stringWithFormat:@"%@", [self class]]
+                                          owner:nil
+                                        options:nil] firstObject];
+}
 - (void)awakeFromNib
 {
     // Shadow

@@ -14,12 +14,13 @@
 
 static CGFloat kEndPoint = 1.5;
 
+
 -(void)awakeFromNib
 {
     [super awakeFromNib];
     
-    [self setNavigationBarWithColor:[Theme naviBackground]];
-    
+//    [self setNavigationBarWithColor:[Theme naviBackground]];
+    [self setBackgroundColor:[Theme naviBackground]];
     //get the rid the fuck off navigation separator
     [self setBackgroundImage:[UIImage new]
                forBarMetrics:UIBarMetricsDefault];

@@ -9,7 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface Theme : UIColor
-
++ (UIButton *)buttonWithImage:(UIImage *)image
+                       target:(id)target
+                     selector:(SEL)method
+                        frame:(CGRect)frame;
++ (UIImage *)navBackButtonDefault;
++ (UIImage *)navComposeButtonDefault;
++ (UIImage *)navShareButtonDefault;
 
 +(UIColor *)menuBackground;
 

@@ -10,4 +10,7 @@
 
 @interface HomeCardView : UIView
 
+
++ (instancetype)instantiateFromNib;
+
 @end

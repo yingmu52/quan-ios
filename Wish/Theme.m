@@ -10,7 +10,33 @@
 
 @implementation Theme
 
++ (UIButton *)buttonWithImage:(UIImage *)image target:(id)target
+                     selector:(SEL)method
+                        frame:(CGRect)frame{
+//    CGRect frame = CGRectMake(10, 10, 30, 30);
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn addTarget:target
+            action:method
+  forControlEvents:UIControlEventTouchUpInside];
+    [btn setImage:image
+         forState:UIControlStateNormal];
+    btn.frame = frame;
+    return btn;
+}
++ (UIImage *)navBackButtonDefault
+{
+    return [UIImage imageNamed:@"nav-ic-back-default"];
+}
 
++ (UIImage *)navComposeButtonDefault
+{
+    return [UIImage imageNamed:@"nav-ic-eidt-default"];
+}
+
++ (UIImage *)navShareButtonDefault
+{
+    return [UIImage imageNamed:@"nav-ic-share-default"];
+}
 + (UIImage *)navAddDefault{
     return [UIImage imageNamed:@"nav-ic-add-default"];
 }

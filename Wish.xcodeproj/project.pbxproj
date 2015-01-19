@@ -19,6 +19,22 @@
 		AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
 		AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
 		AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE72E9541A66F2AA0046B38D /* MenuCell.m */; };
+		AEEC6C4D1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C4C1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m */; };
+		AEEC6C4E1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C4C1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m */; };
+		AEEC6C601A6DB0010021B7E4 /* ALView+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C541A6DB0010021B7E4 /* ALView+PureLayout.m */; };
+		AEEC6C611A6DB0010021B7E4 /* ALView+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C541A6DB0010021B7E4 /* ALView+PureLayout.m */; };
+		AEEC6C621A6DB0010021B7E4 /* NSArray+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C561A6DB0010021B7E4 /* NSArray+PureLayout.m */; };
+		AEEC6C631A6DB0010021B7E4 /* NSArray+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C561A6DB0010021B7E4 /* NSArray+PureLayout.m */; };
+		AEEC6C641A6DB0010021B7E4 /* NSLayoutConstraint+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C581A6DB0010021B7E4 /* NSLayoutConstraint+PureLayout.m */; };
+		AEEC6C651A6DB0010021B7E4 /* NSLayoutConstraint+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C581A6DB0010021B7E4 /* NSLayoutConstraint+PureLayout.m */; };
+		AEEC6C681A6DB0F10021B7E4 /* FirstTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C671A6DB0F10021B7E4 /* FirstTableViewController.m */; };
+		AEEC6C691A6DB0F10021B7E4 /* FirstTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C671A6DB0F10021B7E4 /* FirstTableViewController.m */; };
+		AEEC6C6D1A6DB0FC0021B7E4 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C6B1A6DB0FC0021B7E4 /* HeaderView.m */; };
+		AEEC6C6E1A6DB0FC0021B7E4 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C6B1A6DB0FC0021B7E4 /* HeaderView.m */; };
+		AEEC6C6F1A6DB0FC0021B7E4 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEEC6C6C1A6DB0FC0021B7E4 /* HeaderView.xib */; };
+		AEEC6C701A6DB0FC0021B7E4 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEEC6C6C1A6DB0FC0021B7E4 /* HeaderView.xib */; };
+		AEEC6C731A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C721A6DB11F0021B7E4 /* WishDetailViewController.m */; };
+		AEEC6C741A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C721A6DB11F0021B7E4 /* WishDetailViewController.m */; };
 		AEF3E0D31A6D9B7F00A1FE07 /* ZLPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF3E0D01A6D9B7F00A1FE07 /* ZLPanGestureRecognizer.m */; };
 		AEF3E0D41A6D9B7F00A1FE07 /* ZLPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF3E0D01A6D9B7F00A1FE07 /* ZLPanGestureRecognizer.m */; };
 		AEF3E0D51A6D9B7F00A1FE07 /* ZLSwipeableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF3E0D21A6D9B7F00A1FE07 /* ZLSwipeableView.m */; };
@@ -79,6 +95,24 @@
 		AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCardView.m; sourceTree = "<group>"; };
 		AE72E9531A66F2AA0046B38D /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
 		AE72E9541A66F2AA0046B38D /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
+		AEEC6C4B1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+VGParallaxHeader.h"; sourceTree = "<group>"; };
+		AEEC6C4C1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+VGParallaxHeader.m"; sourceTree = "<group>"; };
+		AEEC6C531A6DB0010021B7E4 /* ALView+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALView+PureLayout.h"; sourceTree = "<group>"; };
+		AEEC6C541A6DB0010021B7E4 /* ALView+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALView+PureLayout.m"; sourceTree = "<group>"; };
+		AEEC6C551A6DB0010021B7E4 /* NSArray+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+PureLayout.h"; sourceTree = "<group>"; };
+		AEEC6C561A6DB0010021B7E4 /* NSArray+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+PureLayout.m"; sourceTree = "<group>"; };
+		AEEC6C571A6DB0010021B7E4 /* NSLayoutConstraint+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+PureLayout.h"; sourceTree = "<group>"; };
+		AEEC6C581A6DB0010021B7E4 /* NSLayoutConstraint+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+PureLayout.m"; sourceTree = "<group>"; };
+		AEEC6C591A6DB0010021B7E4 /* PureLayout+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PureLayout+Internal.h"; sourceTree = "<group>"; };
+		AEEC6C5A1A6DB0010021B7E4 /* PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PureLayout.h; sourceTree = "<group>"; };
+		AEEC6C5B1A6DB0010021B7E4 /* PureLayoutDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PureLayoutDefines.h; sourceTree = "<group>"; };
+		AEEC6C661A6DB0F10021B7E4 /* FirstTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstTableViewController.h; sourceTree = "<group>"; };
+		AEEC6C671A6DB0F10021B7E4 /* FirstTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstTableViewController.m; sourceTree = "<group>"; };
+		AEEC6C6A1A6DB0FC0021B7E4 /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeaderView.h; path = "Third Party/VGParallaxHeader/HeaderView.h"; sourceTree = "<group>"; };
+		AEEC6C6B1A6DB0FC0021B7E4 /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HeaderView.m; path = "Third Party/VGParallaxHeader/HeaderView.m"; sourceTree = "<group>"; };
+		AEEC6C6C1A6DB0FC0021B7E4 /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HeaderView.xib; path = "Third Party/VGParallaxHeader/HeaderView.xib"; sourceTree = "<group>"; };
+		AEEC6C711A6DB11F0021B7E4 /* WishDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishDetailViewController.h; sourceTree = "<group>"; };
+		AEEC6C721A6DB11F0021B7E4 /* WishDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailViewController.m; sourceTree = "<group>"; };
 		AEF3E0CF1A6D9B7F00A1FE07 /* ZLPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLPanGestureRecognizer.h; sourceTree = "<group>"; };
 		AEF3E0D01A6D9B7F00A1FE07 /* ZLPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLPanGestureRecognizer.m; sourceTree = "<group>"; };
 		AEF3E0D11A6D9B7F00A1FE07 /* ZLSwipeableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLSwipeableView.h; sourceTree = "<group>"; };
@@ -149,21 +183,9 @@
 		AE01723B1A65CD8E0014266F /* Wish */ = {
 			isa = PBXGroup;
 			children = (
-				AEF7F2911A686FA30022410B /* Theme.h */,
-				AEF7F2921A686FA30022410B /* Theme.m */,
-				AE1B6E3A1A6D89FC0026F3CE /* HomeCardView.h */,
-				AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */,
-				AE1B6E371A6D884F0026F3CE /* HomeCardView.xib */,
-				AEF7F2991A686FE80022410B /* NavigationBar.h */,
-				AEF7F29A1A686FE80022410B /* NavigationBar.m */,
-				AE0172401A65CD8E0014266F /* AppDelegate.h */,
-				AE0172411A65CD8E0014266F /* AppDelegate.m */,
-				AE0172671A65D3140014266F /* MenuViewController.h */,
-				AE0172681A65D3140014266F /* MenuViewController.m */,
-				AEF7F2951A686FDB0022410B /* HomeViewController.h */,
-				AEF7F2961A686FDB0022410B /* HomeViewController.m */,
-				AE72E9531A66F2AA0046B38D /* MenuCell.h */,
-				AE72E9541A66F2AA0046B38D /* MenuCell.m */,
+				AEEC6C781A6DB6340021B7E4 /* WishDetail */,
+				AEEC6C771A6DB6220021B7E4 /* Home */,
+				AEEC6C751A6DB5EE0021B7E4 /* Menu */,
 				AEF7F29E1A6875360022410B /* Main.storyboard */,
 				AE01724C1A65CD8E0014266F /* Images.xcassets */,
 				AE01724E1A65CD8E0014266F /* LaunchScreen.xib */,
@@ -176,6 +198,12 @@
 		AE01723C1A65CD8E0014266F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AEF7F2911A686FA30022410B /* Theme.h */,
+				AEF7F2921A686FA30022410B /* Theme.m */,
+				AEF7F2991A686FE80022410B /* NavigationBar.h */,
+				AEF7F29A1A686FE80022410B /* NavigationBar.m */,
+				AE0172401A65CD8E0014266F /* AppDelegate.h */,
+				AE0172411A65CD8E0014266F /* AppDelegate.m */,
 				AEF7F2661A686E8A0022410B /* Third Party */,
 				AE01723D1A65CD8E0014266F /* Info.plist */,
 				AE01723E1A65CD8E0014266F /* main.m */,
@@ -200,6 +228,77 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		AEEC6C4A1A6DAD9D0021B7E4 /* VGParallaxHeader */ = {
+			isa = PBXGroup;
+			children = (
+				AEEC6C661A6DB0F10021B7E4 /* FirstTableViewController.h */,
+				AEEC6C671A6DB0F10021B7E4 /* FirstTableViewController.m */,
+				AEEC6C4F1A6DB0010021B7E4 /* PureLayout */,
+				AEEC6C4B1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.h */,
+				AEEC6C4C1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m */,
+			);
+			path = VGParallaxHeader;
+			sourceTree = "<group>";
+		};
+		AEEC6C4F1A6DB0010021B7E4 /* PureLayout */ = {
+			isa = PBXGroup;
+			children = (
+				AEEC6C521A6DB0010021B7E4 /* Source */,
+			);
+			path = PureLayout;
+			sourceTree = "<group>";
+		};
+		AEEC6C521A6DB0010021B7E4 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				AEEC6C531A6DB0010021B7E4 /* ALView+PureLayout.h */,
+				AEEC6C541A6DB0010021B7E4 /* ALView+PureLayout.m */,
+				AEEC6C551A6DB0010021B7E4 /* NSArray+PureLayout.h */,
+				AEEC6C561A6DB0010021B7E4 /* NSArray+PureLayout.m */,
+				AEEC6C571A6DB0010021B7E4 /* NSLayoutConstraint+PureLayout.h */,
+				AEEC6C581A6DB0010021B7E4 /* NSLayoutConstraint+PureLayout.m */,
+				AEEC6C591A6DB0010021B7E4 /* PureLayout+Internal.h */,
+				AEEC6C5A1A6DB0010021B7E4 /* PureLayout.h */,
+				AEEC6C5B1A6DB0010021B7E4 /* PureLayoutDefines.h */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		AEEC6C751A6DB5EE0021B7E4 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				AE72E9531A66F2AA0046B38D /* MenuCell.h */,
+				AE72E9541A66F2AA0046B38D /* MenuCell.m */,
+				AE0172671A65D3140014266F /* MenuViewController.h */,
+				AE0172681A65D3140014266F /* MenuViewController.m */,
+			);
+			name = Menu;
+			sourceTree = "<group>";
+		};
+		AEEC6C771A6DB6220021B7E4 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				AE1B6E3A1A6D89FC0026F3CE /* HomeCardView.h */,
+				AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */,
+				AE1B6E371A6D884F0026F3CE /* HomeCardView.xib */,
+				AEF7F2951A686FDB0022410B /* HomeViewController.h */,
+				AEF7F2961A686FDB0022410B /* HomeViewController.m */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		AEEC6C781A6DB6340021B7E4 /* WishDetail */ = {
+			isa = PBXGroup;
+			children = (
+				AEEC6C6A1A6DB0FC0021B7E4 /* HeaderView.h */,
+				AEEC6C6B1A6DB0FC0021B7E4 /* HeaderView.m */,
+				AEEC6C6C1A6DB0FC0021B7E4 /* HeaderView.xib */,
+				AEEC6C711A6DB11F0021B7E4 /* WishDetailViewController.h */,
+				AEEC6C721A6DB11F0021B7E4 /* WishDetailViewController.m */,
+			);
+			name = WishDetail;
+			sourceTree = "<group>";
+		};
 		AEF3E0CE1A6D9B7F00A1FE07 /* ZLSwipeableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +314,7 @@
 		AEF7F2661A686E8A0022410B /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				AEEC6C4A1A6DAD9D0021B7E4 /* VGParallaxHeader */,
 				AEF3E0CE1A6D9B7F00A1FE07 /* ZLSwipeableView */,
 				AEF7F2A61A6884950022410B /* CustomNavigationItem */,
 				AEF7F26D1A686E8A0022410B /* ECSlidingViewController */,
@@ -344,6 +444,7 @@
 				AE01724D1A65CD8E0014266F /* Images.xcassets in Resources */,
 				AEF7F2A01A6875360022410B /* Main.storyboard in Resources */,
 				AE1B6E381A6D884F0026F3CE /* HomeCardView.xib in Resources */,
+				AEEC6C6F1A6DB0FC0021B7E4 /* HeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,6 +455,7 @@
 				AEF7F29D1A6871F00022410B /* Images.xcassets in Resources */,
 				AEF7F2A11A6875360022410B /* Main.storyboard in Resources */,
 				AE1B6E391A6D884F0026F3CE /* HomeCardView.xib in Resources */,
+				AEEC6C701A6DB0FC0021B7E4 /* HeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,6 +467,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEF7F2851A686E8A0022410B /* ECSlidingInteractiveTransition.m in Sources */,
+				AEEC6C6D1A6DB0FC0021B7E4 /* HeaderView.m in Sources */,
 				AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */,
 				AE0172451A65CD8E0014266F /* Wish.xcdatamodeld in Sources */,
 				AE0172421A65CD8E0014266F /* AppDelegate.m in Sources */,
@@ -374,15 +477,21 @@
 				AEF7F2811A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				AEF7F2891A686E8A0022410B /* ECSlidingViewController.m in Sources */,
 				AEF7F28B1A686E8B0022410B /* UIViewController+ECSlidingViewController.m in Sources */,
+				AEEC6C641A6DB0010021B7E4 /* NSLayoutConstraint+PureLayout.m in Sources */,
 				AEF7F2931A686FA30022410B /* Theme.m in Sources */,
 				AEF7F2971A686FDB0022410B /* HomeViewController.m in Sources */,
 				AEF3E0D31A6D9B7F00A1FE07 /* ZLPanGestureRecognizer.m in Sources */,
 				AEF7F2AD1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */,
 				AEF7F2831A686E8A0022410B /* ECSlidingAnimationController.m in Sources */,
 				AEF7F2871A686E8A0022410B /* ECSlidingSegue.m in Sources */,
+				AEEC6C4D1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */,
 				AE0172691A65D3140014266F /* MenuViewController.m in Sources */,
+				AEEC6C621A6DB0010021B7E4 /* NSArray+PureLayout.m in Sources */,
+				AEEC6C681A6DB0F10021B7E4 /* FirstTableViewController.m in Sources */,
 				AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */,
 				AEF7F29B1A686FE90022410B /* NavigationBar.m in Sources */,
+				AEEC6C731A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,
+				AEEC6C601A6DB0010021B7E4 /* ALView+PureLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +503,8 @@
 				AEF7F28C1A686E8B0022410B /* UIViewController+ECSlidingViewController.m in Sources */,
 				AEF7F28A1A686E8B0022410B /* ECSlidingViewController.m in Sources */,
 				AEF7F2941A686FA30022410B /* Theme.m in Sources */,
+				AEEC6C631A6DB0010021B7E4 /* NSArray+PureLayout.m in Sources */,
+				AEEC6C6E1A6DB0FC0021B7E4 /* HeaderView.m in Sources */,
 				AE01725C1A65CD8F0014266F /* WishTests.m in Sources */,
 				AEF3E0D41A6D9B7F00A1FE07 /* ZLPanGestureRecognizer.m in Sources */,
 				AEF7F2861A686E8A0022410B /* ECSlidingInteractiveTransition.m in Sources */,
@@ -402,10 +513,15 @@
 				AEF3E0D61A6D9B7F00A1FE07 /* ZLSwipeableView.m in Sources */,
 				AEF7F29C1A686FE90022410B /* NavigationBar.m in Sources */,
 				AEF7F2AE1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */,
+				AEEC6C651A6DB0010021B7E4 /* NSLayoutConstraint+PureLayout.m in Sources */,
+				AEEC6C691A6DB0F10021B7E4 /* FirstTableViewController.m in Sources */,
 				AEF7F2881A686E8A0022410B /* ECSlidingSegue.m in Sources */,
+				AEEC6C4E1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */,
 				AEF7F2AC1A6884950022410B /* CustomBarItem.m in Sources */,
+				AEEC6C611A6DB0010021B7E4 /* ALView+PureLayout.m in Sources */,
 				AE01726A1A65D3140014266F /* MenuViewController.m in Sources */,
 				AEF7F2981A686FDB0022410B /* HomeViewController.m in Sources */,
+				AEEC6C741A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
