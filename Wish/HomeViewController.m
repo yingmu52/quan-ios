@@ -125,18 +125,19 @@
                               @"width" : @(view.bounds.size.width)
                               };
     NSDictionary *views = NSDictionaryOfVariableBindings(contentView);
+    [view addConstraints:
+     [NSLayoutConstraint
+      constraintsWithVisualFormat:@"H:|[contentView(width)]"
+      options:0
+      metrics:metrics
+      views:views]];
     [view addConstraints:[NSLayoutConstraint
                           constraintsWithVisualFormat:
-                          @"H:|[contentView(width)]|"
+                          @"V:|[contentView(height)]"
                           options:0
                           metrics:metrics
                           views:views]];
-    [view addConstraints:[NSLayoutConstraint
-                          constraintsWithVisualFormat:
-                          @"V:|[contentView(height)]|"
-                          options:0
-                          metrics:metrics
-                          views:views]];
+
     
     return view;
 }

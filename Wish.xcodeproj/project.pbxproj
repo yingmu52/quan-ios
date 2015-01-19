@@ -19,10 +19,10 @@
 		AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
 		AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
 		AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE72E9541A66F2AA0046B38D /* MenuCell.m */; };
-		AE94A5251A68A985002CE7CE /* ZLPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = AE94A5221A68A985002CE7CE /* ZLPanGestureRecognizer.m */; };
-		AE94A5261A68A985002CE7CE /* ZLPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = AE94A5221A68A985002CE7CE /* ZLPanGestureRecognizer.m */; };
-		AE94A5271A68A985002CE7CE /* ZLSwipeableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE94A5241A68A985002CE7CE /* ZLSwipeableView.m */; };
-		AE94A5281A68A985002CE7CE /* ZLSwipeableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE94A5241A68A985002CE7CE /* ZLSwipeableView.m */; };
+		AEF3E0D31A6D9B7F00A1FE07 /* ZLPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF3E0D01A6D9B7F00A1FE07 /* ZLPanGestureRecognizer.m */; };
+		AEF3E0D41A6D9B7F00A1FE07 /* ZLPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF3E0D01A6D9B7F00A1FE07 /* ZLPanGestureRecognizer.m */; };
+		AEF3E0D51A6D9B7F00A1FE07 /* ZLSwipeableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF3E0D21A6D9B7F00A1FE07 /* ZLSwipeableView.m */; };
+		AEF3E0D61A6D9B7F00A1FE07 /* ZLSwipeableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF3E0D21A6D9B7F00A1FE07 /* ZLSwipeableView.m */; };
 		AEF7F2811A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F26F1A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m */; };
 		AEF7F2821A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F26F1A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m */; };
 		AEF7F2831A686E8A0022410B /* ECSlidingAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F2711A686E8A0022410B /* ECSlidingAnimationController.m */; };
@@ -79,10 +79,10 @@
 		AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCardView.m; sourceTree = "<group>"; };
 		AE72E9531A66F2AA0046B38D /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
 		AE72E9541A66F2AA0046B38D /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
-		AE94A5211A68A985002CE7CE /* ZLPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLPanGestureRecognizer.h; sourceTree = "<group>"; };
-		AE94A5221A68A985002CE7CE /* ZLPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLPanGestureRecognizer.m; sourceTree = "<group>"; };
-		AE94A5231A68A985002CE7CE /* ZLSwipeableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLSwipeableView.h; sourceTree = "<group>"; };
-		AE94A5241A68A985002CE7CE /* ZLSwipeableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLSwipeableView.m; sourceTree = "<group>"; };
+		AEF3E0CF1A6D9B7F00A1FE07 /* ZLPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLPanGestureRecognizer.h; sourceTree = "<group>"; };
+		AEF3E0D01A6D9B7F00A1FE07 /* ZLPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLPanGestureRecognizer.m; sourceTree = "<group>"; };
+		AEF3E0D11A6D9B7F00A1FE07 /* ZLSwipeableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLSwipeableView.h; sourceTree = "<group>"; };
+		AEF3E0D21A6D9B7F00A1FE07 /* ZLSwipeableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLSwipeableView.m; sourceTree = "<group>"; };
 		AEF7F26E1A686E8A0022410B /* ECPercentDrivenInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPercentDrivenInteractiveTransition.h; sourceTree = "<group>"; };
 		AEF7F26F1A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPercentDrivenInteractiveTransition.m; sourceTree = "<group>"; };
 		AEF7F2701A686E8A0022410B /* ECSlidingAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingAnimationController.h; sourceTree = "<group>"; };
@@ -200,21 +200,22 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		AE94A5201A68A985002CE7CE /* ZLSwipeableView */ = {
+		AEF3E0CE1A6D9B7F00A1FE07 /* ZLSwipeableView */ = {
 			isa = PBXGroup;
 			children = (
-				AE94A5211A68A985002CE7CE /* ZLPanGestureRecognizer.h */,
-				AE94A5221A68A985002CE7CE /* ZLPanGestureRecognizer.m */,
-				AE94A5231A68A985002CE7CE /* ZLSwipeableView.h */,
-				AE94A5241A68A985002CE7CE /* ZLSwipeableView.m */,
+				AEF3E0CF1A6D9B7F00A1FE07 /* ZLPanGestureRecognizer.h */,
+				AEF3E0D01A6D9B7F00A1FE07 /* ZLPanGestureRecognizer.m */,
+				AEF3E0D11A6D9B7F00A1FE07 /* ZLSwipeableView.h */,
+				AEF3E0D21A6D9B7F00A1FE07 /* ZLSwipeableView.m */,
 			);
-			path = ZLSwipeableView;
+			name = ZLSwipeableView;
+			path = ../ZLSwipeableView;
 			sourceTree = "<group>";
 		};
 		AEF7F2661A686E8A0022410B /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
-				AE94A5201A68A985002CE7CE /* ZLSwipeableView */,
+				AEF3E0CE1A6D9B7F00A1FE07 /* ZLSwipeableView */,
 				AEF7F2A61A6884950022410B /* CustomNavigationItem */,
 				AEF7F26D1A686E8A0022410B /* ECSlidingViewController */,
 			);
@@ -367,21 +368,21 @@
 				AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */,
 				AE0172451A65CD8E0014266F /* Wish.xcdatamodeld in Sources */,
 				AE0172421A65CD8E0014266F /* AppDelegate.m in Sources */,
-				AE94A5271A68A985002CE7CE /* ZLSwipeableView.m in Sources */,
 				AEF7F2AB1A6884950022410B /* CustomBarItem.m in Sources */,
 				AE01723F1A65CD8E0014266F /* main.m in Sources */,
+				AEF3E0D51A6D9B7F00A1FE07 /* ZLSwipeableView.m in Sources */,
 				AEF7F2811A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				AEF7F2891A686E8A0022410B /* ECSlidingViewController.m in Sources */,
 				AEF7F28B1A686E8B0022410B /* UIViewController+ECSlidingViewController.m in Sources */,
 				AEF7F2931A686FA30022410B /* Theme.m in Sources */,
 				AEF7F2971A686FDB0022410B /* HomeViewController.m in Sources */,
+				AEF3E0D31A6D9B7F00A1FE07 /* ZLPanGestureRecognizer.m in Sources */,
 				AEF7F2AD1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */,
 				AEF7F2831A686E8A0022410B /* ECSlidingAnimationController.m in Sources */,
 				AEF7F2871A686E8A0022410B /* ECSlidingSegue.m in Sources */,
 				AE0172691A65D3140014266F /* MenuViewController.m in Sources */,
 				AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */,
 				AEF7F29B1A686FE90022410B /* NavigationBar.m in Sources */,
-				AE94A5251A68A985002CE7CE /* ZLPanGestureRecognizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,17 +393,17 @@
 				AEF7F2841A686E8A0022410B /* ECSlidingAnimationController.m in Sources */,
 				AEF7F28C1A686E8B0022410B /* UIViewController+ECSlidingViewController.m in Sources */,
 				AEF7F28A1A686E8B0022410B /* ECSlidingViewController.m in Sources */,
-				AE94A5261A68A985002CE7CE /* ZLPanGestureRecognizer.m in Sources */,
 				AEF7F2941A686FA30022410B /* Theme.m in Sources */,
 				AE01725C1A65CD8F0014266F /* WishTests.m in Sources */,
+				AEF3E0D41A6D9B7F00A1FE07 /* ZLPanGestureRecognizer.m in Sources */,
 				AEF7F2861A686E8A0022410B /* ECSlidingInteractiveTransition.m in Sources */,
 				AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */,
 				AEF7F2821A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
+				AEF3E0D61A6D9B7F00A1FE07 /* ZLSwipeableView.m in Sources */,
 				AEF7F29C1A686FE90022410B /* NavigationBar.m in Sources */,
 				AEF7F2AE1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */,
 				AEF7F2881A686E8A0022410B /* ECSlidingSegue.m in Sources */,
 				AEF7F2AC1A6884950022410B /* CustomBarItem.m in Sources */,
-				AE94A5281A68A985002CE7CE /* ZLSwipeableView.m in Sources */,
 				AE01726A1A65D3140014266F /* MenuViewController.m in Sources */,
 				AEF7F2981A686FDB0022410B /* HomeViewController.m in Sources */,
 			);
