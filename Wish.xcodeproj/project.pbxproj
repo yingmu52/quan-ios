@@ -14,13 +14,15 @@
 		AE01725C1A65CD8F0014266F /* WishTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE01725B1A65CD8F0014266F /* WishTests.m */; };
 		AE0172691A65D3140014266F /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0172681A65D3140014266F /* MenuViewController.m */; };
 		AE01726A1A65D3140014266F /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0172681A65D3140014266F /* MenuViewController.m */; };
+		AE1B6E381A6D884F0026F3CE /* HomeCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE1B6E371A6D884F0026F3CE /* HomeCardView.xib */; };
+		AE1B6E391A6D884F0026F3CE /* HomeCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE1B6E371A6D884F0026F3CE /* HomeCardView.xib */; };
+		AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
+		AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
 		AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE72E9541A66F2AA0046B38D /* MenuCell.m */; };
 		AE94A5251A68A985002CE7CE /* ZLPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = AE94A5221A68A985002CE7CE /* ZLPanGestureRecognizer.m */; };
 		AE94A5261A68A985002CE7CE /* ZLPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = AE94A5221A68A985002CE7CE /* ZLPanGestureRecognizer.m */; };
 		AE94A5271A68A985002CE7CE /* ZLSwipeableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE94A5241A68A985002CE7CE /* ZLSwipeableView.m */; };
 		AE94A5281A68A985002CE7CE /* ZLSwipeableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE94A5241A68A985002CE7CE /* ZLSwipeableView.m */; };
-		AE94A52B1A68B641002CE7CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE94A52A1A68B641002CE7CE /* HomeCardView.m */; };
-		AE94A52C1A68B641002CE7CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE94A52A1A68B641002CE7CE /* HomeCardView.m */; };
 		AEF7F2811A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F26F1A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m */; };
 		AEF7F2821A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F26F1A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m */; };
 		AEF7F2831A686E8A0022410B /* ECSlidingAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F2711A686E8A0022410B /* ECSlidingAnimationController.m */; };
@@ -72,14 +74,15 @@
 		AE01725B1A65CD8F0014266F /* WishTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WishTests.m; sourceTree = "<group>"; };
 		AE0172671A65D3140014266F /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		AE0172681A65D3140014266F /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		AE1B6E371A6D884F0026F3CE /* HomeCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCardView.xib; sourceTree = "<group>"; };
+		AE1B6E3A1A6D89FC0026F3CE /* HomeCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCardView.h; sourceTree = "<group>"; };
+		AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCardView.m; sourceTree = "<group>"; };
 		AE72E9531A66F2AA0046B38D /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
 		AE72E9541A66F2AA0046B38D /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		AE94A5211A68A985002CE7CE /* ZLPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLPanGestureRecognizer.h; sourceTree = "<group>"; };
 		AE94A5221A68A985002CE7CE /* ZLPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLPanGestureRecognizer.m; sourceTree = "<group>"; };
 		AE94A5231A68A985002CE7CE /* ZLSwipeableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLSwipeableView.h; sourceTree = "<group>"; };
 		AE94A5241A68A985002CE7CE /* ZLSwipeableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLSwipeableView.m; sourceTree = "<group>"; };
-		AE94A5291A68B641002CE7CE /* HomeCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCardView.h; sourceTree = "<group>"; };
-		AE94A52A1A68B641002CE7CE /* HomeCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCardView.m; sourceTree = "<group>"; };
 		AEF7F26E1A686E8A0022410B /* ECPercentDrivenInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPercentDrivenInteractiveTransition.h; sourceTree = "<group>"; };
 		AEF7F26F1A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPercentDrivenInteractiveTransition.m; sourceTree = "<group>"; };
 		AEF7F2701A686E8A0022410B /* ECSlidingAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingAnimationController.h; sourceTree = "<group>"; };
@@ -148,8 +151,9 @@
 			children = (
 				AEF7F2911A686FA30022410B /* Theme.h */,
 				AEF7F2921A686FA30022410B /* Theme.m */,
-				AE94A5291A68B641002CE7CE /* HomeCardView.h */,
-				AE94A52A1A68B641002CE7CE /* HomeCardView.m */,
+				AE1B6E3A1A6D89FC0026F3CE /* HomeCardView.h */,
+				AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */,
+				AE1B6E371A6D884F0026F3CE /* HomeCardView.xib */,
 				AEF7F2991A686FE80022410B /* NavigationBar.h */,
 				AEF7F29A1A686FE80022410B /* NavigationBar.m */,
 				AE0172401A65CD8E0014266F /* AppDelegate.h */,
@@ -338,6 +342,7 @@
 			files = (
 				AE01724D1A65CD8E0014266F /* Images.xcassets in Resources */,
 				AEF7F2A01A6875360022410B /* Main.storyboard in Resources */,
+				AE1B6E381A6D884F0026F3CE /* HomeCardView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,6 +352,7 @@
 			files = (
 				AEF7F29D1A6871F00022410B /* Images.xcassets in Resources */,
 				AEF7F2A11A6875360022410B /* Main.storyboard in Resources */,
+				AE1B6E391A6D884F0026F3CE /* HomeCardView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,7 +364,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEF7F2851A686E8A0022410B /* ECSlidingInteractiveTransition.m in Sources */,
-				AE94A52B1A68B641002CE7CE /* HomeCardView.m in Sources */,
+				AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */,
 				AE0172451A65CD8E0014266F /* Wish.xcdatamodeld in Sources */,
 				AE0172421A65CD8E0014266F /* AppDelegate.m in Sources */,
 				AE94A5271A68A985002CE7CE /* ZLSwipeableView.m in Sources */,
@@ -390,7 +396,7 @@
 				AEF7F2941A686FA30022410B /* Theme.m in Sources */,
 				AE01725C1A65CD8F0014266F /* WishTests.m in Sources */,
 				AEF7F2861A686E8A0022410B /* ECSlidingInteractiveTransition.m in Sources */,
-				AE94A52C1A68B641002CE7CE /* HomeCardView.m in Sources */,
+				AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */,
 				AEF7F2821A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				AEF7F29C1A686FE90022410B /* NavigationBar.m in Sources */,
 				AEF7F2AE1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */,

@@ -2,12 +2,12 @@
 //  HomeCardView.h
 //  Wish
 //
-//  Created by Xinyi Zhuang on 2015-01-15.
+//  Created by Xinyi Zhuang on 2015-01-19.
 //  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
 //
 
-#import "ZLSwipeableView.h"
+#import <UIKit/UIKit.h>
 
-@interface HomeCardView : ZLSwipeableView
+@interface HomeCardView : UIView
 
 @end

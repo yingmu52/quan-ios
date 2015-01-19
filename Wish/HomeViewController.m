@@ -12,11 +12,13 @@
 #import "MenuViewController.h"
 #import "UIViewController+ECSlidingViewController.h"
 #import "ZLSwipeableView.h"
+#import "HomeCardView.h"
 @interface HomeViewController () <ZLSwipeableViewDataSource,ZLSwipeableViewDelegate>
 
 @property  (nonatomic,strong) CustomBarItem *menuButton;
 @property (nonatomic,strong) CustomBarItem *addButton;
 
+@property (nonatomic,weak) IBOutlet ZLSwipeableView *cardView;
 @end
 
 @implementation HomeViewController
@@ -24,6 +26,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
+    [self.view layoutIfNeeded];
+}
+
+- (void)viewDidLayoutSubviews
+{
+    self.cardView.dataSource = self;
 }
 - (void)setMenuButton:(CustomBarItem *)menuButton
 {
@@ -103,7 +111,34 @@
 #pragma mark - ZLSwipeableViewDataSource
 
 - (UIView *)nextViewForSwipeableView:(ZLSwipeableView *)swipeableView {
-    return nil;
+    UIView *view = [[UIView alloc] initWithFrame:swipeableView.bounds];
+    HomeCardView *contentView = [[[NSBundle mainBundle] loadNibNamed:@"HomeCardView"
+                                   owner:self
+                                 options:nil] firstObject];
+    contentView.translatesAutoresizingMaskIntoConstraints = NO;
+    [view addSubview:contentView];
+    
+    // This is important:
+    // https://github.com/zhxnlai/ZLSwipeableView/issues/9
+    NSDictionary *metrics = @{
+                              @"height" : @(view.bounds.size.height),
+                              @"width" : @(view.bounds.size.width)
+                              };
+    NSDictionary *views = NSDictionaryOfVariableBindings(contentView);
+    [view addConstraints:[NSLayoutConstraint
+                          constraintsWithVisualFormat:
+                          @"H:|[contentView(width)]|"
+                          options:0
+                          metrics:metrics
+                          views:views]];
+    [view addConstraints:[NSLayoutConstraint
+                          constraintsWithVisualFormat:
+                          @"V:|[contentView(height)]|"
+                          options:0
+                          metrics:metrics
+                          views:views]];
+    
+    return view;
 }
 
 
