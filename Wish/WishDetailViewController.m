@@ -7,7 +7,7 @@
 //
 
 #import "WishDetailViewController.h"
-//#import "CustomBarItem.h"
+#import "WishDetailCell.h"
 #import "UINavigationItem+CustomItem.h"
 #import "Theme.h"
 @interface WishDetailViewController ()
@@ -23,6 +23,7 @@
     
     self.scrollOffset = 0.0;
     [self loadCamera];
+
 }
 
 - (void)loadCamera
@@ -106,15 +107,7 @@
 }
 */
 
-#pragma mark - Scroll view delegate
-
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    
-//    self.cameraButton.hidden = NO;
-}
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+- (void)determineApperance:(UIScrollView *)scrollView optinal:(WishDetailCell *)cell
 {
     if (scrollView.contentOffset.y > self.scrollOffset) {
         
@@ -122,6 +115,7 @@
         self.scrollOffset = scrollView.contentOffset.y;
         NSLog(@"scrolling down");
         self.cameraButton.hidden = NO;
+//        [cell showLikeAndComment];
     }
     else
     {
@@ -130,11 +124,28 @@
         
         NSLog(@"scrolling up");
         self.cameraButton.hidden = YES;
-        
+//        [cell dismissLikeAndComment];
+
     }
    
 }
 
+#pragma mark - Scroll view delegate
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self determineApperance:scrollView optinal:nil];
+}
+#pragma mark - Table view delegate
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    [self determineApperance:tableView optinal:(WishDetailCell *)cell];
+//}
+
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self determineApperance:tableView optinal:(WishDetailCell *)cell];
+}
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

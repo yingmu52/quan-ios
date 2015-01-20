@@ -10,4 +10,9 @@
 
 @interface WishDetailCell : UITableViewCell
 
+
+-(void)showLikeAndComment;
+
+- (void)dismissLikeAndComment;
+
 @end
