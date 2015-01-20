@@ -56,8 +56,6 @@
 {
     cell.backgroundColor = [UIColor clearColor];
     cell.layer.backgroundColor = cell.backgroundColor.CGColor;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
 }
 - (MenuCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MenuCell *cell;
@@ -89,7 +87,7 @@
         }
 
     }else if (indexPath.row == 5){
-        cell = [tableView dequeueReusableCellWithIdentifier:@"BottomCell"
+        cell = [tableView dequeueReusableCellWithIdentifier:@"BottomCellLogout"
                                                forIndexPath:indexPath];
     }else return nil;
 
