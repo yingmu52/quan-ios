@@ -12,7 +12,7 @@
         <scene sceneID="Xao-HT-U6w">
             <objects>
                 <tableViewController storyboardIdentifier="MenuViewController" id="7yJ-9s-9cX" customClass="MenuViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="184" sectionHeaderHeight="22" sectionFooterHeight="22" id="SQr-Vp-d7f">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="184" sectionHeaderHeight="22" sectionFooterHeight="22" id="SQr-Vp-d7f">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -35,7 +35,8 @@
                                                     <exclude reference="x6Z-zf-Udw"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact">
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="8" y="158" width="384" height="21"/>
                                                 <mask key="constraints">
                                                     <include reference="x6Z-zf-Udw"/>
                                                 </mask>
@@ -53,7 +54,8 @@
                                                     <exclude reference="od5-Xy-RQf"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact">
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="129" y="8" width="143" height="142"/>
                                                 <mask key="constraints">
                                                     <include reference="od5-Xy-RQf"/>
                                                 </mask>
@@ -131,7 +133,8 @@
                                                     <exclude reference="nxa-Bv-0z1"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact">
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="34" y="38" width="40" height="40"/>
                                                 <mask key="constraints">
                                                     <include reference="nxa-Bv-0z1"/>
                                                 </mask>
@@ -150,7 +153,8 @@
                                                     <exclude reference="ZId-9Z-PWT"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact">
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="326" y="38" width="40" height="40"/>
                                                 <mask key="constraints">
                                                     <include reference="ZId-9Z-PWT"/>
                                                 </mask>
@@ -353,7 +357,7 @@
         <scene sceneID="274-7i-jhG">
             <objects>
                 <tableViewController id="b5E-B5-8Ys" customClass="WishDetailViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="326" sectionHeaderHeight="22" sectionFooterHeight="22" id="XKw-Eq-NrX">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="326" sectionHeaderHeight="22" sectionFooterHeight="22" id="XKw-Eq-NrX">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

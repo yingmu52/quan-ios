@@ -123,26 +123,22 @@
         // scrolls down.
         self.scrollOffset = scrollView.contentOffset.y;
         self.cameraButton.hidden = NO;
-        for (WishDetailCell *cell in self.tableView.visibleCells){
-            [UIView animateWithDuration:0.1 animations:^{
-                [cell showLikeAndComment];
-
-            }];
-        }
     }
     else
     {
         // scrolls up.
         self.scrollOffset = scrollView.contentOffset.y;
         self.cameraButton.hidden = YES;
-        for (WishDetailCell *cell in self.tableView.visibleCells){
-            [UIView animateWithDuration:0.1 animations:^{
-                [cell dismissLikeAndComment];
-                
-            }];
-        }
     }
-
+    for (WishDetailCell *cell in self.tableView.visibleCells){
+        [UIView animateWithDuration:0.1 animations:^{
+            if (self.cameraButton.isHidden) {
+                [cell dismissLikeAndComment];
+            }else{
+                [cell showLikeAndComment];
+            }
+        }];
+    }
    
 }
 

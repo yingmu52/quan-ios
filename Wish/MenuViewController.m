@@ -28,8 +28,6 @@
     
     //set menu background image
     self.tableView.backgroundColor = [Theme menuBackground];
-    //remove table view separator
-    self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     
 }
 
