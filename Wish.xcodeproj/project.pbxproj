@@ -18,6 +18,9 @@
 		AE1B6E391A6D884F0026F3CE /* HomeCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE1B6E371A6D884F0026F3CE /* HomeCardView.xib */; };
 		AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
 		AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
+		AE30EE6D1A6E19D00044740D /* WishDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE30EE6C1A6E19D00044740D /* WishDetailCell.m */; };
+		AE30EE6F1A6E1E520044740D /* snow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE30EE6E1A6E1E520044740D /* snow.jpg */; };
+		AE30EE701A6E1E520044740D /* snow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE30EE6E1A6E1E520044740D /* snow.jpg */; };
 		AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE72E9541A66F2AA0046B38D /* MenuCell.m */; };
 		AEEC6C4D1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C4C1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m */; };
 		AEEC6C4E1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C4C1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m */; };
@@ -93,6 +96,9 @@
 		AE1B6E371A6D884F0026F3CE /* HomeCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCardView.xib; sourceTree = "<group>"; };
 		AE1B6E3A1A6D89FC0026F3CE /* HomeCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCardView.h; sourceTree = "<group>"; };
 		AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCardView.m; sourceTree = "<group>"; };
+		AE30EE6B1A6E19D00044740D /* WishDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishDetailCell.h; sourceTree = "<group>"; };
+		AE30EE6C1A6E19D00044740D /* WishDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailCell.m; sourceTree = "<group>"; };
+		AE30EE6E1A6E1E520044740D /* snow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = snow.jpg; sourceTree = "<group>"; };
 		AE72E9531A66F2AA0046B38D /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
 		AE72E9541A66F2AA0046B38D /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		AEEC6C4B1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+VGParallaxHeader.h"; sourceTree = "<group>"; };
@@ -164,6 +170,7 @@
 		AE0172301A65CD8E0014266F = {
 			isa = PBXGroup;
 			children = (
+				AE30EE6E1A6E1E520044740D /* snow.jpg */,
 				AE01723B1A65CD8E0014266F /* Wish */,
 				AE0172581A65CD8E0014266F /* WishTests */,
 				AE01723A1A65CD8E0014266F /* Products */,
@@ -290,6 +297,8 @@
 		AEEC6C781A6DB6340021B7E4 /* WishDetail */ = {
 			isa = PBXGroup;
 			children = (
+				AE30EE6B1A6E19D00044740D /* WishDetailCell.h */,
+				AE30EE6C1A6E19D00044740D /* WishDetailCell.m */,
 				AEEC6C6A1A6DB0FC0021B7E4 /* HeaderView.h */,
 				AEEC6C6B1A6DB0FC0021B7E4 /* HeaderView.m */,
 				AEEC6C6C1A6DB0FC0021B7E4 /* HeaderView.xib */,
@@ -442,6 +451,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE01724D1A65CD8E0014266F /* Images.xcassets in Resources */,
+				AE30EE6F1A6E1E520044740D /* snow.jpg in Resources */,
 				AEF7F2A01A6875360022410B /* Main.storyboard in Resources */,
 				AE1B6E381A6D884F0026F3CE /* HomeCardView.xib in Resources */,
 				AEEC6C6F1A6DB0FC0021B7E4 /* HeaderView.xib in Resources */,
@@ -453,6 +463,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEF7F29D1A6871F00022410B /* Images.xcassets in Resources */,
+				AE30EE701A6E1E520044740D /* snow.jpg in Resources */,
 				AEF7F2A11A6875360022410B /* Main.storyboard in Resources */,
 				AE1B6E391A6D884F0026F3CE /* HomeCardView.xib in Resources */,
 				AEEC6C701A6DB0FC0021B7E4 /* HeaderView.xib in Resources */,
@@ -492,6 +503,7 @@
 				AEF7F29B1A686FE90022410B /* NavigationBar.m in Sources */,
 				AEEC6C731A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,
 				AEEC6C601A6DB0010021B7E4 /* ALView+PureLayout.m in Sources */,
+				AE30EE6D1A6E19D00044740D /* WishDetailCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
