@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -156,18 +157,18 @@
                     <exclude reference="hf3-b5-NA0"/>
                 </mask>
                 <mask key="constraints">
-                    <exclude reference="GEv-Yo-YJw"/>
-                    <exclude reference="nwp-rw-w5n"/>
                     <exclude reference="dcV-CG-C0p"/>
                     <exclude reference="v7g-G0-zYI"/>
-                    <exclude reference="DlD-sG-J6n"/>
-                    <exclude reference="gBL-Bm-8KN"/>
-                    <exclude reference="zUc-xs-JI6"/>
-                    <exclude reference="SMI-ur-ICr"/>
                     <exclude reference="8Lw-UR-jG7"/>
                     <exclude reference="KMQ-DF-0fu"/>
                     <exclude reference="b8c-ue-iKe"/>
                     <exclude reference="y0C-Ns-Yns"/>
+                    <exclude reference="DlD-sG-J6n"/>
+                    <exclude reference="gBL-Bm-8KN"/>
+                    <exclude reference="zUc-xs-JI6"/>
+                    <exclude reference="SMI-ur-ICr"/>
+                    <exclude reference="GEv-Yo-YJw"/>
+                    <exclude reference="nwp-rw-w5n"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
@@ -180,18 +181,18 @@
                     <include reference="hf3-b5-NA0"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="GEv-Yo-YJw"/>
-                    <include reference="nwp-rw-w5n"/>
                     <include reference="dcV-CG-C0p"/>
                     <include reference="v7g-G0-zYI"/>
-                    <include reference="DlD-sG-J6n"/>
-                    <include reference="gBL-Bm-8KN"/>
-                    <include reference="zUc-xs-JI6"/>
-                    <include reference="SMI-ur-ICr"/>
                     <include reference="8Lw-UR-jG7"/>
                     <include reference="KMQ-DF-0fu"/>
                     <include reference="b8c-ue-iKe"/>
                     <include reference="y0C-Ns-Yns"/>
+                    <include reference="DlD-sG-J6n"/>
+                    <include reference="gBL-Bm-8KN"/>
+                    <include reference="zUc-xs-JI6"/>
+                    <include reference="SMI-ur-ICr"/>
+                    <include reference="GEv-Yo-YJw"/>
+                    <include reference="nwp-rw-w5n"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="269" y="201"/>

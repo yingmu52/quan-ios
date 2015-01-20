@@ -11,7 +11,8 @@
 #import "UINavigationItem+CustomItem.h"
 #import "Theme.h"
 @interface WishDetailViewController ()
-
+@property (nonatomic,strong) UIButton *cameraButton;
+@property (nonatomic) CGFloat scrollOffset;
 @end
 
 @implementation WishDetailViewController
@@ -19,7 +20,49 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
-    // Do any additional setup after loading the view.
+    
+    self.scrollOffset = 0.0;
+    [self loadCamera];
+}
+
+- (void)loadCamera
+{
+    //load camera image
+    UIImage *cameraIcon = [Theme wishDetailCameraDefault];
+    
+
+//    CGFloat x = self.tableView.frame.size.width - 58 - cameraIcon.size.width;
+//    CGFloat y = self.tableView.frame.size.height - 32 - cameraIcon.size.height;
+//    self.cameraButton = [[UIButton alloc] initWithFrame:CGRectMake(x, y, cameraIcon.size.width, cameraIcon.size.height)];
+    UIButton *cameraButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [cameraButton setImage:cameraIcon forState:UIControlStateNormal];
+    cameraButton.hidden = YES;
+    
+    [cameraButton setFrame:CGRectMake(self.tableView.frame.size.width - cameraIcon.size.width/2,
+                                           self.tableView.frame.size.height - cameraIcon.size.height/2,
+                                           cameraIcon.size.width/2,
+                                           cameraIcon.size.height/2)];
+    UIWindow *topView = [[UIApplication sharedApplication] keyWindow];
+    
+    [topView addSubview:cameraButton];
+    
+    //lock camera to buttom right corner
+//    cameraButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [topView addConstraints:[NSLayoutConstraint
+                               constraintsWithVisualFormat:@"V:|-[cameraButton(==10)]-|"
+                               options:NSLayoutFormatDirectionLeadingToTrailing
+                               metrics:nil
+                               views:NSDictionaryOfVariableBindings(cameraButton)]];
+    
+    [topView addConstraints:[NSLayoutConstraint
+                               constraintsWithVisualFormat:@"H:[cameraButton(==10)]-|"
+                               options:NSLayoutFormatDirectionLeadingToTrailing
+                               metrics:nil
+                               views:NSDictionaryOfVariableBindings(cameraButton)]];
+    
+    self.cameraButton = cameraButton;
+    
+
 }
 
 - (void)setUpNavigationItem
@@ -63,18 +106,36 @@
 }
 */
 
+#pragma mark - Scroll view delegate
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    
+//    self.cameraButton.hidden = NO;
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y > self.scrollOffset) {
+        
+        // scrolls down.
+        self.scrollOffset = scrollView.contentOffset.y;
+        NSLog(@"scrolling down");
+        self.cameraButton.hidden = NO;
+    }
+    else
+    {
+        // scrolls up.
+        self.scrollOffset = scrollView.contentOffset.y;
+        
+        NSLog(@"scrolling up");
+        self.cameraButton.hidden = YES;
+        
+    }
+   
+}
 
 #pragma mark - Table view data source
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    return [NSString stringWithFormat:@"Section %@", @(section)];
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 10;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
@@ -83,7 +144,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WishDetailCell" forIndexPath:indexPath];
-    cell.textLabel.text = [NSString stringWithFormat:@"Row %@", @(indexPath.row)];
+//    cell.textLabel.text = [NSString stringWithFormat:@"Row %@", @(indexPath.row)];
     
     return cell;
 }

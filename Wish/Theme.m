@@ -23,6 +23,11 @@
     if (!CGRectIsEmpty(frame)) btn.frame = frame;
     return btn;
 }
+
++ (UIImage *)wishDetailCameraDefault
+{
+    return [UIImage imageNamed:@"stop-ic-camera"];
+}
 + (UIImage *)navBackButtonDefault
 {
     return [UIImage imageNamed:@"nav-ic-back-default"];

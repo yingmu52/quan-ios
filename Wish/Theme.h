@@ -17,6 +17,8 @@
 + (UIImage *)navComposeButtonDefault;
 + (UIImage *)navShareButtonDefault;
 
++ (UIImage *)wishDetailCameraDefault;
+
 +(UIColor *)menuBackground;
 
 +(UIColor *)homeBackground;
