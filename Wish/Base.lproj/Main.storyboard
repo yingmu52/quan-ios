@@ -13,7 +13,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="MenuViewController" id="7yJ-9s-9cX" customClass="MenuViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="184" sectionHeaderHeight="22" sectionFooterHeight="22" id="SQr-Vp-d7f">
-                        <rect key="frame" x="0.0" y="0.0" width="290" height="1136"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -35,8 +35,7 @@
                                                     <exclude reference="x6Z-zf-Udw"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="8" y="158" width="274" height="21"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
                                                     <include reference="x6Z-zf-Udw"/>
                                                 </mask>
@@ -54,8 +53,7 @@
                                                     <exclude reference="od5-Xy-RQf"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="74" y="8" width="143" height="142"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
                                                     <include reference="od5-Xy-RQf"/>
                                                 </mask>
@@ -152,8 +150,7 @@
                                                     <exclude reference="ZId-9Z-PWT"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="216" y="38" width="40" height="40"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
                                                     <include reference="ZId-9Z-PWT"/>
                                                 </mask>
@@ -381,7 +378,6 @@
         <!--Navigation Controller-->
         <scene sceneID="FbS-uZ-glk">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="b0e-We-ijJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="HomeNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="81G-fy-O9t" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WjJ-64-HOQ" customClass="NavigationBar">
@@ -396,6 +392,7 @@
                         <segue destination="wW8-3k-YAd" kind="relationship" relationship="rootViewController" id="rdy-vM-FMw"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b0e-We-ijJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="637.5" y="851.25"/>
         </scene>
