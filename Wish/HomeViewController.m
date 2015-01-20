@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   [self setUpNavigationItem];
+    [self setUpNavigationItem];
 
 }
 

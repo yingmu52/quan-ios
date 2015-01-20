@@ -22,7 +22,10 @@
 
 - (void)awakeFromNib {
     // Initialization code
-
+    self.isWidgetVisible = self.likeButton.isHidden
+                        && self.likeLabel.isHidden
+                        && self.commentButton.isHidden
+                        && self.commentLabel.isHidden;
 
 }
 

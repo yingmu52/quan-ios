@@ -10,9 +10,9 @@
 #import "WishDetailCell.h"
 #import "UINavigationItem+CustomItem.h"
 #import "Theme.h"
-@interface WishDetailViewController ()
+@interface WishDetailViewController () <UIGestureRecognizerDelegate>
 @property (nonatomic,strong) UIButton *cameraButton;
-@property (nonatomic) CGFloat scrollOffset;
+@property (nonatomic) CGFloat yVel;
 @property (nonatomic) BOOL shouldShowSideWidgets;
 @end
 
@@ -26,7 +26,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.scrollOffset = 0.0;
     self.shouldShowSideWidgets = YES;
     [self loadCamera];
 }
@@ -40,21 +39,14 @@
 {
     //load camera image
     UIImage *cameraIcon = [Theme wishDetailCameraDefault];
-    
-
-//    CGFloat x = self.tableView.frame.size.width - 58 - cameraIcon.size.width;
-//    CGFloat y = self.tableView.frame.size.height - 32 - cameraIcon.size.height;
-//    self.cameraButton = [[UIButton alloc] initWithFrame:CGRectMake(x, y, cameraIcon.size.width, cameraIcon.size.height)];
     UIButton *cameraButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [cameraButton setImage:cameraIcon forState:UIControlStateNormal];
     cameraButton.hidden = YES;
-    
     [cameraButton setFrame:CGRectMake(self.tableView.frame.size.width - cameraIcon.size.width/2,
                                            self.tableView.frame.size.height - cameraIcon.size.height/2,
                                            cameraIcon.size.width/2,
                                            cameraIcon.size.height/2)];
     UIWindow *topView = [[UIApplication sharedApplication] keyWindow];
-    
     [topView addSubview:cameraButton];
     
     //lock camera to buttom right corner
@@ -72,7 +64,6 @@
                                views:NSDictionaryOfVariableBindings(cameraButton)]];
     
     self.cameraButton = cameraButton;
-    
 
 }
 
@@ -102,52 +93,40 @@
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+#pragma mark - Scroll view delegate (widget animation)
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-- (void)determineApperance:(UIScrollView *)scrollView{
-    if (scrollView.contentOffset.y > self.scrollOffset){
-        
-        // scrolls down.
-        self.scrollOffset = scrollView.contentOffset.y;
-        self.cameraButton.hidden = NO;
-    }
-    else
-    {
-        // scrolls up.
-        self.scrollOffset = scrollView.contentOffset.y;
-        self.cameraButton.hidden = YES;
-    }
+-  (void)displayWidget:(BOOL)shouldDisplay
+{
+    self.cameraButton.hidden = !shouldDisplay;
     for (WishDetailCell *cell in self.tableView.visibleCells){
         [UIView animateWithDuration:0.1 animations:^{
-            if (self.cameraButton.isHidden) {
-                [cell dismissLikeAndComment];
-            }else{
-                [cell showLikeAndComment];
-            }
+            [cell moveWidget:shouldDisplay];
         }];
     }
-   
+    
 }
 
-#pragma mark - Scroll view delegate
-
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
+{
+    if (self.yVel > 0) [self displayWidget:YES];
+}
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    [self determineApperance:scrollView];
+    self.yVel = [scrollView.panGestureRecognizer velocityInView:scrollView].y;
+    if (self.yVel < 0) {
+        //scrolling up
+        [self displayWidget:NO];
+    }
+
 }
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (self.yVel > 0) {
+        //scrolling down
+        [self displayWidget:YES];
+    }
+}
+
 #pragma mark - Table view delegate
 
 #pragma mark - Table view data source

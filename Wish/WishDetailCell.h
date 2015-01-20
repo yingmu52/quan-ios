@@ -10,9 +10,11 @@
 
 @interface WishDetailCell : UITableViewCell
 
-
+@property (nonatomic) BOOL isWidgetVisible;
 -(void)showLikeAndComment;
 
 - (void)dismissLikeAndComment;
 
+
+- (void)moveWidget:(BOOL)toVisible;
 @end
