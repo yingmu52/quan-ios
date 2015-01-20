@@ -15,9 +15,6 @@
 #import "HomeCardView.h"
 @interface HomeViewController () <ZLSwipeableViewDataSource,ZLSwipeableViewDelegate>
 
-//@property  (nonatomic,strong) CustomBarItem *menuButton;
-//@property (nonatomic,strong) CustomBarItem *addButton;
-
 @property (nonatomic,weak) IBOutlet ZLSwipeableView *cardView;
 @end
 
@@ -34,34 +31,11 @@
     self.cardView.delegate = self;
     self.cardView.dataSource = self;
 }
-//- (void)setMenuButton:(CustomBarItem *)menuButton
-//{
-//    _menuButton = menuButton;
-//    [_menuButton addTarget:self
-//                  selector:@selector(openMenu)
-//                     event:UIControlEventTouchUpInside];
-//    [_menuButton setOffset:5];
-//}
-//
-//- (void)setAddButton:(CustomBarItem *)addButton
-//{
-//    _addButton = addButton;
-//    [_addButton addTarget:self
-//                 selector:@selector(addWish)
-//                    event:UIControlEventTouchUpInside];
-//    [_addButton setOffset:-5];
-//}
-
 
 - (void)setUpNavigationItem
 {
     [self.cardView layoutIfNeeded];
-    
-    
-//    UIButton *menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [menuBtn addTarget:self action:@selector(openMenu) forControlEvents:UIControlEventTouchUpInside];
-//    [menuBtn setImage:[Theme navMenuDefault] forState:UIControlStateNormal];
-//    menuBtn.frame = frame;
+
     CGRect frame = CGRectMake(0, 0, 30, 30);
     UIButton *menuBtn = [Theme buttonWithImage:[Theme navMenuDefault]
                                         target:self
@@ -76,12 +50,6 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
     [self.cardView layoutIfNeeded];
 
-//    self.menuButton = [self.navigationItem setItemWithImage:[Theme navMenuDefault]
-//                                                       size:CGSizeMake(30,30)
-//                                                   itemType:left];
-//    self.addButton = [self.navigationItem setItemWithImage:[Theme navAddDefault]
-//                                                       size:CGSizeMake(30,30)
-//                                                   itemType:right];
 }
 
 - (void)addWish{
@@ -175,6 +143,5 @@
     
     return view;
 }
-
 
 @end

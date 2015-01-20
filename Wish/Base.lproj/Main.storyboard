@@ -35,7 +35,8 @@
                                                     <exclude reference="x6Z-zf-Udw"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact">
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="8" y="158" width="274" height="21"/>
                                                 <mask key="constraints">
                                                     <include reference="x6Z-zf-Udw"/>
                                                 </mask>
@@ -53,7 +54,8 @@
                                                     <exclude reference="od5-Xy-RQf"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact">
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="74" y="8" width="143" height="142"/>
                                                 <mask key="constraints">
                                                     <include reference="od5-Xy-RQf"/>
                                                 </mask>
@@ -150,7 +152,8 @@
                                                     <exclude reference="ZId-9Z-PWT"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact">
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="216" y="38" width="40" height="40"/>
                                                 <mask key="constraints">
                                                     <include reference="ZId-9Z-PWT"/>
                                                 </mask>
@@ -215,12 +218,10 @@
                             <outlet property="delegate" destination="7yJ-9s-9cX" id="7gr-BS-PMO"/>
                         </connections>
                     </tableView>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="290" height="1136"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bw4-56-w5H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="24" y="977.25"/>
+            <point key="canvasLocation" x="-31.5" y="842.25"/>
         </scene>
         <!--Sliding View Controller-->
         <scene sceneID="ufC-wZ-h7g">
@@ -344,11 +345,12 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d1T-ay-k77" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="AVY-ud-FvV">
                     <connections>
-                        <segue destination="b5E-B5-8Ys" kind="show" identifier="showWishDetail" id="NMx-iL-35D"/>
+                        <action selector="tapOnCard:" destination="wW8-3k-YAd" id="MSJ-lP-zJC"/>
+                        <segue destination="b5E-B5-8Ys" kind="show" id="heD-Iu-vYp"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1279.5" y="868.5"/>
+            <point key="canvasLocation" x="1326" y="860.25"/>
         </scene>
         <!--Wish Detail View Controller-->
         <scene sceneID="274-7i-jhG">
@@ -374,11 +376,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l82-2h-AxP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2020.5" y="864.75"/>
+            <point key="canvasLocation" x="2001" y="860.25"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FbS-uZ-glk">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b0e-We-ijJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="HomeNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="81G-fy-O9t" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WjJ-64-HOQ" customClass="NavigationBar">
@@ -393,7 +396,6 @@
                         <segue destination="wW8-3k-YAd" kind="relationship" relationship="rootViewController" id="rdy-vM-FMw"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="b0e-We-ijJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="637.5" y="851.25"/>
         </scene>

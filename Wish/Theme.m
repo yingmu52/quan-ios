@@ -20,7 +20,7 @@
   forControlEvents:UIControlEventTouchUpInside];
     [btn setImage:image
          forState:UIControlStateNormal];
-    btn.frame = frame;
+    if (!CGRectIsEmpty(frame)) btn.frame = frame;
     return btn;
 }
 + (UIImage *)navBackButtonDefault

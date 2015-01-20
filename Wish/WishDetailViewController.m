@@ -11,9 +11,6 @@
 #import "UINavigationItem+CustomItem.h"
 #import "Theme.h"
 @interface WishDetailViewController ()
-@property  (nonatomic,strong) CustomBarItem *backButton;
-@property  (nonatomic,strong) CustomBarItem *composeButton;
-@property  (nonatomic,strong) CustomBarItem *shareButton;
 
 @end
 
@@ -27,24 +24,28 @@
 
 - (void)setUpNavigationItem
 {
-    self.backButton = [self.navigationItem setItemWithImage:[Theme navBackButtonDefault]
-                                                       size:CGSizeMake(30,30)
-                                                   itemType:left];
-    self.composeButton = [self.navigationItem setItemWithImage:[Theme navComposeButtonDefault]
-                                                      size:CGSizeMake(30,30)
-                                                  itemType:center];
-//    [self.composeButton setOffset:40];
-    
-    self.shareButton = [self.navigationItem setItemWithImage:[Theme navShareButtonDefault]
-                                                          size:CGSizeMake(30,30)
-                                                      itemType:right];
-    [self.navigationItem setRightBarButtonItems:@[self.composeButton,self.shareButton]];
 
+    CGRect frame = CGRectMake(0, 0, 30, 30);
+    UIButton *backBtn = [Theme buttonWithImage:[Theme navBackButtonDefault]
+                                        target:self.navigationController
+                                      selector:@selector(popViewControllerAnimated:)
+                                         frame:frame];
+    
+    UIButton *composeBtn = [Theme buttonWithImage:[Theme navComposeButtonDefault]
+                                       target:self
+                                     selector:nil
+                                        frame:frame];
+    
+    UIButton *shareBtn = [Theme buttonWithImage:[Theme navShareButtonDefault]
+                                         target:self
+                                       selector:nil
+                                          frame:frame];
+
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+    self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:shareBtn],
+                                                [[UIBarButtonItem alloc] initWithCustomView:composeBtn]];
 
 }
-
-
-
 
 
 - (void)didReceiveMemoryWarning {
