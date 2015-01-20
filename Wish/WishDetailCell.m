@@ -27,16 +27,35 @@
 
 -(void)showLikeAndComment
 {
-    self.likeButton.hidden = YES;
-    self.commentButton.hidden = YES;
-    self.likeLabel.hidden = YES;
-    self.commentLabel.hidden = YES;
+    [self moveWidget:YES];
+//    self.likeButton.hidden = YES;
+//    self.commentButton.hidden = YES;
+//    self.likeLabel.hidden = YES;
+//    self.commentLabel.hidden = YES;
 }
 - (void)dismissLikeAndComment{
-    self.likeButton.hidden = NO;
-    self.commentButton.hidden = NO;
-    self.likeLabel.hidden = NO;
-    self.commentLabel.hidden = NO;
+    [self moveWidget:NO];
+//    self.likeButton.hidden = NO;
+//    self.commentButton.hidden = NO;
+//    self.likeLabel.hidden = NO;
+//    self.commentLabel.hidden = NO;
 
+}
+
+- (void)moveWidget:(BOOL)toVisible
+{
+    CGFloat offset = toVisible ? self.center.x : -self.center.x;
+    
+    for (UIView *widget in @[self.likeButton,self.commentButton,self.likeLabel,self.commentLabel]) {
+        
+        //move back or away from screen
+        [widget setCenter:CGPointMake(widget.center.x + offset, widget.center.y)];
+        
+        //appear or disappear
+        widget.hidden = !toVisible;
+        
+        [widget setCenter:CGPointMake(widget.center.x - offset, widget.center.y)];
+        
+    }
 }
 @end

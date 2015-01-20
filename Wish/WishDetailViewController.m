@@ -13,6 +13,7 @@
 @interface WishDetailViewController ()
 @property (nonatomic,strong) UIButton *cameraButton;
 @property (nonatomic) CGFloat scrollOffset;
+@property (nonatomic) BOOL shouldShowSideWidgets;
 @end
 
 @implementation WishDetailViewController
@@ -20,12 +21,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
-    
-    self.scrollOffset = 0.0;
-    [self loadCamera];
-
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.scrollOffset = 0.0;
+    self.shouldShowSideWidgets = YES;
+    [self loadCamera];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.cameraButton removeFromSuperview];
+}
 - (void)loadCamera
 {
     //load camera image
@@ -107,26 +117,32 @@
 }
 */
 
-- (void)determineApperance:(UIScrollView *)scrollView optinal:(WishDetailCell *)cell
-{
-    if (scrollView.contentOffset.y > self.scrollOffset) {
+- (void)determineApperance:(UIScrollView *)scrollView{
+    if (scrollView.contentOffset.y > self.scrollOffset){
         
         // scrolls down.
         self.scrollOffset = scrollView.contentOffset.y;
-        NSLog(@"scrolling down");
         self.cameraButton.hidden = NO;
-//        [cell showLikeAndComment];
+        for (WishDetailCell *cell in self.tableView.visibleCells){
+            [UIView animateWithDuration:0.1 animations:^{
+                [cell showLikeAndComment];
+
+            }];
+        }
     }
     else
     {
         // scrolls up.
         self.scrollOffset = scrollView.contentOffset.y;
-        
-        NSLog(@"scrolling up");
         self.cameraButton.hidden = YES;
-//        [cell dismissLikeAndComment];
-
+        for (WishDetailCell *cell in self.tableView.visibleCells){
+            [UIView animateWithDuration:0.1 animations:^{
+                [cell dismissLikeAndComment];
+                
+            }];
+        }
     }
+
    
 }
 
@@ -134,18 +150,10 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    [self determineApperance:scrollView optinal:nil];
+    [self determineApperance:scrollView];
 }
 #pragma mark - Table view delegate
-//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    [self determineApperance:tableView optinal:(WishDetailCell *)cell];
-//}
 
-- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [self determineApperance:tableView optinal:(WishDetailCell *)cell];
-}
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
