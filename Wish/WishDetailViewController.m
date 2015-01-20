@@ -106,26 +106,35 @@
     
 }
 
-- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
-{
-    if (self.yVel > 0) [self displayWidget:YES];
-}
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    self.yVel = [scrollView.panGestureRecognizer velocityInView:scrollView].y;
-    if (self.yVel < 0) {
-        //scrolling up
-        [self displayWidget:NO];
-    }
+    [self displayWidget:NO];
+}
 
-}
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    if (self.yVel > 0) {
-        //scrolling down
-        [self displayWidget:YES];
-    }
+    [self displayWidget:YES];
 }
+//- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
+//{
+//    if (self.yVel > 0) [self displayWidget:YES];
+//}
+//- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+//{
+//    self.yVel = [scrollView.panGestureRecognizer velocityInView:scrollView].y;
+//    if (self.yVel < 0) {
+//        //scrolling up
+//        [self displayWidget:NO];
+//    }
+//
+//}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//{
+//    if (self.yVel > 0) {
+//        //scrolling down
+//        [self displayWidget:YES];
+//    }
+//}
 
 #pragma mark - Table view delegate
 
