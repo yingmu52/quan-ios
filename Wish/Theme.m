@@ -2,7 +2,7 @@
 //  Theme.m
 //  Wish
 //
-//  Created by Xinyi Zhuang on 2015-01-15.
+//  Created by Xinyi Zhuang on 2015_01_15.
 //  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
 //
 
@@ -26,37 +26,37 @@
 
 + (UIImage *)wishDetailCameraDefault
 {
-    return [UIImage imageNamed:@"stop-ic-camera"];
+    return [UIImage imageNamed:@"stop_ic_camera"];
 }
 + (UIImage *)navBackButtonDefault
 {
-    return [UIImage imageNamed:@"nav-ic-back-default"];
+    return [UIImage imageNamed:@"nav_ic_back_default"];
 }
 
 + (UIImage *)navComposeButtonDefault
 {
-    return [UIImage imageNamed:@"nav-ic-eidt-default"];
+    return [UIImage imageNamed:@"nav_ic_eidt_default"];
 }
 
 + (UIImage *)navShareButtonDefault
 {
-    return [UIImage imageNamed:@"nav-ic-share-default"];
+    return [UIImage imageNamed:@"nav_ic_share_default"];
 }
 + (UIImage *)navAddDefault{
-    return [UIImage imageNamed:@"nav-ic-add-default"];
+    return [UIImage imageNamed:@"nav_ic_add_default"];
 }
 
 + (UIImage *)navMenuDefault{
-    return [UIImage imageNamed:@"nav-ic-tab-default"];
+    return [UIImage imageNamed:@"nav_ic_tab_default"];
 }
 + (UIColor *)naviBackground{
-    return [[self class] colorfromImg:@"bg-navbar"];
+    return [[self class] colorfromImg:@"bg_navbar"];
 }
 + (UIColor *)homeBackground{
     return [[self class] colorFromHexString:@"#F6FAF9"];
 }
 +(UIColor *)menuBackground{
-    return [[self class] colorfromImg:@"tab-bg"];
+    return [[self class] colorfromImg:@"tab_bg"];
 }
 + (UIColor *)colorfromImg:(NSString *)name{
     return [UIColor colorWithPatternImage:[UIImage imageNamed:name]];

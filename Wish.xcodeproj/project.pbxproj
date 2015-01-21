@@ -27,13 +27,13 @@
 		AE479EA31A6F79DD00366A0A /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479EA11A6F79DD00366A0A /* Plan.m */; };
 		AE479EA61A6F79DE00366A0A /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479EA51A6F79DE00366A0A /* Task.m */; };
 		AE479EA71A6F79DE00366A0A /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479EA51A6F79DE00366A0A /* Task.m */; };
-		AE479EAA1A6F79DF00366A0A /* Base.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479EA91A6F79DF00366A0A /* Base.m */; };
-		AE479EAB1A6F79DF00366A0A /* Base.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479EA91A6F79DF00366A0A /* Base.m */; };
 		AE479EAE1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479EAD1A6F7A5B00366A0A /* Plan+PlanCRUD.m */; };
 		AE479EAF1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479EAD1A6F7A5B00366A0A /* Plan+PlanCRUD.m */; };
 		AE479EB21A6F7A8600366A0A /* Task+TaskCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479EB11A6F7A8600366A0A /* Task+TaskCRUD.m */; };
 		AE479EB31A6F7A8600366A0A /* Task+TaskCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479EB11A6F7A8600366A0A /* Task+TaskCRUD.m */; };
 		AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE72E9541A66F2AA0046B38D /* MenuCell.m */; };
+		AED68EE41A70399A00CDC0DF /* FetchCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = AED68EE31A70399A00CDC0DF /* FetchCenter.m */; };
+		AED68EE51A70399A00CDC0DF /* FetchCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = AED68EE31A70399A00CDC0DF /* FetchCenter.m */; };
 		AEEC6C4D1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C4C1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m */; };
 		AEEC6C4E1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C4C1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m */; };
 		AEEC6C601A6DB0010021B7E4 /* ALView+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C541A6DB0010021B7E4 /* ALView+PureLayout.m */; };
@@ -117,14 +117,14 @@
 		AE479EA11A6F79DD00366A0A /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
 		AE479EA41A6F79DE00366A0A /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
 		AE479EA51A6F79DE00366A0A /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
-		AE479EA81A6F79DF00366A0A /* Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base.h; sourceTree = "<group>"; };
-		AE479EA91A6F79DF00366A0A /* Base.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base.m; sourceTree = "<group>"; };
 		AE479EAC1A6F7A5B00366A0A /* Plan+PlanCRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Plan+PlanCRUD.h"; sourceTree = "<group>"; };
 		AE479EAD1A6F7A5B00366A0A /* Plan+PlanCRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Plan+PlanCRUD.m"; sourceTree = "<group>"; };
 		AE479EB01A6F7A8600366A0A /* Task+TaskCRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Task+TaskCRUD.h"; sourceTree = "<group>"; };
 		AE479EB11A6F7A8600366A0A /* Task+TaskCRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Task+TaskCRUD.m"; sourceTree = "<group>"; };
 		AE72E9531A66F2AA0046B38D /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
 		AE72E9541A66F2AA0046B38D /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
+		AED68EE21A70399A00CDC0DF /* FetchCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchCenter.h; sourceTree = "<group>"; };
+		AED68EE31A70399A00CDC0DF /* FetchCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchCenter.m; sourceTree = "<group>"; };
 		AEEC6C4B1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+VGParallaxHeader.h"; sourceTree = "<group>"; };
 		AEEC6C4C1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+VGParallaxHeader.m"; sourceTree = "<group>"; };
 		AEEC6C531A6DB0010021B7E4 /* ALView+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALView+PureLayout.h"; sourceTree = "<group>"; };
@@ -261,8 +261,6 @@
 			isa = PBXGroup;
 			children = (
 				AE0172431A65CD8E0014266F /* Wish.xcdatamodeld */,
-				AE479EA81A6F79DF00366A0A /* Base.h */,
-				AE479EA91A6F79DF00366A0A /* Base.m */,
 				AE479EA41A6F79DE00366A0A /* Task.h */,
 				AE479EA51A6F79DE00366A0A /* Task.m */,
 				AE479EA01A6F79DD00366A0A /* Plan.h */,
@@ -271,6 +269,8 @@
 				AE479EAD1A6F7A5B00366A0A /* Plan+PlanCRUD.m */,
 				AE479EB01A6F7A8600366A0A /* Task+TaskCRUD.h */,
 				AE479EB11A6F7A8600366A0A /* Task+TaskCRUD.m */,
+				AED68EE21A70399A00CDC0DF /* FetchCenter.h */,
+				AED68EE31A70399A00CDC0DF /* FetchCenter.m */,
 			);
 			name = "Database&Networking";
 			sourceTree = "<group>";
@@ -532,7 +532,6 @@
 				AE01723F1A65CD8E0014266F /* main.m in Sources */,
 				AEF3E0D51A6D9B7F00A1FE07 /* ZLSwipeableView.m in Sources */,
 				AEF7F2811A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
-				AE479EAA1A6F79DF00366A0A /* Base.m in Sources */,
 				AE479EA61A6F79DE00366A0A /* Task.m in Sources */,
 				AEF7F2891A686E8A0022410B /* ECSlidingViewController.m in Sources */,
 				AEF7F28B1A686E8B0022410B /* UIViewController+ECSlidingViewController.m in Sources */,
@@ -546,6 +545,7 @@
 				AEF7F2871A686E8A0022410B /* ECSlidingSegue.m in Sources */,
 				AEEC6C4D1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */,
 				AE0172691A65D3140014266F /* MenuViewController.m in Sources */,
+				AED68EE41A70399A00CDC0DF /* FetchCenter.m in Sources */,
 				AEEC6C621A6DB0010021B7E4 /* NSArray+PureLayout.m in Sources */,
 				AE479EB21A6F7A8600366A0A /* Task+TaskCRUD.m in Sources */,
 				AE479EAE1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */,
@@ -569,6 +569,7 @@
 				AEF7F28A1A686E8B0022410B /* ECSlidingViewController.m in Sources */,
 				AEF7F2941A686FA30022410B /* Theme.m in Sources */,
 				AEEC6C631A6DB0010021B7E4 /* NSArray+PureLayout.m in Sources */,
+				AED68EE51A70399A00CDC0DF /* FetchCenter.m in Sources */,
 				AE479EB31A6F7A8600366A0A /* Task+TaskCRUD.m in Sources */,
 				AEEC6C6E1A6DB0FC0021B7E4 /* HeaderView.m in Sources */,
 				AE01725C1A65CD8F0014266F /* WishTests.m in Sources */,
@@ -577,7 +578,6 @@
 				AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */,
 				AEF7F2821A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				AE479EAF1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */,
-				AE479EAB1A6F79DF00366A0A /* Base.m in Sources */,
 				AEF3E0D61A6D9B7F00A1FE07 /* ZLSwipeableView.m in Sources */,
 				AEF7F29C1A686FE90022410B /* NavigationBar.m in Sources */,
 				AEF7F2AE1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */,

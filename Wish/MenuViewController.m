@@ -66,24 +66,24 @@
         // Configure the cell...
         if (indexPath.row == 0) {
             
-            [cell.menuImageView setImage:[UIImage imageNamed:@"tab-ic-login-default"]];
+            [cell.menuImageView setImage:[UIImage imageNamed:@"tab_ic_login_default"]];
             cell.menuTitle.text = @"登录";
         }else if (indexPath.row == 1){
-            cell.menuImageView.image = [UIImage imageNamed:@"tab-ic-home-default"];
-            cell.menuImageView.highlightedImage = [UIImage imageNamed:@"tab-ic-home-selected"];
+            cell.menuImageView.image = [UIImage imageNamed:@"tab_ic_home_default"];
+            cell.menuImageView.highlightedImage = [UIImage imageNamed:@"tab_ic_home_selected"];
             cell.menuTitle.text = @"愿望列表";
         }else if (indexPath.row == 2){
-            cell.menuImageView.image = [UIImage imageNamed:@"tab-ic-achieve-default"];
-            cell.menuImageView.highlightedImage = [UIImage imageNamed:@"tab-ic-achieve-selected"];
+            cell.menuImageView.image = [UIImage imageNamed:@"tab_ic_achieve_default"];
+            cell.menuImageView.highlightedImage = [UIImage imageNamed:@"tab_ic_achieve_selected"];
             cell.menuTitle.text = @"我的历程";
         }else if (indexPath.row == 3){
-            cell.menuImageView.image = [UIImage imageNamed:@"tab-ic-discover-default"];
-            cell.menuImageView.highlightedImage = [UIImage imageNamed:@"tab-ic-discover-selected"];
+            cell.menuImageView.image = [UIImage imageNamed:@"tab_ic_discover_default"];
+            cell.menuImageView.highlightedImage = [UIImage imageNamed:@"tab_ic_discover_selected"];
             cell.menuTitle.text = @"发现愿望";
         }else if (indexPath.row == 4){
             cell.menuTitle.text = @"关注动态";
-            cell.menuImageView.image = [UIImage imageNamed:@"tab-ic-follow-default"];
-            cell.menuImageView.highlightedImage = [UIImage imageNamed:@"tab-ic-follow-selected"];
+            cell.menuImageView.image = [UIImage imageNamed:@"tab_ic_follow_default"];
+            cell.menuImageView.highlightedImage = [UIImage imageNamed:@"tab_ic_follow_selected"];
         }
 
     }else if (indexPath.row == 5){

@@ -10,7 +10,8 @@
 
 @implementation Plan (PlanCRUD)
 
-//+ (Plan *)addPlan
+//+ (Plan *)addPlaninContext:(NSManagedObjectContext *)context{
+//}
 @end
 
 

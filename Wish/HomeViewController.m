@@ -114,7 +114,7 @@
 #pragma mark - ZLSwipeableViewDataSource
 
 - (UIView *)nextViewForSwipeableView:(ZLSwipeableView *)swipeableView {
-    return nil;
+    //return nil;
     UIView *view = [[UIView alloc] initWithFrame:swipeableView.bounds];
     
     HomeCardView *contentView = [HomeCardView instantiateFromNib];
@@ -161,7 +161,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [self dismissViewControllerAnimated:YES completion:^{
-        UIImage *editedImage = (UIImage *)info[UIImagePickerControllerEditedImage];
+//        UIImage *editedImage = (UIImage *)info[UIImagePickerControllerEditedImage];
 //        NSLog(@"%@",NSStringFromCGSize(editedImage.size));
     }];
 }

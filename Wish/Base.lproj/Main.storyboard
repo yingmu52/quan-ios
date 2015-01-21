@@ -41,7 +41,7 @@
                                                 </mask>
                                             </variation>
                                         </label>
-                                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tab-bg-avatar" highlightedImage="tab-bg-avatar" translatesAutoresizingMaskIntoConstraints="NO" id="r7v-7a-au2">
+                                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="r7v-7a-au2">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="143" id="AFQ-Hy-X9y"/>
@@ -120,7 +120,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="Ntq-BT-Qs5"/>
                                                     </constraints>
-                                                    <state key="normal" image="tab-ic-message-default">
+                                                    <state key="normal" image="tab_ic_message_default">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <variation key="default">
@@ -139,7 +139,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="QGX-94-vby"/>
                                                     </constraints>
-                                                    <state key="normal" image="tab-ic-setting-default">
+                                                    <state key="normal" image="tab_ic_setting_default">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <variation key="default">
@@ -245,7 +245,7 @@
                                                 </constraint>
                                                 <constraint firstAttribute="width" secondItem="ydL-eb-fJz" secondAttribute="height" multiplier="1:1" id="zmT-fO-pQW"/>
                                             </constraints>
-                                            <state key="normal" image="tab-ic-setting-default">
+                                            <state key="normal" image="tab_ic_setting_default">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <variation key="default">
@@ -329,6 +329,7 @@
                         <viewControllerLayoutGuide type="bottom" id="ISy-CK-psH"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="QnE-FT-cfx">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -356,7 +357,7 @@
                                         <variation key="heightClass=regular-widthClass=compact" constant="-1.1764705882353041"/>
                                     </constraint>
                                 </constraints>
-                                <state key="normal" image="home-ic-camera">
+                                <state key="normal" image="home_ic_camera">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="default">
@@ -375,6 +376,7 @@
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dkb-D1-PCm" customClass="ZLSwipeableView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="AVY-ud-FvV" appends="YES" id="O4s-2S-i4w"/>
@@ -401,11 +403,11 @@
                                 <exclude reference="Dkb-D1-PCm"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="TgN-Hd-UHt"/>
+                                <exclude reference="olS-dx-ePt"/>
                                 <exclude reference="7fl-8M-CiD"/>
                                 <exclude reference="P3c-nG-D8T"/>
                                 <exclude reference="iE3-Zb-j07"/>
-                                <exclude reference="TgN-Hd-UHt"/>
-                                <exclude reference="olS-dx-ePt"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -414,11 +416,11 @@
                                 <include reference="Dkb-D1-PCm"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="TgN-Hd-UHt"/>
+                                <include reference="olS-dx-ePt"/>
                                 <include reference="7fl-8M-CiD"/>
                                 <include reference="P3c-nG-D8T"/>
                                 <include reference="iE3-Zb-j07"/>
-                                <include reference="TgN-Hd-UHt"/>
-                                <include reference="olS-dx-ePt"/>
                             </mask>
                         </variation>
                     </view>
@@ -489,7 +491,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="21" id="wfk-Tm-oaw"/>
                                                     </constraints>
-                                                    <state key="normal" image="fadein-ic-share-default">
+                                                    <state key="normal" image="fadein_ic_share_default">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <variation key="default">
@@ -508,7 +510,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="67" id="ZhK-mQ-ewh"/>
                                                     </constraints>
-                                                    <state key="normal" image="fadein-ic-like-default">
+                                                    <state key="normal" image="fadein_ic_like_default">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <variation key="default">
@@ -529,7 +531,7 @@
                                                         <constraint firstAttribute="width" secondItem="WDi-cz-zBw" secondAttribute="height" multiplier="73:57" id="kdp-LO-E2u"/>
                                                         <constraint firstAttribute="height" constant="53" id="mCZ-tD-43e"/>
                                                     </constraints>
-                                                    <state key="normal" image="fadein-ic-comment-default">
+                                                    <state key="normal" image="fadein_ic_comment_default">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <variation key="default">
@@ -756,13 +758,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="fadein-ic-comment-default" width="102" height="80"/>
-        <image name="fadein-ic-like-default" width="102" height="80"/>
-        <image name="fadein-ic-share-default" width="32" height="32"/>
-        <image name="home-ic-camera" width="472" height="102"/>
+        <image name="fadein_ic_comment_default" width="102" height="80"/>
+        <image name="fadein_ic_like_default" width="102" height="80"/>
+        <image name="fadein_ic_share_default" width="32" height="32"/>
+        <image name="home_ic_camera" width="472" height="102"/>
         <image name="snow.jpg" width="113" height="113"/>
-        <image name="tab-bg-avatar" width="120" height="128"/>
-        <image name="tab-ic-message-default" width="50" height="50"/>
-        <image name="tab-ic-setting-default" width="50" height="50"/>
+        <image name="tab_ic_message_default" width="50" height="50"/>
+        <image name="tab_ic_setting_default" width="50" height="50"/>
     </resources>
 </document>

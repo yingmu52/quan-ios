@@ -55,7 +55,7 @@
                         </mask>
                     </variation>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header-ic-time" translatesAutoresizingMaskIntoConstraints="NO" id="V85-XQ-ydf">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_ic_time" translatesAutoresizingMaskIntoConstraints="NO" id="V85-XQ-ydf">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="V85-XQ-ydf" secondAttribute="height" multiplier="1:1" id="lIl-dT-dbr"/>
@@ -80,7 +80,7 @@
                         <rect key="frame" x="48" y="85" width="104" height="21"/>
                     </variation>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header-ic-follow" translatesAutoresizingMaskIntoConstraints="NO" id="aNa-gN-ud6">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_ic_follow" translatesAutoresizingMaskIntoConstraints="NO" id="aNa-gN-ud6">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="aNa-gN-ud6" secondAttribute="height" multiplier="1:1" id="ael-53-Jem"/>
@@ -107,7 +107,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="52" id="BWb-dl-6hq"/>
                     </constraints>
-                    <state key="normal" title="5个里程碑" backgroundImage="header-button-milepost">
+                    <state key="normal" title="5个里程碑" backgroundImage="header_button_milepost">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <variation key="default">
@@ -199,8 +199,8 @@
         </view>
     </objects>
     <resources>
-        <image name="header-button-milepost" width="92" height="52"/>
-        <image name="header-ic-follow" width="32" height="32"/>
-        <image name="header-ic-time" width="32" height="32"/>
+        <image name="header_button_milepost" width="92" height="52"/>
+        <image name="header_ic_follow" width="32" height="32"/>
+        <image name="header_ic_time" width="32" height="32"/>
     </resources>
 </document>
