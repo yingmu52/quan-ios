@@ -10,4 +10,6 @@
 
 @interface FetchCenter : NSObject
 
+
++ (void)fetchPlanList:(NSString *)ownerId;
 @end

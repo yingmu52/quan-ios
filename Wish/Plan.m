@@ -2,7 +2,7 @@
 //  Plan.m
 //  Wish
 //
-//  Created by Xinyi Zhuang on 2015-01-20.
+//  Created by Xinyi Zhuang on 2015-01-21.
 //  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
 //
 
@@ -13,13 +13,10 @@
 @implementation Plan
 
 @dynamic backgroundNum;
-@dynamic finishPercent;
-@dynamic followCount;
+@dynamic finishDate;
+@dynamic image;
 @dynamic isPrivate;
-@dynamic ownerId;
-@dynamic planStatus;
-@dynamic remainDays;
-@dynamic tryCount;
+@dynamic planTitle;
 @dynamic tasks;
 
 @end

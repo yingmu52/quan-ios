@@ -2,7 +2,7 @@
 //  Plan.h
 //  Wish
 //
-//  Created by Xinyi Zhuang on 2015-01-20.
+//  Created by Xinyi Zhuang on 2015-01-21.
 //  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
 //
 
@@ -14,13 +14,10 @@
 @interface Plan : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * backgroundNum;
-@property (nonatomic, retain) NSNumber * finishPercent;
-@property (nonatomic, retain) NSNumber * followCount;
+@property (nonatomic, retain) NSDate * finishDate;
+@property (nonatomic, retain) id image;
 @property (nonatomic, retain) NSNumber * isPrivate;
-@property (nonatomic, retain) NSString * ownerId;
-@property (nonatomic, retain) NSNumber * planStatus;
-@property (nonatomic, retain) NSNumber * remainDays;
-@property (nonatomic, retain) NSNumber * tryCount;
+@property (nonatomic, retain) NSString * planTitle;
 @property (nonatomic, retain) NSSet *tasks;
 @end
 

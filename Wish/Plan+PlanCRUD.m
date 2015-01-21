@@ -7,11 +7,23 @@
 //
 
 #import "Plan+PlanCRUD.h"
-
+@import UIKit;
 @implementation Plan (PlanCRUD)
 
-//+ (Plan *)addPlaninContext:(NSManagedObjectContext *)context{
-//}
++ (Plan *)createPlan:(NSString *)title
+                date:(NSDate *)date
+             privacy:(BOOL)isPrivate
+               image:(UIImage *)image
+           inContext:(NSManagedObjectContext *)context{
+    Plan *plan = [NSEntityDescription insertNewObjectForEntityForName:@"Plan"
+                                               inManagedObjectContext:context];
+    plan.planTitle = title;
+    plan.finishDate = date;
+    plan.isPrivate = @(isPrivate);
+    plan.image = image;
+
+    return plan;
+}
 @end
 
 

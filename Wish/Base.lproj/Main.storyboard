@@ -336,7 +336,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RIa-Mp-Cry" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1269" y="161.25"/>
+            <point key="canvasLocation" x="1441.5" y="132"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="fpo-Ov-0kY">
@@ -387,14 +387,19 @@
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="Dkb-D1-PCm" firstAttribute="leading" secondItem="v3t-7r-vWJ" secondAttribute="leadingMargin" id="7fl-8M-CiD"/>
-                            <constraint firstItem="Dkb-D1-PCm" firstAttribute="top" secondItem="Nsd-Rd-GUf" secondAttribute="bottom" constant="8" symbolic="YES" id="Cne-5R-chj"/>
-                            <constraint firstAttribute="bottom" secondItem="Dkb-D1-PCm" secondAttribute="bottom" constant="94" id="P3c-nG-D8T"/>
-                            <constraint firstItem="GnW-tC-6ma" firstAttribute="bottom" secondItem="eUx-6Z-ly2" secondAttribute="top" id="QyW-EA-F9H"/>
+                            <constraint firstItem="GnW-tC-6ma" firstAttribute="width" secondItem="v3t-7r-vWJ" secondAttribute="height" multiplier="31:100" id="54P-uw-P2g"/>
+                            <constraint firstItem="eUx-6Z-ly2" firstAttribute="top" secondItem="GnW-tC-6ma" secondAttribute="bottom" id="7RB-yo-Vu8"/>
                             <constraint firstItem="GnW-tC-6ma" firstAttribute="centerX" secondItem="v3t-7r-vWJ" secondAttribute="centerX" id="TgN-Hd-UHt"/>
-                            <constraint firstItem="Dkb-D1-PCm" firstAttribute="centerX" secondItem="GnW-tC-6ma" secondAttribute="centerX" id="iE3-Zb-j07"/>
-                            <constraint firstItem="GnW-tC-6ma" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Dkb-D1-PCm" secondAttribute="bottom" constant="22" id="olS-dx-ePt">
-                                <variation key="heightClass=regular-widthClass=compact" constant="40"/>
+                            <constraint firstItem="Dkb-D1-PCm" firstAttribute="centerX" secondItem="GnW-tC-6ma" secondAttribute="centerX" id="dEJ-61-AFA"/>
+                            <constraint firstItem="GnW-tC-6ma" firstAttribute="top" secondItem="Dkb-D1-PCm" secondAttribute="bottom" constant="40" id="ghc-yU-g2c"/>
+                            <constraint firstItem="GnW-tC-6ma" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="v3t-7r-vWJ" secondAttribute="leadingMargin" constant="60" id="qYK-dO-eIC">
+                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                            </constraint>
+                            <constraint firstAttribute="bottom" secondItem="Dkb-D1-PCm" secondAttribute="bottom" constant="94" id="tQM-An-GZW"/>
+                            <constraint firstItem="Dkb-D1-PCm" firstAttribute="leading" secondItem="v3t-7r-vWJ" secondAttribute="leadingMargin" id="vEK-lY-pVf"/>
+                            <constraint firstItem="Dkb-D1-PCm" firstAttribute="top" secondItem="Nsd-Rd-GUf" secondAttribute="bottom" constant="8" symbolic="YES" id="vgA-fK-Ay3"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="GnW-tC-6ma" secondAttribute="trailing" constant="60" id="xsk-K4-j1b">
+                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
                             </constraint>
                         </constraints>
                         <variation key="default">
@@ -403,11 +408,16 @@
                                 <exclude reference="Dkb-D1-PCm"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="dEJ-61-AFA"/>
+                                <exclude reference="tQM-An-GZW"/>
+                                <exclude reference="vEK-lY-pVf"/>
+                                <exclude reference="vgA-fK-Ay3"/>
+                                <exclude reference="54P-uw-P2g"/>
                                 <exclude reference="TgN-Hd-UHt"/>
-                                <exclude reference="olS-dx-ePt"/>
-                                <exclude reference="7fl-8M-CiD"/>
-                                <exclude reference="P3c-nG-D8T"/>
-                                <exclude reference="iE3-Zb-j07"/>
+                                <exclude reference="ghc-yU-g2c"/>
+                                <exclude reference="qYK-dO-eIC"/>
+                                <exclude reference="xsk-K4-j1b"/>
+                                <exclude reference="7RB-yo-Vu8"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -416,11 +426,16 @@
                                 <include reference="Dkb-D1-PCm"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="dEJ-61-AFA"/>
+                                <include reference="tQM-An-GZW"/>
+                                <include reference="vEK-lY-pVf"/>
+                                <include reference="vgA-fK-Ay3"/>
+                                <exclude reference="54P-uw-P2g"/>
                                 <include reference="TgN-Hd-UHt"/>
-                                <include reference="olS-dx-ePt"/>
-                                <include reference="7fl-8M-CiD"/>
-                                <include reference="P3c-nG-D8T"/>
-                                <include reference="iE3-Zb-j07"/>
+                                <include reference="ghc-yU-g2c"/>
+                                <include reference="qYK-dO-eIC"/>
+                                <include reference="xsk-K4-j1b"/>
+                                <include reference="7RB-yo-Vu8"/>
                             </mask>
                         </variation>
                     </view>
@@ -429,6 +444,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="cardView" destination="Dkb-D1-PCm" id="19b-xl-b6C"/>
+                        <segue destination="1Y1-uW-81U" kind="show" identifier="showPostFromHome" id="CTd-gb-xTE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d1T-ay-k77" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -754,7 +770,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b0e-We-ijJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="547.5" y="821.25"/>
+            <point key="canvasLocation" x="443" y="547"/>
         </scene>
     </scenes>
     <resources>

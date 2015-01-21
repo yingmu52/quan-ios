@@ -54,7 +54,7 @@
 }
 
 - (void)addWish{
-    
+    [self performSegueWithIdentifier:@"showPostFromHome" sender:nil];
 }
 - (void)openMenu{
     [self.slidingViewController anchorTopViewToRightAnimated:YES];

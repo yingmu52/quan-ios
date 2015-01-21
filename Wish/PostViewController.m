@@ -7,7 +7,7 @@
 //
 
 #import "PostViewController.h"
-
+#import "Theme.h"
 @interface PostViewController ()
 
 @end
@@ -16,22 +16,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self setUpNavigationItem];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+- (void)setUpNavigationItem
+{
+    
+    CGRect frame = CGRectMake(0, 0, 30, 30);
+    UIButton *backBtn = [Theme buttonWithImage:[Theme navBackButtonDefault]
+                                        target:self.navigationController
+                                      selector:@selector(popViewControllerAnimated:)
+                                         frame:frame];
+    
+    UIButton *doneButton = [Theme buttonWithImage:[Theme navComposeButtonDefault]
+                                           target:self
+                                         selector:nil
+                                            frame:frame];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
 }
-*/
 
 @end
