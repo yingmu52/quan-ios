@@ -115,7 +115,7 @@
                                 </mask>
                             </variation>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZP-up-CwF" userLabel="finish">
+                        <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="748" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZP-up-CwF" userLabel="finish">
                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="aZP-up-CwF" secondAttribute="height" multiplier="173:40" id="cE1-Uq-dfv"/>
@@ -221,6 +221,8 @@
                             <exclude reference="oxP-1O-9oV"/>
                             <exclude reference="py8-Jz-n3z"/>
                             <exclude reference="rUT-iU-SBI"/>
+                            <exclude reference="1ba-EZ-6vA"/>
+                            <exclude reference="3Ab-fC-Ux6"/>
                             <exclude reference="fY2-5Z-MQL"/>
                             <exclude reference="fi4-B8-9U8"/>
                             <exclude reference="yrA-ci-7Rt"/>
@@ -231,8 +233,6 @@
                             <exclude reference="WIa-WW-teB"/>
                             <exclude reference="XqJ-gy-Sod"/>
                             <exclude reference="y3J-pQ-OdV"/>
-                            <exclude reference="1ba-EZ-6vA"/>
-                            <exclude reference="3Ab-fC-Ux6"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact">
@@ -249,6 +249,8 @@
                             <exclude reference="oxP-1O-9oV"/>
                             <include reference="py8-Jz-n3z"/>
                             <include reference="rUT-iU-SBI"/>
+                            <include reference="1ba-EZ-6vA"/>
+                            <include reference="3Ab-fC-Ux6"/>
                             <include reference="fY2-5Z-MQL"/>
                             <include reference="fi4-B8-9U8"/>
                             <include reference="yrA-ci-7Rt"/>
@@ -259,8 +261,6 @@
                             <include reference="WIa-WW-teB"/>
                             <include reference="XqJ-gy-Sod"/>
                             <include reference="y3J-pQ-OdV"/>
-                            <include reference="1ba-EZ-6vA"/>
-                            <include reference="3Ab-fC-Ux6"/>
                         </mask>
                     </variation>
                 </view>

@@ -13,7 +13,8 @@
 #import "UIViewController+ECSlidingViewController.h"
 #import "ZLSwipeableView.h"
 #import "HomeCardView.h"
-@interface HomeViewController () <ZLSwipeableViewDataSource,ZLSwipeableViewDelegate>
+
+@interface HomeViewController () <ZLSwipeableViewDataSource,ZLSwipeableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic,weak) IBOutlet ZLSwipeableView *cardView;
 @end
@@ -113,6 +114,7 @@
 #pragma mark - ZLSwipeableViewDataSource
 
 - (UIView *)nextViewForSwipeableView:(ZLSwipeableView *)swipeableView {
+    return nil;
     UIView *view = [[UIView alloc] initWithFrame:swipeableView.bounds];
     
     HomeCardView *contentView = [HomeCardView instantiateFromNib];
@@ -142,6 +144,39 @@
 
     
     return view;
+}
+
+#pragma mark - Camera Util
+
+- (IBAction)showCamera:(UIButton *)sender{
+    
+    UIImagePickerController *controller = [[self class] showCamera:self];
+    if (controller) {
+        [self presentViewController:controller
+                           animated:YES
+                         completion:nil];
+    }
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        UIImage *editedImage = (UIImage *)info[UIImagePickerControllerEditedImage];
+//        NSLog(@"%@",NSStringFromCGSize(editedImage.size));
+    }];
+}
+
++ (UIImagePickerController *)showCamera:(id<UINavigationControllerDelegate,UIImagePickerControllerDelegate>)delegate{
+    
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        return nil;
+    }
+    UIImagePickerController *controller = [[UIImagePickerController alloc] init];
+    controller.sourceType = UIImagePickerControllerSourceTypeCamera;
+    controller.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
+    controller.allowsEditing = YES;
+    controller.delegate = delegate;
+    return controller;
 }
 
 @end
