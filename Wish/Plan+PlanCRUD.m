@@ -27,6 +27,7 @@
         plan = [NSEntityDescription insertNewObjectForEntityForName:@"Plan"
                                              inManagedObjectContext:context];
         
+        plan.ownerId = [AppDelegate getOwnerId];
         plan.planTitle = title;
         plan.finishDate = date;
         plan.isPrivate = @(isPrivate);

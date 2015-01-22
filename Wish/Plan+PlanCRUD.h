@@ -22,4 +22,9 @@
 
 - (void)deleteSelf:(NSManagedObjectContext *)context;
 
+
++ (NSArray *)fetchWith:(NSString *)entityName
+             predicate:(NSPredicate *)predicate
+      keyForDescriptor:(NSString *)key
+             inContext:(NSManagedObjectContext *)context;
 @end

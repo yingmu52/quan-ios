@@ -21,5 +21,10 @@
 - (NSURL *)applicationDocumentsDirectory;
 
 + (NSManagedObjectContext *)getContext;
+
+
++ (NSString *)getOwnerId;
++ (void)updateOwnerId:(NSString *)newID;
+
 @end
 
