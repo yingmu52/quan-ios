@@ -16,6 +16,7 @@
 #import "Plan+PlanCRUD.h"
 #import "Plan+PlanCRUD.h"
 #import "AppDelegate.h"
+#import "FetchCenter.h"
 
 const NSUInteger maxCardNum = 10;
 
@@ -98,10 +99,10 @@ HomeCardViewDelegate>
 {
     if ([button.titleLabel.text isEqualToString:@"放弃"]) {
         [self.cardView swipeTopViewToLeft];
-        [self.myPlans removeObject:self.currentPlan];
         [[AppDelegate getContext] deleteObject:self.currentPlan];
     }
 }
+
 #pragma mark - ZLSwipeableViewDelegate
 
 
@@ -117,7 +118,7 @@ HomeCardViewDelegate>
 #pragma mark - ZLSwipeableViewDataSource
 
 - (UIView *)nextViewForSwipeableView:(ZLSwipeableView *)swipeableView {
-    NSLog(@"hug");
+
     //could be improved when there is a view defined for no-myPlan-exist condition
     if (self.myPlans.count == 0) return nil;
     
@@ -163,7 +164,9 @@ HomeCardViewDelegate>
 #pragma mark - Camera Util
 
 - (IBAction)showCamera:(UIButton *)sender{
-    
+    NSLog(@"*********************************************************************************");
+    [FetchCenter fetchPlanList:@"100001"];
+    return;
     UIImagePickerController *controller = [[self class] showCamera:self];
     if (controller) {
         [self presentViewController:controller

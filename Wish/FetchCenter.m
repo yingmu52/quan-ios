@@ -19,13 +19,18 @@
 
 + (void)fetchPlanList:(NSString *)ownerId{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PLAN,GET_LIST];
-    [[AFHTTPRequestOperationManager manager] GET:rqtStr
-                                      parameters:@{@"id":ownerId}
-                                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"json:%@",responseObject);
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error){
-        NSLog(@"FAIL");
-    }];
-}
+    NSDictionary *args = @{@"id":ownerId};
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"]; //important !!!
+    
+    [manager GET:rqtStr
+      parameters:args
+         success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+             NSLog(@"JSON: %@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];}
 
 @end

@@ -11,6 +11,14 @@
 #import "Theme.h"
 #import "UINavigationItem+CustomItem.h"
 
+typedef enum {
+    MenuTableLogin = 0,
+    MenuTableWishList,
+    MenuTableJourney,
+    MenuTableDiscover,
+    MenuTableFollow
+}MenuTable;
+
 @interface MenuViewController ()
 @property (nonatomic) BOOL isLogin;
 @end
@@ -64,23 +72,23 @@
                                                forIndexPath:indexPath];
         
         // Configure the cell...
-        if (indexPath.row == 0) {
+        if (indexPath.row == MenuTableLogin) {
             
             [cell.menuImageView setImage:[Theme menuLoginDefault]];
             cell.menuTitle.text = @"登录";
-        }else if (indexPath.row == 1){
+        }else if (indexPath.row == MenuTableWishList){
             cell.menuImageView.image = [Theme menuWishListDefault];
             cell.menuImageView.highlightedImage = [Theme menuWishListSelected];
             cell.menuTitle.text = @"愿望列表";
-        }else if (indexPath.row == 2){
+        }else if (indexPath.row == MenuTableJourney){
             cell.menuImageView.image = [Theme menuJourneyDefault];
             cell.menuImageView.highlightedImage = [Theme menuJourneySelected];
             cell.menuTitle.text = @"我的历程";
-        }else if (indexPath.row == 3){
+        }else if (indexPath.row == MenuTableDiscover){
             cell.menuImageView.image = [Theme menuDiscoverDefault];
             cell.menuImageView.highlightedImage = [Theme menuDiscoverSelected];
             cell.menuTitle.text = @"发现愿望";
-        }else if (indexPath.row == 4){
+        }else if (indexPath.row == MenuTableFollow){
             cell.menuTitle.text = @"关注动态";
             cell.menuImageView.image = [Theme menuFollowDefault];
             cell.menuImageView.highlightedImage = [Theme menuFollowSelected];
@@ -94,6 +102,12 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == MenuTableWishList) {
+        [self performSegueWithIdentifier:@"showWishList" sender:nil];
+    }
+}
 - (void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self toggleCell:tableView at:indexPath];

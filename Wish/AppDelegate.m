@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "ECSlidingViewController.h"
-#import "FetchCenter.h"
 @interface AppDelegate ()
 
 @end
@@ -24,8 +23,7 @@
     root.anchorRightPeekAmount = root.view.frame.size.width * (640-278)/640;
     
     root.underLeftViewController.edgesForExtendedLayout = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeLeft;
-    NSLog(@"*********************************************************************************");
-    [FetchCenter fetchPlanList:@"100001"];
+
     
     return YES;
 }
