@@ -111,14 +111,12 @@ HomeCardViewDelegate>
 - (void)homeCardView:(HomeCardView *)cardView didPressedButton:(UIButton *)button
 {
     if ([button.titleLabel.text isEqualToString:@"放弃"]) {
-        if (self.myPlans.count) {
-            [self.cardView swipeTopViewToRight];
-            [self.myPlans removeLastObject];
-            [(Plan *)self.myPlans.lastObject deleteSelf:[AppDelegate getContext]];
-            self.buttomCardIndex ++;
-        }
-        
-
+        [self.cardView swipeTopViewToRight];
+        [(Plan *)self.myPlans.lastObject deleteSelf:[AppDelegate getContext]];
+        [self.myPlans removeLastObject];
+        self.buttomCardIndex = -1;
+        [self.cardView discardAllSwipeableViews];
+        [self.cardView loadNextSwipeableViewsIfNeeded];
     }
 }
 
@@ -154,10 +152,10 @@ HomeCardViewDelegate>
     Plan *plan = self.myPlans[--self.buttomCardIndex + 1];
     
     contentView.dataImage = plan.image;
-    contentView.title = [NSString stringWithFormat:@"bindex %d",self.buttomCardIndex];
-    contentView.subtitle = [NSString stringWithFormat:@"last %d",[self.myPlans indexOfObject:plan]];
-    contentView.countDowns = @"????";
-
+    
+    contentView.title = [NSString stringWithFormat:@"bindex %d",self.buttomCardIndex ];
+    contentView.subtitle = [NSString stringWithFormat:@"mpindex %d",[self.myPlans indexOfObject:plan]];
+    contentView.countDowns = nil;
     return view;
 }
 
