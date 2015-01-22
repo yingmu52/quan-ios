@@ -17,7 +17,7 @@
 #import "Plan+PlanCRUD.h"
 #import "AppDelegate.h"
 #import "FetchCenter.h"
-
+#import "PostViewController.h"
 const NSUInteger maxCardNum = 10;
 
 @interface HomeViewController ()
@@ -31,6 +31,9 @@ HomeCardViewDelegate>
 @property (nonatomic,weak) IBOutlet ZLSwipeableView *cardView;
 @property (nonatomic,strong) NSMutableArray *myPlans;
 @property (nonatomic,strong) Plan *currentPlan;
+
+#warning !*^(*&^%&*()_(*&^%$
+@property (nonatomic,strong) UIImage *capturedImage;
 @end
 
 @implementation HomeViewController
@@ -41,14 +44,22 @@ HomeCardViewDelegate>
 
 }
 
+- (Plan *)currentPlan
+{
+    if (self.myPlans.count > 0) {
+        _currentPlan = self.myPlans.firstObject;
+    }
+    return _currentPlan;
+}
+
 - (void)fetchMyplans
 {
     self.myPlans = [[Plan loadMyPlans:[AppDelegate getContext]] mutableCopy];
-    self.currentPlan = self.myPlans.firstObject;
 }
 - (void)viewWillAppear:(BOOL)animated
 {
     [self fetchMyplans];
+    NSLog(@"%d",self.myPlans.count);
 }
 - (void)viewDidLayoutSubviews
 {
@@ -98,7 +109,7 @@ HomeCardViewDelegate>
 - (void)homeCardView:(HomeCardView *)cardView didPressedButton:(UIButton *)button
 {
     if ([button.titleLabel.text isEqualToString:@"放弃"]) {
-        [self.cardView swipeTopViewToLeft];
+        [self.cardView swipeTopViewToRight];
         [[AppDelegate getContext] deleteObject:self.currentPlan];
     }
 }
@@ -164,9 +175,6 @@ HomeCardViewDelegate>
 #pragma mark - Camera Util
 
 - (IBAction)showCamera:(UIButton *)sender{
-    NSLog(@"*********************************************************************************");
-    [FetchCenter fetchPlanList:@"100001"];
-    return;
     UIImagePickerController *controller = [[self class] showCamera:self];
     if (controller) {
         [self presentViewController:controller
@@ -178,7 +186,10 @@ HomeCardViewDelegate>
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [self dismissViewControllerAnimated:YES completion:^{
-//        UIImage *editedImage = (UIImage *)info[UIImagePickerControllerEditedImage];
+        self.capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage]; // this line and next line is sequentally important
+        [self performSegueWithIdentifier:@"showPostFromHome" sender:nil];
+
+//        [self performSegueWithIdentifier:@"showPostFromHome" sender:nil];
 //        NSLog(@"%@",NSStringFromCGSize(editedImage.size));
     }];
 }
@@ -196,4 +207,13 @@ HomeCardViewDelegate>
     return controller;
 }
 
+
+#pragma mark - 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"showPostFromHome"]) {
+        PostViewController *pvc = segue.destinationViewController;
+        pvc.capturedImage = self.capturedImage;
+    }
+}
 @end

@@ -338,23 +338,66 @@
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="78" y="131" width="97" height="30"/>
-                                </variation>
                             </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card_photo_shadow" translatesAutoresizingMaskIntoConstraints="NO" id="pBy-H1-GZN">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="pBy-H1-GZN" secondAttribute="height" id="IBI-Q0-Egy"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="IBI-Q0-Egy"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="IBI-Q0-Egy"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bkR-Oi-ATm" firstAttribute="leading" secondItem="pBy-H1-GZN" secondAttribute="leading" id="5So-xZ-CCg"/>
+                            <constraint firstItem="pBy-H1-GZN" firstAttribute="trailing" secondItem="bkR-Oi-ATm" secondAttribute="trailing" id="F7Z-H9-aWr"/>
+                            <constraint firstItem="bkR-Oi-ATm" firstAttribute="trailing" secondItem="QnE-FT-cfx" secondAttribute="trailingMargin" id="Le8-Mv-1LS"/>
+                            <constraint firstItem="bkR-Oi-ATm" firstAttribute="top" secondItem="FOQ-fN-tNK" secondAttribute="bottom" constant="60" id="OOn-Kt-dIo"/>
+                            <constraint firstItem="pBy-H1-GZN" firstAttribute="top" secondItem="bkR-Oi-ATm" secondAttribute="bottom" constant="60" id="Oxw-qx-OGL"/>
+                            <constraint firstItem="bkR-Oi-ATm" firstAttribute="leading" secondItem="QnE-FT-cfx" secondAttribute="leadingMargin" id="jZR-ua-w02"/>
+                        </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="bkR-Oi-ATm"/>
+                                <exclude reference="pBy-H1-GZN"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="5So-xZ-CCg"/>
+                                <exclude reference="Le8-Mv-1LS"/>
+                                <exclude reference="OOn-Kt-dIo"/>
+                                <exclude reference="jZR-ua-w02"/>
+                                <exclude reference="F7Z-H9-aWr"/>
+                                <exclude reference="Oxw-qx-OGL"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="bkR-Oi-ATm"/>
+                                <include reference="pBy-H1-GZN"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="5So-xZ-CCg"/>
+                                <include reference="Le8-Mv-1LS"/>
+                                <include reference="OOn-Kt-dIo"/>
+                                <include reference="jZR-ua-w02"/>
+                                <include reference="F7Z-H9-aWr"/>
+                                <include reference="Oxw-qx-OGL"/>
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="pBy-H1-GZN" id="u0o-o2-vXz"/>
+                        <outlet property="textField" destination="bkR-Oi-ATm" id="IeB-YY-h7g"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RIa-Mp-Cry" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -796,6 +839,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="card_photo_shadow" width="76" height="88"/>
         <image name="fadein_ic_comment_default" width="102" height="80"/>
         <image name="fadein_ic_like_default" width="102" height="80"/>
         <image name="fadein_ic_share_default" width="32" height="32"/>

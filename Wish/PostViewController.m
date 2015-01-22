@@ -12,9 +12,25 @@
 #import "AppDelegate.h"
 @interface PostViewController ()
 
+@property (nonatomic,weak) IBOutlet UITextField *textField;
+@property (nonatomic,weak) IBOutlet UIImageView *imageView;
+
 @end
 
 @implementation PostViewController
+
+
+- (void)setCapturedImage:(UIImage *)capturedImage
+{
+    _capturedImage = capturedImage;
+    self.imageView.image = capturedImage;
+}
+
+- (void)setImageView:(UIImageView *)imageView
+{
+    _imageView = imageView;
+    _imageView.image = self.capturedImage;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -42,10 +58,10 @@
 
 - (void)doneCreatingWish
 {
-    [Plan createPlan:@"test"
+    [Plan createPlan:self.textField.text
                 date:[NSDate date]
              privacy:NO
-               image:[Theme wishDetailCameraDefault]
+               image:self.capturedImage
            inContext:[AppDelegate getContext]];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
