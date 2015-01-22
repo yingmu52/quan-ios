@@ -30,9 +30,7 @@ HomeCardViewDelegate>
 
 @property (nonatomic,weak) IBOutlet ZLSwipeableView *cardView;
 @property (nonatomic,strong) NSMutableArray *myPlans;
-@property (nonatomic,strong) Plan *currentPlan;
-
-#warning !*^(*&^%&*()_(*&^%$
+@property (nonatomic) int buttomCardIndex;
 @property (nonatomic,strong) UIImage *capturedImage;
 @end
 
@@ -44,23 +42,6 @@ HomeCardViewDelegate>
 
 }
 
-- (Plan *)currentPlan
-{
-    if (self.myPlans.count > 0) {
-        _currentPlan = self.myPlans.lastObject;
-    }
-    return _currentPlan;
-}
-
-- (void)fetchMyplans
-{
-    self.myPlans = [[Plan loadMyPlans:[AppDelegate getContext]] mutableCopy];
-}
-- (void)viewWillAppear:(BOOL)animated
-{
-    [self fetchMyplans];
-    NSLog(@"%d",self.myPlans.count);
-}
 - (void)viewDidLayoutSubviews
 {
     self.cardView.delegate = self;
@@ -69,8 +50,6 @@ HomeCardViewDelegate>
 
 - (void)setUpNavigationItem
 {
-    [self.cardView layoutIfNeeded];
-
     CGRect frame = CGRectMake(0, 0, 30, 30);
     UIButton *menuBtn = [Theme buttonWithImage:[Theme navMenuDefault]
                                         target:self
@@ -83,63 +62,83 @@ HomeCardViewDelegate>
                                         frame:frame];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
+    
     [self.cardView layoutIfNeeded];
 
+}
+
+- (void)openMenu{
+    [self.slidingViewController anchorTopViewToRightAnimated:YES];
+}
+
+#pragma mark - db operation
+
+- (int)buttomCardIndex{
+    if (_buttomCardIndex < 0) {
+        _buttomCardIndex = self.myPlans.count - 1;
+    }else if (_buttomCardIndex > self.myPlans.count - 1){
+        _buttomCardIndex = -1;
+    }
+    return _buttomCardIndex;
 }
 
 - (void)addWish{
     if (self.myPlans.count == maxCardNum){
         [[[UIAlertView alloc] initWithTitle:nil
-                                   message:@"Come the fuck on! life is too short for too many goddamn plans"
-                                  delegate:self
-                         cancelButtonTitle:@"OK"
-                         otherButtonTitles:nil, nil] show];
+                                    message:@"Come the fuck on! life is too short for too many goddamn plans"
+                                   delegate:self
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
     }else{
         [self performSegueWithIdentifier:@"showPostFromHome" sender:nil];
     }
 }
-- (void)openMenu{
-    [self.slidingViewController anchorTopViewToRightAnimated:YES];
+
+
+- (void)fetchMyplans
+{
+    self.myPlans = [[Plan loadMyPlans:[AppDelegate getContext]] mutableCopy];
 }
-
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self fetchMyplans];
+    NSLog(@"%d",self.myPlans.count);
+}
 
 #pragma mark - 
 
 - (void)homeCardView:(HomeCardView *)cardView didPressedButton:(UIButton *)button
 {
     if ([button.titleLabel.text isEqualToString:@"放弃"]) {
-        [self.cardView swipeTopViewToRight];
-        [self.currentPlan deleteSelf:[AppDelegate getContext]];
+        [self.cardView swipeTopViewToUp];
+        NSLog(@"before %d",self.myPlans.count);
+        [(Plan *)self.myPlans.lastObject deleteSelf:[AppDelegate getContext]];
+        NSLog(@"after %d",self.myPlans.count);
+
+        self.buttomCardIndex ++ ;
     }
 }
 
 #pragma mark - ZLSwipeableViewDelegate
 
+//
+//- (void)swipeableView:(ZLSwipeableView *)swipeableView
+//  didStartSwipingView:(UIView *)view
+//           atLocation:(CGPoint)location
+//{
+//    if (!self.myPlans.count) {
+//        [self fetchMyplans];
+//    }
+//}
 
-- (void)swipeableView:(ZLSwipeableView *)swipeableView
-  didStartSwipingView:(UIView *)view
-           atLocation:(CGPoint)location
-{
-    if (!self.myPlans.count) {
-        [self fetchMyplans];
-    }
-}
-
-- (void)swipeableView:(ZLSwipeableView *)swipeableView
-    didEndSwipingView:(UIView *)view
-           atLocation:(CGPoint)location
-{
-    [self.myPlans removeObject:self.currentPlan];
-
-}
 
 #pragma mark - ZLSwipeableViewDataSource
 
+//always display the last object of myPlan
 - (UIView *)nextViewForSwipeableView:(ZLSwipeableView *)swipeableView {
 
     //could be improved when there is a view defined for no-myPlan-exist condition
-    if (self.myPlans.count == 0) return nil;
+    if (!self.myPlans.count || self.buttomCardIndex < 0) return nil;
     
     UIView *view = [[UIView alloc] initWithFrame:swipeableView.bounds];
 
@@ -149,11 +148,13 @@ HomeCardViewDelegate>
     contentView.delegate = self; // for responsing more view button action !!
     
     //preset data
-    contentView.dataImage = self.currentPlan.image;
-    contentView.title = self.currentPlan.planTitle;
-    contentView.subtitle = [NSString stringWithFormat:@"%d",self.myPlans.count];
+    
+    Plan *plan = self.myPlans[--self.buttomCardIndex + 1];
+    
+    contentView.dataImage = plan.image;
+    contentView.title = plan.planTitle;
+    contentView.subtitle = [NSString stringWithFormat:@"%d",[self.myPlans indexOfObject:plan]];
     contentView.countDowns = @"????";
-//    self.currentCardIndex ++ ;
 
     return view;
 }
