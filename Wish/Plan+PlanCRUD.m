@@ -7,6 +7,7 @@
 //
 
 #import "Plan+PlanCRUD.h"
+#import "AppDelegate.h"
 @implementation Plan (PlanCRUD)
 
 + (Plan *)createPlan:(NSString *)title
@@ -20,7 +21,9 @@
     plan.finishDate = date;
     plan.isPrivate = @(isPrivate);
     plan.image = image;
-
+    
+    NSError *error;
+    [context save:&error];
     return plan;
 }
 

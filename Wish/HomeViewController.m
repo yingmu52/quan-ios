@@ -47,7 +47,7 @@ HomeCardViewDelegate>
 - (Plan *)currentPlan
 {
     if (self.myPlans.count > 0) {
-        _currentPlan = self.myPlans.firstObject;
+        _currentPlan = self.myPlans.lastObject;
     }
     return _currentPlan;
 }
@@ -126,12 +126,21 @@ HomeCardViewDelegate>
     }
 }
 
+- (void)swipeableView:(ZLSwipeableView *)swipeableView
+    didEndSwipingView:(UIView *)view
+           atLocation:(CGPoint)location
+{
+    [self.myPlans removeObject:self.currentPlan];
+
+}
+
 #pragma mark - ZLSwipeableViewDataSource
 
 - (UIView *)nextViewForSwipeableView:(ZLSwipeableView *)swipeableView {
 
     //could be improved when there is a view defined for no-myPlan-exist condition
     if (self.myPlans.count == 0) return nil;
+    
     
     UIView *view = [[UIView alloc] initWithFrame:swipeableView.bounds];
     
@@ -166,7 +175,6 @@ HomeCardViewDelegate>
     contentView.title = self.currentPlan.planTitle;
     contentView.subtitle = [NSString stringWithFormat:@"%d",self.myPlans.count];
     contentView.countDowns = @"????";
-    [self.myPlans removeObject:self.currentPlan];
 //    self.currentCardIndex ++ ;
 
     return view;
