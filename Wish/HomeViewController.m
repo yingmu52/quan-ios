@@ -28,7 +28,7 @@ UINavigationControllerDelegate>
 
 @property (nonatomic,weak) IBOutlet ZLSwipeableView *cardView;
 @property (nonatomic,strong) NSMutableArray *myPlans;
-//@property (nonatomic) NSUInteger currentCardIndex;
+@property (nonatomic,strong) Plan *currentPlan;
 @end
 
 @implementation HomeViewController
@@ -46,9 +46,15 @@ UINavigationControllerDelegate>
     [self setUpNavigationItem];
 
 }
-- (void)viewWillAppear:(BOOL)animated
+
+- (void)fetchMyplans
 {
     self.myPlans = [[Plan loadMyPlans:[AppDelegate getContext]] mutableCopy];
+    self.currentPlan = self.myPlans.firstObject;
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self fetchMyplans];
 }
 - (void)viewDidLayoutSubviews
 {
@@ -90,28 +96,25 @@ UINavigationControllerDelegate>
 - (void)openMenu{
     [self.slidingViewController anchorTopViewToRightAnimated:YES];
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+- (IBAction)delete:(UIButton *)sender{
 }
 
 #pragma mark - ZLSwipeableViewDelegate
 
 
-- (void)swipeableView:(ZLSwipeableView *)swipeableView didEndSwipingView:(UIView *)view atLocation:(CGPoint)location
+- (void)swipeableView:(ZLSwipeableView *)swipeableView didStartSwipingView:(UIView *)view atLocation:(CGPoint)location
 {
     if (self.myPlans.count == 0) {
-        self.myPlans = [[Plan loadMyPlans:[AppDelegate getContext]] mutableCopy];
-        [self reloadInputViews];
-//        [self nextViewForSwipeableView:self.cardView];
-//        [self.cardView layoutIfNeeded];
+        [self fetchMyplans];
     }
 }
+
 
 #pragma mark - ZLSwipeableViewDataSource
 
 - (UIView *)nextViewForSwipeableView:(ZLSwipeableView *)swipeableView {
-
+    NSLog(@"hug");
     //could be improved when there is a view defined for no-myPlan-exist condition
     if (self.myPlans.count == 0) return nil;
     
@@ -124,8 +127,7 @@ UINavigationControllerDelegate>
     
     // This is important:
     // https://github.com/zhxnlai/ZLSwipeableView/issues/9
-    NSDictionary *metrics = @{
-                              @"height" : @(view.bounds.size.height),
+    NSDictionary *metrics = @{@"height" : @(view.bounds.size.height),
                               @"width" : @(view.bounds.size.width)
                               };
     NSDictionary *views = NSDictionaryOfVariableBindings(contentView);
@@ -142,15 +144,11 @@ UINavigationControllerDelegate>
                           metrics:metrics
                           views:views]];
     //preset data
-    if (self.myPlans.count > 0){
-        Plan *currentPlan = self.myPlans.lastObject;
-        contentView.dataImage = currentPlan.image;
-        contentView.title = currentPlan.planTitle;
-        contentView.subtitle = [NSString stringWithFormat:@"%d",self.myPlans.count];
-        contentView.countDowns = @"????";
-        [self.myPlans removeObject:currentPlan];
-        
-    }
+    contentView.dataImage = self.currentPlan.image;
+    contentView.title = self.currentPlan.planTitle;
+    contentView.subtitle = [NSString stringWithFormat:@"%d",self.myPlans.count];
+    contentView.countDowns = @"????";
+    [self.myPlans removeObject:self.currentPlan];
 //    self.currentCardIndex ++ ;
 
     return view;
