@@ -71,4 +71,8 @@
 {
     self.moreView.hidden = NO;
 }
+
+- (IBAction)deletePressed:(UIButton *)sender{
+    [self.delegate homeCardView:self didPressedButton:sender];
+}
 @end

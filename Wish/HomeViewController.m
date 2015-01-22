@@ -24,7 +24,8 @@ const NSUInteger maxCardNum = 10;
 <ZLSwipeableViewDataSource,
 ZLSwipeableViewDelegate,
 UIImagePickerControllerDelegate,
-UINavigationControllerDelegate>
+UINavigationControllerDelegate,
+HomeCardViewDelegate>
 
 @property (nonatomic,weak) IBOutlet ZLSwipeableView *cardView;
 @property (nonatomic,strong) NSMutableArray *myPlans;
@@ -32,14 +33,6 @@ UINavigationControllerDelegate>
 @end
 
 @implementation HomeViewController
-
-//-(NSUInteger)currentCardIndex
-//{
-//    if (_currentCardIndex > self.myPlans.count - 1) {
-//        _currentCardIndex = 0 ;
-//    }
-//    return _currentCardIndex;
-//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -97,19 +90,29 @@ UINavigationControllerDelegate>
     [self.slidingViewController anchorTopViewToRightAnimated:YES];
 }
 
-- (IBAction)delete:(UIButton *)sender{
-}
 
+
+#pragma mark - 
+
+- (void)homeCardView:(HomeCardView *)cardView didPressedButton:(UIButton *)button
+{
+    if ([button.titleLabel.text isEqualToString:@"放弃"]) {
+        [self.cardView swipeTopViewToLeft];
+        [self.myPlans removeObject:self.currentPlan];
+        [[AppDelegate getContext] deleteObject:self.currentPlan];
+    }
+}
 #pragma mark - ZLSwipeableViewDelegate
 
 
-- (void)swipeableView:(ZLSwipeableView *)swipeableView didStartSwipingView:(UIView *)view atLocation:(CGPoint)location
+- (void)swipeableView:(ZLSwipeableView *)swipeableView
+  didStartSwipingView:(UIView *)view
+           atLocation:(CGPoint)location
 {
     if (self.myPlans.count == 0) {
         [self fetchMyplans];
     }
 }
-
 
 #pragma mark - ZLSwipeableViewDataSource
 
@@ -143,6 +146,9 @@ UINavigationControllerDelegate>
                           options:0
                           metrics:metrics
                           views:views]];
+    
+    contentView.delegate = self; // for responsing more view button action !!
+    
     //preset data
     contentView.dataImage = self.currentPlan.image;
     contentView.title = self.currentPlan.planTitle;

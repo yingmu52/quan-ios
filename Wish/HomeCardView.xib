@@ -116,6 +116,9 @@
                                     <include reference="1cM-nj-crT"/>
                                 </mask>
                             </variation>
+                            <connections>
+                                <action selector="deletePressed:" destination="JvT-ko-7QX" eventType="touchUpInside" id="FvQ-fx-7a0"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="748" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZP-up-CwF" userLabel="finish">
                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -137,6 +140,9 @@
                                     <include reference="cE1-Uq-dfv"/>
                                 </mask>
                             </variation>
+                            <connections>
+                                <action selector="deletePressed:" destination="JvT-ko-7QX" eventType="touchUpInside" id="FA9-gg-Ta1"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RxS-x8-yXv" userLabel="close">
                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -186,6 +192,9 @@
                                     <include reference="w6o-4K-Nxe"/>
                                 </mask>
                             </variation>
+                            <connections>
+                                <action selector="deletePressed:" destination="JvT-ko-7QX" eventType="touchUpInside" id="eMN-U7-0LL"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
