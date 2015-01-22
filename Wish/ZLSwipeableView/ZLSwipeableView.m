@@ -9,7 +9,7 @@
 #import "ZLSwipeableView.h"
 #import "ZLPanGestureRecognizer.h"
 
-const NSUInteger maxNumPrefetchedViews = 3;
+const NSUInteger kNumPrefetchedViews = 3;
 
 @interface ZLSwipeableView () <UICollisionBehaviorDelegate,
                                UIDynamicAnimatorDelegate>
@@ -32,14 +32,6 @@ const NSUInteger maxNumPrefetchedViews = 3;
 @end
 @implementation ZLSwipeableView
 
-#pragma mark -
-- (NSUInteger)kNumPrefetchedViews
-{
-    if (_kNumPrefetchedViews > maxNumPrefetchedViews) {
-        _kNumPrefetchedViews = maxNumPrefetchedViews;
-    }
-    return _kNumPrefetchedViews;
-}
 #pragma mark - Init
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -132,7 +124,7 @@ const NSUInteger maxNumPrefetchedViews = 3;
 - (void)loadNextSwipeableViewsIfNeeded:(BOOL)animated {
     NSInteger numViews = self.containerView.subviews.count;
     NSMutableSet *newViews = [NSMutableSet set];
-    for (NSInteger i = numViews; i < self.kNumPrefetchedViews; i++) {
+    for (NSInteger i = numViews; i < kNumPrefetchedViews; i++) {
         UIView *nextView = [self nextSwipeableView];
         if (nextView) {
             [self.containerView addSubview:nextView];
@@ -144,7 +136,7 @@ const NSUInteger maxNumPrefetchedViews = 3;
 
     if (animated) {
         NSTimeInterval maxDelay = 0.3;
-        NSTimeInterval delayStep = maxDelay / self.kNumPrefetchedViews;
+        NSTimeInterval delayStep = maxDelay / kNumPrefetchedViews;
         NSTimeInterval aggregatedDelay = maxDelay;
         NSTimeInterval animationDuration = 0.25;
         for (UIView *view in newViews) {

@@ -19,14 +19,27 @@
 
 const NSUInteger maxCardNum = 10;
 
-@interface HomeViewController () <ZLSwipeableViewDataSource,ZLSwipeableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface HomeViewController ()
+
+<ZLSwipeableViewDataSource,
+ZLSwipeableViewDelegate,
+UIImagePickerControllerDelegate,
+UINavigationControllerDelegate>
 
 @property (nonatomic,weak) IBOutlet ZLSwipeableView *cardView;
-@property (nonatomic,strong) NSArray *myPlans;
-@property (nonatomic) NSUInteger currentCardIndex;
+@property (nonatomic,strong) NSMutableArray *myPlans;
+//@property (nonatomic) NSUInteger currentCardIndex;
 @end
 
 @implementation HomeViewController
+
+//-(NSUInteger)currentCardIndex
+//{
+//    if (_currentCardIndex > self.myPlans.count - 1) {
+//        _currentCardIndex = 0 ;
+//    }
+//    return _currentCardIndex;
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,13 +48,12 @@ const NSUInteger maxCardNum = 10;
 }
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.myPlans = [Plan loadMyPlans:[AppDelegate getContext]];
+    self.myPlans = [[Plan loadMyPlans:[AppDelegate getContext]] mutableCopy];
 }
 - (void)viewDidLayoutSubviews
 {
     self.cardView.delegate = self;
     self.cardView.dataSource = self;
-    self.cardView.kNumPrefetchedViews = self.myPlans.count;
 }
 
 - (void)setUpNavigationItem
@@ -86,21 +98,22 @@ const NSUInteger maxCardNum = 10;
 #pragma mark - ZLSwipeableViewDelegate
 
 
-
-- (void)swipeableView:(ZLSwipeableView *)swipeableView didStartSwipingView:(UIView *)view atLocation:(CGPoint)location
+- (void)swipeableView:(ZLSwipeableView *)swipeableView didEndSwipingView:(UIView *)view atLocation:(CGPoint)location
 {
-    self.currentCardIndex ++ ;
-    if (self.currentCardIndex > self.myPlans.count - 1) {
-        self.currentCardIndex = 0;
+    if (self.myPlans.count == 0) {
+        self.myPlans = [[Plan loadMyPlans:[AppDelegate getContext]] mutableCopy];
+        [self reloadInputViews];
+//        [self nextViewForSwipeableView:self.cardView];
+//        [self.cardView layoutIfNeeded];
     }
-    NSLog(@"%lu",(unsigned long)self.currentCardIndex);
-
 }
+
 #pragma mark - ZLSwipeableViewDataSource
 
 - (UIView *)nextViewForSwipeableView:(ZLSwipeableView *)swipeableView {
 
-    if (self.myPlans.count == 0) return nil; //could be improved when there is a view defined for no-myPlan-exist condition
+    //could be improved when there is a view defined for no-myPlan-exist condition
+    if (self.myPlans.count == 0) return nil;
     
     UIView *view = [[UIView alloc] initWithFrame:swipeableView.bounds];
     
@@ -128,16 +141,18 @@ const NSUInteger maxCardNum = 10;
                           options:0
                           metrics:metrics
                           views:views]];
-
     //preset data
     if (self.myPlans.count > 0){
-        Plan *currentPlan = self.myPlans[self.currentCardIndex];
+        Plan *currentPlan = self.myPlans.lastObject;
         contentView.dataImage = currentPlan.image;
         contentView.title = currentPlan.planTitle;
-        contentView.subtitle = [NSString stringWithFormat:@"%d",self.currentCardIndex];
+        contentView.subtitle = [NSString stringWithFormat:@"%d",self.myPlans.count];
         contentView.countDowns = @"????";
+        [self.myPlans removeObject:currentPlan];
         
     }
+//    self.currentCardIndex ++ ;
+
     return view;
 }
 

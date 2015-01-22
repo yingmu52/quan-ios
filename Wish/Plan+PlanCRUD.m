@@ -20,16 +20,16 @@
     plan.finishDate = date;
     plan.isPrivate = @(isPrivate);
     plan.image = image;
-    
+
     return plan;
 }
 
 + (NSArray *)loadMyPlans:(NSManagedObjectContext *)context
 {
     return [[self class] fetchWith:@"Plan"
-                  predicate:nil //fetch all
-           keyForDescriptor:@"finishDate"
-                  inContext:context];
+                         predicate:nil //fetch all
+                  keyForDescriptor:@"finishDate"
+                         inContext:context];
 }
 
 + (NSArray *)fetchWith:(NSString *)entityName

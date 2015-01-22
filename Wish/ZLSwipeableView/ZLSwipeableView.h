@@ -68,8 +68,6 @@ typedef NS_ENUM(NSUInteger, ZLSwipeableViewDirection) {
 @interface ZLSwipeableView : UIView
 
 ///
-@property (nonatomic) NSUInteger kNumPrefetchedViews;
-///
 @property (nonatomic, weak) IBOutlet id<ZLSwipeableViewDataSource> dataSource;
 
 ///
