@@ -8,6 +8,8 @@
 
 #import "PostViewController.h"
 #import "Theme.h"
+#import "Plan+PlanCRUD.h"
+#import "AppDelegate.h"
 @interface PostViewController ()
 
 @end
@@ -28,14 +30,24 @@
                                       selector:@selector(popViewControllerAnimated:)
                                          frame:frame];
     
-    UIButton *doneButton = [Theme buttonWithImage:[Theme navComposeButtonDefault]
+    UIButton *doneButton = [Theme buttonWithImage:[Theme navTikButtonDefault]
                                            target:self
-                                         selector:nil
+                                         selector:@selector(doneCreatingWish)
                                             frame:frame];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
 
+}
+
+- (void)doneCreatingWish
+{
+    [Plan createPlan:@"test"
+                date:[NSDate date]
+             privacy:NO
+               image:[Theme wishDetailCameraDefault]
+           inContext:[AppDelegate getContext]];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end

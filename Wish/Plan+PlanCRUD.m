@@ -7,7 +7,6 @@
 //
 
 #import "Plan+PlanCRUD.h"
-@import UIKit;
 @implementation Plan (PlanCRUD)
 
 + (Plan *)createPlan:(NSString *)title
@@ -21,8 +20,36 @@
     plan.finishDate = date;
     plan.isPrivate = @(isPrivate);
     plan.image = image;
-
+    
     return plan;
+}
+
++ (NSArray *)loadMyPlans:(NSManagedObjectContext *)context
+{
+    return [[self class] fetchWith:@"Plan"
+                  predicate:nil //fetch all
+           keyForDescriptor:@"finishDate"
+                  inContext:context];
+}
+
++ (NSArray *)fetchWith:(NSString *)entityName
+        predicate:(NSPredicate *)predicate
+ keyForDescriptor:(NSString *)key
+        inContext:(NSManagedObjectContext *)context{
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+
+    [fetchRequest setEntity:entity];
+    // Specify criteria for filtering which objects to fetch
+    [fetchRequest setPredicate:predicate];
+    // Specify how the fetched objects should be sorted
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:key
+                                                                   ascending:YES];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
+    
+    NSError *error = nil;
+    return [context executeFetchRequest:fetchRequest error:&error];
+    
 }
 @end
 

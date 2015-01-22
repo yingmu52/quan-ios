@@ -19,8 +19,9 @@
 
 + (void)fetchPlanList:(NSString *)ownerId{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PLAN,GET_LIST];
-    NSDictionary *args = @{@"id":ownerId};
-    [[AFHTTPRequestOperationManager manager] GET:rqtStr parameters:args success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[AFHTTPRequestOperationManager manager] GET:rqtStr
+                                      parameters:@{@"id":ownerId}
+                                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"json:%@",responseObject);
     }failure:^(AFHTTPRequestOperation *operation, NSError *error){
         NSLog(@"FAIL");

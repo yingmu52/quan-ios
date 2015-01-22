@@ -26,7 +26,7 @@ typedef NS_ENUM(NSUInteger, ZLSwipeableViewDirection) {
 
 /// Delegate
 @protocol ZLSwipeableViewDelegate <NSObject>
-
+@optional
 - (void)swipeableView:(ZLSwipeableView *)swipeableView
 		   didSwipeUp:(UIView *)view;
 
@@ -67,6 +67,8 @@ typedef NS_ENUM(NSUInteger, ZLSwipeableViewDirection) {
 
 @interface ZLSwipeableView : UIView
 
+///
+@property (nonatomic) NSUInteger kNumPrefetchedViews;
 ///
 @property (nonatomic, weak) IBOutlet id<ZLSwipeableViewDataSource> dataSource;
 

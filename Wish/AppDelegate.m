@@ -24,8 +24,8 @@
     root.anchorRightPeekAmount = root.view.frame.size.width * (640-278)/640;
     
     root.underLeftViewController.edgesForExtendedLayout = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeLeft;
-    NSLog(@"************************************************************************************************************************************************************************************************************************************************************************************************************************************************");
-    [FetchCenter fetchPlanList:@"this_ownerId_1421202761"];
+    NSLog(@"*********************************************************************************");
+    [FetchCenter fetchPlanList:@"100001"];
     
     return YES;
 }
@@ -134,4 +134,9 @@
     }
 }
 
++ (NSManagedObjectContext *)getContext
+{
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return delegate.managedObjectContext;
+}
 @end

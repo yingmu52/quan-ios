@@ -13,10 +13,17 @@
 #import "UIViewController+ECSlidingViewController.h"
 #import "ZLSwipeableView.h"
 #import "HomeCardView.h"
+#import "Plan+PlanCRUD.h"
+#import "Plan+PlanCRUD.h"
+#import "AppDelegate.h"
+
+const NSUInteger maxCardNum = 10;
 
 @interface HomeViewController () <ZLSwipeableViewDataSource,ZLSwipeableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic,weak) IBOutlet ZLSwipeableView *cardView;
+@property (nonatomic,strong) NSArray *myPlans;
+@property (nonatomic) NSUInteger currentCardIndex;
 @end
 
 @implementation HomeViewController
@@ -26,11 +33,15 @@
     [self setUpNavigationItem];
 
 }
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.myPlans = [Plan loadMyPlans:[AppDelegate getContext]];
+}
 - (void)viewDidLayoutSubviews
 {
     self.cardView.delegate = self;
     self.cardView.dataSource = self;
+    self.cardView.kNumPrefetchedViews = self.myPlans.count;
 }
 
 - (void)setUpNavigationItem
@@ -54,7 +65,15 @@
 }
 
 - (void)addWish{
-    [self performSegueWithIdentifier:@"showPostFromHome" sender:nil];
+    if (self.myPlans.count == maxCardNum){
+        [[[UIAlertView alloc] initWithTitle:nil
+                                   message:@"Come the fuck on! life is too short for too many goddamn plans"
+                                  delegate:self
+                         cancelButtonTitle:@"OK"
+                         otherButtonTitles:nil, nil] show];
+    }else{
+        [self performSegueWithIdentifier:@"showPostFromHome" sender:nil];
+    }
 }
 - (void)openMenu{
     [self.slidingViewController anchorTopViewToRightAnimated:YES];
@@ -66,55 +85,23 @@
 
 #pragma mark - ZLSwipeableViewDelegate
 
-- (void)swipeableView:(ZLSwipeableView *)swipeableView
-         didSwipeLeft:(UIView *)view {
-    NSLog(@"did swipe left");
-}
 
-- (void)swipeableView:(ZLSwipeableView *)swipeableView
-        didSwipeRight:(UIView *)view {
-    NSLog(@"did swipe right");
-}
 
-- (void)swipeableView:(ZLSwipeableView *)swipeableView
-       didCancelSwipe:(UIView *)view {
-    NSLog(@"did cancel swipe");
-}
+- (void)swipeableView:(ZLSwipeableView *)swipeableView didStartSwipingView:(UIView *)view atLocation:(CGPoint)location
+{
+    self.currentCardIndex ++ ;
+    if (self.currentCardIndex > self.myPlans.count - 1) {
+        self.currentCardIndex = 0;
+    }
+    NSLog(@"%lu",(unsigned long)self.currentCardIndex);
 
-- (void)swipeableView:(ZLSwipeableView *)swipeableView
-  didStartSwipingView:(UIView *)view
-           atLocation:(CGPoint)location {
-    NSLog(@"did start swiping at location: x %f, y %f", location.x, location.y);
 }
-
-- (void)swipeableView:(ZLSwipeableView *)swipeableView
-          swipingView:(UIView *)view
-           atLocation:(CGPoint)location
-          translation:(CGPoint)translation {
-    NSLog(@"swiping at location: x %f, y %f, translation: x %f, y %f",
-          location.x, location.y, translation.x, translation.y);
-}
-
-- (void)swipeableView:(ZLSwipeableView *)swipeableView
-    didEndSwipingView:(UIView *)view
-           atLocation:(CGPoint)location {
-    NSLog(@"did end swiping at location: x %f, y %f", location.x, location.y);
-}
-
-- (void)swipeableView:(ZLSwipeableView *)swipeableView
-           didSwipeUp:(UIView *)view{
-    
-}
-
-- (void)swipeableView:(ZLSwipeableView *)swipeableView
-         didSwipeDown:(UIView *)view{
-    
-}
-
 #pragma mark - ZLSwipeableViewDataSource
 
 - (UIView *)nextViewForSwipeableView:(ZLSwipeableView *)swipeableView {
-    //return nil;
+
+    if (self.myPlans.count == 0) return nil; //could be improved when there is a view defined for no-myPlan-exist condition
+    
     UIView *view = [[UIView alloc] initWithFrame:swipeableView.bounds];
     
     HomeCardView *contentView = [HomeCardView instantiateFromNib];
@@ -142,7 +129,15 @@
                           metrics:metrics
                           views:views]];
 
-    
+    //preset data
+    if (self.myPlans.count > 0){
+        Plan *currentPlan = self.myPlans[self.currentCardIndex];
+        contentView.dataImage = currentPlan.image;
+        contentView.title = currentPlan.planTitle;
+        contentView.subtitle = [NSString stringWithFormat:@"%d",self.currentCardIndex];
+        contentView.countDowns = @"????";
+        
+    }
     return view;
 }
 

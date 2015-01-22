@@ -7,7 +7,17 @@
 //
 
 #import "Plan.h"
+@import UIKit;
 
 @interface Plan (PlanCRUD)
+
+
++ (Plan *)createPlan:(NSString *)title
+                date:(NSDate *)date
+             privacy:(BOOL)isPrivate
+               image:(UIImage *)image
+           inContext:(NSManagedObjectContext *)context;
+
++ (NSArray *)loadMyPlans:(NSManagedObjectContext *)context;
 
 @end

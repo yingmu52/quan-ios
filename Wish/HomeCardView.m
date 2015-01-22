@@ -10,9 +10,36 @@
 
 @interface HomeCardView ()
 @property (nonatomic,weak) IBOutlet UIView *moreView;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak,nonatomic) IBOutlet UILabel *subtitleLabel;
+@property (weak,nonatomic) IBOutlet UILabel *countDownLabel;
 @end
 
 @implementation HomeCardView
+
+-(void)setDataImage:(UIImage *)dataImage
+{
+    _dataImage = dataImage;
+    self.imageView.image = dataImage;
+}
+
+- (void)setTitle:(NSString *)title
+{
+    _title = title;
+    self.titleLabel.text = title;
+}
+
+- (void)setSubtitle:(NSString *)subtitle
+{
+    _subtitle = subtitle;
+    self.subtitleLabel.text = subtitle;
+}
+- (void)setCountDowns:(NSString *)countDowns
+{
+    _countDowns = countDowns;
+    self.countDownLabel.text = countDowns;
+}
 
 
 + (instancetype)instantiateFromNib

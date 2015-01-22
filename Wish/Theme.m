@@ -33,6 +33,12 @@
     return [UIImage imageNamed:@"nav_ic_back_default"];
 }
 
+
++ (UIImage *)navTikButtonDefault
+{
+    return [UIImage imageNamed:@"nav_ic_share_default"];
+}
+
 + (UIImage *)navComposeButtonDefault
 {
     return [UIImage imageNamed:@"nav_ic_eidt_default"];

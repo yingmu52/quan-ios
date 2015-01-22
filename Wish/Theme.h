@@ -29,4 +29,6 @@
 
 + (UIImage *)navAddDefault;
 
++ (UIImage *)navTikButtonDefault;
+
 @end
