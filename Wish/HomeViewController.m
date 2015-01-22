@@ -76,6 +76,7 @@ HomeCardViewDelegate>
 - (int)buttomCardIndex{
     if (_buttomCardIndex < 0) {
         _buttomCardIndex = self.myPlans.count - 1;
+
     }else if (_buttomCardIndex > self.myPlans.count - 1){
         _buttomCardIndex = -1;
     }
@@ -110,26 +111,27 @@ HomeCardViewDelegate>
 - (void)homeCardView:(HomeCardView *)cardView didPressedButton:(UIButton *)button
 {
     if ([button.titleLabel.text isEqualToString:@"放弃"]) {
-        [self.cardView swipeTopViewToUp];
-        NSLog(@"before %d",self.myPlans.count);
-        [(Plan *)self.myPlans.lastObject deleteSelf:[AppDelegate getContext]];
-        NSLog(@"after %d",self.myPlans.count);
+        if (self.myPlans.count) {
+            [self.cardView swipeTopViewToRight];
+            [self.myPlans removeLastObject];
+            [(Plan *)self.myPlans.lastObject deleteSelf:[AppDelegate getContext]];
+            self.buttomCardIndex ++;
+        }
+        
 
-        self.buttomCardIndex ++ ;
     }
 }
 
 #pragma mark - ZLSwipeableViewDelegate
 
-//
-//- (void)swipeableView:(ZLSwipeableView *)swipeableView
-//  didStartSwipingView:(UIView *)view
-//           atLocation:(CGPoint)location
-//{
-//    if (!self.myPlans.count) {
-//        [self fetchMyplans];
-//    }
-//}
+
+- (void)swipeableView:(ZLSwipeableView *)swipeableView
+  didStartSwipingView:(UIView *)view
+           atLocation:(CGPoint)location
+{
+    NSLog(@"buttom index %d",self.buttomCardIndex);
+    NSLog(@"%d",self.myPlans.count);
+}
 
 
 #pragma mark - ZLSwipeableViewDataSource
@@ -152,8 +154,8 @@ HomeCardViewDelegate>
     Plan *plan = self.myPlans[--self.buttomCardIndex + 1];
     
     contentView.dataImage = plan.image;
-    contentView.title = plan.planTitle;
-    contentView.subtitle = [NSString stringWithFormat:@"%d",[self.myPlans indexOfObject:plan]];
+    contentView.title = [NSString stringWithFormat:@"bindex %d",self.buttomCardIndex];
+    contentView.subtitle = [NSString stringWithFormat:@"last %d",[self.myPlans indexOfObject:plan]];
     contentView.countDowns = @"????";
 
     return view;
