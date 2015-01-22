@@ -110,7 +110,7 @@ HomeCardViewDelegate>
 {
     if ([button.titleLabel.text isEqualToString:@"放弃"]) {
         [self.cardView swipeTopViewToRight];
-        [[AppDelegate getContext] deleteObject:self.currentPlan];
+        [self.currentPlan deleteSelf:[AppDelegate getContext]];
     }
 }
 
@@ -121,7 +121,7 @@ HomeCardViewDelegate>
   didStartSwipingView:(UIView *)view
            atLocation:(CGPoint)location
 {
-    if (self.myPlans.count == 0) {
+    if (!self.myPlans.count) {
         [self fetchMyplans];
     }
 }
@@ -141,32 +141,10 @@ HomeCardViewDelegate>
     //could be improved when there is a view defined for no-myPlan-exist condition
     if (self.myPlans.count == 0) return nil;
     
-    
     UIView *view = [[UIView alloc] initWithFrame:swipeableView.bounds];
+
+    HomeCardView *contentView = [HomeCardView instantiateFromNibWithSuperView:view];
     
-    HomeCardView *contentView = [HomeCardView instantiateFromNib];
-    
-    contentView.translatesAutoresizingMaskIntoConstraints = NO;
-    [view addSubview:contentView];
-    
-    // This is important:
-    // https://github.com/zhxnlai/ZLSwipeableView/issues/9
-    NSDictionary *metrics = @{@"height" : @(view.bounds.size.height),
-                              @"width" : @(view.bounds.size.width)
-                              };
-    NSDictionary *views = NSDictionaryOfVariableBindings(contentView);
-    [view addConstraints:
-     [NSLayoutConstraint
-      constraintsWithVisualFormat:@"H:|[contentView(width)]"
-      options:0
-      metrics:metrics
-      views:views]];
-    [view addConstraints:[NSLayoutConstraint
-                          constraintsWithVisualFormat:
-                          @"V:|[contentView(height)]"
-                          options:0
-                          metrics:metrics
-                          views:views]];
     
     contentView.delegate = self; // for responsing more view button action !!
     

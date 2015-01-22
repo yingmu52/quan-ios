@@ -21,6 +21,7 @@
 @property (nonatomic,strong) NSString *subtitle;
 @property (nonatomic,strong) NSString *countDowns;
 @property (nonatomic,weak) id <HomeCardViewDelegate> delegate;
-+ (instancetype)instantiateFromNib;
+
++ (instancetype)instantiateFromNibWithSuperView:(UIView *)superView;
 
 @end

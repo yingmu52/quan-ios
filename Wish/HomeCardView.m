@@ -42,11 +42,37 @@
 }
 
 
-+ (instancetype)instantiateFromNib
++ (instancetype)instantiateFromNibWithSuperView:(UIView *)superView
 {
-    return [[[NSBundle mainBundle] loadNibNamed:[NSString stringWithFormat:@"%@", [self class]]
-                                          owner:nil
-                                        options:nil] firstObject];
+    NSString *nibname = [NSString stringWithFormat:@"%@", [self class]];
+    
+    HomeCardView *contentView = [[[NSBundle mainBundle] loadNibNamed:nibname
+                                                               owner:nil
+                                                             options:nil] firstObject];
+    
+    contentView.translatesAutoresizingMaskIntoConstraints = NO;
+    [superView addSubview:contentView];
+    
+    // This is important:
+    // https://github.com/zhxnlai/ZLSwipeableView/issues/9
+    NSDictionary *metrics = @{@"height" : @(superView.bounds.size.height),
+                              @"width" : @(superView.bounds.size.width)
+                              };
+    NSDictionary *views = NSDictionaryOfVariableBindings(contentView);
+    [superView addConstraints:
+     [NSLayoutConstraint
+      constraintsWithVisualFormat:@"H:|[contentView(width)]"
+      options:0
+      metrics:metrics
+      views:views]];
+    [superView addConstraints:[NSLayoutConstraint
+                          constraintsWithVisualFormat:
+                          @"V:|[contentView(height)]"
+                          options:0
+                          metrics:metrics
+                          views:views]];
+
+    return contentView;
 }
 - (void)awakeFromNib
 {

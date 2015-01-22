@@ -15,21 +15,41 @@
              privacy:(BOOL)isPrivate
                image:(UIImage *)image
            inContext:(NSManagedObjectContext *)context{
-    Plan *plan = [NSEntityDescription insertNewObjectForEntityForName:@"Plan"
-                                               inManagedObjectContext:context];
-    plan.planTitle = title;
-    plan.finishDate = date;
-    plan.isPrivate = @(isPrivate);
-    plan.image = image;
     
+    Plan *plan;
+    
+    //check existance
+    NSArray *checks = [Plan fetchWith:@"Plan"
+                            predicate:[NSPredicate predicateWithFormat:@"finishDate = %@",date]
+                     keyForDescriptor:@"finishDate"
+                            inContext:context];
+    if (!checks.count) {
+        plan = [NSEntityDescription insertNewObjectForEntityForName:@"Plan"
+                                             inManagedObjectContext:context];
+        
+        plan.planTitle = title;
+        plan.finishDate = date;
+        plan.isPrivate = @(isPrivate);
+        plan.image = image;
+        
+        NSError *error;
+        [context save:&error];
+
+    }
+    return plan;
+}
+
+- (void)deleteSelf:(NSManagedObjectContext *)context
+{
+    [context deleteObject:self];
     NSError *error;
     [context save:&error];
-    return plan;
 }
 
 + (NSArray *)loadMyPlans:(NSManagedObjectContext *)context
 {
-    return [[self class] fetchWith:@"Plan"
+    
+    return [Plan fetchWith:@"Plan"
                          predicate:nil //fetch all
                   keyForDescriptor:@"finishDate"
                          inContext:context];
@@ -39,7 +59,9 @@
         predicate:(NSPredicate *)predicate
  keyForDescriptor:(NSString *)key
         inContext:(NSManagedObjectContext *)context{
-    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName
+                                              inManagedObjectContext:context];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 
     [fetchRequest setEntity:entity];
@@ -48,6 +70,7 @@
     // Specify how the fetched objects should be sorted
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:key
                                                                    ascending:YES];
+    
     [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
     
     NSError *error = nil;

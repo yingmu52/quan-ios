@@ -20,4 +20,6 @@
 
 + (NSArray *)loadMyPlans:(NSManagedObjectContext *)context;
 
+- (void)deleteSelf:(NSManagedObjectContext *)context;
+
 @end
