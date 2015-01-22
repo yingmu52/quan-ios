@@ -13,6 +13,25 @@
                        target:(id)target
                      selector:(SEL)method
                         frame:(CGRect)frame;
+
+
++ (UIImage *)menuLoginDefault;
+
++ (UIImage *)menuWishListDefault;
+
++ (UIImage *)menuWishListSelected;
+
++ (UIImage *)menuJourneyDefault;
+
++ (UIImage *)menuJourneySelected;
+
++ (UIImage *)menuDiscoverDefault;
++ (UIImage *)menuDiscoverSelected;
+
++ (UIImage *)menuFollowDefault;
+
++ (UIImage *)menuFollowSelected;
+
 + (UIImage *)navBackButtonDefault;
 + (UIImage *)navComposeButtonDefault;
 + (UIImage *)navShareButtonDefault;

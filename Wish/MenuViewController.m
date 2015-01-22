@@ -66,24 +66,24 @@
         // Configure the cell...
         if (indexPath.row == 0) {
             
-            [cell.menuImageView setImage:[UIImage imageNamed:@"tab_ic_login_default"]];
+            [cell.menuImageView setImage:[Theme menuLoginDefault]];
             cell.menuTitle.text = @"登录";
         }else if (indexPath.row == 1){
-            cell.menuImageView.image = [UIImage imageNamed:@"tab_ic_home_default"];
-            cell.menuImageView.highlightedImage = [UIImage imageNamed:@"tab_ic_home_selected"];
+            cell.menuImageView.image = [Theme menuWishListDefault];
+            cell.menuImageView.highlightedImage = [Theme menuWishListSelected];
             cell.menuTitle.text = @"愿望列表";
         }else if (indexPath.row == 2){
-            cell.menuImageView.image = [UIImage imageNamed:@"tab_ic_achieve_default"];
-            cell.menuImageView.highlightedImage = [UIImage imageNamed:@"tab_ic_achieve_selected"];
+            cell.menuImageView.image = [Theme menuJourneyDefault];
+            cell.menuImageView.highlightedImage = [Theme menuJourneySelected];
             cell.menuTitle.text = @"我的历程";
         }else if (indexPath.row == 3){
-            cell.menuImageView.image = [UIImage imageNamed:@"tab_ic_discover_default"];
-            cell.menuImageView.highlightedImage = [UIImage imageNamed:@"tab_ic_discover_selected"];
+            cell.menuImageView.image = [Theme menuDiscoverDefault];
+            cell.menuImageView.highlightedImage = [Theme menuDiscoverSelected];
             cell.menuTitle.text = @"发现愿望";
         }else if (indexPath.row == 4){
             cell.menuTitle.text = @"关注动态";
-            cell.menuImageView.image = [UIImage imageNamed:@"tab_ic_follow_default"];
-            cell.menuImageView.highlightedImage = [UIImage imageNamed:@"tab_ic_follow_selected"];
+            cell.menuImageView.image = [Theme menuFollowDefault];
+            cell.menuImageView.highlightedImage = [Theme menuFollowSelected];
         }
 
     }else if (indexPath.row == 5){

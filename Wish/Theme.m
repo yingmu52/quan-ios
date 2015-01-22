@@ -24,6 +24,54 @@
     return btn;
 }
 
++ (UIImage *)menuLoginDefault
+{
+    return [UIImage imageNamed:@"tab_ic_login_default"];
+}
+
++ (UIImage *)menuWishListDefault
+{
+    return [UIImage imageNamed:@"tab_ic_home_default"];
+}
+
++ (UIImage *)menuWishListSelected
+{
+    return [UIImage imageNamed:@"tab_ic_home_selected"];
+    
+}
+
++ (UIImage *)menuJourneyDefault
+{
+    return [UIImage imageNamed:@"tab_ic_achieve_default"];
+    
+}
+
++ (UIImage *)menuJourneySelected
+{
+    return [UIImage imageNamed:@"tab_ic_achieve_selected"];
+}
+
++ (UIImage *)menuDiscoverDefault
+{
+    return [UIImage imageNamed:@"tab_ic_discover_default"];
+}
+
++ (UIImage *)menuDiscoverSelected
+{
+    return [UIImage imageNamed:@"tab_ic_discover_selected"];
+}
+
++ (UIImage *)menuFollowDefault
+{
+    return [UIImage imageNamed:@"tab_ic_follow_default"];
+}
+
++ (UIImage *)menuFollowSelected
+{
+    return [UIImage imageNamed:@"tab_ic_follow_selected"];
+}
+
+
 + (UIImage *)wishDetailCameraDefault
 {
     return [UIImage imageNamed:@"stop_ic_camera"];
