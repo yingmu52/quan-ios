@@ -55,6 +55,9 @@ typedef NS_ENUM(NSUInteger, ZLSwipeableViewDirection) {
     didEndSwipingView:(UIView *)view
            atLocation:(CGPoint)location;
 
+@required
+- (BOOL)shouldLoadNextView:(ZLSwipeableView *)swipeableView;
+
 @end
 
 // DataSource

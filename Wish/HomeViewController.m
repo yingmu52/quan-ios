@@ -80,8 +80,11 @@ HomeCardViewDelegate>
     }else if (_buttomCardIndex > self.myPlans.count - 1){
         _buttomCardIndex = -1;
     }
+    NSLog(@"----%d",self.myPlans.count+1 % _buttomCardIndex + 1);
     return _buttomCardIndex;
 }
+
+
 
 - (void)addWish{
     if (self.myPlans.count == maxCardNum){
@@ -129,6 +132,16 @@ HomeCardViewDelegate>
 {
     NSLog(@"buttom index %d",self.buttomCardIndex);
     NSLog(@"%d",self.myPlans.count);
+    
+}
+
+- (BOOL)shouldLoadNextView:(ZLSwipeableView *)swipeableView
+{
+    if (!self.myPlans.count || self.buttomCardIndex < 0){
+        return NO;
+    }else{
+        return YES;
+    }
 }
 
 
@@ -138,8 +151,7 @@ HomeCardViewDelegate>
 - (UIView *)nextViewForSwipeableView:(ZLSwipeableView *)swipeableView {
 
     //could be improved when there is a view defined for no-myPlan-exist condition
-    if (!self.myPlans.count || self.buttomCardIndex < 0) return nil;
-    
+
     UIView *view = [[UIView alloc] initWithFrame:swipeableView.bounds];
 
     HomeCardView *contentView = [HomeCardView instantiateFromNibWithSuperView:view];
