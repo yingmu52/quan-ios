@@ -56,11 +56,17 @@ HomeCardViewDelegate>
 
 
 - (void)reloadCards{
-    self.myPlans = [[Plan loadMyPlans:[AppDelegate getContext]] mutableCopy];
-    [self.cardView discardAllSwipeableViews];
-    [self.cardView loadNextSwipeableViewsIfNeeded];
-//    [self.topThreeCache removeAllObjects];
-    
+    dispatch_queue_t reloadQ =  dispatch_queue_create("reload cards", NULL);
+    dispatch_async(reloadQ, ^{
+        self.myPlans = [[Plan loadMyPlans:[AppDelegate getContext]] mutableCopy];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.topThreeCache = nil;
+            [self.cardView discardAllSwipeableViews];
+            [self.cardView loadNextSwipeableViewsIfNeeded];
+        });
+        
+    });
+
 }
 - (void)viewWillAppear:(BOOL)animated
 {
