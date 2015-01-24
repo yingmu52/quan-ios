@@ -7,7 +7,7 @@
 //
 
 #import "HomeCardView.h"
-
+#import "Theme.h"
 @interface HomeCardView ()
 @property (nonatomic,weak) IBOutlet UIView *moreView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -38,8 +38,27 @@
     NSUInteger totalDays = [self daysBetween:plan.createDate and:plan.finishDate];
     NSUInteger pastDays = [self daysBetween:plan.createDate and:[NSDate date]];
 
-    self.countDownLabel.text = [NSString stringWithFormat:@"剩余%u/%u",pastDays,totalDays];
     
+    NSDictionary *baseAttrs = @{NSFontAttributeName:[UIFont systemFontOfSize:24]};
+    NSDictionary *countAttrs1 = @{NSFontAttributeName:[UIFont fontWithName:@"Arial" size:34]};
+    NSDictionary *countAttrs2 = @{NSForegroundColorAttributeName:[Theme colorFromHexString:@"#00bac3"]};
+    
+    NSMutableAttributedString *final = [[NSMutableAttributedString alloc] initWithString:@"剩余 "
+                                                                             attributes:baseAttrs];
+    
+    NSMutableAttributedString *back = [[NSMutableAttributedString alloc] initWithString:@" 天"
+                                                                             attributes:baseAttrs];
+    
+    NSMutableAttributedString *mid = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d/%d",pastDays,totalDays]
+                                                                             attributes:countAttrs1];
+    [mid addAttributes:countAttrs2
+                 range:[mid.string rangeOfString:[NSString stringWithFormat:@"%d",pastDays]]];
+
+    
+
+    [final appendAttributedString:mid];
+    [final appendAttributedString:back];
+    self.countDownLabel.attributedText = final;
 }
 
 - (int)daysBetween:(NSDate *)dt1 and:(NSDate *)dt2 {

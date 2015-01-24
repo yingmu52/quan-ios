@@ -50,4 +50,6 @@
 
 + (UIImage *)navTikButtonDefault;
 
++ (UIColor *)colorFromHexString:(NSString *)hexString;
+
 @end

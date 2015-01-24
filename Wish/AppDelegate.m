@@ -23,7 +23,6 @@
     root.anchorRightPeekAmount = root.view.frame.size.width * (640-278)/640;
     
     root.underLeftViewController.edgesForExtendedLayout = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeLeft;
-
     
     return YES;
 }
