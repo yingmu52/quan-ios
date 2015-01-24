@@ -18,6 +18,7 @@
 #import "AppDelegate.h"
 #import "FetchCenter.h"
 #import "PostViewController.h"
+
 const NSUInteger maxCardNum = 10;
 
 @interface HomeViewController ()
@@ -48,9 +49,6 @@ HomeCardViewDelegate>
     }
     if (_topThreeCache.count > 3) {
         [_topThreeCache removeObjectAtIndex:0];
-    }
-    if (!_topThreeCache.count) {
-        [self.cardView loadNextSwipeableViewsIfNeeded];
     }
     return _topThreeCache;
 }
@@ -133,6 +131,11 @@ HomeCardViewDelegate>
 - (void)swipeableView:(ZLSwipeableView *)swipeableView didEndSwipingView:(UIView *)view atLocation:(CGPoint)location
 {
     [self.topThreeCache removeObjectAtIndex:0];
+    if (!self.topThreeCache.count) {
+        self.myPlans = [self fetchPlans];
+        [swipeableView loadNextSwipeableViewsIfNeeded];
+    }
+    
 }
 
 #pragma mark - ZLSwipeableViewDataSource

@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak,nonatomic) IBOutlet UILabel *subtitleLabel;
 @property (weak,nonatomic) IBOutlet UILabel *countDownLabel;
+@property (weak,nonatomic) IBOutlet UILabel *dateLabel;
 @end
 
 @implementation HomeCardView
@@ -25,16 +26,32 @@
 //    NSLog(@">>>>>>>>>>>>>>>>>>>>>>>>>%d",data.length);
     self.imageView.image = plan.image;
     self.titleLabel.text = plan.planTitle;
-    self.subtitleLabel.text = plan.planTitle;
-    self.countDownLabel.text = plan.planTitle;
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"yyyy-MM-dd";
+    NSString *dateString = [formatter stringFromDate:plan.createDate];
+    self.dateLabel.text = [NSString stringWithFormat:@"最后纪录时间：%@",dateString];
+
+    
+    self.subtitleLabel.text = @"已留0个努力瞬间";
+    
+    NSUInteger totalDays = [self daysBetween:plan.createDate and:plan.finishDate];
+    NSUInteger pastDays = [self daysBetween:plan.createDate and:[NSDate date]];
+
+    self.countDownLabel.text = [NSString stringWithFormat:@"剩余%u/%u",pastDays,totalDays];
     
 }
 
+- (int)daysBetween:(NSDate *)dt1 and:(NSDate *)dt2 {
+    NSUInteger unitFlags = NSDayCalendarUnit;
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [calendar components:unitFlags fromDate:dt1 toDate:dt2 options:0];
+    return [components day]+1;
+}
 
 + (instancetype)instantiateFromNibWithSuperView:(UIView *)superView
 {
     NSString *nibname = [NSString stringWithFormat:@"%@", [self class]];
-    
     HomeCardView *contentView = [[[NSBundle mainBundle] loadNibNamed:nibname
                                                                owner:nil
                                                              options:nil] firstObject];
