@@ -52,15 +52,19 @@ HomeCardViewDelegate>
     }
     return _topThreeCache;
 }
-- (NSMutableArray *)fetchPlans{
-    return [[Plan loadMyPlans:[AppDelegate getContext]] mutableCopy];
+
+
+- (void)reloadCards{
+    self.myPlans = [[Plan loadMyPlans:[AppDelegate getContext]] mutableCopy];
+    [self.cardView discardAllSwipeableViews];
+    [self.cardView loadNextSwipeableViewsIfNeeded];
+    [self.topThreeCache removeAllObjects];
+    
 }
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.cardView discardAllSwipeableViews];
-    self.myPlans = [self fetchPlans];
-    [self.cardView loadNextSwipeableViewsIfNeeded];
+    [self reloadCards];
 }
 
 - (void)viewDidLoad {
@@ -123,6 +127,7 @@ HomeCardViewDelegate>
         Plan *plan = self.topThreeCache.firstObject;
         [plan deleteSelf:[AppDelegate getContext]];
         [self.cardView swipeTopViewToRight];
+        [self reloadCards];
 
     }
 }
@@ -130,10 +135,11 @@ HomeCardViewDelegate>
 #pragma mark - ZLSwipeableViewDelegate
 - (void)swipeableView:(ZLSwipeableView *)swipeableView didEndSwipingView:(UIView *)view atLocation:(CGPoint)location
 {
-    [self.topThreeCache removeObjectAtIndex:0];
+
     if (!self.topThreeCache.count) {
-        self.myPlans = [self fetchPlans];
-        [swipeableView loadNextSwipeableViewsIfNeeded];
+        [self reloadCards];
+    }else{
+        [self.topThreeCache removeObjectAtIndex:0];
     }
     
 }
