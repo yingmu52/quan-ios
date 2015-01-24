@@ -18,27 +18,16 @@
 
 @implementation HomeCardView
 
--(void)setDataImage:(UIImage *)dataImage
-{
-    _dataImage = dataImage;
-    self.imageView.image = dataImage;
-}
 
-- (void)setTitle:(NSString *)title
+- (void)setPlan:(Plan *)plan
 {
-    _title = title;
-    self.titleLabel.text = title;
-}
-
-- (void)setSubtitle:(NSString *)subtitle
-{
-    _subtitle = subtitle;
-    self.subtitleLabel.text = subtitle;
-}
-- (void)setCountDowns:(NSString *)countDowns
-{
-    _countDowns = countDowns;
-    self.countDownLabel.text = countDowns;
+//    NSData *data = UIImageJPEGRepresentation(plan.image, 1);
+//    NSLog(@">>>>>>>>>>>>>>>>>>>>>>>>>%d",data.length);
+    self.imageView.image = plan.image;
+    self.titleLabel.text = plan.planTitle;
+    self.subtitleLabel.text = plan.planTitle;
+    self.countDownLabel.text = plan.planTitle;
+    
 }
 
 
@@ -72,6 +61,7 @@
                           metrics:metrics
                           views:views]];
 
+    
     return contentView;
 }
 - (void)awakeFromNib

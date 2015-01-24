@@ -584,8 +584,7 @@ int signum(float n) { return (n < 0) ? -1 : (n > 0) ? +1 : 0; }
 - (UIView *)nextSwipeableView {
     UIView *nextView = nil;
     if (self.dataSource &&
-        [self.dataSource respondsToSelector:@selector(nextViewForSwipeableView:)] &&
-        [self.delegate shouldLoadNextView:self]) {
+        [self.dataSource respondsToSelector:@selector(nextViewForSwipeableView:)]) {
         nextView = [self.dataSource nextViewForSwipeableView:self];
     }
     if (nextView) {

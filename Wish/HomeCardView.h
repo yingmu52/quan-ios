@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Plan.h"
 @class HomeCardView;
 @protocol HomeCardViewDelegate <NSObject>
 
@@ -16,10 +16,9 @@
 @end
 
 @interface HomeCardView : UIView
-@property (nonatomic,strong) UIImage *dataImage;
-@property (nonatomic,strong) NSString *title;
-@property (nonatomic,strong) NSString *subtitle;
-@property (nonatomic,strong) NSString *countDowns;
+
+@property (nonatomic,strong) Plan *plan;
+
 @property (nonatomic,weak) id <HomeCardViewDelegate> delegate;
 
 + (instancetype)instantiateFromNibWithSuperView:(UIView *)superView;

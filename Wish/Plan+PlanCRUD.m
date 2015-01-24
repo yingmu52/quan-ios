@@ -32,6 +32,7 @@
         plan.finishDate = date;
         plan.isPrivate = @(isPrivate);
         plan.image = image;
+        plan.createDate = [NSDate date];
         
         NSError *error;
         [context save:&error];
@@ -43,8 +44,7 @@
 - (void)deleteSelf:(NSManagedObjectContext *)context
 {
     [context deleteObject:self];
-    NSError *error;
-    [context save:&error];
+    [context save:nil];
 }
 
 + (NSArray *)loadMyPlans:(NSManagedObjectContext *)context

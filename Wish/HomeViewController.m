@@ -29,12 +29,41 @@ UINavigationControllerDelegate,
 HomeCardViewDelegate>
 
 @property (nonatomic,weak) IBOutlet ZLSwipeableView *cardView;
+
 @property (nonatomic,strong) NSMutableArray *myPlans;
-@property (nonatomic) int buttomCardIndex;
+
+
 @property (nonatomic,strong) UIImage *capturedImage;
+
+@property (nonatomic,strong) NSMutableArray *topThreeCache;
+
 @end
 
 @implementation HomeViewController
+
+- (NSMutableArray *)topThreeCache
+{
+    if (!_topThreeCache) {
+        _topThreeCache = [NSMutableArray arrayWithCapacity:3];
+    }
+    if (_topThreeCache.count > 3) {
+        [_topThreeCache removeObjectAtIndex:0];
+    }
+    if (!_topThreeCache.count) {
+        [self.cardView loadNextSwipeableViewsIfNeeded];
+    }
+    return _topThreeCache;
+}
+- (NSMutableArray *)fetchPlans{
+    return [[Plan loadMyPlans:[AppDelegate getContext]] mutableCopy];
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.cardView discardAllSwipeableViews];
+    self.myPlans = [self fetchPlans];
+    [self.cardView loadNextSwipeableViewsIfNeeded];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -73,17 +102,6 @@ HomeCardViewDelegate>
 
 #pragma mark - db operation
 
-- (int)buttomCardIndex{
-    if (_buttomCardIndex < 0) {
-        _buttomCardIndex = self.myPlans.count - 1;
-
-    }else if (_buttomCardIndex > self.myPlans.count - 1){
-        _buttomCardIndex = -1;
-    }
-    NSLog(@"----%d",self.myPlans.count+1 % _buttomCardIndex + 1);
-    return _buttomCardIndex;
-}
-
 
 
 - (void)addWish{
@@ -99,76 +117,45 @@ HomeCardViewDelegate>
 }
 
 
-- (void)fetchMyplans
-{
-    self.myPlans = [[Plan loadMyPlans:[AppDelegate getContext]] mutableCopy];
-}
-- (void)viewWillAppear:(BOOL)animated
-{
-    [self fetchMyplans];
-    NSLog(@"%d",self.myPlans.count);
-}
-
 #pragma mark - 
 
 - (void)homeCardView:(HomeCardView *)cardView didPressedButton:(UIButton *)button
 {
     if ([button.titleLabel.text isEqualToString:@"放弃"]) {
+        Plan *plan = self.topThreeCache.firstObject;
+        [plan deleteSelf:[AppDelegate getContext]];
         [self.cardView swipeTopViewToRight];
-        [(Plan *)self.myPlans.lastObject deleteSelf:[AppDelegate getContext]];
-        [self.myPlans removeLastObject];
-        self.buttomCardIndex = -1;
-        [self.cardView discardAllSwipeableViews];
-        [self.cardView loadNextSwipeableViewsIfNeeded];
+
     }
 }
 
 #pragma mark - ZLSwipeableViewDelegate
-
-
-- (void)swipeableView:(ZLSwipeableView *)swipeableView
-  didStartSwipingView:(UIView *)view
-           atLocation:(CGPoint)location
+- (void)swipeableView:(ZLSwipeableView *)swipeableView didEndSwipingView:(UIView *)view atLocation:(CGPoint)location
 {
-    NSLog(@"buttom index %d",self.buttomCardIndex);
-    NSLog(@"%d",self.myPlans.count);
-    
+    [self.topThreeCache removeObjectAtIndex:0];
 }
-
-- (BOOL)shouldLoadNextView:(ZLSwipeableView *)swipeableView
-{
-    if (!self.myPlans.count || self.buttomCardIndex < 0){
-        return NO;
-    }else{
-        return YES;
-    }
-}
-
 
 #pragma mark - ZLSwipeableViewDataSource
 
 //always display the last object of myPlan
 - (UIView *)nextViewForSwipeableView:(ZLSwipeableView *)swipeableView {
 
-    //could be improved when there is a view defined for no-myPlan-exist condition
-
-    UIView *view = [[UIView alloc] initWithFrame:swipeableView.bounds];
-
-    HomeCardView *contentView = [HomeCardView instantiateFromNibWithSuperView:view];
-    
-    
-    contentView.delegate = self; // for responsing more view button action !!
-    
-    //preset data
-    
-    Plan *plan = self.myPlans[--self.buttomCardIndex + 1];
-    
-    contentView.dataImage = plan.image;
-    
-    contentView.title = [NSString stringWithFormat:@"bindex %d",self.buttomCardIndex ];
-    contentView.subtitle = [NSString stringWithFormat:@"mpindex %d",[self.myPlans indexOfObject:plan]];
-    contentView.countDowns = nil;
-    return view;
+    UIView *view;
+    if (!self.myPlans.count) {
+        return nil;
+    }else{
+        
+        view = [[UIView alloc] initWithFrame:swipeableView.bounds];
+        HomeCardView *contentView = [HomeCardView instantiateFromNibWithSuperView:view];
+        contentView.delegate = self; // for responsing more view button action !!
+        
+        //preset data
+        Plan *plan = self.myPlans.lastObject;
+        contentView.plan = plan;
+        [self.topThreeCache addObject:plan]; //first object is the top card
+        [self.myPlans removeLastObject];
+        return view;
+    }
 }
 
 #pragma mark - Camera Util
