@@ -50,6 +50,7 @@ HomeCardViewDelegate>
     if (_topThreeCache.count > 3) {
         [_topThreeCache removeObjectAtIndex:0];
     }
+    NSLog(@"%@",_topThreeCache);
     return _topThreeCache;
 }
 
@@ -58,7 +59,7 @@ HomeCardViewDelegate>
     self.myPlans = [[Plan loadMyPlans:[AppDelegate getContext]] mutableCopy];
     [self.cardView discardAllSwipeableViews];
     [self.cardView loadNextSwipeableViewsIfNeeded];
-    [self.topThreeCache removeAllObjects];
+//    [self.topThreeCache removeAllObjects];
     
 }
 - (void)viewWillAppear:(BOOL)animated
@@ -135,13 +136,10 @@ HomeCardViewDelegate>
 #pragma mark - ZLSwipeableViewDelegate
 - (void)swipeableView:(ZLSwipeableView *)swipeableView didEndSwipingView:(UIView *)view atLocation:(CGPoint)location
 {
-
-    if (!self.topThreeCache.count) {
+    [self.topThreeCache removeObjectAtIndex:0];
+    if (!self.topThreeCache.count && !self.myPlans.count) {
         [self reloadCards];
-    }else{
-        [self.topThreeCache removeObjectAtIndex:0];
     }
-    
 }
 
 #pragma mark - ZLSwipeableViewDataSource
@@ -155,14 +153,15 @@ HomeCardViewDelegate>
     }else{
         
         view = [[UIView alloc] initWithFrame:swipeableView.bounds];
-        HomeCardView *contentView = [HomeCardView instantiateFromNibWithSuperView:view];
-        contentView.delegate = self; // for responsing more view button action !!
-        
         //preset data
         Plan *plan = self.myPlans.lastObject;
-        contentView.plan = plan;
-        [self.topThreeCache addObject:plan]; //first object is the top card
-        [self.myPlans removeLastObject];
+        if (plan) {
+            HomeCardView *contentView = [HomeCardView instantiateFromNibWithSuperView:view];
+            contentView.delegate = self; // for responsing more view button action !!
+            contentView.plan = plan;
+            [self.topThreeCache addObject:plan]; //first object is the top card
+            [self.myPlans removeLastObject];
+        }
         return view;
     }
 }
