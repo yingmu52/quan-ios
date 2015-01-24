@@ -5,6 +5,7 @@
         <attribute name="createDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="finishDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="Transformable" valueTransformerName="" storedInTruthFile="YES" syncable="YES"/>
+        <attribute name="imageId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isPrivate" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="ownerId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="planId" optional="YES" attributeType="String" syncable="YES"/>
@@ -15,7 +16,7 @@
         <relationship name="plan" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Plan" inverseName="tasks" inverseEntity="Plan" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Plan" positionX="-8903" positionY="-117" width="128" height="180"/>
+        <element name="Plan" positionX="-8903" positionY="-117" width="128" height="193"/>
         <element name="Task" positionX="-9108" positionY="188" width="128" height="60"/>
     </elements>
 </model>

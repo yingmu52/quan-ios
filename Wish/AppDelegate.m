@@ -139,18 +139,4 @@
 
 
 
-#define OWNERID @"MOTHERFUCKING_OWNER_FUCKING_I_FUCKING_D"
-
-#pragma mark - user id
-+ (NSString *)getOwnerId{
-#warning fucking change this in the future man !
-    NSString *ownerID = [[NSUserDefaults standardUserDefaults] objectForKey:OWNERID];
-    ownerID = ownerID ? @"100001" : ownerID;
-    return ownerID;
-}
-
-+ (void)updateOwnerId:(NSString *)newID
-{
-    return [[NSUserDefaults standardUserDefaults] setObject:newID forKey:OWNERID];
-}
 @end

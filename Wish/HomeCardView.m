@@ -8,6 +8,7 @@
 
 #import "HomeCardView.h"
 #import "Theme.h"
+#import "SystemUtil.h"
 @interface HomeCardView ()
 @property (nonatomic,weak) IBOutlet UIView *moreView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -35,13 +36,13 @@
     
     self.subtitleLabel.text = @"已留0个努力瞬间";
     
-    NSUInteger totalDays = [self daysBetween:plan.createDate and:plan.finishDate];
-    NSUInteger pastDays = [self daysBetween:plan.createDate and:[NSDate date]];
+    NSUInteger totalDays = [SystemUtil daysBetween:plan.createDate and:plan.finishDate];
+    NSUInteger pastDays = [SystemUtil daysBetween:plan.createDate and:[NSDate date]];
 
     
     NSDictionary *baseAttrs = @{NSFontAttributeName:[UIFont systemFontOfSize:20]};
     NSDictionary *countAttrs1 = @{NSFontAttributeName:[UIFont fontWithName:@"Arial" size:40]};
-    NSDictionary *countAttrs2 = @{NSForegroundColorAttributeName:[Theme colorFromHexString:@"#00bac3"]};
+    NSDictionary *countAttrs2 = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00bac3"]};
     
     NSMutableAttributedString *final = [[NSMutableAttributedString alloc] initWithString:@"剩余 "
                                                                              attributes:baseAttrs];
@@ -61,12 +62,7 @@
     self.countDownLabel.attributedText = final;
 }
 
-- (int)daysBetween:(NSDate *)dt1 and:(NSDate *)dt2 {
-    NSUInteger unitFlags = NSDayCalendarUnit;
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components = [calendar components:unitFlags fromDate:dt1 toDate:dt2 options:0];
-    return [components day]+1;
-}
+
 
 + (instancetype)instantiateFromNibWithSuperView:(UIView *)superView
 {

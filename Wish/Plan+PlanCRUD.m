@@ -7,8 +7,10 @@
 //
 
 #import "Plan+PlanCRUD.h"
-#import "AppDelegate.h"
+#import "FetchCenter.h"
 @implementation Plan (PlanCRUD)
+
+
 
 + (Plan *)createPlan:(NSString *)title
                 date:(NSDate *)date
@@ -20,22 +22,23 @@
     
     //check existance
     NSArray *checks = [Plan fetchWith:@"Plan"
-                            predicate:[NSPredicate predicateWithFormat:@"finishDate = %@",date]
-                     keyForDescriptor:@"finishDate"
+                            predicate:[NSPredicate predicateWithFormat:@"createDate = %@",date]
+                     keyForDescriptor:@"createDate"
                             inContext:context];
     if (!checks.count) {
         plan = [NSEntityDescription insertNewObjectForEntityForName:@"Plan"
                                              inManagedObjectContext:context];
         
-        plan.ownerId = [AppDelegate getOwnerId];
+        plan.ownerId = [SystemUtil getOwnerId];
         plan.planTitle = title;
         plan.finishDate = date;
         plan.isPrivate = @(isPrivate);
         plan.image = image;
         plan.createDate = [NSDate date];
         
-        NSError *error;
-        [context save:&error];
+        if ([context save:nil]) {
+            [FetchCenter uploadToCreatePlan:plan];
+        }
 
     }
     return plan;
@@ -49,10 +52,9 @@
 
 + (NSArray *)loadMyPlans:(NSManagedObjectContext *)context
 {
-    
     return [Plan fetchWith:@"Plan"
                          predicate:nil //fetch all
-                  keyForDescriptor:@"finishDate"
+                  keyForDescriptor:@"createDate"
                          inContext:context];
 }
 

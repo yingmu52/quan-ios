@@ -50,7 +50,6 @@ HomeCardViewDelegate>
     if (_topThreeCache.count > 3) {
         [_topThreeCache removeObjectAtIndex:0];
     }
-    NSLog(@"%@",_topThreeCache);
     return _topThreeCache;
 }
 

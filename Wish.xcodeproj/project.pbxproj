@@ -27,10 +27,6 @@
 		AE479EAF1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479EAD1A6F7A5B00366A0A /* Plan+PlanCRUD.m */; };
 		AE479EB21A6F7A8600366A0A /* Task+TaskCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479EB11A6F7A8600366A0A /* Task+TaskCRUD.m */; };
 		AE479EB31A6F7A8600366A0A /* Task+TaskCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479EB11A6F7A8600366A0A /* Task+TaskCRUD.m */; };
-		AE4B6CAB1A72C77500F23F9D /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B6CAA1A72C77500F23F9D /* Plan.m */; };
-		AE4B6CAC1A72C77500F23F9D /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B6CAA1A72C77500F23F9D /* Plan.m */; };
-		AE4B6CAF1A72C77600F23F9D /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B6CAE1A72C77600F23F9D /* Task.m */; };
-		AE4B6CB01A72C77600F23F9D /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4B6CAE1A72C77600F23F9D /* Task.m */; };
 		AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE72E9541A66F2AA0046B38D /* MenuCell.m */; };
 		AED68EE41A70399A00CDC0DF /* FetchCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = AED68EE31A70399A00CDC0DF /* FetchCenter.m */; };
 		AED68EE51A70399A00CDC0DF /* FetchCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = AED68EE31A70399A00CDC0DF /* FetchCenter.m */; };
@@ -68,6 +64,12 @@
 		AED68F731A7043E600CDC0DF /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = AED68F511A7043E600CDC0DF /* UIRefreshControl+AFNetworking.m */; };
 		AED68F741A7043E600CDC0DF /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = AED68F531A7043E600CDC0DF /* UIWebView+AFNetworking.m */; };
 		AED68F751A7043E600CDC0DF /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = AED68F531A7043E600CDC0DF /* UIWebView+AFNetworking.m */; };
+		AEE075301A743DF70015155B /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE0752F1A743DF70015155B /* Plan.m */; };
+		AEE075311A743DF70015155B /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE0752F1A743DF70015155B /* Plan.m */; };
+		AEE075341A743DF90015155B /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE075331A743DF90015155B /* Task.m */; };
+		AEE075351A743DF90015155B /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE075331A743DF90015155B /* Task.m */; };
+		AEE075381A744A770015155B /* SystemUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE075371A744A770015155B /* SystemUtil.m */; };
+		AEE075391A744A770015155B /* SystemUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE075371A744A770015155B /* SystemUtil.m */; };
 		AEEC6C4D1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C4C1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m */; };
 		AEEC6C4E1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C4C1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m */; };
 		AEEC6C601A6DB0010021B7E4 /* ALView+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C541A6DB0010021B7E4 /* ALView+PureLayout.m */; };
@@ -151,10 +153,6 @@
 		AE479EAD1A6F7A5B00366A0A /* Plan+PlanCRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Plan+PlanCRUD.m"; sourceTree = "<group>"; };
 		AE479EB01A6F7A8600366A0A /* Task+TaskCRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Task+TaskCRUD.h"; sourceTree = "<group>"; };
 		AE479EB11A6F7A8600366A0A /* Task+TaskCRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Task+TaskCRUD.m"; sourceTree = "<group>"; };
-		AE4B6CA91A72C77500F23F9D /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
-		AE4B6CAA1A72C77500F23F9D /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
-		AE4B6CAD1A72C77600F23F9D /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
-		AE4B6CAE1A72C77600F23F9D /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
 		AE72E9531A66F2AA0046B38D /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
 		AE72E9541A66F2AA0046B38D /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		AED68EE21A70399A00CDC0DF /* FetchCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchCenter.h; sourceTree = "<group>"; };
@@ -195,6 +193,12 @@
 		AED68F511A7043E600CDC0DF /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		AED68F521A7043E600CDC0DF /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		AED68F531A7043E600CDC0DF /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		AEE0752E1A743DF70015155B /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
+		AEE0752F1A743DF70015155B /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
+		AEE075321A743DF90015155B /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
+		AEE075331A743DF90015155B /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
+		AEE075361A744A770015155B /* SystemUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemUtil.h; sourceTree = "<group>"; };
+		AEE075371A744A770015155B /* SystemUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUtil.m; sourceTree = "<group>"; };
 		AEEC6C4B1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+VGParallaxHeader.h"; sourceTree = "<group>"; };
 		AEEC6C4C1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+VGParallaxHeader.m"; sourceTree = "<group>"; };
 		AEEC6C531A6DB0010021B7E4 /* ALView+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALView+PureLayout.h"; sourceTree = "<group>"; };
@@ -284,6 +288,8 @@
 		AE01723B1A65CD8E0014266F /* Wish */ = {
 			isa = PBXGroup;
 			children = (
+				AEE075361A744A770015155B /* SystemUtil.h */,
+				AEE075371A744A770015155B /* SystemUtil.m */,
 				AE30EE711A6F0A8C0044740D /* Database&Networking */,
 				AEEC6C781A6DB6340021B7E4 /* WishDetail */,
 				AEEC6C771A6DB6220021B7E4 /* Home */,
@@ -331,10 +337,10 @@
 			isa = PBXGroup;
 			children = (
 				AE0172431A65CD8E0014266F /* Wish.xcdatamodeld */,
-				AE4B6CAD1A72C77600F23F9D /* Task.h */,
-				AE4B6CAE1A72C77600F23F9D /* Task.m */,
-				AE4B6CA91A72C77500F23F9D /* Plan.h */,
-				AE4B6CAA1A72C77500F23F9D /* Plan.m */,
+				AEE075321A743DF90015155B /* Task.h */,
+				AEE075331A743DF90015155B /* Task.m */,
+				AEE0752E1A743DF70015155B /* Plan.h */,
+				AEE0752F1A743DF70015155B /* Plan.m */,
 				AE479EAC1A6F7A5B00366A0A /* Plan+PlanCRUD.h */,
 				AE479EAD1A6F7A5B00366A0A /* Plan+PlanCRUD.m */,
 				AE479EB01A6F7A8600366A0A /* Task+TaskCRUD.h */,
@@ -654,7 +660,7 @@
 				AE0172451A65CD8E0014266F /* Wish.xcdatamodeld in Sources */,
 				AE0172421A65CD8E0014266F /* AppDelegate.m in Sources */,
 				AED68F6E1A7043E600CDC0DF /* UIImageView+AFNetworking.m in Sources */,
-				AE4B6CAF1A72C77600F23F9D /* Task.m in Sources */,
+				AEE075341A743DF90015155B /* Task.m in Sources */,
 				AED68F601A7043E600CDC0DF /* AFURLRequestSerialization.m in Sources */,
 				AEF7F2AB1A6884950022410B /* CustomBarItem.m in Sources */,
 				AED68F5C1A7043E600CDC0DF /* AFSecurityPolicy.m in Sources */,
@@ -663,6 +669,7 @@
 				AEF3E0D51A6D9B7F00A1FE07 /* ZLSwipeableView.m in Sources */,
 				AED68F681A7043E600CDC0DF /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				AED68F701A7043E600CDC0DF /* UIProgressView+AFNetworking.m in Sources */,
+				AEE075381A744A770015155B /* SystemUtil.m in Sources */,
 				AEF7F2811A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				AED68F5E1A7043E600CDC0DF /* AFURLConnectionOperation.m in Sources */,
 				AEF7F2891A686E8A0022410B /* ECSlidingViewController.m in Sources */,
@@ -683,7 +690,7 @@
 				AE479EB21A6F7A8600366A0A /* Task+TaskCRUD.m in Sources */,
 				AE479EAE1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */,
 				AEEC6C681A6DB0F10021B7E4 /* FirstTableViewController.m in Sources */,
-				AE4B6CAB1A72C77500F23F9D /* Plan.m in Sources */,
+				AEE075301A743DF70015155B /* Plan.m in Sources */,
 				AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */,
 				AEF7F29B1A686FE90022410B /* NavigationBar.m in Sources */,
 				AEEC6C731A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,
@@ -720,6 +727,7 @@
 				AEF7F2861A686E8A0022410B /* ECSlidingInteractiveTransition.m in Sources */,
 				AED68F5F1A7043E600CDC0DF /* AFURLConnectionOperation.m in Sources */,
 				AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */,
+				AEE075391A744A770015155B /* SystemUtil.m in Sources */,
 				AEF7F2821A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				AE479EAF1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */,
 				AEF3E0D61A6D9B7F00A1FE07 /* ZLSwipeableView.m in Sources */,
@@ -739,10 +747,10 @@
 				AED68F5D1A7043E600CDC0DF /* AFSecurityPolicy.m in Sources */,
 				AEF7F2AC1A6884950022410B /* CustomBarItem.m in Sources */,
 				AEEC6C611A6DB0010021B7E4 /* ALView+PureLayout.m in Sources */,
-				AE4B6CB01A72C77600F23F9D /* Task.m in Sources */,
+				AEE075351A743DF90015155B /* Task.m in Sources */,
 				AE479E9F1A6F775C00366A0A /* PostViewController.m in Sources */,
 				AE01726A1A65D3140014266F /* MenuViewController.m in Sources */,
-				AE4B6CAC1A72C77500F23F9D /* Plan.m in Sources */,
+				AEE075311A743DF70015155B /* Plan.m in Sources */,
 				AED68F671A7043E600CDC0DF /* AFNetworkActivityIndicatorManager.m in Sources */,
 				AEF7F2981A686FDB0022410B /* HomeViewController.m in Sources */,
 				AED68F5B1A7043E600CDC0DF /* AFNetworkReachabilityManager.m in Sources */,

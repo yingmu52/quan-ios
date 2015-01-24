@@ -7,9 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Plan.h"
+#import "SystemUtil.h"
 
 @interface FetchCenter : NSObject
 
 
 + (void)fetchPlanList:(NSString *)ownerId;
++ (void)uploadToCreatePlan:(Plan *)plan;
 @end
