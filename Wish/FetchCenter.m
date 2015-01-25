@@ -48,21 +48,18 @@
     NSString *rqtCreatePlan = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PLAN,CREATE_PLAN];
     NSString *rqtUploadImage = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PIC,UPLOAD_IMAGE];
 
-
     //upload image
-    AFHTTPRequestOperationManager *manager = [[self class] launchManager];
-    
-    AFHTTPRequestOperation *op = [manager POST:rqtUploadImage
-                                    parameters:nil
-                     constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    AFHTTPRequestOperationManager *uploadMgr = [self.class launchManager];
 
-                         [formData appendPartWithFileData:UIImageJPEGRepresentation(plan.image, 0.2)
-                                    name:@"name"
-                                fileName:@"fileName"
-                                mimeType:@"image/jpeg"];
+    AFHTTPRequestOperation *upload = [uploadMgr POST:rqtUploadImage
+                                          parameters:nil
+                     constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                         [formData appendPartWithFileData:UIImageJPEGRepresentation(plan.image, 0.5)
+                                                     name:@"image"
+                                                 fileName:@"image.jpg"
+                                                 mimeType:@"image/jpeg"];
+
     } success:^(AFHTTPRequestOperation *operation, NSDictionary *imgResponse) {
-//        NSLog(@"Success: %@ ***** %@", operation.responseString, responseObject);
-        
         //get image id
         NSString *fetchedImageId = imgResponse[@"data.id"];
         NSUInteger daysToFinish = [SystemUtil daysBetween:[NSDate date]
@@ -76,8 +73,10 @@
 #warning fetch tasks (Tasks obj)
                                          @"subPlanList":@[]};
         
+        
+        AFHTTPRequestOperationManager *createMgr = [[self class] launchManager];
         //create plan and get plan id
-        [manager GET:rqtCreatePlan
+        [createMgr GET:rqtCreatePlan
           parameters:createPlanArgs
              success:^(AFHTTPRequestOperation *createPlan, NSDictionary *planResponse) {
                  
@@ -100,9 +99,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@ ***** %@", operation.responseString, error);
     }];
-    [op start];
-    
-    
+    [upload start];
     
     
 }
