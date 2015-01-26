@@ -8,7 +8,7 @@
 
 @import Foundation;
 @import UIKit;
-
+#import "Reachability.h"
 @interface SystemUtil : NSObject
 
 
@@ -19,4 +19,6 @@
 + (void)updateOwnerId:(NSString *)newID;
 
 + (NSString *)stringFromDate:(NSDate *)date;
+
++ (BOOL)hasActiveInternetConnection;
 @end

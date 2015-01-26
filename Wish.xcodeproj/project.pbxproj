@@ -14,6 +14,10 @@
 		AE01725C1A65CD8F0014266F /* WishTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE01725B1A65CD8F0014266F /* WishTests.m */; };
 		AE0172691A65D3140014266F /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0172681A65D3140014266F /* MenuViewController.m */; };
 		AE01726A1A65D3140014266F /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0172681A65D3140014266F /* MenuViewController.m */; };
+		AE0E79461A76EAB8007C48EE /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E79451A76EAB8007C48EE /* Plan.m */; };
+		AE0E79471A76EAB8007C48EE /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E79451A76EAB8007C48EE /* Plan.m */; };
+		AE0E794B1A76EB50007C48EE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E794A1A76EB50007C48EE /* Reachability.m */; };
+		AE0E794C1A76EB50007C48EE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E794A1A76EB50007C48EE /* Reachability.m */; };
 		AE1B6E381A6D884F0026F3CE /* HomeCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE1B6E371A6D884F0026F3CE /* HomeCardView.xib */; };
 		AE1B6E391A6D884F0026F3CE /* HomeCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE1B6E371A6D884F0026F3CE /* HomeCardView.xib */; };
 		AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
@@ -25,15 +29,9 @@
 		AE479E9F1A6F775C00366A0A /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479E9D1A6F775C00366A0A /* PostViewController.m */; };
 		AE479EAE1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479EAD1A6F7A5B00366A0A /* Plan+PlanCRUD.m */; };
 		AE479EAF1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479EAD1A6F7A5B00366A0A /* Plan+PlanCRUD.m */; };
-		AE479EB21A6F7A8600366A0A /* Task+TaskCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479EB11A6F7A8600366A0A /* Task+TaskCRUD.m */; };
-		AE479EB31A6F7A8600366A0A /* Task+TaskCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479EB11A6F7A8600366A0A /* Task+TaskCRUD.m */; };
 		AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE72E9541A66F2AA0046B38D /* MenuCell.m */; };
 		AED68EE41A70399A00CDC0DF /* FetchCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = AED68EE31A70399A00CDC0DF /* FetchCenter.m */; };
 		AED68EE51A70399A00CDC0DF /* FetchCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = AED68EE31A70399A00CDC0DF /* FetchCenter.m */; };
-		AEE075301A743DF70015155B /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE0752F1A743DF70015155B /* Plan.m */; };
-		AEE075311A743DF70015155B /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE0752F1A743DF70015155B /* Plan.m */; };
-		AEE075341A743DF90015155B /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE075331A743DF90015155B /* Task.m */; };
-		AEE075351A743DF90015155B /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE075331A743DF90015155B /* Task.m */; };
 		AEE075381A744A770015155B /* SystemUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE075371A744A770015155B /* SystemUtil.m */; };
 		AEE075391A744A770015155B /* SystemUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE075371A744A770015155B /* SystemUtil.m */; };
 		AEEC6C4D1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C4C1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m */; };
@@ -107,6 +105,10 @@
 		AE01725B1A65CD8F0014266F /* WishTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WishTests.m; sourceTree = "<group>"; };
 		AE0172671A65D3140014266F /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		AE0172681A65D3140014266F /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		AE0E79441A76EAB8007C48EE /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
+		AE0E79451A76EAB8007C48EE /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
+		AE0E79491A76EB50007C48EE /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		AE0E794A1A76EB50007C48EE /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		AE1B6E371A6D884F0026F3CE /* HomeCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCardView.xib; sourceTree = "<group>"; };
 		AE1B6E3A1A6D89FC0026F3CE /* HomeCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCardView.h; sourceTree = "<group>"; };
 		AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCardView.m; sourceTree = "<group>"; };
@@ -117,16 +119,10 @@
 		AE479E9D1A6F775C00366A0A /* PostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostViewController.m; sourceTree = "<group>"; };
 		AE479EAC1A6F7A5B00366A0A /* Plan+PlanCRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Plan+PlanCRUD.h"; sourceTree = "<group>"; };
 		AE479EAD1A6F7A5B00366A0A /* Plan+PlanCRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Plan+PlanCRUD.m"; sourceTree = "<group>"; };
-		AE479EB01A6F7A8600366A0A /* Task+TaskCRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Task+TaskCRUD.h"; sourceTree = "<group>"; };
-		AE479EB11A6F7A8600366A0A /* Task+TaskCRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Task+TaskCRUD.m"; sourceTree = "<group>"; };
 		AE72E9531A66F2AA0046B38D /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
 		AE72E9541A66F2AA0046B38D /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		AED68EE21A70399A00CDC0DF /* FetchCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchCenter.h; sourceTree = "<group>"; };
 		AED68EE31A70399A00CDC0DF /* FetchCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchCenter.m; sourceTree = "<group>"; };
-		AEE0752E1A743DF70015155B /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
-		AEE0752F1A743DF70015155B /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
-		AEE075321A743DF90015155B /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
-		AEE075331A743DF90015155B /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
 		AEE075361A744A770015155B /* SystemUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemUtil.h; sourceTree = "<group>"; };
 		AEE075371A744A770015155B /* SystemUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUtil.m; sourceTree = "<group>"; };
 		AEEC6C4B1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+VGParallaxHeader.h"; sourceTree = "<group>"; };
@@ -263,18 +259,23 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		AE0E79481A76EB3E007C48EE /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				AE0E79491A76EB50007C48EE /* Reachability.h */,
+				AE0E794A1A76EB50007C48EE /* Reachability.m */,
+			);
+			name = Reachability;
+			sourceTree = "<group>";
+		};
 		AE30EE711A6F0A8C0044740D /* Database&Networking */ = {
 			isa = PBXGroup;
 			children = (
 				AE0172431A65CD8E0014266F /* Wish.xcdatamodeld */,
-				AEE075321A743DF90015155B /* Task.h */,
-				AEE075331A743DF90015155B /* Task.m */,
-				AEE0752E1A743DF70015155B /* Plan.h */,
-				AEE0752F1A743DF70015155B /* Plan.m */,
+				AE0E79441A76EAB8007C48EE /* Plan.h */,
+				AE0E79451A76EAB8007C48EE /* Plan.m */,
 				AE479EAC1A6F7A5B00366A0A /* Plan+PlanCRUD.h */,
 				AE479EAD1A6F7A5B00366A0A /* Plan+PlanCRUD.m */,
-				AE479EB01A6F7A8600366A0A /* Task+TaskCRUD.h */,
-				AE479EB11A6F7A8600366A0A /* Task+TaskCRUD.m */,
 				AED68EE21A70399A00CDC0DF /* FetchCenter.h */,
 				AED68EE31A70399A00CDC0DF /* FetchCenter.m */,
 			);
@@ -371,6 +372,7 @@
 		AEF7F2661A686E8A0022410B /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				AE0E79481A76EB3E007C48EE /* Reachability */,
 				AEEC6C4A1A6DAD9D0021B7E4 /* VGParallaxHeader */,
 				AEF3E0CE1A6D9B7F00A1FE07 /* ZLSwipeableView */,
 				AEF7F2A61A6884950022410B /* CustomNavigationItem */,
@@ -534,13 +536,13 @@
 				AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */,
 				AE0172451A65CD8E0014266F /* Wish.xcdatamodeld in Sources */,
 				AE0172421A65CD8E0014266F /* AppDelegate.m in Sources */,
-				AEE075341A743DF90015155B /* Task.m in Sources */,
 				AEF7F2AB1A6884950022410B /* CustomBarItem.m in Sources */,
 				AE01723F1A65CD8E0014266F /* main.m in Sources */,
 				AEF3E0D51A6D9B7F00A1FE07 /* ZLSwipeableView.m in Sources */,
 				AEE075381A744A770015155B /* SystemUtil.m in Sources */,
 				AEF7F2811A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				AEF7F2891A686E8A0022410B /* ECSlidingViewController.m in Sources */,
+				AE0E79461A76EAB8007C48EE /* Plan.m in Sources */,
 				AEF7F28B1A686E8B0022410B /* UIViewController+ECSlidingViewController.m in Sources */,
 				AEEC6C641A6DB0010021B7E4 /* NSLayoutConstraint+PureLayout.m in Sources */,
 				AEF7F2931A686FA30022410B /* Theme.m in Sources */,
@@ -553,10 +555,9 @@
 				AE0172691A65D3140014266F /* MenuViewController.m in Sources */,
 				AED68EE41A70399A00CDC0DF /* FetchCenter.m in Sources */,
 				AEEC6C621A6DB0010021B7E4 /* NSArray+PureLayout.m in Sources */,
-				AE479EB21A6F7A8600366A0A /* Task+TaskCRUD.m in Sources */,
+				AE0E794B1A76EB50007C48EE /* Reachability.m in Sources */,
 				AE479EAE1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */,
 				AEEC6C681A6DB0F10021B7E4 /* FirstTableViewController.m in Sources */,
-				AEE075301A743DF70015155B /* Plan.m in Sources */,
 				AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */,
 				AEF7F29B1A686FE90022410B /* NavigationBar.m in Sources */,
 				AEEC6C731A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,
@@ -575,7 +576,6 @@
 				AEF7F2941A686FA30022410B /* Theme.m in Sources */,
 				AEEC6C631A6DB0010021B7E4 /* NSArray+PureLayout.m in Sources */,
 				AED68EE51A70399A00CDC0DF /* FetchCenter.m in Sources */,
-				AE479EB31A6F7A8600366A0A /* Task+TaskCRUD.m in Sources */,
 				AEEC6C6E1A6DB0FC0021B7E4 /* HeaderView.m in Sources */,
 				AE01725C1A65CD8F0014266F /* WishTests.m in Sources */,
 				AEF3E0D41A6D9B7F00A1FE07 /* ZLPanGestureRecognizer.m in Sources */,
@@ -593,10 +593,10 @@
 				AEEC6C4E1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */,
 				AEF7F2AC1A6884950022410B /* CustomBarItem.m in Sources */,
 				AEEC6C611A6DB0010021B7E4 /* ALView+PureLayout.m in Sources */,
-				AEE075351A743DF90015155B /* Task.m in Sources */,
 				AE479E9F1A6F775C00366A0A /* PostViewController.m in Sources */,
+				AE0E794C1A76EB50007C48EE /* Reachability.m in Sources */,
+				AE0E79471A76EAB8007C48EE /* Plan.m in Sources */,
 				AE01726A1A65D3140014266F /* MenuViewController.m in Sources */,
-				AEE075311A743DF70015155B /* Plan.m in Sources */,
 				AEF7F2981A686FDB0022410B /* HomeViewController.m in Sources */,
 				AEEC6C741A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,
 			);

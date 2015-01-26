@@ -52,4 +52,11 @@
     formatter.dateFormat = @"yyyy_MM_dd";
     return [formatter stringFromDate:date];
 }
+
+
++ (BOOL)hasActiveInternetConnection
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    return reachability.currentReachabilityStatus != NotReachable;
+}
 @end

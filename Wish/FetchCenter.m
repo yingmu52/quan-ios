@@ -7,14 +7,13 @@
 //
 
 #import "FetchCenter.h"
-@import Foundation;
 #define BASE_URL @"http://182.254.167.228/superplan/"
 #define PLAN @"plan/"
 #define GET_LIST @"splan_plan_getlist.php"
 #define PIC @"pic/"
 #define CREATE_PLAN @"splan_plan_create.php"
 #define UPLOAD_IMAGE @"splan_pic_upload.php"
-
+#define DELETE_PLAN @"splan_plan_delete_id.php"
 @implementation FetchCenter
 
 
@@ -59,32 +58,59 @@
             
             NSDictionary *imgJson = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
             //get image id
-            plan.imageId = imgJson[@"data.id"];
-            
-            NSString *rqtCreatePlan = [NSString stringWithFormat:@"%@%@%@?ownerId=%@title=%@finishDate=%dbackGroudNum=%dprivate=%@",BASE_URL,PLAN,CREATE_PLAN,plan.ownerId,plan.planTitle,[SystemUtil daysBetween:[NSDate date] and:plan.finishDate],1,plan.isPrivate];
-            rqtCreatePlan = [rqtCreatePlan stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            
-            NSURLRequest *request = [self.class request:rqtCreatePlan method:@"GET"];
-            NSURLSessionDataTask *creatTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            NSString *fetchedImageId = [imgJson valueForKeyPath:@"data.id"];
+            if (fetchedImageId){
+                plan.imageId = fetchedImageId;
+                NSLog(@"fetched image ID: %@",fetchedImageId);
+                NSString *rqtCreatePlan = [NSString stringWithFormat:@"%@%@%@?ownerId=%@&title=%@&finishDate=%d&backGroudNum=%d&private=%@",BASE_URL,PLAN,CREATE_PLAN,[SystemUtil getOwnerId],plan.planTitle,[SystemUtil daysBetween:[NSDate date] and:plan.finishDate],1,plan.isPrivate];
+                rqtCreatePlan = [rqtCreatePlan stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
                 
-                if (!error) { //create plan success
-                    NSDictionary *planJson = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-                    //get fetched plan id
+                NSURLRequest *request = [self.class request:rqtCreatePlan method:@"GET"];
+                NSURLSessionDataTask *creatTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                     
-                    //update core data - cloud and local synchronization
-                    plan.planId = planJson[@"data.id"];
-                    if([plan.managedObjectContext save:nil]){
-                        NSLog(@"upload plan successed");
+                    if (!error) { //create plan success
+                        NSDictionary *planJson = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                        //get fetched plan id
+                        
+                        //update core data - cloud and local synchronization
+                        NSString *fetchedPlanID = [planJson valueForKeyPath:@"data.id"];
+                        plan.planId = fetchedPlanID;
+                        
+                        if([plan.managedObjectContext save:nil] && fetchedPlanID){
+                            NSLog(@"fetched plan ID %@",fetchedPlanID);
+                            NSLog(@"upload plan successed");
+                        }
+                        
                     }
-
-                }
-            }];
-            [creatTask resume];
-            
+                }];
+                [creatTask resume];
+            }
         }
-                                                    
     }];
     [uploadTask resume];
     
+}
+
+
++ (void)postToDeletePlan:(Plan *)plan
+{
+    NSString *ownerId = [SystemUtil getOwnerId];
+    NSString *rqtDeletePlan = [NSString stringWithFormat:@"%@%@%@?id=%@&ownerId=%@",BASE_URL,PLAN,DELETE_PLAN,plan.planId,plan.ownerId];
+    NSURLRequest *request = [self.class request:rqtDeletePlan method:@"GET"];
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    NSURLSessionDataTask *deleteTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+                                        {
+                                            if (!error){ //delete successed
+                                                [plan.managedObjectContext deleteObject:plan];
+                                                NSLog(@"delete plan successed (both)");
+                                            }else{
+                                                plan.userDeleted = @(YES);
+                                                NSLog(@"delete plan successed (only local)");
+                                            }
+                                            [plan.managedObjectContext save:nil];
+                                        }];
+    [deleteTask resume];
+
 }
 @end

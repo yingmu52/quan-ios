@@ -10,13 +10,9 @@
         <attribute name="ownerId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="planId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="planTitle" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="plan" inverseEntity="Task" syncable="YES"/>
-    </entity>
-    <entity name="Task" representedClassName="Task" syncable="YES">
-        <relationship name="plan" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Plan" inverseName="tasks" inverseEntity="Plan" syncable="YES"/>
+        <attribute name="userDeleted" optional="YES" attributeType="Boolean" syncable="YES"/>
     </entity>
     <elements>
         <element name="Plan" positionX="-8903" positionY="-117" width="128" height="193"/>
-        <element name="Task" positionX="-9108" positionY="188" width="128" height="60"/>
     </elements>
 </model>

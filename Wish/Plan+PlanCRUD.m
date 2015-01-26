@@ -46,14 +46,25 @@
 
 - (void)deleteSelf:(NSManagedObjectContext *)context
 {
-    [context deleteObject:self];
+    if ([SystemUtil hasActiveInternetConnection]){     //active internet
+        if (self.planId && [self.ownerId isEqualToString:[SystemUtil getOwnerId]]){
+            [FetchCenter postToDeletePlan:self];
+        }else{
+            [context deleteObject:self];
+            NSLog(@"deleting from loca, no need to post delete request");
+        }
+    }else{    //inactive internet
+        self.userDeleted = @(YES);
+    }
     [context save:nil];
+    
 }
 
 + (NSArray *)loadMyPlans:(NSManagedObjectContext *)context
 {
+    NSPredicate *notDeleted = [NSPredicate predicateWithFormat:@"userDeleted = NO OR userDeleted = nil"];
     return [Plan fetchWith:@"Plan"
-                         predicate:nil //fetch all
+                         predicate:notDeleted //fetch all non user deleted
                   keyForDescriptor:@"createDate"
                          inContext:context];
 }

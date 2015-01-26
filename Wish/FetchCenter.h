@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Plan.h"
+#import "Plan+PlanCRUD.h"
 #import "SystemUtil.h"
 
 @interface FetchCenter : NSObject
@@ -15,4 +15,5 @@
 
 + (void)fetchPlanList:(NSString *)ownerId;
 + (void)uploadToCreatePlan:(Plan *)plan;
++ (void)postToDeletePlan:(Plan *)plan;
 @end
