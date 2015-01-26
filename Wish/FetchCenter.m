@@ -44,14 +44,10 @@
 + (void)uploadToCreatePlan:(Plan *)plan{
     
     NSString *rqtUploadImage = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PIC,UPLOAD_IMAGE];
-
     //upload image
     NSData *imgData = UIImageJPEGRepresentation(plan.image, 0.5);
-
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-
     NSURLRequest *request = [self.class request:rqtUploadImage method:@"POST"];
-    
     NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:imgData completionHandler:^(NSData *data,NSURLResponse *response,NSError *error)
     {
         if (!error){ //upload image successed
@@ -94,7 +90,6 @@
 
 + (void)postToDeletePlan:(Plan *)plan
 {
-    NSString *ownerId = [SystemUtil getOwnerId];
     NSString *rqtDeletePlan = [NSString stringWithFormat:@"%@%@%@?id=%@&ownerId=%@",BASE_URL,PLAN,DELETE_PLAN,plan.planId,plan.ownerId];
     NSURLRequest *request = [self.class request:rqtDeletePlan method:@"GET"];
     

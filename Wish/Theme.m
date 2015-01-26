@@ -84,7 +84,7 @@
 
 + (UIImage *)navTikButtonDefault
 {
-    return [UIImage imageNamed:@"nav_ic_share_default"];
+    return [UIImage imageNamed:@"nav_ic_finish_default"];
 }
 
 + (UIImage *)navComposeButtonDefault
