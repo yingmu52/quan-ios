@@ -334,12 +334,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bkR-Oi-ATm">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter title here" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bkR-Oi-ATm">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="50304819-ADD0-46CE-95D7-235F0B9E97EB" translatesAutoresizingMaskIntoConstraints="NO" id="pBy-H1-GZN">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="D56239CD-FE4F-4FB3-B312-33745950982D" translatesAutoresizingMaskIntoConstraints="NO" id="pBy-H1-GZN">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="pBy-H1-GZN" secondAttribute="height" id="IBI-Q0-Egy"/>
@@ -356,7 +356,7 @@
                                 </variation>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="bkR-Oi-ATm" firstAttribute="leading" secondItem="pBy-H1-GZN" secondAttribute="leading" id="5So-xZ-CCg"/>
                             <constraint firstItem="pBy-H1-GZN" firstAttribute="trailing" secondItem="bkR-Oi-ATm" secondAttribute="trailing" id="F7Z-H9-aWr"/>
@@ -839,7 +839,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="50304819-ADD0-46CE-95D7-235F0B9E97EB" width="76" height="88">
+        <image name="D56239CD-FE4F-4FB3-B312-33745950982D" width="76" height="88">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

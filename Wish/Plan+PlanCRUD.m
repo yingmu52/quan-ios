@@ -37,7 +37,7 @@
         plan.createDate = [NSDate date];
         
         if ([context save:nil]) {
-            [FetchCenter uploadToCreatePlan:plan];
+//            [FetchCenter uploadToCreatePlan:plan];
         }
 
     }

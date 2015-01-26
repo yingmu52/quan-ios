@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ECSlidingViewController.h"
+//#import "AFNetworkActivityLogger.h"
 @interface AppDelegate ()
 
 @end
@@ -24,6 +25,8 @@
     
     root.underLeftViewController.edgesForExtendedLayout = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeLeft;
     
+//    [[AFNetworkActivityLogger sharedLogger] startLogging];
+
     return YES;
 }
 
