@@ -58,8 +58,8 @@ HomeCardViewDelegate>
     dispatch_queue_t reloadQ =  dispatch_queue_create("reload cards", NULL);
     dispatch_async(reloadQ, ^{
         self.myPlans = [[Plan loadMyPlans:[AppDelegate getContext]] mutableCopy];
+        self.topThreeCache = nil;
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.topThreeCache = nil;
             [self.cardView discardAllSwipeableViews];
             [self.cardView loadNextSwipeableViewsIfNeeded];
         });
@@ -184,10 +184,9 @@ HomeCardViewDelegate>
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    [self dismissViewControllerAnimated:YES completion:^{
+    [self dismissViewControllerAnimated:NO completion:^{
         self.capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage]; // this line and next line is sequentally important
         [self performSegueWithIdentifier:@"showPostFromHome" sender:nil];
-
 //        [self performSegueWithIdentifier:@"showPostFromHome" sender:nil];
 //        NSLog(@"%@",NSStringFromCGSize(editedImage.size));
     }];
