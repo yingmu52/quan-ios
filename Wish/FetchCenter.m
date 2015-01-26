@@ -62,7 +62,7 @@
             if (fetchedImageId){
                 plan.imageId = fetchedImageId;
                 NSLog(@"fetched image ID: %@",fetchedImageId);
-                NSString *rqtCreatePlan = [NSString stringWithFormat:@"%@%@%@?ownerId=%@&title=%@&finishDate=%d&backGroudNum=%d&private=%@",BASE_URL,PLAN,CREATE_PLAN,[SystemUtil getOwnerId],plan.planTitle,[SystemUtil daysBetween:[NSDate date] and:plan.finishDate],1,plan.isPrivate];
+                NSString *rqtCreatePlan = [NSString stringWithFormat:@"%@%@%@?ownerId=%@&title=%@&finishDate=%lu&backGroudNum=%d&private=%@",BASE_URL,PLAN,CREATE_PLAN,[SystemUtil getOwnerId],plan.planTitle,(unsigned long)[SystemUtil daysBetween:[NSDate date] and:plan.finishDate],1,plan.isPrivate];
                 rqtCreatePlan = [rqtCreatePlan stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
                 
                 NSURLRequest *request = [self.class request:rqtCreatePlan method:@"GET"];
