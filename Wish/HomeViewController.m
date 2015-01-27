@@ -17,7 +17,7 @@
 #import "Plan+PlanCRUD.h"
 #import "AppDelegate.h"
 #import "FetchCenter.h"
-#import "PostViewController.h"
+
 
 const NSUInteger maxCardNum = 10;
 
@@ -207,11 +207,4 @@ HomeCardViewDelegate>
 
 
 #pragma mark - 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"showPostFromHome"]) {
-        PostViewController *pvc = segue.destinationViewController;
-        pvc.capturedImage = self.capturedImage;
-    }
-}
 @end
