@@ -11,6 +11,10 @@
 @interface PostViewController () <UITextFieldDelegate>
 
 @property (nonatomic,weak) IBOutlet UITextField *textField;
+@property (nonatomic,weak) IBOutlet UIButton *sgtBtn1;
+@property (nonatomic,weak) IBOutlet UIButton *sgtBtn2;
+@property (nonatomic,weak) IBOutlet UIButton *sgtBtn3;
+@property (nonatomic,weak) IBOutlet UIButton *sgtBtn4;
 
 @end
 
@@ -20,6 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
+
 }
 
 - (void)setUpNavigationItem

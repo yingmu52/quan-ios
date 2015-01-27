@@ -393,7 +393,6 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WuT-7i-DHG">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <color key="backgroundColor" red="0.31764705879999999" green="0.75294117650000003" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="284" id="8tF-DJ-wbI">
                                         <variation key="heightClass=regular-widthClass=compact" constant="250"/>
@@ -417,8 +416,10 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xbf-L3-6fZ">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <color key="backgroundColor" red="0.31764705879999999" green="0.75294117650000003" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="98" id="WEN-ua-a0F">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="250"/>
+                                    </constraint>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="98" id="hPJ-uE-c0c">
                                         <variation key="heightClass=regular-widthClass=compact" constant="250"/>
                                     </constraint>
@@ -430,35 +431,68 @@
                                 </state>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="WEN-ua-a0F"/>
                                         <exclude reference="hPJ-uE-c0c"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
+                                        <include reference="WEN-ua-a0F"/>
                                         <exclude reference="hPJ-uE-c0c"/>
                                     </mask>
                                 </variation>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ezD-Tv-1nI">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <color key="backgroundColor" red="0.31764705879999999" green="0.75294117650000003" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="119" id="k0M-ZX-lgi">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="250"/>
+                                    </constraint>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="跑步绕地球一圈">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="k0M-ZX-lgi"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="k0M-ZX-lgi"/>
+                                    </mask>
+                                </variation>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tQI-Cz-w92">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <color key="backgroundColor" red="0.31764705879999999" green="0.75294117650000003" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Button">
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="90" id="cMY-vN-Lid">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="250"/>
+                                    </constraint>
+                                </constraints>
+                                <state key="normal" title="到每个省拉屎">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="cMY-vN-Lid"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="cMY-vN-Lid"/>
+                                    </mask>
+                                </variation>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.8666666666666667" green="0.89411764705882357" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="bkR-Oi-ATm" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tQI-Cz-w92" secondAttribute="trailing" constant="137" id="0z1-zz-Bws">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
                             <constraint firstItem="WuT-7i-DHG" firstAttribute="top" secondItem="2LA-3P-Hbt" secondAttribute="bottom" constant="15" id="4ei-Cs-ao6">
                                 <variation key="heightClass=regular-widthClass=compact" constant="20"/>
                             </constraint>
@@ -470,6 +504,10 @@
                             <constraint firstItem="Xbf-L3-6fZ" firstAttribute="leading" secondItem="WuT-7i-DHG" secondAttribute="trailing" constant="20" id="KfE-cn-RWa"/>
                             <constraint firstItem="ezD-Tv-1nI" firstAttribute="top" secondItem="WuT-7i-DHG" secondAttribute="bottom" constant="18" id="Lc2-uE-RsP"/>
                             <constraint firstItem="tQI-Cz-w92" firstAttribute="centerY" secondItem="ezD-Tv-1nI" secondAttribute="centerY" id="Lf4-qR-jZD"/>
+                            <constraint firstItem="bkR-Oi-ATm" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Xbf-L3-6fZ" secondAttribute="trailing" constant="62" id="Mh5-kJ-Qpa">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
+                            <constraint firstItem="bkR-Oi-ATm" firstAttribute="trailing" secondItem="Xbf-L3-6fZ" secondAttribute="trailing" constant="62" id="NIG-8N-djG"/>
                             <constraint firstItem="tQI-Cz-w92" firstAttribute="leading" secondItem="ezD-Tv-1nI" secondAttribute="trailing" constant="28" id="Vsr-W2-tGM">
                                 <variation key="heightClass=regular-widthClass=compact" constant="20"/>
                             </constraint>
@@ -494,6 +532,9 @@
                                 <exclude reference="KKU-sG-F0W"/>
                                 <exclude reference="vUr-8y-52s"/>
                                 <exclude reference="xAy-th-Zcx"/>
+                                <exclude reference="0z1-zz-Bws"/>
+                                <exclude reference="Mh5-kJ-Qpa"/>
+                                <exclude reference="NIG-8N-djG"/>
                                 <exclude reference="bZP-7T-oV4"/>
                                 <exclude reference="r1T-Fq-aGM"/>
                                 <exclude reference="4ei-Cs-ao6"/>
@@ -521,6 +562,9 @@
                                 <include reference="KKU-sG-F0W"/>
                                 <include reference="vUr-8y-52s"/>
                                 <include reference="xAy-th-Zcx"/>
+                                <include reference="0z1-zz-Bws"/>
+                                <include reference="Mh5-kJ-Qpa"/>
+                                <exclude reference="NIG-8N-djG"/>
                                 <include reference="bZP-7T-oV4"/>
                                 <include reference="r1T-Fq-aGM"/>
                                 <include reference="4ei-Cs-ao6"/>
@@ -538,6 +582,10 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="sgtBtn1" destination="WuT-7i-DHG" id="WNJ-PD-d6t"/>
+                        <outlet property="sgtBtn2" destination="Xbf-L3-6fZ" id="uLd-Fu-Br9"/>
+                        <outlet property="sgtBtn3" destination="ezD-Tv-1nI" id="zCn-Ih-cdB"/>
+                        <outlet property="sgtBtn4" destination="tQI-Cz-w92" id="YfM-YJ-gbe"/>
                         <outlet property="textField" destination="bkR-Oi-ATm" id="IeB-YY-h7g"/>
                     </connections>
                 </viewController>
