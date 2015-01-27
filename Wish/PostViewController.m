@@ -8,8 +8,6 @@
 
 #import "PostViewController.h"
 #import "Theme.h"
-#import "Plan+PlanCRUD.h"
-#import "AppDelegate.h"
 @interface PostViewController () <UITextFieldDelegate>
 
 @property (nonatomic,weak) IBOutlet UITextField *textField;
@@ -34,7 +32,7 @@
     
     UIButton *nextButton = [Theme buttonWithImage:[Theme navTikButtonDefault]
                                            target:self
-                                         selector:@selector(doneCreatingWish)
+                                         selector:@selector(goToNextView)
                                             frame:frame];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
@@ -42,7 +40,7 @@
 
 }
 
-- (void)doneCreatingWish
+- (void)goToNextView
 {
 //    [Plan createPlan:self.textField.text
 //                date:[NSDate date]

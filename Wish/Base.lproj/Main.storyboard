@@ -341,10 +341,12 @@
                                         <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="bkR-Oi-ATm" secondAttribute="height" multiplier="363:46" id="aJj-eb-ST7"/>
+                                            <constraint firstAttribute="width" secondItem="bkR-Oi-ATm" secondAttribute="height" multiplier="363:46" id="aJj-eb-ST7">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="3"/>
+                                            </constraint>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="aJj-eb-ST7"/>
@@ -361,7 +363,9 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="bkR-Oi-ATm" secondAttribute="height" multiplier="200:23" id="KOf-lk-Ulj"/>
                                     <constraint firstItem="bkR-Oi-ATm" firstAttribute="centerY" secondItem="2LA-3P-Hbt" secondAttribute="centerY" id="KnV-lN-H85"/>
-                                    <constraint firstItem="bkR-Oi-ATm" firstAttribute="centerX" secondItem="2LA-3P-Hbt" secondAttribute="centerX" id="XWg-9M-wID"/>
+                                    <constraint firstItem="bkR-Oi-ATm" firstAttribute="centerX" secondItem="2LA-3P-Hbt" secondAttribute="centerX" id="XWg-9M-wID">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="-1"/>
+                                    </constraint>
                                     <constraint firstAttribute="width" secondItem="2LA-3P-Hbt" secondAttribute="height" multiplier="4:1" id="YJE-Yk-Gn0"/>
                                 </constraints>
                                 <variation key="default">
@@ -387,30 +391,149 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WuT-7i-DHG">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="0.31764705879999999" green="0.75294117650000003" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="284" id="8tF-DJ-wbI">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="250"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="每天一部电影的365天每天天每天一部">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="8tF-DJ-wbI"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="8tF-DJ-wbI"/>
+                                    </mask>
+                                </variation>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xbf-L3-6fZ">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="0.31764705879999999" green="0.75294117650000003" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="98" id="hPJ-uE-c0c">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="250"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="皮匠">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="hPJ-uE-c0c"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <exclude reference="hPJ-uE-c0c"/>
+                                    </mask>
+                                </variation>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ezD-Tv-1nI">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="0.31764705879999999" green="0.75294117650000003" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="跑步绕地球一圈">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tQI-Cz-w92">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="0.31764705879999999" green="0.75294117650000003" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
+                        <color key="backgroundColor" red="0.8666666666666667" green="0.89411764705882357" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="WuT-7i-DHG" firstAttribute="top" secondItem="2LA-3P-Hbt" secondAttribute="bottom" constant="15" id="4ei-Cs-ao6">
+                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                            </constraint>
+                            <constraint firstItem="ezD-Tv-1nI" firstAttribute="top" secondItem="WuT-7i-DHG" secondAttribute="bottom" constant="18" id="5QG-sp-7cV">
+                                <variation key="heightClass=regular-widthClass=compact" constant="8"/>
+                            </constraint>
+                            <constraint firstItem="ezD-Tv-1nI" firstAttribute="height" secondItem="WuT-7i-DHG" secondAttribute="height" id="8ke-iy-7wg"/>
                             <constraint firstAttribute="width" secondItem="2LA-3P-Hbt" secondAttribute="width" id="KKU-sG-F0W"/>
+                            <constraint firstItem="Xbf-L3-6fZ" firstAttribute="leading" secondItem="WuT-7i-DHG" secondAttribute="trailing" constant="20" id="KfE-cn-RWa"/>
+                            <constraint firstItem="ezD-Tv-1nI" firstAttribute="top" secondItem="WuT-7i-DHG" secondAttribute="bottom" constant="18" id="Lc2-uE-RsP"/>
+                            <constraint firstItem="tQI-Cz-w92" firstAttribute="centerY" secondItem="ezD-Tv-1nI" secondAttribute="centerY" id="Lf4-qR-jZD"/>
+                            <constraint firstItem="tQI-Cz-w92" firstAttribute="leading" secondItem="ezD-Tv-1nI" secondAttribute="trailing" constant="28" id="Vsr-W2-tGM">
+                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                            </constraint>
+                            <constraint firstItem="bkR-Oi-ATm" firstAttribute="leading" secondItem="WuT-7i-DHG" secondAttribute="leading" id="bZP-7T-oV4"/>
+                            <constraint firstItem="ezD-Tv-1nI" firstAttribute="leading" secondItem="WuT-7i-DHG" secondAttribute="leading" id="klj-T5-kMi"/>
+                            <constraint firstItem="WuT-7i-DHG" firstAttribute="height" secondItem="Xbf-L3-6fZ" secondAttribute="height" id="l0j-BI-Ken"/>
+                            <constraint firstItem="bkR-Oi-ATm" firstAttribute="height" secondItem="WuT-7i-DHG" secondAttribute="height" id="r1T-Fq-aGM"/>
+                            <constraint firstItem="WuT-7i-DHG" firstAttribute="centerY" secondItem="Xbf-L3-6fZ" secondAttribute="centerY" id="tbM-mF-wX5"/>
                             <constraint firstAttribute="centerX" secondItem="2LA-3P-Hbt" secondAttribute="centerX" id="vUr-8y-52s"/>
                             <constraint firstItem="2LA-3P-Hbt" firstAttribute="top" secondItem="FOQ-fN-tNK" secondAttribute="bottom" id="xAy-th-Zcx"/>
+                            <constraint firstItem="tQI-Cz-w92" firstAttribute="height" secondItem="ezD-Tv-1nI" secondAttribute="height" id="y7N-ky-AaX"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="2LA-3P-Hbt"/>
+                                <exclude reference="WuT-7i-DHG"/>
+                                <exclude reference="Xbf-L3-6fZ"/>
+                                <exclude reference="ezD-Tv-1nI"/>
+                                <exclude reference="tQI-Cz-w92"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="KKU-sG-F0W"/>
                                 <exclude reference="vUr-8y-52s"/>
                                 <exclude reference="xAy-th-Zcx"/>
+                                <exclude reference="bZP-7T-oV4"/>
+                                <exclude reference="r1T-Fq-aGM"/>
+                                <exclude reference="4ei-Cs-ao6"/>
+                                <exclude reference="l0j-BI-Ken"/>
+                                <exclude reference="tbM-mF-wX5"/>
+                                <exclude reference="5QG-sp-7cV"/>
+                                <exclude reference="8ke-iy-7wg"/>
+                                <exclude reference="Lc2-uE-RsP"/>
+                                <exclude reference="klj-T5-kMi"/>
+                                <exclude reference="Lf4-qR-jZD"/>
+                                <exclude reference="Vsr-W2-tGM"/>
+                                <exclude reference="y7N-ky-AaX"/>
+                                <exclude reference="KfE-cn-RWa"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="2LA-3P-Hbt"/>
+                                <include reference="WuT-7i-DHG"/>
+                                <include reference="Xbf-L3-6fZ"/>
+                                <include reference="ezD-Tv-1nI"/>
+                                <include reference="tQI-Cz-w92"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="KKU-sG-F0W"/>
                                 <include reference="vUr-8y-52s"/>
                                 <include reference="xAy-th-Zcx"/>
+                                <include reference="bZP-7T-oV4"/>
+                                <include reference="r1T-Fq-aGM"/>
+                                <include reference="4ei-Cs-ao6"/>
+                                <include reference="l0j-BI-Ken"/>
+                                <include reference="tbM-mF-wX5"/>
+                                <include reference="5QG-sp-7cV"/>
+                                <include reference="8ke-iy-7wg"/>
+                                <exclude reference="Lc2-uE-RsP"/>
+                                <include reference="klj-T5-kMi"/>
+                                <include reference="Lf4-qR-jZD"/>
+                                <include reference="Vsr-W2-tGM"/>
+                                <include reference="y7N-ky-AaX"/>
+                                <include reference="KfE-cn-RWa"/>
                             </mask>
                         </variation>
                     </view>
