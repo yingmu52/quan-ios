@@ -616,6 +616,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  预计2-15-10-21达成" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="POx-NV-WcR">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="POx-NV-WcR" secondAttribute="height" multiplier="363:46" id="9fD-Ei-jZK">
                                         <variation key="heightClass=regular-widthClass=compact" constant="5"/>
@@ -634,6 +635,9 @@
                                         <include reference="9fD-Ei-jZK"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="tY6-wH-Lji" appends="YES" id="Yg5-Yp-2m3"/>
+                                </connections>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2B5-P3-jcT">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -737,18 +741,10 @@
                                         <exclude reference="yLf-Ff-k01"/>
                                     </mask>
                                 </variation>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="ZlA-Lk-H9W" appends="YES" id="fOp-X8-VTM"/>
-                                </connections>
-                            </view>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jNb-TU-KIM">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.83529411764705885" green="0.87058823529411766" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="jNb-TU-KIM" firstAttribute="width" secondItem="UJL-v3-D1u" secondAttribute="width" id="A6V-cm-BN4"/>
                             <constraint firstItem="2B5-P3-jcT" firstAttribute="top" secondItem="POx-NV-WcR" secondAttribute="bottom" constant="14" id="ACC-EW-Ndm"/>
                             <constraint firstItem="2B5-P3-jcT" firstAttribute="height" secondItem="POx-NV-WcR" secondAttribute="height" id="LYV-aX-cfh"/>
                             <constraint firstAttribute="centerX" secondItem="POx-NV-WcR" secondAttribute="centerX" constant="84" id="Zaj-2Z-4oQ">
@@ -756,27 +752,15 @@
                             </constraint>
                             <constraint firstItem="2B5-P3-jcT" firstAttribute="width" secondItem="POx-NV-WcR" secondAttribute="width" id="ase-cc-scc"/>
                             <constraint firstItem="POx-NV-WcR" firstAttribute="leading" secondItem="UJL-v3-D1u" secondAttribute="leadingMargin" id="cJP-EG-ufy"/>
-                            <constraint firstItem="jNb-TU-KIM" firstAttribute="height" secondItem="UJL-v3-D1u" secondAttribute="height" id="dec-zZ-M0f"/>
-                            <constraint firstAttribute="centerX" secondItem="jNb-TU-KIM" secondAttribute="centerX" constant="71" id="fGl-7S-1zb">
-                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
-                            </constraint>
                             <constraint firstItem="2B5-P3-jcT" firstAttribute="leading" secondItem="POx-NV-WcR" secondAttribute="leading" id="k0x-ju-h6e"/>
-                            <constraint firstAttribute="centerY" secondItem="jNb-TU-KIM" secondAttribute="centerY" constant="136" id="kzY-37-X3C">
-                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
-                            </constraint>
                             <constraint firstItem="POx-NV-WcR" firstAttribute="top" secondItem="OL4-I1-0dx" secondAttribute="bottom" constant="19" id="ubV-dR-5dA"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="POx-NV-WcR"/>
                                 <exclude reference="2B5-P3-jcT"/>
-                                <exclude reference="jNb-TU-KIM"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="A6V-cm-BN4"/>
-                                <exclude reference="dec-zZ-M0f"/>
-                                <exclude reference="fGl-7S-1zb"/>
-                                <exclude reference="kzY-37-X3C"/>
                                 <exclude reference="Zaj-2Z-4oQ"/>
                                 <exclude reference="cJP-EG-ufy"/>
                                 <exclude reference="ubV-dR-5dA"/>
@@ -790,13 +774,8 @@
                             <mask key="subviews">
                                 <include reference="POx-NV-WcR"/>
                                 <include reference="2B5-P3-jcT"/>
-                                <include reference="jNb-TU-KIM"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="A6V-cm-BN4"/>
-                                <include reference="dec-zZ-M0f"/>
-                                <include reference="fGl-7S-1zb"/>
-                                <include reference="kzY-37-X3C"/>
                                 <include reference="Zaj-2Z-4oQ"/>
                                 <include reference="cJP-EG-ufy"/>
                                 <include reference="ubV-dR-5dA"/>
@@ -815,9 +794,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="68X-Ti-r1S" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="ZlA-Lk-H9W">
+                <tapGestureRecognizer id="tY6-wH-Lji">
                     <connections>
-                        <action selector="tapOnPrivacyTab:" destination="zJc-81-UtG" id="YeQ-wz-Bex"/>
+                        <action selector="finishDateIsTapped:" destination="zJc-81-UtG" id="xxv-J9-lLO"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

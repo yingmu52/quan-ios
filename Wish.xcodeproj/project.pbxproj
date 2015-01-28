@@ -32,10 +32,6 @@
 		AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE72E9541A66F2AA0046B38D /* MenuCell.m */; };
 		AEBFCA371A78614100686EFE /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA361A78614100686EFE /* PostDetailViewController.m */; };
 		AEBFCA381A78614100686EFE /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA361A78614100686EFE /* PostDetailViewController.m */; };
-		AEBFCA3E1A789EAB00686EFE /* SWNinePatchImageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA3B1A789EAB00686EFE /* SWNinePatchImageFactory.m */; };
-		AEBFCA3F1A789EAB00686EFE /* SWNinePatchImageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA3B1A789EAB00686EFE /* SWNinePatchImageFactory.m */; };
-		AEBFCA401A789EAB00686EFE /* SWNinePatchImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA3D1A789EAB00686EFE /* SWNinePatchImageView.m */; };
-		AEBFCA411A789EAB00686EFE /* SWNinePatchImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA3D1A789EAB00686EFE /* SWNinePatchImageView.m */; };
 		AED68EE41A70399A00CDC0DF /* FetchCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = AED68EE31A70399A00CDC0DF /* FetchCenter.m */; };
 		AED68EE51A70399A00CDC0DF /* FetchCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = AED68EE31A70399A00CDC0DF /* FetchCenter.m */; };
 		AEE075381A744A770015155B /* SystemUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE075371A744A770015155B /* SystemUtil.m */; };
@@ -129,10 +125,6 @@
 		AE72E9541A66F2AA0046B38D /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		AEBFCA351A78614100686EFE /* PostDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostDetailViewController.h; sourceTree = "<group>"; };
 		AEBFCA361A78614100686EFE /* PostDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostDetailViewController.m; sourceTree = "<group>"; };
-		AEBFCA3A1A789EAB00686EFE /* SWNinePatchImageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWNinePatchImageFactory.h; sourceTree = "<group>"; };
-		AEBFCA3B1A789EAB00686EFE /* SWNinePatchImageFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWNinePatchImageFactory.m; sourceTree = "<group>"; };
-		AEBFCA3C1A789EAB00686EFE /* SWNinePatchImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWNinePatchImageView.h; sourceTree = "<group>"; };
-		AEBFCA3D1A789EAB00686EFE /* SWNinePatchImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWNinePatchImageView.m; sourceTree = "<group>"; };
 		AED68EE21A70399A00CDC0DF /* FetchCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchCenter.h; sourceTree = "<group>"; };
 		AED68EE31A70399A00CDC0DF /* FetchCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchCenter.m; sourceTree = "<group>"; };
 		AEE075361A744A770015155B /* SystemUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemUtil.h; sourceTree = "<group>"; };
@@ -294,17 +286,6 @@
 			name = "Database&Networking";
 			sourceTree = "<group>";
 		};
-		AEBFCA391A789EAB00686EFE /* SWNinePatchImageFactory */ = {
-			isa = PBXGroup;
-			children = (
-				AEBFCA3A1A789EAB00686EFE /* SWNinePatchImageFactory.h */,
-				AEBFCA3B1A789EAB00686EFE /* SWNinePatchImageFactory.m */,
-				AEBFCA3C1A789EAB00686EFE /* SWNinePatchImageView.h */,
-				AEBFCA3D1A789EAB00686EFE /* SWNinePatchImageView.m */,
-			);
-			path = SWNinePatchImageFactory;
-			sourceTree = "<group>";
-		};
 		AEEC6C4A1A6DAD9D0021B7E4 /* VGParallaxHeader */ = {
 			isa = PBXGroup;
 			children = (
@@ -397,7 +378,6 @@
 		AEF7F2661A686E8A0022410B /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
-				AEBFCA391A789EAB00686EFE /* SWNinePatchImageFactory */,
 				AE0E79481A76EB3E007C48EE /* Reachability */,
 				AEEC6C4A1A6DAD9D0021B7E4 /* VGParallaxHeader */,
 				AEF3E0CE1A6D9B7F00A1FE07 /* ZLSwipeableView */,
@@ -567,7 +547,6 @@
 				AEF3E0D51A6D9B7F00A1FE07 /* ZLSwipeableView.m in Sources */,
 				AEE075381A744A770015155B /* SystemUtil.m in Sources */,
 				AEF7F2811A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
-				AEBFCA3E1A789EAB00686EFE /* SWNinePatchImageFactory.m in Sources */,
 				AEF7F2891A686E8A0022410B /* ECSlidingViewController.m in Sources */,
 				AE0E79461A76EAB8007C48EE /* Plan.m in Sources */,
 				AEF7F28B1A686E8B0022410B /* UIViewController+ECSlidingViewController.m in Sources */,
@@ -583,7 +562,6 @@
 				AE0172691A65D3140014266F /* MenuViewController.m in Sources */,
 				AED68EE41A70399A00CDC0DF /* FetchCenter.m in Sources */,
 				AEEC6C621A6DB0010021B7E4 /* NSArray+PureLayout.m in Sources */,
-				AEBFCA401A789EAB00686EFE /* SWNinePatchImageView.m in Sources */,
 				AE0E794B1A76EB50007C48EE /* Reachability.m in Sources */,
 				AE479EAE1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */,
 				AEEC6C681A6DB0F10021B7E4 /* FirstTableViewController.m in Sources */,
@@ -618,8 +596,6 @@
 				AEF7F2AE1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */,
 				AEEC6C651A6DB0010021B7E4 /* NSLayoutConstraint+PureLayout.m in Sources */,
 				AEEC6C691A6DB0F10021B7E4 /* FirstTableViewController.m in Sources */,
-				AEBFCA411A789EAB00686EFE /* SWNinePatchImageView.m in Sources */,
-				AEBFCA3F1A789EAB00686EFE /* SWNinePatchImageFactory.m in Sources */,
 				AEF7F2881A686E8A0022410B /* ECSlidingSegue.m in Sources */,
 				AEEC6C4E1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */,
 				AEBFCA381A78614100686EFE /* PostDetailViewController.m in Sources */,

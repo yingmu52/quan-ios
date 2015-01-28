@@ -29,9 +29,12 @@
 }
 - (void)viewDidLayoutSubviews
 {
+    [super viewDidLayoutSubviews];
     self.finishDateLabel.text = [NSString stringWithFormat:@" 预计 %@ 完成",[SystemUtil stringFromDate:[NSDate date]]];
     self.finishDateLabel.layer.borderColor = [Theme postTabBorderColor].CGColor;
     self.finishDateLabel.layer.borderWidth = 1.0;
+}
+- (IBAction)finishDateIsTapped:(UITapGestureRecognizer *)sender {
 }
 
 - (void)setUpNavigationItem
