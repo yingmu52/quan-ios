@@ -11,6 +11,7 @@
 #import "Plan+PlanCRUD.h"
 #import "AppDelegate.h"
 #import "SystemUtil.h"
+#import "WishDetailViewController.h"
 @interface PostDetailViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *finishDateLabel;
 @property (nonatomic,strong) NSDate *selectedDate;
@@ -21,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *lockImageView;
 @property (weak, nonatomic) IBOutlet UILabel *isPrivateLabel;
 @property (nonatomic) BOOL isPrivate;
+
+@property (nonatomic,strong) Plan *createdPlan;
 @end
 
 @implementation PostDetailViewController
@@ -132,12 +135,19 @@
 - (void)createPlan
 {
     
-    [Plan createPlan:self.titleFromPostView
-                date:self.selectedDate
-             privacy:self.isPrivate
-               image:[Theme wishDetailCameraDefault]
-           inContext:[AppDelegate getContext]];
+    self.createdPlan = [Plan createPlan:self.titleFromPostView
+                                date:self.selectedDate
+                             privacy:self.isPrivate
+                               image:[Theme wishDetailCameraDefault]
+                           inContext:[AppDelegate getContext]];
     [self performSegueWithIdentifier:@"doneWirtingAPost" sender:nil];
    
+}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@""]) {
+        WishDetailViewController *wdvc = segue.destinationViewController;
+        wdvc.plan = self.createdPlan;
+    }
 }
 @end

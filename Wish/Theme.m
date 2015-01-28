@@ -24,10 +24,16 @@
     return btn;
 }
 
-+ (UIColor *)wishDetailBackgroundNone{
-    UIImage *img = [[UIImage imageNamed:@"bg_tile"] resizableImageWithCapInsets:UIEdgeInsetsZero
-resizingMode:UIImageResizingModeTile];
-    return [UIColor colorWithPatternImage:img];;
++ (UIColor *)wishDetailBackgroundNone:(UIView *)referenceView{
+    UIImage *img = [UIImage imageNamed:@"bg_tile"];
+    CGSize size = referenceView.bounds.size;
+    size.height /= 2 ;
+    UIGraphicsBeginImageContext(size);
+    CGContextRef imageContext = UIGraphicsGetCurrentContext();
+    CGContextDrawTiledImage(imageContext, (CGRect){CGPointZero,size}, img.CGImage);
+    UIImage *tileImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return [UIColor colorWithPatternImage:tileImage];
 }
 + (UIColor *)postTabBorderColor{
     return [UIColor colorWithRed:0.7451 green:0.7765 blue:0.8039 alpha:1.0];
