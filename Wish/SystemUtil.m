@@ -49,7 +49,7 @@
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 #warning time zone?
-    formatter.dateFormat = @"yyyy_MM_dd";
+    formatter.dateFormat = @"yyyy-MM-dd";
     return [formatter stringFromDate:date];
 }
 
@@ -59,4 +59,5 @@
     Reachability *reachability = [Reachability reachabilityForInternetConnection];
     return reachability.currentReachabilityStatus != NotReachable;
 }
+
 @end

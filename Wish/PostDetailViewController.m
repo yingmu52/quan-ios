@@ -10,6 +10,7 @@
 #import "Theme.h"
 #import "Plan+PlanCRUD.h"
 #import "AppDelegate.h"
+#import "SystemUtil.h"
 @interface PostDetailViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *finishDateLabel;
 
@@ -25,6 +26,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
+}
+- (void)viewDidLayoutSubviews
+{
+    self.finishDateLabel.text = [NSString stringWithFormat:@" 预计 %@ 完成",[SystemUtil stringFromDate:[NSDate date]]];
+    self.finishDateLabel.layer.borderColor = [Theme postTabBorderColor].CGColor;
+    self.finishDateLabel.layer.borderWidth = 1.0;
 }
 
 - (void)setUpNavigationItem
@@ -51,7 +58,7 @@
     if (isPrivate){
         self.lockImageView.image = [Theme privacyIconSelected];
         self.isPrivateLabel.text = @"私密愿望";
-        self.isPrivateTab.backgroundColor = [Theme privacyBackgroundSelected];
+        self.isPrivateTab.backgroundColor = [Theme privacyBackgroundSelected:self.isPrivateTab];
     }else{
         self.lockImageView.image = [Theme privacyIconDefault];
         self.isPrivateLabel.text = @"设为私密愿望";

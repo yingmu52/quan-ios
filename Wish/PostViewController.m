@@ -32,8 +32,10 @@
 }
 
 - (IBAction)changedTitleOnButtonClick:(UIButton *)sender{
+    self.textField.text = nil;
     self.textField.text = sender.titleLabel.text;
 }
+
 - (void)setTitlesWishArray:(NSArray *)array{
     NSArray *valids = [array objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 4)]];
     [self.sgtBtn1 setTitle:valids[0] forState:UIControlStateNormal];
@@ -48,12 +50,15 @@
     [self setPatchImageForButtons:self.sgtBtn2];
     [self setPatchImageForButtons:self.sgtBtn3];
     [self setPatchImageForButtons:self.sgtBtn4];
+    self.textField.layer.borderColor = [Theme postTabBorderColor].CGColor;
+    self.textField.layer.borderWidth = 1.0;
     
 }
 
 - (void)setPatchImageForButtons:(UIButton *)button
 {
     UIImage *image = [Theme tipsBackgroundImage];
+
     UIImage *patchImage = [image resizableImageWithCapInsets:UIEdgeInsetsMake(25.0,25.0,25.0,25.0)
                                                 resizingMode:UIImageResizingModeTile];
     [button setBackgroundImage:patchImage

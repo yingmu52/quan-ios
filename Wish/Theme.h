@@ -14,9 +14,11 @@
                      selector:(SEL)method
                         frame:(CGRect)frame;
 
+
++ (UIColor *)postTabBorderColor;
 + (UIImage *)privacyIconDefault;
 + (UIImage *)privacyIconSelected;
-+ (UIColor *)privacyBackgroundSelected;
++ (UIColor *)privacyBackgroundSelected:(UIView *)referenceVIew;
 + (UIColor *)privacyBackgroundDefault;
 
 + (UIImage *)menuLoginDefault;
