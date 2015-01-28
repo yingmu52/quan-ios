@@ -10,10 +10,12 @@
 #import "WishDetailCell.h"
 #import "UINavigationItem+CustomItem.h"
 #import "Theme.h"
+
 @interface WishDetailViewController () <UIGestureRecognizerDelegate>
 @property (nonatomic,strong) UIButton *cameraButton;
 @property (nonatomic) CGFloat yVel;
 @property (nonatomic) BOOL shouldShowSideWidgets;
+
 @end
 
 @implementation WishDetailViewController
@@ -21,6 +23,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
+    if (!self.plan) {
+        self.view.backgroundColor = [Theme wishDetailBackgroundNone];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated

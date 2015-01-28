@@ -7,7 +7,8 @@
 //
 
 #import "FirstTableViewController.h"
-
+#import "Plan.h"
 @interface WishDetailViewController : FirstTableViewController
 
+@property (nonatomic,strong) Plan *plan;
 @end

@@ -24,6 +24,9 @@
     return btn;
 }
 
++ (UIColor *)wishDetailBackgroundNone{
+    return [self.class colorfromImg:@"bg_tile"];
+}
 + (UIColor *)postTabBorderColor{
     return [UIColor colorWithRed:0.7451 green:0.7765 blue:0.8039 alpha:1.0];
 }

@@ -42,6 +42,7 @@
 
 
 + (UIImage *)wishDetailCameraDefault;
++ (UIColor *)wishDetailBackgroundNone;
 + (UIColor *)homeBackground;
 + (UIImage *)tipsBackgroundImage;
 @end

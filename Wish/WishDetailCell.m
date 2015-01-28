@@ -26,6 +26,7 @@
                         && self.likeLabel.isHidden
                         && self.commentButton.isHidden
                         && self.commentLabel.isHidden;
+    self.backgroundColor = [UIColor clearColor];
 
 }
 
