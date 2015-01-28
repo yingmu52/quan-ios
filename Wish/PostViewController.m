@@ -54,8 +54,10 @@
 - (void)setPatchImageForButtons:(UIButton *)button
 {
     UIImage *image = [Theme tipsBackgroundImage];
-    UIImage *patchImage = [image resizableImageWithCapInsets:UIEdgeInsetsMake(25.0,25.0,25.0,25.0) resizingMode:UIImageResizingModeTile];
-    [button setBackgroundImage:patchImage forState:UIControlStateNormal];
+    UIImage *patchImage = [image resizableImageWithCapInsets:UIEdgeInsetsMake(25.0,25.0,25.0,25.0)
+                                                resizingMode:UIImageResizingModeTile];
+    [button setBackgroundImage:patchImage
+                      forState:UIControlStateNormal];
 }
 
 - (void)setUpNavigationItem
@@ -78,12 +80,7 @@
 
 - (void)goToNextView
 {
-//    [Plan createPlan:self.textField.text
-//                date:[NSDate date]
-//             privacy:NO
-//               image:self.capturedImage
-//           inContext:[AppDelegate getContext]];
-//    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self performSegueWithIdentifier:@"showWritePostDetail" sender:nil];
 }
 
 @end

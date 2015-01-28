@@ -30,6 +30,8 @@
 		AE479EAE1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479EAD1A6F7A5B00366A0A /* Plan+PlanCRUD.m */; };
 		AE479EAF1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479EAD1A6F7A5B00366A0A /* Plan+PlanCRUD.m */; };
 		AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE72E9541A66F2AA0046B38D /* MenuCell.m */; };
+		AEBFCA371A78614100686EFE /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA361A78614100686EFE /* PostDetailViewController.m */; };
+		AEBFCA381A78614100686EFE /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA361A78614100686EFE /* PostDetailViewController.m */; };
 		AED68EE41A70399A00CDC0DF /* FetchCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = AED68EE31A70399A00CDC0DF /* FetchCenter.m */; };
 		AED68EE51A70399A00CDC0DF /* FetchCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = AED68EE31A70399A00CDC0DF /* FetchCenter.m */; };
 		AEE075381A744A770015155B /* SystemUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE075371A744A770015155B /* SystemUtil.m */; };
@@ -121,6 +123,8 @@
 		AE479EAD1A6F7A5B00366A0A /* Plan+PlanCRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Plan+PlanCRUD.m"; sourceTree = "<group>"; };
 		AE72E9531A66F2AA0046B38D /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
 		AE72E9541A66F2AA0046B38D /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
+		AEBFCA351A78614100686EFE /* PostDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostDetailViewController.h; sourceTree = "<group>"; };
+		AEBFCA361A78614100686EFE /* PostDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostDetailViewController.m; sourceTree = "<group>"; };
 		AED68EE21A70399A00CDC0DF /* FetchCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchCenter.h; sourceTree = "<group>"; };
 		AED68EE31A70399A00CDC0DF /* FetchCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchCenter.m; sourceTree = "<group>"; };
 		AEE075361A744A770015155B /* SystemUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemUtil.h; sourceTree = "<group>"; };
@@ -332,6 +336,8 @@
 		AEEC6C771A6DB6220021B7E4 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				AEBFCA351A78614100686EFE /* PostDetailViewController.h */,
+				AEBFCA361A78614100686EFE /* PostDetailViewController.m */,
 				AE479E9C1A6F775B00366A0A /* PostViewController.h */,
 				AE479E9D1A6F775C00366A0A /* PostViewController.m */,
 				AE1B6E3A1A6D89FC0026F3CE /* HomeCardView.h */,
@@ -551,6 +557,7 @@
 				AEF7F2AD1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */,
 				AEF7F2831A686E8A0022410B /* ECSlidingAnimationController.m in Sources */,
 				AEF7F2871A686E8A0022410B /* ECSlidingSegue.m in Sources */,
+				AEBFCA371A78614100686EFE /* PostDetailViewController.m in Sources */,
 				AEEC6C4D1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */,
 				AE0172691A65D3140014266F /* MenuViewController.m in Sources */,
 				AED68EE41A70399A00CDC0DF /* FetchCenter.m in Sources */,
@@ -591,6 +598,7 @@
 				AEEC6C691A6DB0F10021B7E4 /* FirstTableViewController.m in Sources */,
 				AEF7F2881A686E8A0022410B /* ECSlidingSegue.m in Sources */,
 				AEEC6C4E1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */,
+				AEBFCA381A78614100686EFE /* PostDetailViewController.m in Sources */,
 				AEF7F2AC1A6884950022410B /* CustomBarItem.m in Sources */,
 				AEEC6C611A6DB0010021B7E4 /* ALView+PureLayout.m in Sources */,
 				AE479E9F1A6F775C00366A0A /* PostViewController.m in Sources */,

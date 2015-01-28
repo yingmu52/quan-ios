@@ -594,11 +594,29 @@
                         <outlet property="sgtBtn3" destination="ezD-Tv-1nI" id="zCn-Ih-cdB"/>
                         <outlet property="sgtBtn4" destination="tQI-Cz-w92" id="YfM-YJ-gbe"/>
                         <outlet property="textField" destination="bkR-Oi-ATm" id="IeB-YY-h7g"/>
+                        <segue destination="zJc-81-UtG" kind="show" identifier="showWritePostDetail" id="AiT-04-95T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RIa-Mp-Cry" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1441.5" y="132"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="nyi-zn-yq6">
+            <objects>
+                <viewController id="zJc-81-UtG" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OL4-I1-0dx"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ayb-YR-3Sj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UJL-v3-D1u">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="68X-Ti-r1S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2181" y="133.5"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="fpo-Ov-0kY">
