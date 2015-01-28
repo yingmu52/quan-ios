@@ -27,7 +27,7 @@
 + (UIColor *)postTabBorderColor{
     return [UIColor colorWithRed:0.7451 green:0.7765 blue:0.8039 alpha:1.0];
 }
-+ (UIColor *)privacyBackgroundSelected:(UIView *)referenceVIew{
++ (UIColor *)privacyBackgroundSelected{
     return [UIColor colorWithRed:0 green:0.8078 blue:0.7176 alpha:1.0];
 }
 

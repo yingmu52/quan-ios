@@ -8,6 +8,7 @@
 
 #import "PostViewController.h"
 #import "Theme.h"
+#import "PostDetailViewController.h"
 @interface PostViewController () <UITextFieldDelegate>
 
 @property (nonatomic,weak) IBOutlet UITextField *textField;
@@ -88,4 +89,12 @@
     [self performSegueWithIdentifier:@"showWritePostDetail" sender:nil];
 }
 
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"showWritePostDetail"]) {
+        PostDetailViewController *pdvc = segue.destinationViewController;
+        pdvc.titleFromPostView = self.textField.text;
+    }
+}
 @end

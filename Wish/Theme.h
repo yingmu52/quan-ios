@@ -18,7 +18,7 @@
 + (UIColor *)postTabBorderColor;
 + (UIImage *)privacyIconDefault;
 + (UIImage *)privacyIconSelected;
-+ (UIColor *)privacyBackgroundSelected:(UIView *)referenceVIew;
++ (UIColor *)privacyBackgroundSelected;
 + (UIColor *)privacyBackgroundDefault;
 
 + (UIImage *)menuLoginDefault;

@@ -13,7 +13,7 @@
 #import "SystemUtil.h"
 @interface PostDetailViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *finishDateLabel;
-
+@property (nonatomic,strong) NSDate *selectedDate;
 @property (strong, nonatomic) UIDatePicker *datePicker;
 @property (strong, nonatomic) UIToolbar *pickerToolBar;
 @property (strong,nonatomic) UIView *bgView;
@@ -25,6 +25,13 @@
 
 @implementation PostDetailViewController
 
+- (void)setSelectedDate:(NSDate *)selectedDate
+{
+    _selectedDate = selectedDate;
+    NSString *dateString = [SystemUtil stringFromDate:selectedDate];
+    self.finishDateLabel.text = [NSString stringWithFormat:@"  预计 %@ 完成",dateString];
+
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
@@ -52,9 +59,17 @@
     self.pickerToolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(.0, self.datePicker.frame.origin.y - 44.0, self.datePicker.frame.size.width, 44.0)];
     self.pickerToolBar.backgroundColor = self.datePicker.backgroundColor;
     
-    UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(dismissPickerView:)];
-    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-    UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(dismissPickerView:)];
+    UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithTitle:@"取消"
+                                                               style:UIBarButtonItemStylePlain
+                                                              target:self
+                                                              action:@selector(dismissPickerView:)];
+    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                   target:self
+                                                                                   action:nil];
+    UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithTitle:@"完成"
+                                                             style:UIBarButtonItemStylePlain
+                                                            target:self
+                                                            action:@selector(dismissPickerView:)];
     self.pickerToolBar.items = @[cancel,flexibleSpace,done];
     
     [self.bgView addSubview:self.datePicker];
@@ -64,8 +79,7 @@
 }
 
 - (void)pickerChanged:(UIDatePicker *)picker{
-    NSString *dateString = [SystemUtil stringFromDate:picker.date];
-    self.finishDateLabel.text = [NSString stringWithFormat:@"  预计 %@ 完成",dateString];
+    self.selectedDate = picker.date;
 }
 
 - (void)dismissPickerView:(UIBarButtonItem *)item
@@ -102,7 +116,7 @@
     if (isPrivate){
         self.lockImageView.image = [Theme privacyIconSelected];
         self.isPrivateLabel.text = @"私密愿望";
-        self.isPrivateTab.backgroundColor = [Theme privacyBackgroundSelected:self.isPrivateTab];
+        self.isPrivateTab.backgroundColor = [Theme privacyBackgroundSelected];
     }else{
         self.lockImageView.image = [Theme privacyIconDefault];
         self.isPrivateLabel.text = @"设为私密愿望";
@@ -117,12 +131,13 @@
 
 - (void)createPlan
 {
-    [Plan createPlan:self.title
-                date:[NSDate date]
-             privacy:NO
-               image:nil
+    
+    [Plan createPlan:self.titleFromPostView
+                date:self.selectedDate
+             privacy:self.isPrivate
+               image:[Theme wishDetailCameraDefault]
            inContext:[AppDelegate getContext]];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self performSegueWithIdentifier:@"doneWirtingAPost" sender:nil];
    
 }
 @end

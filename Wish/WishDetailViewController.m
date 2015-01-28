@@ -73,7 +73,7 @@
     CGRect frame = CGRectMake(0, 0, 30, 30);
     UIButton *backBtn = [Theme buttonWithImage:[Theme navBackButtonDefault]
                                         target:self.navigationController
-                                      selector:@selector(popViewControllerAnimated:)
+                                      selector:@selector(popToRootViewControllerAnimated:)
                                          frame:frame];
     
     UIButton *composeBtn = [Theme buttonWithImage:[Theme navComposeButtonDefault]
@@ -115,28 +115,6 @@
 {
     [self displayWidget:YES];
 }
-//- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
-//{
-//    if (self.yVel > 0) [self displayWidget:YES];
-//}
-//- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-//{
-//    self.yVel = [scrollView.panGestureRecognizer velocityInView:scrollView].y;
-//    if (self.yVel < 0) {
-//        //scrolling up
-//        [self displayWidget:NO];
-//    }
-//
-//}
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-//{
-//    if (self.yVel > 0) {
-//        //scrolling down
-//        [self displayWidget:YES];
-//    }
-//}
-
-#pragma mark - Table view delegate
 
 #pragma mark - Table view data source
 

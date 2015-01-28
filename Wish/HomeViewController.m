@@ -113,7 +113,7 @@ HomeCardViewDelegate>
 
 
 - (void)addWish{
-    if (self.myPlans.count == maxCardNum){
+    if (self.myPlans.count > maxCardNum){
         [[[UIAlertView alloc] initWithTitle:nil
                                     message:@"Come the fuck on! life is too short for too many goddamn plans"
                                    delegate:self
@@ -206,5 +206,5 @@ HomeCardViewDelegate>
 }
 
 
-#pragma mark - 
+
 @end
