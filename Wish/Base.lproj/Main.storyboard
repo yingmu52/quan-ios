@@ -398,7 +398,7 @@
                                         <variation key="heightClass=regular-widthClass=compact" constant="250"/>
                                     </constraint>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="每天一部电影的365天每天天每天一部">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -413,6 +413,9 @@
                                         <include reference="8tF-DJ-wbI"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="changedTitleOnButtonClick:" destination="1Y1-uW-81U" eventType="touchUpInside" id="NdO-U6-sUc"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xbf-L3-6fZ">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -424,7 +427,7 @@
                                         <variation key="heightClass=regular-widthClass=compact" constant="250"/>
                                     </constraint>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="皮匠">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -441,6 +444,9 @@
                                         <exclude reference="hPJ-uE-c0c"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="changedTitleOnButtonClick:" destination="1Y1-uW-81U" eventType="touchUpInside" id="wS9-6i-rmB"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ezD-Tv-1nI">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -449,7 +455,7 @@
                                         <variation key="heightClass=regular-widthClass=compact" constant="250"/>
                                     </constraint>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="跑步绕地球一圈">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -464,6 +470,9 @@
                                         <include reference="k0M-ZX-lgi"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="changedTitleOnButtonClick:" destination="1Y1-uW-81U" eventType="touchUpInside" id="6Cj-FG-A03"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tQI-Cz-w92">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -472,6 +481,7 @@
                                         <variation key="heightClass=regular-widthClass=compact" constant="250"/>
                                     </constraint>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="到每个省拉屎">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -486,6 +496,9 @@
                                         <include reference="cMY-vN-Lid"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="changedTitleOnButtonClick:" destination="1Y1-uW-81U" eventType="touchUpInside" id="r7a-H5-27x"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.8666666666666667" green="0.89411764705882357" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
@@ -502,12 +515,10 @@
                             <constraint firstItem="ezD-Tv-1nI" firstAttribute="height" secondItem="WuT-7i-DHG" secondAttribute="height" id="8ke-iy-7wg"/>
                             <constraint firstAttribute="width" secondItem="2LA-3P-Hbt" secondAttribute="width" id="KKU-sG-F0W"/>
                             <constraint firstItem="Xbf-L3-6fZ" firstAttribute="leading" secondItem="WuT-7i-DHG" secondAttribute="trailing" constant="20" id="KfE-cn-RWa"/>
-                            <constraint firstItem="ezD-Tv-1nI" firstAttribute="top" secondItem="WuT-7i-DHG" secondAttribute="bottom" constant="18" id="Lc2-uE-RsP"/>
                             <constraint firstItem="tQI-Cz-w92" firstAttribute="centerY" secondItem="ezD-Tv-1nI" secondAttribute="centerY" id="Lf4-qR-jZD"/>
                             <constraint firstItem="bkR-Oi-ATm" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Xbf-L3-6fZ" secondAttribute="trailing" constant="62" id="Mh5-kJ-Qpa">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
-                            <constraint firstItem="bkR-Oi-ATm" firstAttribute="trailing" secondItem="Xbf-L3-6fZ" secondAttribute="trailing" constant="62" id="NIG-8N-djG"/>
                             <constraint firstItem="tQI-Cz-w92" firstAttribute="leading" secondItem="ezD-Tv-1nI" secondAttribute="trailing" constant="28" id="Vsr-W2-tGM">
                                 <variation key="heightClass=regular-widthClass=compact" constant="20"/>
                             </constraint>
@@ -529,25 +540,23 @@
                                 <exclude reference="tQI-Cz-w92"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="KKU-sG-F0W"/>
-                                <exclude reference="vUr-8y-52s"/>
-                                <exclude reference="xAy-th-Zcx"/>
                                 <exclude reference="0z1-zz-Bws"/>
                                 <exclude reference="Mh5-kJ-Qpa"/>
-                                <exclude reference="NIG-8N-djG"/>
                                 <exclude reference="bZP-7T-oV4"/>
                                 <exclude reference="r1T-Fq-aGM"/>
                                 <exclude reference="4ei-Cs-ao6"/>
                                 <exclude reference="l0j-BI-Ken"/>
                                 <exclude reference="tbM-mF-wX5"/>
+                                <exclude reference="KfE-cn-RWa"/>
                                 <exclude reference="5QG-sp-7cV"/>
                                 <exclude reference="8ke-iy-7wg"/>
-                                <exclude reference="Lc2-uE-RsP"/>
                                 <exclude reference="klj-T5-kMi"/>
                                 <exclude reference="Lf4-qR-jZD"/>
                                 <exclude reference="Vsr-W2-tGM"/>
                                 <exclude reference="y7N-ky-AaX"/>
-                                <exclude reference="KfE-cn-RWa"/>
+                                <exclude reference="KKU-sG-F0W"/>
+                                <exclude reference="vUr-8y-52s"/>
+                                <exclude reference="xAy-th-Zcx"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -559,25 +568,23 @@
                                 <include reference="tQI-Cz-w92"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="KKU-sG-F0W"/>
-                                <include reference="vUr-8y-52s"/>
-                                <include reference="xAy-th-Zcx"/>
                                 <include reference="0z1-zz-Bws"/>
                                 <include reference="Mh5-kJ-Qpa"/>
-                                <exclude reference="NIG-8N-djG"/>
                                 <include reference="bZP-7T-oV4"/>
                                 <include reference="r1T-Fq-aGM"/>
                                 <include reference="4ei-Cs-ao6"/>
                                 <include reference="l0j-BI-Ken"/>
                                 <include reference="tbM-mF-wX5"/>
+                                <include reference="KfE-cn-RWa"/>
                                 <include reference="5QG-sp-7cV"/>
                                 <include reference="8ke-iy-7wg"/>
-                                <exclude reference="Lc2-uE-RsP"/>
                                 <include reference="klj-T5-kMi"/>
                                 <include reference="Lf4-qR-jZD"/>
                                 <include reference="Vsr-W2-tGM"/>
                                 <include reference="y7N-ky-AaX"/>
-                                <include reference="KfE-cn-RWa"/>
+                                <include reference="KKU-sG-F0W"/>
+                                <include reference="vUr-8y-52s"/>
+                                <include reference="xAy-th-Zcx"/>
                             </mask>
                         </variation>
                     </view>

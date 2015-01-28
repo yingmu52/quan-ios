@@ -24,7 +24,38 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
+    
+    [self setTitlesWishArray:@[@" 每天一部电影的365天    ", //1 left 4 right
+                               @" 当一个小皮匠    ",
+                               @" 跑步绕地球一圈    ",
+                               @" 在每省都拉过屎    "]];
+}
 
+- (IBAction)changedTitleOnButtonClick:(UIButton *)sender{
+    self.textField.text = sender.titleLabel.text;
+}
+- (void)setTitlesWishArray:(NSArray *)array{
+    NSArray *valids = [array objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 4)]];
+    [self.sgtBtn1 setTitle:valids[0] forState:UIControlStateNormal];
+    [self.sgtBtn2 setTitle:valids[1] forState:UIControlStateNormal];
+    [self.sgtBtn3 setTitle:valids[2] forState:UIControlStateNormal];
+    [self.sgtBtn4 setTitle:valids[3] forState:UIControlStateNormal];
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [self setPatchImageForButtons:self.sgtBtn1];
+    [self setPatchImageForButtons:self.sgtBtn2];
+    [self setPatchImageForButtons:self.sgtBtn3];
+    [self setPatchImageForButtons:self.sgtBtn4];
+    
+}
+
+- (void)setPatchImageForButtons:(UIButton *)button
+{
+    UIImage *image = [Theme tipsBackgroundImage];
+    UIImage *patchImage = [image resizableImageWithCapInsets:UIEdgeInsetsMake(25.0,25.0,25.0,25.0) resizingMode:UIImageResizingModeTile];
+    [button setBackgroundImage:patchImage forState:UIControlStateNormal];
 }
 
 - (void)setUpNavigationItem

@@ -24,6 +24,11 @@
     return btn;
 }
 
++ (UIImage *)tipsBackgroundImage
+{
+    return [UIImage imageNamed:@"tips_bg"];
+}
+
 + (UIImage *)menuLoginDefault
 {
     return [UIImage imageNamed:@"tab_ic_login_default"];

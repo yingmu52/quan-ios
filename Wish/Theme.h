@@ -50,5 +50,5 @@
 
 + (UIImage *)navTikButtonDefault;
 
-
++ (UIImage *)tipsBackgroundImage;
 @end
