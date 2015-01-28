@@ -25,6 +25,8 @@
     [self setUpNavigationItem];
     if (!self.plan) {
         self.view.backgroundColor = [Theme wishDetailBackgroundNone];
+//        [self.view setOpaque:NO];
+//        [self.view.layer setOpaque:NO];
     }
 }
 

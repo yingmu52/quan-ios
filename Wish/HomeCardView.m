@@ -36,8 +36,8 @@
     
     self.subtitleLabel.text = @"已留0个努力瞬间";
     
-    NSUInteger totalDays = [SystemUtil daysBetween:plan.createDate and:plan.finishDate];
-    NSUInteger pastDays = [SystemUtil daysBetween:plan.createDate and:[NSDate date]];
+    NSInteger totalDays = [SystemUtil daysBetween:plan.createDate and:plan.finishDate];
+    NSInteger pastDays = [SystemUtil daysBetween:plan.createDate and:[NSDate date]];
 
     
     NSDictionary *baseAttrs = @{NSFontAttributeName:[UIFont systemFontOfSize:20]};
