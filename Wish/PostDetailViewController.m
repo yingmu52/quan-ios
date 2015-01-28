@@ -14,7 +14,9 @@
 @interface PostDetailViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *finishDateLabel;
 
-
+@property (strong, nonatomic) UIDatePicker *datePicker;
+@property (strong, nonatomic) UIToolbar *pickerToolBar;
+@property (strong,nonatomic) UIView *bgView;
 @property (weak, nonatomic) IBOutlet UIView *isPrivateTab;
 @property (weak, nonatomic) IBOutlet UIImageView *lockImageView;
 @property (weak, nonatomic) IBOutlet UILabel *isPrivateLabel;
@@ -30,13 +32,52 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    self.finishDateLabel.text = [NSString stringWithFormat:@" 预计 %@ 完成",[SystemUtil stringFromDate:[NSDate date]]];
+    self.finishDateLabel.text = [NSString stringWithFormat:@"  预计 %@ 完成",[SystemUtil stringFromDate:[NSDate date]]];
     self.finishDateLabel.layer.borderColor = [Theme postTabBorderColor].CGColor;
     self.finishDateLabel.layer.borderWidth = 1.0;
+    self.datePicker.backgroundColor = [UIColor whiteColor];
 }
 - (IBAction)finishDateIsTapped:(UITapGestureRecognizer *)sender {
+    NSLog(@"ahaha");
+    
+    self.bgView =[[UIView alloc] initWithFrame:self.view.bounds];
+    self.bgView.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.6];
+    CGRect frame = CGRectMake(0, self.bgView.frame.size.height - 216.0, self.bgView.frame.size.width,216.0);
+    self.datePicker = [[UIDatePicker alloc] initWithFrame:frame];
+    self.datePicker.backgroundColor = [UIColor whiteColor];
+    self.datePicker.datePickerMode = UIDatePickerModeDate;
+    [self.datePicker addTarget:self action:@selector(pickerChanged:)
+              forControlEvents:UIControlEventValueChanged];
+
+    self.pickerToolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(.0, self.datePicker.frame.origin.y - 44.0, self.datePicker.frame.size.width, 44.0)];
+    self.pickerToolBar.backgroundColor = self.datePicker.backgroundColor;
+    
+    UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(dismissPickerView:)];
+    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(dismissPickerView:)];
+    self.pickerToolBar.items = @[cancel,flexibleSpace,done];
+    
+    [self.bgView addSubview:self.datePicker];
+    [self.bgView addSubview:self.pickerToolBar];
+    [[[UIApplication sharedApplication] keyWindow] addSubview:self.bgView];
+
 }
 
+- (void)pickerChanged:(UIDatePicker *)picker{
+    NSString *dateString = [SystemUtil stringFromDate:picker.date];
+    self.finishDateLabel.text = [NSString stringWithFormat:@"  预计 %@ 完成",dateString];
+}
+
+- (void)dismissPickerView:(UIBarButtonItem *)item
+{
+    if ([item.title isEqualToString:@"取消"]) {
+        NSString *dateString = [SystemUtil stringFromDate:[NSDate date]];
+        self.finishDateLabel.text = [NSString stringWithFormat:@"  预计 %@ 完成",dateString];
+    }
+    [self.bgView removeFromSuperview];
+    [self.pickerToolBar removeFromSuperview];
+    [self.datePicker removeFromSuperview];
+}
 - (void)setUpNavigationItem
 {
     CGRect frame = CGRectMake(0, 0, 30, 30);

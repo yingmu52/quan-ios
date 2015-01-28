@@ -613,7 +613,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  预计2-15-10-21达成" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="POx-NV-WcR">
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  预计2015-10-21达成" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="POx-NV-WcR">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
@@ -636,10 +636,10 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="tY6-wH-Lji" appends="YES" id="Yg5-Yp-2m3"/>
+                                    <outletCollection property="gestureRecognizers" destination="OoO-kU-4Ra" appends="YES" id="aDT-yN-6mP"/>
                                 </connections>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2B5-P3-jcT">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2B5-P3-jcT" userLabel="Privacy">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设为私密愿望" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="arE-Ve-bl8">
@@ -705,6 +705,10 @@
                                         <exclude reference="5hw-iT-umi"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <exclude reference="4AL-fW-jZH"/>
+                                        <exclude reference="WmU-bh-4ln"/>
+                                        <exclude reference="Xdm-86-F2n"/>
+                                        <exclude reference="yLf-Ff-k01"/>
                                         <exclude reference="LxC-GY-HnE"/>
                                         <exclude reference="Y8s-if-9Dx"/>
                                         <exclude reference="fRd-ug-mnV"/>
@@ -714,10 +718,6 @@
                                         <exclude reference="nOv-Ho-Yd3"/>
                                         <exclude reference="uaf-3H-UNA"/>
                                         <exclude reference="z76-cJ-L3e"/>
-                                        <exclude reference="4AL-fW-jZH"/>
-                                        <exclude reference="WmU-bh-4ln"/>
-                                        <exclude reference="Xdm-86-F2n"/>
-                                        <exclude reference="yLf-Ff-k01"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -726,6 +726,10 @@
                                         <include reference="5hw-iT-umi"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <include reference="4AL-fW-jZH"/>
+                                        <include reference="WmU-bh-4ln"/>
+                                        <include reference="Xdm-86-F2n"/>
+                                        <exclude reference="yLf-Ff-k01"/>
                                         <include reference="LxC-GY-HnE"/>
                                         <exclude reference="Y8s-if-9Dx"/>
                                         <exclude reference="fRd-ug-mnV"/>
@@ -735,12 +739,11 @@
                                         <include reference="nOv-Ho-Yd3"/>
                                         <exclude reference="uaf-3H-UNA"/>
                                         <include reference="z76-cJ-L3e"/>
-                                        <include reference="4AL-fW-jZH"/>
-                                        <include reference="WmU-bh-4ln"/>
-                                        <include reference="Xdm-86-F2n"/>
-                                        <exclude reference="yLf-Ff-k01"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="9W8-lI-szX" appends="YES" id="QKu-1s-czu"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.83529411764705885" green="0.87058823529411766" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
@@ -794,13 +797,18 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="68X-Ti-r1S" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="tY6-wH-Lji">
+                <tapGestureRecognizer id="OoO-kU-4Ra" userLabel="finish date">
                     <connections>
-                        <action selector="finishDateIsTapped:" destination="zJc-81-UtG" id="xxv-J9-lLO"/>
+                        <action selector="finishDateIsTapped:" destination="zJc-81-UtG" id="hIo-Eb-IVY"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="9W8-lI-szX" userLabel="privacy">
+                    <connections>
+                        <action selector="tapOnPrivacyTab:" destination="zJc-81-UtG" id="AzH-ZV-Wir"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2175" y="153"/>
+            <point key="canvasLocation" x="2175" y="154.5"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="fpo-Ov-0kY">
