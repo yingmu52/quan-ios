@@ -35,6 +35,10 @@
     UIGraphicsEndImageContext();
     return [UIColor colorWithPatternImage:tileImage];
 }
+
++ (UIImage *)wishDetailBackgroundNonLogo{
+    return [UIImage imageNamed:@"image_bg"];
+}
 + (UIColor *)postTabBorderColor{
     return [UIColor colorWithRed:0.7451 green:0.7765 blue:0.8039 alpha:1.0];
 }
