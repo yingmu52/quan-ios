@@ -24,6 +24,20 @@
     return btn;
 }
 
++ (UIColor *)privacyBackgroundSelected{
+    return [UIColor colorWithRed:0 green:0.8078 blue:0.7176 alpha:1.0];
+}
+
++ (UIColor *)privacyBackgroundDefault{
+    return [UIColor whiteColor];
+}
++ (UIImage *)privacyIconDefault{
+    return [UIImage imageNamed:@"ic_secret_default"];
+}
+
++ (UIImage *)privacyIconSelected{
+    return [UIImage imageNamed:@"ic_secret_selected"];
+}
 + (UIImage *)tipsBackgroundImage
 {
     return [UIImage imageNamed:@"tips_bg"];

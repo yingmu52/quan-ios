@@ -11,7 +11,13 @@
 #import "Plan+PlanCRUD.h"
 #import "AppDelegate.h"
 @interface PostDetailViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *finishDateLabel;
 
+
+@property (weak, nonatomic) IBOutlet UIView *isPrivateTab;
+@property (weak, nonatomic) IBOutlet UIImageView *lockImageView;
+@property (weak, nonatomic) IBOutlet UILabel *isPrivateLabel;
+@property (nonatomic) BOOL isPrivate;
 @end
 
 @implementation PostDetailViewController
@@ -37,6 +43,25 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
     
+}
+
+- (void)setIsPrivate:(BOOL)isPrivate
+{
+    _isPrivate = isPrivate;
+    if (isPrivate){
+        self.lockImageView.image = [Theme privacyIconSelected];
+        self.isPrivateLabel.text = @"私密愿望";
+        self.isPrivateTab.backgroundColor = [Theme privacyBackgroundSelected];
+    }else{
+        self.lockImageView.image = [Theme privacyIconDefault];
+        self.isPrivateLabel.text = @"设为私密愿望";
+        self.isPrivateTab.backgroundColor = [Theme privacyBackgroundDefault];
+        
+    }
+    
+}
+- (IBAction)tapOnPrivacyTab:(UITapGestureRecognizer *)sender {
+    self.isPrivate = !self.isPrivate;
 }
 
 - (void)createPlan

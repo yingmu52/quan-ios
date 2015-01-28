@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface PostDetailViewController : UIViewController
-@property (nonatomic,strong) NSString *title;
+@property (nonatomic,strong) NSString *titleFromPostView;
 @end

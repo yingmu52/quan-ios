@@ -14,41 +14,32 @@
                      selector:(SEL)method
                         frame:(CGRect)frame;
 
++ (UIImage *)privacyIconDefault;
++ (UIImage *)privacyIconSelected;
++ (UIColor *)privacyBackgroundSelected;
++ (UIColor *)privacyBackgroundDefault;
 
 + (UIImage *)menuLoginDefault;
-
 + (UIImage *)menuWishListDefault;
-
 + (UIImage *)menuWishListSelected;
-
 + (UIImage *)menuJourneyDefault;
-
 + (UIImage *)menuJourneySelected;
-
 + (UIImage *)menuDiscoverDefault;
 + (UIImage *)menuDiscoverSelected;
-
 + (UIImage *)menuFollowDefault;
-
 + (UIImage *)menuFollowSelected;
++ (UIColor *)menuBackground;
 
 + (UIImage *)navBackButtonDefault;
 + (UIImage *)navComposeButtonDefault;
 + (UIImage *)navShareButtonDefault;
-
-+ (UIImage *)wishDetailCameraDefault;
-
-+(UIColor *)menuBackground;
-
-+(UIColor *)homeBackground;
-
 + (UIColor *)naviBackground;
-
 + (UIImage *)navMenuDefault;
-
 + (UIImage *)navAddDefault;
-
 + (UIImage *)navTikButtonDefault;
 
+
++ (UIImage *)wishDetailCameraDefault;
++ (UIColor *)homeBackground;
 + (UIImage *)tipsBackgroundImage;
 @end
