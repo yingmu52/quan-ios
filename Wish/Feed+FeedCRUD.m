@@ -20,6 +20,7 @@
     feed.feedTitle = title;
     feed.image = image;
     feed.createDate = [NSDate date];
+    feed.plan = plan;
     if ([context save:nil]) {
         //upload to server
     }

@@ -14,7 +14,7 @@
 #import "Feed+FeedCRUD.h"
 
 
-@interface WishDetailViewController () <UIGestureRecognizerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface WishDetailViewController () <UIGestureRecognizerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,NSFetchedResultsControllerDelegate>
 @property (nonatomic) CGFloat yVel;
 @property (nonatomic) BOOL shouldShowSideWidgets;
 @property (nonatomic,strong) UIButton *logoButton;
@@ -39,80 +39,34 @@
     self.shouldShowSideWidgets = YES;
     [self loadCornerCamera];
     self.headerView.plan = self.plan; //set plan to header for updaing info
-    [self fetchFeeds];
+//    [self fetchFeeds];
     
 }
 
-- (void)fetchFeeds{
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Feed"];
-    request.predicate = [NSPredicate predicateWithFormat:@"plan = %@",self.plan];
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
 
-    self.fetchedRC = [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                                         managedObjectContext:self.plan.managedObjectContext
-                                                           sectionNameKeyPath:nil
-                                                                    cacheName:nil];
-}
-- (void)setFetchedRC:(NSFetchedResultsController *)fetchedRC
-{
-    _fetchedRC = fetchedRC;
-    if (_fetchedRC.fetchRequest) {
-        [_fetchedRC performFetch:nil];
-    }
-    
-    if (_fetchedRC.fetchedObjects.count > 0) {
-        //remove logo and underlogo text
-        [self.logoButton removeFromSuperview];
-        [self.labelUnderLogo removeFromSuperview];
-        self.tableView.scrollEnabled = YES;
-        self.view.backgroundColor = [Theme wishDetailBackgroundNone:self.view];
-
-    }else{
-        [self showCenterIcon];
-        self.tableView.scrollEnabled = NO;
-        self.cameraButton.hidden = NO;
-
-    }
-    [self.tableView reloadData];
-}
+//- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+//{
+//    if (_fetchedRC.fetchedObjects.count > 0) {
+//        //remove logo and underlogo text
+//        self.tableView.scrollEnabled = YES;
+//        self.view.backgroundColor = [UIColor lightGrayColor];
+//        [self.logoButton removeFromSuperview];
+//        [self.labelUnderLogo removeFromSuperview];
+//        [self.tableView reloadData];
+//    }else{
+//        [self showCenterIcon];
+//    }
+//}
 
 
-- (void)showCenterIcon{
-    self.view.backgroundColor = [Theme wishDetailBackgroundNone:self.view];
-    
-    //set center logo
-    UIImage *logo = [Theme wishDetailBackgroundNonLogo];
-    
-    CGFloat logoWidth = self.view.frame.size.width/2.5;
-    CGPoint center = self.view.center;
-    
-    UIButton *logoButton = [[UIButton alloc] initWithFrame:CGRectMake(center.x-logoWidth/2,
-                                                                      center.y-logoWidth,
-                                                                      logoWidth,logoWidth)];
-    [logoButton setImage:logo forState:UIControlStateNormal];
-    [logoButton addTarget:self action:@selector(showCamera)
-         forControlEvents:UIControlEventTouchUpInside];
-    
-    //set text under logo
-     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, logoButton.center.y + logoWidth/2 + 20.0, self.view.frame.size.width, 20.0)];
-    NSMutableParagraphStyle *paStyle = [NSMutableParagraphStyle new];
-    paStyle.alignment = NSTextAlignmentCenter;
-    NSDictionary *attrs = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:15.0],NSParagraphStyleAttributeName:paStyle};
-    NSAttributedString *str = [[NSAttributedString alloc] initWithString:@"记录种下愿望这一刻吧！" attributes:attrs];
-    label.attributedText = str;
-    
-    
-    self.logoButton = logoButton;
-    self.labelUnderLogo = label;
-    [self.view addSubview:self.logoButton];
-    [self.view addSubview:self.labelUnderLogo];
-    
-}
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [self.cameraButton removeFromSuperview];
 }
+
+
+#pragma mark - setup views
 - (void)loadCornerCamera
 {
     //load camera image
@@ -121,31 +75,30 @@
     [cameraButton setImage:cameraIcon forState:UIControlStateNormal];
     cameraButton.hidden = YES;
     [cameraButton setFrame:CGRectMake(self.tableView.frame.size.width - cameraIcon.size.width/2,
-                                           self.tableView.frame.size.height - cameraIcon.size.height/2,
-                                           cameraIcon.size.width/2,
-                                           cameraIcon.size.height/2)];
+                                      self.tableView.frame.size.height - cameraIcon.size.height/2,
+                                      cameraIcon.size.width/2,
+                                      cameraIcon.size.height/2)];
     UIWindow *topView = [[UIApplication sharedApplication] keyWindow];
     [topView addSubview:cameraButton];
     
     //lock camera to buttom right corner
-//    cameraButton.translatesAutoresizingMaskIntoConstraints = NO;
+    //    cameraButton.translatesAutoresizingMaskIntoConstraints = NO;
     [topView addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"V:[cameraButton(>=12)]|"
-                               options:NSLayoutFormatDirectionLeadingToTrailing
-                               metrics:nil
-                               views:NSDictionaryOfVariableBindings(cameraButton)]];
+                             constraintsWithVisualFormat:@"V:[cameraButton(>=12)]|"
+                             options:NSLayoutFormatDirectionLeadingToTrailing
+                             metrics:nil
+                             views:NSDictionaryOfVariableBindings(cameraButton)]];
     
     [topView addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"H:[cameraButton(>=12)]|"
-                               options:NSLayoutFormatDirectionLeadingToTrailing
-                               metrics:nil
-                               views:NSDictionaryOfVariableBindings(cameraButton)]];
+                             constraintsWithVisualFormat:@"H:[cameraButton(>=12)]|"
+                             options:NSLayoutFormatDirectionLeadingToTrailing
+                             metrics:nil
+                             views:NSDictionaryOfVariableBindings(cameraButton)]];
     [cameraButton addTarget:self action:@selector(showCamera)
            forControlEvents:UIControlEventTouchUpInside];
     self.cameraButton = cameraButton;
-
+    
 }
-
 - (void)setUpNavigationItem
 {
 
@@ -169,8 +122,127 @@
     self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:shareBtn],
                                                 [[UIBarButtonItem alloc] initWithCustomView:composeBtn]];
 
+    self.view.backgroundColor = [Theme wishDetailBackgroundNone:self.view];
+
+}
+- (void)showCenterIcon{
+    
+    self.tableView.scrollEnabled = NO;
+    self.cameraButton.hidden = NO;
+    
+    //set center logo
+    UIImage *logo = [Theme wishDetailBackgroundNonLogo];
+    
+    CGFloat logoWidth = self.view.frame.size.width/2.5;
+    CGPoint center = self.view.center;
+    
+    self.logoButton = [[UIButton alloc] initWithFrame:CGRectMake(center.x-logoWidth/2,
+                                                                 center.y-logoWidth,
+                                                                 logoWidth,logoWidth)];
+    [self.logoButton setImage:logo forState:UIControlStateNormal];
+    [self.logoButton addTarget:self action:@selector(showCamera)
+              forControlEvents:UIControlEventTouchUpInside];
+    
+    //set text under logo
+    self.labelUnderLogo = [[UILabel alloc] initWithFrame:CGRectMake(0, self.logoButton.center.y + logoWidth/2 + 20.0, self.view.frame.size.width, 20.0)];
+    NSMutableParagraphStyle *paStyle = [NSMutableParagraphStyle new];
+    paStyle.alignment = NSTextAlignmentCenter;
+    NSDictionary *attrs = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:15.0],NSParagraphStyleAttributeName:paStyle};
+    NSAttributedString *str = [[NSAttributedString alloc] initWithString:@"记录种下愿望这一刻吧！" attributes:attrs];
+    self.labelUnderLogo.attributedText = str;
+    [self.tableView addSubview:self.logoButton];
+    [self.tableView addSubview:self.labelUnderLogo];
+    
 }
 
+#pragma mark - Fetched Results Controller delegate
+
+- (NSFetchedResultsController *)fetchedRC
+{
+    NSManagedObjectContext *context = self.plan.managedObjectContext;
+    if (_fetchedRC != nil) {
+        return _fetchedRC;
+    }
+    
+    //do fetchrequest
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Feed"];
+    request.predicate = [NSPredicate predicateWithFormat:@"plan = %@",self.plan];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
+    [request setFetchBatchSize:5];
+    
+    //create FetchedResultsController with context, sectionNameKeyPath, and you can cache here, so the next work if the same you can use your cash file.
+    NSFetchedResultsController *newFRC =
+    [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                        managedObjectContext:context sectionNameKeyPath:nil
+                                                   cacheName:nil];
+    self.fetchedRC = newFRC;
+    _fetchedRC.delegate = self;
+    
+    
+    // Perform Fetch
+    NSError *error = nil;
+    [_fetchedRC performFetch:&error];
+    
+    if (error) {
+        NSLog(@"Unable to perform fetch.");
+        NSLog(@"%@, %@", error, error.localizedDescription);
+    }
+    
+    return _fetchedRC;
+    
+    
+}
+
+- (void)controllerWillChangeContent:
+(NSFetchedResultsController *)controller
+{
+    [self.tableView beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath
+{
+    
+    
+    switch(type)
+    {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView
+             insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+             withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView
+             deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+             withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath]
+                                  withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+//            [self.tableView
+//             deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+//             withRowAnimation:UITableViewRowAnimationFade];
+//            
+//            [self.tableView
+//             insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+//             withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+- (void)controllerDidChangeContent:
+(NSFetchedResultsController *)controller
+{
+    [self.tableView endUpdates];
+}
 
 #pragma mark - Scroll view delegate (widget animation)
 
@@ -198,13 +270,10 @@
 
 
 #pragma mark - table view delegate and data source
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger rows = 0;
-    if (self.fetchedRC.sections.count == 1) {
-        rows = self.fetchedRC.fetchedObjects.count;
-    }
-    return rows;
+    return self.fetchedRC.fetchedObjects.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     WishDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WishDetailCell" forIndexPath:indexPath];
@@ -231,7 +300,6 @@
         //        NSLog(@"%@",NSStringFromCGSize(editedImage.size));
         //create Task
         [Feed createFeed:self.plan.planTitle image:self.capturedImage inPlan:self.plan];
-        [self fetchFeeds];
 
     }];
 }
