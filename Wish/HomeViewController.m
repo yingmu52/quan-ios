@@ -151,7 +151,7 @@ HomeCardViewDelegate>
 
 //always display the last object of myPlan
 - (UIView *)nextViewForSwipeableView:(ZLSwipeableView *)swipeableView {
-
+    return nil;
     UIView *view;
     if (!self.myPlans.count) {
         return nil;
@@ -174,7 +174,7 @@ HomeCardViewDelegate>
 #pragma mark - Camera Util
 
 - (IBAction)showCamera:(UIButton *)sender{
-    UIImagePickerController *controller = [[self class] showCamera:self];
+    UIImagePickerController *controller = [SystemUtil showCamera:self];
     if (controller) {
         [self presentViewController:controller
                            animated:YES
@@ -192,18 +192,6 @@ HomeCardViewDelegate>
     }];
 }
 
-+ (UIImagePickerController *)showCamera:(id<UINavigationControllerDelegate,UIImagePickerControllerDelegate>)delegate{
-    
-    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        return nil;
-    }
-    UIImagePickerController *controller = [[UIImagePickerController alloc] init];
-    controller.sourceType = UIImagePickerControllerSourceTypeCamera;
-    controller.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
-    controller.allowsEditing = YES;
-    controller.delegate = delegate;
-    return controller;
-}
 
 
 

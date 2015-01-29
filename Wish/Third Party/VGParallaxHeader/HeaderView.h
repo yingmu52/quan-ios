@@ -7,9 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Plan.h"
 @interface HeaderView : UIView
 
+@property (nonatomic,strong) Plan *plan;
 + (instancetype)instantiateFromNib;
+
+
+- (void)updateTitle:(NSString *)string;
+- (void)updateSubtitle:(NSInteger)tryTime;
+- (void)updateCountDownLabel:(NSInteger)pastDays totalDays:(NSInteger)totalDays;
+- (void)updateFollowCount:(NSInteger)count;
 
 @end

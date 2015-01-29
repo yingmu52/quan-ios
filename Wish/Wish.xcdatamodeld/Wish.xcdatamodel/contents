@@ -4,6 +4,7 @@
         <attribute name="backgroundNum" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="createDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="finishDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="followCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="Transformable" valueTransformerName="" storedInTruthFile="YES" syncable="YES"/>
         <attribute name="imageId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isPrivate" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
@@ -13,6 +14,6 @@
         <attribute name="userDeleted" optional="YES" attributeType="Boolean" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Plan" positionX="-8903" positionY="-117" width="128" height="193"/>
+        <element name="Plan" positionX="-8903" positionY="-117" width="128" height="208"/>
     </elements>
 </model>

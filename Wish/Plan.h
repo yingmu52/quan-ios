@@ -2,7 +2,7 @@
 //  Plan.h
 //  Wish
 //
-//  Created by Xinyi Zhuang on 2015-01-26.
+//  Created by Xinyi Zhuang on 2015-01-28.
 //  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
 //
 
@@ -22,5 +22,6 @@
 @property (nonatomic, retain) NSString * planId;
 @property (nonatomic, retain) NSString * planTitle;
 @property (nonatomic, retain) NSNumber * userDeleted;
+@property (nonatomic, retain) NSNumber * followCount;
 
 @end

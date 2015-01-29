@@ -10,7 +10,7 @@
 #import "WishDetailCell.h"
 #import "UINavigationItem+CustomItem.h"
 #import "Theme.h"
-#import "HomeViewController.h"
+#import "SystemUtil.h"
 @interface WishDetailViewController () <UIGestureRecognizerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (nonatomic) CGFloat yVel;
 @property (nonatomic) BOOL shouldShowSideWidgets;
@@ -30,7 +30,9 @@
 {
     [super viewWillAppear:animated];
     self.shouldShowSideWidgets = YES;
-    [self loadCamera];
+    [self loadCornerCamera];
+    self.headerView.plan = self.plan; //set plan to header for updaing info
+    
 }
 
 - (void)viewDidLayoutSubviews
@@ -38,33 +40,37 @@
     if (!self.plan.image) {
         [self showCenterIcon];
         self.tableView.scrollEnabled = NO;
-        self.cameraButton.hidden = NO;
-        
-    }else{
-        [self.logoButton removeFromSuperview];
-        [self.labelUnderLogo removeFromSuperview];
-        self.tableView.scrollEnabled = YES;
+        self.cameraButton.hidden = NO;   
     }
 }
 
 - (void)showCenterIcon{
     self.view.backgroundColor = [Theme wishDetailBackgroundNone:self.view];
+    
+    //set center logo
     UIImage *logo = [Theme wishDetailBackgroundNonLogo];
     
     CGFloat logoWidth = self.view.frame.size.width/2.5;
     CGPoint center = self.view.center;
     
-    self.logoButton = [[UIButton alloc] initWithFrame:CGRectMake(center.x-logoWidth/2,
+    UIButton *logoButton = [[UIButton alloc] initWithFrame:CGRectMake(center.x-logoWidth/2,
                                                                       center.y-logoWidth,
                                                                       logoWidth,logoWidth)];
-    [self.logoButton setImage:logo forState:UIControlStateNormal];
+    [logoButton setImage:logo forState:UIControlStateNormal];
+    [logoButton addTarget:self action:@selector(showCamera)
+         forControlEvents:UIControlEventTouchUpInside];
     
-     self.labelUnderLogo = [[UILabel alloc] initWithFrame:CGRectMake(0, self.logoButton.center.y + logoWidth/2 + 20.0, self.view.frame.size.width, 20.0)];
+    //set text under logo
+     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, logoButton.center.y + logoWidth/2 + 20.0, self.view.frame.size.width, 20.0)];
     NSMutableParagraphStyle *paStyle = [NSMutableParagraphStyle new];
     paStyle.alignment = NSTextAlignmentCenter;
     NSDictionary *attrs = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:15.0],NSParagraphStyleAttributeName:paStyle};
     NSAttributedString *str = [[NSAttributedString alloc] initWithString:@"记录种下愿望这一刻吧！" attributes:attrs];
-    self.labelUnderLogo.attributedText = str;
+    label.attributedText = str;
+    
+    
+    self.logoButton = logoButton;
+    self.labelUnderLogo = label;
     [self.view addSubview:self.logoButton];
     [self.view addSubview:self.labelUnderLogo];
     
@@ -74,7 +80,7 @@
     [super viewWillDisappear:animated];
     [self.cameraButton removeFromSuperview];
 }
-- (void)loadCamera
+- (void)loadCornerCamera
 {
     //load camera image
     UIImage *cameraIcon = [Theme wishDetailCameraDefault];
@@ -91,17 +97,18 @@
     //lock camera to buttom right corner
 //    cameraButton.translatesAutoresizingMaskIntoConstraints = NO;
     [topView addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"V:|-[cameraButton(==10)]-|"
+                               constraintsWithVisualFormat:@"V:[cameraButton(>=12)]|"
                                options:NSLayoutFormatDirectionLeadingToTrailing
                                metrics:nil
                                views:NSDictionaryOfVariableBindings(cameraButton)]];
     
     [topView addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"H:[cameraButton(==10)]-|"
+                               constraintsWithVisualFormat:@"H:[cameraButton(>=12)]|"
                                options:NSLayoutFormatDirectionLeadingToTrailing
                                metrics:nil
                                views:NSDictionaryOfVariableBindings(cameraButton)]];
-    
+    [cameraButton addTarget:self action:@selector(showCamera)
+           forControlEvents:UIControlEventTouchUpInside];
     self.cameraButton = cameraButton;
 
 }
@@ -165,7 +172,7 @@
 
 
 - (void)showCamera{
-    UIImagePickerController *controller = [HomeViewController showCamera:self];
+    UIImagePickerController *controller = [SystemUtil showCamera:self];
     if (controller) {
         [self presentViewController:controller
                            animated:YES
@@ -177,9 +184,10 @@
 {
     [self dismissViewControllerAnimated:NO completion:^{
         self.capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage]; // this line and next line is sequentally important
-        [self performSegueWithIdentifier:@"showPostFromHome"
-                                  sender:nil];
+//        [self performSegueWithIdentifier:@"showPostFromHome"
+//                                  sender:nil];
         //        NSLog(@"%@",NSStringFromCGSize(editedImage.size));
+        [self.logoButton setImage:self.capturedImage forState:UIControlStateNormal];
     }];
 }
 

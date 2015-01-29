@@ -14,8 +14,6 @@
 		AE01725C1A65CD8F0014266F /* WishTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE01725B1A65CD8F0014266F /* WishTests.m */; };
 		AE0172691A65D3140014266F /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0172681A65D3140014266F /* MenuViewController.m */; };
 		AE01726A1A65D3140014266F /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0172681A65D3140014266F /* MenuViewController.m */; };
-		AE0E79461A76EAB8007C48EE /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E79451A76EAB8007C48EE /* Plan.m */; };
-		AE0E79471A76EAB8007C48EE /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E79451A76EAB8007C48EE /* Plan.m */; };
 		AE0E794B1A76EB50007C48EE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E794A1A76EB50007C48EE /* Reachability.m */; };
 		AE0E794C1A76EB50007C48EE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E794A1A76EB50007C48EE /* Reachability.m */; };
 		AE1B6E381A6D884F0026F3CE /* HomeCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE1B6E371A6D884F0026F3CE /* HomeCardView.xib */; };
@@ -29,6 +27,8 @@
 		AE479E9F1A6F775C00366A0A /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479E9D1A6F775C00366A0A /* PostViewController.m */; };
 		AE479EAE1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479EAD1A6F7A5B00366A0A /* Plan+PlanCRUD.m */; };
 		AE479EAF1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479EAD1A6F7A5B00366A0A /* Plan+PlanCRUD.m */; };
+		AE4D9B7B1A79B337003EC92D /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4D9B7A1A79B337003EC92D /* Plan.m */; };
+		AE4D9B7C1A79B337003EC92D /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4D9B7A1A79B337003EC92D /* Plan.m */; };
 		AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE72E9541A66F2AA0046B38D /* MenuCell.m */; };
 		AEBFCA371A78614100686EFE /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA361A78614100686EFE /* PostDetailViewController.m */; };
 		AEBFCA381A78614100686EFE /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA361A78614100686EFE /* PostDetailViewController.m */; };
@@ -107,8 +107,6 @@
 		AE01725B1A65CD8F0014266F /* WishTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WishTests.m; sourceTree = "<group>"; };
 		AE0172671A65D3140014266F /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		AE0172681A65D3140014266F /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
-		AE0E79441A76EAB8007C48EE /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
-		AE0E79451A76EAB8007C48EE /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
 		AE0E79491A76EB50007C48EE /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		AE0E794A1A76EB50007C48EE /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		AE1B6E371A6D884F0026F3CE /* HomeCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCardView.xib; sourceTree = "<group>"; };
@@ -121,6 +119,8 @@
 		AE479E9D1A6F775C00366A0A /* PostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostViewController.m; sourceTree = "<group>"; };
 		AE479EAC1A6F7A5B00366A0A /* Plan+PlanCRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Plan+PlanCRUD.h"; sourceTree = "<group>"; };
 		AE479EAD1A6F7A5B00366A0A /* Plan+PlanCRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Plan+PlanCRUD.m"; sourceTree = "<group>"; };
+		AE4D9B791A79B337003EC92D /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
+		AE4D9B7A1A79B337003EC92D /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
 		AE72E9531A66F2AA0046B38D /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
 		AE72E9541A66F2AA0046B38D /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		AEBFCA351A78614100686EFE /* PostDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostDetailViewController.h; sourceTree = "<group>"; };
@@ -275,9 +275,9 @@
 		AE30EE711A6F0A8C0044740D /* Database&Networking */ = {
 			isa = PBXGroup;
 			children = (
+				AE4D9B791A79B337003EC92D /* Plan.h */,
+				AE4D9B7A1A79B337003EC92D /* Plan.m */,
 				AE0172431A65CD8E0014266F /* Wish.xcdatamodeld */,
-				AE0E79441A76EAB8007C48EE /* Plan.h */,
-				AE0E79451A76EAB8007C48EE /* Plan.m */,
 				AE479EAC1A6F7A5B00366A0A /* Plan+PlanCRUD.h */,
 				AE479EAD1A6F7A5B00366A0A /* Plan+PlanCRUD.m */,
 				AED68EE21A70399A00CDC0DF /* FetchCenter.h */,
@@ -548,7 +548,7 @@
 				AEE075381A744A770015155B /* SystemUtil.m in Sources */,
 				AEF7F2811A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				AEF7F2891A686E8A0022410B /* ECSlidingViewController.m in Sources */,
-				AE0E79461A76EAB8007C48EE /* Plan.m in Sources */,
+				AE4D9B7B1A79B337003EC92D /* Plan.m in Sources */,
 				AEF7F28B1A686E8B0022410B /* UIViewController+ECSlidingViewController.m in Sources */,
 				AEEC6C641A6DB0010021B7E4 /* NSLayoutConstraint+PureLayout.m in Sources */,
 				AEF7F2931A686FA30022410B /* Theme.m in Sources */,
@@ -587,6 +587,7 @@
 				AE01725C1A65CD8F0014266F /* WishTests.m in Sources */,
 				AEF3E0D41A6D9B7F00A1FE07 /* ZLPanGestureRecognizer.m in Sources */,
 				AEF7F2861A686E8A0022410B /* ECSlidingInteractiveTransition.m in Sources */,
+				AE4D9B7C1A79B337003EC92D /* Plan.m in Sources */,
 				AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */,
 				AEE075391A744A770015155B /* SystemUtil.m in Sources */,
 				AEF7F2821A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
@@ -603,7 +604,6 @@
 				AEEC6C611A6DB0010021B7E4 /* ALView+PureLayout.m in Sources */,
 				AE479E9F1A6F775C00366A0A /* PostViewController.m in Sources */,
 				AE0E794C1A76EB50007C48EE /* Reachability.m in Sources */,
-				AE0E79471A76EAB8007C48EE /* Plan.m in Sources */,
 				AE01726A1A65D3140014266F /* MenuViewController.m in Sources */,
 				AEF7F2981A686FDB0022410B /* HomeViewController.m in Sources */,
 				AEEC6C741A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,

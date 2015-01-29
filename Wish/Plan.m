@@ -2,7 +2,7 @@
 //  Plan.m
 //  Wish
 //
-//  Created by Xinyi Zhuang on 2015-01-26.
+//  Created by Xinyi Zhuang on 2015-01-28.
 //  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
 //
 
@@ -21,5 +21,6 @@
 @dynamic planId;
 @dynamic planTitle;
 @dynamic userDeleted;
+@dynamic followCount;
 
 @end

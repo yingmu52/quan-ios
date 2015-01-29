@@ -18,5 +18,6 @@
 + (void)updateOwnerId:(NSString *)newID;
 + (NSString *)stringFromDate:(NSDate *)date;
 + (BOOL)hasActiveInternetConnection;
-
++ (UIImagePickerController *)showCamera:(id<UINavigationControllerDelegate,UIImagePickerControllerDelegate>)delegate;
++ (UIImage *)darkLayeredImage:(UIImage *)image inRect:(CGRect)bounds;
 @end

@@ -26,13 +26,9 @@
 
 + (UIColor *)wishDetailBackgroundNone:(UIView *)referenceView{
     UIImage *img = [UIImage imageNamed:@"bg_tile"];
-    CGSize size = referenceView.bounds.size;
-    size.height /= 2 ;
-    UIGraphicsBeginImageContext(size);
-    CGContextRef imageContext = UIGraphicsGetCurrentContext();
-    CGContextDrawTiledImage(imageContext, (CGRect){CGPointZero,size}, img.CGImage);
-    UIImage *tileImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    CGRect frame = referenceView.frame;
+    frame.size.height /= 2.0;
+    UIImage *tileImage = [SystemUtil darkLayeredImage:img inRect:frame];
     return [UIColor colorWithPatternImage:tileImage];
 }
 

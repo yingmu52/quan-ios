@@ -60,4 +60,43 @@
     return reachability.currentReachabilityStatus != NotReachable;
 }
 
+
++ (UIImagePickerController *)showCamera:(id<UINavigationControllerDelegate,UIImagePickerControllerDelegate>)delegate{
+    
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        return nil;
+    }
+    UIImagePickerController *controller = [[UIImagePickerController alloc] init];
+    controller.sourceType = UIImagePickerControllerSourceTypeCamera;
+    controller.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
+    controller.allowsEditing = YES;
+    controller.delegate = delegate;
+    return controller;
+}
+
+
++ (UIImage *)darkLayeredImage:(UIImage *)image inRect:(CGRect)bounds{
+    
+    UIImage *tileImage;
+    
+    CGSize size = bounds.size;
+    UIGraphicsBeginImageContext(size);
+    CGContextRef imageContext = UIGraphicsGetCurrentContext();
+
+    CGContextDrawTiledImage(imageContext, (CGRect){CGPointZero,size}, image.CGImage);
+
+    //draw dark layer
+    CGLayerRef aboveLayer = CGLayerCreateWithContext (imageContext, size, NULL);
+    UIColor *darkLayerColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.6];
+    CGContextSetFillColorWithColor(imageContext, darkLayerColor.CGColor);
+    CGContextFillRect (imageContext, bounds);
+    CGContextDrawLayerInRect (imageContext, bounds, aboveLayer);
+    CGLayerRelease (aboveLayer);
+
+    tileImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return tileImage;
+
+}
+
 @end

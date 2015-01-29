@@ -19,9 +19,9 @@
 {
     [super viewDidLoad];
     
-    HeaderView *headerView = [HeaderView instantiateFromNib];
+    self.headerView = [HeaderView instantiateFromNib];
     
-    [self.tableView setParallaxHeaderView:headerView
+    [self.tableView setParallaxHeaderView:self.headerView
                                      mode:VGParallaxHeaderModeFill
                                    height:150];
         

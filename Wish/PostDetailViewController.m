@@ -48,8 +48,6 @@
     self.datePicker.backgroundColor = [UIColor whiteColor];
 }
 - (IBAction)finishDateIsTapped:(UITapGestureRecognizer *)sender {
-    NSLog(@"ahaha");
-    
     self.bgView =[[UIView alloc] initWithFrame:self.view.bounds];
     self.bgView.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.6];
     CGRect frame = CGRectMake(0, self.bgView.frame.size.height - 216.0, self.bgView.frame.size.width,216.0);
@@ -138,14 +136,14 @@
     self.createdPlan = [Plan createPlan:self.titleFromPostView
                                 date:self.selectedDate
                              privacy:self.isPrivate
-                               image:[Theme wishDetailCameraDefault]
+                               image:nil
                            inContext:[AppDelegate getContext]];
     [self performSegueWithIdentifier:@"doneWirtingAPost" sender:nil];
    
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@""]) {
+    if ([segue.identifier isEqualToString:@"doneWirtingAPost"]) {
         WishDetailViewController *wdvc = segue.destinationViewController;
         wdvc.plan = self.createdPlan;
     }

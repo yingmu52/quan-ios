@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "UIScrollView+VGParallaxHeader.h"
+#import "HeaderView.h"
 
 @interface FirstTableViewController : UITableViewController
-
+@property (nonatomic,strong) HeaderView *headerView;
 @end
