@@ -7,7 +7,7 @@
 //
 
 #import "SystemUtil.h"
-
+#import "UIImage+ImageEffects.h"
 @implementation SystemUtil
 
 
@@ -96,7 +96,10 @@
     tileImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return tileImage;
+;
 
 }
+
+
 
 @end

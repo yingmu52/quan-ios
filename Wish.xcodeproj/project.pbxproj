@@ -20,6 +20,8 @@
 		AE1B6E391A6D884F0026F3CE /* HomeCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE1B6E371A6D884F0026F3CE /* HomeCardView.xib */; };
 		AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
 		AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
+		AE2F1C841A7A1A1800A32CB5 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2F1C831A7A1A1800A32CB5 /* UIImage+ImageEffects.m */; };
+		AE2F1C851A7A1A1800A32CB5 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2F1C831A7A1A1800A32CB5 /* UIImage+ImageEffects.m */; };
 		AE30EE6D1A6E19D00044740D /* WishDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE30EE6C1A6E19D00044740D /* WishDetailCell.m */; };
 		AE30EE6F1A6E1E520044740D /* snow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE30EE6E1A6E1E520044740D /* snow.jpg */; };
 		AE30EE701A6E1E520044740D /* snow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE30EE6E1A6E1E520044740D /* snow.jpg */; };
@@ -112,6 +114,8 @@
 		AE1B6E371A6D884F0026F3CE /* HomeCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCardView.xib; sourceTree = "<group>"; };
 		AE1B6E3A1A6D89FC0026F3CE /* HomeCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCardView.h; sourceTree = "<group>"; };
 		AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCardView.m; sourceTree = "<group>"; };
+		AE2F1C821A7A1A1800A32CB5 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		AE2F1C831A7A1A1800A32CB5 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		AE30EE6B1A6E19D00044740D /* WishDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishDetailCell.h; sourceTree = "<group>"; };
 		AE30EE6C1A6E19D00044740D /* WishDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailCell.m; sourceTree = "<group>"; };
 		AE30EE6E1A6E1E520044740D /* snow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = snow.jpg; sourceTree = "<group>"; };
@@ -272,6 +276,15 @@
 			name = Reachability;
 			sourceTree = "<group>";
 		};
+		AE2F1C811A7A1A0200A32CB5 /* BlurTheFuckOn */ = {
+			isa = PBXGroup;
+			children = (
+				AE2F1C821A7A1A1800A32CB5 /* UIImage+ImageEffects.h */,
+				AE2F1C831A7A1A1800A32CB5 /* UIImage+ImageEffects.m */,
+			);
+			name = BlurTheFuckOn;
+			sourceTree = "<group>";
+		};
 		AE30EE711A6F0A8C0044740D /* Database&Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -378,6 +391,7 @@
 		AEF7F2661A686E8A0022410B /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				AE2F1C811A7A1A0200A32CB5 /* BlurTheFuckOn */,
 				AE0E79481A76EB3E007C48EE /* Reachability */,
 				AEEC6C4A1A6DAD9D0021B7E4 /* VGParallaxHeader */,
 				AEF3E0CE1A6D9B7F00A1FE07 /* ZLSwipeableView */,
@@ -552,6 +566,7 @@
 				AEF7F28B1A686E8B0022410B /* UIViewController+ECSlidingViewController.m in Sources */,
 				AEEC6C641A6DB0010021B7E4 /* NSLayoutConstraint+PureLayout.m in Sources */,
 				AEF7F2931A686FA30022410B /* Theme.m in Sources */,
+				AE2F1C841A7A1A1800A32CB5 /* UIImage+ImageEffects.m in Sources */,
 				AEF7F2971A686FDB0022410B /* HomeViewController.m in Sources */,
 				AEF3E0D31A6D9B7F00A1FE07 /* ZLPanGestureRecognizer.m in Sources */,
 				AEF7F2AD1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */,
@@ -604,6 +619,7 @@
 				AEEC6C611A6DB0010021B7E4 /* ALView+PureLayout.m in Sources */,
 				AE479E9F1A6F775C00366A0A /* PostViewController.m in Sources */,
 				AE0E794C1A76EB50007C48EE /* Reachability.m in Sources */,
+				AE2F1C851A7A1A1800A32CB5 /* UIImage+ImageEffects.m in Sources */,
 				AE01726A1A65D3140014266F /* MenuViewController.m in Sources */,
 				AEF7F2981A686FDB0022410B /* HomeViewController.m in Sources */,
 				AEEC6C741A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,
