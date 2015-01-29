@@ -17,7 +17,7 @@
 #import "Plan+PlanCRUD.h"
 #import "AppDelegate.h"
 #import "FetchCenter.h"
-
+#import "WishDetailViewController.h"
 
 const NSUInteger maxCardNum = 10;
 
@@ -125,7 +125,7 @@ HomeCardViewDelegate>
 }
 
 
-#pragma mark - 
+#pragma mark - Home Card View Delegate
 
 - (void)homeCardView:(HomeCardView *)cardView didPressedButton:(UIButton *)button
 {
@@ -136,6 +136,11 @@ HomeCardViewDelegate>
         [self reloadCards];
 
     }
+}
+
+- (void)didTapOnHomeCardView:(HomeCardView *)cardView
+{
+    [self performSegueWithIdentifier:@"showPlanDetailFromHome" sender:nil];
 }
 
 #pragma mark - ZLSwipeableViewDelegate
@@ -185,13 +190,22 @@ HomeCardViewDelegate>
 {
     [self dismissViewControllerAnimated:NO completion:^{
         self.capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage]; // this line and next line is sequentally important
-        [self performSegueWithIdentifier:@"showPostFromHome" sender:nil];
+//        [self performSegueWithIdentifier:@"showPostFromHome" sender:nil];
 //        [self performSegueWithIdentifier:@"showPostFromHome" sender:nil];
 //        NSLog(@"%@",NSStringFromCGSize(editedImage.size));
     }];
 }
 
 
+#pragma - 
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"showPlanDetailFromHome"]) {
+        WishDetailViewController *controller = segue.destinationViewController;
+#warning need to update!
+        controller.plan = self.topThreeCache.firstObject;
+    }
+}
 
 @end

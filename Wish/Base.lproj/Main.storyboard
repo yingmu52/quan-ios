@@ -851,9 +851,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="AVY-ud-FvV" appends="YES" id="O4s-2S-i4w"/>
-                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.95686274509803926" green="0.97254901960784312" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
@@ -918,15 +915,10 @@
                     <connections>
                         <outlet property="cardView" destination="Dkb-D1-PCm" id="19b-xl-b6C"/>
                         <segue destination="1Y1-uW-81U" kind="show" identifier="showPostFromHome" id="CTd-gb-xTE"/>
+                        <segue destination="b5E-B5-8Ys" kind="show" identifier="showPlanDetailFromHome" id="cel-0L-eNY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d1T-ay-k77" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="AVY-ud-FvV">
-                    <connections>
-                        <action selector="tapOnCard:" destination="wW8-3k-YAd" id="MSJ-lP-zJC"/>
-                        <segue destination="b5E-B5-8Ys" kind="show" id="heD-Iu-vYp"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1272" y="738.75"/>
         </scene>
@@ -1257,6 +1249,6 @@
         <image name="tab_ic_setting_default" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wmP-pv-Paa"/>
+        <segue reference="cel-0L-eNY"/>
     </inferredMetricsTieBreakers>
 </document>

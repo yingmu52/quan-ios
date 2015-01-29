@@ -108,6 +108,10 @@
     
     // Corner Radius
     //    self.layer.cornerRadius = 10.0;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTaped)];
+    [self addGestureRecognizer:tap];
+
 }
 
 - (IBAction)dismissMoreView:(id)sender
@@ -123,4 +127,9 @@
 - (IBAction)deletePressed:(UIButton *)sender{
     [self.delegate homeCardView:self didPressedButton:sender];
 }
+
+- (void)backgroundTaped{
+    [self.delegate didTapOnHomeCardView:self];
+}
+
 @end

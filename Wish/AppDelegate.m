@@ -140,6 +140,4 @@
     return delegate.managedObjectContext;
 }
 
-
-
 @end

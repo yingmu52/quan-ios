@@ -11,12 +11,19 @@
 #import "UINavigationItem+CustomItem.h"
 #import "Theme.h"
 #import "SystemUtil.h"
+#import "Feed+FeedCRUD.h"
+
+
 @interface WishDetailViewController () <UIGestureRecognizerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (nonatomic) CGFloat yVel;
 @property (nonatomic) BOOL shouldShowSideWidgets;
 @property (nonatomic,strong) UIButton *logoButton;
 @property (nonatomic,strong) UILabel *labelUnderLogo;
+@property (nonatomic,strong) UIImage *capturedImage;
+@property (nonatomic,strong) UIButton *cameraButton;
 
+
+@property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @end
 
 @implementation WishDetailViewController
@@ -32,17 +39,43 @@
     self.shouldShowSideWidgets = YES;
     [self loadCornerCamera];
     self.headerView.plan = self.plan; //set plan to header for updaing info
+    [self fetchFeeds];
     
 }
 
-- (void)viewDidLayoutSubviews
+- (void)fetchFeeds{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Feed"];
+    request.predicate = [NSPredicate predicateWithFormat:@"plan = %@",self.plan];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
+
+    self.fetchedRC = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                                         managedObjectContext:self.plan.managedObjectContext
+                                                           sectionNameKeyPath:nil
+                                                                    cacheName:nil];
+}
+- (void)setFetchedRC:(NSFetchedResultsController *)fetchedRC
 {
-    if (!self.plan.image) {
+    _fetchedRC = fetchedRC;
+    if (_fetchedRC.fetchRequest) {
+        [_fetchedRC performFetch:nil];
+    }
+    
+    if (_fetchedRC.fetchedObjects.count > 0) {
+        //remove logo and underlogo text
+        [self.logoButton removeFromSuperview];
+        [self.labelUnderLogo removeFromSuperview];
+        self.tableView.scrollEnabled = YES;
+        self.view.backgroundColor = [Theme wishDetailBackgroundNone:self.view];
+
+    }else{
         [self showCenterIcon];
         self.tableView.scrollEnabled = NO;
-        self.cameraButton.hidden = NO;   
+        self.cameraButton.hidden = NO;
+
     }
+    [self.tableView reloadData];
 }
+
 
 - (void)showCenterIcon{
     self.view.backgroundColor = [Theme wishDetailBackgroundNone:self.view];
@@ -163,8 +196,19 @@
 }
 
 
+
+#pragma mark - table view delegate and data source
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSInteger rows = 0;
+    if (self.fetchedRC.sections.count == 1) {
+        rows = self.fetchedRC.fetchedObjects.count;
+    }
+    return rows;
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WishDetailCell" forIndexPath:indexPath];
+    WishDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WishDetailCell" forIndexPath:indexPath];
+    cell.feed = [self.fetchedRC objectAtIndexPath:indexPath];
 //    cell.textLabel.text = [NSString stringWithFormat:@"Row %@", @(indexPath.row)];
     
     return cell;
@@ -182,12 +226,13 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    [self dismissViewControllerAnimated:NO completion:^{
+    [self dismissViewControllerAnimated:YES completion:^{
         self.capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage]; // this line and next line is sequentally important
-//        [self performSegueWithIdentifier:@"showPostFromHome"
-//                                  sender:nil];
         //        NSLog(@"%@",NSStringFromCGSize(editedImage.size));
-        [self.logoButton setImage:self.capturedImage forState:UIControlStateNormal];
+        //create Task
+        [Feed createFeed:self.plan.planTitle image:self.capturedImage inPlan:self.plan];
+        [self fetchFeeds];
+
     }];
 }
 

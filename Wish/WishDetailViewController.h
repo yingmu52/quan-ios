@@ -11,7 +11,5 @@
 @interface WishDetailViewController : FirstTableViewController
 
 @property (nonatomic,strong) Plan *plan;
-@property (nonatomic,strong) UIImage *capturedImage;
-@property (nonatomic,strong) UIButton *cameraButton;
 
 @end

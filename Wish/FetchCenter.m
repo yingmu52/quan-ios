@@ -41,51 +41,51 @@
 
 
 
-+ (void)uploadToCreatePlan:(Plan *)plan{
-    
-    NSString *rqtUploadImage = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PIC,UPLOAD_IMAGE];
-    //upload image
-    NSData *imgData = UIImageJPEGRepresentation(plan.image, 0.5);
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    NSURLRequest *request = [self.class request:rqtUploadImage method:@"POST"];
-    NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:imgData completionHandler:^(NSData *data,NSURLResponse *response,NSError *error)
-    {
-        if (!error){ //upload image successed
-            
-            NSDictionary *imgJson = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-            //get image id
-            NSString *fetchedImageId = [imgJson valueForKeyPath:@"data.id"];
-            if (fetchedImageId){
-                plan.imageId = fetchedImageId;
-                NSLog(@"fetched image ID: %@",fetchedImageId);
-                NSString *rqtCreatePlan = [NSString stringWithFormat:@"%@%@%@?ownerId=%@&title=%@&finishDate=%lu&backGroudNum=%d&private=%@",BASE_URL,PLAN,CREATE_PLAN,[SystemUtil getOwnerId],plan.planTitle,(unsigned long)[SystemUtil daysBetween:[NSDate date] and:plan.finishDate],1,plan.isPrivate];
-                rqtCreatePlan = [rqtCreatePlan stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-                
-                NSURLRequest *request = [self.class request:rqtCreatePlan method:@"GET"];
-                NSURLSessionDataTask *creatTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                    
-                    if (!error) { //create plan success
-                        NSDictionary *planJson = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-                        //get fetched plan id
-                        
-                        //update core data - cloud and local synchronization
-                        NSString *fetchedPlanID = [planJson valueForKeyPath:@"data.id"];
-                        plan.planId = fetchedPlanID;
-                        
-                        if([plan.managedObjectContext save:nil] && fetchedPlanID){
-                            NSLog(@"fetched plan ID %@",fetchedPlanID);
-                            NSLog(@"upload plan successed");
-                        }
-                        
-                    }
-                }];
-                [creatTask resume];
-            }
-        }
-    }];
-    [uploadTask resume];
-    
-}
+//+ (void)uploadToCreatePlan:(Plan *)plan{
+//    
+//    NSString *rqtUploadImage = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PIC,UPLOAD_IMAGE];
+//    //upload image
+//    NSData *imgData = UIImageJPEGRepresentation(plan.image, 0.5);
+//    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+//    NSURLRequest *request = [self.class request:rqtUploadImage method:@"POST"];
+//    NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:imgData completionHandler:^(NSData *data,NSURLResponse *response,NSError *error)
+//    {
+//        if (!error){ //upload image successed
+//            
+//            NSDictionary *imgJson = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+//            //get image id
+//            NSString *fetchedImageId = [imgJson valueForKeyPath:@"data.id"];
+//            if (fetchedImageId){
+//                plan.imageId = fetchedImageId;
+//                NSLog(@"fetched image ID: %@",fetchedImageId);
+//                NSString *rqtCreatePlan = [NSString stringWithFormat:@"%@%@%@?ownerId=%@&title=%@&finishDate=%lu&backGroudNum=%d&private=%@",BASE_URL,PLAN,CREATE_PLAN,[SystemUtil getOwnerId],plan.planTitle,(unsigned long)[SystemUtil daysBetween:[NSDate date] and:plan.finishDate],1,plan.isPrivate];
+//                rqtCreatePlan = [rqtCreatePlan stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//                
+//                NSURLRequest *request = [self.class request:rqtCreatePlan method:@"GET"];
+//                NSURLSessionDataTask *creatTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//                    
+//                    if (!error) { //create plan success
+//                        NSDictionary *planJson = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+//                        //get fetched plan id
+//                        
+//                        //update core data - cloud and local synchronization
+//                        NSString *fetchedPlanID = [planJson valueForKeyPath:@"data.id"];
+//                        plan.planId = fetchedPlanID;
+//                        
+//                        if([plan.managedObjectContext save:nil] && fetchedPlanID){
+//                            NSLog(@"fetched plan ID %@",fetchedPlanID);
+//                            NSLog(@"upload plan successed");
+//                        }
+//                        
+//                    }
+//                }];
+//                [creatTask resume];
+//            }
+//        }
+//    }];
+//    [uploadTask resume];
+//    
+//}
 
 
 + (void)postToDeletePlan:(Plan *)plan

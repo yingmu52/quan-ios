@@ -12,7 +12,7 @@
 @protocol HomeCardViewDelegate <NSObject>
 
 - (void)homeCardView:(HomeCardView *)cardView didPressedButton:(UIButton *)button;
-
+- (void)didTapOnHomeCardView:(HomeCardView *)cardView;
 @end
 
 @interface HomeCardView : UIView

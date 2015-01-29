@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Feed.h"
 @interface WishDetailCell : UITableViewCell
 
 @property (nonatomic) BOOL isWidgetVisible;
+@property (nonatomic,strong) Feed *feed;
 -(void)showLikeAndComment;
 
 - (void)dismissLikeAndComment;

@@ -7,6 +7,7 @@
 //
 
 #import "WishDetailCell.h"
+#import "SystemUtil.h"
 @interface WishDetailCell()
 @property (weak, nonatomic) IBOutlet UIImageView *photoView;
 @property (weak, nonatomic) IBOutlet UILabel *infoLabel;
@@ -30,6 +31,16 @@
 
 }
 
+
+- (void)setFeed:(Feed *)feed
+{
+    _feed = feed;
+    self.photoView.image = feed.image;
+    self.dateLabel.text = [SystemUtil stringFromDate:feed.createDate];
+    self.likeLabel.text = @"0";
+    self.commentLabel.text = @"0";
+    self.infoLabel.text = feed.feedTitle;
+}
 -(void)showLikeAndComment
 {
     [self moveWidget:YES];
