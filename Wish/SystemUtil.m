@@ -87,7 +87,7 @@
 
     //draw dark layer
     CGLayerRef aboveLayer = CGLayerCreateWithContext (imageContext, size, NULL);
-    UIColor *darkLayerColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.6];
+    UIColor *darkLayerColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
     CGContextSetFillColorWithColor(imageContext, darkLayerColor.CGColor);
     CGContextFillRect (imageContext, bounds);
     CGContextDrawLayerInRect (imageContext, bounds, aboveLayer);
