@@ -45,7 +45,7 @@ HomeCardViewDelegate>
 - (NSMutableArray *)topThreeCache
 {
     if (!_topThreeCache) {
-        _topThreeCache = [NSMutableArray arrayWithCapacity:3];
+        _topThreeCache = [NSMutableArray new];
     }
     if (_topThreeCache.count > 3) {
         [_topThreeCache removeObjectAtIndex:0];
@@ -58,9 +58,9 @@ HomeCardViewDelegate>
     dispatch_queue_t reloadQ =  dispatch_queue_create("reload cards", NULL);
     dispatch_async(reloadQ, ^{
         self.myPlans = [[Plan loadMyPlans:[AppDelegate getContext]] mutableCopy];
-        self.topThreeCache = nil;
+        [self.topThreeCache removeAllObjects];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.cardView discardAllSwipeableViews];
+//            [self.cardView discardAllSwipeableViews];
             [self.cardView loadNextSwipeableViewsIfNeeded];
         });
         
@@ -151,7 +151,6 @@ HomeCardViewDelegate>
 
 //always display the last object of myPlan
 - (UIView *)nextViewForSwipeableView:(ZLSwipeableView *)swipeableView {
-    return nil;
     UIView *view;
     if (!self.myPlans.count) {
         return nil;
