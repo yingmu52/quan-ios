@@ -39,25 +39,9 @@
     self.shouldShowSideWidgets = YES;
     [self loadCornerCamera];
     self.headerView.plan = self.plan; //set plan to header for updaing info
-//    [self fetchFeeds];
-    
+    [self showCenterIcon];
+
 }
-
-
-//- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-//{
-//    if (_fetchedRC.fetchedObjects.count > 0) {
-//        //remove logo and underlogo text
-//        self.tableView.scrollEnabled = YES;
-//        self.view.backgroundColor = [UIColor lightGrayColor];
-//        [self.logoButton removeFromSuperview];
-//        [self.labelUnderLogo removeFromSuperview];
-//        [self.tableView reloadData];
-//    }else{
-//        [self showCenterIcon];
-//    }
-//}
-
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -127,33 +111,45 @@
 }
 - (void)showCenterIcon{
     
-    self.tableView.scrollEnabled = NO;
-    self.cameraButton.hidden = NO;
+    BOOL shouldShow =
+    self.fetchedRC
+    && !self.fetchedRC.fetchedObjects.count
+    && !self.logoButton
+    && !self.labelUnderLogo;
     
-    //set center logo
-    UIImage *logo = [Theme wishDetailBackgroundNonLogo];
+    self.tableView.scrollEnabled = !shouldShow;
+    self.cameraButton.hidden = !shouldShow;
     
-    CGFloat logoWidth = self.view.frame.size.width/2.5;
-    CGPoint center = self.view.center;
-    
-    self.logoButton = [[UIButton alloc] initWithFrame:CGRectMake(center.x-logoWidth/2,
-                                                                 center.y-logoWidth,
-                                                                 logoWidth,logoWidth)];
-    [self.logoButton setImage:logo forState:UIControlStateNormal];
-    [self.logoButton addTarget:self action:@selector(showCamera)
-              forControlEvents:UIControlEventTouchUpInside];
-    
-    //set text under logo
-    self.labelUnderLogo = [[UILabel alloc] initWithFrame:CGRectMake(0, self.logoButton.center.y + logoWidth/2 + 20.0, self.view.frame.size.width, 20.0)];
-    NSMutableParagraphStyle *paStyle = [NSMutableParagraphStyle new];
-    paStyle.alignment = NSTextAlignmentCenter;
-    NSDictionary *attrs = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:15.0],NSParagraphStyleAttributeName:paStyle};
-    NSAttributedString *str = [[NSAttributedString alloc] initWithString:@"记录种下愿望这一刻吧！" attributes:attrs];
-    self.labelUnderLogo.attributedText = str;
-    [self.tableView addSubview:self.logoButton];
-    [self.tableView addSubview:self.labelUnderLogo];
+    if (shouldShow){
+        //set center logo
+        UIImage *logo = [Theme wishDetailBackgroundNonLogo];
+        
+        CGFloat logoWidth = self.view.frame.size.width/2.5;
+        CGPoint center = self.view.center;
+        
+        self.logoButton = [[UIButton alloc] initWithFrame:CGRectMake(center.x-logoWidth/2,
+                                                                     center.y-logoWidth,
+                                                                     logoWidth,logoWidth)];
+        [self.logoButton setImage:logo forState:UIControlStateNormal];
+        [self.logoButton addTarget:self action:@selector(showCamera)
+                  forControlEvents:UIControlEventTouchUpInside];
+        
+        //set text under logo
+        self.labelUnderLogo = [[UILabel alloc] initWithFrame:CGRectMake(0, self.logoButton.center.y + logoWidth/2 + 20.0, self.view.frame.size.width, 20.0)];
+        NSMutableParagraphStyle *paStyle = [NSMutableParagraphStyle new];
+        paStyle.alignment = NSTextAlignmentCenter;
+        NSDictionary *attrs = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:15.0],NSParagraphStyleAttributeName:paStyle};
+        NSAttributedString *str = [[NSAttributedString alloc] initWithString:@"记录种下愿望这一刻吧！" attributes:attrs];
+        self.labelUnderLogo.attributedText = str;
+        [self.tableView addSubview:self.logoButton];
+        [self.tableView addSubview:self.labelUnderLogo];
+    }else{
+        [self.labelUnderLogo removeFromSuperview];
+        [self.logoButton removeFromSuperview];
+    }
     
 }
+
 
 #pragma mark - Fetched Results Controller delegate
 
@@ -211,13 +207,13 @@
     {
         case NSFetchedResultsChangeInsert:
             [self.tableView
-             insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+             insertRowsAtIndexPaths:@[newIndexPath]
              withRowAnimation:UITableViewRowAnimationFade];
             break;
             
         case NSFetchedResultsChangeDelete:
             [self.tableView
-             deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+             deleteRowsAtIndexPaths:@[indexPath]
              withRowAnimation:UITableViewRowAnimationFade];
             break;
             
@@ -227,13 +223,7 @@
             break;
             
         case NSFetchedResultsChangeMove:
-//            [self.tableView
-//             deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-//             withRowAnimation:UITableViewRowAnimationFade];
-//            
-//            [self.tableView
-//             insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-//             withRowAnimation:UITableViewRowAnimationFade];
+            // dont't support move action
             break;
     }
 }
@@ -278,11 +268,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     WishDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WishDetailCell" forIndexPath:indexPath];
     cell.feed = [self.fetchedRC objectAtIndexPath:indexPath];
-//    cell.textLabel.text = [NSString stringWithFormat:@"Row %@", @(indexPath.row)];
-    
     return cell;
 }
 
+
+#pragma mark - camera
 
 - (void)showCamera{
     UIImagePickerController *controller = [SystemUtil showCamera:self];
