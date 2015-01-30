@@ -14,6 +14,6 @@
 
 
 + (void)fetchPlanList:(NSString *)ownerId;
-+ (void)uploadToCreatePlan:(Plan *)plan;
+//+ (void)uploadToCreatePlan:(Plan *)plan;
 + (void)postToDeletePlan:(Plan *)plan;
 @end

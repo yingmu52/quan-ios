@@ -36,15 +36,15 @@
     self.headerTitleLabel.text = string;
 }
 - (void)updateSubtitle:(NSInteger)tryTime{
-    self.headerSubTitleLabel.text = [NSString stringWithFormat:@"已留下%d个努力瞬间",tryTime];
+    self.headerSubTitleLabel.text = [NSString stringWithFormat:@"已留下%ld个努力瞬间",(long)tryTime];
 }
 
 - (void)updateCountDownLabel:(NSInteger)pastDays totalDays:(NSInteger)totalDays{
-    self.headerCountDownLabel.text = [NSString stringWithFormat:@"%d/%d 天",pastDays,totalDays];
+    self.headerCountDownLabel.text = [NSString stringWithFormat:@"%ld/%ld 天",(long)pastDays,(long)totalDays];
 }
 
 - (void)updateFollowCount:(NSInteger)count{
-    self.headerFollowLabel.text = [NSString stringWithFormat:@"%d 关注",count];
+    self.headerFollowLabel.text = [NSString stringWithFormat:@"%ld 关注",(long)count];
 }
 + (instancetype)instantiateFromNib
 {

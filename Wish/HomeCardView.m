@@ -50,10 +50,10 @@
     NSMutableAttributedString *back = [[NSMutableAttributedString alloc] initWithString:@" 天"
                                                                              attributes:baseAttrs];
     
-    NSMutableAttributedString *mid = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d/%d",pastDays,totalDays]
+    NSMutableAttributedString *mid = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld/%ld",(long)pastDays,(long)totalDays]
                                                                              attributes:countAttrs1];
     [mid addAttributes:countAttrs2
-                 range:[mid.string rangeOfString:[NSString stringWithFormat:@"%d",pastDays]]];
+                 range:[mid.string rangeOfString:[NSString stringWithFormat:@"%ld",(long)pastDays]]];
 
     
 

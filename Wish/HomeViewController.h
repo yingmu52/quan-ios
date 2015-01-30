@@ -10,6 +10,4 @@
 
 @interface HomeViewController : UIViewController
 
-
-+ (UIImagePickerController *)showCamera:(id<UINavigationControllerDelegate,UIImagePickerControllerDelegate>)delegate;
 @end
