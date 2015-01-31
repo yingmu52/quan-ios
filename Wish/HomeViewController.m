@@ -11,7 +11,6 @@
 #import "Theme.h"
 #import "MenuViewController.h"
 #import "UIViewController+ECSlidingViewController.h"
-#import "ZLSwipeableView.h"
 #import "HomeCardView.h"
 #import "Plan+PlanCRUD.h"
 #import "Plan+PlanCRUD.h"
@@ -21,47 +20,26 @@
 
 const NSUInteger maxCardNum = 10;
 
-@interface HomeViewController ()
+@interface HomeViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,HomeCardViewDelegate>
 
-<ZLSwipeableViewDataSource,
-ZLSwipeableViewDelegate,
-UIImagePickerControllerDelegate,
-UINavigationControllerDelegate,
-HomeCardViewDelegate>
-
-@property (nonatomic,weak) IBOutlet ZLSwipeableView *cardView;
+@property (nonatomic,weak) IBOutlet UICollectionView *cardCollectionView;
 
 @property (nonatomic,strong) NSMutableArray *myPlans;
 
-
 @property (nonatomic,strong) UIImage *capturedImage;
-
-@property (nonatomic,strong) NSMutableArray *topThreeCache;
 
 @end
 
 @implementation HomeViewController
 
-- (NSMutableArray *)topThreeCache
-{
-    if (!_topThreeCache) {
-        _topThreeCache = [NSMutableArray new];
-    }
-    if (_topThreeCache.count > 3) {
-        [_topThreeCache removeObjectAtIndex:0];
-    }
-    return _topThreeCache;
-}
-
-
 - (void)reloadCards{
     dispatch_queue_t reloadQ =  dispatch_queue_create("reload cards", NULL);
     dispatch_async(reloadQ, ^{
         self.myPlans = [[Plan loadMyPlans:[AppDelegate getContext]] mutableCopy];
-        [self.topThreeCache removeAllObjects];
+
         dispatch_async(dispatch_get_main_queue(), ^{
-//            [self.cardView discardAllSwipeableViews];
-            [self.cardView loadNextSwipeableViewsIfNeeded];
+            [self.cardCollectionView reloadData];
+            
         });
         
     });
@@ -76,14 +54,10 @@ HomeCardViewDelegate>
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
+    [self setupCollectionView];
 
 }
 
-- (void)viewDidLayoutSubviews
-{
-    self.cardView.delegate = self;
-    self.cardView.dataSource = self;
-}
 
 - (void)setUpNavigationItem
 {
@@ -100,7 +74,6 @@ HomeCardViewDelegate>
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
     
-    [self.cardView layoutIfNeeded];
 
 }
 
@@ -115,7 +88,7 @@ HomeCardViewDelegate>
 - (void)addWish{
     if (self.myPlans.count > maxCardNum){
         [[[UIAlertView alloc] initWithTitle:nil
-                                    message:@"Come the fuck on! life is too short for too many goddamn plans"
+                                    message:@"Life is too short for too many goddamn plans"
                                    delegate:self
                           cancelButtonTitle:@"OK"
                           otherButtonTitles:nil, nil] show];
@@ -130,51 +103,19 @@ HomeCardViewDelegate>
 - (void)homeCardView:(HomeCardView *)cardView didPressedButton:(UIButton *)button
 {
     if ([button.titleLabel.text isEqualToString:@"放弃"]) {
-        Plan *plan = self.topThreeCache.firstObject;
-        [plan deleteSelf:[AppDelegate getContext]];
-        [self.cardView swipeTopViewToRight];
-        [self reloadCards];
+        
+        
+//        [plan deleteSelf:[AppDelegate getContext]];
 
+//        [self reloadCards];
+        
     }
 }
 
 - (void)didTapOnHomeCardView:(HomeCardView *)cardView
 {
-    [self performSegueWithIdentifier:@"showPlanDetailFromHome" sender:nil];
+//    [self performSegueWithIdentifier:@"showPlanDetailFromHome" sender:nil];
 }
-
-#pragma mark - ZLSwipeableViewDelegate
-- (void)swipeableView:(ZLSwipeableView *)swipeableView didEndSwipingView:(UIView *)view atLocation:(CGPoint)location
-{
-    [self.topThreeCache removeObjectAtIndex:0];
-    if (!self.topThreeCache.count && !self.myPlans.count) {
-        [self reloadCards];
-    }
-}
-
-#pragma mark - ZLSwipeableViewDataSource
-
-//always display the last object of myPlan
-- (UIView *)nextViewForSwipeableView:(ZLSwipeableView *)swipeableView {
-    UIView *view;
-    if (!self.myPlans.count) {
-        return nil;
-    }else{
-        
-        view = [[UIView alloc] initWithFrame:swipeableView.bounds];
-        //preset data
-        Plan *plan = self.myPlans.lastObject;
-        if (plan) {
-            HomeCardView *contentView = [HomeCardView instantiateFromNibWithSuperView:view];
-            contentView.delegate = self; // for responsing more view button action !!
-            contentView.plan = plan;
-            [self.topThreeCache addObject:plan]; //first object is the top card
-            [self.myPlans removeLastObject];
-        }
-        return view;
-    }
-}
-
 #pragma mark - Camera Util
 
 - (IBAction)showCamera:(UIButton *)sender{
@@ -202,10 +143,49 @@ HomeCardViewDelegate>
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"showPlanDetailFromHome"]) {
-        WishDetailViewController *controller = segue.destinationViewController;
+//        WishDetailViewController *controller = segue.destinationViewController;
 #warning need to update!
-        controller.plan = self.topThreeCache.firstObject;
     }
 }
+
+#pragma mark -
+#pragma mark UICollectionView methods
+
+-(void)setupCollectionView {
+
+    NSString *nibName = [NSString stringWithFormat:@"%@", [HomeCardView class]];
+    UINib *nib = [UINib nibWithNibName:nibName bundle:[NSBundle mainBundle]];
+    [self.cardCollectionView registerNib:nib forCellWithReuseIdentifier:@"HomeCardCell"];
+    
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+    [flowLayout setMinimumInteritemSpacing:0.0f];
+    [flowLayout setMinimumLineSpacing:0.0f];
+    [self.cardCollectionView setPagingEnabled:YES];
+    [self.cardCollectionView setCollectionViewLayout:flowLayout];
+}
+
+
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.myPlans.count;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    HomeCardView *cell = (HomeCardView *)[collectionView dequeueReusableCellWithReuseIdentifier:@"HomeCardCell" forIndexPath:indexPath];
+    
+    cell.plan = [self.myPlans objectAtIndex:indexPath.row];
+
+    
+    return cell;
+    
+}
+
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return collectionView.frame.size;
+}
+
+
+
 
 @end

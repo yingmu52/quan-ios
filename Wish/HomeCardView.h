@@ -15,7 +15,7 @@
 - (void)didTapOnHomeCardView:(HomeCardView *)cardView;
 @end
 
-@interface HomeCardView : UIView
+@interface HomeCardView : UICollectionViewCell
 
 @property (nonatomic,strong) Plan *plan;
 

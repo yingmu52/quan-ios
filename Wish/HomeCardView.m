@@ -63,7 +63,6 @@
 }
 
 
-
 + (instancetype)instantiateFromNibWithSuperView:(UIView *)superView
 {
     NSString *nibname = [NSString stringWithFormat:@"%@", [self class]];
@@ -96,6 +95,7 @@
     
     return contentView;
 }
+
 - (void)awakeFromNib
 {
     // Shadow

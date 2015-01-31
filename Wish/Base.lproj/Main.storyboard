@@ -847,11 +847,21 @@
                                     <action selector="showCamera:" destination="wW8-3k-YAd" eventType="touchUpInside" id="7pm-fI-R3O"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dkb-D1-PCm" customClass="ZLSwipeableView">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uow-gD-atl">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                                <gestureRecognizers/>
-                            </view>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Pbg-Kr-TUR">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="wW8-3k-YAd" id="jkZ-Ks-22Z"/>
+                                    <outlet property="delegate" destination="wW8-3k-YAd" id="GDM-ut-tT5"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="0.95686274509803926" green="0.97254901960784312" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -859,15 +869,18 @@
                         <constraints>
                             <constraint firstItem="GnW-tC-6ma" firstAttribute="width" secondItem="v3t-7r-vWJ" secondAttribute="height" multiplier="31:100" id="54P-uw-P2g"/>
                             <constraint firstItem="eUx-6Z-ly2" firstAttribute="top" secondItem="GnW-tC-6ma" secondAttribute="bottom" id="7RB-yo-Vu8"/>
+                            <constraint firstAttribute="centerX" secondItem="uow-gD-atl" secondAttribute="centerX" constant="8" id="8FV-vm-4C8">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
                             <constraint firstItem="GnW-tC-6ma" firstAttribute="centerX" secondItem="v3t-7r-vWJ" secondAttribute="centerX" id="TgN-Hd-UHt"/>
-                            <constraint firstItem="Dkb-D1-PCm" firstAttribute="centerX" secondItem="GnW-tC-6ma" secondAttribute="centerX" id="dEJ-61-AFA"/>
-                            <constraint firstItem="GnW-tC-6ma" firstAttribute="top" secondItem="Dkb-D1-PCm" secondAttribute="bottom" constant="40" id="ghc-yU-g2c"/>
+                            <constraint firstItem="GnW-tC-6ma" firstAttribute="top" secondItem="uow-gD-atl" secondAttribute="bottom" constant="14" id="aAD-zS-YJ9">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
+                            <constraint firstAttribute="width" secondItem="uow-gD-atl" secondAttribute="width" id="cMM-qC-5i3"/>
+                            <constraint firstItem="uow-gD-atl" firstAttribute="top" secondItem="Nsd-Rd-GUf" secondAttribute="bottom" id="mHs-yH-vME"/>
                             <constraint firstItem="GnW-tC-6ma" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="v3t-7r-vWJ" secondAttribute="leadingMargin" constant="60" id="qYK-dO-eIC">
                                 <variation key="heightClass=regular-widthClass=compact" constant="20"/>
                             </constraint>
-                            <constraint firstAttribute="bottom" secondItem="Dkb-D1-PCm" secondAttribute="bottom" constant="94" id="tQM-An-GZW"/>
-                            <constraint firstItem="Dkb-D1-PCm" firstAttribute="leading" secondItem="v3t-7r-vWJ" secondAttribute="leadingMargin" id="vEK-lY-pVf"/>
-                            <constraint firstItem="Dkb-D1-PCm" firstAttribute="top" secondItem="Nsd-Rd-GUf" secondAttribute="bottom" constant="8" symbolic="YES" id="vgA-fK-Ay3"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="GnW-tC-6ma" secondAttribute="trailing" constant="60" id="xsk-K4-j1b">
                                 <variation key="heightClass=regular-widthClass=compact" constant="20"/>
                             </constraint>
@@ -875,37 +888,35 @@
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="GnW-tC-6ma"/>
-                                <exclude reference="Dkb-D1-PCm"/>
+                                <exclude reference="uow-gD-atl"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="7RB-yo-Vu8"/>
+                                <exclude reference="8FV-vm-4C8"/>
+                                <exclude reference="cMM-qC-5i3"/>
+                                <exclude reference="mHs-yH-vME"/>
                                 <exclude reference="54P-uw-P2g"/>
                                 <exclude reference="TgN-Hd-UHt"/>
-                                <exclude reference="ghc-yU-g2c"/>
+                                <exclude reference="aAD-zS-YJ9"/>
                                 <exclude reference="qYK-dO-eIC"/>
                                 <exclude reference="xsk-K4-j1b"/>
-                                <exclude reference="dEJ-61-AFA"/>
-                                <exclude reference="tQM-An-GZW"/>
-                                <exclude reference="vEK-lY-pVf"/>
-                                <exclude reference="vgA-fK-Ay3"/>
+                                <exclude reference="7RB-yo-Vu8"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="GnW-tC-6ma"/>
-                                <include reference="Dkb-D1-PCm"/>
+                                <include reference="uow-gD-atl"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="7RB-yo-Vu8"/>
+                                <include reference="8FV-vm-4C8"/>
+                                <include reference="cMM-qC-5i3"/>
+                                <include reference="mHs-yH-vME"/>
                                 <exclude reference="54P-uw-P2g"/>
                                 <include reference="TgN-Hd-UHt"/>
-                                <include reference="ghc-yU-g2c"/>
+                                <include reference="aAD-zS-YJ9"/>
                                 <include reference="qYK-dO-eIC"/>
                                 <include reference="xsk-K4-j1b"/>
-                                <include reference="dEJ-61-AFA"/>
-                                <include reference="tQM-An-GZW"/>
-                                <include reference="vEK-lY-pVf"/>
-                                <include reference="vgA-fK-Ay3"/>
+                                <include reference="7RB-yo-Vu8"/>
                             </mask>
                         </variation>
                     </view>
@@ -913,14 +924,14 @@
                         <nil key="title"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="cardView" destination="Dkb-D1-PCm" id="19b-xl-b6C"/>
+                        <outlet property="cardCollectionView" destination="uow-gD-atl" id="Iev-8V-hDW"/>
                         <segue destination="1Y1-uW-81U" kind="show" identifier="showPostFromHome" id="CTd-gb-xTE"/>
                         <segue destination="b5E-B5-8Ys" kind="show" identifier="showPlanDetailFromHome" id="cel-0L-eNY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d1T-ay-k77" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1272" y="738.75"/>
+            <point key="canvasLocation" x="1218" y="738.75"/>
         </scene>
         <!--Wish Detail View Controller-->
         <scene sceneID="274-7i-jhG">
@@ -1249,6 +1260,6 @@
         <image name="tab_ic_setting_default" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wmP-pv-Paa"/>
+        <segue reference="cel-0L-eNY"/>
     </inferredMetricsTieBreakers>
 </document>
