@@ -64,9 +64,6 @@
                             <include reference="xAn-IN-wdv"/>
                         </mask>
                     </variation>
-                    <connections>
-                        <action selector="showMoreView:" destination="JvT-ko-7QX" eventType="touchUpInside" id="MMl-db-gt3"/>
-                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="最后纪录时间：2014-3-11" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qCa-cx-NmF">
                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -116,9 +113,6 @@
                                     <include reference="1cM-nj-crT"/>
                                 </mask>
                             </variation>
-                            <connections>
-                                <action selector="deletePressed:" destination="JvT-ko-7QX" eventType="touchUpInside" id="FvQ-fx-7a0"/>
-                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="748" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZP-up-CwF" userLabel="finish">
                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -140,9 +134,6 @@
                                     <include reference="cE1-Uq-dfv"/>
                                 </mask>
                             </variation>
-                            <connections>
-                                <action selector="deletePressed:" destination="JvT-ko-7QX" eventType="touchUpInside" id="FA9-gg-Ta1"/>
-                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RxS-x8-yXv" userLabel="close">
                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -168,9 +159,6 @@
                                     <exclude reference="kRE-2V-9If"/>
                                 </mask>
                             </variation>
-                            <connections>
-                                <action selector="dismissMoreView:" destination="JvT-ko-7QX" eventType="touchUpInside" id="yki-Vd-7kx"/>
-                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EEw-Qj-dSO" userLabel="edit">
                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -192,9 +180,6 @@
                                     <include reference="w6o-4K-Nxe"/>
                                 </mask>
                             </variation>
-                            <connections>
-                                <action selector="deletePressed:" destination="JvT-ko-7QX" eventType="touchUpInside" id="eMN-U7-0LL"/>
-                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
@@ -400,14 +385,6 @@
                     <include reference="ztf-uG-4JB"/>
                 </mask>
             </variation>
-            <connections>
-                <outlet property="countDownLabel" destination="Ceo-u9-kbc" id="wPl-H0-6yY"/>
-                <outlet property="dateLabel" destination="qCa-cx-NmF" id="pUu-0X-rg9"/>
-                <outlet property="imageView" destination="nuU-Or-Ofs" id="TKO-k9-ZMV"/>
-                <outlet property="moreView" destination="Gdx-JJ-IcL" id="w5x-N6-Urg"/>
-                <outlet property="subtitleLabel" destination="86Z-tc-0MA" id="1ja-wv-Sd9"/>
-                <outlet property="titleLabel" destination="Etu-Ix-hYc" id="XJF-8T-7sc"/>
-            </connections>
         </view>
     </objects>
     <resources>

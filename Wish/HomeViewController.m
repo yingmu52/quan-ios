@@ -153,15 +153,15 @@ const NSUInteger maxCardNum = 10;
 
 -(void)setupCollectionView {
 
-    NSString *nibName = [NSString stringWithFormat:@"%@", [HomeCardView class]];
-    UINib *nib = [UINib nibWithNibName:nibName
-                                bundle:[NSBundle mainBundle]];
-    [self.cardCollectionView registerNib:nib
-              forCellWithReuseIdentifier:@"HomeCardCell"];
+//    NSString *nibName = [NSString stringWithFormat:@"%@", [HomeCardView class]];
+//    UINib *nib = [UINib nibWithNibName:nibName
+//                                bundle:[NSBundle mainBundle]];
+//    [self.cardCollectionView registerNib:nib
+//              forCellWithReuseIdentifier:@"HomeCardCell"];
     self.cardCollectionView.backgroundColor = [UIColor clearColor];
     [self.cardCollectionView setPagingEnabled:YES];
-    MKPagePeekFlowLayout *layout = [[MKPagePeekFlowLayout alloc] init];
-    [self.cardCollectionView setCollectionViewLayout:layout];
+//    MKPagePeekFlowLayout *layout = [[MKPagePeekFlowLayout alloc] init];
+//    [self.cardCollectionView setCollectionViewLayout:layout];
 }
 
 
@@ -171,9 +171,9 @@ const NSUInteger maxCardNum = 10;
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    HomeCardView *cell = (HomeCardView *)[collectionView dequeueReusableCellWithReuseIdentifier:@"HomeCardCell" forIndexPath:indexPath];
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HomeCardCell" forIndexPath:indexPath];
     
-    cell.plan = [self.myPlans objectAtIndex:indexPath.row];
+//    cell.plan = [self.myPlans objectAtIndex:indexPath.row];
     
     return cell;
     
