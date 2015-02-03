@@ -13,6 +13,8 @@
 
 - (void)homeCardView:(HomeCardView *)cardView didPressedButton:(UIButton *)button;
 - (void)didTapOnHomeCardView:(HomeCardView *)cardView;
+- (void)didShowMoreView:(UIView *)moreView;
+- (void)didDismissMoreView:(UIView *)moreView;
 @end
 
 @interface HomeCardView : UICollectionViewCell

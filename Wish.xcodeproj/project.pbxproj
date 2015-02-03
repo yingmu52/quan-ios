@@ -33,8 +33,6 @@
 		AE479E9F1A6F775C00366A0A /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479E9D1A6F775C00366A0A /* PostViewController.m */; };
 		AE479EAE1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479EAD1A6F7A5B00366A0A /* Plan+PlanCRUD.m */; };
 		AE479EAF1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479EAD1A6F7A5B00366A0A /* Plan+PlanCRUD.m */; };
-		AE664F341A8029C2006294E9 /* MKPagePeekFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AE664F331A8029C2006294E9 /* MKPagePeekFlowLayout.m */; };
-		AE664F351A8029C2006294E9 /* MKPagePeekFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AE664F331A8029C2006294E9 /* MKPagePeekFlowLayout.m */; };
 		AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE72E9541A66F2AA0046B38D /* MenuCell.m */; };
 		AEBFCA371A78614100686EFE /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA361A78614100686EFE /* PostDetailViewController.m */; };
 		AEBFCA381A78614100686EFE /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA361A78614100686EFE /* PostDetailViewController.m */; };
@@ -58,6 +56,7 @@
 		AEEC6C701A6DB0FC0021B7E4 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEEC6C6C1A6DB0FC0021B7E4 /* HeaderView.xib */; };
 		AEEC6C731A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C721A6DB11F0021B7E4 /* WishDetailViewController.m */; };
 		AEEC6C741A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C721A6DB11F0021B7E4 /* WishDetailViewController.m */; };
+		AEF775441A8134FE000DB73B /* HomeCardFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF775431A8134FE000DB73B /* HomeCardFlowLayout.m */; };
 		AEF7F2811A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F26F1A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m */; };
 		AEF7F2821A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F26F1A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m */; };
 		AEF7F2831A686E8A0022410B /* ECSlidingAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F2711A686E8A0022410B /* ECSlidingAnimationController.m */; };
@@ -128,8 +127,6 @@
 		AE479E9D1A6F775C00366A0A /* PostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostViewController.m; sourceTree = "<group>"; };
 		AE479EAC1A6F7A5B00366A0A /* Plan+PlanCRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Plan+PlanCRUD.h"; sourceTree = "<group>"; };
 		AE479EAD1A6F7A5B00366A0A /* Plan+PlanCRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Plan+PlanCRUD.m"; sourceTree = "<group>"; };
-		AE664F321A8029C2006294E9 /* MKPagePeekFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKPagePeekFlowLayout.h; sourceTree = "<group>"; };
-		AE664F331A8029C2006294E9 /* MKPagePeekFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKPagePeekFlowLayout.m; sourceTree = "<group>"; };
 		AE72E9531A66F2AA0046B38D /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
 		AE72E9541A66F2AA0046B38D /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		AEBFCA351A78614100686EFE /* PostDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostDetailViewController.h; sourceTree = "<group>"; };
@@ -156,6 +153,8 @@
 		AEEC6C6C1A6DB0FC0021B7E4 /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HeaderView.xib; path = "Third Party/VGParallaxHeader/HeaderView.xib"; sourceTree = "<group>"; };
 		AEEC6C711A6DB11F0021B7E4 /* WishDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishDetailViewController.h; sourceTree = "<group>"; };
 		AEEC6C721A6DB11F0021B7E4 /* WishDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailViewController.m; sourceTree = "<group>"; };
+		AEF775421A8134FE000DB73B /* HomeCardFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCardFlowLayout.h; sourceTree = "<group>"; };
+		AEF775431A8134FE000DB73B /* HomeCardFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCardFlowLayout.m; sourceTree = "<group>"; };
 		AEF7F26E1A686E8A0022410B /* ECPercentDrivenInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPercentDrivenInteractiveTransition.h; sourceTree = "<group>"; };
 		AEF7F26F1A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPercentDrivenInteractiveTransition.m; sourceTree = "<group>"; };
 		AEF7F2701A686E8A0022410B /* ECSlidingAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingAnimationController.h; sourceTree = "<group>"; };
@@ -369,6 +368,8 @@
 				AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */,
 				AEF7F2951A686FDB0022410B /* HomeViewController.h */,
 				AEF7F2961A686FDB0022410B /* HomeViewController.m */,
+				AEF775421A8134FE000DB73B /* HomeCardFlowLayout.h */,
+				AEF775431A8134FE000DB73B /* HomeCardFlowLayout.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -390,8 +391,6 @@
 		AEF7F2661A686E8A0022410B /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
-				AE664F321A8029C2006294E9 /* MKPagePeekFlowLayout.h */,
-				AE664F331A8029C2006294E9 /* MKPagePeekFlowLayout.m */,
 				AE7714DD1A7B735900422909 /* SLCoverFlow */,
 				AE2F1C811A7A1A0200A32CB5 /* BlurTheFuckOn */,
 				AE0E79481A76EB3E007C48EE /* Reachability */,
@@ -549,6 +548,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEF775441A8134FE000DB73B /* HomeCardFlowLayout.m in Sources */,
 				AE479E9E1A6F775C00366A0A /* PostViewController.m in Sources */,
 				AEF7F2851A686E8A0022410B /* ECSlidingInteractiveTransition.m in Sources */,
 				AEEC6C6D1A6DB0FC0021B7E4 /* HeaderView.m in Sources */,
@@ -574,7 +574,6 @@
 				AEEC6C4D1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */,
 				AE0172691A65D3140014266F /* MenuViewController.m in Sources */,
 				AED68EE41A70399A00CDC0DF /* FetchCenter.m in Sources */,
-				AE664F341A8029C2006294E9 /* MKPagePeekFlowLayout.m in Sources */,
 				AEEC6C621A6DB0010021B7E4 /* NSArray+PureLayout.m in Sources */,
 				AE0E794B1A76EB50007C48EE /* Reachability.m in Sources */,
 				AE479EAE1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */,
@@ -593,7 +592,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEF7F2841A686E8A0022410B /* ECSlidingAnimationController.m in Sources */,
-				AE664F351A8029C2006294E9 /* MKPagePeekFlowLayout.m in Sources */,
 				AEF7F28C1A686E8B0022410B /* UIViewController+ECSlidingViewController.m in Sources */,
 				AEF7F28A1A686E8B0022410B /* ECSlidingViewController.m in Sources */,
 				AEF7F2941A686FA30022410B /* Theme.m in Sources */,

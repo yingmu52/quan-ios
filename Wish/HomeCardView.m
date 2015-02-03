@@ -83,11 +83,13 @@
 - (IBAction)dismissMoreView:(id)sender
 {
     self.moreView.hidden = YES;
+    [self.delegate didDismissMoreView:self.moreView];
 }
 
 - (IBAction)showMoreView:(id)sender
 {
     self.moreView.hidden = NO;
+    [self.delegate didShowMoreView:self.moreView];
 }
 
 - (IBAction)deletePressed:(UIButton *)sender{
@@ -96,7 +98,9 @@
 }
 
 - (void)backgroundTaped{
-    [self.delegate didTapOnHomeCardView:self];
+    if (self.moreView.isHidden) {
+        [self.delegate didTapOnHomeCardView:self];
+    }
 }
 
 @end
