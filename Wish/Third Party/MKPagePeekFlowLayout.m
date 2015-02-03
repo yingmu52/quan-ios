@@ -21,9 +21,7 @@
     self.itemSize = CGSizeMake(self.collectionView.frame.size.width - 2*SPACING_BETWEEN_CELLS,
                                self.collectionView.frame.size.height - 2*SPACING_BETWEEN_CELLS);
 
-    CGFloat edgeInset = (self.collectionView.frame.size.width-self.itemSize.width)/2;
-
-    self.sectionInset = UIEdgeInsetsMake(0, edgeInset, 0,edgeInset);
+    self.sectionInset = UIEdgeInsetsMake(0, 0, 0,0);
     self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     self.minimumLineSpacing = SPACING_BETWEEN_CELLS;
 }

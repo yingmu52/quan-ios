@@ -25,7 +25,9 @@
     NSUInteger unitFlags = NSDayCalendarUnit;
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *components = [calendar components:unitFlags fromDate:dt1 toDate:dt2 options:0];
-    return [components day]+1;
+    
+    NSInteger days = [components day]+1;
+    return days <= 0 ? 1 : days;
 }
 
 

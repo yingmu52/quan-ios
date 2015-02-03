@@ -171,6 +171,11 @@ const NSUInteger maxCardNum = 10;
     self.cardCollectionView.backgroundColor = [UIColor clearColor];
 //    MKPagePeekFlowLayout *layout = [[MKPagePeekFlowLayout alloc] init];
 //    [self.cardCollectionView setCollectionViewLayout:layout];
+    UICollectionViewFlowLayout *flow = [[UICollectionViewFlowLayout alloc] init];
+    flow.minimumInteritemSpacing = -5;
+    flow.minimumLineSpacing = -5;
+    flow.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    self.cardCollectionView.collectionViewLayout = flow;
 }
 
 
@@ -191,7 +196,11 @@ const NSUInteger maxCardNum = 10;
 
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return collectionView.frame.size;;
+    return [self pageSize];
+}
+
+- (CGSize)pageSize{
+    return CGSizeMake(self.view.frame.size.width - 20.0, self.cardCollectionView.frame.size.height);
 }
 
 
@@ -209,6 +218,7 @@ const NSUInteger maxCardNum = 10;
     {
         case NSFetchedResultsChangeInsert:
             [self.cardCollectionView insertItemsAtIndexPaths:@[newIndexPath]];
+//            [self.cardCollectionView reloadData];
             break;
             
         case NSFetchedResultsChangeDelete:
@@ -225,11 +235,11 @@ const NSUInteger maxCardNum = 10;
     }
 }
 
-- (void)controllerDidChangeContent:
-(NSFetchedResultsController *)controller
-{
-    [self.cardCollectionView reloadData];
-}
+//- (void)controllerDidChangeContent:
+//(NSFetchedResultsController *)controller
+//{
+//    [self.cardCollectionView reloadData];
+//}
 
 
 @end

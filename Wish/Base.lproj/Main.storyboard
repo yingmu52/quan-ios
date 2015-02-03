@@ -963,8 +963,13 @@
                                                                 <constraint firstItem="8aB-0R-gm7" firstAttribute="centerY" secondItem="cYw-51-G2y" secondAttribute="centerY" constant="-2" id="UqJ-tu-VsJ">
                                                                     <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                                                 </constraint>
-                                                                <constraint firstItem="8aB-0R-gm7" firstAttribute="centerX" secondItem="snJ-W8-oJN" secondAttribute="centerX" constant="-1.5" id="XEZ-e3-TRY"/>
+                                                                <constraint firstItem="8aB-0R-gm7" firstAttribute="centerX" secondItem="snJ-W8-oJN" secondAttribute="centerX" constant="-1.5" id="XEZ-e3-TRY">
+                                                                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                                                                </constraint>
                                                                 <constraint firstItem="8aB-0R-gm7" firstAttribute="leading" secondItem="1Zg-lD-sfX" secondAttribute="leading" constant="8" id="a3V-JN-96I"/>
+                                                                <constraint firstItem="twz-bX-uha" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="snJ-W8-oJN" secondAttribute="trailing" constant="60" id="bsU-gd-k24">
+                                                                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                                                                </constraint>
                                                                 <constraint firstItem="8aB-0R-gm7" firstAttribute="height" secondItem="cYw-51-G2y" secondAttribute="height" id="gEp-nS-icM"/>
                                                                 <constraint firstAttribute="centerX" secondItem="8aB-0R-gm7" secondAttribute="centerX" constant="-2" id="kjU-SA-HHY">
                                                                     <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
@@ -1013,6 +1018,7 @@
                                                                     <exclude reference="KMf-dd-MFm"/>
                                                                     <exclude reference="Pf9-1V-0Zr"/>
                                                                     <exclude reference="t8j-W5-PAb"/>
+                                                                    <exclude reference="bsU-gd-k24"/>
                                                                     <exclude reference="va2-xt-3RL"/>
                                                                 </mask>
                                                             </variation>
@@ -1048,6 +1054,7 @@
                                                                     <include reference="KMf-dd-MFm"/>
                                                                     <include reference="Pf9-1V-0Zr"/>
                                                                     <include reference="t8j-W5-PAb"/>
+                                                                    <include reference="bsU-gd-k24"/>
                                                                     <include reference="va2-xt-3RL"/>
                                                                 </mask>
                                                             </variation>

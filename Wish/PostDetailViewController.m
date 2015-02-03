@@ -54,7 +54,7 @@
     self.datePicker = [[UIDatePicker alloc] initWithFrame:frame];
     self.datePicker.backgroundColor = [UIColor whiteColor];
     self.datePicker.datePickerMode = UIDatePickerModeDate;
-    self.datePicker.minimumDate = [NSDate date]; // minimum date is from today on
+    self.datePicker.minimumDate = [NSDate dateWithTimeIntervalSinceNow:3600]; // minimum date is from tomorrow on
 
     [self.datePicker addTarget:self action:@selector(pickerChanged:)
               forControlEvents:UIControlEventValueChanged];
