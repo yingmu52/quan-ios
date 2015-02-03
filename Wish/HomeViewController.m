@@ -18,38 +18,55 @@
 #import "FetchCenter.h"
 #import "WishDetailViewController.h"
 #import "MKPagePeekFlowLayout.h"
+
 const NSUInteger maxCardNum = 10;
 
-@interface HomeViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,HomeCardViewDelegate>
+@interface HomeViewController () <NSFetchedResultsControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HomeCardViewDelegate>
 
 @property (nonatomic,weak) IBOutlet UICollectionView *cardCollectionView;
 
-@property (nonatomic,strong) NSMutableArray *myPlans;
-
 @property (nonatomic,strong) UIImage *capturedImage;
+
+
+@property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 
 @end
 
 @implementation HomeViewController
 
-- (void)reloadCards{
-    dispatch_queue_t reloadQ =  dispatch_queue_create("reload cards", NULL);
-    dispatch_async(reloadQ, ^{
-        self.myPlans = [[Plan loadMyPlans:[AppDelegate getContext]] mutableCopy];
-
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.cardCollectionView reloadData];
-            
-        });
-        
-    });
-
-}
-- (void)viewWillAppear:(BOOL)animated
+- (NSFetchedResultsController *)fetchedRC
 {
-    [super viewWillAppear:animated];
-    [self reloadCards];
+    NSManagedObjectContext *context = [AppDelegate getContext];
+    if (_fetchedRC != nil) {
+        return _fetchedRC;
+    }
+    
+    //do fetchrequest
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
+    
+    NSFetchedResultsController *newFRC =
+    [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                        managedObjectContext:context sectionNameKeyPath:nil
+                                                   cacheName:nil];
+    self.fetchedRC = newFRC;
+    _fetchedRC.delegate = self;
+    
+    
+    // Perform Fetch
+    NSError *error = nil;
+    [_fetchedRC performFetch:&error];
+    
+    if (error) {
+        NSLog(@"Unable to perform fetch.");
+        NSLog(@"%@, %@", error, error.localizedDescription);
+    }
+    
+    return _fetchedRC;
+    
+    
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -86,7 +103,7 @@ const NSUInteger maxCardNum = 10;
 
 
 - (void)addWish{
-    if (self.myPlans.count > maxCardNum){
+    if (self.fetchedRC.fetchedObjects.count > maxCardNum){
         [[[UIAlertView alloc] initWithTitle:nil
                                     message:@"Life is too short for too many goddamn plans"
                                    delegate:self
@@ -103,12 +120,9 @@ const NSUInteger maxCardNum = 10;
 - (void)homeCardView:(HomeCardView *)cardView didPressedButton:(UIButton *)button
 {
     if ([button.titleLabel.text isEqualToString:@"放弃"]) {
-        
-        
-//        [plan deleteSelf:[AppDelegate getContext]];
-
-//        [self reloadCards];
-        
+        NSIndexPath *indexPath = [self.cardCollectionView indexPathForCell:cardView];
+        Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
+        [plan deleteSelf:[AppDelegate getContext]];
     }
 }
 
@@ -119,19 +133,18 @@ const NSUInteger maxCardNum = 10;
 #pragma mark - Camera Util
 
 - (IBAction)showCamera:(UIButton *)sender{
-    UIImagePickerController *controller = [SystemUtil showCamera:self];
-    if (controller) {
-        [self presentViewController:controller
-                           animated:YES
-                         completion:nil];
-    }
+//    UIImagePickerController *controller = [SystemUtil showCamera:self];
+//    if (controller) {
+//        [self presentViewController:controller
+//                           animated:YES
+//                         completion:nil];
+//    }
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [self dismissViewControllerAnimated:NO completion:^{
         self.capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage]; // this line and next line is sequentally important
-//        [self performSegueWithIdentifier:@"showPostFromHome" sender:nil];
 //        [self performSegueWithIdentifier:@"showPostFromHome" sender:nil];
 //        NSLog(@"%@",NSStringFromCGSize(editedImage.size));
     }];
@@ -152,38 +165,68 @@ const NSUInteger maxCardNum = 10;
 #pragma mark UICollectionView methods
 
 -(void)setupCollectionView {
-
-//    NSString *nibName = [NSString stringWithFormat:@"%@", [HomeCardView class]];
-//    UINib *nib = [UINib nibWithNibName:nibName
-//                                bundle:[NSBundle mainBundle]];
-//    [self.cardCollectionView registerNib:nib
-//              forCellWithReuseIdentifier:@"HomeCardCell"];
     self.cardCollectionView.backgroundColor = [UIColor clearColor];
-    [self.cardCollectionView setPagingEnabled:YES];
 //    MKPagePeekFlowLayout *layout = [[MKPagePeekFlowLayout alloc] init];
 //    [self.cardCollectionView setCollectionViewLayout:layout];
 }
 
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.myPlans.count;
+    return self.fetchedRC.fetchedObjects.count;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HomeCardCell" forIndexPath:indexPath];
-    
-//    cell.plan = [self.myPlans objectAtIndex:indexPath.row];
-    
+    HomeCardView *cell = (HomeCardView*)[collectionView dequeueReusableCellWithReuseIdentifier:@"HomeCardCell" forIndexPath:indexPath];
+    cell.delegate = self;
+    Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
+    cell.plan = plan;
+
     return cell;
     
 }
 
+
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return collectionView.frame.size;
+    return collectionView.frame.size;;
 }
 
 
+#pragma mark - FetchedResultsController
+
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath
+{
+    
+    
+    switch(type)
+    {
+        case NSFetchedResultsChangeInsert:
+            [self.cardCollectionView insertItemsAtIndexPaths:@[newIndexPath]];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.cardCollectionView deleteItemsAtIndexPaths:@[indexPath]];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self.cardCollectionView reloadItemsAtIndexPaths:@[indexPath]];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            // dont't support move action
+            break;
+    }
+}
+
+- (void)controllerDidChangeContent:
+(NSFetchedResultsController *)controller
+{
+    [self.cardCollectionView reloadData];
+}
 
 
 @end

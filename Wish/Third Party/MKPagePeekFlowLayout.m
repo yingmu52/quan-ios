@@ -12,16 +12,13 @@
 #import "MKPagePeekFlowLayout.h"
 
 @interface MKPagePeekFlowLayout ()
-
-@property (nonatomic) CGFloat spaceBetweenCells;
-@property (nonatomic) CGFloat minSwipeDistanceToPage;
 @end
 
 @implementation MKPagePeekFlowLayout
 
 
 - (void)prepareLayout {
-    self.itemSize = CGSizeMake(self.collectionView.frame.size.width - 5*SPACING_BETWEEN_CELLS,
+    self.itemSize = CGSizeMake(self.collectionView.frame.size.width - 2*SPACING_BETWEEN_CELLS,
                                self.collectionView.frame.size.height - 2*SPACING_BETWEEN_CELLS);
 
     CGFloat edgeInset = (self.collectionView.frame.size.width-self.itemSize.width)/2;

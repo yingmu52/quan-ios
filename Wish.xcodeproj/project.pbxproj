@@ -16,8 +16,6 @@
 		AE01726A1A65D3140014266F /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0172681A65D3140014266F /* MenuViewController.m */; };
 		AE0E794B1A76EB50007C48EE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E794A1A76EB50007C48EE /* Reachability.m */; };
 		AE0E794C1A76EB50007C48EE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E794A1A76EB50007C48EE /* Reachability.m */; };
-		AE1B6E381A6D884F0026F3CE /* HomeCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE1B6E371A6D884F0026F3CE /* HomeCardView.xib */; };
-		AE1B6E391A6D884F0026F3CE /* HomeCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE1B6E371A6D884F0026F3CE /* HomeCardView.xib */; };
 		AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
 		AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
 		AE2F1C841A7A1A1800A32CB5 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2F1C831A7A1A1800A32CB5 /* UIImage+ImageEffects.m */; };
@@ -113,7 +111,6 @@
 		AE0172681A65D3140014266F /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		AE0E79491A76EB50007C48EE /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		AE0E794A1A76EB50007C48EE /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		AE1B6E371A6D884F0026F3CE /* HomeCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCardView.xib; sourceTree = "<group>"; };
 		AE1B6E3A1A6D89FC0026F3CE /* HomeCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCardView.h; sourceTree = "<group>"; };
 		AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCardView.m; sourceTree = "<group>"; };
 		AE2F1C821A7A1A1800A32CB5 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
@@ -370,7 +367,6 @@
 				AE479E9D1A6F775C00366A0A /* PostViewController.m */,
 				AE1B6E3A1A6D89FC0026F3CE /* HomeCardView.h */,
 				AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */,
-				AE1B6E371A6D884F0026F3CE /* HomeCardView.xib */,
 				AEF7F2951A686FDB0022410B /* HomeViewController.h */,
 				AEF7F2961A686FDB0022410B /* HomeViewController.m */,
 			);
@@ -531,7 +527,6 @@
 				AE01724D1A65CD8E0014266F /* Images.xcassets in Resources */,
 				AE30EE6F1A6E1E520044740D /* snow.jpg in Resources */,
 				AEF7F2A01A6875360022410B /* Main.storyboard in Resources */,
-				AE1B6E381A6D884F0026F3CE /* HomeCardView.xib in Resources */,
 				AEEC6C6F1A6DB0FC0021B7E4 /* HeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -543,7 +538,6 @@
 				AEF7F29D1A6871F00022410B /* Images.xcassets in Resources */,
 				AE30EE701A6E1E520044740D /* snow.jpg in Resources */,
 				AEF7F2A11A6875360022410B /* Main.storyboard in Resources */,
-				AE1B6E391A6D884F0026F3CE /* HomeCardView.xib in Resources */,
 				AEEC6C701A6DB0FC0021B7E4 /* HeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -20,7 +20,6 @@
 
 @implementation HomeCardView
 
-
 - (void)setPlan:(Plan *)plan
 {
 //    NSData *data = UIImageJPEGRepresentation(plan.image, 1);
@@ -63,46 +62,13 @@
 }
 
 
-+ (instancetype)instantiateFromNibWithSuperView:(UIView *)superView
-{
-    NSString *nibname = [NSString stringWithFormat:@"%@", [self class]];
-    HomeCardView *contentView = [[[NSBundle mainBundle] loadNibNamed:nibname
-                                                               owner:nil
-                                                             options:nil] firstObject];
-    
-    contentView.translatesAutoresizingMaskIntoConstraints = NO;
-    [superView addSubview:contentView];
-    
-    // This is important:
-    // https://github.com/zhxnlai/ZLSwipeableView/issues/9
-    NSDictionary *metrics = @{@"height" : @(superView.bounds.size.height),
-                              @"width" : @(superView.bounds.size.width)
-                              };
-    NSDictionary *views = NSDictionaryOfVariableBindings(contentView);
-    [superView addConstraints:
-     [NSLayoutConstraint
-      constraintsWithVisualFormat:@"H:|[contentView(width)]"
-      options:0
-      metrics:metrics
-      views:views]];
-    [superView addConstraints:[NSLayoutConstraint
-                          constraintsWithVisualFormat:
-                          @"V:|[contentView(height)]"
-                          options:0
-                          metrics:metrics
-                          views:views]];
-
-    
-    return contentView;
-}
-
 - (void)awakeFromNib
 {
     // Shadow
     self.layer.shadowColor = [UIColor blackColor].CGColor;
     self.layer.shadowOpacity = 0.33;
     self.layer.shadowOffset = CGSizeMake(0, 1.5);
-    self.layer.shadowRadius = 2.0;
+    self.layer.shadowRadius = 4.0;
     self.layer.shouldRasterize = YES;
     self.layer.rasterizationScale = [[UIScreen mainScreen] scale];
     // Corner Radius
@@ -125,6 +91,7 @@
 
 - (IBAction)deletePressed:(UIButton *)sender{
     [self.delegate homeCardView:self didPressedButton:sender];
+    [self dismissMoreView:sender];
 }
 
 - (void)backgroundTaped{

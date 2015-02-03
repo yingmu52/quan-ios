@@ -16,11 +16,12 @@
 @end
 
 @interface HomeCardView : UICollectionViewCell
-
 @property (nonatomic,strong) Plan *plan;
-
 @property (nonatomic,weak) id <HomeCardViewDelegate> delegate;
 
-+ (instancetype)instantiateFromNibWithSuperView:(UIView *)superView;
+
+- (IBAction)dismissMoreView:(id)sender;
+
+- (IBAction)showMoreView:(id)sender;
 
 @end
