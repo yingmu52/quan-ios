@@ -126,19 +126,16 @@ const NSUInteger maxCardNum = 10;
     }
 }
 
-- (void)didTapOnHomeCardView:(HomeCardView *)cardView
-{
-//    [self performSegueWithIdentifier:@"showPlanDetailFromHome" sender:nil];
-}
+
 #pragma mark - Camera Util
 
 - (IBAction)showCamera:(UIButton *)sender{
-//    UIImagePickerController *controller = [SystemUtil showCamera:self];
-//    if (controller) {
-//        [self presentViewController:controller
-//                           animated:YES
-//                         completion:nil];
-//    }
+    UIImagePickerController *controller = [SystemUtil showCamera:self];
+    if (controller) {
+        [self presentViewController:controller
+                           animated:YES
+                         completion:nil];
+    }
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -153,10 +150,16 @@ const NSUInteger maxCardNum = 10;
 
 #pragma - 
 
+- (void)didTapOnHomeCardView:(HomeCardView *)cardView
+{
+    [self performSegueWithIdentifier:@"showPlanDetailFromHome" sender:cardView];
+}
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"showPlanDetailFromHome"]) {
-//        WishDetailViewController *controller = segue.destinationViewController;
+        WishDetailViewController *controller = segue.destinationViewController;
+        controller.plan = [self.fetchedRC objectAtIndexPath:[self.cardCollectionView indexPathForCell:sender]];
 #warning need to update!
     }
 }
