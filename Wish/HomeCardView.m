@@ -9,6 +9,7 @@
 #import "HomeCardView.h"
 #import "Theme.h"
 #import "SystemUtil.h"
+#import "Feed.h"
 @interface HomeCardView ()
 @property (nonatomic,weak) IBOutlet UIView *moreView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -33,7 +34,7 @@
     self.dateLabel.text = [NSString stringWithFormat:@"最后纪录时间：%@",dateString];
 
     
-    self.subtitleLabel.text = @"已留0个努力瞬间";
+    self.subtitleLabel.text = [NSString stringWithFormat:@"已留下%@个努力瞬间",@(plan.feeds.count)];
     
     NSInteger totalDays = [SystemUtil daysBetween:plan.createDate and:plan.finishDate];
     NSInteger pastDays = [SystemUtil daysBetween:plan.createDate and:[NSDate date]];

@@ -290,7 +290,7 @@
         //        NSLog(@"%@",NSStringFromCGSize(editedImage.size));
         //create Task
         [Feed createFeed:self.plan.planTitle image:self.capturedImage inPlan:self.plan];
-
+        [self.headerView updateSubtitle:self.plan.feeds.count];
     }];
 }
 

@@ -23,7 +23,7 @@
     _plan = plan;
     if (plan) {
         [self updateTitle:plan.planTitle];
-        [self updateSubtitle:0]; //plan.tasks count
+        [self updateSubtitle:plan.feeds.count]; //plan.tasks count
         
         NSInteger pastDays = [SystemUtil daysBetween:plan.createDate and:[NSDate date]];
         NSInteger totalDays = [SystemUtil daysBetween:plan.createDate and:plan.finishDate];

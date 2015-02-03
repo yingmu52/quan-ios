@@ -169,11 +169,8 @@ const NSUInteger maxCardNum = 10;
 
 -(void)setupCollectionView {
     self.cardCollectionView.backgroundColor = [UIColor clearColor];
-//    MKPagePeekFlowLayout *layout = [[MKPagePeekFlowLayout alloc] init];
-//    [self.cardCollectionView setCollectionViewLayout:layout];
     UICollectionViewFlowLayout *flow = [[UICollectionViewFlowLayout alloc] init];
-    flow.minimumInteritemSpacing = -5;
-    flow.minimumLineSpacing = -5;
+    flow.minimumInteritemSpacing = 0.0f;
     flow.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     self.cardCollectionView.collectionViewLayout = flow;
 }
@@ -194,13 +191,14 @@ const NSUInteger maxCardNum = 10;
     
 }
 
-
+//
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return [self pageSize];
+    return CGSizeMake(self.cardCollectionView.frame.size.width - 20.0,
+                      self.cardCollectionView.frame.size.height);
 }
 
-- (CGSize)pageSize{
-    return CGSizeMake(self.view.frame.size.width - 20.0, self.cardCollectionView.frame.size.height);
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
+    return 0.0f;
 }
 
 

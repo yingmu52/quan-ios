@@ -21,6 +21,10 @@
     feed.image = image;
     feed.createDate = [NSDate date];
     feed.plan = plan;
+
+    
+    //update plan
+    plan.image = image;
     if ([context save:nil]) {
         //upload to server
     }
