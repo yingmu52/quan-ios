@@ -35,6 +35,8 @@
 		AE479E9F1A6F775C00366A0A /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479E9D1A6F775C00366A0A /* PostViewController.m */; };
 		AE479EAE1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479EAD1A6F7A5B00366A0A /* Plan+PlanCRUD.m */; };
 		AE479EAF1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479EAD1A6F7A5B00366A0A /* Plan+PlanCRUD.m */; };
+		AE664F341A8029C2006294E9 /* MKPagePeekFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AE664F331A8029C2006294E9 /* MKPagePeekFlowLayout.m */; };
+		AE664F351A8029C2006294E9 /* MKPagePeekFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AE664F331A8029C2006294E9 /* MKPagePeekFlowLayout.m */; };
 		AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE72E9541A66F2AA0046B38D /* MenuCell.m */; };
 		AEBFCA371A78614100686EFE /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA361A78614100686EFE /* PostDetailViewController.m */; };
 		AEBFCA381A78614100686EFE /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA361A78614100686EFE /* PostDetailViewController.m */; };
@@ -129,6 +131,8 @@
 		AE479E9D1A6F775C00366A0A /* PostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostViewController.m; sourceTree = "<group>"; };
 		AE479EAC1A6F7A5B00366A0A /* Plan+PlanCRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Plan+PlanCRUD.h"; sourceTree = "<group>"; };
 		AE479EAD1A6F7A5B00366A0A /* Plan+PlanCRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Plan+PlanCRUD.m"; sourceTree = "<group>"; };
+		AE664F321A8029C2006294E9 /* MKPagePeekFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKPagePeekFlowLayout.h; sourceTree = "<group>"; };
+		AE664F331A8029C2006294E9 /* MKPagePeekFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKPagePeekFlowLayout.m; sourceTree = "<group>"; };
 		AE72E9531A66F2AA0046B38D /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
 		AE72E9541A66F2AA0046B38D /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		AEBFCA351A78614100686EFE /* PostDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostDetailViewController.h; sourceTree = "<group>"; };
@@ -390,6 +394,8 @@
 		AEF7F2661A686E8A0022410B /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				AE664F321A8029C2006294E9 /* MKPagePeekFlowLayout.h */,
+				AE664F331A8029C2006294E9 /* MKPagePeekFlowLayout.m */,
 				AE7714DD1A7B735900422909 /* SLCoverFlow */,
 				AE2F1C811A7A1A0200A32CB5 /* BlurTheFuckOn */,
 				AE0E79481A76EB3E007C48EE /* Reachability */,
@@ -574,6 +580,7 @@
 				AEEC6C4D1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */,
 				AE0172691A65D3140014266F /* MenuViewController.m in Sources */,
 				AED68EE41A70399A00CDC0DF /* FetchCenter.m in Sources */,
+				AE664F341A8029C2006294E9 /* MKPagePeekFlowLayout.m in Sources */,
 				AEEC6C621A6DB0010021B7E4 /* NSArray+PureLayout.m in Sources */,
 				AE0E794B1A76EB50007C48EE /* Reachability.m in Sources */,
 				AE479EAE1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */,
@@ -592,6 +599,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEF7F2841A686E8A0022410B /* ECSlidingAnimationController.m in Sources */,
+				AE664F351A8029C2006294E9 /* MKPagePeekFlowLayout.m in Sources */,
 				AEF7F28C1A686E8B0022410B /* UIViewController+ECSlidingViewController.m in Sources */,
 				AEF7F28A1A686E8B0022410B /* ECSlidingViewController.m in Sources */,
 				AEF7F2941A686FA30022410B /* Theme.m in Sources */,

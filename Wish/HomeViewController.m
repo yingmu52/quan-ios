@@ -17,7 +17,7 @@
 #import "AppDelegate.h"
 #import "FetchCenter.h"
 #import "WishDetailViewController.h"
-
+#import "MKPagePeekFlowLayout.h"
 const NSUInteger maxCardNum = 10;
 
 @interface HomeViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,HomeCardViewDelegate>
@@ -154,15 +154,14 @@ const NSUInteger maxCardNum = 10;
 -(void)setupCollectionView {
 
     NSString *nibName = [NSString stringWithFormat:@"%@", [HomeCardView class]];
-    UINib *nib = [UINib nibWithNibName:nibName bundle:[NSBundle mainBundle]];
-    [self.cardCollectionView registerNib:nib forCellWithReuseIdentifier:@"HomeCardCell"];
-    
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-    [flowLayout setMinimumInteritemSpacing:0.0f];
-    [flowLayout setMinimumLineSpacing:0.0f];
+    UINib *nib = [UINib nibWithNibName:nibName
+                                bundle:[NSBundle mainBundle]];
+    [self.cardCollectionView registerNib:nib
+              forCellWithReuseIdentifier:@"HomeCardCell"];
+    self.cardCollectionView.backgroundColor = [UIColor clearColor];
     [self.cardCollectionView setPagingEnabled:YES];
-    [self.cardCollectionView setCollectionViewLayout:flowLayout];
+    MKPagePeekFlowLayout *layout = [[MKPagePeekFlowLayout alloc] init];
+    [self.cardCollectionView setCollectionViewLayout:layout];
 }
 
 
@@ -175,7 +174,6 @@ const NSUInteger maxCardNum = 10;
     HomeCardView *cell = (HomeCardView *)[collectionView dequeueReusableCellWithReuseIdentifier:@"HomeCardCell" forIndexPath:indexPath];
     
     cell.plan = [self.myPlans objectAtIndex:indexPath.row];
-
     
     return cell;
     

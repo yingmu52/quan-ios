@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -847,7 +847,7 @@
                                     <action selector="showCamera:" destination="wW8-3k-YAd" eventType="touchUpInside" id="7pm-fI-R3O"/>
                                 </connections>
                             </button>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uow-gD-atl">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uow-gD-atl">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Pbg-Kr-TUR">
@@ -872,6 +872,7 @@
                             <constraint firstAttribute="centerX" secondItem="uow-gD-atl" secondAttribute="centerX" constant="8" id="8FV-vm-4C8">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
+                            <constraint firstItem="uow-gD-atl" firstAttribute="top" secondItem="Nsd-Rd-GUf" secondAttribute="bottom" id="IG5-Yb-o8s"/>
                             <constraint firstItem="GnW-tC-6ma" firstAttribute="centerX" secondItem="v3t-7r-vWJ" secondAttribute="centerX" id="TgN-Hd-UHt"/>
                             <constraint firstItem="GnW-tC-6ma" firstAttribute="top" secondItem="uow-gD-atl" secondAttribute="bottom" constant="14" id="aAD-zS-YJ9">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
@@ -892,6 +893,7 @@
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="8FV-vm-4C8"/>
+                                <exclude reference="IG5-Yb-o8s"/>
                                 <exclude reference="cMM-qC-5i3"/>
                                 <exclude reference="mHs-yH-vME"/>
                                 <exclude reference="54P-uw-P2g"/>
@@ -909,8 +911,9 @@
                             </mask>
                             <mask key="constraints">
                                 <include reference="8FV-vm-4C8"/>
+                                <include reference="IG5-Yb-o8s"/>
                                 <include reference="cMM-qC-5i3"/>
-                                <include reference="mHs-yH-vME"/>
+                                <exclude reference="mHs-yH-vME"/>
                                 <exclude reference="54P-uw-P2g"/>
                                 <include reference="TgN-Hd-UHt"/>
                                 <include reference="aAD-zS-YJ9"/>
