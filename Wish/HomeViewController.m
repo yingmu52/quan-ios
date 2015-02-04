@@ -19,6 +19,7 @@
 #import "WishDetailViewController.h"
 #import "HomeCardFlowLayout.h"
 
+
 const NSUInteger maxCardNum = 10;
 
 @interface HomeViewController () <NSFetchedResultsControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HomeCardViewDelegate>
@@ -33,6 +34,21 @@ const NSUInteger maxCardNum = 10;
 @end
 
 @implementation HomeViewController
+
+
+- (void)fetchPlans{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),
+                 ^{
+    NSError *_error;
+    if (![self.fetchedRC performFetch:&_error]) {
+         NSLog(@"Unresolved error %@, %@", _error, [_error userInfo]);
+    }                   dispatch_async(dispatch_get_main_queue(),
+                                    ^{
+                                      [self.cardCollectionView reloadData];
+                                    });
+                 });
+
+}
 
 - (NSFetchedResultsController *)fetchedRC
 {
@@ -52,7 +68,6 @@ const NSUInteger maxCardNum = 10;
     self.fetchedRC = newFRC;
     _fetchedRC.delegate = self;
     
-    
     // Perform Fetch
     NSError *error = nil;
     [_fetchedRC performFetch:&error];
@@ -61,7 +76,6 @@ const NSUInteger maxCardNum = 10;
         NSLog(@"Unable to perform fetch.");
         NSLog(@"%@, %@", error, error.localizedDescription);
     }
-    
     return _fetchedRC;
     
     
@@ -125,7 +139,6 @@ const NSUInteger maxCardNum = 10;
         [plan deleteSelf:[AppDelegate getContext]];
     }
 }
-
 - (void)didShowMoreView:(UIView *)moreView
 {
     self.cardCollectionView.scrollEnabled = NO;
@@ -135,6 +148,7 @@ const NSUInteger maxCardNum = 10;
 {
     self.cardCollectionView.scrollEnabled = YES;
 }
+
 #pragma mark - Camera Util
 
 - (IBAction)showCamera:(UIButton *)sender{
@@ -149,13 +163,12 @@ const NSUInteger maxCardNum = 10;
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [self dismissViewControllerAnimated:NO completion:^{
-//        [Feed createFeed:@"从主页创建的feed"
-//                   image:(UIImage *)info[UIImagePickerControllerEditedImage]
-//                  inPlan:[self planAtCenter]];
-//        [self performSegueWithIdentifier:@"showPlanDetailFromHome" sender:nil];
+        self.capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage]; // this line and next line is sequentally important
+//        [self performSegueWithIdentifier:@"showPostFromHome" sender:nil];
 //        NSLog(@"%@",NSStringFromCGSize(editedImage.size));
     }];
 }
+
 
 #pragma - 
 
@@ -197,11 +210,12 @@ const NSUInteger maxCardNum = 10;
     
 }
 
--(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(self.cardCollectionView.frame.size.width - 15.0,
-                      self.cardCollectionView.frame.size.height);
-}
 
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CGSize size = collectionView.frame.size;
+    size.width -= 10.0;
+    return size;
+}
 
 #pragma mark - FetchedResultsController
 
@@ -217,7 +231,6 @@ const NSUInteger maxCardNum = 10;
     {
         case NSFetchedResultsChangeInsert:
             [self.cardCollectionView insertItemsAtIndexPaths:@[newIndexPath]];
-//            [self.cardCollectionView reloadData];
             break;
             
         case NSFetchedResultsChangeDelete:
@@ -234,11 +247,11 @@ const NSUInteger maxCardNum = 10;
     }
 }
 
-//- (void)controllerDidChangeContent:
-//(NSFetchedResultsController *)controller
-//{
-//    [self.cardCollectionView reloadData];
-//}
+- (void)controllerDidChangeContent:
+(NSFetchedResultsController *)controller
+{
+    [self.cardCollectionView reloadData];
+}
 
 
 @end

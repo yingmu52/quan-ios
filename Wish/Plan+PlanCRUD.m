@@ -33,11 +33,12 @@
         plan.planTitle = title;
         plan.finishDate = date;
         plan.isPrivate = @(isPrivate);
-        plan.image = image;
+        plan.image = UIImageJPEGRepresentation(image, 0.1);
         plan.createDate = [NSDate date];
+        plan.userDeleted = @(NO);
         
-        if ([context save:nil]) {
-//            [FetchCenter uploadToCreatePlan:plan];
+        if ([context save:nil] && [SystemUtil hasActiveInternetConnection]) {
+            [FetchCenter uploadToCreatePlan:plan];
         }
 
     }
@@ -46,28 +47,24 @@
 
 - (void)deleteSelf:(NSManagedObjectContext *)context
 {
+    self.userDeleted = @(YES);
     if ([SystemUtil hasActiveInternetConnection]){     //active internet
         if (self.planId && [self.ownerId isEqualToString:[SystemUtil getOwnerId]]){
             [FetchCenter postToDeletePlan:self];
-        }else{
-            [context deleteObject:self];
-            NSLog(@"deleting from loca, no need to post delete request");
         }
-    }else{    //inactive internet
-        self.userDeleted = @(YES);
     }
-    [context save:nil];
-    
+    [context deleteObject:self];    
 }
 
 + (NSArray *)loadMyPlans:(NSManagedObjectContext *)context
 {
-    NSPredicate *notDeleted = [NSPredicate predicateWithFormat:@"userDeleted = NO OR userDeleted = nil"];
+    NSPredicate *notDeleted = [NSPredicate predicateWithFormat:@"userDeleted = NO"];
     return [Plan fetchWith:@"Plan"
                          predicate:notDeleted //fetch all non user deleted
                   keyForDescriptor:@"createDate"
                          inContext:context];
 }
+
 
 + (NSArray *)fetchWith:(NSString *)entityName
         predicate:(NSPredicate *)predicate

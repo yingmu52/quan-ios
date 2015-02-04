@@ -25,9 +25,21 @@
 
 @property (nonatomic,strong) Plan *createdPlan;
 @end
-
 @implementation PostDetailViewController
+@synthesize selectedDate = _selectedDate;
 
+
+- (NSDate *)tomorrow{
+    return [NSDate dateWithTimeIntervalSinceNow:3600]; // minimum date is from tomorrow on
+}
+
+- (NSDate *)selectedDate
+{
+    if (!_selectedDate) {
+        _selectedDate = [self tomorrow];
+    }
+    return _selectedDate;
+}
 - (void)setSelectedDate:(NSDate *)selectedDate
 {
     _selectedDate = selectedDate;
@@ -54,7 +66,7 @@
     self.datePicker = [[UIDatePicker alloc] initWithFrame:frame];
     self.datePicker.backgroundColor = [UIColor whiteColor];
     self.datePicker.datePickerMode = UIDatePickerModeDate;
-    self.datePicker.minimumDate = [NSDate dateWithTimeIntervalSinceNow:3600]; // minimum date is from tomorrow on
+    self.datePicker.minimumDate = [self tomorrow];
 
     [self.datePicker addTarget:self action:@selector(pickerChanged:)
               forControlEvents:UIControlEventValueChanged];

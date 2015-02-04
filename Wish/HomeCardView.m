@@ -25,41 +25,45 @@
 {
 //    NSData *data = UIImageJPEGRepresentation(plan.image, 1);
 //    NSLog(@">>>>>>>>>>>>>>>>>>>>>>>>>%d",data.length);
-    self.imageView.image = plan.image;
-    self.titleLabel.text = plan.planTitle;
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"yyyy-MM-dd";
-    NSString *dateString = [formatter stringFromDate:plan.createDate];
-    self.dateLabel.text = [NSString stringWithFormat:@"最后纪录时间：%@",dateString];
+    _plan = plan;
+    if (_plan) {
+        self.imageView.image = _plan.image;
+        self.titleLabel.text = _plan.planTitle;
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyy-MM-dd";
+        NSString *dateString = [formatter stringFromDate:plan.createDate];
+        self.dateLabel.text = [NSString stringWithFormat:@"最后纪录时间：%@",dateString];
+        
+        
+        self.subtitleLabel.text = [NSString stringWithFormat:@"已留下%@个努力瞬间",@(plan.feeds.count)];
+        
+        NSInteger totalDays = [SystemUtil daysBetween:_plan.createDate and:_plan.finishDate];
+        NSInteger pastDays = [SystemUtil daysBetween:_plan.createDate and:[NSDate date]];
+        
+        
+        NSDictionary *baseAttrs = @{NSFontAttributeName:[UIFont systemFontOfSize:20]};
+        NSDictionary *countAttrs1 = @{NSFontAttributeName:[UIFont fontWithName:@"Arial" size:40]};
+        NSDictionary *countAttrs2 = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00bac3"]};
+        
+        NSMutableAttributedString *final = [[NSMutableAttributedString alloc] initWithString:@"剩余 "
+                                                                                  attributes:baseAttrs];
+        
+        NSMutableAttributedString *back = [[NSMutableAttributedString alloc] initWithString:@" 天"
+                                                                                 attributes:baseAttrs];
+        
+        NSMutableAttributedString *mid = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld/%ld",(long)pastDays,(long)totalDays]
+                                                                                attributes:countAttrs1];
+        [mid addAttributes:countAttrs2
+                     range:[mid.string rangeOfString:[NSString stringWithFormat:@"%ld",(long)pastDays]]];
+        
+        
+        
+        [final appendAttributedString:mid];
+        [final appendAttributedString:back];
+        self.countDownLabel.attributedText = final;
 
-    
-    self.subtitleLabel.text = [NSString stringWithFormat:@"已留下%@个努力瞬间",@(plan.feeds.count)];
-    
-    NSInteger totalDays = [SystemUtil daysBetween:plan.createDate and:plan.finishDate];
-    NSInteger pastDays = [SystemUtil daysBetween:plan.createDate and:[NSDate date]];
-
-    
-    NSDictionary *baseAttrs = @{NSFontAttributeName:[UIFont systemFontOfSize:20]};
-    NSDictionary *countAttrs1 = @{NSFontAttributeName:[UIFont fontWithName:@"Arial" size:40]};
-    NSDictionary *countAttrs2 = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00bac3"]};
-    
-    NSMutableAttributedString *final = [[NSMutableAttributedString alloc] initWithString:@"剩余 "
-                                                                             attributes:baseAttrs];
-    
-    NSMutableAttributedString *back = [[NSMutableAttributedString alloc] initWithString:@" 天"
-                                                                             attributes:baseAttrs];
-    
-    NSMutableAttributedString *mid = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld/%ld",(long)pastDays,(long)totalDays]
-                                                                             attributes:countAttrs1];
-    [mid addAttributes:countAttrs2
-                 range:[mid.string rangeOfString:[NSString stringWithFormat:@"%ld",(long)pastDays]]];
-
-    
-
-    [final appendAttributedString:mid];
-    [final appendAttributedString:back];
-    self.countDownLabel.attributedText = final;
+    }
 }
 
 
