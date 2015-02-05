@@ -72,8 +72,8 @@
               forControlEvents:UIControlEventValueChanged];
 
     self.pickerToolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(.0, self.datePicker.frame.origin.y - 44.0, self.datePicker.frame.size.width, 44.0)];
-    self.pickerToolBar.backgroundColor = self.datePicker.backgroundColor;
-    
+    self.pickerToolBar.barTintColor = self.datePicker.backgroundColor;
+    self.pickerToolBar.translucent = NO;
     UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithTitle:@"取消"
                                                                style:UIBarButtonItemStylePlain
                                                               target:self
