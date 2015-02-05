@@ -10,10 +10,13 @@
 #define BASE_URL @"http://182.254.167.228/superplan/"
 #define PLAN @"plan/"
 #define GET_LIST @"splan_plan_getlist.php"
-#define PIC @"pic/"
 #define CREATE_PLAN @"splan_plan_create.php"
-#define UPLOAD_IMAGE @"splan_pic_upload.php"
 #define DELETE_PLAN @"splan_plan_delete_id.php"
+
+#define FEED @"feeds/"
+#define PIC @"pic/"
+#define UPLOAD_IMAGE @"splan_pic_upload.php"
+#define CREATE_FEED @"splan_feeds_create.php"
 @implementation FetchCenter
 
 
@@ -34,7 +37,7 @@
 //        [configuration setHTTPMaximumConnectionsPerHost:1];
 //        session = [NSURLSession sessionWithConfiguration:configuration];
 //    });
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     return session;
 }
 + (void)fetchPlanList:(NSString *)ownerId{
@@ -66,43 +69,65 @@
             
             NSString *backGroundPic = [planJson valueForKeyPath:@"data.backGroudPic"];
             // i.e. bg3, means from 3
-            plan.backgroundNum = @([[backGroundPic substringFromIndex:2] integerValue]);
-            
-            NSLog(@"fetched plan ID %@",fetchedPlanID);
-            NSLog(@"background num %@",backGroundPic);
-            NSLog(@"upload plan successed");
+            plan.backgroundNum = [plan extractNumberFromString:backGroundPic];
+            NSLog(@"upload plan successed, ID: %@, #BG: %@",fetchedPlanID,backGroundPic);
+        }else{
+            NSLog(@"Fail to create plan %@",planJson);
             
         }
     }];
     [creatTask resume];
 }
 
-//+ (void)uploadToCreatePlan1:(Plan *)plan{
-//    
-//    NSString *rqtUploadImage = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PIC,UPLOAD_IMAGE];
-//    //upload image
-//    NSData *imgData = UIImageJPEGRepresentation(plan.image, 0.5);
-//    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-//    NSURLRequest *request = [self.class request:rqtUploadImage method:@"POST"];
-//    NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:imgData completionHandler:^(NSData *data,NSURLResponse *response,NSError *error)
-//    {
-//        if (!error){ //upload image successed
-//            
-//            NSDictionary *imgJson = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-//            //get image id
-//            NSString *fetchedImageId = [imgJson valueForKeyPath:@"data.id"];
-//            if (fetchedImageId){
-////                plan.imageId = fetchedImageId;
-//                NSLog(@"fetched image ID: %@",fetchedImageId);
-//
-//                
-//               
-//            }
-//        }
-//    }];
-//    [uploadTask resume];
-//    
-//}
++ (void)uploadToCreateFeed:(Feed *)feed{
+//    NSLog(@"%@",feed);
+//    NSLog(@"%@",feed.plan);
+    NSString *rqtUploadImage = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PIC,UPLOAD_IMAGE];
+    //upload image
+    NSData *imgData = UIImageJPEGRepresentation(feed.image, 0.1);
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    NSURLRequest *request = [self.class request:rqtUploadImage method:@"POST"];
+    NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:imgData
+                                                      completionHandler:^(NSData *data,NSURLResponse *response,NSError *error)
+      {
+          NSDictionary *imgJson = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+
+          if (!error && ![imgJson[@"ret"] boolValue]){ //upload image successed
+              //get image id
+              NSString *fetchedImageId = [imgJson valueForKeyPath:@"data.id"];
+              if (fetchedImageId){
+                  feed.imageId = fetchedImageId;
+                  NSLog(@"fetched image ID: %@",fetchedImageId);
+                  
+                  //****************create feed****************
+                  NSString *rqtCreateFeed = [NSString stringWithFormat:@"%@%@%@?picurl=%@&content=%@&planId=%@",BASE_URL,FEED,CREATE_FEED,feed.imageId,feed.feedTitle,feed.plan.planId];
+                  rqtCreateFeed = [rqtCreateFeed stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                  
+                  NSURLRequest *request = [self.class request:rqtCreateFeed method:@"GET"];
+                  NSURLSessionDataTask *creatTask = [[self.class session] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                      
+                      NSDictionary *feedJson = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                      
+                      if (!error && ![feedJson[@"ret"] boolValue]) { //create feed success
+                          //get fetched feed id
+                          //update core data - cloud and local synchronization
+                          NSString *fetchedFeedID = [feedJson valueForKeyPath:@"data.id"];
+                          feed.feedId = fetchedFeedID;
+                          NSLog(@"upload feed successed, ID: %@",fetchedFeedID);
+                      }else{
+                          NSLog(@"Fail to create feed %@",feed);
+                          
+                      }
+                  }];
+                  [creatTask resume];
+
+                  
+              }
+          }
+      }];
+    [uploadTask resume];
+
+}
 
 
 + (void)postToDeletePlan:(Plan *)plan

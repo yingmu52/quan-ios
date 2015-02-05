@@ -2,7 +2,7 @@
 //  Feed.m
 //  Wish
 //
-//  Created by Xinyi Zhuang on 2015-01-29.
+//  Created by Xinyi Zhuang on 2015-02-04.
 //  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
 //
 
@@ -12,10 +12,11 @@
 
 @implementation Feed
 
-@dynamic image;
-@dynamic feedTitle;
 @dynamic createDate;
+@dynamic feedTitle;
+@dynamic image;
 @dynamic imageId;
+@dynamic feedId;
 @dynamic plan;
 
 @end

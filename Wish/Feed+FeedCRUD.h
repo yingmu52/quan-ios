@@ -12,4 +12,5 @@
 
 @interface Feed (FeedCRUD)
 + (Feed *)createFeed:(NSString *)title image:(UIImage *)image inPlan:(Plan *)plan;
+
 @end

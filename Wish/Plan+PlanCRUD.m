@@ -51,6 +51,8 @@
     if ([SystemUtil hasActiveInternetConnection]){     //active internet
         if (self.planId && [self.ownerId isEqualToString:[SystemUtil getOwnerId]]){
             [FetchCenter postToDeletePlan:self];
+        }else{
+            NSLog(@"delete from local");
         }
     }
     [context deleteObject:self];    
@@ -87,6 +89,10 @@
     NSError *error = nil;
     return [context executeFetchRequest:fetchRequest error:&error];
     
+}
+
+- (NSNumber *)extractNumberFromString:(NSString *)string{
+    return @([[string substringFromIndex:2] integerValue]);
 }
 @end
 

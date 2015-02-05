@@ -7,7 +7,7 @@
 //
 
 #import "Feed+FeedCRUD.h"
-
+#import "FetchCenter.h"
 @implementation Feed (FeedCRUD)
 
 
@@ -27,9 +27,12 @@
     plan.image = image;
     if ([context save:nil]) {
         //upload to server
+        [FetchCenter uploadToCreateFeed:feed];
     }
 
     return feed;
 }
+
+
 
 @end

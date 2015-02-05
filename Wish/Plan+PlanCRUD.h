@@ -27,4 +27,6 @@
              predicate:(NSPredicate *)predicate
       keyForDescriptor:(NSString *)key
              inContext:(NSManagedObjectContext *)context;
+
+- (NSNumber *)extractNumberFromString:(NSString *)string;
 @end

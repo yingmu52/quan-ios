@@ -289,8 +289,12 @@
         self.capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage]; // this line and next line is sequentally important
         //        NSLog(@"%@",NSStringFromCGSize(editedImage.size));
         //create Task
-        [Feed createFeed:self.plan.planTitle image:self.capturedImage inPlan:self.plan];
-        [self.headerView updateSubtitle:self.plan.feeds.count];
+        if (self.capturedImage) {
+            [Feed createFeed:self.plan.planTitle
+                       image:self.capturedImage
+                      inPlan:self.plan];
+            [self.headerView updateSubtitle:self.plan.feeds.count];
+        }
     }];
 }
 
