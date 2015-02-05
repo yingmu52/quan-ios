@@ -106,7 +106,7 @@
     self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:shareBtn],
                                                 [[UIBarButtonItem alloc] initWithCustomView:composeBtn]];
 
-    self.view.backgroundColor = [self currenetBackgroundColor];
+    self.tableView.backgroundColor = [self currenetBackgroundColor];
 
 }
 - (void)showCenterIcon{
@@ -164,7 +164,7 @@
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Feed"];
     request.predicate = [NSPredicate predicateWithFormat:@"plan = %@",self.plan];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
-    [request setFetchBatchSize:5];
+    [request setFetchBatchSize:3];
     
     //create FetchedResultsController with context, sectionNameKeyPath, and you can cache here, so the next work if the same you can use your cash file.
     NSFetchedResultsController *newFRC =
@@ -173,16 +173,17 @@
                                                    cacheName:nil];
     self.fetchedRC = newFRC;
     _fetchedRC.delegate = self;
-    
-    
     // Perform Fetch
-    NSError *error = nil;
-    [_fetchedRC performFetch:&error];
+    dispatch_queue_t fetchQ = dispatch_queue_create("Wish Detail Fetch Q", NULL);
+    dispatch_async(fetchQ, ^{
+        NSError *error = nil;
+        [_fetchedRC performFetch:&error];
+        if (error) {
+            NSLog(@"Unable to perform fetch.");
+            NSLog(@"%@, %@", error, error.localizedDescription);
+        }
+    });
     
-    if (error) {
-        NSLog(@"Unable to perform fetch.");
-        NSLog(@"%@, %@", error, error.localizedDescription);
-    }
     
     return _fetchedRC;
     
@@ -231,6 +232,7 @@
 - (void)controllerDidChangeContent:
 (NSFetchedResultsController *)controller
 {
+    self.tableView.backgroundColor = [self currenetBackgroundColor];
     [self.tableView endUpdates];
 }
 
@@ -294,17 +296,20 @@
                        image:self.capturedImage
                       inPlan:self.plan];
             [self.headerView updateSubtitle:self.plan.feeds.count];
-            self.view.backgroundColor = [self currenetBackgroundColor];
         }
     }];
 }
 
 - (UIColor *)currenetBackgroundColor{
-    if (!self.fetchedRC.fetchedObjects.count){
-        return [Theme wishDetailBackgroundNone:self.view];
+
+    if (!self.plan.image){
+        return [Theme wishDetailBackgroundNone:self.tableView];
     }else{
-        Feed *lastFeed = self.fetchedRC.fetchedObjects.firstObject;
-        return [UIColor colorWithPatternImage:[lastFeed.image applyDarkEffect]];
+        CGRect rect = self.view.bounds;
+        rect.origin.y -= rect.size.height;
+        rect.size.height *= 2;
+        rect.size.width *= 2;
+        return [UIColor colorWithPatternImage:[SystemUtil darkLayeredImage:[self.plan.image applyLightEffect] inRect:rect]];
     }
     
 }
