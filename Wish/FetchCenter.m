@@ -29,14 +29,6 @@
 }
 
 + (NSURLSession *)session{
-
-//    static NSURLSession *session = nil;
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken,^{
-//        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-//        [configuration setHTTPMaximumConnectionsPerHost:1];
-//        session = [NSURLSession sessionWithConfiguration:configuration];
-//    });
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     return session;
 }
