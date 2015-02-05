@@ -12,7 +12,7 @@
 #import "Theme.h"
 #import "SystemUtil.h"
 #import "Feed+FeedCRUD.h"
-
+#import "UIImage+ImageEffects.h"
 
 @interface WishDetailViewController () <UIGestureRecognizerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,NSFetchedResultsControllerDelegate>
 @property (nonatomic) CGFloat yVel;
@@ -106,7 +106,7 @@
     self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:shareBtn],
                                                 [[UIBarButtonItem alloc] initWithCustomView:composeBtn]];
 
-    self.view.backgroundColor = [Theme wishDetailBackgroundNone:self.view];
+    self.view.backgroundColor = [self currenetBackgroundColor];
 
 }
 - (void)showCenterIcon{
@@ -294,12 +294,18 @@
                        image:self.capturedImage
                       inPlan:self.plan];
             [self.headerView updateSubtitle:self.plan.feeds.count];
+            self.view.backgroundColor = [self currenetBackgroundColor];
         }
     }];
 }
 
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
+- (UIColor *)currenetBackgroundColor{
+    if (!self.fetchedRC.fetchedObjects.count){
+        return [Theme wishDetailBackgroundNone:self.view];
+    }else{
+        Feed *lastFeed = self.fetchedRC.fetchedObjects.firstObject;
+        return [UIColor colorWithPatternImage:[lastFeed.image applyDarkEffect]];
+    }
     
 }
 @end
