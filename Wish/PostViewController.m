@@ -16,7 +16,7 @@
 @property (nonatomic,weak) IBOutlet UIButton *sgtBtn2;
 @property (nonatomic,weak) IBOutlet UIButton *sgtBtn3;
 @property (nonatomic,weak) IBOutlet UIButton *sgtBtn4;
-
+@property (nonatomic,strong) UIButton *tikButton;
 @end
 
 @implementation PostViewController
@@ -24,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setUpNavigationItem];
+    [self setupViews];
     
     [self setTitlesWishArray:@[@" 每天一部电影的365天    ", //1 left 4 right
                                @" 当一个小皮匠    ",
@@ -35,6 +35,7 @@
 - (IBAction)changedTitleOnButtonClick:(UIButton *)sender{
     self.textField.text = nil;
     self.textField.text = sender.titleLabel.text;
+    [self textFieldDidUpdate];
 }
 
 - (void)setTitlesWishArray:(NSArray *)array{
@@ -66,7 +67,7 @@
                       forState:UIControlStateNormal];
 }
 
-- (void)setUpNavigationItem
+- (void)setupViews
 {
     CGRect frame = CGRectMake(0, 0, 30, 30);
     UIButton *backBtn = [Theme buttonWithImage:[Theme navBackButtonDefault]
@@ -74,15 +75,24 @@
                                       selector:@selector(popViewControllerAnimated:)
                                          frame:frame];
     
-    UIButton *nextButton = [Theme buttonWithImage:[Theme navTikButtonDefault]
+    self.tikButton = [Theme buttonWithImage:[Theme navTikButtonDisable]
                                            target:self
                                          selector:@selector(goToNextView)
                                             frame:frame];
-    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
-
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+    
+    [self.textField addTarget:self action:@selector(textFieldDidUpdate) forControlEvents:UIControlEventEditingChanged];
 }
+
+- (void)textFieldDidUpdate{
+    BOOL flag = self.textField.text.length*[self.textField.text stringByReplacingOccurrencesOfString:@" " withString:@""].length > 0;
+    self.navigationItem.rightBarButtonItem.enabled = flag;
+    UIImage *bg = flag ? [Theme navTikButtonDefault] : [Theme navTikButtonDisable];
+    [self.tikButton setImage:bg forState:UIControlStateNormal];
+}
+
 
 - (void)goToNextView
 {
@@ -97,4 +107,6 @@
         pdvc.titleFromPostView = self.textField.text;
     }
 }
+
+
 @end

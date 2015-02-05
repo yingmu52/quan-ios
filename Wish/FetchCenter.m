@@ -27,7 +27,15 @@
 
 + (NSURLSession *)session{
 
-    return [NSURLSession sharedSession];
+//    static NSURLSession *session = nil;
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken,^{
+//        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+//        [configuration setHTTPMaximumConnectionsPerHost:1];
+//        session = [NSURLSession sessionWithConfiguration:configuration];
+//    });
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]];
+    return session;
 }
 + (void)fetchPlanList:(NSString *)ownerId{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@?id=%@",BASE_URL,PLAN,GET_LIST,ownerId];

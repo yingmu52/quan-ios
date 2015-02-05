@@ -114,7 +114,9 @@
     return [UIImage imageNamed:@"nav_ic_back_default"];
 }
 
-
++ (UIImage *)navTikButtonDisable{
+    return [UIImage imageNamed:@"nav_ic_finish_disable"];
+}
 + (UIImage *)navTikButtonDefault
 {
     return [UIImage imageNamed:@"nav_ic_finish_default"];

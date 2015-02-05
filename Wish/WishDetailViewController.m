@@ -294,5 +294,9 @@
     }];
 }
 
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    
+}
 @end
 

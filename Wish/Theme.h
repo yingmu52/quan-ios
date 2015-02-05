@@ -39,7 +39,7 @@
 + (UIImage *)navMenuDefault;
 + (UIImage *)navAddDefault;
 + (UIImage *)navTikButtonDefault;
-
++ (UIImage *)navTikButtonDisable;
 
 + (UIImage *)wishDetailCameraDefault;
 + (UIImage *)wishDetailBackgroundNonLogo;
