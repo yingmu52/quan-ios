@@ -107,7 +107,7 @@
                           feed.feedId = fetchedFeedID;
                           NSLog(@"upload feed successed, ID: %@",fetchedFeedID);
                       }else{
-                          NSLog(@"Fail to create feed %@",feed);
+                          NSLog(@"Fail to create feed %@",feedJson);
                           
                       }
                   }];
