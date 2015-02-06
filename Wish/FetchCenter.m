@@ -92,7 +92,7 @@
                   NSLog(@"fetched image ID: %@",fetchedImageId);
                   
                   //****************create feed****************
-                  NSString *rqtCreateFeed = [NSString stringWithFormat:@"%@%@%@?picurl=%@&content=%@&planId=%@",BASE_URL,FEED,CREATE_FEED,feed.imageId,feed.feedTitle,feed.plan.planId];
+                  NSString *rqtCreateFeed = [NSString stringWithFormat:@"%@%@%@?ownerId=%@&picurl=%@&content=%@&planId=%@",BASE_URL,FEED,CREATE_FEED,[SystemUtil getOwnerId],feed.imageId,feed.feedTitle,feed.plan.planId];
                   rqtCreateFeed = [rqtCreateFeed stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
                   
                   NSURLRequest *request = [self.class request:rqtCreateFeed method:@"GET"];
