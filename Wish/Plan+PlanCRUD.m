@@ -38,7 +38,8 @@
         plan.userDeleted = @(NO);
         
         if ([context save:nil] && [SystemUtil hasActiveInternetConnection]) {
-            [FetchCenter uploadToCreatePlan:plan];
+//            [FetchCenter uploadToCreatePlan:plan];
+            [[[FetchCenter alloc] init] uploadToCreatePlan:plan];
         }
 
     }
@@ -50,7 +51,8 @@
     self.userDeleted = @(YES);
     if ([SystemUtil hasActiveInternetConnection]){     //active internet
         if (self.planId && [self.ownerId isEqualToString:[SystemUtil getOwnerId]]){
-            [FetchCenter postToDeletePlan:self];
+//            [FetchCenter postToDeletePlan:self];
+            [[[FetchCenter alloc] init] postToDeletePlan:self];
         }else{
             NSLog(@"delete from local");
         }

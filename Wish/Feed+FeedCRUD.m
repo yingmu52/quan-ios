@@ -27,7 +27,8 @@
     plan.image = image;
     if ([context save:nil]) {
         //upload to server
-        [FetchCenter uploadToCreateFeed:feed];
+//        [FetchCenter uploadToCreateFeed:feed];
+        [[[FetchCenter alloc] init] uploadToCreateFeed:feed];
     }
 
     return feed;
