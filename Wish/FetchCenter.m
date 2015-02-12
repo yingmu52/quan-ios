@@ -117,7 +117,7 @@ typedef enum{
           if (!error && ![json[@"ret"] boolValue]){ //upload image successed
               [self didFinishSendingPostRequest:json operation:FetchCenterPostOpUploadImageForCreatingFeed entity:obj];
           }else{
-              NSLog(@"fail to upload image");
+              NSLog(@"fail to upload image \n response:%@",json);
           }
       }];
     [uploadTask resume];

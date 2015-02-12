@@ -8,7 +8,8 @@
 
 #import "PostFeedViewController.h"
 #import "Theme.h"
-@interface PostFeedViewController ()
+#import "KeyboardAcessoryView.h"
+@interface PostFeedViewController () <UITextFieldDelegate>
 @property (nonatomic,strong) UIButton *tikButton;
 @property (nonatomic,weak) IBOutlet UIImageView *previewIcon;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
@@ -42,9 +43,12 @@
     self.navigationItem.rightBarButtonItem.enabled = NO;
     
     [self.textField addTarget:self action:@selector(textFieldDidUpdate) forControlEvents:UIControlEventEditingChanged];
+    self.textField.inputAccessoryView = [KeyboardAcessoryView instantiateFromNib:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height * 88 / 1136)];
+
 
     self.previewIcon.image = self.previewImage;
     self.title = self.navigationTitle;
+    
 }
 
 - (void)goBackToWishDetail{
@@ -58,4 +62,5 @@
     UIImage *bg = flag ? [Theme navTikButtonDefault] : [Theme navTikButtonDisable];
     [self.tikButton setImage:bg forState:UIControlStateNormal];
 }
+
 @end
