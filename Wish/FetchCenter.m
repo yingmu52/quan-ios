@@ -89,7 +89,7 @@ typedef enum{
 //            NSLog(@"GET successed \n request:%@ \n response:%@ \n",rqtStr,responseJson);
             [self didFinishSendingGetRequest:responseJson operation:op entity:obj];
         }else{
-            NSLog(@"Fail Get Request \n op: %d \n baseUrl: %@ \n parameter: %@",op,baseURL,dict);
+            NSLog(@"Fail Get Request \n op: %d \n baseUrl: %@ \n parameter: %@ \n response: %@",op,baseURL,dict,responseJson);
         }
     }];
     [task resume];

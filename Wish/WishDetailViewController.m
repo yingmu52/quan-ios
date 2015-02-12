@@ -13,8 +13,8 @@
 #import "SystemUtil.h"
 #import "Feed+FeedCRUD.h"
 #import "UIImage+ImageEffects.h"
-
-@interface WishDetailViewController () <UIGestureRecognizerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,NSFetchedResultsControllerDelegate>
+#import "PostFeedViewController.h"
+@interface WishDetailViewController () <UIGestureRecognizerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,NSFetchedResultsControllerDelegate,PostFeedViewControllerDelegate>
 @property (nonatomic) CGFloat yVel;
 @property (nonatomic) BOOL shouldShowSideWidgets;
 @property (nonatomic,strong) UIButton *logoButton;
@@ -277,6 +277,14 @@
 
 #pragma mark - camera
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"showPostFeed"]) {
+        PostFeedViewController *pfvc = (PostFeedViewController *)segue.destinationViewController;
+        pfvc.navigationTitle = self.plan.planTitle;
+        pfvc.previewImage = self.capturedImage;
+        pfvc.delegate = self;
+    }
+}
 - (void)showCamera{
     UIImagePickerController *controller = [SystemUtil showCamera:self];
     if (controller) {
@@ -293,14 +301,19 @@
         //        NSLog(@"%@",NSStringFromCGSize(editedImage.size));
         //create Task
         if (self.capturedImage) {
-            [Feed createFeed:self.plan.planTitle
-                       image:self.capturedImage
-                      inPlan:self.plan];
-            [self.headerView updateSubtitle:self.plan.feeds.count];
+            [self performSegueWithIdentifier:@"showPostFeed" sender:nil];
+            
         }
     }];
 }
 
+- (void)didFinishAddingTitleForFeed:(PostFeedViewController *)postFeedVC{
+    [Feed createFeed:postFeedVC.titleForFeed
+               image:self.capturedImage
+              inPlan:self.plan];
+    [self.headerView updateSubtitle:self.plan.feeds.count];
+
+}
 - (UIColor *)currenetBackgroundColor{
 
     if (!self.plan.image){
