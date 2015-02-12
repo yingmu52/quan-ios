@@ -70,7 +70,6 @@
     }
     UIImagePickerController *controller = [[UIImagePickerController alloc] init];
     controller.sourceType = UIImagePickerControllerSourceTypeCamera;
-    controller.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
     controller.allowsEditing = YES;
     controller.delegate = delegate;
     return controller;

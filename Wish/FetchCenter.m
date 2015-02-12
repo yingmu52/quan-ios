@@ -86,7 +86,7 @@ typedef enum{
                                                                        error:nil];
         
         if (!error && ![responseJson[@"ret"] boolValue]){ //successed "ret" = 0;
-            NSLog(@"GET successed \n request:%@ \n response:%@ \n",rqtStr,responseJson);
+//            NSLog(@"GET successed \n request:%@ \n response:%@ \n",rqtStr,responseJson);
             [self didFinishSendingGetRequest:responseJson operation:op entity:obj];
         }else{
             NSLog(@"Fail Get Request \n op: %d \n baseUrl: %@ \n parameter: %@",op,baseURL,dict);
@@ -158,7 +158,9 @@ typedef enum{
             //get plan list
             break;
         case FetchCenterOpDeletePlan:
-            [obj.managedObjectContext save:nil]; //commited delete
+            if ([obj.managedObjectContext save:nil]) {  //commited delete
+                NSLog(@"deleted successed");
+            }
             break;
         case FetchCenterOpCreateFeed:{
             NSString *fetchedFeedID = [json valueForKeyPath:@"data.id"];
