@@ -106,6 +106,8 @@ typedef enum {
 {
     if (indexPath.row == MenuTableWishList) {
         [self performSegueWithIdentifier:@"showWishList" sender:nil];
+    }else if (indexPath.row == MenuTableFollow){
+        [self performSegueWithIdentifier:@"ShowFollowingFeed" sender:nil];
     }
 }
 - (void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath

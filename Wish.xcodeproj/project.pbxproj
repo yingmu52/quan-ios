@@ -85,6 +85,9 @@
 		AEF7F2AC1A6884950022410B /* CustomBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F2A81A6884950022410B /* CustomBarItem.m */; };
 		AEF7F2AD1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F2AA1A6884950022410B /* UINavigationItem+CustomItem.m */; };
 		AEF7F2AE1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F2AA1A6884950022410B /* UINavigationItem+CustomItem.m */; };
+		AEFEE3FC1A8ED9F6007E8234 /* FollowingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFEE3FB1A8ED9F6007E8234 /* FollowingTableViewController.m */; };
+		AEFEE4001A8EE0A7007E8234 /* FollowingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFEE3FF1A8EE0A7007E8234 /* FollowingCell.m */; };
+		AEFEE4011A8EE0A7007E8234 /* FollowingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFEE3FF1A8EE0A7007E8234 /* FollowingCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -187,6 +190,10 @@
 		AEF7F2A81A6884950022410B /* CustomBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomBarItem.m; sourceTree = "<group>"; };
 		AEF7F2A91A6884950022410B /* UINavigationItem+CustomItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+CustomItem.h"; sourceTree = "<group>"; };
 		AEF7F2AA1A6884950022410B /* UINavigationItem+CustomItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+CustomItem.m"; sourceTree = "<group>"; };
+		AEFEE3FA1A8ED9F6007E8234 /* FollowingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowingTableViewController.h; sourceTree = "<group>"; };
+		AEFEE3FB1A8ED9F6007E8234 /* FollowingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowingTableViewController.m; sourceTree = "<group>"; };
+		AEFEE3FE1A8EE0A7007E8234 /* FollowingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowingCell.h; sourceTree = "<group>"; };
+		AEFEE3FF1A8EE0A7007E8234 /* FollowingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowingCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +246,7 @@
 				AEF7F29E1A6875360022410B /* Main.storyboard */,
 				AE01724C1A65CD8E0014266F /* Images.xcassets */,
 				AE01724E1A65CD8E0014266F /* LaunchScreen.xib */,
+				AEFEE3FD1A8ED9FC007E8234 /* Following */,
 				AE01723C1A65CD8E0014266F /* Supporting Files */,
 			);
 			path = Wish;
@@ -448,6 +456,17 @@
 			path = CustomNavigationItem;
 			sourceTree = "<group>";
 		};
+		AEFEE3FD1A8ED9FC007E8234 /* Following */ = {
+			isa = PBXGroup;
+			children = (
+				AEFEE3FA1A8ED9F6007E8234 /* FollowingTableViewController.h */,
+				AEFEE3FB1A8ED9F6007E8234 /* FollowingTableViewController.m */,
+				AEFEE3FE1A8EE0A7007E8234 /* FollowingCell.h */,
+				AEFEE3FF1A8EE0A7007E8234 /* FollowingCell.m */,
+			);
+			name = Following;
+			sourceTree = "<group>";
+		};
 		F3D9C90B14CD662C469ECA13 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -580,6 +599,7 @@
 				AE2F1C841A7A1A1800A32CB5 /* UIImage+ImageEffects.m in Sources */,
 				AEF7F2971A686FDB0022410B /* HomeViewController.m in Sources */,
 				AEF7F2AD1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */,
+				AEFEE4001A8EE0A7007E8234 /* FollowingCell.m in Sources */,
 				AEF7F2831A686E8A0022410B /* ECSlidingAnimationController.m in Sources */,
 				AEF7F2871A686E8A0022410B /* ECSlidingSegue.m in Sources */,
 				AEF775471A82FE54000DB73B /* Feed.m in Sources */,
@@ -596,6 +616,7 @@
 				AE52FA531A8D55A7003FF725 /* KeyboardAcessoryView.m in Sources */,
 				AEF7F29B1A686FE90022410B /* NavigationBar.m in Sources */,
 				AEEC6C731A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,
+				AEFEE3FC1A8ED9F6007E8234 /* FollowingTableViewController.m in Sources */,
 				AEEC6C601A6DB0010021B7E4 /* ALView+PureLayout.m in Sources */,
 				AE30EE6D1A6E19D00044740D /* WishDetailCell.m in Sources */,
 				AE2F1C941A7A23A200A32CB5 /* Feed+FeedCRUD.m in Sources */,
@@ -633,6 +654,7 @@
 				AEEC6C611A6DB0010021B7E4 /* ALView+PureLayout.m in Sources */,
 				AE479E9F1A6F775C00366A0A /* PostViewController.m in Sources */,
 				AE0E794C1A76EB50007C48EE /* Reachability.m in Sources */,
+				AEFEE4011A8EE0A7007E8234 /* FollowingCell.m in Sources */,
 				AE2F1C851A7A1A1800A32CB5 /* UIImage+ImageEffects.m in Sources */,
 				AE01726A1A65D3140014266F /* MenuViewController.m in Sources */,
 				AEF7F2981A686FDB0022410B /* HomeViewController.m in Sources */,

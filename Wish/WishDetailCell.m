@@ -44,18 +44,9 @@
 -(void)showLikeAndComment
 {
     [self moveWidget:YES];
-//    self.likeButton.hidden = YES;
-//    self.commentButton.hidden = YES;
-//    self.likeLabel.hidden = YES;
-//    self.commentLabel.hidden = YES;
 }
 - (void)dismissLikeAndComment{
     [self moveWidget:NO];
-//    self.likeButton.hidden = NO;
-//    self.commentButton.hidden = NO;
-//    self.likeLabel.hidden = NO;
-//    self.commentLabel.hidden = NO;
-
 }
 
 - (void)moveWidget:(BOOL)toVisible

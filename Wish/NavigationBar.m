@@ -25,6 +25,7 @@ static CGFloat kEndPoint = 1.5;
     [self setBackgroundImage:[UIImage new]
                forBarMetrics:UIBarMetricsDefault];
     self.shadowImage = [UIImage new];
+    
 }
 
 void drawLinearGradient(CGContextRef context, CGRect rect, CGColorRef startColor, CGColorRef endColor)

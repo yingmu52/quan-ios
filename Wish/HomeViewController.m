@@ -7,7 +7,7 @@
 //
 
 #import "HomeViewController.h"
-#import "UINavigationItem+CustomItem.h"
+
 #import "Theme.h"
 #import "MenuViewController.h"
 #import "UIViewController+ECSlidingViewController.h"
@@ -35,20 +35,6 @@ const NSUInteger maxCardNum = 10;
 
 @implementation HomeViewController
 
-
-- (void)fetchPlans{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),
-                 ^{
-    NSError *_error;
-    if (![self.fetchedRC performFetch:&_error]) {
-         NSLog(@"Unresolved error %@, %@", _error, [_error userInfo]);
-    }                   dispatch_async(dispatch_get_main_queue(),
-                                    ^{
-                                      [self.cardCollectionView reloadData];
-                                    });
-                 });
-
-}
 
 - (NSFetchedResultsController *)fetchedRC
 {
@@ -94,8 +80,8 @@ const NSUInteger maxCardNum = 10;
 {
     CGRect frame = CGRectMake(0, 0, 30, 30);
     UIButton *menuBtn = [Theme buttonWithImage:[Theme navMenuDefault]
-                                        target:self
-                                      selector:@selector(openMenu)
+                                        target:self.slidingViewController
+                                      selector:@selector(anchorTopViewToRightAnimated:)
                                          frame:frame];
     
     UIButton *addBtn = [Theme buttonWithImage:[Theme navAddDefault]
@@ -108,9 +94,6 @@ const NSUInteger maxCardNum = 10;
 
 }
 
-- (void)openMenu{
-    [self.slidingViewController anchorTopViewToRightAnimated:YES];
-}
 
 #pragma mark - db operation
 
