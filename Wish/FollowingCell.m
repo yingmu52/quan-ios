@@ -8,17 +8,39 @@
 
 #import "FollowingCell.h"
 
-@interface FollowingCell ()
+@interface FollowingCell () <UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UIView *feedBackground;
 @property (weak, nonatomic) IBOutlet UIView *headBackground;
+@property (weak, nonatomic) IBOutlet UILabel *headTitleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *headProfilePic;
+@property (weak, nonatomic) IBOutlet UILabel *headUserNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *headDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *bottomLabel;
+@property (weak, nonatomic) IBOutlet UICollectionView *wishDetailCollectionView;
 
 @end
 @implementation FollowingCell
 
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"FeedInFollowingCell" forIndexPath:indexPath];
+    
+    return cell;
+    
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return 4;
+}
+- (void)setWishDetailCollectionView:(UICollectionView *)wishDetailCollectionView{
+    _wishDetailCollectionView = wishDetailCollectionView;
+    _wishDetailCollectionView.dataSource = self;
+}
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
     self.backgroundColor = [UIColor clearColor];
-
 }
 - (void)setupShawdowForView:(UIView *)view{
     view.layer.shadowColor = [UIColor blackColor].CGColor;
