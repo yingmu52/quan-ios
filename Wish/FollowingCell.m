@@ -8,7 +8,7 @@
 
 #import "FollowingCell.h"
 
-@interface FollowingCell () <UICollectionViewDataSource>
+@interface FollowingCell () <UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UIView *feedBackground;
 @property (weak, nonatomic) IBOutlet UIView *headBackground;
 @property (weak, nonatomic) IBOutlet UILabel *headTitleLabel;
@@ -22,26 +22,19 @@
 @implementation FollowingCell
 
 
--(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"FeedInFollowingCell" forIndexPath:indexPath];
-    
-    return cell;
-    
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 4;
-}
 - (void)setWishDetailCollectionView:(UICollectionView *)wishDetailCollectionView{
     _wishDetailCollectionView = wishDetailCollectionView;
+    _wishDetailCollectionView.backgroundColor = [UIColor clearColor];
     _wishDetailCollectionView.dataSource = self;
+    _wishDetailCollectionView.delegate = self;
 }
 - (void)awakeFromNib
 {
     [super awakeFromNib];
     self.backgroundColor = [UIColor clearColor];
+    
 }
+
 - (void)setupShawdowForView:(UIView *)view{
     view.layer.shadowColor = [UIColor blackColor].CGColor;
     view.layer.shadowRadius = 1.0f;
@@ -59,6 +52,34 @@
     _headBackground = headBackground;
     _headBackground.backgroundColor = [UIColor whiteColor];
     [self setupShawdowForView:_headBackground];
+}
+
+#pragma uicollectionview delegate and data source
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat side = collectionView.bounds.size.height;
+    return CGSizeMake(side,side);
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
+                        layout:(UICollectionViewLayout *)collectionViewLayout
+        insetForSectionAtIndex:(NSInteger)section{
+    CGFloat margin = self.wishDetailCollectionView.frame.size.width*14.0/610.0;
+    return UIEdgeInsetsMake(0, margin, 0, 2*margin);
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"FeedInFollowingCell" forIndexPath:indexPath];
+    
+    return cell;
+    
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return 4;
 }
 
 @end

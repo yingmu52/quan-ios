@@ -10,6 +10,7 @@
 #import "Theme.h"
 #import "UIViewController+ECSlidingViewController.h"
 #import "FollowingCell.h"
+
 @interface FollowingTableViewController ()
 
 @end
@@ -19,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
-    self.view.backgroundColor = [Theme homeBackground];
+    self.tableView.backgroundColor = [Theme homeBackground];
 }
 
 
