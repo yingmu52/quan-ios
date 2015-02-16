@@ -23,7 +23,7 @@
     
     [self.tableView setParallaxHeaderView:self.headerView
                                      mode:VGParallaxHeaderModeFill
-                                   height:150];
+                                   height:238.0/1136*self.tableView.frame.size.height];
         
     self.tableView.parallaxHeader.stickyViewPosition = VGParallaxHeaderStickyViewPositionTop;
 }
