@@ -35,7 +35,7 @@
 
 - (void)setUpNavigationItem
 {
-    CGRect frame = CGRectMake(0, 0, 30, 30);
+    CGRect frame = CGRectMake(0,0, 25,25);
     UIButton *menuBtn = [Theme buttonWithImage:[Theme navMenuDefault]
                                         target:self.slidingViewController
                                       selector:@selector(anchorTopViewToRightAnimated:)

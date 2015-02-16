@@ -9,11 +9,19 @@
 #import "NavigationBar.h"
 @import QuartzCore;
 #import "Theme.h"
-
+#import "UINavigationBar+CustomHeight.h"
 @implementation NavigationBar
 
 static CGFloat kEndPoint = 1.5;
 
+- (void)layoutSubviews{
+    //fucking centering navigation bar items
+    for (UIView *subview in self.subviews){
+        CGPoint newCenter = subview.center;
+        newCenter.y = self.center.y;
+        subview.center  = newCenter;
+    }
+}
 
 -(void)awakeFromNib
 {
@@ -23,6 +31,13 @@ static CGFloat kEndPoint = 1.5;
     [self setBackgroundImage:[UIImage new]
                forBarMetrics:UIBarMetricsDefault];
     self.shadowImage = [UIImage new];
+    
+    
+    //change navigation bar height
+    CGFloat referenceHeight = [[UIScreen mainScreen] bounds].size.height;
+    [self setHeight:110.0/1136.0f*referenceHeight];
+    
+//    [[UIBarButtonItem appearance] setBackgroundVerticalPositionAdjustment:-20 forBarMetrics:UIBarMetricsDefault];
     
 }
 

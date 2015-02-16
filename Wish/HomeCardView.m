@@ -42,8 +42,8 @@
         NSInteger pastDays = [SystemUtil daysBetween:_plan.createDate and:[NSDate date]];
         
         
-        NSDictionary *baseAttrs = @{NSFontAttributeName:[UIFont systemFontOfSize:20]};
-        NSDictionary *countAttrs1 = @{NSFontAttributeName:[UIFont fontWithName:@"Arial" size:40]};
+        NSDictionary *baseAttrs = @{NSFontAttributeName:[UIFont systemFontOfSize:12]};
+        NSDictionary *countAttrs1 = @{NSFontAttributeName:[UIFont fontWithName:@"Arial" size:26]};
         NSDictionary *countAttrs2 = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00bac3"]};
         
         NSMutableAttributedString *final = [[NSMutableAttributedString alloc] initWithString:@"剩余 "

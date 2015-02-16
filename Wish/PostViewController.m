@@ -69,7 +69,7 @@
 
 - (void)setupViews
 {
-    CGRect frame = CGRectMake(0, 0, 30, 30);
+    CGRect frame = CGRectMake(0,0, 25,25);
     UIButton *backBtn = [Theme buttonWithImage:[Theme navBackButtonDefault]
                                         target:self.navigationController
                                       selector:@selector(popViewControllerAnimated:)

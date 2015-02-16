@@ -22,7 +22,7 @@
 
 const NSUInteger maxCardNum = 10;
 
-@interface HomeViewController () <NSFetchedResultsControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HomeCardViewDelegate>
+@interface HomeViewController () <NSFetchedResultsControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HomeCardViewDelegate,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic,weak) IBOutlet UICollectionView *cardCollectionView;
 @property (nonatomic,strong) UIImage *capturedImage;
@@ -75,7 +75,7 @@ const NSUInteger maxCardNum = 10;
 
 - (void)setUpNavigationItem
 {
-    CGRect frame = CGRectMake(0, 0, 30, 30);
+    CGRect frame = CGRectMake(0,0, 25,25);
     UIButton *menuBtn = [Theme buttonWithImage:[Theme navMenuDefault]
                                         target:self.slidingViewController
                                       selector:@selector(anchorTopViewToRightAnimated:)
@@ -85,9 +85,10 @@ const NSUInteger maxCardNum = 10;
                                        target:self
                                      selector:@selector(addWish)
                                         frame:frame];
+    
+
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
-    
 
 }
 
@@ -171,7 +172,6 @@ const NSUInteger maxCardNum = 10;
 -(void)setupCollectionView {
     self.cardCollectionView.backgroundColor = [UIColor clearColor];
     self.cardCollectionView.pagingEnabled = NO;
-    self.cardCollectionView.collectionViewLayout = [[HomeCardFlowLayout alloc] init];
 }
 
 
@@ -192,9 +192,8 @@ const NSUInteger maxCardNum = 10;
 
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CGSize size = collectionView.frame.size;
-    size.width -= 10.0;
-    return size;
+    return CGSizeMake(548.0/640*self.view.bounds.size.width,
+                      850.0/1136*self.view.bounds.size.height);
 }
 
 #pragma mark - FetchedResultsController
