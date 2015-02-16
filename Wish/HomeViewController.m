@@ -25,10 +25,7 @@ const NSUInteger maxCardNum = 10;
 @interface HomeViewController () <NSFetchedResultsControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HomeCardViewDelegate>
 
 @property (nonatomic,weak) IBOutlet UICollectionView *cardCollectionView;
-
 @property (nonatomic,strong) UIImage *capturedImage;
-
-
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 
 @end
