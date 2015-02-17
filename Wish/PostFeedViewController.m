@@ -9,6 +9,7 @@
 #import "PostFeedViewController.h"
 #import "Theme.h"
 #import "KeyboardAcessoryView.h"
+#import "SystemUtil.h"
 @interface PostFeedViewController () <UITextFieldDelegate>
 @property (nonatomic,strong) UIButton *tikButton;
 @property (nonatomic,weak) IBOutlet UIImageView *previewIcon;
@@ -47,6 +48,7 @@
 
 
     self.previewIcon.image = self.previewImage;
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#2A2A2A"]};
     self.title = self.navigationTitle;
     
 }

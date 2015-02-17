@@ -58,26 +58,33 @@
     UIButton *cameraButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [cameraButton setImage:cameraIcon forState:UIControlStateNormal];
     cameraButton.hidden = YES;
-    [cameraButton setFrame:CGRectMake(self.tableView.frame.size.width - cameraIcon.size.width/2,
-                                      self.tableView.frame.size.height - cameraIcon.size.height/2,
+    
+
+    UIWindow *topView = [[UIApplication sharedApplication] keyWindow];
+
+    CGFloat trailing = 3*58.0/640 * self.view.frame.size.width;
+    CGFloat bottom = 5*32.0/1136 * self.view.frame.size.height;
+
+    [cameraButton setFrame:CGRectMake(topView.frame.size.width - trailing,
+                                      topView.frame.size.height - bottom,
                                       cameraIcon.size.width/2,
                                       cameraIcon.size.height/2)];
-    UIWindow *topView = [[UIApplication sharedApplication] keyWindow];
     [topView addSubview:cameraButton];
     
     //lock camera to buttom right corner
     //    cameraButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [topView addConstraints:[NSLayoutConstraint
-                             constraintsWithVisualFormat:@"V:[cameraButton(>=12)]|"
-                             options:NSLayoutFormatDirectionLeadingToTrailing
-                             metrics:nil
-                             views:NSDictionaryOfVariableBindings(cameraButton)]];
     
-    [topView addConstraints:[NSLayoutConstraint
-                             constraintsWithVisualFormat:@"H:[cameraButton(>=12)]|"
-                             options:NSLayoutFormatDirectionLeadingToTrailing
-                             metrics:nil
-                             views:NSDictionaryOfVariableBindings(cameraButton)]];
+//    [topView addConstraints:[NSLayoutConstraint
+//                             constraintsWithVisualFormat:[NSString stringWithFormat:@"V:[cameraButton(%f)]|",trailing]
+//                             options:NSLayoutFormatDirectionLeadingToTrailing
+//                             metrics:nil
+//                             views:NSDictionaryOfVariableBindings(cameraButton)]];
+//    
+//    [topView addConstraints:[NSLayoutConstraint
+//                             constraintsWithVisualFormat:[NSString stringWithFormat:@"H:[cameraButton(%f)]|",bottom]
+//                             options:NSLayoutFormatDirectionLeadingToTrailing
+//                             metrics:nil
+//                             views:NSDictionaryOfVariableBindings(cameraButton)]];
     [cameraButton addTarget:self action:@selector(showCamera)
            forControlEvents:UIControlEventTouchUpInside];
     self.cameraButton = cameraButton;
@@ -264,6 +271,10 @@
 
 #pragma mark - table view delegate and data source
 
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 580.0/1136*tableView.frame.size.height;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.fetchedRC.fetchedObjects.count;
