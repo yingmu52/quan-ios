@@ -20,6 +20,7 @@
     CGFloat itemWidth = 548.0/640*deviceSize.width;
     CGFloat itemHeight = 850.0/1136*deviceSize.height;
     CGFloat edgeMargin = deviceSize.width - itemWidth - 2*interMargin;
+//    (deviceSize.width - itemWidth - interMargin*2)/2.0f;
     
     self.minimumInteritemSpacing = interMargin;
     self.minimumLineSpacing = 0.0f;
