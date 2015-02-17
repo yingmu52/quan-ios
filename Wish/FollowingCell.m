@@ -75,7 +75,12 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"FeedInFollowingCell" forIndexPath:indexPath];
+    NSString *identifier = @"FeedInFollowingCell";
+    
+    if (indexPath.row == [collectionView numberOfItemsInSection:indexPath.section] - 1) {
+        identifier = @"FollowingCellLast";
+    }
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     return cell;
     
 }
