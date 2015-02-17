@@ -139,17 +139,13 @@
     return [UIImage imageNamed:@"nav_ic_tab_default"];
 }
 + (UIColor *)naviBackground{
-    UIColor *color = [[self class] colorfromImg:@"bg_navbar"];
-    return [color colorWithAlphaComponent:0.95];
+    return [[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_navbar"]] colorWithAlphaComponent:0.95];
 }
 + (UIColor *)homeBackground{
     return [SystemUtil colorFromHexString:@"#F6FAF9"];
 }
 +(UIColor *)menuBackground{
-    return [[self class] colorfromImg:@"tab_bg"];
-}
-+ (UIColor *)colorfromImg:(NSString *)name{
-    return [UIColor colorWithPatternImage:[UIImage imageNamed:name]];
+    return [UIColor colorWithPatternImage:[UIImage imageNamed:@"tab_bg"]];
 }
 
 @end

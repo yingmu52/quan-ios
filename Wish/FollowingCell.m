@@ -60,6 +60,9 @@
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat side = collectionView.bounds.size.height;
+    if (indexPath.row == [collectionView numberOfItemsInSection:indexPath.section] - 1) {
+        return CGSizeMake(side*190.0/350, side);
+    }
     return CGSizeMake(side,side);
 }
 
@@ -67,13 +70,12 @@
                         layout:(UICollectionViewLayout *)collectionViewLayout
         insetForSectionAtIndex:(NSInteger)section{
     CGFloat margin = self.wishDetailCollectionView.frame.size.width*14.0/610.0;
-    return UIEdgeInsetsMake(0, margin, 0, 2*margin);
+    return UIEdgeInsetsMake(0, margin, 0, margin);
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"FeedInFollowingCell" forIndexPath:indexPath];
-    
     return cell;
     
 }

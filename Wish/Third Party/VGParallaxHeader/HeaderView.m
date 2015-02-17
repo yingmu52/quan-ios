@@ -33,7 +33,7 @@
 }
 
 - (void)updateTitle:(NSString *)string{
-    self.headerTitleLabel.text = string;
+    self.headerTitleLabel.text = [string stringByReplacingOccurrencesOfString:@" " withString:@""];
 }
 - (void)updateSubtitle:(NSInteger)tryTime{
     self.headerSubTitleLabel.text = [NSString stringWithFormat:@"已留下%ld个努力瞬间",(long)tryTime];

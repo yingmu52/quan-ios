@@ -142,12 +142,18 @@
                   forControlEvents:UIControlEventTouchUpInside];
         
         //set text under logo
-        self.labelUnderLogo = [[UILabel alloc] initWithFrame:CGRectMake(0, self.logoButton.center.y + logoWidth/2 + 20.0, self.view.frame.size.width, 20.0)];
+        self.labelUnderLogo = [[UILabel alloc] initWithFrame:CGRectMake(0,self.logoButton.center.y + logoWidth/2 + 10.0,
+                                                                        logoWidth*2, 20.0)];
+        self.labelUnderLogo.center = CGPointMake(self.logoButton.center.x + 5.0,self.labelUnderLogo.center.y);
         NSMutableParagraphStyle *paStyle = [NSMutableParagraphStyle new];
         paStyle.alignment = NSTextAlignmentCenter;
-        NSDictionary *attrs = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:15.0],NSParagraphStyleAttributeName:paStyle};
+        NSDictionary *attrs = @{NSForegroundColorAttributeName:[UIColor whiteColor],
+                                NSFontAttributeName:[UIFont systemFontOfSize:12.0],
+                                NSParagraphStyleAttributeName:paStyle};
+        
         NSAttributedString *str = [[NSAttributedString alloc] initWithString:@"记录种下愿望这一刻吧！" attributes:attrs];
         self.labelUnderLogo.attributedText = str;
+        
         [self.tableView addSubview:self.logoButton];
         [self.tableView addSubview:self.labelUnderLogo];
     }else{
