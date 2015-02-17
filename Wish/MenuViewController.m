@@ -49,11 +49,9 @@ typedef enum {
     CGFloat heightRef = tableView.frame.size.height;
     CGFloat heightLogin = heightRef * 220 / 1136;
     CGFloat heightOther = (heightRef - heightLogin)/5;
-    if (indexPath.row == 0){
+    if (indexPath.row == MenuTableLogin){
         return heightLogin;
-    }else if (indexPath.row >= 1 && indexPath.row <=4){
-        return heightOther;
-    }else if (indexPath.row == 5){
+    }else if (indexPath.row <= MenuTableFollow + 1){
         return heightOther;
     }else return 0;
 
@@ -104,11 +102,24 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == MenuTableWishList) {
-        [self performSegueWithIdentifier:@"showWishList" sender:nil];
-    }else if (indexPath.row == MenuTableFollow){
-        [self performSegueWithIdentifier:@"ShowFollowingFeed" sender:nil];
+    NSString *identifier;
+    switch (indexPath.row) {
+        case MenuTableWishList:
+            identifier = @"showWishList";
+            break;
+        case MenuTableJourney:
+            identifier = @"showWishList";
+            break;
+        case MenuTableFollow:
+            identifier = @"ShowFollowingFeed";
+            break;
+        case MenuTableDiscover:
+            identifier = @"ShowDiscoveryList";
+            break;
+        default:
+            break;
     }
+    [self performSegueWithIdentifier:identifier sender:nil];
 }
 - (void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -139,7 +139,6 @@
         self.lockImageView.image = [Theme privacyIconDefault];
         self.isPrivateLabel.text = @"设为私密愿望";
         self.isPrivateTab.backgroundColor = [Theme privacyBackgroundDefault];
-        
     }
     
 }
