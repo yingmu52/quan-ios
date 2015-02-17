@@ -18,12 +18,16 @@
 #define UPLOAD_IMAGE @"splan_pic_upload.php"
 #define CREATE_FEED @"splan_feeds_create.php"
 
+
+#define FOLLOW @"follow/"
+#define GET_FOLLOW_LIST @"splan_follow_get_feedslist.php"
 typedef enum{
     FetchCenterOpCreatePlan = 0,
     FetchCenterOpDeletePlan,
     FetchCenterOpUploadImage,
     FetchCenterOpCreateFeed,
     FetchCenterOpGetPlanList,
+    FetchCenterOpGetFollowingPlanList
 }FetchCenterGetOp;
 
 typedef enum{
@@ -33,8 +37,21 @@ typedef enum{
 @implementation FetchCenter
 
 
+- (void)fetchFollowingPlanList:(NSArray *)ownerIds{
+    for (NSString *ownerId in ownerIds) {
+        NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,FOLLOW,GET_FOLLOW_LIST];
+        [self getRequest:rqtStr
+               parameter:@{@"id":ownerId}
+               operation:FetchCenterOpGetFollowingPlanList
+                  entity:nil];
+    }
+}
+
+#pragma mark - 
+#pragma mark - personal
+
 - (void)fetchPlanList:(NSString *)ownerId{
-    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@?id=%@",BASE_URL,PLAN,GET_LIST,ownerId];
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PLAN,GET_LIST];
     [self getRequest:rqtStr parameter:@{@"id":ownerId} operation:FetchCenterOpGetPlanList entity:nil];
 
 }
@@ -167,8 +184,9 @@ typedef enum{
             if (fetchedFeedID){
                 Feed *feed = (Feed *)obj;
                 feed.feedId = fetchedFeedID;
-                NSLog(@"upload feed successed, ID: %@",fetchedFeedID);
-                [feed.managedObjectContext save:nil];
+                if ([feed.managedObjectContext save:nil]) {
+                    NSLog(@"upload feed successed, ID: %@",fetchedFeedID);
+                }
             }
         }
             break;
@@ -180,6 +198,13 @@ typedef enum{
                 [plan.managedObjectContext save:nil];
                 NSLog(@"create plan succeed, ID: %@",fetchedPlanId);
             }
+        }
+            break;
+        case FetchCenterOpGetFollowingPlanList:{
+            NSLog(@">>>>>>>>>>>>>%@<<<<<<<<<<",json);
+            //save the response following plan list
+//            for (NSDictionary *planItem in json[@"data"]) {
+//            }
         }
             break;
         default:

@@ -10,7 +10,7 @@
 #import "Theme.h"
 #import "UIViewController+ECSlidingViewController.h"
 #import "FollowingCell.h"
-
+#import "FetchCenter.h"
 @interface FollowingTableViewController ()
 @property (nonatomic,weak) IBOutlet UIView *footerView;
 @property (nonatomic,weak) IBOutlet UIImageView *loadMoreButton;
@@ -22,6 +22,8 @@
     [super viewDidLoad];
     [self setUpNavigationItem];
     self.tableView.backgroundColor = [Theme homeBackground];
+    
+    [[[FetchCenter alloc] init] fetchFollowingPlanList:@[@"100004"]];
     
 }
 

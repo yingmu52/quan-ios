@@ -9,7 +9,6 @@
 #import "PostDetailViewController.h"
 #import "Theme.h"
 #import "Plan+PlanCRUD.h"
-#import "AppDelegate.h"
 #import "SystemUtil.h"
 #import "WishDetailViewController.h"
 @interface PostDetailViewController ()
@@ -154,8 +153,7 @@
     self.createdPlan = [Plan createPlan:self.titleFromPostView
                                 date:self.selectedDate
                              privacy:self.isPrivate
-                               image:nil
-                           inContext:[AppDelegate getContext]];
+                               image:nil];
     [self performSegueWithIdentifier:@"doneWirtingAPost" sender:nil];
    
 }

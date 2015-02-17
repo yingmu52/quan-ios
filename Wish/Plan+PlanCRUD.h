@@ -15,12 +15,11 @@
 + (Plan *)createPlan:(NSString *)title
                 date:(NSDate *)date
              privacy:(BOOL)isPrivate
-               image:(UIImage *)image
-           inContext:(NSManagedObjectContext *)context;
+               image:(UIImage *)image;
 
-+ (NSArray *)loadMyPlans:(NSManagedObjectContext *)context;
++ (NSArray *)loadMyPlans;
 
-- (void)deleteSelf:(NSManagedObjectContext *)context;
+- (void)deleteSelf;
 
 
 + (NSArray *)fetchWith:(NSString *)entityName

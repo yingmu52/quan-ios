@@ -8,18 +8,19 @@
 
 #import "Plan+PlanCRUD.h"
 #import "FetchCenter.h"
+#import "AppDelegate.h"
 @implementation Plan (PlanCRUD)
-
 
 
 + (Plan *)createPlan:(NSString *)title
                 date:(NSDate *)date
              privacy:(BOOL)isPrivate
-               image:(UIImage *)image
-           inContext:(NSManagedObjectContext *)context{
+               image:(UIImage *)image{
+    
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = delegate.managedObjectContext;
     
     Plan *plan;
-    
     //check existance
     NSArray *checks = [Plan fetchWith:@"Plan"
                             predicate:[NSPredicate predicateWithFormat:@"createDate = %@",date]
@@ -46,8 +47,10 @@
     return plan;
 }
 
-- (void)deleteSelf:(NSManagedObjectContext *)context
+- (void)deleteSelf
 {
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = delegate.managedObjectContext;
     self.userDeleted = @(YES);
     if ([SystemUtil hasActiveInternetConnection]){     //active internet
         if (self.planId && [self.ownerId isEqualToString:[SystemUtil getOwnerId]]){
@@ -60,8 +63,11 @@
     [context deleteObject:self];    
 }
 
-+ (NSArray *)loadMyPlans:(NSManagedObjectContext *)context
++ (NSArray *)loadMyPlans
 {
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = delegate.managedObjectContext;
+
     NSPredicate *notDeleted = [NSPredicate predicateWithFormat:@"userDeleted = NO"];
     return [Plan fetchWith:@"Plan"
                          predicate:notDeleted //fetch all non user deleted

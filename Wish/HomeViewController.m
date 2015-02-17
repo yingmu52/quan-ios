@@ -117,7 +117,7 @@ const NSUInteger maxCardNum = 10;
     if ([button.titleLabel.text isEqualToString:@"放弃"]) {
         NSIndexPath *indexPath = [self.cardCollectionView indexPathForCell:cardView];
         Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
-        [plan deleteSelf:[AppDelegate getContext]];
+        [plan deleteSelf];
     }
 }
 - (void)didShowMoreView:(UIView *)moreView
@@ -144,9 +144,8 @@ const NSUInteger maxCardNum = 10;
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [self dismissViewControllerAnimated:NO completion:^{
-        self.capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage]; // this line and next line is sequentally important
-//        [self performSegueWithIdentifier:@"showPostFromHome" sender:nil];
-//        NSLog(@"%@",NSStringFromCGSize(editedImage.size));
+        self.capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage];
+        //NSLog(@"%@",NSStringFromCGSize(editedImage.size));
     }];
 }
 
@@ -225,12 +224,12 @@ const NSUInteger maxCardNum = 10;
             break;
     }
 }
-
-- (void)controllerDidChangeContent:
-(NSFetchedResultsController *)controller
-{
-    [self.cardCollectionView reloadData];
-}
+//
+//- (void)controllerDidChangeContent:
+//(NSFetchedResultsController *)controller
+//{
+//    [self.cardCollectionView reloadData];
+//}
 
 
 @end
