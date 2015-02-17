@@ -7,15 +7,24 @@
 //
 
 #import "HomeCardFlowLayout.h"
-#define SPACING_BETWEEN_CELLS 0.0;
+#define SPACING_BETWEEN_CELLS 10.0;
 
 @implementation HomeCardFlowLayout
 
 
 - (void)prepareLayout {
-    self.sectionInset = UIEdgeInsetsMake(0, 0, 0,0);
     self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    self.minimumInteritemSpacing = SPACING_BETWEEN_CELLS;
+    
+    CGSize deviceSize = [[UIScreen mainScreen] bounds].size;
+    CGFloat interMargin = deviceSize.width * 24.0 / 640;
+    CGFloat itemWidth = 548.0/640*deviceSize.width;
+    CGFloat itemHeight = 850.0/1136*deviceSize.height;
+    CGFloat edgeMargin = deviceSize.width - itemWidth - 2*interMargin;
+    
+    self.minimumInteritemSpacing = interMargin;
+    self.minimumLineSpacing = 0.0f;
+    self.itemSize = CGSizeMake(itemWidth,itemHeight);
+    self.sectionInset = UIEdgeInsetsMake(0, edgeMargin, 0, edgeMargin);
 }
 
 - (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset withScrollingVelocity:(CGPoint)velocity
@@ -45,5 +54,6 @@
     return CGPointMake(candidateAttributes.center.x - self.collectionView.bounds.size.width * 0.5f, proposedContentOffset.y);
     
 }
+
 
 @end

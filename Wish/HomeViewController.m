@@ -150,7 +150,7 @@ const NSUInteger maxCardNum = 10;
 }
 
 
-#pragma - 
+#pragma mark -
 
 - (void)didTapOnHomeCardView:(HomeCardView *)cardView
 {
@@ -171,6 +171,7 @@ const NSUInteger maxCardNum = 10;
 -(void)setupCollectionView {
     self.cardCollectionView.backgroundColor = [UIColor clearColor];
     self.cardCollectionView.pagingEnabled = NO;
+    self.cardCollectionView.collectionViewLayout = [[HomeCardFlowLayout alloc] init];
 }
 
 
@@ -188,13 +189,6 @@ const NSUInteger maxCardNum = 10;
     return cell;
     
 }
-
-
--(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(548.0/640*self.view.bounds.size.width,
-                      850.0/1136*self.view.bounds.size.height);
-}
-
 #pragma mark - FetchedResultsController
 
 - (void)controller:(NSFetchedResultsController *)controller
