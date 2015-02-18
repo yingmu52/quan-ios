@@ -79,7 +79,7 @@
 #pragma mark - CHTCollectionViewDelegateWaterfallLayout
     
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(290, 480);
+    return CGSizeMake(290.0/640*collectionView.frame.size.width, 480.0/1136*collectionView.frame.size.height);
 }
 
 #pragma mark <UICollectionViewDelegate>
