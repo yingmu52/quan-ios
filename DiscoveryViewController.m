@@ -10,6 +10,8 @@
 #import "Theme.h"
 #import "UIViewController+ECSlidingViewController.h"
 #import "CHTCollectionViewWaterfallLayout.h"
+#import "DiscoveryBannerCell.h"
+#import "DiscoveryCell.h"
 @interface DiscoveryViewController () <CHTCollectionViewDelegateWaterfallLayout>
 
 @end
@@ -25,12 +27,15 @@
 - (void)setupWaterFallCollectionView{
     CHTCollectionViewWaterfallLayout *layout = [[CHTCollectionViewWaterfallLayout alloc] init];
     
-    layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
-    layout.headerHeight = 550/1136*self.collectionView.frame.size.height;
-    layout.minimumColumnSpacing = 5.0;
-    layout.minimumInteritemSpacing = 5.0;
-    
+    CGFloat horizontalInset = 16.0/640 * self.collectionView.frame.size.width;
+    layout.sectionInset = UIEdgeInsetsMake(horizontalInset, horizontalInset, horizontalInset, horizontalInset);
+    layout.footerHeight = 550.0/1136*self.collectionView.frame.size.height;
+    layout.minimumColumnSpacing = 14.0/16*horizontalInset;
+    layout.minimumInteritemSpacing = 12.0/16*horizontalInset;
+    layout.itemRenderDirection = CHTCollectionViewWaterfallLayoutItemRenderDirectionLeftToRight;
     self.collectionView.collectionViewLayout = layout;
+    [self.collectionView registerClass:[DiscoveryBannerCell class] forSupplementaryViewOfKind:CHTCollectionElementKindSectionFooter withReuseIdentifier:@"DiscoveryOffcialBanner"];
+
 }
 - (void)setUpNavigationItem
 {
@@ -44,33 +49,32 @@
 }
 
 #pragma mark <UICollectionViewDataSource>
-//DiscoveryCell
-//DiscoveryOffcialBanner
+
+
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 4;
+    return 2;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 2;
+    return 4;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DiscoveryCell" forIndexPath:indexPath];
+- (DiscoveryCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    DiscoveryCell *cell = (DiscoveryCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"DiscoveryCell" forIndexPath:indexPath];
     
     // Configure the cell
-    
     return cell;
 }
 
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-    UICollectionReusableView *reusableView = nil;
-    
-    if ([kind isEqualToString:CHTCollectionElementKindSectionHeader]) {
+- (DiscoveryBannerCell *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    DiscoveryBannerCell *reusableView = nil;
+    if ([kind isEqualToString:CHTCollectionElementKindSectionFooter]) {
         reusableView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
                                                           withReuseIdentifier:@"DiscoveryOffcialBanner"
                                                                  forIndexPath:indexPath];
+        reusableView.backgroundColor = [UIColor orangeColor];
     }
     return reusableView;
 }
@@ -79,38 +83,16 @@
 #pragma mark - CHTCollectionViewDelegateWaterfallLayout
     
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(290.0/640*collectionView.frame.size.width, 480.0/1136*collectionView.frame.size.height);
+    CGSize cellSize = CGSizeZero;
+    CGFloat width = 298.0/640*collectionView.frame.size.width;
+    if (indexPath.row == 1 || indexPath.row == 2) {
+        cellSize = CGSizeMake(width,480.0/1136*collectionView.frame.size.height);
+    }else if (indexPath.row == 0 || indexPath.row == 3){
+        cellSize = CGSizeMake(width,556.0/1136*collectionView.frame.size.height);
+    }
+    return cellSize;
 }
 
 #pragma mark <UICollectionViewDelegate>
-
-/*
-// Uncomment this method to specify if the specified item should be highlighted during tracking
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-	return YES;
-}
-*/
-
-/*
-// Uncomment this method to specify if the specified item should be selected
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-*/
-
-/*
-// Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return NO;
-}
-
-- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	return NO;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	
-}
-*/
 
 @end

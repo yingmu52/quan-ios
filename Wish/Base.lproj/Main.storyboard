@@ -2676,10 +2676,14 @@
                                 </variation>
                                 <connections>
                                     <outlet property="discoveryBackgroundView" destination="Egh-BP-uW2" id="LiI-Bc-Qhc"/>
+                                    <outlet property="discoveryByUserLabel" destination="fvI-bW-nfC" id="X1Q-dS-mAU"/>
+                                    <outlet property="discoveryFollowerCountLabel" destination="34U-mW-pah" id="KZL-t2-gdN"/>
+                                    <outlet property="discoveryImageView" destination="Fvs-4S-3d9" id="bzj-zM-hgV"/>
+                                    <outlet property="discoveryTitleLabel" destination="G0Y-kV-Mff" id="gHh-Y0-iwI"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
-                        <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DiscoveryOffcialBanner" id="QMO-I7-gQX">
+                        <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DiscoveryOffcialBanner" id="QMO-I7-gQX" customClass="DiscoveryBannerCell">
                             <rect key="frame" x="0.0" y="387" width="600" height="275"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>

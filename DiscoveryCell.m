@@ -10,6 +10,9 @@
 #import "SystemUtil.h"
 @interface DiscoveryCell ()
 @property (weak, nonatomic) IBOutlet UIView *discoveryBackgroundView;
+@property (weak, nonatomic) IBOutlet UIImageView *discoveryImageView;
+@property (weak, nonatomic) IBOutlet UILabel *discoveryTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *discoveryByUserLabel;
 
 @end
 @implementation DiscoveryCell

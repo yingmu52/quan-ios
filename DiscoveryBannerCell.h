@@ -1,5 +1,5 @@
 //
-//  DiscoveryCell.h
+//  DiscoveryBannerCell.h
 //  Wish
 //
 //  Created by Xinyi Zhuang on 2015-02-18.
@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DiscoveryCell : UICollectionViewCell
-@property (weak, nonatomic) IBOutlet UILabel *discoveryFollowerCountLabel;
+@interface DiscoveryBannerCell : UICollectionReusableView
 
 @end

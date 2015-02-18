@@ -34,6 +34,8 @@
 		AE52FA501A8D3D76003FF725 /* PostFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE52FA4F1A8D3D76003FF725 /* PostFeedViewController.m */; };
 		AE52FA531A8D55A7003FF725 /* KeyboardAcessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE52FA521A8D55A7003FF725 /* KeyboardAcessoryView.m */; };
 		AE52FA551A8D55CA003FF725 /* KeyboardAcessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE52FA541A8D55CA003FF725 /* KeyboardAcessoryView.xib */; };
+		AE596EB81A953D4800AF1F44 /* DiscoveryBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE596EB71A953D4800AF1F44 /* DiscoveryBannerCell.m */; };
+		AE596EB91A953D4800AF1F44 /* DiscoveryBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE596EB71A953D4800AF1F44 /* DiscoveryBannerCell.m */; };
 		AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE72E9541A66F2AA0046B38D /* MenuCell.m */; };
 		AEBD13DD1A93E7A800F5F0D3 /* DiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBD13DC1A93E7A800F5F0D3 /* DiscoveryViewController.m */; };
 		AEBD13E11A93FF6F00F5F0D3 /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBD13E01A93FF6F00F5F0D3 /* CHTCollectionViewWaterfallLayout.m */; };
@@ -142,6 +144,8 @@
 		AE52FA511A8D55A7003FF725 /* KeyboardAcessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardAcessoryView.h; sourceTree = "<group>"; };
 		AE52FA521A8D55A7003FF725 /* KeyboardAcessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardAcessoryView.m; sourceTree = "<group>"; };
 		AE52FA541A8D55CA003FF725 /* KeyboardAcessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyboardAcessoryView.xib; sourceTree = "<group>"; };
+		AE596EB61A953D4800AF1F44 /* DiscoveryBannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryBannerCell.h; sourceTree = "<group>"; };
+		AE596EB71A953D4800AF1F44 /* DiscoveryBannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryBannerCell.m; sourceTree = "<group>"; };
 		AE72E9531A66F2AA0046B38D /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
 		AE72E9541A66F2AA0046B38D /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		AEBD13DB1A93E7A800F5F0D3 /* DiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryViewController.h; sourceTree = "<group>"; };
@@ -340,6 +344,8 @@
 				AEBD13DB1A93E7A800F5F0D3 /* DiscoveryViewController.h */,
 				AEBD13DC1A93E7A800F5F0D3 /* DiscoveryViewController.m */,
 				AEBD13E21A948DD400F5F0D3 /* DiscoveryCell.h */,
+				AE596EB61A953D4800AF1F44 /* DiscoveryBannerCell.h */,
+				AE596EB71A953D4800AF1F44 /* DiscoveryBannerCell.m */,
 				AEBD13E31A948DD400F5F0D3 /* DiscoveryCell.m */,
 			);
 			name = Discovery;
@@ -653,6 +659,7 @@
 				AEBD13E41A948DD400F5F0D3 /* DiscoveryCell.m in Sources */,
 				AEEC6C731A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,
 				AEFEE3FC1A8ED9F6007E8234 /* FollowingTableViewController.m in Sources */,
+				AE596EB81A953D4800AF1F44 /* DiscoveryBannerCell.m in Sources */,
 				AEEC6C601A6DB0010021B7E4 /* ALView+PureLayout.m in Sources */,
 				AE30EE6D1A6E19D00044740D /* WishDetailCell.m in Sources */,
 				AE2F1C941A7A23A200A32CB5 /* Feed+FeedCRUD.m in Sources */,
@@ -684,6 +691,7 @@
 				AED05EDC1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m in Sources */,
 				AEF7F2AE1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */,
 				AEEC6C651A6DB0010021B7E4 /* NSLayoutConstraint+PureLayout.m in Sources */,
+				AE596EB91A953D4800AF1F44 /* DiscoveryBannerCell.m in Sources */,
 				AEEC6C691A6DB0F10021B7E4 /* FirstTableViewController.m in Sources */,
 				AEF7F2881A686E8A0022410B /* ECSlidingSegue.m in Sources */,
 				AEEC6C4E1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */,
