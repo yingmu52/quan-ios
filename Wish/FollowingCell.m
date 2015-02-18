@@ -7,7 +7,7 @@
 //
 
 #import "FollowingCell.h"
-
+#import "SystemUtil.h"
 @interface FollowingCell () <UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UIView *feedBackground;
 @property (weak, nonatomic) IBOutlet UIView *headBackground;
@@ -35,23 +35,16 @@
     
 }
 
-- (void)setupShawdowForView:(UIView *)view{
-    view.layer.shadowColor = [UIColor blackColor].CGColor;
-    view.layer.shadowRadius = 1.0f;
-    view.layer.shadowOpacity = 0.15f;
-    view.layer.masksToBounds = NO;
-    view.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
-}
 
 - (void)setFeedBackground:(UIView *)feedBackground{
     _feedBackground = feedBackground;
-    [self setupShawdowForView:_feedBackground];
+    [SystemUtil setupShawdowForView:_feedBackground];
 }
 
 - (void)setHeadBackground:(UIView *)headBackground{
     _headBackground = headBackground;
     _headBackground.backgroundColor = [UIColor whiteColor];
-    [self setupShawdowForView:_headBackground];
+    [SystemUtil setupShawdowForView:_headBackground];
 }
 
 #pragma uicollectionview delegate and data source

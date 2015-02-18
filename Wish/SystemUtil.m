@@ -97,8 +97,15 @@
     tileImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return tileImage;
-;
 
+}
+
++ (void)setupShawdowForView:(UIView *)view{
+    view.layer.shadowColor = [UIColor blackColor].CGColor;
+    view.layer.shadowRadius = 1.0f;
+    view.layer.shadowOpacity = 0.15f;
+    view.layer.masksToBounds = NO;
+    view.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
 }
 
 

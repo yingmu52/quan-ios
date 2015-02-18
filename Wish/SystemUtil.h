@@ -20,4 +20,6 @@
 + (BOOL)hasActiveInternetConnection;
 + (UIImagePickerController *)showCamera:(id<UINavigationControllerDelegate,UIImagePickerControllerDelegate>)delegate;
 + (UIImage *)darkLayeredImage:(UIImage *)image inRect:(CGRect)bounds;
+
++ (void)setupShawdowForView:(UIView *)view;
 @end
