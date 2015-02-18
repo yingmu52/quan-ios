@@ -16,26 +16,19 @@
 
 @implementation DiscoveryViewController
 
-static NSString * const reuseIdentifier = @"Cell";
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
     [self setupWaterFallCollectionView];
-    // Register cell classes
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    
-    // Do any additional setup after loading the view.
 }
 
 - (void)setupWaterFallCollectionView{
     CHTCollectionViewWaterfallLayout *layout = [[CHTCollectionViewWaterfallLayout alloc] init];
     
     layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
-    layout.headerHeight = 15;
-    layout.footerHeight = 10;
-    layout.minimumColumnSpacing = 20;
-    layout.minimumInteritemSpacing = 30;
+    layout.headerHeight = 550/1136*self.collectionView.frame.size.height;
+    layout.minimumColumnSpacing = 5.0;
+    layout.minimumInteritemSpacing = 5.0;
     
     self.collectionView.collectionViewLayout = layout;
 }
@@ -54,22 +47,39 @@ static NSString * const reuseIdentifier = @"Cell";
 //DiscoveryCell
 //DiscoveryOffcialBanner
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-#warning Incomplete method implementation -- Return the number of sections
-    return 0;
+    return 4;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-#warning Incomplete method implementation -- Return the number of items in the section
-    return 0;
+    return 2;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DiscoveryCell" forIndexPath:indexPath];
     
     // Configure the cell
     
     return cell;
+}
+
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    UICollectionReusableView *reusableView = nil;
+    
+    if ([kind isEqualToString:CHTCollectionElementKindSectionHeader]) {
+        reusableView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
+                                                          withReuseIdentifier:@"DiscoveryOffcialBanner"
+                                                                 forIndexPath:indexPath];
+    }
+    return reusableView;
+}
+
+
+#pragma mark - CHTCollectionViewDelegateWaterfallLayout
+    
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(290, 480);
 }
 
 #pragma mark <UICollectionViewDelegate>
