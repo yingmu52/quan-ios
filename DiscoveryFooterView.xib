@@ -75,13 +75,92 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EBV-hP-Ige">
-                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                            <color key="textColor" red="0.61568627450000002" green="0.61568627450000002" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                        </textView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="9Ns-e9-EFe">
+                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                            <attributedString key="attributedText">
+                                <fragment content="INSA">
+                                    <attributes>
+                                        <color key="NSColor" red="0.61568629741668701" green="0.61568629741668701" blue="0.61568629741668701" alpha="1" colorSpace="calibratedRGB"/>
+                                        <font key="NSFont" size="12" name="HelveticaNeue"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="是一名">
+                                    <attributes>
+                                        <color key="NSColor" red="0.61568629741668701" green="0.61568629741668701" blue="0.61568629741668701" alpha="1" colorSpace="calibratedRGB"/>
+                                        <font key="NSFont" size="12" name="STHeitiSC-Light"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="GIF">
+                                    <attributes>
+                                        <color key="NSColor" red="0.61568629741668701" green="0.61568629741668701" blue="0.61568629741668701" alpha="1" colorSpace="calibratedRGB"/>
+                                        <font key="NSFont" size="12" name="HelveticaNeue"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="图片艺术家，在里约热内卢">
+                                    <attributes>
+                                        <color key="NSColor" red="0.61568629741668701" green="0.61568629741668701" blue="0.61568629741668701" alpha="1" colorSpace="calibratedRGB"/>
+                                        <font key="NSFont" size="12" name="STHeitiSC-Light"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="1">
+                                    <attributes>
+                                        <color key="NSColor" red="0.61568629741668701" green="0.61568629741668701" blue="0.61568629741668701" alpha="1" colorSpace="calibratedRGB"/>
+                                        <font key="NSFont" size="12" name="HelveticaNeue"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="万">
+                                    <attributes>
+                                        <color key="NSColor" red="0.61568629741668701" green="0.61568629741668701" blue="0.61568629741668701" alpha="1" colorSpace="calibratedRGB"/>
+                                        <font key="NSFont" size="12" name="STHeitiSC-Light"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="4000">
+                                    <attributes>
+                                        <color key="NSColor" red="0.61568629741668701" green="0.61568629741668701" blue="0.61568629741668701" alpha="1" colorSpace="calibratedRGB"/>
+                                        <font key="NSFont" size="12" name="HelveticaNeue"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="平米的志地上涂画了">
+                                    <attributes>
+                                        <color key="NSColor" red="0.61568629741668701" green="0.61568629741668701" blue="0.61568629741668701" alpha="1" colorSpace="calibratedRGB"/>
+                                        <font key="NSFont" size="12" name="STHeitiSC-Light"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="4">
+                                    <attributes>
+                                        <color key="NSColor" red="0.61568629741668701" green="0.61568629741668701" blue="0.61568629741668701" alpha="1" colorSpace="calibratedRGB"/>
+                                        <font key="NSFont" size="12" name="HelveticaNeue"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="张图片，用卫星拍摄下来，组成了世界上最大的">
+                                    <attributes>
+                                        <color key="NSColor" red="0.61568629741668701" green="0.61568629741668701" blue="0.61568629741668701" alpha="1" colorSpace="calibratedRGB"/>
+                                        <font key="NSFont" size="12" name="STHeitiSC-Light"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5"/>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="GIF">
+                                    <attributes>
+                                        <color key="NSColor" red="0.61568629741668701" green="0.61568629741668701" blue="0.61568629741668701" alpha="1" colorSpace="calibratedRGB"/>
+                                        <font key="NSFont" size="12" name="HelveticaNeue"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                            <nil key="highlightedColor"/>
+                            <variation key="heightClass=regular-widthClass=compact">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            </variation>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -89,39 +168,38 @@
                         <constraint firstItem="OcE-kI-lbs" firstAttribute="leading" secondItem="xPd-om-z1D" secondAttribute="trailing" constant="8" symbolic="YES" id="0JF-rS-Y8W">
                             <variation key="heightClass=regular-widthClass=compact" constant="5"/>
                         </constraint>
+                        <constraint firstItem="bMV-8q-Z9y" firstAttribute="width" secondItem="MPh-Aj-kzq" secondAttribute="width" id="1Oa-EY-Q0o"/>
                         <constraint firstItem="OcE-kI-lbs" firstAttribute="centerY" secondItem="xPd-om-z1D" secondAttribute="centerY" id="3gZ-k9-1bN"/>
-                        <constraint firstItem="Pt1-aQ-L53" firstAttribute="centerX" secondItem="bMV-8q-Z9y" secondAttribute="centerX" constant="4" id="8cu-MH-S3D">
+                        <constraint firstItem="MPh-Aj-kzq" firstAttribute="centerX" secondItem="9Ns-e9-EFe" secondAttribute="centerX" constant="-1" id="9Zy-6X-YKU">
                             <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                         </constraint>
                         <constraint firstItem="OcE-kI-lbs" firstAttribute="height" secondItem="xPd-om-z1D" secondAttribute="height" id="9nc-8A-Eqe"/>
                         <constraint firstAttribute="trailing" secondItem="OcE-kI-lbs" secondAttribute="trailing" constant="35" id="A2O-vC-CHx">
                             <variation key="heightClass=regular-widthClass=compact" constant="20"/>
                         </constraint>
-                        <constraint firstItem="Pt1-aQ-L53" firstAttribute="top" secondItem="bMV-8q-Z9y" secondAttribute="bottom" constant="8" id="BMI-Qc-JaT">
-                            <variation key="heightClass=regular-widthClass=compact" constant="5"/>
-                        </constraint>
                         <constraint firstItem="UhT-cG-22X" firstAttribute="top" secondItem="Ti0-Qq-dw2" secondAttribute="top" id="DH0-2A-y0J"/>
                         <constraint firstAttribute="centerX" secondItem="MPh-Aj-kzq" secondAttribute="centerX" id="DzJ-5f-NVF"/>
+                        <constraint firstItem="bMV-8q-Z9y" firstAttribute="top" secondItem="MPh-Aj-kzq" secondAttribute="bottom" constant="8" id="Hag-cd-jiW"/>
                         <constraint firstItem="MPh-Aj-kzq" firstAttribute="top" secondItem="Ti0-Qq-dw2" secondAttribute="top" constant="46" id="IUu-Mo-Y1c"/>
+                        <constraint firstItem="9Ns-e9-EFe" firstAttribute="top" secondItem="Pt1-aQ-L53" secondAttribute="bottom" constant="74" id="JxK-vE-eTb">
+                            <variation key="heightClass=regular-widthClass=compact" constant="50"/>
+                        </constraint>
                         <constraint firstAttribute="bottom" secondItem="UhT-cG-22X" secondAttribute="bottom" id="KFu-ka-btn"/>
-                        <constraint firstItem="bMV-8q-Z9y" firstAttribute="top" secondItem="MPh-Aj-kzq" secondAttribute="bottom" constant="8" id="Lw2-MR-5V6"/>
+                        <constraint firstItem="Pt1-aQ-L53" firstAttribute="top" secondItem="bMV-8q-Z9y" secondAttribute="bottom" constant="5" id="KyZ-6q-LV2"/>
                         <constraint firstItem="OcE-kI-lbs" firstAttribute="top" secondItem="Ti0-Qq-dw2" secondAttribute="top" constant="42" id="N6h-G1-oGz">
                             <variation key="heightClass=regular-widthClass=compact" constant="20"/>
                         </constraint>
-                        <constraint firstItem="EBV-hP-Ige" firstAttribute="bottom" secondItem="Ti0-Qq-dw2" secondAttribute="bottomMargin" id="Q0i-CC-5zb"/>
+                        <constraint firstItem="OcE-kI-lbs" firstAttribute="trailing" secondItem="9Ns-e9-EFe" secondAttribute="trailing" id="P1A-6U-uDZ"/>
                         <constraint firstItem="UhT-cG-22X" firstAttribute="leading" secondItem="Ti0-Qq-dw2" secondAttribute="leading" id="To1-Wc-RlY"/>
-                        <constraint firstItem="EBV-hP-Ige" firstAttribute="top" secondItem="Pt1-aQ-L53" secondAttribute="bottom" constant="3" id="WGF-WF-Oyl">
-                            <variation key="heightClass=regular-widthClass=compact" constant="40"/>
-                        </constraint>
                         <constraint firstItem="xPd-om-z1D" firstAttribute="top" secondItem="OcE-kI-lbs" secondAttribute="top" id="XJd-dZ-0PS"/>
-                        <constraint firstItem="bMV-8q-Z9y" firstAttribute="centerX" secondItem="MPh-Aj-kzq" secondAttribute="centerX" constant="65.5" id="aq3-RG-1mR">
-                            <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
-                        </constraint>
+                        <constraint firstItem="UhT-cG-22X" firstAttribute="width" secondItem="9Ns-e9-EFe" secondAttribute="height" multiplier="400:29" id="apW-LG-dfn"/>
+                        <constraint firstAttribute="trailing" secondItem="9Ns-e9-EFe" secondAttribute="trailing" constant="20" id="dCt-Cl-Ybg"/>
                         <constraint firstAttribute="width" secondItem="MPh-Aj-kzq" secondAttribute="height" multiplier="640:100" id="emD-Ib-l4J"/>
                         <constraint firstAttribute="trailing" secondItem="UhT-cG-22X" secondAttribute="trailing" id="g3Z-iy-30l"/>
-                        <constraint firstItem="EBV-hP-Ige" firstAttribute="leading" secondItem="Ti0-Qq-dw2" secondAttribute="leadingMargin" id="hz7-Ry-XFJ"/>
                         <constraint firstItem="MPh-Aj-kzq" firstAttribute="bottom" secondItem="xPd-om-z1D" secondAttribute="bottom" constant="61" id="kjG-iQ-IqL"/>
-                        <constraint firstItem="EBV-hP-Ige" firstAttribute="centerX" secondItem="Pt1-aQ-L53" secondAttribute="centerX" id="tX9-aM-Mdg"/>
+                        <constraint firstItem="bMV-8q-Z9y" firstAttribute="centerX" secondItem="Pt1-aQ-L53" secondAttribute="centerX" id="mkf-Un-p9r"/>
+                        <constraint firstItem="9Ns-e9-EFe" firstAttribute="leading" secondItem="Ti0-Qq-dw2" secondAttribute="leading" constant="22" id="siq-QH-9ue"/>
+                        <constraint firstItem="bMV-8q-Z9y" firstAttribute="centerX" secondItem="MPh-Aj-kzq" secondAttribute="centerX" id="tof-0q-Qz2"/>
                     </constraints>
                     <variation key="default">
                         <mask key="subviews">
@@ -131,32 +209,35 @@
                             <exclude reference="MPh-Aj-kzq"/>
                             <exclude reference="bMV-8q-Z9y"/>
                             <exclude reference="Pt1-aQ-L53"/>
-                            <exclude reference="EBV-hP-Ige"/>
+                            <exclude reference="9Ns-e9-EFe"/>
                         </mask>
                         <mask key="constraints">
-                            <exclude reference="0JF-rS-Y8W"/>
-                            <exclude reference="N6h-G1-oGz"/>
-                            <exclude reference="A2O-vC-CHx"/>
-                            <exclude reference="9nc-8A-Eqe"/>
-                            <exclude reference="3gZ-k9-1bN"/>
-                            <exclude reference="Lw2-MR-5V6"/>
-                            <exclude reference="aq3-RG-1mR"/>
-                            <exclude reference="8cu-MH-S3D"/>
-                            <exclude reference="BMI-Qc-JaT"/>
+                            <exclude reference="DH0-2A-y0J"/>
+                            <exclude reference="KFu-ka-btn"/>
+                            <exclude reference="To1-Wc-RlY"/>
+                            <exclude reference="apW-LG-dfn"/>
+                            <exclude reference="g3Z-iy-30l"/>
+                            <exclude reference="1Oa-EY-Q0o"/>
+                            <exclude reference="Hag-cd-jiW"/>
+                            <exclude reference="mkf-Un-p9r"/>
+                            <exclude reference="tof-0q-Qz2"/>
+                            <exclude reference="9Zy-6X-YKU"/>
                             <exclude reference="DzJ-5f-NVF"/>
                             <exclude reference="IUu-Mo-Y1c"/>
-                            <exclude reference="kjG-iQ-IqL"/>
                             <exclude reference="emD-Ib-l4J"/>
+                            <exclude reference="kjG-iQ-IqL"/>
+                            <exclude reference="JxK-vE-eTb"/>
+                            <exclude reference="dCt-Cl-Ybg"/>
+                            <exclude reference="siq-QH-9ue"/>
+                            <exclude reference="KyZ-6q-LV2"/>
                             <exclude reference="0FB-Sw-1Eg"/>
                             <exclude reference="XJd-dZ-0PS"/>
-                            <exclude reference="DH0-2A-y0J"/>
-                            <exclude reference="g3Z-iy-30l"/>
-                            <exclude reference="To1-Wc-RlY"/>
-                            <exclude reference="KFu-ka-btn"/>
-                            <exclude reference="hz7-Ry-XFJ"/>
-                            <exclude reference="tX9-aM-Mdg"/>
-                            <exclude reference="WGF-WF-Oyl"/>
-                            <exclude reference="Q0i-CC-5zb"/>
+                            <exclude reference="0JF-rS-Y8W"/>
+                            <exclude reference="3gZ-k9-1bN"/>
+                            <exclude reference="9nc-8A-Eqe"/>
+                            <exclude reference="A2O-vC-CHx"/>
+                            <exclude reference="N6h-G1-oGz"/>
+                            <exclude reference="P1A-6U-uDZ"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact">
@@ -167,32 +248,35 @@
                             <include reference="MPh-Aj-kzq"/>
                             <include reference="bMV-8q-Z9y"/>
                             <include reference="Pt1-aQ-L53"/>
-                            <include reference="EBV-hP-Ige"/>
+                            <include reference="9Ns-e9-EFe"/>
                         </mask>
                         <mask key="constraints">
-                            <include reference="0JF-rS-Y8W"/>
-                            <include reference="N6h-G1-oGz"/>
-                            <include reference="A2O-vC-CHx"/>
-                            <include reference="9nc-8A-Eqe"/>
-                            <include reference="3gZ-k9-1bN"/>
-                            <include reference="Lw2-MR-5V6"/>
-                            <include reference="aq3-RG-1mR"/>
-                            <include reference="8cu-MH-S3D"/>
-                            <include reference="BMI-Qc-JaT"/>
+                            <include reference="DH0-2A-y0J"/>
+                            <include reference="KFu-ka-btn"/>
+                            <include reference="To1-Wc-RlY"/>
+                            <exclude reference="apW-LG-dfn"/>
+                            <include reference="g3Z-iy-30l"/>
+                            <exclude reference="1Oa-EY-Q0o"/>
+                            <include reference="Hag-cd-jiW"/>
+                            <include reference="mkf-Un-p9r"/>
+                            <include reference="tof-0q-Qz2"/>
+                            <include reference="9Zy-6X-YKU"/>
                             <include reference="DzJ-5f-NVF"/>
                             <exclude reference="IUu-Mo-Y1c"/>
-                            <include reference="kjG-iQ-IqL"/>
                             <include reference="emD-Ib-l4J"/>
+                            <include reference="kjG-iQ-IqL"/>
+                            <include reference="JxK-vE-eTb"/>
+                            <exclude reference="dCt-Cl-Ybg"/>
+                            <exclude reference="siq-QH-9ue"/>
+                            <include reference="KyZ-6q-LV2"/>
                             <include reference="0FB-Sw-1Eg"/>
                             <exclude reference="XJd-dZ-0PS"/>
-                            <include reference="DH0-2A-y0J"/>
-                            <include reference="g3Z-iy-30l"/>
-                            <include reference="To1-Wc-RlY"/>
-                            <include reference="KFu-ka-btn"/>
-                            <include reference="hz7-Ry-XFJ"/>
-                            <include reference="tX9-aM-Mdg"/>
-                            <include reference="WGF-WF-Oyl"/>
-                            <include reference="Q0i-CC-5zb"/>
+                            <include reference="0JF-rS-Y8W"/>
+                            <include reference="3gZ-k9-1bN"/>
+                            <include reference="9nc-8A-Eqe"/>
+                            <include reference="A2O-vC-CHx"/>
+                            <include reference="N6h-G1-oGz"/>
+                            <include reference="P1A-6U-uDZ"/>
                         </mask>
                     </variation>
                 </view>
@@ -226,9 +310,10 @@
                 </mask>
             </variation>
             <connections>
+                <outlet property="backgroundImageView" destination="UhT-cG-22X" id="36Y-M7-FXB"/>
                 <outlet property="bannerTitleLabel" destination="bMV-8q-Z9y" id="8My-Kz-fx9"/>
                 <outlet property="byUserLabel" destination="Pt1-aQ-L53" id="ULx-Z0-KdX"/>
-                <outlet property="descriptionLabel" destination="EBV-hP-Ige" id="egg-Kb-3f1"/>
+                <outlet property="descriptionLabel" destination="9Ns-e9-EFe" id="txa-yz-vI8"/>
                 <outlet property="followerCountLabel" destination="OcE-kI-lbs" id="a6e-Hn-r4u"/>
                 <outlet property="profileImageVIew" destination="MPh-Aj-kzq" id="5lw-AX-3yK"/>
             </connections>

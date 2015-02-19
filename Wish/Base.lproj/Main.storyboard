@@ -2683,7 +2683,7 @@
                                 </connections>
                             </collectionViewCell>
                         </cells>
-                        <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="du3-5G-hdA">
+                        <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DiscoveryBannerCell" id="du3-5G-hdA">
                             <autoresizingMask key="autoresizingMask"/>
                         </collectionReusableView>
                         <connections>

@@ -7,7 +7,13 @@
 //
 
 #import "DiscoveryBannerCell.h"
-
+#import "UIImage+ImageEffects.h"
 @implementation DiscoveryBannerCell
 
+- (void)setBackgroundImageView:(UIImageView *)backgroundImageView{
+    _backgroundImageView = backgroundImageView;
+    if (_backgroundImageView.image) {
+        _backgroundImageView.image = [_backgroundImageView.image applyDarkEffect];
+    }
+}
 @end

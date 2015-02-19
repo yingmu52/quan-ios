@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageVIew;
 @property (weak, nonatomic) IBOutlet UILabel *bannerTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *byUserLabel;
-@property (weak, nonatomic) IBOutlet UITextView *descriptionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 
 @end
