@@ -38,7 +38,6 @@
 		AE596EB91A953D4800AF1F44 /* DiscoveryBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE596EB71A953D4800AF1F44 /* DiscoveryBannerCell.m */; };
 		AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE72E9541A66F2AA0046B38D /* MenuCell.m */; };
 		AEBD13DD1A93E7A800F5F0D3 /* DiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBD13DC1A93E7A800F5F0D3 /* DiscoveryViewController.m */; };
-		AEBD13E11A93FF6F00F5F0D3 /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBD13E01A93FF6F00F5F0D3 /* CHTCollectionViewWaterfallLayout.m */; };
 		AEBD13E41A948DD400F5F0D3 /* DiscoveryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBD13E31A948DD400F5F0D3 /* DiscoveryCell.m */; };
 		AEBD13E51A948DD400F5F0D3 /* DiscoveryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBD13E31A948DD400F5F0D3 /* DiscoveryCell.m */; };
 		AEBFCA371A78614100686EFE /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA361A78614100686EFE /* PostDetailViewController.m */; };
@@ -47,6 +46,10 @@
 		AED05EDC1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = AED05EDA1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m */; };
 		AED68EE41A70399A00CDC0DF /* FetchCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = AED68EE31A70399A00CDC0DF /* FetchCenter.m */; };
 		AED68EE51A70399A00CDC0DF /* FetchCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = AED68EE31A70399A00CDC0DF /* FetchCenter.m */; };
+		AED71BEC1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AED71BEB1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m */; };
+		AED71BED1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AED71BEB1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m */; };
+		AED71BEF1A95879000F2DAF4 /* DiscoveryFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED71BEE1A95879000F2DAF4 /* DiscoveryFooterView.xib */; };
+		AED71BF01A95879100F2DAF4 /* DiscoveryFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED71BEE1A95879000F2DAF4 /* DiscoveryFooterView.xib */; };
 		AEE075381A744A770015155B /* SystemUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE075371A744A770015155B /* SystemUtil.m */; };
 		AEE075391A744A770015155B /* SystemUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE075371A744A770015155B /* SystemUtil.m */; };
 		AEEC6C4D1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C4C1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m */; };
@@ -150,8 +153,6 @@
 		AE72E9541A66F2AA0046B38D /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		AEBD13DB1A93E7A800F5F0D3 /* DiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryViewController.h; sourceTree = "<group>"; };
 		AEBD13DC1A93E7A800F5F0D3 /* DiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryViewController.m; sourceTree = "<group>"; };
-		AEBD13DF1A93FF6F00F5F0D3 /* CHTCollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTCollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
-		AEBD13E01A93FF6F00F5F0D3 /* CHTCollectionViewWaterfallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTCollectionViewWaterfallLayout.m; sourceTree = "<group>"; };
 		AEBD13E21A948DD400F5F0D3 /* DiscoveryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryCell.h; sourceTree = "<group>"; };
 		AEBD13E31A948DD400F5F0D3 /* DiscoveryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryCell.m; sourceTree = "<group>"; };
 		AEBFCA351A78614100686EFE /* PostDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostDetailViewController.h; sourceTree = "<group>"; };
@@ -160,6 +161,9 @@
 		AED05EDA1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+CustomHeight.m"; sourceTree = "<group>"; };
 		AED68EE21A70399A00CDC0DF /* FetchCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchCenter.h; sourceTree = "<group>"; };
 		AED68EE31A70399A00CDC0DF /* FetchCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchCenter.m; sourceTree = "<group>"; };
+		AED71BEA1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTCollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
+		AED71BEB1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTCollectionViewWaterfallLayout.m; sourceTree = "<group>"; };
+		AED71BEE1A95879000F2DAF4 /* DiscoveryFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscoveryFooterView.xib; sourceTree = "<group>"; };
 		AEE075361A744A770015155B /* SystemUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemUtil.h; sourceTree = "<group>"; };
 		AEE075371A744A770015155B /* SystemUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUtil.m; sourceTree = "<group>"; };
 		AEEC6C4B1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+VGParallaxHeader.h"; sourceTree = "<group>"; };
@@ -341,6 +345,7 @@
 		AEBD13DA1A93E78400F5F0D3 /* Discovery */ = {
 			isa = PBXGroup;
 			children = (
+				AED71BEE1A95879000F2DAF4 /* DiscoveryFooterView.xib */,
 				AEBD13DB1A93E7A800F5F0D3 /* DiscoveryViewController.h */,
 				AEBD13DC1A93E7A800F5F0D3 /* DiscoveryViewController.m */,
 				AEBD13E21A948DD400F5F0D3 /* DiscoveryCell.h */,
@@ -354,8 +359,8 @@
 		AEBD13DE1A93FF3D00F5F0D3 /* WaterFallLayout */ = {
 			isa = PBXGroup;
 			children = (
-				AEBD13DF1A93FF6F00F5F0D3 /* CHTCollectionViewWaterfallLayout.h */,
-				AEBD13E01A93FF6F00F5F0D3 /* CHTCollectionViewWaterfallLayout.m */,
+				AED71BEA1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.h */,
+				AED71BEB1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m */,
 			);
 			name = WaterFallLayout;
 			sourceTree = "<group>";
@@ -596,6 +601,7 @@
 				AE30EE6F1A6E1E520044740D /* snow.jpg in Resources */,
 				AEF7F2A01A6875360022410B /* Main.storyboard in Resources */,
 				AEEC6C6F1A6DB0FC0021B7E4 /* HeaderView.xib in Resources */,
+				AED71BEF1A95879000F2DAF4 /* DiscoveryFooterView.xib in Resources */,
 				AE52FA551A8D55CA003FF725 /* KeyboardAcessoryView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -604,6 +610,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AED71BF01A95879100F2DAF4 /* DiscoveryFooterView.xib in Resources */,
 				AEF7F29D1A6871F00022410B /* Images.xcassets in Resources */,
 				AE30EE701A6E1E520044740D /* snow.jpg in Resources */,
 				AEF7F2A11A6875360022410B /* Main.storyboard in Resources */,
@@ -628,6 +635,7 @@
 				AEF7F2AB1A6884950022410B /* CustomBarItem.m in Sources */,
 				AE01723F1A65CD8E0014266F /* main.m in Sources */,
 				AEBD13DD1A93E7A800F5F0D3 /* DiscoveryViewController.m in Sources */,
+				AED71BEC1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m in Sources */,
 				AEE075381A744A770015155B /* SystemUtil.m in Sources */,
 				AE2F1C8C1A7A234200A32CB5 /* Plan.m in Sources */,
 				AEF7F2811A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
@@ -636,7 +644,6 @@
 				AEEC6C641A6DB0010021B7E4 /* NSLayoutConstraint+PureLayout.m in Sources */,
 				AEF7F2931A686FA30022410B /* Theme.m in Sources */,
 				AE2F1C841A7A1A1800A32CB5 /* UIImage+ImageEffects.m in Sources */,
-				AEBD13E11A93FF6F00F5F0D3 /* CHTCollectionViewWaterfallLayout.m in Sources */,
 				AEF7F2971A686FDB0022410B /* HomeViewController.m in Sources */,
 				AEF7F2AD1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */,
 				AEFEE4001A8EE0A7007E8234 /* FollowingCell.m in Sources */,
@@ -689,6 +696,7 @@
 				AE2F1C951A7A23A200A32CB5 /* Feed+FeedCRUD.m in Sources */,
 				AEF7F29C1A686FE90022410B /* NavigationBar.m in Sources */,
 				AED05EDC1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m in Sources */,
+				AED71BED1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m in Sources */,
 				AEF7F2AE1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */,
 				AEEC6C651A6DB0010021B7E4 /* NSLayoutConstraint+PureLayout.m in Sources */,
 				AE596EB91A953D4800AF1F44 /* DiscoveryBannerCell.m in Sources */,

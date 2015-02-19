@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#define BANNERID @"DiscoveryBannerCell"
 
 @interface DiscoveryBannerCell : UICollectionReusableView
+@property (weak, nonatomic) IBOutlet UILabel *followerCountLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *profileImageVIew;
+@property (weak, nonatomic) IBOutlet UILabel *bannerTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *byUserLabel;
+@property (weak, nonatomic) IBOutlet UITextView *descriptionLabel;
 
 @end
