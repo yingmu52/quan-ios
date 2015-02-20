@@ -18,11 +18,12 @@
         <attribute name="ownerId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="planId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="planTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updateDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="userDeleted" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="feeds" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Feed" inverseName="plan" inverseEntity="Feed" syncable="YES"/>
     </entity>
     <elements>
         <element name="Feed" positionX="-9243" positionY="-54" width="128" height="135"/>
-        <element name="Plan" positionX="-8903" positionY="-153" width="128" height="208"/>
+        <element name="Plan" positionX="-8903" positionY="-153" width="128" height="223"/>
     </elements>
 </model>

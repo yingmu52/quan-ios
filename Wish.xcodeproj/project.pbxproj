@@ -20,8 +20,6 @@
 		AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
 		AE2F1C841A7A1A1800A32CB5 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2F1C831A7A1A1800A32CB5 /* UIImage+ImageEffects.m */; };
 		AE2F1C851A7A1A1800A32CB5 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2F1C831A7A1A1800A32CB5 /* UIImage+ImageEffects.m */; };
-		AE2F1C8C1A7A234200A32CB5 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2F1C8B1A7A234200A32CB5 /* Plan.m */; };
-		AE2F1C8D1A7A234200A32CB5 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2F1C8B1A7A234200A32CB5 /* Plan.m */; };
 		AE2F1C941A7A23A200A32CB5 /* Feed+FeedCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2F1C931A7A23A200A32CB5 /* Feed+FeedCRUD.m */; };
 		AE2F1C951A7A23A200A32CB5 /* Feed+FeedCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2F1C931A7A23A200A32CB5 /* Feed+FeedCRUD.m */; };
 		AE30EE6D1A6E19D00044740D /* WishDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE30EE6C1A6E19D00044740D /* WishDetailCell.m */; };
@@ -50,8 +48,15 @@
 		AED71BED1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AED71BEB1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m */; };
 		AED71BEF1A95879000F2DAF4 /* DiscoveryFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED71BEE1A95879000F2DAF4 /* DiscoveryFooterView.xib */; };
 		AED71BF01A95879100F2DAF4 /* DiscoveryFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED71BEE1A95879000F2DAF4 /* DiscoveryFooterView.xib */; };
+		AED71BF31A95A2EC00F2DAF4 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AED71BF21A95A2EC00F2DAF4 /* Plan.m */; };
 		AEE075381A744A770015155B /* SystemUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE075371A744A770015155B /* SystemUtil.m */; };
 		AEE075391A744A770015155B /* SystemUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE075371A744A770015155B /* SystemUtil.m */; };
+		AEE4A6CC1A9684D500ABF946 /* AchieveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6CB1A9684D500ABF946 /* AchieveViewController.m */; };
+		AEE4A6CD1A9684D500ABF946 /* AchieveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6CB1A9684D500ABF946 /* AchieveViewController.m */; };
+		AEE4A6D01A96A5D500ABF946 /* AchieveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6CF1A96A5D500ABF946 /* AchieveCell.m */; };
+		AEE4A6D11A96A5D500ABF946 /* AchieveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6CF1A96A5D500ABF946 /* AchieveCell.m */; };
+		AEE4A6D41A96AFCF00ABF946 /* TriangleCutoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6D31A96AFCF00ABF946 /* TriangleCutoutView.m */; };
+		AEE4A6D51A96AFCF00ABF946 /* TriangleCutoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6D31A96AFCF00ABF946 /* TriangleCutoutView.m */; };
 		AEEC6C4D1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C4C1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m */; };
 		AEEC6C4E1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C4C1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m */; };
 		AEEC6C601A6DB0010021B7E4 /* ALView+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C541A6DB0010021B7E4 /* ALView+PureLayout.m */; };
@@ -131,8 +136,6 @@
 		AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCardView.m; sourceTree = "<group>"; };
 		AE2F1C821A7A1A1800A32CB5 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		AE2F1C831A7A1A1800A32CB5 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
-		AE2F1C8A1A7A234200A32CB5 /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
-		AE2F1C8B1A7A234200A32CB5 /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
 		AE2F1C921A7A23A200A32CB5 /* Feed+FeedCRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Feed+FeedCRUD.h"; sourceTree = "<group>"; };
 		AE2F1C931A7A23A200A32CB5 /* Feed+FeedCRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Feed+FeedCRUD.m"; sourceTree = "<group>"; };
 		AE30EE6B1A6E19D00044740D /* WishDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishDetailCell.h; sourceTree = "<group>"; };
@@ -164,8 +167,16 @@
 		AED71BEA1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTCollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
 		AED71BEB1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTCollectionViewWaterfallLayout.m; sourceTree = "<group>"; };
 		AED71BEE1A95879000F2DAF4 /* DiscoveryFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscoveryFooterView.xib; sourceTree = "<group>"; };
+		AED71BF11A95A2EC00F2DAF4 /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
+		AED71BF21A95A2EC00F2DAF4 /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
 		AEE075361A744A770015155B /* SystemUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemUtil.h; sourceTree = "<group>"; };
 		AEE075371A744A770015155B /* SystemUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUtil.m; sourceTree = "<group>"; };
+		AEE4A6CA1A9684D500ABF946 /* AchieveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchieveViewController.h; sourceTree = "<group>"; };
+		AEE4A6CB1A9684D500ABF946 /* AchieveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AchieveViewController.m; sourceTree = "<group>"; };
+		AEE4A6CE1A96A5D500ABF946 /* AchieveCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchieveCell.h; sourceTree = "<group>"; };
+		AEE4A6CF1A96A5D500ABF946 /* AchieveCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AchieveCell.m; sourceTree = "<group>"; };
+		AEE4A6D21A96AFCF00ABF946 /* TriangleCutoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriangleCutoutView.h; sourceTree = "<group>"; };
+		AEE4A6D31A96AFCF00ABF946 /* TriangleCutoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TriangleCutoutView.m; sourceTree = "<group>"; };
 		AEEC6C4B1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+VGParallaxHeader.h"; sourceTree = "<group>"; };
 		AEEC6C4C1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+VGParallaxHeader.m"; sourceTree = "<group>"; };
 		AEEC6C531A6DB0010021B7E4 /* ALView+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALView+PureLayout.h"; sourceTree = "<group>"; };
@@ -239,9 +250,7 @@
 		AE0172301A65CD8E0014266F = {
 			isa = PBXGroup;
 			children = (
-				AEBD13DA1A93E78400F5F0D3 /* Discovery */,
 				AE30EE6E1A6E1E520044740D /* snow.jpg */,
-				AEFEE3FD1A8ED9FC007E8234 /* Following */,
 				AE01723B1A65CD8E0014266F /* Wish */,
 				AEF7F2661A686E8A0022410B /* Third Party */,
 				AE0172581A65CD8E0014266F /* WishTests */,
@@ -262,6 +271,9 @@
 		AE01723B1A65CD8E0014266F /* Wish */ = {
 			isa = PBXGroup;
 			children = (
+				AEE4A6C91A9684BC00ABF946 /* Achievement */,
+				AEFEE3FD1A8ED9FC007E8234 /* Following */,
+				AEBD13DA1A93E78400F5F0D3 /* Discovery */,
 				AE30EE711A6F0A8C0044740D /* Database&Networking */,
 				AEEC6C781A6DB6340021B7E4 /* WishDetail */,
 				AEEC6C771A6DB6220021B7E4 /* Home */,
@@ -327,12 +339,12 @@
 		AE30EE711A6F0A8C0044740D /* Database&Networking */ = {
 			isa = PBXGroup;
 			children = (
+				AED71BF11A95A2EC00F2DAF4 /* Plan.h */,
+				AED71BF21A95A2EC00F2DAF4 /* Plan.m */,
 				AEF775451A82FE54000DB73B /* Feed.h */,
 				AEF775461A82FE54000DB73B /* Feed.m */,
 				AE2F1C921A7A23A200A32CB5 /* Feed+FeedCRUD.h */,
 				AE2F1C931A7A23A200A32CB5 /* Feed+FeedCRUD.m */,
-				AE2F1C8A1A7A234200A32CB5 /* Plan.h */,
-				AE2F1C8B1A7A234200A32CB5 /* Plan.m */,
 				AE0172431A65CD8E0014266F /* Wish.xcdatamodeld */,
 				AE479EAC1A6F7A5B00366A0A /* Plan+PlanCRUD.h */,
 				AE479EAD1A6F7A5B00366A0A /* Plan+PlanCRUD.m */,
@@ -354,6 +366,7 @@
 				AEBD13E31A948DD400F5F0D3 /* DiscoveryCell.m */,
 			);
 			name = Discovery;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		AEBD13DE1A93FF3D00F5F0D3 /* WaterFallLayout */ = {
@@ -363,6 +376,19 @@
 				AED71BEB1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m */,
 			);
 			name = WaterFallLayout;
+			sourceTree = "<group>";
+		};
+		AEE4A6C91A9684BC00ABF946 /* Achievement */ = {
+			isa = PBXGroup;
+			children = (
+				AEE4A6CE1A96A5D500ABF946 /* AchieveCell.h */,
+				AEE4A6CF1A96A5D500ABF946 /* AchieveCell.m */,
+				AEE4A6CA1A9684D500ABF946 /* AchieveViewController.h */,
+				AEE4A6CB1A9684D500ABF946 /* AchieveViewController.m */,
+				AEE4A6D21A96AFCF00ABF946 /* TriangleCutoutView.h */,
+				AEE4A6D31A96AFCF00ABF946 /* TriangleCutoutView.m */,
+			);
+			name = Achievement;
 			sourceTree = "<group>";
 		};
 		AEEC6C4A1A6DAD9D0021B7E4 /* VGParallaxHeader */ = {
@@ -507,7 +533,6 @@
 				AEFEE3FF1A8EE0A7007E8234 /* FollowingCell.m */,
 			);
 			name = Following;
-			path = Wish;
 			sourceTree = "<group>";
 		};
 		F3D9C90B14CD662C469ECA13 /* Frameworks */ = {
@@ -633,11 +658,11 @@
 				AE0172451A65CD8E0014266F /* Wish.xcdatamodeld in Sources */,
 				AE0172421A65CD8E0014266F /* AppDelegate.m in Sources */,
 				AEF7F2AB1A6884950022410B /* CustomBarItem.m in Sources */,
+				AEE4A6CC1A9684D500ABF946 /* AchieveViewController.m in Sources */,
 				AE01723F1A65CD8E0014266F /* main.m in Sources */,
 				AEBD13DD1A93E7A800F5F0D3 /* DiscoveryViewController.m in Sources */,
 				AED71BEC1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m in Sources */,
 				AEE075381A744A770015155B /* SystemUtil.m in Sources */,
-				AE2F1C8C1A7A234200A32CB5 /* Plan.m in Sources */,
 				AEF7F2811A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				AEF7F2891A686E8A0022410B /* ECSlidingViewController.m in Sources */,
 				AEF7F28B1A686E8B0022410B /* UIViewController+ECSlidingViewController.m in Sources */,
@@ -645,6 +670,7 @@
 				AEF7F2931A686FA30022410B /* Theme.m in Sources */,
 				AE2F1C841A7A1A1800A32CB5 /* UIImage+ImageEffects.m in Sources */,
 				AEF7F2971A686FDB0022410B /* HomeViewController.m in Sources */,
+				AEE4A6D41A96AFCF00ABF946 /* TriangleCutoutView.m in Sources */,
 				AEF7F2AD1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */,
 				AEFEE4001A8EE0A7007E8234 /* FollowingCell.m in Sources */,
 				AEF7F2831A686E8A0022410B /* ECSlidingAnimationController.m in Sources */,
@@ -666,10 +692,12 @@
 				AEBD13E41A948DD400F5F0D3 /* DiscoveryCell.m in Sources */,
 				AEEC6C731A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,
 				AEFEE3FC1A8ED9F6007E8234 /* FollowingTableViewController.m in Sources */,
+				AED71BF31A95A2EC00F2DAF4 /* Plan.m in Sources */,
 				AE596EB81A953D4800AF1F44 /* DiscoveryBannerCell.m in Sources */,
 				AEEC6C601A6DB0010021B7E4 /* ALView+PureLayout.m in Sources */,
 				AE30EE6D1A6E19D00044740D /* WishDetailCell.m in Sources */,
 				AE2F1C941A7A23A200A32CB5 /* Feed+FeedCRUD.m in Sources */,
+				AEE4A6D01A96A5D500ABF946 /* AchieveCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,19 +711,21 @@
 				AEF7F28A1A686E8B0022410B /* ECSlidingViewController.m in Sources */,
 				AEF7F2941A686FA30022410B /* Theme.m in Sources */,
 				AEEC6C631A6DB0010021B7E4 /* NSArray+PureLayout.m in Sources */,
-				AE2F1C8D1A7A234200A32CB5 /* Plan.m in Sources */,
 				AED68EE51A70399A00CDC0DF /* FetchCenter.m in Sources */,
 				AEF775481A82FE54000DB73B /* Feed.m in Sources */,
 				AEEC6C6E1A6DB0FC0021B7E4 /* HeaderView.m in Sources */,
 				AE01725C1A65CD8F0014266F /* WishTests.m in Sources */,
+				AEE4A6CD1A9684D500ABF946 /* AchieveViewController.m in Sources */,
 				AEF7F2861A686E8A0022410B /* ECSlidingInteractiveTransition.m in Sources */,
 				AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */,
 				AEE075391A744A770015155B /* SystemUtil.m in Sources */,
 				AEF7F2821A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				AE479EAF1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */,
+				AEE4A6D11A96A5D500ABF946 /* AchieveCell.m in Sources */,
 				AE2F1C951A7A23A200A32CB5 /* Feed+FeedCRUD.m in Sources */,
 				AEF7F29C1A686FE90022410B /* NavigationBar.m in Sources */,
 				AED05EDC1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m in Sources */,
+				AEE4A6D51A96AFCF00ABF946 /* TriangleCutoutView.m in Sources */,
 				AED71BED1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m in Sources */,
 				AEF7F2AE1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */,
 				AEEC6C651A6DB0010021B7E4 /* NSLayoutConstraint+PureLayout.m in Sources */,

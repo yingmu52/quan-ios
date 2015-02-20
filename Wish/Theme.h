@@ -46,4 +46,8 @@
 + (UIColor *)wishDetailBackgroundNone:(UIView *)referenceView;
 + (UIColor *)homeBackground;
 + (UIImage *)tipsBackgroundImage;
+
+
++ (UIImage *)achievementFail;
++ (UIImage *)achievementFinish;
 @end

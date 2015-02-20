@@ -11,12 +11,14 @@
 #import "AppDelegate.h"
 @implementation Plan (PlanCRUD)
 
-
+//+ (Plan *)createPlanFromServer:(NSDictionary *)dict{
+//
+//}
 + (Plan *)createPlan:(NSString *)title
                 date:(NSDate *)date
              privacy:(BOOL)isPrivate
                image:(UIImage *)image{
-    
+
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = delegate.managedObjectContext;
     
@@ -29,7 +31,7 @@
     if (!checks.count) {
         plan = [NSEntityDescription insertNewObjectForEntityForName:@"Plan"
                                              inManagedObjectContext:context];
-        
+
         plan.ownerId = [SystemUtil getOwnerId];
         plan.planTitle = title;
         plan.finishDate = date;

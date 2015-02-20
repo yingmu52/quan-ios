@@ -22,4 +22,5 @@
 + (UIImage *)darkLayeredImage:(UIImage *)image inRect:(CGRect)bounds;
 
 + (void)setupShawdowForView:(UIView *)view;
+
 @end

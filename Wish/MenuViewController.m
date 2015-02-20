@@ -9,8 +9,7 @@
 #import "MenuViewController.h"
 #import "MenuCell.h"
 #import "Theme.h"
-#import "UINavigationItem+CustomItem.h"
-
+#import "UIViewController+ECSlidingViewController.h"
 typedef enum {
     MenuTableLogin = 0,
     MenuTableWishList,
@@ -108,7 +107,7 @@ typedef enum {
             identifier = @"showWishList";
             break;
         case MenuTableJourney:
-            identifier = @"showWishList";
+            identifier = @"ShowAcheivementList";
             break;
         case MenuTableFollow:
             identifier = @"ShowFollowingFeed";
@@ -121,6 +120,8 @@ typedef enum {
     }
     [self performSegueWithIdentifier:identifier sender:nil];
 }
+
+
 - (void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self toggleCell:tableView at:indexPath];

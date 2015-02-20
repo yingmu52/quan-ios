@@ -32,6 +32,15 @@
     return [UIColor colorWithPatternImage:tileImage];
 }
 
++ (UIImage *)achievementFail{
+    return [UIImage imageNamed:@"fail_ic"];
+}
+
++ (UIImage *)achievementFinish{
+    return [UIImage imageNamed:@"finish_ic"];
+}
+
+
 + (UIImage *)wishDetailBackgroundNonLogo{
     return [UIImage imageNamed:@"image_bg"];
 }
