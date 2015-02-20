@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FollowingCell.h"
 
 @interface FollowingTableViewController : UITableViewController
-
+- (void)configureFollowingCell:(FollowingCell *)cell atIndexPath:(NSIndexPath *)indexPath; //abstract
 @end

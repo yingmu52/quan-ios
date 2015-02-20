@@ -11,9 +11,42 @@
 #import "AppDelegate.h"
 @implementation Plan (PlanCRUD)
 
-//+ (Plan *)createPlanFromServer:(NSDictionary *)dict{
-//
-//}
++ (Plan *)updatePlanFromServer:(NSDictionary *)dict{
+    
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = delegate.managedObjectContext;
+    Plan *plan;
+    //check existance
+    NSArray *checks = [Plan fetchWith:@"Plan"
+                            predicate:[NSPredicate predicateWithFormat:@"planId = %@",dict[@"id"]]
+                     keyForDescriptor:@"createDate"
+                            inContext:context];
+    NSAssert(checks.count <= 1, @"planId must be a unique!");
+    if (!checks.count) {
+        //insert new fetched plan
+        plan = [NSEntityDescription insertNewObjectForEntityForName:@"Plan"
+                                             inManagedObjectContext:context];
+    }else{
+        //update existing plan
+        plan = checks.lastObject;
+    }
+    
+    plan.planId = dict[@"id"];
+    plan.ownerId = dict[@"ownerId"];
+    plan.planTitle = dict[@"title"];
+    plan.createDate = [NSDate dateWithTimeIntervalSince1970:[dict[@"createTime"] integerValue]];
+    
+    plan.updateDate = [NSDate dateWithTimeInterval:[dict[@"updateTime"] integerValue]
+                                         sinceDate:plan.createDate];
+    plan.userDeleted = @(NO);
+    if ([context save:nil]) {
+        NSLog(@"updated plan list form server");
+    }
+
+
+    return plan;
+
+}
 + (Plan *)createPlan:(NSString *)title
                 date:(NSDate *)date
              privacy:(BOOL)isPrivate

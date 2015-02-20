@@ -42,6 +42,7 @@ const NSUInteger maxCardNum = 10;
     
     //do fetchrequest
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
+    request.predicate = [NSPredicate predicateWithFormat:@"ownerId = %@",[SystemUtil getOwnerId]];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
     
     NSFetchedResultsController *newFRC =

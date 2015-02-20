@@ -57,6 +57,8 @@
 		AEE4A6D11A96A5D500ABF946 /* AchieveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6CF1A96A5D500ABF946 /* AchieveCell.m */; };
 		AEE4A6D41A96AFCF00ABF946 /* TriangleCutoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6D31A96AFCF00ABF946 /* TriangleCutoutView.m */; };
 		AEE4A6D51A96AFCF00ABF946 /* TriangleCutoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6D31A96AFCF00ABF946 /* TriangleCutoutView.m */; };
+		AEE4A6D81A972FAA00ABF946 /* FollowingTVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6D71A972FAA00ABF946 /* FollowingTVCData.m */; };
+		AEE4A6D91A972FAB00ABF946 /* FollowingTVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6D71A972FAA00ABF946 /* FollowingTVCData.m */; };
 		AEEC6C4D1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C4C1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m */; };
 		AEEC6C4E1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C4C1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m */; };
 		AEEC6C601A6DB0010021B7E4 /* ALView+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C541A6DB0010021B7E4 /* ALView+PureLayout.m */; };
@@ -177,6 +179,8 @@
 		AEE4A6CF1A96A5D500ABF946 /* AchieveCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AchieveCell.m; sourceTree = "<group>"; };
 		AEE4A6D21A96AFCF00ABF946 /* TriangleCutoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriangleCutoutView.h; sourceTree = "<group>"; };
 		AEE4A6D31A96AFCF00ABF946 /* TriangleCutoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TriangleCutoutView.m; sourceTree = "<group>"; };
+		AEE4A6D61A972FAA00ABF946 /* FollowingTVCData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowingTVCData.h; sourceTree = "<group>"; };
+		AEE4A6D71A972FAA00ABF946 /* FollowingTVCData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowingTVCData.m; sourceTree = "<group>"; };
 		AEEC6C4B1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+VGParallaxHeader.h"; sourceTree = "<group>"; };
 		AEEC6C4C1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+VGParallaxHeader.m"; sourceTree = "<group>"; };
 		AEEC6C531A6DB0010021B7E4 /* ALView+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALView+PureLayout.h"; sourceTree = "<group>"; };
@@ -527,6 +531,8 @@
 		AEFEE3FD1A8ED9FC007E8234 /* Following */ = {
 			isa = PBXGroup;
 			children = (
+				AEE4A6D61A972FAA00ABF946 /* FollowingTVCData.h */,
+				AEE4A6D71A972FAA00ABF946 /* FollowingTVCData.m */,
 				AEFEE3FA1A8ED9F6007E8234 /* FollowingTableViewController.h */,
 				AEFEE3FB1A8ED9F6007E8234 /* FollowingTableViewController.m */,
 				AEFEE3FE1A8EE0A7007E8234 /* FollowingCell.h */,
@@ -684,6 +690,7 @@
 				AED68EE41A70399A00CDC0DF /* FetchCenter.m in Sources */,
 				AEEC6C621A6DB0010021B7E4 /* NSArray+PureLayout.m in Sources */,
 				AE0E794B1A76EB50007C48EE /* Reachability.m in Sources */,
+				AEE4A6D81A972FAA00ABF946 /* FollowingTVCData.m in Sources */,
 				AE479EAE1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */,
 				AEEC6C681A6DB0F10021B7E4 /* FirstTableViewController.m in Sources */,
 				AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */,
@@ -735,6 +742,7 @@
 				AEEC6C4E1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */,
 				AEBFCA381A78614100686EFE /* PostDetailViewController.m in Sources */,
 				AEF7F2AC1A6884950022410B /* CustomBarItem.m in Sources */,
+				AEE4A6D91A972FAB00ABF946 /* FollowingTVCData.m in Sources */,
 				AEEC6C611A6DB0010021B7E4 /* ALView+PureLayout.m in Sources */,
 				AE479E9F1A6F775C00366A0A /* PostViewController.m in Sources */,
 				AE0E794C1A76EB50007C48EE /* Reachability.m in Sources */,

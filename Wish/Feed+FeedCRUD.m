@@ -10,7 +10,6 @@
 #import "FetchCenter.h"
 @implementation Feed (FeedCRUD)
 
-
 + (Feed *)createFeed:(NSString *)title image:(UIImage *)image inPlan:(Plan *)plan{
     
     NSManagedObjectContext *context = plan.managedObjectContext;

@@ -10,28 +10,17 @@
 #import "Theme.h"
 #import "UIViewController+ECSlidingViewController.h"
 #import "FollowingCell.h"
-#import "FetchCenter.h"
 @interface FollowingTableViewController ()
 @property (nonatomic,weak) IBOutlet UIView *footerView;
 @property (nonatomic,weak) IBOutlet UIImageView *loadMoreButton;
 @end
 
 @implementation FollowingTableViewController
-//
-//- (void)setLoadMoreButton:(UIImageView *)loadMoreButton{
-//    _loadMoreButton = loadMoreButton;
-////    CGFloat height = _loadMoreButton.image.size.height/2;
-//    CGFloat width = _loadMoreButton.image.size.width/10;
-//    _loadMoreButton.image = [_loadMoreButton.image resizableImageWithCapInsets:UIEdgeInsetsMake(height,width,height,width)];
-//
-//}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
-    self.tableView.backgroundColor = [Theme homeBackground];
-    
-    [[[FetchCenter alloc] init] fetchFollowingPlanList:@[@"100004"]];
-    
+    self.tableView.backgroundColor = [Theme homeBackground];    
 }
 
 - (void)setFooterView:(UIView *)footerView{
@@ -55,16 +44,15 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return 3;
-}
-
 
 - (FollowingCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     FollowingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FollowingCell" forIndexPath:indexPath];
-    
+    [self configureFollowingCell:cell atIndexPath:indexPath];
     return cell;
+}
+
+- (void)configureFollowingCell:(FollowingCell *)cell atIndexPath:(NSIndexPath *)indexPath{
+    //abstract
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

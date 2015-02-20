@@ -11,21 +11,13 @@
 
 @interface Plan (PlanCRUD)
 
++ (Plan *)updatePlanFromServer:(NSDictionary *)dict;
 
 + (Plan *)createPlan:(NSString *)title
                 date:(NSDate *)date
              privacy:(BOOL)isPrivate
                image:(UIImage *)image;
-
 + (NSArray *)loadMyPlans;
-
 - (void)deleteSelf;
-
-
-+ (NSArray *)fetchWith:(NSString *)entityName
-             predicate:(NSPredicate *)predicate
-      keyForDescriptor:(NSString *)key
-             inContext:(NSManagedObjectContext *)context;
-
 - (NSNumber *)extractNumberFromString:(NSString *)string;
 @end

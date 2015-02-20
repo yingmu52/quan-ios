@@ -106,7 +106,7 @@ typedef enum{
 //            NSLog(@"GET successed \n request:%@ \n response:%@ \n",rqtStr,responseJson);
             [self didFinishSendingGetRequest:responseJson operation:op entity:obj];
         }else{
-            NSLog(@"Fail Get Request \n op: %d \n baseUrl: %@ \n parameter: %@ \n response: %@",op,baseURL,dict,responseJson);
+            NSLog(@"Fail Get Request \n op: %d \n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@",op,baseURL,dict,responseJson,error);
         }
     }];
     [task resume];
@@ -201,11 +201,22 @@ typedef enum{
         }
             break;
         case FetchCenterOpGetFollowingPlanList:{
-            NSLog(@">>>>>>>>>>>>>%@<<<<<<<<<<",json);
+            NSLog(@"FetchCenterOpGetFollowingPlanList \n %@",json);
             //save the response following plan list
-//            for (NSDictionary *planItem in json[@"data"]) {
-//            }
+            for (NSDictionary *planItem in json[@"data"]) {
+                [Plan updatePlanFromServer:planItem];
+                
+                //convert feedids to array
+//                NSString *feedIds = planItem[@"feedsList"];
+//                if (![feedIds isKindOfClass:[NSNull class]]) { //create feed if exist
+//                    NSArray *idArray = [feedIds componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\"[,"]];
+//                    for (NSString *feedId in idArray){
+//                        NSLog(@"feed Id %@ \n",feedId);
+//                    }
+//                }
+            }
         }
+            
             break;
         default:
             break;
