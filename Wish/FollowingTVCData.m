@@ -20,13 +20,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[[FetchCenter alloc] init] fetchFollowingPlanList:@[@"100004"]];
+//    [[[FetchCenter alloc] init] fetchFollowingPlanList:@[@"100004"]];
 }
 
 #pragma mark - Table View
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.fetchedRC.fetchedObjects.count;
+//    return self.fetchedRC.fetchedObjects.count;
+    return 3;
 }
 
 - (void)configureFollowingCell:(FollowingCell *)cell atIndexPath:(NSIndexPath *)indexPath{
