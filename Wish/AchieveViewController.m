@@ -10,6 +10,7 @@
 #import "AchieveCell.h"
 #import "Theme.h"
 #import "UIViewController+ECSlidingViewController.h"
+#import "SystemUtil.h"
 @interface AchieveViewController ()
 
 @end
@@ -19,6 +20,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
+    
+    //add timeline to background
+    
+#warning inf time line 
+    /*
+    UIView *view = [[UIView alloc] initWithFrame:self.tableView.frame];
+    self.tableView.backgroundView = view;
+    UIView *timeLine = [[UIView alloc] initWithFrame:CGRectMake(view.bounds.origin.x + view.bounds.size.width * 170/640,0,
+                                                                2,view.bounds.size.height)];
+    timeLine.backgroundColor = [SystemUtil colorFromHexString:@"#33c7b7"];
+    [view addSubview:timeLine];
+     */
 }
 
 - (void)setUpNavigationItem
@@ -45,7 +58,6 @@
 - (AchieveCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     AchieveCell *cell = [tableView dequeueReusableCellWithIdentifier:ACHIEVECELLID
                                                             forIndexPath:indexPath];
-    
 //     Configure the cell...
     if (indexPath.row % 2 == 0) {
         cell.badgeImageView.image = [Theme achievementFail];

@@ -50,7 +50,6 @@
 + (NSString *)stringFromDate:(NSDate *)date
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-#warning time zone?
     formatter.dateFormat = @"yyyy-MM-dd";
     return [formatter stringFromDate:date];
 }
