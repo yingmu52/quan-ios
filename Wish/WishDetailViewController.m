@@ -46,7 +46,9 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [self removeCenterIcon];
     [self.cameraButton removeFromSuperview];
+
 }
 
 
@@ -116,13 +118,15 @@
     self.tableView.backgroundColor = [self currenetBackgroundColor];
 
 }
+
+- (void)removeCenterIcon{
+    [self.logoButton removeFromSuperview];
+    [self.labelUnderLogo removeFromSuperview];
+    
+}
 - (void)showCenterIcon{
     
-    BOOL shouldShow =
-    self.fetchedRC
-    && !self.fetchedRC.fetchedObjects.count
-    && !self.logoButton
-    && !self.labelUnderLogo;
+    BOOL shouldShow = self.fetchedRC.fetchedObjects.count == 0; // && !self.logoButton && !self.labelUnderLogo;
     
     self.tableView.scrollEnabled = !shouldShow;
     self.cameraButton.hidden = !shouldShow;
@@ -157,8 +161,7 @@
         [self.tableView addSubview:self.logoButton];
         [self.tableView addSubview:self.labelUnderLogo];
     }else{
-        [self.labelUnderLogo removeFromSuperview];
-        [self.logoButton removeFromSuperview];
+        [self removeCenterIcon];
     }
     
 }
@@ -323,6 +326,7 @@
         }
     }];
 }
+
 
 - (void)didFinishAddingTitleForFeed:(PostFeedViewController *)postFeedVC{
     [Feed createFeed:postFeedVC.titleForFeed
