@@ -80,66 +80,6 @@ typedef enum{
     [self getRequest:baseUrl parameter:args operation:FetchCenterOpDeletePlan entity:plan];
 }
 
-- (void)getRequest:(NSString *)baseURL parameter:(NSDictionary *)dict operation:(FetchCenterGetOp)op entity:(NSManagedObject *)obj{
-    baseURL = [baseURL stringByAppendingString:@"?"];
-    NSMutableArray *array = [NSMutableArray arrayWithCapacity:dict.allKeys.count];
-    [dict enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL* stop) {
-        [array addObject:[NSString stringWithFormat:@"%@=%@",key,value]];
-        
-    }];
-    NSString *rqtStr = [baseURL stringByAppendingString:[array componentsJoinedByString:@"&"]];
-    
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:rqtStr]
-                                                           cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30.0];
-    request.HTTPMethod = @"GET";
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
-                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
-    {
-        NSDictionary *responseJson = [NSJSONSerialization JSONObjectWithData:data
-                                                                     options:NSJSONReadingAllowFragments
-                                                                       error:nil];
-        
-        if (!error && ![responseJson[@"ret"] boolValue]){ //successed "ret" = 0;
-//            NSLog(@"GET successed \n request:%@ \n response:%@ \n",rqtStr,responseJson);
-            [self didFinishSendingGetRequest:responseJson operation:op entity:obj];
-        }else{
-            NSLog(@"Fail Get Request \n op: %d \n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@",op,baseURL,dict,responseJson,error);
-        }
-    }];
-    [task resume];
-
-
-}
-
-- (void)postImageWithOperation:(NSManagedObject *)obj postOp:(FetchCenterPostOp)postOp{
-    NSString *rqtUploadImage = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PIC,UPLOAD_IMAGE];
-    //upload image
-
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:rqtUploadImage]
-                                                           cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30.0];
-    request.HTTPMethod = @"POST";
-    
-    UIImage *image = [obj valueForKey:@"image"];
-    NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:UIImageJPEGRepresentation(image, 0.1)
-                                                      completionHandler:^(NSData *data,NSURLResponse *response,NSError *error)
-      {
-          NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
-                                                               options:NSJSONReadingAllowFragments
-                                                                 error:nil];
-
-          if (!error && ![json[@"ret"] boolValue]){ //upload image successed
-              [self didFinishSendingPostRequest:json operation:FetchCenterPostOpUploadImageForCreatingFeed entity:obj];
-          }else{
-              NSLog(@"fail to upload image \n response:%@",json);
-          }
-      }];
-    [uploadTask resume];
-
-}
 
 
 - (void)didFinishSendingPostRequest:(NSDictionary *)json operation:(FetchCenterPostOp)op entity:(NSManagedObject *)obj{
@@ -222,5 +162,82 @@ typedef enum{
             break;
             
     }
+}
+
+#pragma mark - main get and post method
+
+- (void)getRequest:(NSString *)baseURL parameter:(NSDictionary *)dict operation:(FetchCenterGetOp)op entity:(NSManagedObject *)obj{
+    
+    //base url with version
+    baseURL = [baseURL stringByAppendingString:@"?"];
+    baseURL = [self versionForBaseURL:baseURL];
+    
+    
+    //content arguments
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:dict.allKeys.count];
+    [dict enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL* stop) {
+        [array addObject:[NSString stringWithFormat:@"%@=%@",key,value]];
+        
+    }];
+    NSString *rqtStr = [baseURL stringByAppendingString:[array componentsJoinedByString:@"&"]];
+    
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:rqtStr]
+                                                           cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30.0];
+    request.HTTPMethod = @"GET";
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+                                  {
+                                      NSDictionary *responseJson = [NSJSONSerialization JSONObjectWithData:data
+                                                                                                   options:NSJSONReadingAllowFragments
+                                                                                                     error:nil];
+                                      
+                                      if (!error && ![responseJson[@"ret"] boolValue]){ //successed "ret" = 0;
+                                          //            NSLog(@"GET successed \n request:%@ \n response:%@ \n",rqtStr,responseJson);
+                                          [self didFinishSendingGetRequest:responseJson operation:op entity:obj];
+                                      }else{
+                                          NSLog(@"Fail Get Request \n op: %d \n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@",op,baseURL,dict,responseJson,error);
+                                      }
+                                  }];
+    [task resume];
+    
+    
+}
+
+- (void)postImageWithOperation:(NSManagedObject *)obj postOp:(FetchCenterPostOp)postOp{
+    NSString *rqtUploadImage = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PIC,UPLOAD_IMAGE];
+    rqtUploadImage = [self versionForBaseURL:rqtUploadImage];
+    //upload image
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:rqtUploadImage]
+                                                           cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30.0];
+    request.HTTPMethod = @"POST";
+    
+    UIImage *image = [obj valueForKey:@"image"];
+    NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:UIImageJPEGRepresentation(image, 0.1)
+                                                      completionHandler:^(NSData *data,NSURLResponse *response,NSError *error)
+                                          {
+                                              NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
+                                                                                                   options:NSJSONReadingAllowFragments
+                                                                                                     error:nil];
+                                              
+                                              if (!error && ![json[@"ret"] boolValue]){ //upload image successed
+                                                  [self didFinishSendingPostRequest:json operation:FetchCenterPostOpUploadImageForCreatingFeed entity:obj];
+                                              }else{
+                                                  NSLog(@"fail to upload image \n response:%@",json);
+                                              }
+                                          }];
+    [uploadTask resume];
+    
+}
+
+#pragma mark - version control 
+
+//return a new base url string with appened version argument
+- (NSString *)versionForBaseURL:(NSString *)baseURL{
+    return [baseURL stringByAppendingString:@"2.2.0"];
 }
 @end

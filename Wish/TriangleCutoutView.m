@@ -19,16 +19,16 @@
 
     CGFloat tipWidth = self.referenceBadgeView.frame.size.width/2;
     CGFloat tipHeight = self.referenceBadgeView.frame.size.height/2;
-    CGPoint midPoint = CGPointMake(rect.origin.x + tipWidth/2, self.referenceBadgeView.center.y);
+    CGPoint midPoint = CGPointMake(rect.origin.x - tipWidth/2, self.referenceBadgeView.center.y);
     
-    CGFloat leftEdge = rect.origin.x + tipWidth;
+    CGFloat leftEdge = rect.origin.x;
     
     UIBezierPath *bezierPath = [UIBezierPath bezierPath];
     [bezierPath moveToPoint:CGPointMake(leftEdge,rect.origin.y)];
     [bezierPath addLineToPoint:CGPointMake(rect.origin.x + rect.size.width,rect.origin.y)];
     [bezierPath addLineToPoint:CGPointMake(rect.origin.x + rect.size.width,rect.origin.y + rect.size.height)];
     [bezierPath addLineToPoint:CGPointMake(leftEdge,rect.origin.y + rect.size.height)];
-    
+
     
     [bezierPath addLineToPoint:CGPointMake(leftEdge,midPoint.y + tipHeight/2)];
     [bezierPath addLineToPoint:CGPointMake(midPoint.x, midPoint.y)];
