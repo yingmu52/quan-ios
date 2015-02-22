@@ -195,10 +195,9 @@ typedef enum{
                                                                                                      error:nil];
                                       
                                       if (!error && ![responseJson[@"ret"] boolValue]){ //successed "ret" = 0;
-                                          //            NSLog(@"GET successed \n request:%@ \n response:%@ \n",rqtStr,responseJson);
                                           [self didFinishSendingGetRequest:responseJson operation:op entity:obj];
                                       }else{
-                                          NSLog(@"Fail Get Request \n op: %d \n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@",op,baseURL,dict,responseJson,error);
+                                          NSLog(@"Fail Get Request :%@\n op: %d \n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@",request,op,baseURL,dict,responseJson,error);
                                       }
                                   }];
     [task resume];
@@ -207,7 +206,7 @@ typedef enum{
 }
 
 - (void)postImageWithOperation:(NSManagedObject *)obj postOp:(FetchCenterPostOp)postOp{
-    NSString *rqtUploadImage = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PIC,UPLOAD_IMAGE];
+    NSString *rqtUploadImage = [NSString stringWithFormat:@"%@%@%@?",BASE_URL,PIC,UPLOAD_IMAGE];
     rqtUploadImage = [self versionForBaseURL:rqtUploadImage];
     //upload image
     
@@ -238,6 +237,6 @@ typedef enum{
 
 //return a new base url string with appened version argument
 - (NSString *)versionForBaseURL:(NSString *)baseURL{
-    return [baseURL stringByAppendingString:@"2.2.0"];
+    return [baseURL stringByAppendingString:@"version=2.2.0&"];
 }
 @end
