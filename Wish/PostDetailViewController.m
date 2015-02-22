@@ -84,7 +84,9 @@
                                                              style:UIBarButtonItemStylePlain
                                                             target:self
                                                             action:@selector(dismissPickerView:)];
-    self.pickerToolBar.items = @[cancel,flexibleSpace,done];
+    
+#warning this is gross bitch !
+    self.pickerToolBar.items = @[flexibleSpace,cancel,flexibleSpace,flexibleSpace,flexibleSpace,flexibleSpace,flexibleSpace,flexibleSpace,flexibleSpace,flexibleSpace,flexibleSpace,flexibleSpace,done,flexibleSpace];
     
     [self.bgView addSubview:self.datePicker];
     [self.bgView addSubview:self.pickerToolBar];

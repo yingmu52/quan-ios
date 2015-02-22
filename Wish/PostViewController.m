@@ -52,6 +52,11 @@
     [self setPatchImageForButtons:self.sgtBtn2];
     [self setPatchImageForButtons:self.sgtBtn3];
     [self setPatchImageForButtons:self.sgtBtn4];
+    self.sgtBtn1.backgroundColor = [UIColor clearColor];
+    self.sgtBtn2.backgroundColor = [UIColor clearColor];
+    self.sgtBtn3.backgroundColor = [UIColor clearColor];
+    self.sgtBtn4.backgroundColor = [UIColor clearColor];
+    
     self.textField.layer.borderColor = [Theme postTabBorderColor].CGColor;
     self.textField.layer.borderWidth = 1.0;
     

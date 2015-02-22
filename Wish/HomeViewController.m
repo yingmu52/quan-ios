@@ -73,6 +73,11 @@ const NSUInteger maxCardNum = 10;
 
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.cardCollectionView reloadData];
+}
 
 - (void)setUpNavigationItem
 {
