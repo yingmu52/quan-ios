@@ -35,8 +35,7 @@
     //check existance
     NSArray *checks = [Plan fetchWith:@"Plan"
                             predicate:[NSPredicate predicateWithFormat:@"planId == %@",dict[@"id"]]
-                     keyForDescriptor:@"createDate"
-                            inContext:context];
+                     keyForDescriptor:@"createDate"];
     NSAssert(checks.count <= 1, @"planId must be a unique!");
     if (!checks.count) {
         //insert new fetched plan
@@ -70,13 +69,13 @@
 
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = delegate.managedObjectContext;
+
     
     Plan *plan;
     //check existance
     NSArray *checks = [Plan fetchWith:@"Plan"
                             predicate:[NSPredicate predicateWithFormat:@"createDate = %@",date]
-                     keyForDescriptor:@"createDate"
-                            inContext:context];
+                     keyForDescriptor:@"createDate"];
     if (!checks.count) {
         plan = [NSEntityDescription insertNewObjectForEntityForName:@"Plan"
                                              inManagedObjectContext:context];
@@ -112,23 +111,14 @@
     [context deleteObject:self];
 }
 
-+ (NSArray *)loadMyPlans
-{
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = delegate.managedObjectContext;
-
-    NSPredicate *notDeleted = [NSPredicate predicateWithFormat:@"userDeleted = NO"];
-    return [Plan fetchWith:@"Plan"
-                         predicate:notDeleted //fetch all non user deleted
-                  keyForDescriptor:@"createDate"
-                         inContext:context];
-}
 
 
 + (NSArray *)fetchWith:(NSString *)entityName
         predicate:(NSPredicate *)predicate
- keyForDescriptor:(NSString *)key
-        inContext:(NSManagedObjectContext *)context{
+ keyForDescriptor:(NSString *)key{
+    
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = delegate.managedObjectContext;
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName
                                               inManagedObjectContext:context];

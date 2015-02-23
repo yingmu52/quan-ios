@@ -26,7 +26,7 @@ typedef enum {
                 date:(NSDate *)date
              privacy:(BOOL)isPrivate
                image:(UIImage *)image;
-+ (NSArray *)loadMyPlans;
+
 - (void)deleteSelf;
 - (NSNumber *)extractNumberFromString:(NSString *)string;
 @end

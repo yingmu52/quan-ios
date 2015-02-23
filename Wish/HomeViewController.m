@@ -109,7 +109,7 @@ const NSUInteger maxCardNum = 10;
 #pragma mark - db operation
 
 
-
+#warning - give up for hacking max plan count
 - (void)addWish{
     if (self.fetchedRC.fetchedObjects.count > maxCardNum){
         [[[UIAlertView alloc] initWithTitle:nil
