@@ -35,6 +35,10 @@
 		AE596EB81A953D4800AF1F44 /* DiscoveryBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE596EB71A953D4800AF1F44 /* DiscoveryBannerCell.m */; };
 		AE596EB91A953D4800AF1F44 /* DiscoveryBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE596EB71A953D4800AF1F44 /* DiscoveryBannerCell.m */; };
 		AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE72E9541A66F2AA0046B38D /* MenuCell.m */; };
+		AE9A3AE31A9B165500F0588F /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9A3AE21A9B165500F0588F /* Plan.m */; };
+		AE9A3AE41A9B165500F0588F /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9A3AE21A9B165500F0588F /* Plan.m */; };
+		AE9A3AEB1A9B1DB000F0588F /* AchieveVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9A3AEA1A9B1DB000F0588F /* AchieveVCData.m */; };
+		AE9A3AEC1A9B1DB000F0588F /* AchieveVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9A3AEA1A9B1DB000F0588F /* AchieveVCData.m */; };
 		AEBD13DD1A93E7A800F5F0D3 /* DiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBD13DC1A93E7A800F5F0D3 /* DiscoveryViewController.m */; };
 		AEBD13E41A948DD400F5F0D3 /* DiscoveryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBD13E31A948DD400F5F0D3 /* DiscoveryCell.m */; };
 		AEBD13E51A948DD400F5F0D3 /* DiscoveryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBD13E31A948DD400F5F0D3 /* DiscoveryCell.m */; };
@@ -48,7 +52,6 @@
 		AED71BED1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AED71BEB1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m */; };
 		AED71BEF1A95879000F2DAF4 /* DiscoveryFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED71BEE1A95879000F2DAF4 /* DiscoveryFooterView.xib */; };
 		AED71BF01A95879100F2DAF4 /* DiscoveryFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED71BEE1A95879000F2DAF4 /* DiscoveryFooterView.xib */; };
-		AED71BF31A95A2EC00F2DAF4 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AED71BF21A95A2EC00F2DAF4 /* Plan.m */; };
 		AEE075381A744A770015155B /* SystemUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE075371A744A770015155B /* SystemUtil.m */; };
 		AEE075391A744A770015155B /* SystemUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE075371A744A770015155B /* SystemUtil.m */; };
 		AEE4A6CC1A9684D500ABF946 /* AchieveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6CB1A9684D500ABF946 /* AchieveViewController.m */; };
@@ -156,6 +159,10 @@
 		AE596EB71A953D4800AF1F44 /* DiscoveryBannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryBannerCell.m; sourceTree = "<group>"; };
 		AE72E9531A66F2AA0046B38D /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
 		AE72E9541A66F2AA0046B38D /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
+		AE9A3AE11A9B165500F0588F /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
+		AE9A3AE21A9B165500F0588F /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
+		AE9A3AE91A9B1DB000F0588F /* AchieveVCData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchieveVCData.h; sourceTree = "<group>"; };
+		AE9A3AEA1A9B1DB000F0588F /* AchieveVCData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AchieveVCData.m; sourceTree = "<group>"; };
 		AEBD13DB1A93E7A800F5F0D3 /* DiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryViewController.h; sourceTree = "<group>"; };
 		AEBD13DC1A93E7A800F5F0D3 /* DiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryViewController.m; sourceTree = "<group>"; };
 		AEBD13E21A948DD400F5F0D3 /* DiscoveryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryCell.h; sourceTree = "<group>"; };
@@ -169,8 +176,6 @@
 		AED71BEA1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTCollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
 		AED71BEB1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTCollectionViewWaterfallLayout.m; sourceTree = "<group>"; };
 		AED71BEE1A95879000F2DAF4 /* DiscoveryFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscoveryFooterView.xib; sourceTree = "<group>"; };
-		AED71BF11A95A2EC00F2DAF4 /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
-		AED71BF21A95A2EC00F2DAF4 /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
 		AEE075361A744A770015155B /* SystemUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemUtil.h; sourceTree = "<group>"; };
 		AEE075371A744A770015155B /* SystemUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUtil.m; sourceTree = "<group>"; };
 		AEE4A6CA1A9684D500ABF946 /* AchieveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchieveViewController.h; sourceTree = "<group>"; };
@@ -343,8 +348,8 @@
 		AE30EE711A6F0A8C0044740D /* Database&Networking */ = {
 			isa = PBXGroup;
 			children = (
-				AED71BF11A95A2EC00F2DAF4 /* Plan.h */,
-				AED71BF21A95A2EC00F2DAF4 /* Plan.m */,
+				AE9A3AE11A9B165500F0588F /* Plan.h */,
+				AE9A3AE21A9B165500F0588F /* Plan.m */,
 				AEF775451A82FE54000DB73B /* Feed.h */,
 				AEF775461A82FE54000DB73B /* Feed.m */,
 				AE2F1C921A7A23A200A32CB5 /* Feed+FeedCRUD.h */,
@@ -385,6 +390,8 @@
 		AEE4A6C91A9684BC00ABF946 /* Achievement */ = {
 			isa = PBXGroup;
 			children = (
+				AE9A3AE91A9B1DB000F0588F /* AchieveVCData.h */,
+				AE9A3AEA1A9B1DB000F0588F /* AchieveVCData.m */,
 				AEE4A6CE1A96A5D500ABF946 /* AchieveCell.h */,
 				AEE4A6CF1A96A5D500ABF946 /* AchieveCell.m */,
 				AEE4A6CA1A9684D500ABF946 /* AchieveViewController.h */,
@@ -676,6 +683,7 @@
 				AEF7F2931A686FA30022410B /* Theme.m in Sources */,
 				AE2F1C841A7A1A1800A32CB5 /* UIImage+ImageEffects.m in Sources */,
 				AEF7F2971A686FDB0022410B /* HomeViewController.m in Sources */,
+				AE9A3AEB1A9B1DB000F0588F /* AchieveVCData.m in Sources */,
 				AEE4A6D41A96AFCF00ABF946 /* TriangleCutoutView.m in Sources */,
 				AEF7F2AD1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */,
 				AEFEE4001A8EE0A7007E8234 /* FollowingCell.m in Sources */,
@@ -694,12 +702,12 @@
 				AE479EAE1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */,
 				AEEC6C681A6DB0F10021B7E4 /* FirstTableViewController.m in Sources */,
 				AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */,
+				AE9A3AE31A9B165500F0588F /* Plan.m in Sources */,
 				AE52FA531A8D55A7003FF725 /* KeyboardAcessoryView.m in Sources */,
 				AEF7F29B1A686FE90022410B /* NavigationBar.m in Sources */,
 				AEBD13E41A948DD400F5F0D3 /* DiscoveryCell.m in Sources */,
 				AEEC6C731A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,
 				AEFEE3FC1A8ED9F6007E8234 /* FollowingTableViewController.m in Sources */,
-				AED71BF31A95A2EC00F2DAF4 /* Plan.m in Sources */,
 				AE596EB81A953D4800AF1F44 /* DiscoveryBannerCell.m in Sources */,
 				AEEC6C601A6DB0010021B7E4 /* ALView+PureLayout.m in Sources */,
 				AE30EE6D1A6E19D00044740D /* WishDetailCell.m in Sources */,
@@ -732,6 +740,7 @@
 				AE2F1C951A7A23A200A32CB5 /* Feed+FeedCRUD.m in Sources */,
 				AEF7F29C1A686FE90022410B /* NavigationBar.m in Sources */,
 				AED05EDC1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m in Sources */,
+				AE9A3AE41A9B165500F0588F /* Plan.m in Sources */,
 				AEE4A6D51A96AFCF00ABF946 /* TriangleCutoutView.m in Sources */,
 				AED71BED1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m in Sources */,
 				AEF7F2AE1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */,
@@ -739,6 +748,7 @@
 				AE596EB91A953D4800AF1F44 /* DiscoveryBannerCell.m in Sources */,
 				AEEC6C691A6DB0F10021B7E4 /* FirstTableViewController.m in Sources */,
 				AEF7F2881A686E8A0022410B /* ECSlidingSegue.m in Sources */,
+				AE9A3AEC1A9B1DB000F0588F /* AchieveVCData.m in Sources */,
 				AEEC6C4E1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */,
 				AEBFCA381A78614100686EFE /* PostDetailViewController.m in Sources */,
 				AEF7F2AC1A6884950022410B /* CustomBarItem.m in Sources */,

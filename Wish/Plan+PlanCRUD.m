@@ -11,6 +11,19 @@
 #import "AppDelegate.h"
 @implementation Plan (PlanCRUD)
 
+- (NSArray *)planStatusTags{
+    return @[@"进行中",@"达成",@"放弃"];
+}
+- (void)updatePlanStatus:(PlanStatus)planStatus{
+    NSAssert1(planStatus == PlanStatusOnGoing || planStatus == PlanStatusFinished || planStatus == PlanStatusGiveTheFuckingUp,@"invalid plan status %d", planStatus);
+    self.planStatus = @(planStatus);
+    self.updateDate = [NSDate date];
+    if ([self.managedObjectContext save:nil]) {
+        NSLog(@"updated status : %d",planStatus);
+        //update status to server
+    }
+}
+
 + (Plan *)updatePlanFromServer:(NSDictionary *)dict{
     
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
@@ -72,9 +85,9 @@
         plan.image = UIImageJPEGRepresentation(image, 0.1);
         plan.createDate = [NSDate date];
         plan.userDeleted = @(NO);
+        plan.planStatus = @(PlanStatusOnGoing);
         
         if ([context save:nil] && [SystemUtil hasActiveInternetConnection]) {
-//            [FetchCenter uploadToCreatePlan:plan];
             [[[FetchCenter alloc] init] uploadToCreatePlan:plan];
         }
 

@@ -40,16 +40,16 @@ const NSUInteger maxCardNum = 10;
     NSIndexPath *indexPath = [self.cardCollectionView indexPathForItemAtPoint:currentPoint];
     return [self.fetchedRC objectAtIndexPath:indexPath];
 }
+
 - (NSFetchedResultsController *)fetchedRC
 {
     NSManagedObjectContext *context = [AppDelegate getContext];
     if (_fetchedRC != nil) {
         return _fetchedRC;
     }
-    
     //do fetchrequest
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
-    request.predicate = [NSPredicate predicateWithFormat:@"ownerId = %@",[SystemUtil getOwnerId]];
+    request.predicate = [NSPredicate predicateWithFormat:@"ownerId == %@ && planStatus == %d",[SystemUtil getOwnerId],PlanStatusOnGoing];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
     
     NSFetchedResultsController *newFRC =
@@ -127,12 +127,18 @@ const NSUInteger maxCardNum = 10;
 
 - (void)homeCardView:(HomeCardView *)cardView didPressedButton:(UIButton *)button
 {
+    Plan *plan = [self.fetchedRC objectAtIndexPath:[self.cardCollectionView indexPathForCell:cardView]];
+
     if ([button.titleLabel.text isEqualToString:@"放弃"]) {
-        NSIndexPath *indexPath = [self.cardCollectionView indexPathForCell:cardView];
-        Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
-        [plan deleteSelf];
+//        [plan deleteSelf];
+        [plan updatePlanStatus:PlanStatusGiveTheFuckingUp];
     }
+    if ([button.titleLabel.text isEqualToString:@"完成"]) {
+        [plan updatePlanStatus:PlanStatusFinished];
+    }
+    
 }
+
 - (void)didShowMoreView:(UIView *)moreView
 {
     self.cardCollectionView.scrollEnabled = NO;

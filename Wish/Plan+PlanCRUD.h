@@ -10,6 +10,15 @@
 @import UIKit;
 
 @interface Plan (PlanCRUD)
+@property (nonatomic,strong,readonly) NSArray *planStatusTags; //array of strings
+
+typedef enum {
+    PlanStatusOnGoing = 0,
+    PlanStatusFinished,
+    PlanStatusGiveTheFuckingUp
+}PlanStatus;
+
+- (void)updatePlanStatus:(PlanStatus)planStatus;
 
 + (Plan *)updatePlanFromServer:(NSDictionary *)dict;
 

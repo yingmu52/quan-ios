@@ -101,6 +101,9 @@
     [self dismissMoreView:sender];
 }
 
+- (IBAction)finishPressed:(UIButton *)sender{
+    [self.delegate homeCardView:self didPressedButton:sender];
+}
 - (void)backgroundTaped{
     if (self.moreView.isHidden) {
         [self.delegate didTapOnHomeCardView:self];
