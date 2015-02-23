@@ -18,7 +18,7 @@
     Plan *plan;
     //check existance
     NSArray *checks = [Plan fetchWith:@"Plan"
-                            predicate:[NSPredicate predicateWithFormat:@"planId = %@",dict[@"id"]]
+                            predicate:[NSPredicate predicateWithFormat:@"planId == %@",dict[@"id"]]
                      keyForDescriptor:@"createDate"
                             inContext:context];
     NSAssert(checks.count <= 1, @"planId must be a unique!");
@@ -36,8 +36,8 @@
     plan.planTitle = dict[@"title"];
     plan.createDate = [NSDate dateWithTimeIntervalSince1970:[dict[@"createTime"] integerValue]];
     
-    plan.updateDate = [NSDate dateWithTimeInterval:[dict[@"updateTime"] integerValue]
-                                         sinceDate:plan.createDate];
+    
+    plan.updateDate = [NSDate dateWithTimeIntervalSince1970:[dict[@"createTime"] integerValue]];
     plan.userDeleted = @(NO);
     if ([context save:nil]) {
         NSLog(@"updated plan list form server");

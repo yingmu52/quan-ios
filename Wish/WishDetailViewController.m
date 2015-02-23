@@ -340,10 +340,8 @@
     if (!self.plan.image){
         return [Theme wishDetailBackgroundNone:self.tableView];
     }else{
-        CGRect rect = self.view.bounds;
-        rect.origin.y -= rect.size.height;
+        CGRect rect = self.tableView.bounds;
         rect.size.height *= 2;
-        rect.size.width *= 2;
         return [UIColor colorWithPatternImage:[SystemUtil darkLayeredImage:[self.plan.image applyLightEffect] inRect:rect]];
     }
     

@@ -11,4 +11,5 @@
 
 @interface FollowingTableViewController : UITableViewController
 - (void)configureFollowingCell:(FollowingCell *)cell atIndexPath:(NSIndexPath *)indexPath; //abstract
+
 @end

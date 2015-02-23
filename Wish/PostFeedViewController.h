@@ -19,7 +19,10 @@
 
 @property (nonatomic,strong) NSString *navigationTitle;
 @property (nonatomic,strong) UIImage *previewImage;
-@property (nonatomic,readonly) NSString *titleForFeed;
 @property (nonatomic,weak) id <PostFeedViewControllerDelegate> delegate;
+
+
+@property (nonatomic,readonly) NSString *titleForFeed;
+
 
 @end

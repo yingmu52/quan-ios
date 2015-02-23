@@ -18,14 +18,15 @@
 #import "FetchCenter.h"
 #import "WishDetailViewController.h"
 #import "HomeCardFlowLayout.h"
-
+#import "PostFeedViewController.h"
 
 const NSUInteger maxCardNum = 10;
 
-@interface HomeViewController () <NSFetchedResultsControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HomeCardViewDelegate,UICollectionViewDelegateFlowLayout>
+@interface HomeViewController () <NSFetchedResultsControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HomeCardViewDelegate,UICollectionViewDelegateFlowLayout,PostFeedViewControllerDelegate>
 
 @property (nonatomic,weak) IBOutlet UICollectionView *cardCollectionView;
 @property (nonatomic,strong) UIImage *capturedImage;
+@property (nonatomic,weak) Plan *currentPlan;
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 
 @end
@@ -33,6 +34,12 @@ const NSUInteger maxCardNum = 10;
 @implementation HomeViewController
 
 
+- (Plan *)currentPlan{
+    CGPoint currentPoint = CGPointMake(self.cardCollectionView.center.x + self.cardCollectionView.contentOffset.x,
+                                       self.cardCollectionView.center.y + self.cardCollectionView.contentOffset.y);
+    NSIndexPath *indexPath = [self.cardCollectionView indexPathForItemAtPoint:currentPoint];
+    return [self.fetchedRC objectAtIndexPath:indexPath];
+}
 - (NSFetchedResultsController *)fetchedRC
 {
     NSManagedObjectContext *context = [AppDelegate getContext];
@@ -152,6 +159,9 @@ const NSUInteger maxCardNum = 10;
     [self dismissViewControllerAnimated:NO completion:^{
         self.capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage];
         //NSLog(@"%@",NSStringFromCGSize(editedImage.size));
+        
+#warning haha fucking it bitch, I nailed this ! 
+        [self performSegueWithIdentifier:@"ShowPostFeedFromHome" sender:nil];
     }];
 }
 
@@ -169,8 +179,22 @@ const NSUInteger maxCardNum = 10;
         WishDetailViewController *controller = segue.destinationViewController;
         controller.plan = [self.fetchedRC objectAtIndexPath:[self.cardCollectionView indexPathForCell:sender]];
     }
+    if ([segue.identifier isEqualToString:@"ShowPostFeedFromHome"]) {
+
+        PostFeedViewController *pfvc = segue.destinationViewController;
+        
+        pfvc.navigationTitle = self.currentPlan.planTitle;
+        pfvc.previewImage = self.capturedImage;
+        pfvc.delegate = self;
+    }
 }
 
+#pragma mark - post feed controller delegate
+- (void)didFinishAddingTitleForFeed:(PostFeedViewController *)postFeedVC{
+    [Feed createFeed:postFeedVC.titleForFeed
+               image:self.capturedImage
+              inPlan:self.currentPlan];
+}
 #pragma mark -
 #pragma mark UICollectionView methods
 
