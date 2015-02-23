@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="14C109" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Feed" representedClassName="Feed" syncable="YES">
+        <attribute name="commentCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="createDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="feedId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="feedTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="imageId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="likeCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="plan" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Plan" inverseName="feeds" inverseEntity="Plan" syncable="YES"/>
     </entity>
     <entity name="Plan" representedClassName="Plan" syncable="YES">
@@ -24,7 +26,7 @@
         <relationship name="feeds" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Feed" inverseName="plan" inverseEntity="Feed" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Feed" positionX="-9243" positionY="-54" width="128" height="135"/>
+        <element name="Feed" positionX="-9243" positionY="-54" width="128" height="163"/>
         <element name="Plan" positionX="-8903" positionY="-153" width="128" height="240"/>
     </elements>
 </model>

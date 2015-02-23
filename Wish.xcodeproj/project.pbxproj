@@ -52,6 +52,10 @@
 		AED71BED1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AED71BEB1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m */; };
 		AED71BEF1A95879000F2DAF4 /* DiscoveryFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED71BEE1A95879000F2DAF4 /* DiscoveryFooterView.xib */; };
 		AED71BF01A95879100F2DAF4 /* DiscoveryFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED71BEE1A95879000F2DAF4 /* DiscoveryFooterView.xib */; };
+		AED8D7C61A9BC5840035EDE5 /* Feed.m in Sources */ = {isa = PBXBuildFile; fileRef = AED8D7C51A9BC5840035EDE5 /* Feed.m */; };
+		AED8D7C71A9BC5840035EDE5 /* Feed.m in Sources */ = {isa = PBXBuildFile; fileRef = AED8D7C51A9BC5840035EDE5 /* Feed.m */; };
+		AED8D7CA1A9BE2490035EDE5 /* FollowingImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AED8D7C91A9BE2490035EDE5 /* FollowingImageCell.m */; };
+		AED8D7CB1A9BE2490035EDE5 /* FollowingImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AED8D7C91A9BE2490035EDE5 /* FollowingImageCell.m */; };
 		AEE075381A744A770015155B /* SystemUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE075371A744A770015155B /* SystemUtil.m */; };
 		AEE075391A744A770015155B /* SystemUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE075371A744A770015155B /* SystemUtil.m */; };
 		AEE4A6CC1A9684D500ABF946 /* AchieveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6CB1A9684D500ABF946 /* AchieveViewController.m */; };
@@ -79,8 +83,6 @@
 		AEEC6C731A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C721A6DB11F0021B7E4 /* WishDetailViewController.m */; };
 		AEEC6C741A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C721A6DB11F0021B7E4 /* WishDetailViewController.m */; };
 		AEF775441A8134FE000DB73B /* HomeCardFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF775431A8134FE000DB73B /* HomeCardFlowLayout.m */; };
-		AEF775471A82FE54000DB73B /* Feed.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF775461A82FE54000DB73B /* Feed.m */; };
-		AEF775481A82FE54000DB73B /* Feed.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF775461A82FE54000DB73B /* Feed.m */; };
 		AEF7F2811A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F26F1A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m */; };
 		AEF7F2821A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F26F1A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m */; };
 		AEF7F2831A686E8A0022410B /* ECSlidingAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F2711A686E8A0022410B /* ECSlidingAnimationController.m */; };
@@ -176,6 +178,10 @@
 		AED71BEA1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTCollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
 		AED71BEB1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTCollectionViewWaterfallLayout.m; sourceTree = "<group>"; };
 		AED71BEE1A95879000F2DAF4 /* DiscoveryFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscoveryFooterView.xib; sourceTree = "<group>"; };
+		AED8D7C41A9BC5840035EDE5 /* Feed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feed.h; sourceTree = "<group>"; };
+		AED8D7C51A9BC5840035EDE5 /* Feed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feed.m; sourceTree = "<group>"; };
+		AED8D7C81A9BE2490035EDE5 /* FollowingImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowingImageCell.h; sourceTree = "<group>"; };
+		AED8D7C91A9BE2490035EDE5 /* FollowingImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowingImageCell.m; sourceTree = "<group>"; };
 		AEE075361A744A770015155B /* SystemUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemUtil.h; sourceTree = "<group>"; };
 		AEE075371A744A770015155B /* SystemUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUtil.m; sourceTree = "<group>"; };
 		AEE4A6CA1A9684D500ABF946 /* AchieveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchieveViewController.h; sourceTree = "<group>"; };
@@ -206,8 +212,6 @@
 		AEEC6C721A6DB11F0021B7E4 /* WishDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailViewController.m; sourceTree = "<group>"; };
 		AEF775421A8134FE000DB73B /* HomeCardFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCardFlowLayout.h; sourceTree = "<group>"; };
 		AEF775431A8134FE000DB73B /* HomeCardFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCardFlowLayout.m; sourceTree = "<group>"; };
-		AEF775451A82FE54000DB73B /* Feed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feed.h; sourceTree = "<group>"; };
-		AEF775461A82FE54000DB73B /* Feed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feed.m; sourceTree = "<group>"; };
 		AEF7F26E1A686E8A0022410B /* ECPercentDrivenInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPercentDrivenInteractiveTransition.h; sourceTree = "<group>"; };
 		AEF7F26F1A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPercentDrivenInteractiveTransition.m; sourceTree = "<group>"; };
 		AEF7F2701A686E8A0022410B /* ECSlidingAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingAnimationController.h; sourceTree = "<group>"; };
@@ -348,10 +352,10 @@
 		AE30EE711A6F0A8C0044740D /* Database&Networking */ = {
 			isa = PBXGroup;
 			children = (
+				AED8D7C41A9BC5840035EDE5 /* Feed.h */,
+				AED8D7C51A9BC5840035EDE5 /* Feed.m */,
 				AE9A3AE11A9B165500F0588F /* Plan.h */,
 				AE9A3AE21A9B165500F0588F /* Plan.m */,
-				AEF775451A82FE54000DB73B /* Feed.h */,
-				AEF775461A82FE54000DB73B /* Feed.m */,
 				AE2F1C921A7A23A200A32CB5 /* Feed+FeedCRUD.h */,
 				AE2F1C931A7A23A200A32CB5 /* Feed+FeedCRUD.m */,
 				AE0172431A65CD8E0014266F /* Wish.xcdatamodeld */,
@@ -542,6 +546,8 @@
 				AEE4A6D71A972FAA00ABF946 /* FollowingTVCData.m */,
 				AEFEE3FA1A8ED9F6007E8234 /* FollowingTableViewController.h */,
 				AEFEE3FB1A8ED9F6007E8234 /* FollowingTableViewController.m */,
+				AED8D7C81A9BE2490035EDE5 /* FollowingImageCell.h */,
+				AED8D7C91A9BE2490035EDE5 /* FollowingImageCell.m */,
 				AEFEE3FE1A8EE0A7007E8234 /* FollowingCell.h */,
 				AEFEE3FF1A8EE0A7007E8234 /* FollowingCell.m */,
 			);
@@ -688,8 +694,8 @@
 				AEF7F2AD1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */,
 				AEFEE4001A8EE0A7007E8234 /* FollowingCell.m in Sources */,
 				AEF7F2831A686E8A0022410B /* ECSlidingAnimationController.m in Sources */,
+				AED8D7C61A9BC5840035EDE5 /* Feed.m in Sources */,
 				AEF7F2871A686E8A0022410B /* ECSlidingSegue.m in Sources */,
-				AEF775471A82FE54000DB73B /* Feed.m in Sources */,
 				AEBFCA371A78614100686EFE /* PostDetailViewController.m in Sources */,
 				AEEC6C4D1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */,
 				AED05EDB1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m in Sources */,
@@ -707,6 +713,7 @@
 				AEF7F29B1A686FE90022410B /* NavigationBar.m in Sources */,
 				AEBD13E41A948DD400F5F0D3 /* DiscoveryCell.m in Sources */,
 				AEEC6C731A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,
+				AED8D7CA1A9BE2490035EDE5 /* FollowingImageCell.m in Sources */,
 				AEFEE3FC1A8ED9F6007E8234 /* FollowingTableViewController.m in Sources */,
 				AE596EB81A953D4800AF1F44 /* DiscoveryBannerCell.m in Sources */,
 				AEEC6C601A6DB0010021B7E4 /* ALView+PureLayout.m in Sources */,
@@ -727,7 +734,6 @@
 				AEF7F2941A686FA30022410B /* Theme.m in Sources */,
 				AEEC6C631A6DB0010021B7E4 /* NSArray+PureLayout.m in Sources */,
 				AED68EE51A70399A00CDC0DF /* FetchCenter.m in Sources */,
-				AEF775481A82FE54000DB73B /* Feed.m in Sources */,
 				AEEC6C6E1A6DB0FC0021B7E4 /* HeaderView.m in Sources */,
 				AE01725C1A65CD8F0014266F /* WishTests.m in Sources */,
 				AEE4A6CD1A9684D500ABF946 /* AchieveViewController.m in Sources */,
@@ -740,6 +746,7 @@
 				AE2F1C951A7A23A200A32CB5 /* Feed+FeedCRUD.m in Sources */,
 				AEF7F29C1A686FE90022410B /* NavigationBar.m in Sources */,
 				AED05EDC1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m in Sources */,
+				AED8D7C71A9BC5840035EDE5 /* Feed.m in Sources */,
 				AE9A3AE41A9B165500F0588F /* Plan.m in Sources */,
 				AEE4A6D51A96AFCF00ABF946 /* TriangleCutoutView.m in Sources */,
 				AED71BED1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m in Sources */,
@@ -749,6 +756,7 @@
 				AEEC6C691A6DB0F10021B7E4 /* FirstTableViewController.m in Sources */,
 				AEF7F2881A686E8A0022410B /* ECSlidingSegue.m in Sources */,
 				AE9A3AEC1A9B1DB000F0588F /* AchieveVCData.m in Sources */,
+				AED8D7CB1A9BE2490035EDE5 /* FollowingImageCell.m in Sources */,
 				AEEC6C4E1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */,
 				AEBFCA381A78614100686EFE /* PostDetailViewController.m in Sources */,
 				AEF7F2AC1A6884950022410B /* CustomBarItem.m in Sources */,

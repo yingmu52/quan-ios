@@ -29,4 +29,9 @@ typedef enum {
 
 - (void)deleteSelf;
 - (NSNumber *)extractNumberFromString:(NSString *)string;
+
+
++ (NSArray *)fetchWith:(NSString *)entityName
+             predicate:(NSPredicate *)predicate
+      keyForDescriptor:(NSString *)key;
 @end

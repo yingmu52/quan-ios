@@ -8,14 +8,65 @@
 
 #import "FollowingCell.h"
 #import "SystemUtil.h"
-@interface FollowingCell () <UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+#import "AppDelegate.h"
+#import "FollowingImageCell.h"
+@import CoreData;
+@interface FollowingCell () <UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,NSFetchedResultsControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *feedBackground;
 @property (weak, nonatomic) IBOutlet UIView *headBackground;
-@property (weak, nonatomic) IBOutlet UICollectionView *wishDetailCollectionView;
-
+@property (nonatomic,weak) NSFetchedResultsController *fetchedRC;
 @end
 @implementation FollowingCell
 
+- (NSFetchedResultsController *)fetchedRC
+{
+    NSManagedObjectContext *context = [AppDelegate getContext];
+    if (_fetchedRC != nil) {
+        return _fetchedRC;
+    }
+    //do fetchrequest
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
+    
+    NSAssert(self.plan,@"nil plan for FollowingCell");
+    request.predicate = [NSPredicate predicateWithFormat:@"plan = %@",self.plan];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
+    
+    NSFetchedResultsController *newFRC =
+    [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                        managedObjectContext:context sectionNameKeyPath:nil
+                                                   cacheName:nil];
+    self.fetchedRC = newFRC;
+    _fetchedRC.delegate = self;
+    
+    // Perform Fetch
+    NSError *error = nil;
+    [_fetchedRC performFetch:&error];
+    
+    if (error) {
+        NSLog(@"Unable to perform fetch.");
+        NSLog(@"%@, %@", error, error.localizedDescription);
+    }
+    return _fetchedRC;
+    
+    
+}
+
+
+-(FollowingImageCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSString *identifier = FOLLOWINGIMAGECELLID;
+    
+    if (indexPath.row == [collectionView numberOfItemsInSection:indexPath.section] - 1) {
+        identifier = FOLLOWINGIMAGECELLLASTID;
+    }
+    FollowingImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    
+    return cell;
+    
+}
+
+#pragma mark - UI
+#pragma uicollectionview delegate and data source
 
 - (void)setWishDetailCollectionView:(UICollectionView *)wishDetailCollectionView{
     _wishDetailCollectionView = wishDetailCollectionView;
@@ -42,7 +93,6 @@
     [SystemUtil setupShawdowForView:_headBackground];
 }
 
-#pragma uicollectionview delegate and data source
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout *)collectionViewLayout
@@ -61,17 +111,6 @@
     return UIEdgeInsetsMake(0, margin, 0, margin);
 }
 
--(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    NSString *identifier = @"FeedInFollowingCell";
-    
-    if (indexPath.row == [collectionView numberOfItemsInSection:indexPath.section] - 1) {
-        identifier = @"FollowingCellLast";
-    }
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-    return cell;
-    
-}
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return 4;

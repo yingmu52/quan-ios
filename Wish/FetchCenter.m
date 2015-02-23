@@ -17,19 +17,22 @@
 #define FEED @"feeds/"
 #define PIC @"pic/"
 #define UPLOAD_IMAGE @"splan_pic_upload.php"
+#define GET_IMAGE @"splan_pic_get.php"
+#define kFetchedImage @"fetchedImage" // for constructing NSDictionary with image data
 #define CREATE_FEED @"splan_feeds_create.php"
 
 
 #define FOLLOW @"follow/"
 #define GET_FOLLOW_LIST @"splan_follow_get_feedslist.php"
 typedef enum{
-    FetchCenterOpCreatePlan = 0,
-    FetchCenterOpDeletePlan,
-    FetchCenterOpUploadImage,
-    FetchCenterOpCreateFeed,
-    FetchCenterOpGetPlanList,
-    FetchCenterOpSetPlanStatus,
-    FetchCenterOpGetFollowingPlanList
+    FetchCenterGetOpCreatePlan = 0,
+    FetchCenterGetOpDeletePlan,
+    FetchCenterGetOpUploadImage,
+    FetchCenterGetOpCreateFeed,
+    FetchCenterGetOpGetPlanList,
+    FetchCenterGetOpSetPlanStatus,
+    FetchCenterGetOpGetImageForFeedOfFollowingPlan,
+    FetchCenterGetOpFollowingPlanList
 }FetchCenterGetOp;
 
 typedef enum{
@@ -44,11 +47,18 @@ typedef enum{
         NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,FOLLOW,GET_FOLLOW_LIST];
         [self getRequest:rqtStr
                parameter:@{@"id":ownerId}
-               operation:FetchCenterOpGetFollowingPlanList
+               operation:FetchCenterGetOpFollowingPlanList
                   entity:nil];
     }
 }
 
+- (void)getImageForFeed:(Feed *)feed operation:(FetchCenterGetOp)operation{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PIC,GET_IMAGE];
+    [self getRequest:rqtStr
+           parameter:@{@"id":feed.imageId}
+           operation:FetchCenterGetOpGetImageForFeedOfFollowingPlan
+              entity:feed];
+}
 #pragma mark - 
 #pragma mark - personal
 
@@ -56,12 +66,12 @@ typedef enum{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PLAN,UPDATE_PLAN_STATUS];
     [self getRequest:rqtStr parameter:@{@"id":plan.planId,
                                         @"state":plan.planStatus}
-           operation:FetchCenterOpSetPlanStatus entity:plan];
+           operation:FetchCenterGetOpSetPlanStatus entity:plan];
 
 }
 - (void)fetchPlanList:(NSString *)ownerId{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PLAN,GET_LIST];
-    [self getRequest:rqtStr parameter:@{@"id":ownerId} operation:FetchCenterOpGetPlanList entity:nil];
+    [self getRequest:rqtStr parameter:@{@"id":ownerId} operation:FetchCenterGetOpGetPlanList entity:nil];
 
 }
 
@@ -71,7 +81,7 @@ typedef enum{
                            @"title":[plan.planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                            @"finishDate":@([SystemUtil daysBetween:[NSDate date] and:plan.finishDate]),
                            @"private":plan.isPrivate};
-    [self getRequest:baseUrl parameter:args operation:FetchCenterOpCreatePlan entity:plan];
+    [self getRequest:baseUrl parameter:args operation:FetchCenterGetOpCreatePlan entity:plan];
 }
 
 - (void)uploadToCreateFeed:(Feed *)feed{
@@ -86,7 +96,7 @@ typedef enum{
     NSString *baseUrl = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PLAN,CREATE_PLAN];
     NSDictionary *args = @{@"id":plan.planId,
                            @"ownerId":plan.ownerId};
-    [self getRequest:baseUrl parameter:args operation:FetchCenterOpDeletePlan entity:plan];
+    [self getRequest:baseUrl parameter:args operation:FetchCenterGetOpDeletePlan entity:plan];
 }
 
 
@@ -107,7 +117,7 @@ typedef enum{
                              @"picurl":fetchedImageId,
                              @"content":[feed.feedTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                              @"planId":feed.plan.planId};
-                    [self getRequest:baseURL parameter:args operation:FetchCenterOpCreateFeed entity:obj];
+                    [self getRequest:baseURL parameter:args operation:FetchCenterGetOpCreateFeed entity:obj];
                 }
             }
         }
@@ -120,15 +130,15 @@ typedef enum{
 - (void)didFinishSendingGetRequest:(NSDictionary *)json operation:(FetchCenterGetOp)op entity:(NSManagedObject *)obj{
     switch (op)
     {
-        case FetchCenterOpGetPlanList:
+        case FetchCenterGetOpGetPlanList:
             //get plan list
             break;
-        case FetchCenterOpDeletePlan:
+        case FetchCenterGetOpDeletePlan:
             if ([obj.managedObjectContext save:nil]) {  //commited delete
                 NSLog(@"deleted successed");
             }
             break;
-        case FetchCenterOpCreateFeed:{
+        case FetchCenterGetOpCreateFeed:{
             NSString *fetchedFeedID = [json valueForKeyPath:@"data.id"];
             if (fetchedFeedID){
                 Feed *feed = (Feed *)obj;
@@ -139,7 +149,7 @@ typedef enum{
             }
         }
             break;
-        case FetchCenterOpCreatePlan:{
+        case FetchCenterGetOpCreatePlan:{
             NSString *fetchedPlanId = [json valueForKeyPath:@"data.id"];
             if (fetchedPlanId) {
                 Plan *plan = (Plan *)obj;
@@ -149,28 +159,47 @@ typedef enum{
             }
         }
             break;
-        case FetchCenterOpSetPlanStatus:{
+        case FetchCenterGetOpSetPlanStatus:{
             NSLog(@"updated plan status (from server)");
         }
             break;
+        case FetchCenterGetOpGetImageForFeedOfFollowingPlan:{
+            /*
+             obj is nil in this case see -getImageWithfeedInfo:operation:
+             create feed for image
+            */
+            UIImage *fetchedImage = json[kFetchedImage];
+            Feed *feed = (Feed *)obj;
+            feed.image = fetchedImage;
+            if([feed.managedObjectContext save:nil]){
+                NSLog(@"Done fetching image for feed %@",feed.feedId);
+            }
+        }
+            break;
 
-        case FetchCenterOpGetFollowingPlanList:{
-            NSLog(@"FetchCenterOpGetFollowingPlanList \n %@",json);
+        case FetchCenterGetOpFollowingPlanList:{
+//            NSLog(@"FetchCenterOpGetFollowingPlanList \n %@",json);
             //save the response following plan list
             for (NSDictionary *planItem in json[@"data"]) {
                 [Plan updatePlanFromServer:planItem];
-                
-                //convert feedids to array
-//                NSString *feedIds = planItem[@"feedsList"];
-//                if (![feedIds isKindOfClass:[NSNull class]]) { //create feed if exist
-//                    NSArray *idArray = [feedIds componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\"[,"]];
-//                    for (NSString *feedId in idArray){
-//                        NSLog(@"feed Id %@ \n",feedId);
-//                    }
-//                }
+                NSArray *feedsList = planItem[@"feedsList"];
+                if (feedsList.count) {
+                    //create all feeds
+
+                    NSInteger imageLoadingCount = 0;
+                    for (NSDictionary *feedItem in feedsList) {
+                        Feed *feed = [Feed createFeedFromServer:feedItem];
+                        if (imageLoadingCount < 3) {
+                            [self getImageForFeed:feed
+                                        operation:FetchCenterGetOpGetImageForFeedOfFollowingPlan];
+                            imageLoadingCount++;
+                        }
+                    }
+                    //load the first 3 image data for feed;
+                    
+                }
             }
         }
-            
             break;
         default:
             break;
@@ -204,9 +233,20 @@ typedef enum{
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request
                                             completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                   {
-                                      NSDictionary *responseJson = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                   options:NSJSONReadingAllowFragments
-                                                                                                     error:nil];
+                                      NSDictionary *responseJson;
+                                      if (op == FetchCenterGetOpGetImageForFeedOfFollowingPlan) {
+                                          //covert html body to UIImage instance
+                                          UIImage *fetchedImage = [UIImage imageWithData:data];
+                                          responseJson = @{@"ret":@(0),kFetchedImage:fetchedImage};
+                                      }else{
+                                          responseJson = [NSJSONSerialization JSONObjectWithData:data
+                                                                                         options:NSJSONReadingAllowFragments
+                                                                                           error:nil];
+                                          if ([responseJson[@"ret"] integerValue] == -305) {
+                                              NSLog(@"-305: invalid system version");
+                                              return;
+                                          }
+                                      }
                                       
                                       if (!error && ![responseJson[@"ret"] boolValue]){ //successed "ret" = 0;
                                           [self didFinishSendingGetRequest:responseJson operation:op entity:obj];

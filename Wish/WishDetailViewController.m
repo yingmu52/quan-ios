@@ -189,18 +189,8 @@
                                                    cacheName:nil];
     self.fetchedRC = newFRC;
     _fetchedRC.delegate = self;
-    // Perform Fetch
-//    dispatch_queue_t fetchQ = dispatch_queue_create("Wish Detail Fetch Q", NULL);
-//    dispatch_async(fetchQ, ^{
         NSError *error;
         [_fetchedRC performFetch:&error];
-//        if (error) {
-//            NSLog(@"Unable to perform fetch.");
-//            NSLog(@"%@, %@", error, error.localizedDescription);
-//        }
-//    });
-//    
-    
     return _fetchedRC;
     
     
