@@ -12,6 +12,7 @@
 #define GET_LIST @"splan_plan_getlist.php"
 #define CREATE_PLAN @"splan_plan_create.php"
 #define DELETE_PLAN @"splan_plan_delete_id.php"
+#define UPDATE_PLAN_STATUS @"splan_plan_set_state.php"
 
 #define FEED @"feeds/"
 #define PIC @"pic/"
@@ -27,6 +28,7 @@ typedef enum{
     FetchCenterOpUploadImage,
     FetchCenterOpCreateFeed,
     FetchCenterOpGetPlanList,
+    FetchCenterOpSetPlanStatus,
     FetchCenterOpGetFollowingPlanList
 }FetchCenterGetOp;
 
@@ -50,6 +52,13 @@ typedef enum{
 #pragma mark - 
 #pragma mark - personal
 
+- (void)updateStatus:(Plan *)plan{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PLAN,UPDATE_PLAN_STATUS];
+    [self getRequest:rqtStr parameter:@{@"id":plan.planId,
+                                        @"state":plan.planStatus}
+           operation:FetchCenterOpSetPlanStatus entity:plan];
+
+}
 - (void)fetchPlanList:(NSString *)ownerId{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PLAN,GET_LIST];
     [self getRequest:rqtStr parameter:@{@"id":ownerId} operation:FetchCenterOpGetPlanList entity:nil];
@@ -140,6 +149,11 @@ typedef enum{
             }
         }
             break;
+        case FetchCenterOpSetPlanStatus:{
+            NSLog(@"updated plan status (from server)");
+        }
+            break;
+
         case FetchCenterOpGetFollowingPlanList:{
             NSLog(@"FetchCenterOpGetFollowingPlanList \n %@",json);
             //save the response following plan list

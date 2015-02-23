@@ -17,7 +17,7 @@
 - (void)uploadToCreatePlan:(Plan *)plan;
 - (void)postToDeletePlan:(Plan *)plan;
 - (void)uploadToCreateFeed:(Feed *)feed;
-
+- (void)updateStatus:(Plan *)plan;
 
 - (void)fetchFollowingPlanList:(NSArray *)ownerIds;
 

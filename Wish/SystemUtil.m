@@ -37,7 +37,7 @@
 + (NSString *)getOwnerId{
 #warning fucking change this in the future man !
     NSString *ownerID = [[NSUserDefaults standardUserDefaults] objectForKey:OWNERID];
-    ownerID = ownerID ? ownerID : @"100001";
+    ownerID = ownerID ? ownerID : @"100002";
     return ownerID;
 }
 

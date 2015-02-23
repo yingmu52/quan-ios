@@ -49,7 +49,7 @@ const NSUInteger maxCardNum = 10;
     }
     //do fetchrequest
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
-    request.predicate = [NSPredicate predicateWithFormat:@"ownerId == %@ && planStatus == %d",[SystemUtil getOwnerId],PlanStatusOnGoing];
+    request.predicate = [NSPredicate predicateWithFormat:@"userDeleted == %@ && ownerId == %@ && planStatus == %d",@(NO),[SystemUtil getOwnerId],PlanStatusOnGoing];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
     
     NSFetchedResultsController *newFRC =
@@ -225,39 +225,37 @@ const NSUInteger maxCardNum = 10;
 }
 #pragma mark - FetchedResultsController
 
-- (void)controller:(NSFetchedResultsController *)controller
-   didChangeObject:(id)anObject
-       atIndexPath:(NSIndexPath *)indexPath
-     forChangeType:(NSFetchedResultsChangeType)type
-      newIndexPath:(NSIndexPath *)newIndexPath
-{
-    
-    
-    switch(type)
-    {
-        case NSFetchedResultsChangeInsert:
-            [self.cardCollectionView insertItemsAtIndexPaths:@[newIndexPath]];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [self.cardCollectionView deleteItemsAtIndexPaths:@[indexPath]];
-            break;
-            
-        case NSFetchedResultsChangeUpdate:
-            [self.cardCollectionView reloadItemsAtIndexPaths:@[indexPath]];
-            break;
-            
-        case NSFetchedResultsChangeMove:
-            // dont't support move action
-            break;
-    }
-}
-//
-//- (void)controllerDidChangeContent:
-//(NSFetchedResultsController *)controller
+//- (void)controller:(NSFetchedResultsController *)controller
+//   didChangeObject:(id)anObject
+//       atIndexPath:(NSIndexPath *)indexPath
+//     forChangeType:(NSFetchedResultsChangeType)type
+//      newIndexPath:(NSIndexPath *)newIndexPath
 //{
-//    [self.cardCollectionView reloadData];
+//    
+//    
+//    switch(type)
+//    {
+//        case NSFetchedResultsChangeInsert:
+//            [self.cardCollectionView insertItemsAtIndexPaths:@[newIndexPath]];
+//            break;
+//            
+//        case NSFetchedResultsChangeDelete:
+//            [self.cardCollectionView deleteItemsAtIndexPaths:@[indexPath]];
+//            break;
+//            
+//        case NSFetchedResultsChangeUpdate:
+//            [self.cardCollectionView reloadItemsAtIndexPaths:@[indexPath]];
+//            break;
+//        default:
+//            break;
+//    }
 //}
+
+- (void)controllerDidChangeContent:
+(NSFetchedResultsController *)controller
+{
+    [self.cardCollectionView reloadData];
+}
 
 
 @end

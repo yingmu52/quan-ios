@@ -18,9 +18,12 @@
     NSAssert1(planStatus == PlanStatusOnGoing || planStatus == PlanStatusFinished || planStatus == PlanStatusGiveTheFuckingUp,@"invalid plan status %d", planStatus);
     self.planStatus = @(planStatus);
     self.updateDate = [NSDate date];
-    if ([self.managedObjectContext save:nil]) {
+    if ([self.managedObjectContext save:nil] && self.planId) {
         NSLog(@"updated status : %d",planStatus);
         //update status to server
+        [[FetchCenter alloc] updateStatus:self];
+    }else{
+        NSLog(@"failed to save or null planId");
     }
 }
 
@@ -87,7 +90,7 @@
         plan.userDeleted = @(NO);
         plan.planStatus = @(PlanStatusOnGoing);
         
-        if ([context save:nil] && [SystemUtil hasActiveInternetConnection]) {
+        if ([context save:nil]) {
             [[[FetchCenter alloc] init] uploadToCreatePlan:plan];
         }
 
@@ -100,15 +103,13 @@
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = delegate.managedObjectContext;
     self.userDeleted = @(YES);
-    if ([SystemUtil hasActiveInternetConnection]){     //active internet
-        if (self.planId && [self.ownerId isEqualToString:[SystemUtil getOwnerId]]){
-//            [FetchCenter postToDeletePlan:self];
-            [[[FetchCenter alloc] init] postToDeletePlan:self];
-        }else{
-            NSLog(@"delete from local");
-        }
+    if (self.planId && [self.ownerId isEqualToString:[SystemUtil getOwnerId]]){
+        //            [FetchCenter postToDeletePlan:self];
+        [[[FetchCenter alloc] init] postToDeletePlan:self];
+    }else{
+        NSLog(@"delete from local");
     }
-    [context deleteObject:self];    
+    [context deleteObject:self];
 }
 
 + (NSArray *)loadMyPlans
