@@ -22,16 +22,12 @@
     [self setUpNavigationItem];
     
     //add timeline to background
-    
-#warning inf time line 
-    /*
     UIView *view = [[UIView alloc] initWithFrame:self.tableView.frame];
     self.tableView.backgroundView = view;
     UIView *timeLine = [[UIView alloc] initWithFrame:CGRectMake(view.bounds.origin.x + view.bounds.size.width * 170/640,0,
                                                                 2,view.bounds.size.height)];
     timeLine.backgroundColor = [SystemUtil colorFromHexString:@"#33c7b7"];
     [view addSubview:timeLine];
-     */
 }
 
 - (void)setUpNavigationItem

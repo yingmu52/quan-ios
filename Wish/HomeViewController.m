@@ -25,7 +25,7 @@ const NSUInteger maxCardNum = 10;
 @interface HomeViewController () <NSFetchedResultsControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HomeCardViewDelegate,UICollectionViewDelegateFlowLayout,PostFeedViewControllerDelegate>
 
 @property (nonatomic,weak) IBOutlet UICollectionView *cardCollectionView;
-@property (nonatomic,strong) UIImage *capturedImage;
+@property (nonatomic,weak) UIImage *capturedImage;
 @property (nonatomic,weak) Plan *currentPlan;
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 
@@ -159,8 +159,6 @@ const NSUInteger maxCardNum = 10;
     [self dismissViewControllerAnimated:NO completion:^{
         self.capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage];
         //NSLog(@"%@",NSStringFromCGSize(editedImage.size));
-        
-#warning haha fucking it bitch, I nailed this ! 
         [self performSegueWithIdentifier:@"ShowPostFeedFromHome" sender:nil];
     }];
 }
