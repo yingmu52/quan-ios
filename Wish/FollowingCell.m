@@ -10,6 +10,7 @@
 #import "SystemUtil.h"
 #import "AppDelegate.h"
 #import "FollowingImageCell.h"
+#import "Feed.h"
 @import CoreData;
 @interface FollowingCell () <UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,NSFetchedResultsControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *feedBackground;
@@ -18,6 +19,7 @@
 @end
 @implementation FollowingCell
 
+#pragma fetched results controller
 - (NSFetchedResultsController *)fetchedRC
 {
     NSManagedObjectContext *context = [AppDelegate getContext];
@@ -25,12 +27,12 @@
         return _fetchedRC;
     }
     //do fetchrequest
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Feed"];
     
     NSAssert(self.plan,@"nil plan for FollowingCell");
     request.predicate = [NSPredicate predicateWithFormat:@"plan = %@",self.plan];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
-    
+    request.fetchBatchSize = 3;
     NSFetchedResultsController *newFRC =
     [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                         managedObjectContext:context sectionNameKeyPath:nil
@@ -51,7 +53,11 @@
     
 }
 
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
+    [self.collectionView reloadData];
+}
 
+#pragma mark - collection view delegate and data source
 -(FollowingImageCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     NSString *identifier = FOLLOWINGIMAGECELLID;
@@ -60,20 +66,27 @@
         identifier = FOLLOWINGIMAGECELLLASTID;
     }
     FollowingImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-    
+    Feed *feed = [self.fetchedRC objectAtIndexPath:indexPath];
+    cell.feedImageView.image = feed.image;
     return cell;
     
 }
 
-#pragma mark - UI
-#pragma uicollectionview delegate and data source
 
-- (void)setWishDetailCollectionView:(UICollectionView *)wishDetailCollectionView{
-    _wishDetailCollectionView = wishDetailCollectionView;
-    _wishDetailCollectionView.backgroundColor = [UIColor clearColor];
-    _wishDetailCollectionView.dataSource = self;
-    _wishDetailCollectionView.delegate = self;
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return self.fetchedRC.fetchedObjects.count;
 }
+
+#pragma mark - UI
+
+- (void)setCollectionView:(UICollectionView *)collectionView{
+    _collectionView = collectionView;
+    _collectionView.backgroundColor = [UIColor clearColor];
+    _collectionView.dataSource = self;
+    _collectionView.delegate = self;
+
+}
+
 - (void)awakeFromNib
 {
     [super awakeFromNib];
@@ -107,13 +120,10 @@
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
                         layout:(UICollectionViewLayout *)collectionViewLayout
         insetForSectionAtIndex:(NSInteger)section{
-    CGFloat margin = self.wishDetailCollectionView.frame.size.width*14.0/610.0;
+    CGFloat margin = self.collectionView.frame.size.width*14.0/610.0;
     return UIEdgeInsetsMake(0, margin, 0, margin);
 }
 
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 4;
-}
 
 @end

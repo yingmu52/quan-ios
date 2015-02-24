@@ -32,7 +32,7 @@
     return feed;
 }
 
-+ (Feed *)createFeedFromServer:(NSDictionary *)feedItem{
++ (Feed *)createFeedFromServer:(NSDictionary *)feedItem forPlan:(Plan *)plan{
     NSArray *checks = [Plan fetchWith:@"Feed"
                             predicate:[NSPredicate predicateWithFormat:@"feedId == %@",feedItem[@"id"]]
                      keyForDescriptor:@"createDate"];
@@ -55,6 +55,7 @@
     feed.feedId = feedItem[@"id"];
     feed.likeCount = @([feedItem[@"likeTimes"] integerValue]);
     feed.imageId = feedItem[@"picurl"];
+    feed.plan = plan;
     
     if ([context save:nil]) {
         NSLog(@"updated feed from server");

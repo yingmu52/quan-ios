@@ -28,6 +28,10 @@ typedef enum {
                image:(UIImage *)image;
 
 - (void)deleteSelf;
+
+- (Feed *)fetchLastUpdatedFeed;
+
+
 - (NSNumber *)extractNumberFromString:(NSString *)string;
 
 

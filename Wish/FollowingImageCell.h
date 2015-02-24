@@ -11,5 +11,6 @@
 #define FOLLOWINGIMAGECELLLASTID @"FollowingCellLast"
 
 @interface FollowingImageCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *feedImageView;
 
 @end

@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *headUserNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *headDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bottomLabel;
-@property (weak, nonatomic) IBOutlet UICollectionView *wishDetailCollectionView;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
-@property (nonatomic,strong) Plan *plan
+@property (nonatomic,strong) Plan *plan;
 @end

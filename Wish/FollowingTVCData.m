@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 #import "FetchCenter.h"
 #import "Plan.h"
-@interface FollowingTVCData () <NSFetchedResultsControllerDelegate>
+@interface FollowingTVCData () <NSFetchedResultsControllerDelegate,FetchCenterDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 
 @end
@@ -20,9 +20,25 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[[FetchCenter alloc] init] fetchFollowingPlanList:@[@"100004"]];
+    self.tableView.tableFooterView.hidden = YES;
+    
+//    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+//    NSArray *array = [Plan fetchWith:@"Plan" predicate:nil keyForDescriptor:@"createDate"];
+//    for (Feed*feed in array) {
+//        NSLog(@"%@\n",feed);
+//        [delegate.managedObjectContext deleteObject:feed];
+//    }
+//    [delegate.managedObjectContext save:nil];
+    
+    FetchCenter *fetchCenter =[[FetchCenter alloc] init];
+    fetchCenter.delegate  = self;
+    [fetchCenter performSelectorInBackground:@selector(fetchFollowingPlanList:)
+                                  withObject:@[@"100004"]];
 }
 
+- (void)didFinishFetchingFollowingPlanList{
+    [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+}
 #pragma mark - Table View
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -31,9 +47,12 @@
 
 - (void)configureFollowingCell:(FollowingCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
-    
+    Feed *feed = [plan fetchLastUpdatedFeed];
+//    NSLog(@"%@",plan.feeds );
+    cell.bottomLabel.text = feed.feedTitle;
     cell.headTitleLabel.text = plan.planTitle;
     cell.headDateLabel.text = [SystemUtil stringFromDate:plan.updateDate];
+    cell.plan = plan; // must set 
 }
 #pragma mark - Fetched Results Controller Delegate
 
@@ -44,6 +63,7 @@
     }else{
         AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
         NSManagedObjectContext *context = delegate.managedObjectContext;
+
         //do fetchrequest
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
         request.predicate = [NSPredicate predicateWithFormat:@"ownerId != %@",[SystemUtil getOwnerId]];
@@ -73,7 +93,6 @@
       newIndexPath:(NSIndexPath *)newIndexPath
 {
 //    [self.tableView reloadData];
-    
 //    switch(type)
 //    {
 //        case NSFetchedResultsChangeInsert:

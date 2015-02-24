@@ -1765,6 +1765,9 @@
                                                                     <include reference="bbb-6d-qyx"/>
                                                                 </mask>
                                                             </variation>
+                                                            <connections>
+                                                                <outlet property="feedImageView" destination="AdY-MI-xB3" id="d7L-rz-EJh"/>
+                                                            </connections>
                                                         </collectionViewCell>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FollowingCellLast" id="HFE-jg-pMM" customClass="FollowingImageCell">
                                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -1993,13 +1996,13 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="bottomLabel" destination="0ft-Yx-ljC" id="xMn-Wc-56a"/>
+                                    <outlet property="collectionView" destination="kF5-OK-Oi0" id="Kcf-TB-xFE"/>
                                     <outlet property="feedBackground" destination="0Rr-3L-WEg" id="vdq-Yj-0qx"/>
                                     <outlet property="headBackground" destination="QAi-Q3-jro" id="Ubx-CA-g52"/>
                                     <outlet property="headDateLabel" destination="8sd-oO-FY6" id="CNC-yz-Fos"/>
                                     <outlet property="headProfilePic" destination="aru-Fr-lMO" id="wyq-C4-Yg8"/>
                                     <outlet property="headTitleLabel" destination="Whz-hJ-ANi" id="IeL-zS-PFV"/>
                                     <outlet property="headUserNameLabel" destination="Hqj-BH-cTq" id="cdK-r8-kJd"/>
-                                    <outlet property="wishDetailCollectionView" destination="kF5-OK-Oi0" id="kNO-lf-KPR"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

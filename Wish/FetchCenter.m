@@ -31,7 +31,7 @@ typedef enum{
     FetchCenterGetOpCreateFeed,
     FetchCenterGetOpGetPlanList,
     FetchCenterGetOpSetPlanStatus,
-    FetchCenterGetOpGetImageForFeedOfFollowingPlan,
+//    FetchCenterGetOpGetImageForFeedOfFollowingPlan,
     FetchCenterGetOpFollowingPlanList
 }FetchCenterGetOp;
 
@@ -52,14 +52,14 @@ typedef enum{
     }
 }
 
-- (void)getImageForFeed:(Feed *)feed operation:(FetchCenterGetOp)operation{
-    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PIC,GET_IMAGE];
-    [self getRequest:rqtStr
-           parameter:@{@"id":feed.imageId}
-           operation:FetchCenterGetOpGetImageForFeedOfFollowingPlan
-              entity:feed];
-}
-#pragma mark - 
+//- (void)getImageForFeed:(Feed *)feed operation:(FetchCenterGetOp)operation{
+//    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PIC,GET_IMAGE];
+//    [self getRequest:rqtStr
+//           parameter:@{@"id":feed.imageId}
+//           operation:FetchCenterGetOpGetImageForFeedOfFollowingPlan
+//              entity:feed];
+//}
+#pragma mark -
 #pragma mark - personal
 
 - (void)updateStatus:(Plan *)plan{
@@ -85,8 +85,6 @@ typedef enum{
 }
 
 - (void)uploadToCreateFeed:(Feed *)feed{
-//    NSLog(@"%@",feed);
-//    NSLog(@"%@",feed.plan);
     [self postImageWithOperation:feed postOp:FetchCenterPostOpUploadImageForCreatingFeed];
 }
 
@@ -163,42 +161,36 @@ typedef enum{
             NSLog(@"updated plan status (from server)");
         }
             break;
-        case FetchCenterGetOpGetImageForFeedOfFollowingPlan:{
-            /*
-             obj is nil in this case see -getImageWithfeedInfo:operation:
-             create feed for image
-            */
-            UIImage *fetchedImage = json[kFetchedImage];
-            Feed *feed = (Feed *)obj;
-            feed.image = fetchedImage;
-            if([feed.managedObjectContext save:nil]){
-                NSLog(@"Done fetching image for feed %@",feed.feedId);
-            }
-        }
-            break;
+//        case FetchCenterGetOpGetImageForFeedOfFollowingPlan:{
+//            /*
+//             obj is nil in this case see -getImageWithfeedInfo:operation:
+//             create feed for image
+//            */
+//            UIImage *fetchedImage = json[kFetchedImage];
+//            Feed *feed = (Feed *)obj;
+//            feed.image = fetchedImage;
+//            if([feed.managedObjectContext save:nil]){
+//                NSLog(@"Done fetching image for feed %@",feed.feedId);
+//            }
+//        }
+//            break;
 
         case FetchCenterGetOpFollowingPlanList:{
 //            NSLog(@"FetchCenterOpGetFollowingPlanList \n %@",json);
             //save the response following plan list
+            
             for (NSDictionary *planItem in json[@"data"]) {
-                [Plan updatePlanFromServer:planItem];
+                Plan *plan = [Plan updatePlanFromServer:planItem];
                 NSArray *feedsList = planItem[@"feedsList"];
                 if (feedsList.count) {
                     //create all feeds
-
-                    NSInteger imageLoadingCount = 0;
                     for (NSDictionary *feedItem in feedsList) {
-                        Feed *feed = [Feed createFeedFromServer:feedItem];
-                        if (imageLoadingCount < 3) {
-                            [self getImageForFeed:feed
-                                        operation:FetchCenterGetOpGetImageForFeedOfFollowingPlan];
-                            imageLoadingCount++;
-                        }
+                        [Feed createFeedFromServer:feedItem forPlan:plan];
+                        //use alternative way to load and cache image
                     }
-                    //load the first 3 image data for feed;
-                    
                 }
             }
+            [self.delegate didFinishFetchingFollowingPlanList];
         }
             break;
         default:
@@ -233,21 +225,11 @@ typedef enum{
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request
                                             completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                   {
-                                      NSDictionary *responseJson;
-                                      if (op == FetchCenterGetOpGetImageForFeedOfFollowingPlan) {
-                                          //covert html body to UIImage instance
-                                          UIImage *fetchedImage = [UIImage imageWithData:data];
-                                          responseJson = @{@"ret":@(0),kFetchedImage:fetchedImage};
-                                      }else{
-                                          responseJson = [NSJSONSerialization JSONObjectWithData:data
-                                                                                         options:NSJSONReadingAllowFragments
-                                                                                           error:nil];
-                                          if ([responseJson[@"ret"] integerValue] == -305) {
-                                              NSLog(@"-305: invalid system version");
-                                              return;
-                                          }
+                                      NSDictionary *responseJson = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                                      if ([responseJson[@"ret"] integerValue] == -305) {
+                                          NSLog(@"-305: invalid system version");
+                                          return;
                                       }
-                                      
                                       if (!error && ![responseJson[@"ret"] boolValue]){ //successed "ret" = 0;
                                           [self didFinishSendingGetRequest:responseJson operation:op entity:obj];
                                       }else{
@@ -278,7 +260,9 @@ typedef enum{
                                                                                                      error:nil];
                                               
                                               if (!error && ![json[@"ret"] boolValue]){ //upload image successed
-                                                  [self didFinishSendingPostRequest:json operation:FetchCenterPostOpUploadImageForCreatingFeed entity:obj];
+                                                  [self didFinishSendingPostRequest:json
+                                                                          operation:FetchCenterPostOpUploadImageForCreatingFeed
+                                                                             entity:obj];
                                               }else{
                                                   NSLog(@"fail to upload image \n response:%@",json);
                                               }

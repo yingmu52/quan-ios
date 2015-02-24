@@ -11,7 +11,13 @@
 #import "Feed+FeedCRUD.h"
 #import "SystemUtil.h"
 
+
+@protocol FetchCenterDelegate <NSObject>
+@optional
+- (void)didFinishFetchingFollowingPlanList;
+@end
 @interface FetchCenter : NSObject
+@property (nonatomic,weak) id <FetchCenterDelegate>delegate;
 
 - (void)fetchPlanList:(NSString *)ownerId;
 - (void)uploadToCreatePlan:(Plan *)plan;
@@ -20,5 +26,6 @@
 - (void)updateStatus:(Plan *)plan;
 
 - (void)fetchFollowingPlanList:(NSArray *)ownerIds;
+
 
 @end
