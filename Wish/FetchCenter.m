@@ -179,7 +179,7 @@ typedef enum{
 //            NSLog(@"FetchCenterOpGetFollowingPlanList \n %@",json);
             //save the response following plan list
             
-            for (NSDictionary *planItem in json[@"data"]) {
+            for (NSDictionary *planItem in [json valueForKeyPath:@"data.planList"]) {
                 Plan *plan = [Plan updatePlanFromServer:planItem];
                 NSArray *feedsList = planItem[@"feedsList"];
                 if (feedsList.count) {
