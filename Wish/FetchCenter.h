@@ -27,5 +27,5 @@
 
 - (void)fetchFollowingPlanList:(NSArray *)ownerIds;
 
-
+- (NSURL *)urlWithImageID:(NSString *)imageId;
 @end

@@ -11,6 +11,8 @@
 #import "AppDelegate.h"
 #import "FollowingImageCell.h"
 #import "Feed.h"
+#import "UIImageView+WebCache.h"
+#import "FetchCenter.h"
 @import CoreData;
 @interface FollowingCell () <UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,NSFetchedResultsControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *feedBackground;
@@ -59,22 +61,26 @@
 
 #pragma mark - collection view delegate and data source
 -(FollowingImageCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    NSString *identifier = FOLLOWINGIMAGECELLID;
-    
-    if (indexPath.row == [collectionView numberOfItemsInSection:indexPath.section] - 1) {
-        identifier = FOLLOWINGIMAGECELLLASTID;
+    FollowingImageCell *cell;
+    if (indexPath.row == self.fetchedRC.fetchedObjects.count) {
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:FOLLOWINGIMAGECELLLASTID
+                                                                             forIndexPath:indexPath];
+    }else{
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:FOLLOWINGIMAGECELLID
+                                                                             forIndexPath:indexPath];
+        Feed *feed = [self.fetchedRC objectAtIndexPath:indexPath];
+        NSAssert(feed.imageId, @"null feed image id");
+        [cell.feedImageView sd_setImageWithURL:[[FetchCenter new] urlWithImageID:feed.imageId]
+                              placeholderImage:[UIImage imageNamed:@"snow.jpg"]];
+        
     }
-    FollowingImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-    Feed *feed = [self.fetchedRC objectAtIndexPath:indexPath];
-    cell.feedImageView.image = feed.image;
     return cell;
     
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return self.fetchedRC.fetchedObjects.count;
+    return self.fetchedRC.fetchedObjects.count + 1;
 }
 
 #pragma mark - UI

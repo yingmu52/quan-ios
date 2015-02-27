@@ -277,4 +277,12 @@ typedef enum{
 - (NSString *)versionForBaseURL:(NSString *)baseURL{
     return [baseURL stringByAppendingString:@"version=2.2.0&"];
 }
+
+#pragma mark - get image url wraper
+
+- (NSURL *)urlWithImageID:(NSString *)imageId{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@?",BASE_URL,PIC,GET_IMAGE];
+    NSString *url = [NSString stringWithFormat:@"%@id=%@",[self versionForBaseURL:rqtStr],imageId];
+    return [NSURL URLWithString:url];
+}
 @end
