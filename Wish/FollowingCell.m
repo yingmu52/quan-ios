@@ -14,61 +14,42 @@
 #import "UIImageView+WebCache.h"
 #import "FetchCenter.h"
 @import CoreData;
+
+static NSUInteger numberOfPreloadedFeeds = 5;
+
+
 @interface FollowingCell () <UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,NSFetchedResultsControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *feedBackground;
 @property (weak, nonatomic) IBOutlet UIView *headBackground;
-@property (nonatomic,weak) NSFetchedResultsController *fetchedRC;
+
+@property (nonatomic,strong) NSArray *feedsArray;
 @end
 @implementation FollowingCell
 
-#pragma fetched results controller
-- (NSFetchedResultsController *)fetchedRC
-{
-    NSManagedObjectContext *context = [AppDelegate getContext];
-    if (_fetchedRC != nil) {
-        return _fetchedRC;
-    }
-    //do fetchrequest
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Feed"];
-    
-    NSAssert(self.plan,@"nil plan for FollowingCell");
-    request.predicate = [NSPredicate predicateWithFormat:@"plan = %@",self.plan];
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
-    request.fetchBatchSize = 3;
-    NSFetchedResultsController *newFRC =
-    [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                        managedObjectContext:context sectionNameKeyPath:nil
-                                                   cacheName:nil];
-    self.fetchedRC = newFRC;
-    _fetchedRC.delegate = self;
-    
-    // Perform Fetch
-    NSError *error = nil;
-    [_fetchedRC performFetch:&error];
-    
-    if (error) {
-        NSLog(@"Unable to perform fetch.");
-        NSLog(@"%@, %@", error, error.localizedDescription);
-    }
-    return _fetchedRC;
-    
-    
+- (IBAction)loadMore:(UIButton *)sender{
+    NSLog(@"load more");
 }
 
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
-    [self.collectionView reloadData];
+- (void)setPlan:(Plan *)plan{
+    _plan = plan;
+    NSArray *feeds = _plan.feeds.allObjects;
+    if (_plan.feeds.count > numberOfPreloadedFeeds) {
+        self.feedsArray = [_plan.feeds.allObjects subarrayWithRange:NSMakeRange(0, numberOfPreloadedFeeds)];
+    }else{
+        self.feedsArray = [feeds mutableCopy];
+    }
 }
 
 #pragma mark - collection view delegate and data source
 -(FollowingImageCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     FollowingImageCell *cell;
-    if (indexPath.row == self.fetchedRC.fetchedObjects.count) {
+    if (indexPath.row == self.feedsArray.count) {
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:FOLLOWINGIMAGECELLLASTID
                                                                              forIndexPath:indexPath];
     }else{
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:FOLLOWINGIMAGECELLID
                                                                              forIndexPath:indexPath];
-        Feed *feed = [self.fetchedRC objectAtIndexPath:indexPath];
+        Feed *feed = self.feedsArray[indexPath.row];
         NSAssert(feed.imageId, @"null feed image id");
         [cell.feedImageView sd_setImageWithURL:[[FetchCenter new] urlWithImageID:feed.imageId]
                               placeholderImage:[UIImage imageNamed:@"snow.jpg"]];
@@ -80,7 +61,7 @@
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return self.fetchedRC.fetchedObjects.count + 1;
+    return self.feedsArray.count+1;
 }
 
 #pragma mark - UI
