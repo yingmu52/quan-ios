@@ -8,7 +8,7 @@
 
 #import "WishDetailVCOwner.h"
 #import "PostFeedViewController.h"
-@interface WishDetailVCOwner () <PostFeedViewControllerDelegate,UIImagePickerControllerDelegate>
+@interface WishDetailVCOwner () <PostFeedViewControllerDelegate,UIImagePickerControllerDelegate,UIGestureRecognizerDelegate,UINavigationControllerDelegate>
 @property (nonatomic) BOOL shouldShowSideWidgets;
 @property (nonatomic,strong) UIButton *logoButton;
 @property (nonatomic,strong) UILabel *labelUnderLogo;
@@ -133,6 +133,17 @@
     
 }
 
+- (UIColor *)currenetBackgroundColor{
+    
+    if (!self.plan.image){
+        return [Theme wishDetailBackgroundNone:self.tableView];
+    }else{
+        CGRect rect = self.tableView.bounds;
+        rect.size.height *= 2;
+        return [UIColor colorWithPatternImage:[SystemUtil darkLayeredImage:[self.plan.image applyLightEffect] inRect:rect]];
+    }
+    
+}
 #pragma mark - Scroll view delegate (widget animation)
 
 -  (void)displayWidget:(BOOL)shouldDisplay
@@ -197,16 +208,6 @@
     [self.headerView updateSubtitle:self.plan.feeds.count];
     
 }
-- (UIColor *)currenetBackgroundColor{
-    
-    if (!self.plan.image){
-        return [Theme wishDetailBackgroundNone:self.tableView];
-    }else{
-        CGRect rect = self.tableView.bounds;
-        rect.size.height *= 2;
-        return [UIColor colorWithPatternImage:[SystemUtil darkLayeredImage:[self.plan.image applyLightEffect] inRect:rect]];
-    }
-    
-}
+
 
 @end

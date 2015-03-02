@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "Plan.h"
+
+@class FollowingCell;
+
+@protocol FollowingCellDelegate <NSObject>
+
+- (void)didPressMoreButtonForCell:(FollowingCell *)cell;
+
+@end
 @interface FollowingCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *headTitleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *headProfilePic;
@@ -17,4 +25,6 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @property (nonatomic,strong) Plan *plan;
+
+@property (nonatomic,weak) id <FollowingCellDelegate> delegate;
 @end

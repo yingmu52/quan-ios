@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Feed.h"
 @interface WishDetailCell : UITableViewCell
-
+@property (weak, nonatomic) IBOutlet UIImageView *photoView;
 @property (nonatomic) BOOL isWidgetVisible;
 @property (nonatomic,strong) Feed *feed;
 -(void)showLikeAndComment;

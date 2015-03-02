@@ -26,7 +26,7 @@ static NSUInteger numberOfPreloadedFeeds = 3;
 @implementation FollowingCell
 
 - (IBAction)loadMore:(UIButton *)sender{
-    NSLog(@"load more");
+    [self.delegate didPressMoreButtonForCell:self];
 }
 
 - (void)setPlan:(Plan *)plan{

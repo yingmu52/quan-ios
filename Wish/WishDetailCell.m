@@ -9,7 +9,6 @@
 #import "WishDetailCell.h"
 #import "SystemUtil.h"
 @interface WishDetailCell()
-@property (weak, nonatomic) IBOutlet UIImageView *photoView;
 @property (weak, nonatomic) IBOutlet UILabel *infoLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UIButton *commentButton;
@@ -37,8 +36,8 @@
     _feed = feed;
     self.photoView.image = feed.image;
     self.dateLabel.text = [SystemUtil stringFromDate:feed.createDate];
-    self.likeLabel.text = @"0";
-    self.commentLabel.text = @"0";
+    self.likeLabel.text = [NSString stringWithFormat:@"%@",feed.likeCount];
+    self.commentLabel.text = [NSString stringWithFormat:@"%@",feed.commentCount];
     self.infoLabel.text = feed.feedTitle;
 }
 -(void)showLikeAndComment

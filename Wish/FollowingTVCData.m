@@ -11,9 +11,8 @@
 #import "AppDelegate.h"
 #import "FetchCenter.h"
 #import "Plan.h"
-@interface FollowingTVCData () <NSFetchedResultsControllerDelegate,FetchCenterDelegate>
+@interface FollowingTVCData () <NSFetchedResultsControllerDelegate,FetchCenterDelegate,FollowingCellDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
-
 @end
 
 @implementation FollowingTVCData
@@ -39,6 +38,19 @@
 - (void)didFinishFetchingFollowingPlanList{
     [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
 }
+
+#pragma mark - segue
+
+- (void)didPressMoreButtonForCell:(FollowingCell *)cell{
+    [self performSegueWithIdentifier:@"showFollowerWishDetail" sender:cell];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(FollowingCell *)sender{
+    if ([segue.identifier isEqualToString:@"showFollowerWishDetail"]) {
+        [segue.destinationViewController setPlan:sender.plan];
+    }
+}
+
 #pragma mark - Table View
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -52,7 +64,8 @@
     cell.bottomLabel.text = feed.feedTitle;
     cell.headTitleLabel.text = plan.planTitle;
     cell.headDateLabel.text = [SystemUtil stringFromDate:plan.updateDate];
-    cell.plan = plan; // must set 
+    cell.plan = plan; // must set
+    cell.delegate = self;
 }
 #pragma mark - Fetched Results Controller Delegate
 

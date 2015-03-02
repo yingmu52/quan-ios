@@ -8,7 +8,7 @@
 
 #import "WishDetailViewController.h"
 
-@interface WishDetailViewController () <UIGestureRecognizerDelegate,UINavigationControllerDelegate,NSFetchedResultsControllerDelegate>
+@interface WishDetailViewController () <NSFetchedResultsControllerDelegate>
 @property (nonatomic) CGFloat yVel;
 @end
 
@@ -42,7 +42,6 @@
 - (UIColor *)currenetBackgroundColor{
     return [UIColor blackColor];
 }
-
 #pragma mark - Fetched Results Controller delegate
 
 - (NSFetchedResultsController *)fetchedRC
@@ -132,7 +131,7 @@
 {
     return self.fetchedRC.fetchedObjects.count;
 }
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (WishDetailCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     WishDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WishDetailCell" forIndexPath:indexPath];
     cell.feed = [self.fetchedRC objectAtIndexPath:indexPath];
     return cell;

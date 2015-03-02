@@ -50,8 +50,10 @@
     plan.ownerId = dict[@"ownerId"];
     plan.planTitle = dict[@"title"];
     plan.createDate = [NSDate dateWithTimeIntervalSince1970:[dict[@"createTime"] integerValue]];
-
-    plan.updateDate = [NSDate dateWithTimeIntervalSince1970:[dict[@"createTime"] integerValue]];
+    plan.updateDate = [NSDate dateWithTimeIntervalSince1970:[dict[@"updateTime"] integerValue]];
+    plan.finishDate = [NSDate dateWithTimeInterval:[dict[@"finishDate"] integerValue] * 24 * 60 * 60
+                                         sinceDate:plan.createDate];
+    plan.followCount = @([dict[@"followNums"] integerValue]);
     plan.userDeleted = @(NO);
     if ([context save:nil]) {
         NSLog(@"updated plan list form server");

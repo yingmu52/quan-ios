@@ -104,6 +104,8 @@
 		AEEC6C741A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C721A6DB11F0021B7E4 /* WishDetailViewController.m */; };
 		AEF3F87F1AA4CFA6008C2300 /* WishDetailVCOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF3F87E1AA4CFA6008C2300 /* WishDetailVCOwner.m */; };
 		AEF3F8801AA4CFA6008C2300 /* WishDetailVCOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF3F87E1AA4CFA6008C2300 /* WishDetailVCOwner.m */; };
+		AEF3F8831AA4E3C0008C2300 /* WishDetailVCFollower.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF3F8821AA4E3C0008C2300 /* WishDetailVCFollower.m */; };
+		AEF3F8841AA4E3C0008C2300 /* WishDetailVCFollower.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF3F8821AA4E3C0008C2300 /* WishDetailVCFollower.m */; };
 		AEF775441A8134FE000DB73B /* HomeCardFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF775431A8134FE000DB73B /* HomeCardFlowLayout.m */; };
 		AEF7F2811A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F26F1A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m */; };
 		AEF7F2821A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F26F1A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m */; };
@@ -271,6 +273,8 @@
 		AEEC6C721A6DB11F0021B7E4 /* WishDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailViewController.m; sourceTree = "<group>"; };
 		AEF3F87D1AA4CFA6008C2300 /* WishDetailVCOwner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishDetailVCOwner.h; sourceTree = "<group>"; };
 		AEF3F87E1AA4CFA6008C2300 /* WishDetailVCOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailVCOwner.m; sourceTree = "<group>"; };
+		AEF3F8811AA4E3C0008C2300 /* WishDetailVCFollower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishDetailVCFollower.h; sourceTree = "<group>"; };
+		AEF3F8821AA4E3C0008C2300 /* WishDetailVCFollower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailVCFollower.m; sourceTree = "<group>"; };
 		AEF775421A8134FE000DB73B /* HomeCardFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCardFlowLayout.h; sourceTree = "<group>"; };
 		AEF775431A8134FE000DB73B /* HomeCardFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCardFlowLayout.m; sourceTree = "<group>"; };
 		AEF7F26E1A686E8A0022410B /* ECPercentDrivenInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPercentDrivenInteractiveTransition.h; sourceTree = "<group>"; };
@@ -588,6 +592,8 @@
 				AEEC6C6C1A6DB0FC0021B7E4 /* HeaderView.xib */,
 				AEEC6C711A6DB11F0021B7E4 /* WishDetailViewController.h */,
 				AEEC6C721A6DB11F0021B7E4 /* WishDetailViewController.m */,
+				AEF3F8811AA4E3C0008C2300 /* WishDetailVCFollower.h */,
+				AEF3F8821AA4E3C0008C2300 /* WishDetailVCFollower.m */,
 				AEF3F87D1AA4CFA6008C2300 /* WishDetailVCOwner.h */,
 				AEF3F87E1AA4CFA6008C2300 /* WishDetailVCOwner.m */,
 				AE52FA4E1A8D3D76003FF725 /* PostFeedViewController.h */,
@@ -809,6 +815,7 @@
 				AEE4A6D41A96AFCF00ABF946 /* TriangleCutoutView.m in Sources */,
 				AEF7F2AD1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */,
 				AEFEE4001A8EE0A7007E8234 /* FollowingCell.m in Sources */,
+				AEF3F8831AA4E3C0008C2300 /* WishDetailVCFollower.m in Sources */,
 				AEF7F2831A686E8A0022410B /* ECSlidingAnimationController.m in Sources */,
 				AECE2BED1AA0521600B1C58E /* SDWebImageDecoder.m in Sources */,
 				AEF7F2871A686E8A0022410B /* ECSlidingSegue.m in Sources */,
@@ -890,6 +897,7 @@
 				AEF7F2AC1A6884950022410B /* CustomBarItem.m in Sources */,
 				AEE4A6D91A972FAB00ABF946 /* FollowingTVCData.m in Sources */,
 				AEEC6C611A6DB0010021B7E4 /* ALView+PureLayout.m in Sources */,
+				AEF3F8841AA4E3C0008C2300 /* WishDetailVCFollower.m in Sources */,
 				AE479E9F1A6F775C00366A0A /* PostViewController.m in Sources */,
 				AE0E794C1A76EB50007C48EE /* Reachability.m in Sources */,
 				AEFEE4011A8EE0A7007E8234 /* FollowingCell.m in Sources */,
