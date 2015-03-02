@@ -24,7 +24,6 @@ const NSUInteger maxCardNum = 10;
 @interface HomeViewController () <NSFetchedResultsControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HomeCardViewDelegate,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic,weak) IBOutlet UICollectionView *cardCollectionView;
-@property (nonatomic,weak) UIImage *capturedImage;
 @property (nonatomic,weak) Plan *currentPlan;
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 
@@ -92,13 +91,10 @@ const NSUInteger maxCardNum = 10;
                                         target:self.slidingViewController
                                       selector:@selector(anchorTopViewToRightAnimated:)
                                          frame:frame];
-    
     UIButton *addBtn = [Theme buttonWithImage:[Theme navAddDefault]
                                        target:self
                                      selector:@selector(addWish)
                                         frame:frame];
-    
-
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
 
@@ -162,9 +158,10 @@ const NSUInteger maxCardNum = 10;
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [self dismissViewControllerAnimated:NO completion:^{
-        self.capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage];
+        UIImage *capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage];
+        Feed *feed = [Feed createFeedWithImage:capturedImage inPlan:self.currentPlan];
         //NSLog(@"%@",NSStringFromCGSize(editedImage.size));
-        [self performSegueWithIdentifier:@"ShowPostFeedFromHome" sender:nil];
+        [self performSegueWithIdentifier:@"ShowPostFeedFromHome" sender:feed];
     }];
 }
 
@@ -182,14 +179,9 @@ const NSUInteger maxCardNum = 10;
         WishDetailViewController *controller = segue.destinationViewController;
         controller.plan = [self.fetchedRC objectAtIndexPath:[self.cardCollectionView indexPathForCell:sender]];
     }
-//    if ([segue.identifier isEqualToString:@"ShowPostFeedFromHome"]) {
-//
-//        PostFeedViewController *pfvc = segue.destinationViewController;
-//        
-//        pfvc.navigationTitle = self.currentPlan.planTitle;
-//        pfvc.previewImage = self.capturedImage;
-//        pfvc.delegate = self;
-//    }
+    if ([segue.identifier isEqualToString:@"ShowPostFeedFromHome"]) {
+        [segue.destinationViewController setFeed:sender];
+    }
 }
 
 #pragma mark - post feed controller delegate
