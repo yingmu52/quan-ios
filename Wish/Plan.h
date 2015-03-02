@@ -2,14 +2,14 @@
 //  Plan.h
 //  Wish
 //
-//  Created by Xinyi Zhuang on 2015-02-23.
+//  Created by Xinyi Zhuang on 2015-02-27.
 //  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Feed;
+@class Feed, Owner;
 
 @interface Plan : NSManagedObject
 
@@ -21,11 +21,12 @@
 @property (nonatomic, retain) NSNumber * isPrivate;
 @property (nonatomic, retain) NSString * ownerId;
 @property (nonatomic, retain) NSString * planId;
+@property (nonatomic, retain) NSNumber * planStatus;
 @property (nonatomic, retain) NSString * planTitle;
 @property (nonatomic, retain) NSDate * updateDate;
 @property (nonatomic, retain) NSNumber * userDeleted;
-@property (nonatomic, retain) NSNumber * planStatus;
 @property (nonatomic, retain) NSSet *feeds;
+@property (nonatomic, retain) Owner *owner;
 @end
 
 @interface Plan (CoreDataGeneratedAccessors)

@@ -2,12 +2,13 @@
 //  Plan.m
 //  Wish
 //
-//  Created by Xinyi Zhuang on 2015-02-23.
+//  Created by Xinyi Zhuang on 2015-02-27.
 //  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
 //
 
 #import "Plan.h"
 #import "Feed.h"
+#import "Owner.h"
 
 
 @implementation Plan
@@ -20,10 +21,11 @@
 @dynamic isPrivate;
 @dynamic ownerId;
 @dynamic planId;
+@dynamic planStatus;
 @dynamic planTitle;
 @dynamic updateDate;
 @dynamic userDeleted;
-@dynamic planStatus;
 @dynamic feeds;
+@dynamic owner;
 
 @end

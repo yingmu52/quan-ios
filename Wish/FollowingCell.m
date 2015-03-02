@@ -15,13 +15,12 @@
 #import "FetchCenter.h"
 @import CoreData;
 
-static NSUInteger numberOfPreloadedFeeds = 5;
+static NSUInteger numberOfPreloadedFeeds = 3;
 
 
 @interface FollowingCell () <UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,NSFetchedResultsControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *feedBackground;
 @property (weak, nonatomic) IBOutlet UIView *headBackground;
-
 @property (nonatomic,strong) NSArray *feedsArray;
 @end
 @implementation FollowingCell

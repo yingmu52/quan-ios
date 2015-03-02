@@ -50,8 +50,7 @@
     plan.ownerId = dict[@"ownerId"];
     plan.planTitle = dict[@"title"];
     plan.createDate = [NSDate dateWithTimeIntervalSince1970:[dict[@"createTime"] integerValue]];
-    
-    
+
     plan.updateDate = [NSDate dateWithTimeIntervalSince1970:[dict[@"createTime"] integerValue]];
     plan.userDeleted = @(NO);
     if ([context save:nil]) {

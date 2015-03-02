@@ -176,11 +176,11 @@ typedef enum{
 //            break;
 
         case FetchCenterGetOpFollowingPlanList:{
-//            NSLog(@"FetchCenterOpGetFollowingPlanList \n %@",json);
+            NSLog(@"FetchCenterOpGetFollowingPlanList \n %@",json);
             //save the response following plan list
-            
             for (NSDictionary *planItem in [json valueForKeyPath:@"data.planList"]) {
                 Plan *plan = [Plan updatePlanFromServer:planItem];
+//                plan.owner = [Owner updateOwnerFromServer:[json valueForKeyPath:@"data.manList"]];
                 NSArray *feedsList = planItem[@"feedsList"];
                 if (feedsList.count) {
                     //create all feeds

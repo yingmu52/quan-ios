@@ -20,7 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.tableFooterView.hidden = YES;
+//    self.tableView.tableFooterView.hidden = YES;
     
 //    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
 //    NSArray *array = [Plan fetchWith:@"Plan" predicate:nil keyForDescriptor:@"createDate"];

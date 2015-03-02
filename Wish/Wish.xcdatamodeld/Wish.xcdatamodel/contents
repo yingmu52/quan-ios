@@ -10,6 +10,12 @@
         <attribute name="likeCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="plan" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Plan" inverseName="feeds" inverseEntity="Plan" syncable="YES"/>
     </entity>
+    <entity name="Owner" representedClassName="Owner" syncable="YES">
+        <attribute name="headUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ownerId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ownerName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="plans" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Plan" inverseName="owner" inverseEntity="Plan" syncable="YES"/>
+    </entity>
     <entity name="Plan" representedClassName="Plan" syncable="YES">
         <attribute name="backgroundNum" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="createDate" optional="YES" attributeType="Date" syncable="YES"/>
@@ -24,9 +30,11 @@
         <attribute name="updateDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="userDeleted" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="feeds" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Feed" inverseName="plan" inverseEntity="Feed" syncable="YES"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="plans" inverseEntity="Owner" syncable="YES"/>
     </entity>
     <elements>
         <element name="Feed" positionX="-9243" positionY="-54" width="128" height="165"/>
-        <element name="Plan" positionX="-8903" positionY="-153" width="128" height="240"/>
+        <element name="Owner" positionX="-8705" positionY="-43" width="128" height="103"/>
+        <element name="Plan" positionX="-8903" positionY="-153" width="128" height="253"/>
     </elements>
 </model>

@@ -10,7 +10,7 @@
 #import "Plan+PlanCRUD.h"
 #import "Feed+FeedCRUD.h"
 #import "SystemUtil.h"
-
+#import "Owner+OwnerCRUD.h"
 
 @protocol FetchCenterDelegate <NSObject>
 @optional
