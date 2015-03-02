@@ -142,6 +142,7 @@ typedef enum{
                 Feed *feed = (Feed *)obj;
                 feed.feedId = fetchedFeedID;
                 if ([feed.managedObjectContext save:nil]) {
+                    [self.delegate didFinishUploadingFeed:feed];
                     NSLog(@"upload feed successed, ID: %@",fetchedFeedID);
                 }
             }
@@ -152,8 +153,10 @@ typedef enum{
             if (fetchedPlanId) {
                 Plan *plan = (Plan *)obj;
                 plan.planId = fetchedPlanId;
-                [plan.managedObjectContext save:nil];
-                NSLog(@"create plan succeed, ID: %@",fetchedPlanId);
+                if ([plan.managedObjectContext save:nil]){
+                    [self.delegate didFinishUploadingPlan:plan];
+                    NSLog(@"create plan succeed, ID: %@",fetchedPlanId);
+                }
             }
         }
             break;

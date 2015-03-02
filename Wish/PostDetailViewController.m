@@ -11,7 +11,8 @@
 #import "Plan+PlanCRUD.h"
 #import "SystemUtil.h"
 #import "WishDetailViewController.h"
-@interface PostDetailViewController ()
+#import "FetchCenter.h"
+@interface PostDetailViewController () <FetchCenterDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *finishDateLabel;
 @property (nonatomic,strong) NSDate *selectedDate;
 @property (strong, nonatomic) UIDatePicker *datePicker;
@@ -21,8 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *lockImageView;
 @property (weak, nonatomic) IBOutlet UILabel *isPrivateLabel;
 @property (nonatomic) BOOL isPrivate;
-
-@property (nonatomic,strong) Plan *createdPlan;
+@property (nonatomic,weak) UIButton *nextButton;
 @end
 @implementation PostDetailViewController
 @synthesize selectedDate = _selectedDate;
@@ -116,13 +116,13 @@
                                       selector:@selector(popViewControllerAnimated:)
                                          frame:frame];
     
-    UIButton *nextButton = [Theme buttonWithImage:[Theme navTikButtonDefault]
+    self.nextButton = [Theme buttonWithImage:[Theme navTikButtonDefault]
                                            target:self
                                          selector:@selector(createPlan)
                                             frame:frame];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:nextButton];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
     
     //set navigation bar title and color
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#2A2A2A"]};
@@ -150,19 +150,32 @@
 
 - (void)createPlan
 {
-    
-    self.createdPlan = [Plan createPlan:self.titleFromPostView
-                                date:self.selectedDate
-                             privacy:self.isPrivate
-                               image:nil];
-    [self performSegueWithIdentifier:@"doneWirtingAPost" sender:nil];
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithFrame:self.nextButton.frame];
+    spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+    [spinner startAnimating];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+
+    Plan *plan = [Plan createPlan:self.titleFromPostView
+                             date:self.selectedDate
+                          privacy:self.isPrivate
+                            image:nil];
+    FetchCenter *fc = [[FetchCenter alloc] init];
+    fc.delegate = self;
+    [fc uploadToCreatePlan:plan];
    
 }
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+
+- (void)didFinishUploadingPlan:(Plan *)plan{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
+        [self performSegueWithIdentifier:@"doneWirtingAPost" sender:plan];
+    });
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(Plan *)sender
 {
     if ([segue.identifier isEqualToString:@"doneWirtingAPost"]) {
-        WishDetailViewController *wdvc = segue.destinationViewController;
-        wdvc.plan = self.createdPlan;
+        [segue.destinationViewController setPlan:sender];
     }
 }
 @end

@@ -7,22 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
-@class PostFeedViewController;
+#import "Feed.h"
+#import "Plan.h"
+//@class PostFeedViewController;
 
-@protocol  PostFeedViewControllerDelegate <NSObject>
+//@protocol  PostFeedViewControllerDelegate <NSObject>
 
-@required
-- (void)didFinishAddingTitleForFeed:(PostFeedViewController *)postFeedVC;
+//@required
+//- (void)didFinishAddingTitleForFeed:(PostFeedViewController *)postFeedVC;
 
-@end
+//@end
 @interface PostFeedViewController : UIViewController
 
-@property (nonatomic,strong) NSString *navigationTitle;
-@property (nonatomic,strong) UIImage *previewImage;
-@property (nonatomic,weak) id <PostFeedViewControllerDelegate> delegate;
+@property (nonatomic,strong) Feed *feed;
+//@property (nonatomic,strong) NSString *navigationTitle;
+//@property (nonatomic,strong) UIImage *previewImage;
+//@property (nonatomic,weak) id <PostFeedViewControllerDelegate> delegate;
 
 
-@property (nonatomic,readonly) NSString *titleForFeed;
+//@property (nonatomic,readonly) NSString *titleForFeed;
 
 
 @end

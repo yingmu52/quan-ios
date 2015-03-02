@@ -10,7 +10,8 @@
 #import "Theme.h"
 #import "KeyboardAcessoryView.h"
 #import "SystemUtil.h"
-@interface PostFeedViewController () <UITextFieldDelegate>
+#import "FetchCenter.h"
+@interface PostFeedViewController () <UITextFieldDelegate,FetchCenterDelegate>
 @property (nonatomic,strong) UIButton *tikButton;
 @property (nonatomic,weak) IBOutlet UIImageView *previewIcon;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
@@ -27,6 +28,7 @@
     [super viewDidLoad];
     [self setupViews];
 }
+
 - (void)setupViews
 {
     CGRect frame = CGRectMake(0, 0, 30, 30);
@@ -37,7 +39,7 @@
     
     self.tikButton = [Theme buttonWithImage:[Theme navTikButtonDisable]
                                      target:self
-                                   selector:@selector(goBackToWishDetail)
+                                   selector:@selector(createFeed)
                                       frame:frame];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
@@ -47,15 +49,34 @@
     self.textField.inputAccessoryView = [KeyboardAcessoryView instantiateFromNib:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height * 88 / 1136)];
 
 
-    self.previewIcon.image = self.previewImage;
+    self.previewIcon.image = self.feed.image;
+
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#2A2A2A"]};
-    self.title = self.navigationTitle;
+    self.title = self.feed.plan.planTitle;
     
 }
 
-- (void)goBackToWishDetail{
-    [self.delegate didFinishAddingTitleForFeed:self];
-    [self.navigationController popViewControllerAnimated:YES];
+- (void)createFeed{
+    self.feed.feedTitle = self.textField.text;
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithFrame:self.tikButton.frame];
+    spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+    [spinner startAnimating];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+    
+    FetchCenter *fc = [FetchCenter new];
+    fc.delegate = self;
+    [fc uploadToCreateFeed:self.feed];
+//    [self.delegate didFinishAddingTitleForFeed:self];
+//    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)didFinishUploadingFeed:(Feed *)feed
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    });
 }
 
 - (void)textFieldDidUpdate{

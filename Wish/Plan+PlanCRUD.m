@@ -89,11 +89,6 @@
         plan.createDate = [NSDate date];
         plan.userDeleted = @(NO);
         plan.planStatus = @(PlanStatusOnGoing);
-        
-        if ([context save:nil]) {
-            [[[FetchCenter alloc] init] uploadToCreatePlan:plan];
-        }
-
     }
     return plan;
 }

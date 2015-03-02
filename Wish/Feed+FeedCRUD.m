@@ -11,22 +11,24 @@
 #import "AppDelegate.h"
 @implementation Feed (FeedCRUD)
 
-+ (Feed *)createFeed:(NSString *)title image:(UIImage *)image inPlan:(Plan *)plan{
++ (Feed *)createFeedWithImage:(UIImage *)image inPlan:(Plan *)plan{
     
     NSManagedObjectContext *context = plan.managedObjectContext;
     Feed *feed = [NSEntityDescription insertNewObjectForEntityForName:@"Feed"
                                                inManagedObjectContext:context];
     
-    feed.feedTitle = title;
+//    feed.feedTitle = title;
     feed.image = image;
     feed.createDate = [NSDate date];
     feed.plan = plan;
 
     //update plan
     plan.image = image;
+    
     if ([context save:nil]) {
         //upload to server
-        [[[FetchCenter alloc] init] uploadToCreateFeed:feed];
+//        [[[FetchCenter alloc] init] uploadToCreateFeed:feed];
+        NSLog(@"saved feed with image");
     }
 
     return feed;

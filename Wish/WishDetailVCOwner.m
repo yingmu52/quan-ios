@@ -8,11 +8,11 @@
 
 #import "WishDetailVCOwner.h"
 #import "PostFeedViewController.h"
-@interface WishDetailVCOwner () <PostFeedViewControllerDelegate,UIImagePickerControllerDelegate,UIGestureRecognizerDelegate,UINavigationControllerDelegate>
+@interface WishDetailVCOwner () <UIImagePickerControllerDelegate,UIGestureRecognizerDelegate,UINavigationControllerDelegate>
 @property (nonatomic) BOOL shouldShowSideWidgets;
 @property (nonatomic,strong) UIButton *logoButton;
 @property (nonatomic,strong) UILabel *labelUnderLogo;
-@property (nonatomic,strong) UIImage *capturedImage;
+//@property (nonatomic,strong) UIImage *capturedImage;
 @property (nonatomic,strong) UIButton *cameraButton;
 
 @end
@@ -170,12 +170,13 @@
 
 #pragma mark - camera
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(Feed *)sender{
     if ([segue.identifier isEqualToString:@"showPostFeed"]) {
-        PostFeedViewController *pfvc = (PostFeedViewController *)segue.destinationViewController;
-        pfvc.navigationTitle = self.plan.planTitle;
-        pfvc.previewImage = self.capturedImage;
-        pfvc.delegate = self;
+//        PostFeedViewController *pfvc = (PostFeedViewController *)segue.destinationViewController;
+//        pfvc.navigationTitle = self.plan.planTitle;
+//        pfvc.previewImage = self.capturedImage;
+//        pfvc.delegate = self;
+        [segue.destinationViewController setFeed:sender];
     }
 }
 - (void)showCamera{
@@ -190,24 +191,22 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [self dismissViewControllerAnimated:YES completion:^{
-        self.capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage]; // this line and next line is sequentally important
+        UIImage *capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage]; // this line and next line is sequentally important
         //        NSLog(@"%@",NSStringFromCGSize(editedImage.size));
         //create Task
-        if (self.capturedImage) {
-            [self performSegueWithIdentifier:@"showPostFeed" sender:nil];
-            
+        if (capturedImage) {
+            Feed *feed = [Feed createFeedWithImage:capturedImage inPlan:self.plan];
+//            Feed *feed = [Feed createFeed:postFeedVC.titleForFeed image:self.capturedImage inPlan:self.plan];
+            [self performSegueWithIdentifier:@"showPostFeed" sender:feed];
         }
     }];
 }
 
 
-- (void)didFinishAddingTitleForFeed:(PostFeedViewController *)postFeedVC{
-    [Feed createFeed:postFeedVC.titleForFeed
-               image:self.capturedImage
-              inPlan:self.plan];
-    [self.headerView updateSubtitle:self.plan.feeds.count];
-    
-}
+//- (void)didFinishAddingTitleForFeed:(PostFeedViewController *)postFeedVC{
+//    [self.headerView updateSubtitle:self.plan.feeds.count];
+//    
+//}
 
 
 @end

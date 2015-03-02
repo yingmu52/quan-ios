@@ -11,7 +11,8 @@
 @import UIKit;
 
 @interface Feed (FeedCRUD)
-+ (Feed *)createFeed:(NSString *)title image:(UIImage *)image inPlan:(Plan *)plan;
++ (Feed *)createFeedWithImage:(UIImage *)image inPlan:(Plan *)plan;
+
 + (Feed *)createFeedFromServer:(NSDictionary *)feedItem forPlan:(Plan *)plan;
 
 @end

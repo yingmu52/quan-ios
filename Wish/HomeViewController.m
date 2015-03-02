@@ -18,11 +18,10 @@
 #import "FetchCenter.h"
 #import "WishDetailViewController.h"
 #import "HomeCardFlowLayout.h"
-#import "PostFeedViewController.h"
 
 const NSUInteger maxCardNum = 10;
 
-@interface HomeViewController () <NSFetchedResultsControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HomeCardViewDelegate,UICollectionViewDelegateFlowLayout,PostFeedViewControllerDelegate>
+@interface HomeViewController () <NSFetchedResultsControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HomeCardViewDelegate,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic,weak) IBOutlet UICollectionView *cardCollectionView;
 @property (nonatomic,weak) UIImage *capturedImage;
@@ -183,22 +182,22 @@ const NSUInteger maxCardNum = 10;
         WishDetailViewController *controller = segue.destinationViewController;
         controller.plan = [self.fetchedRC objectAtIndexPath:[self.cardCollectionView indexPathForCell:sender]];
     }
-    if ([segue.identifier isEqualToString:@"ShowPostFeedFromHome"]) {
-
-        PostFeedViewController *pfvc = segue.destinationViewController;
-        
-        pfvc.navigationTitle = self.currentPlan.planTitle;
-        pfvc.previewImage = self.capturedImage;
-        pfvc.delegate = self;
-    }
+//    if ([segue.identifier isEqualToString:@"ShowPostFeedFromHome"]) {
+//
+//        PostFeedViewController *pfvc = segue.destinationViewController;
+//        
+//        pfvc.navigationTitle = self.currentPlan.planTitle;
+//        pfvc.previewImage = self.capturedImage;
+//        pfvc.delegate = self;
+//    }
 }
 
 #pragma mark - post feed controller delegate
-- (void)didFinishAddingTitleForFeed:(PostFeedViewController *)postFeedVC{
-    [Feed createFeed:postFeedVC.titleForFeed
-               image:self.capturedImage
-              inPlan:self.currentPlan];
-}
+//- (void)didFinishAddingTitleForFeed:(PostFeedViewController *)postFeedVC{
+//    [Feed createFeed:postFeedVC.titleForFeed
+//               image:self.capturedImage
+//              inPlan:self.currentPlan];
+//}
 #pragma mark -
 #pragma mark UICollectionView methods
 

@@ -15,6 +15,8 @@
 @protocol FetchCenterDelegate <NSObject>
 @optional
 - (void)didFinishFetchingFollowingPlanList;
+- (void)didFinishUploadingPlan:(Plan *)plan;
+- (void)didFinishUploadingFeed:(Feed *)feed;
 @end
 @interface FetchCenter : NSObject
 @property (nonatomic,weak) id <FetchCenterDelegate>delegate;
