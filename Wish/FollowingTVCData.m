@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "FetchCenter.h"
 #import "Plan.h"
+#import "UIViewController+ECSlidingViewController.h"
 @interface FollowingTVCData () <NSFetchedResultsControllerDelegate,FetchCenterDelegate,FollowingCellDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @end
@@ -36,7 +37,7 @@
 }
 
 - (void)didFinishFetchingFollowingPlanList{
-    [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+    [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
 }
 
 #pragma mark - segue
@@ -136,5 +137,9 @@
     [self.tableView reloadData];
 }
 
-
+#pragma mark - go to discovery 
+- (IBAction)goToDiscovery:(UITapGestureRecognizer *)tap{
+    self.slidingViewController.topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"NavigationControllerForDiscovery"];
+    
+}
 @end

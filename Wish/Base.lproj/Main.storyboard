@@ -1469,8 +1469,9 @@
                             <rect key="frame" x="0.0" y="482" width="600" height="568"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="more_button_default" translatesAutoresizingMaskIntoConstraints="NO" id="d6E-Vc-1Ib">
+                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="more_button_default" translatesAutoresizingMaskIntoConstraints="NO" id="d6E-Vc-1Ib">
                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                    <gestureRecognizers/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="d6E-Vc-1Ib" secondAttribute="height" multiplier="343:50" id="UVC-Jg-Zta"/>
                                     </constraints>
@@ -1484,6 +1485,9 @@
                                             <include reference="UVC-Jg-Zta"/>
                                         </mask>
                                     </variation>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="SFz-Yl-OBg" appends="YES" id="Jkv-1b-kce"/>
+                                    </connections>
                                 </imageView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_new" translatesAutoresizingMaskIntoConstraints="NO" id="rTH-Xi-pyM">
                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -2022,8 +2026,13 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jPt-JN-A9f" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="SFz-Yl-OBg">
+                    <connections>
+                        <action selector="goToDiscovery:" destination="806-RF-bHk" id="p9M-am-fvy"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="633" y="1245.75"/>
+            <point key="canvasLocation" x="623" y="1577"/>
         </scene>
         <!--Wish DetailVC Owner-->
         <scene sceneID="274-7i-jhG">
@@ -3187,7 +3196,7 @@
         <!--Navigation Controller-->
         <scene sceneID="0bo-PJ-66c">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qWQ-Vi-JtX" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationControllerForDiscovery" automaticallyAdjustsScrollViewInsets="NO" id="qWQ-Vi-JtX" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Oym-Lx-qWA" customClass="NavigationBar">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
