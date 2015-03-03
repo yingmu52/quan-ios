@@ -133,6 +133,8 @@
                                              format:@"Set the topViewController before loading ECSlidingViewController"];
     self.topViewController.view.frame = [self topViewCalculatedFrameForPosition:self.currentTopViewPosition];
     [self.view addSubview:self.topViewController.view];
+    self.topViewAnchoredGesture = ECSlidingViewControllerAnchoredGesturePanning | ECSlidingViewControllerAnchoredGestureTapping;
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -14,24 +14,15 @@
 #import "UIViewController+ECSlidingViewController.h"
 #import "UIImageView+WebCache.h"
 #import "Theme.h"
-@interface FollowingTVCData () <NSFetchedResultsControllerDelegate,FetchCenterDelegate,FollowingCellDelegate>
+@interface FollowingTVCData () <NSFetchedResultsControllerDelegate,FetchCenterDelegate,FollowingCellDelegate,ECSlidingViewControllerDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @end
 
 @implementation FollowingTVCData
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.tableView.tableFooterView.hidden = YES;
-    
-//    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-//    NSArray *array = [Plan fetchWith:@"Plan" predicate:nil keyForDescriptor:@"createDate"];
-//    for (Feed*feed in array) {
-//        NSLog(@"%@\n",feed);
-//        [delegate.managedObjectContext deleteObject:feed];
-//    }
-//    [delegate.managedObjectContext save:nil];
-    
     FetchCenter *fetchCenter =[[FetchCenter alloc] init];
     fetchCenter.delegate  = self;
 
@@ -39,15 +30,12 @@
     dispatch_async(fetchFollowingListQ, ^{
         [fetchCenter fetchFollowingPlanList];
     });
-//    [fetchCenter performSelectorInBackground:@selector(fetchFollowingPlanList)
-//                                  withObject:nil];
 }
 
 - (void)didFinishFetchingFollowingPlanList{
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
     });
-//    [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
 }
 
 #pragma mark - segue
@@ -112,45 +100,10 @@
     }
 }
 
-- (void)controllerWillChangeContent:
-(NSFetchedResultsController *)controller
-{
-//    [self.tableView beginUpdates];
-}
-- (void)controller:(NSFetchedResultsController *)controller
-   didChangeObject:(id)anObject
-       atIndexPath:(NSIndexPath *)indexPath
-     forChangeType:(NSFetchedResultsChangeType)type
-      newIndexPath:(NSIndexPath *)newIndexPath
-{
-//    [self.tableView reloadData];
-//    switch(type)
-//    {
-//        case NSFetchedResultsChangeInsert:
-//            [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
-//             withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//            
-//        case NSFetchedResultsChangeDelete:
-//            [self.tableView deleteRowsAtIndexPaths:@[indexPath]
-//             withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//            
-//        case NSFetchedResultsChangeUpdate:
-//            [self.tableView reloadRowsAtIndexPaths:@[indexPath]
-//                                  withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//            
-//        case NSFetchedResultsChangeMove:
-//            // dont't support move action
-//            break;
-//    }
-}
 
 - (void)controllerDidChangeContent:
 (NSFetchedResultsController *)controller
 {
-//    [self.tableView endUpdates];
     [self.tableView reloadData];
 }
 
