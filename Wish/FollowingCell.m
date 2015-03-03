@@ -37,6 +37,7 @@ static NSUInteger numberOfPreloadedFeeds = 3;
     }else{
         self.feedsArray = [feeds mutableCopy];
     }
+    [self.collectionView reloadData];
 }
 
 #pragma mark - collection view delegate and data source

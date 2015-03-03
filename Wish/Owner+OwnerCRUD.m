@@ -21,9 +21,9 @@
     NSArray *checks = [Plan fetchWith:@"Owner"
                             predicate:[NSPredicate predicateWithFormat:@"ownerId == %@",dict[@"id"]]
                      keyForDescriptor:@"ownerId"];
-    NSAssert(checks.count <= 1, @"planId must be a unique!");
+    NSAssert(checks.count <= 1, @"ownerId must be a unique!");
     if (!checks.count) {
-        //insert new fetched plan
+        //insert new fetched Owner
         owner = [NSEntityDescription insertNewObjectForEntityForName:@"Owner"
                                              inManagedObjectContext:context];
     }else{

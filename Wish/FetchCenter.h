@@ -27,7 +27,7 @@
 - (void)uploadToCreateFeed:(Feed *)feed;
 - (void)updateStatus:(Plan *)plan;
 
-- (void)fetchFollowingPlanList:(NSArray *)ownerIds;
+- (void)fetchFollowingPlanList;
 
 - (NSURL *)urlWithImageID:(NSString *)imageId;
 @end

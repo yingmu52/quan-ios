@@ -39,6 +39,7 @@
     self.likeLabel.text = [NSString stringWithFormat:@"%@",feed.likeCount];
     self.commentLabel.text = [NSString stringWithFormat:@"%@",feed.commentCount];
     self.infoLabel.text = feed.feedTitle;
+    [self setNeedsDisplay];
 }
 -(void)showLikeAndComment
 {

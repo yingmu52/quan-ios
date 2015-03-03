@@ -12,6 +12,8 @@
 #import "FetchCenter.h"
 #import "Plan.h"
 #import "UIViewController+ECSlidingViewController.h"
+#import "UIImageView+WebCache.h"
+#import "Theme.h"
 @interface FollowingTVCData () <NSFetchedResultsControllerDelegate,FetchCenterDelegate,FollowingCellDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @end
@@ -32,12 +34,20 @@
     
     FetchCenter *fetchCenter =[[FetchCenter alloc] init];
     fetchCenter.delegate  = self;
-    [fetchCenter performSelectorInBackground:@selector(fetchFollowingPlanList:)
-                                  withObject:@[@"100004"]];
+
+    dispatch_queue_t fetchFollowingListQ = dispatch_queue_create("fetchFollowingListQ", NULL);
+    dispatch_async(fetchFollowingListQ, ^{
+        [fetchCenter fetchFollowingPlanList];
+    });
+//    [fetchCenter performSelectorInBackground:@selector(fetchFollowingPlanList)
+//                                  withObject:nil];
 }
 
 - (void)didFinishFetchingFollowingPlanList{
-    [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
+//    [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
 }
 
 #pragma mark - segue
@@ -60,13 +70,20 @@
 
 - (void)configureFollowingCell:(FollowingCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
-    Feed *feed = [plan fetchLastUpdatedFeed];
-//    NSLog(@"%@",plan.feeds );
-    cell.bottomLabel.text = feed.feedTitle;
+//    Feed *feed = [plan fetchLastUpdatedFeed];
+    Feed *feed = [[plan.feeds allObjects] lastObject];
+    //update Plan Info
+    cell.bottomLabel.text = feed ? feed.feedTitle : @"无标题";
     cell.headTitleLabel.text = plan.planTitle;
-    cell.headDateLabel.text = [SystemUtil stringFromDate:plan.updateDate];
+    cell.headDateLabel.text = [NSString stringWithFormat:@"更新于 %@",[SystemUtil stringFromDate:plan.updateDate]];
     cell.plan = plan; // must set
     cell.delegate = self;
+    
+    //update User Info
+    cell.headUserNameLabel.text = plan.owner.ownerName;
+    [cell.headProfilePic sd_setImageWithURL:[[FetchCenter new] urlWithImageID:plan.owner.headUrl]
+                           placeholderImage:[Theme menuLoginDefault]];
+    
 }
 #pragma mark - Fetched Results Controller Delegate
 

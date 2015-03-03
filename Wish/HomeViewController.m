@@ -184,12 +184,6 @@ const NSUInteger maxCardNum = 10;
     }
 }
 
-#pragma mark - post feed controller delegate
-//- (void)didFinishAddingTitleForFeed:(PostFeedViewController *)postFeedVC{
-//    [Feed createFeed:postFeedVC.titleForFeed
-//               image:self.capturedImage
-//              inPlan:self.currentPlan];
-//}
 #pragma mark -
 #pragma mark UICollectionView methods
 

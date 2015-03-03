@@ -172,10 +172,6 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(Feed *)sender{
     if ([segue.identifier isEqualToString:@"showPostFeed"]) {
-//        PostFeedViewController *pfvc = (PostFeedViewController *)segue.destinationViewController;
-//        pfvc.navigationTitle = self.plan.planTitle;
-//        pfvc.previewImage = self.capturedImage;
-//        pfvc.delegate = self;
         [segue.destinationViewController setFeed:sender];
     }
 }
@@ -196,17 +192,8 @@
         //create Task
         if (capturedImage) {
             Feed *feed = [Feed createFeedWithImage:capturedImage inPlan:self.plan];
-//            Feed *feed = [Feed createFeed:postFeedVC.titleForFeed image:self.capturedImage inPlan:self.plan];
             [self performSegueWithIdentifier:@"showPostFeed" sender:feed];
         }
     }];
 }
-
-
-//- (void)didFinishAddingTitleForFeed:(PostFeedViewController *)postFeedVC{
-//    [self.headerView updateSubtitle:self.plan.feeds.count];
-//    
-//}
-
-
 @end

@@ -31,7 +31,6 @@ typedef enum{
     FetchCenterGetOpCreateFeed,
     FetchCenterGetOpGetPlanList,
     FetchCenterGetOpSetPlanStatus,
-//    FetchCenterGetOpGetImageForFeedOfFollowingPlan,
     FetchCenterGetOpFollowingPlanList
 }FetchCenterGetOp;
 
@@ -42,23 +41,14 @@ typedef enum{
 @implementation FetchCenter
 
 
-- (void)fetchFollowingPlanList:(NSArray *)ownerIds{
-    for (NSString *ownerId in ownerIds) {
-        NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,FOLLOW,GET_FOLLOW_LIST];
-        [self getRequest:rqtStr
-               parameter:@{@"id":ownerId}
-               operation:FetchCenterGetOpFollowingPlanList
-                  entity:nil];
-    }
+- (void)fetchFollowingPlanList{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,FOLLOW,GET_FOLLOW_LIST];
+    [self getRequest:rqtStr
+           parameter:@{@"id":[SystemUtil getOwnerId]}
+           operation:FetchCenterGetOpFollowingPlanList
+              entity:nil];
 }
 
-//- (void)getImageForFeed:(Feed *)feed operation:(FetchCenterGetOp)operation{
-//    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PIC,GET_IMAGE];
-//    [self getRequest:rqtStr
-//           parameter:@{@"id":feed.imageId}
-//           operation:FetchCenterGetOpGetImageForFeedOfFollowingPlan
-//              entity:feed];
-//}
 #pragma mark -
 #pragma mark - personal
 
@@ -164,26 +154,13 @@ typedef enum{
             NSLog(@"updated plan status (from server)");
         }
             break;
-//        case FetchCenterGetOpGetImageForFeedOfFollowingPlan:{
-//            /*
-//             obj is nil in this case see -getImageWithfeedInfo:operation:
-//             create feed for image
-//            */
-//            UIImage *fetchedImage = json[kFetchedImage];
-//            Feed *feed = (Feed *)obj;
-//            feed.image = fetchedImage;
-//            if([feed.managedObjectContext save:nil]){
-//                NSLog(@"Done fetching image for feed %@",feed.feedId);
-//            }
-//        }
-//            break;
-
         case FetchCenterGetOpFollowingPlanList:{
             NSLog(@"FetchCenterOpGetFollowingPlanList \n %@",json);
             //save the response following plan list
             for (NSDictionary *planItem in [json valueForKeyPath:@"data.planList"]) {
                 Plan *plan = [Plan updatePlanFromServer:planItem];
-//                plan.owner = [Owner updateOwnerFromServer:[json valueForKeyPath:@"data.manList"]];
+                NSDictionary *userInfo = [json valueForKeyPath:[NSString stringWithFormat:@"data.manList.%@",plan.ownerId]];
+                plan.owner = [Owner updateOwnerFromServer:userInfo];
                 NSArray *feedsList = planItem[@"feedsList"];
                 if (feedsList.count) {
                     //create all feeds
@@ -198,7 +175,6 @@ typedef enum{
             break;
         default:
             break;
-            
     }
 }
 

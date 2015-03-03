@@ -12,10 +12,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *photoView;
 @property (nonatomic) BOOL isWidgetVisible;
 @property (nonatomic,strong) Feed *feed;
+
 -(void)showLikeAndComment;
-
 - (void)dismissLikeAndComment;
-
-
 - (void)moveWidget:(BOOL)toVisible;
 @end
