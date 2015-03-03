@@ -13,7 +13,9 @@
 
 + (Feed *)createFeedWithImage:(UIImage *)image inPlan:(Plan *)plan{
     
-    NSManagedObjectContext *context = plan.managedObjectContext;
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = delegate.managedObjectContext;
+    
     Feed *feed = [NSEntityDescription insertNewObjectForEntityForName:@"Feed"
                                                inManagedObjectContext:context];
     

@@ -22,7 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *lockImageView;
 @property (weak, nonatomic) IBOutlet UILabel *isPrivateLabel;
 @property (nonatomic) BOOL isPrivate;
-@property (nonatomic,weak) UIButton *nextButton;
+@property (nonatomic,strong) UIButton *nextButton;
 @end
 @implementation PostDetailViewController
 @synthesize selectedDate = _selectedDate;

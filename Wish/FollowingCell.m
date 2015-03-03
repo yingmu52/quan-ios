@@ -14,7 +14,7 @@
 #import "UIImageView+WebCache.h"
 #import "FetchCenter.h"
 @import CoreData;
-
+@import QuartzCore;
 static NSUInteger numberOfPreloadedFeeds = 3;
 
 
@@ -74,11 +74,18 @@ static NSUInteger numberOfPreloadedFeeds = 3;
 
 }
 
+- (void)setHeadProfilePic:(UIImageView *)headProfilePic{
+    _headProfilePic = headProfilePic;
+    _headProfilePic.layer.cornerRadius = self.headProfilePic.frame.size.width/2;
+    _headProfilePic.layer.masksToBounds = YES;
+    _headProfilePic.clipsToBounds = YES;
+
+}
+
 - (void)awakeFromNib
 {
     [super awakeFromNib];
     self.backgroundColor = [UIColor clearColor];
-    
 }
 
 

@@ -147,11 +147,13 @@ const NSUInteger maxCardNum = 10;
 #pragma mark - Camera Util
 
 - (IBAction)showCamera:(UIButton *)sender{
-    UIImagePickerController *controller = [SystemUtil showCamera:self];
-    if (controller) {
-        [self presentViewController:controller
-                           animated:YES
-                         completion:nil];
+    if (self.fetchedRC.fetchedObjects.count) {
+        UIImagePickerController *controller = [SystemUtil showCamera:self];
+        if (controller) {
+            [self presentViewController:controller
+                               animated:YES
+                             completion:nil];
+        }
     }
 }
 

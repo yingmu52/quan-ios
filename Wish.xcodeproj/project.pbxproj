@@ -724,6 +724,7 @@
 				TargetAttributes = {
 					AE0172381A65CD8E0014266F = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 5Z63N39FV7;
 					};
 					AE0172541A65CD8E0014266F = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -1029,6 +1030,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1045,6 +1047,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -75,84 +75,84 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="9Ns-e9-EFe">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumFontSize="9" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="9Ns-e9-EFe">
                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                             <attributedString key="attributedText">
                                 <fragment content="INSA">
                                     <attributes>
                                         <color key="NSColor" red="0.61568629741668701" green="0.61568629741668701" blue="0.61568629741668701" alpha="1" colorSpace="calibratedRGB"/>
                                         <font key="NSFont" size="12" name="HelveticaNeue"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" lineSpacing="4"/>
                                     </attributes>
                                 </fragment>
                                 <fragment content="是一名">
                                     <attributes>
                                         <color key="NSColor" red="0.61568629741668701" green="0.61568629741668701" blue="0.61568629741668701" alpha="1" colorSpace="calibratedRGB"/>
                                         <font key="NSFont" size="12" name="STHeitiSC-Light"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" lineSpacing="4"/>
                                     </attributes>
                                 </fragment>
                                 <fragment content="GIF">
                                     <attributes>
                                         <color key="NSColor" red="0.61568629741668701" green="0.61568629741668701" blue="0.61568629741668701" alpha="1" colorSpace="calibratedRGB"/>
                                         <font key="NSFont" size="12" name="HelveticaNeue"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" lineSpacing="4"/>
                                     </attributes>
                                 </fragment>
                                 <fragment content="图片艺术家，在里约热内卢">
                                     <attributes>
                                         <color key="NSColor" red="0.61568629741668701" green="0.61568629741668701" blue="0.61568629741668701" alpha="1" colorSpace="calibratedRGB"/>
                                         <font key="NSFont" size="12" name="STHeitiSC-Light"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" lineSpacing="4"/>
                                     </attributes>
                                 </fragment>
                                 <fragment content="1">
                                     <attributes>
                                         <color key="NSColor" red="0.61568629741668701" green="0.61568629741668701" blue="0.61568629741668701" alpha="1" colorSpace="calibratedRGB"/>
                                         <font key="NSFont" size="12" name="HelveticaNeue"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" lineSpacing="4"/>
                                     </attributes>
                                 </fragment>
                                 <fragment content="万">
                                     <attributes>
                                         <color key="NSColor" red="0.61568629741668701" green="0.61568629741668701" blue="0.61568629741668701" alpha="1" colorSpace="calibratedRGB"/>
                                         <font key="NSFont" size="12" name="STHeitiSC-Light"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" lineSpacing="4"/>
                                     </attributes>
                                 </fragment>
                                 <fragment content="4000">
                                     <attributes>
                                         <color key="NSColor" red="0.61568629741668701" green="0.61568629741668701" blue="0.61568629741668701" alpha="1" colorSpace="calibratedRGB"/>
                                         <font key="NSFont" size="12" name="HelveticaNeue"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" lineSpacing="4"/>
                                     </attributes>
                                 </fragment>
                                 <fragment content="平米的志地上涂画了">
                                     <attributes>
                                         <color key="NSColor" red="0.61568629741668701" green="0.61568629741668701" blue="0.61568629741668701" alpha="1" colorSpace="calibratedRGB"/>
                                         <font key="NSFont" size="12" name="STHeitiSC-Light"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" lineSpacing="4"/>
                                     </attributes>
                                 </fragment>
                                 <fragment content="4">
                                     <attributes>
                                         <color key="NSColor" red="0.61568629741668701" green="0.61568629741668701" blue="0.61568629741668701" alpha="1" colorSpace="calibratedRGB"/>
                                         <font key="NSFont" size="12" name="HelveticaNeue"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" lineSpacing="4"/>
                                     </attributes>
                                 </fragment>
                                 <fragment content="张图片，用卫星拍摄下来，组成了世界上最大的">
                                     <attributes>
                                         <color key="NSColor" red="0.61568629741668701" green="0.61568629741668701" blue="0.61568629741668701" alpha="1" colorSpace="calibratedRGB"/>
                                         <font key="NSFont" size="12" name="STHeitiSC-Light"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" lineSpacing="4"/>
                                     </attributes>
                                 </fragment>
                                 <fragment content="GIF">
                                     <attributes>
                                         <color key="NSColor" red="0.61568629741668701" green="0.61568629741668701" blue="0.61568629741668701" alpha="1" colorSpace="calibratedRGB"/>
                                         <font key="NSFont" size="12" name="HelveticaNeue"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" lineSpacing="4"/>
                                     </attributes>
                                 </fragment>
                             </attributedString>
@@ -192,6 +192,9 @@
                         <constraint firstItem="OcE-kI-lbs" firstAttribute="trailing" secondItem="9Ns-e9-EFe" secondAttribute="trailing" id="P1A-6U-uDZ"/>
                         <constraint firstItem="UhT-cG-22X" firstAttribute="leading" secondItem="Ti0-Qq-dw2" secondAttribute="leading" id="To1-Wc-RlY"/>
                         <constraint firstItem="xPd-om-z1D" firstAttribute="top" secondItem="OcE-kI-lbs" secondAttribute="top" id="XJd-dZ-0PS"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="9Ns-e9-EFe" secondAttribute="bottom" constant="56" id="Z3K-L8-2IA">
+                            <variation key="heightClass=regular-widthClass=compact" constant="8"/>
+                        </constraint>
                         <constraint firstItem="UhT-cG-22X" firstAttribute="width" secondItem="9Ns-e9-EFe" secondAttribute="height" multiplier="400:29" id="apW-LG-dfn"/>
                         <constraint firstAttribute="trailing" secondItem="9Ns-e9-EFe" secondAttribute="trailing" constant="20" id="dCt-Cl-Ybg"/>
                         <constraint firstAttribute="width" secondItem="MPh-Aj-kzq" secondAttribute="height" multiplier="640:100" id="emD-Ib-l4J"/>
@@ -212,16 +215,15 @@
                             <exclude reference="9Ns-e9-EFe"/>
                         </mask>
                         <mask key="constraints">
+                            <exclude reference="DH0-2A-y0J"/>
+                            <exclude reference="KFu-ka-btn"/>
+                            <exclude reference="To1-Wc-RlY"/>
+                            <exclude reference="apW-LG-dfn"/>
+                            <exclude reference="g3Z-iy-30l"/>
                             <exclude reference="JxK-vE-eTb"/>
+                            <exclude reference="Z3K-L8-2IA"/>
                             <exclude reference="dCt-Cl-Ybg"/>
                             <exclude reference="siq-QH-9ue"/>
-                            <exclude reference="0JF-rS-Y8W"/>
-                            <exclude reference="3gZ-k9-1bN"/>
-                            <exclude reference="9nc-8A-Eqe"/>
-                            <exclude reference="A2O-vC-CHx"/>
-                            <exclude reference="N6h-G1-oGz"/>
-                            <exclude reference="P1A-6U-uDZ"/>
-                            <exclude reference="KyZ-6q-LV2"/>
                             <exclude reference="1Oa-EY-Q0o"/>
                             <exclude reference="Hag-cd-jiW"/>
                             <exclude reference="mkf-Un-p9r"/>
@@ -231,13 +233,15 @@
                             <exclude reference="IUu-Mo-Y1c"/>
                             <exclude reference="emD-Ib-l4J"/>
                             <exclude reference="kjG-iQ-IqL"/>
-                            <exclude reference="DH0-2A-y0J"/>
-                            <exclude reference="KFu-ka-btn"/>
-                            <exclude reference="To1-Wc-RlY"/>
-                            <exclude reference="apW-LG-dfn"/>
-                            <exclude reference="g3Z-iy-30l"/>
+                            <exclude reference="KyZ-6q-LV2"/>
                             <exclude reference="0FB-Sw-1Eg"/>
                             <exclude reference="XJd-dZ-0PS"/>
+                            <exclude reference="0JF-rS-Y8W"/>
+                            <exclude reference="3gZ-k9-1bN"/>
+                            <exclude reference="9nc-8A-Eqe"/>
+                            <exclude reference="A2O-vC-CHx"/>
+                            <exclude reference="N6h-G1-oGz"/>
+                            <exclude reference="P1A-6U-uDZ"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact">
@@ -251,16 +255,15 @@
                             <include reference="9Ns-e9-EFe"/>
                         </mask>
                         <mask key="constraints">
+                            <include reference="DH0-2A-y0J"/>
+                            <include reference="KFu-ka-btn"/>
+                            <include reference="To1-Wc-RlY"/>
+                            <exclude reference="apW-LG-dfn"/>
+                            <include reference="g3Z-iy-30l"/>
                             <include reference="JxK-vE-eTb"/>
+                            <include reference="Z3K-L8-2IA"/>
                             <exclude reference="dCt-Cl-Ybg"/>
                             <exclude reference="siq-QH-9ue"/>
-                            <include reference="0JF-rS-Y8W"/>
-                            <include reference="3gZ-k9-1bN"/>
-                            <include reference="9nc-8A-Eqe"/>
-                            <include reference="A2O-vC-CHx"/>
-                            <include reference="N6h-G1-oGz"/>
-                            <include reference="P1A-6U-uDZ"/>
-                            <include reference="KyZ-6q-LV2"/>
                             <exclude reference="1Oa-EY-Q0o"/>
                             <include reference="Hag-cd-jiW"/>
                             <include reference="mkf-Un-p9r"/>
@@ -270,13 +273,15 @@
                             <exclude reference="IUu-Mo-Y1c"/>
                             <include reference="emD-Ib-l4J"/>
                             <include reference="kjG-iQ-IqL"/>
-                            <include reference="DH0-2A-y0J"/>
-                            <include reference="KFu-ka-btn"/>
-                            <include reference="To1-Wc-RlY"/>
-                            <exclude reference="apW-LG-dfn"/>
-                            <include reference="g3Z-iy-30l"/>
+                            <include reference="KyZ-6q-LV2"/>
                             <include reference="0FB-Sw-1Eg"/>
                             <exclude reference="XJd-dZ-0PS"/>
+                            <include reference="0JF-rS-Y8W"/>
+                            <include reference="3gZ-k9-1bN"/>
+                            <include reference="9nc-8A-Eqe"/>
+                            <include reference="A2O-vC-CHx"/>
+                            <include reference="N6h-G1-oGz"/>
+                            <include reference="P1A-6U-uDZ"/>
                         </mask>
                     </variation>
                 </view>
