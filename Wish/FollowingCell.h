@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "Plan.h"
-
 @class FollowingCell;
 
 @protocol FollowingCellDelegate <NSObject>

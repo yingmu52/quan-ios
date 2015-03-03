@@ -53,7 +53,6 @@ static NSUInteger numberOfPreloadedFeeds = 3;
         NSAssert(feed.imageId, @"null feed image id");
         [cell.feedImageView sd_setImageWithURL:[[FetchCenter new] urlWithImageID:feed.imageId]
                               placeholderImage:[UIImage imageNamed:@"snow.jpg"]];
-        
     }
     return cell;
     
@@ -74,18 +73,18 @@ static NSUInteger numberOfPreloadedFeeds = 3;
 
 }
 
-- (void)setHeadProfilePic:(UIImageView *)headProfilePic{
-    _headProfilePic = headProfilePic;
-    _headProfilePic.layer.cornerRadius = self.headProfilePic.frame.size.width/2;
-    _headProfilePic.layer.masksToBounds = YES;
-    _headProfilePic.clipsToBounds = YES;
-
-}
-
 - (void)awakeFromNib
 {
     [super awakeFromNib];
     self.backgroundColor = [UIColor clearColor];
+}
+
+- (void)setHeadProfilePic:(UIImageView *)headProfilePic{
+    _headProfilePic = headProfilePic;
+#warning size not right
+    _headProfilePic.layer.cornerRadius = 20.0f;
+    _headProfilePic.clipsToBounds = YES;
+    _headProfilePic.layer.doubleSided = YES;
 }
 
 
