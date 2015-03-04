@@ -41,6 +41,15 @@
     self.infoLabel.text = feed.feedTitle;
     [self setNeedsDisplay];
 }
+
+- (void)setPhotoView:(UIImageView *)photoView
+{
+    _photoView = photoView;
+    
+    //crop the feed image to display properly
+    _photoView.contentMode = UIViewContentModeScaleAspectFill;
+    _photoView.clipsToBounds = YES;
+}
 -(void)showLikeAndComment
 {
     [self moveWidget:YES];

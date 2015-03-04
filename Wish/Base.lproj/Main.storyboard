@@ -2635,8 +2635,9 @@
                                                                 </mask>
                                                             </variation>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="snow.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="VXi-Oj-2Oy" userLabel="cardImage">
+                                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="snow.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="VXi-Oj-2Oy" userLabel="cardImage">
                                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                            <gestureRecognizers/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="VXi-Oj-2Oy" secondAttribute="height" multiplier="380:300" id="Bul-du-2aJ"/>
                                                                 <constraint firstAttribute="width" secondItem="VXi-Oj-2Oy" secondAttribute="height" multiplier="241:237" id="Nyw-yk-Pey"/>
@@ -2656,6 +2657,9 @@
                                                                     <exclude reference="ZcD-fA-N2X"/>
                                                                 </mask>
                                                             </variation>
+                                                            <connections>
+                                                                <outletCollection property="gestureRecognizers" destination="7qC-J0-jsS" appends="YES" id="LWK-jJ-OOr"/>
+                                                            </connections>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -2896,10 +2900,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="RyB-N7-FN7"/>
+                    <connections>
+                        <segue destination="Zuf-Pv-X4K" kind="show" identifier="showPlanFromAchievement" id="FWk-7z-Cc0"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pt8-1V-Z4d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="7qC-J0-jsS">
+                    <connections>
+                        <action selector="tapOnImage:" destination="IHE-Tk-1qk" id="Ewa-Vy-ueQ"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-13.5" y="1977"/>
+            <point key="canvasLocation" x="862.5" y="2253.75"/>
         </scene>
         <!--Discovery View Controller-->
         <scene sceneID="LW9-Wg-cfa">
@@ -3576,5 +3588,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="cel-0L-eNY"/>
         <segue reference="4wk-xv-ETJ"/>
+        <segue reference="FWk-7z-Cc0"/>
     </inferredMetricsTieBreakers>
 </document>

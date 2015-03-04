@@ -10,8 +10,12 @@
 
 @implementation AchieveCell
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)setPlanImageView:(UIImageView *)planImageView
+{
+    _planImageView = planImageView;
+    //crop the feed image to display properly
+    _planImageView.contentMode = UIViewContentModeScaleAspectFill;
+    _planImageView.clipsToBounds = YES;
 }
 
 - (void)setCardBackgroundView:(TriangleCutoutView *)cardBackgroundView{

@@ -11,13 +11,28 @@
 #import "AppDelegate.h"
 #import "Plan+PlanCRUD.h"
 #import "AchieveCell.h"
+#import "WishDetailVCFollower.h"
 @interface AchieveVCData () <NSFetchedResultsControllerDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @end
 
 @implementation AchieveVCData
 
+#pragma mark - segue
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"showPlanFromAchievement"]) {
+        [segue.destinationViewController setPlan:sender];
+    }
+}
+
+- (IBAction)tapOnImage:(UITapGestureRecognizer *)tap{
+    
+    UIImageView *imageView = (UIImageView *)tap.view;
+    Plan *plan = [self.fetchedRC objectAtIndexPath:[NSIndexPath indexPathForRow:imageView.tag inSection:0]];
+    [self performSegueWithIdentifier:@"showPlanFromAchievement" sender:plan];
+}
 #pragma mark - UITableViewController Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -38,7 +53,7 @@
     if (plan.planStatus.integerValue == PlanStatusFinished) badge = [Theme achievementFinish];
     if (plan.planStatus.integerValue == PlanStatusGiveTheFuckingUp) badge = [Theme achievementFail];
     cell.badgeImageView.image = badge;
-    
+    cell.badgeImageView.tag = indexPath.row; // this is important for touch event
     cell.planImageView.image = plan.image;
     
     return cell;
