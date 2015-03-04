@@ -27,6 +27,7 @@
     [super viewDidLoad];
     [self setupViews];
 }
+
 - (void)setupViews
 {
     CGRect frame = CGRectMake(0, 0, 30, 30);
@@ -43,25 +44,30 @@
     self.navigationItem.rightBarButtonItem.enabled = NO;
     [self.textField addTarget:self action:@selector(textFieldDidUpdate) forControlEvents:UIControlEventEditingChanged];
     self.textField.inputAccessoryView = [KeyboardAcessoryView instantiateFromNib:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height * 88 / 1136)];
-    self.previewIcon.image = self.feed.image;
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#2A2A2A"]};
-    self.title = self.feed.plan.planTitle;
-}
 
+    self.previewIcon.image = self.imageForFeed;
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#2A2A2A"]};
+    self.title = self.plan.planTitle;
+}
 - (void)createFeed{
-    self.feed.feedTitle = self.textField.text;
+    self.navigationItem.leftBarButtonItem.enabled = NO;
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithFrame:self.tikButton.frame];
     spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
     [spinner startAnimating];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+    
+    
+    Feed *feed = [Feed createFeedWithImage:self.imageForFeed inPlan:self.plan];
+    feed.feedTitle = self.textField.text;
     FetchCenter *fc = [FetchCenter new];
     fc.delegate = self;
-    [fc uploadToCreateFeed:self.feed];
+    [fc uploadToCreateFeed:feed];
 }
 
 - (void)didFinishUploadingFeed:(Feed *)feed
 {
     dispatch_async(dispatch_get_main_queue(), ^{
+        self.navigationItem.leftBarButtonItem.enabled = YES;
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
         [self.navigationController popViewControllerAnimated:YES];
         

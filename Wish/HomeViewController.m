@@ -7,7 +7,7 @@
 //
 
 #import "HomeViewController.h"
-
+#import "PostFeedViewController.h"
 #import "Theme.h"
 #import "MenuViewController.h"
 #import "UIViewController+ECSlidingViewController.h"
@@ -161,9 +161,9 @@ const NSUInteger maxCardNum = 10;
 {
     [self dismissViewControllerAnimated:NO completion:^{
         UIImage *capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage];
-        Feed *feed = [Feed createFeedWithImage:capturedImage inPlan:self.currentPlan];
+//        Feed *feed = [Feed createFeedWithImage:capturedImage inPlan:self.currentPlan];
         //NSLog(@"%@",NSStringFromCGSize(editedImage.size));
-        [self performSegueWithIdentifier:@"ShowPostFeedFromHome" sender:feed];
+        [self performSegueWithIdentifier:@"ShowPostFeedFromHome" sender:capturedImage];
     }];
 }
 
@@ -182,7 +182,9 @@ const NSUInteger maxCardNum = 10;
         controller.plan = [self.fetchedRC objectAtIndexPath:[self.cardCollectionView indexPathForCell:sender]];
     }
     if ([segue.identifier isEqualToString:@"ShowPostFeedFromHome"]) {
-        [segue.destinationViewController setFeed:sender];
+        [segue.destinationViewController setPlan:self.currentPlan];
+        [segue.destinationViewController setImageForFeed:sender];
+        
     }
 }
 

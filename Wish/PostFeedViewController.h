@@ -10,5 +10,7 @@
 #import "Feed.h"
 #import "Plan.h"
 @interface PostFeedViewController : UIViewController
-@property (nonatomic,strong) Feed *feed;
+
+@property (nonatomic,strong) Plan *plan;
+@property (nonatomic,strong) UIImage *imageForFeed;
 @end

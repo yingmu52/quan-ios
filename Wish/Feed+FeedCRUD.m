@@ -26,13 +26,12 @@
 
     //update plan
     plan.image = image;
-    
-    if ([context save:nil]) {
+    NSLog(@"saved feed with image");
+//    if ([context save:nil]) {
         //upload to server
 //        [[[FetchCenter alloc] init] uploadToCreateFeed:feed];
-        NSLog(@"saved feed with image");
-    }
 
+//    }
     return feed;
 }
 

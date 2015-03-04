@@ -46,29 +46,27 @@
 
 - (NSFetchedResultsController *)fetchedRC
 {
-    NSManagedObjectContext *context = self.plan.managedObjectContext;
-    if (_fetchedRC != nil) {
-        return _fetchedRC;
-    }
-    
-    //do fetchrequest
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Feed"];
-    request.predicate = [NSPredicate predicateWithFormat:@"plan = %@",self.plan];
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
-    [request setFetchBatchSize:3];
-    
-    //create FetchedResultsController with context, sectionNameKeyPath, and you can cache here, so the next work if the same you can use your cash file.
-    NSFetchedResultsController *newFRC =
-    [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                        managedObjectContext:context sectionNameKeyPath:nil
-                                                   cacheName:nil];
-    self.fetchedRC = newFRC;
-    _fetchedRC.delegate = self;
+    if (!_fetchedRC){
+        
+        //do fetchrequest
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Feed"];
+        request.predicate = [NSPredicate predicateWithFormat:@"plan = %@",self.plan];
+        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
+        [request setFetchBatchSize:3];
+        
+        //create FetchedResultsController with context, sectionNameKeyPath, and you can cache here, so the next work if the same you can use your cash file.
+        NSFetchedResultsController *newFRC =
+        [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                            managedObjectContext:self.plan.managedObjectContext
+                                              sectionNameKeyPath:nil
+                                                       cacheName:nil];
+        self.fetchedRC = newFRC;
+        _fetchedRC.delegate = self;
         NSError *error;
         [_fetchedRC performFetch:&error];
+        
+    }
     return _fetchedRC;
-    
-    
 }
 
 - (void)controllerWillChangeContent:
@@ -83,29 +81,28 @@
      forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath
 {
-    
-    
     switch(type)
     {
         case NSFetchedResultsChangeInsert:
             [self.tableView
              insertRowsAtIndexPaths:@[newIndexPath]
-             withRowAnimation:UITableViewRowAnimationFade];
+             withRowAnimation:UITableViewRowAnimationAutomatic];
+            self.tableView.backgroundColor = [self currenetBackgroundColor];
+            [self.tableView setContentOffset:CGPointZero animated:NO]; //scroll to top
+
             break;
             
         case NSFetchedResultsChangeDelete:
             [self.tableView
              deleteRowsAtIndexPaths:@[indexPath]
-             withRowAnimation:UITableViewRowAnimationFade];
+             withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
             
         case NSFetchedResultsChangeUpdate:
             [self.tableView reloadRowsAtIndexPaths:@[indexPath]
                                   withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
-            
-        case NSFetchedResultsChangeMove:
-            // dont't support move action
+        default:
             break;
     }
 }
@@ -114,7 +111,6 @@
 (NSFetchedResultsController *)controller
 {
     [self.tableView endUpdates];
-    self.tableView.backgroundColor = [self currenetBackgroundColor];
 
 }
 

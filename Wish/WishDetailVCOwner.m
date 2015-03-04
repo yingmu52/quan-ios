@@ -170,9 +170,10 @@
 
 #pragma mark - camera
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(Feed *)sender{
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"showPostFeed"]) {
-        [segue.destinationViewController setFeed:sender];
+        [segue.destinationViewController setImageForFeed:sender];
+        [segue.destinationViewController setPlan:self.plan];
     }
 }
 - (void)showCamera{
@@ -191,8 +192,8 @@
         //        NSLog(@"%@",NSStringFromCGSize(editedImage.size));
         //create Task
         if (capturedImage) {
-            Feed *feed = [Feed createFeedWithImage:capturedImage inPlan:self.plan];
-            [self performSegueWithIdentifier:@"showPostFeed" sender:feed];
+//            Feed *feed = [Feed createFeedWithImage:capturedImage inPlan:self.plan];
+            [self performSegueWithIdentifier:@"showPostFeed" sender:capturedImage];
         }
     }];
 }

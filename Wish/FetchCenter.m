@@ -131,10 +131,11 @@ typedef enum{
             if (fetchedFeedID){
                 Feed *feed = (Feed *)obj;
                 feed.feedId = fetchedFeedID;
-                if ([feed.managedObjectContext save:nil]) {
-                    [self.delegate didFinishUploadingFeed:feed];
-                    NSLog(@"upload feed successed, ID: %@",fetchedFeedID);
-                }
+                [self.delegate didFinishUploadingFeed:feed];
+                NSLog(@"upload feed successed, ID: %@",fetchedFeedID);
+
+//                if ([feed.managedObjectContext save:nil]) {
+//                }
             }
         }
             break;
