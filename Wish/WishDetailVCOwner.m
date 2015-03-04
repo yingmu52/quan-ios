@@ -133,17 +133,7 @@
     
 }
 
-- (UIColor *)currenetBackgroundColor{
-    
-    if (!self.plan.image){
-        return [Theme wishDetailBackgroundNone:self.tableView];
-    }else{
-        CGRect rect = self.tableView.bounds;
-        rect.size.height *= 2;
-        return [UIColor colorWithPatternImage:[SystemUtil darkLayeredImage:[self.plan.image applyLightEffect] inRect:rect]];
-    }
-    
-}
+
 #pragma mark - Scroll view delegate (widget animation)
 
 -  (void)displayWidget:(BOOL)shouldDisplay

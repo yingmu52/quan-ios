@@ -48,8 +48,8 @@
     if (plan.planStatus.integerValue == PlanStatusFinished) badge = [Theme achievementFinish];
     if (plan.planStatus.integerValue == PlanStatusGiveTheFuckingUp) badge = [Theme achievementFail];
     cell.badgeImageView.image = badge;
-
     cell.planImageView.image = plan.image;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -57,6 +57,7 @@
 {
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
     [self performSegueWithIdentifier:@"showPlanFromAchievement" sender:plan];
+    
 }
 
 #pragma mark - NSFetchedResultsController

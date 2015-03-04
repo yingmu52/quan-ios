@@ -18,5 +18,4 @@
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC; //fetching Feed
 @property (nonatomic,strong) Plan *plan; //must set
 - (void)setUpNavigationItem;
-- (UIColor *)currenetBackgroundColor;
 @end

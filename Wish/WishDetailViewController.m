@@ -36,11 +36,21 @@
                                       selector:@selector(popToRootViewControllerAnimated:)
                                          frame:frame];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
-    self.tableView.backgroundColor = [self currenetBackgroundColor];
+    [self setCurrenetBackgroundColor];
 }
 
-- (UIColor *)currenetBackgroundColor{
-    return [UIColor blackColor];
+- (void)setCurrenetBackgroundColor{
+    if (self.fetchedRC.fetchedObjects.count) {
+        UIImageView *imgView = [[UIImageView alloc] initWithFrame:self.tableView.frame];
+        imgView.contentMode = UIViewContentModeScaleAspectFill;
+        imgView.clipsToBounds = YES;
+        
+        Feed *feed = (Feed *)self.fetchedRC.fetchedObjects.firstObject;
+        imgView.image = [feed.image applyDarkEffect];
+        self.tableView.backgroundView = imgView;
+    }else{
+        self.tableView.backgroundColor = [Theme wishDetailBackgroundNone:self.tableView];
+    }
 }
 #pragma mark - Fetched Results Controller delegate
 
@@ -87,7 +97,6 @@
             [self.tableView
              insertRowsAtIndexPaths:@[newIndexPath]
              withRowAnimation:UITableViewRowAnimationAutomatic];
-            self.tableView.backgroundColor = [self currenetBackgroundColor];
             [self.tableView setContentOffset:CGPointZero animated:NO]; //scroll to top
 
             break;
@@ -110,6 +119,7 @@
 - (void)controllerDidChangeContent:
 (NSFetchedResultsController *)controller
 {
+    [self setCurrenetBackgroundColor];
     [self.tableView endUpdates];
 
 }

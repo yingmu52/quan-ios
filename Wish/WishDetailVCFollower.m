@@ -27,16 +27,4 @@
     }
     return cell;
 }
-
-- (UIColor *)currenetBackgroundColor{
-    if (self.fetchedRC.fetchedObjects.count) {
-        Feed *feed = (Feed *)self.fetchedRC.fetchedObjects.firstObject;
-        CGRect rect = self.tableView.bounds;
-        rect.size.height *= 2;
-        return [UIColor colorWithPatternImage:[SystemUtil darkLayeredImage:feed.image
-                                                                    inRect:rect]];
-    }
-    return [super currenetBackgroundColor];
-}
-
 @end
