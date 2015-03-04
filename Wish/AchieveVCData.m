@@ -27,12 +27,7 @@
     }
 }
 
-- (IBAction)tapOnImage:(UITapGestureRecognizer *)tap{
-    
-    UIImageView *imageView = (UIImageView *)tap.view;
-    Plan *plan = [self.fetchedRC objectAtIndexPath:[NSIndexPath indexPathForRow:imageView.tag inSection:0]];
-    [self performSegueWithIdentifier:@"showPlanFromAchievement" sender:plan];
-}
+
 #pragma mark - UITableViewController Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -42,23 +37,27 @@
 - (AchieveCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     AchieveCell *cell = [tableView dequeueReusableCellWithIdentifier:ACHIEVECELLID
                                                         forIndexPath:indexPath];
-    //     Configure the cell...
+
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
     cell.dateLabel.text = [SystemUtil stringFromDate:plan.updateDate];
     cell.planStatusLabel.text = plan.planStatusTags[plan.planStatus.integerValue];
     cell.planTitleLabel.text = plan.planTitle;
-    cell.planSubtitleLabel.text = [NSString stringWithFormat:@"共有%d条纪录",plan.feeds.count];
+    cell.planSubtitleLabel.text = [NSString stringWithFormat:@"共有%@条纪录",@(plan.feeds.count)];
     
     UIImage *badge;
     if (plan.planStatus.integerValue == PlanStatusFinished) badge = [Theme achievementFinish];
     if (plan.planStatus.integerValue == PlanStatusGiveTheFuckingUp) badge = [Theme achievementFail];
     cell.badgeImageView.image = badge;
-    cell.badgeImageView.tag = indexPath.row; // this is important for touch event
+
     cell.planImageView.image = plan.image;
-    
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:@"showPlanFromAchievement" sender:plan];
+}
 
 #pragma mark - NSFetchedResultsController
 - (NSFetchedResultsController *)fetchedRC
