@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "ECSlidingViewController.h"
 //#import "AFNetworkActivityLogger.h"
+#import <TencentOpenAPI/TencentOAuth.h>
 @interface AppDelegate ()
 
 @end
@@ -53,6 +54,16 @@
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
 }
+
+#pragma mark - Tencent
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    return [TencentOAuth HandleOpenURL:url];
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+    return [TencentOAuth HandleOpenURL:url];
+} 
+
 
 #pragma mark - Core Data stack
 

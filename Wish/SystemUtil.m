@@ -31,20 +31,7 @@
 }
 
 
-#define OWNERID @"MOTHERFUCKING_OWNER_FUCKING_I_FUCKING_D"
 
-#pragma mark - user id
-+ (NSString *)getOwnerId{
-#warning fucking change this in the future man !
-    NSString *ownerID = [[NSUserDefaults standardUserDefaults] objectForKey:OWNERID];
-    ownerID = ownerID ? ownerID : @"100006";
-    return ownerID;
-}
-
-+ (void)updateOwnerId:(NSString *)newID
-{
-    return [[NSUserDefaults standardUserDefaults] setObject:newID forKey:OWNERID];
-}
 
 
 + (NSString *)stringFromDate:(NSDate *)date
@@ -107,5 +94,37 @@
     view.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
 }
 
+
+#pragma mark - user id
+
++ (void)updateOwnerInfo:(NSDictionary *)info{
+    [[NSUserDefaults standardUserDefaults] setObject:info forKey:OWNERINFO];
+}
+
++ (NSDictionary *)getOwnerInfo{
+    NSDictionary *info = [[NSUserDefaults standardUserDefaults] objectForKey:OWNERINFO];
+//    NSAssert(![info isKindOfClass:[NSDictionary class]], @"info is not a dictionary");
+    return info;
+}
+
++ (NSString *)getOwnerId{
+    NSDictionary *info = [self.class getOwnerInfo];
+    return info[OPENID];
+}
+
++ (BOOL)isUserLogin{
+    NSDictionary *info = [self.class getOwnerInfo];
+    return info && [info[LOGIN_STATUS] boolValue];
+}
+
++ (NSURL *)userProfilePictureURL{
+    NSDictionary *info = [self.class getOwnerInfo];
+    return [NSURL URLWithString:info[PROFILE_PICTURE_URL]];
+}
+
++ (NSString *)userDisplayName{
+    NSDictionary *info = [self.class getOwnerInfo];
+    return info[USER_DISPLAY_NAME];
+}
 
 @end
