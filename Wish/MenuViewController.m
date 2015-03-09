@@ -49,6 +49,8 @@ typedef enum {
         return heightRef * 278 / 1136;
     }else if (indexPath.section == 1){
         return heightRef * 178 / 1136;
+    }else if (indexPath.section == 2){
+        return heightRef * 146/ 1136;
     }else{
         return 0;
     }
@@ -66,6 +68,14 @@ typedef enum {
             [cell.menuImageView setImageWithURL:[SystemUtil userProfilePictureURL]
                     usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
             cell.menuTitle.text = [SystemUtil userDisplayName];
+        }
+    }
+    if (indexPath.section == 2) {
+        if (![SystemUtil isUserLogin]) {
+            //only setting
+            [cell hideMessageButton];
+        }else{
+            [cell showMessageButton];
         }
     }
     return cell;
