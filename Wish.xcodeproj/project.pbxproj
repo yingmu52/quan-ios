@@ -1087,12 +1087,11 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Wish/Third",
-					Party,
+					"$(PROJECT_DIR)/Wish/Third\\ Party/**",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/Wish/Third\\ Party/**",
+					"$(PROJECT_DIR)/Wish/Third\\ Party/**",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = Wish/Info.plist;
@@ -1114,12 +1113,11 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Wish/Third",
-					Party,
+					"$(PROJECT_DIR)/Wish/Third\\ Party/**",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/Wish/Third\\ Party/**",
+					"$(PROJECT_DIR)/Wish/Third\\ Party/**",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = Wish/Info.plist;

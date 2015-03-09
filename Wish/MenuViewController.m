@@ -64,49 +64,18 @@ typedef enum {
             cell.menuTitle.text = @"登录";
         }else{
             [cell.menuImageView setImageWithURL:[SystemUtil userProfilePictureURL]
-                               placeholderImage:[Theme menuLoginDefault] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+                    usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
             cell.menuTitle.text = [SystemUtil userDisplayName];
         }
     }
     return cell;
-//    MenuCell *cell;
-//    if (indexPath.row != 5){
-//        cell = [tableView dequeueReusableCellWithIdentifier:@"MenuCell"
-//                                               forIndexPath:indexPath];
-//        
-//        // Configure the cell...
-//        if (indexPath.row == MenuTableLogin) {
-//
-//        }else if (indexPath.row == MenuTableWishList){
-//            cell.menuImageView.image = [Theme menuWishListDefault];
-//            cell.menuImageView.highlightedImage = [Theme menuWishListSelected];
-//            cell.menuTitle.text = @"愿望列表";
-//        }else if (indexPath.row == MenuTableJourney){
-//            cell.menuImageView.image = [Theme menuJourneyDefault];
-//            cell.menuImageView.highlightedImage = [Theme menuJourneySelected];
-//            cell.menuTitle.text = @"我的历程";
-//        }else if (indexPath.row == MenuTableDiscover){
-//            cell.menuImageView.image = [Theme menuDiscoverDefault];
-//            cell.menuImageView.highlightedImage = [Theme menuDiscoverSelected];
-//            cell.menuTitle.text = @"发现愿望";
-//        }else if (indexPath.row == MenuTableFollow){
-//            cell.menuTitle.text = @"关注动态";
-//            cell.menuImageView.image = [Theme menuFollowDefault];
-//            cell.menuImageView.highlightedImage = [Theme menuFollowSelected];
-//        }
-//
-//    }else if (indexPath.row == 5){
-//        cell = [tableView dequeueReusableCellWithIdentifier:@"BottomCellLogout"
-//                                               forIndexPath:indexPath];
-//    }else return nil;
-//
-//    return cell;
+
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0){
+    if (indexPath.section == 0 && ![SystemUtil isUserLogin]){
         [self login];
     }
     if (indexPath.section == 1) {
