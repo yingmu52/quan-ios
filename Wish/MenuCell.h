@@ -7,13 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @interface MenuCell : UITableViewCell
 
 
 @property (weak, nonatomic) IBOutlet UIImageView *menuImageView;
 @property (weak, nonatomic) IBOutlet UILabel *menuTitle;
-
+@property (weak, nonatomic) IBOutlet UIView *menuBackground;
 
 
 @end

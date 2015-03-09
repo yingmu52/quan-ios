@@ -109,7 +109,8 @@
 
 + (NSString *)getOwnerId{
     NSDictionary *info = [self.class getOwnerInfo];
-    return info[OPENID];
+//    return info[OPENID];
+    return @"100006";
 }
 
 + (BOOL)isUserLogin{

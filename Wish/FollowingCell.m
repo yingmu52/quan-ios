@@ -79,13 +79,6 @@ static NSUInteger numberOfPreloadedFeeds = 3;
     self.backgroundColor = [UIColor clearColor];
 }
 
-- (void)setHeadProfilePic:(UIImageView *)headProfilePic{
-    _headProfilePic = headProfilePic;
-#warning size not right
-    _headProfilePic.layer.cornerRadius = 20.0f;
-    _headProfilePic.clipsToBounds = YES;
-    _headProfilePic.layer.doubleSided = YES;
-}
 
 
 - (void)setFeedBackground:(UIView *)feedBackground{

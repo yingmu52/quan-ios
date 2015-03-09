@@ -10,14 +10,13 @@
 #import "MenuCell.h"
 #import "Theme.h"
 #import "SystemUtil.h"
-#import "UIImageView+WebCache.h"
 
+#import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 #import "UIViewController+ECSlidingViewController.h"
 #import "Third Party/TencentOpenAPI.framework/Headers/TencentOAuth.h"
 #import "Third Party/TencentOpenAPI.framework/Headers/TencentApiInterface.h"
 typedef enum {
-    MenuTableLogin = 0,
-    MenuTableWishList,
+    MenuTableWishList = 0,
     MenuTableJourney,
     MenuTableDiscover,
     MenuTableFollow
@@ -38,106 +37,103 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     //set menu background image
     self.tableView.backgroundColor = [Theme menuBackground];
-    
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return section == 0 ? 6 : 0;
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat heightRef = tableView.frame.size.height;
-    CGFloat heightLogin = heightRef * 220 / 1136;
-    CGFloat heightOther = (heightRef - heightLogin)/5;
-    if (indexPath.row == MenuTableLogin){
-        return heightLogin;
-    }else if (indexPath.row <= MenuTableFollow + 1){
-        return heightOther;
-    }else return 0;
-
+    if (indexPath.section == 0) {
+        return heightRef * 278 / 1136;
+    }else if (indexPath.section == 1){
+        return heightRef * 178 / 1136;
+    }else{
+        return 0;
+    }
 }
 
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    cell.backgroundColor = [UIColor clearColor];
-    cell.layer.backgroundColor = cell.backgroundColor.CGColor;
-}
 - (MenuCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MenuCell *cell;
-    if (indexPath.row != 5){
-        cell = [tableView dequeueReusableCellWithIdentifier:@"MenuCell"
-                                               forIndexPath:indexPath];
-        
-        // Configure the cell...
-        if (indexPath.row == MenuTableLogin) {
-            if (![SystemUtil isUserLogin]) {
-                cell.menuImageView.image = [Theme menuLoginDefault];
-                cell.menuTitle.text = @"登录";
-            }else{
-                [cell.menuImageView sd_setImageWithURL:[SystemUtil userProfilePictureURL]
-                                      placeholderImage:[Theme menuLoginDefault]];
-                cell.menuTitle.text = [SystemUtil userDisplayName];
-            }
+    MenuCell *cell = (MenuCell *)[super tableView:tableView cellForRowAtIndexPath:indexPath];
+    if (indexPath.section == 0) {
 
-        }else if (indexPath.row == MenuTableWishList){
-            cell.menuImageView.image = [Theme menuWishListDefault];
-            cell.menuImageView.highlightedImage = [Theme menuWishListSelected];
-            cell.menuTitle.text = @"愿望列表";
-        }else if (indexPath.row == MenuTableJourney){
-            cell.menuImageView.image = [Theme menuJourneyDefault];
-            cell.menuImageView.highlightedImage = [Theme menuJourneySelected];
-            cell.menuTitle.text = @"我的历程";
-        }else if (indexPath.row == MenuTableDiscover){
-            cell.menuImageView.image = [Theme menuDiscoverDefault];
-            cell.menuImageView.highlightedImage = [Theme menuDiscoverSelected];
-            cell.menuTitle.text = @"发现愿望";
-        }else if (indexPath.row == MenuTableFollow){
-            cell.menuTitle.text = @"关注动态";
-            cell.menuImageView.image = [Theme menuFollowDefault];
-            cell.menuImageView.highlightedImage = [Theme menuFollowSelected];
+        if (![SystemUtil isUserLogin]) {
+            cell.menuImageView.image = [Theme menuLoginDefault];
+            cell.menuTitle.text = @"登录";
+        }else{
+            [cell.menuImageView setImageWithURL:[SystemUtil userProfilePictureURL]
+                               placeholderImage:[Theme menuLoginDefault] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+            cell.menuTitle.text = [SystemUtil userDisplayName];
         }
-
-    }else if (indexPath.row == 5){
-        cell = [tableView dequeueReusableCellWithIdentifier:@"BottomCellLogout"
-                                               forIndexPath:indexPath];
-    }else return nil;
-
+    }
     return cell;
+//    MenuCell *cell;
+//    if (indexPath.row != 5){
+//        cell = [tableView dequeueReusableCellWithIdentifier:@"MenuCell"
+//                                               forIndexPath:indexPath];
+//        
+//        // Configure the cell...
+//        if (indexPath.row == MenuTableLogin) {
+//
+//        }else if (indexPath.row == MenuTableWishList){
+//            cell.menuImageView.image = [Theme menuWishListDefault];
+//            cell.menuImageView.highlightedImage = [Theme menuWishListSelected];
+//            cell.menuTitle.text = @"愿望列表";
+//        }else if (indexPath.row == MenuTableJourney){
+//            cell.menuImageView.image = [Theme menuJourneyDefault];
+//            cell.menuImageView.highlightedImage = [Theme menuJourneySelected];
+//            cell.menuTitle.text = @"我的历程";
+//        }else if (indexPath.row == MenuTableDiscover){
+//            cell.menuImageView.image = [Theme menuDiscoverDefault];
+//            cell.menuImageView.highlightedImage = [Theme menuDiscoverSelected];
+//            cell.menuTitle.text = @"发现愿望";
+//        }else if (indexPath.row == MenuTableFollow){
+//            cell.menuTitle.text = @"关注动态";
+//            cell.menuImageView.image = [Theme menuFollowDefault];
+//            cell.menuImageView.highlightedImage = [Theme menuFollowSelected];
+//        }
+//
+//    }else if (indexPath.row == 5){
+//        cell = [tableView dequeueReusableCellWithIdentifier:@"BottomCellLogout"
+//                                               forIndexPath:indexPath];
+//    }else return nil;
+//
+//    return cell;
 }
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *identifier;
-    switch (indexPath.row) {
-        case MenuTableLogin:
-            [self login];
-            return;
-            break;
-        case MenuTableWishList:
-            identifier = @"showWishList";
-            break;
-        case MenuTableJourney:
-            identifier = @"ShowAcheivementList";
-            break;
-        case MenuTableFollow:
-            identifier = @"ShowFollowingFeed";
-            break;
-        case MenuTableDiscover:
-            identifier = @"ShowDiscoveryList";
-            break;
-        default:
-            break;
+    if (indexPath.section == 0){
+        [self login];
     }
-    [self performSegueWithIdentifier:identifier sender:nil];
+    if (indexPath.section == 1) {
+        NSString *identifier;
+        switch (indexPath.row) {
+            case MenuTableWishList:
+                identifier = @"showWishList";
+                break;
+            case MenuTableJourney:
+                identifier = @"ShowAcheivementList";
+                break;
+            case MenuTableFollow:
+                identifier = @"ShowFollowingFeed";
+                break;
+            case MenuTableDiscover:
+                identifier = @"ShowDiscoveryList";
+                break;
+            default:
+                break;
+        }
+        [self performSegueWithIdentifier:identifier sender:nil];
+
+    }
 }
 
 
+#pragma mark - cell highlight behavior
 - (void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self toggleCell:tableView at:indexPath];

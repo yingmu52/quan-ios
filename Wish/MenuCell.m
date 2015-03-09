@@ -11,4 +11,12 @@
 
 @implementation MenuCell
 
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    self.menuBackground.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor clearColor];
+}
+
 @end
