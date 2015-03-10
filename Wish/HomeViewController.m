@@ -21,11 +21,12 @@
 
 const NSUInteger maxCardNum = 10;
 
-@interface HomeViewController () <NSFetchedResultsControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HomeCardViewDelegate,UICollectionViewDelegateFlowLayout>
+@interface HomeViewController () <NSFetchedResultsControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HomeCardViewDelegate,UICollectionViewDelegateFlowLayout,UIGestureRecognizerDelegate>
 
 @property (nonatomic,weak) IBOutlet UICollectionView *cardCollectionView;
 @property (nonatomic,weak) Plan *currentPlan;
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
+@property (nonatomic,strong) UIView *EditingView;
 
 @end
 
@@ -120,28 +121,45 @@ const NSUInteger maxCardNum = 10;
 
 #pragma mark - Home Card View Delegate
 
-- (void)homeCardView:(HomeCardView *)cardView didPressedButton:(UIButton *)button
-{
-    Plan *plan = [self.fetchedRC objectAtIndexPath:[self.cardCollectionView indexPathForCell:cardView]];
+//- (void)homeCardView:(HomeCardView *)cardView didPressedButton:(UIButton *)button
+//{
+//    Plan *plan = [self.fetchedRC objectAtIndexPath:[self.cardCollectionView indexPathForCell:cardView]];
+//
+//    if ([button.titleLabel.text isEqualToString:@"放弃"]) {
+////        [plan deleteSelf];
+//        [plan updatePlanStatus:PlanStatusGiveTheFuckingUp];
+//    }
+//    if ([button.titleLabel.text isEqualToString:@"完成"]) {
+//        [plan updatePlanStatus:PlanStatusFinished];
+//    }
+//    
+//}
 
-    if ([button.titleLabel.text isEqualToString:@"放弃"]) {
-//        [plan deleteSelf];
-        [plan updatePlanStatus:PlanStatusGiveTheFuckingUp];
-    }
-    if ([button.titleLabel.text isEqualToString:@"完成"]) {
-        [plan updatePlanStatus:PlanStatusFinished];
+
+- (void)didTapOnHomeCardView:(HomeCardView *)cardView
+{
+    [self performSegueWithIdentifier:@"showPlanDetailFromHome" sender:cardView.plan];
+}
+
+
+- (void)didLongPressedOn:(HomeCardView *)cardView gesture:(UILongPressGestureRecognizer *)longPress{
+//    ProgressViewController *pvc = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgressViewController"];
+    if (longPress.state == UIGestureRecognizerStateBegan) {
+
+        UIView *view = [[UIView alloc] initWithFrame:self.view.frame];
+        view.backgroundColor = [UIColor blackColor];
+        view.alpha = 0.35;
+        NSLog(@"begin");
+        [self.navigationController.view addSubview:view];
+
+    }else if (longPress.state == UIGestureRecognizerStateEnded ||
+              longPress.state == UIGestureRecognizerStateFailed ||
+              longPress.state == UIGestureRecognizerStateCancelled) {
+        NSLog(@"done %@",self.presentingViewController);
+        [self.navigationController.view.subviews.lastObject removeFromSuperview];
+
     }
     
-}
-
-- (void)didShowMoreView:(UIView *)moreView
-{
-    self.cardCollectionView.scrollEnabled = NO;
-}
-
-- (void)didDismissMoreView:(UIView *)moreView
-{
-    self.cardCollectionView.scrollEnabled = YES;
 }
 
 #pragma mark - Camera Util
@@ -170,22 +188,21 @@ const NSUInteger maxCardNum = 10;
 
 #pragma mark -
 
-- (void)didTapOnHomeCardView:(HomeCardView *)cardView
-{
-    [self performSegueWithIdentifier:@"showPlanDetailFromHome" sender:cardView];
-}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"showPlanDetailFromHome"]) {
-        WishDetailViewController *controller = segue.destinationViewController;
-        controller.plan = [self.fetchedRC objectAtIndexPath:[self.cardCollectionView indexPathForCell:sender]];
+        [segue.destinationViewController setPlan:sender];
+//        WishDetailViewController *controller = segue.destinationViewController;
+//        controller.plan = [self.fetchedRC objectAtIndexPath:[self.cardCollectionView indexPathForCell:sender]];
     }
     if ([segue.identifier isEqualToString:@"ShowPostFeedFromHome"]) {
         [segue.destinationViewController setPlan:self.currentPlan];
         [segue.destinationViewController setImageForFeed:sender];
         
     }
+    
+    
 }
 
 #pragma mark -

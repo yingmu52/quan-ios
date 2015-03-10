@@ -11,19 +11,12 @@
 @class HomeCardView;
 @protocol HomeCardViewDelegate <NSObject>
 
-- (void)homeCardView:(HomeCardView *)cardView didPressedButton:(UIButton *)button;
 - (void)didTapOnHomeCardView:(HomeCardView *)cardView;
-- (void)didShowMoreView:(UIView *)moreView;
-- (void)didDismissMoreView:(UIView *)moreView;
+- (void)didLongPressedOn:(HomeCardView *)cardView gesture:(UILongPressGestureRecognizer *)longPress;
 @end
 
 @interface HomeCardView : UICollectionViewCell
 @property (nonatomic,strong) Plan *plan;
 @property (nonatomic,weak) id <HomeCardViewDelegate> delegate;
-
-
-- (IBAction)dismissMoreView:(id)sender;
-
-- (IBAction)showMoreView:(id)sender;
 
 @end

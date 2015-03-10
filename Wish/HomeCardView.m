@@ -11,7 +11,7 @@
 #import "SystemUtil.h"
 #import "Feed.h"
 @interface HomeCardView ()
-@property (nonatomic,weak) IBOutlet UIView *moreView;
+
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak,nonatomic) IBOutlet UILabel *subtitleLabel;
@@ -79,35 +79,19 @@
     // Corner Radius
     //    self.layer.cornerRadius = 10.0;
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTaped)];
-    [self addGestureRecognizer:tap];
-
+    [self addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundLongPressed:)]];
+    [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTaped)]];
+    
 }
 
-- (IBAction)dismissMoreView:(id)sender
-{
-    self.moreView.hidden = YES;
-    [self.delegate didDismissMoreView:self.moreView];
-}
 
-- (IBAction)showMoreView:(id)sender
-{
-    self.moreView.hidden = NO;
-    [self.delegate didShowMoreView:self.moreView];
-}
-
-- (IBAction)deletePressed:(UIButton *)sender{
-    [self.delegate homeCardView:self didPressedButton:sender];
-    [self dismissMoreView:sender];
-}
-
-- (IBAction)finishPressed:(UIButton *)sender{
-    [self.delegate homeCardView:self didPressedButton:sender];
-}
 - (void)backgroundTaped{
-    if (self.moreView.isHidden) {
-        [self.delegate didTapOnHomeCardView:self];
-    }
+    [self.delegate didTapOnHomeCardView:self];
 }
+
+- (void)backgroundLongPressed:(UILongPressGestureRecognizer *)longPress{
+    [self.delegate didLongPressedOn:self gesture:longPress];
+}
+
 
 @end
