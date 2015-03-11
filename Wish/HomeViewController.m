@@ -18,7 +18,7 @@
 #import "FetchCenter.h"
 #import "WishDetailViewController.h"
 #import "HomeCardFlowLayout.h"
-
+#import "StationView.h"
 const NSUInteger maxCardNum = 10;
 
 @interface HomeViewController () <NSFetchedResultsControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HomeCardViewDelegate,UICollectionViewDelegateFlowLayout,UIGestureRecognizerDelegate>
@@ -26,7 +26,7 @@ const NSUInteger maxCardNum = 10;
 @property (nonatomic,weak) IBOutlet UICollectionView *cardCollectionView;
 @property (nonatomic,weak) Plan *currentPlan;
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
-@property (nonatomic,strong) UIView *EditingView;
+@property (nonatomic,strong) StationView *stationView;
 
 @end
 
@@ -142,22 +142,22 @@ const NSUInteger maxCardNum = 10;
 }
 
 
+- (StationView *)stationView
+{
+    if (!_stationView){
+        _stationView = [StationView instantiateFromNib:self.view.frame];
+    }
+    return _stationView;
+}
 - (void)didLongPressedOn:(HomeCardView *)cardView gesture:(UILongPressGestureRecognizer *)longPress{
 //    ProgressViewController *pvc = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgressViewController"];
     if (longPress.state == UIGestureRecognizerStateBegan) {
-
-        UIView *view = [[UIView alloc] initWithFrame:self.view.frame];
-        view.backgroundColor = [UIColor blackColor];
-        view.alpha = 0.35;
-        NSLog(@"begin");
-        [self.navigationController.view addSubview:view];
-
+        [self.navigationController.view addSubview:self.stationView];
     }else if (longPress.state == UIGestureRecognizerStateEnded ||
               longPress.state == UIGestureRecognizerStateFailed ||
               longPress.state == UIGestureRecognizerStateCancelled) {
         NSLog(@"done %@",self.presentingViewController);
-        [self.navigationController.view.subviews.lastObject removeFromSuperview];
-
+        [self.stationView removeFromSuperview];
     }
     
 }

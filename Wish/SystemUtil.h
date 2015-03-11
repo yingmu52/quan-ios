@@ -29,7 +29,7 @@
 + (UIImage *)darkLayeredImage:(UIImage *)image inRect:(CGRect)bounds;
 
 + (void)setupShawdowForView:(UIView *)view;
-
++ (UIImage *)imageFromColor:(UIColor *)color;
 
 + (NSString *)getOwnerId;
 + (void)updateOwnerInfo:(NSDictionary *)info;
