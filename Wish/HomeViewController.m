@@ -19,6 +19,8 @@
 #import "WishDetailViewController.h"
 #import "HomeCardFlowLayout.h"
 #import "StationView.h"
+
+#import "PopupView.h"
 const NSUInteger maxCardNum = 10;
 
 @interface HomeViewController () <NSFetchedResultsControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HomeCardViewDelegate,UICollectionViewDelegateFlowLayout,UIGestureRecognizerDelegate>
@@ -150,9 +152,16 @@ const NSUInteger maxCardNum = 10;
     return _stationView;
 }
 - (void)didLongPressedOn:(HomeCardView *)cardView gesture:(UILongPressGestureRecognizer *)longPress{
-//    ProgressViewController *pvc = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgressViewController"];
     if (longPress.state == UIGestureRecognizerStateBegan) {
+        self.stationView.cardImageView.image = cardView.plan.image;
         [self.navigationController.view addSubview:self.stationView];
+        [self.stationView layoutIfNeeded];
+        self.stationView.currentCardLocation = [longPress locationInView:self.stationView];
+
+    }else if (longPress.state == UIGestureRecognizerStateChanged){
+        //update card and detect selection
+        self.stationView.currentCardLocation = [longPress locationInView:self.stationView];
+        
     }else if (longPress.state == UIGestureRecognizerStateEnded ||
               longPress.state == UIGestureRecognizerStateFailed ||
               longPress.state == UIGestureRecognizerStateCancelled) {

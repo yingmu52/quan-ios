@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @interface StationView : UIView
-+ (instancetype)instantiateFromNib:(CGRect)frame;
 
+@property (nonatomic,weak) IBOutlet UIView *cardView;
+@property (nonatomic,weak) IBOutlet UIImageView *cardImageView;
+@property (nonatomic) CGPoint currentCardLocation;
++ (instancetype)instantiateFromNib:(CGRect)frame;
 @end

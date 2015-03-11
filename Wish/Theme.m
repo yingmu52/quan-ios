@@ -157,5 +157,17 @@
     return [UIColor colorWithPatternImage:[UIImage imageNamed:@"tab_bg"]];
 }
 
+
++ (UIImage *)popupFail{
+    return [UIImage imageNamed:@"popup_img_fail"];
+}
+
++ (UIImage *)popupFinish{
+    return [UIImage imageNamed:@"popup_img_finish"];
+}
+
++ (UIColor *)popupBackground{
+    return [UIColor colorWithPatternImage:[UIImage imageNamed:@"popup_bg"]];
+}
 @end
 

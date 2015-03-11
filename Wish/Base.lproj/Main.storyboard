@@ -685,8 +685,7 @@
                                                                     <exclude reference="b9C-Mk-9ux"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="129" y="61" width="61" height="62"/>
+                                                            <variation key="heightClass=regular-widthClass=compact">
                                                                 <mask key="constraints">
                                                                     <include reference="b9C-Mk-9ux"/>
                                                                 </mask>
@@ -705,8 +704,7 @@
                                                                     <exclude reference="HKh-6w-srz"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="210" y="61" width="61" height="62"/>
+                                                            <variation key="heightClass=regular-widthClass=compact">
                                                                 <mask key="constraints">
                                                                     <include reference="HKh-6w-srz"/>
                                                                 </mask>
@@ -725,8 +723,7 @@
                                                                     <exclude reference="euC-Hf-2QJ"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="169" y="61" width="62" height="62"/>
+                                                            <variation key="heightClass=regular-widthClass=compact">
                                                                 <mask key="constraints">
                                                                     <exclude reference="euC-Hf-2QJ"/>
                                                                 </mask>
@@ -1375,7 +1372,7 @@
             </objects>
             <point key="canvasLocation" x="2695" y="55"/>
         </scene>
-        <!--Home View Controller-->
+        <!--Version 2.4.1-->
         <scene sceneID="fpo-Ov-0kY">
             <objects>
                 <viewController id="wW8-3k-YAd" customClass="HomeViewController" sceneMemberID="viewController">
@@ -1725,9 +1722,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="Ayl-oc-p2J">
-                        <nil key="title"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Version 2.4.1" id="Ayl-oc-p2J"/>
                     <connections>
                         <outlet property="cardCollectionView" destination="uow-gD-atl" id="Iev-8V-hDW"/>
                         <segue destination="1Y1-uW-81U" kind="show" identifier="showPostFromHome" id="CTd-gb-xTE"/>
@@ -3185,7 +3180,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pt8-1V-Z4d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="862.5" y="2253.75"/>
+            <point key="canvasLocation" x="641" y="2548"/>
         </scene>
         <!--Discovery View Controller-->
         <scene sceneID="LW9-Wg-cfa">
@@ -3867,8 +3862,8 @@
         <image name="tab_ic_setting_default" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OUP-Xo-i2p"/>
         <segue reference="cel-0L-eNY"/>
         <segue reference="4ZT-53-1QA"/>
+        <segue reference="FWk-7z-Cc0"/>
     </inferredMetricsTieBreakers>
 </document>

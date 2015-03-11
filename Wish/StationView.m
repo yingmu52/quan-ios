@@ -7,7 +7,8 @@
 //
 
 #import "StationView.h"
-#import "UIImage+ImageEffects.h"
+#import "PopupView.h"
+
 
 @implementation StationView
 
@@ -18,12 +19,24 @@
     StationView *view = [views firstObject];
     view.frame = frame;
     [view layoutIfNeeded];
-    view.backgroundColor = [UIColor blackColor];
+//    view.backgroundColor = [UIColor orangeColor];
 
-
+//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
+//    imageView.image = [SystemUtil imageFromColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.65]];
+//    
+//    [view insertSubview:imageView atIndex:0];
     return view;
 }
 
+- (void)updateCardViewToLocation:(CGPoint)location
+{
+    self.cardView.center = location;
+}
 
 
+- (void)setCurrentCardLocation:(CGPoint)currentCardLocation
+{
+    _currentCardLocation = currentCardLocation;
+    [self updateCardViewToLocation:_currentCardLocation];
+}
 @end

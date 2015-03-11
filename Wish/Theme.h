@@ -50,4 +50,9 @@
 
 + (UIImage *)achievementFail;
 + (UIImage *)achievementFinish;
+
+
++ (UIImage *)popupFail;
++ (UIImage *)popupFinish;
++ (UIColor *)popupBackground;
 @end
