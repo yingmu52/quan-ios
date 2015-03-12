@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -374,6 +374,9 @@
             <connections>
                 <outlet property="cardImageView" destination="rhp-Iy-1SU" id="sNp-W0-MlT"/>
                 <outlet property="cardView" destination="jbv-Jr-n62" id="HEz-gU-79a"/>
+                <outlet property="deleteButton" destination="gom-Tr-LUq" id="Upn-uN-cLe"/>
+                <outlet property="finishButton" destination="c5T-zl-Dtl" id="W0S-PZ-LNe"/>
+                <outlet property="giveupButton" destination="zN4-Ba-8Xs" id="2LN-Hr-2ap"/>
             </connections>
             <point key="canvasLocation" x="247" y="581"/>
         </view>

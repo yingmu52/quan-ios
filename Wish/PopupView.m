@@ -46,10 +46,10 @@
 }
 
 - (IBAction)cancelPressed:(UIButton *)sender {
-    [self.delegate popupViewDidPressCancel];
+    [self.delegate popupViewDidPressCancel:self];
 }
 - (IBAction)confirmPressed:(UIButton *)sender {
-    [self.delegate popupViewDidPressConfirm];
+    [self.delegate popupViewDidPressConfirm:self];
 }
 
 @end

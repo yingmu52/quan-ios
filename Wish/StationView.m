@@ -18,6 +18,7 @@
     NSArray *views = [[NSBundle mainBundle] loadNibNamed:[NSString stringWithFormat:@"%@", [self class]] owner:nil options:nil];
     StationView *view = [views firstObject];
     view.frame = frame;
+
     [view layoutIfNeeded];
 //    view.backgroundColor = [UIColor orangeColor];
 
@@ -34,9 +35,36 @@
 }
 
 
+- (StationViewSelection)selection
+{
+    if (CGRectIntersectsRect(self.deleteButton.frame, self.cardView.frame)) {
+        return StationViewSelectionDelete;
+    }else if (CGRectIntersectsRect(self.giveupButton.frame, [self convertRect:self.cardView.frame toView:self.giveupButton.superview])){
+        return StationViewSelectionGiveUp;
+    }else if (CGRectIntersectsRect(self.giveupButton.frame, [self convertRect:self.cardView.frame toView:self.finishButton.superview])){
+        return StationViewSelectionFinish;
+    }else{
+        return -1;
+    }
+}
 - (void)setCurrentCardLocation:(CGPoint)currentCardLocation
 {
     _currentCardLocation = currentCardLocation;
     [self updateCardViewToLocation:_currentCardLocation];
+    
+    if (self.selection == StationViewSelectionDelete) {
+        self.deleteButton.highlighted = YES;
+    }else if (self.selection == StationViewSelectionGiveUp){
+        self.giveupButton.highlighted = YES;
+    }else if (self.selection == StationViewSelectionFinish){
+        self.finishButton.highlighted = YES;
+    }else{
+        self.deleteButton.highlighted = NO;
+        self.giveupButton.highlighted = NO;
+        self.finishButton.highlighted = NO;
+    }
+
 }
+
+
 @end

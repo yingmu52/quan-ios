@@ -168,6 +168,7 @@
 
 + (UIColor *)popupBackground{
     return [UIColor colorWithPatternImage:[UIImage imageNamed:@"popup_bg"]];
+    
 }
 @end
 

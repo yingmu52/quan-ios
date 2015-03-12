@@ -23,7 +23,7 @@
 #import "PopupView.h"
 const NSUInteger maxCardNum = 10;
 
-@interface HomeViewController () <NSFetchedResultsControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HomeCardViewDelegate,UICollectionViewDelegateFlowLayout,UIGestureRecognizerDelegate>
+@interface HomeViewController () <NSFetchedResultsControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HomeCardViewDelegate,UICollectionViewDelegateFlowLayout,UIGestureRecognizerDelegate,PopupViewDelegate>
 
 @property (nonatomic,weak) IBOutlet UICollectionView *cardCollectionView;
 @property (nonatomic,weak) Plan *currentPlan;
@@ -152,23 +152,53 @@ const NSUInteger maxCardNum = 10;
     return _stationView;
 }
 - (void)didLongPressedOn:(HomeCardView *)cardView gesture:(UILongPressGestureRecognizer *)longPress{
+    
+    UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+
     if (longPress.state == UIGestureRecognizerStateBegan) {
+
         self.stationView.cardImageView.image = cardView.plan.image;
-        [self.navigationController.view addSubview:self.stationView];
-        [self.stationView layoutIfNeeded];
+        [keyWindow addSubview:self.stationView];
+        [self.stationView layoutIfNeeded]; //important for next line to work
         self.stationView.currentCardLocation = [longPress locationInView:self.stationView];
 
     }else if (longPress.state == UIGestureRecognizerStateChanged){
-        //update card and detect selection
+        //update card location
         self.stationView.currentCardLocation = [longPress locationInView:self.stationView];
         
     }else if (longPress.state == UIGestureRecognizerStateEnded ||
               longPress.state == UIGestureRecognizerStateFailed ||
               longPress.state == UIGestureRecognizerStateCancelled) {
-        NSLog(@"done %@",self.presentingViewController);
-        [self.stationView removeFromSuperview];
+        
+        //detect selection
+        PopupView *popupView;
+        //        [self.stationView layoutIfNeeded];
+        if (self.stationView.selection == StationViewSelectionFinish){
+            popupView = [PopupView showPopupFinishinFrame:keyWindow.frame];
+        }else if (self.stationView.selection == StationViewSelectionGiveUp){
+            popupView = [PopupView showPopupFailinFrame:keyWindow.frame];
+        }else if (self.stationView.selection == StationViewSelectionDelete){
+            popupView = [PopupView showPopupDeleteinFrame:keyWindow.frame];
+        }
+        if (popupView) {
+            popupView.delegate = self;
+            [keyWindow addSubview:popupView];
+        }else{
+            [self.stationView removeFromSuperview];
+        }
     }
     
+}
+
+- (void)popupViewDidPressConfirm:(PopupView *)popupView
+{
+    
+}
+- (void)popupViewDidPressCancel:(PopupView *)popupView
+{
+    [popupView removeFromSuperview];
+    [self.stationView removeFromSuperview];
+    self.stationView = nil;
 }
 
 #pragma mark - Camera Util

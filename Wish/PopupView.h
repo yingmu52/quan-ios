@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class PopupView;
+
 @protocol PopupViewDelegate <NSObject>
 
-- (void)popupViewDidPressCancel;
-- (void)popupViewDidPressConfirm;
+- (void)popupViewDidPressCancel:(PopupView *)popupView;
+- (void)popupViewDidPressConfirm:(PopupView *)popupView;
 
 @end
 @interface PopupView : UIView
