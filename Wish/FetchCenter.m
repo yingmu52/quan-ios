@@ -81,7 +81,7 @@ typedef enum{
 
 - (void)postToDeletePlan:(Plan *)plan
 {
-    NSString *baseUrl = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PLAN,CREATE_PLAN];
+    NSString *baseUrl = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PLAN,DELETE_PLAN];
     NSDictionary *args = @{@"id":plan.planId,
                            @"ownerId":plan.ownerId};
     [self getRequest:baseUrl parameter:args operation:FetchCenterGetOpDeletePlan entity:plan];
@@ -141,9 +141,11 @@ typedef enum{
             break;
         case FetchCenterGetOpCreatePlan:{
             NSString *fetchedPlanId = [json valueForKeyPath:@"data.id"];
-            if (fetchedPlanId) {
+            NSString *bgString = [json valueForKeyPath:@"data.backGroudPic"];
+            if (fetchedPlanId && bgString) {
                 Plan *plan = (Plan *)obj;
                 plan.planId = fetchedPlanId;
+                plan.backgroundNum = [plan extractNumberFromString:bgString];
                 if ([plan.managedObjectContext save:nil]){
                     [self.delegate didFinishUploadingPlan:plan];
                     NSLog(@"create plan succeed, ID: %@",fetchedPlanId);

@@ -55,6 +55,8 @@
                                          sinceDate:plan.createDate];
     plan.followCount = @([dict[@"followNums"] integerValue]);
     plan.userDeleted = @(NO);
+    plan.planStatus = @([dict[@"state"] integerValue]);
+    plan.backgroundNum = [plan extractNumberFromString:dict[@"backGroudPic"]];
     if ([context save:nil]) {
         NSLog(@"updated plan list form server");
     }
