@@ -152,6 +152,7 @@ const NSUInteger maxCardNum = 10;
     return _stationView;
 }
 - (void)didLongPressedOn:(HomeCardView *)cardView gesture:(UILongPressGestureRecognizer *)longPress{
+
     
     UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
 
@@ -182,6 +183,7 @@ const NSUInteger maxCardNum = 10;
         }
         if (popupView) {
             popupView.delegate = self;
+            popupView.plan = cardView.plan;
             [keyWindow addSubview:popupView];
         }else{
             [self.stationView removeFromSuperview];
@@ -192,13 +194,24 @@ const NSUInteger maxCardNum = 10;
 
 - (void)popupViewDidPressConfirm:(PopupView *)popupView
 {
-    
+    if (self.stationView){
+        if (self.stationView.selection == StationViewSelectionFinish){
+            [popupView.plan updatePlanStatus:PlanStatusFinished];
+        }else if (self.stationView.selection == StationViewSelectionGiveUp){
+            [popupView.plan updatePlanStatus:PlanStatusGiveTheFuckingUp];
+        }else if (self.stationView.selection == StationViewSelectionDelete){
+            [popupView.plan deleteSelf];
+        }
+    }
+    [self popupViewDidPressCancel:popupView];
 }
+
 - (void)popupViewDidPressCancel:(PopupView *)popupView
 {
     [popupView removeFromSuperview];
     [self.stationView removeFromSuperview];
     self.stationView = nil;
+
 }
 
 #pragma mark - Camera Util

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Plan.h"
 @class PopupView;
 
 @protocol PopupViewDelegate <NSObject>
@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *headBannerLabel;
 @property (weak, nonatomic) IBOutlet UILabel *HeadDeleteLabel;
 @property (weak, nonatomic) IBOutlet UIView *mainBackground;
+@property (nonatomic,strong) Plan *plan;
 
 @property (nonatomic,weak) id <PopupViewDelegate> delegate;
 
