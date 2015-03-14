@@ -10,6 +10,8 @@
 #import "Theme.h"
 #import "SystemUtil.h"
 #import "Feed.h"
+#import "UIImageView+WebCache.h"
+#import "FetchCenter.h"
 @interface HomeCardView ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -27,7 +29,23 @@
 //    NSLog(@">>>>>>>>>>>>>>>>>>>>>>>>>%d",data.length);
     _plan = plan;
     if (_plan) {
-        self.imageView.image = _plan.image;
+        if (!_plan.image){
+            
+            [self.imageView sd_setImageWithURL:[[FetchCenter new] urlWithImageID:_plan.backgroundNum]
+                              placeholderImage:nil
+                                     completed:^(UIImage *image,
+                                                 NSError *error,
+                                                 SDImageCacheType cacheType,
+                                                 NSURL *imageURL)
+            {
+                _plan.image = image;
+            }];
+            
+            NSAssert(_plan.backgroundNum != nil, @"nil plan background id");
+        }else{
+            self.imageView.image = _plan.image;
+        }
+        
         self.titleLabel.text = _plan.planTitle;
         
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];

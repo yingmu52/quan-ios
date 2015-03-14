@@ -19,7 +19,6 @@
 #import "WishDetailViewController.h"
 #import "HomeCardFlowLayout.h"
 #import "StationView.h"
-
 #import "PopupView.h"
 const NSUInteger maxCardNum = 10;
 
@@ -260,10 +259,13 @@ const NSUInteger maxCardNum = 10;
 #pragma mark -
 #pragma mark UICollectionView methods
 
+// NOTE: This delegate method requires you to disable UICollectionView's `pagingEnabled` property.
+
 -(void)setupCollectionView {
     self.cardCollectionView.backgroundColor = [UIColor clearColor];
-    self.cardCollectionView.pagingEnabled = NO;
     self.cardCollectionView.collectionViewLayout = [[HomeCardFlowLayout alloc] init];
+    self.cardCollectionView.pagingEnabled = NO;
+
 }
 
 

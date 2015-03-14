@@ -32,8 +32,6 @@ typedef enum {
 - (Feed *)fetchLastUpdatedFeed;
 
 
-- (NSNumber *)extractNumberFromString:(NSString *)string;
-
 
 + (NSArray *)fetchWith:(NSString *)entityName
              predicate:(NSPredicate *)predicate

@@ -23,8 +23,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *isPrivateLabel;
 @property (nonatomic) BOOL isPrivate;
 @property (nonatomic,strong) UIButton *nextButton;
+@property (nonatomic,strong) UIButton *backButton;
+@property (nonatomic,strong) Plan *plan;
 @end
 @implementation PostDetailViewController
+
+
 @synthesize selectedDate = _selectedDate;
 
 
@@ -111,7 +115,7 @@
 - (void)setUpNavigationItem
 {
     CGRect frame = CGRectMake(0,0, 25,25);
-    UIButton *backBtn = [Theme buttonWithImage:[Theme navBackButtonDefault]
+    self.backButton = [Theme buttonWithImage:[Theme navBackButtonDefault]
                                         target:self.navigationController
                                       selector:@selector(popViewControllerAnimated:)
                                          frame:frame];
@@ -121,7 +125,7 @@
                                          selector:@selector(createPlan)
                                             frame:frame];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backButton];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
     
     //set navigation bar title and color
@@ -155,19 +159,21 @@
     [spinner startAnimating];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
 
-    Plan *plan = [Plan createPlan:self.titleFromPostView
+    self.plan = [Plan createPlan:self.titleFromPostView
                              date:self.selectedDate
                           privacy:self.isPrivate
                             image:nil];
     FetchCenter *fc = [[FetchCenter alloc] init];
     fc.delegate = self;
-    [fc uploadToCreatePlan:plan];
+    [fc uploadToCreatePlan:self.plan];
+    self.backButton.enabled = NO;
    
 }
 
 - (void)didFinishUploadingPlan:(Plan *)plan{
     dispatch_async(dispatch_get_main_queue(), ^{
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
+        self.backButton.enabled = YES;
         [self performSegueWithIdentifier:@"doneWirtingAPost" sender:plan];
     });
 }

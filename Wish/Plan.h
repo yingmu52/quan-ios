@@ -2,7 +2,7 @@
 //  Plan.h
 //  Wish
 //
-//  Created by Xinyi Zhuang on 2015-02-27.
+//  Created by Xinyi Zhuang on 2015-03-12.
 //  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
 //
 
@@ -13,7 +13,7 @@
 
 @interface Plan : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * backgroundNum;
+@property (nonatomic, retain) NSString * backgroundNum;
 @property (nonatomic, retain) NSDate * createDate;
 @property (nonatomic, retain) NSDate * finishDate;
 @property (nonatomic, retain) NSNumber * followCount;

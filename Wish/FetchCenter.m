@@ -145,7 +145,7 @@ typedef enum{
             if (fetchedPlanId && bgString) {
                 Plan *plan = (Plan *)obj;
                 plan.planId = fetchedPlanId;
-                plan.backgroundNum = [plan extractNumberFromString:bgString];
+                plan.backgroundNum = bgString;
                 if ([plan.managedObjectContext save:nil]){
                     [self.delegate didFinishUploadingPlan:plan];
                     NSLog(@"create plan succeed, ID: %@",fetchedPlanId);
