@@ -13,9 +13,7 @@
 
 
 + (Owner *)updateOwnerFromServer:(NSDictionary *)dict{
-    
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = delegate.managedObjectContext;
+    NSManagedObjectContext *context = [AppDelegate getContext];
     Owner *owner;
     //check existance
     NSArray *checks = [Plan fetchWith:@"Owner"

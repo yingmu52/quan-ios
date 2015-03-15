@@ -13,8 +13,7 @@
 
 + (Feed *)createFeedWithImage:(UIImage *)image inPlan:(Plan *)plan{
     
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = delegate.managedObjectContext;
+    NSManagedObjectContext *context = [AppDelegate getContext];
     
     Feed *feed = [NSEntityDescription insertNewObjectForEntityForName:@"Feed"
                                                inManagedObjectContext:context];
@@ -39,8 +38,7 @@
     NSArray *checks = [Plan fetchWith:@"Feed"
                             predicate:[NSPredicate predicateWithFormat:@"feedId == %@",feedItem[@"id"]]
                      keyForDescriptor:@"createDate"];
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = delegate.managedObjectContext;
+    NSManagedObjectContext *context = [AppDelegate getContext];
     Feed *feed;
     NSAssert(checks.count <= 1, @"non unique feed found");
     if (!checks.count) {

@@ -7,6 +7,7 @@
 //
 
 #import "FetchCenter.h"
+#import "AppDelegate.h"
 #define BASE_URL @"http://182.254.167.228/superplan/"
 #define PLAN @"plan/"
 #define GET_LIST @"splan_plan_getlist.php"
@@ -121,10 +122,11 @@ typedef enum{
         case FetchCenterGetOpGetPlanList:
             //get plan list
             break;
-        case FetchCenterGetOpDeletePlan:
-            if ([obj.managedObjectContext save:nil]) {  //commited delete
-                NSLog(@"deleted successed");
-            }
+        case FetchCenterGetOpDeletePlan:{
+            AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+            [delegate saveContext];
+            NSLog(@"deleted successed %@",json);
+        }
             break;
         case FetchCenterGetOpCreateFeed:{
             NSString *fetchedFeedID = [json valueForKeyPath:@"data.id"];
@@ -133,9 +135,6 @@ typedef enum{
                 feed.feedId = fetchedFeedID;
                 [self.delegate didFinishUploadingFeed:feed];
                 NSLog(@"upload feed successed, ID: %@",fetchedFeedID);
-
-//                if ([feed.managedObjectContext save:nil]) {
-//                }
             }
         }
             break;
@@ -146,10 +145,8 @@ typedef enum{
                 Plan *plan = (Plan *)obj;
                 plan.planId = fetchedPlanId;
                 plan.backgroundNum = bgString;
-                if ([plan.managedObjectContext save:nil]){
-                    [self.delegate didFinishUploadingPlan:plan];
-                    NSLog(@"create plan succeed, ID: %@",fetchedPlanId);
-                }
+                [self.delegate didFinishUploadingPlan:plan];
+                NSLog(@"create plan succeed, ID: %@",fetchedPlanId);
             }
         }
             break;

@@ -29,8 +29,7 @@
 
 + (Plan *)updatePlanFromServer:(NSDictionary *)dict{
     
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = delegate.managedObjectContext;
+    NSManagedObjectContext *context = [AppDelegate getContext];
     Plan *plan;
     //check existance
     NSArray *checks = [Plan fetchWith:@"Plan"
@@ -70,9 +69,7 @@
              privacy:(BOOL)isPrivate
                image:(UIImage *)image{
 
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = delegate.managedObjectContext;
-
+    NSManagedObjectContext *context = [AppDelegate getContext];
     
     Plan *plan;
     //check existance
@@ -97,8 +94,7 @@
 
 - (void)deleteSelf
 {
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = delegate.managedObjectContext;
+    NSManagedObjectContext *context = [AppDelegate getContext];
     self.userDeleted = @(YES);
     if (self.planId && [self.ownerId isEqualToString:[SystemUtil getOwnerId]]){
         //            [FetchCenter postToDeletePlan:self];
@@ -123,8 +119,7 @@
         predicate:(NSPredicate *)predicate
  keyForDescriptor:(NSString *)key{
     
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = delegate.managedObjectContext;
+    NSManagedObjectContext *context = [AppDelegate getContext];
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName
                                               inManagedObjectContext:context];

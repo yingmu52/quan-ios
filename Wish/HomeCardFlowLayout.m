@@ -18,7 +18,6 @@
     CGFloat itemWidth = 548.0/640*deviceSize.width;
     CGFloat itemHeight = 850.0/1136*deviceSize.height;
     CGFloat edgeMargin = deviceSize.width - itemWidth - 2*interMargin;
-    
     self.minimumInteritemSpacing = interMargin;
     self.minimumLineSpacing = 0.0f;
     self.itemSize = CGSizeMake(itemWidth,itemHeight);
@@ -27,7 +26,7 @@
 }
 
 - (CGFloat)pageWidth {
-    return self.itemSize.width + self.minimumLineSpacing;
+    return self.itemSize.width;
 }
 
 - (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset withScrollingVelocity:(CGPoint)velocity
@@ -35,7 +34,6 @@
     CGFloat rawPageValue = self.collectionView.contentOffset.x / self.pageWidth;
     CGFloat currentPage = (velocity.x > 0.0) ? floor(rawPageValue) : ceil(rawPageValue);
     CGFloat nextPage = (velocity.x > 0.0) ? ceil(rawPageValue) : floor(rawPageValue);
-    
     BOOL pannedLessThanAPage = fabs(1 + currentPage - rawPageValue) > 0.5;
     BOOL flicked = fabs(velocity.x) > [self flickVelocity];
     if (pannedLessThanAPage && flicked) {
@@ -43,7 +41,7 @@
     } else {
         proposedContentOffset.x = round(rawPageValue) * self.pageWidth;
     }
-    
+    [self.collectionView setContentOffset:proposedContentOffset animated:YES];
     return proposedContentOffset;
 }
 

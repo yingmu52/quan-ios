@@ -41,7 +41,7 @@
                 _plan.image = image;
             }];
             
-            NSAssert(_plan.backgroundNum != nil, @"nil plan background id");
+//            NSAssert(_plan.backgroundNum != nil, @"nil plan background id");
         }else{
             self.imageView.image = _plan.image;
         }

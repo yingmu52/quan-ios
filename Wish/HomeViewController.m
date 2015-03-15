@@ -34,6 +34,7 @@ const NSUInteger maxCardNum = 10;
 @implementation HomeViewController
 
 
+
 - (Plan *)currentPlan{
     CGPoint currentPoint = CGPointMake(self.cardCollectionView.center.x + self.cardCollectionView.contentOffset.x,
                                        self.cardCollectionView.center.y + self.cardCollectionView.contentOffset.y);
@@ -51,7 +52,7 @@ const NSUInteger maxCardNum = 10;
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
     request.predicate = [NSPredicate predicateWithFormat:@"userDeleted == %@ && ownerId == %@ && planStatus == %d",@(NO),[SystemUtil getOwnerId],PlanStatusOnGoing];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
-    
+
     NSFetchedResultsController *newFRC =
     [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                         managedObjectContext:context sectionNameKeyPath:nil
@@ -78,12 +79,6 @@ const NSUInteger maxCardNum = 10;
     [self setUpNavigationItem];
     [self setupCollectionView];
 
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self.cardCollectionView reloadData];
 }
 
 - (void)setUpNavigationItem
@@ -256,18 +251,89 @@ const NSUInteger maxCardNum = 10;
     
 }
 
-#pragma mark -
-#pragma mark UICollectionView methods
+#pragma mark - Scroll View
 
-// NOTE: This delegate method requires you to disable UICollectionView's `pagingEnabled` property.
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+{
 
--(void)setupCollectionView {
-    self.cardCollectionView.backgroundColor = [UIColor clearColor];
-    self.cardCollectionView.collectionViewLayout = [[HomeCardFlowLayout alloc] init];
-    self.cardCollectionView.pagingEnabled = NO;
+    UICollectionViewFlowLayout *layout = [self cardFlowLayout];
+    
+    CGFloat pageWidth = layout.itemSize.width + layout.minimumLineSpacing; // width + space
+    
+    CGFloat currentOffset = scrollView.contentOffset.x;
+    CGFloat targetOffset = targetContentOffset->x;
+    CGFloat newTargetOffset = 0;
+    
+    if (targetOffset > currentOffset)
+        newTargetOffset = ceilf(currentOffset / pageWidth) * pageWidth;
+    else
+        newTargetOffset = floorf(currentOffset / pageWidth) * pageWidth;
+    
+    if (newTargetOffset < 0)
+        newTargetOffset = 0;
+    else if (newTargetOffset > scrollView.contentSize.width)
+        newTargetOffset = scrollView.contentSize.width;
+    
+    targetContentOffset->x = currentOffset;
+    [scrollView setContentOffset:CGPointMake(newTargetOffset, 0) animated:YES];
 
+    
+//    int index = newTargetOffset / pageWidth;
+//    
+//    if (index == 0) { // If first index
+//        UICollectionViewCell *cell = [self.cardCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:index  inSection:0]];
+//        
+////        [UIView animateWithDuration:ANIMATION_SPEED animations:^{
+////            cell.transform = CGAffineTransformIdentity;
+////        }];
+//        cell = [self.cardCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:index + 1  inSection:0]];
+////        [UIView animateWithDuration:ANIMATION_SPEED animations:^{
+////            cell.transform = TRANSFORM_CELL_VALUE;
+////        }];
+//    }else{
+//        UICollectionViewCell *cell = [self.cardCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
+////        [UIView animateWithDuration:ANIMATION_SPEED animations:^{
+////            cell.transform = CGAffineTransformIdentity;
+////        }];
+//        
+//        index --; // left
+//        cell = [self.cardCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
+////        [UIView animateWithDuration:ANIMATION_SPEED animations:^{
+////            cell.transform = TRANSFORM_CELL_VALUE;
+////        }];
+//        
+//        index ++;
+//        index ++; // right
+//        cell = [self.cardCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
+////        [UIView animateWithDuration:ANIMATION_SPEED animations:^{
+////            cell.transform = TRANSFORM_CELL_VALUE;
+////        }];
+//    }
 }
 
+
+#pragma mark -  UICollectionView methods
+
+- (UICollectionViewFlowLayout *)cardFlowLayout{
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    CGSize deviceSize = self.view.frame.size;
+    CGFloat interMargin = deviceSize.width * 24.0 / 640;
+    CGFloat itemWidth = 548.0/640*deviceSize.width;
+    CGFloat itemHeight = 850.0/1136*deviceSize.height;
+    CGFloat edgeMargin = deviceSize.width - itemWidth - 2*interMargin;
+    layout.minimumInteritemSpacing = interMargin;
+    layout.minimumLineSpacing = 0.0f;
+    layout.itemSize = CGSizeMake(itemWidth,itemHeight);
+    layout.sectionInset = UIEdgeInsetsMake(0, edgeMargin, 0, edgeMargin);
+    return layout;
+}
+-(void)setupCollectionView {
+    self.cardCollectionView.backgroundColor = [UIColor clearColor];
+    self.cardCollectionView.pagingEnabled = NO;
+    self.cardCollectionView.collectionViewLayout = [self cardFlowLayout];
+
+}
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.fetchedRC.fetchedObjects.count;
@@ -292,7 +358,6 @@ const NSUInteger maxCardNum = 10;
 //      newIndexPath:(NSIndexPath *)newIndexPath
 //{
 //    
-//    
 //    switch(type)
 //    {
 //        case NSFetchedResultsChangeInsert:
@@ -311,11 +376,8 @@ const NSUInteger maxCardNum = 10;
 //    }
 //}
 
-- (void)controllerDidChangeContent:
-(NSFetchedResultsController *)controller
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self.cardCollectionView reloadData];
 }
-
-
 @end
