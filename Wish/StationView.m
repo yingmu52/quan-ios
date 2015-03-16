@@ -20,13 +20,10 @@
     view.frame = frame;
 
     [view layoutIfNeeded];
-    
-//    view.backgroundColor = [UIColor orangeColor];
-
-//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
-//    imageView.image = [SystemUtil imageFromColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.65]];
-//    
-//    [view insertSubview:imageView atIndex:0];
+    UIToolbar *layer = [[UIToolbar alloc] initWithFrame:frame];
+    layer.barStyle = UIBarStyleBlackOpaque;
+//    layer.barTintColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0];
+    [view insertSubview:layer atIndex:0];
     return view;
 }
 
