@@ -56,9 +56,9 @@
     plan.userDeleted = @(NO);
     plan.planStatus = @([dict[@"state"] integerValue]);
     plan.backgroundNum = dict[@"backGroudPic"];
-    if ([context save:nil]) {
+//    if ([context save:nil]) {
         NSLog(@"updated plan list form server");
-    }
+//    }
 
 
     return plan;

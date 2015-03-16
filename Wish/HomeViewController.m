@@ -29,6 +29,10 @@ const NSUInteger maxCardNum = 10;
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @property (nonatomic,strong) StationView *stationView;
 
+
+@property (nonatomic,strong) NSMutableArray *itemChanges;
+
+
 @end
 
 @implementation HomeViewController
@@ -50,7 +54,7 @@ const NSUInteger maxCardNum = 10;
     }
     //do fetchrequest
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
-//    request.predicate = [NSPredicate predicateWithFormat:@"userDeleted == %@ && ownerId == %@ && planStatus == %d",@(NO),[SystemUtil getOwnerId],PlanStatusOnGoing];
+    request.predicate = [NSPredicate predicateWithFormat:@"userDeleted == %@ && ownerId == %@ && planStatus == %d",@(NO),[SystemUtil getOwnerId],PlanStatusOnGoing];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
 
     NSFetchedResultsController *newFRC =
@@ -308,33 +312,106 @@ const NSUInteger maxCardNum = 10;
     [self performSegueWithIdentifier:@"showPlanDetailFromHome" sender:[self.fetchedRC objectAtIndexPath:indexPath]];
 }
 #pragma mark - FetchedResultsController
-    //- (void)controller:(NSFetchedResultsController *)controller
+//- (void)controller:(NSFetchedResultsController *)controller
 //   didChangeObject:(id)anObject
 //       atIndexPath:(NSIndexPath *)indexPath
 //     forChangeType:(NSFetchedResultsChangeType)type
 //      newIndexPath:(NSIndexPath *)newIndexPath
 //{
-//    
-//    switch(type)
-//    {
-//        case NSFetchedResultsChangeInsert:
-//            [self.cardCollectionView insertItemsAtIndexPaths:@[newIndexPath]];
-//            break;
-//            
-//        case NSFetchedResultsChangeDelete:
-//            [self.cardCollectionView deleteItemsAtIndexPaths:@[indexPath]];
-//            break;
-//            
-//        case NSFetchedResultsChangeUpdate:
-//            [self.cardCollectionView reloadItemsAtIndexPaths:@[indexPath]];
-//            break;
-//        default:
-//            break;
-//    }
+//
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        switch(type)
+//        {
+//            case NSFetchedResultsChangeInsert:
+//                NSLog(@"Plan inserted");
+//                [self.cardCollectionView insertItemsAtIndexPaths:@[newIndexPath]];
+//                break;
+//                
+//            case NSFetchedResultsChangeDelete:
+//                NSLog(@"Plan Deleted");
+//                [self.cardCollectionView deleteItemsAtIndexPaths:@[indexPath]];
+//                break;
+//                
+//            case NSFetchedResultsChangeUpdate:{
+//                HomeCardView *cell = (HomeCardView *)[self.cardCollectionView cellForItemAtIndexPath:indexPath];
+//                Plan *oldPlan = cell.plan;
+//                Plan *newPlan = [self.fetchedRC objectAtIndexPath:indexPath];
+//                if (oldPlan.objectID != newPlan.objectID) {
+//                    [self.cardCollectionView reloadItemsAtIndexPaths:@[indexPath]];
+//                    NSLog(@"Plan Reloaded");
+//                }
+//            }
+//                break;
+//            default:
+//                break;
+//        }
+//    });
 //}
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    [self.cardCollectionView reloadData];
+//
+//- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+//{
+//    [self.cardCollectionView reloadData];
+//}
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    self.itemChanges = [[NSMutableArray alloc] init];
 }
+
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath {
+    NSMutableDictionary *change = [[NSMutableDictionary alloc] init];
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            change[@(type)] = newIndexPath;
+            break;
+        case NSFetchedResultsChangeDelete:
+            change[@(type)] = indexPath;
+            break;
+        case NSFetchedResultsChangeUpdate:
+            change[@(type)] = indexPath;
+            break;
+        case NSFetchedResultsChangeMove:
+            change[@(type)] = @[indexPath, newIndexPath];
+            break;
+    }
+    [self.itemChanges addObject:change];
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.cardCollectionView performBatchUpdates:^{
+            for (NSDictionary *change in self.itemChanges) {
+                [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+                    NSFetchedResultsChangeType type = [key unsignedIntegerValue];
+                    switch(type) {
+                        case NSFetchedResultsChangeInsert:
+                            [self.cardCollectionView insertItemsAtIndexPaths:@[obj]];
+                            NSLog(@"Inserted Plan");
+                            break;
+                        case NSFetchedResultsChangeDelete:
+                            [self.cardCollectionView deleteItemsAtIndexPaths:@[obj]];
+                            NSLog(@"Deleted Plan");
+                            break;
+                        case NSFetchedResultsChangeUpdate:{
+                            Plan *plan = [controller objectAtIndexPath:obj];
+                            if (plan.planId) {
+                                [self.cardCollectionView reloadItemsAtIndexPaths:@[obj]];
+                                NSLog(@"Updated Plan");
+                            }
+                        }
+                            break;
+                        case NSFetchedResultsChangeMove:
+                            [self.cardCollectionView moveItemAtIndexPath:obj[0] toIndexPath:obj[1]];
+                            break;
+                    }
+                }];
+            }
+        } completion:^(BOOL finished) {
+            self.itemChanges = nil;
+        }];
+    });
+}
+
 @end
