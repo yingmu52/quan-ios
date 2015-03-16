@@ -1375,7 +1375,7 @@
             </objects>
             <point key="canvasLocation" x="2695" y="55"/>
         </scene>
-        <!--Version 2.4.1-->
+        <!--Version 2.5-->
         <scene sceneID="fpo-Ov-0kY">
             <objects>
                 <viewController id="wW8-3k-YAd" customClass="HomeViewController" sceneMemberID="viewController">
@@ -1725,7 +1725,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Version 2.4.1" id="Ayl-oc-p2J"/>
+                    <navigationItem key="navigationItem" title="Version 2.5" id="Ayl-oc-p2J"/>
                     <connections>
                         <outlet property="cardCollectionView" destination="uow-gD-atl" id="Iev-8V-hDW"/>
                         <segue destination="1Y1-uW-81U" kind="show" identifier="showPostFromHome" id="CTd-gb-xTE"/>

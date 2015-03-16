@@ -20,6 +20,7 @@
     view.frame = frame;
 
     [view layoutIfNeeded];
+    
 //    view.backgroundColor = [UIColor orangeColor];
 
 //    UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];

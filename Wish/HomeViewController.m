@@ -286,7 +286,7 @@ const NSUInteger maxCardNum = 10;
                 popupView.plan = self.stationView.plan;
                 [keyWindow addSubview:popupView];
             }else{
-                [self.stationView removeFromSuperview];
+                [self popupViewDidPressCancel:popupView];
             }
         }
 
