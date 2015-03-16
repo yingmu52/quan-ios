@@ -63,7 +63,7 @@
     UIImage *cameraIcon = [Theme wishDetailCameraDefault];
     UIButton *cameraButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [cameraButton setImage:cameraIcon forState:UIControlStateNormal];
-    cameraButton.hidden = YES;
+    cameraButton.hidden = NO;
     
     
     UIWindow *topView = [[UIApplication sharedApplication] keyWindow];
@@ -96,7 +96,7 @@
     BOOL shouldShow = self.fetchedRC.fetchedObjects.count == 0; // && !self.logoButton && !self.labelUnderLogo;
     
     self.tableView.scrollEnabled = !shouldShow;
-    self.cameraButton.hidden = !shouldShow;
+//    self.cameraButton.hidden = !shouldShow;
     
     if (shouldShow){
         //set center logo

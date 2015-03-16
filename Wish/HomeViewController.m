@@ -312,46 +312,6 @@ const NSUInteger maxCardNum = 10;
     [self performSegueWithIdentifier:@"showPlanDetailFromHome" sender:[self.fetchedRC objectAtIndexPath:indexPath]];
 }
 #pragma mark - FetchedResultsController
-//- (void)controller:(NSFetchedResultsController *)controller
-//   didChangeObject:(id)anObject
-//       atIndexPath:(NSIndexPath *)indexPath
-//     forChangeType:(NSFetchedResultsChangeType)type
-//      newIndexPath:(NSIndexPath *)newIndexPath
-//{
-//
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        switch(type)
-//        {
-//            case NSFetchedResultsChangeInsert:
-//                NSLog(@"Plan inserted");
-//                [self.cardCollectionView insertItemsAtIndexPaths:@[newIndexPath]];
-//                break;
-//                
-//            case NSFetchedResultsChangeDelete:
-//                NSLog(@"Plan Deleted");
-//                [self.cardCollectionView deleteItemsAtIndexPaths:@[indexPath]];
-//                break;
-//                
-//            case NSFetchedResultsChangeUpdate:{
-//                HomeCardView *cell = (HomeCardView *)[self.cardCollectionView cellForItemAtIndexPath:indexPath];
-//                Plan *oldPlan = cell.plan;
-//                Plan *newPlan = [self.fetchedRC objectAtIndexPath:indexPath];
-//                if (oldPlan.objectID != newPlan.objectID) {
-//                    [self.cardCollectionView reloadItemsAtIndexPaths:@[indexPath]];
-//                    NSLog(@"Plan Reloaded");
-//                }
-//            }
-//                break;
-//            default:
-//                break;
-//        }
-//    });
-//}
-//
-//- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-//{
-//    [self.cardCollectionView reloadData];
-//}
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     self.itemChanges = [[NSMutableArray alloc] init];
 }
@@ -396,7 +356,7 @@ const NSUInteger maxCardNum = 10;
                             break;
                         case NSFetchedResultsChangeUpdate:{
                             Plan *plan = [controller objectAtIndexPath:obj];
-                            if (plan.planId) {
+                            if (plan.planId && plan.backgroundNum) {
                                 [self.cardCollectionView reloadItemsAtIndexPaths:@[obj]];
                                 NSLog(@"Updated Plan");
                             }
