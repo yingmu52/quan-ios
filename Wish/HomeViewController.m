@@ -358,6 +358,7 @@ const NSUInteger maxCardNum = 10;
                             Plan *plan = [controller objectAtIndexPath:obj];
                             if (plan.planId && plan.backgroundNum) {
                                 [self.cardCollectionView reloadItemsAtIndexPaths:@[obj]];
+                                [self.cardCollectionView scrollToItemAtIndexPath:obj atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
                                 NSLog(@"Updated Plan");
                             }
                         }
