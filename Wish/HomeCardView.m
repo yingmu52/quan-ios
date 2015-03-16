@@ -97,15 +97,12 @@
     // Corner Radius
     //    self.layer.cornerRadius = 10.0;
     
-    [self addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundLongPressed:)]];
-    [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTaped)]];
+    UILongPressGestureRecognizer *lp = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundLongPressed:)];
+    lp.delaysTouchesBegan = YES;
+    [self addGestureRecognizer:lp];
     
 }
 
-
-- (void)backgroundTaped{
-    [self.delegate didTapOnHomeCardView:self];
-}
 
 - (void)backgroundLongPressed:(UILongPressGestureRecognizer *)longPress{
     [self.delegate didLongPressedOn:self gesture:longPress];

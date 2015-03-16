@@ -254,7 +254,7 @@ typedef enum{
 
 //return a new base url string with appened version argument
 - (NSString *)versionForBaseURL:(NSString *)baseURL{
-    return [baseURL stringByAppendingString:@"version=2.2.0&"];
+    return [baseURL stringByAppendingString:@"version=2.2.0&longinType=uid&uid=12345&ukey=12345&"];
 }
 
 #pragma mark - get image url wraper

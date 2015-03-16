@@ -10,8 +10,6 @@
 #import "Plan.h"
 @class HomeCardView;
 @protocol HomeCardViewDelegate <NSObject>
-
-- (void)didTapOnHomeCardView:(HomeCardView *)cardView;
 - (void)didLongPressedOn:(HomeCardView *)cardView gesture:(UILongPressGestureRecognizer *)longPress;
 @end
 

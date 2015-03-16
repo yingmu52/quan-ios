@@ -117,25 +117,6 @@ const NSUInteger maxCardNum = 10;
 
 #pragma mark - Home Card View Delegate
 
-//- (void)homeCardView:(HomeCardView *)cardView didPressedButton:(UIButton *)button
-//{
-//    Plan *plan = [self.fetchedRC objectAtIndexPath:[self.cardCollectionView indexPathForCell:cardView]];
-//
-//    if ([button.titleLabel.text isEqualToString:@"放弃"]) {
-////        [plan deleteSelf];
-//        [plan updatePlanStatus:PlanStatusGiveTheFuckingUp];
-//    }
-//    if ([button.titleLabel.text isEqualToString:@"完成"]) {
-//        [plan updatePlanStatus:PlanStatusFinished];
-//    }
-//    
-//}
-
-
-- (void)didTapOnHomeCardView:(HomeCardView *)cardView
-{
-    [self performSegueWithIdentifier:@"showPlanDetailFromHome" sender:cardView.plan];
-}
 
 
 - (StationView *)stationView
@@ -273,42 +254,10 @@ const NSUInteger maxCardNum = 10;
         newTargetOffset = 0;
     else if (newTargetOffset > scrollView.contentSize.width)
         newTargetOffset = scrollView.contentSize.width;
+
     
     targetContentOffset->x = currentOffset;
     [scrollView setContentOffset:CGPointMake(newTargetOffset, 0) animated:YES];
-
-    
-//    int index = newTargetOffset / pageWidth;
-//    
-//    if (index == 0) { // If first index
-//        UICollectionViewCell *cell = [self.cardCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:index  inSection:0]];
-//        
-////        [UIView animateWithDuration:ANIMATION_SPEED animations:^{
-////            cell.transform = CGAffineTransformIdentity;
-////        }];
-//        cell = [self.cardCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:index + 1  inSection:0]];
-////        [UIView animateWithDuration:ANIMATION_SPEED animations:^{
-////            cell.transform = TRANSFORM_CELL_VALUE;
-////        }];
-//    }else{
-//        UICollectionViewCell *cell = [self.cardCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
-////        [UIView animateWithDuration:ANIMATION_SPEED animations:^{
-////            cell.transform = CGAffineTransformIdentity;
-////        }];
-//        
-//        index --; // left
-//        cell = [self.cardCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
-////        [UIView animateWithDuration:ANIMATION_SPEED animations:^{
-////            cell.transform = TRANSFORM_CELL_VALUE;
-////        }];
-//        
-//        index ++;
-//        index ++; // right
-//        cell = [self.cardCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
-////        [UIView animateWithDuration:ANIMATION_SPEED animations:^{
-////            cell.transform = TRANSFORM_CELL_VALUE;
-////        }];
-//    }
 }
 
 
@@ -322,17 +271,18 @@ const NSUInteger maxCardNum = 10;
     CGFloat itemWidth = 548.0/640*deviceSize.width;
     CGFloat itemHeight = 850.0/1136*deviceSize.height;
     CGFloat edgeMargin = deviceSize.width - itemWidth - 2*interMargin;
-    layout.minimumInteritemSpacing = interMargin;
+    layout.minimumInteritemSpacing = 0.0f;
     layout.minimumLineSpacing = 0.0f;
     layout.itemSize = CGSizeMake(itemWidth,itemHeight);
     layout.sectionInset = UIEdgeInsetsMake(0, edgeMargin, 0, edgeMargin);
     return layout;
 }
+
 -(void)setupCollectionView {
     self.cardCollectionView.backgroundColor = [UIColor clearColor];
     self.cardCollectionView.pagingEnabled = NO;
     self.cardCollectionView.collectionViewLayout = [self cardFlowLayout];
-
+//    self.cardCollectionView.collectionViewLayout = [[HomeCardFlowLayout alloc] init];
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -349,9 +299,12 @@ const NSUInteger maxCardNum = 10;
     return cell;
     
 }
-#pragma mark - FetchedResultsController
 
-//- (void)controller:(NSFetchedResultsController *)controller
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    [self performSegueWithIdentifier:@"showPlanDetailFromHome" sender:[self.fetchedRC objectAtIndexPath:indexPath]];
+}
+#pragma mark - FetchedResultsController
+    //- (void)controller:(NSFetchedResultsController *)controller
 //   didChangeObject:(id)anObject
 //       atIndexPath:(NSIndexPath *)indexPath
 //     forChangeType:(NSFetchedResultsChangeType)type
