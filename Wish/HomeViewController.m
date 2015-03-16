@@ -22,7 +22,7 @@
 #import "PopupView.h"
 const NSUInteger maxCardNum = 10;
 
-@interface HomeViewController () <NSFetchedResultsControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HomeCardViewDelegate,UICollectionViewDelegateFlowLayout,UIGestureRecognizerDelegate,PopupViewDelegate>
+@interface HomeViewController () <NSFetchedResultsControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UICollectionViewDelegateFlowLayout,UIGestureRecognizerDelegate,PopupViewDelegate>
 
 @property (nonatomic,weak) IBOutlet UICollectionView *cardCollectionView;
 @property (nonatomic,weak) Plan *currentPlan;
@@ -50,7 +50,7 @@ const NSUInteger maxCardNum = 10;
     }
     //do fetchrequest
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
-    request.predicate = [NSPredicate predicateWithFormat:@"userDeleted == %@ && ownerId == %@ && planStatus == %d",@(NO),[SystemUtil getOwnerId],PlanStatusOnGoing];
+//    request.predicate = [NSPredicate predicateWithFormat:@"userDeleted == %@ && ownerId == %@ && planStatus == %d",@(NO),[SystemUtil getOwnerId],PlanStatusOnGoing];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
 
     NSFetchedResultsController *newFRC =
@@ -126,46 +126,6 @@ const NSUInteger maxCardNum = 10;
     }
     return _stationView;
 }
-- (void)didLongPressedOn:(HomeCardView *)cardView gesture:(UILongPressGestureRecognizer *)longPress{
-
-    
-    UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
-
-    if (longPress.state == UIGestureRecognizerStateBegan) {
-
-        self.stationView.cardImageView.image = cardView.plan.image;
-        [keyWindow addSubview:self.stationView];
-        [self.stationView layoutIfNeeded]; //important for next line to work
-        self.stationView.currentCardLocation = [longPress locationInView:self.stationView];
-
-    }else if (longPress.state == UIGestureRecognizerStateChanged){
-        //update card location
-        self.stationView.currentCardLocation = [longPress locationInView:self.stationView];
-        
-    }else if (longPress.state == UIGestureRecognizerStateEnded ||
-              longPress.state == UIGestureRecognizerStateFailed ||
-              longPress.state == UIGestureRecognizerStateCancelled) {
-        
-        //detect selection
-        PopupView *popupView;
-        //        [self.stationView layoutIfNeeded];
-        if (self.stationView.selection == StationViewSelectionFinish){
-            popupView = [PopupView showPopupFinishinFrame:keyWindow.frame];
-        }else if (self.stationView.selection == StationViewSelectionGiveUp){
-            popupView = [PopupView showPopupFailinFrame:keyWindow.frame];
-        }else if (self.stationView.selection == StationViewSelectionDelete){
-            popupView = [PopupView showPopupDeleteinFrame:keyWindow.frame];
-        }
-        if (popupView) {
-            popupView.delegate = self;
-            popupView.plan = cardView.plan;
-            [keyWindow addSubview:popupView];
-        }else{
-            [self.stationView removeFromSuperview];
-        }
-    }
-    
-}
 
 - (void)popupViewDidPressConfirm:(PopupView *)popupView
 {
@@ -234,31 +194,31 @@ const NSUInteger maxCardNum = 10;
 
 #pragma mark - Scroll View
 
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
-{
-
-    UICollectionViewFlowLayout *layout = [self cardFlowLayout];
-    
-    CGFloat pageWidth = layout.itemSize.width + layout.minimumLineSpacing; // width + space
-    
-    CGFloat currentOffset = scrollView.contentOffset.x;
-    CGFloat targetOffset = targetContentOffset->x;
-    CGFloat newTargetOffset = 0;
-    
-    if (targetOffset > currentOffset)
-        newTargetOffset = ceilf(currentOffset / pageWidth) * pageWidth;
-    else
-        newTargetOffset = floorf(currentOffset / pageWidth) * pageWidth;
-    
-    if (newTargetOffset < 0)
-        newTargetOffset = 0;
-    else if (newTargetOffset > scrollView.contentSize.width)
-        newTargetOffset = scrollView.contentSize.width;
-
-    
-    targetContentOffset->x = currentOffset;
-    [scrollView setContentOffset:CGPointMake(newTargetOffset, 0) animated:YES];
-}
+//- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+//{
+//
+//    UICollectionViewFlowLayout *layout = [self cardFlowLayout];
+//    
+//    CGFloat pageWidth = layout.itemSize.width + layout.minimumLineSpacing; // width + space
+//    
+//    CGFloat currentOffset = scrollView.contentOffset.x;
+//    CGFloat targetOffset = targetContentOffset->x;
+//    CGFloat newTargetOffset = 0;
+//    
+//    if (targetOffset > currentOffset)
+//        newTargetOffset = ceilf(currentOffset / pageWidth) * pageWidth;
+//    else
+//        newTargetOffset = floorf(currentOffset / pageWidth) * pageWidth;
+//    
+//    if (newTargetOffset < 0)
+//        newTargetOffset = 0;
+//    else if (newTargetOffset > scrollView.contentSize.width)
+//        newTargetOffset = scrollView.contentSize.width;
+//
+//    
+//    targetContentOffset->x = currentOffset;
+//    [scrollView setContentOffset:CGPointMake(newTargetOffset, 0) animated:YES];
+//}
 
 
 #pragma mark -  UICollectionView methods
@@ -281,10 +241,54 @@ const NSUInteger maxCardNum = 10;
 -(void)setupCollectionView {
     self.cardCollectionView.backgroundColor = [UIColor clearColor];
     self.cardCollectionView.pagingEnabled = NO;
-    self.cardCollectionView.collectionViewLayout = [self cardFlowLayout];
-//    self.cardCollectionView.collectionViewLayout = [[HomeCardFlowLayout alloc] init];
+//    self.cardCollectionView.collectionViewLayout = [self cardFlowLayout];
+    self.cardCollectionView.collectionViewLayout = [[HomeCardFlowLayout alloc] init];
+    
+    UILongPressGestureRecognizer *lp = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    lp.delaysTouchesBegan = YES;
+    lp.minimumPressDuration = 0.5;
+    [self.cardCollectionView addGestureRecognizer:lp];
+
 }
 
+- (void)handleLongPress:(UILongPressGestureRecognizer *)longPress{
+    
+    Plan *plan = [self.fetchedRC objectAtIndexPath:[self.cardCollectionView indexPathForItemAtPoint:[longPress locationInView:self.cardCollectionView]]];
+    if (plan) {
+        UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+        if (longPress.state == UIGestureRecognizerStateBegan) {
+            self.stationView.plan = plan;
+            [keyWindow addSubview:self.stationView];
+            [self.stationView layoutIfNeeded]; //important for next line to work
+            self.stationView.currentCardLocation = [longPress locationInView:self.stationView];
+        }else if (longPress.state == UIGestureRecognizerStateChanged){
+            //update card location
+            self.stationView.currentCardLocation = [longPress locationInView:self.stationView];
+        }else if (longPress.state == UIGestureRecognizerStateEnded ||
+                  longPress.state == UIGestureRecognizerStateFailed ||
+                  longPress.state == UIGestureRecognizerStateCancelled) {
+            //detect selection
+            PopupView *popupView;
+            //        [self.stationView layoutIfNeeded];
+            if (self.stationView.selection == StationViewSelectionFinish){
+                popupView = [PopupView showPopupFinishinFrame:keyWindow.frame];
+            }else if (self.stationView.selection == StationViewSelectionGiveUp){
+                popupView = [PopupView showPopupFailinFrame:keyWindow.frame];
+            }else if (self.stationView.selection == StationViewSelectionDelete){
+                popupView = [PopupView showPopupDeleteinFrame:keyWindow.frame];
+            }
+            if (popupView) {
+                popupView.delegate = self;
+                popupView.plan = self.stationView.plan;
+                [keyWindow addSubview:popupView];
+            }else{
+                [self.stationView removeFromSuperview];
+            }
+        }
+
+    }
+
+}
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.fetchedRC.fetchedObjects.count;
 }
@@ -292,7 +296,7 @@ const NSUInteger maxCardNum = 10;
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     HomeCardView *cell = (HomeCardView*)[collectionView dequeueReusableCellWithReuseIdentifier:@"HomeCardCell" forIndexPath:indexPath];
-    cell.delegate = self;
+//    cell.delegate = self;
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
     cell.plan = plan;
 

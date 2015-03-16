@@ -25,6 +25,30 @@
 
 }
 
+- (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset withScrollingVelocity:(CGPoint)velocity
+{
+    if (proposedContentOffset.x > self.collectionView.contentOffset.x) {
+        proposedContentOffset.x = self.collectionView.contentOffset.x + self.collectionView.bounds.size.width / 2.;
+    }
+    else if (proposedContentOffset.x < self.collectionView.contentOffset.x) {
+        proposedContentOffset.x = self.collectionView.contentOffset.x - self.collectionView.bounds.size.width / 2.;
+    }
+    
+    CGFloat offsetAdjustment = MAXFLOAT;
+    CGFloat horizontalCenter = proposedContentOffset.x + self.collectionView.bounds.size.width / 2.;
+    CGRect targetRect = CGRectMake(proposedContentOffset.x, 0., self.collectionView.bounds.size.width, self.collectionView.bounds.size.height);
+    
+    NSArray *attributes = [super layoutAttributesForElementsInRect:targetRect];
+    for (UICollectionViewLayoutAttributes *a in attributes) {
+        CGFloat itemHorizontalCenter = a.center.x;
+        if (ABS(itemHorizontalCenter - horizontalCenter) < ABS(offsetAdjustment)) {
+            offsetAdjustment = itemHorizontalCenter - horizontalCenter;
+        }
+    }
+    
+    return CGPointMake(proposedContentOffset.x + offsetAdjustment, proposedContentOffset.y);
+}
+
 //- (CGSize)collectionViewContentSize
 //{
 //    // Only support single section for now.

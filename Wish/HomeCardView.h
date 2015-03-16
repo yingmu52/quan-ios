@@ -8,13 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "Plan.h"
-@class HomeCardView;
-@protocol HomeCardViewDelegate <NSObject>
-- (void)didLongPressedOn:(HomeCardView *)cardView gesture:(UILongPressGestureRecognizer *)longPress;
-@end
-
 @interface HomeCardView : UICollectionViewCell
 @property (nonatomic,strong) Plan *plan;
-@property (nonatomic,weak) id <HomeCardViewDelegate> delegate;
-
 @end

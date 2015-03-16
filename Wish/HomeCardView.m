@@ -97,16 +97,6 @@
     // Corner Radius
     //    self.layer.cornerRadius = 10.0;
     
-    UILongPressGestureRecognizer *lp = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundLongPressed:)];
-    lp.delaysTouchesBegan = YES;
-    [self addGestureRecognizer:lp];
-    
 }
-
-
-- (void)backgroundLongPressed:(UILongPressGestureRecognizer *)longPress{
-    [self.delegate didLongPressedOn:self gesture:longPress];
-}
-
 
 @end

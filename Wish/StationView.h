@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Plan.h"
 @interface StationView : UIView
 
 typedef enum {
@@ -23,6 +24,7 @@ typedef enum {
 @property (nonatomic,weak) IBOutlet UIImageView *deleteButton;
 @property (nonatomic,weak) IBOutlet UIImageView *finishButton;
 
+@property (nonatomic,strong) Plan *plan;
 @property (nonatomic,readonly) StationViewSelection selection;
 
 + (instancetype)instantiateFromNib:(CGRect)frame;
