@@ -33,6 +33,9 @@ const NSUInteger maxCardNum = 10;
 @property (nonatomic,strong) NSMutableArray *itemChanges;
 
 
+@property (nonatomic, assign) BOOL queuedScrollAnimation;
+@property (nonatomic,assign) CGPoint queuedAnimationOffset;
+
 @end
 
 @implementation HomeViewController
@@ -54,7 +57,7 @@ const NSUInteger maxCardNum = 10;
     }
     //do fetchrequest
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
-    request.predicate = [NSPredicate predicateWithFormat:@"userDeleted == %@ && ownerId == %@ && planStatus == %d",@(NO),[SystemUtil getOwnerId],PlanStatusOnGoing];
+//    request.predicate = [NSPredicate predicateWithFormat:@"userDeleted == %@ && ownerId == %@ && planStatus == %d",@(NO),[SystemUtil getOwnerId],PlanStatusOnGoing];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
 
     NSFetchedResultsController *newFRC =
@@ -197,33 +200,54 @@ const NSUInteger maxCardNum = 10;
 }
 
 #pragma mark - Scroll View
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+{
+    CGPoint offset = *targetContentOffset;
+    
+    UICollectionViewFlowLayout *layout = [self cardFlowLayout];
+    
+    CGFloat pageSize = layout.itemSize.width + layout.minimumLineSpacing;
+    NSUInteger page = roundf(offset.x / pageSize);
+    offset.x = page * pageSize;
+    
+    // if the new offset is in the opposite direction of the scrolling direction
+    if ((offset.x < scrollView.contentOffset.x && velocity.x > 0) || (offset.x > scrollView.contentOffset.x && velocity.x < 0))
+    {
+        self.queuedScrollAnimation = YES;
+        self.queuedAnimationOffset = offset;
+    }
+    else
+    {
+        *targetContentOffset = offset;
+    }
+}
 
-//- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if (self.queuedScrollAnimation)
+    {
+        self.queuedScrollAnimation = NO;
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if (self.queuedScrollAnimation)
+    {
+        self.queuedScrollAnimation = NO;
+        [scrollView setContentOffset:self.queuedAnimationOffset animated:YES];
+    }
+}
+
+//- (void)scrollViewWillEndDragging:(UICollectionView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
 //{
-//
+////    [self.cardCollectionView scrollToItemAtIndexPath:[self.fetchedRC indexPathForObject:self.currentPlan] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
 //    UICollectionViewFlowLayout *layout = [self cardFlowLayout];
-//    
-//    CGFloat pageWidth = layout.itemSize.width + layout.minimumLineSpacing; // width + space
-//    
-//    CGFloat currentOffset = scrollView.contentOffset.x;
-//    CGFloat targetOffset = targetContentOffset->x;
-//    CGFloat newTargetOffset = 0;
-//    
-//    if (targetOffset > currentOffset)
-//        newTargetOffset = ceilf(currentOffset / pageWidth) * pageWidth;
-//    else
-//        newTargetOffset = floorf(currentOffset / pageWidth) * pageWidth;
-//    
-//    if (newTargetOffset < 0)
-//        newTargetOffset = 0;
-//    else if (newTargetOffset > scrollView.contentSize.width)
-//        newTargetOffset = scrollView.contentSize.width;
-//
-//    
-//    targetContentOffset->x = currentOffset;
-//    [scrollView setContentOffset:CGPointMake(newTargetOffset, 0) animated:YES];
+////    NSLog(@"%f,%f,%@,%f",layout.sectionInset.left,layout.sectionInset.right,NSStringFromCGSize(layout.itemSize),layout.minimumLineSpacing);
+////    NSLog(@"target %f contentoffset %f",targetContentOffset->x,scrollView.contentOffset.x);
+//    *targetContentOffset = scrollView.contentOffset;
+//    NSLog(@"scrollViewWillEndDragging");
 //}
-
 
 #pragma mark -  UICollectionView methods
 
@@ -245,8 +269,8 @@ const NSUInteger maxCardNum = 10;
 -(void)setupCollectionView {
     self.cardCollectionView.backgroundColor = [UIColor clearColor];
     self.cardCollectionView.pagingEnabled = NO;
-//    self.cardCollectionView.collectionViewLayout = [self cardFlowLayout];
-    self.cardCollectionView.collectionViewLayout = [[HomeCardFlowLayout alloc] init];
+    self.cardCollectionView.collectionViewLayout = [self cardFlowLayout];
+//    self.cardCollectionView.collectionViewLayout = [[HomeCardFlowLayout alloc] init];
     
     UILongPressGestureRecognizer *lp = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     lp.delaysTouchesBegan = YES;

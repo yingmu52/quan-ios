@@ -98,18 +98,20 @@
              insertRowsAtIndexPaths:@[newIndexPath]
              withRowAnimation:UITableViewRowAnimationAutomatic];
             [self.tableView setContentOffset:CGPointZero animated:NO]; //scroll to top
-
+            NSLog(@"Feed inserted");
             break;
             
         case NSFetchedResultsChangeDelete:
             [self.tableView
              deleteRowsAtIndexPaths:@[indexPath]
              withRowAnimation:UITableViewRowAnimationAutomatic];
+            NSLog(@"Feed deleted");
             break;
             
         case NSFetchedResultsChangeUpdate:
             [self.tableView reloadRowsAtIndexPaths:@[indexPath]
                                   withRowAnimation:UITableViewRowAnimationAutomatic];
+            NSLog(@"Feed updated");
             break;
         default:
             break;

@@ -27,6 +27,7 @@
 
 - (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset withScrollingVelocity:(CGPoint)velocity
 {
+    NSLog(@"called");
     if (proposedContentOffset.x > self.collectionView.contentOffset.x) {
         proposedContentOffset.x = self.collectionView.contentOffset.x + self.collectionView.bounds.size.width / 2.;
     }
@@ -45,8 +46,8 @@
             offsetAdjustment = itemHorizontalCenter - horizontalCenter;
         }
     }
-    
-    return CGPointMake(proposedContentOffset.x + offsetAdjustment, proposedContentOffset.y);
+    CGPoint point = CGPointMake(proposedContentOffset.x + offsetAdjustment, proposedContentOffset.y);
+    return point;
 }
 
 //- (CGSize)collectionViewContentSize
