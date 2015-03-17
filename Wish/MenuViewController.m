@@ -91,10 +91,15 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if (indexPath.section == 0 && ![User isUserLogin]){
+    if (indexPath.section == 0 && ![User isUserLogin]){
+        [self login];
+    }
+//    if (indexPath.section == 0){
+//        [User updateOwnerInfo:nil];
+//        [self.tableView reloadData];
 //        [self login];
 //    }
-    if (indexPath.section == 0) [self login];
+
     if (indexPath.section == 1) {
         NSString *identifier;
         switch (indexPath.row) {
@@ -188,7 +193,9 @@ typedef enum {
                                     LOGIN_STATUS:@(YES)};
     [User updateOwnerInfo:localUserInfo];
     NSLog(@"%@",localUserInfo);
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+    dispatch_async(dispatch_get_main_queue(),^{
+        [self.tableView reloadData];
+    });
 }
 
 //login fail

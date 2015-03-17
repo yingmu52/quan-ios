@@ -52,7 +52,7 @@ typedef enum{
 - (void)fetchFollowingPlanList{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,FOLLOW,GET_FOLLOW_LIST];
     [self getRequest:rqtStr
-           parameter:@{@"id":[User ownerId]}
+           parameter:@{@"id":[User uid]}
            operation:FetchCenterGetOpFollowingPlanList
               entity:nil];
 }
@@ -85,7 +85,7 @@ typedef enum{
 
 -(void)uploadToCreatePlan:(Plan *)plan{
     NSString *baseUrl = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PLAN,CREATE_PLAN];
-    NSDictionary *args = @{@"ownerId":[User ownerId],
+    NSDictionary *args = @{@"ownerId":[User uid],
                            @"title":[plan.planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                            @"finishDate":@([SystemUtil daysBetween:[NSDate date] and:plan.finishDate]),
                            @"private":plan.isPrivate};
@@ -119,7 +119,7 @@ typedef enum{
                 NSString *baseURL = [NSString stringWithFormat:@"%@%@%@",BASE_URL,FEED,CREATE_FEED];
                 NSDictionary *args;
                 if (feed.plan.planId && feed.feedTitle) {
-                    args = @{@"ownerId":[User ownerId],
+                    args = @{@"ownerId":[User uid],
                              @"picurl":fetchedImageId,
                              @"content":[feed.feedTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                              @"planId":feed.plan.planId};

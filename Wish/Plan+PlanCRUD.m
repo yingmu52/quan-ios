@@ -81,7 +81,7 @@
         plan = [NSEntityDescription insertNewObjectForEntityForName:@"Plan"
                                              inManagedObjectContext:context];
 
-        plan.ownerId = [User ownerId];
+        plan.ownerId = [User uid];
         plan.planTitle = title;
         plan.finishDate = date;
         plan.isPrivate = @(isPrivate);
@@ -97,7 +97,7 @@
 {
     NSManagedObjectContext *context = [AppDelegate getContext];
     self.userDeleted = @(YES);
-    if (self.planId && [self.ownerId isEqualToString:[User ownerId]]){
+    if (self.planId && [self.ownerId isEqualToString:[User uid]]){
         //            [FetchCenter postToDeletePlan:self];
         [[[FetchCenter alloc] init] postToDeletePlan:self];
     }else{
