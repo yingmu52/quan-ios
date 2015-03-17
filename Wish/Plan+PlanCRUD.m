@@ -9,6 +9,7 @@
 #import "Plan+PlanCRUD.h"
 #import "FetchCenter.h"
 #import "AppDelegate.h"
+#import "User.h"
 @implementation Plan (PlanCRUD)
 
 - (NSArray *)planStatusTags{
@@ -80,7 +81,7 @@
         plan = [NSEntityDescription insertNewObjectForEntityForName:@"Plan"
                                              inManagedObjectContext:context];
 
-        plan.ownerId = [SystemUtil getOwnerId];
+        plan.ownerId = [User ownerId];
         plan.planTitle = title;
         plan.finishDate = date;
         plan.isPrivate = @(isPrivate);
@@ -96,7 +97,7 @@
 {
     NSManagedObjectContext *context = [AppDelegate getContext];
     self.userDeleted = @(YES);
-    if (self.planId && [self.ownerId isEqualToString:[SystemUtil getOwnerId]]){
+    if (self.planId && [self.ownerId isEqualToString:[User ownerId]]){
         //            [FetchCenter postToDeletePlan:self];
         [[[FetchCenter alloc] init] postToDeletePlan:self];
     }else{

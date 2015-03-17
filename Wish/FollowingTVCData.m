@@ -14,6 +14,7 @@
 #import "UIViewController+ECSlidingViewController.h"
 #import "UIImageView+WebCache.h"
 #import "Theme.h"
+#import "User.h"
 @interface FollowingTVCData () <NSFetchedResultsControllerDelegate,FetchCenterDelegate,FollowingCellDelegate,ECSlidingViewControllerDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @end
@@ -85,7 +86,7 @@
 
         //do fetchrequest
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
-        request.predicate = [NSPredicate predicateWithFormat:@"ownerId != %@",[SystemUtil getOwnerId]];
+        request.predicate = [NSPredicate predicateWithFormat:@"ownerId != %@",[User ownerId]];
         request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
         [request setFetchBatchSize:3];
         //create FetchedResultsController with context, sectionNameKeyPath, and you can cache here, so the next work if the same you can use your cashe file.

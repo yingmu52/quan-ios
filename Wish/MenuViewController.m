@@ -1,4 +1,4 @@
-//
+
 //  MenuViewController.m
 //  Wish
 //
@@ -10,11 +10,16 @@
 #import "MenuCell.h"
 #import "Theme.h"
 #import "SystemUtil.h"
-
+#import "User.h"
 #import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 #import "UIViewController+ECSlidingViewController.h"
 #import "Third Party/TencentOpenAPI.framework/Headers/TencentOAuth.h"
 #import "Third Party/TencentOpenAPI.framework/Headers/TencentApiInterface.h"
+#import "FetchCenter.h"
+#define AppKey @"ByYhJYTkXu0721fH"
+#define AppID @"222222"
+//#define AppID @"1104337894"
+
 typedef enum {
     MenuTableWishList = 0,
     MenuTableJourney,
@@ -22,9 +27,10 @@ typedef enum {
     MenuTableFollow
 }MenuTable;
 
-@interface MenuViewController () <TencentSessionDelegate>
+@interface MenuViewController () <TencentSessionDelegate,FetchCenterDelegate>
 @property (nonatomic) BOOL isLogin;
 @property (nonatomic,strong) TencentOAuth *tencentOAuth;
+@property (nonatomic,strong) APIResponse *apiResponse;
 @end
 
 @implementation MenuViewController
@@ -61,17 +67,17 @@ typedef enum {
     MenuCell *cell = (MenuCell *)[super tableView:tableView cellForRowAtIndexPath:indexPath];
     if (indexPath.section == 0) {
 
-        if (![SystemUtil isUserLogin]) {
+        if (![User isUserLogin]) {
             cell.menuImageView.image = [Theme menuLoginDefault];
             cell.menuTitle.text = @"登录";
         }else{
-            [cell.menuImageView setImageWithURL:[SystemUtil userProfilePictureURL]
+            [cell.menuImageView setImageWithURL:[User userProfilePictureURL]
                     usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-            cell.menuTitle.text = [SystemUtil userDisplayName];
+            cell.menuTitle.text = [User userDisplayName];
         }
     }
     if (indexPath.section == 2) {
-        if (![SystemUtil isUserLogin]) {
+        if (![User isUserLogin]) {
             //only setting
             [cell hideMessageButton];
         }else{
@@ -85,9 +91,10 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0 && ![SystemUtil isUserLogin]){
-        [self login];
-    }
+//    if (indexPath.section == 0 && ![User isUserLogin]){
+//        [self login];
+//    }
+    if (indexPath.section == 0) [self login];
     if (indexPath.section == 1) {
         NSString *identifier;
         switch (indexPath.row) {
@@ -134,7 +141,7 @@ typedef enum {
 
 - (TencentOAuth *)tencentOAuth{
     if (!_tencentOAuth) {
-        _tencentOAuth = [[TencentOAuth alloc] initWithAppId:@"222222" andDelegate:self];
+        _tencentOAuth = [[TencentOAuth alloc] initWithAppId:AppID andDelegate:self];
         _tencentOAuth.redirectURI = @"www.qq.com";
 #warning set local app id
     }
@@ -160,19 +167,30 @@ typedef enum {
 }
 
 - (void)getUserInfoResponse:(APIResponse *)response{
+    //use openId and access_token to get uid+ukey
+    FetchCenter *fc = [[FetchCenter alloc] init];
+    fc.delegate = self;
+    [fc fetchUidandUkeyWithOpenId:self.tencentOAuth.openId accessToken:self.tencentOAuth.accessToken];
+    self.apiResponse = response;
+}
+
+- (void)didFinishReceivingUid:(NSString *)uid uKey:(NSString *)uKey{
     //store access token, openid, expiration date, user photo, username, gender
-    NSDictionary *fetchedUserInfo = [response jsonResponse];
+    NSDictionary *fetchedUserInfo = [self.apiResponse jsonResponse];
     NSDictionary *localUserInfo = @{ACCESS_TOKEN:self.tencentOAuth.accessToken,
                                     OPENID:self.tencentOAuth.openId,
                                     EXPIRATION_DATE:self.tencentOAuth.expirationDate,
                                     PROFILE_PICTURE_URL:fetchedUserInfo[@"figureurl_qq_2"],
                                     GENDER:fetchedUserInfo[@"gender"],
                                     USER_DISPLAY_NAME:fetchedUserInfo[@"nickname"],
+                                    UID:uid,
+                                    UKEY:uKey,
                                     LOGIN_STATUS:@(YES)};
-    [SystemUtil updateOwnerInfo:localUserInfo];
+    [User updateOwnerInfo:localUserInfo];
     NSLog(@"%@",localUserInfo);
-    [self.tableView reloadData];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
 }
+
 //login fail
 -(void)tencentDidNotLogin:(BOOL)cancelled
 {

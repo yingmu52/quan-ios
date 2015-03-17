@@ -12,6 +12,7 @@
 #import "Plan+PlanCRUD.h"
 #import "AchieveCell.h"
 #import "WishDetailVCFollower.h"
+#import "User.h"
 @interface AchieveVCData () <NSFetchedResultsControllerDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @end
@@ -69,7 +70,7 @@
     }
     //do fetchrequest
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
-    request.predicate = [NSPredicate predicateWithFormat:@"ownerId == %@ && planStatus != %d",[SystemUtil getOwnerId],PlanStatusOnGoing];
+    request.predicate = [NSPredicate predicateWithFormat:@"ownerId == %@ && planStatus != %d",[User ownerId],PlanStatusOnGoing];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"updateDate" ascending:NO]];
     
     NSFetchedResultsController *newFRC =

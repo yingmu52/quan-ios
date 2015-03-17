@@ -8,6 +8,7 @@
 
 #import "FetchCenter.h"
 #import "AppDelegate.h"
+#import "User.h"
 #define BASE_URL @"http://182.254.167.228/superplan/"
 #define PLAN @"plan/"
 #define GET_LIST @"splan_plan_getlist.php"
@@ -25,6 +26,11 @@
 
 #define FOLLOW @"follow/"
 #define GET_FOLLOW_LIST @"splan_follow_get_feedslist.php"
+
+
+#define USER @"man/"
+#define GETUID @"splan_get_uid.php"
+
 typedef enum{
     FetchCenterGetOpCreatePlan = 0,
     FetchCenterGetOpDeletePlan,
@@ -32,7 +38,8 @@ typedef enum{
     FetchCenterGetOpCreateFeed,
     FetchCenterGetOpGetPlanList,
     FetchCenterGetOpSetPlanStatus,
-    FetchCenterGetOpFollowingPlanList
+    FetchCenterGetOpFollowingPlanList,
+    FetchCenterGetOpLoginForUidAndUkey
 }FetchCenterGetOp;
 
 typedef enum{
@@ -45,12 +52,22 @@ typedef enum{
 - (void)fetchFollowingPlanList{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,FOLLOW,GET_FOLLOW_LIST];
     [self getRequest:rqtStr
-           parameter:@{@"id":[SystemUtil getOwnerId]}
+           parameter:@{@"id":[User ownerId]}
            operation:FetchCenterGetOpFollowingPlanList
               entity:nil];
 }
 
-#pragma mark -
+#pragma mark - Login&out
+
+- (void)fetchUidandUkeyWithOpenId:(NSString *)openId accessToken:(NSString *)token{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,USER,GETUID];
+    [self getRequest:rqtStr
+           parameter:@{@"openid":openId,
+                       @"token":token}
+           operation:FetchCenterGetOpLoginForUidAndUkey
+              entity:nil];
+}
+
 #pragma mark - personal
 
 - (void)updateStatus:(Plan *)plan{
@@ -68,7 +85,7 @@ typedef enum{
 
 -(void)uploadToCreatePlan:(Plan *)plan{
     NSString *baseUrl = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PLAN,CREATE_PLAN];
-    NSDictionary *args = @{@"ownerId":[SystemUtil getOwnerId],
+    NSDictionary *args = @{@"ownerId":[User ownerId],
                            @"title":[plan.planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                            @"finishDate":@([SystemUtil daysBetween:[NSDate date] and:plan.finishDate]),
                            @"private":plan.isPrivate};
@@ -102,7 +119,7 @@ typedef enum{
                 NSString *baseURL = [NSString stringWithFormat:@"%@%@%@",BASE_URL,FEED,CREATE_FEED];
                 NSDictionary *args;
                 if (feed.plan.planId && feed.feedTitle) {
-                    args = @{@"ownerId":[SystemUtil getOwnerId],
+                    args = @{@"ownerId":[User ownerId],
                              @"picurl":fetchedImageId,
                              @"content":[feed.feedTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                              @"planId":feed.plan.planId};
@@ -173,6 +190,12 @@ typedef enum{
             [self.delegate didFinishFetchingFollowingPlanList];
         }
             break;
+        case FetchCenterGetOpLoginForUidAndUkey:{
+            NSString *uid = [json valueForKeyPath:@"data.uid"];
+            NSString *ukey = [json valueForKeyPath:@"data.ukey"];
+            [self.delegate didFinishReceivingUid:uid uKey:ukey];
+        }
+            break;
         default:
             break;
     }
@@ -180,20 +203,23 @@ typedef enum{
 
 #pragma mark - main get and post method
 
+- (NSString *)argumentStringWithDictionary:(NSDictionary *)dict{
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:dict.allKeys.count];
+    [dict enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL* stop) {
+        [array addObject:[NSString stringWithFormat:@"%@=%@",key,value]];
+    }];
+    return [array componentsJoinedByString:@"&"];
+}
+
 - (void)getRequest:(NSString *)baseURL parameter:(NSDictionary *)dict operation:(FetchCenterGetOp)op entity:(NSManagedObject *)obj{
     
     //base url with version
     baseURL = [baseURL stringByAppendingString:@"?"];
-    baseURL = [self versionForBaseURL:baseURL];
+    baseURL = [self versionForBaseURL:baseURL operation:op];
     
     
     //content arguments
-    NSMutableArray *array = [NSMutableArray arrayWithCapacity:dict.allKeys.count];
-    [dict enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL* stop) {
-        [array addObject:[NSString stringWithFormat:@"%@=%@",key,value]];
-        
-    }];
-    NSString *rqtStr = [baseURL stringByAppendingString:[array componentsJoinedByString:@"&"]];
+    NSString *rqtStr = [baseURL stringByAppendingString:[self argumentStringWithDictionary:dict]];
     
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:rqtStr]
@@ -222,7 +248,7 @@ typedef enum{
 
 - (void)postImageWithOperation:(NSManagedObject *)obj postOp:(FetchCenterPostOp)postOp{
     NSString *rqtUploadImage = [NSString stringWithFormat:@"%@%@%@?",BASE_URL,PIC,UPLOAD_IMAGE];
-    rqtUploadImage = [self versionForBaseURL:rqtUploadImage];
+    rqtUploadImage = [self versionForBaseURL:rqtUploadImage operation:-1];
     //upload image
     
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
@@ -253,15 +279,19 @@ typedef enum{
 #pragma mark - version control 
 
 //return a new base url string with appened version argument
-- (NSString *)versionForBaseURL:(NSString *)baseURL{
-    return [baseURL stringByAppendingString:@"version=2.2.0&longinType=uid&uid=12345&ukey=12345&"];
+- (NSString *)versionForBaseURL:(NSString *)baseURL operation:(FetchCenterGetOp)op{
+    NSMutableDictionary *dict = [@{@"version":@"2.2.2",@"loginType":@"qq"} mutableCopy];
+    if (op != FetchCenterGetOpLoginForUidAndUkey) {
+        [dict addEntriesFromDictionary:@{@"uid":[User uid],@"ukey":[User uKey]}];
+    }
+    return [[baseURL stringByAppendingString:[self argumentStringWithDictionary:dict]] stringByAppendingString:@"&"];
 }
 
 #pragma mark - get image url wraper
 
 - (NSURL *)urlWithImageID:(NSString *)imageId{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@?",BASE_URL,PIC,GET_IMAGE];
-    NSString *url = [NSString stringWithFormat:@"%@id=%@",[self versionForBaseURL:rqtStr],imageId];
+    NSString *url = [NSString stringWithFormat:@"%@id=%@",[self versionForBaseURL:rqtStr operation:-1],imageId];
     return [NSURL URLWithString:url];
 }
 @end

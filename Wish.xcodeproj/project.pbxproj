@@ -45,6 +45,7 @@
 		AEBD13E51A948DD400F5F0D3 /* DiscoveryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBD13E31A948DD400F5F0D3 /* DiscoveryCell.m */; };
 		AEBFCA371A78614100686EFE /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA361A78614100686EFE /* PostDetailViewController.m */; };
 		AEBFCA381A78614100686EFE /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA361A78614100686EFE /* PostDetailViewController.m */; };
+		AEC5B9AA1AB7EB40008ECB92 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC5B9A91AB7EB40008ECB92 /* User.m */; };
 		AEC8CE8E1AAF872A005364F8 /* StationView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC8CE8D1AAF872A005364F8 /* StationView.m */; };
 		AEC8CE8F1AAF872A005364F8 /* StationView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC8CE8D1AAF872A005364F8 /* StationView.m */; };
 		AEC8CE911AAF8823005364F8 /* StationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC8CE901AAF8823005364F8 /* StationView.xib */; };
@@ -219,6 +220,8 @@
 		AEBD13E31A948DD400F5F0D3 /* DiscoveryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryCell.m; sourceTree = "<group>"; };
 		AEBFCA351A78614100686EFE /* PostDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostDetailViewController.h; sourceTree = "<group>"; };
 		AEBFCA361A78614100686EFE /* PostDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostDetailViewController.m; sourceTree = "<group>"; };
+		AEC5B9A81AB7EB40008ECB92 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		AEC5B9A91AB7EB40008ECB92 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		AEC8CE8C1AAF872A005364F8 /* StationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationView.h; sourceTree = "<group>"; };
 		AEC8CE8D1AAF872A005364F8 /* StationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationView.m; sourceTree = "<group>"; };
 		AEC8CE901AAF8823005364F8 /* StationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StationView.xib; sourceTree = "<group>"; };
@@ -421,6 +424,8 @@
 		AE01723C1A65CD8E0014266F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AEC5B9A81AB7EB40008ECB92 /* User.h */,
+				AEC5B9A91AB7EB40008ECB92 /* User.m */,
 				AEE075361A744A770015155B /* SystemUtil.h */,
 				AEE075371A744A770015155B /* SystemUtil.m */,
 				AEF7F2911A686FA30022410B /* Theme.h */,
@@ -930,6 +935,7 @@
 				AEEC6C621A6DB0010021B7E4 /* NSArray+PureLayout.m in Sources */,
 				AE0E794B1A76EB50007C48EE /* Reachability.m in Sources */,
 				AECE2BF81AA0521600B1C58E /* UIView+WebCacheOperation.m in Sources */,
+				AEC5B9AA1AB7EB40008ECB92 /* User.m in Sources */,
 				AEE4A6D81A972FAA00ABF946 /* FollowingTVCData.m in Sources */,
 				AECE2BEB1AA0521600B1C58E /* SDImageCache.m in Sources */,
 				AECE2BF71AA0521600B1C58E /* UIImageView+WebCache.m in Sources */,

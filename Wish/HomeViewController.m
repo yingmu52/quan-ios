@@ -20,6 +20,7 @@
 #import "HomeCardFlowLayout.h"
 #import "StationView.h"
 #import "PopupView.h"
+#import "User.h"
 const NSUInteger maxCardNum = 10;
 
 @interface HomeViewController () <NSFetchedResultsControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UICollectionViewDelegateFlowLayout,UIGestureRecognizerDelegate,PopupViewDelegate>
@@ -57,7 +58,7 @@ const NSUInteger maxCardNum = 10;
     }
     //do fetchrequest
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
-//    request.predicate = [NSPredicate predicateWithFormat:@"userDeleted == %@ && ownerId == %@ && planStatus == %d",@(NO),[SystemUtil getOwnerId],PlanStatusOnGoing];
+    request.predicate = [NSPredicate predicateWithFormat:@"userDeleted == %@ && ownerId == %@ && planStatus == %d",@(NO),[User ownerId],PlanStatusOnGoing];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
 
     NSFetchedResultsController *newFRC =

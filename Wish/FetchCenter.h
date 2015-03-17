@@ -17,6 +17,7 @@
 - (void)didFinishFetchingFollowingPlanList;
 - (void)didFinishUploadingPlan:(Plan *)plan;
 - (void)didFinishUploadingFeed:(Feed *)feed;
+- (void)didFinishReceivingUid:(NSString *)uid uKey:(NSString *)uKey;
 @end
 @interface FetchCenter : NSObject
 @property (nonatomic,weak) id <FetchCenterDelegate>delegate;
@@ -30,4 +31,9 @@
 - (void)fetchFollowingPlanList;
 
 - (NSURL *)urlWithImageID:(NSString *)imageId;
+
+- (void)fetchUidandUkeyWithOpenId:(NSString *)openId accessToken:(NSString *)token;
+
+
+
 @end
