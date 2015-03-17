@@ -283,6 +283,7 @@ typedef enum{
     NSMutableDictionary *dict = [@{@"version":@"2.2.2",@"loginType":@"qq"} mutableCopy];
     if (op != FetchCenterGetOpLoginForUidAndUkey) {
         [dict addEntriesFromDictionary:@{@"uid":[User uid],@"ukey":[User uKey]}];
+        dict[@"loginType"] = @"uid";
     }
     return [[baseURL stringByAppendingString:[self argumentStringWithDictionary:dict]] stringByAppendingString:@"&"];
 }
