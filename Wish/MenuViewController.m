@@ -91,14 +91,14 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0 && ![User isUserLogin]){
-        [self login];
-    }
-//    if (indexPath.section == 0){
-//        [User updateOwnerInfo:nil];
-//        [self.tableView reloadData];
+//    if (indexPath.section == 0 && ![User isUserLogin]){
 //        [self login];
 //    }
+    if (indexPath.section == 0){
+        [User updateOwnerInfo:nil];
+        [self.tableView reloadData];
+        [self login];
+    }
 
     if (indexPath.section == 1) {
         NSString *identifier;

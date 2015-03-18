@@ -85,8 +85,7 @@ typedef enum{
 
 -(void)uploadToCreatePlan:(Plan *)plan{
     NSString *baseUrl = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PLAN,CREATE_PLAN];
-    NSDictionary *args = @{@"ownerId":[User uid],
-                           @"title":[plan.planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+    NSDictionary *args = @{@"title":[plan.planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                            @"finishDate":@([SystemUtil daysBetween:[NSDate date] and:plan.finishDate]),
                            @"private":plan.isPrivate};
     [self getRequest:baseUrl parameter:args operation:FetchCenterGetOpCreatePlan entity:plan];
@@ -100,8 +99,7 @@ typedef enum{
 - (void)postToDeletePlan:(Plan *)plan
 {
     NSString *baseUrl = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PLAN,DELETE_PLAN];
-    NSDictionary *args = @{@"id":plan.planId,
-                           @"ownerId":plan.ownerId};
+    NSDictionary *args = @{@"id":plan.planId};
     [self getRequest:baseUrl parameter:args operation:FetchCenterGetOpDeletePlan entity:plan];
 }
 
@@ -119,11 +117,12 @@ typedef enum{
                 NSString *baseURL = [NSString stringWithFormat:@"%@%@%@",BASE_URL,FEED,CREATE_FEED];
                 NSDictionary *args;
                 if (feed.plan.planId && feed.feedTitle) {
-                    args = @{@"ownerId":[User uid],
-                             @"picurl":fetchedImageId,
+                    args = @{@"picurl":fetchedImageId,
                              @"content":[feed.feedTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                              @"planId":feed.plan.planId};
-                    [self getRequest:baseURL parameter:args operation:FetchCenterGetOpCreateFeed entity:obj];
+                    [self getRequest:baseURL
+                           parameter:args
+                           operation:FetchCenterGetOpCreateFeed entity:obj];
                 }
             }
         }
