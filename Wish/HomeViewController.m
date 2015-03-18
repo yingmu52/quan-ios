@@ -197,8 +197,25 @@ const NSUInteger maxCardNum = 10;
 }
 
 #pragma mark - Scroll View
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+- (void)scrollViewWillEndDragging:(UICollectionView *)collectionView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
 {
+    CGFloat kMaxIndex = self.fetchedRC.fetchedObjects.count;
+    UICollectionViewFlowLayout *layout = [self cardFlowLayout];
+    CGFloat targetX = collectionView.contentOffset.x + velocity.x * 60.0;
+    CGFloat targetIndex = round(targetX / (layout.itemSize.width + layout.minimumLineSpacing));
+    if (targetIndex < 0)
+        targetIndex = 0;
+    if (targetIndex > kMaxIndex)
+        targetIndex = kMaxIndex;
+    targetContentOffset->x = targetIndex * (layout.itemSize.width + layout.minimumLineSpacing);
+    
+    if (collectionView.contentOffset.x != targetContentOffset->x){
+        [UIView animateWithDuration:0.2 animations:^{
+            [collectionView setContentOffset:*targetContentOffset];
+        }];
+    }
+    NSLog(@"%f",targetContentOffset->x);
+
 }
 
 
