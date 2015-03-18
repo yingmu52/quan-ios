@@ -29,9 +29,8 @@
 
 - (void)setPlan:(Plan *)plan{
     _plan = plan;
-    self.cardImageView = _plan.image;
+    self.cardImageView.image = _plan.image;
 }
-
 - (void)updateCardViewToLocation:(CGPoint)location
 {
     self.cardView.center = location;

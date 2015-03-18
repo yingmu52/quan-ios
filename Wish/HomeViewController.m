@@ -195,52 +195,13 @@ const NSUInteger maxCardNum = 10;
     
     
 }
-
-#pragma mark - Scroll View
-- (void)scrollViewWillEndDragging:(UICollectionView *)collectionView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
-{
-    CGFloat kMaxIndex = self.fetchedRC.fetchedObjects.count;
-    UICollectionViewFlowLayout *layout = [self cardFlowLayout];
-    CGFloat targetX = collectionView.contentOffset.x + velocity.x * 60.0;
-    CGFloat targetIndex = round(targetX / (layout.itemSize.width + layout.minimumLineSpacing));
-    if (targetIndex < 0)
-        targetIndex = 0;
-    if (targetIndex > kMaxIndex)
-        targetIndex = kMaxIndex;
-    targetContentOffset->x = targetIndex * (layout.itemSize.width + layout.minimumLineSpacing);
-    
-    if (collectionView.contentOffset.x != targetContentOffset->x){
-        [UIView animateWithDuration:0.2 animations:^{
-            [collectionView setContentOffset:*targetContentOffset];
-        }];
-    }
-    NSLog(@"%f",targetContentOffset->x);
-
-}
-
-
 #pragma mark -  UICollectionView methods
-
-- (UICollectionViewFlowLayout *)cardFlowLayout{
-    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    CGSize deviceSize = self.view.frame.size;
-    CGFloat interMargin = deviceSize.width * 24.0 / 640;
-    CGFloat itemWidth = 548.0/640*deviceSize.width;
-    CGFloat itemHeight = 810.0/1136*deviceSize.height;
-    CGFloat edgeMargin = deviceSize.width - itemWidth - 2*interMargin;
-    layout.minimumInteritemSpacing = 0.0f;
-    layout.minimumLineSpacing = 0.0f;
-    layout.itemSize = CGSizeMake(itemWidth,itemHeight);
-    layout.sectionInset = UIEdgeInsetsMake(0, edgeMargin, 0, edgeMargin);
-    return layout;
-}
 
 -(void)setupCollectionView {
     self.cardCollectionView.backgroundColor = [UIColor clearColor];
     self.cardCollectionView.pagingEnabled = NO;
-    self.cardCollectionView.collectionViewLayout = [self cardFlowLayout];
-//    self.cardCollectionView.collectionViewLayout = [[HomeCardFlowLayout alloc] init];
+//    self.cardCollectionView.collectionViewLayout = [self cardFlowLayout];
+    self.cardCollectionView.collectionViewLayout = [[HomeCardFlowLayout alloc] init];
     
     UILongPressGestureRecognizer *lp = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     lp.delaysTouchesBegan = YES;
@@ -251,17 +212,21 @@ const NSUInteger maxCardNum = 10;
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *)longPress{
     
-    Plan *plan = [self.fetchedRC objectAtIndexPath:[self.cardCollectionView indexPathForItemAtPoint:[longPress locationInView:self.cardCollectionView]]];
+    NSIndexPath *indexPath = [self.cardCollectionView indexPathForItemAtPoint:[longPress locationInView:self.cardCollectionView]];
+    Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
     if (plan) {
         UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
         if (longPress.state == UIGestureRecognizerStateBegan) {
-            self.stationView.plan = plan;
             [keyWindow addSubview:self.stationView];
             [self.stationView layoutIfNeeded]; //important for next line to work
             self.stationView.currentCardLocation = [longPress locationInView:self.stationView];
+            
+            self.stationView.plan = plan;
+
         }else if (longPress.state == UIGestureRecognizerStateChanged){
             //update card location
             self.stationView.currentCardLocation = [longPress locationInView:self.stationView];
+            NSLog(@"%@",self.stationView.plan.planTitle);
         }else if (longPress.state == UIGestureRecognizerStateEnded ||
                   longPress.state == UIGestureRecognizerStateFailed ||
                   longPress.state == UIGestureRecognizerStateCancelled) {
