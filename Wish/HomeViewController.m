@@ -33,10 +33,6 @@ const NSUInteger maxCardNum = 10;
 
 @property (nonatomic,strong) NSMutableArray *itemChanges;
 
-
-@property (nonatomic, assign) BOOL queuedScrollAnimation;
-@property (nonatomic,assign) CGPoint queuedAnimationOffset;
-
 @end
 
 @implementation HomeViewController
@@ -203,52 +199,8 @@ const NSUInteger maxCardNum = 10;
 #pragma mark - Scroll View
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
 {
-    CGPoint offset = *targetContentOffset;
-    
-    UICollectionViewFlowLayout *layout = [self cardFlowLayout];
-    
-    CGFloat pageSize = layout.itemSize.width + layout.minimumLineSpacing;
-    NSUInteger page = roundf(offset.x / pageSize);
-    offset.x = page * pageSize;
-    
-    // if the new offset is in the opposite direction of the scrolling direction
-    if ((offset.x < scrollView.contentOffset.x && velocity.x > 0) || (offset.x > scrollView.contentOffset.x && velocity.x < 0))
-    {
-        self.queuedScrollAnimation = YES;
-        self.queuedAnimationOffset = offset;
-    }
-    else
-    {
-        *targetContentOffset = offset;
-    }
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
-    if (self.queuedScrollAnimation)
-    {
-        self.queuedScrollAnimation = NO;
-    }
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    if (self.queuedScrollAnimation)
-    {
-        self.queuedScrollAnimation = NO;
-        [scrollView setContentOffset:self.queuedAnimationOffset animated:YES];
-    }
-}
-
-//- (void)scrollViewWillEndDragging:(UICollectionView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
-//{
-////    [self.cardCollectionView scrollToItemAtIndexPath:[self.fetchedRC indexPathForObject:self.currentPlan] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-//    UICollectionViewFlowLayout *layout = [self cardFlowLayout];
-////    NSLog(@"%f,%f,%@,%f",layout.sectionInset.left,layout.sectionInset.right,NSStringFromCGSize(layout.itemSize),layout.minimumLineSpacing);
-////    NSLog(@"target %f contentoffset %f",targetContentOffset->x,scrollView.contentOffset.x);
-//    *targetContentOffset = scrollView.contentOffset;
-//    NSLog(@"scrollViewWillEndDragging");
-//}
 
 #pragma mark -  UICollectionView methods
 
@@ -258,7 +210,7 @@ const NSUInteger maxCardNum = 10;
     CGSize deviceSize = self.view.frame.size;
     CGFloat interMargin = deviceSize.width * 24.0 / 640;
     CGFloat itemWidth = 548.0/640*deviceSize.width;
-    CGFloat itemHeight = 850.0/1136*deviceSize.height;
+    CGFloat itemHeight = 810.0/1136*deviceSize.height;
     CGFloat edgeMargin = deviceSize.width - itemWidth - 2*interMargin;
     layout.minimumInteritemSpacing = 0.0f;
     layout.minimumLineSpacing = 0.0f;
