@@ -15,6 +15,7 @@
 //@property (nonatomic,strong) UIImage *capturedImage;
 @property (nonatomic,strong) UIButton *cameraButton;
 
+@property (nonatomic) CGFloat lastContentOffSet; // for camera animation
 @end
 @implementation WishDetailVCOwner
 
@@ -57,6 +58,7 @@
     
 }
 #pragma mark - setup views
+
 - (void)loadCornerCamera
 {
     //load camera image
@@ -136,28 +138,40 @@
 
 #pragma mark - Scroll view delegate (widget animation)
 
--  (void)displayWidget:(BOOL)shouldDisplay
-{
-    self.cameraButton.hidden = !shouldDisplay;
-    for (WishDetailCell *cell in self.tableView.visibleCells){
-        [UIView animateWithDuration:0.1 animations:^{
-            [cell moveWidget:shouldDisplay];
-        }];
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    self.lastContentOffSet = scrollView.contentOffset.y;
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    if (self.lastContentOffSet < scrollView.contentOffset.y) {
+        NSLog(@"up");
+        //hide camera
+        if (self.cameraButton.isUserInteractionEnabled) [self animateCameraIcon:YES];
+        
+    }else if (self.lastContentOffSet > scrollView.contentOffset.y) {
+        NSLog(@"down");
+        //show camera
+        if (!self.cameraButton.isUserInteractionEnabled) [self animateCameraIcon:NO];
     }
-    
+
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
-    [self displayWidget:NO];
+- (void)animateCameraIcon:(BOOL)shouldHideCamera{
+    CGFloat movingDistance = CGRectGetHeight(self.view.frame) * 0.5f;
+    if (shouldHideCamera){
+        [UIView animateWithDuration:1.0 animations:^{
+            self.cameraButton.center = CGPointMake(self.cameraButton.center.x,
+                                                   self.cameraButton.center.y + movingDistance);
+            self.cameraButton.userInteractionEnabled = NO;
+        }];
+    }else{
+        [UIView animateWithDuration:0.7 animations:^{
+            self.cameraButton.center = CGPointMake(self.cameraButton.center.x,
+                                                   self.cameraButton.center.y - movingDistance);
+        }];
+        self.cameraButton.userInteractionEnabled = YES;
+    }
 }
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
-    [self displayWidget:YES];
-}
-
-
 #pragma mark - camera
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{

@@ -189,6 +189,10 @@ typedef enum {
                               delegate:self
                      cancelButtonTitle:@"OK"
                      otherButtonTitles:nil, nil] show];
+    [User updateOwnerInfo:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
 }
 
 - (void)didFinishReceivingUid:(NSString *)uid uKey:(NSString *)uKey{
