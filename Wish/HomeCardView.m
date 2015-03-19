@@ -12,6 +12,7 @@
 #import "Feed.h"
 #import "UIImageView+WebCache.h"
 #import "FetchCenter.h"
+#import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 @interface HomeCardView ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -30,17 +31,9 @@
     _plan = plan;
     if (_plan) {
         if (!_plan.image){
-            
-            [self.imageView sd_setImageWithURL:[[FetchCenter new] urlWithImageID:_plan.backgroundNum]
-                              placeholderImage:nil
-                                     completed:^(UIImage *image,
-                                                 NSError *error,
-                                                 SDImageCacheType cacheType,
-                                                 NSURL *imageURL)
-            {
-                _plan.image = image;
-            }];
-            
+            [self. imageView setImageWithURL:[[FetchCenter new] urlWithImageID:_plan.backgroundNum]
+                 usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+//            [self.imageView sd_setImageWithURL:[[[FetchCenter new] urlWithImageID:_plan.backgroundNum] placeholderImage:nil];
 //            NSAssert(_plan.backgroundNum != nil, @"nil plan background id");
         }else{
             self.imageView.image = _plan.image;

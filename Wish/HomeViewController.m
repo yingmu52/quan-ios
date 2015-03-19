@@ -314,8 +314,11 @@ const NSUInteger maxCardNum = 10;
                 [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
                     NSFetchedResultsChangeType type = [key unsignedIntegerValue];
                     switch(type) {
-                        case NSFetchedResultsChangeInsert:
-                            [self.cardCollectionView insertItemsAtIndexPaths:@[obj]];
+                        case NSFetchedResultsChangeInsert:{
+                            [UIView performWithoutAnimation:^{
+                                [self.cardCollectionView insertItemsAtIndexPaths:@[obj]];
+                            }];
+                        }
                             NSLog(@"Inserted Plan");
                             break;
                         case NSFetchedResultsChangeDelete:
@@ -325,8 +328,12 @@ const NSUInteger maxCardNum = 10;
                         case NSFetchedResultsChangeUpdate:{
                             Plan *plan = [controller objectAtIndexPath:obj];
                             if (plan.planId && plan.backgroundNum) {
-                                [self.cardCollectionView reloadItemsAtIndexPaths:@[obj]];
-                                [self.cardCollectionView scrollToItemAtIndexPath:obj atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
+                                [UIView performWithoutAnimation:^{
+                                    [self.cardCollectionView reloadItemsAtIndexPaths:@[obj]];
+                                    [self.cardCollectionView scrollToItemAtIndexPath:obj
+                                                                    atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
+                                                                            animated:NO];
+                                }];
                                 NSLog(@"Updated Plan");
                             }
                         }
