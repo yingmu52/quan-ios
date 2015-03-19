@@ -23,7 +23,7 @@
 #import "User.h"
 const NSUInteger maxCardNum = 10;
 
-@interface HomeViewController () <NSFetchedResultsControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UICollectionViewDelegateFlowLayout,UIGestureRecognizerDelegate,PopupViewDelegate>
+@interface HomeViewController () <NSFetchedResultsControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UICollectionViewDelegateFlowLayout,UIGestureRecognizerDelegate,PopupViewDelegate,HomeCardViewDelegate>
 
 @property (nonatomic,weak) IBOutlet UICollectionView *cardCollectionView;
 @property (nonatomic,weak) Plan *currentPlan;
@@ -38,13 +38,13 @@ const NSUInteger maxCardNum = 10;
 @implementation HomeViewController
 
 
-
-- (Plan *)currentPlan{
-    CGPoint currentPoint = CGPointMake(self.cardCollectionView.center.x + self.cardCollectionView.contentOffset.x,
-                                       self.cardCollectionView.center.y + self.cardCollectionView.contentOffset.y);
-    NSIndexPath *indexPath = [self.cardCollectionView indexPathForItemAtPoint:currentPoint];
-    return [self.fetchedRC objectAtIndexPath:indexPath];
-}
+//
+//- (Plan *)currentPlan{
+//    CGPoint currentPoint = CGPointMake(self.cardCollectionView.center.x + self.cardCollectionView.contentOffset.x,
+//                                       self.cardCollectionView.center.y + self.cardCollectionView.contentOffset.y);
+//    NSIndexPath *indexPath = [self.cardCollectionView indexPathForItemAtPoint:currentPoint];
+//    return [self.fetchedRC objectAtIndexPath:indexPath];
+//}
 
 - (NSFetchedResultsController *)fetchedRC
 {
@@ -154,17 +154,27 @@ const NSUInteger maxCardNum = 10;
 }
 
 #pragma mark - Camera Util
-
-- (IBAction)showCamera:(UIButton *)sender{
+- (void)didPressCameraOnCard:(HomeCardView *)cardView{
     if (self.fetchedRC.fetchedObjects.count) {
         UIImagePickerController *controller = [SystemUtil showCamera:self];
         if (controller) {
-            [self presentViewController:controller
-                               animated:YES
-                             completion:nil];
+            [self presentViewController:controller animated:YES completion:^{
+                self.currentPlan = cardView.plan;
+            }];
         }
     }
+
 }
+//- (IBAction)showCamera:(UIButton *)sender{
+//    if (self.fetchedRC.fetchedObjects.count) {
+//        UIImagePickerController *controller = [SystemUtil showCamera:self];
+//        if (controller) {
+//            [self presentViewController:controller
+//                               animated:YES
+//                             completion:nil];
+//        }
+//    }
+//}
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -262,7 +272,7 @@ const NSUInteger maxCardNum = 10;
 //    cell.delegate = self;
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
     cell.plan = plan;
-
+    cell.delegate = self;
     return cell;
     
 }

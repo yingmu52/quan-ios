@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "Plan.h"
+
+@class HomeCardView;
+
+@protocol HomeCardViewDelegate <NSObject>
+@optional
+- (void)didPressCameraOnCard:(HomeCardView *)cardView;
+@end
+
 @interface HomeCardView : UICollectionViewCell
 @property (nonatomic,strong) Plan *plan;
+@property (nonatomic,weak) id <HomeCardViewDelegate>delegate;
 @end

@@ -84,6 +84,10 @@ typedef enum {
             [cell showMessageButton];
         }
     }
+    
+    if ((indexPath.section == 1 && indexPath.row == 2) || indexPath.row == 3) {
+        cell.hidden = YES;
+    }
     return cell;
 
 }
@@ -91,14 +95,14 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if (indexPath.section == 0 && ![User isUserLogin]){
-//        [self login];
-//    }
-    if (indexPath.section == 0){
-        [User updateOwnerInfo:nil];
-        [self.tableView reloadData];
+    if (indexPath.section == 0 && ![User isUserLogin]){
         [self login];
     }
+//    if (indexPath.section == 0){
+//        [User updateOwnerInfo:nil];
+//        [self.tableView reloadData];
+//        [self login];
+//    }
 
     if (indexPath.section == 1) {
         NSString *identifier;

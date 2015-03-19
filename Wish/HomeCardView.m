@@ -99,4 +99,8 @@
     
 }
 
+
+- (IBAction)cameraPressed:(UIButton *)sender{
+    [self.delegate didPressCameraOnCard:self];
+}
 @end
