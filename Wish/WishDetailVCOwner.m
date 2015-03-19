@@ -144,12 +144,10 @@
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     if (self.lastContentOffSet < scrollView.contentOffset.y) {
-        NSLog(@"up");
         //hide camera
         if (self.cameraButton.isUserInteractionEnabled) [self animateCameraIcon:YES];
         
     }else if (self.lastContentOffSet > scrollView.contentOffset.y) {
-        NSLog(@"down");
         //show camera
         if (!self.cameraButton.isUserInteractionEnabled) [self animateCameraIcon:NO];
     }

@@ -97,7 +97,7 @@
                                 </mask>
                             </variation>
                         </view>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="delete_default" highlightedImage="delete_selected" translatesAutoresizingMaskIntoConstraints="NO" id="gom-Tr-LUq">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="delete_default" highlightedImage="delete_selected" translatesAutoresizingMaskIntoConstraints="NO" id="gom-Tr-LUq">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="gom-Tr-LUq" secondAttribute="height" multiplier="1:1" id="0Ao-kY-Vcx"/>
@@ -126,7 +126,8 @@
                                             <exclude reference="ZXF-rP-Jd2"/>
                                         </mask>
                                     </variation>
-                                    <variation key="heightClass=regular-widthClass=compact">
+                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                        <rect key="frame" x="66" y="66" width="67" height="68"/>
                                         <mask key="constraints">
                                             <include reference="ZXF-rP-Jd2"/>
                                         </mask>
@@ -228,7 +229,8 @@
                                     <exclude reference="vWA-9Z-s43"/>
                                 </mask>
                             </variation>
-                            <variation key="heightClass=regular-widthClass=compact">
+                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                <rect key="frame" x="130" y="308" width="140" height="184"/>
                                 <mask key="subviews">
                                     <include reference="rhp-Iy-1SU"/>
                                 </mask>

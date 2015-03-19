@@ -301,8 +301,7 @@ const NSUInteger maxCardNum = 10;
         case NSFetchedResultsChangeUpdate:
             change[@(type)] = indexPath;
             break;
-        case NSFetchedResultsChangeMove:
-            change[@(type)] = @[indexPath, newIndexPath];
+        default:
             break;
     }
     [self.itemChanges addObject:change];
@@ -332,14 +331,14 @@ const NSUInteger maxCardNum = 10;
                             }
                         }
                             break;
-                        case NSFetchedResultsChangeMove:
-                            [self.cardCollectionView moveItemAtIndexPath:obj[0] toIndexPath:obj[1]];
+                        default:
                             break;
                     }
                 }];
             }
         } completion:^(BOOL finished) {
-            self.itemChanges = nil;
+            [[AppDelegate getContext] save:nil];
+            self.itemChanges = nil;;
         }];
     });
 }
