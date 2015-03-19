@@ -61,8 +61,8 @@
         
         
         NSDictionary *baseAttrs = @{NSFontAttributeName:[UIFont systemFontOfSize:12]};
-        NSDictionary *countAttrs1 = @{NSFontAttributeName:[UIFont fontWithName:@"Arial" size:26]};
-        NSDictionary *countAttrs2 = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00bac3"]};
+//        NSDictionary *countAttrs1 = @{NSFontAttributeName:[UIFont fontWithName:@"Arial" size:26]};
+//        NSDictionary *countAttrs2 = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00bac3"]};
         
         NSMutableAttributedString *final = [[NSMutableAttributedString alloc] initWithString:@"剩余 "
                                                                                   attributes:baseAttrs];
@@ -70,10 +70,14 @@
         NSMutableAttributedString *back = [[NSMutableAttributedString alloc] initWithString:@" 天"
                                                                                  attributes:baseAttrs];
         
-        NSMutableAttributedString *mid = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld/%ld",(long)pastDays,(long)totalDays]
-                                                                                attributes:countAttrs1];
-        [mid addAttributes:countAttrs2
-                     range:[mid.string rangeOfString:[NSString stringWithFormat:@"%ld",(long)pastDays]]];
+        
+        NSDictionary *attrs = @{NSFontAttributeName:[UIFont fontWithName:@"Arial" size:26],
+                                NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00bac3"]};
+        NSAttributedString *mid = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",@(totalDays - pastDays)] attributes:attrs];
+//        NSMutableAttributedString *mid = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld/%ld",(long)pastDays,(long)totalDays]
+//                                                                                attributes:countAttrs1];
+//        [mid addAttributes:countAttrs2
+//                     range:[mid.string rangeOfString:[NSString stringWithFormat:@"%ld",(long)pastDays]]];
         
         
         
