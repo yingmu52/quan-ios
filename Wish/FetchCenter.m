@@ -238,7 +238,7 @@ typedef enum{
                                           [self didFinishSendingGetRequest:responseJson operation:op entity:obj];
                                       }else{
                                           NSLog(@"Fail Get Request :%@\n op: %d \n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@",request,op,baseURL,dict,responseJson,error);
-                                          [self.delegate didFailSendingRequestWithInfo:responseJson];
+                                          [self.delegate didFailSendingRequestWithInfo:responseJson entity:obj];
                                       }
                                   }];
     [task resume];
@@ -270,7 +270,7 @@ typedef enum{
                                                                              entity:obj];
                                               }else{
                                                   NSLog(@"fail to upload image \n response:%@",json);
-                                                  [self.delegate didFailUploadingImageWithInfo:json];
+                                                  [self.delegate didFailUploadingImageWithInfo:json entity:obj];
                                               }
                                           }];
     [uploadTask resume];

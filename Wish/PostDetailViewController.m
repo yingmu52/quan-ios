@@ -178,15 +178,25 @@
     });
 }
 
-- (void)didFailSendingRequestWithInfo:(NSDictionary *)info{
+- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
     dispatch_async(dispatch_get_main_queue(), ^{
+        
+        //update navigation item
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
         self.backButton.enabled = YES;
-        [[[UIAlertView alloc] initWithTitle:nil
-                                    message:[NSString stringWithFormat:@"%@",info]
+        
+        //show alerts
+        [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
+                                    message:[NSString stringWithFormat:@"%@",info[@"msg"]]
                                    delegate:self
                           cancelButtonTitle:@"OK"
                           otherButtonTitles:nil, nil] show];
+        
+        //remove plan from core data
+        if ([managedObject isKindOfClass:[Plan class]]){
+            Plan *plan = (Plan *)managedObject;
+            [plan deleteSelf];
+        }
     });
 
 }

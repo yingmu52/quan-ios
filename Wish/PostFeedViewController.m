@@ -74,7 +74,7 @@
     });
 }
 
-- (void)didFailSendingRequestWithInfo:(NSDictionary *)info{
+- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
     [self handleFailure:info];
 }
 

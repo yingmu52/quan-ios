@@ -183,7 +183,7 @@ typedef enum {
     self.apiResponse = response;
 }
 
-- (void)didFailSendingRequestWithInfo:(NSDictionary *)info{
+- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
     [[[UIAlertView alloc] initWithTitle:nil
                                message:[NSString stringWithFormat:@"%@",info]
                               delegate:self
