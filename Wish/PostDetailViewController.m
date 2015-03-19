@@ -178,6 +178,19 @@
     });
 }
 
+- (void)didFailSendingRequestWithInfo:(NSDictionary *)info{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
+        self.backButton.enabled = YES;
+        [[[UIAlertView alloc] initWithTitle:nil
+                                    message:[NSString stringWithFormat:@"%@",info]
+                                   delegate:self
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+    });
+
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(Plan *)sender
 {
     if ([segue.identifier isEqualToString:@"doneWirtingAPost"]) {

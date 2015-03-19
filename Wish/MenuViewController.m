@@ -95,14 +95,14 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0 && ![User isUserLogin]){
-        [self login];
-    }
-//    if (indexPath.section == 0){
-//        [User updateOwnerInfo:nil];
-//        [self.tableView reloadData];
+//    if (indexPath.section == 0 && ![User isUserLogin]){
 //        [self login];
 //    }
+    if (indexPath.section == 0){
+        [User updateOwnerInfo:nil];
+        [self.tableView reloadData];
+        [self login];
+    }
 
     if (indexPath.section == 1) {
         NSString *identifier;
@@ -183,23 +183,33 @@ typedef enum {
     self.apiResponse = response;
 }
 
+- (void)didFailSendingRequestWithInfo:(NSDictionary *)info{
+    [[[UIAlertView alloc] initWithTitle:nil
+                               message:[NSString stringWithFormat:@"%@",info]
+                              delegate:self
+                     cancelButtonTitle:@"OK"
+                     otherButtonTitles:nil, nil] show];
+}
+
 - (void)didFinishReceivingUid:(NSString *)uid uKey:(NSString *)uKey{
     //store access token, openid, expiration date, user photo, username, gender
     NSDictionary *fetchedUserInfo = [self.apiResponse jsonResponse];
-    NSDictionary *localUserInfo = @{ACCESS_TOKEN:self.tencentOAuth.accessToken,
-                                    OPENID:self.tencentOAuth.openId,
-                                    EXPIRATION_DATE:self.tencentOAuth.expirationDate,
-                                    PROFILE_PICTURE_URL:fetchedUserInfo[@"figureurl_qq_2"],
-                                    GENDER:fetchedUserInfo[@"gender"],
-                                    USER_DISPLAY_NAME:fetchedUserInfo[@"nickname"],
-                                    UID:uid,
-                                    UKEY:uKey,
-                                    LOGIN_STATUS:@(YES)};
-    [User updateOwnerInfo:localUserInfo];
-    NSLog(@"%@",localUserInfo);
-    dispatch_async(dispatch_get_main_queue(),^{
-        [self.tableView reloadData];
-    });
+    if (fetchedUserInfo) {
+        dispatch_async(dispatch_get_main_queue(),^{
+            NSDictionary *localUserInfo = @{ACCESS_TOKEN:self.tencentOAuth.accessToken,
+                                            OPENID:self.tencentOAuth.openId,
+                                            EXPIRATION_DATE:self.tencentOAuth.expirationDate,
+                                            PROFILE_PICTURE_URL:fetchedUserInfo[@"figureurl_qq_2"],
+                                            GENDER:fetchedUserInfo[@"gender"],
+                                            USER_DISPLAY_NAME:fetchedUserInfo[@"nickname"],
+                                            UID:uid,
+                                            UKEY:uKey,
+                                            LOGIN_STATUS:@(YES)};
+            [User updateOwnerInfo:localUserInfo];
+            NSLog(@"%@",localUserInfo);
+            [self.tableView reloadData];
+        });
+    }
 }
 
 //login fail

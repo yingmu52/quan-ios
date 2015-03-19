@@ -18,6 +18,8 @@
 - (void)didFinishUploadingPlan:(Plan *)plan;
 - (void)didFinishUploadingFeed:(Feed *)feed;
 - (void)didFinishReceivingUid:(NSString *)uid uKey:(NSString *)uKey;
+- (void)didFailUploadingImageWithInfo:(NSDictionary *)info;
+- (void)didFailSendingRequestWithInfo:(NSDictionary *)info;
 @end
 @interface FetchCenter : NSObject
 @property (nonatomic,weak) id <FetchCenterDelegate>delegate;

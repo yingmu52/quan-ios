@@ -74,6 +74,27 @@
     });
 }
 
+- (void)didFailSendingRequestWithInfo:(NSDictionary *)info{
+    [self handleFailure:info];
+}
+
+- (void)didFailUploadingImageWithInfo:(NSDictionary *)info{
+    [self handleFailure:info];
+}
+
+- (void)handleFailure:(NSDictionary *)info{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.navigationItem.leftBarButtonItem.enabled = YES;
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
+        [[[UIAlertView alloc] initWithTitle:nil
+                                    message:[NSString stringWithFormat:@"%@",info]
+                                   delegate:self
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+    });
+
+}
+
 - (void)textFieldDidUpdate{
     BOOL flag = self.textField.text.length*[self.textField.text stringByReplacingOccurrencesOfString:@" " withString:@""].length > 0;
     self.navigationItem.rightBarButtonItem.enabled = flag;

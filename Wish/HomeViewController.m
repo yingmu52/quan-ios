@@ -236,7 +236,7 @@ const NSUInteger maxCardNum = 10;
         }else if (longPress.state == UIGestureRecognizerStateChanged){
             //update card location
             self.stationView.currentCardLocation = [longPress locationInView:self.stationView];
-            NSLog(@"%@",self.stationView.plan.planTitle);
+//            NSLog(@"%@",self.stationView.plan.planTitle);
         }else if (longPress.state == UIGestureRecognizerStateEnded ||
                   longPress.state == UIGestureRecognizerStateFailed ||
                   longPress.state == UIGestureRecognizerStateCancelled) {
