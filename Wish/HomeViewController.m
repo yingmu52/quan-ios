@@ -113,7 +113,7 @@ const NSUInteger maxCardNum = 10;
                                    delegate:self
                           cancelButtonTitle:@"OK"
                           otherButtonTitles:nil, nil] show];
-    }else{
+    }else if ([User isUserLogin]){
         [self performSegueWithIdentifier:@"showPostFromHome" sender:nil];
     }
 }

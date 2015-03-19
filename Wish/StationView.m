@@ -41,9 +41,9 @@
 {
     if (CGRectIntersectsRect(self.deleteButton.frame, self.cardView.frame)) {
         return StationViewSelectionDelete;
-    }else if (CGRectIntersectsRect(self.giveupButton.frame, [self convertRect:self.cardView.frame toView:self.giveupButton.superview])){
+    }else if (CGRectIntersectsRect(self.giveupButton.frame, self.cardView.frame)){
         return StationViewSelectionGiveUp;
-    }else if (CGRectIntersectsRect(self.giveupButton.frame, [self convertRect:self.cardView.frame toView:self.finishButton.superview])){
+    }else if (CGRectIntersectsRect(self.finishButton.frame, self.cardView.frame)){
         return StationViewSelectionFinish;
     }else{
         return -1;
