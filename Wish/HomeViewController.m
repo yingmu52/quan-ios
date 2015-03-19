@@ -232,11 +232,17 @@ const NSUInteger maxCardNum = 10;
             self.stationView.currentCardLocation = [longPress locationInView:self.stationView];
             
             self.stationView.plan = plan;
+            
+            if (!self.stationView.cardImageView.image){
+                HomeCardView *cardView = (HomeCardView *)[self.cardCollectionView cellForItemAtIndexPath:indexPath];
+                self.stationView.cardImageView.image = cardView.imageView.image;
+            }
 
         }else if (longPress.state == UIGestureRecognizerStateChanged){
             //update card location
             self.stationView.currentCardLocation = [longPress locationInView:self.stationView];
 //            NSLog(@"%@",self.stationView.plan.planTitle);
+            
         }else if (longPress.state == UIGestureRecognizerStateEnded ||
                   longPress.state == UIGestureRecognizerStateFailed ||
                   longPress.state == UIGestureRecognizerStateCancelled) {

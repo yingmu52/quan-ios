@@ -17,6 +17,7 @@
 @end
 
 @interface HomeCardView : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (nonatomic,strong) Plan *plan;
 @property (nonatomic,weak) id <HomeCardViewDelegate>delegate;
 @end
