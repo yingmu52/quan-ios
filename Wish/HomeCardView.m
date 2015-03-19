@@ -56,30 +56,25 @@
         
         self.subtitleLabel.text = [NSString stringWithFormat:@"%@个努力瞬间",@(plan.feeds.count)];
         
-        NSInteger totalDays = [SystemUtil daysBetween:_plan.createDate and:_plan.finishDate];
-        NSInteger pastDays = [SystemUtil daysBetween:_plan.createDate and:[NSDate date]];
         
         
         NSDictionary *baseAttrs = @{NSFontAttributeName:[UIFont systemFontOfSize:12]};
+        NSDictionary *attrs = @{NSFontAttributeName:[UIFont fontWithName:@"Arial" size:26],
+                                NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00bac3"]};
+
+        NSInteger totalDays = [SystemUtil daysBetween:_plan.createDate and:_plan.finishDate];
+        NSInteger pastDays = [SystemUtil daysBetween:_plan.createDate and:[NSDate date]];
+        NSInteger results = totalDays - pastDays;
 //        NSDictionary *countAttrs1 = @{NSFontAttributeName:[UIFont fontWithName:@"Arial" size:26]};
 //        NSDictionary *countAttrs2 = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00bac3"]};
         
-        NSMutableAttributedString *final = [[NSMutableAttributedString alloc] initWithString:@"剩余 "
-                                                                                  attributes:baseAttrs];
-        
-        NSMutableAttributedString *back = [[NSMutableAttributedString alloc] initWithString:@" 天"
-                                                                                 attributes:baseAttrs];
-        
-        
-        NSDictionary *attrs = @{NSFontAttributeName:[UIFont fontWithName:@"Arial" size:26],
-                                NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00bac3"]};
-        NSAttributedString *mid = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",@(totalDays - pastDays)] attributes:attrs];
+        NSMutableAttributedString *final = [[NSMutableAttributedString alloc] initWithString:(results >= 0 ? @"剩余 " : @"过期 ") attributes:baseAttrs];
+        NSMutableAttributedString *back = [[NSMutableAttributedString alloc] initWithString:@" 天" attributes:baseAttrs];
+        NSAttributedString *mid = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",@(ABS(results))] attributes:attrs];
 //        NSMutableAttributedString *mid = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld/%ld",(long)pastDays,(long)totalDays]
 //                                                                                attributes:countAttrs1];
 //        [mid addAttributes:countAttrs2
 //                     range:[mid.string rangeOfString:[NSString stringWithFormat:@"%ld",(long)pastDays]]];
-        
-        
         
         [final appendAttributedString:mid];
         [final appendAttributedString:back];
