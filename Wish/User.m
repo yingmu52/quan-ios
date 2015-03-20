@@ -12,7 +12,7 @@
 
 + (NSString *)uid{
     NSDictionary *info = [self.class getOwnerInfo];
-    return info[UID];
+    return [NSString stringWithFormat:@"%@",info[UID]];
 }
 
 + (NSString *)uKey{

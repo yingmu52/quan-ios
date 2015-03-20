@@ -350,7 +350,8 @@ const NSUInteger maxCardNum = 10;
                 }];
             }
         } completion:^(BOOL finished) {
-            [[AppDelegate getContext] save:nil];
+            self.title = [NSString stringWithFormat:@"%@ plans",@(self.fetchedRC.fetchedObjects.count)];
+            [(AppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
             self.itemChanges = nil;;
         }];
     });
