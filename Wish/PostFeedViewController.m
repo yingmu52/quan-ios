@@ -105,10 +105,12 @@
 }
 
 - (void)textFieldDidUpdate{
-    BOOL flag = self.textField.text.length*[self.textField.text stringByReplacingOccurrencesOfString:@" " withString:@""].length > 0;
-    self.navigationItem.rightBarButtonItem.enabled = flag;
-    UIImage *bg = flag ? [Theme navTikButtonDefault] : [Theme navTikButtonDisable];
-    [self.tikButton setImage:bg forState:UIControlStateNormal];
+    if (self.textField.isFirstResponder){
+        BOOL flag = self.textField.text.length*[self.textField.text stringByReplacingOccurrencesOfString:@" " withString:@""].length > 0;
+        self.navigationItem.rightBarButtonItem.enabled = flag;
+        UIImage *bg = flag ? [Theme navTikButtonDefault] : [Theme navTikButtonDisable];
+        [self.tikButton setImage:bg forState:UIControlStateNormal];
+    }
 }
 
 @end
