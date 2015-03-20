@@ -86,8 +86,8 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         self.navigationItem.leftBarButtonItem.enabled = YES;
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
-        [[[UIAlertView alloc] initWithTitle:nil
-                                    message:[NSString stringWithFormat:@"%@",info]
+        [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
+                                    message:[NSString stringWithFormat:@"%@",info[@"msg"]]
                                    delegate:self
                           cancelButtonTitle:@"OK"
                           otherButtonTitles:nil, nil] show];

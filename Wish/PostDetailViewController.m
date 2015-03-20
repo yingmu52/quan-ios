@@ -186,7 +186,7 @@
         self.backButton.enabled = YES;
         
         //show alerts
-        [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"retwor"]]
+        [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
                                     message:[NSString stringWithFormat:@"%@",info[@"msg"]]
                                    delegate:self
                           cancelButtonTitle:@"OK"

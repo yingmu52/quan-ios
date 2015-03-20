@@ -1678,7 +1678,9 @@
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstAttribute="height" secondItem="1Zg-lD-sfX" secondAttribute="height" id="2HE-Me-wKl"/>
-                                                        <constraint firstAttribute="centerX" secondItem="1Zg-lD-sfX" secondAttribute="centerX" id="rbL-Hl-XQo"/>
+                                                        <constraint firstAttribute="centerX" secondItem="1Zg-lD-sfX" secondAttribute="centerX" id="rbL-Hl-XQo">
+                                                            <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                                                        </constraint>
                                                         <constraint firstAttribute="centerY" secondItem="1Zg-lD-sfX" secondAttribute="centerY" id="wfh-FD-Jm2"/>
                                                         <constraint firstAttribute="width" secondItem="1Zg-lD-sfX" secondAttribute="width" id="yzB-S7-zIy"/>
                                                     </constraints>
@@ -1710,10 +1712,18 @@
                                         </view>
                                         <gestureRecognizers/>
                                         <constraints>
-                                            <constraint firstItem="oAr-ZA-ahJ" firstAttribute="top" secondItem="otN-1L-MlY" secondAttribute="topMargin" id="f5X-Kq-Ofs"/>
-                                            <constraint firstItem="oAr-ZA-ahJ" firstAttribute="trailing" secondItem="otN-1L-MlY" secondAttribute="trailingMargin" id="jqP-NQ-eO7"/>
-                                            <constraint firstItem="oAr-ZA-ahJ" firstAttribute="leading" secondItem="otN-1L-MlY" secondAttribute="leadingMargin" id="mBh-4f-rLr"/>
-                                            <constraint firstItem="oAr-ZA-ahJ" firstAttribute="bottom" secondItem="otN-1L-MlY" secondAttribute="bottomMargin" id="qqY-KT-cTx"/>
+                                            <constraint firstItem="oAr-ZA-ahJ" firstAttribute="top" secondItem="otN-1L-MlY" secondAttribute="topMargin" id="f5X-Kq-Ofs">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                                            </constraint>
+                                            <constraint firstItem="oAr-ZA-ahJ" firstAttribute="trailing" secondItem="otN-1L-MlY" secondAttribute="trailingMargin" id="jqP-NQ-eO7">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                                            </constraint>
+                                            <constraint firstItem="oAr-ZA-ahJ" firstAttribute="leading" secondItem="otN-1L-MlY" secondAttribute="leadingMargin" id="mBh-4f-rLr">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                                            </constraint>
+                                            <constraint firstItem="oAr-ZA-ahJ" firstAttribute="bottom" secondItem="otN-1L-MlY" secondAttribute="bottomMargin" id="qqY-KT-cTx">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                                            </constraint>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="subviews">
