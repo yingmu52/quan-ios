@@ -28,6 +28,15 @@
     [self setupViews];
 }
 
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.textField becomeFirstResponder];
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.textField resignFirstResponder];
+}
+
 - (void)setupViews
 {
     CGRect frame = CGRectMake(0, 0, 30, 30);

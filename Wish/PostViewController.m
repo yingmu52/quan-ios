@@ -32,6 +32,16 @@
                                @" 在每省都拉过屎    "]];
 }
 
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.textField becomeFirstResponder];
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.textField resignFirstResponder];
+}
+
 - (IBAction)changedTitleOnButtonClick:(UIButton *)sender{
     self.textField.text = nil;
     self.textField.text = sender.titleLabel.text;
