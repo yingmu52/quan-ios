@@ -30,7 +30,7 @@ const NSUInteger maxCardNum = 10;
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @property (nonatomic,strong) StationView *stationView;
 
-
+@property (nonatomic,weak) IBOutlet UIButton *pageButton;
 @property (nonatomic,strong) NSMutableArray *itemChanges;
 
 @end
@@ -82,7 +82,6 @@ const NSUInteger maxCardNum = 10;
     [super viewDidLoad];
     [self setUpNavigationItem];
     [self setupCollectionView];
-
 }
 
 - (void)setUpNavigationItem
@@ -206,12 +205,23 @@ const NSUInteger maxCardNum = 10;
     
 }
 #pragma mark -  UICollectionView methods
-
+- (void)updatePage{
+    NSInteger page = self.cardCollectionView.contentOffset.x / self.cardCollectionView.frame.size.width;
+    [self.pageButton setTitle:[NSString stringWithFormat:@"%@",@(page+1)]
+                     forState:UIControlStateNormal];
+    
+}
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    [self updatePage];
+}
 -(void)setupCollectionView {
     self.cardCollectionView.backgroundColor = [UIColor clearColor];
-    self.cardCollectionView.pagingEnabled = NO;
-//    self.cardCollectionView.collectionViewLayout = [self cardFlowLayout];
-    self.cardCollectionView.collectionViewLayout = [[HomeCardFlowLayout alloc] init];
+    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.cardCollectionView.collectionViewLayout;
+    CGSize deviceSize = [[UIScreen mainScreen] bounds].size;
+    CGFloat itemWidth = 568.0f/640*deviceSize.width;
+    CGFloat itemHeight = 890.0f/1136*deviceSize.height;
+    layout.itemSize = CGSizeMake(itemWidth,itemHeight);
+
     
     UILongPressGestureRecognizer *lp = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     lp.delaysTouchesBegan = YES;
@@ -219,7 +229,6 @@ const NSUInteger maxCardNum = 10;
     [self.cardCollectionView addGestureRecognizer:lp];
 
 }
-
 - (void)handleLongPress:(UILongPressGestureRecognizer *)longPress{
     
     NSIndexPath *indexPath = [self.cardCollectionView indexPathForItemAtPoint:[longPress locationInView:self.cardCollectionView]];
@@ -279,13 +288,18 @@ const NSUInteger maxCardNum = 10;
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
     cell.plan = plan;
     cell.delegate = self;
+    NSLog(@"%@",indexPath);
     return cell;
     
 }
 
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     [self performSegueWithIdentifier:@"showPlanDetailFromHome" sender:[self.fetchedRC objectAtIndexPath:indexPath]];
 }
+
+
+
 #pragma mark - FetchedResultsController
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     self.itemChanges = [[NSMutableArray alloc] init];
@@ -353,6 +367,7 @@ const NSUInteger maxCardNum = 10;
             self.title = [NSString stringWithFormat:@"%@ plans",@(self.fetchedRC.fetchedObjects.count)];
             [(AppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
             self.itemChanges = nil;;
+            [self updatePage];
         }];
     });
 }
