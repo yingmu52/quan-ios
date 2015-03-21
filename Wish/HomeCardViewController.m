@@ -28,14 +28,13 @@
     
     // the next two line of code is so mother fucking important !!!!!
     [self.collectionView layoutIfNeeded];
-    [self.collectionView setNeedsLayout];
     
     UICollectionViewFlowLayout *myLayout = [[UICollectionViewFlowLayout alloc] init];
     
     CGFloat margin = ((self.view.frame.size.width - self.collectionView.frame.size.width) / 2);
     
     // This assumes that the the collectionView is centered withing its parent view.
-    myLayout.itemSize = CGSizeMake(self.collectionView.frame.size.width + margin, self.collectionView.frame.size.height);
+//    myLayout.itemSize = CGSizeMake(self.collectionView.frame.size.width + margin,self.collectionView.frame.size.height);
     
     // A negative margin will shift each item to the left.
     myLayout.minimumLineSpacing = -margin;
@@ -45,13 +44,22 @@
     [self.collectionView setCollectionViewLayout:myLayout];
 
     self.collectionView.pagingEnabled = YES;
+    
+    self.collectionView.backgroundColor = [UIColor clearColor];
+    
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+
+    CGFloat margin = ((self.view.frame.size.width - self.collectionView.frame.size.width) / 2);
+    return  CGSizeMake(self.collectionView.frame.size.width + margin, self.view.frame.size.height * 910.0f / 1136);
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)aCollectionView
                         layout:(UICollectionViewFlowLayout *)aCollectionViewLayout
         insetForSectionAtIndex:(NSInteger)aSection
 {
-    CGFloat margin = (aCollectionViewLayout.minimumLineSpacing / 2);
+    CGFloat margin = (aCollectionViewLayout.minimumLineSpacing * 0.5f);
     
     // top, left, bottom, right
     UIEdgeInsets myInsets = UIEdgeInsetsMake(0, margin, 0, margin);

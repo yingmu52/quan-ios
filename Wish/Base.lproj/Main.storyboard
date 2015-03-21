@@ -1392,7 +1392,7 @@
         <!--Home View Controller-->
         <scene sceneID="fpo-Ov-0kY">
             <objects>
-                <viewController id="wW8-3k-YAd" customClass="HomeViewController" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" id="wW8-3k-YAd" customClass="HomeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Nsd-Rd-GUf"/>
                         <viewControllerLayoutGuide type="bottom" id="eUx-6Z-ly2"/>
@@ -1522,7 +1522,7 @@
                             </view>
                             <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uow-gD-atl">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.31764705879999999" green="0.74901960779999999" blue="0.65098039220000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Pbg-Kr-TUR">
                                     <size key="itemSize" width="314" height="521"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -1601,6 +1601,7 @@
                     <navigationItem key="navigationItem" id="Ayl-oc-p2J"/>
                     <connections>
                         <outlet property="collectionView" destination="uow-gD-atl" id="WfP-de-Oth"/>
+                        <outlet property="pageButton" destination="sVG-wH-ukh" id="SpG-b0-2wv"/>
                         <segue destination="1Y1-uW-81U" kind="show" identifier="showPostFromHome" id="CTd-gb-xTE"/>
                         <segue destination="b5E-B5-8Ys" kind="show" identifier="showPlanDetailFromHome" id="cel-0L-eNY"/>
                         <segue destination="XiV-RA-INl" kind="show" identifier="ShowPostFeedFromHome" id="4ZT-53-1QA"/>

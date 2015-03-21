@@ -28,8 +28,6 @@ const NSUInteger maxCardNum = 10;
 UIImagePickerControllerDelegate,
 UINavigationControllerDelegate,
 UIGestureRecognizerDelegate,
-UICollectionViewDataSource,
-UICollectionViewDelegate,
 PopupViewDelegate,
 HomeCardViewDelegate>
 
@@ -48,14 +46,16 @@ HomeCardViewDelegate>
 @implementation HomeViewController
 
 
-
-- (Plan *)currentPlan{
-    CGPoint currentPoint = CGPointMake(self.collectionView.center.x + self.collectionView.contentOffset.x,
-                                       self.collectionView.center.y + self.collectionView.contentOffset.y);
-    NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:currentPoint];
-    return [self.fetchedRC objectAtIndexPath:indexPath];
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    self.currentPlan = nil;
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self updatePage];
+}
 - (NSFetchedResultsController *)fetchedRC
 {
     NSManagedObjectContext *context = [AppDelegate getContext];
@@ -91,6 +91,11 @@ HomeCardViewDelegate>
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
+    
+    UILongPressGestureRecognizer *lp = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    lp.delaysTouchesBegan = YES;
+    lp.minimumPressDuration = 0.5;
+    [self.collectionView addGestureRecognizer:lp];
 }
 
 - (void)setUpNavigationItem
@@ -173,22 +178,12 @@ HomeCardViewDelegate>
     }
 
 }
-//- (IBAction)showCamera:(UIButton *)sender{
-//    if (self.fetchedRC.fetchedObjects.count) {
-//        UIImagePickerController *controller = [SystemUtil showCamera:self];
-//        if (controller) {
-//            [self presentViewController:controller
-//                               animated:YES
-//                             completion:nil];
-//        }
-//    }
-//}
+
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [self dismissViewControllerAnimated:NO completion:^{
         UIImage *capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage];
-//        Feed *feed = [Feed createFeedWithImage:capturedImage inPlan:self.currentPlan];
         //NSLog(@"%@",NSStringFromCGSize(editedImage.size));
         [self performSegueWithIdentifier:@"ShowPostFeedFromHome" sender:capturedImage];
     }];
@@ -202,27 +197,22 @@ HomeCardViewDelegate>
 {
     if ([segue.identifier isEqualToString:@"showPlanDetailFromHome"]) {
         [segue.destinationViewController setPlan:sender];
-//        WishDetailViewController *controller = segue.destinationViewController;
-//        controller.plan = [self.fetchedRC objectAtIndexPath:[self.cardCollectionView indexPathForCell:sender]];
     }
     if ([segue.identifier isEqualToString:@"ShowPostFeedFromHome"]) {
         [segue.destinationViewController setPlan:self.currentPlan];
         [segue.destinationViewController setImageForFeed:sender];
-        
     }
-    
-    
 }
 #pragma mark -  UICollectionView methods
-//- (void)updatePage{
-//    NSInteger page = self.cardCollectionView.contentOffset.x / self.cardCollectionView.frame.size.width;
-//    [self.pageButton setTitle:[NSString stringWithFormat:@"%@",@(page+1)]
-//                     forState:UIControlStateNormal];
-//    
-//}
-//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-//    [self updatePage];
-//}
+- (void)updatePage{
+    NSInteger page = self.collectionView.contentOffset.x / self.collectionView.frame.size.width;
+    [self.pageButton setTitle:[NSString stringWithFormat:@"%@",@(page+1)]
+                     forState:UIControlStateNormal];
+    
+}
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    [self updatePage];
+}
 
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *)longPress{
@@ -276,18 +266,6 @@ HomeCardViewDelegate>
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.fetchedRC.fetchedObjects.count;
 }
-//
-//-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//    HomeCardView *cell = (HomeCardView*)[collectionView dequeueReusableCellWithReuseIdentifier:@"HomeCardCell" forIndexPath:indexPath];
-//
-//    Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
-//    cell.plan = plan;
-//    cell.delegate = self;
-//    NSLog(@"%@",indexPath);
-//    return cell;
-//    
-//}
 
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -360,10 +338,10 @@ HomeCardViewDelegate>
                 }];
             }
         } completion:^(BOOL finished) {
-            self.title = [NSString stringWithFormat:@"%@ plans",@(self.fetchedRC.fetchedObjects.count)];
+//            self.title = [NSString stringWithFormat:@"%@ plans",@(self.fetchedRC.fetchedObjects.count)];
             [(AppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
             self.itemChanges = nil;;
-//            [self updatePage];
+            [self updatePage];
         }];
     });
 }
