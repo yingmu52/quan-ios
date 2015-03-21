@@ -23,14 +23,24 @@
 #import "User.h"
 const NSUInteger maxCardNum = 10;
 
-@interface HomeViewController () <NSFetchedResultsControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UICollectionViewDelegateFlowLayout,UIGestureRecognizerDelegate,PopupViewDelegate,HomeCardViewDelegate>
+@interface HomeViewController ()
+<NSFetchedResultsControllerDelegate,
+UIImagePickerControllerDelegate,
+UINavigationControllerDelegate,
+UIGestureRecognizerDelegate,
+UICollectionViewDataSource,
+UICollectionViewDelegate,
+PopupViewDelegate,
+HomeCardViewDelegate>
 
-@property (nonatomic,weak) IBOutlet UICollectionView *cardCollectionView;
-@property (nonatomic,weak) Plan *currentPlan;
+
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
+@property (nonatomic,weak) Plan *currentPlan;
+
 @property (nonatomic,strong) StationView *stationView;
 
 @property (nonatomic,weak) IBOutlet UIButton *pageButton;
+
 @property (nonatomic,strong) NSMutableArray *itemChanges;
 
 @end
@@ -38,13 +48,13 @@ const NSUInteger maxCardNum = 10;
 @implementation HomeViewController
 
 
-//
-//- (Plan *)currentPlan{
-//    CGPoint currentPoint = CGPointMake(self.cardCollectionView.center.x + self.cardCollectionView.contentOffset.x,
-//                                       self.cardCollectionView.center.y + self.cardCollectionView.contentOffset.y);
-//    NSIndexPath *indexPath = [self.cardCollectionView indexPathForItemAtPoint:currentPoint];
-//    return [self.fetchedRC objectAtIndexPath:indexPath];
-//}
+
+- (Plan *)currentPlan{
+    CGPoint currentPoint = CGPointMake(self.collectionView.center.x + self.collectionView.contentOffset.x,
+                                       self.collectionView.center.y + self.collectionView.contentOffset.y);
+    NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:currentPoint];
+    return [self.fetchedRC objectAtIndexPath:indexPath];
+}
 
 - (NSFetchedResultsController *)fetchedRC
 {
@@ -81,7 +91,6 @@ const NSUInteger maxCardNum = 10;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
-    [self setupCollectionView];
 }
 
 - (void)setUpNavigationItem
@@ -205,33 +214,20 @@ const NSUInteger maxCardNum = 10;
     
 }
 #pragma mark -  UICollectionView methods
-- (void)updatePage{
-    NSInteger page = self.cardCollectionView.contentOffset.x / self.cardCollectionView.frame.size.width;
-    [self.pageButton setTitle:[NSString stringWithFormat:@"%@",@(page+1)]
-                     forState:UIControlStateNormal];
-    
-}
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    [self updatePage];
-}
--(void)setupCollectionView {
-    self.cardCollectionView.backgroundColor = [UIColor clearColor];
-    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.cardCollectionView.collectionViewLayout;
-    CGSize deviceSize = [[UIScreen mainScreen] bounds].size;
-    CGFloat itemWidth = 568.0f/640*deviceSize.width;
-    CGFloat itemHeight = 890.0f/1136*deviceSize.height;
-    layout.itemSize = CGSizeMake(itemWidth,itemHeight);
+//- (void)updatePage{
+//    NSInteger page = self.cardCollectionView.contentOffset.x / self.cardCollectionView.frame.size.width;
+//    [self.pageButton setTitle:[NSString stringWithFormat:@"%@",@(page+1)]
+//                     forState:UIControlStateNormal];
+//    
+//}
+//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+//    [self updatePage];
+//}
 
-    
-    UILongPressGestureRecognizer *lp = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    lp.delaysTouchesBegan = YES;
-    lp.minimumPressDuration = 0.5;
-    [self.cardCollectionView addGestureRecognizer:lp];
 
-}
 - (void)handleLongPress:(UILongPressGestureRecognizer *)longPress{
     
-    NSIndexPath *indexPath = [self.cardCollectionView indexPathForItemAtPoint:[longPress locationInView:self.cardCollectionView]];
+    NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:[longPress locationInView:self.collectionView]];
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
     if (plan) {
         UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
@@ -243,7 +239,7 @@ const NSUInteger maxCardNum = 10;
             self.stationView.plan = plan;
             
             if (!self.stationView.cardImageView.image){
-                HomeCardView *cardView = (HomeCardView *)[self.cardCollectionView cellForItemAtIndexPath:indexPath];
+                HomeCardView *cardView = (HomeCardView *)[self.collectionView cellForItemAtIndexPath:indexPath];
                 self.stationView.cardImageView.image = cardView.imageView.image;
             }
 
@@ -280,18 +276,18 @@ const NSUInteger maxCardNum = 10;
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.fetchedRC.fetchedObjects.count;
 }
-
--(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    HomeCardView *cell = (HomeCardView*)[collectionView dequeueReusableCellWithReuseIdentifier:@"HomeCardCell" forIndexPath:indexPath];
+//
+//-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//    HomeCardView *cell = (HomeCardView*)[collectionView dequeueReusableCellWithReuseIdentifier:@"HomeCardCell" forIndexPath:indexPath];
+//
+//    Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
+//    cell.plan = plan;
 //    cell.delegate = self;
-    Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
-    cell.plan = plan;
-    cell.delegate = self;
-    NSLog(@"%@",indexPath);
-    return cell;
-    
-}
+//    NSLog(@"%@",indexPath);
+//    return cell;
+//    
+//}
 
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -329,28 +325,28 @@ const NSUInteger maxCardNum = 10;
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.cardCollectionView performBatchUpdates:^{
+        [self.collectionView performBatchUpdates:^{
             for (NSDictionary *change in self.itemChanges) {
                 [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
                     NSFetchedResultsChangeType type = [key unsignedIntegerValue];
                     switch(type) {
                         case NSFetchedResultsChangeInsert:{
                             [UIView performWithoutAnimation:^{
-                                [self.cardCollectionView insertItemsAtIndexPaths:@[obj]];
+                                [self.collectionView insertItemsAtIndexPaths:@[obj]];
                             }];
                         }
                             NSLog(@"Inserted Plan");
                             break;
                         case NSFetchedResultsChangeDelete:
-                            [self.cardCollectionView deleteItemsAtIndexPaths:@[obj]];
+                            [self.collectionView deleteItemsAtIndexPaths:@[obj]];
                             NSLog(@"Deleted Plan");
                             break;
                         case NSFetchedResultsChangeUpdate:{
                             Plan *plan = [controller objectAtIndexPath:obj];
                             if (plan.planId && plan.backgroundNum) {
                                 [UIView performWithoutAnimation:^{
-                                    [self.cardCollectionView reloadItemsAtIndexPaths:@[obj]];
-                                    [self.cardCollectionView scrollToItemAtIndexPath:obj
+                                    [self.collectionView reloadItemsAtIndexPaths:@[obj]];
+                                    [self.collectionView scrollToItemAtIndexPath:obj
                                                                     atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
                                                                             animated:NO];
                                 }];
@@ -367,9 +363,21 @@ const NSUInteger maxCardNum = 10;
             self.title = [NSString stringWithFormat:@"%@ plans",@(self.fetchedRC.fetchedObjects.count)];
             [(AppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
             self.itemChanges = nil;;
-            [self updatePage];
+//            [self updatePage];
         }];
     });
+}
+
+
+#pragma mark - implement parent class abstract methods
+
+
+- (void)configureCollectionViewCell:(UICollectionViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
+    HomeCardView *card = (HomeCardView *)cell;
+    Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
+    card.plan = plan;
+    card.delegate = self;
+
 }
 
 @end

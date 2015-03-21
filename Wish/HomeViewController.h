@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface HomeViewController : UIViewController
+#import "HomeCardViewController.h"
+@interface HomeViewController : HomeCardViewController
 
 @end

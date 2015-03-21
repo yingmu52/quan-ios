@@ -14,6 +14,8 @@
 		AE01725C1A65CD8F0014266F /* WishTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE01725B1A65CD8F0014266F /* WishTests.m */; };
 		AE0172691A65D3140014266F /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0172681A65D3140014266F /* MenuViewController.m */; };
 		AE01726A1A65D3140014266F /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0172681A65D3140014266F /* MenuViewController.m */; };
+		AE0ADF191ABD78CC00692131 /* HomeCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0ADF181ABD78CC00692131 /* HomeCardViewController.m */; };
+		AE0ADF1A1ABD78CC00692131 /* HomeCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0ADF181ABD78CC00692131 /* HomeCardViewController.m */; };
 		AE0E794B1A76EB50007C48EE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E794A1A76EB50007C48EE /* Reachability.m */; };
 		AE0E794C1A76EB50007C48EE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E794A1A76EB50007C48EE /* Reachability.m */; };
 		AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
@@ -75,6 +77,7 @@
 		AED05EDB1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = AED05EDA1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m */; };
 		AED05EDC1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = AED05EDA1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m */; };
 		AED28FDC1AB2886C0054DE66 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AED28FDB1AB2886C0054DE66 /* Plan.m */; };
+		AED5BC5A1ABDEECE00EFF398 /* HomeCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED5BC591ABDEECE00EFF398 /* HomeCardView.xib */; };
 		AED68EE41A70399A00CDC0DF /* FetchCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = AED68EE31A70399A00CDC0DF /* FetchCenter.m */; };
 		AED68EE51A70399A00CDC0DF /* FetchCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = AED68EE31A70399A00CDC0DF /* FetchCenter.m */; };
 		AED71BEC1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AED71BEB1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m */; };
@@ -181,6 +184,8 @@
 		AE01725B1A65CD8F0014266F /* WishTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WishTests.m; sourceTree = "<group>"; };
 		AE0172671A65D3140014266F /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		AE0172681A65D3140014266F /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		AE0ADF171ABD78CC00692131 /* HomeCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCardViewController.h; sourceTree = "<group>"; };
+		AE0ADF181ABD78CC00692131 /* HomeCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCardViewController.m; sourceTree = "<group>"; };
 		AE0E79491A76EB50007C48EE /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		AE0E794A1A76EB50007C48EE /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		AE1B6E3A1A6D89FC0026F3CE /* HomeCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCardView.h; sourceTree = "<group>"; };
@@ -268,6 +273,7 @@
 		AED05EDA1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+CustomHeight.m"; sourceTree = "<group>"; };
 		AED28FDA1AB2886C0054DE66 /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
 		AED28FDB1AB2886C0054DE66 /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
+		AED5BC591ABDEECE00EFF398 /* HomeCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCardView.xib; sourceTree = "<group>"; };
 		AED68EE21A70399A00CDC0DF /* FetchCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchCenter.h; sourceTree = "<group>"; };
 		AED68EE31A70399A00CDC0DF /* FetchCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchCenter.m; sourceTree = "<group>"; };
 		AED71BEA1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTCollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
@@ -627,12 +633,15 @@
 		AEEC6C771A6DB6220021B7E4 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				AE0ADF171ABD78CC00692131 /* HomeCardViewController.h */,
+				AE0ADF181ABD78CC00692131 /* HomeCardViewController.m */,
 				AEBFCA351A78614100686EFE /* PostDetailViewController.h */,
 				AEBFCA361A78614100686EFE /* PostDetailViewController.m */,
 				AE479E9C1A6F775B00366A0A /* PostViewController.h */,
 				AE479E9D1A6F775C00366A0A /* PostViewController.m */,
 				AE1B6E3A1A6D89FC0026F3CE /* HomeCardView.h */,
 				AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */,
+				AED5BC591ABDEECE00EFF398 /* HomeCardView.xib */,
 				AEF7F2951A686FDB0022410B /* HomeViewController.h */,
 				AEF7F2961A686FDB0022410B /* HomeViewController.m */,
 				AEF775421A8134FE000DB73B /* HomeCardFlowLayout.h */,
@@ -854,6 +863,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE01724D1A65CD8E0014266F /* Images.xcassets in Resources */,
+				AED5BC5A1ABDEECE00EFF398 /* HomeCardView.xib in Resources */,
 				AE30EE6F1A6E1E520044740D /* snow.jpg in Resources */,
 				AEF7F2A01A6875360022410B /* Main.storyboard in Resources */,
 				AE6E7A0C1AB0DF1F0023B9C7 /* PopupView.xib in Resources */,
@@ -902,6 +912,7 @@
 				AEBD13DD1A93E7A800F5F0D3 /* DiscoveryViewController.m in Sources */,
 				AED71BEC1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m in Sources */,
 				AEE075381A744A770015155B /* SystemUtil.m in Sources */,
+				AE0ADF191ABD78CC00692131 /* HomeCardViewController.m in Sources */,
 				AECE2BEA1AA0521600B1C58E /* NSData+ImageContentType.m in Sources */,
 				AEF7F2811A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				AEF7F2891A686E8A0022410B /* ECSlidingViewController.m in Sources */,
@@ -974,6 +985,7 @@
 				AEBD13E51A948DD400F5F0D3 /* DiscoveryCell.m in Sources */,
 				AEF7F28A1A686E8B0022410B /* ECSlidingViewController.m in Sources */,
 				AEF7F2941A686FA30022410B /* Theme.m in Sources */,
+				AE0ADF1A1ABD78CC00692131 /* HomeCardViewController.m in Sources */,
 				AEEC6C631A6DB0010021B7E4 /* NSArray+PureLayout.m in Sources */,
 				AECE2C001AA19F6500B1C58E /* Owner+OwnerCRUD.m in Sources */,
 				AED68EE51A70399A00CDC0DF /* FetchCenter.m in Sources */,

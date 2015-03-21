@@ -19,6 +19,8 @@
 @property (weak,nonatomic) IBOutlet UILabel *subtitleLabel;
 @property (weak,nonatomic) IBOutlet UILabel *countDownLabel;
 @property (weak,nonatomic) IBOutlet UILabel *dateLabel;
+
+@property (weak,nonatomic) IBOutlet UIView *canvasView;
 @end
 
 @implementation HomeCardView
@@ -79,11 +81,11 @@
 - (void)awakeFromNib
 {
     // Shadow
-    self.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.layer.shadowRadius = 2.0f;
-    self.layer.shadowOpacity = 0.2f;
-    self.layer.masksToBounds = NO;
-    self.layer.shadowOffset = CGSizeMake(4.0f,4.0f);
+    self.canvasView.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.canvasView.layer.shadowRadius = 2.0f;
+    self.canvasView.layer.shadowOpacity = 0.2f;
+    self.canvasView.layer.masksToBounds = NO;
+    self.canvasView.layer.shadowOffset = CGSizeMake(4.0f,4.0f);
 //    self.layer.rasterizationScale = [[UIScreen mainScreen] scale];
     // Corner Radius
     //    self.layer.cornerRadius = 10.0;
