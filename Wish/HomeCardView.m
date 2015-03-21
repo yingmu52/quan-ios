@@ -52,9 +52,10 @@
         
         
         
-        NSDictionary *baseAttrs = @{NSFontAttributeName:[UIFont systemFontOfSize:12]};
+        NSDictionary *baseAttrs = @{NSFontAttributeName:[UIFont systemFontOfSize:14]};
         NSDictionary *attrs = @{NSFontAttributeName:[UIFont fontWithName:@"Arial" size:26],
-                                NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00bac3"]};
+                                NSFontAttributeName:[UIFont boldSystemFontOfSize:26]};
+//                                NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00bac3"]};
 
         NSInteger totalDays = [SystemUtil daysBetween:_plan.createDate and:_plan.finishDate];
         NSInteger pastDays = [SystemUtil daysBetween:_plan.createDate and:[NSDate date]];

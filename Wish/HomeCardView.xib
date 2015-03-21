@@ -50,7 +50,7 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已留下6个努力瞬间" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLR-Hd-anW">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -67,8 +67,7 @@
                                                 <exclude reference="WV4-Qq-qkX"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="41" y="402" width="206" height="45"/>
+                                        <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="constraints">
                                                 <include reference="WV4-Qq-qkX"/>
                                             </mask>
@@ -80,7 +79,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wsl-6j-iE1" userLabel="countDownBackground">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="剩下 21/60 天" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Idc-rT-gV5">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="剩余 888 天" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Idc-rT-gV5">
                                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -103,8 +102,7 @@
                                                 <exclude reference="hcG-yv-baj"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="355" width="288" height="47"/>
+                                        <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="subviews">
                                                 <include reference="Idc-rT-gV5"/>
                                             </mask>
@@ -149,7 +147,7 @@
                                     </constraint>
                                     <constraint firstItem="ZLR-Hd-anW" firstAttribute="centerX" secondItem="30G-9u-wug" secondAttribute="centerX" id="Xmh-yL-IRP"/>
                                     <constraint firstItem="30G-9u-wug" firstAttribute="top" secondItem="wdu-5R-amF" secondAttribute="bottom" constant="14" id="ZPk-y6-yv7">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="25"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="10"/>
                                     </constraint>
                                     <constraint firstAttribute="width" secondItem="LQM-wc-M9N" secondAttribute="height" multiplier="568:890" id="ZuZ-gl-BbN"/>
                                     <constraint firstItem="wdu-5R-amF" firstAttribute="centerY" secondItem="gGT-Oc-h3S" secondAttribute="centerY" constant="-2" id="dkV-y1-Qkk">
