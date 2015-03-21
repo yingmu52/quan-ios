@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" reuseIdentifier="HomeCardCell" id="ORW-ZF-1Yo" customClass="HomeCardView">
+        <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="top" reuseIdentifier="HomeCardCell" id="ORW-ZF-1Yo" customClass="HomeCardView">
             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -67,7 +67,8 @@
                                                 <exclude reference="WV4-Qq-qkX"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=compact">
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="41" y="402" width="206" height="45"/>
                                             <mask key="constraints">
                                                 <include reference="WV4-Qq-qkX"/>
                                             </mask>
@@ -102,7 +103,8 @@
                                                 <exclude reference="hcG-yv-baj"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=compact">
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="355" width="288" height="47"/>
                                             <mask key="subviews">
                                                 <include reference="Idc-rT-gV5"/>
                                             </mask>
@@ -237,7 +239,9 @@
                             <constraint firstAttribute="height" secondItem="LQM-wc-M9N" secondAttribute="height" id="8w9-IR-oNV"/>
                             <constraint firstAttribute="width" secondItem="LQM-wc-M9N" secondAttribute="width" multiplier="588:568" id="Dhf-7b-1gs"/>
                             <constraint firstAttribute="centerX" secondItem="LQM-wc-M9N" secondAttribute="centerX" id="Mmb-lz-k5x"/>
-                            <constraint firstAttribute="centerY" secondItem="LQM-wc-M9N" secondAttribute="centerY" id="YQl-Rl-Igu"/>
+                            <constraint firstAttribute="centerY" secondItem="LQM-wc-M9N" secondAttribute="centerY" id="YQl-Rl-Igu">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
                             <constraint firstAttribute="centerY" secondItem="LQM-wc-M9N" secondAttribute="centerY" id="Yah-Ha-uuM"/>
                             <constraint firstAttribute="centerX" secondItem="LQM-wc-M9N" secondAttribute="centerX" id="jq2-Q1-UMy">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>

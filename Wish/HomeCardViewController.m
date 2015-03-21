@@ -52,7 +52,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
 
     CGFloat margin = ((self.view.frame.size.width - self.collectionView.frame.size.width) / 2);
-    return  CGSizeMake(self.collectionView.frame.size.width + margin, self.view.frame.size.height * 910.0f / 1136);
+    return  CGSizeMake(self.collectionView.frame.size.width + margin, self.view.frame.size.height * 890.0f / 1136);
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)aCollectionView

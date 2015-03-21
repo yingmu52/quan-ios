@@ -28,12 +28,15 @@
     [self setupViews];
 }
 
+
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    self.textField.text = nil;
     [self.textField becomeFirstResponder];
 }
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
+
+- (void)viewWillDisappear:(BOOL)animated
+{
     [self.textField resignFirstResponder];
 }
 

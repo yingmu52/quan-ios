@@ -35,17 +35,14 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    self.textField.text = nil;
     [self.textField becomeFirstResponder];
 }
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
+
+- (void)viewWillDisappear:(BOOL)animated
+{
     [self.textField resignFirstResponder];
 }
-
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    return YES;
-}
-
 - (IBAction)changedTitleOnButtonClick:(UIButton *)sender{
     self.textField.text = sender.titleLabel.text;
     [self textFieldDidUpdate];
