@@ -78,6 +78,8 @@
 		AED05EDC1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = AED05EDA1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m */; };
 		AED28FDC1AB2886C0054DE66 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AED28FDB1AB2886C0054DE66 /* Plan.m */; };
 		AED5BC5A1ABDEECE00EFF398 /* HomeCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED5BC591ABDEECE00EFF398 /* HomeCardView.xib */; };
+		AED5BC631ABE3CB600EFF398 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5BC621ABE3CB600EFF398 /* SettingViewController.m */; };
+		AED5BC641ABE3CB600EFF398 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5BC621ABE3CB600EFF398 /* SettingViewController.m */; };
 		AED68EE41A70399A00CDC0DF /* FetchCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = AED68EE31A70399A00CDC0DF /* FetchCenter.m */; };
 		AED68EE51A70399A00CDC0DF /* FetchCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = AED68EE31A70399A00CDC0DF /* FetchCenter.m */; };
 		AED71BEC1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AED71BEB1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m */; };
@@ -274,6 +276,8 @@
 		AED28FDA1AB2886C0054DE66 /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
 		AED28FDB1AB2886C0054DE66 /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
 		AED5BC591ABDEECE00EFF398 /* HomeCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCardView.xib; sourceTree = "<group>"; };
+		AED5BC611ABE3CB600EFF398 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		AED5BC621ABE3CB600EFF398 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		AED68EE21A70399A00CDC0DF /* FetchCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchCenter.h; sourceTree = "<group>"; };
 		AED68EE31A70399A00CDC0DF /* FetchCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchCenter.m; sourceTree = "<group>"; };
 		AED71BEA1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTCollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
@@ -412,6 +416,7 @@
 		AE01723B1A65CD8E0014266F /* Wish */ = {
 			isa = PBXGroup;
 			children = (
+				AED5BC601ABE3C9A00EFF398 /* Settings */,
 				AEE4A6C91A9684BC00ABF946 /* Achievement */,
 				AEFEE3FD1A8ED9FC007E8234 /* Following */,
 				AEBD13DA1A93E78400F5F0D3 /* Discovery */,
@@ -566,6 +571,15 @@
 				AECE2BE81AA0521600B1C58E /* UIView+WebCacheOperation.m */,
 			);
 			path = SDWebImage;
+			sourceTree = "<group>";
+		};
+		AED5BC601ABE3C9A00EFF398 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				AED5BC611ABE3CB600EFF398 /* SettingViewController.h */,
+				AED5BC621ABE3CB600EFF398 /* SettingViewController.m */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 		AEE4A6C91A9684BC00ABF946 /* Achievement */ = {
@@ -946,6 +960,7 @@
 				AEEC6C621A6DB0010021B7E4 /* NSArray+PureLayout.m in Sources */,
 				AE0E794B1A76EB50007C48EE /* Reachability.m in Sources */,
 				AECE2BF81AA0521600B1C58E /* UIView+WebCacheOperation.m in Sources */,
+				AED5BC631ABE3CB600EFF398 /* SettingViewController.m in Sources */,
 				AEC5B9AA1AB7EB40008ECB92 /* User.m in Sources */,
 				AEE4A6D81A972FAA00ABF946 /* FollowingTVCData.m in Sources */,
 				AECE2BEB1AA0521600B1C58E /* SDImageCache.m in Sources */,
@@ -990,6 +1005,7 @@
 				AECE2C001AA19F6500B1C58E /* Owner+OwnerCRUD.m in Sources */,
 				AED68EE51A70399A00CDC0DF /* FetchCenter.m in Sources */,
 				AEEC6C6E1A6DB0FC0021B7E4 /* HeaderView.m in Sources */,
+				AED5BC641ABE3CB600EFF398 /* SettingViewController.m in Sources */,
 				AE01725C1A65CD8F0014266F /* WishTests.m in Sources */,
 				AEE4A6CD1A9684D500ABF946 /* AchieveViewController.m in Sources */,
 				AEF7F2861A686E8A0022410B /* ECSlidingInteractiveTransition.m in Sources */,
