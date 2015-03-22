@@ -36,6 +36,7 @@
 + (UIImage *)navComposeButtonDefault;
 + (UIImage *)navShareButtonDefault;
 + (UIColor *)naviBackground;
++ (UIImage *)navWhiteButtonDefault;
 + (UIImage *)navMenuDefault;
 + (UIImage *)navAddDefault;
 + (UIImage *)navTikButtonDefault;
@@ -55,4 +56,7 @@
 + (UIImage *)popupFail;
 + (UIImage *)popupFinish;
 + (UIColor *)popupBackground;
+
+
++ (UIColor *)profileBakground;
 @end

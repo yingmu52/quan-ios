@@ -15,6 +15,7 @@
 static CGFloat kEndPoint = 1.5;
 
 - (void)layoutSubviews{
+    [super layoutSubviews];
     //fucking centering navigation bar items
     for (UIView *subview in self.subviews){
         CGPoint newCenter = subview.center;

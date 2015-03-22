@@ -123,6 +123,10 @@
     return [UIImage imageNamed:@"nav_ic_back_default"];
 }
 
++ (UIImage *)navWhiteButtonDefault{
+    return [UIImage imageNamed:@"nav_ic_white_default"];
+}
+
 + (UIImage *)navTikButtonDisable{
     return [UIImage imageNamed:@"nav_ic_finish_disable"];
 }
@@ -169,6 +173,10 @@
 + (UIColor *)popupBackground{
     return [UIColor colorWithPatternImage:[UIImage imageNamed:@"popup_bg"]];
     
+}
+
++ (UIColor *)profileBakground{
+    return [UIColor colorWithPatternImage:[UIImage imageNamed:@"profile_bg"]];
 }
 @end
 

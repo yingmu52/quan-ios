@@ -12,6 +12,8 @@
 @property (nonatomic,strong) UIView *currentView;
 
 @property (nonatomic,strong) UIColor *normalBackground;
+
+@property (nonatomic,weak) IBOutlet UIImageView *iconImageView;
 @end
 
 @implementation SettingViewController
@@ -20,7 +22,14 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self setUpNavigationItem];
+    self.iconImageView.hidden = YES;
 }
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.title = @"设置";
+}
+
 - (void)setUpNavigationItem
 {
     CGRect frame = CGRectMake(0,0, 25,25);

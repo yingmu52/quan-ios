@@ -80,6 +80,8 @@
 		AED5BC5A1ABDEECE00EFF398 /* HomeCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED5BC591ABDEECE00EFF398 /* HomeCardView.xib */; };
 		AED5BC631ABE3CB600EFF398 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5BC621ABE3CB600EFF398 /* SettingViewController.m */; };
 		AED5BC641ABE3CB600EFF398 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5BC621ABE3CB600EFF398 /* SettingViewController.m */; };
+		AED5BC671ABEA7EB00EFF398 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5BC661ABEA7EB00EFF398 /* ProfileViewController.m */; };
+		AED5BC681ABEA7EB00EFF398 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5BC661ABEA7EB00EFF398 /* ProfileViewController.m */; };
 		AED68EE41A70399A00CDC0DF /* FetchCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = AED68EE31A70399A00CDC0DF /* FetchCenter.m */; };
 		AED68EE51A70399A00CDC0DF /* FetchCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = AED68EE31A70399A00CDC0DF /* FetchCenter.m */; };
 		AED71BEC1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AED71BEB1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m */; };
@@ -278,6 +280,8 @@
 		AED5BC591ABDEECE00EFF398 /* HomeCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCardView.xib; sourceTree = "<group>"; };
 		AED5BC611ABE3CB600EFF398 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		AED5BC621ABE3CB600EFF398 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		AED5BC651ABEA7EB00EFF398 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		AED5BC661ABEA7EB00EFF398 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		AED68EE21A70399A00CDC0DF /* FetchCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchCenter.h; sourceTree = "<group>"; };
 		AED68EE31A70399A00CDC0DF /* FetchCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchCenter.m; sourceTree = "<group>"; };
 		AED71BEA1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTCollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
@@ -576,6 +580,8 @@
 		AED5BC601ABE3C9A00EFF398 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				AED5BC651ABEA7EB00EFF398 /* ProfileViewController.h */,
+				AED5BC661ABEA7EB00EFF398 /* ProfileViewController.m */,
 				AED5BC611ABE3CB600EFF398 /* SettingViewController.h */,
 				AED5BC621ABE3CB600EFF398 /* SettingViewController.m */,
 			);
@@ -943,6 +949,7 @@
 				AE9A3AEB1A9B1DB000F0588F /* AchieveVCData.m in Sources */,
 				AECE2BEC1AA0521600B1C58E /* SDWebImageCompat.m in Sources */,
 				AEE4A6D41A96AFCF00ABF946 /* TriangleCutoutView.m in Sources */,
+				AED5BC671ABEA7EB00EFF398 /* ProfileViewController.m in Sources */,
 				AEF7F2AD1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */,
 				AEFEE4001A8EE0A7007E8234 /* FollowingCell.m in Sources */,
 				AEF3F8831AA4E3C0008C2300 /* WishDetailVCFollower.m in Sources */,
@@ -999,6 +1006,7 @@
 				AEF7F28C1A686E8B0022410B /* UIViewController+ECSlidingViewController.m in Sources */,
 				AEBD13E51A948DD400F5F0D3 /* DiscoveryCell.m in Sources */,
 				AEF7F28A1A686E8B0022410B /* ECSlidingViewController.m in Sources */,
+				AED5BC681ABEA7EB00EFF398 /* ProfileViewController.m in Sources */,
 				AEF7F2941A686FA30022410B /* Theme.m in Sources */,
 				AE0ADF1A1ABD78CC00692131 /* HomeCardViewController.m in Sources */,
 				AEEC6C631A6DB0010021B7E4 /* NSArray+PureLayout.m in Sources */,
