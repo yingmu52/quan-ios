@@ -8,8 +8,10 @@
 
 #import "SettingViewController.h"
 
-@interface SettingViewController ()
+@interface SettingViewController () <UIGestureRecognizerDelegate>
+@property (nonatomic,strong) UIView *currentView;
 
+@property (nonatomic,strong) UIColor *normalBackground;
 @end
 
 @implementation SettingViewController
@@ -30,4 +32,33 @@
     
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 104.0f / 1136 * self.view.frame.size.height;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+        return 45.0f / 1136 * self.view.frame.size.height;
+    }else if (section == 1){
+        return 30.0f / 1136 * self.view.frame.size.height;
+    }else if (section == 2){
+        return 431.0f / 1136 * self.view.frame.size.height;
+    }else{
+        return 0.0f;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+
+    cell.backgroundColor = [SystemUtil colorFromHexString:@"#E7F0ED"];
+}
+
+- (void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.backgroundColor = [SystemUtil colorFromHexString:@"#F6FAF9"];
+
+}
 @end
