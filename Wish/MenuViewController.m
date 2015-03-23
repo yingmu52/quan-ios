@@ -17,8 +17,7 @@
 #import "Third Party/TencentOpenAPI.framework/Headers/TencentApiInterface.h"
 #import "FetchCenter.h"
 #define AppKey @"ByYhJYTkXu0721fH"
-#define AppID @"222222"
-//#define AppID @"1104337894"
+#define AppID @"1104337894"
 
 typedef enum {
     MenuTableWishList = 0,

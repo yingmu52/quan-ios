@@ -57,4 +57,29 @@
     [self.navigationController.navigationBar
      setTitleTextAttributes:@{NSForegroundColorAttributeName :color}];
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 1){
+        return 58.0f / 1136 * tableView.frame.size.height;
+    }
+    return 0.0f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0) {
+        return 400.0f / 1136 * tableView.frame.size.height;
+    }else if (indexPath.section == 1){
+        return 104.0f / 1136 * tableView.frame.size.height;
+    }else{
+        return 0.0f;
+    }
+    
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (section == 2) {
+        return 0;
+    }
+    return [super tableView:tableView numberOfRowsInSection:section];
+}
 @end
