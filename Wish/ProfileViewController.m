@@ -58,13 +58,14 @@
      setTitleTextAttributes:@{NSForegroundColorAttributeName :color}];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section == 1){
-        return 58.0f / 1136 * tableView.frame.size.height;
-    }
-    return 0.0f;
-}
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if (section == 0){
+        return 58.0f / 1136 * tableView.frame.size.height;
+    }else{
+        return 470.0f / 1136 * tableView.frame.size.height;
+    };
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         return 400.0f / 1136 * tableView.frame.size.height;
@@ -82,4 +83,21 @@
     }
     return [super tableView:tableView numberOfRowsInSection:section];
 }
+
+
+
+- (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    cell.backgroundColor = [SystemUtil colorFromHexString:@"#E7F0ED"];
+}
+
+- (void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.backgroundColor = [SystemUtil colorFromHexString:@"#F6FAF9"];
+    
+}
+
+
 @end
