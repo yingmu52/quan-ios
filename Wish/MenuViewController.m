@@ -94,15 +94,9 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if (indexPath.section == 0 && ![User isUserLogin]){
-//        [self login];
-//    }
-    if (indexPath.section == 0){
-        [User updateOwnerInfo:nil];
-        [self.tableView reloadData];
+    if (indexPath.section == 0 && ![User isUserLogin]){
         [self login];
     }
-
     if (indexPath.section == 1) {
         NSString *identifier;
         switch (indexPath.row) {
@@ -206,8 +200,7 @@ typedef enum {
                                             GENDER:fetchedUserInfo[@"gender"],
                                             USER_DISPLAY_NAME:fetchedUserInfo[@"nickname"],
                                             UID:uid,
-                                            UKEY:uKey,
-                                            LOGIN_STATUS:@(YES)};
+                                            UKEY:uKey};
             [User updateOwnerInfo:localUserInfo];
             NSLog(@"%@",localUserInfo);
             [self.tableView reloadData];

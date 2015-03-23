@@ -12,7 +12,7 @@
 
 + (NSString *)uid{
     NSDictionary *info = [self.class getOwnerInfo];
-    return [NSString stringWithFormat:@"%@",info[UID]];
+    return [NSString stringWithFormat:@"%@", info ? info[UID] : @""];
 }
 
 + (NSString *)uKey{
@@ -31,7 +31,8 @@
 
 + (BOOL)isUserLogin{
     NSDictionary *info = [self.class getOwnerInfo];
-    return info && [info[LOGIN_STATUS] boolValue];
+    return info != nil;
+//    && [info[LOGIN_STATUS] boolValue];
 }
 
 + (NSURL *)userProfilePictureURL{

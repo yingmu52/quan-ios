@@ -56,6 +56,7 @@ HomeCardViewDelegate>
     [super viewWillAppear:animated];
     [self updatePage];
 }
+
 - (NSFetchedResultsController *)fetchedRC
 {
     NSManagedObjectContext *context = [AppDelegate getContext];

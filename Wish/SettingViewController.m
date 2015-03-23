@@ -7,7 +7,9 @@
 //
 
 #import "SettingViewController.h"
-
+#import "User.h"
+#import "AppDelegate.h"
+#import "MenuViewController.h"
 @interface SettingViewController () <UIGestureRecognizerDelegate>
 @property (nonatomic,strong) UIView *currentView;
 
@@ -68,6 +70,49 @@
 
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.backgroundColor = [SystemUtil colorFromHexString:@"#F6FAF9"];
+
+}
+
+#pragma mark - Functionality
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 2){
+        [self logout];
+    }
+}
+
+- (void)logout{
+    //delete user info
+    [User updateOwnerInfo:nil];
+    
+    //reload menu
+    ECSlidingViewController *slidingVC = (ECSlidingViewController *)self.presentingViewController;
+    MenuViewController *menuVC = (MenuViewController *)slidingVC.underLeftViewController;
+    [menuVC.tableView reloadData];
+    
+    //reset top view
+    slidingVC.topViewController = nil;
+    [self dismissViewControllerAnimated:YES completion:nil];
+    //delete all objects in core data
+//    [self clearCoreData];
+
+}
+
+- (void)clearCoreData{
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    for (NSEntityDescription *entity in delegate.managedObjectModel.entities){
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:entity.name];
+        [request setIncludesPropertyValues:NO]; //only fetch the managedObjectID
+        NSError * error = nil;
+        NSArray * objects = [delegate.managedObjectContext executeFetchRequest:request error:&error];
+        //error handling goes here
+        for (NSManagedObject *object in objects) {
+            [delegate.managedObjectContext deleteObject:object];
+        }
+        NSError *saveError = nil;
+        [delegate.managedObjectContext save:&saveError];
+        
+    }
 
 }
 @end
