@@ -342,7 +342,7 @@ HomeCardViewDelegate>
 //            self.title = [NSString stringWithFormat:@"%@ plans",@(self.fetchedRC.fetchedObjects.count)];
             [(AppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
             self.itemChanges = nil;;
-            [self updatePage];
+            [self updatePage];            
         }];
     });
 }
