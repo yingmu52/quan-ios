@@ -7,21 +7,20 @@
 //
 
 #import "HomeCardViewController.h"
-
 @interface HomeCardViewController ()
 @end
 
 @implementation HomeCardViewController
 
-- (void)viewDidLoad{
-    [super viewDidLoad];
+
+- (void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
     [self setupCollectionView];
 }
 - (void)setupCollectionView{
-    UINib *myNib = [UINib nibWithNibName:@"HomeCardView" bundle:nil];
-    
+//    UINib *myNib = [UINib nibWithNibName:@"HomeCardView" bundle:nil];
     // All new cells will be created from this one
-    [self.collectionView registerNib:myNib forCellWithReuseIdentifier:@"HomeCardCell"];
+//    [self.collectionView registerNib:myNib forCellWithReuseIdentifier:@"HomeCardCell"];
     
     // By turning off clipping, you'll see the prior and next items.
     self.collectionView.clipsToBounds = NO;
@@ -34,7 +33,7 @@
     CGFloat margin = ((self.view.frame.size.width - self.collectionView.frame.size.width) / 2);
     
     // This assumes that the the collectionView is centered withing its parent view.
-//    myLayout.itemSize = CGSizeMake(self.collectionView.frame.size.width + margin,self.collectionView.frame.size.height);
+    myLayout.itemSize = CGSizeMake(self.collectionView.frame.size.width + margin,self.collectionView.frame.size.height);
     
     // A negative margin will shift each item to the left.
     myLayout.minimumLineSpacing = -margin;
@@ -48,12 +47,12 @@
     self.collectionView.backgroundColor = [UIColor clearColor];
     
 }
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-
-    CGFloat margin = ((self.view.frame.size.width - self.collectionView.frame.size.width) / 2);
-    return  CGSizeMake(self.collectionView.frame.size.width + margin, self.view.frame.size.height * 890.0f / 1136);
-}
+//
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+//
+//    CGFloat margin = ((self.view.frame.size.width - self.collectionView.frame.size.width) / 2);
+//    return  CGSizeMake(self.collectionView.frame.size.width + margin, self.view.frame.size.height * 890.0f / 1136);
+//}
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)aCollectionView
                         layout:(UICollectionViewFlowLayout *)aCollectionViewLayout
@@ -68,15 +67,15 @@
 }
 
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)aCollectionView
+- (HomeCardView *)collectionView:(UICollectionView *)aCollectionView
                   cellForItemAtIndexPath:(NSIndexPath *)anIndexPath
 {
-    UICollectionViewCell *appropriateCell = [aCollectionView dequeueReusableCellWithReuseIdentifier:@"HomeCardCell" forIndexPath:anIndexPath];
+    HomeCardView *appropriateCell = [aCollectionView dequeueReusableCellWithReuseIdentifier:@"HomeCardCell" forIndexPath:anIndexPath];
     [self configureCollectionViewCell:appropriateCell atIndexPath:anIndexPath];
     return appropriateCell;
 }
 
-- (void)configureCollectionViewCell:(UICollectionViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
+- (void)configureCollectionViewCell:(HomeCardView *)cell atIndexPath:(NSIndexPath *)indexPath{
     //abstract
 }
 @end

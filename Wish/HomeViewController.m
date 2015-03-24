@@ -351,11 +351,11 @@ HomeCardViewDelegate>
 #pragma mark - implement parent class abstract methods
 
 
-- (void)configureCollectionViewCell:(UICollectionViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
-    HomeCardView *card = (HomeCardView *)cell;
+- (void)configureCollectionViewCell:(HomeCardView *)cell atIndexPath:(NSIndexPath *)indexPath{
+
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
-    card.plan = plan;
-    card.delegate = self;
+    cell.plan = plan;
+    cell.delegate = self;
 
 }
 

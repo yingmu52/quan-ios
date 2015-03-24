@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomeCardView.h"
 
 @interface HomeCardViewController : UIViewController 
 
 @property (nonatomic,weak) IBOutlet UICollectionView *collectionView;
 
-- (void)configureCollectionViewCell:(UICollectionViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+- (void)configureCollectionViewCell:(HomeCardView *)cell atIndexPath:(NSIndexPath *)indexPath;
+
 @end
