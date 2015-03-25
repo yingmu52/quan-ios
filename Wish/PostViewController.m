@@ -69,6 +69,8 @@
     
     self.textField.layer.borderColor = [Theme postTabBorderColor].CGColor;
     self.textField.layer.borderWidth = 1.0;
+    self.textField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,10,1)];
+    self.textField.leftViewMode = UITextFieldViewModeAlways;
     
 }
 

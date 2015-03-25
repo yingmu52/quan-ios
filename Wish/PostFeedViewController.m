@@ -55,6 +55,11 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
     self.navigationItem.rightBarButtonItem.enabled = NO;
     [self.textField addTarget:self action:@selector(textFieldDidUpdate) forControlEvents:UIControlEventEditingChanged];
+    
+    //left margin
+    self.textField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,10,1)];
+    self.textField.leftViewMode = UITextFieldViewModeAlways;
+    
     self.textField.inputAccessoryView = [KeyboardAcessoryView instantiateFromNib:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height * 88 / 1136)];
 
     self.previewIcon.image = self.imageForFeed;
