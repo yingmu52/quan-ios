@@ -45,7 +45,7 @@
     cell.dateLabel.text = [SystemUtil stringFromDate:plan.updateDate];
     cell.planStatusLabel.text = plan.planStatusTags[plan.planStatus.integerValue];
     cell.planTitleLabel.text = plan.planTitle;
-    cell.planSubtitleLabel.text = [NSString stringWithFormat:@"共有%@条纪录",@(plan.feeds.count)];
+    cell.planSubtitleLabel.text = [NSString stringWithFormat:@"%@个努力瞬间",@(plan.feeds.count)];
     
     UIImage *badge;
     if (plan.planStatus.integerValue == PlanStatusFinished) badge = [Theme achievementFinish];

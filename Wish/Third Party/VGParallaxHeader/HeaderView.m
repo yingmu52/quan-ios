@@ -10,10 +10,6 @@
 #import "SystemUtil.h"
 @interface HeaderView()
 
-@property (nonatomic,weak) IBOutlet UILabel *headerTitleLabel;
-@property (nonatomic,weak) IBOutlet UILabel *headerSubTitleLabel;
-@property (nonatomic,weak) IBOutlet UILabel *headerCountDownLabel;
-@property (nonatomic,weak) IBOutlet UILabel *headerFollowLabel;
 @end
 @implementation HeaderView
 
@@ -22,46 +18,32 @@
 {
     _plan = plan;
     if (plan) {
-        [self updateTitle:plan.planTitle];
-        [self updateSubtitle:plan.feeds.count]; //plan.tasks count
         
-        NSInteger pastDays = [SystemUtil daysBetween:plan.createDate and:[NSDate date]];
-        NSInteger totalDays = [SystemUtil daysBetween:plan.createDate and:plan.finishDate];
-        [self updateCountDownLabel:pastDays totalDays:totalDays];
-        [self updateFollowCount:plan.followCount.integerValue];
+        self.headerTitleLabel.text = [plan.planTitle stringByReplacingOccurrencesOfString:@" " withString:@""];
+        self.headerSubTitleLabel.text = [NSString stringWithFormat:@"已留下%@个努力瞬间",@(plan.feeds.count)];
+        self.headerFollowLabel.text = [NSString stringWithFormat:@"%@关注",plan.followCount];
+        [self updateCountDownLabel:plan];
     }
 }
 
-- (void)updateTitle:(NSString *)string{
-    self.headerTitleLabel.text = [string stringByReplacingOccurrencesOfString:@" " withString:@""];
-}
-- (void)updateSubtitle:(NSInteger)tryTime{
-    self.headerSubTitleLabel.text = [NSString stringWithFormat:@"已留下%ld个努力瞬间",(long)tryTime];
+- (void)updateCountDownLabel:(Plan *)plan{
+
+    NSInteger totalDays = [SystemUtil daysBetween:plan.createDate and:plan.finishDate];
+    NSInteger pastDays = [SystemUtil daysBetween:plan.createDate and:[NSDate date]];
+    NSInteger results = totalDays - pastDays;
+
+    if ([plan.planStatus isEqualToNumber:@(PlanStatusOnGoing)]) {
+        self.headerCountDownLabel.text = [NSString stringWithFormat:@"%@%@天",results >= 0 ? @"剩余":@"已过期",@(ABS(results))];
+    }else{
+        self.headerCountDownLabel.text = [NSString stringWithFormat:@"%@%@天",results >= 0 ? @"历时":@"过期",@(ABS(results))];
+    }
 }
 
-- (void)updateCountDownLabel:(NSInteger)pastDays totalDays:(NSInteger)totalDays{
-    self.headerCountDownLabel.text = [NSString stringWithFormat:@"%ld/%ld 天",(long)pastDays,(long)totalDays];
-}
-
-- (void)updateFollowCount:(NSInteger)count{
-    self.headerFollowLabel.text = [NSString stringWithFormat:@"%ld 关注",(long)count];
-}
 + (instancetype)instantiateFromNib
 {
     NSArray *views = [[NSBundle mainBundle] loadNibNamed:[NSString stringWithFormat:@"%@", [self class]] owner:nil options:nil];
     return [views firstObject];
 }
 
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    if (self) {
-        self.headerTitleLabel.text = @"无标题";
-        [self updateSubtitle:0];
-        [self updateCountDownLabel:0 totalDays:0];
-        [self updateFollowCount:0];
-        
-    }
 
-}
 @end

@@ -7,16 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Plan.h"
+#import "Plan+PlanCRUD.h"
 @interface HeaderView : UIView
+@property (nonatomic,weak) IBOutlet UILabel *headerTitleLabel;
+@property (nonatomic,weak) IBOutlet UILabel *headerSubTitleLabel;
+@property (nonatomic,weak) IBOutlet UILabel *headerCountDownLabel;
+@property (nonatomic,weak) IBOutlet UILabel *headerFollowLabel;
 
 @property (nonatomic,strong) Plan *plan;
 + (instancetype)instantiateFromNib;
-
-
-- (void)updateTitle:(NSString *)string;
-- (void)updateSubtitle:(NSInteger)tryTime;
-- (void)updateCountDownLabel:(NSInteger)pastDays totalDays:(NSInteger)totalDays;
-- (void)updateFollowCount:(NSInteger)count;
 
 @end

@@ -46,13 +46,14 @@
                                          selector:nil
                                             frame:frame];
     
-    UIButton *shareBtn = [Theme buttonWithImage:[Theme navShareButtonDefault]
-                                         target:self
-                                       selector:nil
-                                          frame:frame];
+//    UIButton *shareBtn = [Theme buttonWithImage:[Theme navShareButtonDefault]
+//                                         target:self
+//                                       selector:nil
+//                                          frame:frame];
     
-    self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:shareBtn],
-                                                [[UIBarButtonItem alloc] initWithCustomView:composeBtn]];
+//    self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:shareBtn],
+//                                                [[UIBarButtonItem alloc] initWithCustomView:composeBtn]];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:composeBtn];
     
 
     
