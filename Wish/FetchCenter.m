@@ -281,7 +281,10 @@ typedef enum{
 
 //return a new base url string with appened version argument
 - (NSString *)versionForBaseURL:(NSString *)baseURL operation:(FetchCenterGetOp)op{
-    NSMutableDictionary *dict = [@{@"version":@"2.2.2",@"loginType":@"qq"} mutableCopy];
+    NSMutableDictionary *dict = [@{@"version":@"2.2.2",
+                                   @"loginType":@"qq",
+                                   @"sysVersion":[UIDevice currentDevice].systemVersion,
+                                   @"sysModel":[UIDevice currentDevice].model} mutableCopy];
     if (op != FetchCenterGetOpLoginForUidAndUkey) {
         [dict addEntriesFromDictionary:@{@"uid":[User uid],@"ukey":[User uKey]}];
         dict[@"loginType"] = @"uid";
