@@ -52,7 +52,7 @@
 }
 
 + (UIColor *)privacyBackgroundDefault{
-    return [UIColor whiteColor];
+    return [SystemUtil colorFromHexString:@"#F6FAF9"];
 }
 + (UIImage *)privacyIconDefault{
     return [UIImage imageNamed:@"ic_secret_default"];

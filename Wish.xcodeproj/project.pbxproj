@@ -40,6 +40,8 @@
 		AE596EB91A953D4800AF1F44 /* DiscoveryBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE596EB71A953D4800AF1F44 /* DiscoveryBannerCell.m */; };
 		AE6E7A0C1AB0DF1F0023B9C7 /* PopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE6E7A0B1AB0DF1F0023B9C7 /* PopupView.xib */; };
 		AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE72E9541A66F2AA0046B38D /* MenuCell.m */; };
+		AE9861FA1AC33C04005544B9 /* EditWishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9861F91AC33C04005544B9 /* EditWishViewController.m */; };
+		AE9861FB1AC33C04005544B9 /* EditWishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9861F91AC33C04005544B9 /* EditWishViewController.m */; };
 		AE9A3AEB1A9B1DB000F0588F /* AchieveVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9A3AEA1A9B1DB000F0588F /* AchieveVCData.m */; };
 		AE9A3AEC1A9B1DB000F0588F /* AchieveVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9A3AEA1A9B1DB000F0588F /* AchieveVCData.m */; };
 		AEBD13DD1A93E7A800F5F0D3 /* DiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBD13DC1A93E7A800F5F0D3 /* DiscoveryViewController.m */; };
@@ -220,6 +222,8 @@
 		AE6E7A0B1AB0DF1F0023B9C7 /* PopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopupView.xib; sourceTree = "<group>"; };
 		AE72E9531A66F2AA0046B38D /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
 		AE72E9541A66F2AA0046B38D /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
+		AE9861F81AC33C04005544B9 /* EditWishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditWishViewController.h; sourceTree = "<group>"; };
+		AE9861F91AC33C04005544B9 /* EditWishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditWishViewController.m; sourceTree = "<group>"; };
 		AE9A3AE91A9B1DB000F0588F /* AchieveVCData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchieveVCData.h; sourceTree = "<group>"; };
 		AE9A3AEA1A9B1DB000F0588F /* AchieveVCData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AchieveVCData.m; sourceTree = "<group>"; };
 		AEBD13DB1A93E7A800F5F0D3 /* DiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryViewController.h; sourceTree = "<group>"; };
@@ -676,6 +680,8 @@
 		AEEC6C781A6DB6340021B7E4 /* WishDetail */ = {
 			isa = PBXGroup;
 			children = (
+				AE9861F81AC33C04005544B9 /* EditWishViewController.h */,
+				AE9861F91AC33C04005544B9 /* EditWishViewController.m */,
 				AE52FA511A8D55A7003FF725 /* KeyboardAcessoryView.h */,
 				AE52FA521A8D55A7003FF725 /* KeyboardAcessoryView.m */,
 				AE52FA541A8D55CA003FF725 /* KeyboardAcessoryView.xib */,
@@ -922,6 +928,7 @@
 				AE0172421A65CD8E0014266F /* AppDelegate.m in Sources */,
 				AEF7F2AB1A6884950022410B /* CustomBarItem.m in Sources */,
 				AEE4A6CC1A9684D500ABF946 /* AchieveViewController.m in Sources */,
+				AE9861FA1AC33C04005544B9 /* EditWishViewController.m in Sources */,
 				AE01723F1A65CD8E0014266F /* main.m in Sources */,
 				AECE2C031AA1A28900B1C58E /* Owner.m in Sources */,
 				AE1E6BAA1AAFEEE400AF2613 /* PopupView.m in Sources */,
@@ -1042,6 +1049,7 @@
 				AE479E9F1A6F775C00366A0A /* PostViewController.m in Sources */,
 				AE0E794C1A76EB50007C48EE /* Reachability.m in Sources */,
 				AEFEE4011A8EE0A7007E8234 /* FollowingCell.m in Sources */,
+				AE9861FB1AC33C04005544B9 /* EditWishViewController.m in Sources */,
 				AE2F1C851A7A1A1800A32CB5 /* UIImage+ImageEffects.m in Sources */,
 				AE01726A1A65D3140014266F /* MenuViewController.m in Sources */,
 				AECE2C041AA1A28900B1C58E /* Owner.m in Sources */,

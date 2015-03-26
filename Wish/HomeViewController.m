@@ -120,14 +120,8 @@ HomeCardViewDelegate>
 
 
 #warning - give up for hacking max plan count
-- (void)addWish{
-    if (self.fetchedRC.fetchedObjects.count > maxCardNum){
-        [[[UIAlertView alloc] initWithTitle:nil
-                                    message:@"Life is too short for too many goddamn plans"
-                                   delegate:self
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil, nil] show];
-    }else if ([User isUserLogin]){
+- (void)addWish{    
+    if ([User isUserLogin]){
         [self performSegueWithIdentifier:@"showPostFromHome" sender:nil];
     }
 }

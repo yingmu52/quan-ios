@@ -8,6 +8,7 @@
 
 #import "WishDetailVCOwner.h"
 #import "PostFeedViewController.h"
+#import "EditWishViewController.h"
 @interface WishDetailVCOwner () <UIImagePickerControllerDelegate,UIGestureRecognizerDelegate,UINavigationControllerDelegate>
 @property (nonatomic) BOOL shouldShowSideWidgets;
 @property (nonatomic,strong) UIButton *logoButton;
@@ -43,7 +44,7 @@
     CGRect frame = CGRectMake(0,0, 25,25);
     UIButton *composeBtn = [Theme buttonWithImage:[Theme navComposeButtonDefault]
                                            target:self
-                                         selector:nil
+                                         selector:@selector(editPlan)
                                             frame:frame];
     
 //    UIButton *shareBtn = [Theme buttonWithImage:[Theme navShareButtonDefault]
@@ -58,6 +59,11 @@
 
     
 }
+- (void)editPlan{
+    [self performSegueWithIdentifier:@"showEditPage" sender:self.plan];
+}
+
+
 #pragma mark - setup views
 
 - (void)loadCornerCamera
@@ -178,6 +184,10 @@
         [segue.destinationViewController setImageForFeed:sender];
         [segue.destinationViewController setPlan:self.plan];
     }
+    if ([segue.identifier isEqualToString:@"showEditPage"]){
+        [segue.destinationViewController setPlan:sender];
+    }
+
 }
 - (void)showCamera{
     UIImagePickerController *controller = [SystemUtil showCamera:self];

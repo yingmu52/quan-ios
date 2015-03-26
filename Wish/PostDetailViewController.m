@@ -7,24 +7,7 @@
 //
 
 #import "PostDetailViewController.h"
-#import "Theme.h"
-#import "Plan+PlanCRUD.h"
-#import "SystemUtil.h"
-#import "WishDetailViewController.h"
-#import "FetchCenter.h"
 @interface PostDetailViewController () <FetchCenterDelegate>
-@property (weak, nonatomic) IBOutlet UILabel *finishDateLabel;
-@property (nonatomic,strong) NSDate *selectedDate;
-@property (strong, nonatomic) UIDatePicker *datePicker;
-@property (strong, nonatomic) UIToolbar *pickerToolBar;
-@property (strong,nonatomic) UIView *bgView;
-@property (weak, nonatomic) IBOutlet UIView *isPrivateTab;
-@property (weak, nonatomic) IBOutlet UIImageView *lockImageView;
-@property (weak, nonatomic) IBOutlet UILabel *isPrivateLabel;
-@property (nonatomic) BOOL isPrivate;
-@property (nonatomic,strong) UIButton *nextButton;
-@property (nonatomic,strong) UIButton *backButton;
-@property (nonatomic,strong) Plan *plan;
 @end
 @implementation PostDetailViewController
 
@@ -47,7 +30,7 @@
 {
     _selectedDate = selectedDate;
     NSString *dateString = [SystemUtil stringFromDate:selectedDate];
-    self.finishDateLabel.text = [NSString stringWithFormat:@"  预计 %@ 完成",dateString];
+    self.finishDateLabel.text = [NSString stringWithFormat:@"预计%@完成",dateString];
 
 }
 - (void)viewDidLoad {
@@ -57,10 +40,15 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    self.finishDateLabel.text = [NSString stringWithFormat:@"  预计 %@ 完成",[SystemUtil stringFromDate:[NSDate date]]];
-    self.finishDateLabel.layer.borderColor = [Theme postTabBorderColor].CGColor;
-    self.finishDateLabel.layer.borderWidth = 1.0;
+    self.finishDateLabel.text = [NSString stringWithFormat:@"预计%@完成",[SystemUtil stringFromDate:[NSDate date]]];
     self.datePicker.backgroundColor = [UIColor whiteColor];
+    [self setViewBorder:self.dateBackground];
+    [self setViewBorder:self.isPrivateTab];
+}
+
+- (void)setViewBorder:(UIView *)view{
+    view.layer.borderColor = [Theme postTabBorderColor].CGColor;
+    view.layer.borderWidth = 1.0;
 }
 - (IBAction)finishDateIsTapped:(UITapGestureRecognizer *)sender {
     self.bgView =[[UIView alloc] initWithFrame:self.view.bounds];
@@ -106,7 +94,7 @@
 {
     if ([item.title isEqualToString:@"取消"]) {
         NSString *dateString = [SystemUtil stringFromDate:[NSDate date]];
-        self.finishDateLabel.text = [NSString stringWithFormat:@"  预计 %@ 完成",dateString];
+        self.finishDateLabel.text = [NSString stringWithFormat:@"预计%@完成",dateString];
     }
     [self.bgView removeFromSuperview];
     [self.pickerToolBar removeFromSuperview];
@@ -122,7 +110,7 @@
     
     self.nextButton = [Theme buttonWithImage:[Theme navTikButtonDefault]
                                            target:self
-                                         selector:@selector(createPlan)
+                                         selector:@selector(doneEditing)
                                             frame:frame];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backButton];
@@ -152,7 +140,7 @@
     self.isPrivate = !self.isPrivate;
 }
 
-- (void)createPlan
+- (void)doneEditing
 {
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithFrame:self.nextButton.frame];
     spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;

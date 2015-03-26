@@ -60,7 +60,7 @@
     self.textField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,10,1)];
     self.textField.leftViewMode = UITextFieldViewModeAlways;
     
-    self.textField.inputAccessoryView = [KeyboardAcessoryView instantiateFromNib:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height * 88 / 1136)];
+//    self.textField.inputAccessoryView = [KeyboardAcessoryView instantiateFromNib:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height * 88 / 1136)];
 
     self.previewIcon.image = self.imageForFeed;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#2A2A2A"]};
