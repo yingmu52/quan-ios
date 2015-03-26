@@ -9,6 +9,7 @@
 #import "EditWishViewController.h"
 #import "Theme.h"
 #import "SystemUtil.h"
+#import "Plan+PlanCRUD.h"
 @interface EditWishViewController ()
 @property (nonatomic,strong) IBOutlet UITextField *textField;
 @end
@@ -58,6 +59,14 @@
     if (self.textField.isFirstResponder) [self.textField resignFirstResponder];
 }
 
+- (IBAction)giveUp:(UIButton *)sender{
+    [self.plan updatePlanStatus:PlanStatusGiveTheFuckingUp];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 
+- (IBAction)finish:(UIButton *)sender{
+    [self.plan updatePlanStatus:PlanStatusFinished];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 
 @end

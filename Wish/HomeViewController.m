@@ -308,11 +308,11 @@ HomeCardViewDelegate>
                                 [self.collectionView insertItemsAtIndexPaths:@[obj]];
                             }];
                         }
-                            NSLog(@"Inserted Plan");
+                            NSLog(@"Home Card: Inserted Plan");
                             break;
                         case NSFetchedResultsChangeDelete:
                             [self.collectionView deleteItemsAtIndexPaths:@[obj]];
-                            NSLog(@"Deleted Plan");
+                            NSLog(@"Home Card: Deleted Plan");
                             break;
                         case NSFetchedResultsChangeUpdate:{
                             Plan *plan = [controller objectAtIndexPath:obj];
@@ -323,7 +323,7 @@ HomeCardViewDelegate>
                                                                     atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
                                                                             animated:NO];
                                 }];
-                                NSLog(@"Updated Plan");
+                                NSLog(@"Home Card: Updated Plan");
                             }
                         }
                             break;
