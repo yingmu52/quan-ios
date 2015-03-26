@@ -15,6 +15,7 @@
 #define CREATE_PLAN @"splan_plan_create.php"
 #define DELETE_PLAN @"splan_plan_delete_id.php"
 #define UPDATE_PLAN_STATUS @"splan_plan_set_state.php"
+#define UPDATE_PLAN @"splan_plan_update.php"
 
 #define FEED @"feeds/"
 #define PIC @"pic/"
@@ -38,6 +39,7 @@ typedef enum{
     FetchCenterGetOpCreateFeed,
     FetchCenterGetOpGetPlanList,
     FetchCenterGetOpSetPlanStatus,
+    FetchCenterGetOpUpdatePlan,
     FetchCenterGetOpFollowingPlanList,
     FetchCenterGetOpLoginForUidAndUkey
 }FetchCenterGetOp;
@@ -70,6 +72,18 @@ typedef enum{
 
 #pragma mark - personal
 
+- (void)updatePlan:(Plan *)plan{
+    //输入样例：id=hello_1421235901&title=hello_title2&finishDate=3&backGroudPic=bg3&private=1&state=1&finishPercent=20
+    //—— 每一项都可以单独更新
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PLAN,UPDATE_PLAN];
+    [self getRequest:rqtStr parameter:@{@"id":plan.planId,
+                                        @"title":[plan.planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                                        @"finishDate":@([SystemUtil daysBetween:plan.createDate and:plan.finishDate]),
+                                        @"private":plan.isPrivate}
+           operation:FetchCenterGetOpUpdatePlan
+              entity:plan];
+   
+}
 - (void)updateStatus:(Plan *)plan{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PLAN,UPDATE_PLAN_STATUS];
     [self getRequest:rqtStr parameter:@{@"id":plan.planId,
@@ -168,6 +182,7 @@ typedef enum{
             break;
         case FetchCenterGetOpSetPlanStatus:{
             NSLog(@"updated plan status (from server)");
+            NSLog(@"updated status : %@",((Plan *)obj).planStatus);
         }
             break;
         case FetchCenterGetOpFollowingPlanList:{
@@ -193,6 +208,12 @@ typedef enum{
             NSString *uid = [json valueForKeyPath:@"data.uid"];
             NSString *ukey = [json valueForKeyPath:@"data.ukey"];
             [self.delegate didFinishReceivingUid:uid uKey:ukey];
+        }
+            break;
+        case FetchCenterGetOpUpdatePlan:{
+            NSLog(@"%@",json);
+            Plan *plan = (Plan *)obj;
+            [self.delegate didFinishUpdatingPlan:plan];
         }
             break;
         default:

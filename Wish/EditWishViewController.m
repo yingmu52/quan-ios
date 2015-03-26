@@ -10,6 +10,7 @@
 #import "Theme.h"
 #import "SystemUtil.h"
 #import "Plan+PlanCRUD.h"
+#import "AppDelegate.h"
 @interface EditWishViewController ()
 @property (nonatomic,strong) IBOutlet UITextField *textField;
 @end
@@ -32,7 +33,21 @@
 
 - (void)doneEditing{
     NSLog(@"test");
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithFrame:self.nextButton.frame];
+    spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+    [spinner startAnimating];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+    self.backButton.enabled = NO;
+    
+    
+    [self.plan updatePlan:self.textField.text finishDate:self.selectedDate isPrivated:self.isPrivate];
+    
+    //set updaing request
+    FetchCenter *fc = [[FetchCenter alloc] init];
+    fc.delegate = self;
+    [fc updatePlan:self.plan];
 }
+
 
 - (IBAction)finishDateIsTapped:(UITapGestureRecognizer *)sender{
     [super finishDateIsTapped:sender];
@@ -40,13 +55,37 @@
     if (self.textField.isFirstResponder) [self.textField resignFirstResponder];
 }
 
-- (void)didFinishUploadingPlan:(Plan *)plan{
 
-}
-
-- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
+- (void)didFinishUpdatingPlan:(Plan *)plan{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
+        self.backButton.enabled = YES;
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
+    });
     
 }
+- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        //update navigation item
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
+        self.backButton.enabled = YES;
+        
+        //show alerts
+        [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
+                                    message:[NSString stringWithFormat:@"%@",info[@"msg"]]
+                                   delegate:self
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+        
+        AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+        [delegate.managedObjectContext rollback];
+        [delegate.managedObjectContext refreshObject:self.plan mergeChanges:NO];
+    });
+
+}
+
 
 //- (void)dismissPickerView:(UIBarButtonItem *)item{
 //    [super dismissPickerView:item];

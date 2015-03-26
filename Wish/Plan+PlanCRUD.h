@@ -18,6 +18,8 @@ typedef enum {
     PlanStatusGiveTheFuckingUp
 }PlanStatus;
 
+- (void)updatePlan:(NSString *)newTitle finishDate:(NSDate *)date isPrivated:(BOOL)isPrivated;
+
 - (void)updatePlanStatus:(PlanStatus)planStatus;
 
 + (Plan *)updatePlanFromServer:(NSDictionary *)dict;

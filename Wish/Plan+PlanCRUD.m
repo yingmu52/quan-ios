@@ -15,17 +15,33 @@
 - (NSArray *)planStatusTags{
     return @[@"进行中",@"达成",@"放弃"];
 }
+
+- (void)updatePlan:(NSString *)newTitle finishDate:(NSDate *)date isPrivated:(BOOL)isPrivated{
+//    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+//    [delegate saveContext];
+
+    self.planTitle = newTitle;
+    self.finishDate = date;
+    self.isPrivate = @(isPrivated);
+    
+}
+
 - (void)updatePlanStatus:(PlanStatus)planStatus{
+    
+//    [managedObjectContext rollback] will discard any changes made to the context since the last save. If you want finer grain control add an NSUndoManager to the context and break out the docs! :)
+
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    [delegate saveContext];
+
+
     NSAssert1(planStatus == PlanStatusOnGoing || planStatus == PlanStatusFinished || planStatus == PlanStatusGiveTheFuckingUp,@"invalid plan status %d", planStatus);
     self.planStatus = @(planStatus);
     self.updateDate = [NSDate date];
-    if ([self.managedObjectContext save:nil] && self.planId) {
-        NSLog(@"updated status : %d",planStatus);
-        //update status to server
-        [[FetchCenter alloc] updateStatus:self];
-    }else{
-        NSLog(@"failed to save or null planId");
-    }
+
+    NSAssert(self.planId, @"nil plan id");
+    
+    //update status to server
+    [[FetchCenter new] updateStatus:self];
 }
 
 + (Plan *)updatePlanFromServer:(NSDictionary *)dict{
