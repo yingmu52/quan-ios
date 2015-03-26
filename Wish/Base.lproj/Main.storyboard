@@ -4868,7 +4868,7 @@
                                                             <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selected_ic" translatesAutoresizingMaskIntoConstraints="NO" id="Kuf-Xu-yWb">
+                                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selected_ic" translatesAutoresizingMaskIntoConstraints="NO" id="Kuf-Xu-yWb">
                                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="Kuf-Xu-yWb" secondAttribute="height" multiplier="1:1" id="PJ6-2t-wYv"/>
@@ -4980,7 +4980,10 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="genderLabel" destination="RcL-cZ-Gg4" id="evF-aS-WLa"/>
+                        <outlet property="nickNameLabel" destination="f5r-Pe-AEg" id="Rvc-HU-76q"/>
                         <outlet property="profileBackground" destination="Ngg-fS-R8e" id="9UT-8E-1Ku"/>
+                        <outlet property="profilePicture" destination="6Ek-F7-2bh" id="KXa-Co-XcN"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gYH-6l-u3n" userLabel="First Responder" sceneMemberID="firstResponder"/>

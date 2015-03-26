@@ -30,4 +30,6 @@
 + (BOOL)isUserLogin;
 + (NSURL *)userProfilePictureURL;
 + (NSString *)userDisplayName;
+
++ (NSString *)gender;
 @end

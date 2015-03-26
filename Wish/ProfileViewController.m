@@ -10,8 +10,14 @@
 #import "Theme.h"
 #import "SystemUtil.h"
 #import "NavigationBar.h"
+#import "UIImageView+UIActivityIndicatorForSDWebImage.h"
+#import "FetchCenter.h"
+#import "User.h"
 @interface ProfileViewController ()
 @property (nonatomic,weak) IBOutlet UIView *profileBackground;
+@property (nonatomic,weak) IBOutlet UIImageView *profilePicture;
+@property (nonatomic,weak) IBOutlet UILabel *nickNameLabel;
+@property (nonatomic,weak) IBOutlet UILabel *genderLabel;
 
 @end
 
@@ -21,6 +27,7 @@
     [super viewDidLoad];
     [self setUpNavigationItem];
     [self setupProfileBanner];
+    [self setupInfoSection];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -38,6 +45,9 @@
 
 - (void)setupProfileBanner{
     self.profileBackground.backgroundColor = [Theme profileBakground];
+    [self.profilePicture setImageWithURL:[User userProfilePictureURL]
+             usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+
 }
 
 - (void)setUpNavigationItem
@@ -100,4 +110,18 @@
 }
 
 
+#pragma mark - functionality
+- (void)setupInfoSection{
+    self.nickNameLabel.text = [User userDisplayName];
+    self.genderLabel.text = [User gender];
+}
 @end
+
+
+
+
+
+
+
+
+

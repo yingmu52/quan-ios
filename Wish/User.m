@@ -45,4 +45,9 @@
     return info[USER_DISPLAY_NAME];
 }
 
++ (NSString *)gender{
+    NSDictionary *info = [self.class getOwnerInfo];
+    return info[GENDER];
+}
+
 @end
