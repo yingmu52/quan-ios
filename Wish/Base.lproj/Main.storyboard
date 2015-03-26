@@ -5001,6 +5001,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xEq-TA-PZ3">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="xEq-TA-PZ3" secondAttribute="height" multiplier="363:46" id="PJc-zW-pBb"/>
                                 </constraints>
@@ -5029,6 +5030,7 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="0aW-Io-xbG" firstAttribute="leading" secondItem="1i0-ST-YVR" secondAttribute="leading" constant="109" id="TFn-at-mtS">
                                         <variation key="heightClass=regular-widthClass=compact" constant="10"/>
@@ -5053,6 +5055,9 @@
                                         <include reference="hIh-Zz-n3q"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="jJ3-Ln-mWk" appends="YES" id="lhM-OR-oY4"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Scz-FF-veU">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -5081,6 +5086,7 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="K2d-EJ-sS0" firstAttribute="width" secondItem="Scz-FF-veU" secondAttribute="height" multiplier="6:11" id="5g9-uW-wFg"/>
                                     <constraint firstItem="K2d-EJ-sS0" firstAttribute="leading" secondItem="Scz-FF-veU" secondAttribute="leading" constant="8" id="YvU-U9-fhL">
@@ -5120,6 +5126,9 @@
                                         <include reference="sby-IH-rrj"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="avL-Hk-hXc" appends="YES" id="0gn-lh-ayK"/>
+                                </connections>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="edit_split_line" translatesAutoresizingMaskIntoConstraints="NO" id="fzL-bq-XFg">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -5189,6 +5198,7 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.80000000000000004" green="0.83921568627450982" blue="0.82352941176470584" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="centerY" secondItem="fzL-bq-XFg" secondAttribute="centerY" constant="-171" id="1eb-v2-pkV">
                                 <variation key="heightClass=regular-widthClass=compact" constant="-150"/>
@@ -5213,9 +5223,7 @@
                                 <variation key="heightClass=regular-widthClass=compact" constant="20"/>
                             </constraint>
                             <constraint firstItem="hCb-4G-wLB" firstAttribute="width" secondItem="faq-sT-W4c" secondAttribute="width" multiplier="96:640" id="KHc-e7-XGO"/>
-                            <constraint firstItem="xEq-TA-PZ3" firstAttribute="width" secondItem="faq-sT-W4c" secondAttribute="width" id="KOT-Ow-0WL"/>
                             <constraint firstItem="1i0-ST-YVR" firstAttribute="width" secondItem="Scz-FF-veU" secondAttribute="width" id="LP2-p2-BN1"/>
-                            <constraint firstItem="fzL-bq-XFg" firstAttribute="width" secondItem="faq-sT-W4c" secondAttribute="height" multiplier="1:400" id="OfM-4i-u2s"/>
                             <constraint firstAttribute="centerX" secondItem="fzL-bq-XFg" secondAttribute="centerX" constant="5" id="PuD-dy-be1">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
@@ -5258,7 +5266,6 @@
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="7hz-vL-BdJ"/>
-                                <exclude reference="KOT-Ow-0WL"/>
                                 <exclude reference="SCb-zd-5EM"/>
                                 <exclude reference="pL4-Qq-g62"/>
                                 <exclude reference="FoJ-uA-8qn"/>
@@ -5275,7 +5282,6 @@
                                 <exclude reference="d2a-sv-QSO"/>
                                 <exclude reference="1eb-v2-pkV"/>
                                 <exclude reference="4fW-il-cxe"/>
-                                <exclude reference="OfM-4i-u2s"/>
                                 <exclude reference="PuD-dy-be1"/>
                                 <exclude reference="wZl-dQ-KsQ"/>
                                 <exclude reference="cKQ-JU-ibh"/>
@@ -5298,7 +5304,6 @@
                             </mask>
                             <mask key="constraints">
                                 <include reference="7hz-vL-BdJ"/>
-                                <exclude reference="KOT-Ow-0WL"/>
                                 <include reference="SCb-zd-5EM"/>
                                 <include reference="pL4-Qq-g62"/>
                                 <include reference="FoJ-uA-8qn"/>
@@ -5315,7 +5320,6 @@
                                 <include reference="d2a-sv-QSO"/>
                                 <include reference="1eb-v2-pkV"/>
                                 <include reference="4fW-il-cxe"/>
-                                <exclude reference="OfM-4i-u2s"/>
                                 <include reference="PuD-dy-be1"/>
                                 <include reference="wZl-dQ-KsQ"/>
                                 <include reference="cKQ-JU-ibh"/>
@@ -5325,9 +5329,35 @@
                                 <include reference="G7g-3V-Lu1"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="At8-P7-BEF" appends="YES" id="SrX-tn-4dI"/>
+                        </connections>
                     </view>
+                    <connections>
+                        <outlet property="dateBackground" destination="1i0-ST-YVR" id="Y4Q-FY-NmB"/>
+                        <outlet property="finishDateLabel" destination="0aW-Io-xbG" id="2q0-fm-4jE"/>
+                        <outlet property="isPrivateLabel" destination="pts-UK-hN5" id="Vra-IC-BId"/>
+                        <outlet property="isPrivateTab" destination="Scz-FF-veU" id="lqT-Db-MKH"/>
+                        <outlet property="lockImageView" destination="K2d-EJ-sS0" id="ROT-SY-MtH"/>
+                        <outlet property="textField" destination="xEq-TA-PZ3" id="hp6-xW-Qqr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="spf-fL-Tn6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="jJ3-Ln-mWk" userLabel="tapOnDate">
+                    <connections>
+                        <action selector="finishDateIsTapped:" destination="rNz-bL-QyY" id="dys-3M-NnB"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="avL-Hk-hXc" userLabel="tapOnPrivacy">
+                    <connections>
+                        <action selector="tapOnPrivacyTab:" destination="rNz-bL-QyY" id="LzF-sG-zmq"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="At8-P7-BEF" userLabel="tapOnBackground">
+                    <connections>
+                        <action selector="tapOnBackground:" destination="rNz-bL-QyY" id="Uii-It-O28"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="4569" y="438"/>
         </scene>
