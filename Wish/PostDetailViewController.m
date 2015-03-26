@@ -7,7 +7,7 @@
 //
 
 #import "PostDetailViewController.h"
-@interface PostDetailViewController () <FetchCenterDelegate>
+@interface PostDetailViewController () 
 @end
 @implementation PostDetailViewController
 

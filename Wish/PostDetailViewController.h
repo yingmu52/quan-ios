@@ -13,7 +13,7 @@
 #import "WishDetailViewController.h"
 #import "FetchCenter.h"
 
-@interface PostDetailViewController : UIViewController
+@interface PostDetailViewController : UIViewController <FetchCenterDelegate>
 @property (nonatomic,strong) NSString *titleFromPostView;
 
 
@@ -39,5 +39,7 @@
 - (void)setViewBorder:(UIView *)view;
 
 
-- (void)doneEditing; 
+- (void)doneEditing;
+- (IBAction)finishDateIsTapped:(UITapGestureRecognizer *)sender;
+- (void)dismissPickerView:(UIBarButtonItem *)item;
 @end

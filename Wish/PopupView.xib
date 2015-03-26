@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
@@ -283,16 +283,16 @@
                                             <exclude reference="cVN-sM-Iiy"/>
                                         </mask>
                                         <mask key="constraints">
+                                            <exclude reference="cg9-MY-0Zj"/>
+                                            <exclude reference="5uf-Gq-uhp"/>
+                                            <exclude reference="MT6-zV-xYr"/>
+                                            <exclude reference="kzL-nz-dpJ"/>
+                                            <exclude reference="v2j-Nv-xbW"/>
                                             <exclude reference="084-sK-okb"/>
                                             <exclude reference="2CK-F1-Fs9"/>
                                             <exclude reference="BUm-eb-Oig"/>
                                             <exclude reference="Zey-oK-ngA"/>
                                             <exclude reference="iSe-MJ-S31"/>
-                                            <exclude reference="5uf-Gq-uhp"/>
-                                            <exclude reference="MT6-zV-xYr"/>
-                                            <exclude reference="kzL-nz-dpJ"/>
-                                            <exclude reference="v2j-Nv-xbW"/>
-                                            <exclude reference="cg9-MY-0Zj"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=compact">
@@ -302,16 +302,16 @@
                                             <include reference="cVN-sM-Iiy"/>
                                         </mask>
                                         <mask key="constraints">
+                                            <include reference="cg9-MY-0Zj"/>
+                                            <include reference="5uf-Gq-uhp"/>
+                                            <include reference="MT6-zV-xYr"/>
+                                            <include reference="kzL-nz-dpJ"/>
+                                            <exclude reference="v2j-Nv-xbW"/>
                                             <include reference="084-sK-okb"/>
                                             <include reference="2CK-F1-Fs9"/>
                                             <include reference="BUm-eb-Oig"/>
                                             <include reference="Zey-oK-ngA"/>
                                             <include reference="iSe-MJ-S31"/>
-                                            <include reference="5uf-Gq-uhp"/>
-                                            <include reference="MT6-zV-xYr"/>
-                                            <include reference="kzL-nz-dpJ"/>
-                                            <exclude reference="v2j-Nv-xbW"/>
-                                            <include reference="cg9-MY-0Zj"/>
                                         </mask>
                                     </variation>
                                 </view>
@@ -370,7 +370,7 @@
                             <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                         </constraint>
                         <constraint firstAttribute="centerX" secondItem="ffR-XM-dzo" secondAttribute="centerX" id="eqV-Kt-zsx"/>
-                        <constraint firstAttribute="height" secondItem="ffR-XM-dzo" secondAttribute="height" multiplier="1136:400" id="f0Z-ej-wFI"/>
+                        <constraint firstAttribute="width" secondItem="ffR-XM-dzo" secondAttribute="width" multiplier="640:550" id="f0Z-ej-wFI"/>
                     </constraints>
                     <variation key="default">
                         <mask key="subviews">
