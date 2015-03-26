@@ -32,6 +32,10 @@
 #define USER @"man/"
 #define GETUID @"splan_get_uid.php"
 
+
+#define OTHER @"other/"
+#define CHECK_NEW_VERSION @"splan_other_new_version.php"
+
 typedef enum{
     FetchCenterGetOpCreatePlan = 0,
     FetchCenterGetOpDeletePlan,
@@ -41,7 +45,8 @@ typedef enum{
     FetchCenterGetOpSetPlanStatus,
     FetchCenterGetOpUpdatePlan,
     FetchCenterGetOpFollowingPlanList,
-    FetchCenterGetOpLoginForUidAndUkey
+    FetchCenterGetOpLoginForUidAndUkey,
+    FetchCenterGetOpCheckNewVersion
 }FetchCenterGetOp;
 
 typedef enum{
@@ -51,6 +56,13 @@ typedef enum{
 @implementation FetchCenter
 
 
+- (void)checkVersion{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,OTHER,CHECK_NEW_VERSION];
+    [self getRequest:rqtStr
+           parameter:nil
+           operation:FetchCenterGetOpCheckNewVersion
+              entity:nil];
+}
 - (void)fetchFollowingPlanList{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,FOLLOW,GET_FOLLOW_LIST];
     [self getRequest:rqtStr
@@ -211,14 +223,19 @@ typedef enum{
         }
             break;
         case FetchCenterGetOpUpdatePlan:{
-            NSLog(@"%@",json);
             Plan *plan = (Plan *)obj;
             [self.delegate didFinishUpdatingPlan:plan];
+        }
+            break;
+        case FetchCenterGetOpCheckNewVersion:{
+            BOOL hasNewVersion = [[json valueForKeyPath:@"data.haveNew"] boolValue];
+            [self.delegate didFinishCheckingNewVersion:hasNewVersion];
         }
             break;
         default:
             break;
     }
+    NSLog(@"%@",json);
 }
 
 #pragma mark - main get and post method

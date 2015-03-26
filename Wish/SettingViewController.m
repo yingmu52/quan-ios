@@ -10,7 +10,8 @@
 #import "User.h"
 #import "AppDelegate.h"
 #import "MenuViewController.h"
-@interface SettingViewController () <UIGestureRecognizerDelegate>
+#import "FetchCenter.h"
+@interface SettingViewController () <UIGestureRecognizerDelegate,FetchCenterDelegate>
 @property (nonatomic,strong) UIView *currentView;
 
 @property (nonatomic,strong) UIColor *normalBackground;
@@ -25,6 +26,8 @@
     [super viewDidLoad];
     [self setUpNavigationItem];
     self.iconImageView.hidden = YES;
+    [self checkUpdate];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -115,4 +118,24 @@
     }
 
 }
+
+#pragma mark - check update
+- (void)checkUpdate{
+    FetchCenter *fc = [[FetchCenter alloc] init];
+    fc.delegate = self;
+    [fc checkVersion];
+}
+
+- (void)didFinishCheckingNewVersion:(BOOL)hasNewVersion{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.iconImageView.hidden = !hasNewVersion;
+    });
+    NSLog(@"%@",hasNewVersion ? @"has new version" : @"this is latest version");
+}
 @end
+
+
+
+
+
+

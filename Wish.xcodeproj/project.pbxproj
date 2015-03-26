@@ -42,6 +42,8 @@
 		AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE72E9541A66F2AA0046B38D /* MenuCell.m */; };
 		AE9861FA1AC33C04005544B9 /* EditWishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9861F91AC33C04005544B9 /* EditWishViewController.m */; };
 		AE9861FB1AC33C04005544B9 /* EditWishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9861F91AC33C04005544B9 /* EditWishViewController.m */; };
+		AE9861FD1AC3F477005544B9 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = AE9861FC1AC3F476005544B9 /* placeholder.png */; };
+		AE9861FE1AC3F477005544B9 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = AE9861FC1AC3F476005544B9 /* placeholder.png */; };
 		AE9A3AEB1A9B1DB000F0588F /* AchieveVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9A3AEA1A9B1DB000F0588F /* AchieveVCData.m */; };
 		AE9A3AEC1A9B1DB000F0588F /* AchieveVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9A3AEA1A9B1DB000F0588F /* AchieveVCData.m */; };
 		AEBD13DD1A93E7A800F5F0D3 /* DiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBD13DC1A93E7A800F5F0D3 /* DiscoveryViewController.m */; };
@@ -224,6 +226,7 @@
 		AE72E9541A66F2AA0046B38D /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		AE9861F81AC33C04005544B9 /* EditWishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditWishViewController.h; sourceTree = "<group>"; };
 		AE9861F91AC33C04005544B9 /* EditWishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditWishViewController.m; sourceTree = "<group>"; };
+		AE9861FC1AC3F476005544B9 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		AE9A3AE91A9B1DB000F0588F /* AchieveVCData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchieveVCData.h; sourceTree = "<group>"; };
 		AE9A3AEA1A9B1DB000F0588F /* AchieveVCData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AchieveVCData.m; sourceTree = "<group>"; };
 		AEBD13DB1A93E7A800F5F0D3 /* DiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryViewController.h; sourceTree = "<group>"; };
@@ -402,6 +405,7 @@
 			isa = PBXGroup;
 			children = (
 				AE30EE6E1A6E1E520044740D /* snow.jpg */,
+				AE9861FC1AC3F476005544B9 /* placeholder.png */,
 				AE01723B1A65CD8E0014266F /* Wish */,
 				AEF7F2661A686E8A0022410B /* Third Party */,
 				AE0172581A65CD8E0014266F /* WishTests */,
@@ -888,6 +892,7 @@
 				AE01724D1A65CD8E0014266F /* Images.xcassets in Resources */,
 				AE30EE6F1A6E1E520044740D /* snow.jpg in Resources */,
 				AEF7F2A01A6875360022410B /* Main.storyboard in Resources */,
+				AE9861FD1AC3F477005544B9 /* placeholder.png in Resources */,
 				AE6E7A0C1AB0DF1F0023B9C7 /* PopupView.xib in Resources */,
 				AEDD06511AABF7AE00379C17 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				AEEC6C6F1A6DB0FC0021B7E4 /* HeaderView.xib in Resources */,
@@ -905,6 +910,7 @@
 				AEC8CE921AAF8823005364F8 /* StationView.xib in Resources */,
 				AEF7F29D1A6871F00022410B /* Images.xcassets in Resources */,
 				AE30EE701A6E1E520044740D /* snow.jpg in Resources */,
+				AE9861FE1AC3F477005544B9 /* placeholder.png in Resources */,
 				AEF7F2A11A6875360022410B /* Main.storyboard in Resources */,
 				AEEC6C701A6DB0FC0021B7E4 /* HeaderView.xib in Resources */,
 			);

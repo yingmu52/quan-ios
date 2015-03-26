@@ -19,7 +19,7 @@
 - (void)didFinishUploadingFeed:(Feed *)feed;
 - (void)didFinishReceivingUid:(NSString *)uid uKey:(NSString *)uKey;
 - (void)didFinishUpdatingPlan:(Plan *)plan;
-
+- (void)didFinishCheckingNewVersion:(BOOL)hasNewVersion;
 
 - (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
@@ -27,6 +27,8 @@
 @interface FetchCenter : NSObject
 @property (nonatomic,weak) id <FetchCenterDelegate>delegate;
 
+
+- (void)checkVersion;
 
 
 - (void)fetchPlanList:(NSString *)ownerId;
