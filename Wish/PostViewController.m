@@ -129,4 +129,15 @@
 }
 
 
+#pragma mark - text field 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    NSUInteger limit = 15;
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (newString.length > limit){
+        return NO;
+    }
+    return YES;
+}
+
 @end
