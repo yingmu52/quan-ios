@@ -9,14 +9,18 @@
 #import "PostViewController.h"
 #import "Theme.h"
 #import "PostDetailViewController.h"
-@interface PostViewController () <UITextFieldDelegate>
+#import "KTCenterFlowLayout.h"
+#import "KeyWordCell.h"
+#import "SGSStaggeredFlowLayout.h"
+#import "NHAlignmentFlowLayout.h"
+@interface PostViewController () <UITextFieldDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
 
 @property (nonatomic,weak) IBOutlet UITextField *textField;
-@property (nonatomic,weak) IBOutlet UIButton *sgtBtn1;
-@property (nonatomic,weak) IBOutlet UIButton *sgtBtn2;
-@property (nonatomic,weak) IBOutlet UIButton *sgtBtn3;
-@property (nonatomic,weak) IBOutlet UIButton *sgtBtn4;
 @property (nonatomic,strong) UIButton *tikButton;
+
+@property (nonatomic,weak) IBOutlet UICollectionView *collectionView;
+
+@property (nonatomic,strong) NSArray *keywordArray;
 @end
 
 @implementation PostViewController
@@ -25,11 +29,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupViews];
-    
-    [self setTitlesWishArray:@[@" 每天一部电影的365天    ", //1 left 4 right
-                               @" 当一个小皮匠    ",
-                               @" 跑步绕地球一圈    ",
-                               @" 在每省都拉过屎    "]];
+    self.keywordArray = @[@"每天一部电影的365天",
+                       @"当一个小皮匠",
+                       @"跑步绕地球一圈",
+                       @"在每省都拉过屎"];
 }
 
 
@@ -44,28 +47,26 @@
     [self.textField resignFirstResponder];
 }
 - (IBAction)changedTitleOnButtonClick:(UIButton *)sender{
-    self.textField.text = sender.titleLabel.text;
-    [self textFieldDidUpdate];
 }
 
-- (void)setTitlesWishArray:(NSArray *)array{
-    NSArray *valids = [array objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 4)]];
-    [self.sgtBtn1 setTitle:valids[0] forState:UIControlStateNormal];
-    [self.sgtBtn2 setTitle:valids[1] forState:UIControlStateNormal];
-    [self.sgtBtn3 setTitle:valids[2] forState:UIControlStateNormal];
-    [self.sgtBtn4 setTitle:valids[3] forState:UIControlStateNormal];
-}
+//- (void)setTitlesWishArray:(NSArray *)array{
+//    NSArray *valids = [array objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 4)]];
+//    [self.sgtBtn1 setTitle:valids[0] forState:UIControlStateNormal];
+//    [self.sgtBtn2 setTitle:valids[1] forState:UIControlStateNormal];
+//    [self.sgtBtn3 setTitle:valids[2] forState:UIControlStateNormal];
+//    [self.sgtBtn4 setTitle:valids[3] forState:UIControlStateNormal];
+//}
 
 - (void)viewDidLayoutSubviews
 {
-    [self setPatchImageForButtons:self.sgtBtn1];
-    [self setPatchImageForButtons:self.sgtBtn2];
-    [self setPatchImageForButtons:self.sgtBtn3];
-    [self setPatchImageForButtons:self.sgtBtn4];
-    self.sgtBtn1.backgroundColor = [UIColor clearColor];
-    self.sgtBtn2.backgroundColor = [UIColor clearColor];
-    self.sgtBtn3.backgroundColor = [UIColor clearColor];
-    self.sgtBtn4.backgroundColor = [UIColor clearColor];
+//    [self setPatchImageForButtons:self.sgtBtn1];
+//    [self setPatchImageForButtons:self.sgtBtn2];
+//    [self setPatchImageForButtons:self.sgtBtn3];
+//    [self setPatchImageForButtons:self.sgtBtn4];
+//    self.sgtBtn1.backgroundColor = [UIColor clearColor];
+//    self.sgtBtn2.backgroundColor = [UIColor clearColor];
+//    self.sgtBtn3.backgroundColor = [UIColor clearColor];
+//    self.sgtBtn4.backgroundColor = [UIColor clearColor];
     
     self.textField.layer.borderColor = [Theme postTabBorderColor].CGColor;
     self.textField.layer.borderWidth = 1.0;
@@ -74,15 +75,6 @@
     
 }
 
-- (void)setPatchImageForButtons:(UIButton *)button
-{
-    UIImage *image = [Theme tipsBackgroundImage];
-
-    UIImage *patchImage = [image resizableImageWithCapInsets:UIEdgeInsetsMake(25.0,25.0,25.0,25.0)
-                                                resizingMode:UIImageResizingModeTile];
-    [button setBackgroundImage:patchImage
-                      forState:UIControlStateNormal];
-}
 
 - (void)setupViews
 {
@@ -101,6 +93,27 @@
     self.navigationItem.rightBarButtonItem.enabled = NO;
     
     [self.textField addTarget:self action:@selector(textFieldDidUpdate) forControlEvents:UIControlEventEditingChanged];
+    
+    
+    
+    //set up collection view
+//    KTCenterFlowLayout *layout = [[KTCenterFlowLayout alloc] init];
+//    layout.minimumInteritemSpacing = 10.0f;
+//    layout.minimumLineSpacing = 10.0f;
+//    SGSStaggeredFlowLayout *layout = [[SGSStaggeredFlowLayout alloc] init];
+//    layout.layoutMode = SGSStaggeredFlowLayoutMode_Even;
+//    layout.minimumLineSpacing = 10.0f;
+//    layout.minimumInteritemSpacing = 10.0f;
+    NHAlignmentFlowLayout *layout = [[NHAlignmentFlowLayout alloc] init];
+    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    layout.alignment = NHAlignmentTopLeftAligned;
+    layout.minimumInteritemSpacing = 10.0f;
+    layout.minimumLineSpacing = 10.0f;
+
+//    layout.itemSize = CGSizeMake((arc4random_uniform(1)+1)*100.0f, 44.0f);
+    self.collectionView.collectionViewLayout = layout;
+    
+    
 }
 
 - (void)textFieldDidUpdate{
@@ -139,5 +152,55 @@
     }
     return YES;
 }
+#pragma mark - collection view delegate
 
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return 4;
+}
+
+
+- (KeyWordCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    KeyWordCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"KeyWordCell"
+                                                                    forIndexPath:indexPath];
+
+    cell.keywordLabel.text = self.keywordArray[indexPath.row];
+    return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewFlowLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UILabel *label = [UILabel new];
+    label.text = self.keywordArray[indexPath.row];
+    label.font = [UIFont systemFontOfSize:14.0];
+    [label sizeToFit];
+    
+    return CGSizeMake(label.intrinsicContentSize.width + 25.0f,69.0 / 1136 * self.view.frame.size.height);
+}
+
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    KeyWordCell *cell = (KeyWordCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    self.textField.text = cell.keywordLabel.text;
+    [self textFieldDidUpdate];
+
+}
+
+
+- (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath{
+    KeyWordCell *cell = (KeyWordCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    cell.backgroundImageView.alpha = 0.67f;
+}
+
+
+- (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    KeyWordCell *cell = (KeyWordCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    cell.backgroundImageView.alpha = 1.0f;
+
+}
 @end

@@ -145,7 +145,6 @@ typedef enum {
     if (!_tencentOAuth) {
         _tencentOAuth = [[TencentOAuth alloc] initWithAppId:AppID andDelegate:self];
         _tencentOAuth.redirectURI = @"www.qq.com";
-#warning set local app id
     }
     return _tencentOAuth;
 }
