@@ -51,6 +51,8 @@
 		AEBD13E51A948DD400F5F0D3 /* DiscoveryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBD13E31A948DD400F5F0D3 /* DiscoveryCell.m */; };
 		AEBFCA371A78614100686EFE /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA361A78614100686EFE /* PostDetailViewController.m */; };
 		AEBFCA381A78614100686EFE /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA361A78614100686EFE /* PostDetailViewController.m */; };
+		AEC0E1C51AC64F9600563F7C /* WishDetailVCOwnerAchieved.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC0E1C41AC64F9600563F7C /* WishDetailVCOwnerAchieved.m */; };
+		AEC0E1C61AC64F9600563F7C /* WishDetailVCOwnerAchieved.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC0E1C41AC64F9600563F7C /* WishDetailVCOwnerAchieved.m */; };
 		AEC5B9AA1AB7EB40008ECB92 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC5B9A91AB7EB40008ECB92 /* User.m */; };
 		AEC8CE8E1AAF872A005364F8 /* StationView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC8CE8D1AAF872A005364F8 /* StationView.m */; };
 		AEC8CE8F1AAF872A005364F8 /* StationView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC8CE8D1AAF872A005364F8 /* StationView.m */; };
@@ -235,6 +237,8 @@
 		AEBD13E31A948DD400F5F0D3 /* DiscoveryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryCell.m; sourceTree = "<group>"; };
 		AEBFCA351A78614100686EFE /* PostDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostDetailViewController.h; sourceTree = "<group>"; };
 		AEBFCA361A78614100686EFE /* PostDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostDetailViewController.m; sourceTree = "<group>"; };
+		AEC0E1C31AC64F9600563F7C /* WishDetailVCOwnerAchieved.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishDetailVCOwnerAchieved.h; sourceTree = "<group>"; };
+		AEC0E1C41AC64F9600563F7C /* WishDetailVCOwnerAchieved.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailVCOwnerAchieved.m; sourceTree = "<group>"; };
 		AEC5B9A81AB7EB40008ECB92 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		AEC5B9A91AB7EB40008ECB92 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		AEC8CE8C1AAF872A005364F8 /* StationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationView.h; sourceTree = "<group>"; };
@@ -698,6 +702,8 @@
 				AEEC6C721A6DB11F0021B7E4 /* WishDetailViewController.m */,
 				AEF3F8811AA4E3C0008C2300 /* WishDetailVCFollower.h */,
 				AEF3F8821AA4E3C0008C2300 /* WishDetailVCFollower.m */,
+				AEC0E1C31AC64F9600563F7C /* WishDetailVCOwnerAchieved.h */,
+				AEC0E1C41AC64F9600563F7C /* WishDetailVCOwnerAchieved.m */,
 				AEF3F87D1AA4CFA6008C2300 /* WishDetailVCOwner.h */,
 				AEF3F87E1AA4CFA6008C2300 /* WishDetailVCOwner.m */,
 				AE52FA4E1A8D3D76003FF725 /* PostFeedViewController.h */,
@@ -1001,6 +1007,7 @@
 				AECE2BEE1AA0521600B1C58E /* SDWebImageDownloader.m in Sources */,
 				AE30EE6D1A6E19D00044740D /* WishDetailCell.m in Sources */,
 				AECE2BEF1AA0521600B1C58E /* SDWebImageDownloaderOperation.m in Sources */,
+				AEC0E1C51AC64F9600563F7C /* WishDetailVCOwnerAchieved.m in Sources */,
 				AECE2BE91AA0521600B1C58E /* MKAnnotationView+WebCache.m in Sources */,
 				AE2F1C941A7A23A200A32CB5 /* Feed+FeedCRUD.m in Sources */,
 				AEE4A6D01A96A5D500ABF946 /* AchieveCell.m in Sources */,
@@ -1045,6 +1052,7 @@
 				AEF7F2881A686E8A0022410B /* ECSlidingSegue.m in Sources */,
 				AE9A3AEC1A9B1DB000F0588F /* AchieveVCData.m in Sources */,
 				AED8D7CB1A9BE2490035EDE5 /* FollowingImageCell.m in Sources */,
+				AEC0E1C61AC64F9600563F7C /* WishDetailVCOwnerAchieved.m in Sources */,
 				AEEC6C4E1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */,
 				AEBFCA381A78614100686EFE /* PostDetailViewController.m in Sources */,
 				AEF7F2AC1A6884950022410B /* CustomBarItem.m in Sources */,

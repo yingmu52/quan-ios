@@ -13,7 +13,7 @@
 @property (nonatomic,weak) IBOutlet UILabel *headerSubTitleLabel;
 @property (nonatomic,weak) IBOutlet UILabel *headerCountDownLabel;
 @property (nonatomic,weak) IBOutlet UILabel *headerFollowLabel;
-
+@property (nonatomic,weak) IBOutlet UIImageView *badgeImageView;
 @property (nonatomic,strong) Plan *plan;
 + (instancetype)instantiateFromNib;
 

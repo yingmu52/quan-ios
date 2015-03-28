@@ -26,7 +26,7 @@
     [super viewDidLoad];
     [self setUpNavigationItem];
     self.iconImageView.hidden = YES;
-    [self checkUpdate];
+    if ([User isUserLogin]) [self checkUpdate];
 
 }
 
@@ -131,6 +131,10 @@
         self.iconImageView.hidden = !hasNewVersion;
     });
     NSLog(@"%@",hasNewVersion ? @"has new version" : @"this is latest version");
+}
+
+- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
+    NSLog(@"%@",info);
 }
 @end
 

@@ -41,6 +41,7 @@
 + (UIImage *)navAddDefault;
 + (UIImage *)navTikButtonDefault;
 + (UIImage *)navTikButtonDisable;
++ (UIImage *)navButtonDeleted;
 
 + (UIImage *)wishDetailCameraDefault;
 + (UIImage *)wishDetailBackgroundNonLogo;
@@ -51,7 +52,8 @@
 
 + (UIImage *)achievementFail;
 + (UIImage *)achievementFinish;
-
++ (UIImage *)achieveBadageLabelFail;
++ (UIImage *)achieveBadageLabelSuccess;
 
 + (UIImage *)popupFail;
 + (UIImage *)popupFinish;

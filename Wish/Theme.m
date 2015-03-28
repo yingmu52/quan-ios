@@ -140,6 +140,10 @@
     return [UIImage imageNamed:@"nav_ic_eidt_default"];
 }
 
++ (UIImage *)navButtonDeleted{
+    return [UIImage imageNamed:@"nav_delete_ic"];
+}
+
 + (UIImage *)navShareButtonDefault
 {
     return [UIImage imageNamed:@"nav_ic_share_default"];
@@ -178,5 +182,15 @@
 + (UIColor *)profileBakground{
     return [UIColor colorWithPatternImage:[UIImage imageNamed:@"profile_bg"]];
 }
+
+
++ (UIImage *)achieveBadageLabelFail{
+    return [UIImage imageNamed:@"label_fail"];
+}
+
++ (UIImage *)achieveBadageLabelSuccess{
+    return [UIImage imageNamed:@"label_finish"];
+}
+
 @end
 
