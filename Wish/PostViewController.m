@@ -9,9 +9,7 @@
 #import "PostViewController.h"
 #import "Theme.h"
 #import "PostDetailViewController.h"
-#import "KTCenterFlowLayout.h"
 #import "KeyWordCell.h"
-#import "SGSStaggeredFlowLayout.h"
 #import "NHAlignmentFlowLayout.h"
 @interface PostViewController () <UITextFieldDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
 
@@ -46,28 +44,10 @@
 {
     [self.textField resignFirstResponder];
 }
-- (IBAction)changedTitleOnButtonClick:(UIButton *)sender{
-}
 
-//- (void)setTitlesWishArray:(NSArray *)array{
-//    NSArray *valids = [array objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 4)]];
-//    [self.sgtBtn1 setTitle:valids[0] forState:UIControlStateNormal];
-//    [self.sgtBtn2 setTitle:valids[1] forState:UIControlStateNormal];
-//    [self.sgtBtn3 setTitle:valids[2] forState:UIControlStateNormal];
-//    [self.sgtBtn4 setTitle:valids[3] forState:UIControlStateNormal];
-//}
 
 - (void)viewDidLayoutSubviews
 {
-//    [self setPatchImageForButtons:self.sgtBtn1];
-//    [self setPatchImageForButtons:self.sgtBtn2];
-//    [self setPatchImageForButtons:self.sgtBtn3];
-//    [self setPatchImageForButtons:self.sgtBtn4];
-//    self.sgtBtn1.backgroundColor = [UIColor clearColor];
-//    self.sgtBtn2.backgroundColor = [UIColor clearColor];
-//    self.sgtBtn3.backgroundColor = [UIColor clearColor];
-//    self.sgtBtn4.backgroundColor = [UIColor clearColor];
-    
     self.textField.layer.borderColor = [Theme postTabBorderColor].CGColor;
     self.textField.layer.borderWidth = 1.0;
     self.textField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,10,1)];
@@ -97,13 +77,6 @@
     
     
     //set up collection view
-//    KTCenterFlowLayout *layout = [[KTCenterFlowLayout alloc] init];
-//    layout.minimumInteritemSpacing = 10.0f;
-//    layout.minimumLineSpacing = 10.0f;
-//    SGSStaggeredFlowLayout *layout = [[SGSStaggeredFlowLayout alloc] init];
-//    layout.layoutMode = SGSStaggeredFlowLayoutMode_Even;
-//    layout.minimumLineSpacing = 10.0f;
-//    layout.minimumInteritemSpacing = 10.0f;
     NHAlignmentFlowLayout *layout = [[NHAlignmentFlowLayout alloc] init];
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     layout.alignment = NHAlignmentTopLeftAligned;
@@ -156,7 +129,7 @@
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 4;
+    return self.keywordArray.count;
 }
 
 
@@ -179,14 +152,22 @@
     label.font = [UIFont systemFontOfSize:14.0];
     [label sizeToFit];
     
-    return CGSizeMake(label.intrinsicContentSize.width + 25.0f,69.0 / 1136 * self.view.frame.size.height);
+//    [collectionView layoutIfNeeded];
+    CGFloat expectedWidth = label.intrinsicContentSize.width + 25.0f;
+    CGFloat maxWidth = CGRectGetWidth(collectionView.frame);
+    if (maxWidth < expectedWidth) {
+        expectedWidth = maxWidth;
+    }
+    return CGSizeMake(expectedWidth,69.0 / 1136 * self.view.frame.size.height);
 }
 
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     KeyWordCell *cell = (KeyWordCell *)[collectionView cellForItemAtIndexPath:indexPath];
+
     self.textField.text = cell.keywordLabel.text;
     [self textFieldDidUpdate];
+
 
 }
 
