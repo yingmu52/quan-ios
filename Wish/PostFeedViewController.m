@@ -11,38 +11,47 @@
 #import "KeyboardAcessoryView.h"
 #import "SystemUtil.h"
 #import "FetchCenter.h"
-@interface PostFeedViewController () <UITextFieldDelegate,FetchCenterDelegate>
+#import "GCPTextView.h"
+@interface PostFeedViewController () <UITextFieldDelegate,FetchCenterDelegate,UITextViewDelegate>
 @property (nonatomic,strong) UIButton *tikButton;
 @property (nonatomic,weak) IBOutlet UIImageView *previewIcon;
-@property (weak, nonatomic) IBOutlet UITextField *textField;
+//@property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (weak, nonatomic) IBOutlet GCPTextView *textView;
 
 @end
 
 @implementation PostFeedViewController
 
 - (NSString *)titleForFeed{
-    return self.textField.text;
+    return self.textView.text;
 }
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self setupViews];
 }
 
+#define placeHolder @"说点什么吧"
+
+- (void)setTextView:(GCPTextView *)textView{
+    _textView = textView;
+    _textView.delegate = self;
+    [_textView setPlaceholder:placeHolder];
+    _textView.textContainerInset = UIEdgeInsetsZero;
+}
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    self.textField.text = nil;
-    [self.textField becomeFirstResponder];
+    [self.textView becomeFirstResponder];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [self.textField resignFirstResponder];
+    [self.textView resignFirstResponder];
 }
 
 - (void)setupViews
 {
-    CGRect frame = CGRectMake(0, 0, 30, 30);
+    CGRect frame = CGRectMake(0, 0, 25, 25);
     UIButton *backBtn = [Theme buttonWithImage:[Theme navBackButtonDefault]
                                         target:self.navigationController
                                       selector:@selector(popViewControllerAnimated:)
@@ -54,11 +63,11 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
     self.navigationItem.rightBarButtonItem.enabled = NO;
-    [self.textField addTarget:self action:@selector(textFieldDidUpdate) forControlEvents:UIControlEventEditingChanged];
+//    [self.textField addTarget:self action:@selector(textFieldDidUpdate) forControlEvents:UIControlEventEditingChanged];
     
     //left margin
-    self.textField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,10,1)];
-    self.textField.leftViewMode = UITextFieldViewModeAlways;
+//    self.textField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,10,1)];
+//    self.textField.leftViewMode = UITextFieldViewModeAlways;
     
 //    self.textField.inputAccessoryView = [KeyboardAcessoryView instantiateFromNib:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height * 88 / 1136)];
 
@@ -75,7 +84,7 @@
     
     
     Feed *feed = [Feed createFeedWithImage:self.imageForFeed inPlan:self.plan];
-    feed.feedTitle = self.textField.text;
+    feed.feedTitle = self.textView.text;
     FetchCenter *fc = [FetchCenter new];
     fc.delegate = self;
     [fc uploadToCreateFeed:feed];
@@ -112,13 +121,24 @@
 
 }
 
-- (void)textFieldDidUpdate{
-    if (self.textField.isFirstResponder){
-        BOOL flag = self.textField.text.length*[self.textField.text stringByReplacingOccurrencesOfString:@" " withString:@""].length > 0;
+
+#pragma mark - text view delegate
+
+
+- (void)textViewDidChange:(UITextView *)textView{
+    if (self.textView.isFirstResponder){
+        BOOL flag = self.textView.text.length*[self.textView.text stringByReplacingOccurrencesOfString:@" " withString:@""].length > 0;
         self.navigationItem.rightBarButtonItem.enabled = flag;
         UIImage *bg = flag ? [Theme navTikButtonDefault] : [Theme navTikButtonDisable];
         [self.tikButton setImage:bg forState:UIControlStateNormal];
     }
+
 }
 
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    NSUInteger noc = textView.text.length + (text.length - range.length);
+//    NSLog(@"%d",noc);
+    return  noc <= 140;
+}
 @end

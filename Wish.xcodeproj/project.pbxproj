@@ -83,6 +83,7 @@
 		AED05EDB1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = AED05EDA1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m */; };
 		AED05EDC1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = AED05EDA1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m */; };
 		AED28FDC1AB2886C0054DE66 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AED28FDB1AB2886C0054DE66 /* Plan.m */; };
+		AED4CB1B1AC683AF00EE2DA4 /* GCPTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = AED4CB1A1AC683AF00EE2DA4 /* GCPTextView.m */; };
 		AED5BC631ABE3CB600EFF398 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5BC621ABE3CB600EFF398 /* SettingViewController.m */; };
 		AED5BC641ABE3CB600EFF398 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5BC621ABE3CB600EFF398 /* SettingViewController.m */; };
 		AED5BC671ABEA7EB00EFF398 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5BC661ABEA7EB00EFF398 /* ProfileViewController.m */; };
@@ -287,6 +288,8 @@
 		AED05EDA1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+CustomHeight.m"; sourceTree = "<group>"; };
 		AED28FDA1AB2886C0054DE66 /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
 		AED28FDB1AB2886C0054DE66 /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
+		AED4CB191AC683AF00EE2DA4 /* GCPTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCPTextView.h; sourceTree = "<group>"; };
+		AED4CB1A1AC683AF00EE2DA4 /* GCPTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCPTextView.m; sourceTree = "<group>"; };
 		AED5BC611ABE3CB600EFF398 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		AED5BC621ABE3CB600EFF398 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		AED5BC651ABEA7EB00EFF398 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
@@ -545,6 +548,13 @@
 			name = WaterFallLayout;
 			sourceTree = "<group>";
 		};
+		AEC0E1EB1AC6733D00563F7C /* TextView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = TextView;
+			sourceTree = "<group>";
+		};
 		AECE2BC71AA0521600B1C58E /* SDWebImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -585,6 +595,15 @@
 				AECE2BE81AA0521600B1C58E /* UIView+WebCacheOperation.m */,
 			);
 			path = SDWebImage;
+			sourceTree = "<group>";
+		};
+		AED4CB181AC683AF00EE2DA4 /* GCPTextView */ = {
+			isa = PBXGroup;
+			children = (
+				AED4CB191AC683AF00EE2DA4 /* GCPTextView.h */,
+				AED4CB1A1AC683AF00EE2DA4 /* GCPTextView.m */,
+			);
+			path = GCPTextView;
 			sourceTree = "<group>";
 		};
 		AED5BC601ABE3C9A00EFF398 /* Settings */ = {
@@ -715,6 +734,8 @@
 		AEF7F2661A686E8A0022410B /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				AED4CB181AC683AF00EE2DA4 /* GCPTextView */,
+				AEC0E1EB1AC6733D00563F7C /* TextView */,
 				AEFA5FD71AAFBA41001CA0C8 /* NZCircularImageView */,
 				AECE2BC71AA0521600B1C58E /* SDWebImage */,
 				AEBD13DE1A93FF3D00F5F0D3 /* WaterFallLayout */,
@@ -929,6 +950,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AED4CB1B1AC683AF00EE2DA4 /* GCPTextView.m in Sources */,
 				AEF775441A8134FE000DB73B /* HomeCardFlowLayout.m in Sources */,
 				AE479E9E1A6F775C00366A0A /* PostViewController.m in Sources */,
 				AEF7F2851A686E8A0022410B /* ECSlidingInteractiveTransition.m in Sources */,
