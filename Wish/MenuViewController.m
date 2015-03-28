@@ -204,6 +204,8 @@ typedef enum {
             [User updateOwnerInfo:localUserInfo];
             NSLog(@"%@",localUserInfo);
             [self.tableView reloadData];
+            
+            [self performSegueWithIdentifier:@"showWishList" sender:nil];
         });
     }
 }
