@@ -675,7 +675,9 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DDV-M8-CRn" userLabel="msg">
                                                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" secondItem="DDV-M8-CRn" secondAttribute="height" multiplier="1:1" id="b9C-Mk-9ux"/>
+                                                                <constraint firstAttribute="width" secondItem="DDV-M8-CRn" secondAttribute="height" multiplier="1:1" id="b9C-Mk-9ux">
+                                                                    <variation key="heightClass=regular-widthClass=compact" constant="-1"/>
+                                                                </constraint>
                                                             </constraints>
                                                             <state key="normal" image="tab_ic_message_default">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -685,8 +687,7 @@
                                                                     <exclude reference="b9C-Mk-9ux"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="119" y="61" width="61" height="62"/>
+                                                            <variation key="heightClass=regular-widthClass=compact">
                                                                 <mask key="constraints">
                                                                     <include reference="b9C-Mk-9ux"/>
                                                                 </mask>
@@ -695,7 +696,9 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nUb-ph-biW" userLabel="setting">
                                                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" secondItem="nUb-ph-biW" secondAttribute="height" multiplier="1:1" id="HKh-6w-srz"/>
+                                                                <constraint firstAttribute="width" secondItem="nUb-ph-biW" secondAttribute="height" multiplier="1:1" id="HKh-6w-srz">
+                                                                    <variation key="heightClass=regular-widthClass=compact" constant="-1"/>
+                                                                </constraint>
                                                             </constraints>
                                                             <state key="normal" image="tab_ic_setting_default">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -705,14 +708,13 @@
                                                                     <exclude reference="HKh-6w-srz"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="220" y="61" width="61" height="62"/>
+                                                            <variation key="heightClass=regular-widthClass=compact">
                                                                 <mask key="constraints">
                                                                     <include reference="HKh-6w-srz"/>
                                                                 </mask>
                                                             </variation>
                                                             <connections>
-                                                                <segue destination="2Fl-7V-mVz" kind="presentation" identifier="showSettingView" modalTransitionStyle="crossDissolve" id="gdh-vS-Eyq"/>
+                                                                <segue destination="2Fl-7V-mVz" kind="custom" identifier="showSettingView" customClass="ModalLeftToRightSegue" id="gdh-vS-Eyq"/>
                                                             </connections>
                                                         </button>
                                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vbi-t1-BTR" userLabel="backupsetting">
@@ -728,8 +730,7 @@
                                                                     <exclude reference="euC-Hf-2QJ"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="169" y="61" width="62" height="62"/>
+                                                            <variation key="heightClass=regular-widthClass=compact">
                                                                 <mask key="constraints">
                                                                     <exclude reference="euC-Hf-2QJ"/>
                                                                 </mask>
@@ -745,7 +746,9 @@
                                                     <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="centerY" secondItem="nUb-ph-biW" secondAttribute="centerY" id="1IQ-AP-pB9"/>
-                                                        <constraint firstItem="nUb-ph-biW" firstAttribute="width" secondItem="vbi-t1-BTR" secondAttribute="width" id="AU4-kb-cSv"/>
+                                                        <constraint firstItem="nUb-ph-biW" firstAttribute="width" secondItem="vbi-t1-BTR" secondAttribute="width" id="AU4-kb-cSv">
+                                                            <variation key="heightClass=regular-widthClass=compact" constant="-1"/>
+                                                        </constraint>
                                                         <constraint firstAttribute="centerX" secondItem="vbi-t1-BTR" secondAttribute="centerX" constant="-0.5" id="KXH-6Z-gog">
                                                             <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                                         </constraint>
@@ -866,7 +869,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bw4-56-w5H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-757.5" y="-962.25"/>
+            <point key="canvasLocation" x="-928.5" y="-803.25"/>
         </scene>
         <!--Sliding View Controller-->
         <scene sceneID="ufC-wZ-h7g">
@@ -2891,6 +2894,7 @@
                                 <exclude reference="yEm-S5-5O6"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="g4H-QB-CWi"/>
                                 <exclude reference="Sds-HS-m9c"/>
                                 <exclude reference="U7K-xE-uV7"/>
                                 <exclude reference="Zty-y0-ZMn"/>
@@ -2901,7 +2905,6 @@
                                 <exclude reference="kML-uP-t9N"/>
                                 <exclude reference="8cA-Lo-Zcp"/>
                                 <exclude reference="RET-zi-x5t"/>
-                                <exclude reference="g4H-QB-CWi"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -2910,6 +2913,7 @@
                                 <include reference="yEm-S5-5O6"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="g4H-QB-CWi"/>
                                 <exclude reference="Sds-HS-m9c"/>
                                 <include reference="U7K-xE-uV7"/>
                                 <include reference="Zty-y0-ZMn"/>
@@ -2920,7 +2924,6 @@
                                 <include reference="kML-uP-t9N"/>
                                 <include reference="8cA-Lo-Zcp"/>
                                 <include reference="RET-zi-x5t"/>
-                                <exclude reference="g4H-QB-CWi"/>
                             </mask>
                         </variation>
                     </view>
@@ -4042,14 +4045,14 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qBZ-x7-vS6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3138" y="762"/>
+            <point key="canvasLocation" x="-1902" y="327"/>
         </scene>
         <!--Setting View Controller-->
         <scene sceneID="p9F-bV-MOz">
             <objects>
                 <tableViewController id="iFY-B5-FXO" customClass="SettingViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="L9V-RS-3sc">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.85098039219999999" green="0.87450980389999999" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="separatorColor" red="0.85490196078431369" green="0.87058823529411766" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -4530,7 +4533,7 @@
             <objects>
                 <tableViewController automaticallyAdjustsScrollViewInsets="NO" id="5Kd-hC-Doa" customClass="ProfileViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="wM3-3e-z4M">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.85098039215686272" green="0.87450980392156863" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <sections>
