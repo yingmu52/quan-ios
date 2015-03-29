@@ -13,7 +13,7 @@
 #import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 #import "FetchCenter.h"
 #import "User.h"
-@interface ProfileViewController ()
+@interface ProfileViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,FetchCenterDelegate>
 @property (nonatomic,weak) IBOutlet UIView *profileBackground;
 @property (nonatomic,weak) IBOutlet UIImageView *profilePicture;
 @property (nonatomic,weak) IBOutlet UILabel *nickNameLabel;
@@ -49,6 +49,7 @@
              usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 
 }
+
 
 - (void)setUpNavigationItem
 {
@@ -115,6 +116,40 @@
     self.nickNameLabel.text = [User userDisplayName];
     self.genderLabel.text = [User gender];
 }
+
+- (IBAction)tapOnCamera:(UIButton *)sender{
+    UIImagePickerController *controller = [SystemUtil showCamera:self];
+    if (controller) {
+        [self presentViewController:controller animated:YES completion:nil];
+    }
+}
+
+
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [self dismissViewControllerAnimated:NO completion:^{
+        UIImage *capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage];
+        //NSLog(@"%@",NSStringFromCGSize(editedImage.size));
+        FetchCenter *fc = [[FetchCenter alloc] init];
+        fc.delegate = self;
+        [fc uploadNewProfilePicture:capturedImage];
+    }];
+}
+
+
+- (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
+    NSLog(@"fail");
+}
+
+- (void)didFinishUploadingPictureForProfile:(NSDictionary *)info{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSURL *newUrl = [[FetchCenter new] urlWithImageID:[User updatedProfilePictureId]];
+        [self.profilePicture setImageWithURL:newUrl
+                 usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    });
+}
+
 @end
 
 

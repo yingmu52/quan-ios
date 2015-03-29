@@ -12,7 +12,8 @@
 #define OWNERINFO @"motherfucking_user_fucking_in_fucking_fo" //key for user info
 #define ACCESS_TOKEN @"access_token_string" //NSString
 #define OPENID @"user_open_id" //NSString
-#define PROFILE_PICTURE_URL @"user_profile_url" //NSString
+#define PROFILE_PICTURE_ID @"user_profile_id_qq" //NSString
+#define PROFILE_PICTURE_ID_CUSTOM @"user_profile_id"
 #define EXPIRATION_DATE @"login_expiraiton_date" //NSDate
 #define GENDER @"user_gender" //NSString
 #define USER_DISPLAY_NAME @"user_display_name" //NSString
@@ -22,14 +23,16 @@
 
 @interface User : NSObject
 
-+ (NSString *)uid;
-+ (NSString *)uKey;
 
++ (void)updateAttributeFromDictionary:(NSDictionary *)info;
 + (void)updateOwnerInfo:(NSDictionary *)info;
 
+    
++ (NSString *)uid;
++ (NSString *)uKey;
 + (BOOL)isUserLogin;
 + (NSURL *)userProfilePictureURL;
 + (NSString *)userDisplayName;
-
 + (NSString *)gender;
++ (NSString *)updatedProfilePictureId;
 @end

@@ -20,6 +20,7 @@
 - (void)didFinishReceivingUid:(NSString *)uid uKey:(NSString *)uKey;
 - (void)didFinishUpdatingPlan:(Plan *)plan;
 - (void)didFinishCheckingNewVersion:(BOOL)hasNewVersion;
+- (void)didFinishUploadingPictureForProfile:(NSDictionary *)info;
 - (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
 
@@ -30,6 +31,7 @@
 
 
 - (void)checkVersion;
+- (void)uploadNewProfilePicture:(UIImage *)picture;
 
 
 - (void)fetchPlanList:(NSString *)ownerId;

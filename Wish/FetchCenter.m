@@ -50,7 +50,8 @@ typedef enum{
 }FetchCenterGetOp;
 
 typedef enum{
-    FetchCenterPostOpUploadImageForCreatingFeed = 0
+    FetchCenterPostOpUploadImageForCreatingFeed = 0,
+    FetchCenterPostOpUploadImageForUpdaingProfile
 }FetchCenterPostOp;
 
 @implementation FetchCenter
@@ -83,7 +84,13 @@ typedef enum{
 }
 
 #pragma mark - personal
-
+//id=100010&name=hello_name2&headUrl=abcd.com&gender=2&birthday=1234&setLife=1000
+- (void)uploadNewProfilePicture:(UIImage *)picture{
+    [self postImageWithOperation:picture postOp:FetchCenterPostOpUploadImageForUpdaingProfile];
+}
+- (void)updatePersonalInfo:(NSString *)imageId NickName:(NSString *)name gender:(NSString *)gender{
+    
+}
 - (void)updatePlan:(Plan *)plan{
     //输入样例：id=hello_1421235901&title=hello_title2&finishDate=3&backGroudPic=bg3&private=1&state=1&finishPercent=20
     //—— 每一项都可以单独更新
@@ -132,9 +139,10 @@ typedef enum{
 
 
 - (void)didFinishSendingPostRequest:(NSDictionary *)json operation:(FetchCenterPostOp)op entity:(NSManagedObject *)obj{
+    
+    NSString *fetchedImageId = [json valueForKeyPath:@"data.id"];
     switch (op){
         case FetchCenterPostOpUploadImageForCreatingFeed:{
-            NSString *fetchedImageId = [json valueForKeyPath:@"data.id"];
             if (fetchedImageId){
                 Feed *feed = (Feed *)obj;
                 feed.imageId = fetchedImageId;
@@ -150,6 +158,14 @@ typedef enum{
                            parameter:args
                            operation:FetchCenterGetOpCreateFeed entity:obj];
                 }
+            }
+        }
+            break;
+        case FetchCenterPostOpUploadImageForUpdaingProfile:{
+            //update local User info
+            if (fetchedImageId){
+                [User updateAttributeFromDictionary:@{PROFILE_PICTURE_ID_CUSTOM:fetchedImageId}];
+                [self.delegate didFinishUploadingPictureForProfile:json];
             }
         }
             break;
@@ -284,17 +300,25 @@ typedef enum{
     
 }
 
-- (void)postImageWithOperation:(NSManagedObject *)obj postOp:(FetchCenterPostOp)postOp{
+- (void)postImageWithOperation:(id)obj postOp:(FetchCenterPostOp)postOp{ //obj :NSManagedObject or UIimage
     NSString *rqtUploadImage = [NSString stringWithFormat:@"%@%@%@?",BASE_URL,PIC,UPLOAD_IMAGE];
     rqtUploadImage = [self versionForBaseURL:rqtUploadImage operation:-1];
-    //upload image
     
+    UIImage *image; // = [obj valueForKey:@"image"];
+    if ([obj isKindOfClass:[UIImage class]]){
+        image = obj;
+    }else if ([obj isKindOfClass:[NSManagedObject class]]){
+        image = [obj valueForKey:@"image"];
+    }else{
+        NSAssert(true, @"postImageWithOperation :invalid obj");
+    }
+    
+    //upload image
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:rqtUploadImage]
                                                            cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30.0];
     request.HTTPMethod = @"POST";
-    
-    UIImage *image = [obj valueForKey:@"image"];
+
     NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:UIImageJPEGRepresentation(image, 0.1)
                                                       completionHandler:^(NSData *data,NSURLResponse *response,NSError *error)
                                           {
@@ -304,7 +328,7 @@ typedef enum{
                                               
                                               if (!error && ![json[@"ret"] boolValue]){ //upload image successed
                                                   [self didFinishSendingPostRequest:json
-                                                                          operation:FetchCenterPostOpUploadImageForCreatingFeed
+                                                                          operation:postOp
                                                                              entity:obj];
                                               }else{
                                                   NSLog(@"fail to upload image \n response:%@",json);
