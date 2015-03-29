@@ -13,10 +13,10 @@
 #import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 #import "FetchCenter.h"
 #import "User.h"
-@interface ProfileViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,FetchCenterDelegate>
+@interface ProfileViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,FetchCenterDelegate,UITextFieldDelegate>
 @property (nonatomic,weak) IBOutlet UIView *profileBackground;
 @property (nonatomic,weak) IBOutlet UIImageView *profilePicture;
-@property (nonatomic,weak) IBOutlet UILabel *nickNameLabel;
+@property (nonatomic,weak) IBOutlet UITextField *nickNameTextField;
 @property (nonatomic,weak) IBOutlet UILabel *genderLabel;
 
 @end
@@ -47,6 +47,13 @@
     [self.navigationController popViewControllerAnimated:YES];
     self.navigationController.navigationBar.backgroundColor = [Theme naviBackground];
     [self setNavBarText:[UIColor blackColor]];
+    
+    
+    //updae info if needed
+    if (![self.nickNameTextField.text isEqualToString:[User userDisplayName]] ||
+        ![self.genderLabel.text isEqualToString:[User gender]]){
+
+    }
 
 }
 
@@ -74,9 +81,8 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     if (section == 0){
         return 58.0f / 1136 * tableView.frame.size.height;
-    }else{
-        return 470.0f / 1136 * tableView.frame.size.height;
-    };
+    }
+    return 0.0f;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
@@ -114,10 +120,36 @@
 
 #pragma mark - functionality
 - (void)setupInfoSection{
-    self.nickNameLabel.text = [User userDisplayName];
+    self.nickNameTextField.text = [User userDisplayName];
     self.genderLabel.text = [User gender];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero]; // clear empty cell
 }
 
+
+#pragma mark - update info
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 1) {
+        if (indexPath.row == 0){
+            [self.nickNameTextField becomeFirstResponder];
+        }
+        if (indexPath.row == 1){
+            self.genderLabel.text = [self.genderLabel.text isEqualToString:@"男"] ? @"女" : @"男";
+        }
+    }
+    [self dismissKeyboardIfNeed];
+}
+
+- (void)dismissKeyboardIfNeed{
+    if (self.nickNameTextField.isFirstResponder){
+        [self.nickNameTextField resignFirstResponder];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self dismissKeyboardIfNeed];
+}
+
+#pragma mark - upload profile pic
 - (IBAction)tapOnCamera:(UIButton *)sender{
     UIImagePickerController *controller = [SystemUtil showCamera:self];
     if (controller) {
