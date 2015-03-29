@@ -46,7 +46,10 @@ typedef enum {
     self.tableView.backgroundColor = [Theme menuBackground];
 }
 
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat heightRef = tableView.frame.size.height;
@@ -70,7 +73,9 @@ typedef enum {
             cell.menuImageView.image = [Theme menuLoginDefault];
             cell.menuTitle.text = @"登录";
         }else{
-            [cell.menuImageView setImageWithURL:[User userProfilePictureURL]
+            NSString *newPicId = [User updatedProfilePictureId];
+            NSURL *url = [newPicId isEqualToString:@""] ? [User userProfilePictureURL] : [[FetchCenter new] urlWithImageID:newPicId];
+            [cell.menuImageView setImageWithURL:url
                     usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
             cell.menuTitle.text = [User userDisplayName];
         }

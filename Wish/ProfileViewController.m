@@ -30,38 +30,39 @@
     [self setupInfoSection];
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    self.title = @"个人资料";
-}
-
-
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    self.navigationController.navigationBar.backgroundColor = [Theme naviBackground];
-    [self setNavBarText:[UIColor blackColor]];
-}
-
-
 - (void)setupProfileBanner{
     self.profileBackground.backgroundColor = [Theme profileBakground];
-    [self.profilePicture setImageWithURL:[User userProfilePictureURL]
-             usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    if ([User isUserLogin]) {
+        NSString *newPicId = [User updatedProfilePictureId];
+        NSURL *url = [newPicId isEqualToString:@""] ? [User userProfilePictureURL] : [[FetchCenter new] urlWithImageID:newPicId];
+        [self.profilePicture setImageWithURL:url
+                 usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    }
+
 
 }
 
+- (void)gobackToSettingView{
+    [self.navigationController popViewControllerAnimated:YES];
+    self.navigationController.navigationBar.backgroundColor = [Theme naviBackground];
+    [self setNavBarText:[UIColor blackColor]];
+
+}
 
 - (void)setUpNavigationItem
 {
     CGRect frame = CGRectMake(0,0, 25,25);
     UIButton *back = [Theme buttonWithImage:[Theme navWhiteButtonDefault]
-                                     target:self.navigationController
-                                   selector:@selector(popViewControllerAnimated:)
+                                     target:self
+                                   selector:@selector(gobackToSettingView)
                                       frame:frame];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:back];
     self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
     [self setNavBarText:[UIColor whiteColor]];
-    
+
+    self.title = @"个人资料";
+
 }
 
 - (void)setNavBarText:(UIColor *)color{

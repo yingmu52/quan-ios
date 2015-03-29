@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 #import "MenuViewController.h"
 #import "FetchCenter.h"
-@interface SettingViewController () <UIGestureRecognizerDelegate,FetchCenterDelegate>
+@interface SettingViewController () <UIGestureRecognizerDelegate,FetchCenterDelegate,UIActionSheetDelegate>
 @property (nonatomic,strong) UIView *currentView;
 
 @property (nonatomic,strong) UIColor *normalBackground;
@@ -80,10 +80,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 2){
-        [self logout];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"退出后不会删除任何历史数据，下次登录依然可以使用帐号。" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"退出登录" otherButtonTitles:nil, nil];
+        [actionSheet showInView:self.view];
+//        [self logout];
     }
 }
 
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"退出登录"]){
+        [self logout];
+    }
+}
 - (void)logout{
     //delete user info
     [User updateOwnerInfo:nil];
