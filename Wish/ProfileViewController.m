@@ -18,7 +18,7 @@
 @property (nonatomic,weak) IBOutlet UIImageView *profilePicture;
 @property (nonatomic,weak) IBOutlet UITextField *nickNameTextField;
 @property (nonatomic,weak) IBOutlet UILabel *genderLabel;
-
+@property (nonatomic,strong) FetchCenter *fetchCenter;
 @end
 
 @implementation ProfileViewController
@@ -35,7 +35,7 @@
     
     if ([User isUserLogin]) {
         NSString *newPicId = [User updatedProfilePictureId];
-        NSURL *url = [newPicId isEqualToString:@""] ? [User userProfilePictureURL] : [[FetchCenter new] urlWithImageID:newPicId];
+        NSURL *url = [newPicId isEqualToString:@""] ? [User userProfilePictureURL] : [self.fetchCenter urlWithImageID:newPicId];
         [self.profilePicture setImageWithURL:url
                  usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     }
@@ -43,18 +43,24 @@
 
 }
 
+
+- (FetchCenter *)fetchCenter{
+    if (!_fetchCenter) {
+        _fetchCenter = [[FetchCenter alloc] init];
+    }
+    _fetchCenter.delegate = self;
+    return _fetchCenter;
+}
 - (void)gobackToSettingView{
-    [self.navigationController popViewControllerAnimated:YES];
-    self.navigationController.navigationBar.backgroundColor = [Theme naviBackground];
-    [self setNavBarText:[UIColor blackColor]];
-    
-    
     //updae info if needed
     if (![self.nickNameTextField.text isEqualToString:[User userDisplayName]] ||
         ![self.genderLabel.text isEqualToString:[User gender]]){
-
+        [self.fetchCenter updatePersonalInfo:self.nickNameTextField.text gender:self.genderLabel.text];
     }
 
+    [self.navigationController popViewControllerAnimated:YES];
+    self.navigationController.navigationBar.backgroundColor = [Theme naviBackground];
+    [self setNavBarText:[UIColor blackColor]];
 }
 
 - (void)setUpNavigationItem
@@ -164,23 +170,28 @@
     [self dismissViewControllerAnimated:NO completion:^{
         UIImage *capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage];
         //NSLog(@"%@",NSStringFromCGSize(editedImage.size));
-        FetchCenter *fc = [[FetchCenter alloc] init];
-        fc.delegate = self;
-        [fc uploadNewProfilePicture:capturedImage];
+        [self.fetchCenter uploadNewProfilePicture:capturedImage];
     }];
 }
 
 
+#pragma mark - image delegate
 - (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
     NSLog(@"fail");
 }
 
 - (void)didFinishUploadingPictureForProfile:(NSDictionary *)info{
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSURL *newUrl = [[FetchCenter new] urlWithImageID:[User updatedProfilePictureId]];
+        NSURL *newUrl = [self.fetchCenter urlWithImageID:[User updatedProfilePictureId]];
         [self.profilePicture setImageWithURL:newUrl
                  usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     });
+}
+
+#pragma mark - update info delegate 
+
+- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
+    NSLog(@"fail");
 }
 
 @end

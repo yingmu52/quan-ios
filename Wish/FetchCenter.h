@@ -32,6 +32,8 @@
 
 - (void)checkVersion;
 - (void)uploadNewProfilePicture:(UIImage *)picture;
+- (void)updatePersonalInfo:(NSString *)nickName gender:(NSString *)gender;
+
 
 
 - (void)fetchPlanList:(NSString *)ownerId;
@@ -46,7 +48,5 @@
 - (NSURL *)urlWithImageID:(NSString *)imageId;
 
 - (void)fetchUidandUkeyWithOpenId:(NSString *)openId accessToken:(NSString *)token;
-
-
 
 @end

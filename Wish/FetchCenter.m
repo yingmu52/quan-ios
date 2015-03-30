@@ -31,7 +31,7 @@
 
 #define USER @"man/"
 #define GETUID @"splan_get_uid.php"
-
+#define UPDATE_USER_INFO @"splan_man_update.php"
 
 #define OTHER @"other/"
 #define CHECK_NEW_VERSION @"splan_other_new_version.php"
@@ -46,7 +46,8 @@ typedef enum{
     FetchCenterGetOpUpdatePlan,
     FetchCenterGetOpFollowingPlanList,
     FetchCenterGetOpLoginForUidAndUkey,
-    FetchCenterGetOpCheckNewVersion
+    FetchCenterGetOpCheckNewVersion,
+    FetchCenterGetOpUpdatePersonalInfo
 }FetchCenterGetOp;
 
 typedef enum{
@@ -88,8 +89,15 @@ typedef enum{
 - (void)uploadNewProfilePicture:(UIImage *)picture{
     [self postImageWithOperation:picture postOp:FetchCenterPostOpUploadImageForUpdaingProfile];
 }
-- (void)updatePersonalInfo:(NSString *)imageId NickName:(NSString *)name gender:(NSString *)gender{
-    
+
+- (void)updatePersonalInfo:(NSString *)nickName gender:(NSString *)gender{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,USER,UPDATE_USER_INFO];
+    [self getRequest:rqtStr parameter:@{@"id":[User uid],
+                                        @"name":[nickName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                                        @"gender":[gender isEqualToString:@"男"] ? @(0):@(1)}
+           operation:FetchCenterGetOpUpdatePersonalInfo
+              entity:@[nickName,gender]];
+
 }
 - (void)updatePlan:(Plan *)plan{
     //输入样例：id=hello_1421235901&title=hello_title2&finishDate=3&backGroudPic=bg3&private=1&state=1&finishPercent=20
@@ -174,7 +182,7 @@ typedef enum{
     }
 }
 
-- (void)didFinishSendingGetRequest:(NSDictionary *)json operation:(FetchCenterGetOp)op entity:(NSManagedObject *)obj{
+- (void)didFinishSendingGetRequest:(NSDictionary *)json operation:(FetchCenterGetOp)op entity:(id)obj{
     switch (op)
     {
         case FetchCenterGetOpGetPlanList:
@@ -248,6 +256,11 @@ typedef enum{
             [self.delegate didFinishCheckingNewVersion:hasNewVersion];
         }
             break;
+        case FetchCenterGetOpUpdatePersonalInfo:{
+            NSArray *info = (NSArray *)obj;
+            [User updateAttributeFromDictionary:@{USER_DISPLAY_NAME:info[0],GENDER:info[1]}];
+        }
+            break;
         default:
             break;
     }
@@ -264,7 +277,7 @@ typedef enum{
     return [array componentsJoinedByString:@"&"];
 }
 
-- (void)getRequest:(NSString *)baseURL parameter:(NSDictionary *)dict operation:(FetchCenterGetOp)op entity:(NSManagedObject *)obj{
+- (void)getRequest:(NSString *)baseURL parameter:(NSDictionary *)dict operation:(FetchCenterGetOp)op entity:(id)obj{
     
     //base url with version
     baseURL = [baseURL stringByAppendingString:@"?"];
