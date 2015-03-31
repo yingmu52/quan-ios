@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
+    [self.tableView registerNib:[UINib nibWithNibName:@"WishDetailCell" bundle:nil]
+         forCellReuseIdentifier:@"WishDetailCell"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -130,9 +132,24 @@
 
 #pragma mark - table view delegate and data source
 
+- (CGFloat)heightForText:(NSString *)text{
+    
+    NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:text
+                                                                         attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12.0f]}];
+    
+    CGSize maxSize = [[UIScreen mainScreen] bounds].size;
+    
+    CGRect rect = [attributedText boundingRectWithSize:(CGSize){368.0f / 400 * maxSize.width,maxSize.height}
+                                               options:NSStringDrawingUsesLineFragmentOrigin
+                                               context:nil];
+    return rect.size.height; // maximum number of line is 6 for 140 character
+}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 580.0/1136*tableView.frame.size.height;
+    Feed *feed = [self.fetchedRC objectAtIndexPath:indexPath];
+    CGFloat margin = 0.0f;
+    return (580.0f - margin)/1136*tableView.frame.size.height + [self heightForText:feed.feedTitle];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

@@ -22,10 +22,10 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    self.isWidgetVisible = self.likeButton.isHidden
-                        && self.likeLabel.isHidden
-                        && self.commentButton.isHidden
-                        && self.commentLabel.isHidden;
+//    self.isWidgetVisible = self.likeButton.isHidden
+//                        && self.likeLabel.isHidden
+//                        && self.commentButton.isHidden
+//                        && self.commentLabel.isHidden;
     self.backgroundColor = [UIColor clearColor];
 
 }
@@ -50,28 +50,30 @@
     _photoView.contentMode = UIViewContentModeScaleAspectFill;
     _photoView.clipsToBounds = YES;
 }
--(void)showLikeAndComment
-{
-    [self moveWidget:YES];
-}
-- (void)dismissLikeAndComment{
-    [self moveWidget:NO];
-}
 
-- (void)moveWidget:(BOOL)toVisible
-{
-    CGFloat offset = toVisible ? self.center.x : -self.center.x;
-    
-    for (UIView *widget in @[self.likeButton,self.commentButton,self.likeLabel,self.commentLabel]) {
-        
-        //move back or away from screen
-        [widget setCenter:CGPointMake(widget.center.x + offset, widget.center.y)];
-        
-        //appear or disappear
-        widget.hidden = !toVisible;
-        
-        [widget setCenter:CGPointMake(widget.center.x - offset, widget.center.y)];
-        
-    }
-}
+
+//-(void)showLikeAndComment
+//{
+//    [self moveWidget:YES];
+//}
+//- (void)dismissLikeAndComment{
+//    [self moveWidget:NO];
+//}
+//
+//- (void)moveWidget:(BOOL)toVisible
+//{
+//    CGFloat offset = toVisible ? self.center.x : -self.center.x;
+//    
+//    for (UIView *widget in @[self.likeButton,self.commentButton,self.likeLabel,self.commentLabel]) {
+//        
+//        //move back or away from screen
+//        [widget setCenter:CGPointMake(widget.center.x + offset, widget.center.y)];
+//        
+//        //appear or disappear
+//        widget.hidden = !toVisible;
+//        
+//        [widget setCenter:CGPointMake(widget.center.x - offset, widget.center.y)];
+//        
+//    }
+//}
 @end

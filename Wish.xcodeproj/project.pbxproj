@@ -24,6 +24,7 @@
 		AE1E6BAB1AAFEEE400AF2613 /* PopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1E6BA91AAFEEE400AF2613 /* PopupView.m */; };
 		AE2A8DDF1ACA116D00029D52 /* DiscoveryVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2A8DDE1ACA116D00029D52 /* DiscoveryVCData.m */; };
 		AE2A8DE01ACA116D00029D52 /* DiscoveryVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2A8DDE1ACA116D00029D52 /* DiscoveryVCData.m */; };
+		AE2A8DE51ACA700100029D52 /* WishDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE2A8DE41ACA700100029D52 /* WishDetailCell.xib */; };
 		AE2F1C841A7A1A1800A32CB5 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2F1C831A7A1A1800A32CB5 /* UIImage+ImageEffects.m */; };
 		AE2F1C851A7A1A1800A32CB5 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2F1C831A7A1A1800A32CB5 /* UIImage+ImageEffects.m */; };
 		AE2F1C941A7A23A200A32CB5 /* Feed+FeedCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2F1C931A7A23A200A32CB5 /* Feed+FeedCRUD.m */; };
@@ -216,6 +217,7 @@
 		AE1E6BA91AAFEEE400AF2613 /* PopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupView.m; sourceTree = "<group>"; };
 		AE2A8DDD1ACA116D00029D52 /* DiscoveryVCData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryVCData.h; sourceTree = "<group>"; };
 		AE2A8DDE1ACA116D00029D52 /* DiscoveryVCData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryVCData.m; sourceTree = "<group>"; };
+		AE2A8DE41ACA700100029D52 /* WishDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WishDetailCell.xib; sourceTree = "<group>"; };
 		AE2F1C821A7A1A1800A32CB5 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		AE2F1C831A7A1A1800A32CB5 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		AE2F1C921A7A23A200A32CB5 /* Feed+FeedCRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Feed+FeedCRUD.h"; sourceTree = "<group>"; };
@@ -763,6 +765,7 @@
 				AEF3F87E1AA4CFA6008C2300 /* WishDetailVCOwner.m */,
 				AE52FA4E1A8D3D76003FF725 /* PostFeedViewController.h */,
 				AE52FA4F1A8D3D76003FF725 /* PostFeedViewController.m */,
+				AE2A8DE41ACA700100029D52 /* WishDetailCell.xib */,
 			);
 			name = WishDetail;
 			sourceTree = "<group>";
@@ -956,6 +959,7 @@
 				AE30EE6F1A6E1E520044740D /* snow.jpg in Resources */,
 				AEF7F2A01A6875360022410B /* Main.storyboard in Resources */,
 				AE9861FD1AC3F477005544B9 /* placeholder.png in Resources */,
+				AE2A8DE51ACA700100029D52 /* WishDetailCell.xib in Resources */,
 				AE6E7A0C1AB0DF1F0023B9C7 /* PopupView.xib in Resources */,
 				AEDD06511AABF7AE00379C17 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				AEEC6C6F1A6DB0FC0021B7E4 /* HeaderView.xib in Resources */,
