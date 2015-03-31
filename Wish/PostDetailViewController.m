@@ -7,6 +7,7 @@
 //
 
 #import "PostDetailViewController.h"
+#import "SDWebImageCompat.h"
 @interface PostDetailViewController () 
 @end
 @implementation PostDetailViewController
@@ -158,7 +159,7 @@
 }
 
 - (void)didFinishUploadingPlan:(Plan *)plan{
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_main_async_safe(^{
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
         self.backButton.enabled = YES;
         [self performSegueWithIdentifier:@"doneWirtingAPost" sender:plan];
@@ -166,8 +167,7 @@
 }
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
+    dispatch_main_async_safe((^{
         //update navigation item
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
         self.backButton.enabled = YES;
@@ -184,7 +184,7 @@
             Plan *plan = (Plan *)managedObject;
             [plan deleteSelf];
         }
-    });
+    }));
 
 }
 

@@ -21,6 +21,8 @@
 #import "StationView.h"
 #import "PopupView.h"
 #import "User.h"
+#import "SDWebImageCompat.h"
+
 const NSUInteger maxCardNum = 10;
 
 @interface HomeViewController ()
@@ -35,7 +37,7 @@ HomeCardViewDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @property (nonatomic,weak) Plan *currentPlan;
 
-@property (nonatomic,strong) StationView *stationView;
+@property (nonatomic,weak) StationView *stationView;
 
 @property (nonatomic,weak) IBOutlet UIButton *pageButton;
 
@@ -293,7 +295,7 @@ HomeCardViewDelegate>
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_main_async_safe(^{
         [self.collectionView performBatchUpdates:^{
             for (NSDictionary *change in self.itemChanges) {
                 [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
@@ -316,8 +318,8 @@ HomeCardViewDelegate>
                                 [UIView performWithoutAnimation:^{
                                     [self.collectionView reloadItemsAtIndexPaths:@[obj]];
                                     [self.collectionView scrollToItemAtIndexPath:obj
-                                                                    atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
-                                                                            animated:NO];
+                                                                atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
+                                                                        animated:NO];
                                 }];
                                 NSLog(@"Home Card: Updated Plan");
                             }
@@ -329,10 +331,10 @@ HomeCardViewDelegate>
                 }];
             }
         } completion:^(BOOL finished) {
-//            self.title = [NSString stringWithFormat:@"%@ plans",@(self.fetchedRC.fetchedObjects.count)];
+            //            self.title = [NSString stringWithFormat:@"%@ plans",@(self.fetchedRC.fetchedObjects.count)];
             [(AppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
             self.itemChanges = nil;;
-            [self updatePage];            
+            [self updatePage];
         }];
     });
 }

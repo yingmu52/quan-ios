@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "MenuViewController.h"
 #import "FetchCenter.h"
+#import "SDWebImageCompat.h"
 @interface SettingViewController () <UIGestureRecognizerDelegate,FetchCenterDelegate,UIActionSheetDelegate>
 @property (nonatomic,strong) UIView *currentView;
 
@@ -134,7 +135,7 @@
 }
 
 - (void)didFinishCheckingNewVersion:(BOOL)hasNewVersion{
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_main_async_safe(^{
         self.iconImageView.hidden = !hasNewVersion;
     });
     NSLog(@"%@",hasNewVersion ? @"has new version" : @"this is latest version");

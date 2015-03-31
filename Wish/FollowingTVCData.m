@@ -15,6 +15,8 @@
 #import "UIImageView+WebCache.h"
 #import "Theme.h"
 #import "User.h"
+#import "SDWebImageCompat.h"
+
 @interface FollowingTVCData () <NSFetchedResultsControllerDelegate,FetchCenterDelegate,FollowingCellDelegate,ECSlidingViewControllerDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @end
@@ -34,7 +36,7 @@
 }
 
 - (void)didFinishFetchingFollowingPlanList{
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_main_async_safe(^{
         [self.tableView reloadData];
     });
 }

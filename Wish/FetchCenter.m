@@ -356,7 +356,7 @@ typedef enum{
                                                            cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30.0];
     request.HTTPMethod = @"POST";
 
-    NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:UIImageJPEGRepresentation(image, 0.1)
+    NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:UIImageJPEGRepresentation(image, 0.01)
                                                       completionHandler:^(NSData *data,NSURLResponse *response,NSError *error)
                                           {
                                               NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data

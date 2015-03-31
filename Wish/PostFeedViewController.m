@@ -12,6 +12,7 @@
 #import "SystemUtil.h"
 #import "FetchCenter.h"
 #import "GCPTextView.h"
+#import "SDWebImageCompat.h"
 @interface PostFeedViewController () <UITextFieldDelegate,FetchCenterDelegate,UITextViewDelegate>
 @property (nonatomic,strong) UIButton *tikButton;
 @property (nonatomic,weak) IBOutlet UIImageView *previewIcon;
@@ -92,7 +93,7 @@
 
 - (void)didFinishUploadingFeed:(Feed *)feed
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_main_async_safe(^{
         self.navigationItem.leftBarButtonItem.enabled = YES;
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
         [self.navigationController popViewControllerAnimated:YES];
@@ -108,7 +109,7 @@
 }
 
 - (void)handleFailure:(NSDictionary *)info{
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_main_async_safe((^{
         self.navigationItem.leftBarButtonItem.enabled = YES;
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
         [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
@@ -116,7 +117,7 @@
                                    delegate:self
                           cancelButtonTitle:@"OK"
                           otherButtonTitles:nil, nil] show];
-    });
+    }));
 
 }
 

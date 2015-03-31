@@ -13,6 +13,7 @@
 #import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 #import "FetchCenter.h"
 #import "User.h"
+#import "SDWebImageCompat.h"
 @interface ProfileViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,FetchCenterDelegate,UITextFieldDelegate>
 @property (nonatomic,weak) IBOutlet UIView *profileBackground;
 @property (nonatomic,weak) IBOutlet UIImageView *profilePicture;
@@ -186,7 +187,7 @@
 #pragma mark - fetch center delegate 
 
 - (void)didFinishUpdatingPersonalInfo{
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_main_async_safe(^{
         [self dismissSpinner];
         [self goBack];
     });
@@ -196,7 +197,7 @@
 }
 
 - (void)didFinishUploadingPictureForProfile:(NSDictionary *)info{
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_main_async_safe(^{
         NSURL *newUrl = [self.fetchCenter urlWithImageID:[User updatedProfilePictureId]];
         [self dismissSpinner];
         [self.profilePicture setImageWithURL:newUrl

@@ -9,6 +9,8 @@
 #import "DiscoveryVCData.h"
 #import "FetchCenter.h"
 #import "UIImageView+WebCache.h"
+#import "SDWebImageCompat.h"
+
 @interface DiscoveryVCData () <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,strong) NSMutableArray *plans;
@@ -35,6 +37,8 @@
     [spinner startAnimating];
     [self.fetchCenter getDiscoveryList];
 }
+
+
 #pragma mark - collection view delegate & data soucce
 - (void)configureCell:(DiscoveryCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     Plan *plan = self.plans[indexPath.section * 4 + indexPath.item];
@@ -67,10 +71,10 @@
 }
 - (void)didfinishFetchingDiscovery:(NSArray *)plans{
     [self.plans addObjectsFromArray:plans];
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_main_async_safe(^{
         [self.collectionView reloadData];
         self.navigationItem.rightBarButtonItem = nil;
-    });
+    })
 }
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{

@@ -7,7 +7,7 @@
 //
 
 #import "WishDetailViewController.h"
-
+#import "SDWebImageCompat.h"
 @interface WishDetailViewController () <NSFetchedResultsControllerDelegate>
 @property (nonatomic) CGFloat yVel;
 @end
@@ -91,31 +91,33 @@
      forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath
 {
-    switch(type)
-    {
-        case NSFetchedResultsChangeInsert:
-            [self.tableView
-             insertRowsAtIndexPaths:@[newIndexPath]
-             withRowAnimation:UITableViewRowAnimationAutomatic];
-            [self.tableView setContentOffset:CGPointZero animated:NO]; //scroll to top
-            NSLog(@"Feed inserted");
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [self.tableView
-             deleteRowsAtIndexPaths:@[indexPath]
-             withRowAnimation:UITableViewRowAnimationAutomatic];
-            NSLog(@"Feed deleted");
-            break;
-            
-        case NSFetchedResultsChangeUpdate:
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath]
-                                  withRowAnimation:UITableViewRowAnimationAutomatic];
-            NSLog(@"Feed updated");
-            break;
-        default:
-            break;
-    }
+    dispatch_main_async_safe(^{
+        switch(type)
+        {
+            case NSFetchedResultsChangeInsert:
+                [self.tableView
+                 insertRowsAtIndexPaths:@[newIndexPath]
+                 withRowAnimation:UITableViewRowAnimationAutomatic];
+                [self.tableView setContentOffset:CGPointZero animated:NO]; //scroll to top
+                NSLog(@"Feed inserted");
+                break;
+                
+            case NSFetchedResultsChangeDelete:
+                [self.tableView
+                 deleteRowsAtIndexPaths:@[indexPath]
+                 withRowAnimation:UITableViewRowAnimationAutomatic];
+                NSLog(@"Feed deleted");
+                break;
+                
+            case NSFetchedResultsChangeUpdate:
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath]
+                                      withRowAnimation:UITableViewRowAnimationAutomatic];
+                NSLog(@"Feed updated");
+                break;
+            default:
+                break;
+        }        
+    })
 }
 
 - (void)controllerDidChangeContent:

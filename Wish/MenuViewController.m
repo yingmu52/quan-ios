@@ -16,6 +16,7 @@
 #import "Third Party/TencentOpenAPI.framework/Headers/TencentOAuth.h"
 #import "Third Party/TencentOpenAPI.framework/Headers/TencentApiInterface.h"
 #import "FetchCenter.h"
+#import "SDWebImageCompat.h"
 #define AppKey @"ByYhJYTkXu0721fH"
 #define AppID @"1104337894"
 
@@ -186,7 +187,7 @@ typedef enum {
                      cancelButtonTitle:@"OK"
                      otherButtonTitles:nil, nil] show];
     [User updateOwnerInfo:nil];
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_main_async_safe(^{
         [self.tableView reloadData];
     });
 }
@@ -195,7 +196,7 @@ typedef enum {
     //store access token, openid, expiration date, user photo, username, gender
     NSDictionary *fetchedUserInfo = [self.apiResponse jsonResponse];
     if (fetchedUserInfo) {
-        dispatch_async(dispatch_get_main_queue(),^{
+        dispatch_main_async_safe((^{
             NSDictionary *localUserInfo = @{ACCESS_TOKEN:self.tencentOAuth.accessToken,
                                             OPENID:self.tencentOAuth.openId,
                                             EXPIRATION_DATE:self.tencentOAuth.expirationDate,
@@ -210,7 +211,7 @@ typedef enum {
             [self.tableView reloadData];
             
             [self performSegueWithIdentifier:@"showWishList" sender:nil];
-        });
+        }));
     }
 }
 

@@ -11,8 +11,12 @@
 #import "SystemUtil.h"
 #import "Plan+PlanCRUD.h"
 #import "AppDelegate.h"
+#import "PopupView.h"
+#import "SDWebImageCompat.h"
+
 @interface EditWishViewController ()
-@property (nonatomic,strong) IBOutlet UITextField *textField;
+@property (nonatomic,weak) IBOutlet UITextField *textField;
+@property (nonatomic,weak) PopupView *popView;
 @end
 @implementation EditWishViewController
 
@@ -57,17 +61,15 @@
 
 
 - (void)didFinishUpdatingPlan:(Plan *)plan{
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_main_async_safe(^{
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
         self.backButton.enabled = YES;
         [self.navigationController popToRootViewControllerAnimated:YES];
         [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
     });
-    
 }
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
+    dispatch_main_async_safe((^{
         //update navigation item
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
         self.backButton.enabled = YES;
@@ -82,8 +84,7 @@
         AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
         [delegate.managedObjectContext rollback];
         [delegate.managedObjectContext refreshObject:self.plan mergeChanges:NO];
-    });
-
+    }))
 }
 
 
@@ -106,6 +107,18 @@
 - (IBAction)finish:(UIButton *)sender{
     [self.plan updatePlanStatus:PlanStatusFinished];
     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+
+- (void)showPopViewFor:(PlanStatus)status{
+    UIView *keyWindow = [[UIApplication sharedApplication] keyWindow];
+    if (status == PlanStatusFinished) {
+        self.popView = [PopupView showPopupFinishinFrame:keyWindow.frame];
+    }else if (status == PlanStatusGiveTheFuckingUp){
+        self.popView = [PopupView showPopupFailinFrame:keyWindow.frame];
+    }
+    self.popView.delegate = self;
+    [keyWindow addSubview:self.popView];
 }
 
 @end
