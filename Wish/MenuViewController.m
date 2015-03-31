@@ -89,7 +89,7 @@ typedef enum {
         }
     }
     
-    if ((indexPath.section == 1 && indexPath.row == 2) || indexPath.row == 3) {
+    if (indexPath.section == 1 && indexPath.row == 3) {
         cell.hidden = YES;
     }
     return cell;
@@ -121,7 +121,6 @@ typedef enum {
                 break;
         }
         [self performSegueWithIdentifier:identifier sender:nil];
-
     }
 }
 

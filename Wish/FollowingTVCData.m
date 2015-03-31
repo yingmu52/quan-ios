@@ -113,4 +113,11 @@
     self.slidingViewController.topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"NavigationControllerForDiscovery"];
     
 }
+
+#pragma mark - fetch center delegate
+
+- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
+    NSLog(@"fail");
+
+}
 @end

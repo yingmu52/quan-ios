@@ -73,8 +73,10 @@
     plan.userDeleted = @(NO);
     plan.planStatus = @([dict[@"state"] integerValue]);
     plan.backgroundNum = dict[@"backGroudPic"];
+    plan.isPrivate = @([dict[@"private"] boolValue]);
+    
 //    if ([context save:nil]) {
-        NSLog(@"updated plan list form server");
+//        NSLog(@"updated plan list form server");
 //    }
 
 

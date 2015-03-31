@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DiscoveryCell.h"
 
 @interface DiscoveryViewController : UICollectionViewController
-
+- (void)configureCell:(DiscoveryCell *)cell atIndexPath:(NSIndexPath *)indexPath; //abstract
 @end

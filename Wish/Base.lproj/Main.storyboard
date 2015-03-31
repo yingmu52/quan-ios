@@ -3377,10 +3377,10 @@
             </objects>
             <point key="canvasLocation" x="2935.5" y="2553.75"/>
         </scene>
-        <!--Discovery View Controller-->
+        <!--DiscoveryVC Data-->
         <scene sceneID="LW9-Wg-cfa">
             <objects>
-                <collectionViewController id="b5t-1p-y8a" customClass="DiscoveryViewController" sceneMemberID="viewController">
+                <collectionViewController id="b5t-1p-y8a" customClass="DiscoveryVCData" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="aiF-Ap-Cxg">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3569,7 +3569,7 @@
                                                         </mask>
                                                     </variation>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tab_bg" translatesAutoresizingMaskIntoConstraints="NO" id="Fvs-4S-3d9">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tab_bg" translatesAutoresizingMaskIntoConstraints="NO" id="Fvs-4S-3d9">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                 </imageView>
                                             </subviews>

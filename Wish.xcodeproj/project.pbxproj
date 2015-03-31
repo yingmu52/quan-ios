@@ -22,6 +22,8 @@
 		AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
 		AE1E6BAA1AAFEEE400AF2613 /* PopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1E6BA91AAFEEE400AF2613 /* PopupView.m */; };
 		AE1E6BAB1AAFEEE400AF2613 /* PopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1E6BA91AAFEEE400AF2613 /* PopupView.m */; };
+		AE2A8DDF1ACA116D00029D52 /* DiscoveryVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2A8DDE1ACA116D00029D52 /* DiscoveryVCData.m */; };
+		AE2A8DE01ACA116D00029D52 /* DiscoveryVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2A8DDE1ACA116D00029D52 /* DiscoveryVCData.m */; };
 		AE2F1C841A7A1A1800A32CB5 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2F1C831A7A1A1800A32CB5 /* UIImage+ImageEffects.m */; };
 		AE2F1C851A7A1A1800A32CB5 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2F1C831A7A1A1800A32CB5 /* UIImage+ImageEffects.m */; };
 		AE2F1C941A7A23A200A32CB5 /* Feed+FeedCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2F1C931A7A23A200A32CB5 /* Feed+FeedCRUD.m */; };
@@ -212,6 +214,8 @@
 		AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCardView.m; sourceTree = "<group>"; };
 		AE1E6BA81AAFEEE400AF2613 /* PopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupView.h; sourceTree = "<group>"; };
 		AE1E6BA91AAFEEE400AF2613 /* PopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupView.m; sourceTree = "<group>"; };
+		AE2A8DDD1ACA116D00029D52 /* DiscoveryVCData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryVCData.h; sourceTree = "<group>"; };
+		AE2A8DDE1ACA116D00029D52 /* DiscoveryVCData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryVCData.m; sourceTree = "<group>"; };
 		AE2F1C821A7A1A1800A32CB5 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		AE2F1C831A7A1A1800A32CB5 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		AE2F1C921A7A23A200A32CB5 /* Feed+FeedCRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Feed+FeedCRUD.h"; sourceTree = "<group>"; };
@@ -550,6 +554,8 @@
 				AED71BEE1A95879000F2DAF4 /* DiscoveryFooterView.xib */,
 				AEBD13DB1A93E7A800F5F0D3 /* DiscoveryViewController.h */,
 				AEBD13DC1A93E7A800F5F0D3 /* DiscoveryViewController.m */,
+				AE2A8DDD1ACA116D00029D52 /* DiscoveryVCData.h */,
+				AE2A8DDE1ACA116D00029D52 /* DiscoveryVCData.m */,
 				AE596EB61A953D4800AF1F44 /* DiscoveryBannerCell.h */,
 				AE596EB71A953D4800AF1F44 /* DiscoveryBannerCell.m */,
 				AEBD13E21A948DD400F5F0D3 /* DiscoveryCell.h */,
@@ -992,6 +998,7 @@
 				AE0172421A65CD8E0014266F /* AppDelegate.m in Sources */,
 				AEF7F2AB1A6884950022410B /* CustomBarItem.m in Sources */,
 				AEE4A6CC1A9684D500ABF946 /* AchieveViewController.m in Sources */,
+				AE2A8DDF1ACA116D00029D52 /* DiscoveryVCData.m in Sources */,
 				AE9861FA1AC33C04005544B9 /* EditWishViewController.m in Sources */,
 				AE01723F1A65CD8E0014266F /* main.m in Sources */,
 				AECE2C031AA1A28900B1C58E /* Owner.m in Sources */,
@@ -1098,6 +1105,7 @@
 				AEF7F2821A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				AE479EAF1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */,
 				AEE4A6D11A96A5D500ABF946 /* AchieveCell.m in Sources */,
+				AE2A8DE01ACA116D00029D52 /* DiscoveryVCData.m in Sources */,
 				AE2F1C951A7A23A200A32CB5 /* Feed+FeedCRUD.m in Sources */,
 				AEF7F29C1A686FE90022410B /* NavigationBar.m in Sources */,
 				AED05EDC1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m in Sources */,

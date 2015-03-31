@@ -96,7 +96,6 @@
         self.navigationItem.leftBarButtonItem.enabled = YES;
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
         [self.navigationController popViewControllerAnimated:YES];
-        
     });
 }
 
@@ -120,7 +119,6 @@
     });
 
 }
-
 
 #pragma mark - text view delegate
 

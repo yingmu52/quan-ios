@@ -21,6 +21,9 @@
 - (void)didFinishUpdatingPlan:(Plan *)plan;
 - (void)didFinishCheckingNewVersion:(BOOL)hasNewVersion;
 - (void)didFinishUploadingPictureForProfile:(NSDictionary *)info;
+- (void)didfinishFetchingDiscovery:(NSArray *)plans;
+
+
 - (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
 
@@ -29,6 +32,9 @@
 @interface FetchCenter : NSObject
 @property (nonatomic,weak) id <FetchCenterDelegate>delegate;
 
+
+
+- (void)getDiscoveryList;
 
 - (void)checkVersion;
 - (void)uploadNewProfilePicture:(UIImage *)picture;

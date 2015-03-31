@@ -36,6 +36,11 @@
 #define OTHER @"other/"
 #define CHECK_NEW_VERSION @"splan_other_new_version.php"
 
+#define DISCOVER @"find/"
+#define GET_DISCOVER_LIST @"splan_find_planlist.php"
+
+
+
 typedef enum{
     FetchCenterGetOpCreatePlan = 0,
     FetchCenterGetOpDeletePlan,
@@ -47,7 +52,8 @@ typedef enum{
     FetchCenterGetOpFollowingPlanList,
     FetchCenterGetOpLoginForUidAndUkey,
     FetchCenterGetOpCheckNewVersion,
-    FetchCenterGetOpUpdatePersonalInfo
+    FetchCenterGetOpUpdatePersonalInfo,
+    FetchCenterGetOpDiscoverPlans
 }FetchCenterGetOp;
 
 typedef enum{
@@ -73,7 +79,15 @@ typedef enum{
               entity:nil];
 }
 
-#pragma mark - Login&out
+#pragma mark - Discovery Related
+
+- (void)getDiscoveryList{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,DISCOVER,GET_DISCOVER_LIST];
+    [self getRequest:rqtStr parameter:nil operation:FetchCenterGetOpDiscoverPlans entity:nil];
+}
+
+
+#pragma mark - Login&out & update personal info
 
 - (void)fetchUidandUkeyWithOpenId:(NSString *)openId accessToken:(NSString *)token{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,USER,GETUID];
@@ -259,6 +273,15 @@ typedef enum{
         case FetchCenterGetOpUpdatePersonalInfo:{
             NSArray *info = (NSArray *)obj;
             [User updateAttributeFromDictionary:@{USER_DISPLAY_NAME:info[0],GENDER:info[1]}];
+        }
+            break;
+        case FetchCenterGetOpDiscoverPlans:{
+            //stored the lastet
+            NSMutableArray *plans = [[NSMutableArray alloc] init];
+            for (NSDictionary *planInfo in json[@"data"]){
+                [plans addObject:[Plan updatePlanFromServer:planInfo]];
+            }
+            [self.delegate didfinishFetchingDiscovery:plans];
         }
             break;
         default:

@@ -11,7 +11,7 @@
 #import "UIViewController+ECSlidingViewController.h"
 #import "CHTCollectionViewWaterfallLayout.h"
 #import "DiscoveryBannerCell.h"
-#import "DiscoveryCell.h"
+
 
 @interface DiscoveryViewController () <CHTCollectionViewDelegateWaterfallLayout>
 @end
@@ -31,7 +31,7 @@
     CHTCollectionViewWaterfallLayout *layout = [[CHTCollectionViewWaterfallLayout alloc] init];
     CGFloat horizontalInset = 16.0/640 * self.collectionView.frame.size.width;
     layout.sectionInset = UIEdgeInsetsMake(horizontalInset, horizontalInset, horizontalInset, horizontalInset);
-    layout.footerHeight = 550.0/1136*self.collectionView.frame.size.height;
+//    layout.footerHeight = 550.0/1136*self.collectionView.frame.size.height; //banner height
     layout.minimumColumnSpacing = 14.0/16*horizontalInset;
     layout.minimumInteritemSpacing = 12.0/16*horizontalInset;
     layout.itemRenderDirection = CHTCollectionViewWaterfallLayoutItemRenderDirectionLeftToRight;
@@ -39,10 +39,10 @@
     
     
     //register footer view
-    [self.collectionView registerNib:[UINib nibWithNibName:@"DiscoveryFooterView"
-                                                    bundle:[NSBundle mainBundle]]
-          forSupplementaryViewOfKind:CHTCollectionElementKindSectionFooter
-                 withReuseIdentifier:BANNERID];
+//    [self.collectionView registerNib:[UINib nibWithNibName:@"DiscoveryFooterView"
+//                                                    bundle:[NSBundle mainBundle]]
+//          forSupplementaryViewOfKind:CHTCollectionElementKindSectionFooter
+//                 withReuseIdentifier:BANNERID];
 
 }
 - (void)setUpNavigationItem
@@ -59,34 +59,29 @@
 #pragma mark <UICollectionViewDataSource>
 
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 3;
-}
-
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 4;
-}
-
 - (DiscoveryCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     DiscoveryCell *cell = (DiscoveryCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NORMALCELLID forIndexPath:indexPath];
-    
+    [self configureCell:cell atIndexPath:indexPath];
     // Configure the cell
     return cell;
 }
 
 
-- (DiscoveryBannerCell *)collectionView:(UICollectionView *)collectionView
-      viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-    DiscoveryBannerCell *banner = nil;
-    if ([kind isEqualToString:CHTCollectionElementKindSectionFooter]) {
-        banner = (DiscoveryBannerCell *)[collectionView dequeueReusableSupplementaryViewOfKind:kind
-                                                          withReuseIdentifier:BANNERID
-                                                                 forIndexPath:indexPath];
-    }
-    
-    return banner;
+- (void)configureCell:(DiscoveryCell *)cell atIndexPath:(NSIndexPath *)indexPath{
+    //abstract
 }
+
+//- (DiscoveryBannerCell *)collectionView:(UICollectionView *)collectionView
+//      viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+//    DiscoveryBannerCell *banner = nil;
+////    if ([kind isEqualToString:CHTCollectionElementKindSectionFooter]) {
+////        banner = (DiscoveryBannerCell *)[collectionView dequeueReusableSupplementaryViewOfKind:kind
+////                                                          withReuseIdentifier:BANNERID
+////                                                                 forIndexPath:indexPath];
+////    }
+//    
+//    return banner;
+//}
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGSize cellSize = CGSizeZero;
