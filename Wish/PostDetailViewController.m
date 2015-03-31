@@ -37,16 +37,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
-}
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
+    
     self.finishDateLabel.text = [NSString stringWithFormat:@"预计%@完成",[SystemUtil stringFromDate:[NSDate date]]];
     self.datePicker.backgroundColor = [UIColor whiteColor];
     [self setViewBorder:self.dateBackground];
     [self setViewBorder:self.isPrivateTab];
-}
 
+}
 - (void)setViewBorder:(UIView *)view{
     view.layer.borderColor = [Theme postTabBorderColor].CGColor;
     view.layer.borderWidth = 1.0;
