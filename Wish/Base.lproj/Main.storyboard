@@ -3470,6 +3470,9 @@
                                                             <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                                         </constraint>
                                                         <constraint firstItem="1TG-3Q-zoz" firstAttribute="width" secondItem="R3x-Qg-vjU" secondAttribute="height" multiplier="13:63" id="CDI-Ir-tRC"/>
+                                                        <constraint firstAttribute="centerX" secondItem="34U-mW-pah" secondAttribute="centerX" constant="-11.5" id="DJi-YJ-CCK">
+                                                            <variation key="heightClass=regular-widthClass=compact" constant="-10"/>
+                                                        </constraint>
                                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fvI-bW-nfC" secondAttribute="trailing" constant="65" id="MWD-hp-H50">
                                                             <variation key="heightClass=regular-widthClass=compact" constant="10"/>
                                                         </constraint>
@@ -3491,7 +3494,7 @@
                                                         </constraint>
                                                         <constraint firstAttribute="centerX" secondItem="VQ2-nQ-z5m" secondAttribute="centerX" id="aXa-nF-xa9"/>
                                                         <constraint firstItem="34U-mW-pah" firstAttribute="leading" secondItem="1TG-3Q-zoz" secondAttribute="trailing" constant="8" symbolic="YES" id="bfC-mt-4TK">
-                                                            <variation key="heightClass=regular-widthClass=compact" constant="3"/>
+                                                            <variation key="heightClass=regular-widthClass=compact" constant="5"/>
                                                         </constraint>
                                                         <constraint firstItem="G0Y-kV-Mff" firstAttribute="top" secondItem="R3x-Qg-vjU" secondAttribute="top" constant="8" id="gB2-gT-asL">
                                                             <variation key="heightClass=regular-widthClass=compact" constant="10"/>
@@ -3538,6 +3541,7 @@
                                                             <exclude reference="ZkT-Bk-lqA"/>
                                                             <exclude reference="kBq-h5-C3E"/>
                                                             <exclude reference="nK7-mC-EON"/>
+                                                            <exclude reference="DJi-YJ-CCK"/>
                                                             <exclude reference="bfC-mt-4TK"/>
                                                         </mask>
                                                     </variation>
@@ -3564,12 +3568,13 @@
                                                             <exclude reference="Sdd-UO-G6R"/>
                                                             <include reference="mAN-Pt-mbe"/>
                                                             <include reference="0cB-Om-RHS"/>
-                                                            <include reference="2oD-qO-RGn"/>
+                                                            <exclude reference="2oD-qO-RGn"/>
                                                             <exclude reference="CDI-Ir-tRC"/>
                                                             <exclude reference="Rmh-4C-KlZ"/>
                                                             <exclude reference="ZkT-Bk-lqA"/>
                                                             <include reference="kBq-h5-C3E"/>
                                                             <include reference="nK7-mC-EON"/>
+                                                            <include reference="DJi-YJ-CCK"/>
                                                             <include reference="bfC-mt-4TK"/>
                                                         </mask>
                                                     </variation>
