@@ -135,11 +135,11 @@
 - (CGFloat)heightForText:(NSString *)text{
     
     NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:text
-                                                                         attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12.0f]}];
+                                                                         attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13.0f]}];
     
     CGSize maxSize = [[UIScreen mainScreen] bounds].size;
     
-    CGRect rect = [attributedText boundingRectWithSize:(CGSize){368.0f / 400 * maxSize.width,maxSize.height}
+    CGRect rect = [attributedText boundingRectWithSize:(CGSize){368.0f / 400 * maxSize.width,CGFLOAT_MAX}
                                                options:NSStringDrawingUsesLineFragmentOrigin
                                                context:nil];
     return rect.size.height; // maximum number of line is 6 for 140 character
@@ -147,9 +147,15 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    CGFloat baseHeight = 550.0f/1136*tableView.frame.size.height;
+
     Feed *feed = [self.fetchedRC objectAtIndexPath:indexPath];
-    CGFloat margin = 0.0f;
-    return (580.0f - margin)/1136*tableView.frame.size.height + [self heightForText:feed.feedTitle];
+    CGFloat additionalTextHeight = [self heightForText:feed.feedTitle];
+    CGFloat margin = 80.0f;
+    
+    CGFloat actualHeight = (550.0f - margin)/1136*tableView.frame.size.height + additionalTextHeight;
+    return actualHeight < baseHeight ? baseHeight : actualHeight;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

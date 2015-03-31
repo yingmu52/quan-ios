@@ -9,27 +9,24 @@
 #import "WishDetailCell.h"
 #import "SystemUtil.h"
 @interface WishDetailCell()
-@property (weak, nonatomic) IBOutlet UILabel *infoLabel;
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-@property (weak, nonatomic) IBOutlet UIButton *commentButton;
-@property (weak, nonatomic) IBOutlet UIButton *likeButton;
-
-@property (weak, nonatomic) IBOutlet UILabel *likeLabel;
-
-@property (weak, nonatomic) IBOutlet UILabel *commentLabel;
 @end
 @implementation WishDetailCell
 
 - (void)awakeFromNib {
     // Initialization code
-//    self.isWidgetVisible = self.likeButton.isHidden
-//                        && self.likeLabel.isHidden
-//                        && self.commentButton.isHidden
-//                        && self.commentLabel.isHidden;
+    self.likeButton.hidden = YES;
+    self.likeLabel.hidden = YES;
+    self.commentButton.hidden = YES;
+    self.commentLabel.hidden = YES;
     self.backgroundColor = [UIColor clearColor];
 
 }
 
+- (void)setTitleTextView:(UITextView *)titleTextView{
+    _titleTextView = titleTextView;
+    _titleTextView.textContainer.lineFragmentPadding = 0.0f;
+    _titleTextView.textContainerInset = UIEdgeInsetsZero;
+}
 
 - (void)setFeed:(Feed *)feed
 {
@@ -38,7 +35,8 @@
     self.dateLabel.text = [SystemUtil stringFromDate:feed.createDate];
     self.likeLabel.text = [NSString stringWithFormat:@"%@",feed.likeCount];
     self.commentLabel.text = [NSString stringWithFormat:@"%@",feed.commentCount];
-    self.infoLabel.text = feed.feedTitle;
+//    self.infoLabel.text = feed.feedTitle;
+    self.titleTextView.text = feed.feedTitle;
     [self setNeedsDisplay];
 }
 
