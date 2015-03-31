@@ -273,6 +273,7 @@ typedef enum{
         case FetchCenterGetOpUpdatePersonalInfo:{
             NSArray *info = (NSArray *)obj;
             [User updateAttributeFromDictionary:@{USER_DISPLAY_NAME:info[0],GENDER:info[1]}];
+            [self.delegate didFinishUpdatingPersonalInfo];
         }
             break;
         case FetchCenterGetOpDiscoverPlans:{
@@ -287,7 +288,7 @@ typedef enum{
         default:
             break;
     }
-    NSLog(@"%@",json);
+//    NSLog(@"%@",json);
 }
 
 #pragma mark - main get and post method

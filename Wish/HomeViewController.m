@@ -116,11 +116,7 @@ HomeCardViewDelegate>
 }
 
 
-#pragma mark - db operation
-
-
-#warning - give up for hacking max plan count
-- (void)addWish{    
+- (void)addWish{
     if ([User isUserLogin]){
         [self performSegueWithIdentifier:@"showPostFromHome" sender:nil];
     }

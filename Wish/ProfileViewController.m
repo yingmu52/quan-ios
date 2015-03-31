@@ -51,17 +51,25 @@
     _fetchCenter.delegate = self;
     return _fetchCenter;
 }
+
 - (void)gobackToSettingView{
     //updae info if needed
     if (![self.nickNameTextField.text isEqualToString:[User userDisplayName]] ||
         ![self.genderLabel.text isEqualToString:[User gender]]){
+        [self showSpinniner];
         [self.fetchCenter updatePersonalInfo:self.nickNameTextField.text gender:self.genderLabel.text];
+    }else{
+        [self goBack];
     }
 
+}
+
+- (void)goBack{
     [self.navigationController popViewControllerAnimated:YES];
     self.navigationController.navigationBar.backgroundColor = [Theme naviBackground];
     [self setNavBarText:[UIColor blackColor]];
 }
+
 
 - (void)setUpNavigationItem
 {
@@ -169,13 +177,20 @@
 {
     [self dismissViewControllerAnimated:NO completion:^{
         UIImage *capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage];
-        //NSLog(@"%@",NSStringFromCGSize(editedImage.size));
+        [self showSpinniner];
         [self.fetchCenter uploadNewProfilePicture:capturedImage];
     }];
 }
 
 
-#pragma mark - image delegate
+#pragma mark - fetch center delegate 
+
+- (void)didFinishUpdatingPersonalInfo{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self dismissSpinner];
+        [self goBack];
+    });
+}
 - (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
     NSLog(@"fail");
 }
@@ -183,17 +198,28 @@
 - (void)didFinishUploadingPictureForProfile:(NSDictionary *)info{
     dispatch_async(dispatch_get_main_queue(), ^{
         NSURL *newUrl = [self.fetchCenter urlWithImageID:[User updatedProfilePictureId]];
+        [self dismissSpinner];
         [self.profilePicture setImageWithURL:newUrl
                  usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     });
 }
 
-#pragma mark - update info delegate 
-
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
     NSLog(@"fail");
 }
 
+
+#pragma mark - activity 
+
+- (void)showSpinniner{
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+    [spinner startAnimating];
+}
+
+- (void)dismissSpinner{
+    self.navigationItem.rightBarButtonItem = nil;
+}
 @end
 
 

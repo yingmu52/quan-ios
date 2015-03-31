@@ -77,7 +77,6 @@
                                                             target:self
                                                             action:@selector(dismissPickerView:)];
     
-#warning this is gross bitch !
     self.pickerToolBar.items = @[flexibleSpace,cancel,flexibleSpace,flexibleSpace,flexibleSpace,flexibleSpace,flexibleSpace,flexibleSpace,flexibleSpace,flexibleSpace,flexibleSpace,flexibleSpace,done,flexibleSpace];
     
     [self.bgView addSubview:self.datePicker];

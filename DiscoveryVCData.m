@@ -26,9 +26,15 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.fetchCenter getDiscoveryList];
+    [self discover];
 }
 
+- (void)discover{
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+    [spinner startAnimating];
+    [self.fetchCenter getDiscoveryList];
+}
 #pragma mark - collection view delegate & data soucce
 - (void)configureCell:(DiscoveryCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     Plan *plan = self.plans[indexPath.section * 4 + indexPath.item];
@@ -63,6 +69,7 @@
     [self.plans addObjectsFromArray:plans];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
+        self.navigationItem.rightBarButtonItem = nil;
     });
 }
 

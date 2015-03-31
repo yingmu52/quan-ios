@@ -14,7 +14,7 @@
     self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
     CGSize deviceSize = [[UIScreen mainScreen] bounds].size;
-    CGFloat interMargin = deviceSize.width * 24.0 / 640;
+//    CGFloat interMargin = deviceSize.width * 24.0 / 640;
     CGFloat itemWidth = 568.0f/640*deviceSize.width;
     CGFloat itemHeight = 890.0f/1136*deviceSize.height;
 //    CGFloat edgeMargin = deviceSize.width - itemWidth - 2*interMargin;

@@ -22,7 +22,7 @@
 - (void)didFinishCheckingNewVersion:(BOOL)hasNewVersion;
 - (void)didFinishUploadingPictureForProfile:(NSDictionary *)info;
 - (void)didfinishFetchingDiscovery:(NSArray *)plans;
-
+- (void)didFinishUpdatingPersonalInfo;
 
 - (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
