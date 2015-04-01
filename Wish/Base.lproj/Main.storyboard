@@ -714,7 +714,7 @@
                                                                 </mask>
                                                             </variation>
                                                             <connections>
-                                                                <segue destination="2Fl-7V-mVz" kind="custom" identifier="showSettingView" customClass="ModalLeftToRightSegue" id="gdh-vS-Eyq"/>
+                                                                <action selector="showSettingsView:" destination="7yJ-9s-9cX" eventType="touchUpInside" id="P6C-Jr-HVu"/>
                                                             </connections>
                                                         </button>
                                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vbi-t1-BTR" userLabel="backupsetting">
@@ -735,6 +735,9 @@
                                                                     <exclude reference="euC-Hf-2QJ"/>
                                                                 </mask>
                                                             </variation>
+                                                            <connections>
+                                                                <action selector="showSettingsView:" destination="7yJ-9s-9cX" eventType="touchUpInside" id="3MA-jb-j3s"/>
+                                                            </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 2.6.2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLQ-Q1-JJm">
                                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -865,11 +868,12 @@
                         <segue destination="hMT-8j-PB2" kind="custom" identifier="ShowFollowingFeed" customClass="ECSlidingSegue" id="Dpd-CX-I1h"/>
                         <segue destination="qWQ-Vi-JtX" kind="custom" identifier="ShowDiscoveryList" customClass="ECSlidingSegue" id="EIs-hJ-8hx"/>
                         <segue destination="6Q3-IH-cnc" kind="custom" identifier="ShowAcheivementList" customClass="ECSlidingSegue" id="F8M-fd-Ue6"/>
+                        <segue destination="2Fl-7V-mVz" kind="custom" identifier="showSettingView" customClass="ModalLeftToRightSegue" id="xYo-RT-VgZ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bw4-56-w5H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-928.5" y="-803.25"/>
+            <point key="canvasLocation" x="-868.5" y="294.75"/>
         </scene>
         <!--Sliding View Controller-->
         <scene sceneID="ufC-wZ-h7g">
@@ -3453,7 +3457,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qBZ-x7-vS6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1902" y="327"/>
+            <point key="canvasLocation" x="-2706" y="780"/>
         </scene>
         <!--Setting View Controller-->
         <scene sceneID="p9F-bV-MOz">

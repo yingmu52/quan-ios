@@ -35,6 +35,9 @@ typedef enum {
 
 @implementation MenuViewController
 
+- (IBAction)showSettingsView:(UIButton *)sender{
+    [self performSegueWithIdentifier:@"showSettingView" sender:nil];
+}
 
 - (IBAction)unwindToMenuViewController:(UIStoryboardSegue *)segue
 {
@@ -81,13 +84,24 @@ typedef enum {
             cell.menuTitle.text = [User userDisplayName];
         }
     }
+    
+    if (indexPath.section == 1 && indexPath.row == 2 && ![User isUserLogin]){
+        cell.hidden = YES;
+    }
     if (indexPath.section == 2) {
-        if (![User isUserLogin]) {
+//        if (![User isUserLogin]) {
             //only setting
-            [cell hideMessageButton];
+        
+        if (![User isUserLogin]){
+            cell.hidden = YES;
         }else{
-            [cell showMessageButton];
+            cell.hidden = NO;
+            [cell hideMessageButton];
         }
+        
+//        }else{
+//            [cell showMessageButton];
+//        }
     }
     
     if (indexPath.section == 1 && indexPath.row == 3) {
