@@ -1107,6 +1107,7 @@
                             <constraint firstAttribute="centerX" secondItem="iBx-8W-kUN" secondAttribute="centerX" id="7MK-qi-ohG"/>
                             <constraint firstAttribute="width" secondItem="2LA-3P-Hbt" secondAttribute="width" id="KKU-sG-F0W"/>
                             <constraint firstItem="iBx-8W-kUN" firstAttribute="height" secondItem="QnE-FT-cfx" secondAttribute="height" multiplier="1:3" id="Nde-PZ-0Up"/>
+                            <constraint firstItem="iBx-8W-kUN" firstAttribute="width" secondItem="QnE-FT-cfx" secondAttribute="width" multiplier="363:400" id="R2X-po-qqn"/>
                             <constraint firstItem="iBx-8W-kUN" firstAttribute="trailing" secondItem="QnE-FT-cfx" secondAttribute="trailingMargin" id="YY7-6U-X2t"/>
                             <constraint firstItem="iBx-8W-kUN" firstAttribute="width" secondItem="bkR-Oi-ATm" secondAttribute="width" id="gK9-Ll-qFe"/>
                             <constraint firstItem="iBx-8W-kUN" firstAttribute="leading" secondItem="QnE-FT-cfx" secondAttribute="leadingMargin" constant="11" id="v3K-0a-LRT">
@@ -1129,6 +1130,7 @@
                                 <exclude reference="xAy-th-Zcx"/>
                                 <exclude reference="7MK-qi-ohG"/>
                                 <exclude reference="Nde-PZ-0Up"/>
+                                <exclude reference="R2X-po-qqn"/>
                                 <exclude reference="YY7-6U-X2t"/>
                                 <exclude reference="gK9-Ll-qFe"/>
                                 <exclude reference="v3K-0a-LRT"/>
@@ -1146,8 +1148,9 @@
                                 <include reference="xAy-th-Zcx"/>
                                 <include reference="7MK-qi-ohG"/>
                                 <include reference="Nde-PZ-0Up"/>
+                                <include reference="R2X-po-qqn"/>
                                 <exclude reference="YY7-6U-X2t"/>
-                                <include reference="gK9-Ll-qFe"/>
+                                <exclude reference="gK9-Ll-qFe"/>
                                 <exclude reference="v3K-0a-LRT"/>
                                 <include reference="yDZ-EO-7d8"/>
                             </mask>

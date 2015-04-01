@@ -23,14 +23,19 @@
 
 @implementation PostViewController
 
+- (NSArray *)keywordArray{
+    if (!_keywordArray){
+        _keywordArray = @[@"每天一部电影的365天",
+                          @"当一个小皮匠",
+                          @"跑步绕地球一圈",
+                          @"在每省都拉过屎"];
+    }
+    return _keywordArray;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupViews];
-    self.keywordArray = @[@"每天一部电影的365天",
-                       @"当一个小皮匠",
-                       @"跑步绕地球一圈",
-                       @"在每省都拉过屎"];
 }
 
 
@@ -38,6 +43,7 @@
     [super viewDidAppear:animated];
     self.textField.text = nil;
     [self.textField becomeFirstResponder];
+    NSLog(@"%@",NSStringFromCGRect(self.collectionView.frame));
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -45,16 +51,14 @@
     [self.textField resignFirstResponder];
 }
 
-
-- (void)viewDidLayoutSubviews
-{
-    self.textField.layer.borderColor = [Theme postTabBorderColor].CGColor;
-    self.textField.layer.borderWidth = 1.0;
-    self.textField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,10,1)];
-    self.textField.leftViewMode = UITextFieldViewModeAlways;
+- (void)setTextField:(UITextField *)textField{
+    _textField = textField;
+    _textField.layer.borderColor = [Theme postTabBorderColor].CGColor;
+    _textField.layer.borderWidth = 1.0;
+    _textField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,10,1)];
+    _textField.leftViewMode = UITextFieldViewModeAlways;
     
 }
-
 
 - (void)setupViews
 {
