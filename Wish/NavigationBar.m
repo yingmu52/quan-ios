@@ -58,6 +58,9 @@ void drawLinearGradient(CGContextRef context, CGRect rect, CGColorRef startColor
     CGContextClip(context);
     CGContextDrawLinearGradient(context, gradient, startPoint, endPoint, 0);
     CGContextSetStrokeColorWithColor(context, [[UIColor clearColor] CGColor]);
+    
+    CGColorSpaceRelease(colorSpace);
+    CGGradientRelease(gradient);
 }
 
 - (UIImage *)imageWithColor:(UIColor *)color
