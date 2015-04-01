@@ -14,7 +14,7 @@
 #import "PopupView.h"
 #import "SDWebImageCompat.h"
 
-@interface EditWishViewController ()
+@interface EditWishViewController () <PopupViewDelegate>
 @property (nonatomic,weak) IBOutlet UITextField *textField;
 @property (nonatomic,weak) PopupView *popView;
 @end
@@ -100,13 +100,11 @@
 }
 
 - (IBAction)giveUp:(UIButton *)sender{
-    [self.plan updatePlanStatus:PlanStatusGiveTheFuckingUp];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self showPopViewFor:PlanStatusGiveTheFuckingUp];
 }
 
 - (IBAction)finish:(UIButton *)sender{
-    [self.plan updatePlanStatus:PlanStatusFinished];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self showPopViewFor:PlanStatusFinished];
 }
 
 
@@ -120,5 +118,34 @@
     self.popView.delegate = self;
     [keyWindow addSubview:self.popView];
 }
+
+
+#pragma mark - pop up view delegate
+
+
+- (void)popupViewDidPressCancel:(PopupView *)popupView{
+    [popupView removeFromSuperview];
+}
+
+- (void)popupViewDidPressConfirm:(PopupView *)popupView{
+    
+    if (popupView.state == PopupViewStateFinish){
+        [self.plan updatePlanStatus:PlanStatusFinished];
+
+    }else if (popupView.state == PopupViewStateGiveUp){
+        [self.plan updatePlanStatus:PlanStatusGiveTheFuckingUp];
+
+    }else {
+        NSAssert(false, @"error");
+    }
+    [popupView removeFromSuperview];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+
+
+
+
+
 
 @end

@@ -9,6 +9,9 @@
 #import "PopupView.h"
 #import "Theme.h"
 
+@interface PopupView ()
+@property (nonatomic) PopupViewState internalState;
+@end
 @implementation PopupView
 
 + (instancetype)instantiateFromNib:(CGRect)frame
@@ -27,6 +30,7 @@
     view.headBannerImageView.image = [Theme popupFinish];
     view.headBannerLabel.text = @"恭喜达成！";
     view.HeadDeleteLabel.text = nil;
+    view.internalState = PopupViewStateFinish;
     return view;
 }
 + (instancetype)showPopupFailinFrame:(CGRect)frame{
@@ -34,6 +38,7 @@
     view.headBannerImageView.image = [Theme popupFail];
     view.headBannerLabel.text = @"真的放弃？";
     view.HeadDeleteLabel.text = nil;
+    view.internalState = PopupViewStateGiveUp;
     return view;
 }
 + (instancetype)showPopupDeleteinFrame:(CGRect)frame{
@@ -42,7 +47,12 @@
     view.popUpBackground.backgroundColor = [UIColor whiteColor];
     view.headBannerLabel.text = nil;
     view.HeadDeleteLabel.text = @"删除的卡片不恢复哦！";
+    view.internalState = PopupViewStateDelete;
     return view;
+}
+
+- (PopupViewState)state{
+    return self.internalState;
 }
 
 - (IBAction)cancelPressed:(UIButton *)sender {

@@ -16,12 +16,23 @@
 - (void)popupViewDidPressConfirm:(PopupView *)popupView;
 
 @end
+
 @interface PopupView : UIView
+
+
+typedef enum {
+    PopupViewStateDelete = 0,
+    PopupViewStateGiveUp,
+    PopupViewStateFinish
+}PopupViewState;
+
+
 @property (weak, nonatomic) IBOutlet UIView *popUpBackground;
 @property (weak, nonatomic) IBOutlet UIImageView *headBannerImageView;
 @property (weak, nonatomic) IBOutlet UILabel *headBannerLabel;
 @property (weak, nonatomic) IBOutlet UILabel *HeadDeleteLabel;
 @property (weak, nonatomic) IBOutlet UIView *mainBackground;
+@property (nonatomic,readonly) PopupViewState state;
 @property (nonatomic,strong) Plan *plan;
 
 @property (nonatomic,weak) id <PopupViewDelegate> delegate;
