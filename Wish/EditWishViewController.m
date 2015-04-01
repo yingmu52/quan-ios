@@ -26,7 +26,7 @@
     self.textField.text = self.plan.planTitle;
     self.finishDateLabel.text = [NSString stringWithFormat:@"预计%@达成",[SystemUtil stringFromDate:self.plan.finishDate]];
     self.isPrivate = self.plan.isPrivate.boolValue;
-    self.title = self.plan.planTitle;
+    self.title = @"编辑愿望";
 }
 
 - (void)setupTextField{
