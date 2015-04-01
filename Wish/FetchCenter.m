@@ -78,7 +78,7 @@ typedef enum{
     }else{
         _baseUrl = [NSString stringWithFormat:@"%@%@",INNER_NETWORK_URL,PROJECT];
     }
-    NSLog(@"%@",_baseUrl);
+//    NSLog(@"%@",_baseUrl);
     return _baseUrl;
 }
 

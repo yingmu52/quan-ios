@@ -10,7 +10,7 @@
 #import "FetchCenter.h"
 #import "UIImageView+WebCache.h"
 #import "SDWebImageCompat.h"
-
+#import "AppDelegate.h"
 @interface DiscoveryVCData () <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,strong) NSMutableArray *plans;
@@ -31,6 +31,16 @@
     [self discover];
 }
 
+
+- (void)dealloc{
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    for (Plan *plan in self.plans){
+        [delegate.managedObjectContext deleteObject:plan];
+    }
+//    NSLog(@"%@",[[AppDelegate getContext] deletedObjects]);
+    [delegate saveContext];
+
+}
 - (void)discover{
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
@@ -43,7 +53,6 @@
 - (void)configureCell:(DiscoveryCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     Plan *plan = self.plans[indexPath.section * 4 + indexPath.item];
     cell.discoveryTitleLabel.text = plan.planTitle;
-    
     [cell.discoveryImageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:plan.backgroundNum]
                                placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
 

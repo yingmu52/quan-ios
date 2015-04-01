@@ -23,7 +23,6 @@
 
 @interface User : NSObject
 
-
 + (void)updateAttributeFromDictionary:(NSDictionary *)info;
 + (void)updateOwnerInfo:(NSDictionary *)info;
 
