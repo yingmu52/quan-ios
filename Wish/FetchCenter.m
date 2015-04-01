@@ -9,7 +9,13 @@
 #import "FetchCenter.h"
 #import "AppDelegate.h"
 #import "User.h"
-#define BASE_URL @"http://182.254.167.228/superplan/"
+//#define BASE_URL @"http://182.254.167.228/superplan/"
+
+
+#define INNER_NETWORK_URL @"http://182.254.167.228"
+#define OUTTER_NETWORK_URL @"http://120.24.73.51"
+#define PROJECT @"/superplan/"
+
 #define PLAN @"plan/"
 #define GET_LIST @"splan_plan_getlist.php"
 #define CREATE_PLAN @"splan_plan_create.php"
@@ -61,18 +67,30 @@ typedef enum{
     FetchCenterPostOpUploadImageForUpdaingProfile
 }FetchCenterPostOp;
 
+@interface FetchCenter ()
+@property (nonatomic,strong) NSString *baseUrl;
+@end
 @implementation FetchCenter
 
+- (NSString *)baseUrl{
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_OUTTER_NETWORK]) {
+        _baseUrl = [NSString stringWithFormat:@"%@%@",OUTTER_NETWORK_URL,PROJECT];
+    }else{
+        _baseUrl = [NSString stringWithFormat:@"%@%@",INNER_NETWORK_URL,PROJECT];
+    }
+    NSLog(@"%@",_baseUrl);
+    return _baseUrl;
+}
 
 - (void)checkVersion{
-    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,OTHER,CHECK_NEW_VERSION];
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,OTHER,CHECK_NEW_VERSION];
     [self getRequest:rqtStr
            parameter:nil
            operation:FetchCenterGetOpCheckNewVersion
               entity:nil];
 }
 - (void)fetchFollowingPlanList{
-    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,FOLLOW,GET_FOLLOW_LIST];
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FOLLOW,GET_FOLLOW_LIST];
     [self getRequest:rqtStr
            parameter:@{@"id":[User uid]}
            operation:FetchCenterGetOpFollowingPlanList
@@ -82,7 +100,7 @@ typedef enum{
 #pragma mark - Discovery Related
 
 - (void)getDiscoveryList{
-    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,DISCOVER,GET_DISCOVER_LIST];
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,DISCOVER,GET_DISCOVER_LIST];
     [self getRequest:rqtStr parameter:nil operation:FetchCenterGetOpDiscoverPlans entity:nil];
 }
 
@@ -90,7 +108,7 @@ typedef enum{
 #pragma mark - Login&out & update personal info
 
 - (void)fetchUidandUkeyWithOpenId:(NSString *)openId accessToken:(NSString *)token{
-    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,USER,GETUID];
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,USER,GETUID];
     [self getRequest:rqtStr
            parameter:@{@"openid":openId,
                        @"token":token}
@@ -105,7 +123,7 @@ typedef enum{
 }
 
 - (void)updatePersonalInfo:(NSString *)nickName gender:(NSString *)gender{
-    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,USER,UPDATE_USER_INFO];
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,USER,UPDATE_USER_INFO];
     [self getRequest:rqtStr parameter:@{@"id":[User uid],
                                         @"name":[nickName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                                         @"gender":[gender isEqualToString:@"男"] ? @(0):@(1)}
@@ -116,7 +134,7 @@ typedef enum{
 - (void)updatePlan:(Plan *)plan{
     //输入样例：id=hello_1421235901&title=hello_title2&finishDate=3&backGroudPic=bg3&private=1&state=1&finishPercent=20
     //—— 每一项都可以单独更新
-    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PLAN,UPDATE_PLAN];
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,UPDATE_PLAN];
     [self getRequest:rqtStr parameter:@{@"id":plan.planId,
                                         @"title":[plan.planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                                         @"finishDate":@([SystemUtil daysBetween:plan.createDate and:plan.finishDate]),
@@ -126,20 +144,20 @@ typedef enum{
    
 }
 - (void)updateStatus:(Plan *)plan{
-    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PLAN,UPDATE_PLAN_STATUS];
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,UPDATE_PLAN_STATUS];
     [self getRequest:rqtStr parameter:@{@"id":plan.planId,
                                         @"state":plan.planStatus}
            operation:FetchCenterGetOpSetPlanStatus entity:plan];
 
 }
 - (void)fetchPlanList:(NSString *)ownerId{
-    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PLAN,GET_LIST];
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,GET_LIST];
     [self getRequest:rqtStr parameter:@{@"id":ownerId} operation:FetchCenterGetOpGetPlanList entity:nil];
 
 }
 
 -(void)uploadToCreatePlan:(Plan *)plan{
-    NSString *baseUrl = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PLAN,CREATE_PLAN];
+    NSString *baseUrl = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,CREATE_PLAN];
     NSDictionary *args = @{@"title":[plan.planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                            @"finishDate":@([SystemUtil daysBetween:[NSDate date] and:plan.finishDate]),
                            @"private":plan.isPrivate};
@@ -153,7 +171,7 @@ typedef enum{
 
 - (void)postToDeletePlan:(Plan *)plan
 {
-    NSString *baseUrl = [NSString stringWithFormat:@"%@%@%@",BASE_URL,PLAN,DELETE_PLAN];
+    NSString *baseUrl = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,DELETE_PLAN];
     NSDictionary *args = @{@"id":plan.planId};
     [self getRequest:baseUrl parameter:args operation:FetchCenterGetOpDeletePlan entity:plan];
 }
@@ -170,7 +188,7 @@ typedef enum{
                 feed.imageId = fetchedImageId;
                 NSLog(@"fetched image ID: %@",fetchedImageId);
                 //upload feed
-                NSString *baseURL = [NSString stringWithFormat:@"%@%@%@",BASE_URL,FEED,CREATE_FEED];
+                NSString *baseURL = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,CREATE_FEED];
                 NSDictionary *args;
                 if (feed.plan.planId && feed.feedTitle) {
                     args = @{@"picurl":fetchedImageId,
@@ -288,7 +306,7 @@ typedef enum{
         default:
             break;
     }
-//    NSLog(@"%@",json);
+    NSLog(@"%@",json);
 }
 
 #pragma mark - main get and post method
@@ -338,7 +356,7 @@ typedef enum{
 }
 
 - (void)postImageWithOperation:(id)obj postOp:(FetchCenterPostOp)postOp{ //obj :NSManagedObject or UIimage
-    NSString *rqtUploadImage = [NSString stringWithFormat:@"%@%@%@?",BASE_URL,PIC,UPLOAD_IMAGE];
+    NSString *rqtUploadImage = [NSString stringWithFormat:@"%@%@%@?",self.baseUrl,PIC,UPLOAD_IMAGE];
     rqtUploadImage = [self versionForBaseURL:rqtUploadImage operation:-1];
     
     UIImage *image; // = [obj valueForKey:@"image"];
@@ -394,7 +412,7 @@ typedef enum{
 #pragma mark - get image url wraper
 
 - (NSURL *)urlWithImageID:(NSString *)imageId{
-    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@?",BASE_URL,PIC,GET_IMAGE];
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@?",self.baseUrl,PIC,GET_IMAGE];
     NSString *url = [NSString stringWithFormat:@"%@id=%@",[self versionForBaseURL:rqtStr operation:-1],imageId];
     return [NSURL URLWithString:url];
 }

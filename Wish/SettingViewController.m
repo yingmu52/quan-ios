@@ -34,8 +34,24 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.title = @"设置";
+    [self becomeFirstResponder];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self resignFirstResponder];
+}
+
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event{
+    if (motion == UIEventSubtypeMotionShake) {
+        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"选择环境，红为内网，蓝为外网"
+                                                           delegate:self
+                                                  cancelButtonTitle:nil
+                                             destructiveButtonTitle:INNER_NETWORK_URL
+                                                  otherButtonTitles:OUTTER_NETWORK_URL, nil];
+        [sheet showInView:self.view];
+    }
+}
 - (void)setUpNavigationItem
 {
     CGRect frame = CGRectMake(0,0, 25,25);
@@ -91,6 +107,13 @@
     if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"退出登录"]){
         [self logout];
     }
+    if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:INNER_NETWORK_URL]){
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:SHOULD_USE_OUTTER_NETWORK];
+    }
+    if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:OUTTER_NETWORK_URL]){
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SHOULD_USE_OUTTER_NETWORK];
+    }
+
 }
 - (void)logout{
     //delete user info
