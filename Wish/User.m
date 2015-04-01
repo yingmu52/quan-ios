@@ -53,9 +53,7 @@
 }
 
 + (BOOL)isUserLogin{
-    NSDictionary *info = [self.class getOwnerInfo];
-    return info != nil;
-//    && [info[LOGIN_STATUS] boolValue];
+    return [[self class] uid] && [[self class] uKey];
 }
 
 + (NSURL *)userProfilePictureURL{
