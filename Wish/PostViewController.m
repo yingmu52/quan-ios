@@ -43,7 +43,6 @@
     [super viewDidAppear:animated];
     self.textField.text = nil;
     [self.textField becomeFirstResponder];
-    NSLog(@"%@",NSStringFromCGRect(self.collectionView.frame));
 }
 
 - (void)viewWillDisappear:(BOOL)animated

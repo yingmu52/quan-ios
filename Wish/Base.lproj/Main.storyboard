@@ -925,7 +925,7 @@
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="constraints">
-                                                <include reference="aJj-eb-ST7"/>
+                                                <exclude reference="aJj-eb-ST7"/>
                                             </mask>
                                         </variation>
                                         <connections>
@@ -935,6 +935,9 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.81568627450980391" green="0.84313725490196079" blue="0.83529411764705885" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="bkR-Oi-ATm" firstAttribute="leading" secondItem="2LA-3P-Hbt" secondAttribute="leading" constant="19" id="74m-Xn-224">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="15"/>
+                                    </constraint>
                                     <constraint firstAttribute="width" secondItem="bkR-Oi-ATm" secondAttribute="height" multiplier="200:23" id="KOf-lk-Ulj"/>
                                     <constraint firstItem="bkR-Oi-ATm" firstAttribute="centerY" secondItem="2LA-3P-Hbt" secondAttribute="centerY" id="KnV-lN-H85"/>
                                     <constraint firstItem="bkR-Oi-ATm" firstAttribute="centerX" secondItem="2LA-3P-Hbt" secondAttribute="centerX" id="XWg-9M-wID">
@@ -948,6 +951,7 @@
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="YJE-Yk-Gn0"/>
+                                        <exclude reference="74m-Xn-224"/>
                                         <exclude reference="KOf-lk-Ulj"/>
                                         <exclude reference="KnV-lN-H85"/>
                                         <exclude reference="XWg-9M-wID"/>
@@ -959,6 +963,7 @@
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="YJE-Yk-Gn0"/>
+                                        <include reference="74m-Xn-224"/>
                                         <include reference="KOf-lk-Ulj"/>
                                         <include reference="KnV-lN-H85"/>
                                         <include reference="XWg-9M-wID"/>
