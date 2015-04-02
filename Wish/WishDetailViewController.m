@@ -153,7 +153,7 @@
 
     Feed *feed = [self.fetchedRC objectAtIndexPath:indexPath];
     CGFloat additionalTextHeight = [self heightForText:feed.feedTitle];
-    CGFloat margin = 80.0f;
+    CGFloat margin = 50.0f;
     
     CGFloat actualHeight = (550.0f - margin)/1136*tableView.frame.size.height + additionalTextHeight;
     return actualHeight < baseHeight ? baseHeight : actualHeight;
