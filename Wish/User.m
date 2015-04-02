@@ -35,7 +35,8 @@
     //    NSAssert(![info isKindOfClass:[NSDictionary class]], @"info is not a dictionary");
     return info;
 }
-/*
+
+
 + (NSString *)uid{
 //    return @"100004";
     NSDictionary *info = [self.class getOwnerInfo];
@@ -74,9 +75,11 @@
     return info[GENDER];
 }
 
-*/
+
 
 #pragma mark - simulator implementation (need to uncomment )
+/*
+
 + (NSString *)uid{
     return @"100004";
 }
@@ -106,5 +109,5 @@
 + (NSString *)gender{
     return @"TestGender";
 }
-
+*/
 @end
