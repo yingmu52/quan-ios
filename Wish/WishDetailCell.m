@@ -16,8 +16,8 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    self.likeButton.hidden = NO;
-    self.likeLabel.hidden = NO;
+    self.likeButton.hidden = YES;
+    self.likeLabel.hidden = YES;
     self.commentButton.hidden = YES;
     self.commentLabel.hidden = YES;
     self.backgroundColor = [UIColor clearColor];
@@ -42,7 +42,6 @@
 
 //    self.infoLabel.text = feed.feedTitle;
     self.titleTextView.text = feed.feedTitle;
-    [self setNeedsDisplay];
 }
 
 - (void)setPhotoView:(UIImageView *)photoView
