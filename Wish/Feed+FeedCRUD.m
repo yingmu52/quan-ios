@@ -22,7 +22,7 @@
     feed.image = image;
     feed.createDate = [NSDate date];
     feed.plan = plan;
-
+    feed.selfLiked = @(NO);
     //update plan
     plan.image = image;
     NSLog(@"saved feed with image");
@@ -57,6 +57,7 @@
     feed.likeCount = @([feedItem[@"likeTimes"] integerValue]);
     feed.imageId = feedItem[@"picurl"];
     feed.plan = plan;
+    feed.selfLiked = @(NO);
     
     if ([context save:nil]) {
         NSLog(@"updated feed from server");

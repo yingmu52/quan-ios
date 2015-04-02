@@ -67,13 +67,13 @@ HomeCardViewDelegate>
     }
     //do fetchrequest
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
+    
     request.predicate = [NSPredicate predicateWithFormat:@"userDeleted == %@ && ownerId == %@ && planStatus == %d",@(NO),[User uid],PlanStatusOnGoing];
+    
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
 
-    NSFetchedResultsController *newFRC =
-    [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                        managedObjectContext:context sectionNameKeyPath:nil
-                                                   cacheName:nil];
+    NSFetchedResultsController *newFRC = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
+    
     self.fetchedRC = newFRC;
     _fetchedRC.delegate = self;
     

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6751" systemVersion="14C1510" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6751" systemVersion="14C1514" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Feed" representedClassName="Feed" syncable="YES">
         <attribute name="commentCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="createDate" optional="YES" attributeType="Date" syncable="YES"/>
@@ -8,6 +8,7 @@
         <attribute name="image" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="imageId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="likeCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="selfLiked" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="plan" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Plan" inverseName="feeds" inverseEntity="Plan" syncable="YES"/>
     </entity>
     <entity name="Owner" representedClassName="Owner" syncable="YES">
@@ -33,7 +34,7 @@
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="plans" inverseEntity="Owner" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Feed" positionX="-9243" positionY="-54" width="128" height="165"/>
+        <element name="Feed" positionX="-9243" positionY="-54" width="128" height="180"/>
         <element name="Owner" positionX="-8705" positionY="-43" width="128" height="103"/>
         <element name="Plan" positionX="-8903" positionY="-153" width="128" height="253"/>
     </elements>

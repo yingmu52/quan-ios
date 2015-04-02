@@ -47,6 +47,9 @@
 - (void)updatePersonalInfo:(NSString *)nickName gender:(NSString *)gender;
 
 
+- (void)likeFeed:(Feed *)feed;
+- (void)unLikeFeed:(Feed *)feed;
+
 
 - (void)fetchPlanList:(NSString *)ownerId;
 - (void)uploadToCreatePlan:(Plan *)plan;

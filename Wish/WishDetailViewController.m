@@ -8,7 +8,8 @@
 
 #import "WishDetailViewController.h"
 #import "SDWebImageCompat.h"
-@interface WishDetailViewController () <NSFetchedResultsControllerDelegate>
+#import "FetchCenter.h"
+@interface WishDetailViewController () <NSFetchedResultsControllerDelegate,WishDetailCellDelegate>
 @property (nonatomic) CGFloat yVel;
 @end
 
@@ -113,7 +114,7 @@
                 
             case NSFetchedResultsChangeUpdate:
                 [self.tableView reloadRowsAtIndexPaths:@[indexPath]
-                                      withRowAnimation:UITableViewRowAnimationAutomatic];
+                                      withRowAnimation:UITableViewRowAnimationNone];
                 NSLog(@"Feed updated");
                 break;
             default:
@@ -163,8 +164,22 @@
 }
 - (WishDetailCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     WishDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WishDetailCell" forIndexPath:indexPath];
+    cell.delegate = self;
     cell.feed = [self.fetchedRC objectAtIndexPath:indexPath];
     return cell;
+}
+
+#pragma mark - wish detail view cell delegate 
+
+- (void)didPressedLikeOnCell:(WishDetailCell *)cell{
+    FetchCenter *fc = [[FetchCenter alloc] init];
+    if (cell.feed.likeCount.boolValue) {
+        //unlike
+        [fc likeFeed:cell.feed];
+    }else{
+        //like
+        [fc unLikeFeed:cell.feed];
+    }
 }
 
 

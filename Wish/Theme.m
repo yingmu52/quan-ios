@@ -192,5 +192,14 @@
     return [UIImage imageNamed:@"label_finish"];
 }
 
+
+
++ (UIImage *)likeButtonLiked{
+    return [UIImage imageNamed:@"fadein_ic_like_selected"];
+}
+
++ (UIImage *)likeButtonUnLiked{
+    return [UIImage imageNamed:@"fadein_ic_like_default"];
+}
 @end
 

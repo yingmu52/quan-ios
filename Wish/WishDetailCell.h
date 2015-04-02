@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "Feed.h"
+
+@class WishDetailCell;
+
+@protocol WishDetailCellDelegate <NSObject>
+
+- (void)didPressedLikeOnCell:(WishDetailCell *)cell;
+
+
+@end
+
 @interface WishDetailCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *photoView;
 //@property (nonatomic) BOOL isWidgetVisible;
@@ -23,6 +33,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *likeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentLabel;
 
+
+
+@property (weak,nonatomic) id <WishDetailCellDelegate> delegate;
+
+
+- (IBAction)like:(UIButton *)sender;
 //-(void)showLikeAndComment;
 //- (void)dismissLikeAndComment;
 //- (void)moveWidget:(BOOL)toVisible;

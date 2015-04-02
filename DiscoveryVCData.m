@@ -11,6 +11,7 @@
 #import "UIImageView+WebCache.h"
 #import "SDWebImageCompat.h"
 #import "AppDelegate.h"
+#import "User.h"
 @interface DiscoveryVCData () <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,strong) NSMutableArray *plans;
@@ -33,12 +34,17 @@
 
 
 - (void)dealloc{
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    for (Plan *plan in self.plans){
-        [delegate.managedObjectContext deleteObject:plan];
-    }
-//    NSLog(@"%@",[[AppDelegate getContext] deletedObjects]);
-    [delegate saveContext];
+#warning fix this 
+    
+//    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+//    for (Plan *plan in self.plans){ //delete plans from other users
+//        if (plan.planId != [User uid]){
+//            [delegate.managedObjectContext deleteObject:plan];
+//        }
+//        
+//    }
+////    NSLog(@"%@",[[AppDelegate getContext] deletedObjects]);
+//    [delegate saveContext];
 
 }
 - (void)discover{

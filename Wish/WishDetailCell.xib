@@ -75,6 +75,9 @@
                                         <include reference="q9K-k7-sCQ"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="like:" destination="pxc-Ad-lPE" eventType="touchUpInside" id="ieX-a4-jc1"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="exW-nV-vun" userLabel="comment">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -318,11 +321,11 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <connections>
-                <outlet property="commentButton" destination="exW-nV-vun" id="yBS-Nn-s96"/>
-                <outlet property="commentLabel" destination="WWz-Kb-mxZ" id="6BJ-Il-NNS"/>
+                <outlet property="commentButton" destination="exW-nV-vun" id="0D1-ZO-jc7"/>
+                <outlet property="commentLabel" destination="YRm-yA-BeB" id="biG-0F-gBr"/>
                 <outlet property="dateLabel" destination="GuU-9F-7ku" id="paz-12-8xh"/>
-                <outlet property="likeButton" destination="EKr-4J-ED9" id="eAN-pq-8MJ"/>
-                <outlet property="likeLabel" destination="YRm-yA-BeB" id="p82-QS-A35"/>
+                <outlet property="likeButton" destination="EKr-4J-ED9" id="u6Q-9u-zvA"/>
+                <outlet property="likeLabel" destination="WWz-Kb-mxZ" id="Rl1-Fz-hab"/>
                 <outlet property="photoView" destination="chM-GD-b4g" id="pRK-rQ-fa1"/>
                 <outlet property="titleTextView" destination="C8W-Sm-hjo" id="e36-3T-SCY"/>
             </connections>

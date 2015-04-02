@@ -29,6 +29,8 @@
 #define GET_IMAGE @"splan_pic_get.php"
 #define kFetchedImage @"fetchedImage" // for constructing NSDictionary with image data
 #define CREATE_FEED @"splan_feeds_create.php"
+#define LIKE_FEED @"splan_feeds_like.php"
+#define UNLIKE_FEED @"splan_feeds_unlike.php"
 
 
 #define FOLLOW @"follow/"
@@ -59,7 +61,9 @@ typedef enum{
     FetchCenterGetOpLoginForUidAndUkey,
     FetchCenterGetOpCheckNewVersion,
     FetchCenterGetOpUpdatePersonalInfo,
-    FetchCenterGetOpDiscoverPlans
+    FetchCenterGetOpDiscoverPlans,
+    FetchCenterGetOpLikeAFeed,
+    FetchCenterGetOpUnLikeAFeed
 }FetchCenterGetOp;
 
 typedef enum{
@@ -82,13 +86,27 @@ typedef enum{
     return _baseUrl;
 }
 
-- (void)checkVersion{
-    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,OTHER,CHECK_NEW_VERSION];
+
+#pragma mark - like and comment 
+
+- (void)likeFeed:(Feed *)feed{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,LIKE_FEED];
     [self getRequest:rqtStr
-           parameter:nil
-           operation:FetchCenterGetOpCheckNewVersion
-              entity:nil];
+           parameter:@{@"id":feed.feedId}
+           operation:FetchCenterGetOpLikeAFeed
+              entity:feed];
 }
+
+- (void)unLikeFeed:(Feed *)feed{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,UNLIKE_FEED];
+    [self getRequest:rqtStr
+           parameter:@{@"id":feed.feedId}
+           operation:FetchCenterGetOpUnLikeAFeed
+              entity:feed];
+    
+}
+
+#pragma mark - following list
 - (void)fetchFollowingPlanList{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FOLLOW,GET_FOLLOW_LIST];
     [self getRequest:rqtStr
@@ -107,6 +125,15 @@ typedef enum{
 
 #pragma mark - Login&out & update personal info
 
+- (void)checkVersion{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,OTHER,CHECK_NEW_VERSION];
+    [self getRequest:rqtStr
+           parameter:nil
+           operation:FetchCenterGetOpCheckNewVersion
+              entity:nil];
+}
+
+
 - (void)fetchUidandUkeyWithOpenId:(NSString *)openId accessToken:(NSString *)token{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,USER,GETUID];
     [self getRequest:rqtStr
@@ -117,7 +144,7 @@ typedef enum{
 }
 
 #pragma mark - personal
-//id=100010&name=hello_name2&headUrl=abcd.com&gender=2&birthday=1234&setLife=1000
+
 - (void)uploadNewProfilePicture:(UIImage *)picture{
     [self postImageWithOperation:picture postOp:FetchCenterPostOpUploadImageForUpdaingProfile];
 }
@@ -301,6 +328,23 @@ typedef enum{
                 [plans addObject:[Plan updatePlanFromServer:planInfo]];
             }
             [self.delegate didfinishFetchingDiscovery:plans];
+        }
+            break;
+        case FetchCenterGetOpLikeAFeed:{
+            NSLog(@"liked");
+            Feed *feed = (Feed *)obj;
+            if ([feed.plan.ownerId isEqualToString:[User uid]]){
+                feed.likeCount = @(feed.likeCount.integerValue + 1);
+            }
+        }
+            break;
+        case FetchCenterGetOpUnLikeAFeed:{
+            NSLog(@"unliked");
+            Feed *feed = (Feed *)obj;
+            if ([feed.plan.ownerId isEqualToString:[User uid]]){
+                feed.likeCount = @(feed.likeCount.integerValue - 1);
+            }
+
         }
             break;
         default:

@@ -15,6 +15,10 @@
                         frame:(CGRect)frame;
 
 
++ (UIImage *)likeButtonLiked;
++ (UIImage *)likeButtonUnLiked;
+    
+
 + (UIColor *)postTabBorderColor;
 + (UIImage *)privacyIconDefault;
 + (UIImage *)privacyIconSelected;

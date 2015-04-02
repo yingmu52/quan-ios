@@ -85,8 +85,8 @@ typedef enum {
         }
     }
     
-    if (indexPath.section == 1 && indexPath.row == 2 && ![User isUserLogin]){
-        cell.hidden = YES;
+    if (indexPath.section == 1 && indexPath.row == 2){
+        cell.hidden = ![User isUserLogin];
     }
     if (indexPath.section == 2) {
 //        if (![User isUserLogin]) {
