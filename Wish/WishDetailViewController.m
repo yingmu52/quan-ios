@@ -172,12 +172,13 @@
 #pragma mark - wish detail view cell delegate 
 
 - (void)didPressedLikeOnCell:(WishDetailCell *)cell{
+    //already increment/decrement like count locally,
+    //the following request must respect the current cell.feed like/dislike status
+    
     FetchCenter *fc = [[FetchCenter alloc] init];
-    if (cell.feed.likeCount.boolValue) {
-        //unlike
+    if (cell.feed.selfLiked.boolValue) {
         [fc likeFeed:cell.feed];
     }else{
-        //like
         [fc unLikeFeed:cell.feed];
     }
 }

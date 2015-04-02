@@ -331,20 +331,13 @@ typedef enum{
         }
             break;
         case FetchCenterGetOpLikeAFeed:{
-            NSLog(@"liked");
             Feed *feed = (Feed *)obj;
-            if ([feed.plan.ownerId isEqualToString:[User uid]]){
-                feed.likeCount = @(feed.likeCount.integerValue + 1);
-            }
+            NSLog(@"liked feed ID %@",feed.feedId);
         }
             break;
         case FetchCenterGetOpUnLikeAFeed:{
-            NSLog(@"unliked");
             Feed *feed = (Feed *)obj;
-            if ([feed.plan.ownerId isEqualToString:[User uid]]){
-                feed.likeCount = @(feed.likeCount.integerValue - 1);
-            }
-
+            NSLog(@"unliked feed ID %@",feed.feedId);
         }
             break;
         default:

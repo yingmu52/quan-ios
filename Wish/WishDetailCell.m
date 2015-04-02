@@ -64,7 +64,7 @@
     }
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     [delegate saveContext];
-//    [self.delegate didPressedLikeOnCell:self];
+    [self.delegate didPressedLikeOnCell:self];
 }
 //-(void)showLikeAndComment
 //{
