@@ -1589,12 +1589,6 @@
                                                                     <color key="textColor" red="0.1215686275" green="0.1215686275" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已留下6个努力瞬间" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5V3-1K-OgO">
-                                                                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                    <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jI4-VJ-WUa">
                                                                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                                                     <constraints>
@@ -1653,6 +1647,12 @@
                                                                         </mask>
                                                                     </variation>
                                                                 </view>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已留下6个努力瞬间" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5V3-1K-OgO">
+                                                                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <gestureRecognizers/>
@@ -1717,9 +1717,9 @@
                                                                     <exclude reference="jNc-yv-qCH"/>
                                                                     <exclude reference="x4P-Yq-O8s"/>
                                                                     <exclude reference="Ppn-UI-eqX"/>
-                                                                    <exclude reference="5V3-1K-OgO"/>
                                                                     <exclude reference="jI4-VJ-WUa"/>
                                                                     <exclude reference="xrd-L9-s1B"/>
+                                                                    <exclude reference="5V3-1K-OgO"/>
                                                                 </mask>
                                                                 <mask key="constraints">
                                                                     <exclude reference="Gwy-zw-2gC"/>
@@ -1751,9 +1751,9 @@
                                                                     <include reference="jNc-yv-qCH"/>
                                                                     <include reference="x4P-Yq-O8s"/>
                                                                     <include reference="Ppn-UI-eqX"/>
-                                                                    <include reference="5V3-1K-OgO"/>
                                                                     <include reference="jI4-VJ-WUa"/>
                                                                     <include reference="xrd-L9-s1B"/>
+                                                                    <include reference="5V3-1K-OgO"/>
                                                                 </mask>
                                                                 <mask key="constraints">
                                                                     <include reference="Gwy-zw-2gC"/>
@@ -1774,7 +1774,7 @@
                                                                     <include reference="PH5-Bi-C14"/>
                                                                     <include reference="YJ5-RL-eeL"/>
                                                                     <include reference="tae-5i-cWh"/>
-                                                                    <include reference="x5d-3n-uAN"/>
+                                                                    <exclude reference="x5d-3n-uAN"/>
                                                                     <include reference="0lK-j3-ZYx"/>
                                                                     <include reference="R8Y-9g-Kff"/>
                                                                     <include reference="fTK-zf-py1"/>
@@ -4803,7 +4803,7 @@
         <image name="tips_bg" width="69" height="69"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wmP-pv-Paa"/>
-        <segue reference="4wk-xv-ETJ"/>
+        <segue reference="cel-0L-eNY"/>
+        <segue reference="4ZT-53-1QA"/>
     </inferredMetricsTieBreakers>
 </document>

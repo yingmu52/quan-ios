@@ -348,6 +348,7 @@ HomeCardViewDelegate>
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
     cell.plan = plan;
     cell.delegate = self;
+    [cell layoutIfNeeded]; //fixed auto layout error on iphone 5s or above
 
 }
 

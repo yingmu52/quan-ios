@@ -30,6 +30,7 @@
 //    NSData *data = UIImageJPEGRepresentation(plan.image, 1);
 //    NSLog(@">>>>>>>>>>>>>>>>>>>>>>>>>%d",data.length);
     _plan = plan;
+//    return;
     if (_plan) {
         if (!_plan.image){
 //            [self. imageView setImageWithURL:[[FetchCenter new] urlWithImageID:_plan.backgroundNum]
@@ -82,6 +83,7 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
     // Shadow
     self.canvasView.layer.shadowColor = [UIColor blackColor].CGColor;
     self.canvasView.layer.shadowRadius = 2.0f;
@@ -91,7 +93,6 @@
 //    self.layer.rasterizationScale = [[UIScreen mainScreen] scale];
     // Corner Radius
     //    self.layer.cornerRadius = 10.0;
-    
 }
 
 
