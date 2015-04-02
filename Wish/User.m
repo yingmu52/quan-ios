@@ -13,6 +13,7 @@
 
 #pragma mark - set
 
+
 + (void)updateOwnerInfo:(NSDictionary *)info{
     [[NSUserDefaults standardUserDefaults] setObject:info forKey:OWNERINFO];
 }
@@ -34,13 +35,15 @@
     //    NSAssert(![info isKindOfClass:[NSDictionary class]], @"info is not a dictionary");
     return info;
 }
-
+/*
 + (NSString *)uid{
+//    return @"100004";
     NSDictionary *info = [self.class getOwnerInfo];
     return [NSString stringWithFormat:@"%@", info ? info[UID] : @""];
 }
 
 + (NSString *)uKey{
+//    return @"ukey551616ce53da30.10303099";
     NSDictionary *info = [self.class getOwnerInfo];
     return info[UKEY];
 }
@@ -69,6 +72,39 @@
 + (NSString *)gender{
     NSDictionary *info = [self.class getOwnerInfo];
     return info[GENDER];
+}
+
+*/
+
+#pragma mark - simulator implementation (need to uncomment )
++ (NSString *)uid{
+    return @"100004";
+}
+
++ (NSString *)uKey{
+    return @"ukey551616ce53da30.10303099";
+}
+
+
++ (NSString *)updatedProfilePictureId{
+    return @"";
+    
+}
+
++ (BOOL)isUserLogin{
+    return [[self class] uid] && [[self class] uKey];
+}
+
++ (NSURL *)userProfilePictureURL{
+    return [NSURL URLWithString:@"http://q.qlogo.cn/qqapp/1104337894/78167CF6EB9262F8C4BA18F858BC3485/100"];
+}
+
++ (NSString *)userDisplayName{
+    return @"Test Name";
+}
+
++ (NSString *)gender{
+    return @"TestGender";
 }
 
 @end

@@ -438,7 +438,7 @@ typedef enum{
     NSMutableDictionary *dict = [@{@"version":@"2.2.2",
                                    @"loginType":@"qq",
                                    @"sysVersion":[UIDevice currentDevice].systemVersion,
-                                   @"sysModel":[UIDevice currentDevice].model} mutableCopy];
+                                   @"sysModel":[[UIDevice currentDevice].model stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]} mutableCopy];
     if (op != FetchCenterGetOpLoginForUidAndUkey) {
         [dict addEntriesFromDictionary:@{@"uid":[User uid],@"ukey":[User uKey]}];
         dict[@"loginType"] = @"uid";
