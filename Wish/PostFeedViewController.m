@@ -105,9 +105,10 @@
     [self handleFailure:info];
 }
 
-- (void)didFailUploadingImageWithInfo:(NSDictionary *)info{
+- (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
     [self handleFailure:info];
 }
+
 
 - (void)handleFailure:(NSDictionary *)info{
     dispatch_main_async_safe((^{

@@ -151,24 +151,20 @@
     FetchCenter *fc = [[FetchCenter alloc] init];
     fc.delegate = self;
     [fc uploadToCreatePlan:self.plan];
-    self.backButton.enabled = NO;
+//    self.backButton.enabled = NO;
    
 }
 
 - (void)didFinishUploadingPlan:(Plan *)plan{
     dispatch_main_async_safe(^{
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
-        self.backButton.enabled = YES;
+//        self.backButton.enabled = YES;
         [self performSegueWithIdentifier:@"doneWirtingAPost" sender:plan];
     });
 }
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
     dispatch_main_async_safe((^{
-        //update navigation item
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
-        self.backButton.enabled = YES;
-        
         //show alerts
         [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
                                     message:[NSString stringWithFormat:@"%@",info[@"msg"]]
@@ -181,6 +177,11 @@
             Plan *plan = (Plan *)managedObject;
             [plan deleteSelf];
         }
+        
+        //update navigation item
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
+//        self.backButton.enabled = YES;
+
     }));
 
 }

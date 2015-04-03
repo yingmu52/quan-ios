@@ -41,14 +41,6 @@
     return [formatter stringFromDate:date];
 }
 
-
-+ (BOOL)hasActiveInternetConnection
-{
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    return reachability.currentReachabilityStatus != NotReachable;
-}
-
-
 + (UIImagePickerController *)showCamera:(id<UINavigationControllerDelegate,UIImagePickerControllerDelegate>)delegate{
     
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {

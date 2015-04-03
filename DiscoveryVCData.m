@@ -93,7 +93,19 @@
 }
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    NSLog(@"fail in discovery");
+    [self handleFailure:info];
+}
+
+- (void)handleFailure:(NSDictionary *)info{
+    dispatch_main_async_safe((^{
+        self.navigationItem.rightBarButtonItem = nil;
+        [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
+                                    message:[NSString stringWithFormat:@"%@",info[@"msg"]]
+                                   delegate:self
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+    }));
+    
 }
 
 @end

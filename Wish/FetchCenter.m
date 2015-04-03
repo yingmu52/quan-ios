@@ -374,8 +374,23 @@ typedef enum{
     return [array componentsJoinedByString:@"&"];
 }
 
+
+
+- (BOOL)hasActiveInternetConnection
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    return reachability.currentReachabilityStatus != NotReachable;
+}
+
+
+
 - (void)getRequest:(NSString *)baseURL parameter:(NSDictionary *)dict operation:(FetchCenterGetOp)op entity:(id)obj{
     
+    //check internet connection
+    if (![self hasActiveInternetConnection]){
+        [self.delegate didFailSendingRequestWithInfo:@{@"ret":@"网络故障",@"msg":@"请检查网络连接"} entity:obj];
+        return;
+    }
     //base url with version
     baseURL = [baseURL stringByAppendingString:@"?"];
     baseURL = [self versionForBaseURL:baseURL operation:op];
@@ -411,6 +426,13 @@ typedef enum{
 }
 
 - (void)postImageWithOperation:(id)obj postOp:(FetchCenterPostOp)postOp{ //obj :NSManagedObject or UIimage
+    
+    //chekc internet
+    if (![self hasActiveInternetConnection]){
+        [self.delegate didFailUploadingImageWithInfo:@{@"ret":@"网络故障",@"msg":@"请检查网络连接"} entity:obj];
+        return;
+    }
+
     NSString *rqtUploadImage = [NSString stringWithFormat:@"%@%@%@?",self.baseUrl,PIC,UPLOAD_IMAGE];
     rqtUploadImage = [self versionForBaseURL:rqtUploadImage operation:-1];
     
@@ -448,6 +470,8 @@ typedef enum{
     [uploadTask resume];
     
 }
+
+
 
 #pragma mark - version control 
 
