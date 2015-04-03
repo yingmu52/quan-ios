@@ -58,12 +58,12 @@
 #pragma mark - collection view delegate & data soucce
 - (void)configureCell:(DiscoveryCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     Plan *plan = self.plans[indexPath.section * 4 + indexPath.item];
-    cell.discoveryTitleLabel.text = plan.planTitle;
+
     [cell.discoveryImageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:plan.backgroundNum]
                                placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-
+    cell.discoveryTitleLabel.text = plan.planTitle;
+    cell.discoveryByUserLabel.text = [NSString stringWithFormat:@"by %@",plan.owner.ownerName];
     cell.discoveryFollowerCountLabel.text = [NSString stringWithFormat:@"%@ 关注",plan.followCount];
-    
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {

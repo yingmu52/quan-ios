@@ -339,9 +339,17 @@ typedef enum{
         case FetchCenterGetOpDiscoverPlans:{
             //stored the lastet
             NSMutableArray *plans = [[NSMutableArray alloc] init];
-            for (NSDictionary *planInfo in json[@"data"]){
-                [plans addObject:[Plan updatePlanFromServer:planInfo]];
+            NSArray *planList = [json valueForKeyPath:@"data.planList"];
+            NSDictionary *manList = [json valueForKeyPath:@"data.manList"];
+            if (planList && manList){
+                for (NSDictionary *planInfo in planList){
+                    Plan *plan = [Plan updatePlanFromServer:planInfo];
+                    plan.owner = [Owner updateOwnerFromServer:[manList valueForKey:plan.ownerId]];
+                    [plans addObject:plan];
+                
+                }
             }
+            [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
             [self.delegate didfinishFetchingDiscovery:plans];
         }
             break;

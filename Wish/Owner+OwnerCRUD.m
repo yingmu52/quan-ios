@@ -31,9 +31,9 @@
     owner.headUrl = dict[@"headUrl"];
     owner.ownerId = dict[@"id"];
     owner.ownerName = dict[@"name"];
-    if ([context save:nil]) {
-        NSLog(@"updated owner info");
-    }
+//    if ([context save:nil]) {
+//        NSLog(@"updated owner info");
+//    }
     return owner;
 }
 @end
