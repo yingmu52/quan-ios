@@ -44,7 +44,7 @@
 
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event{
     if (motion == UIEventSubtypeMotionShake) {
-        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"选择环境，红为内网，蓝为外网"
+        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"选择环境，红为开发环境，蓝为正式环境"
                                                            delegate:self
                                                   cancelButtonTitle:nil
                                              destructiveButtonTitle:INNER_NETWORK_URL
@@ -94,6 +94,7 @@
 }
 
 #pragma mark - Functionality
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 2){

@@ -43,6 +43,8 @@
 
 #define OTHER @"other/"
 #define CHECK_NEW_VERSION @"splan_other_new_version.php"
+#define FEED_BACK @"splan_other_support_set.php"
+
 
 #define DISCOVER @"find/"
 #define GET_DISCOVER_LIST @"splan_find_planlist.php"
@@ -63,7 +65,8 @@ typedef enum{
     FetchCenterGetOpUpdatePersonalInfo,
     FetchCenterGetOpDiscoverPlans,
     FetchCenterGetOpLikeAFeed,
-    FetchCenterGetOpUnLikeAFeed
+    FetchCenterGetOpUnLikeAFeed,
+    FetchCenterGetOpFeedBack
 }FetchCenterGetOp;
 
 typedef enum{
@@ -125,6 +128,18 @@ typedef enum{
 
 #pragma mark - Login&out & update personal info
 
+- (void)sendFeedback:(NSString *)title content:(NSString *)content{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,OTHER,FEED_BACK];
+    NSString *newTitle = [title stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *newContent = [content stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *moreInfo = [[[Reachability reachabilityForInternetConnection] currentReachabilityString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [self getRequest:rqtStr
+           parameter:@{@"title":newTitle,
+                       @"content":newContent,
+                       @"moreInfo":moreInfo}
+           operation:FetchCenterGetOpFeedBack
+              entity:nil];
+}
 - (void)checkVersion{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,OTHER,CHECK_NEW_VERSION];
     [self getRequest:rqtStr
@@ -339,6 +354,9 @@ typedef enum{
             Feed *feed = (Feed *)obj;
             NSLog(@"unliked feed ID %@",feed.feedId);
         }
+            break;
+        case FetchCenterGetOpFeedBack:
+            [self.delegate didFinishSendingFeedBack];
             break;
         default:
             break;

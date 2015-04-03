@@ -38,7 +38,7 @@
         [window insertSubview:secondVCView aboveSubview:firstVCView];
         
         // Animate the transition.
-        [UIView animateWithDuration:0. animations:^{
+        [UIView animateWithDuration:0.2 animations:^{
             firstVCView.frame = CGRectOffset(firstVCView.frame,screenHeight,0.0f);
             secondVCView.frame = CGRectOffset(secondVCView.frame,screenHeight,0.0f);
 

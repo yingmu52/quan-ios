@@ -29,6 +29,8 @@
 - (void)didFinishUploadingPictureForProfile:(NSDictionary *)info;
 - (void)didfinishFetchingDiscovery:(NSArray *)plans;
 - (void)didFinishUpdatingPersonalInfo;
+- (void)didFinishSendingFeedBack;
+
 
 - (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
@@ -42,6 +44,8 @@
 
 - (void)getDiscoveryList;
 
+
+- (void)sendFeedback:(NSString *)title content:(NSString *)content;
 - (void)checkVersion;
 - (void)uploadNewProfilePicture:(UIImage *)picture;
 - (void)updatePersonalInfo:(NSString *)nickName gender:(NSString *)gender;

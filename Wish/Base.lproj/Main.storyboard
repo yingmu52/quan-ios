@@ -3459,6 +3459,115 @@
             </objects>
             <point key="canvasLocation" x="-2706" y="780"/>
         </scene>
+        <!--Feedback View Controller-->
+        <scene sceneID="Q1I-NJ-5oY">
+            <objects>
+                <viewController id="kcp-Id-Hzn" customClass="FeedbackViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="M8q-9B-Vl1"/>
+                        <viewControllerLayoutGuide type="bottom" id="Vjh-Nn-OTW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8kK-W4-bZj">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dab-RX-QlN">
+                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="dab-RX-QlN" secondAttribute="height" multiplier="8:1" id="NFx-mn-vqe"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="NFx-mn-vqe"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="NFx-mn-vqe"/>
+                                    </mask>
+                                </variation>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WPO-eX-BM0">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="WPO-eX-BM0" secondAttribute="height" multiplier="184:100" id="Lup-Rv-5lg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Lup-Rv-5lg"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="Lup-Rv-5lg"/>
+                                    </mask>
+                                </variation>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.85098039219999999" green="0.87450980389999999" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="WPO-eX-BM0" firstAttribute="leading" secondItem="dab-RX-QlN" secondAttribute="leading" id="1l5-Uj-FZy"/>
+                            <constraint firstItem="WPO-eX-BM0" firstAttribute="width" secondItem="dab-RX-QlN" secondAttribute="width" id="2da-a6-iln"/>
+                            <constraint firstItem="dab-RX-QlN" firstAttribute="leading" secondItem="8kK-W4-bZj" secondAttribute="leadingMargin" id="5ma-OP-5kY"/>
+                            <constraint firstItem="WPO-eX-BM0" firstAttribute="trailing" secondItem="dab-RX-QlN" secondAttribute="trailing" id="7m6-lL-UjF"/>
+                            <constraint firstItem="WPO-eX-BM0" firstAttribute="centerX" secondItem="dab-RX-QlN" secondAttribute="centerX" id="Bmw-2S-FLB"/>
+                            <constraint firstItem="dab-RX-QlN" firstAttribute="trailing" secondItem="8kK-W4-bZj" secondAttribute="trailingMargin" id="GZs-tS-rnr"/>
+                            <constraint firstItem="WPO-eX-BM0" firstAttribute="top" secondItem="dab-RX-QlN" secondAttribute="bottom" constant="8" id="QcX-Tf-VGT"/>
+                            <constraint firstAttribute="centerX" secondItem="dab-RX-QlN" secondAttribute="centerX" id="cJM-re-FMe"/>
+                            <constraint firstItem="WPO-eX-BM0" firstAttribute="trailing" secondItem="dab-RX-QlN" secondAttribute="trailing" id="ijd-ME-qNp"/>
+                            <constraint firstItem="dab-RX-QlN" firstAttribute="top" secondItem="M8q-9B-Vl1" secondAttribute="bottom" constant="19" id="oEz-km-J75"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="dab-RX-QlN"/>
+                                <exclude reference="WPO-eX-BM0"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="5ma-OP-5kY"/>
+                                <exclude reference="GZs-tS-rnr"/>
+                                <exclude reference="cJM-re-FMe"/>
+                                <exclude reference="oEz-km-J75"/>
+                                <exclude reference="1l5-Uj-FZy"/>
+                                <exclude reference="2da-a6-iln"/>
+                                <exclude reference="7m6-lL-UjF"/>
+                                <exclude reference="Bmw-2S-FLB"/>
+                                <exclude reference="QcX-Tf-VGT"/>
+                                <exclude reference="ijd-ME-qNp"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="dab-RX-QlN"/>
+                                <include reference="WPO-eX-BM0"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="5ma-OP-5kY"/>
+                                <include reference="GZs-tS-rnr"/>
+                                <include reference="cJM-re-FMe"/>
+                                <include reference="oEz-km-J75"/>
+                                <exclude reference="1l5-Uj-FZy"/>
+                                <include reference="2da-a6-iln"/>
+                                <exclude reference="7m6-lL-UjF"/>
+                                <include reference="Bmw-2S-FLB"/>
+                                <include reference="QcX-Tf-VGT"/>
+                                <exclude reference="ijd-ME-qNp"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="textField" destination="dab-RX-QlN" id="iXP-Xr-Iu5"/>
+                        <outlet property="textView" destination="WPO-eX-BM0" id="TjP-C8-GTF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q0N-5Z-lB6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3511.5" y="2206.5"/>
+        </scene>
         <!--Setting View Controller-->
         <scene sceneID="p9F-bV-MOz">
             <objects>
@@ -3773,6 +3882,9 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.96470588239999999" green="0.98039215690000003" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                                        <connections>
+                                            <segue destination="kcp-Id-Hzn" kind="show" id="uj8-0k-sVO"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="70" id="vRQ-tc-MSz">
                                         <autoresizingMask key="autoresizingMask"/>
