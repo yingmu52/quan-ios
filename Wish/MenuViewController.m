@@ -116,10 +116,11 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == MenuSectionLogin && ![User isUserLogin]){
+        [self login];
+    }
+
     if ([User isUserLogin]) {
-        if (indexPath.section == MenuSectionLogin){
-            [self login];
-        }
         if (indexPath.section == MenuSectionMid) {
             NSString *identifier;
             switch (indexPath.row) {
