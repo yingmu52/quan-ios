@@ -22,7 +22,7 @@
 #import "PopupView.h"
 #import "User.h"
 #import "SDWebImageCompat.h"
-#import "TWPhotoPickerController.h"
+#import "ImagePicker.h"
 const NSUInteger maxCardNum = 10;
 
 @interface HomeViewController ()
@@ -32,7 +32,8 @@ UINavigationControllerDelegate,
 UIGestureRecognizerDelegate,
 PopupViewDelegate,
 HomeCardViewDelegate,
-UIActionSheetDelegate>
+UIActionSheetDelegate,
+ImagePickerDelegate>
 
 
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
@@ -154,43 +155,16 @@ UIActionSheetDelegate>
 }
 
 #pragma mark - Camera Util
-#define take_photo @"拍照"
-#define choose_album @"从手机相册选择"
 - (void)didPressCameraOnCard:(HomeCardView *)cardView{
     if (self.fetchedRC.fetchedObjects.count) {
         self.currentPlan = cardView.plan;
-        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:take_photo,choose_album, nil];
-        [sheet showInView:self.view];
+        [ImagePicker startPickingImageFromLocalSourceFor:self];
     }
 
 }
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:take_photo]) {
-        UIImagePickerController *controller = [SystemUtil showCamera:self];
-        [self presentViewController:controller animated:YES completion:nil];
-    }else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:choose_album]) {
-        TWPhotoPickerController *photoPicker = [[TWPhotoPickerController alloc] init];
-        photoPicker.cropBlock = ^(UIImage *image) {
-            //do something
-            [self performSegueWithIdentifier:@"ShowPostFeedFromHome" sender:[UIImage imageWithData:UIImageJPEGRepresentation(image, 0.1)]];
-        };
-        [self presentViewController:photoPicker animated:YES completion:nil];
-    }else {
-        self.currentPlan = nil;
-    }
-    
+- (void)didFinishPickingImage:(UIImage *)image{
+    [self performSegueWithIdentifier:@"ShowPostFeedFromHome" sender:image];
 }
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    [self dismissViewControllerAnimated:NO completion:^{
-        UIImage *capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage];
-        //NSLog(@"%@",NSStringFromCGSize(editedImage.size));
-        [self performSegueWithIdentifier:@"ShowPostFeedFromHome" sender:[UIImage imageWithData:UIImageJPEGRepresentation(capturedImage, 0.1)]];
-    }];
-}
-
 
 #pragma mark -
 

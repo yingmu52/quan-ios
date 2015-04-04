@@ -14,7 +14,8 @@
 #import "FetchCenter.h"
 #import "User.h"
 #import "SDWebImageCompat.h"
-@interface ProfileViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,FetchCenterDelegate,UITextFieldDelegate>
+#import "ImagePicker.h"
+@interface ProfileViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,FetchCenterDelegate,UITextFieldDelegate,ImagePickerDelegate>
 @property (nonatomic,weak) IBOutlet UIView *profileBackground;
 @property (nonatomic,weak) IBOutlet UIImageView *profilePicture;
 @property (nonatomic,weak) IBOutlet UITextField *nickNameTextField;
@@ -166,23 +167,13 @@
 
 #pragma mark - upload profile pic
 - (IBAction)tapOnCamera:(UIButton *)sender{
-    UIImagePickerController *controller = [SystemUtil showCamera:self];
-    if (controller) {
-        [self presentViewController:controller animated:YES completion:nil];
-    }
+    [ImagePicker startPickingImageFromLocalSourceFor:self];
 }
 
-
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    [self dismissViewControllerAnimated:NO completion:^{
-        UIImage *capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage];
-        [self showSpinniner];
-        [self.fetchCenter uploadNewProfilePicture:capturedImage];
-    }];
+- (void)didFinishPickingImage:(UIImage *)image{
+    [self showSpinniner];
+    [self.fetchCenter uploadNewProfilePicture:image];
 }
-
 
 #pragma mark - fetch center delegate 
 

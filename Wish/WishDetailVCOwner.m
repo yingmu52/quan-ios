@@ -9,7 +9,8 @@
 #import "WishDetailVCOwner.h"
 #import "PostFeedViewController.h"
 #import "EditWishViewController.h"
-@interface WishDetailVCOwner () <UIImagePickerControllerDelegate,UIGestureRecognizerDelegate,UINavigationControllerDelegate>
+#import "ImagePicker.h"
+@interface WishDetailVCOwner () <UIImagePickerControllerDelegate,UIGestureRecognizerDelegate,UINavigationControllerDelegate,ImagePickerDelegate>
 @property (nonatomic) BOOL shouldShowSideWidgets;
 @property (nonatomic,strong) UIButton *logoButton;
 @property (nonatomic,strong) UILabel *labelUnderLogo;
@@ -190,13 +191,12 @@
 
 }
 - (void)showCamera{
-    UIImagePickerController *controller = [SystemUtil showCamera:self];
-    if (controller) {
-        [self presentViewController:controller
-                           animated:YES
-                         completion:nil];
-    }
+    [ImagePicker startPickingImageFromLocalSourceFor:self];
 }
+- (void)didFinishPickingImage:(UIImage *)image{
+    [self performSegueWithIdentifier:@"showPostFeed" sender:image];
+}
+
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -206,7 +206,6 @@
         //create Task
         if (capturedImage) {
 //            Feed *feed = [Feed createFeedWithImage:capturedImage inPlan:self.plan];
-            [self performSegueWithIdentifier:@"showPostFeed" sender:capturedImage];
         }
     }];
 }

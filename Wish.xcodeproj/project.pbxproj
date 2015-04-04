@@ -54,6 +54,11 @@
 		AE95A9F41ACFA7F8007465D5 /* TWImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE95A9E91ACFA7F8007465D5 /* TWImageScrollView.m */; };
 		AE95A9F51ACFA7F8007465D5 /* TWPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE95A9EB1ACFA7F8007465D5 /* TWPhotoCollectionViewCell.m */; };
 		AE95A9F61ACFA7F8007465D5 /* TWPhotoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE95A9ED1ACFA7F8007465D5 /* TWPhotoPickerController.m */; };
+		AE95A9F91ACFBCA9007465D5 /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = AE95A9F81ACFBCA9007465D5 /* UIActionSheet+Blocks.m */; };
+		AE95A9FC1ACFC26A007465D5 /* ImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = AE95A9FB1ACFC26A007465D5 /* ImagePicker.m */; };
+		AE95A9FD1ACFC26A007465D5 /* ImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = AE95A9FB1ACFC26A007465D5 /* ImagePicker.m */; };
+		AE95AABD1ACFD428007465D5 /* UIImagePickerController+DelegateBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = AE95AABC1ACFD428007465D5 /* UIImagePickerController+DelegateBlocks.m */; };
+		AE95AABE1ACFD428007465D5 /* UIImagePickerController+DelegateBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = AE95AABC1ACFD428007465D5 /* UIImagePickerController+DelegateBlocks.m */; };
 		AE9861FA1AC33C04005544B9 /* EditWishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9861F91AC33C04005544B9 /* EditWishViewController.m */; };
 		AE9861FB1AC33C04005544B9 /* EditWishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9861F91AC33C04005544B9 /* EditWishViewController.m */; };
 		AE9861FD1AC3F477005544B9 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = AE9861FC1AC3F476005544B9 /* placeholder.png */; };
@@ -267,6 +272,12 @@
 		AE95A9EB1ACFA7F8007465D5 /* TWPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWPhotoCollectionViewCell.m; sourceTree = "<group>"; };
 		AE95A9EC1ACFA7F8007465D5 /* TWPhotoPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWPhotoPickerController.h; sourceTree = "<group>"; };
 		AE95A9ED1ACFA7F8007465D5 /* TWPhotoPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWPhotoPickerController.m; sourceTree = "<group>"; };
+		AE95A9F71ACFBCA9007465D5 /* UIActionSheet+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIActionSheet+Blocks.h"; path = "TWPhotoPicker/UIActionSheet+Blocks.h"; sourceTree = "<group>"; };
+		AE95A9F81ACFBCA9007465D5 /* UIActionSheet+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIActionSheet+Blocks.m"; path = "TWPhotoPicker/UIActionSheet+Blocks.m"; sourceTree = "<group>"; };
+		AE95A9FA1ACFC26A007465D5 /* ImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePicker.h; sourceTree = "<group>"; };
+		AE95A9FB1ACFC26A007465D5 /* ImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePicker.m; sourceTree = "<group>"; };
+		AE95AABB1ACFD428007465D5 /* UIImagePickerController+DelegateBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImagePickerController+DelegateBlocks.h"; sourceTree = "<group>"; };
+		AE95AABC1ACFD428007465D5 /* UIImagePickerController+DelegateBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImagePickerController+DelegateBlocks.m"; sourceTree = "<group>"; };
 		AE9861F81AC33C04005544B9 /* EditWishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditWishViewController.h; sourceTree = "<group>"; };
 		AE9861F91AC33C04005544B9 /* EditWishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditWishViewController.m; sourceTree = "<group>"; };
 		AE9861FC1AC3F476005544B9 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
@@ -502,6 +513,8 @@
 		AE01723C1A65CD8E0014266F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AE95A9FA1ACFC26A007465D5 /* ImagePicker.h */,
+				AE95A9FB1ACFC26A007465D5 /* ImagePicker.m */,
 				AEC5B9A81AB7EB40008ECB92 /* User.h */,
 				AEC5B9A91AB7EB40008ECB92 /* User.m */,
 				AEE075361A744A770015155B /* SystemUtil.h */,
@@ -599,6 +612,17 @@
 				AE95A9E71ACFA7F8007465D5 /* straighten-grid@3x.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		AE95AA5C1ACFD181007465D5 /* Blocks */ = {
+			isa = PBXGroup;
+			children = (
+				AE95AABB1ACFD428007465D5 /* UIImagePickerController+DelegateBlocks.h */,
+				AE95AABC1ACFD428007465D5 /* UIImagePickerController+DelegateBlocks.m */,
+				AE95A9F71ACFBCA9007465D5 /* UIActionSheet+Blocks.h */,
+				AE95A9F81ACFBCA9007465D5 /* UIActionSheet+Blocks.m */,
+			);
+			name = Blocks;
 			sourceTree = "<group>";
 		};
 		AEBD13DA1A93E78400F5F0D3 /* Discovery */ = {
@@ -826,6 +850,7 @@
 		AEF7F2661A686E8A0022410B /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				AE95AA5C1ACFD181007465D5 /* Blocks */,
 				AE95A9E01ACFA7F7007465D5 /* TWPhotoPicker */,
 				AED4CB181AC683AF00EE2DA4 /* GCPTextView */,
 				AEC0E1EB1AC6733D00563F7C /* TextView */,
@@ -1060,6 +1085,7 @@
 				AEFA5FE11AAFCAD9001CA0C8 /* ALDBlurImageProcessor.m in Sources */,
 				AE0172451A65CD8E0014266F /* Wish.xcdatamodeld in Sources */,
 				AE0172421A65CD8E0014266F /* AppDelegate.m in Sources */,
+				AE95AABD1ACFD428007465D5 /* UIImagePickerController+DelegateBlocks.m in Sources */,
 				AEF7F2AB1A6884950022410B /* CustomBarItem.m in Sources */,
 				AEE4A6CC1A9684D500ABF946 /* AchieveViewController.m in Sources */,
 				AE2A8DDF1ACA116D00029D52 /* DiscoveryVCData.m in Sources */,
@@ -1077,6 +1103,7 @@
 				AEFB3AC01ACCAD970046CBAB /* Feed.m in Sources */,
 				AEF7F2811A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				AEF7F2891A686E8A0022410B /* ECSlidingViewController.m in Sources */,
+				AE95A9F91ACFBCA9007465D5 /* UIActionSheet+Blocks.m in Sources */,
 				AEF7F28B1A686E8B0022410B /* UIViewController+ECSlidingViewController.m in Sources */,
 				AECE2BF21AA0521600B1C58E /* UIButton+WebCache.m in Sources */,
 				AEFA5FDA1AAFBA41001CA0C8 /* NZCircularImageView.m in Sources */,
@@ -1114,6 +1141,7 @@
 				AED5BC631ABE3CB600EFF398 /* SettingViewController.m in Sources */,
 				AEC5B9AA1AB7EB40008ECB92 /* User.m in Sources */,
 				AEE4A6D81A972FAA00ABF946 /* FollowingTVCData.m in Sources */,
+				AE95A9FC1ACFC26A007465D5 /* ImagePicker.m in Sources */,
 				AECE2BEB1AA0521600B1C58E /* SDImageCache.m in Sources */,
 				AECE2BF71AA0521600B1C58E /* UIImageView+WebCache.m in Sources */,
 				AE479EAE1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */,
@@ -1184,9 +1212,11 @@
 				AEF7F2AE1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */,
 				AEEC6C651A6DB0010021B7E4 /* NSLayoutConstraint+PureLayout.m in Sources */,
 				AE596EB91A953D4800AF1F44 /* DiscoveryBannerCell.m in Sources */,
+				AE95AABE1ACFD428007465D5 /* UIImagePickerController+DelegateBlocks.m in Sources */,
 				AEEC6C691A6DB0F10021B7E4 /* FirstTableViewController.m in Sources */,
 				AED4CB271AC7604E00EE2DA4 /* SGSStaggeredFlowLayout.m in Sources */,
 				AEF7F2881A686E8A0022410B /* ECSlidingSegue.m in Sources */,
+				AE95A9FD1ACFC26A007465D5 /* ImagePicker.m in Sources */,
 				AE9A3AEC1A9B1DB000F0588F /* AchieveVCData.m in Sources */,
 				AED8D7CB1A9BE2490035EDE5 /* FollowingImageCell.m in Sources */,
 				AEC0E1C61AC64F9600563F7C /* WishDetailVCOwnerAchieved.m in Sources */,
