@@ -45,6 +45,15 @@
 		AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE72E9541A66F2AA0046B38D /* MenuCell.m */; };
 		AE767E7F1ACE35A600F35137 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE767E7E1ACE35A600F35137 /* FeedbackViewController.m */; };
 		AE767E801ACE35A600F35137 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE767E7E1ACE35A600F35137 /* FeedbackViewController.m */; };
+		AE95A9EE1ACFA7F8007465D5 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE95A9E21ACFA7F8007465D5 /* back@2x.png */; };
+		AE95A9EF1ACFA7F8007465D5 /* back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE95A9E31ACFA7F8007465D5 /* back@3x.png */; };
+		AE95A9F01ACFA7F8007465D5 /* cameraroll-picker-grip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE95A9E41ACFA7F8007465D5 /* cameraroll-picker-grip@2x.png */; };
+		AE95A9F11ACFA7F8007465D5 /* cameraroll-picker-grip@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE95A9E51ACFA7F8007465D5 /* cameraroll-picker-grip@3x.png */; };
+		AE95A9F21ACFA7F8007465D5 /* straighten-grid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE95A9E61ACFA7F8007465D5 /* straighten-grid@2x.png */; };
+		AE95A9F31ACFA7F8007465D5 /* straighten-grid@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE95A9E71ACFA7F8007465D5 /* straighten-grid@3x.png */; };
+		AE95A9F41ACFA7F8007465D5 /* TWImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE95A9E91ACFA7F8007465D5 /* TWImageScrollView.m */; };
+		AE95A9F51ACFA7F8007465D5 /* TWPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE95A9EB1ACFA7F8007465D5 /* TWPhotoCollectionViewCell.m */; };
+		AE95A9F61ACFA7F8007465D5 /* TWPhotoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE95A9ED1ACFA7F8007465D5 /* TWPhotoPickerController.m */; };
 		AE9861FA1AC33C04005544B9 /* EditWishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9861F91AC33C04005544B9 /* EditWishViewController.m */; };
 		AE9861FB1AC33C04005544B9 /* EditWishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9861F91AC33C04005544B9 /* EditWishViewController.m */; };
 		AE9861FD1AC3F477005544B9 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = AE9861FC1AC3F476005544B9 /* placeholder.png */; };
@@ -246,6 +255,18 @@
 		AE72E9541A66F2AA0046B38D /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		AE767E7D1ACE35A600F35137 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
 		AE767E7E1ACE35A600F35137 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
+		AE95A9E21ACFA7F8007465D5 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
+		AE95A9E31ACFA7F8007465D5 /* back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@3x.png"; sourceTree = "<group>"; };
+		AE95A9E41ACFA7F8007465D5 /* cameraroll-picker-grip@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cameraroll-picker-grip@2x.png"; sourceTree = "<group>"; };
+		AE95A9E51ACFA7F8007465D5 /* cameraroll-picker-grip@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cameraroll-picker-grip@3x.png"; sourceTree = "<group>"; };
+		AE95A9E61ACFA7F8007465D5 /* straighten-grid@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "straighten-grid@2x.png"; sourceTree = "<group>"; };
+		AE95A9E71ACFA7F8007465D5 /* straighten-grid@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "straighten-grid@3x.png"; sourceTree = "<group>"; };
+		AE95A9E81ACFA7F8007465D5 /* TWImageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWImageScrollView.h; sourceTree = "<group>"; };
+		AE95A9E91ACFA7F8007465D5 /* TWImageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWImageScrollView.m; sourceTree = "<group>"; };
+		AE95A9EA1ACFA7F8007465D5 /* TWPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWPhotoCollectionViewCell.h; sourceTree = "<group>"; };
+		AE95A9EB1ACFA7F8007465D5 /* TWPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWPhotoCollectionViewCell.m; sourceTree = "<group>"; };
+		AE95A9EC1ACFA7F8007465D5 /* TWPhotoPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWPhotoPickerController.h; sourceTree = "<group>"; };
+		AE95A9ED1ACFA7F8007465D5 /* TWPhotoPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWPhotoPickerController.m; sourceTree = "<group>"; };
 		AE9861F81AC33C04005544B9 /* EditWishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditWishViewController.h; sourceTree = "<group>"; };
 		AE9861F91AC33C04005544B9 /* EditWishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditWishViewController.m; sourceTree = "<group>"; };
 		AE9861FC1AC3F476005544B9 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
@@ -553,6 +574,33 @@
 			name = "Database&Networking";
 			sourceTree = "<group>";
 		};
+		AE95A9E01ACFA7F7007465D5 /* TWPhotoPicker */ = {
+			isa = PBXGroup;
+			children = (
+				AE95A9E11ACFA7F7007465D5 /* Resources */,
+				AE95A9E81ACFA7F8007465D5 /* TWImageScrollView.h */,
+				AE95A9E91ACFA7F8007465D5 /* TWImageScrollView.m */,
+				AE95A9EA1ACFA7F8007465D5 /* TWPhotoCollectionViewCell.h */,
+				AE95A9EB1ACFA7F8007465D5 /* TWPhotoCollectionViewCell.m */,
+				AE95A9EC1ACFA7F8007465D5 /* TWPhotoPickerController.h */,
+				AE95A9ED1ACFA7F8007465D5 /* TWPhotoPickerController.m */,
+			);
+			path = TWPhotoPicker;
+			sourceTree = "<group>";
+		};
+		AE95A9E11ACFA7F7007465D5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AE95A9E21ACFA7F8007465D5 /* back@2x.png */,
+				AE95A9E31ACFA7F8007465D5 /* back@3x.png */,
+				AE95A9E41ACFA7F8007465D5 /* cameraroll-picker-grip@2x.png */,
+				AE95A9E51ACFA7F8007465D5 /* cameraroll-picker-grip@3x.png */,
+				AE95A9E61ACFA7F8007465D5 /* straighten-grid@2x.png */,
+				AE95A9E71ACFA7F8007465D5 /* straighten-grid@3x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		AEBD13DA1A93E78400F5F0D3 /* Discovery */ = {
 			isa = PBXGroup;
 			children = (
@@ -778,6 +826,7 @@
 		AEF7F2661A686E8A0022410B /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				AE95A9E01ACFA7F7007465D5 /* TWPhotoPicker */,
 				AED4CB181AC683AF00EE2DA4 /* GCPTextView */,
 				AEC0E1EB1AC6733D00563F7C /* TextView */,
 				AEFA5FD71AAFBA41001CA0C8 /* NZCircularImageView */,
@@ -960,17 +1009,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE95A9F31ACFA7F8007465D5 /* straighten-grid@3x.png in Resources */,
 				AE01724D1A65CD8E0014266F /* Images.xcassets in Resources */,
+				AE95A9EF1ACFA7F8007465D5 /* back@3x.png in Resources */,
 				AE30EE6F1A6E1E520044740D /* snow.jpg in Resources */,
 				AEF7F2A01A6875360022410B /* Main.storyboard in Resources */,
+				AE95A9F01ACFA7F8007465D5 /* cameraroll-picker-grip@2x.png in Resources */,
 				AE9861FD1AC3F477005544B9 /* placeholder.png in Resources */,
 				AE2A8DE51ACA700100029D52 /* WishDetailCell.xib in Resources */,
+				AE95A9EE1ACFA7F8007465D5 /* back@2x.png in Resources */,
 				AE6E7A0C1AB0DF1F0023B9C7 /* PopupView.xib in Resources */,
 				AEDD06511AABF7AE00379C17 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
+				AE95A9F11ACFA7F8007465D5 /* cameraroll-picker-grip@3x.png in Resources */,
 				AEEC6C6F1A6DB0FC0021B7E4 /* HeaderView.xib in Resources */,
 				AEC8CE911AAF8823005364F8 /* StationView.xib in Resources */,
 				AED71BEF1A95879000F2DAF4 /* DiscoveryFooterView.xib in Resources */,
 				AE52FA551A8D55CA003FF725 /* KeyboardAcessoryView.xib in Resources */,
+				AE95A9F21ACFA7F8007465D5 /* straighten-grid@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1017,6 +1072,7 @@
 				AED71BEC1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m in Sources */,
 				AEE075381A744A770015155B /* SystemUtil.m in Sources */,
 				AE0ADF191ABD78CC00692131 /* HomeCardViewController.m in Sources */,
+				AE95A9F41ACFA7F8007465D5 /* TWImageScrollView.m in Sources */,
 				AECE2BEA1AA0521600B1C58E /* NSData+ImageContentType.m in Sources */,
 				AEFB3AC01ACCAD970046CBAB /* Feed.m in Sources */,
 				AEF7F2811A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
@@ -1024,6 +1080,7 @@
 				AEF7F28B1A686E8B0022410B /* UIViewController+ECSlidingViewController.m in Sources */,
 				AECE2BF21AA0521600B1C58E /* UIButton+WebCache.m in Sources */,
 				AEFA5FDA1AAFBA41001CA0C8 /* NZCircularImageView.m in Sources */,
+				AE95A9F51ACFA7F8007465D5 /* TWPhotoCollectionViewCell.m in Sources */,
 				AEEC6C641A6DB0010021B7E4 /* NSLayoutConstraint+PureLayout.m in Sources */,
 				AEF7F2931A686FA30022410B /* Theme.m in Sources */,
 				AEF3F87F1AA4CFA6008C2300 /* WishDetailVCOwner.m in Sources */,
@@ -1075,6 +1132,7 @@
 				AE596EB81A953D4800AF1F44 /* DiscoveryBannerCell.m in Sources */,
 				AED4CB431AC79F3A00EE2DA4 /* ModalLeftToRightSegue.m in Sources */,
 				AEEC6C601A6DB0010021B7E4 /* ALView+PureLayout.m in Sources */,
+				AE95A9F61ACFA7F8007465D5 /* TWPhotoPickerController.m in Sources */,
 				AECE2BF01AA0521600B1C58E /* SDWebImageManager.m in Sources */,
 				AECE2BEE1AA0521600B1C58E /* SDWebImageDownloader.m in Sources */,
 				AED4CB261AC7604E00EE2DA4 /* SGSStaggeredFlowLayout.m in Sources */,

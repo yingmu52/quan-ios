@@ -22,7 +22,7 @@
 #import "PopupView.h"
 #import "User.h"
 #import "SDWebImageCompat.h"
-
+#import "TWPhotoPickerController.h"
 const NSUInteger maxCardNum = 10;
 
 @interface HomeViewController ()
@@ -31,7 +31,8 @@ UIImagePickerControllerDelegate,
 UINavigationControllerDelegate,
 UIGestureRecognizerDelegate,
 PopupViewDelegate,
-HomeCardViewDelegate>
+HomeCardViewDelegate,
+UIActionSheetDelegate>
 
 
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
@@ -46,13 +47,6 @@ HomeCardViewDelegate>
 @end
 
 @implementation HomeViewController
-
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    self.currentPlan = nil;
-}
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -160,25 +154,40 @@ HomeCardViewDelegate>
 }
 
 #pragma mark - Camera Util
+#define take_photo @"拍照"
+#define choose_album @"从手机相册选择"
 - (void)didPressCameraOnCard:(HomeCardView *)cardView{
     if (self.fetchedRC.fetchedObjects.count) {
-        UIImagePickerController *controller = [SystemUtil showCamera:self];
-        if (controller) {
-            [self presentViewController:controller animated:YES completion:^{
-                self.currentPlan = cardView.plan;
-            }];
-        }
+        self.currentPlan = cardView.plan;
+        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:take_photo,choose_album, nil];
+        [sheet showInView:self.view];
     }
 
 }
 
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:take_photo]) {
+        UIImagePickerController *controller = [SystemUtil showCamera:self];
+        [self presentViewController:controller animated:YES completion:nil];
+    }else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:choose_album]) {
+        TWPhotoPickerController *photoPicker = [[TWPhotoPickerController alloc] init];
+        photoPicker.cropBlock = ^(UIImage *image) {
+            //do something
+            [self performSegueWithIdentifier:@"ShowPostFeedFromHome" sender:[UIImage imageWithData:UIImageJPEGRepresentation(image, 0.1)]];
+        };
+        [self presentViewController:photoPicker animated:YES completion:nil];
+    }else {
+        self.currentPlan = nil;
+    }
+    
+}
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [self dismissViewControllerAnimated:NO completion:^{
         UIImage *capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage];
         //NSLog(@"%@",NSStringFromCGSize(editedImage.size));
-        [self performSegueWithIdentifier:@"ShowPostFeedFromHome" sender:capturedImage];
+        [self performSegueWithIdentifier:@"ShowPostFeedFromHome" sender:[UIImage imageWithData:UIImageJPEGRepresentation(capturedImage, 0.1)]];
     }];
 }
 
