@@ -17,14 +17,18 @@
 @implementation ImagePicker
 
 
-
-- (void)showCameraOn:(UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,ImagePickerDelegate>*)controller{
+- (void)showCameraOn:(UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,ImagePickerDelegate>*)controller type:(UIImagePickerControllerSourceType)type{
     UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
-    ipc.sourceType = UIImagePickerControllerSourceTypeCamera;
+    ipc.sourceType = type;
     ipc.allowsEditing = YES;
-    ipc.showsCameraControls = YES;
+    ipc.delegate = self;
+    
+    if (type == UIImagePickerControllerSourceTypeCamera) {
+        ipc.showsCameraControls = YES;
+    }
     [ipc useBlocksForDelegate]; // important !
     [ipc onDidFinishPickingMediaWithInfo:^(UIImagePickerController *picker, NSDictionary *info) {
+        [self hideStatusBar];
         [controller dismissViewControllerAnimated:YES completion:^{
             UIImage *capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage];
             UIImage *compressed = [UIImage imageWithData:UIImageJPEGRepresentation(capturedImage, 0.1)];
@@ -32,11 +36,30 @@
             [self.imagePickerDelegate didFinishPickingImage:compressed];
         }];
     }];
+    [ipc onDidCancel:^(UIImagePickerController *picker) {
+        [controller dismissViewControllerAnimated:YES completion:nil];
+        [self hideStatusBar];
+    }];
+    
+    [ipc onDidShowViewController:^(UINavigationController *navigationController, UIViewController *viewController, BOOL animated) {
+        [self hideStatusBar];
+    }];
     [controller presentViewController:ipc animated:YES completion:nil];
     
 }
 
 
+- (void)hideStatusBar{
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+}
+
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+}
+
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+}
 #define take_photo @"拍照"
 #define choose_album @"从手机相册选择"
 
@@ -50,15 +73,16 @@
                          ImagePicker *picker = [[ImagePicker alloc] init];
                          picker.imagePickerDelegate = controller;
         if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:take_photo]) {
-            [picker showCameraOn:controller];
+            [picker showCameraOn:controller type:UIImagePickerControllerSourceTypeCamera];
         }else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:choose_album]) {
-            TWPhotoPickerController *photoPicker = [[TWPhotoPickerController alloc] init];
-            photoPicker.cropBlock = ^(UIImage *image) {
-                //do something
-                UIImage *compressedImage = [UIImage imageWithData:UIImageJPEGRepresentation(image, 0.1)];
-                [picker.imagePickerDelegate didFinishPickingImage:compressedImage];
-            };
-            [controller presentViewController:photoPicker animated:YES completion:nil];
+            [picker showCameraOn:controller type:UIImagePickerControllerSourceTypePhotoLibrary];
+//            TWPhotoPickerController *photoPicker = [[TWPhotoPickerController alloc] init];
+//            photoPicker.cropBlock = ^(UIImage *image) {
+//                //do something
+//                UIImage *compressedImage = [UIImage imageWithData:UIImageJPEGRepresentation(image, 0.1)];
+//                [picker.imagePickerDelegate didFinishPickingImage:compressedImage];
+//            };
+//            [controller presentViewController:photoPicker animated:YES completion:nil];
         }}];
 }
 @end
