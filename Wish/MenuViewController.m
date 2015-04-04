@@ -25,18 +25,34 @@ typedef enum {
     MenuTableJourney,
     MenuTableDiscover,
     MenuTableFollow
-}MenuTable;
+}MenuMidSection;
+
+typedef enum {
+    MenuSectionLogin = 0,
+    MenuSectionMid,
+    MenuSectionLower
+}MenuSection;
+
 
 @interface MenuViewController () <TencentSessionDelegate,FetchCenterDelegate>
 @property (nonatomic) BOOL isLogin;
 @property (nonatomic,strong) TencentOAuth *tencentOAuth;
 @property (nonatomic,strong) APIResponse *apiResponse;
+
+@property (nonatomic,weak) IBOutlet UILabel *versionLabel;
 @end
+
 
 @implementation MenuViewController
 
+- (void)setVersionLabel:(UILabel *)versionLabel{
+    _versionLabel = versionLabel;
+    _versionLabel.text = @"Version 2.7.3";
+}
 - (IBAction)showSettingsView:(UIButton *)sender{
-    [self performSegueWithIdentifier:@"showSettingView" sender:nil];
+    if ([User isUserLogin]){
+        [self performSegueWithIdentifier:@"showSettingView" sender:nil];
+    }
 }
 
 - (IBAction)unwindToMenuViewController:(UIStoryboardSegue *)segue
@@ -57,11 +73,11 @@ typedef enum {
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat heightRef = tableView.frame.size.height;
-    if (indexPath.section == 0) {
+    if (indexPath.section == MenuSectionLogin) {
         return heightRef * 278 / 1136;
-    }else if (indexPath.section == 1){
+    }else if (indexPath.section == MenuSectionMid){
         return heightRef * 178 / 1136;
-    }else if (indexPath.section == 2){
+    }else if (indexPath.section == MenuSectionLower){
         return heightRef * 146/ 1136;
     }else{
         return 0;
@@ -71,7 +87,7 @@ typedef enum {
 
 - (MenuCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MenuCell *cell = (MenuCell *)[super tableView:tableView cellForRowAtIndexPath:indexPath];
-    if (indexPath.section == 0) {
+    if (indexPath.section == MenuSectionLogin) {
 
         if (![User isUserLogin]) {
             cell.menuImageView.image = [Theme menuLoginDefault];
@@ -85,28 +101,14 @@ typedef enum {
         }
     }
     
-    if (indexPath.section == 1 && indexPath.row == 2){
-        cell.hidden = ![User isUserLogin];
-    }
-    if (indexPath.section == 2) {
-//        if (![User isUserLogin]) {
-            //only setting
-        
-        if (![User isUserLogin]){
-            cell.hidden = YES;
-        }else{
-            cell.hidden = NO;
-            [cell hideMessageButton];
-        }
-        
-//        }else{
-//            [cell showMessageButton];
-//        }
-    }
-    
-    if (indexPath.section == 1 && indexPath.row == 3) {
+    if (indexPath.section == MenuSectionMid && indexPath.row == MenuTableFollow){
         cell.hidden = YES;
     }
+    if (indexPath.section == MenuSectionLower) {
+            //only setting
+        [cell hideMessageButton];
+    }
+
     return cell;
 
 }
@@ -114,28 +116,30 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0 && ![User isUserLogin]){
-        [self login];
-    }
-    if (indexPath.section == 1) {
-        NSString *identifier;
-        switch (indexPath.row) {
-            case MenuTableWishList:
-                identifier = @"showWishList";
-                break;
-            case MenuTableJourney:
-                identifier = @"ShowAcheivementList";
-                break;
-            case MenuTableFollow:
-                identifier = @"ShowFollowingFeed";
-                break;
-            case MenuTableDiscover:
-                identifier = @"ShowDiscoveryList";
-                break;
-            default:
-                break;
+    if ([User isUserLogin]) {
+        if (indexPath.section == MenuSectionLogin){
+            [self login];
         }
-        [self performSegueWithIdentifier:identifier sender:nil];
+        if (indexPath.section == MenuSectionMid) {
+            NSString *identifier;
+            switch (indexPath.row) {
+                case MenuTableWishList:
+                    identifier = @"showWishList";
+                    break;
+                case MenuTableJourney:
+                    identifier = @"ShowAcheivementList";
+                    break;
+                case MenuTableFollow:
+                    identifier = @"ShowFollowingFeed";
+                    break;
+                case MenuTableDiscover:
+                    identifier = @"ShowDiscoveryList";
+                    break;
+                default:
+                    break;
+            }
+            [self performSegueWithIdentifier:identifier sender:nil];
+        }
     }
 }
 

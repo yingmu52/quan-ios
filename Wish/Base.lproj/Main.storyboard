@@ -864,6 +864,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="400" height="1200"/>
                     <connections>
+                        <outlet property="versionLabel" destination="QLQ-Q1-JJm" id="8UC-hI-yWU"/>
                         <segue destination="81G-fy-O9t" kind="custom" identifier="showWishList" customClass="ECSlidingSegue" id="TSB-x1-1aq"/>
                         <segue destination="hMT-8j-PB2" kind="custom" identifier="ShowFollowingFeed" customClass="ECSlidingSegue" id="Dpd-CX-I1h"/>
                         <segue destination="qWQ-Vi-JtX" kind="custom" identifier="ShowDiscoveryList" customClass="ECSlidingSegue" id="EIs-hJ-8hx"/>
@@ -3468,6 +3469,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Vjh-Nn-OTW"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8kK-W4-bZj">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dab-RX-QlN">
