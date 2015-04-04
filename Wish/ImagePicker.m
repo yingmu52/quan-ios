@@ -39,6 +39,7 @@
     [ipc onDidCancel:^(UIImagePickerController *picker) {
         [controller dismissViewControllerAnimated:YES completion:nil];
         [self hideStatusBar];
+        [self.imagePickerDelegate didFailPickingImage];
     }];
     
     [ipc onDidShowViewController:^(UINavigationController *navigationController, UIViewController *viewController, BOOL animated) {
@@ -69,9 +70,10 @@
             cancelButtonTitle:@"取消"
        destructiveButtonTitle:nil
             otherButtonTitles:@[take_photo,choose_album]
-                     tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
-                         ImagePicker *picker = [[ImagePicker alloc] init];
-                         picker.imagePickerDelegate = controller;
+                     tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex)
+    {
+        ImagePicker *picker = [[ImagePicker alloc] init];
+        picker.imagePickerDelegate = controller;
         if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:take_photo]) {
             [picker showCameraOn:controller type:UIImagePickerControllerSourceTypeCamera];
         }else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:choose_album]) {
@@ -83,6 +85,9 @@
 //                [picker.imagePickerDelegate didFinishPickingImage:compressedImage];
 //            };
 //            [controller presentViewController:photoPicker animated:YES completion:nil];
-        }}];
+        }else{
+            [picker.imagePickerDelegate didFailPickingImage];
+        }
+    }];
 }
 @end

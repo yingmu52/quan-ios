@@ -191,22 +191,15 @@
 
 }
 - (void)showCamera{
+    self.cameraButton.hidden = YES;
     [ImagePicker startPickingImageFromLocalSourceFor:self];
 }
 - (void)didFinishPickingImage:(UIImage *)image{
+    self.cameraButton.hidden = NO;
     [self performSegueWithIdentifier:@"showPostFeed" sender:image];
 }
-
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    [self dismissViewControllerAnimated:YES completion:^{
-        UIImage *capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage]; // this line and next line is sequentally important
-        //        NSLog(@"%@",NSStringFromCGSize(editedImage.size));
-        //create Task
-        if (capturedImage) {
-//            Feed *feed = [Feed createFeedWithImage:capturedImage inPlan:self.plan];
-        }
-    }];
+- (void)didFailPickingImage{
+    self.cameraButton.hidden = NO;
 }
+
 @end
