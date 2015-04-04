@@ -46,7 +46,7 @@
     if (motion == UIEventSubtypeMotionShake) {
         UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"选择环境，红为开发环境，蓝为正式环境"
                                                            delegate:self
-                                                  cancelButtonTitle:nil
+                                                  cancelButtonTitle:@"取消"
                                              destructiveButtonTitle:INNER_NETWORK_URL
                                                   otherButtonTitles:OUTTER_NETWORK_URL, nil];
         [sheet showInView:self.view];
