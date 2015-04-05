@@ -40,6 +40,7 @@
 #define USER @"man/"
 #define GETUID @"splan_get_uid.php"
 #define UPDATE_USER_INFO @"splan_man_update.php"
+#define CREATE_USER_INFO @"splan_man_create.php"
 
 #define OTHER @"other/"
 #define CHECK_NEW_VERSION @"splan_other_new_version.php"
@@ -63,6 +64,7 @@ typedef enum{
     FetchCenterGetOpLoginForUidAndUkey,
     FetchCenterGetOpCheckNewVersion,
     FetchCenterGetOpUpdatePersonalInfo,
+    FetchCenterGetOpCreatePersonalInfo,
     FetchCenterGetOpDiscoverPlans,
     FetchCenterGetOpLikeAFeed,
     FetchCenterGetOpUnLikeAFeed,
@@ -164,10 +166,17 @@ typedef enum{
     [self postImageWithOperation:picture postOp:FetchCenterPostOpUploadImageForUpdaingProfile];
 }
 
+//- (void)createPersonalInfo:(NSString *)nickName gender:(NSString *)gender{
+//    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,USER,CREATE_USER_INFO];
+//    [self getRequest:rqtStr parameter:@{@"name":[nickName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+//                                        @"gender":[gender isEqualToString:@"男"] ? @(0):@(1)}
+//           operation:FetchCenterGetOpCreatePersonalInfo
+//              entity:@[nickName,gender]];
+//}
+
 - (void)updatePersonalInfo:(NSString *)nickName gender:(NSString *)gender{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,USER,UPDATE_USER_INFO];
-    [self getRequest:rqtStr parameter:@{@"id":[User uid],
-                                        @"name":[nickName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+    [self getRequest:rqtStr parameter:@{@"name":[nickName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                                         @"gender":[gender isEqualToString:@"男"] ? @(0):@(1)}
            operation:FetchCenterGetOpUpdatePersonalInfo
               entity:@[nickName,gender]];
@@ -330,6 +339,12 @@ typedef enum{
             [self.delegate didFinishCheckingNewVersion:hasNewVersion];
         }
             break;
+//        case FetchCenterGetOpCreatePersonalInfo:{
+//            NSArray *info = (NSArray *)obj;
+//            [User updateAttributeFromDictionary:@{USER_DISPLAY_NAME:info[0],GENDER:info[1]}];
+//            [self.delegate didFinishCreatingPersonalInfo];
+//        }
+//            break;
         case FetchCenterGetOpUpdatePersonalInfo:{
             NSArray *info = (NSArray *)obj;
             [User updateAttributeFromDictionary:@{USER_DISPLAY_NAME:info[0],GENDER:info[1]}];

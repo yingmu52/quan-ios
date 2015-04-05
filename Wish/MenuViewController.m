@@ -38,12 +38,21 @@ typedef enum {
 @property (nonatomic) BOOL isLogin;
 @property (nonatomic,strong) TencentOAuth *tencentOAuth;
 @property (nonatomic,strong) APIResponse *apiResponse;
-
+@property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,weak) IBOutlet UILabel *versionLabel;
 @end
 
 
 @implementation MenuViewController
+
+
+- (FetchCenter *)fetchCenter{
+    if (!_fetchCenter) {
+        _fetchCenter = [[FetchCenter alloc] init];
+        _fetchCenter.delegate = self;
+    }
+    return _fetchCenter;
+}
 
 - (void)setVersionLabel:(UILabel *)versionLabel{
     _versionLabel = versionLabel;
@@ -94,7 +103,7 @@ typedef enum {
             cell.menuTitle.text = @"登录";
         }else{
             NSString *newPicId = [User updatedProfilePictureId];
-            NSURL *url = [newPicId isEqualToString:@""] ? [User userProfilePictureURL] : [[FetchCenter new] urlWithImageID:newPicId];
+            NSURL *url = [newPicId isEqualToString:@""] ? [User userProfilePictureURL] : [self.fetchCenter urlWithImageID:newPicId];
             [cell.menuImageView setImageWithURL:url
                     usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
             cell.menuTitle.text = [User userDisplayName];
@@ -193,47 +202,58 @@ typedef enum {
 
 - (void)getUserInfoResponse:(APIResponse *)response{
     //use openId and access_token to get uid+ukey
-    FetchCenter *fc = [[FetchCenter alloc] init];
-    fc.delegate = self;
-    [fc fetchUidandUkeyWithOpenId:self.tencentOAuth.openId accessToken:self.tencentOAuth.accessToken];
+    [self.fetchCenter fetchUidandUkeyWithOpenId:self.tencentOAuth.openId accessToken:self.tencentOAuth.accessToken];
     self.apiResponse = response;
 }
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
-                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
-                              delegate:self
-                     cancelButtonTitle:@"OK"
-                     otherButtonTitles:nil, nil] show];
-    [User updateOwnerInfo:nil];
-    dispatch_main_async_safe(^{
+    dispatch_main_async_safe((^{
+        [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
+                                    message:[NSString stringWithFormat:@"%@",info[@"msg"]]
+                                   delegate:self
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+        [User updateOwnerInfo:nil];
         [self.tableView reloadData];
-    });
+    }));
 }
 
 - (void)didFinishReceivingUid:(NSString *)uid uKey:(NSString *)uKey{
     //store access token, openid, expiration date, user photo, username, gender
     NSDictionary *fetchedUserInfo = [self.apiResponse jsonResponse];
+
     if (fetchedUserInfo) {
+        
+        //update local user info & UI
         dispatch_main_async_safe((^{
+            
+            NSString *nickName = fetchedUserInfo[@"nickname"];
+            NSString *gender = fetchedUserInfo[@"gender"];
+            
             NSDictionary *localUserInfo = @{ACCESS_TOKEN:self.tencentOAuth.accessToken,
                                             OPENID:self.tencentOAuth.openId,
                                             EXPIRATION_DATE:self.tencentOAuth.expirationDate,
                                             PROFILE_PICTURE_ID:fetchedUserInfo[@"figureurl_qq_2"],
                                             PROFILE_PICTURE_ID_CUSTOM:@"",
-                                            GENDER:fetchedUserInfo[@"gender"],
-                                            USER_DISPLAY_NAME:fetchedUserInfo[@"nickname"],
+                                            GENDER:gender,
+                                            USER_DISPLAY_NAME:nickName,
                                             UID:uid,
                                             UKEY:uKey};
             [User updateOwnerInfo:localUserInfo];
             NSLog(@"%@",localUserInfo);
+
             [self.tableView reloadData];
-            
             [self performSegueWithIdentifier:@"showWishList" sender:nil];
+            //update user info
+            [self.fetchCenter updatePersonalInfo:[NSString stringWithFormat:@"%@ ",nickName] gender:gender];
+
         }));
     }
 }
 
+- (void)didFinishUpdatingPersonalInfo{
+    NSLog(@"info updated");
+}
 //login fail
 -(void)tencentDidNotLogin:(BOOL)cancelled
 {

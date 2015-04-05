@@ -29,6 +29,7 @@
 - (void)didFinishUploadingPictureForProfile:(NSDictionary *)info;
 - (void)didfinishFetchingDiscovery:(NSArray *)plans;
 - (void)didFinishUpdatingPersonalInfo;
+//- (void)didFinishCreatingPersonalInfo;
 - (void)didFinishSendingFeedBack;
 
 
@@ -49,6 +50,7 @@
 - (void)checkVersion;
 - (void)uploadNewProfilePicture:(UIImage *)picture;
 - (void)updatePersonalInfo:(NSString *)nickName gender:(NSString *)gender;
+//- (void)createPersonalInfo:(NSString *)nickName gender:(NSString *)gender;
 
 
 - (void)likeFeed:(Feed *)feed;
