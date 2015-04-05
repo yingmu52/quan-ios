@@ -245,7 +245,7 @@ typedef enum {
             [self.tableView reloadData];
             [self performSegueWithIdentifier:@"showWishList" sender:nil];
             //update user info
-            [self.fetchCenter updatePersonalInfo:[NSString stringWithFormat:@"%@ ",nickName] gender:gender];
+//            [self.fetchCenter updatePersonalInfo:[NSString stringWithFormat:@"%@ ",nickName] gender:gender];
 
         }));
     }
