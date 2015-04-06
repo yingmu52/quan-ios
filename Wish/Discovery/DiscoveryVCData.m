@@ -12,6 +12,7 @@
 #import "SDWebImageCompat.h"
 #import "AppDelegate.h"
 #import "User.h"
+#import "WishDetailVCFollower.h"
 @interface DiscoveryVCData () <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,strong) NSMutableArray *plans;
@@ -108,4 +109,18 @@
     
 }
 
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    Plan *plan = self.plans[indexPath.item];
+    [self performSegueWithIdentifier:@"showDiscoveryWishDetail" sender:plan];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"showDiscoveryWishDetail"]){
+        [segue.destinationViewController setPlan:sender];
+    }
+}
 @end
+
+
+

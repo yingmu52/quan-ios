@@ -3085,6 +3085,24 @@
             </objects>
             <point key="canvasLocation" x="2935.5" y="2553.75"/>
         </scene>
+        <!--Wish DetailVC Follower-->
+        <scene sceneID="v9l-pC-NeM">
+            <objects>
+                <tableViewController id="rp9-lu-nOr" customClass="WishDetailVCFollower" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fOK-yO-OcH">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="rp9-lu-nOr" id="Nxa-wY-gWf"/>
+                            <outlet property="delegate" destination="rp9-lu-nOr" id="ZdJ-iW-9UD"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l1a-lB-oB1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3985.5" y="-469.5"/>
+        </scene>
         <!--DiscoveryVC Data-->
         <scene sceneID="LW9-Wg-cfa">
             <objects>
@@ -3382,10 +3400,13 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="LOQ-Fv-cfJ"/>
+                    <connections>
+                        <segue destination="rp9-lu-nOr" kind="show" identifier="showDiscoveryWishDetail" id="nE2-oT-ipt"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="69m-YO-ebd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3274.5" y="-351"/>
+            <point key="canvasLocation" x="-2986.5" y="-477"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0bo-PJ-66c">
@@ -3403,7 +3424,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="48c-PE-EQl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4192.5" y="-351"/>
+            <point key="canvasLocation" x="-1960.5" y="-459"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oql-Pd-j6R">
@@ -4883,12 +4904,12 @@
     <resources>
         <image name="arrow_ic" width="35" height="35"/>
         <image name="card_photo_shadow" width="76" height="88"/>
-        <image name="edit_fail_ic_default" width="96" height="96"/>
-        <image name="edit_finish_ic_default" width="96" height="96"/>
-        <image name="edit_split_line" width="2" height="142"/>
+        <image name="edit_fail_ic_default" width="192" height="192"/>
+        <image name="edit_finish_ic_default" width="192" height="192"/>
+        <image name="edit_split_line" width="4" height="284"/>
         <image name="feed_ic_more" width="86" height="86"/>
         <image name="find_ic_follow" width="26" height="26"/>
-        <image name="finish_ic" width="60" height="60"/>
+        <image name="finish_ic" width="120" height="120"/>
         <image name="home_ic_camera" width="472" height="102"/>
         <image name="ic_new" width="35" height="35"/>
         <image name="ic_secret_default" width="36" height="36"/>
@@ -4902,16 +4923,16 @@
         <image name="selected_ic" width="35" height="35"/>
         <image name="snow.jpg" width="113" height="113"/>
         <image name="tab_bg" width="8" height="1136"/>
-        <image name="tab_bg_avatar" width="120" height="128"/>
-        <image name="tab_ic_achieve_default" width="102" height="112"/>
+        <image name="tab_bg_avatar" width="240" height="256"/>
+        <image name="tab_ic_achieve_default" width="204" height="224"/>
         <image name="tab_ic_achieve_selected" width="102" height="112"/>
-        <image name="tab_ic_discover_default" width="102" height="112"/>
+        <image name="tab_ic_discover_default" width="204" height="224"/>
         <image name="tab_ic_discover_selected" width="102" height="112"/>
-        <image name="tab_ic_follow_default" width="102" height="112"/>
+        <image name="tab_ic_follow_default" width="204" height="224"/>
         <image name="tab_ic_follow_selected" width="102" height="112"/>
-        <image name="tab_ic_home_default" width="102" height="112"/>
+        <image name="tab_ic_home_default" width="204" height="224"/>
         <image name="tab_ic_home_selected" width="102" height="112"/>
-        <image name="tab_ic_login_default" width="120" height="128"/>
+        <image name="tab_ic_login_default" width="240" height="256"/>
         <image name="tab_ic_message_default" width="50" height="50"/>
         <image name="tab_ic_setting_default" width="50" height="50"/>
         <image name="tips_bg" width="69" height="69"/>
