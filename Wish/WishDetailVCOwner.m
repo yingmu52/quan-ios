@@ -83,8 +83,8 @@
     
     [cameraButton setFrame:CGRectMake(topView.frame.size.width - trailing,
                                       topView.frame.size.height - bottom,
-                                      cameraIcon.size.width/2,
-                                      cameraIcon.size.height/2)];
+                                      cameraIcon.size.width/1.9,
+                                      cameraIcon.size.height/1.9)];
     [topView addSubview:cameraButton];
     
     [cameraButton addTarget:self action:@selector(showCamera)
