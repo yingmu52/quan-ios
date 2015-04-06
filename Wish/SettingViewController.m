@@ -130,27 +130,24 @@
     //reset top view
     slidingVC.topViewController = nil;
     [self dismissViewControllerAnimated:YES completion:nil];
+    
     //delete all objects in core data
+#warning fix this
 //    [self clearCoreData];
 
 }
 
 - (void)clearCoreData{
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    for (NSEntityDescription *entity in delegate.managedObjectModel.entities){
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:entity.name];
-        [request setIncludesPropertyValues:NO]; //only fetch the managedObjectID
-        NSError * error = nil;
-        NSArray * objects = [delegate.managedObjectContext executeFetchRequest:request error:&error];
-        //error handling goes here
-        for (NSManagedObject *object in objects) {
-            [delegate.managedObjectContext deleteObject:object];
-        }
-        NSError *saveError = nil;
-        [delegate.managedObjectContext save:&saveError];
-        
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
+    [request setIncludesPropertyValues:NO]; //only fetch the managedObjectID
+    NSError * error = nil;
+    NSArray * objects = [delegate.managedObjectContext executeFetchRequest:request error:&error];
+    //error handling goes here
+    for (Plan *plan in objects) {
+        [delegate.managedObjectContext deleteObject:plan];
     }
-
+    [delegate saveContext];
 }
 
 #pragma mark - check update

@@ -35,18 +35,14 @@
 
 
 - (void)dealloc{
-#warning fix this 
-    
-//    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-//    for (Plan *plan in self.plans){ //delete plans from other users
-//        if (plan.planId != [User uid]){
-//            [delegate.managedObjectContext deleteObject:plan];
-//        }
-//        
-//    }
-////    NSLog(@"%@",[[AppDelegate getContext] deletedObjects]);
-//    [delegate saveContext];
-
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    for (Plan *plan in self.plans){ //delete plans from other users
+        if (![plan.ownerId isEqualToString:[User uid]]){
+            [delegate.managedObjectContext deleteObject:plan];
+        }
+    }
+//    NSLog(@"%@",[[AppDelegate getContext] deletedObjects]);
+    [delegate saveContext];
 }
 - (void)discover{
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
