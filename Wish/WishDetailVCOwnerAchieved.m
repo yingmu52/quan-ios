@@ -20,14 +20,6 @@
     [self setupBadageImageView];
 }
 
-- (void)setupBadageImageView{
-    UIImage *image;
-    if (self.plan.planStatus.integerValue == PlanStatusFinished) image = [Theme achieveBadageLabelSuccess];
-    if (self.plan.planStatus.integerValue == PlanStatusGiveTheFuckingUp) image = [Theme achieveBadageLabelFail];
-    self.headerView.badgeImageView.image = image;
-    self.headerView.badgeImageView.hidden = NO;
-}
-
 
 - (void)setUpNavigationItem{
     [super setUpNavigationItem];

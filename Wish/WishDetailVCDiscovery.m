@@ -20,6 +20,7 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
+    [self setupBadageImageView]; //display badge
     [self loadFeedFromServer:nil];
 }
 - (FetchCenter *)fetchCenter{
@@ -73,6 +74,7 @@
 
 - (void)didFinishLoadingFeedList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage{    
     dispatch_main_async_safe(^{
+        [self updateHeaderView];
         //update navigation item
         self.navigationItem.rightBarButtonItem = nil;
     })

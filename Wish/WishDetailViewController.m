@@ -25,10 +25,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.headerView.plan = self.plan; //set plan to header for updaing info
+    [self updateHeaderView];
 }
-
-
 
 - (void)setUpNavigationItem
 {
@@ -184,6 +182,20 @@
         [fc unLikeFeed:cell.feed];
     }
 }
+
+#pragma mark - header view 
+- (void)updateHeaderView{
+    self.headerView.plan = self.plan; //set plan to header for updaing info
+}
+
+- (void)setupBadageImageView{
+    UIImage *image;
+    if (self.plan.planStatus.integerValue == PlanStatusFinished) image = [Theme achieveBadageLabelSuccess];
+    if (self.plan.planStatus.integerValue == PlanStatusGiveTheFuckingUp) image = [Theme achieveBadageLabelFail];
+    self.headerView.badgeImageView.image = image;
+    self.headerView.badgeImageView.hidden = NO;
+}
+
 
 
 @end

@@ -18,4 +18,6 @@
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC; //fetching Feed
 @property (nonatomic,strong) Plan *plan; //must set
 - (void)setUpNavigationItem;
+- (void)updateHeaderView;
+- (void)setupBadageImageView;
 @end
