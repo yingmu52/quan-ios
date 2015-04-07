@@ -59,9 +59,9 @@
     feed.plan = plan;
     feed.selfLiked = @(NO);
     
-    if ([context save:nil]) {
-        NSLog(@"updated feed from server");
-    }
+//    if ([context save:nil]) {
+//        NSLog(@"updated feed from server");
+//    }
     return feed;
 }
 

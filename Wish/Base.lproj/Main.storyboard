@@ -3085,10 +3085,10 @@
             </objects>
             <point key="canvasLocation" x="2935.5" y="2553.75"/>
         </scene>
-        <!--Wish DetailVC Follower-->
+        <!--Wish DetailVC Discovery-->
         <scene sceneID="v9l-pC-NeM">
             <objects>
-                <tableViewController id="rp9-lu-nOr" customClass="WishDetailVCFollower" sceneMemberID="viewController">
+                <tableViewController id="rp9-lu-nOr" customClass="WishDetailVCDiscovery" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fOK-yO-OcH">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

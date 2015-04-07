@@ -13,12 +13,15 @@
 #import "AppDelegate.h"
 #import "User.h"
 #import "WishDetailVCFollower.h"
-@interface DiscoveryVCData () <FetchCenterDelegate>
+@interface DiscoveryVCData () <FetchCenterDelegate,NSFetchedResultsControllerDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,strong) NSMutableArray *plans;
+@property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @end
 
 @implementation DiscoveryVCData
+
+static NSUInteger numberOfitems = 4;
 
 
 - (FetchCenter *)fetchCenter{
@@ -64,12 +67,12 @@
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return self.plans.count / 4;
+    return self.plans.count / numberOfitems;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 4;
+    return numberOfitems;
 }
 
 
@@ -107,7 +110,7 @@
 
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    Plan *plan = self.plans[indexPath.item];
+    Plan *plan = self.plans[(indexPath.section)*numberOfitems + indexPath.item ];
     [self performSegueWithIdentifier:@"showDiscoveryWishDetail" sender:plan];
 }
 
@@ -116,6 +119,9 @@
         [segue.destinationViewController setPlan:sender];
     }
 }
+
+#pragma mark - fetched results controller 
+
 @end
 
 

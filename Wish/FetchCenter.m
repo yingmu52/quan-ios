@@ -31,7 +31,7 @@
 #define CREATE_FEED @"splan_feeds_create.php"
 #define LIKE_FEED @"splan_feeds_like.php"
 #define UNLIKE_FEED @"splan_feeds_unlike.php"
-
+#define LOAD_FEED_LIST @"splan_feeds_getlist.php"
 
 #define FOLLOW @"follow/"
 #define GET_FOLLOW_LIST @"splan_follow_get_feedslist.php"
@@ -68,6 +68,7 @@ typedef enum{
     FetchCenterGetOpDiscoverPlans,
     FetchCenterGetOpLikeAFeed,
     FetchCenterGetOpUnLikeAFeed,
+    FetchCenterGetOpLoadFeedList,
     FetchCenterGetOpFeedBack
 }FetchCenterGetOp;
 
@@ -92,7 +93,20 @@ typedef enum{
 }
 
 
-#pragma mark - like and comment 
+#pragma mark - Feed
+
+- (void)loadFeedsListForPlan:(Plan *)plan pageInfo:(NSDictionary *)info{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,LOAD_FEED_LIST];
+    NSDictionary *args = info ? @{@"id":plan.planId,@"attachInfo":info} : @{@"id":plan.planId};
+    [self getRequest:rqtStr
+           parameter:args
+           operation:FetchCenterGetOpLoadFeedList
+              entity:plan];
+}
+
+- (void)uploadToCreateFeed:(Feed *)feed{
+    [self postImageWithOperation:feed postOp:FetchCenterPostOpUploadImageForCreatingFeed];
+}
 
 - (void)likeFeed:(Feed *)feed{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,LIKE_FEED];
@@ -213,10 +227,6 @@ typedef enum{
                            @"finishDate":@([SystemUtil daysBetween:[NSDate date] and:plan.finishDate]),
                            @"private":plan.isPrivate};
     [self getRequest:baseUrl parameter:args operation:FetchCenterGetOpCreatePlan entity:plan];
-}
-
-- (void)uploadToCreateFeed:(Feed *)feed{
-    [self postImageWithOperation:feed postOp:FetchCenterPostOpUploadImageForCreatingFeed];
 }
 
 
@@ -376,6 +386,17 @@ typedef enum{
         case FetchCenterGetOpUnLikeAFeed:{
             Feed *feed = (Feed *)obj;
             NSLog(@"unliked feed ID %@",feed.feedId);
+        }
+            break;
+        case FetchCenterGetOpLoadFeedList:{
+            
+            NSArray *feeds = [json valueForKeyPath:@"data.feedsList"];
+            BOOL hasNextPage = [[json valueForKeyPath:@"data.isMore"] boolValue];
+            NSDictionary *pageInfo = [json valueForKeyPath:@"data.attachInfo"];
+            for (NSDictionary *info in feeds){
+                [Feed createFeedFromServer:info forPlan:obj]; // obj is Plan*
+            }
+            [self.delegate didFinishLoadingFeedList:pageInfo hasNextPage:hasNextPage];
         }
             break;
         case FetchCenterGetOpFeedBack:

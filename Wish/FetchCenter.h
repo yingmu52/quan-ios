@@ -31,7 +31,7 @@
 - (void)didFinishUpdatingPersonalInfo;
 //- (void)didFinishCreatingPersonalInfo;
 - (void)didFinishSendingFeedBack;
-
+- (void)didFinishLoadingFeedList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage;
 
 - (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
@@ -41,22 +41,12 @@
 @interface FetchCenter : NSObject
 @property (nonatomic,weak) id <FetchCenterDelegate>delegate;
 
-
-
-- (void)getDiscoveryList;
-
-
-- (void)sendFeedback:(NSString *)title content:(NSString *)content;
-- (void)checkVersion;
-- (void)uploadNewProfilePicture:(UIImage *)picture;
-- (void)updatePersonalInfo:(NSString *)nickName gender:(NSString *)gender;
-//- (void)createPersonalInfo:(NSString *)nickName gender:(NSString *)gender;
-
-
+#pragma mark - Feed
+- (void)loadFeedsListForPlan:(Plan *)plan pageInfo:(NSDictionary *)info;
 - (void)likeFeed:(Feed *)feed;
 - (void)unLikeFeed:(Feed *)feed;
 
-
+#pragma mark - Plan
 - (void)fetchPlanList:(NSString *)ownerId;
 - (void)uploadToCreatePlan:(Plan *)plan;
 - (void)updatePlan:(Plan *)plan;
@@ -64,10 +54,24 @@
 - (void)uploadToCreateFeed:(Feed *)feed;
 - (void)updateStatus:(Plan *)plan;
 
+#pragma mark - Follow
+
+#pragma mark - Discover
+- (void)getDiscoveryList;
 - (void)fetchFollowingPlanList;
 
+#pragma mark - Other
+- (void)sendFeedback:(NSString *)title content:(NSString *)content;
+- (void)checkVersion;
+- (void)uploadNewProfilePicture:(UIImage *)picture;
+- (void)updatePersonalInfo:(NSString *)nickName gender:(NSString *)gender;
+//- (void)createPersonalInfo:(NSString *)nickName gender:(NSString *)gender;
+
+#pragma mark - ultility
 - (NSURL *)urlWithImageID:(NSString *)imageId;
 
+#pragma mark - login
 - (void)fetchUidandUkeyWithOpenId:(NSString *)openId accessToken:(NSString *)token;
 
 @end
+
