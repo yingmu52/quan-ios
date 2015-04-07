@@ -71,9 +71,7 @@
 
 }
 
-- (void)didFinishLoadingFeedList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage{
-    
-    
+- (void)didFinishLoadingFeedList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage{    
     dispatch_main_async_safe(^{
         //update navigation item
         self.navigationItem.rightBarButtonItem = nil;

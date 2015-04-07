@@ -101,7 +101,7 @@
                 [self.tableView
                  insertRowsAtIndexPaths:@[newIndexPath]
                  withRowAnimation:UITableViewRowAnimationAutomatic];
-                [self.tableView setContentOffset:CGPointZero animated:NO]; //scroll to top
+                [self.tableView setContentOffset:CGPointZero animated:YES]; //scroll to top
                 NSLog(@"Feed inserted");
                 break;
                 
