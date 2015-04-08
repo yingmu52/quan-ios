@@ -196,7 +196,25 @@
     self.headerView.badgeImageView.hidden = NO;
 }
 
+#pragma mark - did scroll to bottom
+- (void)scrollViewDidEndDragging:(UIScrollView *)aScrollView
+                  willDecelerate:(BOOL)decelerate
+{
+    CGPoint offset = aScrollView.contentOffset;
+    CGRect bounds = aScrollView.bounds;
+    CGSize size = aScrollView.contentSize;
+    UIEdgeInsets inset = aScrollView.contentInset;
+    CGFloat y = offset.y + bounds.size.height - inset.bottom;
+    CGFloat h = size.height;
+    
+    CGFloat reload_distance = 50.0;
+    if(y > h + reload_distance) {
+        [self loadMore];
+    }
+}
 
-
+- (void)loadMore{
+    //abstract
+}
 @end
 

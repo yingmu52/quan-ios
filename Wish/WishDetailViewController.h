@@ -20,4 +20,5 @@
 - (void)setUpNavigationItem;
 - (void)updateHeaderView;
 - (void)setupBadageImageView;
+- (void)loadMore; // abstract
 @end

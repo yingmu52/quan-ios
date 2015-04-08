@@ -14,6 +14,9 @@
 @interface WishDetailVCDiscovery () <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 
+
+@property (nonatomic) BOOL hasNextPage;
+@property (nonatomic,strong) NSDictionary *pageInfo;
 @end
 @implementation WishDetailVCDiscovery
 
@@ -21,7 +24,9 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self setupBadageImageView]; //display badge
-    [self loadFeedFromServer:nil];
+    
+    self.hasNextPage = YES; //important, must set before [self loadMore]
+    [self loadMore];
 }
 - (FetchCenter *)fetchCenter{
     if (!_fetchCenter){
@@ -72,14 +77,24 @@
 
 }
 
-- (void)didFinishLoadingFeedList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage{    
+- (void)didFinishLoadingFeedList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage{
     dispatch_main_async_safe(^{
+        self.hasNextPage = hasNextPage;
+        self.pageInfo = pageInfo;
         [self updateHeaderView];
         //update navigation item
         self.navigationItem.rightBarButtonItem = nil;
     })
-    
 
+}
+
+- (void)loadMore{
+    if (self.hasNextPage) {
+        [self loadFeedFromServer:self.pageInfo];
+    }else{
+        self.title = @"别拉了，没了！";
+        [self performSelector:@selector(setTitle:) withObject:nil afterDelay:0.5f];
+    }
 }
 @end
 
