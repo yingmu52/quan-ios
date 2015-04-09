@@ -97,11 +97,21 @@ typedef enum{
 
 - (void)loadFeedsListForPlan:(Plan *)plan pageInfo:(NSDictionary *)info{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,LOAD_FEED_LIST];
-    NSDictionary *args = info ? @{@"id":plan.planId,@"attachInfo":info} : @{@"id":plan.planId};
+    NSDictionary *args = info ? @{@"id":plan.planId,@"attachInfo":[self convertDictionaryToString:info]} : @{@"id":plan.planId};
     [self getRequest:rqtStr
            parameter:args
            operation:FetchCenterGetOpLoadFeedList
               entity:plan];
+}
+
+- (NSString*)convertDictionaryToString:(NSDictionary*)dict{
+    NSError* error;
+    //giving error as it takes dic, array,etc only. not custom object.
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict
+                                                       options:0
+                                                         error:&error];
+    
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 
 - (void)uploadToCreateFeed:(Feed *)feed{
@@ -460,7 +470,7 @@ typedef enum{
                                       if (!error && ![responseJson[@"ret"] boolValue]){ //successed "ret" = 0;
                                           [self didFinishSendingGetRequest:responseJson operation:op entity:obj];
                                       }else{
-                                          NSLog(@"Fail Get Request :%@\n op: %d \n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@",request,op,baseURL,dict,responseJson,error);
+                                          NSLog(@"Fail Get Request :%@\n op: %d \n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@",rqtStr,op,baseURL,dict,responseJson,error);
                                           [self.delegate didFailSendingRequestWithInfo:responseJson entity:obj];
                                       }
                                   }];
