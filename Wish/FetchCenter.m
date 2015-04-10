@@ -97,7 +97,8 @@ typedef enum{
 
 - (void)loadFeedsListForPlan:(Plan *)plan pageInfo:(NSDictionary *)info{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,LOAD_FEED_LIST];
-    NSDictionary *args = info ? @{@"id":plan.planId,@"attachInfo":[self convertDictionaryToString:info]} : @{@"id":plan.planId};
+    NSString *infoStr = info ? [self convertDictionaryToString:info] : @"";
+    NSDictionary *args = @{@"id":plan.planId,@"attachInfo":infoStr};
     [self getRequest:rqtStr
            parameter:args
            operation:FetchCenterGetOpLoadFeedList
@@ -111,7 +112,7 @@ typedef enum{
                                                        options:0
                                                          error:&error];
     
-    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    return [[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
 - (void)uploadToCreateFeed:(Feed *)feed{
