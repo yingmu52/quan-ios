@@ -21,7 +21,7 @@
 
 @implementation DiscoveryVCData
 
-static NSUInteger numberOfitems = 4;
+static NSUInteger numberOfitems = 4.0; //float is important
 
 
 - (FetchCenter *)fetchCenter{
@@ -67,12 +67,17 @@ static NSUInteger numberOfitems = 4;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return self.plans.count / numberOfitems;
+    NSInteger num = round(((float)self.plans.count) / numberOfitems);
+    return num;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return numberOfitems;
+    if (section != round(((float)self.plans.count) / numberOfitems) - 1){
+        return numberOfitems;
+    }else{
+        return self.plans.count % numberOfitems;
+    }
 }
 
 
