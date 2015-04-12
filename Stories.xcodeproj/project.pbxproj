@@ -41,6 +41,7 @@
 		AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE72E9541A66F2AA0046B38D /* MenuCell.m */; };
 		AE767E7F1ACE35A600F35137 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE767E7E1ACE35A600F35137 /* FeedbackViewController.m */; };
 		AE767E801ACE35A600F35137 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE767E7E1ACE35A600F35137 /* FeedbackViewController.m */; };
+		AE7D1D3B1ADA5278006E3396 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7D1D3A1ADA5278006E3396 /* Plan.m */; };
 		AE95A9EE1ACFA7F8007465D5 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE95A9E21ACFA7F8007465D5 /* back@2x.png */; };
 		AE95A9EF1ACFA7F8007465D5 /* back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE95A9E31ACFA7F8007465D5 /* back@3x.png */; };
 		AE95A9F01ACFA7F8007465D5 /* cameraroll-picker-grip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE95A9E41ACFA7F8007465D5 /* cameraroll-picker-grip@2x.png */; };
@@ -90,7 +91,6 @@
 		AECE2C041AA1A28900B1C58E /* Owner.m in Sources */ = {isa = PBXBuildFile; fileRef = AECE2C021AA1A28900B1C58E /* Owner.m */; };
 		AED05EDB1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = AED05EDA1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m */; };
 		AED05EDC1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = AED05EDA1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m */; };
-		AED28FDC1AB2886C0054DE66 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AED28FDB1AB2886C0054DE66 /* Plan.m */; };
 		AED4CB1B1AC683AF00EE2DA4 /* GCPTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = AED4CB1A1AC683AF00EE2DA4 /* GCPTextView.m */; };
 		AED4CB1E1AC7556800EE2DA4 /* KTCenterFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AED4CB1D1AC7556800EE2DA4 /* KTCenterFlowLayout.m */; };
 		AED4CB1F1AC7556800EE2DA4 /* KTCenterFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AED4CB1D1AC7556800EE2DA4 /* KTCenterFlowLayout.m */; };
@@ -258,6 +258,8 @@
 		AE72E9541A66F2AA0046B38D /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		AE767E7D1ACE35A600F35137 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
 		AE767E7E1ACE35A600F35137 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
+		AE7D1D391ADA5278006E3396 /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
+		AE7D1D3A1ADA5278006E3396 /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
 		AE95A9E21ACFA7F8007465D5 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
 		AE95A9E31ACFA7F8007465D5 /* back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@3x.png"; sourceTree = "<group>"; };
 		AE95A9E41ACFA7F8007465D5 /* cameraroll-picker-grip@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cameraroll-picker-grip@2x.png"; sourceTree = "<group>"; };
@@ -328,8 +330,6 @@
 		AECE2C021AA1A28900B1C58E /* Owner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Owner.m; sourceTree = "<group>"; };
 		AED05ED91A928DC900CA1CE6 /* UINavigationBar+CustomHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+CustomHeight.h"; sourceTree = "<group>"; };
 		AED05EDA1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+CustomHeight.m"; sourceTree = "<group>"; };
-		AED28FDA1AB2886C0054DE66 /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
-		AED28FDB1AB2886C0054DE66 /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
 		AED4CB191AC683AF00EE2DA4 /* GCPTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCPTextView.h; sourceTree = "<group>"; };
 		AED4CB1A1AC683AF00EE2DA4 /* GCPTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCPTextView.m; sourceTree = "<group>"; };
 		AED4CB1C1AC7556800EE2DA4 /* KTCenterFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCenterFlowLayout.h; sourceTree = "<group>"; };
@@ -568,6 +568,8 @@
 		AE30EE711A6F0A8C0044740D /* Database&Networking */ = {
 			isa = PBXGroup;
 			children = (
+				AE7D1D391ADA5278006E3396 /* Plan.h */,
+				AE7D1D3A1ADA5278006E3396 /* Plan.m */,
 				AEFB3ABE1ACCAD970046CBAB /* Feed.h */,
 				AEFB3ABF1ACCAD970046CBAB /* Feed.m */,
 				AE2F1C921A7A23A200A32CB5 /* Feed+FeedCRUD.h */,
@@ -575,8 +577,6 @@
 				AECE2BFD1AA19F6500B1C58E /* Owner+OwnerCRUD.h */,
 				AECE2BFE1AA19F6500B1C58E /* Owner+OwnerCRUD.m */,
 				AE0172431A65CD8E0014266F /* Wish.xcdatamodeld */,
-				AED28FDA1AB2886C0054DE66 /* Plan.h */,
-				AED28FDB1AB2886C0054DE66 /* Plan.m */,
 				AECE2C011AA1A28900B1C58E /* Owner.h */,
 				AECE2C021AA1A28900B1C58E /* Owner.m */,
 				AE479EAC1A6F7A5B00366A0A /* Plan+PlanCRUD.h */,
@@ -1146,12 +1146,12 @@
 				AE479EAE1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */,
 				AEEC6C681A6DB0F10021B7E4 /* FirstTableViewController.m in Sources */,
 				AECE2BF31AA0521600B1C58E /* UIImage+GIF.m in Sources */,
+				AE7D1D3B1ADA5278006E3396 /* Plan.m in Sources */,
 				AEFB04861AD12437009EB0D3 /* DiscoveryCell.m in Sources */,
 				AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */,
 				AE52FA531A8D55A7003FF725 /* KeyboardAcessoryView.m in Sources */,
 				AEF7F29B1A686FE90022410B /* NavigationBar.m in Sources */,
 				AEFB048C1AD12437009EB0D3 /* DiscoveryViewController.m in Sources */,
-				AED28FDC1AB2886C0054DE66 /* Plan.m in Sources */,
 				AEEC6C731A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,
 				AEFA5FDD1AAFBAA8001CA0C8 /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */,
 				AED8D7CA1A9BE2490035EDE5 /* FollowingImageCell.m in Sources */,

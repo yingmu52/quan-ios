@@ -33,17 +33,30 @@
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     [delegate saveContext];
 
+    if (planStatus != PlanStatusOnGoing) {
+        [self updateTryTimesOfPlan:NO];
+    }
 
     NSAssert1(planStatus == PlanStatusOnGoing || planStatus == PlanStatusFinished || planStatus == PlanStatusGiveTheFuckingUp,@"invalid plan status %d", planStatus);
     self.planStatus = @(planStatus);
     self.updateDate = [NSDate date];
-
+    
     NSAssert(self.planId, @"nil plan id");
     
     //update status to server
     [[FetchCenter new] updateStatus:self];
 }
 
+
+- (void)updateTryTimesOfPlan:(BOOL)assending{
+    NSInteger attempts = self.tryTimes.integerValue;
+    if (assending) {
+        attempts += 1;
+    }else{
+        attempts -= 1;
+    }
+    self.tryTimes = @(attempts);
+}
 + (Plan *)updatePlanFromServer:(NSDictionary *)dict{
     
     NSManagedObjectContext *context = [AppDelegate getContext];
@@ -74,6 +87,7 @@
     plan.planStatus = @([dict[@"state"] integerValue]);
     plan.backgroundNum = dict[@"backGroudPic"];
     plan.isPrivate = @([dict[@"private"] boolValue]);
+    plan.tryTimes = @([dict[@"tryTimes"] integerValue]);
     
 //    if ([context save:nil]) {
 //        NSLog(@"updated plan list form server");

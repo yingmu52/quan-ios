@@ -33,7 +33,7 @@ typedef enum {
 
 - (Feed *)fetchLastUpdatedFeed;
 
-
+- (void)updateTryTimesOfPlan:(BOOL)assending;
 
 + (NSArray *)fetchWith:(NSString *)entityName
              predicate:(NSPredicate *)predicate

@@ -25,6 +25,7 @@
     feed.selfLiked = @(NO);
     //update plan
     plan.image = image;
+    [plan updateTryTimesOfPlan:YES];
     NSLog(@"saved feed with image");
 //    if ([context save:nil]) {
         //upload to server
@@ -65,4 +66,7 @@
     return feed;
 }
 
+
 @end
+
+

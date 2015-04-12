@@ -1,8 +1,8 @@
 //
 //  Plan.m
-//  Wish
+//  Stories
 //
-//  Created by Xinyi Zhuang on 2015-03-12.
+//  Created by Xinyi Zhuang on 2015-04-12.
 //  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
 //
 
@@ -25,6 +25,7 @@
 @dynamic planTitle;
 @dynamic updateDate;
 @dynamic userDeleted;
+@dynamic tryTimes;
 @dynamic feeds;
 @dynamic owner;
 

@@ -7,7 +7,8 @@
 //
 
 #import "Feed.h"
-#import "Plan.h"
+#import "Plan+PlanCRUD.h"
+
 @import UIKit;
 
 @interface Feed (FeedCRUD)

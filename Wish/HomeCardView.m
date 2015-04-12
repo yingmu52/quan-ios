@@ -50,7 +50,7 @@
         self.dateLabel.text = [NSString stringWithFormat:@"最后纪录时间：%@",dateString];
         
         
-        self.subtitleLabel.text = [NSString stringWithFormat:@"%@个努力瞬间",@(plan.feeds.count)];
+        self.subtitleLabel.text = [NSString stringWithFormat:@"%@个努力瞬间",plan.tryTimes];
         
         
         
