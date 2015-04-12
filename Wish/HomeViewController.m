@@ -166,6 +166,10 @@ ImagePickerDelegate>
     [self performSegueWithIdentifier:@"ShowPostFeedFromHome" sender:image];
 }
 
+- (void)didFailPickingImage{
+    NSLog(@"fail picking image");
+}
+
 #pragma mark -
 
 
