@@ -33,10 +33,6 @@
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     [delegate saveContext];
 
-    if (planStatus != PlanStatusOnGoing) {
-        [self updateTryTimesOfPlan:NO];
-    }
-
     NSAssert1(planStatus == PlanStatusOnGoing || planStatus == PlanStatusFinished || planStatus == PlanStatusGiveTheFuckingUp,@"invalid plan status %d", planStatus);
     self.planStatus = @(planStatus);
     self.updateDate = [NSDate date];
