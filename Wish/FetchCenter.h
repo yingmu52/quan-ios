@@ -16,7 +16,8 @@
 #define INNER_NETWORK_URL @"http://182.254.167.228"
 #define OUTTER_NETWORK_URL @"http://120.24.73.51"
 
-#define SHOULD_USE_OUTTER_NETWORK @"kShouldUSeOutterNetwork"
+#define SHOULD_USE_INNER_NETWORK @"kShouldUSeInnerNetwork"
+//#define SHOULD_USE_OUTTER_NETWORK @"kShouldUSeOutterNetwork"
 
 @protocol FetchCenterDelegate <NSObject>
 @optional

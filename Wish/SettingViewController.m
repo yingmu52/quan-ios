@@ -109,11 +109,11 @@
         [self logout];
     }
     if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:INNER_NETWORK_URL]){
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:SHOULD_USE_OUTTER_NETWORK];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:SHOULD_USE_INNER_NETWORK];
         [self logout];
     }
     if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:OUTTER_NETWORK_URL]){
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SHOULD_USE_OUTTER_NETWORK];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SHOULD_USE_INNER_NETWORK];
         [self logout];
     }
 

@@ -99,7 +99,7 @@
             case NSFetchedResultsChangeInsert:
                 [self.tableView
                  insertRowsAtIndexPaths:@[newIndexPath]
-                 withRowAnimation:UITableViewRowAnimationAutomatic];
+                 withRowAnimation:UITableViewRowAnimationNone];
                 [self fetchResultsControllerDidInsert];
                 NSLog(@"Feed inserted");
                 break;
@@ -123,7 +123,7 @@
 }
 
 - (void)fetchResultsControllerDidInsert{
-    
+    //abstract
 }
 
 
