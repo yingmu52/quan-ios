@@ -42,13 +42,14 @@
 
 - (void)setCurrenetBackgroundColor{
     if (self.fetchedRC.fetchedObjects.count) {
-        UIImageView *imgView = [[UIImageView alloc] initWithFrame:self.tableView.frame];
-        imgView.contentMode = UIViewContentModeScaleAspectFill;
-        imgView.clipsToBounds = YES;
-        
         Feed *feed = (Feed *)self.fetchedRC.fetchedObjects.firstObject;
-        imgView.image = [feed.image applyDarkEffect];
-        self.tableView.backgroundView = imgView;
+        if (feed.image) {
+            UIImageView *imgView = [[UIImageView alloc] initWithFrame:self.tableView.frame];
+            imgView.contentMode = UIViewContentModeScaleAspectFill;
+            imgView.clipsToBounds = YES;
+            imgView.image = [feed.image applyDarkEffect];
+            self.tableView.backgroundView = imgView;
+        }
     }else{
         self.tableView.backgroundColor = [Theme wishDetailBackgroundNone:self.tableView];
     }
@@ -99,7 +100,7 @@
                 [self.tableView
                  insertRowsAtIndexPaths:@[newIndexPath]
                  withRowAnimation:UITableViewRowAnimationAutomatic];
-                [self.tableView setContentOffset:CGPointZero animated:YES]; //scroll to top
+                [self fetchResultsControllerDidInsert];
                 NSLog(@"Feed inserted");
                 break;
                 
@@ -120,6 +121,11 @@
         }        
     })
 }
+
+- (void)fetchResultsControllerDidInsert{
+    
+}
+
 
 - (void)controllerDidChangeContent:
 (NSFetchedResultsController *)controller

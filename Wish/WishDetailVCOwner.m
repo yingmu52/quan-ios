@@ -202,4 +202,10 @@
     self.cameraButton.hidden = NO;
 }
 
+
+#pragma mark - fetch results controller
+
+- (void)fetchResultsControllerDidInsert{
+    [self.tableView setContentOffset:CGPointZero animated:YES]; //scroll to top
+}
 @end

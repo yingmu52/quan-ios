@@ -13,7 +13,7 @@
 #import "SystemUtil.h"
 #import "Feed+FeedCRUD.h"
 #import "UIImage+ImageEffects.h"
-
+#import "AppDelegate.h"
 @interface WishDetailViewController : FirstTableViewController
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC; //fetching Feed
 @property (nonatomic,strong) Plan *plan; //must set
@@ -21,4 +21,7 @@
 - (void)updateHeaderView;
 - (void)setupBadageImageView;
 - (void)loadMore; // abstract
+
+
+- (void)fetchResultsControllerDidInsert;
 @end

@@ -96,6 +96,15 @@
         [self performSelector:@selector(setTitle:) withObject:nil afterDelay:0.5f];
     }
 }
+
+
+- (void)dealloc{
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    for (Feed *feed in self.fetchedRC.fetchedObjects){
+        [delegate.managedObjectContext deleteObject:feed];
+    }
+    [delegate saveContext];
+}
 @end
 
 
