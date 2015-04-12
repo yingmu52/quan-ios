@@ -10,7 +10,7 @@
 #import "UIImageView+WebCache.h"
 #import "FetchCenter.h"
 #import "Feed.h"
-
+#import "User.h"
 @interface WishDetailVCDiscovery () <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 
@@ -92,7 +92,7 @@
     if (self.hasNextPage) {
         [self loadFeedFromServer:self.pageInfo];
     }else{
-        self.title = @"别拉了，没了！";
+//        self.title = @"别拉了，没了！";
         [self performSelector:@selector(setTitle:) withObject:nil afterDelay:0.5f];
     }
 }
@@ -101,7 +101,9 @@
 - (void)dealloc{
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     for (Feed *feed in self.fetchedRC.fetchedObjects){
-        [delegate.managedObjectContext deleteObject:feed];
+        if (![feed.plan.ownerId isEqualToString:[User uid]]) {
+            [delegate.managedObjectContext deleteObject:feed];
+        }
     }
     [delegate saveContext];
 }
