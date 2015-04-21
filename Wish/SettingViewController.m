@@ -148,14 +148,15 @@
     slidingVC.topViewController = nil;
     [self dismissViewControllerAnimated:YES completion:nil];
     
-    //delete all objects in core data
-//    [self clearCoreData];
+    //delete plans that do not belong to self in core data
+    [self clearCoreData];
 
 }
 
 - (void)clearCoreData{
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
+    request.predicate = [NSPredicate predicateWithFormat:@"ownerId != %@",[User uid]];
     [request setIncludesPropertyValues:NO]; //only fetch the managedObjectID
     NSError * error = nil;
     NSArray * objects = [delegate.managedObjectContext executeFetchRequest:request error:&error];
@@ -164,6 +165,7 @@
         [delegate.managedObjectContext deleteObject:plan];
     }
     [delegate saveContext];
+    NSLog(@"%d plans deleted",objects.count);
 }
 
 #pragma mark - check update

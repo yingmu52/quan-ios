@@ -16,7 +16,6 @@
 @interface DiscoveryVCData () <FetchCenterDelegate,NSFetchedResultsControllerDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,strong) NSMutableArray *plans;
-@property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @end
 
 @implementation DiscoveryVCData
