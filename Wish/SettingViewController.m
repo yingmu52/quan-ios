@@ -18,6 +18,9 @@
 @property (nonatomic,strong) UIColor *normalBackground;
 
 @property (nonatomic,weak) IBOutlet UIImageView *iconImageView;
+
+@property (nonatomic,strong) NSString *innerNetworkTitle;
+@property (nonatomic,strong) NSString *outerNetworkTitle;
 @end
 
 @implementation SettingViewController
@@ -42,13 +45,25 @@
     [self resignFirstResponder];
 }
 
+
+- (NSString *)innerNetworkTitle{
+    BOOL isUsingInnerNetwork = [[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_INNER_NETWORK];
+    return isUsingInnerNetwork ? @"内网✔️" : @"内网";
+}
+
+- (NSString *)outerNetworkTitle{
+    BOOL isUsingInnerNetwork = [[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_INNER_NETWORK];
+    return isUsingInnerNetwork ? @"外网" : @"外网✔️";
+}
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event{
     if (motion == UIEventSubtypeMotionShake) {
-        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"选择环境，红为开发环境，蓝为正式环境"
+        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"选择环境"
                                                            delegate:self
                                                   cancelButtonTitle:@"取消"
-                                             destructiveButtonTitle:INNER_NETWORK_URL
-                                                  otherButtonTitles:OUTTER_NETWORK_URL, nil];
+                                             destructiveButtonTitle:nil
+                                                  otherButtonTitles:nil, nil];
+        [sheet addButtonWithTitle:self.innerNetworkTitle];
+        [sheet addButtonWithTitle:self.outerNetworkTitle];
         [sheet showInView:self.view];
     }
 }
@@ -108,12 +123,14 @@
     if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"退出登录"]){
         [self logout];
     }
-    if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:INNER_NETWORK_URL]){
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:SHOULD_USE_INNER_NETWORK];
+    if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:self.innerNetworkTitle] &&
+       ![[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_INNER_NETWORK]){
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SHOULD_USE_INNER_NETWORK];
         [self logout];
     }
-    if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:OUTTER_NETWORK_URL]){
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SHOULD_USE_INNER_NETWORK];
+    if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:self.outerNetworkTitle] &&
+       [[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_INNER_NETWORK]){
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:SHOULD_USE_INNER_NETWORK];
         [self logout];
     }
 
@@ -132,7 +149,6 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     
     //delete all objects in core data
-#warning fix this
 //    [self clearCoreData];
 
 }
