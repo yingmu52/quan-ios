@@ -8,8 +8,9 @@
 
 #import "AppDelegate.h"
 #import "ECSlidingViewController.h"
-//#import "AFNetworkActivityLogger.h"
 #import <TencentOpenAPI/TencentOAuth.h>
+#import "User.h"
+#import "LoginViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -18,15 +19,17 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
     
-    // configure anchored layout
-    ECSlidingViewController *root = (ECSlidingViewController *)self.window.rootViewController;
-    root.anchorRightPeekAmount = root.view.frame.size.width * (640 - 290.0)/640;
-    
-    root.underLeftViewController.edgesForExtendedLayout = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeLeft;
-    
-//    [[AFNetworkActivityLogger sharedLogger] startLogging];
+    if ([User isUserLogin]){
+        ECSlidingViewController *root = (ECSlidingViewController *)self.window.rootViewController;
+        root.anchorRightPeekAmount = root.view.frame.size.width * (640 - 290.0)/640;
+        root.underLeftViewController.edgesForExtendedLayout = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeLeft;
+    }else{
+        UIStoryboard *storyBoard = self.window.rootViewController.storyboard;
+        LoginViewController *loginVC = [storyBoard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        self.window.rootViewController = loginVC;
+        [self.window makeKeyAndVisible];
+    }
 
     return YES;
 }

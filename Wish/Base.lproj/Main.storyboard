@@ -876,10 +876,114 @@
             </objects>
             <point key="canvasLocation" x="-775.5" y="189"/>
         </scene>
+        <!--Login View Controller-->
+        <scene sceneID="lMp-Y1-bRB">
+            <objects>
+                <viewController storyboardIdentifier="LoginViewController" id="Pro-KE-lhb" customClass="LoginViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kUN-rP-j1F"/>
+                        <viewControllerLayoutGuide type="bottom" id="zUJ-aZ-Pim"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="s3U-1Q-hYe">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pDI-Je-6Pa">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="QQ 登录">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="login:" destination="Pro-KE-lhb" eventType="touchUpInside" id="zUe-cH-ZfR"/>
+                                </connections>
+                            </button>
+                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="请填写姓名" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a1J-1f-kGX">
+                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="310" id="HgN-Q3-K1x"/>
+                                    <constraint firstAttribute="height" constant="30" id="U4g-XJ-Lar"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="HgN-Q3-K1x"/>
+                                        <exclude reference="U4g-XJ-Lar"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="HgN-Q3-K1x"/>
+                                        <include reference="U4g-XJ-Lar"/>
+                                    </mask>
+                                </variation>
+                            </textField>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y3a-Ls-gIj">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="进入新世界">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="pDI-Je-6Pa" secondAttribute="centerX" id="1Um-Zg-3cT"/>
+                            <constraint firstItem="Y3a-Ls-gIj" firstAttribute="centerX" secondItem="a1J-1f-kGX" secondAttribute="centerX" constant="0.5" id="6B0-tK-cGe"/>
+                            <constraint firstAttribute="centerY" secondItem="a1J-1f-kGX" secondAttribute="centerY" constant="195" id="6b1-EZ-6CU"/>
+                            <constraint firstAttribute="centerX" secondItem="a1J-1f-kGX" secondAttribute="centerX" id="Ivd-yo-wJZ"/>
+                            <constraint firstItem="pDI-Je-6Pa" firstAttribute="centerY" secondItem="s3U-1Q-hYe" secondAttribute="centerY" id="rU1-KY-dtk"/>
+                            <constraint firstItem="Y3a-Ls-gIj" firstAttribute="top" secondItem="a1J-1f-kGX" secondAttribute="bottom" constant="20" id="raF-36-C6N"/>
+                            <constraint firstItem="pDI-Je-6Pa" firstAttribute="leading" secondItem="s3U-1Q-hYe" secondAttribute="leading" constant="177" id="sBQ-Ik-SWc">
+                                <variation key="heightClass=regular-widthClass=compact" constant="171"/>
+                            </constraint>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="pDI-Je-6Pa"/>
+                                <exclude reference="a1J-1f-kGX"/>
+                                <exclude reference="Y3a-Ls-gIj"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="6b1-EZ-6CU"/>
+                                <exclude reference="Ivd-yo-wJZ"/>
+                                <exclude reference="6B0-tK-cGe"/>
+                                <exclude reference="raF-36-C6N"/>
+                                <exclude reference="1Um-Zg-3cT"/>
+                                <exclude reference="rU1-KY-dtk"/>
+                                <exclude reference="sBQ-Ik-SWc"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="pDI-Je-6Pa"/>
+                                <include reference="a1J-1f-kGX"/>
+                                <include reference="Y3a-Ls-gIj"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="6b1-EZ-6CU"/>
+                                <include reference="Ivd-yo-wJZ"/>
+                                <include reference="6B0-tK-cGe"/>
+                                <include reference="raF-36-C6N"/>
+                                <include reference="1Um-Zg-3cT"/>
+                                <include reference="rU1-KY-dtk"/>
+                                <exclude reference="sBQ-Ik-SWc"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="accessMainViewButton" destination="Y3a-Ls-gIj" id="AEB-zC-oOX"/>
+                        <outlet property="loginButton" destination="pDI-Je-6Pa" id="FeM-mz-5k9"/>
+                        <outlet property="textField" destination="a1J-1f-kGX" id="xAz-SM-Mbr"/>
+                        <segue destination="vXZ-lx-hvc" kind="show" identifier="showMainView" id="iIJ-UW-UUS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l2d-7Y-UWq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2529" y="-1440"/>
+        </scene>
         <!--Sliding View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ECSlidingViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ECSlidingViewController" id="vXZ-lx-hvc" customClass="ECSlidingViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -4241,9 +4345,11 @@
                     <navigationItem key="navigationItem" id="oDz-Pi-ybt"/>
                     <connections>
                         <outlet property="iconImageView" destination="m8x-Dn-Mul" id="XAh-VL-h4C"/>
+                        <segue destination="plc-8i-1SL" kind="unwind" identifier="showLoginView" unwindAction="unwindToLoginViewController:" id="LOc-yc-hhq"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bDw-Cl-yWH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="plc-8i-1SL" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-3523.5" y="1453.5"/>
         </scene>

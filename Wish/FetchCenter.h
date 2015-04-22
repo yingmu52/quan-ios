@@ -24,7 +24,7 @@
 - (void)didFinishFetchingFollowingPlanList;
 - (void)didFinishUploadingPlan:(Plan *)plan;
 - (void)didFinishUploadingFeed:(Feed *)feed;
-- (void)didFinishReceivingUid:(NSString *)uid uKey:(NSString *)uKey;
+- (void)didFinishReceivingUid:(NSString *)uid uKey:(NSString *)uKey isNewUser:(BOOL)isNew userInfo:(NSDictionary *)userInfo;
 - (void)didFinishUpdatingPlan:(Plan *)plan;
 - (void)didFinishCheckingNewVersion:(BOOL)hasNewVersion;
 - (void)didFinishUploadingPictureForProfile:(NSDictionary *)info;
@@ -66,7 +66,7 @@
 - (void)checkVersion;
 - (void)uploadNewProfilePicture:(UIImage *)picture;
 - (void)updatePersonalInfo:(NSString *)nickName gender:(NSString *)gender;
-//- (void)createPersonalInfo:(NSString *)nickName gender:(NSString *)gender;
+
 
 #pragma mark - ultility
 - (NSURL *)urlWithImageID:(NSString *)imageId;

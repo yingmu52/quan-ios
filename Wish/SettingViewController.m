@@ -139,18 +139,19 @@
     //delete user info
     [User updateOwnerInfo:nil];
     
-    //reload menu
-    ECSlidingViewController *slidingVC = (ECSlidingViewController *)self.presentingViewController;
-    MenuViewController *menuVC = (MenuViewController *)slidingVC.underLeftViewController;
-    [menuVC.tableView reloadData];
+//    //reload menu
+//    ECSlidingViewController *slidingVC = (ECSlidingViewController *)self.presentingViewController;
+//    MenuViewController *menuVC = (MenuViewController *)slidingVC.underLeftViewController;
+//    [menuVC.tableView reloadData];
     
-    //reset top view
-    slidingVC.topViewController = nil;
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    //reset top view
+//    slidingVC.topViewController = nil;
+//    [self dismissViewControllerAnimated:YES completion:nil];
     
     //delete plans that do not belong to self in core data
     [self clearCoreData];
-
+    
+    [self performSegueWithIdentifier:@"showLoginView" sender:nil];
 }
 
 - (void)clearCoreData{

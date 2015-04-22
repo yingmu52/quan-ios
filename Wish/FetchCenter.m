@@ -40,7 +40,7 @@
 #define USER @"man/"
 #define GETUID @"splan_get_uid.php"
 #define UPDATE_USER_INFO @"splan_man_update.php"
-#define CREATE_USER_INFO @"splan_man_create.php"
+#define SET_USER_INFO @"splan_man_set.php"
 
 #define OTHER @"other/"
 #define CHECK_NEW_VERSION @"splan_other_new_version.php"
@@ -191,13 +191,7 @@ typedef enum{
     [self postImageWithOperation:picture postOp:FetchCenterPostOpUploadImageForUpdaingProfile];
 }
 
-//- (void)createPersonalInfo:(NSString *)nickName gender:(NSString *)gender{
-//    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,USER,CREATE_USER_INFO];
-//    [self getRequest:rqtStr parameter:@{@"name":[nickName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-//                                        @"gender":[gender isEqualToString:@"男"] ? @(0):@(1)}
-//           operation:FetchCenterGetOpCreatePersonalInfo
-//              entity:@[nickName,gender]];
-//}
+
 
 - (void)updatePersonalInfo:(NSString *)nickName gender:(NSString *)gender{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,USER,UPDATE_USER_INFO];
@@ -347,7 +341,12 @@ typedef enum{
         case FetchCenterGetOpLoginForUidAndUkey:{
             NSString *uid = [json valueForKeyPath:@"data.uid"];
             NSString *ukey = [json valueForKeyPath:@"data.ukey"];
-            [self.delegate didFinishReceivingUid:uid uKey:ukey];
+            BOOL isNewUser = [[json valueForKeyPath:@"data.isNew"] boolValue];
+            NSDictionary *userInfo = [json valueForKeyPath:@"data.maninfo"];
+            [self.delegate didFinishReceivingUid:uid
+                                            uKey:ukey
+                                       isNewUser:isNewUser
+                                        userInfo:userInfo];
         }
             break;
         case FetchCenterGetOpUpdatePlan:{
