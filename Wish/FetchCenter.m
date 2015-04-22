@@ -64,7 +64,7 @@ typedef enum{
     FetchCenterGetOpLoginForUidAndUkey,
     FetchCenterGetOpCheckNewVersion,
     FetchCenterGetOpUpdatePersonalInfo,
-    FetchCenterGetOpCreatePersonalInfo,
+    FetchCenterGetOpSetPersonalInfo,
     FetchCenterGetOpDiscoverPlans,
     FetchCenterGetOpLikeAFeed,
     FetchCenterGetOpUnLikeAFeed,
@@ -192,7 +192,6 @@ typedef enum{
 }
 
 
-
 - (void)updatePersonalInfo:(NSString *)nickName gender:(NSString *)gender{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,USER,UPDATE_USER_INFO];
     [self getRequest:rqtStr parameter:@{@"name":[nickName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
@@ -201,6 +200,16 @@ typedef enum{
               entity:@[nickName,gender]];
 
 }
+
+- (void)setPersonalInfo:(NSString *)nickName gender:(NSString *)gender{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,USER,SET_USER_INFO];
+    [self getRequest:rqtStr parameter:@{@"name":[nickName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                                        @"gender":[gender isEqualToString:@"男"] ? @(0):@(1)}
+           operation:FetchCenterGetOpSetPersonalInfo
+              entity:@[nickName,gender]];
+    
+}
+#pragma mark - Plan
 - (void)updatePlan:(Plan *)plan{
     //输入样例：id=hello_1421235901&title=hello_title2&finishDate=3&backGroudPic=bg3&private=1&state=1&finishPercent=20
     //—— 每一项都可以单独更新
@@ -359,12 +368,13 @@ typedef enum{
             [self.delegate didFinishCheckingNewVersion:hasNewVersion];
         }
             break;
-//        case FetchCenterGetOpCreatePersonalInfo:{
-//            NSArray *info = (NSArray *)obj;
-//            [User updateAttributeFromDictionary:@{USER_DISPLAY_NAME:info[0],GENDER:info[1]}];
-//            [self.delegate didFinishCreatingPersonalInfo];
-//        }
-//            break;
+        case FetchCenterGetOpSetPersonalInfo:{
+            NSArray *info = (NSArray *)obj; // nickname,gender
+            [User updateAttributeFromDictionary:@{USER_DISPLAY_NAME:info[0],
+                                                  GENDER:info[1]}];
+            [self.delegate didFinishSettingPersonalInfo];
+        }
+            break;
         case FetchCenterGetOpUpdatePersonalInfo:{
             NSArray *info = (NSArray *)obj;
             [User updateAttributeFromDictionary:@{USER_DISPLAY_NAME:info[0],GENDER:info[1]}];

@@ -12,6 +12,7 @@
 #import "MenuViewController.h"
 #import "FetchCenter.h"
 #import "SDWebImageCompat.h"
+#import "LoginViewController.h"
 @interface SettingViewController () <UIGestureRecognizerDelegate,FetchCenterDelegate,UIActionSheetDelegate>
 @property (nonatomic,strong) UIView *currentView;
 
@@ -151,7 +152,12 @@
     //delete plans that do not belong to self in core data
     [self clearCoreData];
     
-    [self performSegueWithIdentifier:@"showLoginView" sender:nil];
+    [self showLoginView];
+}
+
+- (void)showLoginView{
+    LoginViewController *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    [self presentViewController:loginVC animated:NO completion:nil];
 }
 
 - (void)clearCoreData{

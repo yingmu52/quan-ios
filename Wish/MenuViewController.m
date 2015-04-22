@@ -13,7 +13,7 @@
 #import "User.h"
 #import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 #import "UIViewController+ECSlidingViewController.h"
-
+#import "FetchCenter.h"
 typedef enum {
     MenuTableWishList = 0,
     MenuTableJourney,
@@ -42,9 +42,7 @@ typedef enum {
     _versionLabel.text = @"Version 2.7.5";
 }
 - (IBAction)showSettingsView:(UIButton *)sender{
-    if ([User isUserLogin]){
-        [self performSegueWithIdentifier:@"showSettingView" sender:nil];
-    }
+    [self performSegueWithIdentifier:@"showSettingView" sender:nil];
 }
 
 - (IBAction)unwindToMenuViewController:(UIStoryboardSegue *)segue
@@ -80,17 +78,15 @@ typedef enum {
 - (MenuCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MenuCell *cell = (MenuCell *)[super tableView:tableView cellForRowAtIndexPath:indexPath];
     if (indexPath.section == MenuSectionLogin) {
-
-        if (![User isUserLogin]) {
-            cell.menuImageView.image = [Theme menuLoginDefault];
-            cell.menuTitle.text = @"登录";
-        }else{
-            NSString *newPicId = [User updatedProfilePictureId];
-//            NSURL *url = [newPicId isEqualToString:@""] ? [User userProfilePictureURL] : [self.fetchCenter urlWithImageID:newPicId];
-//            [cell.menuImageView setImageWithURL:url
-//                    usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-            cell.menuTitle.text = [User userDisplayName];
-        }
+        NSString *newPicId = [User updatedProfilePictureId];
+        NSURL *url = [newPicId isEqualToString:@""] ? [User userProfilePictureURL] : [[FetchCenter new] urlWithImageID:newPicId];
+        [cell.menuImageView setImageWithURL:url
+                usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        cell.menuTitle.text = [User userDisplayName];
+//        if (![User isUserLogin]) {
+//            cell.menuImageView.image = [Theme menuLoginDefault];
+//            cell.menuTitle.text = @"登录";
+//        }
     }
     
     if (indexPath.section == MenuSectionMid && indexPath.row == MenuTableFollow){
@@ -108,31 +104,25 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == MenuSectionLogin && ![User isUserLogin]){
-//        [self login];
-    }
-
-    if ([User isUserLogin]) {
-        if (indexPath.section == MenuSectionMid) {
-            NSString *identifier;
-            switch (indexPath.row) {
-                case MenuTableWishList:
-                    identifier = @"showWishList";
-                    break;
-                case MenuTableJourney:
-                    identifier = @"ShowAcheivementList";
-                    break;
-                case MenuTableFollow:
-                    identifier = @"ShowFollowingFeed";
-                    break;
-                case MenuTableDiscover:
-                    identifier = @"ShowDiscoveryList";
-                    break;
-                default:
-                    break;
-            }
-            [self performSegueWithIdentifier:identifier sender:nil];
+    if (indexPath.section == MenuSectionMid) {
+        NSString *identifier;
+        switch (indexPath.row) {
+            case MenuTableWishList:
+                identifier = @"showWishList";
+                break;
+            case MenuTableJourney:
+                identifier = @"ShowAcheivementList";
+                break;
+            case MenuTableFollow:
+                identifier = @"ShowFollowingFeed";
+                break;
+            case MenuTableDiscover:
+                identifier = @"ShowDiscoveryList";
+                break;
+            default:
+                break;
         }
+        [self performSegueWithIdentifier:identifier sender:nil];
     }
 }
 

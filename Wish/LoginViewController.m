@@ -13,6 +13,7 @@
 #import "SDWebImageCompat.h"
 #import "User.h"
 #import "ECSlidingViewController.h"
+#import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 #define AppKey @"ByYhJYTkXu0721fH"
 #define AppID @"1104337894"
 
@@ -25,6 +26,7 @@
 @property (nonatomic,weak) IBOutlet UIButton *loginButton;
 @property (nonatomic,weak) IBOutlet UIButton *accessMainViewButton;
 @property (nonatomic,weak) IBOutlet UITextField *textField;
+@property (nonatomic,weak) IBOutlet UIImageView *profileImageView;
 @end
 @implementation LoginViewController
 
@@ -113,8 +115,8 @@
         dispatch_main_async_safe((^{
             
             if (isNew) {
-                [self processUserInfo];
-            }else{
+                [self processUserInfo:fetchedUserInfo];
+            }else if (userInfo){
                 NSDictionary *localUserInfo = @{ACCESS_TOKEN:self.tencentOAuth.accessToken,
                                                 OPENID:self.tencentOAuth.openId,
                                                 EXPIRATION_DATE:self.tencentOAuth.expirationDate,
@@ -132,14 +134,6 @@
     }
 }
 
-- (void)processUserInfo{
-    self.loginButton.hidden = YES;
-    self.textField.hidden = NO;
-    self.accessMainViewButton.hidden = NO;
-    //update user info
-//    [self.fetchCenter updatePersonalInfo:[NSString stringWithFormat:@"%@ ",nickName] gender:gender];
-
-}
 //login fail
 -(void)tencentDidNotLogin:(BOOL)cancelled
 {
@@ -180,9 +174,62 @@
     }
 }
 
+
+#pragma mark - new user registration
+- (void)processUserInfo:(NSDictionary *)qqInfo{
+    self.loginButton.hidden = YES;
+    self.profileImageView.hidden = NO;
+    
+    //download head url for uploading to our server
+    [self.profileImageView setImageWithURL:[NSURL URLWithString:qqInfo[@"figureurl_qq_2"]]
+                          placeholderImage:[UIImage imageNamed:@"placeholder.png"]
+                                 completed:^(UIImage *image,
+                                             NSError *error,
+                                             SDImageCacheType cacheType,
+                                             NSURL *imageURL)
+    {
+        //upload image on login
+        [self.fetchCenter uploadNewProfilePicture:image];
+        
+        //show text field and aceess button
+        self.textField.hidden = NO;
+        self.accessMainViewButton.hidden = NO;
+
+    } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    //    [self.fetchCenter updatePersonalInfo:[NSString stringWithFormat:@"%@ ",nickName] gender:gender];
+    
+}
+
+- (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
+    [self handleFailure:info];
+}
+
+- (void)didFinishUploadingPictureForProfile:(NSDictionary *)info{
+    //finish uploading profile picture, imageid saved
+}
+
+- (void)handleFailure:(NSDictionary *)info{
+    dispatch_main_async_safe((^{
+        self.navigationItem.rightBarButtonItem = nil;
+        [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
+                                    message:[NSString stringWithFormat:@"%@",info[@"msg"]]
+                                   delegate:self
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil, nil] show];
+    }));
+    
+}
+
 - (IBAction)showMainView:(id)sender{
-    if (self.textField.hasText) {
-        [self performSegueWithIdentifier:@"showMainView" sender:nil];
+    NSDictionary *fetchedUserInfo = [self.apiResponse jsonResponse];
+    //upload user info
+    if (self.textField.hasText && fetchedUserInfo) {
+        [self.fetchCenter setPersonalInfo:self.textField.text gender:fetchedUserInfo[@"gender"]];
     }
 }
+
+- (void)didFinishSettingPersonalInfo{
+    [self performSegueWithIdentifier:@"showMainView" sender:nil];
+}
+
 @end

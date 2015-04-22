@@ -30,7 +30,7 @@
 - (void)didFinishUploadingPictureForProfile:(NSDictionary *)info;
 - (void)didfinishFetchingDiscovery:(NSArray *)plans;
 - (void)didFinishUpdatingPersonalInfo;
-//- (void)didFinishCreatingPersonalInfo;
+- (void)didFinishSettingPersonalInfo;
 - (void)didFinishSendingFeedBack;
 - (void)didFinishLoadingFeedList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage;
 
@@ -66,7 +66,7 @@
 - (void)checkVersion;
 - (void)uploadNewProfilePicture:(UIImage *)picture;
 - (void)updatePersonalInfo:(NSString *)nickName gender:(NSString *)gender;
-
+- (void)setPersonalInfo:(NSString *)nickName gender:(NSString *)gender;
 
 #pragma mark - ultility
 - (NSURL *)urlWithImageID:(NSString *)imageId;

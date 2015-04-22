@@ -885,6 +885,7 @@
                         <viewControllerLayoutGuide type="bottom" id="zUJ-aZ-Pim"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="s3U-1Q-hYe">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pDI-Je-6Pa">
@@ -922,14 +923,39 @@
                                 <state key="normal" title="进入新世界">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="showMainView:" destination="Pro-KE-lhb" eventType="touchUpInside" id="yJO-tN-S9A"/>
+                                </connections>
                             </button>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7zn-GY-gSS">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="7zn-GY-gSS" secondAttribute="height" multiplier="1:1" id="OXo-gg-FoW"/>
+                                    <constraint firstAttribute="height" constant="50" id="fs2-OD-7Ji"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="OXo-gg-FoW"/>
+                                        <exclude reference="fs2-OD-7Ji"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="OXo-gg-FoW"/>
+                                        <include reference="fs2-OD-7Ji"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="pDI-Je-6Pa" secondAttribute="centerX" id="1Um-Zg-3cT"/>
                             <constraint firstItem="Y3a-Ls-gIj" firstAttribute="centerX" secondItem="a1J-1f-kGX" secondAttribute="centerX" constant="0.5" id="6B0-tK-cGe"/>
                             <constraint firstAttribute="centerY" secondItem="a1J-1f-kGX" secondAttribute="centerY" constant="195" id="6b1-EZ-6CU"/>
+                            <constraint firstItem="pDI-Je-6Pa" firstAttribute="top" secondItem="7zn-GY-gSS" secondAttribute="bottom" constant="8" id="7E1-uQ-0qp"/>
                             <constraint firstAttribute="centerX" secondItem="a1J-1f-kGX" secondAttribute="centerX" id="Ivd-yo-wJZ"/>
+                            <constraint firstItem="7zn-GY-gSS" firstAttribute="centerX" secondItem="a1J-1f-kGX" secondAttribute="centerX" id="cIt-a2-aU4"/>
+                            <constraint firstItem="7zn-GY-gSS" firstAttribute="top" secondItem="pDI-Je-6Pa" secondAttribute="bottom" constant="19" id="jBZ-RC-XPD"/>
                             <constraint firstItem="pDI-Je-6Pa" firstAttribute="centerY" secondItem="s3U-1Q-hYe" secondAttribute="centerY" id="rU1-KY-dtk"/>
                             <constraint firstItem="Y3a-Ls-gIj" firstAttribute="top" secondItem="a1J-1f-kGX" secondAttribute="bottom" constant="20" id="raF-36-C6N"/>
                             <constraint firstItem="pDI-Je-6Pa" firstAttribute="leading" secondItem="s3U-1Q-hYe" secondAttribute="leading" constant="177" id="sBQ-Ik-SWc">
@@ -941,13 +967,17 @@
                                 <exclude reference="pDI-Je-6Pa"/>
                                 <exclude reference="a1J-1f-kGX"/>
                                 <exclude reference="Y3a-Ls-gIj"/>
+                                <exclude reference="7zn-GY-gSS"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="6b1-EZ-6CU"/>
                                 <exclude reference="Ivd-yo-wJZ"/>
                                 <exclude reference="6B0-tK-cGe"/>
                                 <exclude reference="raF-36-C6N"/>
+                                <exclude reference="cIt-a2-aU4"/>
+                                <exclude reference="jBZ-RC-XPD"/>
                                 <exclude reference="1Um-Zg-3cT"/>
+                                <exclude reference="7E1-uQ-0qp"/>
                                 <exclude reference="rU1-KY-dtk"/>
                                 <exclude reference="sBQ-Ik-SWc"/>
                             </mask>
@@ -957,13 +987,17 @@
                                 <include reference="pDI-Je-6Pa"/>
                                 <include reference="a1J-1f-kGX"/>
                                 <include reference="Y3a-Ls-gIj"/>
+                                <include reference="7zn-GY-gSS"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="6b1-EZ-6CU"/>
                                 <include reference="Ivd-yo-wJZ"/>
                                 <include reference="6B0-tK-cGe"/>
                                 <include reference="raF-36-C6N"/>
+                                <include reference="cIt-a2-aU4"/>
+                                <exclude reference="jBZ-RC-XPD"/>
                                 <include reference="1Um-Zg-3cT"/>
+                                <include reference="7E1-uQ-0qp"/>
                                 <include reference="rU1-KY-dtk"/>
                                 <exclude reference="sBQ-Ik-SWc"/>
                             </mask>
@@ -972,6 +1006,7 @@
                     <connections>
                         <outlet property="accessMainViewButton" destination="Y3a-Ls-gIj" id="AEB-zC-oOX"/>
                         <outlet property="loginButton" destination="pDI-Je-6Pa" id="FeM-mz-5k9"/>
+                        <outlet property="profileImageView" destination="7zn-GY-gSS" id="aqZ-Uj-CGp"/>
                         <outlet property="textField" destination="a1J-1f-kGX" id="xAz-SM-Mbr"/>
                         <segue destination="vXZ-lx-hvc" kind="show" identifier="showMainView" id="iIJ-UW-UUS"/>
                     </connections>
@@ -4345,11 +4380,9 @@
                     <navigationItem key="navigationItem" id="oDz-Pi-ybt"/>
                     <connections>
                         <outlet property="iconImageView" destination="m8x-Dn-Mul" id="XAh-VL-h4C"/>
-                        <segue destination="plc-8i-1SL" kind="unwind" identifier="showLoginView" unwindAction="unwindToLoginViewController:" id="LOc-yc-hhq"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bDw-Cl-yWH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="plc-8i-1SL" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-3523.5" y="1453.5"/>
         </scene>
