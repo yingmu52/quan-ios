@@ -201,10 +201,11 @@ typedef enum{
 
 }
 
-- (void)setPersonalInfo:(NSString *)nickName gender:(NSString *)gender{
+- (void)setPersonalInfo:(NSString *)nickName gender:(NSString *)gender imageId:(NSString *)imageId{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,USER,SET_USER_INFO];
     [self getRequest:rqtStr parameter:@{@"name":[nickName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                                        @"gender":[gender isEqualToString:@"男"] ? @(0):@(1)}
+                                        @"gender":[gender isEqualToString:@"男"] ? @(0):@(1),
+                                        @"headUrl":imageId}
            operation:FetchCenterGetOpSetPersonalInfo
               entity:@[nickName,gender]];
     
@@ -280,6 +281,7 @@ typedef enum{
             //update local User info
             if (fetchedImageId){
                 [User updateAttributeFromDictionary:@{PROFILE_PICTURE_ID_CUSTOM:fetchedImageId}];
+                NSLog(@"image uploaded %@",fetchedImageId);
                 [self.delegate didFinishUploadingPictureForProfile:json];
             }
         }

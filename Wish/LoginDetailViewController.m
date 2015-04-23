@@ -74,9 +74,9 @@
 
 - (IBAction)showMainView:(id)sender{
     //upload user info
-    if (self.textField.hasText) {
-        [self.fetchCenter setPersonalInfo:self.textField.text gender:[User gender]];
-    }
+    NSString *gender = [User gender];
+    NSString *profilePicId = [User updatedProfilePictureId];
+    [self.fetchCenter setPersonalInfo:self.textField.text gender:gender imageId:profilePicId];
 }
 
 - (void)didFinishSettingPersonalInfo{

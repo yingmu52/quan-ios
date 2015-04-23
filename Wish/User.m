@@ -16,15 +16,13 @@
 
 + (void)updateOwnerInfo:(NSDictionary *)info{
     [[NSUserDefaults standardUserDefaults] setObject:info forKey:OWNERINFO];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (void)updateAttributeFromDictionary:(NSDictionary *)info{
-    NSDictionary *oldOwnerInfo = [[self.class getOwnerInfo] mutableCopy];
+    NSMutableDictionary *oldOwnerInfo = [[self.class getOwnerInfo] mutableCopy];
     for (NSString *key in [info allKeys]){
-        if ([oldOwnerInfo objectForKey:key]){
-            [oldOwnerInfo setValue:info[key] forKey:key];
-        }
-        
+        oldOwnerInfo[key] = info[key];
     }
     [self.class updateOwnerInfo:oldOwnerInfo];
 }
