@@ -65,6 +65,9 @@
                                         <include reference="6fN-4R-scH"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="morePressed:" destination="pxc-Ad-lPE" eventType="touchUpInside" id="9WK-Rt-phc"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="评论" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2u-ox-IP2">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>

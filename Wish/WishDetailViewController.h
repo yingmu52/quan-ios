@@ -14,7 +14,7 @@
 #import "Feed+FeedCRUD.h"
 #import "UIImage+ImageEffects.h"
 #import "AppDelegate.h"
-@interface WishDetailViewController : FirstTableViewController
+@interface WishDetailViewController : FirstTableViewController <NSFetchedResultsControllerDelegate,WishDetailCellDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC; //fetching Feed
 @property (nonatomic,strong) Plan *plan; //must set
 - (void)setUpNavigationItem;

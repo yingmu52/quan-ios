@@ -13,8 +13,9 @@
 
 @protocol WishDetailCellDelegate <NSObject>
 
+@optional
 - (void)didPressedLikeOnCell:(WishDetailCell *)cell;
-
+- (void)didPressedMoreOnCell:(WishDetailCell *)cell;
 
 @end
 

@@ -62,4 +62,7 @@
     [self.delegate didPressedLikeOnCell:self];
 }
 
+- (IBAction)morePressed:(UIButton *)sender{
+    [self.delegate didPressedMoreOnCell:self];
+}
 @end

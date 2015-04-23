@@ -10,6 +10,8 @@
 #import "PostFeedViewController.h"
 #import "EditWishViewController.h"
 #import "ImagePicker.h"
+#import "UIActionSheet+Blocks.h"
+
 @interface WishDetailVCOwner () <UIImagePickerControllerDelegate,UIGestureRecognizerDelegate,UINavigationControllerDelegate,ImagePickerDelegate>
 @property (nonatomic) BOOL shouldShowSideWidgets;
 @property (nonatomic,strong) UIButton *logoButton;
@@ -208,4 +210,20 @@
 - (void)fetchResultsControllerDidInsert{
     [self.tableView setContentOffset:CGPointZero animated:YES]; //scroll to top
 }
+
+#pragma mark - wish detail cell delegate
+- (void)didPressedMoreOnCell:(WishDetailCell *)cell{
+    [UIActionSheet showInView:self.tableView withTitle:nil cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles:@[@"分享这张照片"] tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+        NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
+        if ([title isEqualToString:@"分享这张照片"]) {
+            NSLog(@"share feed");
+        }else if ([title isEqualToString:@"删除"]){
+            
+        }
+    }];
+}
+
+
+#pragma mark - delete feed
+
 @end
