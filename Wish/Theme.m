@@ -195,11 +195,11 @@
 
 
 + (UIImage *)likeButtonLiked{
-    return [UIImage imageNamed:@"fadein_ic_like_selected"];
+    return [UIImage imageNamed:@"ic_like_selected"];
 }
 
 + (UIImage *)likeButtonUnLiked{
-    return [UIImage imageNamed:@"fadein_ic_like_default"];
+    return [UIImage imageNamed:@"ic_like_default"];
 }
 @end
 
