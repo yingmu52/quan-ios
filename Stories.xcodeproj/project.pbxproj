@@ -61,6 +61,7 @@
 		AE9A3AEB1A9B1DB000F0588F /* AchieveVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9A3AEA1A9B1DB000F0588F /* AchieveVCData.m */; };
 		AE9A3AEC1A9B1DB000F0588F /* AchieveVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9A3AEA1A9B1DB000F0588F /* AchieveVCData.m */; };
 		AEBECCF31AE7687900EDF385 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBECCF21AE7687900EDF385 /* LoginViewController.m */; };
+		AEBECCF91AE8A16600EDF385 /* LoginDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBECCF81AE8A16600EDF385 /* LoginDetailViewController.m */; };
 		AEBFCA371A78614100686EFE /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA361A78614100686EFE /* PostDetailViewController.m */; };
 		AEBFCA381A78614100686EFE /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA361A78614100686EFE /* PostDetailViewController.m */; };
 		AEC0E1C51AC64F9600563F7C /* WishDetailVCOwnerAchieved.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC0E1C41AC64F9600563F7C /* WishDetailVCOwnerAchieved.m */; };
@@ -285,6 +286,8 @@
 		AE9A3AEA1A9B1DB000F0588F /* AchieveVCData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AchieveVCData.m; sourceTree = "<group>"; };
 		AEBECCF11AE7687800EDF385 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		AEBECCF21AE7687900EDF385 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		AEBECCF71AE8A16600EDF385 /* LoginDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginDetailViewController.h; sourceTree = "<group>"; };
+		AEBECCF81AE8A16600EDF385 /* LoginDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginDetailViewController.m; sourceTree = "<group>"; };
 		AEBFCA351A78614100686EFE /* PostDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostDetailViewController.h; sourceTree = "<group>"; };
 		AEBFCA361A78614100686EFE /* PostDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostDetailViewController.m; sourceTree = "<group>"; };
 		AEC0E1C31AC64F9600563F7C /* WishDetailVCOwnerAchieved.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishDetailVCOwnerAchieved.h; sourceTree = "<group>"; };
@@ -770,6 +773,8 @@
 		AEEC6C751A6DB5EE0021B7E4 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				AEBECCF71AE8A16600EDF385 /* LoginDetailViewController.h */,
+				AEBECCF81AE8A16600EDF385 /* LoginDetailViewController.m */,
 				AEBECCF11AE7687800EDF385 /* LoginViewController.h */,
 				AEBECCF21AE7687900EDF385 /* LoginViewController.m */,
 				AE72E9531A66F2AA0046B38D /* MenuCell.h */,
@@ -1128,6 +1133,7 @@
 				AEF7F2831A686E8A0022410B /* ECSlidingAnimationController.m in Sources */,
 				AED4CB1E1AC7556800EE2DA4 /* KTCenterFlowLayout.m in Sources */,
 				AECE2BED1AA0521600B1C58E /* SDWebImageDecoder.m in Sources */,
+				AEBECCF91AE8A16600EDF385 /* LoginDetailViewController.m in Sources */,
 				AEF7F2871A686E8A0022410B /* ECSlidingSegue.m in Sources */,
 				AEBFCA371A78614100686EFE /* PostDetailViewController.m in Sources */,
 				AEEC6C4D1A6DAD9D0021B7E4 /* UIScrollView+VGParallaxHeader.m in Sources */,

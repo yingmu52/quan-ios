@@ -12,8 +12,9 @@
 #import "FetchCenter.h"
 #import "SDWebImageCompat.h"
 #import "User.h"
+#import "LoginDetailViewController.h"
 #import "ECSlidingViewController.h"
-#import "UIImageView+UIActivityIndicatorForSDWebImage.h"
+
 #define AppKey @"ByYhJYTkXu0721fH"
 #define AppID @"1104337894"
 
@@ -24,9 +25,6 @@
 
 
 @property (nonatomic,weak) IBOutlet UIButton *loginButton;
-@property (nonatomic,weak) IBOutlet UIButton *accessMainViewButton;
-@property (nonatomic,weak) IBOutlet UITextField *textField;
-@property (nonatomic,weak) IBOutlet UIImageView *profileImageView;
 @end
 @implementation LoginViewController
 
@@ -113,23 +111,27 @@
     if (fetchedUserInfo) {
         //update local user info & UI
         dispatch_main_async_safe((^{
+            NSDictionary *localUserInfo = @{ACCESS_TOKEN:self.tencentOAuth.accessToken,
+                                            OPENID:self.tencentOAuth.openId,
+                                            EXPIRATION_DATE:self.tencentOAuth.expirationDate,
+                                            PROFILE_PICTURE_ID:fetchedUserInfo[@"figureurl_qq_2"],
+                                            GENDER:fetchedUserInfo[@"gender"],
+                                            USER_DISPLAY_NAME:fetchedUserInfo[@"nickname"],
+                                            UID:uid,
+                                            UKEY:uKey};
+            [User updateOwnerInfo:localUserInfo];
             
-            if (isNew) {
-                [self processUserInfo:fetchedUserInfo];
-            }else if (userInfo){
-                NSDictionary *localUserInfo = @{ACCESS_TOKEN:self.tencentOAuth.accessToken,
-                                                OPENID:self.tencentOAuth.openId,
-                                                EXPIRATION_DATE:self.tencentOAuth.expirationDate,
-                                                PROFILE_PICTURE_ID:fetchedUserInfo[@"figureurl_qq_2"],
-                                                PROFILE_PICTURE_ID_CUSTOM:userInfo[@"headUrl"],
-                                                GENDER:[userInfo[@"gender"] boolValue] ? @"男" : @"女",
-                                                USER_DISPLAY_NAME:userInfo[@"name"],
-                                                UID:uid,
-                                                UKEY:uKey};
-                [User updateOwnerInfo:localUserInfo];
-                NSLog(@"%@",localUserInfo);
-                [self performSegueWithIdentifier:@"showMainView" sender:nil];
+            if (!isNew) {
+                NSDictionary *additionalUserInfo = @{PROFILE_PICTURE_ID_CUSTOM:userInfo[@"headUrl"],
+                                                     GENDER:[userInfo[@"gender"] boolValue] ? @"男" : @"女",
+                                                     USER_DISPLAY_NAME:userInfo[@"name"]};
+                [User updateAttributeFromDictionary:additionalUserInfo];
+//                NSLog(@"%@",localUserInfo);
+                [self performSegueWithIdentifier:@"showMainViewFromLogin" sender:nil];
+            }else{
+                [self performSegueWithIdentifier:@"showLoginDetail" sender:nil];
             }
+
         }));
     }
 }
@@ -159,77 +161,16 @@
  4. 建议应用在用户登录后，即调用getUserInfo接口获得该用户的头像、昵称并显示在界面上，使用户体验统一。
  */
 
-#pragma mark - logout 
-- (IBAction)unwindToLoginViewController:(UIStoryboardSegue *)segue
-{
-    //after returning to menue view
-}
 
-#pragma mark - segue 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if ([segue.identifier isEqualToString:@"showMainView"]) {
+    if ([segue.identifier isEqualToString:@"showMainViewFromLogin"]) {
         ECSlidingViewController *root = (ECSlidingViewController *)segue.destinationViewController;
         root.anchorRightPeekAmount = root.view.frame.size.width * (640 - 290.0)/640;
         root.underLeftViewController.edgesForExtendedLayout = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeLeft;
     }
-}
-
-
-#pragma mark - new user registration
-- (void)processUserInfo:(NSDictionary *)qqInfo{
-    self.loginButton.hidden = YES;
-    self.profileImageView.hidden = NO;
-    
-    //download head url for uploading to our server
-    [self.profileImageView setImageWithURL:[NSURL URLWithString:qqInfo[@"figureurl_qq_2"]]
-                          placeholderImage:[UIImage imageNamed:@"placeholder.png"]
-                                 completed:^(UIImage *image,
-                                             NSError *error,
-                                             SDImageCacheType cacheType,
-                                             NSURL *imageURL)
-    {
-        //upload image on login
-        [self.fetchCenter uploadNewProfilePicture:image];
-        
-        //show text field and aceess button
-        self.textField.hidden = NO;
-        self.accessMainViewButton.hidden = NO;
-
-    } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    //    [self.fetchCenter updatePersonalInfo:[NSString stringWithFormat:@"%@ ",nickName] gender:gender];
+    //    if ([segue.identifier isEqualToString:@"showLoginDetail"]) {
+    //        [segue.destinationViewController setUserInfo:sender];
+    //    }
     
 }
-
-- (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    [self handleFailure:info];
-}
-
-- (void)didFinishUploadingPictureForProfile:(NSDictionary *)info{
-    //finish uploading profile picture, imageid saved
-}
-
-- (void)handleFailure:(NSDictionary *)info{
-    dispatch_main_async_safe((^{
-        self.navigationItem.rightBarButtonItem = nil;
-        [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
-                                    message:[NSString stringWithFormat:@"%@",info[@"msg"]]
-                                   delegate:self
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil, nil] show];
-    }));
-    
-}
-
-- (IBAction)showMainView:(id)sender{
-    NSDictionary *fetchedUserInfo = [self.apiResponse jsonResponse];
-    //upload user info
-    if (self.textField.hasText && fetchedUserInfo) {
-        [self.fetchCenter setPersonalInfo:self.textField.text gender:fetchedUserInfo[@"gender"]];
-    }
-}
-
-- (void)didFinishSettingPersonalInfo{
-    [self performSegueWithIdentifier:@"showMainView" sender:nil];
-}
-
 @end

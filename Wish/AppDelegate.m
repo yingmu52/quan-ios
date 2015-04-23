@@ -17,9 +17,7 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
     if ([User isUserLogin]){
         ECSlidingViewController *root = (ECSlidingViewController *)self.window.rootViewController;
         root.anchorRightPeekAmount = root.view.frame.size.width * (640 - 290.0)/640;

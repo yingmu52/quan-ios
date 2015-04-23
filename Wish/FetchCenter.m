@@ -81,7 +81,7 @@ typedef enum{
 @property (nonatomic,strong) NSString *baseUrl;
 @end
 @implementation FetchCenter
-
+#warning fetch center
 - (NSString *)baseUrl{
 //    if ([[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_INNER_NETWORK]) {
         _baseUrl = [NSString stringWithFormat:@"%@%@",INNER_NETWORK_URL,PROJECT];
