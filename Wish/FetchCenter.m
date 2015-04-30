@@ -83,11 +83,11 @@ typedef enum{
 @implementation FetchCenter
 #warning fetch center
 - (NSString *)baseUrl{
-//    if ([[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_INNER_NETWORK]) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_INNER_NETWORK]) {
         _baseUrl = [NSString stringWithFormat:@"%@%@",INNER_NETWORK_URL,PROJECT];
-//    }else{
-//        _baseUrl = [NSString stringWithFormat:@"%@%@",OUTTER_NETWORK_URL,PROJECT];
-//    }
+    }else{
+        _baseUrl = [NSString stringWithFormat:@"%@%@",OUTTER_NETWORK_URL,PROJECT];
+    }
 //    NSLog(@"%@",_baseUrl);
     return _baseUrl;
 }

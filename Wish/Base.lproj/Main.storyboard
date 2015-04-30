@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment version="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -1028,14 +1028,14 @@
                                 <exclude reference="fsO-TR-xh4"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="YDp-QE-aK8"/>
+                                <exclude reference="KCo-qn-QXO"/>
+                                <exclude reference="MPd-rd-JlF"/>
+                                <exclude reference="Y9Q-Ef-Yhz"/>
                                 <exclude reference="Ma8-tK-hrH"/>
                                 <exclude reference="XZx-EZ-W8L"/>
                                 <exclude reference="p9a-fc-5jf"/>
                                 <exclude reference="sQp-Lu-vqH"/>
-                                <exclude reference="KCo-qn-QXO"/>
-                                <exclude reference="MPd-rd-JlF"/>
-                                <exclude reference="Y9Q-Ef-Yhz"/>
-                                <exclude reference="YDp-QE-aK8"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -1045,14 +1045,14 @@
                                 <include reference="fsO-TR-xh4"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="YDp-QE-aK8"/>
+                                <include reference="KCo-qn-QXO"/>
+                                <include reference="MPd-rd-JlF"/>
+                                <include reference="Y9Q-Ef-Yhz"/>
                                 <exclude reference="Ma8-tK-hrH"/>
                                 <include reference="XZx-EZ-W8L"/>
                                 <include reference="p9a-fc-5jf"/>
                                 <include reference="sQp-Lu-vqH"/>
-                                <include reference="KCo-qn-QXO"/>
-                                <include reference="MPd-rd-JlF"/>
-                                <include reference="Y9Q-Ef-Yhz"/>
-                                <exclude reference="YDp-QE-aK8"/>
                             </mask>
                         </variation>
                     </view>
@@ -4468,7 +4468,8 @@
                                                                     <exclude reference="adP-cZ-hyW"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact">
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="155" y="105" width="106" height="112"/>
                                                                 <mask key="constraints">
                                                                     <include reference="adP-cZ-hyW"/>
                                                                 </mask>
@@ -4476,6 +4477,9 @@
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tab_ic_login_default" translatesAutoresizingMaskIntoConstraints="NO" id="6Ek-F7-2bh" customClass="NZCircularImageView">
                                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="155" y="105" width="106" height="112"/>
+                                                            </variation>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vxw-kH-2iF" userLabel="bottomMargin">
                                                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -4509,7 +4513,8 @@
                                                                     <exclude reference="pvl-4u-Zta"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact">
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="237" y="185" width="39" height="38"/>
                                                                 <mask key="constraints">
                                                                     <include reference="pvl-4u-Zta"/>
                                                                 </mask>
@@ -4596,10 +4601,18 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottomMargin" secondItem="Ngg-fS-R8e" secondAttribute="bottom" constant="-8" id="T5h-xa-8eR"/>
-                                                <constraint firstItem="Ngg-fS-R8e" firstAttribute="leading" secondItem="g06-5H-gFr" secondAttribute="leadingMargin" constant="-8" id="ZOc-NL-5Fe"/>
-                                                <constraint firstItem="Ngg-fS-R8e" firstAttribute="top" secondItem="g06-5H-gFr" secondAttribute="topMargin" constant="-8" id="giC-8q-WP9"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Ngg-fS-R8e" secondAttribute="trailing" constant="-8" id="lAO-8t-mhf"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Ngg-fS-R8e" secondAttribute="bottom" constant="-8" id="T5h-xa-8eR">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="-16"/>
+                                                </constraint>
+                                                <constraint firstItem="Ngg-fS-R8e" firstAttribute="leading" secondItem="g06-5H-gFr" secondAttribute="leadingMargin" constant="-8" id="ZOc-NL-5Fe">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="-16"/>
+                                                </constraint>
+                                                <constraint firstItem="Ngg-fS-R8e" firstAttribute="top" secondItem="g06-5H-gFr" secondAttribute="topMargin" constant="-8" id="giC-8q-WP9">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="-16"/>
+                                                </constraint>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Ngg-fS-R8e" secondAttribute="trailing" constant="-8" id="lAO-8t-mhf">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="-16"/>
+                                                </constraint>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="subviews">
