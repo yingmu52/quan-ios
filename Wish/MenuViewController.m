@@ -15,10 +15,11 @@
 #import "UIViewController+ECSlidingViewController.h"
 #import "FetchCenter.h"
 typedef enum {
-    MenuTableWishList = 0,
-    MenuTableJourney,
+    MenuTableMyEvent = 0,
+//    MenuTableJourney,
     MenuTableDiscover,
-    MenuTableFollow
+    MenuTableFollow,
+    MenuTableMessage
 }MenuMidSection;
 
 typedef enum {
@@ -39,7 +40,7 @@ typedef enum {
 
 - (void)setVersionLabel:(UILabel *)versionLabel{
     _versionLabel = versionLabel;
-    _versionLabel.text = @"Version 2.7.5";
+    _versionLabel.text = @"Version 3.0";
 }
 - (IBAction)showSettingsView:(UIButton *)sender{
     [self performSegueWithIdentifier:@"showSettingView" sender:nil];
@@ -78,24 +79,23 @@ typedef enum {
 - (MenuCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MenuCell *cell = (MenuCell *)[super tableView:tableView cellForRowAtIndexPath:indexPath];
     if (indexPath.section == MenuSectionLogin) {
+        
         NSString *newPicId = [User updatedProfilePictureId];
+        
         NSURL *url = [newPicId isEqualToString:@""] ? [User userProfilePictureURL] : [[FetchCenter new] urlWithImageID:newPicId];
-        [cell.menuImageView setImageWithURL:url
-                usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        
+        [cell.menuImageView setImageWithURL:url usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        
         cell.menuTitle.text = [User userDisplayName];
-//        if (![User isUserLogin]) {
-//            cell.menuImageView.image = [Theme menuLoginDefault];
-//            cell.menuTitle.text = @"登录";
-//        }
     }
     
-    if (indexPath.section == MenuSectionMid && indexPath.row == MenuTableFollow){
-        cell.hidden = YES;
-    }
-    if (indexPath.section == MenuSectionLower) {
-            //only setting
-        [cell hideMessageButton];
-    }
+//    if (indexPath.section == MenuSectionMid && indexPath.row == MenuTableFollow){
+//        cell.hidden = YES;
+//    }
+//    if (indexPath.section == MenuSectionLower) {
+//            //only setting
+//        [cell hideMessageButton];
+//    }
 
     return cell;
 
@@ -107,17 +107,18 @@ typedef enum {
     if (indexPath.section == MenuSectionMid) {
         NSString *identifier;
         switch (indexPath.row) {
-            case MenuTableWishList:
+            case MenuTableMyEvent:
                 identifier = @"showWishList";
                 break;
-            case MenuTableJourney:
-                identifier = @"ShowAcheivementList";
+            case MenuTableDiscover:
+                identifier = @"ShowDiscoveryList";
                 break;
             case MenuTableFollow:
                 identifier = @"ShowFollowingFeed";
                 break;
-            case MenuTableDiscover:
-                identifier = @"ShowDiscoveryList";
+            case MenuTableMessage:
+//                identifier = @"ShowDiscoveryList";
+                return;
                 break;
             default:
                 break;
