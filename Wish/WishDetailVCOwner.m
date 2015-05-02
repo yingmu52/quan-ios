@@ -11,15 +11,15 @@
 #import "EditWishViewController.h"
 #import "ImagePicker.h"
 #import "UIActionSheet+Blocks.h"
-
-@interface WishDetailVCOwner () <UIImagePickerControllerDelegate,UIGestureRecognizerDelegate,UINavigationControllerDelegate,ImagePickerDelegate>
+#import "PopupView.h"
+@interface WishDetailVCOwner () <UIImagePickerControllerDelegate,UIGestureRecognizerDelegate,UINavigationControllerDelegate,ImagePickerDelegate,PopupViewDelegate>
 @property (nonatomic) BOOL shouldShowSideWidgets;
 @property (nonatomic,strong) UIButton *logoButton;
 @property (nonatomic,strong) UILabel *labelUnderLogo;
 //@property (nonatomic,strong) UIImage *capturedImage;
 @property (nonatomic,strong) UIButton *cameraButton;
-
 @property (nonatomic) CGFloat lastContentOffSet; // for camera animation
+
 @end
 @implementation WishDetailVCOwner
 
@@ -218,12 +218,45 @@
         if ([title isEqualToString:@"分享这张照片"]) {
             NSLog(@"share feed");
         }else if ([title isEqualToString:@"删除"]){
-            
+            UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+            PopupView *popupView = [PopupView showPopupDeleteinFrame:window.frame];
+            popupView.delegate = self;
+            popupView.feed = cell.feed;
+            [window addSubview:popupView];
         }
     }];
 }
 
 
 #pragma mark - delete feed
+
+- (void)popupViewDidPressConfirm:(PopupView *)popupView{
+    Feed *feed = popupView.feed;
+    if (feed.feedId && feed.plan.planId && feed.imageId){
+        [self.fetchCenter deleteFeed:popupView.feed];
+    }else if (!feed.feedId){
+        [self deleteFeed:feed];
+    }
+    [self popupViewDidPressCancel:popupView];
+
+}
+- (void)popupViewDidPressCancel:(PopupView *)popupView{
+    [popupView removeFromSuperview];
+}
+- (void)didFinishDeletingFeed:(Feed *)feed{
+    [self deleteFeed:feed];
+}
+- (void)deleteFeed:(Feed *)feed{
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    //delete Feed
+    [delegate.managedObjectContext deleteObject:feed];
+    
+    //tryTime - 1
+    feed.plan.tryTimes = @(feed.plan.tryTimes.integerValue - 1);
+    
+    [delegate saveContext];
+    
+}
 
 @end

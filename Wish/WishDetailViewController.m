@@ -7,9 +7,6 @@
 //
 
 #import "WishDetailViewController.h"
-#import "SDWebImageCompat.h"
-#import "FetchCenter.h"
-#import "UIActionSheet+Blocks.h"
 
 @interface WishDetailViewController () 
 @property (nonatomic) CGFloat yVel;
@@ -17,17 +14,19 @@
 
 @implementation WishDetailViewController
 
+- (FetchCenter *)fetchCenter{
+    if (!_fetchCenter){
+        _fetchCenter = [[FetchCenter alloc] init];
+        _fetchCenter.delegate = self;
+    }
+    return _fetchCenter;
+  
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
     [self.tableView registerNib:[UINib nibWithNibName:@"WishDetailCell" bundle:nil]
          forCellReuseIdentifier:@"WishDetailCell"];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self updateHeaderView];
 }
 
 - (void)setUpNavigationItem
@@ -99,17 +98,15 @@
         switch(type)
         {
             case NSFetchedResultsChangeInsert:
-                [self.tableView
-                 insertRowsAtIndexPaths:@[newIndexPath]
-                 withRowAnimation:UITableViewRowAnimationNone];
+                [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
+                                      withRowAnimation:UITableViewRowAnimationNone];
                 [self fetchResultsControllerDidInsert];
                 NSLog(@"Feed inserted");
                 break;
                 
             case NSFetchedResultsChangeDelete:
-                [self.tableView
-                 deleteRowsAtIndexPaths:@[indexPath]
-                 withRowAnimation:UITableViewRowAnimationAutomatic];
+                [self.tableView deleteRowsAtIndexPaths:@[indexPath]
+                                      withRowAnimation:UITableViewRowAnimationAutomatic];
                 NSLog(@"Feed deleted");
                 break;
                 
@@ -120,7 +117,10 @@
                 break;
             default:
                 break;
-        }        
+        }
+        
+        [self updateHeaderView];
+
     })
 }
 
@@ -183,11 +183,10 @@
     //already increment/decrement like count locally,
     //the following request must respect the current cell.feed like/dislike status
     
-    FetchCenter *fc = [[FetchCenter alloc] init];
     if (cell.feed.selfLiked.boolValue) {
-        [fc likeFeed:cell.feed];
+        [self.fetchCenter likeFeed:cell.feed];
     }else{
-        [fc unLikeFeed:cell.feed];
+        [self.fetchCenter unLikeFeed:cell.feed];
     }
 }
 

@@ -34,6 +34,7 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UIView *mainBackground;
 @property (nonatomic,readonly) PopupViewState state;
 @property (nonatomic,strong) Plan *plan;
+@property (nonatomic,strong) Feed *feed;
 
 @property (nonatomic,weak) id <PopupViewDelegate> delegate;
 

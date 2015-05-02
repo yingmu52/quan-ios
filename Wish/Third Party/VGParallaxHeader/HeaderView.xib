@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -191,6 +191,19 @@
                     <exclude reference="ki1-Z1-UA4"/>
                 </mask>
                 <mask key="constraints">
+                    <exclude reference="73p-7g-Fn9"/>
+                    <exclude reference="WW2-Cg-1Nq"/>
+                    <exclude reference="ZiB-m5-qNw"/>
+                    <exclude reference="UjS-mM-fzN"/>
+                    <exclude reference="jTN-B2-9Gr"/>
+                    <exclude reference="Otg-UF-4d0"/>
+                    <exclude reference="Tqs-eG-dZt"/>
+                    <exclude reference="CNp-L7-Cs8"/>
+                    <exclude reference="N7f-kb-RUR"/>
+                    <exclude reference="rlz-zt-rhU"/>
+                    <exclude reference="zzG-sl-EvG"/>
+                    <exclude reference="DDY-Mh-3ML"/>
+                    <exclude reference="jkN-sA-svG"/>
                     <exclude reference="ViE-Iv-MyD"/>
                     <exclude reference="jUe-C1-T9h"/>
                     <exclude reference="taC-XO-aau"/>
@@ -199,19 +212,6 @@
                     <exclude reference="Nlo-O2-nIB"/>
                     <exclude reference="R4z-Gh-ZEL"/>
                     <exclude reference="Rap-jN-o5J"/>
-                    <exclude reference="73p-7g-Fn9"/>
-                    <exclude reference="WW2-Cg-1Nq"/>
-                    <exclude reference="Otg-UF-4d0"/>
-                    <exclude reference="Tqs-eG-dZt"/>
-                    <exclude reference="ZiB-m5-qNw"/>
-                    <exclude reference="CNp-L7-Cs8"/>
-                    <exclude reference="N7f-kb-RUR"/>
-                    <exclude reference="rlz-zt-rhU"/>
-                    <exclude reference="zzG-sl-EvG"/>
-                    <exclude reference="UjS-mM-fzN"/>
-                    <exclude reference="jTN-B2-9Gr"/>
-                    <exclude reference="DDY-Mh-3ML"/>
-                    <exclude reference="jkN-sA-svG"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
@@ -225,6 +225,19 @@
                     <include reference="ki1-Z1-UA4"/>
                 </mask>
                 <mask key="constraints">
+                    <include reference="73p-7g-Fn9"/>
+                    <include reference="WW2-Cg-1Nq"/>
+                    <include reference="ZiB-m5-qNw"/>
+                    <include reference="UjS-mM-fzN"/>
+                    <include reference="jTN-B2-9Gr"/>
+                    <include reference="Otg-UF-4d0"/>
+                    <include reference="Tqs-eG-dZt"/>
+                    <include reference="CNp-L7-Cs8"/>
+                    <include reference="N7f-kb-RUR"/>
+                    <include reference="rlz-zt-rhU"/>
+                    <include reference="zzG-sl-EvG"/>
+                    <include reference="DDY-Mh-3ML"/>
+                    <include reference="jkN-sA-svG"/>
                     <include reference="ViE-Iv-MyD"/>
                     <include reference="jUe-C1-T9h"/>
                     <include reference="taC-XO-aau"/>
@@ -233,19 +246,6 @@
                     <include reference="Nlo-O2-nIB"/>
                     <include reference="R4z-Gh-ZEL"/>
                     <include reference="Rap-jN-o5J"/>
-                    <include reference="73p-7g-Fn9"/>
-                    <include reference="WW2-Cg-1Nq"/>
-                    <include reference="Otg-UF-4d0"/>
-                    <include reference="Tqs-eG-dZt"/>
-                    <include reference="ZiB-m5-qNw"/>
-                    <include reference="CNp-L7-Cs8"/>
-                    <include reference="N7f-kb-RUR"/>
-                    <include reference="rlz-zt-rhU"/>
-                    <include reference="zzG-sl-EvG"/>
-                    <include reference="UjS-mM-fzN"/>
-                    <include reference="jTN-B2-9Gr"/>
-                    <include reference="DDY-Mh-3ML"/>
-                    <include reference="jkN-sA-svG"/>
                 </mask>
             </variation>
             <connections>

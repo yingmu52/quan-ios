@@ -8,13 +8,9 @@
 
 #import "WishDetailVCDiscovery.h"
 #import "UIImageView+WebCache.h"
-#import "FetchCenter.h"
 #import "Feed.h"
 #import "User.h"
-@interface WishDetailVCDiscovery () <FetchCenterDelegate>
-@property (nonatomic,strong) FetchCenter *fetchCenter;
-
-
+@interface WishDetailVCDiscovery ()
 @property (nonatomic) BOOL hasNextPage;
 @property (nonatomic,strong) NSDictionary *pageInfo;
 @end
@@ -28,14 +24,6 @@
     self.hasNextPage = YES; //important, must set before [self loadMore]
     [self loadMore];
 }
-- (FetchCenter *)fetchCenter{
-    if (!_fetchCenter){
-        _fetchCenter = [[FetchCenter alloc] init];
-        _fetchCenter.delegate = self;
-    }
-    return _fetchCenter;
-}
-
 
 - (void)loadFeedFromServer:(NSDictionary *)pageInfo{
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];

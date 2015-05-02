@@ -9,6 +9,7 @@
 #import "FetchCenter.h"
 #import "AppDelegate.h"
 #import "User.h"
+#import "SDWebImageCompat.h"
 //#define BASE_URL @"http://182.254.167.228/superplan/"
 
 
@@ -32,6 +33,7 @@
 #define LIKE_FEED @"splan_feeds_like.php"
 #define UNLIKE_FEED @"splan_feeds_unlike.php"
 #define LOAD_FEED_LIST @"splan_feeds_getlist.php"
+#define DELETE_FEED @"splan_feeds_delete_id.php"
 
 #define FOLLOW @"follow/"
 #define GET_FOLLOW_LIST @"splan_follow_get_feedslist.php"
@@ -68,6 +70,7 @@ typedef enum{
     FetchCenterGetOpDiscoverPlans,
     FetchCenterGetOpLikeAFeed,
     FetchCenterGetOpUnLikeAFeed,
+    FetchCenterGetOpDeleteFeed,
     FetchCenterGetOpLoadFeedList,
     FetchCenterGetOpFeedBack
 }FetchCenterGetOp;
@@ -81,7 +84,7 @@ typedef enum{
 @property (nonatomic,strong) NSString *baseUrl;
 @end
 @implementation FetchCenter
-#warning fetch center
+
 - (NSString *)baseUrl{
     if ([[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_INNER_NETWORK]) {
         _baseUrl = [NSString stringWithFormat:@"%@%@",INNER_NETWORK_URL,PROJECT];
@@ -94,6 +97,18 @@ typedef enum{
 
 
 #pragma mark - Feed
+//superplan/feeds/splan_feeds_delete_id.php
+- (void)deleteFeed:(Feed *)feed{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,DELETE_FEED];
+    NSDictionary *args = @{@"id":feed.feedId,
+                           @"picId":feed.imageId,
+                           @"planId":feed.plan.planId};
+    [self getRequest:rqtStr
+           parameter:args
+           operation:FetchCenterGetOpDeleteFeed
+              entity:feed];
+}
+
 
 - (void)loadFeedsListForPlan:(Plan *)plan pageInfo:(NSDictionary *)info{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,LOAD_FEED_LIST];
@@ -292,142 +307,149 @@ typedef enum{
 }
 
 - (void)didFinishSendingGetRequest:(NSDictionary *)json operation:(FetchCenterGetOp)op entity:(id)obj{
-    switch (op)
-    {
-        case FetchCenterGetOpGetPlanList:
-            //get plan list
-            break;
-        case FetchCenterGetOpDeletePlan:{
-            AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-            [delegate saveContext];
-            NSLog(@"deleted successed %@",json);
-        }
-            break;
-        case FetchCenterGetOpCreateFeed:{
-            NSString *fetchedFeedID = [json valueForKeyPath:@"data.id"];
-            if (fetchedFeedID){
-                Feed *feed = (Feed *)obj;
-                feed.feedId = fetchedFeedID;
-                [self.delegate didFinishUploadingFeed:feed];
-                NSLog(@"upload feed successed, ID: %@",fetchedFeedID);
+    dispatch_main_async_safe((^{
+        switch (op)
+        {
+            case FetchCenterGetOpGetPlanList:
+                //get plan list
+                break;
+            case FetchCenterGetOpDeletePlan:{
+                AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+                [delegate saveContext];
+                NSLog(@"deleted successed %@",json);
             }
-        }
-            break;
-        case FetchCenterGetOpCreatePlan:{
-            NSString *fetchedPlanId = [json valueForKeyPath:@"data.id"];
-            NSString *bgString = [json valueForKeyPath:@"data.backGroudPic"];
-            if (fetchedPlanId && bgString) {
-                Plan *plan = (Plan *)obj;
-                plan.planId = fetchedPlanId;
-                plan.backgroundNum = bgString;
-                [self.delegate didFinishUploadingPlan:plan];
-                NSLog(@"create plan succeed, ID: %@",fetchedPlanId);
+                break;
+            case FetchCenterGetOpCreateFeed:{
+                NSString *fetchedFeedID = [json valueForKeyPath:@"data.id"];
+                if (fetchedFeedID){
+                    Feed *feed = (Feed *)obj;
+                    feed.feedId = fetchedFeedID;
+                    [self.delegate didFinishUploadingFeed:feed];
+                    NSLog(@"upload feed successed, ID: %@",fetchedFeedID);
+                }
             }
-        }
-            break;
-        case FetchCenterGetOpSetPlanStatus:{
-            NSLog(@"updated plan status (from server)");
-            NSLog(@"updated status : %@",((Plan *)obj).planStatus);
-        }
-            break;
-        case FetchCenterGetOpFollowingPlanList:{
-//            NSLog(@"FetchCenterOpGetFollowingPlanList \n %@",json);
-            //save the response following plan list
-            for (NSDictionary *planItem in [json valueForKeyPath:@"data.planList"]) {
-                Plan *plan = [Plan updatePlanFromServer:planItem];
-                NSDictionary *userInfo = [json valueForKeyPath:[NSString stringWithFormat:@"data.manList.%@",plan.ownerId]];
-                plan.owner = [Owner updateOwnerFromServer:userInfo];
-                NSArray *feedsList = planItem[@"feedsList"];
-                if (feedsList.count) {
-                    //create all feeds
-                    for (NSDictionary *feedItem in feedsList) {
-                        [Feed createFeedFromServer:feedItem forPlan:plan];
-                        //use alternative way to load and cache image
+                break;
+            case FetchCenterGetOpCreatePlan:{
+                NSString *fetchedPlanId = [json valueForKeyPath:@"data.id"];
+                NSString *bgString = [json valueForKeyPath:@"data.backGroudPic"];
+                if (fetchedPlanId && bgString) {
+                    Plan *plan = (Plan *)obj;
+                    plan.planId = fetchedPlanId;
+                    plan.backgroundNum = bgString;
+                    [self.delegate didFinishUploadingPlan:plan];
+                    NSLog(@"create plan succeed, ID: %@",fetchedPlanId);
+                }
+            }
+                break;
+            case FetchCenterGetOpSetPlanStatus:{
+                NSLog(@"updated plan status (from server)");
+                NSLog(@"updated status : %@",((Plan *)obj).planStatus);
+            }
+                break;
+            case FetchCenterGetOpFollowingPlanList:{
+                //            NSLog(@"FetchCenterOpGetFollowingPlanList \n %@",json);
+                //save the response following plan list
+                for (NSDictionary *planItem in [json valueForKeyPath:@"data.planList"]) {
+                    Plan *plan = [Plan updatePlanFromServer:planItem];
+                    NSDictionary *userInfo = [json valueForKeyPath:[NSString stringWithFormat:@"data.manList.%@",plan.ownerId]];
+                    plan.owner = [Owner updateOwnerFromServer:userInfo];
+                    NSArray *feedsList = planItem[@"feedsList"];
+                    if (feedsList.count) {
+                        //create all feeds
+                        for (NSDictionary *feedItem in feedsList) {
+                            [Feed createFeedFromServer:feedItem forPlan:plan];
+                            //use alternative way to load and cache image
+                        }
                     }
                 }
+                [self.delegate didFinishFetchingFollowingPlanList];
             }
-            [self.delegate didFinishFetchingFollowingPlanList];
-        }
-            break;
-        case FetchCenterGetOpLoginForUidAndUkey:{
-            NSString *uid = [json valueForKeyPath:@"data.uid"];
-            NSString *ukey = [json valueForKeyPath:@"data.ukey"];
-            BOOL isNewUser = [[json valueForKeyPath:@"data.isNew"] boolValue];
-            NSDictionary *userInfo = [json valueForKeyPath:@"data.maninfo"];
-            [self.delegate didFinishReceivingUid:uid
-                                            uKey:ukey
-                                       isNewUser:isNewUser
-                                        userInfo:userInfo];
-        }
-            break;
-        case FetchCenterGetOpUpdatePlan:{
-            Plan *plan = (Plan *)obj;
-            [self.delegate didFinishUpdatingPlan:plan];
-        }
-            break;
-        case FetchCenterGetOpCheckNewVersion:{
-            BOOL hasNewVersion = [[json valueForKeyPath:@"data.haveNew"] boolValue];
-            [self.delegate didFinishCheckingNewVersion:hasNewVersion];
-        }
-            break;
-        case FetchCenterGetOpSetPersonalInfo:{
-            NSArray *info = (NSArray *)obj; // nickname,gender
-            [User updateAttributeFromDictionary:@{USER_DISPLAY_NAME:info[0],
-                                                  GENDER:info[1]}];
-            [self.delegate didFinishSettingPersonalInfo];
-        }
-            break;
-        case FetchCenterGetOpUpdatePersonalInfo:{
-            NSArray *info = (NSArray *)obj;
-            [User updateAttributeFromDictionary:@{USER_DISPLAY_NAME:info[0],GENDER:info[1]}];
-            [self.delegate didFinishUpdatingPersonalInfo];
-        }
-            break;
-        case FetchCenterGetOpDiscoverPlans:{
-            //stored the lastet
-            NSMutableArray *plans = [[NSMutableArray alloc] init];
-            NSArray *planList = [json valueForKeyPath:@"data.planList"];
-            NSDictionary *manList = [json valueForKeyPath:@"data.manList"];
-            if (planList && manList){
-                for (NSDictionary *planInfo in planList){
-                    Plan *plan = [Plan updatePlanFromServer:planInfo];
-                    plan.owner = [Owner updateOwnerFromServer:[manList valueForKey:plan.ownerId]];
-                    [plans addObject:plan];
-                
+                break;
+            case FetchCenterGetOpLoginForUidAndUkey:{
+                NSString *uid = [json valueForKeyPath:@"data.uid"];
+                NSString *ukey = [json valueForKeyPath:@"data.ukey"];
+                BOOL isNewUser = [[json valueForKeyPath:@"data.isNew"] boolValue];
+                NSDictionary *userInfo = [json valueForKeyPath:@"data.maninfo"];
+                [self.delegate didFinishReceivingUid:uid
+                                                uKey:ukey
+                                           isNewUser:isNewUser
+                                            userInfo:userInfo];
+            }
+                break;
+            case FetchCenterGetOpUpdatePlan:{
+                Plan *plan = (Plan *)obj;
+                [self.delegate didFinishUpdatingPlan:plan];
+            }
+                break;
+            case FetchCenterGetOpCheckNewVersion:{
+                BOOL hasNewVersion = [[json valueForKeyPath:@"data.haveNew"] boolValue];
+                [self.delegate didFinishCheckingNewVersion:hasNewVersion];
+            }
+                break;
+            case FetchCenterGetOpSetPersonalInfo:{
+                NSArray *info = (NSArray *)obj; // nickname,gender
+                [User updateAttributeFromDictionary:@{USER_DISPLAY_NAME:info[0],
+                                                      GENDER:info[1]}];
+                [self.delegate didFinishSettingPersonalInfo];
+            }
+                break;
+            case FetchCenterGetOpUpdatePersonalInfo:{
+                NSArray *info = (NSArray *)obj;
+                [User updateAttributeFromDictionary:@{USER_DISPLAY_NAME:info[0],GENDER:info[1]}];
+                [self.delegate didFinishUpdatingPersonalInfo];
+            }
+                break;
+            case FetchCenterGetOpDiscoverPlans:{
+                //stored the lastet
+                NSMutableArray *plans = [[NSMutableArray alloc] init];
+                NSArray *planList = [json valueForKeyPath:@"data.planList"];
+                NSDictionary *manList = [json valueForKeyPath:@"data.manList"];
+                if (planList && manList){
+                    for (NSDictionary *planInfo in planList){
+                        Plan *plan = [Plan updatePlanFromServer:planInfo];
+                        plan.owner = [Owner updateOwnerFromServer:[manList valueForKey:plan.ownerId]];
+                        [plans addObject:plan];
+                        
+                    }
                 }
+                [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
+                [self.delegate didfinishFetchingDiscovery:plans];
             }
-            [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
-            [self.delegate didfinishFetchingDiscovery:plans];
-        }
-            break;
-        case FetchCenterGetOpLikeAFeed:{
-            Feed *feed = (Feed *)obj;
-            NSLog(@"liked feed ID %@",feed.feedId);
-        }
-            break;
-        case FetchCenterGetOpUnLikeAFeed:{
-            Feed *feed = (Feed *)obj;
-            NSLog(@"unliked feed ID %@",feed.feedId);
-        }
-            break;
-        case FetchCenterGetOpLoadFeedList:{
-            
-            NSArray *feeds = [json valueForKeyPath:@"data.feedsList"];
-            BOOL hasNextPage = [[json valueForKeyPath:@"data.isMore"] boolValue];
-            NSDictionary *pageInfo = [json valueForKeyPath:@"data.attachInfo"];
-            for (NSDictionary *info in feeds){
-                [Feed createFeedFromServer:info forPlan:obj]; // obj is Plan*
+                break;
+            case FetchCenterGetOpLikeAFeed:{
+                Feed *feed = (Feed *)obj;
+                NSLog(@"liked feed ID %@",feed.feedId);
             }
-            [self.delegate didFinishLoadingFeedList:pageInfo hasNextPage:hasNextPage];
+                break;
+            case FetchCenterGetOpUnLikeAFeed:{
+                Feed *feed = (Feed *)obj;
+                NSLog(@"unliked feed ID %@",feed.feedId);
+            }
+                break;
+            case FetchCenterGetOpDeleteFeed:{
+                [self.delegate didFinishDeletingFeed:obj];
+            }
+                break;
+            case FetchCenterGetOpLoadFeedList:{
+                
+                NSArray *feeds = [json valueForKeyPath:@"data.feedsList"];
+                BOOL hasNextPage = [[json valueForKeyPath:@"data.isMore"] boolValue];
+                NSDictionary *pageInfo = [json valueForKeyPath:@"data.attachInfo"];
+                for (NSDictionary *info in feeds){
+                    [Feed createFeedFromServer:info forPlan:obj]; // obj is Plan*
+                }
+                [self.delegate didFinishLoadingFeedList:pageInfo hasNextPage:hasNextPage];
+            }
+                break;
+            case FetchCenterGetOpFeedBack:
+                [self.delegate didFinishSendingFeedBack];
+                break;
+            default:
+                break;
         }
-            break;
-        case FetchCenterGetOpFeedBack:
-            [self.delegate didFinishSendingFeedBack];
-            break;
-        default:
-            break;
-    }
-    NSLog(@"%@",json);
+        NSLog(@"%@",json);
+        
+    }));
 }
 
 #pragma mark - main get and post method

@@ -14,9 +14,14 @@
 #import "Feed+FeedCRUD.h"
 #import "UIImage+ImageEffects.h"
 #import "AppDelegate.h"
-@interface WishDetailViewController : FirstTableViewController <NSFetchedResultsControllerDelegate,WishDetailCellDelegate>
+#import "FetchCenter.h"
+#import "SDWebImageCompat.h"
+#import "UIActionSheet+Blocks.h"
+
+@interface WishDetailViewController : FirstTableViewController <NSFetchedResultsControllerDelegate,WishDetailCellDelegate,FetchCenterDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC; //fetching Feed
 @property (nonatomic,strong) Plan *plan; //must set
+@property (nonatomic,strong) FetchCenter *fetchCenter;
 - (void)setUpNavigationItem;
 - (void)updateHeaderView;
 - (void)setupBadageImageView;

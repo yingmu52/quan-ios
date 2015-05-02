@@ -16,7 +16,7 @@
 - (void)setPlan:(Plan *)plan
 {
     _plan = plan;
-    if (plan) {
+    if ([_plan hasChanges]) {
         self.headerTitleLabel.text = [plan.planTitle stringByReplacingOccurrencesOfString:@" " withString:@""];
         self.headerSubTitleLabel.text = [NSString stringWithFormat:@"已留下%@个努力瞬间",plan.tryTimes];
         self.headerFollowLabel.text = [NSString stringWithFormat:@"%@关注",plan.followCount];

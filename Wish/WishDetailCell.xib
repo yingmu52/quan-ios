@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -190,28 +189,28 @@
                                 <exclude reference="zhj-V3-Rbc"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="5kb-8v-LdO"/>
-                                <exclude reference="Wnb-o9-u1d"/>
-                                <exclude reference="kLC-Ye-ekz"/>
-                                <exclude reference="Pfg-6R-Vb5"/>
-                                <exclude reference="jYE-da-1u0"/>
-                                <exclude reference="x7w-tB-HGH"/>
-                                <exclude reference="iKr-uy-DIM"/>
-                                <exclude reference="kWj-XD-wwD"/>
                                 <exclude reference="8cv-bh-Sek"/>
                                 <exclude reference="gey-Mq-WIK"/>
                                 <exclude reference="xC0-I8-Qt9"/>
                                 <exclude reference="ZbO-MI-tBt"/>
                                 <exclude reference="qkL-wC-9Us"/>
-                                <exclude reference="IL6-HC-yxA"/>
-                                <exclude reference="KTc-NH-siQ"/>
                                 <exclude reference="aiD-Yd-wzP"/>
                                 <exclude reference="s2P-c1-Zp6"/>
+                                <exclude reference="IL6-HC-yxA"/>
+                                <exclude reference="KTc-NH-siQ"/>
                                 <exclude reference="4Xc-1b-vRR"/>
                                 <exclude reference="Aab-6w-bDd"/>
                                 <exclude reference="JrY-fN-dav"/>
                                 <exclude reference="ald-Uo-qxM"/>
                                 <exclude reference="obR-NB-hLu"/>
+                                <exclude reference="iKr-uy-DIM"/>
+                                <exclude reference="kWj-XD-wwD"/>
+                                <exclude reference="Pfg-6R-Vb5"/>
+                                <exclude reference="jYE-da-1u0"/>
+                                <exclude reference="x7w-tB-HGH"/>
+                                <exclude reference="5kb-8v-LdO"/>
+                                <exclude reference="Wnb-o9-u1d"/>
+                                <exclude reference="kLC-Ye-ekz"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -226,36 +225,38 @@
                                 <include reference="zhj-V3-Rbc"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="5kb-8v-LdO"/>
-                                <include reference="Wnb-o9-u1d"/>
-                                <include reference="kLC-Ye-ekz"/>
-                                <include reference="Pfg-6R-Vb5"/>
-                                <include reference="jYE-da-1u0"/>
-                                <include reference="x7w-tB-HGH"/>
-                                <include reference="iKr-uy-DIM"/>
-                                <include reference="kWj-XD-wwD"/>
                                 <include reference="8cv-bh-Sek"/>
                                 <include reference="gey-Mq-WIK"/>
                                 <include reference="xC0-I8-Qt9"/>
                                 <include reference="ZbO-MI-tBt"/>
                                 <include reference="qkL-wC-9Us"/>
-                                <include reference="IL6-HC-yxA"/>
-                                <include reference="KTc-NH-siQ"/>
                                 <include reference="aiD-Yd-wzP"/>
                                 <include reference="s2P-c1-Zp6"/>
+                                <include reference="IL6-HC-yxA"/>
+                                <include reference="KTc-NH-siQ"/>
                                 <include reference="4Xc-1b-vRR"/>
                                 <include reference="Aab-6w-bDd"/>
                                 <include reference="JrY-fN-dav"/>
                                 <include reference="ald-Uo-qxM"/>
                                 <include reference="obR-NB-hLu"/>
+                                <include reference="iKr-uy-DIM"/>
+                                <include reference="kWj-XD-wwD"/>
+                                <include reference="Pfg-6R-Vb5"/>
+                                <include reference="jYE-da-1u0"/>
+                                <include reference="x7w-tB-HGH"/>
+                                <include reference="5kb-8v-LdO"/>
+                                <include reference="Wnb-o9-u1d"/>
+                                <include reference="kLC-Ye-ekz"/>
                             </mask>
                         </variation>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="EE8-Zb-7dr" firstAttribute="trailing" secondItem="eoV-9B-OOG" secondAttribute="trailingMargin" id="4zA-ZE-MAN"/>
+                    <constraint firstItem="EE8-Zb-7dr" firstAttribute="trailing" secondItem="eoV-9B-OOG" secondAttribute="trailingMargin" id="4zA-ZE-MAN">
+                        <variation key="heightClass=regular-widthClass=compact" constant="8"/>
+                    </constraint>
                     <constraint firstItem="EE8-Zb-7dr" firstAttribute="leading" secondItem="eoV-9B-OOG" secondAttribute="leadingMargin" constant="2" id="Bhq-aj-wBT">
-                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                        <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
                     </constraint>
                     <constraint firstAttribute="bottomMargin" secondItem="EE8-Zb-7dr" secondAttribute="bottom" constant="2" id="klq-q5-Kwx">
                         <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>

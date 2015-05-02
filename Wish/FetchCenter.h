@@ -33,6 +33,7 @@
 - (void)didFinishSettingPersonalInfo;
 - (void)didFinishSendingFeedBack;
 - (void)didFinishLoadingFeedList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage;
+- (void)didFinishDeletingFeed:(Feed *)feed;
 
 - (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
@@ -46,6 +47,8 @@
 - (void)loadFeedsListForPlan:(Plan *)plan pageInfo:(NSDictionary *)info;
 - (void)likeFeed:(Feed *)feed;
 - (void)unLikeFeed:(Feed *)feed;
+- (void)deleteFeed:(Feed *)feed;
+
 
 #pragma mark - Plan
 - (void)fetchPlanList:(NSString *)ownerId;

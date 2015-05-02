@@ -689,8 +689,7 @@
                                                                     <exclude reference="k2r-tt-zxT"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="220" y="61" width="61" height="62"/>
+                                                            <variation key="heightClass=regular-widthClass=compact">
                                                                 <mask key="constraints">
                                                                     <exclude reference="HKh-6w-srz"/>
                                                                     <include reference="k2r-tt-zxT"/>
@@ -2110,7 +2109,7 @@
                                                         </mask>
                                                     </variation>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="中华田园汪评论了你一条记录：哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJ9-7T-9ft">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="中华田园汪评论了你一条记录：哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="248" translatesAutoresizingMaskIntoConstraints="NO" id="jJ9-7T-9ft">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2162,13 +2161,13 @@
                                                     <exclude reference="SL0-KW-OTX"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="7bV-Ih-Zb7"/>
-                                                    <exclude reference="86s-GU-nAm"/>
-                                                    <exclude reference="qoI-y4-fow"/>
+                                                    <exclude reference="FIY-CR-Hs3"/>
                                                     <exclude reference="1rf-r1-xlL"/>
                                                     <exclude reference="M8d-8O-gi6"/>
                                                     <exclude reference="s34-b6-HJk"/>
-                                                    <exclude reference="FIY-CR-Hs3"/>
+                                                    <exclude reference="7bV-Ih-Zb7"/>
+                                                    <exclude reference="86s-GU-nAm"/>
+                                                    <exclude reference="qoI-y4-fow"/>
                                                     <exclude reference="81y-62-bOB"/>
                                                     <exclude reference="DHf-QL-sY1"/>
                                                     <exclude reference="c8h-qB-gVt"/>
@@ -2183,13 +2182,13 @@
                                                     <include reference="SL0-KW-OTX"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="7bV-Ih-Zb7"/>
-                                                    <include reference="86s-GU-nAm"/>
-                                                    <include reference="qoI-y4-fow"/>
+                                                    <include reference="FIY-CR-Hs3"/>
                                                     <include reference="1rf-r1-xlL"/>
                                                     <include reference="M8d-8O-gi6"/>
                                                     <include reference="s34-b6-HJk"/>
-                                                    <include reference="FIY-CR-Hs3"/>
+                                                    <include reference="7bV-Ih-Zb7"/>
+                                                    <include reference="86s-GU-nAm"/>
+                                                    <include reference="qoI-y4-fow"/>
                                                     <include reference="81y-62-bOB"/>
                                                     <include reference="DHf-QL-sY1"/>
                                                     <include reference="c8h-qB-gVt"/>
