@@ -31,7 +31,7 @@
     [super viewDidLoad];
     [self setUpNavigationItem];
     self.iconImageView.hidden = YES;
-    if ([User isUserLogin]) [self checkUpdate];
+    [self checkUpdate];
 
 }
 

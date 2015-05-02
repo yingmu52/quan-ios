@@ -117,8 +117,7 @@ typedef enum {
                 identifier = @"ShowFollowingFeed";
                 break;
             case MenuTableMessage:
-//                identifier = @"ShowDiscoveryList";
-                return;
+                identifier = @"showMessageListView";
                 break;
             default:
                 break;

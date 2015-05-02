@@ -37,6 +37,8 @@
 		AE52FA501A8D3D76003FF725 /* PostFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE52FA4F1A8D3D76003FF725 /* PostFeedViewController.m */; };
 		AE52FA531A8D55A7003FF725 /* KeyboardAcessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE52FA521A8D55A7003FF725 /* KeyboardAcessoryView.m */; };
 		AE52FA551A8D55CA003FF725 /* KeyboardAcessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE52FA541A8D55CA003FF725 /* KeyboardAcessoryView.xib */; };
+		AE606A201AF4697B003DF16E /* MessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE606A1F1AF4697B003DF16E /* MessageListViewController.m */; };
+		AE606A231AF46991003DF16E /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE606A221AF46991003DF16E /* MessageCell.m */; };
 		AE6E7A0C1AB0DF1F0023B9C7 /* PopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE6E7A0B1AB0DF1F0023B9C7 /* PopupView.xib */; };
 		AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE72E9541A66F2AA0046B38D /* MenuCell.m */; };
 		AE767E7F1ACE35A600F35137 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE767E7E1ACE35A600F35137 /* FeedbackViewController.m */; };
@@ -255,6 +257,10 @@
 		AE52FA511A8D55A7003FF725 /* KeyboardAcessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardAcessoryView.h; sourceTree = "<group>"; };
 		AE52FA521A8D55A7003FF725 /* KeyboardAcessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardAcessoryView.m; sourceTree = "<group>"; };
 		AE52FA541A8D55CA003FF725 /* KeyboardAcessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyboardAcessoryView.xib; sourceTree = "<group>"; };
+		AE606A1E1AF4697B003DF16E /* MessageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageListViewController.h; sourceTree = "<group>"; };
+		AE606A1F1AF4697B003DF16E /* MessageListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageListViewController.m; sourceTree = "<group>"; };
+		AE606A211AF46991003DF16E /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
+		AE606A221AF46991003DF16E /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
 		AE6E7A0B1AB0DF1F0023B9C7 /* PopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopupView.xib; sourceTree = "<group>"; };
 		AE72E9531A66F2AA0046B38D /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
 		AE72E9541A66F2AA0046B38D /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
@@ -500,6 +506,7 @@
 		AE01723B1A65CD8E0014266F /* Wish */ = {
 			isa = PBXGroup;
 			children = (
+				AE606A1D1AF4693F003DF16E /* Message */,
 				AEFB04781AD12437009EB0D3 /* Discovery */,
 				AED5BC601ABE3C9A00EFF398 /* Settings */,
 				AEE4A6C91A9684BC00ABF946 /* Achievement */,
@@ -591,6 +598,17 @@
 				AED68EE31A70399A00CDC0DF /* FetchCenter.m */,
 			);
 			name = "Database&Networking";
+			sourceTree = "<group>";
+		};
+		AE606A1D1AF4693F003DF16E /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				AE606A1E1AF4697B003DF16E /* MessageListViewController.h */,
+				AE606A1F1AF4697B003DF16E /* MessageListViewController.m */,
+				AE606A211AF46991003DF16E /* MessageCell.h */,
+				AE606A221AF46991003DF16E /* MessageCell.m */,
+			);
+			name = Message;
 			sourceTree = "<group>";
 		};
 		AE95A9E01ACFA7F7007465D5 /* TWPhotoPicker */ = {
@@ -1091,6 +1109,7 @@
 				AEF7F2851A686E8A0022410B /* ECSlidingInteractiveTransition.m in Sources */,
 				AECE2BF51AA0521600B1C58E /* UIImage+WebP.m in Sources */,
 				AEEC6C6D1A6DB0FC0021B7E4 /* HeaderView.m in Sources */,
+				AE606A201AF4697B003DF16E /* MessageListViewController.m in Sources */,
 				AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */,
 				AEFA5FE11AAFCAD9001CA0C8 /* ALDBlurImageProcessor.m in Sources */,
 				AE0172451A65CD8E0014266F /* Wish.xcdatamodeld in Sources */,
@@ -1182,6 +1201,7 @@
 				AECE2BE91AA0521600B1C58E /* MKAnnotationView+WebCache.m in Sources */,
 				AE2F1C941A7A23A200A32CB5 /* Feed+FeedCRUD.m in Sources */,
 				AE2F28E71AD3937700FC3370 /* WishDetailVCDiscovery.m in Sources */,
+				AE606A231AF46991003DF16E /* MessageCell.m in Sources */,
 				AED4CB221AC75A0200EE2DA4 /* KeyWordCell.m in Sources */,
 				AEE4A6D01A96A5D500ABF946 /* AchieveCell.m in Sources */,
 			);
