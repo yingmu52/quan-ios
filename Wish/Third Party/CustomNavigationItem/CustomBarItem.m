@@ -10,7 +10,7 @@
 #define Default_Offset 10
 #define TitleViewSize CGSizeMake(70, 30)//用NSString设置item时 item的尺寸
 @implementation CustomBarItem
-
+@dynamic customView;
 - (void)initCustomItemWithType:(ItemType)type andSize:(CGSize)size
 {
     self.isCustomView = NO;
