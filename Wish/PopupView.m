@@ -42,11 +42,15 @@
     return view;
 }
 + (instancetype)showPopupDeleteinFrame:(CGRect)frame{
+    return [self.class showPopupDeleteinFrame:frame withTitle:@"删除的事件不恢复哦！"];
+}
+
++ (instancetype)showPopupDeleteinFrame:(CGRect)frame withTitle:(NSString *)title{
     PopupView *view = [PopupView instantiateFromNib:frame];
     view.headBannerImageView.image = nil;
     view.popUpBackground.backgroundColor = [UIColor whiteColor];
     view.headBannerLabel.text = nil;
-    view.HeadDeleteLabel.text = @"删除的事件不恢复哦！";
+    view.HeadDeleteLabel.text = title;
     view.internalState = PopupViewStateDelete;
     return view;
 }

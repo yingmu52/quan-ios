@@ -213,13 +213,20 @@
 
 #pragma mark - wish detail cell delegate
 - (void)didPressedMoreOnCell:(WishDetailCell *)cell{
-    [UIActionSheet showInView:self.tableView withTitle:nil cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles:@[@"分享这张照片"] tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    [UIActionSheet showInView:window
+                    withTitle:nil
+            cancelButtonTitle:@"取消"
+       destructiveButtonTitle:@"删除"
+            otherButtonTitles:@[@"分享这张照片"]
+                     tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex)
+    {
         NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
         if ([title isEqualToString:@"分享这张照片"]) {
             NSLog(@"share feed");
         }else if ([title isEqualToString:@"删除"]){
-            UIWindow *window = [[UIApplication sharedApplication] keyWindow];
-            PopupView *popupView = [PopupView showPopupDeleteinFrame:window.frame];
+            
+            PopupView *popupView = [PopupView showPopupDeleteinFrame:window.frame withTitle:@"真的要删除这条记录吗？"];
             popupView.delegate = self;
             popupView.feed = cell.feed;
             [window addSubview:popupView];

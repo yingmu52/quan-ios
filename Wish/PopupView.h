@@ -42,4 +42,5 @@ typedef enum {
 + (instancetype)showPopupFinishinFrame:(CGRect)frame;
 + (instancetype)showPopupFailinFrame:(CGRect)frame;
 + (instancetype)showPopupDeleteinFrame:(CGRect)frame;
++ (instancetype)showPopupDeleteinFrame:(CGRect)frame withTitle:(NSString *)title;
 @end
