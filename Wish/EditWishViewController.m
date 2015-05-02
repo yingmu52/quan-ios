@@ -61,30 +61,26 @@
 
 
 - (void)didFinishUpdatingPlan:(Plan *)plan{
-    dispatch_main_async_safe(^{
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
-        self.backButton.enabled = YES;
-        [self.navigationController popToRootViewControllerAnimated:YES];
-        [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
-    });
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
+    self.backButton.enabled = YES;
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
 }
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    dispatch_main_async_safe((^{
-        //update navigation item
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
-        self.backButton.enabled = YES;
-        
-        //show alerts
-        [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
-                                    message:[NSString stringWithFormat:@"%@",info[@"msg"]]
-                                   delegate:self
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil, nil] show];
-        
-        AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-        [delegate.managedObjectContext rollback];
-        [delegate.managedObjectContext refreshObject:self.plan mergeChanges:NO];
-    }))
+    //update navigation item
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
+    self.backButton.enabled = YES;
+    
+    //show alerts
+    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
+                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
+                               delegate:self
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil, nil] show];
+    
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    [delegate.managedObjectContext rollback];
+    [delegate.managedObjectContext refreshObject:self.plan mergeChanges:NO];
 }
 
 

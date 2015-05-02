@@ -61,12 +61,10 @@ static char imageURLKey;
         }];
         [self sd_setImageLoadOperation:operation forKey:@"MKAnnotationViewImage"];
     } else {
-        dispatch_main_async_safe(^{
-            NSError *error = [NSError errorWithDomain:@"SDWebImageErrorDomain" code:-1 userInfo:@{NSLocalizedDescriptionKey : @"Trying to load a nil url"}];
-            if (completedBlock) {
-                completedBlock(nil, error, SDImageCacheTypeNone, url);
-            }
-        });
+        NSError *error = [NSError errorWithDomain:@"SDWebImageErrorDomain" code:-1 userInfo:@{NSLocalizedDescriptionKey : @"Trying to load a nil url"}];
+        if (completedBlock) {
+            completedBlock(nil, error, SDImageCacheTypeNone, url);
+        }
     }
 }
 

@@ -183,9 +183,7 @@
 }
 
 - (void)didFinishCheckingNewVersion:(BOOL)hasNewVersion{
-    dispatch_main_async_safe(^{
-        self.iconImageView.hidden = !hasNewVersion;
-    });
+    self.iconImageView.hidden = !hasNewVersion;
     NSLog(@"%@",hasNewVersion ? @"has new version" : @"this is latest version");
 }
 

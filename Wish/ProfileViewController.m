@@ -178,22 +178,18 @@
 #pragma mark - fetch center delegate 
 
 - (void)didFinishUpdatingPersonalInfo{
-    dispatch_main_async_safe(^{
-        [self dismissSpinner];
-        [self goBack];
-    });
+    [self dismissSpinner];
+    [self goBack];
 }
 - (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
     [self handleFailure:info];
 }
 
 - (void)didFinishUploadingPictureForProfile:(NSDictionary *)info{
-    dispatch_main_async_safe(^{
-        NSURL *newUrl = [self.fetchCenter urlWithImageID:[User updatedProfilePictureId]];
-        [self dismissSpinner];
-        [self.profilePicture setImageWithURL:newUrl
-                 usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    });
+    NSURL *newUrl = [self.fetchCenter urlWithImageID:[User updatedProfilePictureId]];
+    [self dismissSpinner];
+    [self.profilePicture setImageWithURL:newUrl
+             usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 }
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
@@ -201,18 +197,15 @@
 }
 
 - (void)handleFailure:(NSDictionary *)info{
-    dispatch_main_async_safe((^{
-        self.navigationItem.rightBarButtonItem = nil;
-        [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
-                                    message:[NSString stringWithFormat:@"%@",info[@"msg"]]
-                                   delegate:self
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil, nil] show];
-    }));
-    
+    self.navigationItem.rightBarButtonItem = nil;
+    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
+                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
+                               delegate:self
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil, nil] show];
 }
 
-#pragma mark - activity 
+#pragma mark - activity
 
 - (void)showSpinniner{
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];

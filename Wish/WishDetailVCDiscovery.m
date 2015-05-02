@@ -50,30 +50,24 @@
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject
 {
-    dispatch_main_async_safe((^{
-        //show alerts
-        [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
-                                    message:[NSString stringWithFormat:@"%@",info[@"msg"]]
-                                   delegate:self
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil, nil] show];
-        
-        //update navigation item
-        self.navigationItem.rightBarButtonItem = nil;
-        
-    }));
+    //show alerts
+    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
+                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
+                               delegate:self
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil, nil] show];
+    
+    //update navigation item
+    self.navigationItem.rightBarButtonItem = nil;
 
 }
 
 - (void)didFinishLoadingFeedList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage{
-    dispatch_main_async_safe(^{
-        self.hasNextPage = hasNextPage;
-        self.pageInfo = pageInfo;
-        [self updateHeaderView];
-        //update navigation item
-        self.navigationItem.rightBarButtonItem = nil;
-    })
-
+    self.hasNextPage = hasNextPage;
+    self.pageInfo = pageInfo;
+    [self updateHeaderView];
+    //update navigation item
+    self.navigationItem.rightBarButtonItem = nil;
 }
 
 - (void)loadMore{

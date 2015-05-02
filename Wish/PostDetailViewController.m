@@ -156,34 +156,28 @@
 }
 
 - (void)didFinishUploadingPlan:(Plan *)plan{
-    dispatch_main_async_safe(^{
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
-//        self.backButton.enabled = YES;
-        [self performSegueWithIdentifier:@"doneWirtingAPost" sender:plan];
-    });
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
+    //        self.backButton.enabled = YES;
+    [self performSegueWithIdentifier:@"doneWirtingAPost" sender:plan];
 }
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    dispatch_main_async_safe((^{
-        //show alerts
-        [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
-                                    message:[NSString stringWithFormat:@"%@",info[@"msg"]]
-                                   delegate:self
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil, nil] show];
-        
-        //remove plan from core data
-        if ([managedObject isKindOfClass:[Plan class]]){
-            Plan *plan = (Plan *)managedObject;
-            [plan deleteSelf];
-        }
-        
-        //update navigation item
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
-//        self.backButton.enabled = YES;
-
-    }));
-
+    //show alerts
+    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
+                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
+                               delegate:self
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil, nil] show];
+    
+    //remove plan from core data
+    if ([managedObject isKindOfClass:[Plan class]]){
+        Plan *plan = (Plan *)managedObject;
+        [plan deleteSelf];
+    }
+    
+    //update navigation item
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
+    //        self.backButton.enabled = YES;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(Plan *)sender

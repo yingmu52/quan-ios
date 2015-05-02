@@ -36,9 +36,7 @@
 }
 
 - (void)didFinishFetchingFollowingPlanList{
-    dispatch_main_async_safe(^{
-        [self.tableView reloadData];
-    });
+    [self.tableView reloadData];
 }
 
 #pragma mark - segue

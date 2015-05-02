@@ -90,10 +90,8 @@ static NSUInteger numberOfitems = 4.0; //float is important
 }
 - (void)didfinishFetchingDiscovery:(NSArray *)plans{
     [self.plans addObjectsFromArray:plans];
-    dispatch_main_async_safe(^{
-        [self.collectionView reloadData];
-        self.navigationItem.rightBarButtonItem = nil;
-    })
+    [self.collectionView reloadData];
+    self.navigationItem.rightBarButtonItem = nil;
 }
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
@@ -101,15 +99,12 @@ static NSUInteger numberOfitems = 4.0; //float is important
 }
 
 - (void)handleFailure:(NSDictionary *)info{
-    dispatch_main_async_safe((^{
-        self.navigationItem.rightBarButtonItem = nil;
-        [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
-                                    message:[NSString stringWithFormat:@"%@",info[@"msg"]]
-                                   delegate:self
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil, nil] show];
-    }));
-    
+    self.navigationItem.rightBarButtonItem = nil;
+    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
+                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
+                               delegate:self
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil, nil] show];
 }
 
 

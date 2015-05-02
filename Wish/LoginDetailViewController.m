@@ -55,21 +55,16 @@
 
 - (void)didFinishUploadingPictureForProfile:(NSDictionary *)info{
     //finish uploading profile picture, imageid saved
-    dispatch_main_async_safe(^{
-        self.accessMainViewButton.hidden = NO;
-    });
+    self.accessMainViewButton.hidden = NO;
 }
 
 - (void)handleFailure:(NSDictionary *)info{
-    dispatch_main_async_safe((^{
-        self.navigationItem.rightBarButtonItem = nil;
-        [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
-                                    message:[NSString stringWithFormat:@"%@",info[@"msg"]]
-                                   delegate:self
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil, nil] show];
-    }));
-    
+    self.navigationItem.rightBarButtonItem = nil;
+    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
+                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
+                               delegate:self
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil, nil] show];
 }
 
 - (IBAction)showMainView:(id)sender{
@@ -80,10 +75,7 @@
 }
 
 - (void)didFinishSettingPersonalInfo{
-    dispatch_main_async_safe(^{
-        [self performSegueWithIdentifier:@"showMainView" sender:nil];
-    });
-
+    [self performSegueWithIdentifier:@"showMainView" sender:nil];
 }
 
 

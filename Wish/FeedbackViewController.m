@@ -56,9 +56,7 @@
 
 
 - (void)didFinishSendingFeedBack{
-    dispatch_main_async_safe(^{
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
-        [self.navigationController popViewControllerAnimated:YES];
-    });
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end

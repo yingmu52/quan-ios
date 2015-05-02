@@ -72,14 +72,12 @@
 }
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    dispatch_main_async_safe((^{
-        [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
-                                    message:[NSString stringWithFormat:@"%@",info[@"msg"]]
-                                   delegate:self
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil, nil] show];
-        [User updateOwnerInfo:nil];
-    }));
+    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
+                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
+                               delegate:self
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil, nil] show];
+    [User updateOwnerInfo:nil];
 }
 
 /*
@@ -110,29 +108,27 @@
     
     if (fetchedUserInfo) {
         //update local user info & UI
-        dispatch_main_async_safe((^{
-            NSDictionary *localUserInfo = @{ACCESS_TOKEN:self.tencentOAuth.accessToken,
-                                            OPENID:self.tencentOAuth.openId,
-                                            EXPIRATION_DATE:self.tencentOAuth.expirationDate,
-                                            PROFILE_PICTURE_ID:fetchedUserInfo[@"figureurl_qq_2"],
-                                            GENDER:fetchedUserInfo[@"gender"],
-                                            USER_DISPLAY_NAME:fetchedUserInfo[@"nickname"],
-                                            UID:uid,
-                                            UKEY:uKey};
-            [User updateOwnerInfo:localUserInfo];
-            
-            if (!isNew) {
-                NSDictionary *additionalUserInfo = @{PROFILE_PICTURE_ID_CUSTOM:userInfo[@"headUrl"],
-                                                     GENDER:[userInfo[@"gender"] boolValue] ? @"男" : @"女",
-                                                     USER_DISPLAY_NAME:userInfo[@"name"]};
-                [User updateAttributeFromDictionary:additionalUserInfo];
-//                NSLog(@"%@",localUserInfo);
-                [self performSegueWithIdentifier:@"showMainViewFromLogin" sender:nil];
-            }else{
-                [self performSegueWithIdentifier:@"showLoginDetail" sender:nil];
-            }
-
-        }));
+        NSDictionary *localUserInfo = @{ACCESS_TOKEN:self.tencentOAuth.accessToken,
+                                        OPENID:self.tencentOAuth.openId,
+                                        EXPIRATION_DATE:self.tencentOAuth.expirationDate,
+                                        PROFILE_PICTURE_ID:fetchedUserInfo[@"figureurl_qq_2"],
+                                        GENDER:fetchedUserInfo[@"gender"],
+                                        USER_DISPLAY_NAME:fetchedUserInfo[@"nickname"],
+                                        UID:uid,
+                                        UKEY:uKey};
+        [User updateOwnerInfo:localUserInfo];
+        
+        if (!isNew) {
+            NSDictionary *additionalUserInfo = @{PROFILE_PICTURE_ID_CUSTOM:userInfo[@"headUrl"],
+                                                 GENDER:[userInfo[@"gender"] boolValue] ? @"男" : @"女",
+                                                 USER_DISPLAY_NAME:userInfo[@"name"]};
+            [User updateAttributeFromDictionary:additionalUserInfo];
+            //                NSLog(@"%@",localUserInfo);
+            [self performSegueWithIdentifier:@"showMainViewFromLogin" sender:nil];
+        }else{
+            [self performSegueWithIdentifier:@"showLoginDetail" sender:nil];
+        }
+        
     }
 }
 

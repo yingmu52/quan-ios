@@ -101,34 +101,31 @@
      forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath
 {
-    dispatch_main_async_safe(^{
-        switch(type)
-        {
-            case NSFetchedResultsChangeInsert:
-                [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
-                                      withRowAnimation:UITableViewRowAnimationNone];
-                [self fetchResultsControllerDidInsert];
-                NSLog(@"Feed inserted");
-                break;
-                
-            case NSFetchedResultsChangeDelete:
-                [self.tableView deleteRowsAtIndexPaths:@[indexPath]
-                                      withRowAnimation:UITableViewRowAnimationAutomatic];
-                NSLog(@"Feed deleted");
-                break;
-                
-            case NSFetchedResultsChangeUpdate:
-                [self.tableView reloadRowsAtIndexPaths:@[indexPath]
-                                      withRowAnimation:UITableViewRowAnimationNone];
-                NSLog(@"Feed updated");
-                break;
-            default:
-                break;
-        }
-        
-        [self updateHeaderView];
-
-    })
+    switch(type)
+    {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
+                                  withRowAnimation:UITableViewRowAnimationNone];
+            [self fetchResultsControllerDidInsert];
+            NSLog(@"Feed inserted");
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath]
+                                  withRowAnimation:UITableViewRowAnimationAutomatic];
+            NSLog(@"Feed deleted");
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath]
+                                  withRowAnimation:UITableViewRowAnimationNone];
+            NSLog(@"Feed updated");
+            break;
+        default:
+            break;
+    }
+    
+    [self updateHeaderView];
 }
 
 - (void)fetchResultsControllerDidInsert{
