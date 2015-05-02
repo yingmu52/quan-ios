@@ -15,6 +15,5 @@
 @property (nonatomic,weak) IBOutlet UILabel *headerFollowLabel;
 @property (nonatomic,weak) IBOutlet UIImageView *badgeImageView;
 @property (nonatomic,strong) Plan *plan;
-+ (instancetype)instantiateFromNib;
-
++ (instancetype)instantiateFromNib:(CGRect)frame;
 @end

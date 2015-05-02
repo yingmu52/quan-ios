@@ -14,6 +14,12 @@
 
 @implementation WishDetailViewController
 
+- (void)initialHeaderView{
+    self.headerView = [HeaderView instantiateFromNib:CGRectMake(0, 0, self.tableView.frame.size.width, 238.0/1136*self.tableView.frame.size.height)];
+    self.tableView.tableHeaderView = self.headerView;
+    self.headerView.plan = self.plan;
+}
+
 - (FetchCenter *)fetchCenter{
     if (!_fetchCenter){
         _fetchCenter = [[FetchCenter alloc] init];
@@ -25,6 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
+    [self initialHeaderView];
     [self.tableView registerNib:[UINib nibWithNibName:@"WishDetailCell" bundle:nil]
          forCellReuseIdentifier:@"WishDetailCell"];
 }
@@ -232,6 +239,17 @@
             NSLog(@"share feed");
         }
     }];
+}
+
+
+#pragma mark - fetch center delegate 
+
+- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
+    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
+                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
+                               delegate:self
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil, nil] show];
 }
 
 @end

@@ -269,41 +269,227 @@ typedef enum{
 
 
 
-- (void)didFinishSendingPostRequest:(NSDictionary *)json operation:(FetchCenterPostOp)op entity:(NSManagedObject *)obj{
+#pragma mark - main get and post method
+
+- (NSString *)argumentStringWithDictionary:(NSDictionary *)dict{
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:dict.allKeys.count];
+    [dict enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL* stop) {
+        [array addObject:[NSString stringWithFormat:@"%@=%@",key,value]];
+    }];
+    return [array componentsJoinedByString:@"&"];
+}
+
+
+
+- (BOOL)hasActiveInternetConnection
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    return reachability.currentReachabilityStatus != NotReachable;
+}
+
+
+
+- (void)getRequest:(NSString *)baseURL parameter:(NSDictionary *)dict operation:(FetchCenterGetOp)op entity:(id)obj{
     
-    NSString *fetchedImageId = [json valueForKeyPath:@"data.id"];
-    switch (op){
-        case FetchCenterPostOpUploadImageForCreatingFeed:{
-            if (fetchedImageId){
-                Feed *feed = (Feed *)obj;
-                feed.imageId = fetchedImageId;
-                NSLog(@"fetched image ID: %@",fetchedImageId);
-                //upload feed
-                NSString *baseURL = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,CREATE_FEED];
-                NSDictionary *args;
-                if (feed.plan.planId && feed.feedTitle) {
-                    args = @{@"picurl":fetchedImageId,
-                             @"content":[feed.feedTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                             @"planId":feed.plan.planId};
-                    [self getRequest:baseURL
-                           parameter:args
-                           operation:FetchCenterGetOpCreateFeed entity:obj];
+    //check internet connection
+    if (![self hasActiveInternetConnection]){
+        dispatch_main_async_safe((^{
+            [self.delegate didFailSendingRequestWithInfo:@{@"ret":@"网络故障",@"msg":@"请检查网络连接"}
+                                                  entity:obj];
+            return;
+        }))
+    }
+    //base url with version
+    baseURL = [baseURL stringByAppendingString:@"?"];
+    baseURL = [self versionForBaseURL:baseURL operation:op];
+    
+    
+    //content arguments
+    NSString *rqtStr = [baseURL stringByAppendingString:[self argumentStringWithDictionary:dict]];
+    
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:rqtStr]
+                                                           cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30.0];
+    request.HTTPMethod = @"GET";
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+                                  {
+                                      NSDictionary *responseJson = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                                      if ([responseJson[@"ret"] integerValue] == -305) {
+                                          NSLog(@"-305: invalid system version");
+                                          return;
+                                      }
+                                      if (!error && ![responseJson[@"ret"] boolValue]){ //successed "ret" = 0;
+                                          [self didFinishSendingGetRequest:responseJson operation:op entity:obj];
+                                      }else{
+                                          NSLog(@"Fail Get Request :%@\n op: %d \n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@",rqtStr,op,baseURL,dict,responseJson,error);
+                                          dispatch_main_async_safe(^{
+                                              [self.delegate didFailSendingRequestWithInfo:responseJson entity:obj];
+                                          });
+                                      }
+                                  }];
+    [task resume];
+    
+    
+}
+
+- (void)postImageWithOperation:(id)obj postOp:(FetchCenterPostOp)postOp{ //obj :NSManagedObject or UIimage
+    
+    //chekc internet
+    if (![self hasActiveInternetConnection]){
+        dispatch_main_async_safe((^{
+            [self.delegate didFailUploadingImageWithInfo:@{@"ret":@"网络故障",@"msg":@"请检查网络连接"}
+                                                  entity:obj];
+            return;
+        }));
+    }
+
+    NSString *rqtUploadImage = [NSString stringWithFormat:@"%@%@%@?",self.baseUrl,PIC,UPLOAD_IMAGE];
+    rqtUploadImage = [self versionForBaseURL:rqtUploadImage operation:-1];
+    
+    UIImage *image; // = [obj valueForKey:@"image"];
+    if ([obj isKindOfClass:[UIImage class]]){
+        image = obj;
+    }else if ([obj isKindOfClass:[NSManagedObject class]]){
+        image = [obj valueForKey:@"image"];
+    }else{
+        NSAssert(true, @"postImageWithOperation :invalid obj");
+    }
+    
+    //upload image
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:rqtUploadImage]
+                                                           cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30.0];
+    request.HTTPMethod = @"POST";
+
+    NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:[self compressImage:image]
+                                                      completionHandler:^(NSData *data,NSURLResponse *response,NSError *error)
+                                          {
+                                              NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
+                                                                                                   options:NSJSONReadingAllowFragments
+                                                                                                     error:nil];
+                                              
+                                              if (!error && ![json[@"ret"] boolValue]){ //upload image successed
+                                                  [self didFinishSendingPostRequest:json
+                                                                          operation:postOp
+                                                                             entity:obj];
+                                              }else{
+                                                  NSLog(@"fail to upload image \n response:%@",json);
+                                                  dispatch_main_async_safe(^{
+                                                      [self.delegate didFailUploadingImageWithInfo:json entity:obj];
+                                                  });
+                                                  
+                                              }
+                                          }];
+    [uploadTask resume];
+    
+}
+
+
+
+#pragma mark - version control 
+
+//return a new base url string with appened version argument
+- (NSString *)versionForBaseURL:(NSString *)baseURL operation:(FetchCenterGetOp)op{
+    NSMutableDictionary *dict = [@{@"version":@"2.2.2",
+                                   @"loginType":@"qq",
+                                   @"sysVersion":[UIDevice currentDevice].systemVersion,
+                                   @"sysModel":[[UIDevice currentDevice].model stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]} mutableCopy];
+    if (op != FetchCenterGetOpLoginForUidAndUkey) {
+        [dict addEntriesFromDictionary:@{@"uid":[User uid],@"ukey":[User uKey]}];
+        dict[@"loginType"] = @"uid";
+    }
+    return [[baseURL stringByAppendingString:[self argumentStringWithDictionary:dict]] stringByAppendingString:@"&"];
+}
+
+#pragma mark - get image url wraper
+
+- (NSURL *)urlWithImageID:(NSString *)imageId{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@?",self.baseUrl,PIC,GET_IMAGE];
+    NSString *url = [NSString stringWithFormat:@"%@id=%@",[self versionForBaseURL:rqtStr operation:-1],imageId];
+    return [NSURL URLWithString:url];
+}
+
+#pragma mark - image compression 
+
+- (NSData *)compressImage:(UIImage *)image{
+    CGFloat actualHeight = image.size.height;
+    CGFloat actualWidth = image.size.width;
+    CGFloat maxHeight = 600.0;
+    CGFloat maxWidth = 800.0;
+    CGFloat imgRatio = actualWidth/actualHeight;
+    CGFloat maxRatio = maxWidth/maxHeight;
+    CGFloat compressionQuality = 0.5;//50 percent compression
+    
+    if (actualHeight > maxHeight || actualWidth > maxWidth){
+        if(imgRatio < maxRatio){
+            //adjust width according to maxHeight
+            imgRatio = maxHeight / actualHeight;
+            actualWidth = imgRatio * actualWidth;
+            actualHeight = maxHeight;
+        }
+        else if(imgRatio > maxRatio){
+            //adjust height according to maxWidth
+            imgRatio = maxWidth / actualWidth;
+            actualHeight = imgRatio * actualHeight;
+            actualWidth = maxWidth;
+        }
+        else{
+            actualHeight = maxHeight;
+            actualWidth = maxWidth;
+        }
+    }
+    
+    CGRect rect = CGRectMake(0.0, 0.0, actualWidth, actualHeight);
+    UIGraphicsBeginImageContext(rect.size);
+    [image drawInRect:rect];
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    NSData *imageData = UIImageJPEGRepresentation(img, compressionQuality);
+    UIGraphicsEndImageContext();
+    
+    return imageData;
+}
+
+#pragma mark - response handler
+- (void)didFinishSendingPostRequest:(NSDictionary *)json operation:(FetchCenterPostOp)op entity:(NSManagedObject *)obj{
+    dispatch_main_async_safe((^{
+        NSString *fetchedImageId = [json valueForKeyPath:@"data.id"];
+        switch (op){
+            case FetchCenterPostOpUploadImageForCreatingFeed:{
+                if (fetchedImageId){
+                    Feed *feed = (Feed *)obj;
+                    feed.imageId = fetchedImageId;
+                    NSLog(@"fetched image ID: %@",fetchedImageId);
+                    //upload feed
+                    NSString *baseURL = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,CREATE_FEED];
+                    NSDictionary *args;
+                    if (feed.plan.planId && feed.feedTitle) {
+                        args = @{@"picurl":fetchedImageId,
+                                 @"content":[feed.feedTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                                 @"planId":feed.plan.planId};
+                        [self getRequest:baseURL
+                               parameter:args
+                               operation:FetchCenterGetOpCreateFeed entity:obj];
+                    }
                 }
             }
-        }
-            break;
-        case FetchCenterPostOpUploadImageForUpdaingProfile:{
-            //update local User info
-            if (fetchedImageId){
-                [User updateAttributeFromDictionary:@{PROFILE_PICTURE_ID_CUSTOM:fetchedImageId}];
-                NSLog(@"image uploaded %@",fetchedImageId);
-                [self.delegate didFinishUploadingPictureForProfile:json];
+                break;
+            case FetchCenterPostOpUploadImageForUpdaingProfile:{
+                //update local User info
+                if (fetchedImageId){
+                    [User updateAttributeFromDictionary:@{PROFILE_PICTURE_ID_CUSTOM:fetchedImageId}];
+                    NSLog(@"image uploaded %@",fetchedImageId);
+                    [self.delegate didFinishUploadingPictureForProfile:json];
+                }
             }
+                break;
+            default:
+                break;
         }
-            break;
-        default:
-            break;
-    }
+        
+    }));
 }
 
 - (void)didFinishSendingGetRequest:(NSDictionary *)json operation:(FetchCenterGetOp)op entity:(id)obj{
@@ -451,177 +637,4 @@ typedef enum{
         
     }));
 }
-
-#pragma mark - main get and post method
-
-- (NSString *)argumentStringWithDictionary:(NSDictionary *)dict{
-    NSMutableArray *array = [NSMutableArray arrayWithCapacity:dict.allKeys.count];
-    [dict enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL* stop) {
-        [array addObject:[NSString stringWithFormat:@"%@=%@",key,value]];
-    }];
-    return [array componentsJoinedByString:@"&"];
-}
-
-
-
-- (BOOL)hasActiveInternetConnection
-{
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    return reachability.currentReachabilityStatus != NotReachable;
-}
-
-
-
-- (void)getRequest:(NSString *)baseURL parameter:(NSDictionary *)dict operation:(FetchCenterGetOp)op entity:(id)obj{
-    
-    //check internet connection
-    if (![self hasActiveInternetConnection]){
-        [self.delegate didFailSendingRequestWithInfo:@{@"ret":@"网络故障",@"msg":@"请检查网络连接"} entity:obj];
-        return;
-    }
-    //base url with version
-    baseURL = [baseURL stringByAppendingString:@"?"];
-    baseURL = [self versionForBaseURL:baseURL operation:op];
-    
-    
-    //content arguments
-    NSString *rqtStr = [baseURL stringByAppendingString:[self argumentStringWithDictionary:dict]];
-    
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:rqtStr]
-                                                           cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30.0];
-    request.HTTPMethod = @"GET";
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
-                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
-                                  {
-                                      NSDictionary *responseJson = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-                                      if ([responseJson[@"ret"] integerValue] == -305) {
-                                          NSLog(@"-305: invalid system version");
-                                          return;
-                                      }
-                                      if (!error && ![responseJson[@"ret"] boolValue]){ //successed "ret" = 0;
-                                          [self didFinishSendingGetRequest:responseJson operation:op entity:obj];
-                                      }else{
-                                          NSLog(@"Fail Get Request :%@\n op: %d \n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@",rqtStr,op,baseURL,dict,responseJson,error);
-                                          [self.delegate didFailSendingRequestWithInfo:responseJson entity:obj];
-                                      }
-                                  }];
-    [task resume];
-    
-    
-}
-
-- (void)postImageWithOperation:(id)obj postOp:(FetchCenterPostOp)postOp{ //obj :NSManagedObject or UIimage
-    
-    //chekc internet
-    if (![self hasActiveInternetConnection]){
-        [self.delegate didFailUploadingImageWithInfo:@{@"ret":@"网络故障",@"msg":@"请检查网络连接"} entity:obj];
-        return;
-    }
-
-    NSString *rqtUploadImage = [NSString stringWithFormat:@"%@%@%@?",self.baseUrl,PIC,UPLOAD_IMAGE];
-    rqtUploadImage = [self versionForBaseURL:rqtUploadImage operation:-1];
-    
-    UIImage *image; // = [obj valueForKey:@"image"];
-    if ([obj isKindOfClass:[UIImage class]]){
-        image = obj;
-    }else if ([obj isKindOfClass:[NSManagedObject class]]){
-        image = [obj valueForKey:@"image"];
-    }else{
-        NSAssert(true, @"postImageWithOperation :invalid obj");
-    }
-    
-    //upload image
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:rqtUploadImage]
-                                                           cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30.0];
-    request.HTTPMethod = @"POST";
-
-    NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:[self compressImage:image]
-                                                      completionHandler:^(NSData *data,NSURLResponse *response,NSError *error)
-                                          {
-                                              NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                   options:NSJSONReadingAllowFragments
-                                                                                                     error:nil];
-                                              
-                                              if (!error && ![json[@"ret"] boolValue]){ //upload image successed
-                                                  [self didFinishSendingPostRequest:json
-                                                                          operation:postOp
-                                                                             entity:obj];
-                                              }else{
-                                                  NSLog(@"fail to upload image \n response:%@",json);
-                                                  [self.delegate didFailUploadingImageWithInfo:json entity:obj];
-                                              }
-                                          }];
-    [uploadTask resume];
-    
-}
-
-
-
-#pragma mark - version control 
-
-//return a new base url string with appened version argument
-- (NSString *)versionForBaseURL:(NSString *)baseURL operation:(FetchCenterGetOp)op{
-    NSMutableDictionary *dict = [@{@"version":@"2.2.2",
-                                   @"loginType":@"qq",
-                                   @"sysVersion":[UIDevice currentDevice].systemVersion,
-                                   @"sysModel":[[UIDevice currentDevice].model stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]} mutableCopy];
-    if (op != FetchCenterGetOpLoginForUidAndUkey) {
-        [dict addEntriesFromDictionary:@{@"uid":[User uid],@"ukey":[User uKey]}];
-        dict[@"loginType"] = @"uid";
-    }
-    return [[baseURL stringByAppendingString:[self argumentStringWithDictionary:dict]] stringByAppendingString:@"&"];
-}
-
-#pragma mark - get image url wraper
-
-- (NSURL *)urlWithImageID:(NSString *)imageId{
-    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@?",self.baseUrl,PIC,GET_IMAGE];
-    NSString *url = [NSString stringWithFormat:@"%@id=%@",[self versionForBaseURL:rqtStr operation:-1],imageId];
-    return [NSURL URLWithString:url];
-}
-
-#pragma mark - image compression 
-
-- (NSData *)compressImage:(UIImage *)image{
-    CGFloat actualHeight = image.size.height;
-    CGFloat actualWidth = image.size.width;
-    CGFloat maxHeight = 600.0;
-    CGFloat maxWidth = 800.0;
-    CGFloat imgRatio = actualWidth/actualHeight;
-    CGFloat maxRatio = maxWidth/maxHeight;
-    CGFloat compressionQuality = 0.5;//50 percent compression
-    
-    if (actualHeight > maxHeight || actualWidth > maxWidth){
-        if(imgRatio < maxRatio){
-            //adjust width according to maxHeight
-            imgRatio = maxHeight / actualHeight;
-            actualWidth = imgRatio * actualWidth;
-            actualHeight = maxHeight;
-        }
-        else if(imgRatio > maxRatio){
-            //adjust height according to maxWidth
-            imgRatio = maxWidth / actualWidth;
-            actualHeight = imgRatio * actualHeight;
-            actualWidth = maxWidth;
-        }
-        else{
-            actualHeight = maxHeight;
-            actualWidth = maxWidth;
-        }
-    }
-    
-    CGRect rect = CGRectMake(0.0, 0.0, actualWidth, actualHeight);
-    UIGraphicsBeginImageContext(rect.size);
-    [image drawInRect:rect];
-    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-    NSData *imageData = UIImageJPEGRepresentation(img, compressionQuality);
-    UIGraphicsEndImageContext();
-    
-    return imageData;
-}
-
 @end

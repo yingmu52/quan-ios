@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
 //
 
-#import "FirstTableViewController.h"
 #import "Plan.h"
 #import "Theme.h"
 #import "WishDetailCell.h"
@@ -17,11 +16,12 @@
 #import "FetchCenter.h"
 #import "SDWebImageCompat.h"
 #import "UIActionSheet+Blocks.h"
-
-@interface WishDetailViewController : FirstTableViewController <NSFetchedResultsControllerDelegate,WishDetailCellDelegate,FetchCenterDelegate>
+#import "HeaderView.h"
+@interface WishDetailViewController : UITableViewController <NSFetchedResultsControllerDelegate,WishDetailCellDelegate,FetchCenterDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC; //fetching Feed
 @property (nonatomic,strong) Plan *plan; //must set
 @property (nonatomic,strong) FetchCenter *fetchCenter;
+@property (nonatomic,strong) HeaderView *headerView;
 - (void)setUpNavigationItem;
 - (void)updateHeaderView;
 - (void)setupBadageImageView;

@@ -37,10 +37,13 @@
     }
 }
 
-+ (instancetype)instantiateFromNib
++ (instancetype)instantiateFromNib:(CGRect)frame
 {
     NSArray *views = [[NSBundle mainBundle] loadNibNamed:[NSString stringWithFormat:@"%@", [self class]] owner:nil options:nil];
-    return [views firstObject];
+    HeaderView *view = [views firstObject];
+    view.frame = frame;
+    [view layoutIfNeeded];
+    return view;
 }
 
 

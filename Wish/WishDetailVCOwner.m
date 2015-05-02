@@ -250,9 +250,6 @@
 - (void)popupViewDidPressCancel:(PopupView *)popupView{
     [popupView removeFromSuperview];
 }
-- (void)didFinishDeletingFeed:(Feed *)feed{
-    [self deleteFeed:feed];
-}
 - (void)deleteFeed:(Feed *)feed{
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
@@ -265,5 +262,13 @@
     [delegate saveContext];
     
 }
+
+
+#pragma mark - fetch center delegate 
+
+- (void)didFinishDeletingFeed:(Feed *)feed{
+    [self deleteFeed:feed];
+}
+
 
 @end

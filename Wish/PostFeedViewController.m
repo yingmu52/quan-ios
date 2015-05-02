@@ -13,16 +13,26 @@
 #import "FetchCenter.h"
 #import "GCPTextView.h"
 #import "SDWebImageCompat.h"
+#import "AppDelegate.h"
 @interface PostFeedViewController () <UITextFieldDelegate,FetchCenterDelegate,UITextViewDelegate>
 @property (nonatomic,strong) UIButton *tikButton;
 @property (nonatomic,weak) IBOutlet UIImageView *previewIcon;
 //@property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet GCPTextView *textView;
 
+
+@property (nonatomic,strong) Feed *feed;
 @end
 
 @implementation PostFeedViewController
 
+- (Feed *)feed{
+    if (!_feed){
+        _feed = [Feed createFeedWithImage:self.imageForFeed inPlan:self.plan];
+        _feed.feedTitle = self.textView.text;
+    }
+    return _feed;
+}
 - (NSString *)titleForFeed{
     return self.textView.text;
 }
@@ -55,8 +65,8 @@
 {
     CGRect frame = CGRectMake(0, 0, 25, 25);
     UIButton *backBtn = [Theme buttonWithImage:[Theme navBackButtonDefault]
-                                        target:self.navigationController
-                                      selector:@selector(popViewControllerAnimated:)
+                                        target:self
+                                      selector:@selector(goBack)
                                          frame:frame];
     self.tikButton = [Theme buttonWithImage:[Theme navTikButtonDisable]
                                      target:self
@@ -84,45 +94,16 @@
     [spinner startAnimating];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
     
-    
-    Feed *feed = [Feed createFeedWithImage:self.imageForFeed inPlan:self.plan];
-    feed.feedTitle = self.textView.text;
     FetchCenter *fc = [FetchCenter new];
     fc.delegate = self;
-    [fc uploadToCreateFeed:feed];
-}
-
-- (void)didFinishUploadingFeed:(Feed *)feed
-{
-    dispatch_main_async_safe(^{
-        self.navigationItem.leftBarButtonItem.enabled = YES;
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
-        [self.navigationController popViewControllerAnimated:YES];
-    });
-}
-
-- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    [self handleFailure:info];
-}
-
-- (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    [self handleFailure:info];
+    [fc uploadToCreateFeed:self.feed];
 }
 
 
-- (void)handleFailure:(NSDictionary *)info{
-    dispatch_main_async_safe((^{
-        self.navigationItem.leftBarButtonItem.enabled = YES;
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
-        [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
-                                    message:[NSString stringWithFormat:@"%@",info[@"msg"]]
-                                   delegate:self
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil, nil] show];
-    }));
-
+- (void)goBack{
+    [[AppDelegate getContext] deleteObject:self.feed];
+    [self.navigationController popViewControllerAnimated:YES];
 }
-
 #pragma mark - text view delegate
 
 
@@ -141,5 +122,34 @@
     NSUInteger noc = textView.text.length + (text.length - range.length);
 //    NSLog(@"%d",noc);
     return  noc <= 140;
+}
+
+#pragma mark - fetch center delegate 
+
+
+- (void)didFinishUploadingFeed:(Feed *)feed
+{
+    self.navigationItem.leftBarButtonItem.enabled = YES;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
+    [self handleFailure:info];
+}
+
+- (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
+    [self handleFailure:info];
+}
+
+
+- (void)handleFailure:(NSDictionary *)info{
+    self.navigationItem.leftBarButtonItem.enabled = YES;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
+    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
+                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
+                               delegate:self
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil, nil] show];
 }
 @end
