@@ -94,6 +94,7 @@ ImagePickerDelegate>
     lp.delaysTouchesBegan = YES;
     lp.minimumPressDuration = 0.5;
     [self.collectionView addGestureRecognizer:lp];
+    self.title = @"我的事儿";
 }
 
 - (void)setUpNavigationItem
