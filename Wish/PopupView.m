@@ -46,7 +46,7 @@
     view.headBannerImageView.image = nil;
     view.popUpBackground.backgroundColor = [UIColor whiteColor];
     view.headBannerLabel.text = nil;
-    view.HeadDeleteLabel.text = @"删除的卡片不恢复哦！";
+    view.HeadDeleteLabel.text = @"删除的事件不恢复哦！";
     view.internalState = PopupViewStateDelete;
     return view;
 }
