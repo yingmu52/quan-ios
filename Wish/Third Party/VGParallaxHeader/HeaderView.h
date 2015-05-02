@@ -10,8 +10,7 @@
 #import "Plan+PlanCRUD.h"
 @interface HeaderView : UIView
 @property (nonatomic,weak) IBOutlet UILabel *headerTitleLabel;
-@property (nonatomic,weak) IBOutlet UILabel *headerSubTitleLabel;
-@property (nonatomic,weak) IBOutlet UILabel *headerCountDownLabel;
+@property (nonatomic,weak) IBOutlet UILabel *headerFeedCountLabel;
 @property (nonatomic,weak) IBOutlet UILabel *headerFollowLabel;
 @property (nonatomic,weak) IBOutlet UIImageView *badgeImageView;
 @property (nonatomic,strong) Plan *plan;

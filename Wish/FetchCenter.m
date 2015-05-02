@@ -135,20 +135,24 @@ typedef enum{
 }
 
 - (void)likeFeed:(Feed *)feed{
-    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,LIKE_FEED];
-    [self getRequest:rqtStr
-           parameter:@{@"id":feed.feedId}
-           operation:FetchCenterGetOpLikeAFeed
-              entity:feed];
+    if (feed.feedId){
+        NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,LIKE_FEED];
+        [self getRequest:rqtStr
+               parameter:@{@"id":feed.feedId}
+               operation:FetchCenterGetOpLikeAFeed
+                  entity:feed];
+        
+    }
 }
 
 - (void)unLikeFeed:(Feed *)feed{
-    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,UNLIKE_FEED];
-    [self getRequest:rqtStr
-           parameter:@{@"id":feed.feedId}
-           operation:FetchCenterGetOpUnLikeAFeed
-              entity:feed];
-    
+    if (feed.feedId){
+        NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,UNLIKE_FEED];
+        [self getRequest:rqtStr
+               parameter:@{@"id":feed.feedId}
+               operation:FetchCenterGetOpUnLikeAFeed
+                  entity:feed];
+    }
 }
 
 #pragma mark - following list
