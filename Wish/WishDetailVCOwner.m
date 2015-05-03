@@ -190,7 +190,9 @@
     if ([segue.identifier isEqualToString:@"showEditPage"]){
         [segue.destinationViewController setPlan:sender];
     }
-
+    if ([segue.identifier isEqualToString:@"showFeedDetailFromOwner"]){
+        [segue.destinationViewController setFeed:sender];
+    }
 }
 - (void)showCamera{
     self.cameraButton.hidden = YES;
@@ -268,6 +270,13 @@
 
 - (void)didFinishDeletingFeed:(Feed *)feed{
     [self deleteFeed:feed];
+}
+
+#pragma mark - table view delegate 
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    Feed *feed = [self.fetchedRC objectAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:@"showFeedDetailFromOwner" sender:feed];
 }
 
 

@@ -17,6 +17,7 @@
 #import "SDWebImageCompat.h"
 #import "UIActionSheet+Blocks.h"
 #import "HeaderView.h"
+#import "FeedDetailViewController.h"
 @interface WishDetailViewController : UITableViewController <NSFetchedResultsControllerDelegate,WishDetailCellDelegate,FetchCenterDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC; //fetching Feed
 @property (nonatomic,strong) Plan *plan; //must set

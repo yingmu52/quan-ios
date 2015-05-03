@@ -18,6 +18,7 @@
 		AE0ADF1A1ABD78CC00692131 /* HomeCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0ADF181ABD78CC00692131 /* HomeCardViewController.m */; };
 		AE0E794B1A76EB50007C48EE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E794A1A76EB50007C48EE /* Reachability.m */; };
 		AE0E794C1A76EB50007C48EE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E794A1A76EB50007C48EE /* Reachability.m */; };
+		AE17799A1AF585CB005F1BEB /* FeedDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1779991AF585CB005F1BEB /* FeedDetailViewController.m */; };
 		AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
 		AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
 		AE1E6BAA1AAFEEE400AF2613 /* PopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1E6BA91AAFEEE400AF2613 /* PopupView.m */; };
@@ -221,6 +222,8 @@
 		AE0ADF181ABD78CC00692131 /* HomeCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCardViewController.m; sourceTree = "<group>"; };
 		AE0E79491A76EB50007C48EE /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		AE0E794A1A76EB50007C48EE /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		AE1779981AF585CB005F1BEB /* FeedDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedDetailViewController.h; sourceTree = "<group>"; };
+		AE1779991AF585CB005F1BEB /* FeedDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedDetailViewController.m; sourceTree = "<group>"; };
 		AE1B6E3A1A6D89FC0026F3CE /* HomeCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCardView.h; sourceTree = "<group>"; };
 		AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCardView.m; sourceTree = "<group>"; };
 		AE1E6BA81AAFEEE400AF2613 /* PopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupView.h; sourceTree = "<group>"; };
@@ -774,6 +777,8 @@
 		AEEC6C781A6DB6340021B7E4 /* WishDetail */ = {
 			isa = PBXGroup;
 			children = (
+				AE1779981AF585CB005F1BEB /* FeedDetailViewController.h */,
+				AE1779991AF585CB005F1BEB /* FeedDetailViewController.m */,
 				AE9861F81AC33C04005544B9 /* EditWishViewController.h */,
 				AE9861F91AC33C04005544B9 /* EditWishViewController.m */,
 				AE52FA511A8D55A7003FF725 /* KeyboardAcessoryView.h */,
@@ -1118,6 +1123,7 @@
 				AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */,
 				AE52FA531A8D55A7003FF725 /* KeyboardAcessoryView.m in Sources */,
 				AEF7F29B1A686FE90022410B /* NavigationBar.m in Sources */,
+				AE17799A1AF585CB005F1BEB /* FeedDetailViewController.m in Sources */,
 				AEFB048C1AD12437009EB0D3 /* DiscoveryViewController.m in Sources */,
 				AEEC6C731A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,
 				AEFA5FDD1AAFBAA8001CA0C8 /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */,
