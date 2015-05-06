@@ -8,6 +8,7 @@
 
 #import "FeedDetailViewController.h"
 #import "Theme.h"
+#import "FeedDetailCell.h"
 @interface FeedDetailViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
@@ -102,4 +103,26 @@
 }
 
 
+#pragma mark - table view 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 10;
+}
+
+- (FeedDetailCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    FeedDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:FEEDDETAILCELLID forIndexPath:indexPath];
+    
+    NSString *content = [NSString stringWithFormat:@"%@",[NSUUID UUID]];
+    cell.contentLabel.text = content;
+    return cell;
+}
+
+
 @end
+
+
+
+
+
+
+
+
