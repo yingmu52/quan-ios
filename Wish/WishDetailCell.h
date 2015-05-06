@@ -26,13 +26,10 @@
 
 
 
-@property (weak, nonatomic) IBOutlet UILabel *infoLabel;
-@property (weak,nonatomic) IBOutlet UITextView *titleTextView;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UIButton *commentButton;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
-@property (weak, nonatomic) IBOutlet UILabel *likeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *commentLabel;
 
 
 

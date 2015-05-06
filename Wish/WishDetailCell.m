@@ -20,33 +20,25 @@
 
 }
 
-- (void)setTitleTextView:(UITextView *)titleTextView{
-    _titleTextView = titleTextView;
-    _titleTextView.textContainer.lineFragmentPadding = 0.0f;
-    _titleTextView.textContainerInset = UIEdgeInsetsZero;
-}
-
 - (void)setFeed:(Feed *)feed
 {
     _feed = feed;
     self.photoView.image = feed.image;
     self.dateLabel.text = [SystemUtil stringFromDate:feed.createDate];
-    self.likeLabel.text = [NSString stringWithFormat:@"%@",feed.likeCount];
-    self.commentLabel.text = [NSString stringWithFormat:@"%@",feed.commentCount];
+
     [self.likeButton setImage:feed.selfLiked.boolValue ? [Theme likeButtonLiked] : [Theme likeButtonUnLiked]
                      forState:UIControlStateNormal];
-
-//    self.infoLabel.text = feed.feedTitle;
-    self.titleTextView.text = feed.feedTitle;
+    
+    self.titleLabel.text = feed.feedTitle;
 }
 
-- (void)setPhotoView:(UIImageView *)photoView
-{
-    _photoView = photoView;
+//- (void)setPhotoView:(UIImageView *)photoView
+//{
+//    _photoView = photoView;
     //crop the feed image to display properly
-    _photoView.contentMode = UIViewContentModeScaleAspectFill;
-    _photoView.clipsToBounds = YES;
-}
+//    _photoView.contentMode = UIViewContentModeScaleAspectFill;
+//    _photoView.clipsToBounds = YES;
+//}
 
 - (IBAction)like:(UIButton *)sender{
     

@@ -143,30 +143,24 @@
 
 #pragma mark - table view delegate and data source
 
-- (CGFloat)heightForText:(NSString *)text{
-    
-    NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:text
-                                                                         attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13.0f]}];
-    
-    CGSize maxSize = [[UIScreen mainScreen] bounds].size;
-    
-    CGRect rect = [attributedText boundingRectWithSize:(CGSize){368.0f / 400 * maxSize.width,CGFLOAT_MAX}
-                                               options:NSStringDrawingUsesLineFragmentOrigin
-                                               context:nil];
-    return rect.size.height; // maximum number of line is 6 for 140 character
-}
+//- (CGFloat)heightForText:(NSString *)text{
+//    
+//    NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:text
+//                                                                         attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13.0f]}];
+//    
+//    CGSize maxSize = [[UIScreen mainScreen] bounds].size;
+//    
+//    CGRect rect = [attributedText boundingRectWithSize:(CGSize){368.0f / 400 * maxSize.width,CGFLOAT_MAX}
+//                                               options:NSStringDrawingUsesLineFragmentOrigin
+//                                               context:nil];
+//    return rect.size.height; // maximum number of line is 6 for 140 character
+//}
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    CGFloat baseHeight = 550.0f/1136*tableView.frame.size.height;
-
-    Feed *feed = [self.fetchedRC objectAtIndexPath:indexPath];
-    CGFloat additionalTextHeight = [self heightForText:feed.feedTitle];
-    CGFloat margin = 50.0f;
-    
-    CGFloat actualHeight = (550.0f - margin)/1136*tableView.frame.size.height + additionalTextHeight;
-    return actualHeight < baseHeight ? baseHeight : actualHeight;
+    CGFloat baseHeight = 750.0f/1136*tableView.frame.size.height;
+    return baseHeight;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
