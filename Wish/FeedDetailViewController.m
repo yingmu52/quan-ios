@@ -9,15 +9,17 @@
 #import "FeedDetailViewController.h"
 #import "Theme.h"
 #import "FeedDetailCell.h"
-@interface FeedDetailViewController ()
+#import "FetchCenter.h"
+#import "Theme.h"
+@interface FeedDetailViewController () <FetchCenterDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *likeCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentCountLabel;
 @property (weak, nonatomic) IBOutlet UIView* tableHeaderViewWrapper;
 @property (weak, nonatomic) IBOutlet UILabel* headerLabel;
-
+@property (weak, nonatomic) IBOutlet UIButton *likeButton;
+@property (strong, nonatomic) FetchCenter *fetchCenter;
 @end
 
 @implementation FeedDetailViewController
@@ -30,11 +32,11 @@
 
 - (void)setupContents{
     self.imageView.image = self.feed.image;
-    self.textView.text = self.feed.feedTitle;
     self.headerLabel.text = self.feed.feedTitle;
     self.dateLabel.text = [NSString stringWithFormat:@"%@",self.feed.createDate];
     self.likeCountLabel.text = [NSString stringWithFormat:@"%@",self.feed.likeCount];
     self.commentCountLabel.text = [NSString stringWithFormat:@"%@",self.feed.commentCount];
+    [self.likeButton setImage:(self.feed.selfLiked.boolValue ? [Theme likeButtonLiked] : [Theme likeButtonUnLiked]) forState:UIControlStateNormal];
 }
 
 
@@ -116,6 +118,51 @@
     return cell;
 }
 
+#pragma mark - like
+- (FetchCenter *)fetchCenter{
+    if (!_fetchCenter){
+        _fetchCenter = [[FetchCenter alloc] init];
+        _fetchCenter.delegate = self;
+    }
+    return _fetchCenter;
+}
+
+- (IBAction)likeButtonPressed{
+    if (!self.feed.selfLiked.boolValue) {
+        [self.likeButton setImage:[Theme likeButtonLiked] forState:UIControlStateNormal];
+        [self.fetchCenter likeFeed:self.feed];
+    }else{
+        [self.likeButton setImage:[Theme likeButtonUnLiked] forState:UIControlStateNormal];
+        [self.fetchCenter unLikeFeed:self.feed];
+    }
+    self.likeButton.userInteractionEnabled = NO;
+
+}
+
+- (void)didFinishUnLikingFeed:(Feed *)feed{
+    self.likeButton.userInteractionEnabled = YES;
+    //decrease feed like count
+    feed.likeCount = @(self.feed.likeCount.integerValue - 1);
+    feed.selfLiked = @(NO);
+    self.likeCountLabel.text = [NSString stringWithFormat:@"%@",feed.likeCount];
+}
+
+- (void)didFinishLikingFeed:(Feed *)feed{
+    self.likeButton.userInteractionEnabled = YES;
+    //increase feed like count
+    feed.likeCount = @(self.feed.likeCount.integerValue + 1);
+    feed.selfLiked = @(YES);
+    self.likeCountLabel.text = [NSString stringWithFormat:@"%@",feed.likeCount];
+}
+
+- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
+    self.likeButton.userInteractionEnabled = YES;
+    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
+                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
+                               delegate:self
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil, nil] show];
+}
 
 @end
 

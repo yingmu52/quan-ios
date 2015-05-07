@@ -35,6 +35,9 @@
 - (void)didFinishLoadingFeedList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage;
 - (void)didFinishDeletingFeed:(Feed *)feed;
 
+- (void)didFinishLikingFeed:(Feed *)feed;
+- (void)didFinishUnLikingFeed:(Feed *)feed;
+
 - (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
 

@@ -9,7 +9,6 @@
 #import "WishDetailCell.h"
 #import "SystemUtil.h"
 #import "Theme.h"
-#import "AppDelegate.h"
 @interface WishDetailCell()
 @end
 @implementation WishDetailCell
@@ -42,15 +41,11 @@
 
 - (IBAction)like:(UIButton *)sender{
     
-    if (self.feed.selfLiked.boolValue){
-        self.feed.selfLiked = @(NO);
-        self.feed.likeCount = @(self.feed.likeCount.integerValue - 1);
-    }else{
-        self.feed.selfLiked = @(YES);
-        self.feed.likeCount = @(self.feed.likeCount.integerValue + 1);
-    }
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    [delegate saveContext];
+//    if (self.feed.selfLiked.boolValue){
+//        self.feed.selfLiked = @(NO);
+//    }else{
+//        self.feed.selfLiked = @(YES);
+//    }
     [self.delegate didPressedLikeOnCell:self];
 }
 

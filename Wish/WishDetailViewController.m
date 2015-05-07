@@ -181,13 +181,27 @@
     //already increment/decrement like count locally,
     //the following request must respect the current cell.feed like/dislike status
     
-    if (cell.feed.selfLiked.boolValue) {
+    if (!cell.feed.selfLiked.boolValue) {
         [self.fetchCenter likeFeed:cell.feed];
     }else{
         [self.fetchCenter unLikeFeed:cell.feed];
     }
 }
 
+- (void)didFinishUnLikingFeed:(Feed *)feed{
+    //decrease feed like count
+    feed.likeCount = @(feed.likeCount.integerValue - 1);
+    feed.selfLiked = @(NO);
+    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
+}
+
+- (void)didFinishLikingFeed:(Feed *)feed{
+    //increase feed like count
+    feed.likeCount = @(feed.likeCount.integerValue + 1);
+    feed.selfLiked = @(YES);
+    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
+//    self.likeCountLabel.text = [NSString stringWithFormat:@"%@",feed.likeCount];
+}
 #pragma mark - header view 
 - (void)updateHeaderView{
     self.headerView.plan = self.plan; //set plan to header for updaing info
