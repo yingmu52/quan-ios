@@ -3412,10 +3412,13 @@
                             <outlet property="delegate" destination="rp9-lu-nOr" id="ZdJ-iW-9UD"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="egE-eW-ywB" kind="show" identifier="showDiscoverFeedDetail" id="Y2c-0U-Rmr"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l1a-lB-oB1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3985.5" y="-469.5"/>
+            <point key="canvasLocation" x="4714.5" y="-19.5"/>
         </scene>
         <!--DiscoveryVC Data-->
         <scene sceneID="LW9-Wg-cfa">
@@ -5912,6 +5915,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="cel-0L-eNY"/>
         <segue reference="4wk-xv-ETJ"/>
+        <segue reference="Y2c-0U-Rmr"/>
         <segue reference="zL5-4w-ilR"/>
     </inferredMetricsTieBreakers>
 </document>

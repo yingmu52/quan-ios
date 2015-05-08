@@ -26,8 +26,9 @@
 - (void)setUpNavigationItem;
 - (void)updateHeaderView;
 - (void)setupBadageImageView;
-- (void)loadMore; // abstract
-
-
 - (void)fetchResultsControllerDidInsert;
+
+#pragma mark - abstract
+- (NSString *)segueForFeed;
+- (void)loadMore;
 @end

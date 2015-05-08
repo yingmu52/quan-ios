@@ -89,6 +89,10 @@
     }
     [delegate saveContext];
 }
+
+- (NSString *)segueForFeed{
+    return @"showDiscoverFeedDetail";
+}
 @end
 
 

@@ -183,15 +183,14 @@
 #pragma mark - camera
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    [super prepareForSegue:segue sender:sender];
+    
     if ([segue.identifier isEqualToString:@"showPostFeed"]) {
         [segue.destinationViewController setImageForFeed:sender];
         [segue.destinationViewController setPlan:self.plan];
     }
     if ([segue.identifier isEqualToString:@"showEditPage"]){
         [segue.destinationViewController setPlan:sender];
-    }
-    if ([segue.identifier isEqualToString:@"showFeedDetailFromOwner"]){
-        [segue.destinationViewController setFeed:sender];
     }
 }
 - (void)showCamera{
@@ -272,12 +271,8 @@
     [self deleteFeed:feed];
 }
 
-#pragma mark - table view delegate 
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    Feed *feed = [self.fetchedRC objectAtIndexPath:indexPath];
-    [self performSegueWithIdentifier:@"showFeedDetailFromOwner" sender:feed];
+- (NSString *)segueForFeed{
+    return @"showFeedDetailFromOwner";
 }
-
 
 @end

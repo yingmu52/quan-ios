@@ -175,6 +175,15 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    Feed *feed = [self.fetchedRC objectAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:[self segueForFeed] sender:feed];
+}
+
+- (NSString *)segueForFeed{
+    //abstract
+    return @"";
+}
 #pragma mark - wish detail view cell delegate 
 
 - (void)didPressedLikeOnCell:(WishDetailCell *)cell{
@@ -257,5 +266,12 @@
                       otherButtonTitles:nil, nil] show];
 }
 
+#pragma mark - segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:[self segueForFeed]]){
+        [segue.destinationViewController setFeed:sender];
+    }
+}
 @end
 
