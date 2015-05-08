@@ -11,6 +11,8 @@
 #import "FeedDetailCell.h"
 #import "FetchCenter.h"
 #import "Theme.h"
+#import "SystemUtil.h"
+#import "CommentAcessaryView.h"
 @interface FeedDetailViewController () <FetchCenterDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
@@ -20,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UILabel* headerLabel;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (strong, nonatomic) FetchCenter *fetchCenter;
+
+@property (strong,nonatomic) CommentAcessaryView *commentView;
 @end
 
 @implementation FeedDetailViewController
@@ -33,7 +37,7 @@
 - (void)setupContents{
     self.imageView.image = self.feed.image;
     self.headerLabel.text = self.feed.feedTitle;
-    self.dateLabel.text = [NSString stringWithFormat:@"%@",self.feed.createDate];
+    self.dateLabel.text = [SystemUtil stringFromDate:self.feed.createDate];
     self.likeCountLabel.text = [NSString stringWithFormat:@"%@",self.feed.likeCount];
     self.commentCountLabel.text = [NSString stringWithFormat:@"%@",self.feed.commentCount];
     [self.likeButton setImage:(self.feed.selfLiked.boolValue ? [Theme likeButtonLiked] : [Theme likeButtonUnLiked]) forState:UIControlStateNormal];
@@ -118,6 +122,16 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [[[UIApplication sharedApplication] keyWindow] addSubview:self.commentView];
+}
+
+- (CommentAcessaryView *)commentView{
+    if (!_commentView){
+        _commentView = [CommentAcessaryView instantiateFromNib:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+    }
+    return _commentView;
+}
 #pragma mark - like
 - (FetchCenter *)fetchCenter{
     if (!_fetchCenter){

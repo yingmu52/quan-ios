@@ -64,6 +64,8 @@
 		AE9861FB1AC33C04005544B9 /* EditWishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9861F91AC33C04005544B9 /* EditWishViewController.m */; };
 		AE9A3AEB1A9B1DB000F0588F /* AchieveVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9A3AEA1A9B1DB000F0588F /* AchieveVCData.m */; };
 		AE9A3AEC1A9B1DB000F0588F /* AchieveVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9A3AEA1A9B1DB000F0588F /* AchieveVCData.m */; };
+		AEA4CAD81AFC33DD00BDE7F9 /* CommentAcessaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA4CAD71AFC33DC00BDE7F9 /* CommentAcessaryView.m */; };
+		AEA4CADA1AFC340A00BDE7F9 /* CommentAcessaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA4CAD91AFC340A00BDE7F9 /* CommentAcessaryView.xib */; };
 		AEBECCF31AE7687900EDF385 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBECCF21AE7687900EDF385 /* LoginViewController.m */; };
 		AEBECCF91AE8A16600EDF385 /* LoginDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBECCF81AE8A16600EDF385 /* LoginDetailViewController.m */; };
 		AEBFCA371A78614100686EFE /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA361A78614100686EFE /* PostDetailViewController.m */; };
@@ -286,6 +288,9 @@
 		AE9861F91AC33C04005544B9 /* EditWishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditWishViewController.m; sourceTree = "<group>"; };
 		AE9A3AE91A9B1DB000F0588F /* AchieveVCData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchieveVCData.h; sourceTree = "<group>"; };
 		AE9A3AEA1A9B1DB000F0588F /* AchieveVCData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AchieveVCData.m; sourceTree = "<group>"; };
+		AEA4CAD61AFC33DC00BDE7F9 /* CommentAcessaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentAcessaryView.h; sourceTree = "<group>"; };
+		AEA4CAD71AFC33DC00BDE7F9 /* CommentAcessaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentAcessaryView.m; sourceTree = "<group>"; };
+		AEA4CAD91AFC340A00BDE7F9 /* CommentAcessaryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentAcessaryView.xib; sourceTree = "<group>"; };
 		AEBECCF11AE7687800EDF385 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		AEBECCF21AE7687900EDF385 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		AEBECCF71AE8A16600EDF385 /* LoginDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginDetailViewController.h; sourceTree = "<group>"; };
@@ -780,6 +785,9 @@
 		AEEC6C781A6DB6340021B7E4 /* WishDetail */ = {
 			isa = PBXGroup;
 			children = (
+				AEA4CAD61AFC33DC00BDE7F9 /* CommentAcessaryView.h */,
+				AEA4CAD71AFC33DC00BDE7F9 /* CommentAcessaryView.m */,
+				AEA4CAD91AFC340A00BDE7F9 /* CommentAcessaryView.xib */,
 				AE47055B1AF9DC080028D7BC /* FeedDetailCell.h */,
 				AE47055C1AF9DC080028D7BC /* FeedDetailCell.m */,
 				AE1779981AF585CB005F1BEB /* FeedDetailViewController.h */,
@@ -1017,6 +1025,7 @@
 				AE95A9F31ACFA7F8007465D5 /* straighten-grid@3x.png in Resources */,
 				AE01724D1A65CD8E0014266F /* Images.xcassets in Resources */,
 				AE95A9EF1ACFA7F8007465D5 /* back@3x.png in Resources */,
+				AEA4CADA1AFC340A00BDE7F9 /* CommentAcessaryView.xib in Resources */,
 				AEF7F2A01A6875360022410B /* Main.storyboard in Resources */,
 				AE95A9F01ACFA7F8007465D5 /* cameraroll-picker-grip@2x.png in Resources */,
 				AEFB048E1AD12437009EB0D3 /* placeholder.png in Resources */,
@@ -1089,6 +1098,7 @@
 				AEF3F87F1AA4CFA6008C2300 /* WishDetailVCOwner.m in Sources */,
 				AE2F1C841A7A1A1800A32CB5 /* UIImage+ImageEffects.m in Sources */,
 				AECE2BFF1AA19F6500B1C58E /* Owner+OwnerCRUD.m in Sources */,
+				AEA4CAD81AFC33DD00BDE7F9 /* CommentAcessaryView.m in Sources */,
 				AEF7F2971A686FDB0022410B /* HomeViewController.m in Sources */,
 				AECE2BF11AA0521600B1C58E /* SDWebImagePrefetcher.m in Sources */,
 				AE9A3AEB1A9B1DB000F0588F /* AchieveVCData.m in Sources */,
