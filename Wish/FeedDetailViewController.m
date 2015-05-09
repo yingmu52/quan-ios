@@ -134,6 +134,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     self.commentView.feedInfoBackground.hidden = NO; // feed info section is for replying
+
+    Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
+    
+    [self.commentView.imageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:comment.owner.headUrl]
+                                  placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    
+    self.commentView.userNameLabel.text = comment.owner.ownerName;
+    self.commentView.contentLabel.text = comment.content;
+    self.commentView.timeLabel.text = [SystemUtil timeStringFromDate:comment.createTime];
+    
     [[[UIApplication sharedApplication] keyWindow] addSubview:self.commentView];
 }
 
