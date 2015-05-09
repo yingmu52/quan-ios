@@ -1047,7 +1047,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2LA-3P-Hbt" userLabel="Title Background">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" 写下你的大计划吧" minimumFontSize="10" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="bkR-Oi-ATm">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" 你想说件什么事儿？" minimumFontSize="10" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="bkR-Oi-ATm">
                                         <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -1109,7 +1109,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iBx-8W-kUN">
+                            <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iBx-8W-kUN">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="N6I-wu-9kY">
@@ -1240,10 +1240,6 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="1Y1-uW-81U" id="Qfl-vY-h8C"/>
-                                    <outlet property="delegate" destination="1Y1-uW-81U" id="aOX-1r-Qpo"/>
-                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="0.8666666666666667" green="0.89411764705882357" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
@@ -1301,7 +1297,6 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="collectionView" destination="iBx-8W-kUN" id="yzW-fy-Wgm"/>
                         <outlet property="textField" destination="bkR-Oi-ATm" id="IeB-YY-h7g"/>
                         <segue destination="zJc-81-UtG" kind="show" identifier="showWritePostDetail" id="AiT-04-95T"/>
                     </connections>
