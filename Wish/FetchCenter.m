@@ -7,9 +7,6 @@
 //
 
 #import "FetchCenter.h"
-#import "AppDelegate.h"
-#import "User.h"
-#import "SDWebImageCompat.h"
 //#define BASE_URL @"http://182.254.167.228/superplan/"
 
 
@@ -35,7 +32,7 @@
 #define LOAD_FEED_LIST @"splan_feeds_getlist.php"
 #define DELETE_FEED @"splan_feeds_delete_id.php"
 #define COMMENT_FEED @"splan_comment_create.php"
-
+#define GET_FEED_COMMENTS @"splan_comment_getlist.php"
 
 
 #define FOLLOW @"follow/"
@@ -75,6 +72,7 @@ typedef enum{
     FetchCenterGetOpUnLikeAFeed,
     FetchCenterGetOpDeleteFeed,
     FetchCenterGetOpCommentFeed,
+    FetchCenterGetOpGetFeedCommentList,
     FetchCenterGetOpLoadFeedList,
     FetchCenterGetOpFeedBack
 }FetchCenterGetOp;
@@ -100,6 +98,18 @@ typedef enum{
 }
 
 #pragma mark - Comment
+
+- (void)getCommentListForFeed:(Feed *)feed pageInfo:(NSDictionary *)info{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,GET_FEED_COMMENTS];
+    NSString *infoStr = info ? [self convertDictionaryToString:info] : @"";
+    
+    NSDictionary *args = @{@"feedsId":feed.feedId,
+                           @"attachInfo":infoStr};
+    [self getRequest:rqtStr
+           parameter:args
+           operation:FetchCenterGetOpGetFeedCommentList
+              entity:feed];
+}
 
 - (void)commentOnFeed:(Feed *)feed content:(NSString *)text{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,COMMENT_FEED];
@@ -636,7 +646,24 @@ typedef enum{
             case FetchCenterGetOpCommentFeed:{
                 //increase comment count by one
                 Feed *feed = (Feed *)obj;
-                [self.delegate didFinishCommentingFeed:feed];
+                NSString *commentId = [json valueForKeyPath:@"data.id"];
+                [self.delegate didFinishCommentingFeed:feed commentId:commentId];
+            }
+                break;
+            case FetchCenterGetOpGetFeedCommentList:{
+                NSArray *comments = [json valueForKeyPath:@"data.commentList"];
+                NSDictionary *ownerInfo = [json valueForKeyPath:@"data.manList"];
+                BOOL hasNextPage = [[json valueForKeyPath:@"data.isMore"] boolValue];
+                NSDictionary *pageInfo = [json valueForKeyPath:@"data.attachInfo"];
+
+                Feed *feed = (Feed *)obj;
+                for (NSDictionary *commentInfo in comments){
+                    Comment *comment = [Comment updateCommentFromServer:commentInfo];
+                    comment.owner = [Owner updateOwnerFromServer:ownerInfo[commentInfo[@"ownerId"]]];
+                    comment.feed = feed;
+                    NSLog(@"%@",comment);
+                }
+                [self.delegate didFinishLoadingCommentList:pageInfo hasNextPage:hasNextPage];
             }
                 break;
             case FetchCenterGetOpDeleteFeed:{

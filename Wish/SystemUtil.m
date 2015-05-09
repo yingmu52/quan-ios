@@ -41,6 +41,12 @@
     return [formatter stringFromDate:date];
 }
 
++ (NSString *)timeStringFromDate:(NSDate *)date{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"HH:mm";
+    return [formatter stringFromDate:date];
+}
+
 + (UIImagePickerController *)showCamera:(id<UINavigationControllerDelegate,UIImagePickerControllerDelegate>)delegate{
     
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {

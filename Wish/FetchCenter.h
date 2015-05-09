@@ -11,7 +11,14 @@
 #import "Feed+FeedCRUD.h"
 #import "SystemUtil.h"
 #import "Owner+OwnerCRUD.h"
-
+#import "Comment+CRUD.h"
+#import "FetchCenter.h"
+#import "AppDelegate.h"
+#import "User.h"
+#import "SDWebImageCompat.h"
+#import "AppDelegate.h"
+#import "User.h"
+#import "SDWebImageCompat.h"
 
 #define INNER_NETWORK_URL @"http://182.254.167.228"
 #define OUTTER_NETWORK_URL @"http://120.24.73.51"
@@ -35,9 +42,12 @@
 - (void)didFinishLoadingFeedList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage;
 - (void)didFinishDeletingFeed:(Feed *)feed;
 
+
+
 - (void)didFinishLikingFeed:(Feed *)feed;
 - (void)didFinishUnLikingFeed:(Feed *)feed;
-- (void)didFinishCommentingFeed:(Feed *)feed;
+- (void)didFinishCommentingFeed:(Feed *)feed commentId:(NSString *)commentId;
+- (void)didFinishLoadingCommentList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage;
 
 - (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
@@ -53,6 +63,9 @@
 - (void)unLikeFeed:(Feed *)feed;
 - (void)deleteFeed:(Feed *)feed;
 - (void)commentOnFeed:(Feed *)feed content:(NSString *)text;
+- (void)getCommentListForFeed:(Feed *)feed pageInfo:(NSDictionary *)info;
+
+
 
 #pragma mark - Plan
 - (void)fetchPlanList:(NSString *)ownerId;

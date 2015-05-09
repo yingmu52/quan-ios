@@ -15,6 +15,8 @@
 + (UIColor *)colorFromHexString:(NSString *)hexString;
 + (NSInteger)daysBetween:(NSDate *)dt1 and:(NSDate *)dt2;
 + (NSString *)stringFromDate:(NSDate *)date;
++ (NSString *)timeStringFromDate:(NSDate *)date;
+
 
 + (UIImagePickerController *)showCamera:(id<UINavigationControllerDelegate,UIImagePickerControllerDelegate>)delegate;
 + (UIImage *)darkLayeredImage:(UIImage *)image inRect:(CGRect)bounds;

@@ -14,7 +14,9 @@
 #import "SystemUtil.h"
 #import "CommentAcessaryView.h"
 #import "AppDelegate.h"
-@interface FeedDetailViewController () <FetchCenterDelegate,CommentAcessaryViewDelegate>
+#import "UIImageView+WebCache.h"
+
+@interface FeedDetailViewController () <FetchCenterDelegate,CommentAcessaryViewDelegate,NSFetchedResultsControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *likeCountLabel;
@@ -23,7 +25,7 @@
 @property (weak, nonatomic) IBOutlet UILabel* headerLabel;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (strong, nonatomic) FetchCenter *fetchCenter;
-
+@property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @property (strong,nonatomic) CommentAcessaryView *commentView;
 @end
 
@@ -33,6 +35,9 @@
     [super viewDidLoad];
     [self setUpNavigationItem];
     [self setupContents];
+    
+    
+    [self.fetchCenter getCommentListForFeed:self.feed pageInfo:nil];
 }
 
 - (void)setupContents{
@@ -112,14 +117,18 @@
 
 #pragma mark - table view 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return self.fetchedRC.fetchedObjects.count;
 }
 
 - (FeedDetailCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     FeedDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:FEEDDETAILCELLID forIndexPath:indexPath];
+    Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
+    [cell.profileImageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:comment.owner.headUrl]
+                             placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     
-    NSString *content = [NSString stringWithFormat:@"%@",[NSUUID UUID]];
-    cell.contentLabel.text = content;
+    cell.userNameLabel.text = comment.owner.ownerName;
+    cell.contentLabel.text = comment.content;
+    cell.dateLabel.text = [SystemUtil timeStringFromDate:comment.createTime];
     return cell;
 }
 
@@ -174,11 +183,12 @@
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
     self.likeButton.userInteractionEnabled = YES;
-    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
-                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
-                               delegate:self
-                      cancelButtonTitle:@"OK"
-                      otherButtonTitles:nil, nil] show];
+    NSLog(@"%@",info);
+//    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
+//                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
+//                               delegate:self
+//                      cancelButtonTitle:@"OK"
+//                      otherButtonTitles:nil, nil] show];
 }
 
 #pragma mark - comment
@@ -194,12 +204,92 @@
 }
 
 #pragma mark - fetch center delegate 
-- (void)didFinishCommentingFeed:(Feed *)feed{
+- (void)didFinishCommentingFeed:(Feed *)feed commentId:(NSString *)commentId{
+    
+    //update feed count
     feed.commentCount = @(feed.commentCount.integerValue + 1);
-//    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
+    self.commentCountLabel.text = [NSString stringWithFormat:@"%@",feed.commentCount];
+
+    //create comment locally
+    [Comment createComment:self.commentView.textField.text commentId:commentId forFeed:feed];
+    
     [self.commentView removeFromSuperview];
     self.commentView.textField.text = @"";
 }
+
+- (void)didFinishLoadingCommentList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage{
+#warning need to implement to load more
+}
+
+#pragma mark - fetched results controller 
+
+- (NSFetchedResultsController *)fetchedRC
+{
+    if (!_fetchedRC){
+        
+        //do fetchrequest
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Comment"];
+        request.predicate = [NSPredicate predicateWithFormat:@"feed = %@",self.feed];
+        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createTime" ascending:NO]];
+        [request setFetchBatchSize:3];
+        
+        NSFetchedResultsController *newFRC =
+        [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                            managedObjectContext:[AppDelegate getContext]
+                                              sectionNameKeyPath:nil
+                                                       cacheName:nil];
+        self.fetchedRC = newFRC;
+        _fetchedRC.delegate = self;
+        NSError *error;
+        [_fetchedRC performFetch:&error];
+        
+    }
+    return _fetchedRC;
+}
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.tableView beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath
+{
+    switch(type)
+    {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
+                                  withRowAnimation:UITableViewRowAnimationNone];
+            NSLog(@"Comment inserted");
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath]
+                                  withRowAnimation:UITableViewRowAnimationAutomatic];
+            NSLog(@"Comment deleted");
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath]
+                                  withRowAnimation:UITableViewRowAnimationNone];
+            NSLog(@"Comment updated");
+            break;
+        default:
+            break;
+    }
+}
+
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.tableView endUpdates];
+    
+}
+
+
 @end
 
 

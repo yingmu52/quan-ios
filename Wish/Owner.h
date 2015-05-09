@@ -1,25 +1,31 @@
 //
 //  Owner.h
-//  Wish
+//  Stories
 //
-//  Created by Xinyi Zhuang on 2015-02-27.
+//  Created by Xinyi Zhuang on 2015-05-08.
 //  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Plan;
+@class Comment, Plan;
 
 @interface Owner : NSManagedObject
 
 @property (nonatomic, retain) NSString * headUrl;
 @property (nonatomic, retain) NSString * ownerId;
 @property (nonatomic, retain) NSString * ownerName;
+@property (nonatomic, retain) NSSet *comments;
 @property (nonatomic, retain) NSSet *plans;
 @end
 
 @interface Owner (CoreDataGeneratedAccessors)
+
+- (void)addCommentsObject:(Comment *)value;
+- (void)removeCommentsObject:(Comment *)value;
+- (void)addComments:(NSSet *)values;
+- (void)removeComments:(NSSet *)values;
 
 - (void)addPlansObject:(Plan *)value;
 - (void)removePlansObject:(Plan *)value;
