@@ -74,7 +74,7 @@
     if (self.hasNextPage) {
         [self loadFeedFromServer:self.pageInfo];
     }else{
-//        self.title = @"别拉了，没了！";
+        self.title = @"别拉了，没了！";
         [self performSelector:@selector(setTitle:) withObject:nil afterDelay:0.5f];
     }
 }

@@ -27,6 +27,11 @@
 @property (strong, nonatomic) FetchCenter *fetchCenter;
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @property (strong,nonatomic) CommentAcessaryView *commentView;
+
+
+
+@property (nonatomic) BOOL hasNextPage;
+@property (nonatomic,strong) NSDictionary *pageInfo;
 @end
 
 @implementation FeedDetailViewController
@@ -35,9 +40,10 @@
     [super viewDidLoad];
     [self setUpNavigationItem];
     [self setupContents];
-    
-    
-    [self.fetchCenter getCommentListForFeed:self.feed pageInfo:nil];
+
+    //load comments
+    self.hasNextPage = YES;
+    [self loadComments];
 }
 
 - (void)setupContents{
@@ -194,6 +200,8 @@
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
     self.likeButton.userInteractionEnabled = YES;
     NSLog(@"%@",info);
+    self.navigationItem.rightBarButtonItem = nil;
+
 //    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
 //                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
 //                               delegate:self
@@ -228,7 +236,9 @@
 }
 
 - (void)didFinishLoadingCommentList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage{
-#warning need to implement to load more
+    self.hasNextPage = hasNextPage;
+    self.pageInfo = pageInfo;
+    self.navigationItem.rightBarButtonItem = nil;
 }
 
 #pragma mark - fetched results controller 
@@ -300,6 +310,48 @@
 }
 
 
+#pragma mark - did scroll to bottom
+- (void)scrollViewDidEndDragging:(UIScrollView *)aScrollView
+                  willDecelerate:(BOOL)decelerate
+{
+    CGPoint offset = aScrollView.contentOffset;
+    CGRect bounds = aScrollView.bounds;
+    CGSize size = aScrollView.contentSize;
+    UIEdgeInsets inset = aScrollView.contentInset;
+    CGFloat y = offset.y + bounds.size.height - inset.bottom;
+    CGFloat h = size.height;
+    
+    CGFloat reload_distance = 50.0;
+    if(y > h + reload_distance) {
+        [self loadMore];
+    }
+}
+
+- (void)loadMore{
+    if (self.hasNextPage) {
+        [self loadComments];
+    }else{
+        self.title = @"别拉了，没了！";
+        [self performSelector:@selector(setTitle:) withObject:nil afterDelay:0.5f];
+    }
+}
+
+
+- (void)loadComments{
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+    [spinner startAnimating];
+    [self.fetchCenter getCommentListForFeed:self.feed pageInfo:self.pageInfo];
+}
+
+#pragma mark - delete local comments to insync with server
+
+//- (void)dealloc{
+//    for (Comment *comment in self.fetchedRC.fetchedObjects) {
+//        [[AppDelegate getContext] deleteObject:comment];
+//    }
+//    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
+//}
 @end
 
 
