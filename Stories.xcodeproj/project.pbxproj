@@ -116,6 +116,7 @@
 		AED5AB1E1AFDCBBB00719208 /* Feed.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5AB1C1AFDCBBB00719208 /* Feed.m */; };
 		AED5AB211AFDCBBC00719208 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5AB201AFDCBBC00719208 /* Comment.m */; };
 		AED5AB221AFDCBBC00719208 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5AB201AFDCBBC00719208 /* Comment.m */; };
+		AED5AB231AFDE39800719208 /* CommentAcessaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA4CAD71AFC33DC00BDE7F9 /* CommentAcessaryView.m */; };
 		AED5BC631ABE3CB600EFF398 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5BC621ABE3CB600EFF398 /* SettingViewController.m */; };
 		AED5BC641ABE3CB600EFF398 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5BC621ABE3CB600EFF398 /* SettingViewController.m */; };
 		AED5BC671ABEA7EB00EFF398 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5BC661ABEA7EB00EFF398 /* ProfileViewController.m */; };
@@ -1183,6 +1184,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AED5AB231AFDE39800719208 /* CommentAcessaryView.m in Sources */,
 				AEF7F2841A686E8A0022410B /* ECSlidingAnimationController.m in Sources */,
 				AEF7F28C1A686E8B0022410B /* UIViewController+ECSlidingViewController.m in Sources */,
 				AED4CB441AC79F3A00EE2DA4 /* ModalLeftToRightSegue.m in Sources */,

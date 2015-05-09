@@ -52,4 +52,8 @@
 - (IBAction)morePressed:(UIButton *)sender{
     [self.delegate didPressedMoreOnCell:self];
 }
+
+- (IBAction)commentPressed:(UIButton *)sender{
+    [self.delegate didPressedCommentOnCell:self];
+}
 @end

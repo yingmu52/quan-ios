@@ -7,9 +7,11 @@
 //
 
 #import "WishDetailViewController.h"
-
-@interface WishDetailViewController () 
+#import "CommentAcessaryView.h"
+@interface WishDetailViewController () <CommentAcessaryViewDelegate>
 @property (nonatomic) CGFloat yVel;
+@property (strong,nonatomic) CommentAcessaryView *commentView;
+
 @end
 
 @implementation WishDetailViewController
@@ -184,7 +186,7 @@
     //abstract
     return @"";
 }
-#pragma mark - wish detail view cell delegate 
+#pragma mark - like and unlike
 
 - (void)didPressedLikeOnCell:(WishDetailCell *)cell{
     //already increment/decrement like count locally,
@@ -273,5 +275,39 @@
         [segue.destinationViewController setFeed:sender];
     }
 }
+
+
+#pragma mark - comment
+- (CommentAcessaryView *)commentView{
+    if (!_commentView){
+        _commentView = [CommentAcessaryView instantiateFromNib:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        self.commentView.feedInfoBackground.hidden = YES; // feed info section is for replying
+        _commentView.delegate = self;
+    }
+    return _commentView;
+}
+
+- (void)didPressedCommentOnCell:(WishDetailCell *)cell{
+    [[[UIApplication sharedApplication] keyWindow] addSubview:self.commentView];
+    self.commentView.feed = cell.feed;
+}
+
+- (void)didPressSend:(CommentAcessaryView *)cav{
+    [self.fetchCenter commentOnFeed:cav.feed content:cav.textField.text];
+}
+
+#pragma mark - fetch center delegate
+- (void)didFinishCommentingFeed:(Feed *)feed commentId:(NSString *)commentId{
+    
+    //update feed count
+    feed.commentCount = @(feed.commentCount.integerValue + 1);
+    
+    //create comment locally
+    [Comment createComment:self.commentView.textField.text commentId:commentId forFeed:feed];
+    
+    [self.commentView removeFromSuperview];
+    self.commentView.textField.text = @"";
+}
+
 @end
 

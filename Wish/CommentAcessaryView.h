@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Feed.h"
 @class CommentAcessaryView;
 @protocol CommentAcessaryViewDelegate <NSObject>
 @optional
@@ -16,6 +16,9 @@
 
 
 @interface CommentAcessaryView : UIView
+
+@property (nonatomic,strong) Feed *feed; //needed for wish detail
+
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
