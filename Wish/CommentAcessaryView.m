@@ -55,4 +55,8 @@
     [self removeFromSuperview];
     [self.textField resignFirstResponder];
 }
+
+- (IBAction)sendPressed:(UIButton *)sender{
+    [self.delegate didPressSend:self];
+}
 @end

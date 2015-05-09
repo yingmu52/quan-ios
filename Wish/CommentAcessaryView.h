@@ -8,12 +8,25 @@
 
 #import <UIKit/UIKit.h>
 
+@class CommentAcessaryView;
+@protocol CommentAcessaryViewDelegate <NSObject>
+@optional
+- (void)didPressSend:(CommentAcessaryView *)cav;
+@end
+
+
 @interface CommentAcessaryView : UIView
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UIView *feedInfoBackground;
 
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
+
+@property (weak, nonatomic) id <CommentAcessaryViewDelegate> delegate;
+
+
+
 + (instancetype)instantiateFromNib:(CGRect)frame;
 @end

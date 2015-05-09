@@ -34,6 +34,9 @@
 #define UNLIKE_FEED @"splan_feeds_unlike.php"
 #define LOAD_FEED_LIST @"splan_feeds_getlist.php"
 #define DELETE_FEED @"splan_feeds_delete_id.php"
+#define COMMENT_FEED @"splan_comment_create.php"
+
+
 
 #define FOLLOW @"follow/"
 #define GET_FOLLOW_LIST @"splan_follow_get_feedslist.php"
@@ -71,6 +74,7 @@ typedef enum{
     FetchCenterGetOpLikeAFeed,
     FetchCenterGetOpUnLikeAFeed,
     FetchCenterGetOpDeleteFeed,
+    FetchCenterGetOpCommentFeed,
     FetchCenterGetOpLoadFeedList,
     FetchCenterGetOpFeedBack
 }FetchCenterGetOp;
@@ -95,6 +99,17 @@ typedef enum{
     return _baseUrl;
 }
 
+#pragma mark - Comment
+
+- (void)commentOnFeed:(Feed *)feed content:(NSString *)text{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,COMMENT_FEED];
+    NSDictionary *args = @{@"feedsId":feed.feedId,
+                           @"content":[text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]};
+    [self getRequest:rqtStr
+           parameter:args
+           operation:FetchCenterGetOpCommentFeed
+              entity:feed];
+}
 
 #pragma mark - Feed
 //superplan/feeds/splan_feeds_delete_id.php
@@ -616,6 +631,12 @@ typedef enum{
                 Feed *feed = (Feed *)obj;
                 [self.delegate didFinishUnLikingFeed:feed];
                 NSLog(@"unliked feed ID %@",feed.feedId);
+            }
+                break;
+            case FetchCenterGetOpCommentFeed:{
+                //increase comment count by one
+                Feed *feed = (Feed *)obj;
+                [self.delegate didFinishCommentingFeed:feed];
             }
                 break;
             case FetchCenterGetOpDeleteFeed:{

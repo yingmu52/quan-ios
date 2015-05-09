@@ -37,6 +37,7 @@
 
 - (void)didFinishLikingFeed:(Feed *)feed;
 - (void)didFinishUnLikingFeed:(Feed *)feed;
+- (void)didFinishCommentingFeed:(Feed *)feed;
 
 - (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
@@ -51,7 +52,7 @@
 - (void)likeFeed:(Feed *)feed;
 - (void)unLikeFeed:(Feed *)feed;
 - (void)deleteFeed:(Feed *)feed;
-
+- (void)commentOnFeed:(Feed *)feed content:(NSString *)text;
 
 #pragma mark - Plan
 - (void)fetchPlanList:(NSString *)ownerId;

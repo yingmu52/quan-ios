@@ -13,7 +13,8 @@
 #import "Theme.h"
 #import "SystemUtil.h"
 #import "CommentAcessaryView.h"
-@interface FeedDetailViewController () <FetchCenterDelegate>
+#import "AppDelegate.h"
+@interface FeedDetailViewController () <FetchCenterDelegate,CommentAcessaryViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *likeCountLabel;
@@ -123,12 +124,14 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    self.commentView.feedInfoBackground.hidden = NO; // feed info section is for replying
     [[[UIApplication sharedApplication] keyWindow] addSubview:self.commentView];
 }
 
 - (CommentAcessaryView *)commentView{
     if (!_commentView){
         _commentView = [CommentAcessaryView instantiateFromNib:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        _commentView.delegate = self;
     }
     return _commentView;
 }
@@ -178,6 +181,25 @@
                       otherButtonTitles:nil, nil] show];
 }
 
+#pragma mark - comment
+
+- (IBAction)comment:(UIButton *)sender{
+    self.commentView.feedInfoBackground.hidden = YES; // feed info section is for replying
+    [[[UIApplication sharedApplication] keyWindow] addSubview:self.commentView];
+}
+
+#pragma mark - comment accessary view delegate 
+- (void)didPressSend:(CommentAcessaryView *)cav{
+    [self.fetchCenter commentOnFeed:self.feed content:cav.textField.text];
+}
+
+#pragma mark - fetch center delegate 
+- (void)didFinishCommentingFeed:(Feed *)feed{
+    feed.commentCount = @(feed.commentCount.integerValue + 1);
+//    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
+    [self.commentView removeFromSuperview];
+    self.commentView.textField.text = @"";
+}
 @end
 
 

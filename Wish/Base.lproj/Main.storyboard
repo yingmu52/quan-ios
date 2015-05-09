@@ -5441,6 +5441,9 @@
                                                     <include reference="JPa-RK-sMM"/>
                                                 </mask>
                                             </variation>
+                                            <connections>
+                                                <action selector="comment:" destination="egE-eW-ywB" eventType="touchUpInside" id="61d-65-kVi"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pB4-5P-XJo">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
