@@ -90,30 +90,20 @@
     return plan;
 
 }
-+ (Plan *)createPlan:(NSString *)title
-                date:(NSDate *)date
-             privacy:(BOOL)isPrivate
-               image:(UIImage *)image{
++ (Plan *)createPlan:(NSString *)title privacy:(BOOL)isPrivate image:(UIImage *)image{
 
     NSManagedObjectContext *context = [AppDelegate getContext];
     
-    Plan *plan;
-    //check existance
-    NSArray *checks = [Plan fetchWith:@"Plan"
-                            predicate:[NSPredicate predicateWithFormat:@"createDate = %@",date]
-                     keyForDescriptor:@"createDate"];
-    if (!checks.count) {
-        plan = [NSEntityDescription insertNewObjectForEntityForName:@"Plan"
-                                             inManagedObjectContext:context];
-
-        plan.ownerId = [User uid];
-        plan.planTitle = title;
-        plan.isPrivate = @(isPrivate);
-        plan.image = UIImageJPEGRepresentation(image, 0.1);
-        plan.createDate = [NSDate date];
-        plan.userDeleted = @(NO);
-        plan.planStatus = @(PlanStatusOnGoing);
-    }
+    Plan *plan = [NSEntityDescription insertNewObjectForEntityForName:@"Plan"
+                                               inManagedObjectContext:context];
+    
+    plan.ownerId = [User uid];
+    plan.planTitle = title;
+    plan.isPrivate = @(isPrivate);
+    plan.image = image;
+    plan.createDate = [NSDate date];
+    plan.userDeleted = @(NO);
+    plan.planStatus = @(PlanStatusOnGoing);
     return plan;
 }
 

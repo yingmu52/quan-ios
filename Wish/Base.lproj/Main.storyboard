@@ -1432,6 +1432,7 @@
                     </view>
                     <connections>
                         <outlet property="cameraBackground" destination="BgG-Mb-aAj" id="dJ1-8A-g7y"/>
+                        <segue destination="XiV-RA-INl" kind="show" identifier="showPostFeedFromPlanCreation" id="tsq-QX-XiL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="68X-Ti-r1S" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1441,7 +1442,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3645" y="-1709.25"/>
+            <point key="canvasLocation" x="4267.5" y="-1695"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="fpo-Ov-0kY">
@@ -2842,11 +2843,12 @@
                     <connections>
                         <outlet property="previewIcon" destination="F9Y-4i-J9R" id="qxh-nN-pp0"/>
                         <outlet property="textView" destination="yEm-S5-5O6" id="huI-cf-GwA"/>
+                        <segue destination="b5E-B5-8Ys" kind="show" identifier="showWishDetailOnPlanCreation" id="0NR-qk-ahm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x2Z-Fs-fXM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5539.5" y="-1725"/>
+            <point key="canvasLocation" x="5286" y="-1020"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FbS-uZ-glk">
@@ -5799,8 +5801,9 @@
         <image name="tips_bg" width="69" height="69"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Y2c-0U-Rmr"/>
-        <segue reference="4wk-xv-ETJ"/>
         <segue reference="zL5-4w-ilR"/>
+        <segue reference="0NR-qk-ahm"/>
+        <segue reference="4wk-xv-ETJ"/>
+        <segue reference="rOd-Ph-D4Y"/>
     </inferredMetricsTieBreakers>
 </document>

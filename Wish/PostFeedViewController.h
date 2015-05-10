@@ -13,4 +13,6 @@
 
 @property (nonatomic,strong) Plan *plan;
 @property (nonatomic,strong) UIImage *imageForFeed;
+
+@property (nonatomic) BOOL seugeFromPlanCreation;
 @end

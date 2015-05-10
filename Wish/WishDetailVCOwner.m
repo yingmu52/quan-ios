@@ -63,7 +63,7 @@
     
 }
 - (void)editPlan{
-    [self performSegueWithIdentifier:@"showEditPage" sender:self.plan];
+//    [self performSegueWithIdentifier:@"showEditPage" sender:self.plan];
 }
 
 

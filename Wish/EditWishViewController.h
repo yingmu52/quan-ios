@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "PostDetailViewController.h"
-@interface EditWishViewController : PostDetailViewController
+@interface EditWishViewController : UIViewController
 
 @end

@@ -14,6 +14,7 @@
 #import "GCPTextView.h"
 #import "SDWebImageCompat.h"
 #import "AppDelegate.h"
+#import "WishDetailVCOwner.h"
 @interface PostFeedViewController () <UITextFieldDelegate,FetchCenterDelegate,UITextViewDelegate>
 @property (nonatomic,strong) UIButton *tikButton;
 @property (nonatomic,weak) IBOutlet UIImageView *previewIcon;
@@ -124,6 +125,11 @@
     return  noc <= 140;
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"showWishDetailOnPlanCreation"]){
+        [segue.destinationViewController setPlan:sender]; //sender is plan
+    }
+}
 #pragma mark - fetch center delegate 
 
 
@@ -131,7 +137,13 @@
 {
     self.navigationItem.leftBarButtonItem.enabled = YES;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    if (!self.seugeFromPlanCreation) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [self performSegueWithIdentifier:@"showWishDetailOnPlanCreation" sender:self.plan];
+
+    }
 }
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{

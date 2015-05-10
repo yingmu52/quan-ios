@@ -10,9 +10,10 @@
 #import "Theme.h"
 #import "SystemUtil.h"
 #import "ImagePicker.h"
-@interface PostDetailViewController () <ImagePickerDelegate>
+#import "PostFeedViewController.h"
+#import "FetchCenter.h"
+@interface PostDetailViewController () <ImagePickerDelegate,FetchCenterDelegate>
 @property (weak, nonatomic) IBOutlet UIView *cameraBackground;
-
 @end
 @implementation PostDetailViewController
 
@@ -36,18 +37,23 @@
                                       selector:@selector(popViewControllerAnimated:)
                                          frame:frame];
     
-//    self.nextButton = [Theme buttonWithImage:[Theme navTikButtonDefault]
-//                                           target:self
-//                                         selector:@selector(doneEditing)
-//                                            frame:frame];
-    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
-    
+
     //set navigation bar title and color
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#2A2A2A"]};
     self.title = self.titleFromPostView;
     
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"showPostFeedFromPlanCreation"]) {
+        PostFeedViewController *pfvc = (PostFeedViewController *)segue.destinationViewController;
+        Plan *plan = sender;
+        pfvc.plan = plan;
+        pfvc.imageForFeed = plan.image;
+        pfvc.seugeFromPlanCreation = YES; // important!
+    }
 }
 
 #pragma mark - camera
@@ -61,9 +67,28 @@
 }
 
 - (void)didFinishPickingImage:(UIImage *)image{
+    //activity indicator
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0,0, 25,25)];
+    spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+    [spinner startAnimating];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
     
+    //create plan
+    FetchCenter *fc = [[FetchCenter alloc] init];
+    fc.delegate = self;
+    [fc uploadToCreatePlan:[Plan createPlan:self.titleFromPostView privacy:NO image:image]];
 }
 - (void)didFailPickingImage{
+#warning didFailPickingImage_PostDetail
+}
+
+- (void)didFinishUploadingPlan:(Plan *)plan{
+    self.navigationItem.rightBarButtonItem = nil;
+    [self performSegueWithIdentifier:@"showPostFeedFromPlanCreation" sender:plan];
+}
+
+- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
+#warning didFailSendingRequestWithInfo_PostDetail
 }
 
 @end

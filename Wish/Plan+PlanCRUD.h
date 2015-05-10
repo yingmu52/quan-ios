@@ -24,10 +24,7 @@ typedef enum {
 
 + (Plan *)updatePlanFromServer:(NSDictionary *)dict;
 
-+ (Plan *)createPlan:(NSString *)title
-                date:(NSDate *)date
-             privacy:(BOOL)isPrivate
-               image:(UIImage *)image;
++ (Plan *)createPlan:(NSString *)title privacy:(BOOL)isPrivate image:(UIImage *)image;
 
 - (void)deleteSelf;
 
