@@ -17,7 +17,7 @@
 @implementation WishDetailViewController
 
 - (void)initialHeaderView{
-    self.headerView = [HeaderView instantiateFromNib:CGRectMake(0, 0, self.tableView.frame.size.width, 280.0/1136*self.tableView.frame.size.height)];
+    self.headerView = [HeaderView instantiateFromNib:CGRectMake(0, 0, self.tableView.frame.size.width, 350.0f/1136*self.tableView.frame.size.height)];
     self.tableView.tableHeaderView = self.headerView;
     self.headerView.plan = self.plan;
 }
