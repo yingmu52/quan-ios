@@ -175,6 +175,9 @@
     [self.fetchCenter uploadNewProfilePicture:image];
 }
 
+- (void)didFailPickingImage{
+    
+}
 #pragma mark - fetch center delegate 
 
 - (void)didFinishUpdatingPersonalInfo{

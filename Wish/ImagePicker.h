@@ -11,7 +11,6 @@
 @class ImagePickerDelegate;
 @protocol ImagePickerDelegate <NSObject>
 - (void)didFinishPickingImage:(UIImage *)image;
-@optional
 - (void)didFailPickingImage;
 @end
 @interface ImagePicker : NSObject <UIImagePickerControllerDelegate,UINavigationBarDelegate>

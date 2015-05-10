@@ -14,7 +14,8 @@
 #import "PopupView.h"
 #import "SDWebImageCompat.h"
 
-@interface EditWishViewController () <PopupViewDelegate>
+@interface EditWishViewController ()
+//<PopupViewDelegate>
 @property (nonatomic,weak) IBOutlet UITextField *textField;
 @property (nonatomic,weak) PopupView *popView;
 @end

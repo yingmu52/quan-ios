@@ -9,7 +9,8 @@
 #import "PostDetailViewController.h"
 #import "Theme.h"
 #import "SystemUtil.h"
-@interface PostDetailViewController ()
+#import "ImagePicker.h"
+@interface PostDetailViewController () <ImagePickerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *cameraBackground;
 
 @end
@@ -47,6 +48,22 @@
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#2A2A2A"]};
     self.title = self.titleFromPostView;
     
+}
+
+#pragma mark - camera
+
+- (IBAction)toggleCamera:(UIButton *)sender {
+    [ImagePicker startPickingImageFromLocalSourceFor:self];
+}
+
+- (IBAction)tapOnCameraBackground:(UITapGestureRecognizer *)tap{
+    [self toggleCamera:nil];
+}
+
+- (void)didFinishPickingImage:(UIImage *)image{
+    
+}
+- (void)didFailPickingImage{
 }
 
 @end
