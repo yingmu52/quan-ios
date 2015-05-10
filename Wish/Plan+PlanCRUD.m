@@ -21,7 +21,6 @@
 //    [delegate saveContext];
 
     self.planTitle = newTitle;
-    self.finishDate = date;
     self.isPrivate = @(isPrivated);
     
 }
@@ -76,8 +75,6 @@
     plan.planTitle = dict[@"title"];
     plan.createDate = [NSDate dateWithTimeIntervalSince1970:[dict[@"createTime"] integerValue]];
     plan.updateDate = [NSDate dateWithTimeIntervalSince1970:[dict[@"updateTime"] integerValue]];
-    plan.finishDate = [NSDate dateWithTimeInterval:[dict[@"finishDate"] integerValue] * 24 * 60 * 60
-                                         sinceDate:plan.createDate];
     plan.followCount = @([dict[@"followNums"] integerValue]);
     plan.userDeleted = @(NO);
     plan.planStatus = @([dict[@"state"] integerValue]);
@@ -111,7 +108,6 @@
 
         plan.ownerId = [User uid];
         plan.planTitle = title;
-        plan.finishDate = date;
         plan.isPrivate = @(isPrivate);
         plan.image = UIImageJPEGRepresentation(image, 0.1);
         plan.createDate = [NSDate date];

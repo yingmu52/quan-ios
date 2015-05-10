@@ -29,7 +29,6 @@
     <entity name="Plan" representedClassName="Plan" syncable="YES">
         <attribute name="backgroundNum" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createDate" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="finishDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="followCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="isPrivate" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
@@ -44,9 +43,9 @@
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="plans" inverseEntity="Owner" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Comment" positionX="-9009" positionY="95" width="128" height="118"/>
         <element name="Feed" positionX="-9416" positionY="-81" width="128" height="193"/>
         <element name="Owner" positionX="-8705" positionY="-43" width="128" height="118"/>
-        <element name="Plan" positionX="-9110" positionY="-324" width="128" height="270"/>
-        <element name="Comment" positionX="-9009" positionY="95" width="128" height="118"/>
+        <element name="Plan" positionX="-9110" positionY="-324" width="128" height="255"/>
     </elements>
 </model>

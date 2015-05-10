@@ -261,7 +261,6 @@ typedef enum{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,UPDATE_PLAN];
     [self getRequest:rqtStr parameter:@{@"id":plan.planId,
                                         @"title":[plan.planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                                        @"finishDate":@([SystemUtil daysBetween:plan.createDate and:plan.finishDate]),
                                         @"private":plan.isPrivate}
            operation:FetchCenterGetOpUpdatePlan
               entity:plan];
@@ -283,7 +282,6 @@ typedef enum{
 -(void)uploadToCreatePlan:(Plan *)plan{
     NSString *baseUrl = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,CREATE_PLAN];
     NSDictionary *args = @{@"title":[plan.planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                           @"finishDate":@([SystemUtil daysBetween:[NSDate date] and:plan.finishDate]),
                            @"private":plan.isPrivate};
     [self getRequest:baseUrl parameter:args operation:FetchCenterGetOpCreatePlan entity:plan];
 }

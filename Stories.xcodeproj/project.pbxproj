@@ -31,6 +31,8 @@
 		AE2F28E71AD3937700FC3370 /* WishDetailVCDiscovery.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2F28E61AD3937700FC3370 /* WishDetailVCDiscovery.m */; };
 		AE2F28E81AD3937700FC3370 /* WishDetailVCDiscovery.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2F28E61AD3937700FC3370 /* WishDetailVCDiscovery.m */; };
 		AE30EE6D1A6E19D00044740D /* WishDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE30EE6C1A6E19D00044740D /* WishDetailCell.m */; };
+		AE3D70B31AFF2242000C0806 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D70B21AFF2242000C0806 /* Plan.m */; };
+		AE3D70B41AFF2242000C0806 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D70B21AFF2242000C0806 /* Plan.m */; };
 		AE47055D1AF9DC080028D7BC /* FeedDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE47055C1AF9DC080028D7BC /* FeedDetailCell.m */; };
 		AE479E9E1A6F775C00366A0A /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479E9D1A6F775C00366A0A /* PostViewController.m */; };
 		AE479E9F1A6F775C00366A0A /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479E9D1A6F775C00366A0A /* PostViewController.m */; };
@@ -108,8 +110,6 @@
 		AED4CB431AC79F3A00EE2DA4 /* ModalLeftToRightSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = AED4CB421AC79F3A00EE2DA4 /* ModalLeftToRightSegue.m */; };
 		AED4CB441AC79F3A00EE2DA4 /* ModalLeftToRightSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = AED4CB421AC79F3A00EE2DA4 /* ModalLeftToRightSegue.m */; };
 		AED5AB121AFDC74E00719208 /* Comment+CRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5AB111AFDC74E00719208 /* Comment+CRUD.m */; };
-		AED5AB151AFDCBBA00719208 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5AB141AFDCBBA00719208 /* Plan.m */; };
-		AED5AB161AFDCBBA00719208 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5AB141AFDCBBA00719208 /* Plan.m */; };
 		AED5AB191AFDCBBB00719208 /* Owner.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5AB181AFDCBBB00719208 /* Owner.m */; };
 		AED5AB1A1AFDCBBB00719208 /* Owner.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5AB181AFDCBBB00719208 /* Owner.m */; };
 		AED5AB1D1AFDCBBB00719208 /* Feed.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5AB1C1AFDCBBB00719208 /* Feed.m */; };
@@ -246,6 +246,8 @@
 		AE2F28E61AD3937700FC3370 /* WishDetailVCDiscovery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailVCDiscovery.m; sourceTree = "<group>"; };
 		AE30EE6B1A6E19D00044740D /* WishDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishDetailCell.h; sourceTree = "<group>"; };
 		AE30EE6C1A6E19D00044740D /* WishDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailCell.m; sourceTree = "<group>"; };
+		AE3D70B11AFF2241000C0806 /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
+		AE3D70B21AFF2242000C0806 /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
 		AE4481AA1AB6B5A700A912CB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		AE4481AB1AB6B5A700A912CB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		AE4481AC1AB6B65A00A912CB /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -359,8 +361,6 @@
 		AED4CB421AC79F3A00EE2DA4 /* ModalLeftToRightSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalLeftToRightSegue.m; sourceTree = "<group>"; };
 		AED5AB101AFDC74E00719208 /* Comment+CRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Comment+CRUD.h"; sourceTree = "<group>"; };
 		AED5AB111AFDC74E00719208 /* Comment+CRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Comment+CRUD.m"; sourceTree = "<group>"; };
-		AED5AB131AFDCBBA00719208 /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
-		AED5AB141AFDCBBA00719208 /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
 		AED5AB171AFDCBBB00719208 /* Owner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Owner.h; sourceTree = "<group>"; };
 		AED5AB181AFDCBBB00719208 /* Owner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Owner.m; sourceTree = "<group>"; };
 		AED5AB1B1AFDCBBB00719208 /* Feed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feed.h; sourceTree = "<group>"; };
@@ -579,14 +579,14 @@
 		AE30EE711A6F0A8C0044740D /* Database&Networking */ = {
 			isa = PBXGroup;
 			children = (
+				AE3D70B11AFF2241000C0806 /* Plan.h */,
+				AE3D70B21AFF2242000C0806 /* Plan.m */,
 				AED5AB1F1AFDCBBC00719208 /* Comment.h */,
 				AED5AB201AFDCBBC00719208 /* Comment.m */,
 				AED5AB1B1AFDCBBB00719208 /* Feed.h */,
 				AED5AB1C1AFDCBBB00719208 /* Feed.m */,
 				AED5AB171AFDCBBB00719208 /* Owner.h */,
 				AED5AB181AFDCBBB00719208 /* Owner.m */,
-				AED5AB131AFDCBBA00719208 /* Plan.h */,
-				AED5AB141AFDCBBA00719208 /* Plan.m */,
 				AED5AB101AFDC74E00719208 /* Comment+CRUD.h */,
 				AED5AB111AFDC74E00719208 /* Comment+CRUD.m */,
 				AE2F1C921A7A23A200A32CB5 /* Feed+FeedCRUD.h */,
@@ -1099,7 +1099,7 @@
 				AEE075381A744A770015155B /* SystemUtil.m in Sources */,
 				AE0ADF191ABD78CC00692131 /* HomeCardViewController.m in Sources */,
 				AE95A9F41ACFA7F8007465D5 /* TWImageScrollView.m in Sources */,
-				AED5AB151AFDCBBA00719208 /* Plan.m in Sources */,
+				AE3D70B31AFF2242000C0806 /* Plan.m in Sources */,
 				AECE2BEA1AA0521600B1C58E /* NSData+ImageContentType.m in Sources */,
 				AED5AB191AFDCBBB00719208 /* Owner.m in Sources */,
 				AEF7F2811A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
@@ -1207,7 +1207,6 @@
 				AEFB04871AD12437009EB0D3 /* DiscoveryCell.m in Sources */,
 				AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */,
 				AEE075391A744A770015155B /* SystemUtil.m in Sources */,
-				AED5AB161AFDCBBA00719208 /* Plan.m in Sources */,
 				AEF7F2821A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				AE479EAF1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */,
 				AEE4A6D11A96A5D500ABF946 /* AchieveCell.m in Sources */,
@@ -1229,6 +1228,7 @@
 				AED8D7CB1A9BE2490035EDE5 /* FollowingImageCell.m in Sources */,
 				AEC0E1C61AC64F9600563F7C /* WishDetailVCOwnerAchieved.m in Sources */,
 				AED5AB221AFDCBBC00719208 /* Comment.m in Sources */,
+				AE3D70B41AFF2242000C0806 /* Plan.m in Sources */,
 				AEBFCA381A78614100686EFE /* PostDetailViewController.m in Sources */,
 				AEF7F2AC1A6884950022410B /* CustomBarItem.m in Sources */,
 				AEE4A6D91A972FAB00ABF946 /* FollowingTVCData.m in Sources */,

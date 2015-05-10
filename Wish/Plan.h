@@ -2,7 +2,7 @@
 //  Plan.h
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2015-05-08.
+//  Created by Xinyi Zhuang on 2015-05-09.
 //  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
 //
 
@@ -15,7 +15,6 @@
 
 @property (nonatomic, retain) NSString * backgroundNum;
 @property (nonatomic, retain) NSDate * createDate;
-@property (nonatomic, retain) NSDate * finishDate;
 @property (nonatomic, retain) NSNumber * followCount;
 @property (nonatomic, retain) id image;
 @property (nonatomic, retain) NSNumber * isPrivate;
