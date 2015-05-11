@@ -45,21 +45,22 @@
     [super setUpNavigationItem];
     
     CGRect frame = CGRectMake(0,0, 25,25);
-    UIButton *composeBtn = [Theme buttonWithImage:[Theme navComposeButtonDefault]
-                                           target:self
-                                         selector:@selector(editPlan)
+    UIButton *planEditBtn = [Theme buttonWithImage:[Theme navComposeButtonDefault]
+                                            target:self
+                                          selector:@selector(editPlan)
                                             frame:frame];
     
-//    UIButton *shareBtn = [Theme buttonWithImage:[Theme navShareButtonDefault]
-//                                         target:self
-//                                       selector:nil
-//                                          frame:frame];
+    UIButton *shareBtn = [Theme buttonWithImage:[Theme navShareButtonDefault]
+                                         target:self
+                                       selector:nil
+                                          frame:frame];
     
-//    self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:shareBtn],
-//                                                [[UIBarButtonItem alloc] initWithCustomView:composeBtn]];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:composeBtn];
-    
-
+    UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                                                           target:nil action:nil];
+    space.width = 25.0f;
+    self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:shareBtn],
+                                                space,
+                                                [[UIBarButtonItem alloc] initWithCustomView:planEditBtn]];
     
 }
 - (void)editPlan{
