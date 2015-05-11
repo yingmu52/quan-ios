@@ -184,7 +184,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     Feed *feed = [self.fetchedRC objectAtIndexPath:indexPath];
-    [self performSegueWithIdentifier:[self segueForFeed] sender:feed];
+    if (feed.feedId){ //prevent crash
+        [self performSegueWithIdentifier:[self segueForFeed] sender:feed];
+    }
 }
 
 - (NSString *)segueForFeed{

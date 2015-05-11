@@ -228,48 +228,72 @@
             NSLog(@"share feed");
         }else if ([title isEqualToString:@"删除"]){
             
-            PopupView *popupView = [PopupView showPopupDeleteinFrame:window.frame withTitle:@"真的要删除这条记录吗？"];
+            NSString *popupViewTitle = [self isDeletingTheLastFeed] ?
+            @"这是最后一条记录啦！\n这件事儿也会被删除哦~" : @"真的要删除这条记录吗？";
+            
+            PopupView *popupView = [PopupView showPopupDeleteinFrame:window.frame
+                                                           withTitle:popupViewTitle];
             popupView.delegate = self;
             popupView.feed = cell.feed;
             [window addSubview:popupView];
         }
     }];
 }
-
-
 #pragma mark - delete feed
+
+
+- (BOOL)isDeletingTheLastFeed{
+    return self.fetchedRC.fetchedObjects.count == 1;
+}
 
 - (void)popupViewDidPressConfirm:(PopupView *)popupView{
     Feed *feed = popupView.feed;
     if (feed.feedId && feed.plan.planId && feed.imageId){
-        [self.fetchCenter deleteFeed:popupView.feed];
-    }else if (!feed.feedId){
-        [self deleteFeed:feed];
+        
+        [self.fetchCenter deleteFeed:feed];
+        
+    }else if (!feed.feedId){ //local feed
+        
+        if ([self isDeletingTheLastFeed]){ // delete the last plan
+            [self deletePlan];
+        }else{
+            [self deleteFeed:feed];
+        }
     }
     [self popupViewDidPressCancel:popupView];
 
 }
+
 - (void)popupViewDidPressCancel:(PopupView *)popupView{
     [popupView removeFromSuperview];
 }
+
 - (void)deleteFeed:(Feed *)feed{
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     //delete Feed
-    [delegate.managedObjectContext deleteObject:feed];
+    [[AppDelegate getContext] deleteObject:feed];
     
     //tryTime - 1
     feed.plan.tryTimes = @(feed.plan.tryTimes.integerValue - 1);
     
-    [delegate saveContext];
+    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
     
 }
 
+- (void)deletePlan{
+    //delete plan and pop back. Notice place deletion is cascade
+    [self.plan deleteSelf];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 
-#pragma mark - fetch center delegate 
+}
+#pragma mark - fetch center delegate
 
 - (void)didFinishDeletingFeed:(Feed *)feed{
-    [self deleteFeed:feed];
+    if ([self isDeletingTheLastFeed]) {
+        [self deletePlan];
+    }else{
+        [self deleteFeed:feed];
+    }
 }
 
 - (NSString *)segueForFeed{
