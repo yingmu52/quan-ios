@@ -19,7 +19,7 @@
     self.headerTitleLabel.text = [plan.planTitle stringByReplacingOccurrencesOfString:@" " withString:@""];
     self.headerFeedCountLabel.text = [NSString stringWithFormat:@"%@条记录",plan.tryTimes];
     self.headerFollowLabel.text = [NSString stringWithFormat:@"%@关注",plan.followCount];
-    //        [self updateCountDownLabel:plan];
+    self.badgeImageView.hidden = (self.plan.planStatus.integerValue != PlanStatusFinished);
 }
 
 //- (void)updateCountDownLabel:(Plan *)plan{

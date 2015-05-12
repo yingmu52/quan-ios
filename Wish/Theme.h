@@ -56,7 +56,7 @@
 
 + (UIImage *)achievementFail;
 + (UIImage *)achievementFinish;
-+ (UIImage *)achieveBadageLabelFail;
+//+ (UIImage *)achieveBadageLabelFail;
 + (UIImage *)achieveBadageLabelSuccess;
 
 + (UIImage *)popupFail;

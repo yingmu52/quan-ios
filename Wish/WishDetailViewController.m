@@ -225,13 +225,13 @@
     self.headerView.plan = self.plan; //set plan to header for updaing info
 }
 
-- (void)setupBadageImageView{
-    UIImage *image;
-    if (self.plan.planStatus.integerValue == PlanStatusFinished) image = [Theme achieveBadageLabelSuccess];
-    if (self.plan.planStatus.integerValue == PlanStatusGiveTheFuckingUp) image = [Theme achieveBadageLabelFail];
-    self.headerView.badgeImageView.image = image;
-    self.headerView.badgeImageView.hidden = NO;
-}
+//- (void)setupBadageImageView{
+//    UIImage *image;
+//    if (self.plan.planStatus.integerValue == PlanStatusFinished) image = [Theme achieveBadageLabelSuccess];
+//    if (self.plan.planStatus.integerValue == PlanStatusGiveTheFuckingUp) image = [Theme achieveBadageLabelFail];
+//    self.headerView.badgeImageView.image = image;
+//    self.headerView.badgeImageView.hidden = NO;
+//}
 
 #pragma mark - did scroll to bottom
 - (void)scrollViewDidEndDragging:(UIScrollView *)aScrollView

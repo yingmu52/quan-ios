@@ -25,7 +25,7 @@
 @property (nonatomic,strong) HeaderView *headerView;
 - (void)setUpNavigationItem;
 - (void)updateHeaderView;
-- (void)setupBadageImageView;
+//- (void)setupBadageImageView;
 - (void)fetchResultsControllerDidInsert;
 
 #pragma mark - abstract

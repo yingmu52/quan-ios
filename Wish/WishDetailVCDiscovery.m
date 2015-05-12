@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    [self setupBadageImageView]; //display badge
+//    [self setupBadageImageView]; //display badge
     
     self.hasNextPage = YES; //important, must set before [self loadMore]
     [self loadMore];

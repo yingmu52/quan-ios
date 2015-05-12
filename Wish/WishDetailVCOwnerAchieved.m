@@ -15,10 +15,10 @@
 @implementation WishDetailVCOwnerAchieved
 
 
-- (void)viewDidLoad{
-    [super viewDidLoad];
-    [self setupBadageImageView];
-}
+//- (void)viewDidLoad{
+//    [super viewDidLoad];
+//    [self setupBadageImageView];
+//}
 
 
 - (void)setUpNavigationItem{

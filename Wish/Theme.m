@@ -184,13 +184,13 @@
 }
 
 
-+ (UIImage *)achieveBadageLabelFail{
-    return [UIImage imageNamed:@"label_fail"];
-}
+//+ (UIImage *)achieveBadageLabelFail{
+//    return [UIImage imageNamed:@"label_fail"];
+//}
 
-+ (UIImage *)achieveBadageLabelSuccess{
-    return [UIImage imageNamed:@"label_finish"];
-}
+//+ (UIImage *)achieveBadageLabelSuccess{
+//    return [UIImage imageNamed:@"label_finish"];
+//}
 
 
 
