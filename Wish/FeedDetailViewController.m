@@ -137,7 +137,7 @@
     
     NSDictionary *userNameAttribute = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00B9C0"]};
     
-    if (comment.idForReply) { //this is a reply. format: 回复<color_userName>:content
+    if (comment.idForReply && comment.nameForReply) { //this is a reply. format: 回复<color_userName>:content
         NSMutableAttributedString *userA = [[NSMutableAttributedString alloc] initWithString:comment.owner.ownerName
                                                                                   attributes:userNameAttribute];
         NSMutableAttributedString *reply = [[NSMutableAttributedString alloc] initWithString:@"回复"];
