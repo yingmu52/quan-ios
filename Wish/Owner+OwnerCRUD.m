@@ -12,6 +12,7 @@
 @implementation Owner (OwnerCRUD)
 
 
+#warning this func needs a better name
 + (Owner *)updateOwnerFromServer:(NSDictionary *)dict{
     NSManagedObjectContext *context = [AppDelegate getContext];
     Owner *owner;

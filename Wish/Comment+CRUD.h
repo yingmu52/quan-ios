@@ -11,4 +11,5 @@
 @interface Comment (CRUD)
 + (Comment *)updateCommentFromServer:(NSDictionary *)dict;
 + (Comment *)createComment:(NSString *)content commentId:(NSString *)commendId forFeed:(Feed *)feed;
++ (Comment *)replyToOwner:(Owner *)owner content:(NSString *)text commentId:(NSString *)commentId forFeed:(Feed *)feed;
 @end

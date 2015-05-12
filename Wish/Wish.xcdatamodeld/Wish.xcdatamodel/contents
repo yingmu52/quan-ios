@@ -4,6 +4,9 @@
         <attribute name="commentId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="idForReply" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isMyComment" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="nameForReply" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="feed" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Feed" inverseName="comments" inverseEntity="Feed" syncable="YES"/>
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="comments" inverseEntity="Owner" syncable="YES"/>
     </entity>
@@ -43,7 +46,7 @@
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="plans" inverseEntity="Owner" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Comment" positionX="-9009" positionY="95" width="128" height="118"/>
+        <element name="Comment" positionX="-9009" positionY="95" width="128" height="163"/>
         <element name="Feed" positionX="-9416" positionY="-81" width="128" height="193"/>
         <element name="Owner" positionX="-8705" positionY="-43" width="128" height="118"/>
         <element name="Plan" positionX="-9110" positionY="-324" width="128" height="255"/>

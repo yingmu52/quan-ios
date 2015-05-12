@@ -7,7 +7,8 @@
 //
 
 #import "CommentAcessaryView.h"
-
+#import "FetchCenter.h"
+#import "UIImageView+WebCache.h"
 @implementation CommentAcessaryView
 
 + (instancetype)instantiateFromNib:(CGRect)frame
@@ -59,4 +60,26 @@
 - (IBAction)sendPressed:(UIButton *)sender{
     [self.delegate didPressSend:self];
 }
+
+
+-(CommentAcessaryViewState)state{
+    return self.feedInfoBackground.isHidden ? CommentAcessaryViewStateComment : CommentAcessaryViewStateReply;
+}
+
+- (void)setComment:(Comment *)comment{
+    _comment = comment;
+    [self.imageView sd_setImageWithURL:[[FetchCenter new] urlWithImageID:comment.owner.headUrl]
+                      placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    
+    self.userNameLabel.text = comment.owner.ownerName;
+    self.contentLabel.text = comment.content;
+    self.timeLabel.text = [SystemUtil timeStringFromDate:comment.createTime];
+
+}
 @end
+
+
+
+
+
+

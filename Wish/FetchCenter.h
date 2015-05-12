@@ -63,6 +63,7 @@
 - (void)unLikeFeed:(Feed *)feed;
 - (void)deleteFeed:(Feed *)feed;
 - (void)commentOnFeed:(Feed *)feed content:(NSString *)text;
+- (void)replyAtFeed:(Feed *)feed content:(NSString *)text toOwner:(NSString *)ownerId;
 - (void)getCommentListForFeed:(Feed *)feed pageInfo:(NSDictionary *)info;
 
 

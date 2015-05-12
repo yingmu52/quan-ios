@@ -112,13 +112,20 @@ typedef enum{
 }
 
 - (void)commentOnFeed:(Feed *)feed content:(NSString *)text{
+    [self replyAtFeed:feed content:text toOwner:nil];
+}
+
+- (void)replyAtFeed:(Feed *)feed content:(NSString *)text toOwner:(NSString *)ownerId{
+    
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,COMMENT_FEED];
     NSDictionary *args = @{@"feedsId":feed.feedId,
-                           @"content":[text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]};
+                           @"content":[text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                           @"commentTo": (ownerId ? ownerId : @"")};
     [self getRequest:rqtStr
            parameter:args
            operation:FetchCenterGetOpCommentFeed
               entity:feed];
+
 }
 
 #pragma mark - Feed
@@ -657,9 +664,16 @@ typedef enum{
                 Feed *feed = (Feed *)obj;
                 for (NSDictionary *commentInfo in comments){
                     Comment *comment = [Comment updateCommentFromServer:commentInfo];
-                    comment.owner = [Owner updateOwnerFromServer:ownerInfo[commentInfo[@"ownerId"]]];
+                    
+                    NSDictionary *userInfo = comment.isMyComment.boolValue ? @{@"headUrl":[User updatedProfilePictureId],@"id":[User uid],@"name":[User userDisplayName]} : ownerInfo[commentInfo[@"ownerId"]];
+                    
+                    comment.owner = [Owner updateOwnerFromServer:userInfo];
                     comment.feed = feed;
-                    NSLog(@"%@",comment);
+                    if (comment.idForReply) {
+                        comment.nameForReply = [ownerInfo[comment.idForReply] objectForKey:@"name"];
+                    }
+//                    NSLog(@"Comments %@",comment);
+//                    NSLog(@"Owner %@",comment.owner);
                 }
                 [self.delegate didFinishLoadingCommentList:pageInfo hasNextPage:hasNextPage];
             }
@@ -686,7 +700,7 @@ typedef enum{
                 break;
         }
         NSLog(@"%@",json);
-        
+        [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
     }));
 }
 @end

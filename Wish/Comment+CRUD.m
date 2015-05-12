@@ -28,6 +28,12 @@
     comment.commentId = dict[@"id"];
     comment.content = dict[@"content"];
     comment.createTime = [NSDate dateWithTimeIntervalSince1970:[dict[@"createTime"] integerValue]];
+    comment.isMyComment = @([dict[@"ownerId"] isEqualToString:[User uid]]);
+    NSString *commentTo = dict[@"commentTo"]; //this is what differential reply and comment
+    
+    if (![commentTo isEqualToString:@""]) {
+        comment.idForReply = commentTo;
+    }
     
     return comment;
 }
@@ -47,4 +53,17 @@
     return comment;
 
 }
+
+
++ (Comment *)replyToOwner:(Owner *)owner content:(NSString *)text commentId:(NSString *)commentId forFeed:(Feed *)feed{
+    if (!owner.ownerId) {
+        NSLog(@"invalid owner %@",owner);
+    }
+    Comment *comment = [self.class createComment:text commentId:commentId forFeed:feed];
+    comment.idForReply = owner.ownerId;
+    comment.nameForReply = owner.ownerName;
+    return comment;
+}
+
+
 @end

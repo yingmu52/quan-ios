@@ -28,7 +28,8 @@
                                             <exclude reference="j5C-78-74l"/>
                                         </mask>
                                     </variation>
-                                    <variation key="heightClass=regular-widthClass=compact">
+                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                        <rect key="frame" x="8" y="12" width="56" height="57"/>
                                         <mask key="constraints">
                                             <include reference="j5C-78-74l"/>
                                         </mask>
@@ -39,6 +40,9 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
+                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                        <rect key="frame" x="72" y="12" width="48" height="15"/>
+                                    </variation>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13:20" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yn4-zH-34M">
                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -51,6 +55,9 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
+                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                        <rect key="frame" x="72" y="35" width="320" height="16"/>
+                                    </variation>
                                 </label>
                             </subviews>
                             <color key="backgroundColor" red="0.95686274509803926" green="0.98039215686274506" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
@@ -124,11 +131,26 @@
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xVp-UF-XMd">
                                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="30" id="CNk-hf-0nw">
+                                            <variation key="heightClass=regular-widthClass=compact" constant="60"/>
+                                        </constraint>
+                                    </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <state key="normal" title="发表">
                                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="CNk-hf-0nw"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=regular-widthClass=compact">
+                                        <mask key="constraints">
+                                            <include reference="CNk-hf-0nw"/>
+                                        </mask>
+                                    </variation>
                                     <connections>
                                         <action selector="sendPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="VQM-jM-G6E"/>
                                     </connections>
@@ -143,14 +165,18 @@
                             <color key="backgroundColor" red="0.90588235294117647" green="0.91764705882352937" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="xVp-UF-XMd" firstAttribute="leading" secondItem="DpA-ZA-asG" secondAttribute="trailing" constant="8" id="0Lc-vE-HYJ">
-                                    <variation key="heightClass=regular-widthClass=compact" constant="10"/>
+                                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                 </constraint>
+                                <constraint firstItem="xVp-UF-XMd" firstAttribute="top" secondItem="cdh-F5-wjF" secondAttribute="top" constant="10" id="Vjo-oz-Dc4">
+                                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                                </constraint>
+                                <constraint firstAttribute="bottom" secondItem="xVp-UF-XMd" secondAttribute="bottom" id="WHt-2Q-Qjt"/>
                                 <constraint firstAttribute="centerY" secondItem="xVp-UF-XMd" secondAttribute="centerY" constant="-2" id="fRd-hL-le9">
                                     <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                 </constraint>
                                 <constraint firstItem="DpA-ZA-asG" firstAttribute="leading" secondItem="cdh-F5-wjF" secondAttribute="leading" constant="8" id="gR6-qm-jeU"/>
                                 <constraint firstAttribute="trailing" secondItem="xVp-UF-XMd" secondAttribute="trailing" constant="24" id="uNr-11-4n8">
-                                    <variation key="heightClass=regular-widthClass=compact" constant="10"/>
+                                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                 </constraint>
                                 <constraint firstAttribute="centerY" secondItem="DpA-ZA-asG" secondAttribute="centerY" id="z1m-2o-DKc"/>
                             </constraints>
@@ -163,6 +189,8 @@
                                     <exclude reference="gR6-qm-jeU"/>
                                     <exclude reference="z1m-2o-DKc"/>
                                     <exclude reference="0Lc-vE-HYJ"/>
+                                    <exclude reference="Vjo-oz-Dc4"/>
+                                    <exclude reference="WHt-2Q-Qjt"/>
                                     <exclude reference="fRd-hL-le9"/>
                                     <exclude reference="uNr-11-4n8"/>
                                 </mask>
@@ -176,7 +204,9 @@
                                     <include reference="gR6-qm-jeU"/>
                                     <include reference="z1m-2o-DKc"/>
                                     <include reference="0Lc-vE-HYJ"/>
-                                    <include reference="fRd-hL-le9"/>
+                                    <include reference="Vjo-oz-Dc4"/>
+                                    <include reference="WHt-2Q-Qjt"/>
+                                    <exclude reference="fRd-hL-le9"/>
                                     <include reference="uNr-11-4n8"/>
                                 </mask>
                             </variation>

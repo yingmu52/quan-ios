@@ -33,6 +33,8 @@
 		AE30EE6D1A6E19D00044740D /* WishDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE30EE6C1A6E19D00044740D /* WishDetailCell.m */; };
 		AE3D70B31AFF2242000C0806 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D70B21AFF2242000C0806 /* Plan.m */; };
 		AE3D70B41AFF2242000C0806 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D70B21AFF2242000C0806 /* Plan.m */; };
+		AE3D70BF1B019DE1000C0806 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D70BE1B019DE1000C0806 /* Comment.m */; };
+		AE3D70C01B019DE1000C0806 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D70BE1B019DE1000C0806 /* Comment.m */; };
 		AE47055D1AF9DC080028D7BC /* FeedDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE47055C1AF9DC080028D7BC /* FeedDetailCell.m */; };
 		AE479E9E1A6F775C00366A0A /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479E9D1A6F775C00366A0A /* PostViewController.m */; };
 		AE479E9F1A6F775C00366A0A /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479E9D1A6F775C00366A0A /* PostViewController.m */; };
@@ -114,8 +116,6 @@
 		AED5AB1A1AFDCBBB00719208 /* Owner.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5AB181AFDCBBB00719208 /* Owner.m */; };
 		AED5AB1D1AFDCBBB00719208 /* Feed.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5AB1C1AFDCBBB00719208 /* Feed.m */; };
 		AED5AB1E1AFDCBBB00719208 /* Feed.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5AB1C1AFDCBBB00719208 /* Feed.m */; };
-		AED5AB211AFDCBBC00719208 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5AB201AFDCBBC00719208 /* Comment.m */; };
-		AED5AB221AFDCBBC00719208 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5AB201AFDCBBC00719208 /* Comment.m */; };
 		AED5AB231AFDE39800719208 /* CommentAcessaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA4CAD71AFC33DC00BDE7F9 /* CommentAcessaryView.m */; };
 		AED5BC631ABE3CB600EFF398 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5BC621ABE3CB600EFF398 /* SettingViewController.m */; };
 		AED5BC641ABE3CB600EFF398 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5BC621ABE3CB600EFF398 /* SettingViewController.m */; };
@@ -248,6 +248,8 @@
 		AE30EE6C1A6E19D00044740D /* WishDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailCell.m; sourceTree = "<group>"; };
 		AE3D70B11AFF2241000C0806 /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
 		AE3D70B21AFF2242000C0806 /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
+		AE3D70BD1B019DE0000C0806 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
+		AE3D70BE1B019DE1000C0806 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		AE4481AA1AB6B5A700A912CB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		AE4481AB1AB6B5A700A912CB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		AE4481AC1AB6B65A00A912CB /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -365,8 +367,6 @@
 		AED5AB181AFDCBBB00719208 /* Owner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Owner.m; sourceTree = "<group>"; };
 		AED5AB1B1AFDCBBB00719208 /* Feed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feed.h; sourceTree = "<group>"; };
 		AED5AB1C1AFDCBBB00719208 /* Feed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feed.m; sourceTree = "<group>"; };
-		AED5AB1F1AFDCBBC00719208 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
-		AED5AB201AFDCBBC00719208 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		AED5BC611ABE3CB600EFF398 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		AED5BC621ABE3CB600EFF398 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		AED5BC651ABEA7EB00EFF398 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
@@ -579,10 +579,10 @@
 		AE30EE711A6F0A8C0044740D /* Database&Networking */ = {
 			isa = PBXGroup;
 			children = (
+				AE3D70BD1B019DE0000C0806 /* Comment.h */,
+				AE3D70BE1B019DE1000C0806 /* Comment.m */,
 				AE3D70B11AFF2241000C0806 /* Plan.h */,
 				AE3D70B21AFF2242000C0806 /* Plan.m */,
-				AED5AB1F1AFDCBBC00719208 /* Comment.h */,
-				AED5AB201AFDCBBC00719208 /* Comment.m */,
 				AED5AB1B1AFDCBBB00719208 /* Feed.h */,
 				AED5AB1C1AFDCBBB00719208 /* Feed.m */,
 				AED5AB171AFDCBBB00719208 /* Owner.h */,
@@ -1133,7 +1133,7 @@
 				AE0172691A65D3140014266F /* MenuViewController.m in Sources */,
 				AE52FA501A8D3D76003FF725 /* PostFeedViewController.m in Sources */,
 				AECE2BF61AA0521600B1C58E /* UIImageView+HighlightedWebCache.m in Sources */,
-				AED5AB211AFDCBBC00719208 /* Comment.m in Sources */,
+				AE3D70BF1B019DE1000C0806 /* Comment.m in Sources */,
 				AED4CB2A1AC7633D00EE2DA4 /* NHAlignmentFlowLayout.m in Sources */,
 				AED68EE41A70399A00CDC0DF /* FetchCenter.m in Sources */,
 				AEC8CE8E1AAF872A005364F8 /* StationView.m in Sources */,
@@ -1227,7 +1227,6 @@
 				AE9A3AEC1A9B1DB000F0588F /* AchieveVCData.m in Sources */,
 				AED8D7CB1A9BE2490035EDE5 /* FollowingImageCell.m in Sources */,
 				AEC0E1C61AC64F9600563F7C /* WishDetailVCOwnerAchieved.m in Sources */,
-				AED5AB221AFDCBBC00719208 /* Comment.m in Sources */,
 				AE3D70B41AFF2242000C0806 /* Plan.m in Sources */,
 				AEBFCA381A78614100686EFE /* PostDetailViewController.m in Sources */,
 				AEF7F2AC1A6884950022410B /* CustomBarItem.m in Sources */,
@@ -1240,6 +1239,7 @@
 				AEFEE4011A8EE0A7007E8234 /* FollowingCell.m in Sources */,
 				AE9861FB1AC33C04005544B9 /* EditWishViewController.m in Sources */,
 				AE2F1C851A7A1A1800A32CB5 /* UIImage+ImageEffects.m in Sources */,
+				AE3D70C01B019DE1000C0806 /* Comment.m in Sources */,
 				AE01726A1A65D3140014266F /* MenuViewController.m in Sources */,
 				AEFB04851AD12437009EB0D3 /* DiscoveryBannerCell.m in Sources */,
 				AEF3F8801AA4CFA6008C2300 /* WishDetailVCOwner.m in Sources */,

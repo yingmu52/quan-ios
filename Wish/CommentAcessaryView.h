@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Feed.h"
+#import "Comment.h"
 @class CommentAcessaryView;
 @protocol CommentAcessaryViewDelegate <NSObject>
 @optional
@@ -16,6 +17,15 @@
 
 
 @interface CommentAcessaryView : UIView
+
+
+typedef enum {
+    CommentAcessaryViewStateComment = 0,
+    CommentAcessaryViewStateReply,
+}CommentAcessaryViewState;
+
+
+@property (nonatomic,strong) Comment *comment; //reply and display info
 
 @property (nonatomic,strong) Feed *feed; //needed for wish detail
 
@@ -29,7 +39,7 @@
 
 @property (weak, nonatomic) id <CommentAcessaryViewDelegate> delegate;
 
-
+@property (nonatomic,readonly) CommentAcessaryViewState state;
 
 + (instancetype)instantiateFromNib:(CGRect)frame;
 @end

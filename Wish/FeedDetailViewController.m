@@ -129,28 +129,43 @@
 - (FeedDetailCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     FeedDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:FEEDDETAILCELLID forIndexPath:indexPath];
     Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
+    
+    
     [cell.profileImageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:comment.owner.headUrl]
                              placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-    
-    cell.userNameLabel.text = comment.owner.ownerName;
     cell.contentLabel.text = comment.content;
+    
+    NSDictionary *userNameAttribute = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00B9C0"]};
+    
+    if (comment.idForReply) { //this is a reply. format: 回复<color_userName>:content
+        NSMutableAttributedString *userA = [[NSMutableAttributedString alloc] initWithString:comment.owner.ownerName
+                                                                                  attributes:userNameAttribute];
+        NSMutableAttributedString *reply = [[NSMutableAttributedString alloc] initWithString:@"回复"];
+        NSMutableAttributedString *userB = [[NSMutableAttributedString alloc] initWithString:comment.nameForReply
+                                                                                  attributes:userNameAttribute];
+        
+        [userA appendAttributedString:reply];
+        [userA appendAttributedString:userB];
+        cell.userNameLabel.attributedText = userA;
+    }else{
+        cell.userNameLabel.attributedText = [[NSAttributedString alloc] initWithString:comment.owner.ownerName
+                                                                            attributes:userNameAttribute];
+    }
     cell.dateLabel.text = [SystemUtil timeStringFromDate:comment.createTime];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    //show comment view for replying
     self.commentView.feedInfoBackground.hidden = NO; // feed info section is for replying
-
     Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
     
-    [self.commentView.imageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:comment.owner.headUrl]
-                                  placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    if (![comment.owner.ownerId isEqualToString:[User uid]]) { //can't reply to self
+        self.commentView.comment = comment;
+        [[[UIApplication sharedApplication] keyWindow] addSubview:self.commentView];
+    }
     
-    self.commentView.userNameLabel.text = comment.owner.ownerName;
-    self.commentView.contentLabel.text = comment.content;
-    self.commentView.timeLabel.text = [SystemUtil timeStringFromDate:comment.createTime];
-    
-    [[[UIApplication sharedApplication] keyWindow] addSubview:self.commentView];
 }
 
 - (CommentAcessaryView *)commentView{
@@ -218,7 +233,14 @@
 
 #pragma mark - comment accessary view delegate 
 - (void)didPressSend:(CommentAcessaryView *)cav{
-    [self.fetchCenter commentOnFeed:self.feed content:cav.textField.text];
+    if (cav.state == CommentAcessaryViewStateComment) {
+        [self.fetchCenter commentOnFeed:self.feed
+                                content:cav.textField.text];
+    }else if (cav.state == CommentAcessaryViewStateReply){
+        [self.fetchCenter replyAtFeed:self.feed
+                              content:cav.textField.text
+                              toOwner:cav.comment.owner.ownerId];
+    }
 }
 
 #pragma mark - fetch center delegate 
@@ -229,7 +251,17 @@
     self.commentCountLabel.text = [NSString stringWithFormat:@"%@",feed.commentCount];
 
     //create comment locally
-    [Comment createComment:self.commentView.textField.text commentId:commentId forFeed:feed];
+    if (self.commentView.state == CommentAcessaryViewStateComment) {
+        [Comment createComment:self.commentView.textField.text
+                     commentId:commentId
+                       forFeed:feed];
+        
+    }else if (self.commentView.state == CommentAcessaryViewStateReply){
+        [Comment replyToOwner:self.commentView.comment.owner // this is done in didSelectRowAtIndexPath
+                      content:self.commentView.textField.text
+                    commentId:commentId
+                      forFeed:feed];
+    }
     
     [self.commentView removeFromSuperview];
     self.commentView.textField.text = @"";
