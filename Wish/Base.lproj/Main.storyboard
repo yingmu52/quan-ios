@@ -713,6 +713,9 @@
                                                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
+                                                            <connections>
+                                                                <segue destination="uQz-XF-LbE" kind="modal" modalTransitionStyle="coverVertical" id="pdM-Yj-CUA"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -3868,7 +3871,23 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qBZ-x7-vS6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2706" y="780"/>
+            <point key="canvasLocation" x="-5010" y="-294"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="dRt-gq-QIx">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uQz-XF-LbE" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AOj-IP-DMh" customClass="NavigationBar">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="kcp-Id-Hzn" kind="relationship" relationship="rootViewController" id="DTM-of-qhC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ltE-cf-kVI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-6243" y="1543.5"/>
         </scene>
         <!--Feedback View Controller-->
         <scene sceneID="Q1I-NJ-5oY">
@@ -3882,9 +3901,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q22-4G-Eo7" customClass="GCPTextView">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" text="测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测" translatesAutoresizingMaskIntoConstraints="NO" id="q22-4G-Eo7" customClass="GCPTextView">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <string key="text">测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -3925,13 +3943,14 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="uby-vF-xEQ"/>
                     <connections>
                         <outlet property="textView" destination="q22-4G-Eo7" id="0Zu-Cn-1FN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q0N-5Z-lB6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1038" y="1412.25"/>
+            <point key="canvasLocation" x="-5089.5" y="1617"/>
         </scene>
         <!--Setting View Controller-->
         <scene sceneID="p9F-bV-MOz">
@@ -4415,7 +4434,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bDw-Cl-yWH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3523.5" y="1453.5"/>
+            <point key="canvasLocation" x="-3451.5" y="373.5"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="Jmd-XO-3ZT">
@@ -5771,6 +5790,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="cel-0L-eNY"/>
+        <segue reference="DTM-of-qhC"/>
         <segue reference="4ZT-53-1QA"/>
         <segue reference="rOd-Ph-D4Y"/>
         <segue reference="zL5-4w-ilR"/>

@@ -12,7 +12,7 @@
 #import "SDWebImageCompat.h"
 #import "FeedbackkAccessoryView.h"
 #import "GCPTextView.h"
-@interface FeedbackViewController () <FetchCenterDelegate,GCPTextViewDelegate>
+@interface FeedbackViewController () <FetchCenterDelegate,UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet GCPTextView *textView;
 @property (nonatomic,strong) UIButton *tikButton;
 @end
@@ -22,7 +22,6 @@
 
 - (void)setTextView:(GCPTextView *)textView{
     _textView = textView;
-    _textView.delegate = self;
     _textView.text = nil;
     [_textView setPlaceholder:@" 感谢您对我们App的建议~么么哒"];
 }
@@ -47,8 +46,8 @@
     
     CGRect frame = CGRectMake(0,0, 25,25);
     UIButton *backBtn = [Theme buttonWithImage:[Theme navBackButtonDefault]
-                                        target:self.navigationController
-                                      selector:@selector(popViewControllerAnimated:)
+                                        target:self
+                                      selector:@selector(dismissController)
                                          frame:frame];
     self.tikButton = [Theme buttonWithImage:[Theme navTikButtonDefault]
                                      target:self
@@ -77,10 +76,19 @@
     }
 }
 
+- (void)dismissController{
+    
+    //if self is the root of a navigation controller, this is being modally presented
+    if (self.navigationController.viewControllers.firstObject == self) { //self is the root view controller
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 
+}
 - (void)didFinishSendingFeedBack{
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissController];
 }
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
@@ -105,9 +113,6 @@
     return  noc <= 500;
 }
 
-- (void)backspaceDidOccurInEmptyField{
-    //this method prevents crash when user keep hitting back space
-}
 @end
 
 

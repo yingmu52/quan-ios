@@ -15,7 +15,7 @@
 #import "SDWebImageCompat.h"
 #import "AppDelegate.h"
 #import "WishDetailVCOwner.h"
-@interface PostFeedViewController () <UITextFieldDelegate,FetchCenterDelegate,GCPTextViewDelegate>
+@interface PostFeedViewController () <UITextFieldDelegate,FetchCenterDelegate>
 @property (nonatomic,strong) UIButton *tikButton;
 @property (nonatomic,weak) IBOutlet UIImageView *previewIcon;
 //@property (weak, nonatomic) IBOutlet UITextField *textField;
@@ -46,7 +46,6 @@
 
 - (void)setTextView:(GCPTextView *)textView{
     _textView = textView;
-    _textView.delegate = self;
     [_textView setPlaceholder:placeHolder];
     _textView.textContainerInset = UIEdgeInsetsZero;
 }
