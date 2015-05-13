@@ -21,7 +21,7 @@
 
 
 - (void)setTextView:(GCPTextView *)textView{
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.automaticallyAdjustsScrollViewInsets = NO; // this line of code fixed the display issue of text view where feed back view is shown modally directly from the menu.
     _textView = textView;
     _textView.text = nil;
     [_textView setPlaceholder:@" 感谢您对我们App的建议~么么哒"];
