@@ -206,15 +206,13 @@ typedef enum{
 
 #pragma mark - Login&out & update personal info
 
-- (void)sendFeedback:(NSString *)title content:(NSString *)content{
+- (void)sendFeedback:(NSString *)content content:(NSString *)email{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,OTHER,FEED_BACK];
-    NSString *newTitle = [title stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *newContent = [content stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *moreInfo = [[[Reachability reachabilityForInternetConnection] currentReachabilityString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    NSString *moreInfo = [[[Reachability reachabilityForInternetConnection] currentReachabilityString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [self getRequest:rqtStr
-           parameter:@{@"title":newTitle,
-                       @"content":newContent,
-                       @"moreInfo":moreInfo}
+           parameter:@{@"title":[@"Feedback From iOS Client Application" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                       @"content":[content stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                       @"moreInfo":[email ? email : @"User did not specify contact info" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]}
            operation:FetchCenterGetOpFeedBack
               entity:nil];
 }

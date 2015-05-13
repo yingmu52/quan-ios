@@ -83,7 +83,7 @@
 - (void)fetchFollowingPlanList;
 
 #pragma mark - Other
-- (void)sendFeedback:(NSString *)title content:(NSString *)content;
+- (void)sendFeedback:(NSString *)content content:(NSString *)email;
 - (void)checkVersion;
 - (void)uploadNewProfilePicture:(UIImage *)picture;
 - (void)updatePersonalInfo:(NSString *)nickName gender:(NSString *)gender;

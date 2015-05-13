@@ -72,7 +72,8 @@
         
         FetchCenter *fetchCenter = [[FetchCenter alloc] init];
         fetchCenter.delegate = self;
-//        [fetchCenter sendFeedback:self.textField.text content:self.textView.text];
+        [fetchCenter sendFeedback:self.textView.text
+                          content:((FeedbackkAccessoryView *)self.textView.inputAccessoryView).textField.text];
     }
 }
 
