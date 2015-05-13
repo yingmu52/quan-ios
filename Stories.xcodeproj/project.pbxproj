@@ -65,6 +65,9 @@
 		AE95AABE1ACFD428007465D5 /* UIImagePickerController+DelegateBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = AE95AABC1ACFD428007465D5 /* UIImagePickerController+DelegateBlocks.m */; };
 		AE9861FA1AC33C04005544B9 /* EditWishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9861F91AC33C04005544B9 /* EditWishViewController.m */; };
 		AE9861FB1AC33C04005544B9 /* EditWishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9861F91AC33C04005544B9 /* EditWishViewController.m */; };
+		AE9A19851B02E38800590784 /* FeedbackkAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE9A19841B02E38800590784 /* FeedbackkAccessoryView.xib */; };
+		AE9A19881B02E3A100590784 /* FeedbackkAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9A19871B02E3A100590784 /* FeedbackkAccessoryView.m */; };
+		AE9A198A1B02E9E700590784 /* FeedbackkAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9A19871B02E3A100590784 /* FeedbackkAccessoryView.m */; };
 		AE9A3AEB1A9B1DB000F0588F /* AchieveVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9A3AEA1A9B1DB000F0588F /* AchieveVCData.m */; };
 		AE9A3AEC1A9B1DB000F0588F /* AchieveVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9A3AEA1A9B1DB000F0588F /* AchieveVCData.m */; };
 		AEA4CAD81AFC33DD00BDE7F9 /* CommentAcessaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA4CAD71AFC33DC00BDE7F9 /* CommentAcessaryView.m */; };
@@ -294,6 +297,9 @@
 		AE95AABC1ACFD428007465D5 /* UIImagePickerController+DelegateBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImagePickerController+DelegateBlocks.m"; sourceTree = "<group>"; };
 		AE9861F81AC33C04005544B9 /* EditWishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditWishViewController.h; sourceTree = "<group>"; };
 		AE9861F91AC33C04005544B9 /* EditWishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditWishViewController.m; sourceTree = "<group>"; };
+		AE9A19841B02E38800590784 /* FeedbackkAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedbackkAccessoryView.xib; sourceTree = "<group>"; };
+		AE9A19861B02E3A100590784 /* FeedbackkAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackkAccessoryView.h; sourceTree = "<group>"; };
+		AE9A19871B02E3A100590784 /* FeedbackkAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackkAccessoryView.m; sourceTree = "<group>"; };
 		AE9A3AE91A9B1DB000F0588F /* AchieveVCData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchieveVCData.h; sourceTree = "<group>"; };
 		AE9A3AEA1A9B1DB000F0588F /* AchieveVCData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AchieveVCData.m; sourceTree = "<group>"; };
 		AEA4CAD61AFC33DC00BDE7F9 /* CommentAcessaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentAcessaryView.h; sourceTree = "<group>"; };
@@ -735,6 +741,9 @@
 				AED5BC621ABE3CB600EFF398 /* SettingViewController.m */,
 				AE767E7D1ACE35A600F35137 /* FeedbackViewController.h */,
 				AE767E7E1ACE35A600F35137 /* FeedbackViewController.m */,
+				AE9A19841B02E38800590784 /* FeedbackkAccessoryView.xib */,
+				AE9A19861B02E3A100590784 /* FeedbackkAccessoryView.h */,
+				AE9A19871B02E3A100590784 /* FeedbackkAccessoryView.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -1052,6 +1061,7 @@
 				AEEC6C6F1A6DB0FC0021B7E4 /* HeaderView.xib in Resources */,
 				AEC8CE911AAF8823005364F8 /* StationView.xib in Resources */,
 				AE52FA551A8D55CA003FF725 /* KeyboardAcessoryView.xib in Resources */,
+				AE9A19851B02E38800590784 /* FeedbackkAccessoryView.xib in Resources */,
 				AE95A9F21ACFA7F8007465D5 /* straighten-grid@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1083,6 +1093,7 @@
 				AEF7F2851A686E8A0022410B /* ECSlidingInteractiveTransition.m in Sources */,
 				AECE2BF51AA0521600B1C58E /* UIImage+WebP.m in Sources */,
 				AEEC6C6D1A6DB0FC0021B7E4 /* HeaderView.m in Sources */,
+				AE9A19881B02E3A100590784 /* FeedbackkAccessoryView.m in Sources */,
 				AE606A201AF4697B003DF16E /* MessageListViewController.m in Sources */,
 				AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */,
 				AEFA5FE11AAFCAD9001CA0C8 /* ALDBlurImageProcessor.m in Sources */,
@@ -1213,6 +1224,7 @@
 				AE2F1C951A7A23A200A32CB5 /* Feed+FeedCRUD.m in Sources */,
 				AEF7F29C1A686FE90022410B /* NavigationBar.m in Sources */,
 				AED05EDC1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m in Sources */,
+				AE9A198A1B02E9E700590784 /* FeedbackkAccessoryView.m in Sources */,
 				AED5AB1A1AFDCBBB00719208 /* Owner.m in Sources */,
 				AE767E801ACE35A600F35137 /* FeedbackViewController.m in Sources */,
 				AE1E6BAB1AAFEEE400AF2613 /* PopupView.m in Sources */,

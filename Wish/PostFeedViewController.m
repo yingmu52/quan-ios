@@ -15,7 +15,7 @@
 #import "SDWebImageCompat.h"
 #import "AppDelegate.h"
 #import "WishDetailVCOwner.h"
-@interface PostFeedViewController () <UITextFieldDelegate,FetchCenterDelegate,UITextViewDelegate>
+@interface PostFeedViewController () <UITextFieldDelegate,FetchCenterDelegate,GCPTextViewDelegate>
 @property (nonatomic,strong) UIButton *tikButton;
 @property (nonatomic,weak) IBOutlet UIImageView *previewIcon;
 //@property (weak, nonatomic) IBOutlet UITextField *textField;
@@ -123,6 +123,10 @@
     NSUInteger noc = textView.text.length + (text.length - range.length);
 //    NSLog(@"%d",noc);
     return  noc <= 140;
+}
+
+- (void)backspaceDidOccurInEmptyField{
+    //this method prevents crash when user keep hitting back space
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
