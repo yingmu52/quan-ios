@@ -21,6 +21,7 @@
 
 
 - (void)setTextView:(GCPTextView *)textView{
+    self.automaticallyAdjustsScrollViewInsets = NO;
     _textView = textView;
     _textView.text = nil;
     [_textView setPlaceholder:@" 感谢您对我们App的建议~么么哒"];
