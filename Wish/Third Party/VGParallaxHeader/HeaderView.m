@@ -20,6 +20,9 @@
     self.headerFeedCountLabel.text = [NSString stringWithFormat:@"%@条记录",plan.tryTimes];
     self.headerFollowLabel.text = [NSString stringWithFormat:@"%@关注",plan.followCount];
     self.badgeImageView.hidden = (self.plan.planStatus.integerValue != PlanStatusFinished);
+    [self.followButton setTitle:(plan.isFollowed.boolValue ? @"已关注" :@"关注")
+                       forState:UIControlStateNormal];
+    if (self.followButton.isHidden) self.followButton.hidden = NO;
 }
 
 //- (void)updateCountDownLabel:(Plan *)plan{
@@ -50,4 +53,20 @@
     self.backgroundColor = [UIColor clearColor];
 }
 
+
+- (IBAction)followButtonPressed:(UIButton *)sender{
+    if ([sender.titleLabel.text isEqual:@"关注"]) {
+        //send follow request
+        [self.delegate didPressedFollow:sender];
+    }else if ([sender.titleLabel.text isEqual:@"已关注"]){
+        //send unfollow request
+        [self.delegate didPressedUnFollow:sender];
+    }
+    sender.hidden = YES;
+}
+
 @end
+
+
+
+

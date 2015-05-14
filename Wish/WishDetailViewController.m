@@ -8,7 +8,7 @@
 
 #import "WishDetailViewController.h"
 #import "CommentAcessaryView.h"
-@interface WishDetailViewController () <CommentAcessaryViewDelegate>
+@interface WishDetailViewController () <CommentAcessaryViewDelegate,HeaderViewDelegate>
 @property (nonatomic) CGFloat yVel;
 @property (strong,nonatomic) CommentAcessaryView *commentView;
 
@@ -23,6 +23,7 @@
 
 - (void)setHeaderView:(HeaderView *)headerView{
     _headerView = headerView;
+    _headerView.delegate = self;
     _headerView.plan = self.plan;
     self.tableView.tableHeaderView = headerView;
 }
@@ -41,6 +42,7 @@
     [self initialHeaderView];
     [self.tableView registerNib:[UINib nibWithNibName:@"WishDetailCell" bundle:nil]
          forCellReuseIdentifier:@"WishDetailCell"];
+    self.headerView.followButton.hidden = YES; // hide follow button and show it when the proper info is fetched from the server
 }
 
 - (void)setUpNavigationItem
@@ -273,6 +275,9 @@
                                delegate:self
                       cancelButtonTitle:@"OK"
                       otherButtonTitles:nil, nil] show];
+    
+    self.headerView.followButton.hidden = NO; //show follow button on request failure.
+
 }
 
 #pragma mark - segue
@@ -315,6 +320,29 @@
     [self.commentView removeFromSuperview];
     self.commentView.textField.text = @"";
 }
+
+#pragma mark - follow
+
+- (void)didPressedUnFollow:(UIButton *)sender{
+    [self.fetchCenter unFollowPlan:self.plan];
+}
+
+- (void)didPressedFollow:(UIButton *)sender{
+    [self.fetchCenter followPlan:self.plan];
+}
+
+- (void)didFinishFollowingPlan:(Plan *)plan{
+//    [self.headerView.followButton setTitle:@"已关注" forState:UIControlStateNormal];
+//    self.headerView.followButton.titleLabel.text = @"已关注";
+    self.headerView.followButton.hidden = NO;
+}
+
+- (void)didFinishUnFollowingPlan:(Plan *)plan{
+//    [self.headerView.followButton setTitle:@"关注" forState:UIControlStateNormal];
+//    self.headerView.followButton.titleLabel.text = @"关注";
+    self.headerView.followButton.hidden = NO;
+}
+
 
 @end
 

@@ -8,11 +8,21 @@
 
 #import <UIKit/UIKit.h>
 #import "Plan+PlanCRUD.h"
+
+
+@protocol HeaderViewDelegate <NSObject>
+@optional
+- (void)didPressedFollow:(UIButton *)sender;
+- (void)didPressedUnFollow:(UIButton *)sender;
+@end
 @interface HeaderView : UIView
 @property (nonatomic,weak) IBOutlet UILabel *headerTitleLabel;
 @property (nonatomic,weak) IBOutlet UILabel *headerFeedCountLabel;
 @property (nonatomic,weak) IBOutlet UILabel *headerFollowLabel;
 @property (nonatomic,weak) IBOutlet UIImageView *badgeImageView;
+@property (nonatomic,weak) IBOutlet UIButton *followButton;
 @property (nonatomic,strong) Plan *plan;
+@property (weak,nonatomic) id <HeaderViewDelegate> delegate;
 + (instancetype)instantiateFromNib:(CGRect)frame;
+
 @end

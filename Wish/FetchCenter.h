@@ -49,6 +49,10 @@
 - (void)didFinishCommentingFeed:(Feed *)feed commentId:(NSString *)commentId;
 - (void)didFinishLoadingCommentList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage;
 
+
+- (void)didFinishFollowingPlan:(Plan *)plan;
+- (void)didFinishUnFollowingPlan:(Plan *)plan;
+
 - (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
 
@@ -77,6 +81,8 @@
 - (void)updateStatus:(Plan *)plan;
 
 #pragma mark - Follow
+- (void)followPlan:(Plan *)plan;
+- (void)unFollowPlan:(Plan *)plan;
 
 #pragma mark - Discover
 - (void)getDiscoveryList;

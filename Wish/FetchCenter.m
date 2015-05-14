@@ -37,7 +37,8 @@
 
 #define FOLLOW @"follow/"
 #define GET_FOLLOW_LIST @"splan_follow_get_feedslist.php"
-
+#define FOLLOW_PLAN @"splan_follow_do.php"
+#define UNFOLLOW_PLAN @"splan_follow_undo.php"
 
 #define USER @"man/"
 #define GETUID @"splan_get_uid.php"
@@ -63,6 +64,8 @@ typedef enum{
     FetchCenterGetOpSetPlanStatus,
     FetchCenterGetOpUpdatePlan,
     FetchCenterGetOpFollowingPlanList,
+    FetchCenterGetOpFollowPlanAction,
+    FetchCenterGetOpUnFollowPlanAction,
     FetchCenterGetOpLoginForUidAndUkey,
     FetchCenterGetOpCheckNewVersion,
     FetchCenterGetOpUpdatePersonalInfo,
@@ -188,6 +191,23 @@ typedef enum{
 }
 
 #pragma mark - following list
+
+- (void)followPlan:(Plan *)plan{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FOLLOW,FOLLOW_PLAN];
+    [self getRequest:rqtStr
+           parameter:@{@"planId":plan.planId}
+           operation:FetchCenterGetOpFollowPlanAction
+              entity:plan];
+}
+
+- (void)unFollowPlan:(Plan *)plan{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FOLLOW,UNFOLLOW_PLAN];
+    [self getRequest:rqtStr
+           parameter:@{@"planId":plan.planId}
+           operation:FetchCenterGetOpUnFollowPlanAction
+              entity:plan];
+}
+
 - (void)fetchFollowingPlanList{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FOLLOW,GET_FOLLOW_LIST];
     [self getRequest:rqtStr
@@ -683,16 +703,28 @@ typedef enum{
             case FetchCenterGetOpLoadFeedList:{
                 
                 NSArray *feeds = [json valueForKeyPath:@"data.feedsList"];
-                BOOL hasNextPage = [[json valueForKeyPath:@"data.isMore"] boolValue];
                 NSDictionary *pageInfo = [json valueForKeyPath:@"data.attachInfo"];
+                Plan *plan = (Plan *)obj;
+                plan.isFollowed = @([[json valueForKeyPath:@"data.isFollowed"] boolValue]);
                 for (NSDictionary *info in feeds){
                     [Feed createFeedFromServer:info forPlan:obj]; // obj is Plan*
                 }
-                [self.delegate didFinishLoadingFeedList:pageInfo hasNextPage:hasNextPage];
+                [self.delegate didFinishLoadingFeedList:pageInfo
+                                            hasNextPage:[[json valueForKeyPath:@"data.isMore"] boolValue]];
             }
                 break;
+                
             case FetchCenterGetOpFeedBack:
                 [self.delegate didFinishSendingFeedBack];
+                break;
+                
+            case FetchCenterGetOpFollowPlanAction:{
+                [self.delegate didFinishFollowingPlan:obj];
+            }
+                break;
+            case FetchCenterGetOpUnFollowPlanAction:{
+                [self.delegate didFinishUnFollowingPlan:obj];
+            }
                 break;
             default:
                 break;
