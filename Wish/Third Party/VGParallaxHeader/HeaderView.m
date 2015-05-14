@@ -22,7 +22,7 @@
     self.badgeImageView.hidden = (self.plan.planStatus.integerValue != PlanStatusFinished);
     [self.followButton setTitle:(plan.isFollowed.boolValue ? @"已关注" :@"关注")
                        forState:UIControlStateNormal];
-    if (self.followButton.isHidden) self.followButton.hidden = NO;
+    self.followButton.hidden = NO;
 }
 
 //- (void)updateCountDownLabel:(Plan *)plan{

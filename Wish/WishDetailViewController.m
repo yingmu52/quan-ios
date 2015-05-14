@@ -332,17 +332,19 @@
 }
 
 - (void)didFinishFollowingPlan:(Plan *)plan{
-//    [self.headerView.followButton setTitle:@"已关注" forState:UIControlStateNormal];
-//    self.headerView.followButton.titleLabel.text = @"已关注";
-    self.headerView.followButton.hidden = NO;
+    [self showFollowButtonWithTitle:@"已关注"];
 }
 
 - (void)didFinishUnFollowingPlan:(Plan *)plan{
-//    [self.headerView.followButton setTitle:@"关注" forState:UIControlStateNormal];
-//    self.headerView.followButton.titleLabel.text = @"关注";
-    self.headerView.followButton.hidden = NO;
+    [self showFollowButtonWithTitle:@"关注"];
 }
 
-
+- (void)showFollowButtonWithTitle:(NSString *)title{
+    [UIView setAnimationsEnabled:NO]; // avoid set title animation for behave correctly
+    [self.headerView.followButton setTitle:title forState:UIControlStateNormal];
+    self.headerView.followButton.hidden = NO;
+    [self.headerView.followButton layoutIfNeeded];
+    [UIView setAnimationsEnabled:YES];
+}
 @end
 
