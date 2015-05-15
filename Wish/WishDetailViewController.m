@@ -42,7 +42,7 @@
     [self initialHeaderView];
     [self.tableView registerNib:[UINib nibWithNibName:@"WishDetailCell" bundle:nil]
          forCellReuseIdentifier:@"WishDetailCell"];
-    self.headerView.followButton.hidden = YES; // hide follow button and show it when the proper info is fetched from the server
+    self.headerView.followButton.hidden = YES;
 }
 
 - (void)setUpNavigationItem

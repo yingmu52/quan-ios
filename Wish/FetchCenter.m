@@ -589,6 +589,7 @@ typedef enum{
                 //save the response following plan list
                 for (NSDictionary *planItem in [json valueForKeyPath:@"data.planList"]) {
                     Plan *plan = [Plan updatePlanFromServer:planItem];
+                    plan.isFollowed = @(YES);
                     NSDictionary *userInfo = [json valueForKeyPath:[NSString stringWithFormat:@"data.manList.%@",plan.ownerId]];
                     plan.owner = [Owner updateOwnerFromServer:userInfo];
                     NSArray *feedsList = planItem[@"feedsList"];

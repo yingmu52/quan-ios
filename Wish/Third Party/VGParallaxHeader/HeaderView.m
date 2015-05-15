@@ -8,6 +8,9 @@
 
 #import "HeaderView.h"
 #import "SystemUtil.h"
+#import "Plan.h"
+#import "Owner.h"
+#import "User.h"
 @interface HeaderView()
 
 @end
@@ -20,9 +23,14 @@
     self.headerFeedCountLabel.text = [NSString stringWithFormat:@"%@条记录",plan.tryTimes];
     self.headerFollowLabel.text = [NSString stringWithFormat:@"%@关注",plan.followCount];
     self.badgeImageView.hidden = (self.plan.planStatus.integerValue != PlanStatusFinished);
-    [self.followButton setTitle:(plan.isFollowed.boolValue ? @"已关注" :@"关注")
-                       forState:UIControlStateNormal];
-    self.followButton.hidden = NO;
+    
+    if ([plan.owner.ownerId isEqualToString:[User uid]]) { //owner don't get to follow its plan
+        [self.followButton removeFromSuperview];
+    }else{
+        [self.followButton setTitle:(plan.isFollowed.boolValue ? @"已关注" :@"关注")
+                           forState:UIControlStateNormal];
+        self.followButton.hidden = NO;
+    }
 }
 
 //- (void)updateCountDownLabel:(Plan *)plan{

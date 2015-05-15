@@ -9,5 +9,8 @@
 #import "WishDetailVCFollower.h"
 @implementation WishDetailVCFollower
 
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.headerView.followButton.hidden = NO;
+}
 @end
