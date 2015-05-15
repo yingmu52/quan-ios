@@ -2300,18 +2300,27 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" red="0.094117647060000004" green="0.67843137249999996" blue="0.71372549019999998" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="77" y="38" width="60" height="15"/>
+                                                            </variation>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="每天一部电影的365天" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Whz-hJ-ANi">
                                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="77" y="15" width="136" height="17"/>
+                                                            </variation>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="更新于2015-08-08" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8sd-oO-FY6">
                                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="145" y="38" width="101" height="15"/>
+                                                            </variation>
                                                         </label>
                                                     </subviews>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
@@ -2613,7 +2622,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="QAi-Q3-jro" secondAttribute="trailing" id="hfI-g4-7rs"/>
                                                 <constraint firstItem="QAi-Q3-jro" firstAttribute="top" secondItem="0Rr-3L-WEg" secondAttribute="top" id="kNf-g9-gSh"/>
                                                 <constraint firstItem="0ft-Yx-ljC" firstAttribute="top" secondItem="kF5-OK-Oi0" secondAttribute="bottom" constant="20" id="mgY-Co-SoK">
-                                                    <variation key="heightClass=regular-widthClass=compact" constant="13"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                                                 </constraint>
                                                 <constraint firstItem="QAi-Q3-jro" firstAttribute="leading" secondItem="0Rr-3L-WEg" secondAttribute="leading" id="rbr-Jo-qB4"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0ft-Yx-ljC" secondAttribute="trailing" constant="82" id="snH-gd-FvH">
@@ -2670,13 +2679,13 @@
                                             <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
                                         </constraint>
                                         <constraint firstAttribute="trailingMargin" secondItem="0Rr-3L-WEg" secondAttribute="trailing" constant="-8" id="AC8-6L-50Q">
-                                            <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                                            <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
                                         </constraint>
                                         <constraint firstItem="0Rr-3L-WEg" firstAttribute="top" secondItem="faY-b2-CXn" secondAttribute="topMargin" constant="-8" id="GRB-jK-Jzd">
                                             <variation key="heightClass=regular-widthClass=compact" constant="3"/>
                                         </constraint>
                                         <constraint firstItem="0Rr-3L-WEg" firstAttribute="leading" secondItem="faY-b2-CXn" secondAttribute="leadingMargin" constant="-8" id="IYx-F2-h4W">
-                                            <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                                            <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
                                         </constraint>
                                     </constraints>
                                     <variation key="default">

@@ -28,11 +28,10 @@
     [super viewDidLoad];
     FetchCenter *fetchCenter =[[FetchCenter alloc] init];
     fetchCenter.delegate  = self;
-
-    dispatch_queue_t fetchFollowingListQ = dispatch_queue_create("fetchFollowingListQ", NULL);
-    dispatch_async(fetchFollowingListQ, ^{
-        [fetchCenter fetchFollowingPlanList];
-    });
+    [fetchCenter fetchFollowingPlanList];
+//    dispatch_queue_t fetchFollowingListQ = dispatch_queue_create("fetchFollowingListQ", NULL);
+//    dispatch_async(fetchFollowingListQ, ^{
+//    });
 }
 
 - (void)didFinishFetchingFollowingPlanList{
@@ -60,7 +59,7 @@
 - (void)configureFollowingCell:(FollowingCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
 //    Feed *feed = [plan fetchLastUpdatedFeed];
-    Feed *feed = [[plan.feeds allObjects] lastObject];
+    Feed *feed = [[plan.feeds allObjects] firstObject];
     //update Plan Info
     cell.bottomLabel.text = feed ? feed.feedTitle : @"无标题";
     cell.headTitleLabel.text = plan.planTitle;
