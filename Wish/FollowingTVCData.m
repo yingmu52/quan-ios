@@ -86,7 +86,7 @@
 
         //do fetchrequest
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
-        request.predicate = [NSPredicate predicateWithFormat:@"ownerId != %@",[User uid]];
+        request.predicate = [NSPredicate predicateWithFormat:@"ownerId != %@ && isFollowed == %@",[User uid],@(YES)];
         request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
         [request setFetchBatchSize:3];
         //create FetchedResultsController with context, sectionNameKeyPath, and you can cache here, so the next work if the same you can use your cashe file.
