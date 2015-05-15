@@ -31,7 +31,7 @@
     comment.isMyComment = @([dict[@"ownerId"] isEqualToString:[User uid]]);
     NSString *commentTo = dict[@"commentTo"]; //this is what differential reply and comment
     
-    if (![commentTo isEqualToString:@""]) {
+    if (![commentTo isKindOfClass:[NSNull class]] && ![commentTo isEqualToString:@""]) { //for cases where commentTo = "<null>";
         comment.idForReply = commentTo;
     }
     
