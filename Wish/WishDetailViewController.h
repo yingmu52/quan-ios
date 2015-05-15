@@ -36,6 +36,6 @@
 - (void)fetchResultsControllerDidInsert;
 
 #pragma mark - abstract
-- (NSString *)segueForFeed;
+- (NSString *)segueForFeed; //must set to display feed detail
 
 @end

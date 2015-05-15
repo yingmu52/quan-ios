@@ -2724,7 +2724,7 @@
                     <connections>
                         <outlet property="footerView" destination="Ykn-Gb-1ST" id="TAN-aO-Qpf"/>
                         <outlet property="loadMoreButton" destination="d6E-Vc-1Ib" id="cbe-Ks-8GE"/>
-                        <segue destination="Zuf-Pv-X4K" kind="show" identifier="showFollowerWishDetail" id="OUP-Xo-i2p"/>
+                        <segue destination="a6S-F3-WCk" kind="show" identifier="showFollowerWishDetail" id="dTf-Xy-FJp"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jPt-JN-A9f" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3323,6 +3323,26 @@
             </objects>
             <point key="canvasLocation" x="4714.5" y="-19.5"/>
         </scene>
+        <!--Wish DetailVC Follower-->
+        <scene sceneID="xeY-AK-5LK">
+            <objects>
+                <tableViewController id="a6S-F3-WCk" customClass="WishDetailVCFollower" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="nd5-yr-oxc">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="a6S-F3-WCk" id="Oq9-de-VlL"/>
+                            <outlet property="delegate" destination="a6S-F3-WCk" id="JVD-15-mQI"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="egE-eW-ywB" kind="show" identifier="showFollowingFeedDetail" id="rjz-Cv-C9H"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H5Q-tl-bx3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4471.5" y="949.5"/>
+        </scene>
         <!--DiscoveryVC Data-->
         <scene sceneID="LW9-Wg-cfa">
             <objects>
@@ -3835,24 +3855,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9lj-sH-N4z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1570.5" y="1694.25"/>
-        </scene>
-        <!--Wish DetailVC Follower-->
-        <scene sceneID="4RQ-Kd-ou1">
-            <objects>
-                <tableViewController id="Zuf-Pv-X4K" customClass="WishDetailVCFollower" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="326" sectionHeaderHeight="22" sectionFooterHeight="22" id="HI9-on-eMy">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <connections>
-                            <outlet property="dataSource" destination="Zuf-Pv-X4K" id="Ifo-jk-erh"/>
-                            <outlet property="delegate" destination="Zuf-Pv-X4K" id="8Zh-Qw-00y"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Waf-ak-kM9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4223" y="1335"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="tag-Sl-CNN">
@@ -5789,10 +5791,10 @@
         <image name="tips_bg" width="69" height="69"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="rjz-Cv-C9H"/>
         <segue reference="cel-0L-eNY"/>
-        <segue reference="DTM-of-qhC"/>
         <segue reference="4ZT-53-1QA"/>
-        <segue reference="rOd-Ph-D4Y"/>
+        <segue reference="DTM-of-qhC"/>
         <segue reference="zL5-4w-ilR"/>
     </inferredMetricsTieBreakers>
 </document>

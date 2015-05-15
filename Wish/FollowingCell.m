@@ -52,7 +52,7 @@ static NSUInteger numberOfPreloadedFeeds = 3;
         Feed *feed = self.feedsArray[indexPath.row];
         NSAssert(feed.imageId, @"null feed image id");
         [cell.feedImageView sd_setImageWithURL:[[FetchCenter new] urlWithImageID:feed.imageId]
-                              placeholderImage:[UIImage imageNamed:@"snow.jpg"]
+                              placeholderImage:[UIImage imageNamed:@"placeholder.png"]
                                      completed:^(UIImage *image, NSError *error,
                                                  SDImageCacheType cacheType, NSURL *imageURL) {
                                          feed.image = image;

@@ -17,10 +17,14 @@
 - (void)didFinishUnFollowingPlan:(Plan *)plan{
     
     [super didFinishUnFollowingPlan:plan];
-    
+
     // 1. change plan isFollow Flag
     plan.isFollowed = @(NO);
     // 2. Pop view controller to main following page !
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (NSString *)segueForFeed{
+    return @"showFollowingFeedDetail";
 }
 @end
