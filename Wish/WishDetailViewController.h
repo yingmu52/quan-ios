@@ -23,12 +23,19 @@
 @property (nonatomic,strong) Plan *plan; //must set
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,strong) HeaderView *headerView;
+
+/*
+ these two properties are for paging feature
+ */
+
+@property (nonatomic) BOOL hasNextPage;
+@property (nonatomic,strong) NSDictionary *pageInfo;
+
 - (void)setUpNavigationItem;
 - (void)updateHeaderView;
-//- (void)setupBadageImageView;
 - (void)fetchResultsControllerDidInsert;
 
 #pragma mark - abstract
 - (NSString *)segueForFeed;
-- (void)loadMore;
+
 @end
