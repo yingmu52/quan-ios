@@ -184,7 +184,13 @@
     cell.feed = [self.fetchedRC objectAtIndexPath:indexPath];
     if (!cell.feed.image) {
         [cell.photoView sd_setImageWithURL:[self.fetchCenter urlWithImageID:cell.feed.imageId]
-                          placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+                          placeholderImage:[UIImage imageNamed:@"placeholder.png"]
+                                 completed:^(UIImage *image,
+                                             NSError *error,
+                                             SDImageCacheType cacheType,
+                                             NSURL *imageURL) {
+                                     cell.feed.image = image;
+         }];
     }
     return cell;
 }
