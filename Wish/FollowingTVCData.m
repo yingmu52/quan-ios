@@ -19,19 +19,22 @@
 
 @interface FollowingTVCData () <NSFetchedResultsControllerDelegate,FetchCenterDelegate,FollowingCellDelegate,ECSlidingViewControllerDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
+@property (nonatomic,strong) FetchCenter *fetchCenter;
 @end
 
 @implementation FollowingTVCData
 
+- (FetchCenter *)fetchCenter{
+    if (!_fetchCenter) {
+        _fetchCenter = [[FetchCenter alloc] init];
+        _fetchCenter.delegate = self;
+    }
+    return _fetchCenter;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    FetchCenter *fetchCenter =[[FetchCenter alloc] init];
-    fetchCenter.delegate  = self;
-    [fetchCenter fetchFollowingPlanList];
-//    dispatch_queue_t fetchFollowingListQ = dispatch_queue_create("fetchFollowingListQ", NULL);
-//    dispatch_async(fetchFollowingListQ, ^{
-//    });
+    [self.fetchCenter fetchFollowingPlanList];
 }
 
 - (void)didFinishFetchingFollowingPlanList{
@@ -69,7 +72,7 @@
     
     //update User Info
     cell.headUserNameLabel.text = plan.owner.ownerName;
-    [cell.headProfilePic sd_setImageWithURL:[[FetchCenter new] urlWithImageID:plan.owner.headUrl]
+    [cell.headProfilePic sd_setImageWithURL:[self.fetchCenter urlWithImageID:plan.owner.headUrl]
                            placeholderImage:[Theme menuLoginDefault]];
     
 }

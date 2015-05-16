@@ -104,6 +104,10 @@
     plan.createDate = [NSDate date];
     plan.userDeleted = @(NO);
     plan.planStatus = @(PlanStatusOnGoing);
+    plan.owner = [Owner updateOwnerFromServer:@{@"headUrl":[User updatedProfilePictureId],
+                                                @"id":[User uid],
+                                                @"name":[User userDisplayName]}];
+
     return plan;
 }
 
