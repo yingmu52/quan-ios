@@ -555,7 +555,7 @@ typedef enum{
                 for (NSDictionary *planInfo in plans) {
                     Plan *plan = [Plan updatePlanFromServer:planInfo];
                     [plan addMyselfAsOwner];
-                    NSLog(@"%@",plan);
+//                    NSLog(@"%@",plan);
                 }
             }
                 break;
@@ -598,7 +598,6 @@ typedef enum{
                 for (NSDictionary *planItem in [json valueForKeyPath:@"data.planList"]) {
                     Plan *plan = [Plan updatePlanFromServer:planItem];
                     plan.isFollowed = @(YES);
-#warning !!!!
                     NSDictionary *userInfo = [json valueForKeyPath:[NSString stringWithFormat:@"data.manList.%@",planItem[@"ownerId"]]];
                     plan.owner = [Owner updateOwnerFromServer:userInfo];
                     NSArray *feedsList = planItem[@"feedsList"];
@@ -655,7 +654,6 @@ typedef enum{
                 if (planList && manList){
                     for (NSDictionary *planInfo in planList){
                         Plan *plan = [Plan updatePlanFromServer:planInfo];
-#warning fix this !
                         plan.owner = [Owner updateOwnerFromServer:[manList valueForKey:planInfo[@"ownerId"]]];
                         [plans addObject:plan];
                         
