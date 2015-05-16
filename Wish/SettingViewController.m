@@ -163,7 +163,7 @@
 - (void)clearCoreData{
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
-    request.predicate = [NSPredicate predicateWithFormat:@"ownerId != %@",[User uid]];
+    request.predicate = [NSPredicate predicateWithFormat:@"owner.ownerId != %@",[User uid]];
     [request setIncludesPropertyValues:NO]; //only fetch the managedObjectID
     NSError * error = nil;
     NSArray * objects = [delegate.managedObjectContext executeFetchRequest:request error:&error];

@@ -33,6 +33,8 @@
 		AE30EE6D1A6E19D00044740D /* WishDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE30EE6C1A6E19D00044740D /* WishDetailCell.m */; };
 		AE3D70BF1B019DE1000C0806 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D70BE1B019DE1000C0806 /* Comment.m */; };
 		AE3D70C01B019DE1000C0806 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D70BE1B019DE1000C0806 /* Comment.m */; };
+		AE3FCF871B07C93B00422FB8 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3FCF861B07C93B00422FB8 /* Plan.m */; };
+		AE3FCF881B07C93B00422FB8 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3FCF861B07C93B00422FB8 /* Plan.m */; };
 		AE47055D1AF9DC080028D7BC /* FeedDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE47055C1AF9DC080028D7BC /* FeedDetailCell.m */; };
 		AE479E9E1A6F775C00366A0A /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479E9D1A6F775C00366A0A /* PostViewController.m */; };
 		AE479E9F1A6F775C00366A0A /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479E9D1A6F775C00366A0A /* PostViewController.m */; };
@@ -45,8 +47,6 @@
 		AE606A231AF46991003DF16E /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE606A221AF46991003DF16E /* MessageCell.m */; };
 		AE6E7A0C1AB0DF1F0023B9C7 /* PopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE6E7A0B1AB0DF1F0023B9C7 /* PopupView.xib */; };
 		AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE72E9541A66F2AA0046B38D /* MenuCell.m */; };
-		AE74D27A1B04500600D48192 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE74D2791B04500600D48192 /* Plan.m */; };
-		AE74D27B1B04500600D48192 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE74D2791B04500600D48192 /* Plan.m */; };
 		AE767E7F1ACE35A600F35137 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE767E7E1ACE35A600F35137 /* FeedbackViewController.m */; };
 		AE767E801ACE35A600F35137 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE767E7E1ACE35A600F35137 /* FeedbackViewController.m */; };
 		AE95A9EE1ACFA7F8007465D5 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE95A9E21ACFA7F8007465D5 /* back@2x.png */; };
@@ -251,6 +251,8 @@
 		AE30EE6C1A6E19D00044740D /* WishDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailCell.m; sourceTree = "<group>"; };
 		AE3D70BD1B019DE0000C0806 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		AE3D70BE1B019DE1000C0806 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		AE3FCF851B07C93B00422FB8 /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
+		AE3FCF861B07C93B00422FB8 /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
 		AE4481AA1AB6B5A700A912CB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		AE4481AB1AB6B5A700A912CB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		AE4481AC1AB6B65A00A912CB /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -273,8 +275,6 @@
 		AE6E7A0B1AB0DF1F0023B9C7 /* PopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopupView.xib; sourceTree = "<group>"; };
 		AE72E9531A66F2AA0046B38D /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
 		AE72E9541A66F2AA0046B38D /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
-		AE74D2781B04500600D48192 /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
-		AE74D2791B04500600D48192 /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
 		AE767E7D1ACE35A600F35137 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
 		AE767E7E1ACE35A600F35137 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
 		AE95A9E21ACFA7F8007465D5 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
@@ -585,8 +585,8 @@
 		AE30EE711A6F0A8C0044740D /* Database&Networking */ = {
 			isa = PBXGroup;
 			children = (
-				AE74D2781B04500600D48192 /* Plan.h */,
-				AE74D2791B04500600D48192 /* Plan.m */,
+				AE3FCF851B07C93B00422FB8 /* Plan.h */,
+				AE3FCF861B07C93B00422FB8 /* Plan.m */,
 				AE3D70BD1B019DE0000C0806 /* Comment.h */,
 				AE3D70BE1B019DE1000C0806 /* Comment.m */,
 				AED5AB1B1AFDCBBB00719208 /* Feed.h */,
@@ -1132,7 +1132,7 @@
 				AED5BC671ABEA7EB00EFF398 /* ProfileViewController.m in Sources */,
 				AEF7F2AD1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */,
 				AEFEE4001A8EE0A7007E8234 /* FollowingCell.m in Sources */,
-				AE74D27A1B04500600D48192 /* Plan.m in Sources */,
+				AE3FCF871B07C93B00422FB8 /* Plan.m in Sources */,
 				AEF3F8831AA4E3C0008C2300 /* WishDetailVCFollower.m in Sources */,
 				AEF7F2831A686E8A0022410B /* ECSlidingAnimationController.m in Sources */,
 				AED4CB1E1AC7556800EE2DA4 /* KTCenterFlowLayout.m in Sources */,
@@ -1231,7 +1231,7 @@
 				AEE4A6D51A96AFCF00ABF946 /* TriangleCutoutView.m in Sources */,
 				AED71BED1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m in Sources */,
 				AEF7F2AE1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */,
-				AE74D27B1B04500600D48192 /* Plan.m in Sources */,
+				AE3FCF881B07C93B00422FB8 /* Plan.m in Sources */,
 				AE95AABE1ACFD428007465D5 /* UIImagePickerController+DelegateBlocks.m in Sources */,
 				AED5AB1E1AFDCBBB00719208 /* Feed.m in Sources */,
 				AED4CB271AC7604E00EE2DA4 /* SGSStaggeredFlowLayout.m in Sources */,

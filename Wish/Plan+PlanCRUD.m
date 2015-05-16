@@ -71,7 +71,6 @@
     }
     
     plan.planId = dict[@"id"];
-    plan.ownerId = dict[@"ownerId"];
     plan.planTitle = dict[@"title"];
     plan.createDate = [NSDate dateWithTimeIntervalSince1970:[dict[@"createTime"] integerValue]];
     plan.updateDate = [NSDate dateWithTimeIntervalSince1970:[dict[@"updateTime"] integerValue]];
@@ -81,11 +80,6 @@
     plan.backgroundNum = dict[@"backGroudPic"];
     plan.isPrivate = @([dict[@"private"] boolValue]);
     plan.tryTimes = @([dict[@"tryTimes"] integerValue]);
-    
-//    if ([context save:nil]) {
-//        NSLog(@"updated plan list form server");
-//    }
-
 
     return plan;
 
@@ -97,7 +91,6 @@
     Plan *plan = [NSEntityDescription insertNewObjectForEntityForName:@"Plan"
                                                inManagedObjectContext:context];
     
-    plan.ownerId = [User uid];
     plan.planTitle = title;
     plan.isPrivate = @(isPrivate);
     plan.image = image;
@@ -112,7 +105,7 @@
 {
     NSManagedObjectContext *context = [AppDelegate getContext];
     self.userDeleted = @(YES);
-    if (self.planId && [self.ownerId isEqualToString:[User uid]]){
+    if (self.planId && [self.owner.ownerId isEqualToString:[User uid]]){
         //            [FetchCenter postToDeletePlan:self];
         [[[FetchCenter alloc] init] postToDeletePlan:self];
     }else{

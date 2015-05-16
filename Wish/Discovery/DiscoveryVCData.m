@@ -43,7 +43,7 @@ static NSUInteger numberOfitems = 4.0; //float is important
 //- (void)dealloc{
 //    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
 //    for (Plan *plan in self.plans){ //delete plans from other users
-//        if (![plan.ownerId isEqualToString:[User uid]]){
+//        if (![plan.owner.ownerId isEqualToString:[User uid]]){
 //            [delegate.managedObjectContext deleteObject:plan];
 //        }
 //    }
@@ -133,7 +133,7 @@ static NSUInteger numberOfitems = 4.0; //float is important
     }else{
         //do fetchrequest
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
-        //        request.predicate = [NSPredicate predicateWithFormat:@"ownerId != %@ && isFollowed == %@",[User uid],@(YES)];
+        //        request.predicate = [NSPredicate predicateWithFormat:@"owner.ownerId != %@ && isFollowed == %@",[User uid],@(YES)];
         request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"updateDate" ascending:NO]];
         [request setFetchBatchSize:3];
         //create FetchedResultsController with context, sectionNameKeyPath, and you can cache here, so the next work if the same you can use your cashe file.
