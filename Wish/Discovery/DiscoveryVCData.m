@@ -18,7 +18,7 @@
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 //@property (nonatomic,strong) NSMutableArray *plans;
 @property (nonatomic,strong) NSMutableArray *itemChanges;
-
+@property (nonatomic,strong) NSBlockOperation *blockOperation;
 @end
 
 @implementation DiscoveryVCData
@@ -131,9 +131,6 @@ static NSUInteger numberOfitems = 4.0; //float is important
     if (_fetchedRC != nil) {
         return _fetchedRC;
     }else{
-        AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-        NSManagedObjectContext *context = delegate.managedObjectContext;
-        
         //do fetchrequest
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
         //        request.predicate = [NSPredicate predicateWithFormat:@"ownerId != %@ && isFollowed == %@",[User uid],@(YES)];
@@ -142,7 +139,7 @@ static NSUInteger numberOfitems = 4.0; //float is important
         //create FetchedResultsController with context, sectionNameKeyPath, and you can cache here, so the next work if the same you can use your cashe file.
         NSFetchedResultsController *newFRC =
         [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                            managedObjectContext:context
+                                            managedObjectContext:[AppDelegate getContext]
                                               sectionNameKeyPath:nil
                                                        cacheName:nil];
         _fetchedRC = newFRC;
@@ -152,7 +149,59 @@ static NSUInteger numberOfitems = 4.0; //float is important
     }
 }
 
-
+//- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+//{
+//    self.blockOperation = [NSBlockOperation new];
+//}
+//
+//- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
+//{
+//    __weak UICollectionView *collectionView = self.collectionView;
+//    switch (type) {
+//        case NSFetchedResultsChangeInsert: {
+//            [self.blockOperation addExecutionBlock:^{
+//                [collectionView insertSections:[NSIndexSet indexSetWithIndex:newIndexPath.section] ];
+//            }];
+//            break;
+//        }
+//            
+//        case NSFetchedResultsChangeDelete: {
+//            [self.blockOperation addExecutionBlock:^{
+//                [collectionView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section]];
+//            }];
+//            break;
+//        }
+//            
+//        case NSFetchedResultsChangeUpdate: {
+//            [self.blockOperation addExecutionBlock:^{
+//                [collectionView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section]];
+//            }];
+//            break;
+//        }
+//            
+//        case NSFetchedResultsChangeMove: {
+//            [self.blockOperation addExecutionBlock:^{
+//                [collectionView moveSection:indexPath.section toSection:newIndexPath.section];
+//            }];
+//            break;
+//        }
+//            
+//        default:
+//            break;
+//    }
+//}
+//
+//- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+//{
+//    [self.collectionView performBatchUpdates:^{
+//        [self.blockOperation start];
+//    } completion:^(BOOL finished) {
+//        // Do whatever
+//    }];
+//}
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
+    [self.collectionView reloadData];
+}
 @end
 
 

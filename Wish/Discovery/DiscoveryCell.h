@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-//#define NORMALCELLID @"DiscoveryCell"
-#define NORMALCELLID @"DiscoveryCellTmp"
+#define NORMALCELLID @"DiscoveryCell"
+//#define NORMALCELLID @"DiscoveryCellTmp"
 
 @interface DiscoveryCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UILabel *discoveryFollowerCountLabel;
