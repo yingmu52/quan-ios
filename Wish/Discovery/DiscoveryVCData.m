@@ -199,6 +199,7 @@ static NSUInteger numberOfitems = 4.0; //float is important
 //        // Do whatever
 //    }];
 //}
+#warning this is going to be very slow !
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
     [self.collectionView reloadData];
 }

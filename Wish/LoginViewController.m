@@ -123,7 +123,7 @@
                                                  GENDER:[userInfo[@"gender"] boolValue] ? @"男" : @"女",
                                                  USER_DISPLAY_NAME:userInfo[@"name"]};
             [User updateAttributeFromDictionary:additionalUserInfo];
-            //                NSLog(@"%@",localUserInfo);
+            NSLog(@"%@",localUserInfo);
             [self performSegueWithIdentifier:@"showMainViewFromLogin" sender:nil];
         }else{
             [self performSegueWithIdentifier:@"showLoginDetail" sender:nil];

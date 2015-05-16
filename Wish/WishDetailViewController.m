@@ -355,19 +355,13 @@
 }
 
 - (void)didFinishFollowingPlan:(Plan *)plan{
-    [self showFollowButtonWithTitle:@"已关注"];
+    [self updateHeaderView];
 }
 
 - (void)didFinishUnFollowingPlan:(Plan *)plan{
-    [self showFollowButtonWithTitle:@"关注"];
+    [self updateHeaderView];
 }
 
-- (void)showFollowButtonWithTitle:(NSString *)title{
-    [UIView setAnimationsEnabled:NO]; // avoid set title animation for behave correctly
-    [self.headerView.followButton setTitle:title forState:UIControlStateNormal];
-    self.headerView.followButton.hidden = NO;
-    [self.headerView.followButton layoutIfNeeded];
-    [UIView setAnimationsEnabled:YES];
-}
+
 @end
 

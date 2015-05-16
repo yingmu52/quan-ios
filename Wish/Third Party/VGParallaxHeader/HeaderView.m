@@ -27,12 +27,17 @@
     if ([plan.owner.ownerId isEqualToString:[User uid]]) { //owner don't get to follow its plan
         [self.followButton removeFromSuperview];
     }else{
-        [self.followButton setTitle:(plan.isFollowed.boolValue ? @"已关注" :@"关注")
-                           forState:UIControlStateNormal];
-        self.followButton.hidden = NO;
+        [self showFollowButtonWithTitle:(plan.isFollowed.boolValue ? @"已关注" :@"关注")];
     }
 }
 
+- (void)showFollowButtonWithTitle:(NSString *)title{
+    [UIView setAnimationsEnabled:NO]; // avoid set title animation for behave correctly
+    [self.followButton setTitle:title forState:UIControlStateNormal];
+    self.followButton.hidden = NO;
+    [self.followButton layoutIfNeeded];
+    [UIView setAnimationsEnabled:YES];
+}
 //- (void)updateCountDownLabel:(Plan *)plan{
 
 //    NSInteger totalDays = [SystemUtil daysBetween:plan.createDate and:plan.finishDate];

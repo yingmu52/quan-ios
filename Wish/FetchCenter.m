@@ -722,12 +722,14 @@ typedef enum{
             case FetchCenterGetOpFollowPlanAction:{
                 Plan *plan = (Plan *)obj;
                 plan.followCount = @(plan.followCount.integerValue + 1);
+                plan.isFollowed = @(YES);
                 [self.delegate didFinishFollowingPlan:plan];
             }
                 break;
             case FetchCenterGetOpUnFollowPlanAction:{
                 Plan *plan = (Plan *)obj;
                 plan.followCount = @(plan.followCount.integerValue - 1);
+                plan.isFollowed = @(NO);
                 [self.delegate didFinishUnFollowingPlan:plan];
             }
                 break;
