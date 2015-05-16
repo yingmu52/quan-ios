@@ -2491,7 +2491,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="139" height="274"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="snow.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="L06-fY-NVv">
+                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L06-fY-NVv">
                                                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                                     </imageView>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PcJ-IL-nwD" userLabel="layer">
@@ -3823,11 +3823,12 @@
                     <navigationItem key="navigationItem" id="LOQ-Fv-cfJ"/>
                     <connections>
                         <segue destination="rp9-lu-nOr" kind="show" identifier="showDiscoveryWishDetail" id="nE2-oT-ipt"/>
+                        <segue destination="1Y1-uW-81U" kind="show" identifier="showPostViewFromDiscovery" id="3Cj-2H-t7j"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="69m-YO-ebd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2986.5" y="-477"/>
+            <point key="canvasLocation" x="301.5" y="-1749"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0bo-PJ-66c">
@@ -5786,7 +5787,6 @@
         <image name="placeholder.png" width="753" height="753"/>
         <image name="profile_ic" width="35" height="35"/>
         <image name="selected_ic" width="35" height="35"/>
-        <image name="snow.jpg" width="113" height="113"/>
         <image name="tab_bg" width="8" height="1136"/>
         <image name="tab_bg_avatar" width="240" height="256"/>
         <image name="tab_ic_discover_default" width="204" height="224"/>
@@ -5801,6 +5801,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="rjz-Cv-C9H"/>
+        <segue reference="3Cj-2H-t7j"/>
         <segue reference="cel-0L-eNY"/>
         <segue reference="4ZT-53-1QA"/>
         <segue reference="DTM-of-qhC"/>

@@ -35,7 +35,9 @@ static NSUInteger numberOfitems = 4.0; //float is important
     [self discover];
 }
 
-
+- (void)addWish{
+    [self performSegueWithIdentifier:@"showPostViewFromDiscovery" sender:nil];
+}
 - (void)dealloc{
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     for (Plan *plan in self.plans){ //delete plans from other users
@@ -47,9 +49,9 @@ static NSUInteger numberOfitems = 4.0; //float is important
     [delegate saveContext];
 }
 - (void)discover{
-    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
-    [spinner startAnimating];
+//    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+//    [spinner startAnimating];
     [self.fetchCenter getDiscoveryList];
 }
 
@@ -91,7 +93,7 @@ static NSUInteger numberOfitems = 4.0; //float is important
 - (void)didfinishFetchingDiscovery:(NSArray *)plans{
     [self.plans addObjectsFromArray:plans];
     [self.collectionView reloadData];
-    self.navigationItem.rightBarButtonItem = nil;
+//    self.navigationItem.rightBarButtonItem = nil;
 }
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
@@ -99,7 +101,7 @@ static NSUInteger numberOfitems = 4.0; //float is important
 }
 
 - (void)handleFailure:(NSDictionary *)info{
-    self.navigationItem.rightBarButtonItem = nil;
+//    self.navigationItem.rightBarButtonItem = nil;
     [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
                                 message:[NSString stringWithFormat:@"%@",info[@"msg"]]
                                delegate:self

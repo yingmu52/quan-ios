@@ -52,10 +52,20 @@
                                         target:self.slidingViewController
                                       selector:@selector(anchorTopViewToRightAnimated:)
                                          frame:frame];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
     
+    UIButton *addBtn = [Theme buttonWithImage:[Theme navAddDefault]
+                                       target:self
+                                     selector:@selector(addWish)
+                                        frame:frame];
+
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
+    self.navigationItem.rightBarButtonItem= [[UIBarButtonItem alloc] initWithCustomView:addBtn];
 }
 
+
+- (void)addWish{
+    //abstract
+}
 #pragma mark <UICollectionViewDataSource>
 
 
