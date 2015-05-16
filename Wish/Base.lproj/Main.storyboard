@@ -416,7 +416,7 @@
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tab_bg_avatar" translatesAutoresizingMaskIntoConstraints="NO" id="JiM-wW-Yl9" userLabel="avatarBg">
                                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                         </imageView>
-                                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tab_ic_discover_default" highlightedImage="tab_ic_discover_selected" translatesAutoresizingMaskIntoConstraints="NO" id="1JB-k5-u6x">
+                                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tab_ic_follow_default" highlightedImage="tab_ic_follow_selected" translatesAutoresizingMaskIntoConstraints="NO" id="1JB-k5-u6x">
                                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="1JB-k5-u6x" secondAttribute="height" multiplier="51:56" id="2yE-D8-7A6"/>
@@ -689,8 +689,7 @@
                                                                     <exclude reference="k2r-tt-zxT"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="220" y="61" width="61" height="62"/>
+                                                            <variation key="heightClass=regular-widthClass=compact">
                                                                 <mask key="constraints">
                                                                     <exclude reference="HKh-6w-srz"/>
                                                                     <include reference="k2r-tt-zxT"/>
@@ -714,7 +713,7 @@
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <connections>
-                                                                <segue destination="uQz-XF-LbE" kind="modal" modalTransitionStyle="coverVertical" id="pdM-Yj-CUA"/>
+                                                                <segue destination="uQz-XF-LbE" kind="presentation" id="pdM-Yj-CUA"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -1990,8 +1989,7 @@
                                                             <exclude reference="Hvc-Nq-sim"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="5" y="27" width="56" height="57"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="Hvc-Nq-sim"/>
                                                         </mask>
@@ -2018,18 +2016,12 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="66" y="27" width="249" height="32"/>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2014-11-21 13:20" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SL0-KW-OTX">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="66" y="67" width="100" height="15"/>
-                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <constraints>
@@ -2159,7 +2151,7 @@
             </objects>
             <point key="canvasLocation" x="1983" y="-108.75"/>
         </scene>
-        <!--FollowingTVC Data-->
+        <!--我的关注-->
         <scene sceneID="lyA-XV-6dq">
             <objects>
                 <tableViewController id="806-RF-bHk" customClass="FollowingTVCData" sceneMemberID="viewController">
@@ -2403,7 +2395,7 @@
                                                         </mask>
                                                     </variation>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="终于受不了敦煌的太阳，凌晨火车到了甘肃，冷爆了。" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ft-Yx-ljC">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="终于受不了敦煌的太阳，凌晨火车到了甘肃，冷爆了。" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="288" translatesAutoresizingMaskIntoConstraints="NO" id="0ft-Yx-ljC">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2720,7 +2712,7 @@
                             <outlet property="delegate" destination="806-RF-bHk" id="V1z-Nl-PGu"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Eyu-XI-q6r"/>
+                    <navigationItem key="navigationItem" title="我的关注" id="Eyu-XI-q6r"/>
                     <connections>
                         <outlet property="footerView" destination="Ykn-Gb-1ST" id="TAN-aO-Qpf"/>
                         <outlet property="loadMoreButton" destination="d6E-Vc-1Ib" id="cbe-Ks-8GE"/>
@@ -3344,7 +3336,7 @@
             </objects>
             <point key="canvasLocation" x="4471.5" y="949.5"/>
         </scene>
-        <!--DiscoveryVC Data-->
+        <!--发生啥事-->
         <scene sceneID="LW9-Wg-cfa">
             <objects>
                 <collectionViewController id="b5t-1p-y8a" customClass="DiscoveryVCData" sceneMemberID="viewController">
@@ -3812,7 +3804,7 @@
                             <outlet property="delegate" destination="b5t-1p-y8a" id="Aej-XV-FMS"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="LOQ-Fv-cfJ"/>
+                    <navigationItem key="navigationItem" title="发生啥事" id="LOQ-Fv-cfJ"/>
                     <connections>
                         <segue destination="rp9-lu-nOr" kind="show" identifier="showDiscoveryWishDetail" id="nE2-oT-ipt"/>
                         <segue destination="1Y1-uW-81U" kind="show" identifier="showPostViewFromDiscovery" id="3Cj-2H-t7j"/>
@@ -4511,8 +4503,7 @@
                                                                     <exclude reference="pvl-4u-Zta"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="238" y="186" width="38" height="37"/>
+                                                            <variation key="heightClass=regular-widthClass=compact">
                                                                 <mask key="constraints">
                                                                     <include reference="pvl-4u-Zta"/>
                                                                 </mask>
@@ -5556,8 +5547,7 @@
                                                             <exclude reference="cDQ-wi-LQ3"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="8" y="8" width="56" height="57"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="cDQ-wi-LQ3"/>
                                                         </mask>
@@ -5568,9 +5558,6 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="72" y="8" width="36" height="15"/>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13:20" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y3l-Lk-3lg">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -5583,9 +5570,6 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="72" y="26" width="311" height="43"/>
-                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -5783,6 +5767,8 @@
         <image name="tab_bg_avatar" width="240" height="256"/>
         <image name="tab_ic_discover_default" width="204" height="224"/>
         <image name="tab_ic_discover_selected" width="102" height="112"/>
+        <image name="tab_ic_follow_default" width="204" height="224"/>
+        <image name="tab_ic_follow_selected" width="102" height="112"/>
         <image name="tab_ic_home_default" width="204" height="224"/>
         <image name="tab_ic_home_selected" width="102" height="112"/>
         <image name="tab_ic_login_default" width="240" height="256"/>
