@@ -63,7 +63,7 @@ ImagePickerDelegate>
     //do fetchrequest
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
     
-    request.predicate = [NSPredicate predicateWithFormat:@"userDeleted == %@ && ownerId == %@ && planStatus == %d",@(NO),[User uid],PlanStatusOnGoing];
+    request.predicate = [NSPredicate predicateWithFormat:@"owner.ownerId == %@ && planStatus == %d",[User uid],PlanStatusOnGoing];
     
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
 
@@ -89,12 +89,17 @@ ImagePickerDelegate>
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
+    [self addLongPressGesture];
     
+    [[FetchCenter new] fetchPlanListForOwnerId:[User uid]];
+
+}
+
+- (void)addLongPressGesture{
     UILongPressGestureRecognizer *lp = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     lp.delaysTouchesBegan = YES;
     lp.minimumPressDuration = 0.5;
     [self.collectionView addGestureRecognizer:lp];
-    self.title = @"我的事儿";
 }
 
 - (void)setUpNavigationItem
@@ -111,6 +116,7 @@ ImagePickerDelegate>
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
 
+    self.title = @"我的事儿";
 }
 
 

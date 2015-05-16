@@ -28,6 +28,9 @@ typedef enum {
 
 - (void)deleteSelf;
 
+- (void)addMyselfAsOwner;
+
+
 - (Feed *)fetchLastUpdatedFeed;
 
 - (void)updateTryTimesOfPlan:(BOOL)assending;

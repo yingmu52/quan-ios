@@ -52,7 +52,7 @@
     }
     self.tryTimes = @(attempts);
 }
-+ (Plan *)updatePlanFromServer:(NSDictionary *)dict{
++ (Plan *)updatePlanFromServer:(NSDictionary *)dict{ //owner may be different ! 
     
     NSManagedObjectContext *context = [AppDelegate getContext];
     Plan *plan;
@@ -104,10 +104,7 @@
     plan.createDate = [NSDate date];
     plan.userDeleted = @(NO);
     plan.planStatus = @(PlanStatusOnGoing);
-    plan.owner = [Owner updateOwnerFromServer:@{@"headUrl":[User updatedProfilePictureId],
-                                                @"id":[User uid],
-                                                @"name":[User userDisplayName]}];
-
+    [plan addMyselfAsOwner];
     return plan;
 }
 
@@ -156,6 +153,12 @@
     NSError *error = nil;
     return [context executeFetchRequest:fetchRequest error:&error];
     
+}
+
+- (void)addMyselfAsOwner{
+    self.owner = [Owner updateOwnerFromServer:@{@"headUrl":[User updatedProfilePictureId],
+                                                @"id":[User uid],
+                                                @"name":[User userDisplayName]}];
 }
 
 @end

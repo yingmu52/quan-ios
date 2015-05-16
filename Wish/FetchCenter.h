@@ -73,7 +73,7 @@
 
 
 #pragma mark - Plan
-- (void)fetchPlanList:(NSString *)ownerId;
+- (void)fetchPlanListForOwnerId:(NSString *)ownerId;
 - (void)uploadToCreatePlan:(Plan *)plan;
 - (void)updatePlan:(Plan *)plan;
 - (void)postToDeletePlan:(Plan *)plan;

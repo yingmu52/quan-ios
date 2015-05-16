@@ -298,7 +298,7 @@ typedef enum{
            operation:FetchCenterGetOpSetPlanStatus entity:plan];
 
 }
-- (void)fetchPlanList:(NSString *)ownerId{
+- (void)fetchPlanListForOwnerId:(NSString *)ownerId{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,GET_LIST];
     [self getRequest:rqtStr parameter:@{@"id":ownerId} operation:FetchCenterGetOpGetPlanList entity:nil];
 
@@ -548,8 +548,16 @@ typedef enum{
     dispatch_main_async_safe((^{
         switch (op)
         {
-            case FetchCenterGetOpGetPlanList:
-                //get plan list
+            case FetchCenterGetOpGetPlanList:{
+                //down load plan
+                NSArray *plans = json[@"data"];
+ 
+                for (NSDictionary *planInfo in plans) {
+                    Plan *plan = [Plan updatePlanFromServer:planInfo];
+                    [plan addMyselfAsOwner];
+                    NSLog(@"%@",plan);
+                }
+            }
                 break;
             case FetchCenterGetOpDeletePlan:{
                 AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
@@ -736,7 +744,7 @@ typedef enum{
             default:
                 break;
         }
-        NSLog(@"%@",json);
+//        NSLog(@"%@",json);
         [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
     }));
 }
