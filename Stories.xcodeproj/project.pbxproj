@@ -1469,7 +1469,7 @@
 				INFOPLIST_FILE = WishTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = StoriesTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Wish.app/Wish";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Stories.app/Stories";
 			};
 			name = Debug;
 		};
@@ -1484,7 +1484,7 @@
 				INFOPLIST_FILE = WishTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = StoriesTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Wish.app/Wish";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Stories.app/Stories";
 			};
 			name = Release;
 		};
