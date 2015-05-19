@@ -13,9 +13,9 @@
 #import "UIActionSheet+Blocks.h"
 #import "PopupView.h"
 @interface WishDetailVCOwner () <UIImagePickerControllerDelegate,UIGestureRecognizerDelegate,UINavigationControllerDelegate,ImagePickerDelegate,PopupViewDelegate>
-@property (nonatomic) BOOL shouldShowSideWidgets;
-@property (nonatomic,strong) UIButton *logoButton;
-@property (nonatomic,strong) UILabel *labelUnderLogo;
+
+//@property (nonatomic,strong) UIButton *logoButton;
+//@property (nonatomic,strong) UILabel *labelUnderLogo;
 //@property (nonatomic,strong) UIImage *capturedImage;
 @property (nonatomic,strong) UIButton *cameraButton;
 @property (nonatomic) CGFloat lastContentOffSet; // for camera animation
@@ -27,16 +27,15 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.shouldShowSideWidgets = YES;
     [self loadCornerCamera];
-    [self showCenterIcon];
+//    [self showCenterIcon];
     
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self removeCenterIcon];
+//    [self removeCenterIcon];
     [self.cameraButton removeFromSuperview];
     
 }
@@ -96,55 +95,55 @@
     
 }
 
+//
+//- (void)removeCenterIcon{
+//    [self.logoButton removeFromSuperview];
+//    [self.labelUnderLogo removeFromSuperview];
+//    
+//}
 
-- (void)removeCenterIcon{
-    [self.logoButton removeFromSuperview];
-    [self.labelUnderLogo removeFromSuperview];
-    
-}
-
-
-- (void)showCenterIcon{
-    
-    BOOL shouldShow = self.fetchedRC.fetchedObjects.count == 0; // && !self.logoButton && !self.labelUnderLogo;
-    
-    self.tableView.scrollEnabled = !shouldShow;
-//    self.cameraButton.hidden = !shouldShow;
-    
-    if (shouldShow){
-        //set center logo
-        UIImage *logo = [Theme wishDetailBackgroundNonLogo];
-        
-        CGFloat logoWidth = self.view.frame.size.width/2.5;
-        CGPoint center = self.view.center;
-        
-        self.logoButton = [[UIButton alloc] initWithFrame:CGRectMake(center.x-logoWidth/2,
-                                                                     center.y-logoWidth,
-                                                                     logoWidth,logoWidth)];
-        [self.logoButton setImage:logo forState:UIControlStateNormal];
-        [self.logoButton addTarget:self action:@selector(showCamera)
-                  forControlEvents:UIControlEventTouchUpInside];
-        
-        //set text under logo
-        self.labelUnderLogo = [[UILabel alloc] initWithFrame:CGRectMake(0,self.logoButton.center.y + logoWidth/2 + 10.0,
-                                                                        logoWidth*2, 20.0)];
-        self.labelUnderLogo.center = CGPointMake(self.logoButton.center.x + 5.0,self.labelUnderLogo.center.y);
-        NSMutableParagraphStyle *paStyle = [NSMutableParagraphStyle new];
-        paStyle.alignment = NSTextAlignmentCenter;
-        NSDictionary *attrs = @{NSForegroundColorAttributeName:[UIColor whiteColor],
-                                NSFontAttributeName:[UIFont systemFontOfSize:12.0],
-                                NSParagraphStyleAttributeName:paStyle};
-        
-        NSAttributedString *str = [[NSAttributedString alloc] initWithString:@"记录种下愿望这一刻吧！" attributes:attrs];
-        self.labelUnderLogo.attributedText = str;
-        
-        [self.tableView addSubview:self.logoButton];
-        [self.tableView addSubview:self.labelUnderLogo];
-    }else{
-        [self removeCenterIcon];
-    }
-    
-}
+//
+//- (void)showCenterIcon{
+//    
+//    BOOL shouldShow = self.fetchedRC.fetchedObjects.count == 0; // && !self.logoButton && !self.labelUnderLogo;
+//    
+//    self.tableView.scrollEnabled = !shouldShow;
+////    self.cameraButton.hidden = !shouldShow;
+//    
+//    if (shouldShow){
+//        //set center logo
+//        UIImage *logo = [Theme wishDetailBackgroundNonLogo];
+//        
+//        CGFloat logoWidth = self.view.frame.size.width/2.5;
+//        CGPoint center = self.view.center;
+//        
+//        self.logoButton = [[UIButton alloc] initWithFrame:CGRectMake(center.x-logoWidth/2,
+//                                                                     center.y-logoWidth,
+//                                                                     logoWidth,logoWidth)];
+//        [self.logoButton setImage:logo forState:UIControlStateNormal];
+//        [self.logoButton addTarget:self action:@selector(showCamera)
+//                  forControlEvents:UIControlEventTouchUpInside];
+//        
+//        //set text under logo
+//        self.labelUnderLogo = [[UILabel alloc] initWithFrame:CGRectMake(0,self.logoButton.center.y + logoWidth/2 + 10.0,
+//                                                                        logoWidth*2, 20.0)];
+//        self.labelUnderLogo.center = CGPointMake(self.logoButton.center.x + 5.0,self.labelUnderLogo.center.y);
+//        NSMutableParagraphStyle *paStyle = [NSMutableParagraphStyle new];
+//        paStyle.alignment = NSTextAlignmentCenter;
+//        NSDictionary *attrs = @{NSForegroundColorAttributeName:[UIColor whiteColor],
+//                                NSFontAttributeName:[UIFont systemFontOfSize:12.0],
+//                                NSParagraphStyleAttributeName:paStyle};
+//        
+//        NSAttributedString *str = [[NSAttributedString alloc] initWithString:@"记录种下愿望这一刻吧！" attributes:attrs];
+//        self.labelUnderLogo.attributedText = str;
+//        
+//        [self.tableView addSubview:self.logoButton];
+//        [self.tableView addSubview:self.labelUnderLogo];
+//    }else{
+//        [self removeCenterIcon];
+//    }
+//    
+//}
 
 
 #pragma mark - Scroll view delegate (widget animation)
