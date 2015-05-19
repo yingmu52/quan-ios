@@ -265,6 +265,8 @@
 		AE2F28E61AD3937700FC3370 /* WishDetailVCDiscovery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailVCDiscovery.m; sourceTree = "<group>"; };
 		AE30EE6B1A6E19D00044740D /* WishDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishDetailCell.h; sourceTree = "<group>"; };
 		AE30EE6C1A6E19D00044740D /* WishDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailCell.m; sourceTree = "<group>"; };
+		AE326D061B0AE84400F3666D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		AE326D081B0AE84F00F3666D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		AE3D70BD1B019DE0000C0806 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		AE3D70BE1B019DE1000C0806 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		AE3FCF851B07C93B00422FB8 /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
@@ -302,9 +304,7 @@
 		AE3FCFA81B07D63900422FB8 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		AE3FCFA91B07D63900422FB8 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		AE3FCFAA1B07D63900422FB8 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
-		AE4481AA1AB6B5A700A912CB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		AE4481AB1AB6B5A700A912CB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		AE4481AC1AB6B65A00A912CB /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		AE4481AD1AB6B65A00A912CB /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		AE47055B1AF9DC080028D7BC /* FeedDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedDetailCell.h; sourceTree = "<group>"; };
 		AE47055C1AF9DC080028D7BC /* FeedDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedDetailCell.m; sourceTree = "<group>"; };
@@ -1044,6 +1044,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = AE0172301A65CD8E0014266F;
 			productRefGroup = AE01723A1A65CD8E0014266F /* Products */;
@@ -1317,8 +1319,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				AEF7F29F1A6875360022410B /* Base */,
-				AE4481AA1AB6B5A700A912CB /* zh-Hans */,
-				AE4481AC1AB6B65A00A912CB /* zh-Hant */,
+				AE326D061B0AE84400F3666D /* zh-Hans */,
+				AE326D081B0AE84F00F3666D /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
