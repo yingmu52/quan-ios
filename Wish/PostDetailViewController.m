@@ -79,7 +79,7 @@
     [fc uploadToCreatePlan:[Plan createPlan:self.titleFromPostView privacy:NO image:image]];
 }
 - (void)didFailPickingImage{
-#warning didFailPickingImage_PostDetail
+    [[[UIAlertView alloc] initWithTitle:@"无法获取图片" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
 }
 
 - (void)didFinishUploadingPlan:(Plan *)plan{
@@ -88,7 +88,7 @@
 }
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-#warning didFailSendingRequestWithInfo_PostDetail
+    [[[UIAlertView alloc] initWithTitle:@"请求失败" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
 }
 
 @end

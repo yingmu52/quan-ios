@@ -114,7 +114,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 2){
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"退出后不会删除任何历史数据，下次登录依然可以使用帐号。" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"退出登录" otherButtonTitles:nil, nil];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"退出后不会删除任何历史数据，下次登录依然可以使用帐号。"
+                                                                 delegate:self
+                                                        cancelButtonTitle:@"取消"
+                                                   destructiveButtonTitle:@"退出登录"
+                                                        otherButtonTitles:nil, nil];
         [actionSheet showInView:self.view];
 //        [self logout];
     }
@@ -140,15 +144,6 @@
     //delete user info
     [User updateOwnerInfo:nil];
     
-//    //reload menu
-//    ECSlidingViewController *slidingVC = (ECSlidingViewController *)self.presentingViewController;
-//    MenuViewController *menuVC = (MenuViewController *)slidingVC.underLeftViewController;
-//    [menuVC.tableView reloadData];
-    
-//    //reset top view
-//    slidingVC.topViewController = nil;
-//    [self dismissViewControllerAnimated:YES completion:nil];
-    
     //delete plans that do not belong to self in core data
     [self clearCoreData];
     
@@ -172,7 +167,6 @@
         [delegate.managedObjectContext deleteObject:plan];
     }
     [delegate saveContext];
-    NSLog(@"%d plans deleted",objects.count);
 }
 
 #pragma mark - check update
