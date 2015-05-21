@@ -15,6 +15,7 @@
 @interface FeedbackViewController () <FetchCenterDelegate,UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet GCPTextView *textView;
 @property (nonatomic,strong) UIButton *tikButton;
+@property (nonatomic,strong) FeedbackkAccessoryView *feedbackAccessoryView;
 @end
 
 @implementation FeedbackViewController
@@ -56,9 +57,17 @@
                                       frame:frame];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
-    
-    self.textView.inputAccessoryView = [FeedbackkAccessoryView instantiateFromNib:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height * 88.0f/ 1136)];
+    self.textView.inputAccessoryView = self.feedbackAccessoryView;
 
+}
+
+- (FeedbackkAccessoryView *)feedbackAccessoryView{
+    if (!_feedbackAccessoryView){
+        CGSize size = self.view.bounds.size;
+        CGFloat height = size.height * 88.0f/ 1136;
+        _feedbackAccessoryView = [FeedbackkAccessoryView instantiateFromNib:CGRectMake(0, 0, size.width,height)];
+    }
+    return _feedbackAccessoryView;
 }
 
 - (void)sendFeedBack{
@@ -113,6 +122,7 @@
     //    NSLog(@"%d",noc);
     return  noc <= 500;
 }
+
 
 @end
 

@@ -20,4 +20,31 @@
     return view;
 }
 
+
+//#pragma mark - keyboard interaction notification
+//
+//- (void)awakeFromNib{
+//    [super awakeFromNib];
+////    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
+//}
+//
+//- (void)keyboardWillShow:(NSNotification *)note {
+//    [self updateFrameWithKeyboardSize:[[[note userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height];
+//}
+//
+//- (void)keyboardDidChange:(NSNotification *)note{
+//    [self updateFrameWithKeyboardSize:[[[note userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height];
+//}
+//
+//- (void)updateFrameWithKeyboardSize:(CGFloat)height{
+//    NSLog(@"%@",@(height));
+//    CGRect newFrame = self.frame;
+//    newFrame.origin.y = [[UIScreen mainScreen] bounds].size.height - height - newFrame.size.height;
+//    self.frame = newFrame;
+//}
+//- (void)dealloc{
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//}
+
 @end
