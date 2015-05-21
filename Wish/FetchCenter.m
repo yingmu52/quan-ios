@@ -604,7 +604,7 @@ typedef enum{
                     if (feedsList.count) {
                         //create all feeds
                         for (NSDictionary *feedItem in feedsList) {
-                            [Feed createFeedFromServer:feedItem forPlan:plan];
+                            [Feed updateFeedWithInfo:feedItem forPlan:plan];
                             //use alternative way to load and cache image
                         }
                     }
@@ -716,7 +716,7 @@ typedef enum{
                 Plan *plan = (Plan *)obj;
                 plan.isFollowed = @([[json valueForKeyPath:@"data.isFollowed"] boolValue]);
                 for (NSDictionary *info in feeds){
-                    [Feed createFeedFromServer:info forPlan:obj]; // obj is Plan*
+                    [Feed updateFeedWithInfo:info forPlan:obj]; // obj is Plan*
                 }
                 [self.delegate didFinishLoadingFeedList:pageInfo
                                             hasNextPage:[[json valueForKeyPath:@"data.isMore"] boolValue]];
