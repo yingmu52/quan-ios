@@ -36,7 +36,6 @@
 - (void)didFinishCheckingNewVersion:(BOOL)hasNewVersion;
 - (void)didFinishUploadingPictureForProfile:(NSDictionary *)info;
 - (void)didfinishFetchingDiscovery:(NSArray *)plans;
-- (void)didFinishUpdatingPersonalInfo;
 - (void)didFinishSettingPersonalInfo;
 - (void)didFinishSendingFeedBack;
 - (void)didFinishLoadingFeedList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage;
@@ -92,7 +91,6 @@
 - (void)sendFeedback:(NSString *)content content:(NSString *)email;
 - (void)checkVersion;
 - (void)uploadNewProfilePicture:(UIImage *)picture;
-- (void)updatePersonalInfo:(NSString *)nickName gender:(NSString *)gender;
 - (void)setPersonalInfo:(NSString *)nickName gender:(NSString *)gender imageId:(NSString *)imageId;
 
 #pragma mark - ultility

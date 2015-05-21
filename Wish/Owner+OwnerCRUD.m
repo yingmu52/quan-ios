@@ -23,14 +23,23 @@
         //insert new fetched Owner
         owner = [NSEntityDescription insertNewObjectForEntityForName:@"Owner"
                                              inManagedObjectContext:context];
-        owner.headUrl = dict[@"headUrl"];
         owner.ownerId = dict[@"id"];
-        owner.ownerName = dict[@"name"];
         
     }else{
         //update existing plan
         owner = checks.lastObject;
     }
+    
+    if (![owner.headUrl isEqualToString:dict[@"headUrl"]]){
+        owner.headUrl = dict[@"headUrl"];
+        owner.image = nil; //delete the current image when a new headUrl is detected
+    }
+    
+    if (![owner.ownerName isEqualToString:dict[@"name"]]){
+        owner.ownerName = dict[@"name"];
+    }
+    
+
     return owner;
 }
 @end

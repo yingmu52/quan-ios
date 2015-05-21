@@ -42,7 +42,6 @@
 
 #define USER @"man/"
 #define GETUID @"splan_get_uid.php"
-#define UPDATE_USER_INFO @"splan_man_update.php"
 #define SET_USER_INFO @"splan_man_set.php"
 
 #define OTHER @"other/"
@@ -68,7 +67,6 @@ typedef enum{
     FetchCenterGetOpUnFollowPlanAction,
     FetchCenterGetOpLoginForUidAndUkey,
     FetchCenterGetOpCheckNewVersion,
-    FetchCenterGetOpUpdatePersonalInfo,
     FetchCenterGetOpSetPersonalInfo,
     FetchCenterGetOpDiscoverPlans,
     FetchCenterGetOpLikeAFeed,
@@ -260,23 +258,13 @@ typedef enum{
     [self postImageWithOperation:picture postOp:FetchCenterPostOpUploadImageForUpdaingProfile];
 }
 
-
-- (void)updatePersonalInfo:(NSString *)nickName gender:(NSString *)gender{
-    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,USER,UPDATE_USER_INFO];
-    [self getRequest:rqtStr parameter:@{@"name":[nickName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                                        @"gender":[gender isEqualToString:@"男"] ? @(0):@(1)}
-           operation:FetchCenterGetOpUpdatePersonalInfo
-              entity:@[nickName,gender]];
-
-}
-
 - (void)setPersonalInfo:(NSString *)nickName gender:(NSString *)gender imageId:(NSString *)imageId{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,USER,SET_USER_INFO];
     [self getRequest:rqtStr parameter:@{@"name":[nickName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                                         @"gender":[gender isEqualToString:@"男"] ? @(0):@(1),
                                         @"headUrl":imageId}
            operation:FetchCenterGetOpSetPersonalInfo
-              entity:@[nickName,gender]];
+              entity:@[nickName,gender,imageId]];
     
 }
 #pragma mark - Plan
@@ -634,16 +622,12 @@ typedef enum{
             }
                 break;
             case FetchCenterGetOpSetPersonalInfo:{
-                NSArray *info = (NSArray *)obj; // nickname,gender
+                NSArray *info = (NSArray *)obj; // nickname,gender,imageId
                 [User updateAttributeFromDictionary:@{USER_DISPLAY_NAME:info[0],
-                                                      GENDER:info[1]}];
+                                                      GENDER:info[1],
+                                                      PROFILE_PICTURE_ID_CUSTOM:info[2]}];
+                NSLog(@"%@",[User getOwnerInfo]);
                 [self.delegate didFinishSettingPersonalInfo];
-            }
-                break;
-            case FetchCenterGetOpUpdatePersonalInfo:{
-                NSArray *info = (NSArray *)obj;
-                [User updateAttributeFromDictionary:@{USER_DISPLAY_NAME:info[0],GENDER:info[1]}];
-                [self.delegate didFinishUpdatingPersonalInfo];
             }
                 break;
             case FetchCenterGetOpDiscoverPlans:{
@@ -744,7 +728,7 @@ typedef enum{
             default:
                 break;
         }
-//        NSLog(@"%@",json);
+        NSLog(@"%@",json);
         [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
     }));
 }

@@ -43,8 +43,9 @@
 - (FetchCenter *)fetchCenter{
     if (!_fetchCenter) {
         _fetchCenter = [[FetchCenter alloc] init];
+        _fetchCenter.delegate = self;
+
     }
-    _fetchCenter.delegate = self;
     return _fetchCenter;
 }
 
@@ -53,11 +54,17 @@
     if (![self.nickNameTextField.text isEqualToString:[User userDisplayName]] ||
         ![self.genderLabel.text isEqualToString:[User gender]]){
         [self showSpinniner];
-        [self.fetchCenter updatePersonalInfo:self.nickNameTextField.text gender:self.genderLabel.text];
+        [self uploadPersonalInfo];
     }else{
         [self goBack];
     }
 
+}
+
+- (void)uploadPersonalInfo{
+    [self.fetchCenter setPersonalInfo:self.nickNameTextField.text
+                               gender:self.genderLabel.text
+                              imageId:[User updatedProfilePictureId]];
 }
 
 - (void)goBack{
@@ -174,19 +181,19 @@
 }
 #pragma mark - fetch center delegate 
 
-- (void)didFinishUpdatingPersonalInfo{
+- (void)didFinishSettingPersonalInfo{
     [self dismissSpinner];
-    [self goBack];
+    NSURL *newUrl = [self.fetchCenter urlWithImageID:[User updatedProfilePictureId]];
+    [self.profilePicture setImageWithURL:newUrl
+             usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+
 }
 - (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
     [self handleFailure:info];
 }
 
 - (void)didFinishUploadingPictureForProfile:(NSDictionary *)info{
-    NSURL *newUrl = [self.fetchCenter urlWithImageID:[User updatedProfilePictureId]];
-    [self dismissSpinner];
-    [self.profilePicture setImageWithURL:newUrl
-             usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self uploadPersonalInfo];
 }
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
