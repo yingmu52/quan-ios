@@ -121,9 +121,7 @@ ImagePickerDelegate>
 
 
 - (void)addWish{
-    if ([User isUserLogin]){
-        [self performSegueWithIdentifier:@"showPostFromHome" sender:nil];
-    }
+    [self performSegueWithIdentifier:@"showPostFromHome" sender:nil];
 }
 
 

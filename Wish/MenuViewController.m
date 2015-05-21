@@ -79,24 +79,12 @@ typedef enum {
 - (MenuCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MenuCell *cell = (MenuCell *)[super tableView:tableView cellForRowAtIndexPath:indexPath];
     if (indexPath.section == MenuSectionLogin) {
-        
-        NSString *newPicId = [User updatedProfilePictureId];
-        
-        NSURL *url = [newPicId isEqualToString:@""] ? [User userProfilePictureURL] : [[FetchCenter new] urlWithImageID:newPicId];
-        
-        [cell.menuImageView setImageWithURL:url usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+                
+        [cell.menuImageView setImageWithURL:[[FetchCenter new] urlWithImageID:[User updatedProfilePictureId]]
+                usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         
         cell.menuTitle.text = [User userDisplayName];
     }
-    
-//    if (indexPath.section == MenuSectionMid && indexPath.row == MenuTableFollow){
-//        cell.hidden = YES;
-//    }
-//    if (indexPath.section == MenuSectionLower) {
-//            //only setting
-//        [cell hideMessageButton];
-//    }
-
     return cell;
 
 }

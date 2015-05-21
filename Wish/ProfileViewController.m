@@ -34,15 +34,9 @@
 
 - (void)setupProfileBanner{
     self.profileBackground.backgroundColor = [Theme profileBakground];
-    
-    if ([User isUserLogin]) {
-        NSString *newPicId = [User updatedProfilePictureId];
-        NSURL *url = [newPicId isEqualToString:@""] ? [User userProfilePictureURL] : [self.fetchCenter urlWithImageID:newPicId];
-        [self.profilePicture setImageWithURL:url
-                 usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    }
-
-
+    NSString *newPicId = [User updatedProfilePictureId];
+    [self.profilePicture setImageWithURL:[self.fetchCenter urlWithImageID:newPicId]
+             usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 }
 
 

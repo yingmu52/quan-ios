@@ -25,7 +25,7 @@
 
 + (void)updateAttributeFromDictionary:(NSDictionary *)info;
 + (void)updateOwnerInfo:(NSDictionary *)info;
-
++ (NSDictionary *)getOwnerInfo;
     
 + (NSString *)uid;
 + (NSString *)uKey;
