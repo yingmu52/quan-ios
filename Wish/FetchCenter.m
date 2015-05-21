@@ -599,7 +599,7 @@ typedef enum{
                     Plan *plan = [Plan updatePlanFromServer:planItem];
                     plan.isFollowed = @(YES);
                     NSDictionary *userInfo = [json valueForKeyPath:[NSString stringWithFormat:@"data.manList.%@",planItem[@"ownerId"]]];
-                    plan.owner = [Owner updateOwnerFromServer:userInfo];
+                    plan.owner = [Owner updateOwnerWithInfo:userInfo];
                     NSArray *feedsList = planItem[@"feedsList"];
                     if (feedsList.count) {
                         //create all feeds
@@ -654,7 +654,7 @@ typedef enum{
                 if (planList && manList){
                     for (NSDictionary *planInfo in planList){
                         Plan *plan = [Plan updatePlanFromServer:planInfo];
-                        plan.owner = [Owner updateOwnerFromServer:[manList valueForKey:planInfo[@"ownerId"]]];
+                        plan.owner = [Owner updateOwnerWithInfo:[manList valueForKey:planInfo[@"ownerId"]]];
                         [plans addObject:plan];
                         
                     }
@@ -694,7 +694,7 @@ typedef enum{
                     
                     NSDictionary *userInfo = comment.isMyComment.boolValue ? @{@"headUrl":[User updatedProfilePictureId],@"id":[User uid],@"name":[User userDisplayName]} : ownerInfo[commentInfo[@"ownerId"]];
                     
-                    comment.owner = [Owner updateOwnerFromServer:userInfo];
+                    comment.owner = [Owner updateOwnerWithInfo:userInfo];
                     comment.feed = feed;
                     if (comment.idForReply) {
                         comment.nameForReply = [ownerInfo[comment.idForReply] objectForKey:@"name"];

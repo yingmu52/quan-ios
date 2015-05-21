@@ -11,9 +11,7 @@
 #import "Plan+PlanCRUD.h"
 @implementation Owner (OwnerCRUD)
 
-
-#warning this func needs a better name
-+ (Owner *)updateOwnerFromServer:(NSDictionary *)dict{
++ (Owner *)updateOwnerWithInfo:(NSDictionary *)dict{
     NSManagedObjectContext *context = [AppDelegate getContext];
     Owner *owner;
     //check existance
@@ -25,16 +23,14 @@
         //insert new fetched Owner
         owner = [NSEntityDescription insertNewObjectForEntityForName:@"Owner"
                                              inManagedObjectContext:context];
+        owner.headUrl = dict[@"headUrl"];
+        owner.ownerId = dict[@"id"];
+        owner.ownerName = dict[@"name"];
+        
     }else{
         //update existing plan
         owner = checks.lastObject;
     }
-    owner.headUrl = dict[@"headUrl"];
-    owner.ownerId = dict[@"id"];
-    owner.ownerName = dict[@"name"];
-//    if ([context save:nil]) {
-//        NSLog(@"updated owner info");
-//    }
     return owner;
 }
 @end

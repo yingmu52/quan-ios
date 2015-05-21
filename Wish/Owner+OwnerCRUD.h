@@ -9,5 +9,5 @@
 #import "Owner.h"
 
 @interface Owner (OwnerCRUD)
-+ (Owner *)updateOwnerFromServer:(NSDictionary *)dict;
++ (Owner *)updateOwnerWithInfo:(NSDictionary *)dict;
 @end

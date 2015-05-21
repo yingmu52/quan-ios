@@ -149,7 +149,7 @@
 }
 
 - (void)addMyselfAsOwner{
-    self.owner = [Owner updateOwnerFromServer:@{@"headUrl":[User updatedProfilePictureId],
+    self.owner = [Owner updateOwnerWithInfo:@{@"headUrl":[User updatedProfilePictureId],
                                                 @"id":[User uid],
                                                 @"name":[User userDisplayName]}];
 }

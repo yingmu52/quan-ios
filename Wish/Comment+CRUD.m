@@ -48,9 +48,7 @@
     comment.content = content;
     comment.createTime = [NSDate date];
     comment.feed = feed;
-    comment.owner = [Owner updateOwnerFromServer:@{@"headUrl":[User updatedProfilePictureId],
-                                                   @"id":[User uid],
-                                                   @"name":[User userDisplayName]}];
+    comment.owner = [Owner updateOwnerWithInfo:@{@"headUrl":[User updatedProfilePictureId],@"id":[User uid],@"name":[User userDisplayName]}];
     return comment;
 
 }
