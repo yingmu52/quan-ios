@@ -13,7 +13,7 @@
 #import "User.h"
 @implementation Comment (CRUD)
 
-+ (Comment *)updateCommentFromServer:(NSDictionary *)dict{
++ (Comment *)updateCommentWithInfo:(NSDictionary *)dict{
     
     Comment *comment;
     NSArray *results = [Plan fetchWith:@"Comment"
@@ -22,17 +22,18 @@
     NSAssert(results.count <= 1, @"ownerId must be a unique!");
     if (!results.count) {
         comment = [NSEntityDescription insertNewObjectForEntityForName:@"Comment" inManagedObjectContext:[AppDelegate getContext]];
+        comment.commentId = dict[@"id"];
+        comment.content = dict[@"content"];
+        comment.createTime = [NSDate dateWithTimeIntervalSince1970:[dict[@"createTime"] integerValue]];
+        comment.isMyComment = @([dict[@"ownerId"] isEqualToString:[User uid]]);
+        NSString *commentTo = dict[@"commentTo"]; //this is what differential reply and comment
+        
+        if (![commentTo isKindOfClass:[NSNull class]] && ![commentTo isEqualToString:@""]) { //for cases where commentTo = "<null>";
+            comment.idForReply = commentTo;
+        }
+
     }else{
         comment = results.lastObject;
-    }
-    comment.commentId = dict[@"id"];
-    comment.content = dict[@"content"];
-    comment.createTime = [NSDate dateWithTimeIntervalSince1970:[dict[@"createTime"] integerValue]];
-    comment.isMyComment = @([dict[@"ownerId"] isEqualToString:[User uid]]);
-    NSString *commentTo = dict[@"commentTo"]; //this is what differential reply and comment
-    
-    if (![commentTo isKindOfClass:[NSNull class]] && ![commentTo isEqualToString:@""]) { //for cases where commentTo = "<null>";
-        comment.idForReply = commentTo;
     }
     
     return comment;

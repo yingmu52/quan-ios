@@ -690,7 +690,7 @@ typedef enum{
 
                 Feed *feed = (Feed *)obj;
                 for (NSDictionary *commentInfo in comments){
-                    Comment *comment = [Comment updateCommentFromServer:commentInfo];
+                    Comment *comment = [Comment updateCommentWithInfo:commentInfo];
                     
                     NSDictionary *userInfo = comment.isMyComment.boolValue ? @{@"headUrl":[User updatedProfilePictureId],@"id":[User uid],@"name":[User userDisplayName]} : ownerInfo[commentInfo[@"ownerId"]];
                     
