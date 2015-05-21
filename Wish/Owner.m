@@ -2,7 +2,7 @@
 //  Owner.m
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2015-05-08.
+//  Created by Xinyi Zhuang on 2015-05-20.
 //  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
 //
 
@@ -16,6 +16,7 @@
 @dynamic headUrl;
 @dynamic ownerId;
 @dynamic ownerName;
+@dynamic image;
 @dynamic comments;
 @dynamic plans;
 

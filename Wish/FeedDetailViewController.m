@@ -130,9 +130,16 @@
     FeedDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:FEEDDETAILCELLID forIndexPath:indexPath];
     Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
     
-    
-    [cell.profileImageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:comment.owner.headUrl]
-                             placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    if (!comment.owner.image) {
+        [cell.profileImageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:comment.owner.headUrl]
+                                 placeholderImage:[UIImage imageNamed:@"placeholder.png"]
+         completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+             comment.owner.image = image;
+         }];
+
+    }else{
+        cell.profileImageView.image = comment.owner.image;
+    }
     cell.contentLabel.text = comment.content;
     
     NSDictionary *userNameAttribute = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00B9C0"]};

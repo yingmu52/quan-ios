@@ -2,7 +2,7 @@
 //  Owner.h
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2015-05-08.
+//  Created by Xinyi Zhuang on 2015-05-20.
 //  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
 //
 
@@ -16,6 +16,7 @@
 @property (nonatomic, retain) NSString * headUrl;
 @property (nonatomic, retain) NSString * ownerId;
 @property (nonatomic, retain) NSString * ownerName;
+@property (nonatomic, retain) id image;
 @property (nonatomic, retain) NSSet *comments;
 @property (nonatomic, retain) NSSet *plans;
 @end
