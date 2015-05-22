@@ -2138,6 +2138,12 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.97647058819999999" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="60" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="contentLabel" destination="jJ9-7T-9ft" id="U2Z-5m-Hul"/>
+                                    <outlet property="dateLabel" destination="SL0-KW-OTX" id="6gE-8n-Exn"/>
+                                    <outlet property="feedImageView" destination="MBk-o1-YtD" id="uiG-mC-F6C"/>
+                                    <outlet property="profilePictureImageView" destination="Aut-lJ-Up7" id="4C7-SY-Kgz"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

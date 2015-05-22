@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface MessageCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *profilePictureImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *feedImageView;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 
 @end

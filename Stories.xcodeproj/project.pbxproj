@@ -132,6 +132,10 @@
 		AED4CB2B1AC7633D00EE2DA4 /* NHAlignmentFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AED4CB291AC7633D00EE2DA4 /* NHAlignmentFlowLayout.m */; };
 		AED4CB431AC79F3A00EE2DA4 /* ModalLeftToRightSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = AED4CB421AC79F3A00EE2DA4 /* ModalLeftToRightSegue.m */; };
 		AED4CB441AC79F3A00EE2DA4 /* ModalLeftToRightSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = AED4CB421AC79F3A00EE2DA4 /* ModalLeftToRightSegue.m */; };
+		AED4DD1E1B0E922C00AF1497 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = AED4DD1D1B0E922C00AF1497 /* Message.m */; };
+		AED4DD1F1B0E922C00AF1497 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = AED4DD1D1B0E922C00AF1497 /* Message.m */; };
+		AED4DD221B0E925300AF1497 /* Message+MessageCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AED4DD211B0E925300AF1497 /* Message+MessageCRUD.m */; };
+		AED4DD231B0E925300AF1497 /* Message+MessageCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AED4DD211B0E925300AF1497 /* Message+MessageCRUD.m */; };
 		AED5AB121AFDC74E00719208 /* Comment+CRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5AB111AFDC74E00719208 /* Comment+CRUD.m */; };
 		AED5AB1D1AFDCBBB00719208 /* Feed.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5AB1C1AFDCBBB00719208 /* Feed.m */; };
 		AED5AB1E1AFDCBBB00719208 /* Feed.m in Sources */ = {isa = PBXBuildFile; fileRef = AED5AB1C1AFDCBBB00719208 /* Feed.m */; };
@@ -385,6 +389,10 @@
 		AED4CB291AC7633D00EE2DA4 /* NHAlignmentFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHAlignmentFlowLayout.m; sourceTree = "<group>"; };
 		AED4CB411AC79F3A00EE2DA4 /* ModalLeftToRightSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalLeftToRightSegue.h; sourceTree = "<group>"; };
 		AED4CB421AC79F3A00EE2DA4 /* ModalLeftToRightSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalLeftToRightSegue.m; sourceTree = "<group>"; };
+		AED4DD1C1B0E922C00AF1497 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		AED4DD1D1B0E922C00AF1497 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		AED4DD201B0E925300AF1497 /* Message+MessageCRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Message+MessageCRUD.h"; sourceTree = "<group>"; };
+		AED4DD211B0E925300AF1497 /* Message+MessageCRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Message+MessageCRUD.m"; sourceTree = "<group>"; };
 		AED5AB101AFDC74E00719208 /* Comment+CRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Comment+CRUD.h"; sourceTree = "<group>"; };
 		AED5AB111AFDC74E00719208 /* Comment+CRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Comment+CRUD.m"; sourceTree = "<group>"; };
 		AED5AB1B1AFDCBBB00719208 /* Feed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feed.h; sourceTree = "<group>"; };
@@ -601,6 +609,10 @@
 		AE30EE711A6F0A8C0044740D /* Database&Networking */ = {
 			isa = PBXGroup;
 			children = (
+				AED4DD1C1B0E922C00AF1497 /* Message.h */,
+				AED4DD1D1B0E922C00AF1497 /* Message.m */,
+				AED4DD201B0E925300AF1497 /* Message+MessageCRUD.h */,
+				AED4DD211B0E925300AF1497 /* Message+MessageCRUD.m */,
 				AE05C0341B0D62BA002F83F1 /* Owner.h */,
 				AE05C0351B0D62BA002F83F1 /* Owner.m */,
 				AE3FCF851B07C93B00422FB8 /* Plan.h */,
@@ -1139,6 +1151,7 @@
 				AEF7F2811A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				AE3FCFC91B07D63900422FB8 /* UIView+WebCacheOperation.m in Sources */,
 				AEF7F2891A686E8A0022410B /* ECSlidingViewController.m in Sources */,
+				AED4DD221B0E925300AF1497 /* Message+MessageCRUD.m in Sources */,
 				AE95A9F91ACFBCA9007465D5 /* UIActionSheet+Blocks.m in Sources */,
 				AEF7F28B1A686E8B0022410B /* UIViewController+ECSlidingViewController.m in Sources */,
 				AEFA5FDA1AAFBA41001CA0C8 /* NZCircularImageView.m in Sources */,
@@ -1170,6 +1183,7 @@
 				AE52FA501A8D3D76003FF725 /* PostFeedViewController.m in Sources */,
 				AE3D70BF1B019DE1000C0806 /* Comment.m in Sources */,
 				AED4CB2A1AC7633D00EE2DA4 /* NHAlignmentFlowLayout.m in Sources */,
+				AED4DD1E1B0E922C00AF1497 /* Message.m in Sources */,
 				AED68EE41A70399A00CDC0DF /* FetchCenter.m in Sources */,
 				AEC8CE8E1AAF872A005364F8 /* StationView.m in Sources */,
 				AE0E794B1A76EB50007C48EE /* Reachability.m in Sources */,
@@ -1215,6 +1229,7 @@
 			files = (
 				AED5AB231AFDE39800719208 /* CommentAcessaryView.m in Sources */,
 				AEF7F2841A686E8A0022410B /* ECSlidingAnimationController.m in Sources */,
+				AED4DD1F1B0E922C00AF1497 /* Message.m in Sources */,
 				AEF7F28C1A686E8B0022410B /* UIViewController+ECSlidingViewController.m in Sources */,
 				AED4CB441AC79F3A00EE2DA4 /* ModalLeftToRightSegue.m in Sources */,
 				AEF7F28A1A686E8B0022410B /* ECSlidingViewController.m in Sources */,
@@ -1263,6 +1278,7 @@
 				AE9A3AEC1A9B1DB000F0588F /* AchieveVCData.m in Sources */,
 				AED8D7CB1A9BE2490035EDE5 /* FollowingImageCell.m in Sources */,
 				AEC0E1C61AC64F9600563F7C /* WishDetailVCOwnerAchieved.m in Sources */,
+				AED4DD231B0E925300AF1497 /* Message+MessageCRUD.m in Sources */,
 				AEBFCA381A78614100686EFE /* PostDetailViewController.m in Sources */,
 				AE3FCFBC1B07D63900422FB8 /* SDWebImagePrefetcher.m in Sources */,
 				AEF7F2AC1A6884950022410B /* CustomBarItem.m in Sources */,

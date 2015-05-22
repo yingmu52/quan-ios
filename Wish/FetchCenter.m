@@ -34,7 +34,6 @@
 #define COMMENT_FEED @"splan_comment_create.php"
 #define GET_FEED_COMMENTS @"splan_comment_getlist.php"
 
-
 #define FOLLOW @"follow/"
 #define GET_FOLLOW_LIST @"splan_follow_get_feedslist.php"
 #define FOLLOW_PLAN @"splan_follow_do.php"
@@ -53,6 +52,8 @@
 #define GET_DISCOVER_LIST @"splan_find_planlist.php"
 
 
+#define MESSAGE @"message/"
+#define GET_MESSAGE_LIST @"splan_message_getlist.php"
 
 typedef enum{
     FetchCenterGetOpCreatePlan = 0,
@@ -75,7 +76,8 @@ typedef enum{
     FetchCenterGetOpCommentFeed,
     FetchCenterGetOpGetFeedCommentList,
     FetchCenterGetOpLoadFeedList,
-    FetchCenterGetOpFeedBack
+    FetchCenterGetOpFeedBack,
+    FetchCenterGetOpGetMessageList
 }FetchCenterGetOp;
 
 typedef enum{
@@ -97,6 +99,16 @@ typedef enum{
 //    NSLog(@"%@",_baseUrl);
     return _baseUrl;
 }
+
+
+#pragma mark - Message 
+- (void)getMessageList{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,MESSAGE,GET_MESSAGE_LIST];
+    [self getRequest:rqtStr parameter:@{@"id":[User uid]}
+           operation:FetchCenterGetOpGetMessageList entity:nil];
+
+}
+
 
 #pragma mark - Comment
 
@@ -725,6 +737,16 @@ typedef enum{
                 [self.delegate didFinishUnFollowingPlan:plan];
             }
                 break;
+            case FetchCenterGetOpGetMessageList:{
+                NSArray *messagesArray = [json valueForKeyPath:@"data.messageList"];
+                NSDictionary *owners = [json valueForKeyPath:@"data.manList"];
+                for (NSDictionary *message in messagesArray){
+                    NSDictionary *ownerInfo = owners[message[@"operatorId"]];
+                    [Message updateMessageWithInfo:message ownerInfo:ownerInfo];
+//                    NSLog(@"%@",a);
+                }
+            }
+                break;
             default:
                 break;
         }
@@ -733,3 +755,12 @@ typedef enum{
     }));
 }
 @end
+
+
+
+
+
+
+
+
+

@@ -19,6 +19,7 @@
 #import "AppDelegate.h"
 #import "User.h"
 #import "SDWebImageCompat.h"
+#import "Message+MessageCRUD.h"
 
 #define INNER_NETWORK_URL @"http://182.254.167.228"
 #define OUTTER_NETWORK_URL @"http://120.24.73.51"
@@ -60,6 +61,9 @@
 @interface FetchCenter : NSObject
 @property (nonatomic,weak) id <FetchCenterDelegate>delegate;
 
+#pragma mark - Message
+- (void)getMessageList;
+
 #pragma mark - Feed
 - (void)loadFeedsListForPlan:(Plan *)plan pageInfo:(NSDictionary *)info;
 - (void)likeFeed:(Feed *)feed;
@@ -68,8 +72,6 @@
 - (void)commentOnFeed:(Feed *)feed content:(NSString *)text;
 - (void)replyAtFeed:(Feed *)feed content:(NSString *)text toOwner:(NSString *)ownerId;
 - (void)getCommentListForFeed:(Feed *)feed pageInfo:(NSDictionary *)info;
-
-
 
 #pragma mark - Plan
 - (void)fetchPlanListForOwnerId:(NSString *)ownerId;
