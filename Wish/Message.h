@@ -19,6 +19,8 @@
 @property (nonatomic, retain) NSString * feedsId;
 @property (nonatomic, retain) NSString * messageId;
 @property (nonatomic, retain) NSString * picurl;
+@property (nonatomic, retain) NSString * targetOwnerId;
+@property (nonatomic, retain) NSNumber * isRead;
 @property (nonatomic, retain) Owner *owner;
 
 @end

@@ -79,6 +79,7 @@
         
         //do fetchrequest
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Message"];
+        request.predicate = [NSPredicate predicateWithFormat:@"targetOwnerId = %@",[User uid]];
         request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createTime" ascending:NO]];
         [request setFetchBatchSize:3];
         
@@ -139,5 +140,14 @@
     [self.tableView endUpdates];
 }
 
+#pragma mark - fetch center delegate 
 
+- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
+    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
+                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
+                               delegate:self
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil, nil] show];
+    
+}
 @end

@@ -18,6 +18,8 @@
 @dynamic feedsId;
 @dynamic messageId;
 @dynamic picurl;
+@dynamic targetOwnerId;
+@dynamic isRead;
 @dynamic owner;
 
 @end

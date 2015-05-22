@@ -10,6 +10,7 @@
 #import "Plan+PlanCRUD.h"
 #import "AppDelegate.h"
 #import "Owner+OwnerCRUD.h"
+#import "User.h"
 @implementation Message (MessageCRUD)
 
 
@@ -33,6 +34,10 @@
         message.createTime = [NSDate dateWithTimeIntervalSince1970:[messageInfo[@"createTime"] integerValue]];
 
         message.owner = [Owner updateOwnerWithInfo:ownerInfo];
+        
+        message.targetOwnerId = [User uid]; //this message is requested by the current user ~
+        
+        message.isRead = @(NO); // every newly created message is initially not read.
         
     }else{
         message = results.lastObject;

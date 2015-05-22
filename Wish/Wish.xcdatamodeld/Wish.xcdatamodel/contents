@@ -27,8 +27,10 @@
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="feedsId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isRead" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="messageId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="picurl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="targetOwnerId" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="messages" inverseEntity="Owner" syncable="YES"/>
     </entity>
     <entity name="Owner" representedClassName="Owner" syncable="YES">
@@ -59,8 +61,8 @@
     <elements>
         <element name="Comment" positionX="-9009" positionY="95" width="128" height="163"/>
         <element name="Feed" positionX="-9416" positionY="-81" width="128" height="193"/>
+        <element name="Message" positionX="-8892" positionY="-346" width="128" height="178"/>
         <element name="Owner" positionX="-8705" positionY="-43" width="128" height="148"/>
         <element name="Plan" positionX="-9110" positionY="-324" width="128" height="253"/>
-        <element name="Message" positionX="-8892" positionY="-346" width="128" height="148"/>
     </elements>
 </model>
