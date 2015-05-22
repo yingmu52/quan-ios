@@ -22,11 +22,6 @@
 
 @interface WishDetailCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *photoView;
-//@property (nonatomic) BOOL isWidgetVisible;
-@property (nonatomic,strong) Feed *feed;
-
-
-
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UIButton *commentButton;
@@ -38,7 +33,4 @@
 
 
 - (IBAction)like:(UIButton *)sender;
-//-(void)showLikeAndComment;
-//- (void)dismissLikeAndComment;
-//- (void)moveWidget:(BOOL)toVisible;
 @end

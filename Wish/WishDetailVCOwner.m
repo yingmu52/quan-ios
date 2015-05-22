@@ -233,7 +233,7 @@
             PopupView *popupView = [PopupView showPopupDeleteinFrame:window.frame
                                                            withTitle:popupViewTitle];
             popupView.delegate = self;
-            popupView.feed = cell.feed;
+            popupView.feed = [self.fetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
             [window addSubview:popupView];
         }
     }];

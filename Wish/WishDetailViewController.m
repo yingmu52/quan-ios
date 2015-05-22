@@ -181,16 +181,25 @@
 - (WishDetailCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     WishDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WishDetailCell" forIndexPath:indexPath];
     cell.delegate = self;
-    cell.feed = [self.fetchedRC objectAtIndexPath:indexPath];
-    if (!cell.feed.image) {
-        [cell.photoView sd_setImageWithURL:[self.fetchCenter urlWithImageID:cell.feed.imageId]
+    Feed *feed = [self.fetchedRC objectAtIndexPath:indexPath];
+    cell.dateLabel.text = [SystemUtil stringFromDate:feed.createDate];
+    
+    [cell.likeButton setImage:feed.selfLiked.boolValue ? [Theme likeButtonLiked] : [Theme likeButtonUnLiked]
+                     forState:UIControlStateNormal];
+    
+    cell.titleLabel.text = feed.feedTitle;
+
+    if (!feed.image) {
+        [cell.photoView sd_setImageWithURL:[self.fetchCenter urlWithImageID:feed.imageId]
                           placeholderImage:[UIImage imageNamed:@"placeholder.png"]
                                  completed:^(UIImage *image,
                                              NSError *error,
                                              SDImageCacheType cacheType,
                                              NSURL *imageURL) {
-                                     cell.feed.image = image;
+                                     feed.image = image;
          }];
+    }else{
+        cell.photoView.image = feed.image;
     }
     return cell;
 }
@@ -207,11 +216,11 @@
 - (void)didPressedLikeOnCell:(WishDetailCell *)cell{
     //already increment/decrement like count locally,
     //the following request must respect the current cell.feed like/dislike status
-    
-    if (!cell.feed.selfLiked.boolValue) {
-        [self.fetchCenter likeFeed:cell.feed];
+    Feed *feed = [self.fetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
+    if (!feed.selfLiked.boolValue) {
+        [self.fetchCenter likeFeed:feed];
     }else{
-        [self.fetchCenter unLikeFeed:cell.feed];
+        [self.fetchCenter unLikeFeed:feed];
     }
 }
 
@@ -337,7 +346,7 @@
 
 - (void)didPressedCommentOnCell:(WishDetailCell *)cell{
     [[[UIApplication sharedApplication] keyWindow] addSubview:self.commentView];
-    self.commentView.feed = cell.feed;
+    self.commentView.feed = [self.fetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
 }
 
 - (void)didPressSend:(CommentAcessaryView *)cav{
