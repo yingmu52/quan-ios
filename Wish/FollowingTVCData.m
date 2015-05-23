@@ -61,7 +61,8 @@
 
 - (void)configureFollowingCell:(FollowingCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
-//    Feed *feed = [plan fetchLastUpdatedFeed];
+    
+#warning !!!!!!!!!
     Feed *feed = [[plan.feeds allObjects] firstObject];
     //update Plan Info
     cell.bottomLabel.text = feed ? feed.feedTitle : @"无标题";
