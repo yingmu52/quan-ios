@@ -22,12 +22,16 @@
 @property (nonatomic,strong) TencentOAuth *tencentOAuth;
 @property (nonatomic,strong) APIResponse *apiResponse;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
-
-
 @property (nonatomic,weak) IBOutlet UIButton *loginButton;
 @end
 @implementation LoginViewController
 
+
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    [self.loginButton setTitle:@"QQ账号登陆" forState:UIControlStateNormal];
+    [self.loginButton setTitle:@"登录中..." forState:UIControlStateDisabled];
+}
 - (FetchCenter *)fetchCenter{
     if (!_fetchCenter) {
         _fetchCenter = [[FetchCenter alloc] init];
@@ -52,6 +56,7 @@
                              kOPEN_PERMISSION_GET_INFO,
                              kOPEN_PERMISSION_GET_OTHER_INFO];
     [self.tencentOAuth authorize:permissions inSafari:NO];
+    self.loginButton.enabled = NO;
 }
 
 //login successed
@@ -130,7 +135,10 @@
         }
         
     }
+    self.loginButton.enabled = YES;
+
     NSLog(@"%@",[User getOwnerInfo]);
+    
 }
 
 //login fail
@@ -141,12 +149,14 @@
     }else{
         NSLog(@"login fail");
     }
+    self.loginButton.enabled = YES;
 }
 
 //no internet
 -(void)tencentDidNotNetWork
 {
     NSLog(@"无网络连接，请设置网络");
+    self.loginButton.enabled = YES;
 }
 
 

@@ -252,6 +252,8 @@
 		AE0172681A65D3140014266F /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		AE05C0341B0D62BA002F83F1 /* Owner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Owner.h; sourceTree = "<group>"; };
 		AE05C0351B0D62BA002F83F1 /* Owner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Owner.m; sourceTree = "<group>"; };
+		AE08C66A1B11184D00ED8B46 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		AE08C66C1B11185B00ED8B46 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		AE0ADF171ABD78CC00692131 /* HomeCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCardViewController.h; sourceTree = "<group>"; };
 		AE0ADF181ABD78CC00692131 /* HomeCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCardViewController.m; sourceTree = "<group>"; };
 		AE0E79491A76EB50007C48EE /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -271,8 +273,6 @@
 		AE2F28E61AD3937700FC3370 /* WishDetailVCDiscovery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailVCDiscovery.m; sourceTree = "<group>"; };
 		AE30EE6B1A6E19D00044740D /* WishDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishDetailCell.h; sourceTree = "<group>"; };
 		AE30EE6C1A6E19D00044740D /* WishDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailCell.m; sourceTree = "<group>"; };
-		AE326D061B0AE84400F3666D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
-		AE326D081B0AE84F00F3666D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		AE3D70BD1B019DE0000C0806 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		AE3D70BE1B019DE1000C0806 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		AE3FCF851B07C93B00422FB8 /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
@@ -1335,8 +1335,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				AEF7F29F1A6875360022410B /* Base */,
-				AE326D061B0AE84400F3666D /* zh-Hans */,
-				AE326D081B0AE84F00F3666D /* zh-Hant */,
+				AE08C66A1B11184D00ED8B46 /* zh-Hans */,
+				AE08C66C1B11185B00ED8B46 /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
