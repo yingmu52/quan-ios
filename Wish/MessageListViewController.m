@@ -12,6 +12,7 @@
 #import "MessageCell.h"
 #import "Owner.h"
 #import "UIImageView+WebCache.h"
+#import "FeedDetailViewController.h"
 @interface MessageListViewController () <FetchCenterDelegate,NSFetchedResultsControllerDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
@@ -31,7 +32,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
-    self.title = @"消息";
     [self.fetchCenter getMessageList];
 }
 
@@ -43,7 +43,7 @@
                                    selector:@selector(dismissModalViewControllerAnimated:)
                                       frame:frame];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:back];
-    
+    self.navigationItem.title = @"消息";
 }
 
 #pragma mark - Table view data source
@@ -69,6 +69,20 @@
     cell.dateLabel.text = [SystemUtil stringFromDate:message.createTime];
     cell.contentLabel.text = message.content;
     return cell;
+}
+
+#pragma mark - Table View Delegate 
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    Message *message = [self.fetchedRC objectAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:@"showFeedDetailFromMessage" sender:message.feedsId];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"showFeedDetailFromMessage"]) {
+        [segue.destinationViewController setFeedId:sender];
+    }
 }
 
 #pragma mark - NSFetchedResultsController Delegate 

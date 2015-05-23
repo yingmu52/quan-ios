@@ -36,6 +36,7 @@
 
 @implementation FeedDetailViewController
 
+
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self setUpNavigationItem];
@@ -377,10 +378,12 @@
 
 
 - (void)loadComments{
-    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
-    [spinner startAnimating];
-    [self.fetchCenter getCommentListForFeed:self.feed pageInfo:self.pageInfo];
+    if (self.feed){
+        UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+        [spinner startAnimating];
+        [self.fetchCenter getCommentListForFeed:self.feed pageInfo:self.pageInfo];
+    }
 }
 
 #pragma mark - delete local comments to insync with server
@@ -391,6 +394,29 @@
 //    }
 //    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
 //}
+
+#pragma mark - set up for message view 
+
+/*
+ 1. When set self.feedId, fetch local database.
+ 2. set self.feed to the local feed instance.
+ 3. if self.feed does not exist, then fetch only and get feed
+ */
+
+- (void)setFeedId:(NSString *)feedId{
+    _feedId = feedId;
+    NSArray *results = [Plan fetchWith:@"Feed"
+                             predicate:[NSPredicate predicateWithFormat:@"feedId = %@",feedId]
+                      keyForDescriptor:@"createDate"];
+    NSAssert(results.count <= 1, @"feed id is not unique");
+    
+    if (results.count) {
+        self.feed = results.lastObject;
+    }else{
+        //load Feed from online
+#warning need to work on this !
+    }
+}
 @end
 
 

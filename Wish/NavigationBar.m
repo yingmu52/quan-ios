@@ -33,12 +33,9 @@ static CGFloat kEndPoint = 1.5;
                forBarMetrics:UIBarMetricsDefault];
     self.shadowImage = [UIImage new];
     
-    
     //change navigation bar height
     CGFloat referenceHeight = [[UIScreen mainScreen] bounds].size.height;
     [self setHeight:110.0/1136.0f*referenceHeight];
-    
-//    [[UIBarButtonItem appearance] setBackgroundVerticalPositionAdjustment:-20 forBarMetrics:UIBarMetricsDefault];
     
 }
 
