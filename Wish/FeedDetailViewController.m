@@ -144,19 +144,24 @@
     cell.contentLabel.text = comment.content;
     
     NSDictionary *userNameAttribute = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00B9C0"]};
-    
+
+    NSString *userAstring = comment.owner.ownerName ? comment.owner.ownerName : @"";
+
     if (comment.idForReply && comment.nameForReply) { //this is a reply. format: 回复<color_userName>:content
-        NSMutableAttributedString *userA = [[NSMutableAttributedString alloc] initWithString:comment.owner.ownerName
+        
+        NSString *userBstring = comment.nameForReply ? comment.nameForReply : @"";
+        NSMutableAttributedString *userA = [[NSMutableAttributedString alloc] initWithString:userAstring
                                                                                   attributes:userNameAttribute];
         NSMutableAttributedString *reply = [[NSMutableAttributedString alloc] initWithString:@"回复"];
-        NSMutableAttributedString *userB = [[NSMutableAttributedString alloc] initWithString:comment.nameForReply
+        NSMutableAttributedString *userB = [[NSMutableAttributedString alloc] initWithString:userBstring
                                                                                   attributes:userNameAttribute];
         
         [userA appendAttributedString:reply];
         [userA appendAttributedString:userB];
         cell.userNameLabel.attributedText = userA;
     }else{
-        cell.userNameLabel.attributedText = [[NSAttributedString alloc] initWithString:comment.owner.ownerName
+        
+        cell.userNameLabel.attributedText = [[NSAttributedString alloc] initWithString:userAstring
                                                                             attributes:userNameAttribute];
     }
     cell.dateLabel.text = [SystemUtil timeStringFromDate:comment.createTime];

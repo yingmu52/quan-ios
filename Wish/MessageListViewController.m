@@ -66,8 +66,14 @@
 
     [cell.profilePictureImageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:message.owner.headUrl] placeholderImage:placeHolder];
     [cell.feedImageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:message.picurl] placeholderImage:placeHolder];
-    cell.dateLabel.text = [SystemUtil stringFromDate:message.createTime];
     cell.contentLabel.text = message.content;
+    
+    
+    //displaying date
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"yyyy-MM-dd HH:mm";
+    cell.dateLabel.text = [formatter stringFromDate:message.createTime];
+
     return cell;
 }
 

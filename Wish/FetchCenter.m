@@ -750,7 +750,7 @@ typedef enum{
             default:
                 break;
         }
-//        NSLog(@"%@",json);
+        NSLog(@"%@",json);
         [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
     }));
 }
