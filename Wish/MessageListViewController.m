@@ -44,12 +44,13 @@
                                       frame:frame];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:back];
     self.navigationItem.title = @"消息";
+    
 }
 
 #pragma mark - Table view data source
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 150.0/1136 * self.tableView.frame.size.height;
+    return 140.0/1136 * self.tableView.frame.size.height;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -66,7 +67,11 @@
 
     [cell.profilePictureImageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:message.owner.headUrl] placeholderImage:placeHolder];
     [cell.feedImageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:message.picurl] placeholderImage:placeHolder];
-    cell.contentLabel.text = message.content;
+    
+    NSMutableAttributedString *content = [[NSMutableAttributedString alloc] initWithString:message.owner.ownerName
+                                                                                attributes:@{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00B8C2"]}];
+    [content appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"发表了一条评论：%@",message.content]]];
+    cell.contentLabel.attributedText = content;
     
     
     //displaying date
@@ -78,6 +83,19 @@
 }
 
 #pragma mark - Table View Delegate 
+
+- (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    cell.backgroundColor = [SystemUtil colorFromHexString:@"#E7F0ED"];
+}
+
+- (void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.backgroundColor = [SystemUtil colorFromHexString:@"#F4F9F7"];
+    
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
