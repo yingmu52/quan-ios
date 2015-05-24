@@ -2288,7 +2288,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MOq-nh-JaT" userLabel="BackgroundView">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tab_ic_login_default" translatesAutoresizingMaskIntoConstraints="NO" id="Aut-lJ-Up7" userLabel="profile picture">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tab_ic_login_default" translatesAutoresizingMaskIntoConstraints="NO" id="Aut-lJ-Up7" userLabel="profile picture" customClass="NZCircularImageView">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Aut-lJ-Up7" secondAttribute="height" multiplier="1:1" id="Hvc-Nq-sim"/>
@@ -2298,8 +2298,7 @@
                                                             <exclude reference="Hvc-Nq-sim"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="5" y="27" width="56" height="57"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="Hvc-Nq-sim"/>
                                                         </mask>
@@ -2326,32 +2325,26 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="66" y="27" width="249" height="32"/>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2014-11-21 13:20" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SL0-KW-OTX">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="66" y="67" width="100" height="15"/>
-                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="jJ9-7T-9ft" firstAttribute="top" secondItem="Aut-lJ-Up7" secondAttribute="top" constant="-9" id="1rf-r1-xlL">
                                                     <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                                 </constraint>
-                                                <constraint firstItem="Aut-lJ-Up7" firstAttribute="height" secondItem="MOq-nh-JaT" secondAttribute="width" multiplier="90:640" id="7bV-Ih-Zb7"/>
+                                                <constraint firstItem="Aut-lJ-Up7" firstAttribute="height" secondItem="MOq-nh-JaT" secondAttribute="width" multiplier="100:640" id="7bV-Ih-Zb7"/>
                                                 <constraint firstAttribute="trailing" secondItem="MBk-o1-YtD" secondAttribute="trailing" constant="8" id="81y-62-bOB">
                                                     <variation key="heightClass=regular-widthClass=compact" constant="5"/>
                                                 </constraint>
                                                 <constraint firstAttribute="centerY" secondItem="Aut-lJ-Up7" secondAttribute="centerY" constant="19.5" id="86s-GU-nAm">
                                                     <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                                 </constraint>
-                                                <constraint firstAttribute="width" secondItem="MBk-o1-YtD" secondAttribute="height" multiplier="640:120" id="DHf-QL-sY1"/>
+                                                <constraint firstAttribute="width" secondItem="MBk-o1-YtD" secondAttribute="height" multiplier="640:130" id="DHf-QL-sY1"/>
                                                 <constraint firstItem="SL0-KW-OTX" firstAttribute="top" secondItem="jJ9-7T-9ft" secondAttribute="bottom" constant="13" id="FIY-CR-Hs3">
                                                     <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                                                 </constraint>
