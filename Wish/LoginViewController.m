@@ -57,10 +57,10 @@
 
 - (IBAction)login:(id)sender{
     
-#warning !!!
-    [self performSegueWithIdentifier:@"showLoginDetail" sender:nil];
-
-    return;
+//#warning !!!
+//    [self performSegueWithIdentifier:@"showLoginDetail" sender:nil];
+//
+//    return;
     NSArray *permissions = @[kOPEN_PERMISSION_GET_USER_INFO,
                              kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
                              kOPEN_PERMISSION_GET_INFO,

@@ -40,32 +40,33 @@
                                         target:self.navigationController
                                       selector:@selector(popViewControllerAnimated:)
                                          frame:frame];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+
     self.tikButton = [Theme buttonWithImage:[Theme navTikButtonDefault]
                                      target:self
                                    selector:@selector(showMainView)
                                       frame:frame];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
     self.navigationItem.rightBarButtonItem.enabled = NO;
-
     
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-#warning - download head url for uploading to our server
-//    [self.profileImageView setImageWithURL:[User userProfilePictureURL]
-//                          placeholderImage:[UIImage imageNamed:@"placeholder.png"]
-//                                 completed:^(UIImage *image,
-//                                             NSError *error,
-//                                             SDImageCacheType cacheType,
-//                                             NSURL *imageURL)
-//     {
-//         //upload image on login
-//         [self.fetchCenter uploadNewProfilePicture:image];
-//     } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-//    //    [self.fetchCenter updatePersonalInfo:[NSString stringWithFormat:@"%@ ",nickName] gender:gender];
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    [manager downloadImageWithURL:[User userProfilePictureURL]
+                          options:0
+                         progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                             // progression tracking code
+                         }
+                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                            if (image) {
+                                // do something with image
+                                [self.fetchCenter uploadNewProfilePicture:image];
+                            }
+                        }];
+
     [self setupNavigationItem];
     
     [self.descriptionTextView setPlaceholder:@"描述下你是怎样的一个人？"];
@@ -89,7 +90,6 @@
 }
 
 - (void)handleFailure:(NSDictionary *)info{
-    self.navigationItem.rightBarButtonItem = nil;
     [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
                                 message:[NSString stringWithFormat:@"%@",info[@"msg"]]
                                delegate:self
@@ -99,9 +99,9 @@
 
 - (void)showMainView{
     //upload user info
-    NSString *gender = [User gender];
-    NSString *profilePicId = [User updatedProfilePictureId];
-//    [self.fetchCenter setPersonalInfo:self.textField.text gender:gender imageId:profilePicId];
+    [self.fetchCenter setPersonalInfo:self.nameTextField.text
+                               gender:self.genderLabel.text
+                              imageId:[User updatedProfilePictureId]];
 }
 
 - (void)didFinishSettingPersonalInfo{
@@ -158,7 +158,7 @@
 
 - (void)textFieldDidUpdate{
     BOOL flag = self.nameTextField.text.length*[self.nameTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""].length > 0;
-    self.navigationItem.rightBarButtonItem.enabled = flag;
+    self.navigationItem.rightBarButtonItem.enabled = flag && ([User updatedProfilePictureId] != nil);
     UIImage *bg = flag ? [Theme navTikButtonDefault] : [Theme navTikButtonDisable];
     [self.tikButton setImage:bg forState:UIControlStateNormal];
 }
