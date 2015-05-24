@@ -8,8 +8,5 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoginDetailViewController : UIViewController
-@property (nonatomic,weak) IBOutlet UIButton *accessMainViewButton;
-@property (nonatomic,weak) IBOutlet UITextField *textField;
-@property (nonatomic,weak) IBOutlet UIImageView *profileImageView;
+@interface LoginDetailViewController : UITableViewController
 @end

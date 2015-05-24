@@ -32,6 +32,11 @@
     [self.loginButton setTitle:@"QQ账号登陆" forState:UIControlStateNormal];
     [self.loginButton setTitle:@"登录中..." forState:UIControlStateDisabled];
 }
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = YES;
+}
 - (FetchCenter *)fetchCenter{
     if (!_fetchCenter) {
         _fetchCenter = [[FetchCenter alloc] init];
@@ -51,6 +56,11 @@
 #pragma mark - login
 
 - (IBAction)login:(id)sender{
+    
+#warning !!!
+    [self performSegueWithIdentifier:@"showLoginDetail" sender:nil];
+
+    return;
     NSArray *permissions = @[kOPEN_PERMISSION_GET_USER_INFO,
                              kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
                              kOPEN_PERMISSION_GET_INFO,

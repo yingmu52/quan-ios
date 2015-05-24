@@ -24,7 +24,7 @@
         root.underLeftViewController.edgesForExtendedLayout = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeLeft;
     }else{
         UIStoryboard *storyBoard = self.window.rootViewController.storyboard;
-        LoginViewController *loginVC = [storyBoard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        LoginViewController *loginVC = [storyBoard instantiateViewControllerWithIdentifier:@"LoginNavigationController"];
         self.window.rootViewController = loginVC;
         [self.window makeKeyAndVisible];
     }
