@@ -10,14 +10,21 @@
 
 @implementation FeedDetailCell
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)setBounds:(CGRect)bounds
+{
+    [super setBounds:bounds];
+    
+    self.contentView.frame = self.bounds;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    [self.contentView updateConstraintsIfNeeded];
+    [self.contentView layoutIfNeeded];
+    
+    self.contentLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.contentLabel.frame);
 }
 
 @end

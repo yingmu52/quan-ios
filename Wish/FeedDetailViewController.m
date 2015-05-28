@@ -123,6 +123,17 @@
 
 
 #pragma mark - table view 
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewAutomaticDimension;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    return UITableViewAutomaticDimension;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.fetchedRC.fetchedObjects.count;
 }
@@ -145,11 +156,11 @@
     
     NSDictionary *userNameAttribute = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00B9C0"]};
 
-    NSString *userAstring = comment.owner.ownerName ? comment.owner.ownerName : @"";
+    NSString *userAstring = comment.owner.ownerName ? comment.owner.ownerName : @"无用户名";
 
     if (comment.idForReply && comment.nameForReply) { //this is a reply. format: 回复<color_userName>:content
         
-        NSString *userBstring = comment.nameForReply ? comment.nameForReply : @"";
+        NSString *userBstring = comment.nameForReply ? comment.nameForReply : @"无用户名";
         NSMutableAttributedString *userA = [[NSMutableAttributedString alloc] initWithString:userAstring
                                                                                   attributes:userNameAttribute];
         NSMutableAttributedString *reply = [[NSMutableAttributedString alloc] initWithString:@"回复"];
