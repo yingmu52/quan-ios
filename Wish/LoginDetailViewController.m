@@ -105,6 +105,7 @@
 }
 
 - (void)didFinishSettingPersonalInfo{
+    self.navigationController.navigationBar.hidden = YES;
     [self performSegueWithIdentifier:@"showMainView" sender:nil];
 }
 
