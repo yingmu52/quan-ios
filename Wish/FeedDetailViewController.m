@@ -317,7 +317,7 @@
         //do fetchrequest
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Comment"];
         request.predicate = [NSPredicate predicateWithFormat:@"feed.feedId = %@",self.feedId ? self.feedId : self.feed.feedId];
-        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createTime" ascending:NO]];
+        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createTime" ascending:YES]];
         [request setFetchBatchSize:3];
         
         NSFetchedResultsController *newFRC =
