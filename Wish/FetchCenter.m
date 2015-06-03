@@ -54,7 +54,7 @@
 
 #define MESSAGE @"message/"
 #define GET_MESSAGE_LIST @"splan_message_getlist.php"
-
+#define GET_MESSAGE_NOTIFICATION @"splan_count_get.php"
 typedef enum{
     FetchCenterGetOpCreatePlan = 0,
     FetchCenterGetOpDeletePlan,
@@ -77,7 +77,8 @@ typedef enum{
     FetchCenterGetOpGetFeedCommentList,
     FetchCenterGetOpLoadFeedList,
     FetchCenterGetOpFeedBack,
-    FetchCenterGetOpGetMessageList
+    FetchCenterGetOpGetMessageList,
+    FetchCenterGetOpGetMessageNotificationInfo
 }FetchCenterGetOp;
 
 typedef enum{
@@ -109,6 +110,10 @@ typedef enum{
 
 }
 
+- (void)getMessageNotificationInfo{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,MESSAGE,GET_MESSAGE_NOTIFICATION];
+    [self getRequest:rqtStr parameter:nil operation:FetchCenterGetOpGetMessageNotificationInfo entity:nil];
+}
 
 #pragma mark - Comment
 
@@ -749,10 +754,17 @@ typedef enum{
                 }
             }
                 break;
+            case FetchCenterGetOpGetMessageNotificationInfo:{
+                NSNumber *unreadFollowCount = @([[json valueForKeyPath:@"data.unreadCountFollow"] integerValue]);
+                NSNumber *unreadMsgCount = @([[json valueForKeyPath:@"data.unreadCountMsg"] integerValue]);
+                [self.delegate didFinishGettingMessageNotificationWithMessageCount:unreadMsgCount
+                                                                       followCount:unreadFollowCount];
+            }
+                break;
             default:
                 break;
         }
-        NSLog(@"%@",json);
+//        NSLog(@"%@",json);
         [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
     }));
 }

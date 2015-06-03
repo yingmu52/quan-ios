@@ -56,13 +56,14 @@
 - (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
 
-
+- (void)didFinishGettingMessageNotificationWithMessageCount:(NSNumber *)msgCount followCount:(NSNumber *)followCount;
 @end
 @interface FetchCenter : NSObject
 @property (nonatomic,weak) id <FetchCenterDelegate>delegate;
 
 #pragma mark - Message
 - (void)getMessageList;
+- (void)getMessageNotificationInfo;
 
 #pragma mark - Feed
 - (void)loadFeedsListForPlan:(Plan *)plan pageInfo:(NSDictionary *)info;

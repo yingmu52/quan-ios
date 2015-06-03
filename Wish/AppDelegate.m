@@ -11,8 +11,12 @@
 #import <TencentOpenAPI/TencentOAuth.h>
 #import "User.h"
 #import "LoginViewController.h"
-@interface AppDelegate ()
-
+#import "FetchCenter.h"
+@interface AppDelegate () <FetchCenterDelegate>
+@property (strong, nonatomic) NSNumber *messageCount;
+@property (strong, nonatomic) NSNumber *followCount;
+@property (nonatomic,strong) NSTimer *messageNotificationTimer;
+@property (nonatomic,strong) FetchCenter *fetchCenter;
 @end
 
 @implementation AppDelegate
@@ -28,13 +32,13 @@
         self.window.rootViewController = loginVC;
         [self.window makeKeyAndVisible];
     }
-
     return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    self.messageNotificationTimer = nil; //set to nil instead of invalidate
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -48,6 +52,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [self.messageNotificationTimer fire];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -152,4 +157,35 @@
     return delegate.managedObjectContext;
 }
 
+
+#pragma mark - Message Notification
+
+- (FetchCenter *)fetchCenter{
+    if (!_fetchCenter){
+        _fetchCenter = [[FetchCenter alloc] init];
+        _fetchCenter.delegate = self;
+    }
+    return _fetchCenter;
+}
+
+- (NSTimer *)messageNotificationTimer{
+    if (!_messageNotificationTimer) {
+        _messageNotificationTimer  = [NSTimer scheduledTimerWithTimeInterval:30.0f target:self.fetchCenter selector:@selector(getMessageNotificationInfo) userInfo:nil repeats:YES];
+    }
+    return _messageNotificationTimer;
+}
+- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
+    //do nothing
+}
+
+- (void)didFinishGettingMessageNotificationWithMessageCount:(NSNumber *)msgCount followCount:(NSNumber *)followCount{
+    self.messageCount = msgCount;
+    self.followCount = followCount;
+    NSLog(@"message count %@, follow count %@",msgCount,followCount);
+}
+
 @end
+
+
+
+
