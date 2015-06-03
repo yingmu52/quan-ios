@@ -46,27 +46,33 @@
         //create
         feed = [NSEntityDescription insertNewObjectForEntityForName:@"Feed"
                                                    inManagedObjectContext:context];
+        feed.commentCount = @([feedItem[@"commentTimes"] integerValue]);
+        feed.feedTitle = feedItem[@"content"];
+        feed.createDate = [NSDate dateWithTimeIntervalSince1970:[feedItem[@"createTime"] integerValue]];
+        feed.feedId = feedItem[@"id"];
+        feed.likeCount = @([feedItem[@"likeTimes"] integerValue]);
+        feed.imageId = feedItem[@"picurl"];
+        feed.selfLiked = @(NO);
+        if (plan) feed.plan = plan;
+        
     }else{
         //update
         feed = checks.lastObject;
         
     }
-    feed.commentCount = @([feedItem[@"commentTimes"] integerValue]);
-    feed.feedTitle = feedItem[@"content"];
-    feed.createDate = [NSDate dateWithTimeIntervalSince1970:[feedItem[@"createTime"] integerValue]];
-    feed.feedId = feedItem[@"id"];
-    feed.likeCount = @([feedItem[@"likeTimes"] integerValue]);
-    feed.imageId = feedItem[@"picurl"];
-    feed.plan = plan;
-    feed.selfLiked = @(NO);
-    
 //    if ([context save:nil]) {
 //        NSLog(@"updated feed from server");
 //    }
     return feed;
 }
 
-
++ (Feed *)fetchFeedWithId:(NSString *)feedId{
+    NSArray *results = [Plan fetchWith:@"Feed"
+                             predicate:[NSPredicate predicateWithFormat:@"feedId = %@",feedId]
+                      keyForDescriptor:@"createDate"];
+    NSAssert(results.count <= 1, @"feed id is not unique");
+    return results.lastObject;
+}
 @end
 
 

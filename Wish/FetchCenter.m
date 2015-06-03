@@ -112,16 +112,16 @@ typedef enum{
 
 #pragma mark - Comment
 
-- (void)getCommentListForFeed:(Feed *)feed pageInfo:(NSDictionary *)info{
+- (void)getCommentListForFeed:(NSString *)feedId pageInfo:(NSDictionary *)info{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,GET_FEED_COMMENTS];
     NSString *infoStr = info ? [self convertDictionaryToString:info] : @"";
     
-    NSDictionary *args = @{@"feedsId":feed.feedId,
+    NSDictionary *args = @{@"feedsId":feedId,
                            @"attachInfo":infoStr};
     [self getRequest:rqtStr
            parameter:args
            operation:FetchCenterGetOpGetFeedCommentList
-              entity:feed];
+              entity:nil];
 }
 
 - (void)commentOnFeed:(Feed *)feed content:(NSString *)text{
@@ -683,8 +683,10 @@ typedef enum{
                 NSDictionary *ownerInfo = [json valueForKeyPath:@"data.manList"];
                 BOOL hasNextPage = [[json valueForKeyPath:@"data.isMore"] boolValue];
                 NSDictionary *pageInfo = [json valueForKeyPath:@"data.attachInfo"];
-
-                Feed *feed = (Feed *)obj;
+                NSDictionary *feedInfo = [json valueForKeyPath:@"data.feeds"];
+                
+                Feed *feed = [Feed updateFeedWithInfo:feedInfo forPlan:nil];
+                
                 for (NSDictionary *commentInfo in comments){
                     Comment *comment = [Comment updateCommentWithInfo:commentInfo];
                     
@@ -698,7 +700,7 @@ typedef enum{
 //                    NSLog(@"Comments %@",comment);
 //                    NSLog(@"Owner %@",comment.owner);
                 }
-                [self.delegate didFinishLoadingCommentList:pageInfo hasNextPage:hasNextPage];
+                [self.delegate didFinishLoadingCommentList:pageInfo hasNextPage:hasNextPage forFeed:feed];
             }
                 break;
             case FetchCenterGetOpDeleteFeed:{

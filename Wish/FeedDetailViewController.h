@@ -9,6 +9,5 @@
 #import <UIKit/UIKit.h>
 #import "Feed.h"
 @interface FeedDetailViewController : UITableViewController
-@property (nonatomic,strong) Feed *feed;
 @property (nonatomic,strong) NSString *feedId; //for Message List View
 @end

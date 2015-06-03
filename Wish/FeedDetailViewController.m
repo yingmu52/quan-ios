@@ -15,7 +15,8 @@
 #import "CommentAcessaryView.h"
 #import "AppDelegate.h"
 #import "UIImageView+WebCache.h"
-
+#import "Feed+FeedCRUD.h"
+#import "SDWebImageCompat.h"
 @interface FeedDetailViewController () <FetchCenterDelegate,CommentAcessaryViewDelegate,NSFetchedResultsControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
@@ -27,7 +28,7 @@
 @property (strong, nonatomic) FetchCenter *fetchCenter;
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @property (strong,nonatomic) CommentAcessaryView *commentView;
-
+@property (nonatomic,strong) Feed *feed;
 
 
 @property (nonatomic) BOOL hasNextPage;
@@ -40,22 +41,38 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self setUpNavigationItem];
-    [self setupContents];
+    [self updateHeaderInfoForFeed:self.feed];
 
     //load comments
     self.hasNextPage = YES;
     [self loadComments];
 }
 
-- (void)setupContents{
-    self.imageView.image = self.feed.image;
-    self.headerLabel.text = self.feed.feedTitle;
-    self.dateLabel.text = [SystemUtil stringFromDate:self.feed.createDate];
-    self.likeCountLabel.text = [NSString stringWithFormat:@"%@",self.feed.likeCount];
-    self.commentCountLabel.text = [NSString stringWithFormat:@"%@",self.feed.commentCount];
-    [self.likeButton setImage:(self.feed.selfLiked.boolValue ? [Theme likeButtonLiked] : [Theme likeButtonUnLiked]) forState:UIControlStateNormal];
+- (void)updateHeaderInfoForFeed:(Feed *)feed{
+    if (feed){
+        if (feed.image){
+            self.imageView.image = feed.image;
+        }else{
+            [self.imageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:feed.imageId]
+                              placeholderImage:[UIImage imageNamed:@"placeholder.png"]
+                                     completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                         feed.image = image;
+                                     }];
+        }
+        self.headerLabel.text = feed.feedTitle;
+        self.dateLabel.text = [SystemUtil stringFromDate:feed.createDate];
+        self.likeCountLabel.text = [NSString stringWithFormat:@"%@",feed.likeCount];
+        self.commentCountLabel.text = [NSString stringWithFormat:@"%@",feed.commentCount];
+        [self.likeButton setImage:(feed.selfLiked.boolValue ? [Theme likeButtonLiked] : [Theme likeButtonUnLiked]) forState:UIControlStateNormal];
+    }
 }
 
+- (void)setFeed:(Feed *)feed{
+    if (_feed != feed){
+        [self updateHeaderInfoForFeed:feed];
+    }
+    _feed = feed;
+}
 
 - (void)setUpNavigationItem
 {
@@ -122,15 +139,9 @@
 }
 
 
-#pragma mark - table view 
-
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return UITableViewAutomaticDimension;
-}
+#pragma mark - table view
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-
     return UITableViewAutomaticDimension;
 }
 
@@ -239,7 +250,7 @@
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
     self.likeButton.userInteractionEnabled = YES;
     NSLog(@"%@",info);
-    self.navigationItem.rightBarButtonItem = nil;
+//    self.navigationItem.rightBarButtonItem = nil;
 
 //    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
 //                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
@@ -291,10 +302,10 @@
     self.commentView.textField.text = @"";
 }
 
-- (void)didFinishLoadingCommentList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage{
+- (void)didFinishLoadingCommentList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage forFeed:(Feed *)feed{
     self.hasNextPage = hasNextPage;
     self.pageInfo = pageInfo;
-    self.navigationItem.rightBarButtonItem = nil;
+    self.feed = feed;
 }
 
 #pragma mark - fetched results controller 
@@ -305,7 +316,7 @@
         
         //do fetchrequest
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Comment"];
-        request.predicate = [NSPredicate predicateWithFormat:@"feed = %@",self.feed];
+        request.predicate = [NSPredicate predicateWithFormat:@"feed.feedId = %@",self.feedId ? self.feedId : self.feed.feedId];
         request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createTime" ascending:NO]];
         [request setFetchBatchSize:3];
         
@@ -336,22 +347,25 @@
 {
     switch(type)
     {
-        case NSFetchedResultsChangeInsert:
+        case NSFetchedResultsChangeInsert:{
             [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
-                                  withRowAnimation:UITableViewRowAnimationNone];
+                                  withRowAnimation:UITableViewRowAnimationAutomatic];
             NSLog(@"Comment inserted");
+        }
             break;
             
-        case NSFetchedResultsChangeDelete:
+        case NSFetchedResultsChangeDelete:{
             [self.tableView deleteRowsAtIndexPaths:@[indexPath]
                                   withRowAnimation:UITableViewRowAnimationAutomatic];
             NSLog(@"Comment deleted");
+        }
             break;
             
-        case NSFetchedResultsChangeUpdate:
+        case NSFetchedResultsChangeUpdate:{
             [self.tableView reloadRowsAtIndexPaths:@[indexPath]
-                                  withRowAnimation:UITableViewRowAnimationNone];
+                                  withRowAnimation:UITableViewRowAnimationAutomatic];
             NSLog(@"Comment updated");
+        }
             break;
         default:
             break;
@@ -394,12 +408,10 @@
 
 
 - (void)loadComments{
-    if (self.feed){
-        UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
-        [spinner startAnimating];
-        [self.fetchCenter getCommentListForFeed:self.feed pageInfo:self.pageInfo];
-    }
+    // if self.feed is not at local than use feedId to fetchFrom the Cloud
+    NSString *feedId = self.feed.feedId ? self.feed.feedId : self.feedId;
+    NSAssert(feedId, @"nil feedId");
+    [self.fetchCenter getCommentListForFeed:feedId pageInfo:self.pageInfo];
 }
 
 #pragma mark - delete local comments to insync with server
@@ -411,27 +423,11 @@
 //    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
 //}
 
-#pragma mark - set up for message view 
-
-/*
- 1. When set self.feedId, fetch local database.
- 2. set self.feed to the local feed instance.
- 3. if self.feed does not exist, then fetch only and get feed
- */
+#pragma mark - set up for message view
 
 - (void)setFeedId:(NSString *)feedId{
     _feedId = feedId;
-    NSArray *results = [Plan fetchWith:@"Feed"
-                             predicate:[NSPredicate predicateWithFormat:@"feedId = %@",feedId]
-                      keyForDescriptor:@"createDate"];
-    NSAssert(results.count <= 1, @"feed id is not unique");
-    
-    if (results.count) {
-        self.feed = results.lastObject;
-    }else{
-        //load Feed from online
-#warning need to work on this !
-    }
+    self.feed = [Feed fetchFeedWithId:_feedId];
 }
 @end
 

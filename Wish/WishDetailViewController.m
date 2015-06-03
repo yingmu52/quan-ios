@@ -207,7 +207,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     Feed *feed = [self.fetchedRC objectAtIndexPath:indexPath];
     if (feed.feedId){ //prevent crash
-        [self performSegueWithIdentifier:[self segueForFeed] sender:feed];
+        [self performSegueWithIdentifier:[self segueForFeed] sender:feed.feedId];
     }
 }
 
@@ -326,7 +326,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:[self segueForFeed]]){
-        [segue.destinationViewController setFeed:sender];
+        [segue.destinationViewController setFeedId:sender];
     }
 }
 
