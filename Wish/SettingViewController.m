@@ -38,9 +38,11 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.title = @"设置";
+}
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     [self becomeFirstResponder];
 }
-
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self resignFirstResponder];
@@ -72,8 +74,8 @@
 {
     CGRect frame = CGRectMake(0,0, 25,25);
     UIButton *back = [Theme buttonWithImage:[Theme navBackButtonDefault]
-                                     target:self.slidingViewController
-                                   selector:@selector(anchorTopViewToRightAnimated:)
+                                     target:self
+                                   selector:@selector(dismissModalViewControllerAnimated:)
                                       frame:frame];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:back];
     

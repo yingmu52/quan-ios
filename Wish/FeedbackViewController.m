@@ -49,8 +49,8 @@
     
     CGRect frame = CGRectMake(0,0, 25,25);
     UIButton *backBtn = [Theme buttonWithImage:[Theme navBackButtonDefault]
-                                        target:self.slidingViewController
-                                      selector:@selector(anchorTopViewToRightAnimated:)
+                                        target:self
+                                      selector:@selector(dismissModalViewControllerAnimated:)
                                          frame:frame];
     self.tikButton = [Theme buttonWithImage:[Theme navTikButtonDefault]
                                      target:self
@@ -61,6 +61,7 @@
     self.textView.inputAccessoryView = self.feedbackAccessoryView;
 
 }
+
 
 - (FeedbackkAccessoryView *)feedbackAccessoryView{
     if (!_feedbackAccessoryView){

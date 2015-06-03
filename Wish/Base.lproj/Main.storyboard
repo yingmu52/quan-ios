@@ -714,7 +714,7 @@
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <connections>
-                                                                <segue destination="uQz-XF-LbE" kind="custom" customClass="ECSlidingSegue" id="pdM-Yj-CUA"/>
+                                                                <segue destination="uQz-XF-LbE" kind="presentation" modalTransitionStyle="crossDissolve" id="pdM-Yj-CUA"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -814,7 +814,7 @@
                         <segue destination="hMT-8j-PB2" kind="custom" identifier="ShowFollowingFeed" customClass="ECSlidingSegue" id="Dpd-CX-I1h"/>
                         <segue destination="qWQ-Vi-JtX" kind="custom" identifier="ShowDiscoveryList" customClass="ECSlidingSegue" id="EIs-hJ-8hx"/>
                         <segue destination="6Q3-IH-cnc" kind="custom" identifier="ShowAcheivementList" customClass="ECSlidingSegue" id="F8M-fd-Ue6"/>
-                        <segue destination="2Fl-7V-mVz" kind="custom" identifier="showSettingView" customClass="ECSlidingSegue" id="xYo-RT-VgZ"/>
+                        <segue destination="2Fl-7V-mVz" kind="presentation" identifier="showSettingView" modalTransitionStyle="crossDissolve" id="xYo-RT-VgZ"/>
                         <segue destination="m7d-Re-JGr" kind="custom" identifier="showMessageListView" customClass="ECSlidingSegue" id="GQx-yR-ZaO"/>
                     </connections>
                 </tableViewController>
