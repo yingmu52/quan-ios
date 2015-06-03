@@ -72,9 +72,9 @@
 {
     CGRect frame = CGRectMake(0,0, 25,25);
     UIButton *back = [Theme buttonWithImage:[Theme navBackButtonDefault]
-                                        target:self
-                                      selector:@selector(dismissModalViewControllerAnimated:)
-                                         frame:frame];
+                                     target:self.slidingViewController
+                                   selector:@selector(anchorTopViewToRightAnimated:)
+                                      frame:frame];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:back];
     
 }

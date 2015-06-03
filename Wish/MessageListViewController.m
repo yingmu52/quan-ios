@@ -13,6 +13,7 @@
 #import "Owner.h"
 #import "UIImageView+WebCache.h"
 #import "FeedDetailViewController.h"
+#import "UIViewController+ECSlidingViewController.h"
 @interface MessageListViewController () <FetchCenterDelegate,NSFetchedResultsControllerDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
@@ -39,8 +40,8 @@
 {
     CGRect frame = CGRectMake(0,0, 25,25);
     UIButton *back = [Theme buttonWithImage:[Theme navBackButtonDefault]
-                                     target:self
-                                   selector:@selector(dismissModalViewControllerAnimated:)
+                                     target:self.slidingViewController
+                                   selector:@selector(anchorTopViewToRightAnimated:)
                                       frame:frame];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:back];
     self.navigationItem.title = @"消息";

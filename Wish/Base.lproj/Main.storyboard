@@ -714,7 +714,7 @@
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <connections>
-                                                                <segue destination="uQz-XF-LbE" kind="presentation" id="pdM-Yj-CUA"/>
+                                                                <segue destination="uQz-XF-LbE" kind="custom" customClass="ECSlidingSegue" id="pdM-Yj-CUA"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -814,8 +814,8 @@
                         <segue destination="hMT-8j-PB2" kind="custom" identifier="ShowFollowingFeed" customClass="ECSlidingSegue" id="Dpd-CX-I1h"/>
                         <segue destination="qWQ-Vi-JtX" kind="custom" identifier="ShowDiscoveryList" customClass="ECSlidingSegue" id="EIs-hJ-8hx"/>
                         <segue destination="6Q3-IH-cnc" kind="custom" identifier="ShowAcheivementList" customClass="ECSlidingSegue" id="F8M-fd-Ue6"/>
-                        <segue destination="2Fl-7V-mVz" kind="custom" identifier="showSettingView" customClass="ModalLeftToRightSegue" id="xYo-RT-VgZ"/>
-                        <segue destination="m7d-Re-JGr" kind="presentation" identifier="showMessageListView" id="GQx-yR-ZaO"/>
+                        <segue destination="2Fl-7V-mVz" kind="custom" identifier="showSettingView" customClass="ECSlidingSegue" id="xYo-RT-VgZ"/>
+                        <segue destination="m7d-Re-JGr" kind="custom" identifier="showMessageListView" customClass="ECSlidingSegue" id="GQx-yR-ZaO"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bw4-56-w5H" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4196,7 +4196,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qBZ-x7-vS6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5010" y="-294"/>
+            <point key="canvasLocation" x="-54" y="1872"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dRt-gq-QIx">
@@ -4212,7 +4212,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ltE-cf-kVI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-6243" y="1543.5"/>
+            <point key="canvasLocation" x="-3891" y="-19.5"/>
         </scene>
         <!--Feedback View Controller-->
         <scene sceneID="Q1I-NJ-5oY">
@@ -4275,7 +4275,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q0N-5Z-lB6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5089.5" y="1617"/>
+            <point key="canvasLocation" x="-3913.5" y="1053"/>
         </scene>
         <!--Setting View Controller-->
         <scene sceneID="p9F-bV-MOz">
@@ -4759,7 +4759,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bDw-Cl-yWH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3451.5" y="373.5"/>
+            <point key="canvasLocation" x="-2203.5" y="1489.5"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="Jmd-XO-3ZT">
@@ -5194,7 +5194,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gYH-6l-u3n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2455" y="1928"/>
+            <point key="canvasLocation" x="-4027.5" y="2059.5"/>
         </scene>
         <!--Edit Wish View Controller-->
         <scene sceneID="Zq5-lh-qnj">
@@ -6054,11 +6054,11 @@
         <image name="tips_bg" width="69" height="69"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9SL-Jw-Apx"/>
-        <segue reference="CTd-gb-xTE"/>
-        <segue reference="DTM-of-qhC"/>
-        <segue reference="sa3-BT-zY6"/>
         <segue reference="cel-0L-eNY"/>
+        <segue reference="sa3-BT-zY6"/>
+        <segue reference="DTM-of-qhC"/>
+        <segue reference="CTd-gb-xTE"/>
         <segue reference="4ZT-53-1QA"/>
+        <segue reference="9SL-Jw-Apx"/>
     </inferredMetricsTieBreakers>
 </document>

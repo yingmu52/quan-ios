@@ -12,6 +12,7 @@
 #import "SDWebImageCompat.h"
 #import "FeedbackkAccessoryView.h"
 #import "GCPTextView.h"
+#import "UIViewController+ECSlidingViewController.h"
 @interface FeedbackViewController () <FetchCenterDelegate,UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet GCPTextView *textView;
 @property (nonatomic,strong) UIButton *tikButton;
@@ -48,8 +49,8 @@
     
     CGRect frame = CGRectMake(0,0, 25,25);
     UIButton *backBtn = [Theme buttonWithImage:[Theme navBackButtonDefault]
-                                        target:self
-                                      selector:@selector(dismissController)
+                                        target:self.slidingViewController
+                                      selector:@selector(anchorTopViewToRightAnimated:)
                                          frame:frame];
     self.tikButton = [Theme buttonWithImage:[Theme navTikButtonDefault]
                                      target:self
