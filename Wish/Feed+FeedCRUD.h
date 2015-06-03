@@ -17,4 +17,6 @@
 + (Feed *)updateFeedWithInfo:(NSDictionary *)feedItem forPlan:(Plan *)plan;
 
 + (Feed *)fetchFeedWithId:(NSString *)feedId;
+
+- (void)deleteSelf;
 @end

@@ -73,6 +73,15 @@
     NSAssert(results.count <= 1, @"feed id is not unique");
     return results.lastObject;
 }
+
+- (void)deleteSelf{
+    //delete Feed
+    [[AppDelegate getContext] deleteObject:self];
+    //tryTime - 1
+    self.plan.tryTimes = @(self.plan.tryTimes.integerValue - 1);
+    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
+
+}
 @end
 
 
