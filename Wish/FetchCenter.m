@@ -759,6 +759,8 @@ typedef enum{
                 NSNumber *unreadMsgCount = @([[json valueForKeyPath:@"data.unreadCountMsg"] integerValue]);
                 [self.delegate didFinishGettingMessageNotificationWithMessageCount:unreadMsgCount
                                                                        followCount:unreadFollowCount];
+//                NSLog(@"%@",json);
+
             }
                 break;
             default:

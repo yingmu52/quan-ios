@@ -13,10 +13,10 @@
 #import "LoginViewController.h"
 #import "FetchCenter.h"
 @interface AppDelegate () <FetchCenterDelegate>
-@property (strong, nonatomic) NSNumber *messageCount;
-@property (strong, nonatomic) NSNumber *followCount;
 @property (nonatomic,strong) NSTimer *messageNotificationTimer;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
+@property (strong, nonatomic) NSNumber *messageCount;
+@property (strong, nonatomic) NSNumber *followCount;
 @end
 
 @implementation AppDelegate
@@ -26,6 +26,7 @@
         ECSlidingViewController *root = (ECSlidingViewController *)self.window.rootViewController;
         root.anchorRightPeekAmount = root.view.frame.size.width * (640 - 290.0)/640;
         root.underLeftViewController.edgesForExtendedLayout = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeLeft;
+        [self.messageNotificationTimer fire];
     }else{
         UIStoryboard *storyBoard = self.window.rootViewController.storyboard;
         LoginViewController *loginVC = [storyBoard instantiateViewControllerWithIdentifier:@"LoginNavigationController"];
@@ -44,6 +45,7 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [self.messageNotificationTimer invalidate];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -59,6 +61,7 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
+    self.messageNotificationTimer = nil;
 }
 
 #pragma mark - Tencent
@@ -170,7 +173,7 @@
 
 - (NSTimer *)messageNotificationTimer{
     if (!_messageNotificationTimer) {
-        _messageNotificationTimer  = [NSTimer scheduledTimerWithTimeInterval:30.0f target:self.fetchCenter selector:@selector(getMessageNotificationInfo) userInfo:nil repeats:YES];
+        _messageNotificationTimer  = [NSTimer scheduledTimerWithTimeInterval:30.0f target:self selector:@selector(requestMessageCount) userInfo:nil repeats:YES];
     }
     return _messageNotificationTimer;
 }
@@ -182,8 +185,30 @@
     self.messageCount = msgCount;
     self.followCount = followCount;
     NSLog(@"message count %@, follow count %@",msgCount,followCount);
+    self.numberOfMessages = @(msgCount.integerValue + followCount.integerValue);
 }
 
+- (NSNumber *)messageCount{
+    if (!_messageCount) {
+        _messageCount = @(0);
+    }
+    return _messageCount;
+}
+
+- (NSNumber *)followCount{
+    if (!_followCount) {
+        _followCount = @(0);
+    }
+    return _followCount;
+}
+
+- (void)requestMessageCount{
+    if ([User isUserLogin]) {
+        [self.fetchCenter getMessageNotificationInfo];
+    }else{
+        [self.messageNotificationTimer invalidate];
+    }
+}
 @end
 
 

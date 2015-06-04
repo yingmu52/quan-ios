@@ -14,6 +14,9 @@
 #import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 #import "UIViewController+ECSlidingViewController.h"
 #import "FetchCenter.h"
+#import "UIView+Shake.h"
+#import "CustomBadge.h"
+#import "UIView+Shake.h"
 typedef enum {
     MenuTableMyEvent = 0,
 //    MenuTableJourney,
@@ -32,16 +35,89 @@ typedef enum {
 @interface MenuViewController () 
 
 @property (nonatomic,weak) IBOutlet UILabel *versionLabel;
+@property (nonatomic,strong) CustomBadge *badage;
 @end
 
 
 @implementation MenuViewController
 
 
+#pragma mark - observe message notification
+- (void)tuneInMessageNotification{
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [delegate addObserver:self
+               forKeyPath:@"numberOfMessages"
+                  options:NSKeyValueObservingOptionNew
+                  context:NULL];
+}
+
+- (void)tuneOutMessageNotification{
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [delegate removeObserver:self forKeyPath:@"numberOfMessages"];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+    [self tuneInMessageNotification];
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [self tuneOutMessageNotification];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+
+    if ([keyPath isEqualToString:@"numberOfMessages"]) {
+        id value = [change objectForKey:@"new"];
+        NSInteger count = [value integerValue];
+        MenuCell *cell = (MenuCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:MenuTableMessage
+                                                                                              inSection:MenuSectionMid]];
+        if (count > 0) {
+            //update message cell
+            
+            //remove badage in case it exist previously
+            [self.badage removeFromSuperview];
+            self.badage = nil;
+            
+            //set badge text
+            self.badage.badgeText = [NSString stringWithFormat:@"%@",value];
+            
+            //set position of the badage
+            CGPoint point = cell.menuTitle.center;
+            point.x += cell.menuTitle.frame.size.width/2 + self.badage.frame.size.width;
+            self.badage.center = point;
+            [cell addSubview:self.badage];
+            
+            //shake
+            if (!self.badage.isShaking) {
+                [self.badage shakeWithOptions:SCShakeOptionsDirectionRotate | SCShakeOptionsForceInterpolationExpDown | SCShakeOptionsAtEndRestart | SCShakeOptionsAutoreverse force:0.15 duration:2.0 iterationDuration:0.03 completionHandler:nil];
+
+            }
+        }else{
+            //resume message cell
+            [self.badage endShake];
+            [self.badage removeFromSuperview];
+            self.badage = nil;
+            cell.menuTitle.text = @"消息";
+        }
+    }
+}
+
+- (CustomBadge *)badage{
+    if (!_badage) {
+        _badage = [CustomBadge customBadgeWithString:nil withStyle:[BadgeStyle oldStyle]];
+    }
+    return _badage;
+}
+#pragma mark -
+
 - (void)setVersionLabel:(UILabel *)versionLabel{
     _versionLabel = versionLabel;
-    _versionLabel.text = @"Version 3.1.0";
+    _versionLabel.text = @"Version 3.1.1";
 }
+
 - (IBAction)showSettingsView:(UIButton *)sender{
     [self performSegueWithIdentifier:@"showSettingView" sender:nil];
 }
@@ -57,10 +133,7 @@ typedef enum {
     self.tableView.backgroundColor = [Theme menuBackground];
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self.tableView reloadData];
-}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat heightRef = tableView.frame.size.height;
