@@ -154,8 +154,34 @@
 
 #pragma mark - table view
 
+#define kAvatarSize 40.0f
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return UITableViewAutomaticDimension;
+//    return UITableViewAutomaticDimension;
+    Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
+    
+    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+    paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraphStyle.alignment = NSTextAlignmentLeft;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0],
+                                 NSParagraphStyleAttributeName: paragraphStyle};
+    
+    CGFloat width = CGRectGetWidth(tableView.frame);
+    
+    CGRect bounds = [comment.content boundingRectWithSize:CGSizeMake(width, 0.0) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:NULL];
+    
+//    if (message.length == 0) {
+//        return 0.0;
+//    }
+//    
+    CGFloat height = roundf(CGRectGetHeight(bounds)+kAvatarSize);
+//    
+//    if (height < kMinimumHeight) {
+//        height = kMinimumHeight;
+//    }
+//    
+    return height;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -177,7 +203,6 @@
         cell.profileImageView.image = comment.owner.image;
     }
     cell.contentLabel.text = comment.content;
-    
     NSDictionary *userNameAttribute = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00B9C0"]};
 
     NSString *userAstring = comment.owner.ownerName ? comment.owner.ownerName : @"无用户名";
