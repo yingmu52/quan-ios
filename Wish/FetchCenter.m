@@ -666,13 +666,13 @@ typedef enum{
                 break;
             case FetchCenterGetOpLikeAFeed:{
                 Feed *feed = (Feed *)obj;
-                [self.delegate didFinishLikingFeed:feed];
+//                [self.delegate didFinishLikingFeed:feed];
                 NSLog(@"liked feed ID %@",feed.feedId);
             }
                 break;
             case FetchCenterGetOpUnLikeAFeed:{
                 Feed *feed = (Feed *)obj;
-                [self.delegate didFinishUnLikingFeed:feed];
+//                [self.delegate didFinishUnLikingFeed:feed];
                 NSLog(@"unliked feed ID %@",feed.feedId);
             }
                 break;

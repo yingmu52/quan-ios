@@ -260,30 +260,32 @@
 - (IBAction)likeButtonPressed{
     if (!self.feed.selfLiked.boolValue) {
         [self.likeButton setImage:[Theme likeButtonLiked] forState:UIControlStateNormal];
+        
+        //increase feed like count
+        self.feed.likeCount = @(self.feed.likeCount.integerValue + 1);
+        self.feed.selfLiked = @(YES);
+        self.likeCountLabel.text = [NSString stringWithFormat:@"%@",self.feed.likeCount];
+
         [self.fetchCenter likeFeed:self.feed];
     }else{
         [self.likeButton setImage:[Theme likeButtonUnLiked] forState:UIControlStateNormal];
+    
+        //decrease feed like count
+        self.feed.likeCount = @(self.feed.likeCount.integerValue - 1);
+        self.feed.selfLiked = @(NO);
+        self.likeCountLabel.text = [NSString stringWithFormat:@"%@",self.feed.likeCount];
+
+        
         [self.fetchCenter unLikeFeed:self.feed];
     }
-    self.likeButton.userInteractionEnabled = NO;
 
 }
 
-- (void)didFinishUnLikingFeed:(Feed *)feed{
-    self.likeButton.userInteractionEnabled = YES;
-    //decrease feed like count
-    feed.likeCount = @(self.feed.likeCount.integerValue - 1);
-    feed.selfLiked = @(NO);
-    self.likeCountLabel.text = [NSString stringWithFormat:@"%@",feed.likeCount];
-}
-
-- (void)didFinishLikingFeed:(Feed *)feed{
-    self.likeButton.userInteractionEnabled = YES;
-    //increase feed like count
-    feed.likeCount = @(self.feed.likeCount.integerValue + 1);
-    feed.selfLiked = @(YES);
-    self.likeCountLabel.text = [NSString stringWithFormat:@"%@",feed.likeCount];
-}
+//- (void)didFinishUnLikingFeed:(Feed *)feed{
+//}
+//
+//- (void)didFinishLikingFeed:(Feed *)feed{
+//}
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
     self.likeButton.userInteractionEnabled = YES;

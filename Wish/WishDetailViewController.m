@@ -235,13 +235,13 @@
     }
 }
 
-- (void)didFinishUnLikingFeed:(Feed *)feed{
-    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
-}
-
-- (void)didFinishLikingFeed:(Feed *)feed{
-    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
-}
+//- (void)didFinishUnLikingFeed:(Feed *)feed{
+//    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
+//}
+//
+//- (void)didFinishLikingFeed:(Feed *)feed{
+//    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
+//}
 
 #pragma mark - did scroll to bottom (load more)
 - (void)scrollViewDidEndDragging:(UIScrollView *)aScrollView
