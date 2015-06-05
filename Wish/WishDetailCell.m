@@ -14,7 +14,6 @@
 - (void)awakeFromNib {
     // Initialization code
     self.backgroundColor = [UIColor clearColor];
-
 }
 
 - (IBAction)like:(UIButton *)sender{
