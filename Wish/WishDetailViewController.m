@@ -218,25 +218,29 @@
     //the following request must respect the current cell.feed like/dislike status
     Feed *feed = [self.fetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
     if (!feed.selfLiked.boolValue) {
+        //increase feed like count
+        feed.likeCount = @(feed.likeCount.integerValue + 1);
+        feed.selfLiked = @(YES);
+        
+        //send like request
         [self.fetchCenter likeFeed:feed];
     }else{
+        
+        //decrease feed like count
+        feed.likeCount = @(feed.likeCount.integerValue - 1);
+        feed.selfLiked = @(NO);
+        
+        //send unlike request
         [self.fetchCenter unLikeFeed:feed];
     }
 }
 
 - (void)didFinishUnLikingFeed:(Feed *)feed{
-    //decrease feed like count
-    feed.likeCount = @(feed.likeCount.integerValue - 1);
-    feed.selfLiked = @(NO);
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
 }
 
 - (void)didFinishLikingFeed:(Feed *)feed{
-    //increase feed like count
-    feed.likeCount = @(feed.likeCount.integerValue + 1);
-    feed.selfLiked = @(YES);
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
-//    self.likeCountLabel.text = [NSString stringWithFormat:@"%@",feed.likeCount];
 }
 
 #pragma mark - did scroll to bottom (load more)
@@ -287,11 +291,11 @@
 #pragma mark - fetch center delegate 
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
-                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
-                               delegate:self
-                      cancelButtonTitle:@"OK"
-                      otherButtonTitles:nil, nil] show];
+//    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
+//                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
+//                               delegate:self
+//                      cancelButtonTitle:@"OK"
+//                      otherButtonTitles:nil, nil] show];
     
     self.headerView.followButton.hidden = NO; //show follow button on request failure.
 
