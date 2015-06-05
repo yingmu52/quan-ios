@@ -177,8 +177,11 @@ typedef enum {
             case MenuTableFollow:
                 identifier = @"ShowFollowingFeed";
                 break;
-            case MenuTableMessage:
+            case MenuTableMessage:{
                 identifier = @"showMessageListView";
+                [self.badage removeFromSuperview];
+                self.badage = nil;   
+            }
                 break;
             default:
                 break;
