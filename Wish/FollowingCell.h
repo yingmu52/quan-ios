@@ -23,7 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *bottomLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
-@property (nonatomic,strong) Plan *plan;
+@property (nonatomic,strong) NSArray *feedsArray;
 
 @property (nonatomic,weak) id <FollowingCellDelegate> delegate;
 @end

@@ -714,6 +714,7 @@ typedef enum{
 //                    NSLog(@"Comments %@",comment);
 //                    NSLog(@"Owner %@",comment.owner);
                 }
+                NSLog(@"%@",json);
                 [self.delegate didFinishLoadingCommentList:pageInfo hasNextPage:hasNextPage forFeed:feed];
             }
                 break;

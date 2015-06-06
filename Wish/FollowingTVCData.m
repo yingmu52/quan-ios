@@ -16,6 +16,7 @@
 #import "Theme.h"
 #import "User.h"
 #import "SDWebImageCompat.h"
+static NSUInteger numberOfPreloadedFeeds = 3;
 
 @interface FollowingTVCData () <NSFetchedResultsControllerDelegate,FetchCenterDelegate,FollowingCellDelegate,ECSlidingViewControllerDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
@@ -44,12 +45,13 @@
 #pragma mark - segue
 
 - (void)didPressMoreButtonForCell:(FollowingCell *)cell{
-    [self performSegueWithIdentifier:@"showFollowerWishDetail" sender:cell];
+    Plan *plan = [self.fetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
+    [self performSegueWithIdentifier:@"showFollowerWishDetail" sender:plan];
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(FollowingCell *)sender{
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(Plan *)plan{
     if ([segue.identifier isEqualToString:@"showFollowerWishDetail"]) {
-        [segue.destinationViewController setPlan:sender.plan];
+        [segue.destinationViewController setPlan:plan];
     }
 }
 
@@ -62,15 +64,19 @@
 - (void)configureFollowingCell:(FollowingCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
     
-#warning !!!!!!!!!
-    Feed *feed = [[plan.feeds allObjects] firstObject];
     //update Plan Info
-    cell.bottomLabel.text = feed ? feed.feedTitle : @"无标题";
     cell.headTitleLabel.text = plan.planTitle;
     cell.headDateLabel.text = [NSString stringWithFormat:@"更新于 %@",[SystemUtil stringFromDate:plan.updateDate]];
-    cell.plan = plan; // must set
     cell.delegate = self;
     
+    //fetch feeds array
+    NSArray *array = plan.feeds.allObjects;
+    if (array.count > numberOfPreloadedFeeds) {
+        array = [array subarrayWithRange:NSMakeRange(0, numberOfPreloadedFeeds)];
+    }
+    cell.feedsArray = [array sortedArrayUsingComparator:^NSComparisonResult(Feed *feed1, Feed *feed2) {
+        return [feed2.createDate compare:feed1.createDate];
+    }];
     //update User Info
     cell.headUserNameLabel.text = plan.owner.ownerName;
     [cell.headProfilePic sd_setImageWithURL:[self.fetchCenter urlWithImageID:plan.owner.headUrl]

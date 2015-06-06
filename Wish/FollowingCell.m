@@ -15,29 +15,22 @@
 #import "FetchCenter.h"
 @import CoreData;
 @import QuartzCore;
-static NSUInteger numberOfPreloadedFeeds = 3;
-
 
 @interface FollowingCell () <UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,NSFetchedResultsControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *feedBackground;
 @property (weak, nonatomic) IBOutlet UIView *headBackground;
-@property (nonatomic,strong) NSArray *feedsArray;
 @end
 @implementation FollowingCell
 
-- (IBAction)loadMore:(UIButton *)sender{
-    [self.delegate didPressMoreButtonForCell:self];
+- (void)setFeedsArray:(NSArray *)feedsArray{
+    _feedsArray = feedsArray;
+    Feed *feed = _feedsArray.firstObject;
+    self.bottomLabel.text = feed.feedTitle;
+    [self.collectionView reloadData];
 }
 
-- (void)setPlan:(Plan *)plan{
-    _plan = plan;
-    NSArray *feeds = _plan.feeds.allObjects;
-    if (_plan.feeds.count > numberOfPreloadedFeeds) {
-        self.feedsArray = [_plan.feeds.allObjects subarrayWithRange:NSMakeRange(0, numberOfPreloadedFeeds)];
-    }else{
-        self.feedsArray = [feeds mutableCopy];
-    }
-    [self.collectionView reloadData];
+- (IBAction)loadMore:(UIButton *)sender{
+    [self.delegate didPressMoreButtonForCell:self];
 }
 
 #pragma mark - collection view delegate and data source
