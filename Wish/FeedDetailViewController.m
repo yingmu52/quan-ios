@@ -18,14 +18,9 @@
 #import "Feed+FeedCRUD.h"
 #import "SDWebImageCompat.h"
 #import "PopupView.h"
-@interface FeedDetailViewController () <FetchCenterDelegate,CommentAcessaryViewDelegate,NSFetchedResultsControllerDelegate,PopupViewDelegate>
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *likeCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *commentCountLabel;
-@property (weak, nonatomic) IBOutlet UIView* tableHeaderViewWrapper;
-@property (weak, nonatomic) IBOutlet UILabel* headerLabel;
-@property (weak, nonatomic) IBOutlet UIButton *likeButton;
+#import "FeedDetailHeader.h"
+@interface FeedDetailViewController () <FetchCenterDelegate,CommentAcessaryViewDelegate,NSFetchedResultsControllerDelegate,PopupViewDelegate,FeedDetailHeaderDelegate>
+
 @property (strong, nonatomic) FetchCenter *fetchCenter;
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @property (strong,nonatomic) CommentAcessaryView *commentView;
@@ -34,38 +29,21 @@
 
 @property (nonatomic) BOOL hasNextPage;
 @property (nonatomic,strong) NSDictionary *pageInfo;
+
+@property (nonatomic,strong) FeedDetailHeader *headerView;
 @end
 
 @implementation FeedDetailViewController
 
-
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self setUpNavigationItem];
+    [self setupHeaderView];
     [self updateHeaderInfoForFeed:self.feed];
 
     //load comments
     self.hasNextPage = YES;
     [self loadComments];
-}
-
-- (void)updateHeaderInfoForFeed:(Feed *)feed{
-    if (feed){
-        if (feed.image){
-            self.imageView.image = feed.image;
-        }else{
-            [self.imageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:feed.imageId]
-                              placeholderImage:[UIImage imageNamed:@"placeholder.png"]
-                                     completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                         feed.image = image;
-                                     }];
-        }
-        self.headerLabel.text = feed.feedTitle;
-        self.dateLabel.text = [SystemUtil stringFromDate:feed.createDate];
-        self.likeCountLabel.text = [NSString stringWithFormat:@"%@",feed.likeCount];
-        self.commentCountLabel.text = [NSString stringWithFormat:@"%@",feed.commentCount];
-        [self.likeButton setImage:(feed.selfLiked.boolValue ? [Theme likeButtonLiked] : [Theme likeButtonUnLiked]) forState:UIControlStateNormal];
-    }
 }
 
 - (void)setFeed:(Feed *)feed{
@@ -108,80 +86,60 @@
 
 #pragma mark - dynamic feed title height 
 
-/*
- 1) Add a headerView to a UITableView.
- 2) Add a subview to headerView, let's call it wrapper.
- 3) Make wrapper's height be adjusted with it's subviews (via Auto Layout).
- 4) When autolayout had finished layout, set headerView's height to wrapper's height. (see -updateTableViewHeaderViewHeight)
- 5) Reset headerView. (see -resetTableViewHeaderView)
- 
- 
- All this works seamlessly after the initial autolayout pass. Later, if you change wrapper's contents so that it gains different
- height, it wont work for some reason (guess laying out UILabel requires several autolayout passes or something). I solved this
- with scheduling setNeedsLayout for the ViewController's view in the next run loop iteration.
- */
-
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-    [self updateTableViewHeaderViewHeight];
+- (void)setHeaderView:(FeedDetailHeader *)headerView{
+    _headerView = headerView;
+    self.tableView.tableHeaderView = _headerView;
+    [self updateHeaderInfoForFeed:self.feed];
 }
 
-- (void)updateTableViewHeaderViewHeight
-{
-    // get height of the wrapper and apply it to a header
-    CGRect Frame = self.tableView.tableHeaderView.frame;
-    Frame.size.height = self.tableHeaderViewWrapper.frame.size.height;
-    self.tableView.tableHeaderView.frame = Frame;
-    
-    // this magic applies the above changes
-    // note, that if you won't schedule this call to the next run loop iteration
-    // you'll get and error
-    [self performSelector:@selector(resetTableViewHeaderView) withObject:self afterDelay:0];
+
+- (void)setupHeaderView{
+    CGFloat height = self.tableView.frame.size.width + [self heightForText:self.feed.feedTitle withFontSize:13.0f] + 32.0f + 8.0f; //bottom 32, top 8
+    CGRect frame = CGRectMake(0,0, self.tableView.frame.size.width, height);
+    self.headerView = [FeedDetailHeader instantiateFromNib:frame];
+    self.headerView.delegate = self;
 }
 
-// yeah, gues there's something special in the setter
-- (void)resetTableViewHeaderView
-{
-    // whew, this could be animated!
-    self.tableView.tableHeaderView = self.tableView.tableHeaderView;
-    
-    // We need this to update the height, still not fully sure why do we need to
-    // schedule this call for the next Run Loop iteration, will appreciate comments.
-    [self.view performSelector:@selector(setNeedsLayout) withObject:nil afterDelay:0];
+- (void)updateHeaderInfoForFeed:(Feed *)feed{
+    if (feed){
+        if (feed.image){
+            self.headerView.imageView.image = feed.image;
+        }else{
+            [self.headerView.imageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:feed.imageId]
+                                         placeholderImage:[UIImage imageNamed:@"placeholder.png"]
+                                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                                    feed.image = image;
+                                                }];
+        }
+        self.headerView.headerLabel.text = feed.feedTitle;
+        self.headerView.dateLabel.text = [SystemUtil stringFromDate:feed.createDate];
+        self.headerView.likeCountLabel.text = [NSString stringWithFormat:@"%@",feed.likeCount];
+        self.headerView.commentCountLabel.text = [NSString stringWithFormat:@"%@",feed.commentCount];
+        [self.headerView.likeButton setImage:(feed.selfLiked.boolValue ? [Theme likeButtonLiked] : [Theme likeButtonUnLiked]) forState:UIControlStateNormal];
+    }
 }
-
 
 #pragma mark - table view
 
 #define kAvatarSize 40.0f
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return UITableViewAutomaticDimension;
-    Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
-    
+- (CGFloat)heightForText:(NSString *)text withFontSize:(CGFloat)size{
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
     paragraphStyle.alignment = NSTextAlignmentLeft;
     
-    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0],
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:size],
                                  NSParagraphStyleAttributeName: paragraphStyle};
     
-    CGFloat width = CGRectGetWidth(tableView.frame);
+    CGFloat width = CGRectGetWidth(self.tableView.frame);
     
-    CGRect bounds = [comment.content boundingRectWithSize:CGSizeMake(width, 0.0) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:NULL];
-    
-//    if (message.length == 0) {
-//        return 0.0;
-//    }
-//    
-    CGFloat height = roundf(CGRectGetHeight(bounds)+kAvatarSize);
-//    
-//    if (height < kMinimumHeight) {
-//        height = kMinimumHeight;
-//    }
-//    
-    return height;
+    CGRect bounds = [text boundingRectWithSize:CGSizeMake(width, 0.0) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:NULL];
+    return roundf(CGRectGetHeight(bounds));
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
+    return [self heightForText:comment.content withFontSize:14.0] + kAvatarSize;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -257,38 +215,32 @@
     return _fetchCenter;
 }
 
-- (IBAction)likeButtonPressed{
+- (void)didPressedLikeButton:(FeedDetailHeader *)headerView{
     if (!self.feed.selfLiked.boolValue) {
-        [self.likeButton setImage:[Theme likeButtonLiked] forState:UIControlStateNormal];
+        [headerView.likeButton setImage:[Theme likeButtonLiked] forState:UIControlStateNormal];
         
         //increase feed like count
         self.feed.likeCount = @(self.feed.likeCount.integerValue + 1);
         self.feed.selfLiked = @(YES);
-        self.likeCountLabel.text = [NSString stringWithFormat:@"%@",self.feed.likeCount];
-
+        headerView.likeCountLabel.text = [NSString stringWithFormat:@"%@",self.feed.likeCount];
+        
         [self.fetchCenter likeFeed:self.feed];
     }else{
-        [self.likeButton setImage:[Theme likeButtonUnLiked] forState:UIControlStateNormal];
-    
+        [headerView.likeButton setImage:[Theme likeButtonUnLiked] forState:UIControlStateNormal];
+        
         //decrease feed like count
         self.feed.likeCount = @(self.feed.likeCount.integerValue - 1);
         self.feed.selfLiked = @(NO);
-        self.likeCountLabel.text = [NSString stringWithFormat:@"%@",self.feed.likeCount];
-
+        headerView.likeCountLabel.text = [NSString stringWithFormat:@"%@",self.feed.likeCount];
+        
         
         [self.fetchCenter unLikeFeed:self.feed];
     }
-
+    
 }
 
-//- (void)didFinishUnLikingFeed:(Feed *)feed{
-//}
-//
-//- (void)didFinishLikingFeed:(Feed *)feed{
-//}
-
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    self.likeButton.userInteractionEnabled = YES;
+//    self.likeButton.userInteractionEnabled = YES;
     NSLog(@"%@",info);
 //    self.navigationItem.rightBarButtonItem = nil;
 
@@ -301,10 +253,12 @@
 
 #pragma mark - comment
 
-- (IBAction)comment:(UIButton *)sender{
+-(void)didPressedCommentButton:(FeedDetailHeader *)headerView{
     self.commentView.feedInfoBackground.hidden = YES; // feed info section is for replying
     [[[UIApplication sharedApplication] keyWindow] addSubview:self.commentView];
+    
 }
+
 
 #pragma mark - comment accessary view delegate 
 - (void)didPressSend:(CommentAcessaryView *)cav{
@@ -323,7 +277,7 @@
     
     //update feed count
     feed.commentCount = @(feed.commentCount.integerValue + 1);
-    self.commentCountLabel.text = [NSString stringWithFormat:@"%@",feed.commentCount];
+    self.headerView.commentCountLabel.text = [NSString stringWithFormat:@"%@",feed.commentCount];
 
     //create comment locally
     if (self.commentView.state == CommentAcessaryViewStateComment) {

@@ -127,6 +127,10 @@
 		AECE2C001AA19F6500B1C58E /* Owner+OwnerCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AECE2BFE1AA19F6500B1C58E /* Owner+OwnerCRUD.m */; };
 		AED05EDB1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = AED05EDA1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m */; };
 		AED05EDC1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = AED05EDA1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m */; };
+		AED355F41B2285D3000427FF /* FeedDetailHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED355F31B2285D3000427FF /* FeedDetailHeader.xib */; };
+		AED355F51B2285D3000427FF /* FeedDetailHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED355F31B2285D3000427FF /* FeedDetailHeader.xib */; };
+		AED355F81B228696000427FF /* FeedDetailHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AED355F71B228696000427FF /* FeedDetailHeader.m */; };
+		AED355F91B228696000427FF /* FeedDetailHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AED355F71B228696000427FF /* FeedDetailHeader.m */; };
 		AED4CB1B1AC683AF00EE2DA4 /* GCPTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = AED4CB1A1AC683AF00EE2DA4 /* GCPTextView.m */; };
 		AED4CB1E1AC7556800EE2DA4 /* KTCenterFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AED4CB1D1AC7556800EE2DA4 /* KTCenterFlowLayout.m */; };
 		AED4CB1F1AC7556800EE2DA4 /* KTCenterFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AED4CB1D1AC7556800EE2DA4 /* KTCenterFlowLayout.m */; };
@@ -389,6 +393,9 @@
 		AECE2BFE1AA19F6500B1C58E /* Owner+OwnerCRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Owner+OwnerCRUD.m"; sourceTree = "<group>"; };
 		AED05ED91A928DC900CA1CE6 /* UINavigationBar+CustomHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+CustomHeight.h"; sourceTree = "<group>"; };
 		AED05EDA1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+CustomHeight.m"; sourceTree = "<group>"; };
+		AED355F31B2285D3000427FF /* FeedDetailHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedDetailHeader.xib; sourceTree = "<group>"; };
+		AED355F61B228696000427FF /* FeedDetailHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedDetailHeader.h; sourceTree = "<group>"; };
+		AED355F71B228696000427FF /* FeedDetailHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedDetailHeader.m; sourceTree = "<group>"; };
 		AED4CB191AC683AF00EE2DA4 /* GCPTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCPTextView.h; sourceTree = "<group>"; };
 		AED4CB1A1AC683AF00EE2DA4 /* GCPTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCPTextView.m; sourceTree = "<group>"; };
 		AED4CB1C1AC7556800EE2DA4 /* KTCenterFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCenterFlowLayout.h; sourceTree = "<group>"; };
@@ -552,6 +559,7 @@
 				AEE4A6C91A9684BC00ABF946 /* Achievement */,
 				AEFEE3FD1A8ED9FC007E8234 /* Following */,
 				AE30EE711A6F0A8C0044740D /* Database&Networking */,
+				AED355FB1B22889B000427FF /* FeedDetail */,
 				AEEC6C781A6DB6340021B7E4 /* WishDetail */,
 				AEEC6C771A6DB6220021B7E4 /* Home */,
 				AEEC6C751A6DB5EE0021B7E4 /* Menu */,
@@ -781,6 +789,22 @@
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
+		AED355FB1B22889B000427FF /* FeedDetail */ = {
+			isa = PBXGroup;
+			children = (
+				AED355F31B2285D3000427FF /* FeedDetailHeader.xib */,
+				AED355F61B228696000427FF /* FeedDetailHeader.h */,
+				AED355F71B228696000427FF /* FeedDetailHeader.m */,
+				AE47055B1AF9DC080028D7BC /* FeedDetailCell.h */,
+				AE47055C1AF9DC080028D7BC /* FeedDetailCell.m */,
+				AE1779981AF585CB005F1BEB /* FeedDetailViewController.h */,
+				AE1779991AF585CB005F1BEB /* FeedDetailViewController.m */,
+				AE52FA4E1A8D3D76003FF725 /* PostFeedViewController.h */,
+				AE52FA4F1A8D3D76003FF725 /* PostFeedViewController.m */,
+			);
+			name = FeedDetail;
+			sourceTree = "<group>";
+		};
 		AED4CB181AC683AF00EE2DA4 /* GCPTextView */ = {
 			isa = PBXGroup;
 			children = (
@@ -871,10 +895,6 @@
 				AEA4CAD61AFC33DC00BDE7F9 /* CommentAcessaryView.h */,
 				AEA4CAD71AFC33DC00BDE7F9 /* CommentAcessaryView.m */,
 				AEA4CAD91AFC340A00BDE7F9 /* CommentAcessaryView.xib */,
-				AE47055B1AF9DC080028D7BC /* FeedDetailCell.h */,
-				AE47055C1AF9DC080028D7BC /* FeedDetailCell.m */,
-				AE1779981AF585CB005F1BEB /* FeedDetailViewController.h */,
-				AE1779991AF585CB005F1BEB /* FeedDetailViewController.m */,
 				AE9861F81AC33C04005544B9 /* EditWishViewController.h */,
 				AE9861F91AC33C04005544B9 /* EditWishViewController.m */,
 				AE52FA511A8D55A7003FF725 /* KeyboardAcessoryView.h */,
@@ -896,8 +916,6 @@
 				AEC0E1C41AC64F9600563F7C /* WishDetailVCOwnerAchieved.m */,
 				AEF3F87D1AA4CFA6008C2300 /* WishDetailVCOwner.h */,
 				AEF3F87E1AA4CFA6008C2300 /* WishDetailVCOwner.m */,
-				AE52FA4E1A8D3D76003FF725 /* PostFeedViewController.h */,
-				AE52FA4F1A8D3D76003FF725 /* PostFeedViewController.m */,
 			);
 			name = WishDetail;
 			sourceTree = "<group>";
@@ -1122,6 +1140,7 @@
 				AEDD06511AABF7AE00379C17 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				AE95A9F11ACFA7F8007465D5 /* cameraroll-picker-grip@3x.png in Resources */,
 				AEFB04881AD12437009EB0D3 /* DiscoveryFooterView.xib in Resources */,
+				AED355F41B2285D3000427FF /* FeedDetailHeader.xib in Resources */,
 				AEEC6C6F1A6DB0FC0021B7E4 /* HeaderView.xib in Resources */,
 				AEC8CE911AAF8823005364F8 /* StationView.xib in Resources */,
 				AE52FA551A8D55CA003FF725 /* KeyboardAcessoryView.xib in Resources */,
@@ -1140,6 +1159,7 @@
 				AEF7F29D1A6871F00022410B /* Images.xcassets in Resources */,
 				AEF7F2A11A6875360022410B /* Main.storyboard in Resources */,
 				AEEC6C701A6DB0FC0021B7E4 /* HeaderView.xib in Resources */,
+				AED355F51B2285D3000427FF /* FeedDetailHeader.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1183,6 +1203,7 @@
 				AE0ADF191ABD78CC00692131 /* HomeCardViewController.m in Sources */,
 				AE95A9F41ACFA7F8007465D5 /* TWImageScrollView.m in Sources */,
 				AE3FCFBF1B07D63900422FB8 /* UIImage+GIF.m in Sources */,
+				AED355F81B228696000427FF /* FeedDetailHeader.m in Sources */,
 				AEF7F2811A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				AE3FCFC91B07D63900422FB8 /* UIView+WebCacheOperation.m in Sources */,
 				AEF7F2891A686E8A0022410B /* ECSlidingViewController.m in Sources */,
@@ -1345,6 +1366,7 @@
 				AEFB04851AD12437009EB0D3 /* DiscoveryBannerCell.m in Sources */,
 				AEF3F8801AA4CFA6008C2300 /* WishDetailVCOwner.m in Sources */,
 				AE05C0371B0D62BA002F83F1 /* Owner.m in Sources */,
+				AED355F91B228696000427FF /* FeedDetailHeader.m in Sources */,
 				AEF7F2981A686FDB0022410B /* HomeViewController.m in Sources */,
 				AEEC6C741A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,
 			);
