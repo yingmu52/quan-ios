@@ -57,11 +57,13 @@
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
 
 - (void)didFinishGettingMessageNotificationWithMessageCount:(NSNumber *)msgCount followCount:(NSNumber *)followCount;
+- (void)didFinishClearingAllMessages;
 @end
 @interface FetchCenter : NSObject
 @property (nonatomic,weak) id <FetchCenterDelegate>delegate;
 
 #pragma mark - Message
+- (void)clearAllMessages;
 - (void)getMessageList;
 - (void)getMessageNotificationInfo;
 

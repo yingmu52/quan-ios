@@ -14,6 +14,7 @@
 #import "UIImageView+WebCache.h"
 #import "FeedDetailViewController.h"
 #import "UIViewController+ECSlidingViewController.h"
+#import "UIActionSheet+Blocks.h"
 @interface MessageListViewController () <FetchCenterDelegate,NSFetchedResultsControllerDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
@@ -45,9 +46,37 @@
                                       frame:frame];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:back];
     self.navigationItem.title = @"消息";
+ 
+    UIButton *deleteBtn = [Theme buttonWithImage:[Theme navButtonDeleted]
+                                          target:self
+                                        selector:@selector(clearAllMessages)
+                                           frame:frame];
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:deleteBtn];
 }
 
+#pragma mark - clear all message 
+- (void)clearAllMessages{
+    [UIActionSheet showInView:self.view
+                    withTitle:@"确定要清空所有消息吗？"
+            cancelButtonTitle:@"取消"
+       destructiveButtonTitle:@"确定"
+            otherButtonTitles:nil
+                     tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+                         NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
+                         if ([title isEqualToString:@"确定"]) {
+                             [self.fetchCenter clearAllMessages];
+                         }
+                     }];
+}
+
+- (void)didFinishClearingAllMessages{
+    NSManagedObjectContext *context = [AppDelegate getContext];
+    for (Message *message in self.fetchedRC.fetchedObjects) {
+        [context deleteObject:message];
+    }
+    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
+}
 #pragma mark - Table view data source
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

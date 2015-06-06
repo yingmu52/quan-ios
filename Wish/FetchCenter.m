@@ -55,6 +55,7 @@
 #define MESSAGE @"message/"
 #define GET_MESSAGE_LIST @"splan_message_getlist.php"
 #define GET_MESSAGE_NOTIFICATION @"splan_count_get.php"
+#define CLEAR_ALL_MESSAGES @"splan_message_clear.php"
 typedef enum{
     FetchCenterGetOpCreatePlan = 0,
     FetchCenterGetOpDeletePlan,
@@ -78,7 +79,8 @@ typedef enum{
     FetchCenterGetOpLoadFeedList,
     FetchCenterGetOpFeedBack,
     FetchCenterGetOpGetMessageList,
-    FetchCenterGetOpGetMessageNotificationInfo
+    FetchCenterGetOpGetMessageNotificationInfo,
+    FetchCenterGetOpClearAllMessages
 }FetchCenterGetOp;
 
 typedef enum{
@@ -103,6 +105,13 @@ typedef enum{
 
 
 #pragma mark - Message 
+
+- (void)clearAllMessages{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,MESSAGE,CLEAR_ALL_MESSAGES];
+    [self getRequest:rqtStr parameter:nil operation:FetchCenterGetOpClearAllMessages entity:nil];
+}
+
+
 - (void)getMessageList{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,MESSAGE,GET_MESSAGE_LIST];
     [self getRequest:rqtStr parameter:@{@"id":[User uid]}
@@ -762,6 +771,9 @@ typedef enum{
 //                NSLog(@"%@",json);
 
             }
+                break;
+            case FetchCenterGetOpClearAllMessages:
+                [self.delegate didFinishClearingAllMessages];
                 break;
             default:
                 break;
