@@ -38,8 +38,6 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self setUpNavigationItem];
-    [self setupHeaderView];
-    [self updateHeaderInfoForFeed:self.feed];
 
     //load comments
     self.hasNextPage = YES;
@@ -48,7 +46,8 @@
 
 - (void)setFeed:(Feed *)feed{
     if (_feed != feed){
-        [self updateHeaderInfoForFeed:feed];
+        _feed = feed;
+        [self updateHeaderInfoForFeed:_feed];
     }
     _feed = feed;
 }
@@ -86,37 +85,33 @@
 
 #pragma mark - dynamic feed title height 
 
-- (void)setHeaderView:(FeedDetailHeader *)headerView{
-    _headerView = headerView;
-    self.tableView.tableHeaderView = _headerView;
-    [self updateHeaderInfoForFeed:self.feed];
-}
-
-
-- (void)setupHeaderView{
-    CGFloat height = self.tableView.frame.size.width + [self heightForText:self.feed.feedTitle withFontSize:13.0f] + 32.0f + 8.0f; //bottom 32, top 8
-    CGRect frame = CGRectMake(0,0, self.tableView.frame.size.width, height);
-    self.headerView = [FeedDetailHeader instantiateFromNib:frame];
-    self.headerView.delegate = self;
+- (FeedDetailHeader *)headerView{
+    if (!_headerView) {
+        CGFloat height = self.tableView.frame.size.width + [self heightForText:self.feed.feedTitle withFontSize:13.0f] + 32.0f + 8.0f; //bottom 32, top 8
+        CGRect frame = CGRectMake(0,0, self.tableView.frame.size.width, height);
+        _headerView = [FeedDetailHeader instantiateFromNib:frame];
+        _headerView.delegate = self;
+        self.tableView.tableHeaderView = _headerView;
+    }
+    return _headerView;
 }
 
 - (void)updateHeaderInfoForFeed:(Feed *)feed{
-    if (feed){
-        if (feed.image){
-            self.headerView.imageView.image = feed.image;
-        }else{
-            [self.headerView.imageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:feed.imageId]
-                                         placeholderImage:[UIImage imageNamed:@"placeholder.png"]
-                                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                                    feed.image = image;
-                                                }];
-        }
-        self.headerView.headerLabel.text = feed.feedTitle;
-        self.headerView.dateLabel.text = [SystemUtil stringFromDate:feed.createDate];
-        self.headerView.likeCountLabel.text = [NSString stringWithFormat:@"%@",feed.likeCount];
-        self.headerView.commentCountLabel.text = [NSString stringWithFormat:@"%@",feed.commentCount];
-        [self.headerView.likeButton setImage:(feed.selfLiked.boolValue ? [Theme likeButtonLiked] : [Theme likeButtonUnLiked]) forState:UIControlStateNormal];
+    if (feed.image){
+        self.headerView.imageView.image = feed.image;
+    }else{
+        [self.headerView.imageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:feed.imageId]
+                                     placeholderImage:[UIImage imageNamed:@"placeholder.png"]
+                                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                                feed.image = image;
+                                            }];
     }
+    self.headerView.headerLabel.text = feed.feedTitle;
+    self.headerView.dateLabel.text = [SystemUtil stringFromDate:feed.createDate];
+    self.headerView.likeCountLabel.text = [NSString stringWithFormat:@"%@",feed.likeCount];
+    self.headerView.commentCountLabel.text = [NSString stringWithFormat:@"%@",feed.commentCount];
+    [self.headerView.likeButton setImage:(feed.selfLiked.boolValue ? [Theme likeButtonLiked] : [Theme likeButtonUnLiked]) forState:UIControlStateNormal];
+        
 }
 
 #pragma mark - table view
