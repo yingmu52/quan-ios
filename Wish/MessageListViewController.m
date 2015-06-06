@@ -109,27 +109,36 @@
     formatter.dateFormat = @"yyyy-MM-dd HH:mm";
     cell.dateLabel.text = [formatter stringFromDate:message.createTime];
 
+    cell.backgroundColor = message.isRead.boolValue ? [self normalColor] : [self highlightColor];
     return cell;
 }
 
+- (UIColor *)normalColor{
+    return [SystemUtil colorFromHexString:@"#F4F9F7"];
+}
+- (UIColor *)highlightColor{
+    return [SystemUtil colorFromHexString:@"#E7F0ED"];
+
+}
 #pragma mark - Table View Delegate 
 
 - (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
-    cell.backgroundColor = [SystemUtil colorFromHexString:@"#E7F0ED"];
+    cell.backgroundColor = [self highlightColor];
 }
 
 - (void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath{
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    cell.backgroundColor = [SystemUtil colorFromHexString:@"#F4F9F7"];
+    cell.backgroundColor = [self normalColor];
     
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
     Message *message = [self.fetchedRC objectAtIndexPath:indexPath];
+    message.isRead = @(YES);
     [self performSegueWithIdentifier:@"showFeedDetailFromMessage" sender:message.feedsId];
 }
 
