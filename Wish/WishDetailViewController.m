@@ -60,13 +60,26 @@
 
 }
 
+- (void)goBack{
+    NSUInteger numberOfPreservingFeeds = 3;
+    NSArray *allFeeds = self.fetchedRC.fetchedObjects;
+    if (allFeeds.count > numberOfPreservingFeeds) {
+        AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+        for (NSUInteger i = numberOfPreservingFeeds; i < allFeeds.count; i++) {
+            Feed *feed = allFeeds[i];
+            [delegate.managedObjectContext deleteObject:feed];
+        }
+        [delegate saveContext];
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)setUpNavigationItem
 {
-
     CGRect frame = CGRectMake(0,0, 25,25);
     UIButton *backBtn = [Theme buttonWithImage:[Theme navBackButtonDefault]
-                                        target:self.navigationController
-                                      selector:@selector(popToRootViewControllerAnimated:)
+                                        target:self
+                                      selector:@selector(goBack)
                                          frame:frame];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     [self setCurrenetBackgroundColor];
