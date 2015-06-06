@@ -43,29 +43,7 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HCg-IJ-vig" userLabel="More Button">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="HCg-IJ-vig" secondAttribute="height" multiplier="1:1" id="6fN-4R-scH"/>
-                                </constraints>
-                                <state key="normal" image="ic_more_default">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="6fN-4R-scH"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="6fN-4R-scH"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="morePressed:" destination="pxc-Ad-lPE" eventType="touchUpInside" id="B9d-1N-guH"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="评论" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2u-ox-IP2">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NN万" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2u-ox-IP2">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.16470588235294117" green="0.16470588235294117" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -93,7 +71,7 @@
                                     <action selector="commentPressed:" destination="pxc-Ad-lPE" eventType="touchUpInside" id="n3g-gD-2Vr"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="赞" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sg0-AV-EZM">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NN万" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sg0-AV-EZM">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -143,6 +121,28 @@
                                     </mask>
                                 </variation>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HCg-IJ-vig" userLabel="More Button">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="HCg-IJ-vig" secondAttribute="height" multiplier="1:1" id="6fN-4R-scH"/>
+                                </constraints>
+                                <state key="normal" image="ic_more_default">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="6fN-4R-scH"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="6fN-4R-scH"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="morePressed:" destination="pxc-Ad-lPE" eventType="touchUpInside" id="B9d-1N-guH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -167,10 +167,13 @@
                             <constraint firstAttribute="trailing" secondItem="yJz-Il-Ox4" secondAttribute="trailing" constant="8" id="HAw-3c-uE8">
                                 <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                             </constraint>
-                            <constraint firstItem="FQn-QO-qQz" firstAttribute="height" secondItem="EE8-Zb-7dr" secondAttribute="width" multiplier="35:640" id="IL6-HC-yxA"/>
-                            <constraint firstItem="HCg-IJ-vig" firstAttribute="height" secondItem="EE8-Zb-7dr" secondAttribute="width" multiplier="35:640" id="JrY-fN-dav"/>
+                            <constraint firstItem="FQn-QO-qQz" firstAttribute="height" secondItem="EE8-Zb-7dr" secondAttribute="width" multiplier="40:640" id="IL6-HC-yxA"/>
+                            <constraint firstItem="HCg-IJ-vig" firstAttribute="height" secondItem="EE8-Zb-7dr" secondAttribute="width" multiplier="40:640" id="JrY-fN-dav"/>
                             <constraint firstItem="FQn-QO-qQz" firstAttribute="leading" secondItem="Sg0-AV-EZM" secondAttribute="trailing" constant="38" id="KTc-NH-siQ">
                                 <variation key="heightClass=regular-widthClass=compact" constant="15"/>
+                            </constraint>
+                            <constraint firstItem="GuU-9F-7ku" firstAttribute="bottom" secondItem="HCg-IJ-vig" secondAttribute="bottom" constant="-3" id="V6L-dB-DAx">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
                             <constraint firstItem="chM-GD-b4g" firstAttribute="top" secondItem="EE8-Zb-7dr" secondAttribute="top" constant="5" id="Wnb-o9-u1d">
                                 <variation key="heightClass=regular-widthClass=compact" constant="2"/>
@@ -191,7 +194,7 @@
                             <constraint firstItem="chM-GD-b4g" firstAttribute="leading" secondItem="EE8-Zb-7dr" secondAttribute="leading" constant="5" id="kLC-Ye-ekz">
                                 <variation key="heightClass=regular-widthClass=compact" constant="2"/>
                             </constraint>
-                            <constraint firstItem="zhj-V3-Rbc" firstAttribute="height" secondItem="EE8-Zb-7dr" secondAttribute="width" multiplier="35:640" id="kWj-XD-wwD"/>
+                            <constraint firstItem="zhj-V3-Rbc" firstAttribute="height" secondItem="EE8-Zb-7dr" secondAttribute="width" multiplier="40:640" id="kWj-XD-wwD"/>
                             <constraint firstAttribute="trailing" secondItem="HCg-IJ-vig" secondAttribute="trailing" constant="36" id="obR-NB-hLu">
                                 <variation key="heightClass=regular-widthClass=compact" constant="10"/>
                             </constraint>
@@ -204,12 +207,12 @@
                             <mask key="subviews">
                                 <exclude reference="chM-GD-b4g"/>
                                 <exclude reference="GuU-9F-7ku"/>
-                                <exclude reference="HCg-IJ-vig"/>
                                 <exclude reference="e2u-ox-IP2"/>
                                 <exclude reference="FQn-QO-qQz"/>
                                 <exclude reference="Sg0-AV-EZM"/>
                                 <exclude reference="zhj-V3-Rbc"/>
                                 <exclude reference="yJz-Il-Ox4"/>
+                                <exclude reference="HCg-IJ-vig"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="5kb-8v-LdO"/>
@@ -219,6 +222,7 @@
                                 <exclude reference="G0w-Ni-q9u"/>
                                 <exclude reference="HAw-3c-uE8"/>
                                 <exclude reference="8cv-bh-Sek"/>
+                                <exclude reference="V6L-dB-DAx"/>
                                 <exclude reference="gey-Mq-WIK"/>
                                 <exclude reference="iKr-uy-DIM"/>
                                 <exclude reference="kWj-XD-wwD"/>
@@ -239,12 +243,12 @@
                             <mask key="subviews">
                                 <include reference="chM-GD-b4g"/>
                                 <include reference="GuU-9F-7ku"/>
-                                <include reference="HCg-IJ-vig"/>
                                 <include reference="e2u-ox-IP2"/>
                                 <include reference="FQn-QO-qQz"/>
                                 <include reference="Sg0-AV-EZM"/>
                                 <include reference="zhj-V3-Rbc"/>
                                 <include reference="yJz-Il-Ox4"/>
+                                <include reference="HCg-IJ-vig"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="5kb-8v-LdO"/>
@@ -254,6 +258,7 @@
                                 <include reference="G0w-Ni-q9u"/>
                                 <include reference="HAw-3c-uE8"/>
                                 <include reference="8cv-bh-Sek"/>
+                                <include reference="V6L-dB-DAx"/>
                                 <include reference="gey-Mq-WIK"/>
                                 <include reference="iKr-uy-DIM"/>
                                 <include reference="kWj-XD-wwD"/>
@@ -263,7 +268,7 @@
                                 <include reference="KTc-NH-siQ"/>
                                 <include reference="aiD-Yd-wzP"/>
                                 <include reference="s2P-c1-Zp6"/>
-                                <include reference="4Xc-1b-vRR"/>
+                                <exclude reference="4Xc-1b-vRR"/>
                                 <include reference="Aab-6w-bDd"/>
                                 <include reference="JrY-fN-dav"/>
                                 <include reference="ald-Uo-qxM"/>
@@ -310,8 +315,10 @@
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="commentButton" destination="FQn-QO-qQz" id="KrB-g4-vdL"/>
+                <outlet property="commentCountLabel" destination="e2u-ox-IP2" id="gWz-vd-F4a"/>
                 <outlet property="dateLabel" destination="GuU-9F-7ku" id="paz-12-8xh"/>
                 <outlet property="likeButton" destination="zhj-V3-Rbc" id="Y0f-pu-Srf"/>
+                <outlet property="likeCountLabel" destination="Sg0-AV-EZM" id="0TS-6y-ixZ"/>
                 <outlet property="photoView" destination="chM-GD-b4g" id="pRK-rQ-fa1"/>
                 <outlet property="titleLabel" destination="yJz-Il-Ox4" id="HQ0-dq-aa4"/>
             </connections>

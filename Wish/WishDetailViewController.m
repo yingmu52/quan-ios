@@ -188,7 +188,9 @@
                      forState:UIControlStateNormal];
     
     cell.titleLabel.text = feed.feedTitle;
-
+    
+    cell.likeCountLabel.text = [NSString stringWithFormat:@"%@",feed.likeCount];
+    cell.commentCountLabel.text = [NSString stringWithFormat:@"%@",feed.commentCount];
     if (!feed.image) {
         [cell.photoView sd_setImageWithURL:[self.fetchCenter urlWithImageID:feed.imageId]
                           placeholderImage:[UIImage imageNamed:@"placeholder.png"]
