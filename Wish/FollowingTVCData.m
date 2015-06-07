@@ -87,9 +87,10 @@ static NSUInteger numberOfPreloadedFeeds = 3;
     }];
     //update User Info
     cell.headUserNameLabel.text = plan.owner.ownerName;
-    [cell.headProfilePic sd_setImageWithURL:[self.fetchCenter urlWithImageID:plan.owner.headUrl]
-                           placeholderImage:[Theme menuLoginDefault]];
-    
+
+    [cell.headProfilePic setCircularImageWithURL:[self.fetchCenter urlWithImageID:plan.owner.headUrl]
+                                        forState:UIControlStateNormal
+                                placeholderImage:[Theme menuLoginDefault]];
 }
 #pragma mark - Fetched Results Controller Delegate
 
