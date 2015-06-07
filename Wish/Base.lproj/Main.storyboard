@@ -2681,19 +2681,19 @@
                                                             <exclude reference="4We-uP-Jsw"/>
                                                         </mask>
                                                         <mask key="constraints">
-                                                            <exclude reference="Ix3-SO-cWd"/>
-                                                            <exclude reference="SeK-5n-gZC"/>
-                                                            <exclude reference="g5G-QW-cwA"/>
-                                                            <exclude reference="nGk-qf-ROk"/>
+                                                            <exclude reference="sPP-1x-8NU"/>
+                                                            <exclude reference="y7D-WQ-nCT"/>
+                                                            <exclude reference="A28-9U-Ewf"/>
+                                                            <exclude reference="ksd-6y-OTe"/>
+                                                            <exclude reference="wSP-4a-Fvk"/>
                                                             <exclude reference="Sly-dW-Erv"/>
                                                             <exclude reference="bdK-qr-gbj"/>
                                                             <exclude reference="ilm-e2-5Gb"/>
                                                             <exclude reference="yVc-d4-1yb"/>
-                                                            <exclude reference="A28-9U-Ewf"/>
-                                                            <exclude reference="ksd-6y-OTe"/>
-                                                            <exclude reference="wSP-4a-Fvk"/>
-                                                            <exclude reference="sPP-1x-8NU"/>
-                                                            <exclude reference="y7D-WQ-nCT"/>
+                                                            <exclude reference="Ix3-SO-cWd"/>
+                                                            <exclude reference="SeK-5n-gZC"/>
+                                                            <exclude reference="g5G-QW-cwA"/>
+                                                            <exclude reference="nGk-qf-ROk"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=compact">
@@ -2704,19 +2704,19 @@
                                                             <include reference="4We-uP-Jsw"/>
                                                         </mask>
                                                         <mask key="constraints">
-                                                            <include reference="Ix3-SO-cWd"/>
-                                                            <include reference="SeK-5n-gZC"/>
-                                                            <include reference="g5G-QW-cwA"/>
-                                                            <include reference="nGk-qf-ROk"/>
+                                                            <include reference="sPP-1x-8NU"/>
+                                                            <include reference="y7D-WQ-nCT"/>
+                                                            <exclude reference="A28-9U-Ewf"/>
+                                                            <include reference="ksd-6y-OTe"/>
+                                                            <exclude reference="wSP-4a-Fvk"/>
                                                             <include reference="Sly-dW-Erv"/>
                                                             <exclude reference="bdK-qr-gbj"/>
                                                             <include reference="ilm-e2-5Gb"/>
                                                             <include reference="yVc-d4-1yb"/>
-                                                            <exclude reference="A28-9U-Ewf"/>
-                                                            <include reference="ksd-6y-OTe"/>
-                                                            <exclude reference="wSP-4a-Fvk"/>
-                                                            <include reference="sPP-1x-8NU"/>
-                                                            <include reference="y7D-WQ-nCT"/>
+                                                            <include reference="Ix3-SO-cWd"/>
+                                                            <include reference="SeK-5n-gZC"/>
+                                                            <include reference="g5G-QW-cwA"/>
+                                                            <include reference="nGk-qf-ROk"/>
                                                         </mask>
                                                     </variation>
                                                 </view>
@@ -4927,7 +4927,7 @@
                                                             <color key="textColor" red="0.6705882352941176" green="0.6705882352941176" blue="0.6705882352941176" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="中华田园汪" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="694-2p-fbh">
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="中华田园汪" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="694-2p-fbh">
                                                             <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <textInputTraits key="textInputTraits"/>
@@ -5112,7 +5112,7 @@
                                                             <color key="textColor" red="0.6705882353" green="0.6705882353" blue="0.6705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请填写你的职业" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BpZ-7O-fJu">
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BpZ-7O-fJu">
                                                             <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <textInputTraits key="textInputTraits"/>
@@ -5202,7 +5202,7 @@
                                                             <color key="textColor" red="0.6705882353" green="0.6705882353" blue="0.6705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QKC-Pv-Gl2" customClass="GCPTextView">
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QKC-Pv-Gl2">
                                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -5295,7 +5295,7 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="descriptionTextView" destination="QKC-Pv-Gl2" id="gxK-7h-UZL"/>
+                        <outlet property="descriptionTextView" destination="QKC-Pv-Gl2" id="gUV-ar-X3c"/>
                         <outlet property="genderLabel" destination="MbK-tY-v5T" id="78Z-uM-Ye6"/>
                         <outlet property="nickNameTextField" destination="694-2p-fbh" id="MBr-BP-g5X"/>
                         <outlet property="occupationTextField" destination="BpZ-7O-fJu" id="PzB-Li-xKe"/>

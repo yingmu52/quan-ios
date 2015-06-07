@@ -14,7 +14,6 @@
 
 @implementation ProfileViewController
 
-
 - (void)setInfoForOwner{
     if (self.owner) {
         if (self.owner.image) {

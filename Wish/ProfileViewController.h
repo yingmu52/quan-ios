@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GCPTextView.h"
 #import "Theme.h"
 #import "SystemUtil.h"
 #import "UIImageView+UIActivityIndicatorForSDWebImage.h"
@@ -20,8 +19,7 @@
 @property (nonatomic,weak) IBOutlet UITextField *nickNameTextField;
 @property (nonatomic,weak) IBOutlet UILabel *genderLabel;
 @property (nonatomic,weak) IBOutlet UITextField *occupationTextField;
-@property (nonatomic,weak) IBOutlet GCPTextView *descriptionTextView;
-
+@property (nonatomic,weak) IBOutlet UITextView *descriptionTextView;
 @property (nonatomic,strong) Owner *owner; // for view user profile (info is non-editable) 
 
 - (void)goBack;

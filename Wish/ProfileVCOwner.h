@@ -7,6 +7,8 @@
 //
 
 #import "ProfileViewController.h"
+#import "GCPTextView.h"
 
 @interface ProfileVCOwner : ProfileViewController
+@property (nonatomic,weak) IBOutlet GCPTextView *descriptionTextView;
 @end
