@@ -51,7 +51,7 @@
     [self initialHeaderView];
     [self.tableView registerNib:[UINib nibWithNibName:@"WishDetailCell" bundle:nil]
          forCellReuseIdentifier:@"WishDetailCell"];
-    
+    self.tableView.separatorColor = [UIColor clearColor]; //remove separation line
     //hide follow button first and display later when the correct value is fetched from the server
     self.headerView.followButton.hidden = YES;
     
