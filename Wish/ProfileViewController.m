@@ -7,64 +7,31 @@
 //
 
 #import "ProfileViewController.h"
-#import "Theme.h"
-#import "SystemUtil.h"
-#import "NavigationBar.h"
-#import "UIImageView+UIActivityIndicatorForSDWebImage.h"
-#import "FetchCenter.h"
-#import "User.h"
-#import "SDWebImageCompat.h"
-#import "ImagePicker.h"
-@interface ProfileViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,FetchCenterDelegate,UITextFieldDelegate,ImagePickerDelegate>
-@property (nonatomic,weak) IBOutlet UIView *profileBackground;
-@property (nonatomic,weak) IBOutlet UIImageView *profilePicture;
-@property (nonatomic,weak) IBOutlet UITextField *nickNameTextField;
-@property (nonatomic,weak) IBOutlet UILabel *genderLabel;
-@property (nonatomic,strong) FetchCenter *fetchCenter;
+
+
+@interface ProfileViewController () 
 @end
 
 @implementation ProfileViewController
 
+
+- (void)setInfoForOwner{
+    if (self.owner) {
+        if (self.owner.image) {
+            self.profilePicture.image = self.owner.image;
+        }else{
+            [self.profilePicture setImageWithURL:[[FetchCenter new] urlWithImageID:self.owner.headUrl]
+                     usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        }
+        self.nickNameTextField.text = self.owner.ownerName;
+    }
+}
+
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self setUpNavigationItem];
-    [self setupProfileBanner];
-    [self setupInfoSection];
-}
-
-- (void)setupProfileBanner{
-    self.profileBackground.backgroundColor = [Theme profileBakground];
-    NSString *newPicId = [User updatedProfilePictureId];
-    [self.profilePicture setImageWithURL:[self.fetchCenter urlWithImageID:newPicId]
-             usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-}
-
-
-- (FetchCenter *)fetchCenter{
-    if (!_fetchCenter) {
-        _fetchCenter = [[FetchCenter alloc] init];
-        _fetchCenter.delegate = self;
-
-    }
-    return _fetchCenter;
-}
-
-- (void)gobackToSettingView{
-    //updae info if needed
-    if (![self.nickNameTextField.text isEqualToString:[User userDisplayName]] ||
-        ![self.genderLabel.text isEqualToString:[User gender]]){
-        [self showSpinniner];
-        [self uploadPersonalInfo];
-    }else{
-        [self goBack];
-    }
-
-}
-
-- (void)uploadPersonalInfo{
-    [self.fetchCenter setPersonalInfo:self.nickNameTextField.text
-                               gender:self.genderLabel.text
-                              imageId:[User updatedProfilePictureId]];
+    [self setInfoForOwner];
+    self.tableView.scrollEnabled = NO;
 }
 
 - (void)goBack{
@@ -79,7 +46,7 @@
     CGRect frame = CGRectMake(0,0, 25,25);
     UIButton *back = [Theme buttonWithImage:[Theme navWhiteButtonDefault]
                                      target:self
-                                   selector:@selector(gobackToSettingView)
+                                   selector:@selector(goBack)
                                       frame:frame];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:back];
     self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
@@ -91,7 +58,7 @@
 
 - (void)setNavBarText:(UIColor *)color{
     [self.navigationController.navigationBar
-     setTitleTextAttributes:@{NSForegroundColorAttributeName :color}];
+     setTitleTextAttributes:@{NSForegroundColorAttributeName:color}];
 }
 
 
@@ -101,11 +68,17 @@
     }
     return 0.0f;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         return 400.0f / 1136 * tableView.frame.size.height;
     }else if (indexPath.section == 1){
-        return 104.0f / 1136 * tableView.frame.size.height;
+        if (indexPath.row != 3){
+            return 104.0f / 1136 * tableView.frame.size.height;
+        }else{
+            return 300.0f / 1136 * tableView.frame.size.height;
+        }
+        
     }else{
         return 0.0f;
     }
@@ -135,91 +108,6 @@
 }
 
 
-#pragma mark - functionality
-- (void)setupInfoSection{
-    self.nickNameTextField.text = [User userDisplayName];
-    self.genderLabel.text = [User gender];
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero]; // clear empty cell
-}
-
-
-#pragma mark - update info
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 1) {
-        if (indexPath.row == 0){
-            [self.nickNameTextField becomeFirstResponder];
-        }
-        if (indexPath.row == 1){
-            self.genderLabel.text = [self.genderLabel.text isEqualToString:@"男"] ? @"女" : @"男";
-        }
-    }
-    [self dismissKeyboardIfNeed];
-}
-
-- (void)dismissKeyboardIfNeed{
-    if (self.nickNameTextField.isFirstResponder){
-        [self.nickNameTextField resignFirstResponder];
-    }
-}
-
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self dismissKeyboardIfNeed];
-}
-
-#pragma mark - upload profile pic
-- (IBAction)tapOnCamera:(UIButton *)sender{
-    [ImagePicker startPickingImageFromLocalSourceFor:self];
-}
-
-- (void)didFinishPickingImage:(UIImage *)image{
-    [self showSpinniner];
-    [self.fetchCenter uploadNewProfilePicture:image];
-}
-
-- (void)didFailPickingImage{
-    
-}
-#pragma mark - fetch center delegate 
-
-- (void)didFinishSettingPersonalInfo{
-    [self dismissSpinner];
-    NSURL *newUrl = [self.fetchCenter urlWithImageID:[User updatedProfilePictureId]];
-    [self.profilePicture setImageWithURL:newUrl
-             usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-
-}
-- (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    [self handleFailure:info];
-}
-
-- (void)didFinishUploadingPictureForProfile:(NSDictionary *)info{
-    [self uploadPersonalInfo];
-}
-
-- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    [self handleFailure:info];
-}
-
-- (void)handleFailure:(NSDictionary *)info{
-    self.navigationItem.rightBarButtonItem = nil;
-    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
-                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
-                               delegate:self
-                      cancelButtonTitle:@"OK"
-                      otherButtonTitles:nil, nil] show];
-}
-
-#pragma mark - activity
-
-- (void)showSpinniner{
-    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
-    [spinner startAnimating];
-}
-
-- (void)dismissSpinner{
-    self.navigationItem.rightBarButtonItem = nil;
-}
 @end
 
 

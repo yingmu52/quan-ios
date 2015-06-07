@@ -131,6 +131,8 @@
 		AED355F51B2285D3000427FF /* FeedDetailHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED355F31B2285D3000427FF /* FeedDetailHeader.xib */; };
 		AED355F81B228696000427FF /* FeedDetailHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AED355F71B228696000427FF /* FeedDetailHeader.m */; };
 		AED355F91B228696000427FF /* FeedDetailHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AED355F71B228696000427FF /* FeedDetailHeader.m */; };
+		AED355FE1B23BBB8000427FF /* ProfileVCOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = AED355FD1B23BBB8000427FF /* ProfileVCOwner.m */; };
+		AED355FF1B23BBB8000427FF /* ProfileVCOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = AED355FD1B23BBB8000427FF /* ProfileVCOwner.m */; };
 		AED4CB1B1AC683AF00EE2DA4 /* GCPTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = AED4CB1A1AC683AF00EE2DA4 /* GCPTextView.m */; };
 		AED4CB1E1AC7556800EE2DA4 /* KTCenterFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AED4CB1D1AC7556800EE2DA4 /* KTCenterFlowLayout.m */; };
 		AED4CB1F1AC7556800EE2DA4 /* KTCenterFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AED4CB1D1AC7556800EE2DA4 /* KTCenterFlowLayout.m */; };
@@ -396,6 +398,8 @@
 		AED355F31B2285D3000427FF /* FeedDetailHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedDetailHeader.xib; sourceTree = "<group>"; };
 		AED355F61B228696000427FF /* FeedDetailHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedDetailHeader.h; sourceTree = "<group>"; };
 		AED355F71B228696000427FF /* FeedDetailHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedDetailHeader.m; sourceTree = "<group>"; };
+		AED355FC1B23BBB8000427FF /* ProfileVCOwner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileVCOwner.h; sourceTree = "<group>"; };
+		AED355FD1B23BBB8000427FF /* ProfileVCOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileVCOwner.m; sourceTree = "<group>"; };
 		AED4CB191AC683AF00EE2DA4 /* GCPTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCPTextView.h; sourceTree = "<group>"; };
 		AED4CB1A1AC683AF00EE2DA4 /* GCPTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCPTextView.m; sourceTree = "<group>"; };
 		AED4CB1C1AC7556800EE2DA4 /* KTCenterFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCenterFlowLayout.h; sourceTree = "<group>"; };
@@ -821,6 +825,8 @@
 				AED4CB421AC79F3A00EE2DA4 /* ModalLeftToRightSegue.m */,
 				AED5BC651ABEA7EB00EFF398 /* ProfileViewController.h */,
 				AED5BC661ABEA7EB00EFF398 /* ProfileViewController.m */,
+				AED355FC1B23BBB8000427FF /* ProfileVCOwner.h */,
+				AED355FD1B23BBB8000427FF /* ProfileVCOwner.m */,
 				AED5BC611ABE3CB600EFF398 /* SettingViewController.h */,
 				AED5BC621ABE3CB600EFF398 /* SettingViewController.m */,
 				AE767E7D1ACE35A600F35137 /* FeedbackViewController.h */,
@@ -1248,6 +1254,7 @@
 				AEC5B9AA1AB7EB40008ECB92 /* User.m in Sources */,
 				AEE4A6D81A972FAA00ABF946 /* FollowingTVCData.m in Sources */,
 				AE95A9FC1ACFC26A007465D5 /* ImagePicker.m in Sources */,
+				AED355FE1B23BBB8000427FF /* ProfileVCOwner.m in Sources */,
 				AE479EAE1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */,
 				AEFB04861AD12437009EB0D3 /* DiscoveryCell.m in Sources */,
 				AE8A9E981B1FB8B7007BD4E5 /* UIView+Shake.m in Sources */,
@@ -1366,6 +1373,7 @@
 				AEFB04851AD12437009EB0D3 /* DiscoveryBannerCell.m in Sources */,
 				AEF3F8801AA4CFA6008C2300 /* WishDetailVCOwner.m in Sources */,
 				AE05C0371B0D62BA002F83F1 /* Owner.m in Sources */,
+				AED355FF1B23BBB8000427FF /* ProfileVCOwner.m in Sources */,
 				AED355F91B228696000427FF /* FeedDetailHeader.m in Sources */,
 				AEF7F2981A686FDB0022410B /* HomeViewController.m in Sources */,
 				AEEC6C741A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,

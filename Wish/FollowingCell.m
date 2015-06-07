@@ -112,5 +112,10 @@
 }
 
 
+#pragma mark - tap on user profile picture 
+
+- (IBAction)userProfilePictureTapped{
+    [self.delegate didTapOnProfilePicture:self];
+}
 
 @end

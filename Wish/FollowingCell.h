@@ -11,9 +11,8 @@
 @class FollowingCell;
 
 @protocol FollowingCellDelegate <NSObject>
-
 - (void)didPressMoreButtonForCell:(FollowingCell *)cell;
-
+- (void)didTapOnProfilePicture:(FollowingCell *)cell;
 @end
 @interface FollowingCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *headTitleLabel;

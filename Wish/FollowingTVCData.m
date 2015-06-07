@@ -16,6 +16,7 @@
 #import "Theme.h"
 #import "User.h"
 #import "SDWebImageCompat.h"
+#import "ProfileViewController.h"
 static NSUInteger numberOfPreloadedFeeds = 3;
 
 @interface FollowingTVCData () <NSFetchedResultsControllerDelegate,FetchCenterDelegate,FollowingCellDelegate,ECSlidingViewControllerDelegate>
@@ -49,12 +50,19 @@ static NSUInteger numberOfPreloadedFeeds = 3;
     [self performSegueWithIdentifier:@"showFollowerWishDetail" sender:plan];
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(Plan *)plan{
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"showFollowerWishDetail"]) {
-        [segue.destinationViewController setPlan:plan];
+        [segue.destinationViewController setPlan:sender];
+    }
+    if ([segue.identifier isEqualToString:@"showPersonalInfo"]) {
+        [segue.destinationViewController setOwner:sender];
     }
 }
 
+- (void)didTapOnProfilePicture:(FollowingCell *)cell{
+    Plan *plan = [self.fetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
+    [self performSegueWithIdentifier:@"showPersonalInfo" sender:plan.owner];
+}
 #pragma mark - Table View
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
