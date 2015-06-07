@@ -13,45 +13,53 @@
 #import "AppDelegate.h"
 #import "PopupView.h"
 #import "SDWebImageCompat.h"
-
-@interface EditWishViewController ()
-//<PopupViewDelegate>
+#import "GCPTextView.h"
+@interface EditWishViewController () <PopupViewDelegate>
 @property (nonatomic,weak) IBOutlet UITextField *textField;
+@property (nonatomic,weak) IBOutlet GCPTextView *textView;
 @property (nonatomic,weak) PopupView *popView;
+@property (nonatomic,strong) UIButton *tikButton;
 @end
 @implementation EditWishViewController
 
-//- (void)viewDidLoad{
-//    [super viewDidLoad];
-//    [self setupTextField];
-//    self.textField.text = self.plan.planTitle;
-//    self.finishDateLabel.text = [NSString stringWithFormat:@"预计%@达成",[SystemUtil stringFromDate:self.plan.finishDate]];
-//    self.isPrivate = self.plan.isPrivate.boolValue;
-//    self.title = @"编辑愿望";
-//}
-//
-//- (void)setupTextField{
-//    self.textField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,10,1)];
-//    self.textField.leftViewMode = UITextFieldViewModeAlways;
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    [self setupNavigationItem];
+    [self setupTextField];
+    [self setupContent];
+}
+
+- (void)setupNavigationItem{
+    CGRect frame = CGRectMake(0,0, 25,25);
+    UIButton *backBtn = [Theme buttonWithImage:[Theme navBackButtonDefault]
+                                        target:self.navigationController
+                                      selector:@selector(popViewControllerAnimated:)
+                                         frame:frame];
+    self.tikButton = [Theme buttonWithImage:[Theme navTikButtonDefault]
+                                     target:self
+                                   selector:@selector(doneEditing)
+                                      frame:frame];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
+}
+
+
+- (void)setupTextField{
+    self.textField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,5,1)];
+    self.textField.leftViewMode = UITextFieldViewModeAlways;
 //    [self setViewBorder:self.textField];
-//}
-//
-//- (void)doneEditing{
-//    NSLog(@"test");
-//    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithFrame:self.nextButton.frame];
-//    spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
-//    [spinner startAnimating];
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
-//    self.backButton.enabled = NO;
-//    
-//    
-//    [self.plan updatePlan:self.textField.text finishDate:self.selectedDate isPrivated:self.isPrivate];
-//    
-//    //set updaing request
-//    FetchCenter *fc = [[FetchCenter alloc] init];
-//    fc.delegate = self;
-//    [fc updatePlan:self.plan];
-//}
+}
+
+
+- (void)setupContent{
+    self.textField.placeholder = self.plan.planTitle;
+    [self.textView setPlaceholder:@"添加描述能让别人更了解这件事儿哦~"];
+    
+}
+
+- (void)doneEditing{
+    
+}
 //
 //
 //- (IBAction)finishDateIsTapped:(UITapGestureRecognizer *)sender{
@@ -105,44 +113,39 @@
 //}
 //
 //
-//- (void)showPopViewFor:(PlanStatus)status{
-//    UIView *keyWindow = [[UIApplication sharedApplication] keyWindow];
-//    if (status == PlanStatusFinished) {
-//        self.popView = [PopupView showPopupFinishinFrame:keyWindow.frame];
-//    }else if (status == PlanStatusGiveTheFuckingUp){
-//        self.popView = [PopupView showPopupFailinFrame:keyWindow.frame];
-//    }
-//    self.popView.delegate = self;
-//    [keyWindow addSubview:self.popView];
-//}
-//
-//
-//#pragma mark - pop up view delegate
-//
-//
-//- (void)popupViewDidPressCancel:(PopupView *)popupView{
-//    [popupView removeFromSuperview];
-//}
-//
-//- (void)popupViewDidPressConfirm:(PopupView *)popupView{
-//    
-//    if (popupView.state == PopupViewStateFinish){
-//        [self.plan updatePlanStatus:PlanStatusFinished];
-//
-//    }else if (popupView.state == PopupViewStateGiveUp){
-//        [self.plan updatePlanStatus:PlanStatusGiveTheFuckingUp];
-//
-//    }else {
-//        NSAssert(false, @"error");
-//    }
-//    [popupView removeFromSuperview];
-//    [self.navigationController popToRootViewControllerAnimated:YES];
-//}
-//
+- (void)showPopViewFor:(PlanStatus)status{
+    UIView *keyWindow = [[UIApplication sharedApplication] keyWindow];
+    if (status == PlanStatusFinished) {
+        self.popView = [PopupView showPopupFinishinFrame:keyWindow.frame];
+    }else if (status == PlanStatusGiveTheFuckingUp){
+        self.popView = [PopupView showPopupFailinFrame:keyWindow.frame];
+    }
+    self.popView.delegate = self;
+    [keyWindow addSubview:self.popView];
+}
 
 
+#pragma mark - pop up view delegate
 
 
+- (void)popupViewDidPressCancel:(PopupView *)popupView{
+    [popupView removeFromSuperview];
+}
+
+- (void)popupViewDidPressConfirm:(PopupView *)popupView{
+    
+    if (popupView.state == PopupViewStateFinish){
+        [self.plan updatePlanStatus:PlanStatusFinished];
+
+    }else if (popupView.state == PopupViewStateGiveUp){
+        [self.plan updatePlanStatus:PlanStatusGiveTheFuckingUp];
+
+    }else {
+        NSAssert(false, @"error");
+    }
+    [popupView removeFromSuperview];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 
 
 @end

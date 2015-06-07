@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PostDetailViewController.h"
+#import "Plan.h"
 @interface EditWishViewController : UIViewController
-
+@property (nonatomic,strong) Plan *plan;
 @end
