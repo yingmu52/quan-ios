@@ -3320,7 +3320,8 @@
                                                                     <exclude reference="v34-wt-sef"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact">
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="12" y="247" width="112" height="17"/>
                                                                 <mask key="constraints">
                                                                     <include reference="v34-wt-sef"/>
                                                                 </mask>
@@ -3339,7 +3340,8 @@
                                                                     <exclude reference="Sbs-b7-VUp"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact">
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="12" y="269" width="74" height="15"/>
                                                                 <mask key="constraints">
                                                                     <include reference="Sbs-b7-VUp"/>
                                                                 </mask>
@@ -3360,7 +3362,8 @@
                                                                     <exclude reference="ZcD-fA-N2X"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact">
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="3" y="2" width="252" height="237"/>
                                                                 <mask key="constraints">
                                                                     <exclude reference="Bul-du-2aJ"/>
                                                                     <exclude reference="Nyw-yk-Pey"/>
@@ -3369,7 +3372,7 @@
                                                             </variation>
                                                         </imageView>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="VXi-Oj-2Oy" firstAttribute="leading" secondItem="OVu-Sf-4mg" secondAttribute="leading" constant="22" id="04Y-sT-YlM">
                                                             <variation key="heightClass=regular-widthClass=compact" constant="2"/>
@@ -3555,10 +3558,10 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="xoQ-2c-1ih" firstAttribute="leading" secondItem="0n8-tR-n6o" secondAttribute="leadingMargin" constant="88" id="NAZ-oe-AFj">
-                                            <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
+                                            <variation key="heightClass=regular-widthClass=compact" constant="-16"/>
                                         </constraint>
                                         <constraint firstAttribute="trailingMargin" secondItem="xoQ-2c-1ih" secondAttribute="trailing" constant="-104" id="OcB-Ed-p3U">
-                                            <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
+                                            <variation key="heightClass=regular-widthClass=compact" constant="-16"/>
                                         </constraint>
                                         <constraint firstItem="xoQ-2c-1ih" firstAttribute="top" secondItem="0n8-tR-n6o" secondAttribute="topMargin" constant="-37" id="tEa-Iz-XBy">
                                             <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
@@ -5696,7 +5699,7 @@
         <scene sceneID="YyH-nI-6zS">
             <objects>
                 <tableViewController id="IYm-1R-fEI" customClass="WishDetailVCOwnerAchieved" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="326" sectionHeaderHeight="22" sectionFooterHeight="22" id="jvS-PL-veJ">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="326" sectionHeaderHeight="22" sectionFooterHeight="22" id="jvS-PL-veJ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -5705,6 +5708,9 @@
                             <outlet property="delegate" destination="IYm-1R-fEI" id="MxJ-8R-lBP"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="egE-eW-ywB" kind="show" identifier="ShowFeedFromAchievementDetail" id="bsm-j4-Eiy"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mAH-kH-P45" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -6361,11 +6367,11 @@
         <image name="tips_bg" width="69" height="69"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="sa3-BT-zY6"/>
+        <segue reference="bsm-j4-Eiy"/>
         <segue reference="uj8-0k-sVO"/>
+        <segue reference="cel-0L-eNY"/>
         <segue reference="4ZT-53-1QA"/>
         <segue reference="CTd-gb-xTE"/>
-        <segue reference="cel-0L-eNY"/>
         <segue reference="9SL-Jw-Apx"/>
     </inferredMetricsTieBreakers>
 </document>

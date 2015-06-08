@@ -165,6 +165,7 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if (indexPath.section == MenuSectionMid) {
         NSString *identifier;
         switch (indexPath.row) {
@@ -187,6 +188,8 @@ typedef enum {
                 break;
         }
         [self performSegueWithIdentifier:identifier sender:nil];
+    }else if (indexPath.section == MenuSectionLogin){
+        [self performSegueWithIdentifier:@"ShowAcheivementList" sender:nil];
     }
 }
 

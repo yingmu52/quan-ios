@@ -51,5 +51,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
+- (NSString *)segueForFeed{
+    return @"ShowFeedFromAchievementDetail";
+}
 @end
