@@ -14,13 +14,17 @@
 #import "PopupView.h"
 #import "SDWebImageCompat.h"
 #import "GCPTextView.h"
-@interface EditWishViewController () <PopupViewDelegate>
+#import "FetchCenter.h"
+@interface EditWishViewController () <PopupViewDelegate,FetchCenterDelegate>
 @property (nonatomic,weak) IBOutlet UITextField *textField;
 @property (nonatomic,weak) IBOutlet GCPTextView *textView;
 @property (nonatomic,weak) PopupView *popView;
+@property (nonatomic,weak) IBOutlet UILabel *wordCountLabel;
 @property (nonatomic,strong) UIButton *tikButton;
+@property (nonatomic,strong) FetchCenter *fetchCenter;
 @end
 @implementation EditWishViewController
+
 
 - (void)viewDidLoad{
     [super viewDidLoad];
@@ -31,7 +35,7 @@
 
 - (void)setupNavigationItem{
     CGRect frame = CGRectMake(0,0, 25,25);
-    UIButton *backBtn = [Theme buttonWithImage:[Theme navBackButtonDefault]
+    UIButton *backButton = [Theme buttonWithImage:[Theme navBackButtonDefault]
                                         target:self.navigationController
                                       selector:@selector(popViewControllerAnimated:)
                                          frame:frame];
@@ -39,7 +43,7 @@
                                      target:self
                                    selector:@selector(doneEditing)
                                       frame:frame];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
 }
 
@@ -54,65 +58,66 @@
 - (void)setupContent{
     self.textField.placeholder = self.plan.planTitle;
     [self.textView setPlaceholder:@"添加描述能让别人更了解这件事儿哦~"];
+    self.wordCountLabel.text = [NSString stringWithFormat:@"%@/75",@(self.plan.planTitle.length)];
     
 }
 
 - (void)doneEditing{
     
+#warning !!!!
+    if (self.textField.hasText && ![self.textField.text isEqualToString:self.plan.planTitle]){
+        //update Plan
+        [self.fetchCenter updatePlan:self.plan];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
-//
-//
-//- (IBAction)finishDateIsTapped:(UITapGestureRecognizer *)sender{
-//    [super finishDateIsTapped:sender];
-//    NSLog(@"test");
-//    if (self.textField.isFirstResponder) [self.textField resignFirstResponder];
-//}
-//
-//
-//- (void)didFinishUpdatingPlan:(Plan *)plan{
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
-//    self.backButton.enabled = YES;
-//    [self.navigationController popToRootViewControllerAnimated:YES];
-//    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
-//}
-//- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-//    //update navigation item
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.nextButton];
-//    self.backButton.enabled = YES;
-//    
-//    //show alerts
-//    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
-//                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
-//                               delegate:self
-//                      cancelButtonTitle:@"OK"
-//                      otherButtonTitles:nil, nil] show];
-//    
-//    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-//    [delegate.managedObjectContext rollback];
-//    [delegate.managedObjectContext refreshObject:self.plan mergeChanges:NO];
-//}
-//
-//
-////- (void)dismissPickerView:(UIBarButtonItem *)item{
-////    [super dismissPickerView:item];
-//////    if (!self.textField.isFirstResponder) [self.textField becomeFirstResponder];
-////}
-//
-//
-//
-//- (IBAction)tapOnBackground:(UITapGestureRecognizer *)sender{
-//    if (self.textField.isFirstResponder) [self.textField resignFirstResponder];
-//}
-//
-//- (IBAction)giveUp:(UIButton *)sender{
-//    [self showPopViewFor:PlanStatusGiveTheFuckingUp];
-//}
-//
-//- (IBAction)finish:(UIButton *)sender{
-//    [self showPopViewFor:PlanStatusFinished];
-//}
-//
-//
+
+- (FetchCenter *)fetchCenter{
+    if (!_fetchCenter){
+        _fetchCenter = [[FetchCenter alloc] init];
+        _fetchCenter.delegate = self;
+    }
+    return _fetchCenter;
+}
+- (void)didFinishUpdatingPlan:(Plan *)plan{
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
+}
+
+- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
+    //update navigation item
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
+    
+    //show alerts
+    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
+                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
+                               delegate:self
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil, nil] show];
+    
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    [delegate.managedObjectContext rollback];
+    [delegate.managedObjectContext refreshObject:self.plan mergeChanges:NO];
+}
+
+
+
+- (IBAction)tapOnBackground:(UITapGestureRecognizer *)sender{
+    if (self.textField.isFirstResponder) [self.textField resignFirstResponder];
+    if (self.textView.isFirstResponder) [self.textView resignFirstResponder];
+}
+
+- (IBAction)giveUp:(UIButton *)sender{
+    [self showPopViewFor:PlanStatusGiveTheFuckingUp];
+}
+
+- (IBAction)finish:(UIButton *)sender{
+    [self showPopViewFor:PlanStatusFinished];
+}
+
+
 - (void)showPopViewFor:(PlanStatus)status{
     UIView *keyWindow = [[UIApplication sharedApplication] keyWindow];
     if (status == PlanStatusFinished) {
