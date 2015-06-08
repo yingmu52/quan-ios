@@ -122,19 +122,22 @@
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
     paragraphStyle.alignment = NSTextAlignmentLeft;
-    
+
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:size],
                                  NSParagraphStyleAttributeName: paragraphStyle};
     
     CGFloat width = CGRectGetWidth(self.tableView.frame);
     
-    CGRect bounds = [text boundingRectWithSize:CGSizeMake(width, 0.0) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:NULL];
+    CGRect bounds = [text boundingRectWithSize:CGSizeMake(width - kAvatarSize,CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:NULL];
     return roundf(CGRectGetHeight(bounds));
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
-    return [self heightForText:comment.content withFontSize:14.0] + kAvatarSize;
+    
+    CGFloat height = [self heightForText:comment.content withFontSize:14.0] + 30.0f; //30.0f are approximate margins
+    if (height < 60.0f) height = 60.0f;
+    return height;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
