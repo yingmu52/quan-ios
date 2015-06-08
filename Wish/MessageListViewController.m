@@ -40,7 +40,7 @@
 - (void)setUpNavigationItem
 {
     CGRect frame = CGRectMake(0,0, 25,25);
-    UIButton *back = [Theme buttonWithImage:[Theme navBackButtonDefault]
+    UIButton *back = [Theme buttonWithImage:[Theme navMenuDefault]
                                      target:self.slidingViewController
                                    selector:@selector(anchorTopViewToRightAnimated:)
                                       frame:frame];
