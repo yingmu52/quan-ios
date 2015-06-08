@@ -71,7 +71,7 @@
         }
         [delegate saveContext];
     }
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)setUpNavigationItem
