@@ -45,8 +45,7 @@
 
 - (void)setComment:(Comment *)comment{
     _comment = comment;
-    [self.imageView sd_setImageWithURL:[[FetchCenter new] urlWithImageID:comment.owner.headUrl]
-                      placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    [self.imageView sd_setImageWithURL:[[FetchCenter new] urlWithImageID:comment.owner.headUrl]];
     
     self.userNameLabel.text = comment.owner.ownerName;
     self.contentLabel.text = comment.content;

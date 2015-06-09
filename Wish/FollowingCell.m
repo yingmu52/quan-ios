@@ -48,7 +48,6 @@
             cell.feedImageView.image = feed.image;
         }else{
             [cell.feedImageView sd_setImageWithURL:[[FetchCenter new] urlWithImageID:feed.imageId]
-                                  placeholderImage:[UIImage imageNamed:@"placeholder.png"]
                                          completed:^(UIImage *image, NSError *error,
                                                      SDImageCacheType cacheType, NSURL *imageURL) {
                                              feed.image = image;

@@ -91,6 +91,7 @@ static NSUInteger numberOfPreloadedFeeds = 3;
     [cell.headProfilePic setCircularImageWithURL:[self.fetchCenter urlWithImageID:plan.owner.headUrl]
                                         forState:UIControlStateNormal
                                 placeholderImage:[Theme menuLoginDefault]];
+
 }
 #pragma mark - Fetched Results Controller Delegate
 

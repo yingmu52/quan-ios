@@ -233,8 +233,6 @@
 		AEFB048B1AD12437009EB0D3 /* DiscoveryVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFB047F1AD12437009EB0D3 /* DiscoveryVCData.m */; };
 		AEFB048C1AD12437009EB0D3 /* DiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFB04811AD12437009EB0D3 /* DiscoveryViewController.m */; };
 		AEFB048D1AD12437009EB0D3 /* DiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFB04811AD12437009EB0D3 /* DiscoveryViewController.m */; };
-		AEFB048E1AD12437009EB0D3 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = AEFB04821AD12437009EB0D3 /* placeholder.png */; };
-		AEFB048F1AD12437009EB0D3 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = AEFB04821AD12437009EB0D3 /* placeholder.png */; };
 		AEFEE3FC1A8ED9F6007E8234 /* FollowingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFEE3FB1A8ED9F6007E8234 /* FollowingTableViewController.m */; };
 		AEFEE4001A8EE0A7007E8234 /* FollowingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFEE3FF1A8EE0A7007E8234 /* FollowingCell.m */; };
 		AEFEE4011A8EE0A7007E8234 /* FollowingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFEE3FF1A8EE0A7007E8234 /* FollowingCell.m */; };
@@ -504,7 +502,6 @@
 		AEFB047F1AD12437009EB0D3 /* DiscoveryVCData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryVCData.m; sourceTree = "<group>"; };
 		AEFB04801AD12437009EB0D3 /* DiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryViewController.h; sourceTree = "<group>"; };
 		AEFB04811AD12437009EB0D3 /* DiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryViewController.m; sourceTree = "<group>"; };
-		AEFB04821AD12437009EB0D3 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		AEFEE3FA1A8ED9F6007E8234 /* FollowingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowingTableViewController.h; sourceTree = "<group>"; };
 		AEFEE3FB1A8ED9F6007E8234 /* FollowingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowingTableViewController.m; sourceTree = "<group>"; };
 		AEFEE3FE1A8EE0A7007E8234 /* FollowingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowingCell.h; sourceTree = "<group>"; };
@@ -1027,7 +1024,6 @@
 				AEFB047F1AD12437009EB0D3 /* DiscoveryVCData.m */,
 				AEFB04801AD12437009EB0D3 /* DiscoveryViewController.h */,
 				AEFB04811AD12437009EB0D3 /* DiscoveryViewController.m */,
-				AEFB04821AD12437009EB0D3 /* placeholder.png */,
 			);
 			path = Discovery;
 			sourceTree = "<group>";
@@ -1153,7 +1149,6 @@
 				AEA4CADA1AFC340A00BDE7F9 /* CommentAcessaryView.xib in Resources */,
 				AEF7F2A01A6875360022410B /* Main.storyboard in Resources */,
 				AE95A9F01ACFA7F8007465D5 /* cameraroll-picker-grip@2x.png in Resources */,
-				AEFB048E1AD12437009EB0D3 /* placeholder.png in Resources */,
 				AE2A8DE51ACA700100029D52 /* WishDetailCell.xib in Resources */,
 				AE95A9EE1ACFA7F8007465D5 /* back@2x.png in Resources */,
 				AE6E7A0C1AB0DF1F0023B9C7 /* PopupView.xib in Resources */,
@@ -1174,7 +1169,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEFB04891AD12437009EB0D3 /* DiscoveryFooterView.xib in Resources */,
-				AEFB048F1AD12437009EB0D3 /* placeholder.png in Resources */,
 				AEC8CE921AAF8823005364F8 /* StationView.xib in Resources */,
 				AEF7F29D1A6871F00022410B /* Images.xcassets in Resources */,
 				AEF7F2A11A6875360022410B /* Main.storyboard in Resources */,

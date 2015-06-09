@@ -64,8 +64,7 @@ static NSUInteger numberOfitems = 4.0; //float is important
     
     Plan *plan = [self.fetchedRC.fetchedObjects objectAtIndex:index];
 
-    [cell.discoveryImageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:plan.backgroundNum]
-                               placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    [cell.discoveryImageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:plan.backgroundNum]];
     cell.discoveryTitleLabel.text = plan.planTitle;
     cell.discoveryByUserLabel.text = [NSString stringWithFormat:@"by %@",plan.owner.ownerName];
     cell.discoveryFollowerCountLabel.text = [NSString stringWithFormat:@"%@ 关注",plan.followCount];

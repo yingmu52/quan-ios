@@ -94,10 +94,8 @@
     
     Message *message = [self.fetchedRC objectAtIndexPath:indexPath];
     
-    UIImage *placeHolder = [UIImage imageNamed:@"placeholder.png"];
-
-    [cell.profilePictureImageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:message.owner.headUrl] placeholderImage:placeHolder];
-    [cell.feedImageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:message.picurl] placeholderImage:placeHolder];
+    [cell.profilePictureImageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:message.owner.headUrl]];
+    [cell.feedImageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:message.picurl]];
     
     NSMutableAttributedString *content = [[NSMutableAttributedString alloc] initWithString:message.owner.ownerName
                                                                                 attributes:@{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00B8C2"]}];

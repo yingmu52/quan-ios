@@ -101,7 +101,6 @@
         self.headerView.imageView.image = feed.image;
     }else{
         [self.headerView.imageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:feed.imageId]
-                                     placeholderImage:[UIImage imageNamed:@"placeholder.png"]
                                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                                 feed.image = image;
                                             }];
@@ -150,7 +149,6 @@
     
     if (!comment.owner.image) {
         [cell.profileImageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:comment.owner.headUrl]
-                                 placeholderImage:[UIImage imageNamed:@"placeholder.png"]
          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
              comment.owner.image = image;
          }];

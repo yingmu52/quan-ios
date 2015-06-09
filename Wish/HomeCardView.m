@@ -27,8 +27,7 @@
     _plan = plan;
     if (_plan) {
         if (!_plan.image){
-            [self.imageView sd_setImageWithURL:[[FetchCenter new] urlWithImageID:_plan.backgroundNum]
-                              placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+            [self.imageView sd_setImageWithURL:[[FetchCenter new] urlWithImageID:_plan.backgroundNum]];
         }else{
             self.imageView.image = _plan.image;
         }
