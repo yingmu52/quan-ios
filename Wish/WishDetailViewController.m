@@ -61,6 +61,8 @@
 }
 
 - (void)goBack{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+
     NSUInteger numberOfPreservingFeeds = 3;
     NSArray *allFeeds = self.fetchedRC.fetchedObjects;
     if (allFeeds.count > numberOfPreservingFeeds) {
@@ -71,7 +73,6 @@
         }
         [delegate saveContext];
     }
-    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)setUpNavigationItem
@@ -268,13 +269,14 @@
     CGFloat y = offset.y + bounds.size.height - inset.bottom;
     CGFloat h = size.height;
     
-    CGFloat reload_distance = 50.0;
+    CGFloat reload_distance = 20.0f;
     if(y > h + reload_distance) {
         [self loadMore];
     }
 }
 
 - (void)loadMore{
+    NSLog(@"Loading More..");
     if (self.hasNextPage) {
         [self loadFeedFromServer:self.pageInfo];
     }else{
