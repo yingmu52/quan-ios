@@ -14,6 +14,7 @@
 #import "FetchCenter.h"
 @interface PostDetailViewController () <ImagePickerDelegate,FetchCenterDelegate>
 @property (weak, nonatomic) IBOutlet UIView *cameraBackground;
+@property (nonatomic,strong) Plan *plan;
 @end
 @implementation PostDetailViewController
 
@@ -33,8 +34,8 @@
 {
     CGRect frame = CGRectMake(0,0, 25,25);
     UIButton *backButton = [Theme buttonWithImage:[Theme navBackButtonDefault]
-                                        target:self.navigationController
-                                      selector:@selector(popViewControllerAnimated:)
+                                        target:self
+                                      selector:@selector(goBack)
                                          frame:frame];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
@@ -43,6 +44,11 @@
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#2A2A2A"]};
     self.title = self.titleFromPostView;
     
+}
+
+- (void)goBack{
+    [self.plan deleteSelf];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -73,11 +79,18 @@
     [spinner startAnimating];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
     
+    self.plan = [Plan createPlan:self.titleFromPostView privacy:NO image:image];
+}
+
+
+- (void)setPlan:(Plan *)plan{
+    _plan = plan;
     //create plan
     FetchCenter *fc = [[FetchCenter alloc] init];
     fc.delegate = self;
-    [fc uploadToCreatePlan:[Plan createPlan:self.titleFromPostView privacy:NO image:image]];
+    [fc uploadToCreatePlan:_plan];
 }
+
 - (void)didFailPickingImage{
     [[[UIAlertView alloc] initWithTitle:@"无法获取图片" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
 }
