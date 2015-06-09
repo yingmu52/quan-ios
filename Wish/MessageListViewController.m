@@ -53,7 +53,6 @@
                                            frame:frame];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:deleteBtn];
-    self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
 #pragma mark - clear all message 
