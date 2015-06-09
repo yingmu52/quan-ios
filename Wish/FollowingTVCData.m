@@ -89,8 +89,7 @@ static NSUInteger numberOfPreloadedFeeds = 3;
     cell.headUserNameLabel.text = plan.owner.ownerName;
 
     [cell.headProfilePic setCircularImageWithURL:[self.fetchCenter urlWithImageID:plan.owner.headUrl]
-                                        forState:UIControlStateNormal
-                                placeholderImage:[Theme menuLoginDefault]];
+                                        forState:UIControlStateNormal];
 
 }
 #pragma mark - Fetched Results Controller Delegate
