@@ -330,7 +330,6 @@
     //create comment locally
     [Comment createComment:self.commentView.textField.text commentId:commentId forFeed:feed];
     
-    [self.commentView removeFromSuperview];
     self.commentView.textField.text = @"";
 }
 
@@ -371,6 +370,8 @@
 
 - (void)didPressSend:(CommentAcessaryView *)cav{
     [self.fetchCenter commentOnFeed:cav.feed content:cav.textField.text];
+    [self.commentView removeFromSuperview];
+
 }
 
 #pragma mark - follow

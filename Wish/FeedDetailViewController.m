@@ -258,13 +258,16 @@
 
 #pragma mark - comment accessary view delegate 
 - (void)didPressSend:(CommentAcessaryView *)cav{
-    if (cav.state == CommentAcessaryViewStateComment) {
-        [self.fetchCenter commentOnFeed:self.feed
-                                content:cav.textField.text];
-    }else if (cav.state == CommentAcessaryViewStateReply){
-        [self.fetchCenter replyAtFeed:self.feed
-                              content:cav.textField.text
-                              toOwner:cav.comment.owner.ownerId];
+    if (cav.textField.hasText){
+        if (cav.state == CommentAcessaryViewStateComment) {
+            [self.fetchCenter commentOnFeed:self.feed
+                                    content:cav.textField.text];
+        }else if (cav.state == CommentAcessaryViewStateReply){
+            [self.fetchCenter replyAtFeed:self.feed
+                                  content:cav.textField.text
+                                  toOwner:cav.comment.owner.ownerId];
+        }
+        [self.commentView removeFromSuperview];
     }
 }
 
@@ -287,8 +290,6 @@
                     commentId:commentId
                       forFeed:feed];
     }
-    
-    [self.commentView removeFromSuperview];
     self.commentView.textField.text = @"";
 }
 
