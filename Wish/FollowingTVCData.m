@@ -17,6 +17,7 @@
 #import "User.h"
 #import "SDWebImageCompat.h"
 #import "ProfileViewController.h"
+#import "WishDetailVCFollower.h"
 static NSUInteger numberOfPreloadedFeeds = 3;
 
 @interface FollowingTVCData () <NSFetchedResultsControllerDelegate,FetchCenterDelegate,FollowingCellDelegate,ECSlidingViewControllerDelegate>
@@ -52,7 +53,18 @@ static NSUInteger numberOfPreloadedFeeds = 3;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"showFollowerWishDetail"]) {
-        [segue.destinationViewController setPlan:sender];
+        if ([sender isKindOfClass:[NSArray class]]){
+            NSArray *array = (NSArray *)sender;
+            WishDetailVCFollower *wishDetailVC = segue.destinationViewController;
+            wishDetailVC.plan = array.firstObject; // refer: didPressCollectionCellAtIndex
+            [wishDetailVC.tableView scrollToRowAtIndexPath:array.lastObject
+                                          atScrollPosition:UITableViewScrollPositionMiddle
+                                                  animated:NO];
+
+        }else{
+            [segue.destinationViewController setPlan:sender];
+        }
+
     }
     if ([segue.identifier isEqualToString:@"showPersonalInfo"]) {
         [segue.destinationViewController setOwner:sender];
@@ -62,6 +74,11 @@ static NSUInteger numberOfPreloadedFeeds = 3;
 - (void)didTapOnProfilePicture:(FollowingCell *)cell{
     Plan *plan = [self.fetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
     [self performSegueWithIdentifier:@"showPersonalInfo" sender:plan.owner];
+}
+
+- (void)didPressCollectionCellAtIndex:(NSIndexPath *)indexPath forCell:(FollowingCell *)cell{
+    Plan *plan = [self.fetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
+    [self performSegueWithIdentifier:@"showFollowerWishDetail" sender:@[plan,indexPath]];
 }
 #pragma mark - Table View
 

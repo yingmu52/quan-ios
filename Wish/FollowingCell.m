@@ -16,7 +16,7 @@
 @import CoreData;
 @import QuartzCore;
 
-@interface FollowingCell () <UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,NSFetchedResultsControllerDelegate>
+@interface FollowingCell () <UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,NSFetchedResultsControllerDelegate,UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *feedBackground;
 @property (weak, nonatomic) IBOutlet UIView *headBackground;
 @end
@@ -61,6 +61,11 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return self.feedsArray.count+1;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == self.feedsArray.count) return;
+    [self.delegate didPressCollectionCellAtIndex:indexPath forCell:self];
 }
 
 #pragma mark - UI

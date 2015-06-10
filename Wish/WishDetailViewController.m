@@ -63,7 +63,7 @@
 - (void)goBack{
     [self.navigationController popToRootViewControllerAnimated:YES];
 
-    NSUInteger numberOfPreservingFeeds = 3;
+    NSUInteger numberOfPreservingFeeds = 5;
     NSArray *allFeeds = self.fetchedRC.fetchedObjects;
     if (allFeeds.count > numberOfPreservingFeeds) {
         AppDelegate *delegate = [[UIApplication sharedApplication] delegate];

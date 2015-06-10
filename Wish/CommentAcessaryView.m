@@ -65,7 +65,6 @@
 
 - (void)keyboardWillHide:(NSNotification *)note{
     [self removeFromSuperview];
-    NSLog(@"haha");
 }
 
 //- (void)keyboardWillShow:(NSNotification *)note {
