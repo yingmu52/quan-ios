@@ -9,7 +9,7 @@
 #import "WishDetailViewController.h"
 #import "CommentAcessaryView.h"
 #import "UIImageView+WebCache.h"
-@interface WishDetailViewController () <CommentAcessaryViewDelegate,HeaderViewDelegate>
+@interface WishDetailViewController () <CommentAcessaryViewDelegate,HeaderViewDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic) CGFloat yVel;
 @property (strong,nonatomic) CommentAcessaryView *commentView;
 @end
@@ -57,7 +57,6 @@
     
     self.hasNextPage = YES; //important, must set before [self loadMore]
     [self loadMore];
-
 }
 
 - (void)goBack{
@@ -73,6 +72,7 @@
         }
         [delegate saveContext];
     }
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
 }
 
 - (void)setUpNavigationItem
@@ -84,6 +84,10 @@
                                          frame:frame];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     [self setCurrenetBackgroundColor];
+    
+    //pan to pop gesture
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
 }
 
 - (void)setCurrenetBackgroundColor{
