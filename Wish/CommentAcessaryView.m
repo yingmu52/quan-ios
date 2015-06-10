@@ -58,13 +58,19 @@
 
 - (void)awakeFromNib{
     [super awakeFromNib];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
-- (void)keyboardWillShow:(NSNotification *)note {
-    [self updateFrameWithKeyboardSize:[[[note userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size];
+- (void)keyboardWillHide:(NSNotification *)note{
+    [self removeFromSuperview];
+    NSLog(@"haha");
 }
+
+//- (void)keyboardWillShow:(NSNotification *)note {
+//    [self updateFrameWithKeyboardSize:[[[note userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size];
+//}
 
 - (void)keyboardDidChange:(NSNotification *)note{
     [self updateFrameWithKeyboardSize:[[[note userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size];
