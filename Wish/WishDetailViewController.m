@@ -45,6 +45,13 @@
 }
 #pragma mark - set up view
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    //pan to pop gesture
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
@@ -72,7 +79,6 @@
         }
         [delegate saveContext];
     }
-    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
 }
 
 - (void)setUpNavigationItem
@@ -84,10 +90,6 @@
                                          frame:frame];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     [self setCurrenetBackgroundColor];
-    
-    //pan to pop gesture
-    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-    self.navigationController.interactivePopGestureRecognizer.delegate = self;
 }
 
 - (void)setCurrenetBackgroundColor{
