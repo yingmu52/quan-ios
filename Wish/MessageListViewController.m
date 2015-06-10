@@ -227,4 +227,41 @@
 //                      otherButtonTitles:nil, nil] show];
 //    
 }
+
+#pragma mark - mark all to be read
+
+- (BOOL)canBecomeFirstResponder {
+    return YES;
+}
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self becomeFirstResponder];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self resignFirstResponder];
+}
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event{
+    if (motion == UIEventSubtypeMotionShake) {
+        [UIActionSheet showInView:self.view
+                        withTitle:@"是否确定将所有消息标记为已读？"
+                cancelButtonTitle:@"取消"
+           destructiveButtonTitle:@"确定"
+                otherButtonTitles:nil
+                         tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+                             if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"确定"]){
+                                 for (Message *message in self.fetchedRC.fetchedObjects){
+                                     if (!message.isRead.boolValue){
+                                         message.isRead = @(YES);
+                                     }
+                                 }
+                             }
+                         }];
+    }
+}
+
 @end
+
+
+
