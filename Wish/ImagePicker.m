@@ -85,17 +85,17 @@
 #pragma mark - image compression
 
 - (UIImage *)compressImage:(UIImage *)image{
-    CGFloat actualHeight = image.size.height;
-    CGFloat actualWidth = image.size.width;
-    
-    CGFloat thresHold = 1e5;
-    NSLog(@"Image Size : %@",NSStringFromCGSize(image.size));
-    UIImage *outputImage;
-    if (actualHeight*actualWidth <= thresHold){
-        //no compression is needed
-        outputImage = image;
-    }else{
-        outputImage = [UIImage imageWithData:UIImageJPEGRepresentation(image, .99)];
+//    CGFloat actualHeight = image.size.height;
+//    CGFloat actualWidth = image.size.width;
+    UIImage *outputImage = [UIImage imageWithData:UIImageJPEGRepresentation(image, 1.0)];
+//    CGFloat thresHold = 1e5;
+//    NSLog(@"Image Size : %@",NSStringFromCGSize(image.size));
+//    UIImage *outputImage;
+//    if (actualHeight*actualWidth <= thresHold){
+//        //no compression is needed
+//        outputImage = image;
+//    }else{
+//        outputImage = [UIImage imageWithData:UIImageJPEGRepresentation(image, 1.0)];
 //        CGFloat maxHeight = [UIScreen mainScreen].bounds.size.width;
 //        CGFloat maxWidth = maxHeight;
 //        CGFloat imgRatio = actualWidth/actualHeight;
@@ -128,7 +128,7 @@
 //        NSData *imageData = UIImageJPEGRepresentation(img, compressionQuality);
 //        UIGraphicsEndImageContext();
 //        outputImage = [UIImage imageWithData:imageData];
-    }
+//    }
     
     return outputImage;
 }
