@@ -78,13 +78,15 @@
     
     UIWindow *topView = [[UIApplication sharedApplication] keyWindow];
     
-    CGFloat trailing = 3*58.0/640 * self.view.frame.size.width;
-    CGFloat bottom = 5*32.0/1136 * self.view.frame.size.height;
+    CGFloat trailing = 58.0/640 * self.view.frame.size.width;
+    CGFloat bottom = 32.0/1136 * self.view.frame.size.height;
     
-    [cameraButton setFrame:CGRectMake(topView.frame.size.width - trailing,
-                                      topView.frame.size.height - bottom,
-                                      cameraIcon.size.width/1.9,
-                                      cameraIcon.size.height/1.9)];
+    CGFloat width = cameraIcon.size.width/1.8;
+    CGFloat height = cameraIcon.size.height/1.8;
+    [cameraButton setFrame:CGRectMake(topView.frame.size.width - trailing - width,
+                                      topView.frame.size.height - bottom - height,
+                                      width,
+                                      height)];
     [topView addSubview:cameraButton];
     
     [cameraButton addTarget:self action:@selector(showCamera)
