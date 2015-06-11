@@ -31,11 +31,7 @@
         [self hideStatusBar];
         [controller dismissViewControllerAnimated:YES completion:^{
             UIImage *capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage];
-            
-            //compress image !
-            UIImage *compressed = [UIImage imageWithData:[self compressImage:capturedImage]];
-            //NSLog(@"%@",NSStringFromCGSize(editedImage.size));
-            [self.imagePickerDelegate didFinishPickingImage:compressed];
+            [self.imagePickerDelegate didFinishPickingImage:[self compressImage:capturedImage]];
         }];
     }];
     [ipc onDidCancel:^(UIImagePickerController *picker) {
@@ -88,42 +84,52 @@
 
 #pragma mark - image compression
 
-- (NSData *)compressImage:(UIImage *)image{
+- (UIImage *)compressImage:(UIImage *)image{
     CGFloat actualHeight = image.size.height;
     CGFloat actualWidth = image.size.width;
-    CGFloat maxHeight = [UIScreen mainScreen].bounds.size.width;
-    CGFloat maxWidth = maxHeight;
-    CGFloat imgRatio = actualWidth/actualHeight;
-    CGFloat maxRatio = maxWidth/maxHeight;
-    CGFloat compressionQuality = 1.0;//90 percent compression
     
-    if (actualHeight > maxHeight || actualWidth > maxWidth){
-        if(imgRatio < maxRatio){
-            //adjust width according to maxHeight
-            imgRatio = maxHeight / actualHeight;
-            actualWidth = imgRatio * actualWidth;
-            actualHeight = maxHeight;
+    CGFloat thresHold = 1e5;
+    
+    UIImage *outputImage;
+    if (actualHeight*actualWidth <= thresHold){
+        //no compression is needed
+        outputImage = image;
+    }else{
+        CGFloat maxHeight = [UIScreen mainScreen].bounds.size.width;
+        CGFloat maxWidth = maxHeight;
+        CGFloat imgRatio = actualWidth/actualHeight;
+        CGFloat maxRatio = maxWidth/maxHeight;
+        CGFloat compressionQuality = 1.0;//90 percent compression
+        
+        if (actualHeight > maxHeight || actualWidth > maxWidth){
+            if(imgRatio < maxRatio){
+                //adjust width according to maxHeight
+                imgRatio = maxHeight / actualHeight;
+                actualWidth = imgRatio * actualWidth;
+                actualHeight = maxHeight;
+            }
+            else if(imgRatio > maxRatio){
+                //adjust height according to maxWidth
+                imgRatio = maxWidth / actualWidth;
+                actualHeight = imgRatio * actualHeight;
+                actualWidth = maxWidth;
+            }
+            else{
+                actualHeight = maxHeight;
+                actualWidth = maxWidth;
+            }
         }
-        else if(imgRatio > maxRatio){
-            //adjust height according to maxWidth
-            imgRatio = maxWidth / actualWidth;
-            actualHeight = imgRatio * actualHeight;
-            actualWidth = maxWidth;
-        }
-        else{
-            actualHeight = maxHeight;
-            actualWidth = maxWidth;
-        }
+        
+        CGRect rect = CGRectMake(0.0, 0.0, actualWidth, actualHeight);
+        UIGraphicsBeginImageContext(rect.size);
+        [image drawInRect:rect];
+        UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+        NSData *imageData = UIImageJPEGRepresentation(img, compressionQuality);
+        UIGraphicsEndImageContext();
+        outputImage = [UIImage imageWithData:imageData];
     }
     
-    CGRect rect = CGRectMake(0.0, 0.0, actualWidth, actualHeight);
-    UIGraphicsBeginImageContext(rect.size);
-    [image drawInRect:rect];
-    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-    NSData *imageData = UIImageJPEGRepresentation(img, compressionQuality);
-    UIGraphicsEndImageContext();
-    
-    return imageData;
+    return outputImage;
 }
 
 @end
