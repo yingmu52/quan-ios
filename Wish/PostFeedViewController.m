@@ -17,7 +17,7 @@
 #import "WishDetailVCOwner.h"
 @interface PostFeedViewController () <UITextFieldDelegate,FetchCenterDelegate>
 @property (nonatomic,strong) UIButton *tikButton;
-@property (nonatomic,weak) IBOutlet UIImageView *previewIcon;
+@property (nonatomic,weak) IBOutlet UIButton *previewButton;
 //@property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet GCPTextView *textView;
 
@@ -34,6 +34,7 @@
     }
     return _feed;
 }
+
 - (NSString *)titleForFeed{
     return self.textView.text;
 }
@@ -75,17 +76,14 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
     self.navigationItem.rightBarButtonItem.enabled = NO;
-//    [self.textField addTarget:self action:@selector(textFieldDidUpdate) forControlEvents:UIControlEventEditingChanged];
-    
-    //left margin
-//    self.textField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,10,1)];
-//    self.textField.leftViewMode = UITextFieldViewModeAlways;
-    
-//    self.textField.inputAccessoryView = [KeyboardAcessoryView instantiateFromNib:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height * 88 / 1136)];
-
-    self.previewIcon.image = self.imageForFeed;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#2A2A2A"]};
     self.title = self.plan.planTitle;
+//    [self.previewButton setImage:self.imageForFeed forState:UIControlStateNormal];
+}
+
+- (void)setPreviewButton:(UIButton *)previewButton{
+    _previewButton = previewButton;
+    [_previewButton setImage:self.imageForFeed forState:UIControlStateNormal];
 }
 - (void)createFeed{
     self.navigationItem.leftBarButtonItem.enabled = NO;
