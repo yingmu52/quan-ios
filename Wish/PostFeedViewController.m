@@ -15,6 +15,7 @@
 #import "SDWebImageCompat.h"
 #import "AppDelegate.h"
 #import "WishDetailVCOwner.h"
+#import "SJAvatarBrowser.h"
 @interface PostFeedViewController () <UITextFieldDelegate,FetchCenterDelegate>
 @property (nonatomic,strong) UIButton *tikButton;
 @property (nonatomic,weak) IBOutlet UIButton *previewButton;
@@ -84,6 +85,11 @@
 - (void)setPreviewButton:(UIButton *)previewButton{
     _previewButton = previewButton;
     [_previewButton setImage:self.imageForFeed forState:UIControlStateNormal];
+}
+
+- (IBAction)preViewButtonPressed:(UIButton *)button{
+    [SJAvatarBrowser showImage:button.imageView];
+    [self.textView resignFirstResponder];
 }
 - (void)createFeed{
     self.navigationItem.leftBarButtonItem.enabled = NO;

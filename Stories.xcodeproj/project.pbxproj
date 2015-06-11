@@ -20,6 +20,8 @@
 		AE0ADF1A1ABD78CC00692131 /* HomeCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0ADF181ABD78CC00692131 /* HomeCardViewController.m */; };
 		AE0E794B1A76EB50007C48EE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E794A1A76EB50007C48EE /* Reachability.m */; };
 		AE0E794C1A76EB50007C48EE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E794A1A76EB50007C48EE /* Reachability.m */; };
+		AE1068CB1B296878001DA2B5 /* SJAvatarBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1068CA1B296878001DA2B5 /* SJAvatarBrowser.m */; };
+		AE1068CC1B296878001DA2B5 /* SJAvatarBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1068CA1B296878001DA2B5 /* SJAvatarBrowser.m */; };
 		AE17799A1AF585CB005F1BEB /* FeedDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1779991AF585CB005F1BEB /* FeedDetailViewController.m */; };
 		AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
 		AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
@@ -270,6 +272,8 @@
 		AE0ADF181ABD78CC00692131 /* HomeCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCardViewController.m; sourceTree = "<group>"; };
 		AE0E79491A76EB50007C48EE /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		AE0E794A1A76EB50007C48EE /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		AE1068C91B296878001DA2B5 /* SJAvatarBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJAvatarBrowser.h; sourceTree = "<group>"; };
+		AE1068CA1B296878001DA2B5 /* SJAvatarBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJAvatarBrowser.m; sourceTree = "<group>"; };
 		AE1779981AF585CB005F1BEB /* FeedDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedDetailViewController.h; sourceTree = "<group>"; };
 		AE1779991AF585CB005F1BEB /* FeedDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedDetailViewController.m; sourceTree = "<group>"; };
 		AE1B6E3A1A6D89FC0026F3CE /* HomeCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCardView.h; sourceTree = "<group>"; };
@@ -621,6 +625,15 @@
 			name = Reachability;
 			sourceTree = "<group>";
 		};
+		AE1068C81B296865001DA2B5 /* ImagePreview */ = {
+			isa = PBXGroup;
+			children = (
+				AE1068C91B296878001DA2B5 /* SJAvatarBrowser.h */,
+				AE1068CA1B296878001DA2B5 /* SJAvatarBrowser.m */,
+			);
+			name = ImagePreview;
+			sourceTree = "<group>";
+		};
 		AE2F1C811A7A1A0200A32CB5 /* BlurTheFuckOn */ = {
 			isa = PBXGroup;
 			children = (
@@ -939,6 +952,7 @@
 		AEF7F2661A686E8A0022410B /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				AE1068C81B296865001DA2B5 /* ImagePreview */,
 				AE611ED61B2409E7006332F3 /* AMBCircularButton */,
 				AE8A9E9A1B1FF6E7007BD4E5 /* CustomBadge */,
 				AE8A9E951B1FB8B7007BD4E5 /* SCViewShaker */,
@@ -1253,6 +1267,7 @@
 				AE0172691A65D3140014266F /* MenuViewController.m in Sources */,
 				AE52FA501A8D3D76003FF725 /* PostFeedViewController.m in Sources */,
 				AE3D70BF1B019DE1000C0806 /* Comment.m in Sources */,
+				AE1068CB1B296878001DA2B5 /* SJAvatarBrowser.m in Sources */,
 				AED4CB2A1AC7633D00EE2DA4 /* NHAlignmentFlowLayout.m in Sources */,
 				AED68EE41A70399A00CDC0DF /* FetchCenter.m in Sources */,
 				AEC8CE8E1AAF872A005364F8 /* StationView.m in Sources */,
@@ -1337,6 +1352,7 @@
 				AEF7F29C1A686FE90022410B /* NavigationBar.m in Sources */,
 				AED05EDC1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m in Sources */,
 				AE9A198A1B02E9E700590784 /* FeedbackkAccessoryView.m in Sources */,
+				AE1068CC1B296878001DA2B5 /* SJAvatarBrowser.m in Sources */,
 				AE767E801ACE35A600F35137 /* FeedbackViewController.m in Sources */,
 				AE1E6BAB1AAFEEE400AF2613 /* PopupView.m in Sources */,
 				AEE4A6D51A96AFCF00ABF946 /* TriangleCutoutView.m in Sources */,
