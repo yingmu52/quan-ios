@@ -430,7 +430,8 @@ typedef enum{
                                                            cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30.0];
     request.HTTPMethod = @"POST";
 
-    NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:[self compressImage:image]
+    NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request
+                                                               fromData:UIImagePNGRepresentation(image)
                                                       completionHandler:^(NSData *data,NSURLResponse *response,NSError *error)
                                           {
                                               NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
@@ -476,46 +477,6 @@ typedef enum{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@?",self.baseUrl,PIC,GET_IMAGE];
     NSString *url = [NSString stringWithFormat:@"%@id=%@",[self versionForBaseURL:rqtStr operation:-1],imageId];
     return [NSURL URLWithString:url];
-}
-
-#pragma mark - image compression 
-
-- (NSData *)compressImage:(UIImage *)image{
-    CGFloat actualHeight = image.size.height;
-    CGFloat actualWidth = image.size.width;
-    CGFloat maxHeight = 600.0;
-    CGFloat maxWidth = 800.0;
-    CGFloat imgRatio = actualWidth/actualHeight;
-    CGFloat maxRatio = maxWidth/maxHeight;
-    CGFloat compressionQuality = 0.5;//50 percent compression
-    
-    if (actualHeight > maxHeight || actualWidth > maxWidth){
-        if(imgRatio < maxRatio){
-            //adjust width according to maxHeight
-            imgRatio = maxHeight / actualHeight;
-            actualWidth = imgRatio * actualWidth;
-            actualHeight = maxHeight;
-        }
-        else if(imgRatio > maxRatio){
-            //adjust height according to maxWidth
-            imgRatio = maxWidth / actualWidth;
-            actualHeight = imgRatio * actualHeight;
-            actualWidth = maxWidth;
-        }
-        else{
-            actualHeight = maxHeight;
-            actualWidth = maxWidth;
-        }
-    }
-    
-    CGRect rect = CGRectMake(0.0, 0.0, actualWidth, actualHeight);
-    UIGraphicsBeginImageContext(rect.size);
-    [image drawInRect:rect];
-    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-    NSData *imageData = UIImageJPEGRepresentation(img, compressionQuality);
-    UIGraphicsEndImageContext();
-    
-    return imageData;
 }
 
 #pragma mark - response handler
