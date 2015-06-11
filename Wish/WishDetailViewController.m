@@ -67,8 +67,8 @@
 }
 
 - (void)goBack{
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     [self.navigationController popToRootViewControllerAnimated:YES];
-
     NSUInteger numberOfPreservingFeeds = 5;
     NSArray *allFeeds = self.fetchedRC.fetchedObjects;
     if (allFeeds.count > numberOfPreservingFeeds) {
@@ -101,6 +101,8 @@
             imgView.clipsToBounds = YES;
             imgView.image = [feed.image applyDarkEffect];
             self.tableView.backgroundView = imgView;
+        }else{
+            self.tableView.backgroundColor = [Theme wishDetailBackgroundNone:self.tableView];
         }
     }else{
         self.tableView.backgroundColor = [Theme wishDetailBackgroundNone:self.tableView];
