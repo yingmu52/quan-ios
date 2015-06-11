@@ -89,44 +89,45 @@
     CGFloat actualWidth = image.size.width;
     
     CGFloat thresHold = 1e5;
-    
+    NSLog(@"Image Size : %@",NSStringFromCGSize(image.size));
     UIImage *outputImage;
     if (actualHeight*actualWidth <= thresHold){
         //no compression is needed
         outputImage = image;
     }else{
-        CGFloat maxHeight = [UIScreen mainScreen].bounds.size.width;
-        CGFloat maxWidth = maxHeight;
-        CGFloat imgRatio = actualWidth/actualHeight;
-        CGFloat maxRatio = maxWidth/maxHeight;
-        CGFloat compressionQuality = 1.0;//90 percent compression
-        
-        if (actualHeight > maxHeight || actualWidth > maxWidth){
-            if(imgRatio < maxRatio){
-                //adjust width according to maxHeight
-                imgRatio = maxHeight / actualHeight;
-                actualWidth = imgRatio * actualWidth;
-                actualHeight = maxHeight;
-            }
-            else if(imgRatio > maxRatio){
-                //adjust height according to maxWidth
-                imgRatio = maxWidth / actualWidth;
-                actualHeight = imgRatio * actualHeight;
-                actualWidth = maxWidth;
-            }
-            else{
-                actualHeight = maxHeight;
-                actualWidth = maxWidth;
-            }
-        }
-        
-        CGRect rect = CGRectMake(0.0, 0.0, actualWidth, actualHeight);
-        UIGraphicsBeginImageContext(rect.size);
-        [image drawInRect:rect];
-        UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-        NSData *imageData = UIImageJPEGRepresentation(img, compressionQuality);
-        UIGraphicsEndImageContext();
-        outputImage = [UIImage imageWithData:imageData];
+        outputImage = [UIImage imageWithData:UIImageJPEGRepresentation(image, .99)];
+//        CGFloat maxHeight = [UIScreen mainScreen].bounds.size.width;
+//        CGFloat maxWidth = maxHeight;
+//        CGFloat imgRatio = actualWidth/actualHeight;
+//        CGFloat maxRatio = maxWidth/maxHeight;
+//        CGFloat compressionQuality = 1.0;//90 percent compression
+//        
+//        if (actualHeight > maxHeight || actualWidth > maxWidth){
+//            if(imgRatio < maxRatio){
+//                //adjust width according to maxHeight
+//                imgRatio = maxHeight / actualHeight;
+//                actualWidth = imgRatio * actualWidth;
+//                actualHeight = maxHeight;
+//            }
+//            else if(imgRatio > maxRatio){
+//                //adjust height according to maxWidth
+//                imgRatio = maxWidth / actualWidth;
+//                actualHeight = imgRatio * actualHeight;
+//                actualWidth = maxWidth;
+//            }
+//            else{
+//                actualHeight = maxHeight;
+//                actualWidth = maxWidth;
+//            }
+//        }
+//        
+//        CGRect rect = CGRectMake(0.0, 0.0, actualWidth, actualHeight);
+//        UIGraphicsBeginImageContext(rect.size);
+//        [image drawInRect:rect];
+//        UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+//        NSData *imageData = UIImageJPEGRepresentation(img, compressionQuality);
+//        UIGraphicsEndImageContext();
+//        outputImage = [UIImage imageWithData:imageData];
     }
     
     return outputImage;
