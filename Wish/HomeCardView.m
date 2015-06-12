@@ -32,9 +32,7 @@
             self.imageView.image = _plan.image;
         }
         self.titleLabel.text = _plan.planTitle;
-        self.subtitleLabel.text = [NSString stringWithFormat:@"已有%@条记录",plan.tryTimes];
-        self.followCountLabel.text = [NSString stringWithFormat:@"%@关注",plan.followCount];
-        
+        self.subtitleLabel.text = [NSString stringWithFormat:@"%@条记录\t%@人关注",plan.tryTimes,plan.followCount];
     }
 }
 
