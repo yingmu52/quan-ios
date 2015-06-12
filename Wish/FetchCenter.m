@@ -425,6 +425,7 @@ typedef enum{
     }
     
     //upload image
+    
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:rqtUploadImage]
                                                            cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30.0];
@@ -434,21 +435,20 @@ typedef enum{
                                                                fromData:UIImagePNGRepresentation(image)
                                                       completionHandler:^(NSData *data,NSURLResponse *response,NSError *error)
                                           {
-                                              NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                   options:NSJSONReadingAllowFragments
-                                                                                                     error:nil];
-                                              
-                                              if (!error && ![json[@"ret"] boolValue]){ //upload image successed
-                                                  [self didFinishSendingPostRequest:json
-                                                                          operation:postOp
-                                                                             entity:obj];
-                                              }else{
-                                                  NSLog(@"fail to upload image \n response:%@",json);
-                                                  dispatch_main_async_safe(^{
+                                              dispatch_main_async_safe((^{
+                                                  NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
+                                                                                                       options:NSJSONReadingAllowFragments
+                                                                                                         error:nil];
+                                                  if (!error && ![json[@"ret"] boolValue]){ //upload image successed
+                                                      [self didFinishSendingPostRequest:json
+                                                                              operation:postOp
+                                                                                 entity:obj];
+                                                  }else{
+                                                      NSLog(@"fail to upload image \n response:%@",json);
+                                                      if (!json) json = @{@"ret":@"超时",@"msg":@"未知错误 :("};
                                                       [self.delegate didFailUploadingImageWithInfo:json entity:obj];
-                                                  });
-                                                  
-                                              }
+                                                  }
+                                              }));
                                           }];
     [uploadTask resume];
     
@@ -456,7 +456,7 @@ typedef enum{
 
 
 
-#pragma mark - version control 
+#pragma mark - version control
 
 //return a new base url string with appened version argument
 - (NSString *)versionForBaseURL:(NSString *)baseURL operation:(FetchCenterGetOp)op{
@@ -481,42 +481,39 @@ typedef enum{
 
 #pragma mark - response handler
 - (void)didFinishSendingPostRequest:(NSDictionary *)json operation:(FetchCenterPostOp)op entity:(NSManagedObject *)obj{
-    dispatch_main_async_safe((^{
-        NSString *fetchedImageId = [json valueForKeyPath:@"data.id"];
-        switch (op){
-            case FetchCenterPostOpUploadImageForCreatingFeed:{
-                if (fetchedImageId){
-                    Feed *feed = (Feed *)obj;
-                    feed.imageId = fetchedImageId;
-                    NSLog(@"fetched image ID: %@",fetchedImageId);
-                    //upload feed
-                    NSString *baseURL = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,CREATE_FEED];
-                    NSDictionary *args;
-                    if (feed.plan.planId && feed.feedTitle) {
-                        args = @{@"picurl":fetchedImageId,
-                                 @"content":[feed.feedTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                                 @"planId":feed.plan.planId};
-                        [self getRequest:baseURL
-                               parameter:args
-                               operation:FetchCenterGetOpCreateFeed entity:obj];
-                    }
+    NSString *fetchedImageId = [json valueForKeyPath:@"data.id"];
+    switch (op){
+        case FetchCenterPostOpUploadImageForCreatingFeed:{
+            if (fetchedImageId){
+                Feed *feed = (Feed *)obj;
+                feed.imageId = fetchedImageId;
+                NSLog(@"fetched image ID: %@",fetchedImageId);
+                //upload feed
+                NSString *baseURL = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,CREATE_FEED];
+                NSDictionary *args;
+                if (feed.plan.planId && feed.feedTitle) {
+                    args = @{@"picurl":fetchedImageId,
+                             @"content":[feed.feedTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                             @"planId":feed.plan.planId};
+                    [self getRequest:baseURL
+                           parameter:args
+                           operation:FetchCenterGetOpCreateFeed entity:obj];
                 }
             }
-                break;
-            case FetchCenterPostOpUploadImageForUpdaingProfile:{
-                //update local User info
-                if (fetchedImageId){
-                    [User updateAttributeFromDictionary:@{PROFILE_PICTURE_ID_CUSTOM:fetchedImageId}];
-                    NSLog(@"image uploaded %@",fetchedImageId);
-                    [self.delegate didFinishUploadingPictureForProfile:json];
-                }
-            }
-                break;
-            default:
-                break;
         }
-        
-    }));
+            break;
+        case FetchCenterPostOpUploadImageForUpdaingProfile:{
+            //update local User info
+            if (fetchedImageId){
+                [User updateAttributeFromDictionary:@{PROFILE_PICTURE_ID_CUSTOM:fetchedImageId}];
+                NSLog(@"image uploaded %@",fetchedImageId);
+                [self.delegate didFinishUploadingPictureForProfile:json];
+            }
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)didFinishSendingGetRequest:(NSDictionary *)json operation:(FetchCenterGetOp)op entity:(id)obj{

@@ -18,7 +18,6 @@
 #import "SDWebImageCompat.h"
 #import "AppDelegate.h"
 #import "User.h"
-#import "SDWebImageCompat.h"
 #import "Message+MessageCRUD.h"
 
 #define INNER_NETWORK_URL @"http://182.254.167.228"
