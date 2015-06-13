@@ -17,15 +17,19 @@ static CGFloat kEndPoint = 1.5;
 -(void)awakeFromNib
 {
     [super awakeFromNib];
-//    [self setBackgroundColor:[Theme naviBackground]];
-//    //get the rid the fuck off navigation separator
-//    [self setBackgroundImage:[UIImage new]
-//               forBarMetrics:UIBarMetricsDefault];
-//    self.shadowImage = [UIImage new];
-//    
+    
+    NSDictionary *textAttributes = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#2B2B2B"],
+                                     NSFontAttributeName:[UIFont systemFontOfSize:17.0]};
+    self.titleTextAttributes = textAttributes;
+    
+    //get the rid the fuck off navigation separator
+    [self setBackgroundImage:[SystemUtil imageFromColor:[Theme naviBackground]]
+               forBarMetrics:UIBarMetricsDefault];
+    self.shadowImage = [UIImage new];
+
 //    //change navigation bar height
     CGFloat referenceHeight = [[UIScreen mainScreen] bounds].size.height;
-    [self setHeight:80.0/1136.0f*referenceHeight];
+    [self setHeight:75.0/1136.0f*referenceHeight];
 
 }
 
