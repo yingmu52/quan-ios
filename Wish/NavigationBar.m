@@ -14,29 +14,19 @@
 
 static CGFloat kEndPoint = 1.5;
 
-- (void)layoutSubviews{
-    [super layoutSubviews];
-    //fucking centering navigation bar items
-    for (UIView *subview in self.subviews){
-        CGPoint newCenter = subview.center;
-        newCenter.y = self.center.y;
-        subview.center  = newCenter;
-    }
-}
-
 -(void)awakeFromNib
 {
     [super awakeFromNib];
-    [self setBackgroundColor:[Theme naviBackground]];
-    //get the rid the fuck off navigation separator
-    [self setBackgroundImage:[UIImage new]
-               forBarMetrics:UIBarMetricsDefault];
-    self.shadowImage = [UIImage new];
-    
-    //change navigation bar height
+//    [self setBackgroundColor:[Theme naviBackground]];
+//    //get the rid the fuck off navigation separator
+//    [self setBackgroundImage:[UIImage new]
+//               forBarMetrics:UIBarMetricsDefault];
+//    self.shadowImage = [UIImage new];
+//    
+//    //change navigation bar height
     CGFloat referenceHeight = [[UIScreen mainScreen] bounds].size.height;
-    [self setHeight:110.0/1136.0f*referenceHeight];
-    
+    [self setHeight:80.0/1136.0f*referenceHeight];
+
 }
 
 void drawLinearGradient(CGContextRef context, CGRect rect, CGColorRef startColor, CGColorRef endColor)

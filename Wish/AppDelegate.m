@@ -12,6 +12,7 @@
 #import "User.h"
 #import "LoginViewController.h"
 #import "FetchCenter.h"
+#import "Theme.h"
 @interface AppDelegate () <FetchCenterDelegate>
 @property (nonatomic,strong) NSTimer *messageNotificationTimer;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
@@ -22,6 +23,7 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [self setupNavigationBar];
     if ([User isUserLogin]){
         ECSlidingViewController *root = (ECSlidingViewController *)self.window.rootViewController;
         root.anchorRightPeekAmount = root.view.frame.size.width * (640 - 290.0)/640;
@@ -36,6 +38,37 @@
     return YES;
 }
 
+
+- (void)setupNavigationBar{
+    //navigation title
+    NSDictionary *textAttributes = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#2B2B2B"],
+                                                NSFontAttributeName:[UIFont systemFontOfSize:17.0]};
+    [[UINavigationBar appearance] setTitleTextAttributes:textAttributes];
+    
+    //get rid of navigation buttom line
+    [[UINavigationBar appearance] setBackgroundImage:[self imageWithColor:[Theme naviBackground]]
+                                      forBarPosition:UIBarPositionAny
+                                          barMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setShadowImage:[UIImage new]];
+    [[UINavigationBar appearance] setBackgroundColor:[Theme naviBackground]];
+    [[UINavigationBar appearance] setTranslucent:NO];
+    
+}
+
+- (UIImage *)imageWithColor:(UIColor *)color
+{
+    CGRect rect = [[UIApplication sharedApplication] statusBarFrame];
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, color.CGColor);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
