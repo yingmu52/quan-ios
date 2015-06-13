@@ -7,7 +7,7 @@
 //
 
 #import "ProfileViewController.h"
-
+#import "NavigationBar.h"
 
 @interface ProfileViewController () 
 @end
@@ -35,8 +35,9 @@
 
 - (void)goBack{
     [self.navigationController popViewControllerAnimated:YES];
-    self.navigationController.navigationBar.backgroundColor = [Theme naviBackground];
-    [self setNavBarText:[UIColor blackColor]];
+    NavigationBar *navBar = (NavigationBar *)self.navigationController.navigationBar;
+    [navBar showDefaultTextColor];
+    [navBar showDefaultTextColor];
 }
 
 
@@ -48,16 +49,11 @@
                                    selector:@selector(goBack)
                                       frame:frame];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:back];
-    self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
-    [self setNavBarText:[UIColor whiteColor]];
-
+    
+    NavigationBar *navBar = (NavigationBar *)self.navigationController.navigationBar;
+    [navBar showClearBackground];
+    [navBar showTextWithColor:[UIColor whiteColor]];
     self.title = @"个人资料";
-
-}
-
-- (void)setNavBarText:(UIColor *)color{
-    [self.navigationController.navigationBar
-     setTitleTextAttributes:@{NSForegroundColorAttributeName:color}];
 }
 
 

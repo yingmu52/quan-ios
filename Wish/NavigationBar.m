@@ -18,19 +18,33 @@ static CGFloat kEndPoint = 1.5;
 {
     [super awakeFromNib];
     
-    NSDictionary *textAttributes = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#2B2B2B"],
-                                     NSFontAttributeName:[UIFont systemFontOfSize:17.0]};
-    self.titleTextAttributes = textAttributes;
-    
+    [self showDefaultTextColor];
     //get the rid the fuck off navigation separator
-    [self setBackgroundImage:[SystemUtil imageFromColor:[Theme naviBackground]]
-               forBarMetrics:UIBarMetricsDefault];
+    [self showDefaultBackground];
     self.shadowImage = [UIImage new];
 
 //    //change navigation bar height
     CGFloat referenceHeight = [[UIScreen mainScreen] bounds].size.height;
     [self setHeight:75.0/1136.0f*referenceHeight];
 
+}
+
+- (void)showDefaultTextColor{
+    [self showTextWithColor:[SystemUtil colorFromHexString:@"#2B2B2B"]];
+}
+
+- (void)showTextWithColor:(UIColor *)color{
+    NSDictionary *textAttributes = @{NSForegroundColorAttributeName:color,
+                                     NSFontAttributeName:[UIFont systemFontOfSize:17.0]};
+    self.titleTextAttributes = textAttributes;
+}
+
+- (void)showClearBackground{
+    [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+}
+
+- (void)showDefaultBackground{
+    [self setBackgroundImage:[SystemUtil imageFromColor:[Theme naviBackground]] forBarMetrics:UIBarMetricsDefault];
 }
 
 void drawLinearGradient(CGContextRef context, CGRect rect, CGColorRef startColor, CGColorRef endColor)
