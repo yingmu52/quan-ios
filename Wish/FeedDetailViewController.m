@@ -7,32 +7,6 @@
 //
 
 #import "FeedDetailViewController.h"
-#import "Theme.h"
-#import "FeedDetailCell.h"
-#import "FetchCenter.h"
-#import "Theme.h"
-#import "SystemUtil.h"
-#import "CommentAcessaryView.h"
-#import "AppDelegate.h"
-#import "UIImageView+WebCache.h"
-#import "Feed+FeedCRUD.h"
-#import "SDWebImageCompat.h"
-#import "PopupView.h"
-#import "FeedDetailHeader.h"
-@interface FeedDetailViewController () <FetchCenterDelegate,CommentAcessaryViewDelegate,NSFetchedResultsControllerDelegate,PopupViewDelegate,FeedDetailHeaderDelegate>
-
-@property (strong, nonatomic) FetchCenter *fetchCenter;
-@property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
-@property (strong,nonatomic) CommentAcessaryView *commentView;
-@property (nonatomic,strong) Feed *feed;
-
-
-@property (nonatomic) BOOL hasNextPage;
-@property (nonatomic,strong) NSDictionary *pageInfo;
-
-@property (nonatomic,strong) FeedDetailHeader *headerView;
-@end
-
 @implementation FeedDetailViewController
 
 - (void)viewDidLoad{
@@ -67,21 +41,8 @@
                                            target:self
                                          selector:nil
                                             frame:frame];
-
-#warning 区分主人和客人态
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
-//    UIButton *deleteButton = [Theme buttonWithImage:[Theme navButtonDeleted]
-//                                             target:self
-//                                           selector:@selector(showPopupView)
-//                                              frame:frame];
-//    UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
-//                                                                           target:nil action:nil];
-//    space.width = 25.0f;
-//    self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:deleteButton],
-//                                                space,
-//                                                [[UIBarButtonItem alloc] initWithCustomView:shareButton]];
-
 }
 
 #pragma mark - dynamic feed title height 
@@ -200,6 +161,7 @@
     if (!_commentView){
         _commentView = [CommentAcessaryView instantiateFromNib:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
         _commentView.delegate = self;
+
     }
     return _commentView;
 }
@@ -422,42 +384,6 @@
     self.feed = [Feed fetchFeedWithId:_feedId];
 }
 
-#pragma mark - feed deletion
-
-- (void)showPopupView{
-    if (self.feed){
-        UIWindow *window = [[UIApplication sharedApplication] keyWindow];
-        NSString *popupViewTitle = [self isDeletingTheLastFeed] ?
-        @"这是最后一条记录啦！\n这件事儿也会被删除哦~" : @"真的要删除这条记录吗？";
-        PopupView *popupView = [PopupView showPopupDeleteinFrame:window.frame
-                                                       withTitle:popupViewTitle];
-        popupView.delegate = self;
-        [window addSubview:popupView];
-    }
-}
-
-- (void)popupViewDidPressCancel:(PopupView *)popupView{
-    [popupView removeFromSuperview];
-}
-
-- (void)popupViewDidPressConfirm:(PopupView *)popupView{
-    if ([self isDeletingTheLastFeed]){
-        [self.feed.plan deleteSelf];
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }else{
-        [self.fetchCenter deleteFeed:self.feed];
-    }
-    [self popupViewDidPressCancel:popupView];
-}
-
-- (void)didFinishDeletingFeed:(Feed *)feed{
-    [feed deleteSelf];
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (BOOL)isDeletingTheLastFeed{
-    return self.feed.plan.feeds.count == 1;
-}
 @end
 
 

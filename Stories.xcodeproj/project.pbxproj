@@ -122,6 +122,8 @@
 		AEBFCA381A78614100686EFE /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA361A78614100686EFE /* PostDetailViewController.m */; };
 		AEC0688F1B2D309E007975D2 /* FeedDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC0688E1B2D309E007975D2 /* FeedDetailCell.xib */; };
 		AEC068901B2D309E007975D2 /* FeedDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC0688E1B2D309E007975D2 /* FeedDetailCell.xib */; };
+		AEC068931B2D3D55007975D2 /* FeedDetailVCOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC068921B2D3D55007975D2 /* FeedDetailVCOwner.m */; };
+		AEC068941B2D3D55007975D2 /* FeedDetailVCOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC068921B2D3D55007975D2 /* FeedDetailVCOwner.m */; };
 		AEC0E1C51AC64F9600563F7C /* WishDetailVCOwnerAchieved.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC0E1C41AC64F9600563F7C /* WishDetailVCOwnerAchieved.m */; };
 		AEC0E1C61AC64F9600563F7C /* WishDetailVCOwnerAchieved.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC0E1C41AC64F9600563F7C /* WishDetailVCOwnerAchieved.m */; };
 		AEC5B9AA1AB7EB40008ECB92 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC5B9A91AB7EB40008ECB92 /* User.m */; };
@@ -393,6 +395,8 @@
 		AEBFCA351A78614100686EFE /* PostDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostDetailViewController.h; sourceTree = "<group>"; };
 		AEBFCA361A78614100686EFE /* PostDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostDetailViewController.m; sourceTree = "<group>"; };
 		AEC0688E1B2D309E007975D2 /* FeedDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedDetailCell.xib; sourceTree = "<group>"; };
+		AEC068911B2D3D55007975D2 /* FeedDetailVCOwner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedDetailVCOwner.h; sourceTree = "<group>"; };
+		AEC068921B2D3D55007975D2 /* FeedDetailVCOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedDetailVCOwner.m; sourceTree = "<group>"; };
 		AEC0E1C31AC64F9600563F7C /* WishDetailVCOwnerAchieved.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishDetailVCOwnerAchieved.h; sourceTree = "<group>"; };
 		AEC0E1C41AC64F9600563F7C /* WishDetailVCOwnerAchieved.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailVCOwnerAchieved.m; sourceTree = "<group>"; };
 		AEC5B9A81AB7EB40008ECB92 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -830,6 +834,8 @@
 				AE47055C1AF9DC080028D7BC /* FeedDetailCell.m */,
 				AE1779981AF585CB005F1BEB /* FeedDetailViewController.h */,
 				AE1779991AF585CB005F1BEB /* FeedDetailViewController.m */,
+				AEC068911B2D3D55007975D2 /* FeedDetailVCOwner.h */,
+				AEC068921B2D3D55007975D2 /* FeedDetailVCOwner.m */,
 				AE52FA4E1A8D3D76003FF725 /* PostFeedViewController.h */,
 				AE52FA4F1A8D3D76003FF725 /* PostFeedViewController.m */,
 			);
@@ -1245,6 +1251,7 @@
 				AE95A9F91ACFBCA9007465D5 /* UIActionSheet+Blocks.m in Sources */,
 				AEF7F28B1A686E8B0022410B /* UIViewController+ECSlidingViewController.m in Sources */,
 				AEFA5FDA1AAFBA41001CA0C8 /* NZCircularImageView.m in Sources */,
+				AEC068931B2D3D55007975D2 /* FeedDetailVCOwner.m in Sources */,
 				AE95A9F51ACFA7F8007465D5 /* TWPhotoCollectionViewCell.m in Sources */,
 				AE05C0361B0D62BA002F83F1 /* Owner.m in Sources */,
 				AEF7F2931A686FA30022410B /* Theme.m in Sources */,
@@ -1323,6 +1330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AED5AB231AFDE39800719208 /* CommentAcessaryView.m in Sources */,
+				AEC068941B2D3D55007975D2 /* FeedDetailVCOwner.m in Sources */,
 				AEF7F2841A686E8A0022410B /* ECSlidingAnimationController.m in Sources */,
 				AEF7F28C1A686E8B0022410B /* UIViewController+ECSlidingViewController.m in Sources */,
 				AED4CB441AC79F3A00EE2DA4 /* ModalLeftToRightSegue.m in Sources */,

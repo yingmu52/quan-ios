@@ -3053,7 +3053,7 @@
                     <connections>
                         <segue destination="XiV-RA-INl" kind="show" identifier="showPostFeed" id="4wk-xv-ETJ"/>
                         <segue destination="rNz-bL-QyY" kind="show" identifier="showEditPage" id="Zdn-fs-IsB"/>
-                        <segue destination="egE-eW-ywB" kind="show" identifier="showFeedDetailFromOwner" id="rOd-Ph-D4Y"/>
+                        <segue destination="sEO-AT-36b" kind="show" identifier="showFeedDetailFromOwner" id="evE-nl-2lN"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l82-2h-AxP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3159,6 +3159,31 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x2Z-Fs-fXM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5286" y="-1020"/>
+        </scene>
+        <!--Feed DetailVC Owner-->
+        <scene sceneID="XQH-HN-t6p">
+            <objects>
+                <tableViewController id="sEO-AT-36b" customClass="FeedDetailVCOwner" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fjd-0v-DA5">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="oE6-uC-iR0">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oE6-uC-iR0" id="hM7-er-Wp7">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="sEO-AT-36b" id="kB9-wn-nge"/>
+                            <outlet property="delegate" destination="sEO-AT-36b" id="Xpo-YH-dsX"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="csu-nT-aEs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7018.5" y="-496.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FbS-uZ-glk">
@@ -5596,7 +5621,7 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <segue destination="egE-eW-ywB" kind="show" identifier="ShowFeedFromAchievementDetail" id="bsm-j4-Eiy"/>
+                        <segue destination="sEO-AT-36b" kind="show" identifier="ShowFeedFromAchievementDetail" id="JFc-cO-xBu"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mAH-kH-P45" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -6252,11 +6277,12 @@
         <image name="tips_bg" width="69" height="69"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="sa3-BT-zY6"/>
-        <segue reference="uj8-0k-sVO"/>
-        <segue reference="4ZT-53-1QA"/>
         <segue reference="CTd-gb-xTE"/>
+        <segue reference="Y2c-0U-Rmr"/>
+        <segue reference="JFc-cO-xBu"/>
+        <segue reference="uj8-0k-sVO"/>
         <segue reference="cel-0L-eNY"/>
+        <segue reference="4wk-xv-ETJ"/>
         <segue reference="9SL-Jw-Apx"/>
     </inferredMetricsTieBreakers>
 </document>
