@@ -120,6 +120,8 @@
 		AEBECCF91AE8A16600EDF385 /* LoginDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBECCF81AE8A16600EDF385 /* LoginDetailViewController.m */; };
 		AEBFCA371A78614100686EFE /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA361A78614100686EFE /* PostDetailViewController.m */; };
 		AEBFCA381A78614100686EFE /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA361A78614100686EFE /* PostDetailViewController.m */; };
+		AEC0688F1B2D309E007975D2 /* FeedDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC0688E1B2D309E007975D2 /* FeedDetailCell.xib */; };
+		AEC068901B2D309E007975D2 /* FeedDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC0688E1B2D309E007975D2 /* FeedDetailCell.xib */; };
 		AEC0E1C51AC64F9600563F7C /* WishDetailVCOwnerAchieved.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC0E1C41AC64F9600563F7C /* WishDetailVCOwnerAchieved.m */; };
 		AEC0E1C61AC64F9600563F7C /* WishDetailVCOwnerAchieved.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC0E1C41AC64F9600563F7C /* WishDetailVCOwnerAchieved.m */; };
 		AEC5B9AA1AB7EB40008ECB92 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC5B9A91AB7EB40008ECB92 /* User.m */; };
@@ -390,6 +392,7 @@
 		AEBECCF81AE8A16600EDF385 /* LoginDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginDetailViewController.m; sourceTree = "<group>"; };
 		AEBFCA351A78614100686EFE /* PostDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostDetailViewController.h; sourceTree = "<group>"; };
 		AEBFCA361A78614100686EFE /* PostDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostDetailViewController.m; sourceTree = "<group>"; };
+		AEC0688E1B2D309E007975D2 /* FeedDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedDetailCell.xib; sourceTree = "<group>"; };
 		AEC0E1C31AC64F9600563F7C /* WishDetailVCOwnerAchieved.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishDetailVCOwnerAchieved.h; sourceTree = "<group>"; };
 		AEC0E1C41AC64F9600563F7C /* WishDetailVCOwnerAchieved.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailVCOwnerAchieved.m; sourceTree = "<group>"; };
 		AEC5B9A81AB7EB40008ECB92 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -819,6 +822,7 @@
 		AED355FB1B22889B000427FF /* FeedDetail */ = {
 			isa = PBXGroup;
 			children = (
+				AEC0688E1B2D309E007975D2 /* FeedDetailCell.xib */,
 				AED355F31B2285D3000427FF /* FeedDetailHeader.xib */,
 				AED355F61B228696000427FF /* FeedDetailHeader.h */,
 				AED355F71B228696000427FF /* FeedDetailHeader.m */,
@@ -1160,6 +1164,7 @@
 				AE95A9F31ACFA7F8007465D5 /* straighten-grid@3x.png in Resources */,
 				AE01724D1A65CD8E0014266F /* Images.xcassets in Resources */,
 				AE95A9EF1ACFA7F8007465D5 /* back@3x.png in Resources */,
+				AEC0688F1B2D309E007975D2 /* FeedDetailCell.xib in Resources */,
 				AEA4CADA1AFC340A00BDE7F9 /* CommentAcessaryView.xib in Resources */,
 				AEF7F2A01A6875360022410B /* Main.storyboard in Resources */,
 				AE95A9F01ACFA7F8007465D5 /* cameraroll-picker-grip@2x.png in Resources */,
@@ -1186,6 +1191,7 @@
 				AEC8CE921AAF8823005364F8 /* StationView.xib in Resources */,
 				AEF7F29D1A6871F00022410B /* Images.xcassets in Resources */,
 				AEF7F2A11A6875360022410B /* Main.storyboard in Resources */,
+				AEC068901B2D309E007975D2 /* FeedDetailCell.xib in Resources */,
 				AEEC6C701A6DB0FC0021B7E4 /* HeaderView.xib in Resources */,
 				AED355F51B2285D3000427FF /* FeedDetailHeader.xib in Resources */,
 			);

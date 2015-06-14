@@ -38,6 +38,7 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self setUpNavigationItem];
+    [self.tableView registerNib:[UINib nibWithNibName:@"FeedDetailCell" bundle:nil] forCellReuseIdentifier:FEEDDETAILCELLID];
 
     //load comments
     self.hasNextPage = YES;
