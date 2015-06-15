@@ -56,17 +56,17 @@
 
 
 - (void)setupContent{
-    self.textField.placeholder = self.plan.planTitle;
+    self.textField.text = self.plan.planTitle;
     [self.textView setPlaceholder:@"添加描述能让别人更了解这件事儿哦~"];
-    self.wordCountLabel.text = [NSString stringWithFormat:@"%@/75",@(self.plan.planTitle.length)];
-    
+    self.textView.text = self.plan.detailText;
+    self.wordCountLabel.text = [NSString stringWithFormat:@"%@/75",@(self.plan.detailText.length)];
 }
 
 - (void)doneEditing{
     
-#warning !!!!
     if (self.textField.hasText && ![self.textField.text isEqualToString:self.plan.planTitle]){
         //update Plan
+        self.plan.planTitle = self.textField.text;
         [self.fetchCenter updatePlan:self.plan];
     }else{
         [self.navigationController popViewControllerAnimated:YES];
