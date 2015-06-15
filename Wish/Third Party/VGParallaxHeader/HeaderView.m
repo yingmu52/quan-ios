@@ -23,7 +23,7 @@
     self.headerFeedCountLabel.text = [NSString stringWithFormat:@"%@条记录",plan.tryTimes];
     self.headerFollowLabel.text = [NSString stringWithFormat:@"%@人关注",plan.followCount];
     self.badgeImageView.hidden = (self.plan.planStatus.integerValue != PlanStatusFinished);
-    
+    self.descriptionTextView.text = plan.detailText;
     if ([plan.owner.ownerId isEqualToString:[User uid]]) { //owner don't get to follow its plan
         [self.followButton removeFromSuperview];
     }else{
@@ -54,8 +54,8 @@
     [super awakeFromNib];
     self.backgroundColor = [UIColor clearColor];
     [self.descriptionTextView setPlaceholder:@"+添加描述能让别人更了解这件事儿哦~"];
+    [self.descriptionTextView setReturnKeyType:UIReturnKeyDone];
 }
-
 
 - (IBAction)followButtonPressed:(UIButton *)sender{
     if ([sender.titleLabel.text isEqual:@"关注"]) {

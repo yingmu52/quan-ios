@@ -9,7 +9,7 @@
 #import "WishDetailViewController.h"
 #import "CommentAcessaryView.h"
 #import "UIImageView+WebCache.h"
-@interface WishDetailViewController () <CommentAcessaryViewDelegate,HeaderViewDelegate,UIGestureRecognizerDelegate>
+@interface WishDetailViewController () <CommentAcessaryViewDelegate,HeaderViewDelegate,UIGestureRecognizerDelegate,UITextViewDelegate>
 @property (nonatomic) CGFloat yVel;
 @property (strong,nonatomic) CommentAcessaryView *commentView;
 @end
@@ -38,10 +38,23 @@
 - (void)initialHeaderView{
     CGRect frame = CGRectMake(0, 0, self.tableView.frame.size.width, 350.0f/1136*self.tableView.frame.size.height);
     self.headerView = [HeaderView instantiateFromNib:frame];
+    self.headerView.descriptionTextView.delegate = self;
 }
 
 - (void)updateHeaderView{
     self.headerView.plan = self.plan; //set plan to header for updaing info
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    NSRange resultRange = [text rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet] options:NSBackwardsSearch];
+    if ([text length] == 1 && resultRange.location != NSNotFound) {
+        [textView resignFirstResponder];
+        self.plan.detailText = textView.text;
+//        [self.fetchCenter updatePlan:self.plan];
+        return NO;
+    }
+    
+    return YES;
 }
 #pragma mark - set up view
 

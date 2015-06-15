@@ -37,8 +37,6 @@
 		AE30EE6D1A6E19D00044740D /* WishDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE30EE6C1A6E19D00044740D /* WishDetailCell.m */; };
 		AE3D70BF1B019DE1000C0806 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D70BE1B019DE1000C0806 /* Comment.m */; };
 		AE3D70C01B019DE1000C0806 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D70BE1B019DE1000C0806 /* Comment.m */; };
-		AE3FCF871B07C93B00422FB8 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3FCF861B07C93B00422FB8 /* Plan.m */; };
-		AE3FCF881B07C93B00422FB8 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3FCF861B07C93B00422FB8 /* Plan.m */; };
 		AE3FCFAB1B07D63900422FB8 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3FCF8B1B07D63800422FB8 /* MKAnnotationView+WebCache.m */; };
 		AE3FCFAC1B07D63900422FB8 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3FCF8B1B07D63800422FB8 /* MKAnnotationView+WebCache.m */; };
 		AE3FCFAD1B07D63900422FB8 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3FCF8D1B07D63800422FB8 /* NSData+ImageContentType.m */; };
@@ -116,6 +114,8 @@
 		AE9A3AEC1A9B1DB000F0588F /* AchieveVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9A3AEA1A9B1DB000F0588F /* AchieveVCData.m */; };
 		AEA4CAD81AFC33DD00BDE7F9 /* CommentAcessaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA4CAD71AFC33DC00BDE7F9 /* CommentAcessaryView.m */; };
 		AEA4CADA1AFC340A00BDE7F9 /* CommentAcessaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA4CAD91AFC340A00BDE7F9 /* CommentAcessaryView.xib */; };
+		AEB8A54F1B2E7FCC005E0726 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB8A54E1B2E7FCC005E0726 /* Plan.m */; };
+		AEB8A5501B2E7FCC005E0726 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB8A54E1B2E7FCC005E0726 /* Plan.m */; };
 		AEBECCF31AE7687900EDF385 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBECCF21AE7687900EDF385 /* LoginViewController.m */; };
 		AEBECCF91AE8A16600EDF385 /* LoginDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBECCF81AE8A16600EDF385 /* LoginDetailViewController.m */; };
 		AEBFCA371A78614100686EFE /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA361A78614100686EFE /* PostDetailViewController.m */; };
@@ -295,8 +295,6 @@
 		AE30EE6C1A6E19D00044740D /* WishDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailCell.m; sourceTree = "<group>"; };
 		AE3D70BD1B019DE0000C0806 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		AE3D70BE1B019DE1000C0806 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
-		AE3FCF851B07C93B00422FB8 /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
-		AE3FCF861B07C93B00422FB8 /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
 		AE3FCF8A1B07D63800422FB8 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		AE3FCF8B1B07D63800422FB8 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		AE3FCF8C1B07D63800422FB8 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -388,6 +386,8 @@
 		AEA4CAD61AFC33DC00BDE7F9 /* CommentAcessaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentAcessaryView.h; sourceTree = "<group>"; };
 		AEA4CAD71AFC33DC00BDE7F9 /* CommentAcessaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentAcessaryView.m; sourceTree = "<group>"; };
 		AEA4CAD91AFC340A00BDE7F9 /* CommentAcessaryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentAcessaryView.xib; sourceTree = "<group>"; };
+		AEB8A54D1B2E7FCC005E0726 /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
+		AEB8A54E1B2E7FCC005E0726 /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
 		AEBECCF11AE7687800EDF385 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		AEBECCF21AE7687900EDF385 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		AEBECCF71AE8A16600EDF385 /* LoginDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginDetailViewController.h; sourceTree = "<group>"; };
@@ -654,14 +654,14 @@
 		AE30EE711A6F0A8C0044740D /* Database&Networking */ = {
 			isa = PBXGroup;
 			children = (
+				AEB8A54D1B2E7FCC005E0726 /* Plan.h */,
+				AEB8A54E1B2E7FCC005E0726 /* Plan.m */,
 				AED4DD241B0EE49B00AF1497 /* Message.h */,
 				AED4DD251B0EE49B00AF1497 /* Message.m */,
 				AED4DD201B0E925300AF1497 /* Message+MessageCRUD.h */,
 				AED4DD211B0E925300AF1497 /* Message+MessageCRUD.m */,
 				AE05C0341B0D62BA002F83F1 /* Owner.h */,
 				AE05C0351B0D62BA002F83F1 /* Owner.m */,
-				AE3FCF851B07C93B00422FB8 /* Plan.h */,
-				AE3FCF861B07C93B00422FB8 /* Plan.m */,
 				AE3D70BD1B019DE0000C0806 /* Comment.h */,
 				AE3D70BE1B019DE1000C0806 /* Comment.m */,
 				AED5AB1B1AFDCBBB00719208 /* Feed.h */,
@@ -1268,7 +1268,6 @@
 				AEF7F2AD1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */,
 				AEFEE4001A8EE0A7007E8234 /* FollowingCell.m in Sources */,
 				AE3FCFB71B07D63900422FB8 /* SDWebImageDownloaderOperation.m in Sources */,
-				AE3FCF871B07C93B00422FB8 /* Plan.m in Sources */,
 				AEF3F8831AA4E3C0008C2300 /* WishDetailVCFollower.m in Sources */,
 				AE611ED91B2409E7006332F3 /* AMBCircularButton.m in Sources */,
 				AEF7F2831A686E8A0022410B /* ECSlidingAnimationController.m in Sources */,
@@ -1319,6 +1318,7 @@
 				AEC0E1C51AC64F9600563F7C /* WishDetailVCOwnerAchieved.m in Sources */,
 				AE2F1C941A7A23A200A32CB5 /* Feed+FeedCRUD.m in Sources */,
 				AE2F28E71AD3937700FC3370 /* WishDetailVCDiscovery.m in Sources */,
+				AEB8A54F1B2E7FCC005E0726 /* Plan.m in Sources */,
 				AE606A231AF46991003DF16E /* MessageCell.m in Sources */,
 				AED4CB221AC75A0200EE2DA4 /* KeyWordCell.m in Sources */,
 				AEE4A6D01A96A5D500ABF946 /* AchieveCell.m in Sources */,
@@ -1373,7 +1373,7 @@
 				AED71BED1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m in Sources */,
 				AE3FCFCA1B07D63900422FB8 /* UIView+WebCacheOperation.m in Sources */,
 				AEF7F2AE1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */,
-				AE3FCF881B07C93B00422FB8 /* Plan.m in Sources */,
+				AEB8A5501B2E7FCC005E0726 /* Plan.m in Sources */,
 				AE95AABE1ACFD428007465D5 /* UIImagePickerController+DelegateBlocks.m in Sources */,
 				AED5AB1E1AFDCBBB00719208 /* Feed.m in Sources */,
 				AE611EDA1B2409E7006332F3 /* AMBCircularButton.m in Sources */,
