@@ -19,9 +19,9 @@
 - (void)setPlan:(Plan *)plan
 {
     _plan = plan;
-    self.headerTitleLabel.text = [plan.planTitle stringByReplacingOccurrencesOfString:@" " withString:@""];
+    self.headerTitleLabel.text = plan.planTitle;
     self.headerFeedCountLabel.text = [NSString stringWithFormat:@"%@条记录",plan.tryTimes];
-    self.headerFollowLabel.text = [NSString stringWithFormat:@"%@关注",plan.followCount];
+    self.headerFollowLabel.text = [NSString stringWithFormat:@"%@人关注",plan.followCount];
     self.badgeImageView.hidden = (self.plan.planStatus.integerValue != PlanStatusFinished);
     
     if ([plan.owner.ownerId isEqualToString:[User uid]]) { //owner don't get to follow its plan
@@ -38,18 +38,7 @@
     [self.followButton layoutIfNeeded];
     [UIView setAnimationsEnabled:YES];
 }
-//- (void)updateCountDownLabel:(Plan *)plan{
 
-//    NSInteger totalDays = [SystemUtil daysBetween:plan.createDate and:plan.finishDate];
-//    NSInteger pastDays = [SystemUtil daysBetween:plan.createDate and:[NSDate date]];
-//    NSInteger results = totalDays - pastDays;
-
-//    if ([plan.planStatus isEqualToNumber:@(PlanStatusOnGoing)]) {
-//        self.headerCountDownLabel.text = [NSString stringWithFormat:@"%@%@天",results >= 0 ? @"剩余":@"已过期",@(ABS(results))];
-//    }else{
-//        self.headerCountDownLabel.text = [NSString stringWithFormat:@"%@%@天",results >= 0 ? @"历时":@"过期",@(ABS(results))];
-//    }
-//}
 
 + (instancetype)instantiateFromNib:(CGRect)frame
 {
@@ -64,6 +53,7 @@
 - (void)awakeFromNib{
     [super awakeFromNib];
     self.backgroundColor = [UIColor clearColor];
+    [self.descriptionTextView setPlaceholder:@"+添加描述能让别人更了解这件事儿哦~"];
 }
 
 
@@ -76,6 +66,13 @@
         [self.delegate didPressedUnFollow:sender];
     }
     sender.hidden = YES;
+}
+
+- (IBAction)backgroundTapped:(UITapGestureRecognizer *)tap{
+    if (self.descriptionTextView.isFirstResponder) {
+        [self.descriptionTextView resignFirstResponder];
+    }
+    
 }
 
 @end

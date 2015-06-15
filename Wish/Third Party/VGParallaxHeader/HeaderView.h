@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Plan+PlanCRUD.h"
-
+#import "GCPTextView.h"
 
 @protocol HeaderViewDelegate <NSObject>
 @optional
@@ -21,6 +21,7 @@
 @property (nonatomic,weak) IBOutlet UILabel *headerFollowLabel;
 @property (nonatomic,weak) IBOutlet UIImageView *badgeImageView;
 @property (nonatomic,weak) IBOutlet UIButton *followButton;
+@property (nonatomic,weak) IBOutlet GCPTextView *descriptionTextView;
 @property (nonatomic,strong) Plan *plan;
 @property (weak,nonatomic) id <HeaderViewDelegate> delegate;
 + (instancetype)instantiateFromNib:(CGRect)frame;
