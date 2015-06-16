@@ -64,9 +64,10 @@
 
 - (void)doneEditing{
     
-    if (self.textField.hasText && ![self.textField.text isEqualToString:self.plan.planTitle]){
+    if (self.textField.hasText && ![self.textField.text isEqualToString:self.plan.planTitle] | ![self.textView.text isEqualToString:self.plan.detailText]){
         //update Plan
         self.plan.planTitle = self.textField.text;
+        self.plan.detailText = self.textView.text;
         [self.fetchCenter updatePlan:self.plan];
     }else{
         [self.navigationController popViewControllerAnimated:YES];

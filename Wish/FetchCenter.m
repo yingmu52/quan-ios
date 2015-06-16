@@ -306,7 +306,7 @@ typedef enum{
     [self getRequest:rqtStr parameter:@{@"id":plan.planId,
                                         @"title":[plan.planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                                         @"private":plan.isPrivate,
-                                        @"description":plan.detailText}
+                                        @"description":plan.detailText ? [plan.detailText stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] : @""}
            operation:FetchCenterGetOpUpdatePlan
               entity:plan];
    
