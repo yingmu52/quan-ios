@@ -101,7 +101,9 @@
     //upload user info
     [self.fetchCenter setPersonalInfo:self.nameTextField.text
                                gender:self.genderLabel.text
-                              imageId:[User updatedProfilePictureId]];
+                              imageId:[User updatedProfilePictureId]
+                           occupation:self.occupationTextField.text
+                         personalInfo:self.descriptionTextView.text];
 }
 
 - (void)didFinishSettingPersonalInfo{
@@ -158,10 +160,14 @@
 #pragma mark - Text Field Delegate 
 
 - (void)textFieldDidUpdate{
-    BOOL flag = self.nameTextField.text.length*[self.nameTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""].length > 0;
-    self.navigationItem.rightBarButtonItem.enabled = flag && ([User updatedProfilePictureId] != nil);
-    UIImage *bg = flag ? [Theme navTikButtonDefault] : [Theme navTikButtonDisable];
-    [self.tikButton setImage:bg forState:UIControlStateNormal];
+#warning shold check if profile picture has been downloaded or not
+    if (self.nameTextField.isFirstResponder){
+        BOOL flag = self.nameTextField.text.length*[self.nameTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""].length > 0;
+        self.navigationItem.rightBarButtonItem.enabled = flag;
+        UIImage *bg = flag ? [Theme navTikButtonDefault] : [Theme navTikButtonDisable];
+        [self.tikButton setImage:bg forState:UIControlStateNormal];
+    }
+
 }
 
 @end

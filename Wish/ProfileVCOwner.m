@@ -49,7 +49,9 @@
 - (void)uploadPersonalInfo{
     [self.fetchCenter setPersonalInfo:self.nickNameTextField.text
                                gender:self.genderLabel.text
-                              imageId:[User updatedProfilePictureId]];
+                              imageId:[User updatedProfilePictureId]
+                           occupation:self.occupationTextField.text
+                         personalInfo:self.descriptionTextView.text];
 }
  
 #pragma mark - update info

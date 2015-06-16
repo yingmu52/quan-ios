@@ -95,7 +95,11 @@
 - (void)sendFeedback:(NSString *)content content:(NSString *)email;
 - (void)checkVersion;
 - (void)uploadNewProfilePicture:(UIImage *)picture;
-- (void)setPersonalInfo:(NSString *)nickName gender:(NSString *)gender imageId:(NSString *)imageId;
+- (void)setPersonalInfo:(NSString *)nickName
+                 gender:(NSString *)gender
+                imageId:(NSString *)imageId 
+             occupation:(NSString *)occupation
+           personalInfo:(NSString *)info;
 
 #pragma mark - ultility
 - (NSURL *)urlWithImageID:(NSString *)imageId;

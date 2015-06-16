@@ -284,11 +284,13 @@ typedef enum{
     [self postImageWithOperation:picture postOp:FetchCenterPostOpUploadImageForUpdaingProfile];
 }
 
-- (void)setPersonalInfo:(NSString *)nickName gender:(NSString *)gender imageId:(NSString *)imageId{
+- (void)setPersonalInfo:(NSString *)nickName gender:(NSString *)gender imageId:(NSString *)imageId occupation:(NSString *)occupation personalInfo:(NSString *)info{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,USER,SET_USER_INFO];
     [self getRequest:rqtStr parameter:@{@"name":[nickName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                                        @"gender":[gender isEqualToString:@"男"] ? @(0):@(1),
-                                        @"headUrl":imageId}
+                                        @"gender":[gender isEqualToString:@"男"] ? @(1):@(0),
+                                        @"headUrl":imageId,
+                                        @"profession":occupation ? occupation : @"",
+                                        @"description":info ? info : @""}
            operation:FetchCenterGetOpSetPersonalInfo
               entity:@[nickName,gender,imageId]];
     
