@@ -37,7 +37,7 @@
     [self.navigationController popViewControllerAnimated:YES];
     NavigationBar *navBar = (NavigationBar *)self.navigationController.navigationBar;
     [navBar showDefaultTextColor];
-    [navBar showDefaultTextColor];
+    [navBar showDefaultBackground];
 }
 
 
