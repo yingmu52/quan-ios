@@ -305,7 +305,8 @@ typedef enum{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,UPDATE_PLAN];
     [self getRequest:rqtStr parameter:@{@"id":plan.planId,
                                         @"title":[plan.planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                                        @"private":plan.isPrivate}
+                                        @"private":plan.isPrivate,
+                                        @"description":plan.detailText}
            operation:FetchCenterGetOpUpdatePlan
               entity:plan];
    

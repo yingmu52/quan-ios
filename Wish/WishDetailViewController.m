@@ -50,7 +50,7 @@
     if ([text length] == 1 && resultRange.location != NSNotFound) {
         [textView resignFirstResponder];
         self.plan.detailText = textView.text;
-//        [self.fetchCenter updatePlan:self.plan];
+        [self.fetchCenter updatePlan:self.plan];
         return NO;
     }
     

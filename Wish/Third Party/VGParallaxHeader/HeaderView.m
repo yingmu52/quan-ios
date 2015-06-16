@@ -25,8 +25,12 @@
     self.badgeImageView.hidden = (self.plan.planStatus.integerValue != PlanStatusFinished);
     if ([plan.owner.ownerId isEqualToString:[User uid]]) { //owner don't get to follow its plan
         [self.followButton removeFromSuperview];
-        self.descriptionTextView.text = plan.detailText;
-        [self.descriptionTextView setPlaceholder:@"+添加描述能让别人更了解这件事儿哦~"];
+        if (!plan.detailText){
+            [self.descriptionTextView setPlaceholder:@"+添加描述能让别人更了解这件事儿哦~"];
+        }else{
+            self.descriptionTextView.text = plan.detailText;
+        }
+
         [self.descriptionTextView setReturnKeyType:UIReturnKeyDone];
     }else{
         self.descriptionTextView.text = plan.detailText ? plan.detailText : @"可怜的事儿，连个描述也没有~";
