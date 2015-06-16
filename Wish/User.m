@@ -73,8 +73,15 @@
     return info[GENDER];
 }
 
++ (NSString *)occupation{
+    NSDictionary *info = [self.class getOwnerInfo];
+    return info[OCCUPATION];
+}
 
-
++ (NSString *)personalDetailInfo{
+    NSDictionary *info = [self.class getOwnerInfo];
+    return info[PERSONALDETAIL];
+}
 #pragma mark - simulator implementation (need to uncomment )
 /*
 

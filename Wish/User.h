@@ -17,7 +17,8 @@
 #define EXPIRATION_DATE @"login_expiraiton_date" //NSDate
 #define GENDER @"user_gender" //NSString
 #define USER_DISPLAY_NAME @"user_display_name" //NSString
-//#define LOGIN_STATUS @"user_login_status" //BOOL
+#define OCCUPATION @"user_occupation"
+#define PERSONALDETAIL @"user_description"
 #define UID @"user_unique_id"
 #define UKEY @"user_unique_request_key"
 
@@ -34,4 +35,6 @@
 + (NSString *)userDisplayName;
 + (NSString *)gender;
 + (NSString *)updatedProfilePictureId;
++ (NSString *)occupation;
++ (NSString *)personalDetailInfo;
 @end

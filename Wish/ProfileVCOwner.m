@@ -27,6 +27,8 @@
              usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     self.nickNameTextField.text = [User userDisplayName];
     self.genderLabel.text = [User gender];
+    self.occupationTextField.text = [User occupation];
+    self.descriptionTextView.text = [User personalDetailInfo];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero]; // clear empty cell
 }
 

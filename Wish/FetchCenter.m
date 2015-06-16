@@ -286,13 +286,16 @@ typedef enum{
 
 - (void)setPersonalInfo:(NSString *)nickName gender:(NSString *)gender imageId:(NSString *)imageId occupation:(NSString *)occupation personalInfo:(NSString *)info{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,USER,SET_USER_INFO];
+    
+    NSString *ocpStr = occupation ? occupation : @"";
+    NSString *infoStr = info ? info : @"";
     [self getRequest:rqtStr parameter:@{@"name":[nickName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                                         @"gender":[gender isEqualToString:@"男"] ? @(1):@(0),
                                         @"headUrl":imageId,
-                                        @"profession":occupation ? occupation : @"",
-                                        @"description":info ? info : @""}
+                                        @"profession":[ocpStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                                        @"description":[infoStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]}
            operation:FetchCenterGetOpSetPersonalInfo
-              entity:@[nickName,gender,imageId]];
+              entity:@[nickName,gender,imageId,ocpStr,infoStr]];
     
 }
 #pragma mark - Plan
@@ -611,7 +614,9 @@ typedef enum{
                 NSArray *info = (NSArray *)obj; // nickname,gender,imageId
                 [User updateAttributeFromDictionary:@{USER_DISPLAY_NAME:info[0],
                                                       GENDER:info[1],
-                                                      PROFILE_PICTURE_ID_CUSTOM:info[2]}];
+                                                      PROFILE_PICTURE_ID_CUSTOM:info[2],
+                                                      OCCUPATION:info[3],
+                                                      PERSONALDETAIL:info[4]}];
                 NSLog(@"%@",[User getOwnerInfo]);
                 [self.delegate didFinishSettingPersonalInfo];
             }
