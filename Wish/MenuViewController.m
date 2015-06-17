@@ -56,14 +56,19 @@ typedef enum {
     [delegate removeObserver:self forKeyPath:@"numberOfMessages"];
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self.tableView reloadData];
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    //set menu background image
+    self.tableView.backgroundColor = [Theme menuBackground];
     [self tuneInMessageNotification];
 }
 
-- (void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
+
+- (void)dealloc{
     [self tuneOutMessageNotification];
 }
 
@@ -125,12 +130,6 @@ typedef enum {
 - (IBAction)unwindToMenuViewController:(UIStoryboardSegue *)segue
 {
     //after returning to menue view
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    //set menu background image
-    self.tableView.backgroundColor = [Theme menuBackground];
 }
 
 
