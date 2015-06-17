@@ -114,6 +114,12 @@
 		AE9A3AEC1A9B1DB000F0588F /* AchieveVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9A3AEA1A9B1DB000F0588F /* AchieveVCData.m */; };
 		AEA4CAD81AFC33DD00BDE7F9 /* CommentAcessaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA4CAD71AFC33DC00BDE7F9 /* CommentAcessaryView.m */; };
 		AEA4CADA1AFC340A00BDE7F9 /* CommentAcessaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA4CAD91AFC340A00BDE7F9 /* CommentAcessaryView.xib */; };
+		AEA89DA01B31F7A0009C5586 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = AEA89D9C1B31F7A0009C5586 /* LICENSE */; };
+		AEA89DA11B31F7A0009C5586 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = AEA89D9C1B31F7A0009C5586 /* LICENSE */; };
+		AEA89DA21B31F7A0009C5586 /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA89D9E1B31F7A0009C5586 /* UIImage+WebP.m */; };
+		AEA89DA31B31F7A0009C5586 /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA89D9E1B31F7A0009C5586 /* UIImage+WebP.m */; };
+		AEA89DA41B31F7A0009C5586 /* WebP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA89D9F1B31F7A0009C5586 /* WebP.framework */; };
+		AEA89DA51B31F7A0009C5586 /* WebP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA89D9F1B31F7A0009C5586 /* WebP.framework */; };
 		AEB8A54F1B2E7FCC005E0726 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB8A54E1B2E7FCC005E0726 /* Plan.m */; };
 		AEB8A5501B2E7FCC005E0726 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB8A54E1B2E7FCC005E0726 /* Plan.m */; };
 		AEBECCF31AE7687900EDF385 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBECCF21AE7687900EDF385 /* LoginViewController.m */; };
@@ -386,6 +392,10 @@
 		AEA4CAD61AFC33DC00BDE7F9 /* CommentAcessaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentAcessaryView.h; sourceTree = "<group>"; };
 		AEA4CAD71AFC33DC00BDE7F9 /* CommentAcessaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentAcessaryView.m; sourceTree = "<group>"; };
 		AEA4CAD91AFC340A00BDE7F9 /* CommentAcessaryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentAcessaryView.xib; sourceTree = "<group>"; };
+		AEA89D9C1B31F7A0009C5586 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		AEA89D9D1B31F7A0009C5586 /* UIImage+WebP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WebP.h"; sourceTree = "<group>"; };
+		AEA89D9E1B31F7A0009C5586 /* UIImage+WebP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WebP.m"; sourceTree = "<group>"; };
+		AEA89D9F1B31F7A0009C5586 /* WebP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebP.framework; sourceTree = "<group>"; };
 		AEB8A54D1B2E7FCC005E0726 /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
 		AEB8A54E1B2E7FCC005E0726 /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
 		AEBECCF11AE7687800EDF385 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -524,6 +534,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEDD06521AABF7AE00379C17 /* TencentOpenAPI.framework in Frameworks */,
+				AEA89DA41B31F7A0009C5586 /* WebP.framework in Frameworks */,
 				AEDD06621AABF94500379C17 /* libsqlite3.dylib in Frameworks */,
 				AEDD06601AABF93E00379C17 /* libstdc++.dylib in Frameworks */,
 				AEDD065E1AABF93700379C17 /* libz.1.1.3.dylib in Frameworks */,
@@ -532,7 +544,6 @@
 				AEDD06581AABF8FB00379C17 /* CoreTelephony.framework in Frameworks */,
 				AEDD06561AABF8F600379C17 /* CoreGraphics.framework in Frameworks */,
 				AEDD06541AABF8F000379C17 /* SystemConfiguration.framework in Frameworks */,
-				AEDD06521AABF7AE00379C17 /* TencentOpenAPI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -540,6 +551,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEA89DA51B31F7A0009C5586 /* WebP.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -759,6 +771,18 @@
 			name = Blocks;
 			sourceTree = "<group>";
 		};
+		AEA89D9B1B31F7A0009C5586 /* iOS-WebP */ = {
+			isa = PBXGroup;
+			children = (
+				AEA89D9C1B31F7A0009C5586 /* LICENSE */,
+				AEA89D9D1B31F7A0009C5586 /* UIImage+WebP.h */,
+				AEA89D9E1B31F7A0009C5586 /* UIImage+WebP.m */,
+				AEA89D9F1B31F7A0009C5586 /* WebP.framework */,
+			);
+			name = "iOS-WebP";
+			path = "ECSlidingViewController/ECSlidingViewController/iOS-WebP";
+			sourceTree = "<group>";
+		};
 		AEBD13DE1A93FF3D00F5F0D3 /* WaterFallLayout */ = {
 			isa = PBXGroup;
 			children = (
@@ -976,6 +1000,7 @@
 				AE2F1C811A7A1A0200A32CB5 /* BlurTheFuckOn */,
 				AE0E79481A76EB3E007C48EE /* Reachability */,
 				AEF7F2A61A6884950022410B /* CustomNavigationItem */,
+				AEA89D9B1B31F7A0009C5586 /* iOS-WebP */,
 				AEF7F26D1A686E8A0022410B /* ECSlidingViewController */,
 			);
 			name = "Third Party";
@@ -1181,6 +1206,7 @@
 				AE95A9F11ACFA7F8007465D5 /* cameraroll-picker-grip@3x.png in Resources */,
 				AEFB04881AD12437009EB0D3 /* DiscoveryFooterView.xib in Resources */,
 				AED355F41B2285D3000427FF /* FeedDetailHeader.xib in Resources */,
+				AEA89DA01B31F7A0009C5586 /* LICENSE in Resources */,
 				AEEC6C6F1A6DB0FC0021B7E4 /* HeaderView.xib in Resources */,
 				AEC8CE911AAF8823005364F8 /* StationView.xib in Resources */,
 				AE52FA551A8D55CA003FF725 /* KeyboardAcessoryView.xib in Resources */,
@@ -1195,6 +1221,7 @@
 			files = (
 				AEFB04891AD12437009EB0D3 /* DiscoveryFooterView.xib in Resources */,
 				AEC8CE921AAF8823005364F8 /* StationView.xib in Resources */,
+				AEA89DA11B31F7A0009C5586 /* LICENSE in Resources */,
 				AEF7F29D1A6871F00022410B /* Images.xcassets in Resources */,
 				AEF7F2A11A6875360022410B /* Main.storyboard in Resources */,
 				AEC068901B2D309E007975D2 /* FeedDetailCell.xib in Resources */,
@@ -1293,6 +1320,7 @@
 				AED355FE1B23BBB8000427FF /* ProfileVCOwner.m in Sources */,
 				AE479EAE1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */,
 				AEFB04861AD12437009EB0D3 /* DiscoveryCell.m in Sources */,
+				AEA89DA21B31F7A0009C5586 /* UIImage+WebP.m in Sources */,
 				AE8A9E981B1FB8B7007BD4E5 /* UIView+Shake.m in Sources */,
 				AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */,
 				AE3FCFB11B07D63900422FB8 /* SDWebImageCompat.m in Sources */,
@@ -1352,6 +1380,7 @@
 				AE01725C1A65CD8F0014266F /* WishTests.m in Sources */,
 				AE2F28E81AD3937700FC3370 /* WishDetailVCDiscovery.m in Sources */,
 				AEE4A6CD1A9684D500ABF946 /* AchieveViewController.m in Sources */,
+				AEA89DA31B31F7A0009C5586 /* UIImage+WebP.m in Sources */,
 				AEF7F2861A686E8A0022410B /* ECSlidingInteractiveTransition.m in Sources */,
 				AE3FCFC21B07D63900422FB8 /* UIImage+MultiFormat.m in Sources */,
 				AEFB04871AD12437009EB0D3 /* DiscoveryCell.m in Sources */,
@@ -1589,6 +1618,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Wish/Third",
+					"Party/ECSlidingViewController/ECSlidingViewController/iOS-WebP",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1608,6 +1639,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Wish/Third",
+					"Party/ECSlidingViewController/ECSlidingViewController/iOS-WebP",
 				);
 				INFOPLIST_FILE = WishTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
