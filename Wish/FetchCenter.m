@@ -7,6 +7,7 @@
 //
 
 #import "FetchCenter.h"
+#import "UIImage+WebP.h"
 //#define BASE_URL @"http://182.254.167.228/superplan/"
 
 
@@ -418,6 +419,11 @@ typedef enum{
         }));
     }
 
+    //create webp local path
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *webPPath = [paths[0] stringByAppendingPathComponent:@"image.webp"];
+
+    //set up upload info
     NSString *rqtUploadImage = [NSString stringWithFormat:@"%@%@%@?",self.baseUrl,PIC,UPLOAD_IMAGE];
     rqtUploadImage = [self versionForBaseURL:rqtUploadImage operation:-1];
     
@@ -430,34 +436,54 @@ typedef enum{
         NSAssert(true, @"postImageWithOperation :invalid obj");
     }
     
-    //upload image
-    
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:rqtUploadImage]
-                                                           cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30.0];
-    request.HTTPMethod = @"POST";
+    //compress image
+    NSLog(@"original size %@ KB", @(UIImagePNGRepresentation(image).length/1024.0f));
+    [UIImage imageToWebP:image
+                 quality:75.0f
+                   alpha:1.0f
+                  preset:WEBP_PRESET_PHOTO
+         completionBlock:^(NSData *result)
+    {
+        NSLog(@"compressed size %@ KB", @(result.length/1024.0f));
 
-    NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request
-                                                               fromData:UIImagePNGRepresentation(image)
-                                                      completionHandler:^(NSData *data,NSURLResponse *response,NSError *error)
-                                          {
-                                              dispatch_main_async_safe((^{
-                                                  NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                       options:NSJSONReadingAllowFragments
-                                                                                                         error:nil];
-                                                  if (!error && ![json[@"ret"] boolValue]){ //upload image successed
-                                                      [self didFinishSendingPostRequest:json
-                                                                              operation:postOp
-                                                                                 entity:obj];
-                                                  }else{
-                                                      NSLog(@"fail to upload image \n response:%@",json);
-                                                      if (!json) json = @{@"ret":@"超时",@"msg":@"未知错误 :("};
-                                                      [self.delegate didFailUploadingImageWithInfo:json entity:obj];
-                                                  }
-                                              }));
-                                          }];
-    [uploadTask resume];
-    
+        //write data to local webp path
+        if ([result writeToFile:webPPath atomically:YES]) {
+            
+            //decoding succeed, upload image to server
+            //upload image
+            NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:rqtUploadImage]
+                                                                   cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30.0];
+            request.HTTPMethod = @"POST";
+            NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request
+                                                                       fromData:[NSData dataWithContentsOfFile:webPPath]
+                                                              completionHandler:^(NSData *data,NSURLResponse *response,NSError *error)
+                                                  {
+                                                      dispatch_main_async_safe((^{
+                                                          NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
+                                                                                                               options:NSJSONReadingAllowFragments
+                                                                                                                 error:nil];
+                                                          if (!error && ![json[@"ret"] boolValue]){ //upload image successed
+                                                              [self didFinishSendingPostRequest:json
+                                                                                      operation:postOp
+                                                                                         entity:obj];
+                                                          }else{
+                                                              
+                                                              if (!json) json = @{@"ret":@"重试",@"msg":@"上传失败 :("};
+                                                              [self.delegate didFailUploadingImageWithInfo:json entity:obj];
+                                                              //delete temp file in webpPath
+                                                              [[NSFileManager defaultManager] removeItemAtPath:webPPath error:nil];
+                                                          }
+                                                      }));
+                                                  }];
+            [uploadTask resume];
+            
+        } //end if : writeToFile
+        
+    } failureBlock:^(NSError *error) { //compression failed
+        NSLog(@"%@", error.localizedDescription);
+        [self.delegate didFailUploadingImageWithInfo:@{@"ret":@"请重试",@"msg":@"无法压缩图像"} entity:obj];
+    }];
 }
 
 

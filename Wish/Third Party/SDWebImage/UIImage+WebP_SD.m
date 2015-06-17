@@ -7,7 +7,7 @@
 //
 
 #ifdef SD_WEBP
-#import "UIImage+WebP.h"
+#import "UIImage+WebP_SD.h"
 #import "webp/decode.h"
 
 // Callback for CGDataProviderRelease

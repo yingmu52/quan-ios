@@ -12,7 +12,7 @@
 #import <ImageIO/ImageIO.h>
 
 #ifdef SD_WEBP
-#import "UIImage+WebP.h"
+#import "UIImage+WebP_SD.h"
 #endif
 
 @implementation UIImage (MultiFormat)

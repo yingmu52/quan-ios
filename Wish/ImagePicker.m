@@ -31,7 +31,7 @@
         [self hideStatusBar];
         [controller dismissViewControllerAnimated:YES completion:^{
             UIImage *capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage];
-            [self.imagePickerDelegate didFinishPickingImage:[self compressImage:capturedImage]];
+            [self.imagePickerDelegate didFinishPickingImage:capturedImage];
         }];
     }];
     [ipc onDidCancel:^(UIImagePickerController *picker) {
@@ -83,7 +83,7 @@
 }
 
 #pragma mark - image compression
-
+/*
 - (UIImage *)compressImage:(UIImage *)image{
     CGFloat actualHeight = image.size.height;
     CGFloat actualWidth = image.size.width;
@@ -132,5 +132,5 @@
     
     return outputImage;
 }
-
+*/
 @end

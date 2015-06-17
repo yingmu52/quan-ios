@@ -61,8 +61,6 @@
 		AE3FCFC01B07D63900422FB8 /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3FCFA01B07D63800422FB8 /* UIImage+GIF.m */; };
 		AE3FCFC11B07D63900422FB8 /* UIImage+MultiFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3FCFA21B07D63800422FB8 /* UIImage+MultiFormat.m */; };
 		AE3FCFC21B07D63900422FB8 /* UIImage+MultiFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3FCFA21B07D63800422FB8 /* UIImage+MultiFormat.m */; };
-		AE3FCFC31B07D63900422FB8 /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3FCFA41B07D63800422FB8 /* UIImage+WebP.m */; };
-		AE3FCFC41B07D63900422FB8 /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3FCFA41B07D63800422FB8 /* UIImage+WebP.m */; };
 		AE3FCFC51B07D63900422FB8 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3FCFA61B07D63800422FB8 /* UIImageView+HighlightedWebCache.m */; };
 		AE3FCFC61B07D63900422FB8 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3FCFA61B07D63800422FB8 /* UIImageView+HighlightedWebCache.m */; };
 		AE3FCFC71B07D63900422FB8 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3FCFA81B07D63900422FB8 /* UIImageView+WebCache.m */; };
@@ -120,6 +118,8 @@
 		AEA89DA31B31F7A0009C5586 /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA89D9E1B31F7A0009C5586 /* UIImage+WebP.m */; };
 		AEA89DA41B31F7A0009C5586 /* WebP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA89D9F1B31F7A0009C5586 /* WebP.framework */; };
 		AEA89DA51B31F7A0009C5586 /* WebP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA89D9F1B31F7A0009C5586 /* WebP.framework */; };
+		AEA89DA81B322045009C5586 /* UIImage+WebP_SD.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA89DA61B322045009C5586 /* UIImage+WebP_SD.m */; };
+		AEA89DA91B322045009C5586 /* UIImage+WebP_SD.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA89DA61B322045009C5586 /* UIImage+WebP_SD.m */; };
 		AEB8A54F1B2E7FCC005E0726 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB8A54E1B2E7FCC005E0726 /* Plan.m */; };
 		AEB8A5501B2E7FCC005E0726 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB8A54E1B2E7FCC005E0726 /* Plan.m */; };
 		AEBECCF31AE7687900EDF385 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBECCF21AE7687900EDF385 /* LoginViewController.m */; };
@@ -326,8 +326,6 @@
 		AE3FCFA01B07D63800422FB8 /* UIImage+GIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GIF.m"; sourceTree = "<group>"; };
 		AE3FCFA11B07D63800422FB8 /* UIImage+MultiFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MultiFormat.h"; sourceTree = "<group>"; };
 		AE3FCFA21B07D63800422FB8 /* UIImage+MultiFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MultiFormat.m"; sourceTree = "<group>"; };
-		AE3FCFA31B07D63800422FB8 /* UIImage+WebP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WebP.h"; sourceTree = "<group>"; };
-		AE3FCFA41B07D63800422FB8 /* UIImage+WebP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WebP.m"; sourceTree = "<group>"; };
 		AE3FCFA51B07D63800422FB8 /* UIImageView+HighlightedWebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+HighlightedWebCache.h"; sourceTree = "<group>"; };
 		AE3FCFA61B07D63800422FB8 /* UIImageView+HighlightedWebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+HighlightedWebCache.m"; sourceTree = "<group>"; };
 		AE3FCFA71B07D63800422FB8 /* UIImageView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+WebCache.h"; sourceTree = "<group>"; };
@@ -396,6 +394,8 @@
 		AEA89D9D1B31F7A0009C5586 /* UIImage+WebP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WebP.h"; sourceTree = "<group>"; };
 		AEA89D9E1B31F7A0009C5586 /* UIImage+WebP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WebP.m"; sourceTree = "<group>"; };
 		AEA89D9F1B31F7A0009C5586 /* WebP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebP.framework; sourceTree = "<group>"; };
+		AEA89DA61B322045009C5586 /* UIImage+WebP_SD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WebP_SD.m"; sourceTree = "<group>"; };
+		AEA89DA71B322045009C5586 /* UIImage+WebP_SD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WebP_SD.h"; sourceTree = "<group>"; };
 		AEB8A54D1B2E7FCC005E0726 /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
 		AEB8A54E1B2E7FCC005E0726 /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
 		AEBECCF11AE7687800EDF385 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -833,8 +833,8 @@
 				AE3FCFA01B07D63800422FB8 /* UIImage+GIF.m */,
 				AE3FCFA11B07D63800422FB8 /* UIImage+MultiFormat.h */,
 				AE3FCFA21B07D63800422FB8 /* UIImage+MultiFormat.m */,
-				AE3FCFA31B07D63800422FB8 /* UIImage+WebP.h */,
-				AE3FCFA41B07D63800422FB8 /* UIImage+WebP.m */,
+				AEA89DA61B322045009C5586 /* UIImage+WebP_SD.m */,
+				AEA89DA71B322045009C5586 /* UIImage+WebP_SD.h */,
 				AE3FCFA51B07D63800422FB8 /* UIImageView+HighlightedWebCache.h */,
 				AE3FCFA61B07D63800422FB8 /* UIImageView+HighlightedWebCache.m */,
 				AE3FCFA71B07D63800422FB8 /* UIImageView+WebCache.h */,
@@ -1249,7 +1249,6 @@
 				AE9A19881B02E3A100590784 /* FeedbackkAccessoryView.m in Sources */,
 				AE3FCFC71B07D63900422FB8 /* UIImageView+WebCache.m in Sources */,
 				AE3FCFAF1B07D63900422FB8 /* SDImageCache.m in Sources */,
-				AE3FCFC31B07D63900422FB8 /* UIImage+WebP.m in Sources */,
 				AE606A201AF4697B003DF16E /* MessageListViewController.m in Sources */,
 				AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */,
 				AEFA5FE11AAFCAD9001CA0C8 /* ALDBlurImageProcessor.m in Sources */,
@@ -1338,6 +1337,7 @@
 				AEFB04841AD12437009EB0D3 /* DiscoveryBannerCell.m in Sources */,
 				AEFEE3FC1A8ED9F6007E8234 /* FollowingTableViewController.m in Sources */,
 				AED5AB1D1AFDCBBB00719208 /* Feed.m in Sources */,
+				AEA89DA81B322045009C5586 /* UIImage+WebP_SD.m in Sources */,
 				AED4CB431AC79F3A00EE2DA4 /* ModalLeftToRightSegue.m in Sources */,
 				AE3FCFAB1B07D63900422FB8 /* MKAnnotationView+WebCache.m in Sources */,
 				AE95A9F61ACFA7F8007465D5 /* TWPhotoPickerController.m in Sources */,
@@ -1382,6 +1382,7 @@
 				AEE4A6CD1A9684D500ABF946 /* AchieveViewController.m in Sources */,
 				AEA89DA31B31F7A0009C5586 /* UIImage+WebP.m in Sources */,
 				AEF7F2861A686E8A0022410B /* ECSlidingInteractiveTransition.m in Sources */,
+				AEA89DA91B322045009C5586 /* UIImage+WebP_SD.m in Sources */,
 				AE3FCFC21B07D63900422FB8 /* UIImage+MultiFormat.m in Sources */,
 				AEFB04871AD12437009EB0D3 /* DiscoveryCell.m in Sources */,
 				AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */,
@@ -1417,7 +1418,6 @@
 				AE3FCFBC1B07D63900422FB8 /* SDWebImagePrefetcher.m in Sources */,
 				AEF7F2AC1A6884950022410B /* CustomBarItem.m in Sources */,
 				AE8A9EA01B1FF6E7007BD4E5 /* BadgeStyle.m in Sources */,
-				AE3FCFC41B07D63900422FB8 /* UIImage+WebP.m in Sources */,
 				AEE4A6D91A972FAB00ABF946 /* FollowingTVCData.m in Sources */,
 				AE3FCFB01B07D63900422FB8 /* SDImageCache.m in Sources */,
 				AED4DD271B0EE49B00AF1497 /* Message.m in Sources */,
@@ -1570,6 +1570,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Wish/Third\\ Party/**",
 				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SD_WEBP=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Wish/Third\\ Party/**",
@@ -1595,6 +1599,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Wish/Third\\ Party/**",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SD_WEBP=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
