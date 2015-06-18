@@ -11,14 +11,6 @@
 #import <TencentOpenAPI/TencentOAuth.h>
 #import "User.h"
 #import "LoginViewController.h"
-#import "FetchCenter.h"
-@interface AppDelegate () <FetchCenterDelegate>
-@property (nonatomic,strong) NSTimer *messageNotificationTimer;
-@property (nonatomic,strong) FetchCenter *fetchCenter;
-@property (strong, nonatomic) NSNumber *messageCount;
-@property (strong, nonatomic) NSNumber *followCount;
-@end
-
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -26,7 +18,6 @@
         ECSlidingViewController *root = (ECSlidingViewController *)self.window.rootViewController;
         root.anchorRightPeekAmount = root.view.frame.size.width * (640 - 290.0)/640;
         root.underLeftViewController.edgesForExtendedLayout = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeLeft;
-        [self.messageNotificationTimer fire];
     }else{
         UIStoryboard *storyBoard = self.window.rootViewController.storyboard;
         LoginViewController *loginVC = [storyBoard instantiateViewControllerWithIdentifier:@"LoginNavigationController"];
@@ -39,13 +30,11 @@
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-    self.messageNotificationTimer = nil; //set to nil instead of invalidate
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    [self.messageNotificationTimer invalidate];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -54,14 +43,12 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    [self.messageNotificationTimer fire];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
-    self.messageNotificationTimer = nil;
 }
 
 #pragma mark - Tencent
@@ -160,55 +147,6 @@
     return delegate.managedObjectContext;
 }
 
-
-#pragma mark - Message Notification
-
-- (FetchCenter *)fetchCenter{
-    if (!_fetchCenter){
-        _fetchCenter = [[FetchCenter alloc] init];
-        _fetchCenter.delegate = self;
-    }
-    return _fetchCenter;
-}
-
-- (NSTimer *)messageNotificationTimer{
-    if (!_messageNotificationTimer) {
-        _messageNotificationTimer  = [NSTimer scheduledTimerWithTimeInterval:30.0f target:self selector:@selector(requestMessageCount) userInfo:nil repeats:YES];
-    }
-    return _messageNotificationTimer;
-}
-- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    //do nothing
-}
-
-- (void)didFinishGettingMessageNotificationWithMessageCount:(NSNumber *)msgCount followCount:(NSNumber *)followCount{
-    self.messageCount = msgCount;
-    self.followCount = followCount;
-    NSLog(@"message count %@, follow count %@",msgCount,followCount);
-    self.numberOfMessages = @(msgCount.integerValue + followCount.integerValue);
-}
-
-- (NSNumber *)messageCount{
-    if (!_messageCount) {
-        _messageCount = @(0);
-    }
-    return _messageCount;
-}
-
-- (NSNumber *)followCount{
-    if (!_followCount) {
-        _followCount = @(0);
-    }
-    return _followCount;
-}
-
-- (void)requestMessageCount{
-    if ([User isUserLogin]) {
-        [self.fetchCenter getMessageNotificationInfo];
-    }else{
-        [self.messageNotificationTimer invalidate];
-    }
-}
 @end
 
 

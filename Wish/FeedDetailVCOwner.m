@@ -8,7 +8,7 @@
 
 #import "FeedDetailVCOwner.h"
 
-@interface FeedDetailVCOwner ()
+@interface FeedDetailVCOwner () <PopupViewDelegate>
 
 @end
 

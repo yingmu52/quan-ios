@@ -32,10 +32,12 @@ typedef enum {
 }MenuSection;
 
 
-@interface MenuViewController () 
-
+@interface MenuViewController () <FetchCenterDelegate>
+@property (nonatomic,strong) FetchCenter *fetchCenter;
+@property (nonatomic,strong) NSTimer *messageNotificationTimer;
 @property (nonatomic,weak) IBOutlet UILabel *versionLabel;
 @property (nonatomic,strong) CustomBadge *badage;
+@property (nonatomic) NSInteger numberOfMessages;
 @end
 
 
@@ -43,24 +45,76 @@ typedef enum {
 
 
 #pragma mark - observe message notification
-- (void)tuneInMessageNotification{
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [delegate addObserver:self
-               forKeyPath:@"numberOfMessages"
-                  options:NSKeyValueObservingOptionNew
-                  context:NULL];
+- (FetchCenter *)fetchCenter{
+    if (!_fetchCenter){
+        _fetchCenter = [[FetchCenter alloc] init];
+        _fetchCenter.delegate = self;
+    }
+    return _fetchCenter;
 }
 
-- (void)tuneOutMessageNotification{
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [delegate removeObserver:self forKeyPath:@"numberOfMessages"];
+- (NSTimer *)messageNotificationTimer{
+    if (!_messageNotificationTimer) {
+        _messageNotificationTimer  = [NSTimer scheduledTimerWithTimeInterval:30.0f target:self selector:@selector(requestMessageCount) userInfo:nil repeats:YES];
+    }
+    return _messageNotificationTimer;
+}
+
+- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
+    //do nothing
+}
+
+
+- (void)setNumberOfMessages:(NSInteger)numberOfMessages{
+    _numberOfMessages = numberOfMessages;
+    MenuCell *cell = (MenuCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:MenuTableMessage
+                                                                                          inSection:MenuSectionMid]];
+    if (numberOfMessages > 0) {
+        //update message cell
+        //remove badage in case it exist previously
+        [self.badage removeFromSuperview];
+        self.badage = nil;
+        //set badge text
+        self.badage.badgeText = [NSString stringWithFormat:@"%@",@(numberOfMessages)];
+        
+        //set position of the badage
+        CGPoint point = cell.menuTitle.center;
+        point.x += cell.menuTitle.frame.size.width/2 + self.badage.frame.size.width;
+        self.badage.center = point;
+        [cell addSubview:self.badage];
+        
+        //shake
+        if (!self.badage.isShaking) {
+            [self.badage shakeWithOptions:SCShakeOptionsDirectionRotate | SCShakeOptionsForceInterpolationExpDown | SCShakeOptionsAtEndRestart | SCShakeOptionsAutoreverse force:0.15 duration:2.0 iterationDuration:0.03 completionHandler:nil];
+            
+        }
+    }else{
+        //resume message cell
+        [self.badage endShake];
+        [self.badage removeFromSuperview];
+        self.badage = nil;
+        cell.menuTitle.text = @"消息";
+    }
+}
+
+- (void)didFinishGettingMessageNotificationWithMessageCount:(NSNumber *)msgCount followCount:(NSNumber *)followCount{
+    NSLog(@"message count %@, follow count %@",msgCount,followCount);
+    self.numberOfMessages = @(msgCount.integerValue + followCount.integerValue).integerValue;
+}
+
+- (void)requestMessageCount{
+    if ([User isUserLogin]) {
+        [self.fetchCenter getMessageNotificationInfo];
+    }else{
+        self.messageNotificationTimer = nil;
+    }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     //set menu background image
     self.tableView.backgroundColor = [Theme menuBackground];
-    [self tuneInMessageNotification];
+    [self.messageNotificationTimer fire];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -69,46 +123,19 @@ typedef enum {
 }
 
 - (void)dealloc{
-    [self tuneOutMessageNotification];
+    [self.messageNotificationTimer invalidate];
+    self.messageNotificationTimer = nil;
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-
-    if ([keyPath isEqualToString:@"numberOfMessages"]) {
-        id value = [change objectForKey:@"new"];
-        NSInteger count = [value integerValue];
-        MenuCell *cell = (MenuCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:MenuTableMessage
-                                                                                              inSection:MenuSectionMid]];
-        if (count > 0) {
-            //update message cell
-            
-            //remove badage in case it exist previously
-            [self.badage removeFromSuperview];
-            self.badage = nil;
-            
-            //set badge text
-            self.badage.badgeText = [NSString stringWithFormat:@"%@",value];
-            
-            //set position of the badage
-            CGPoint point = cell.menuTitle.center;
-            point.x += cell.menuTitle.frame.size.width/2 + self.badage.frame.size.width;
-            self.badage.center = point;
-            [cell addSubview:self.badage];
-            
-            //shake
-            if (!self.badage.isShaking) {
-                [self.badage shakeWithOptions:SCShakeOptionsDirectionRotate | SCShakeOptionsForceInterpolationExpDown | SCShakeOptionsAtEndRestart | SCShakeOptionsAutoreverse force:0.15 duration:2.0 iterationDuration:0.03 completionHandler:nil];
-
-            }
-        }else{
-            //resume message cell
-            [self.badage endShake];
-            [self.badage removeFromSuperview];
-            self.badage = nil;
-            cell.menuTitle.text = @"消息";
-        }
-    }
-}
+//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+//
+//    if ([keyPath isEqualToString:@"numberOfMessages"]) {
+//        id value = [change objectForKey:@"new"];
+//        NSInteger count = [value integerValue];
+//        MenuCell *cell = (MenuCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:MenuTableMessage
+//                                                                                              inSection:MenuSectionMid]];
+//    }
+//}
 
 - (CustomBadge *)badage{
     if (!_badage) {

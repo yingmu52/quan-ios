@@ -21,7 +21,7 @@
 #import "PopupView.h"
 #import "FeedDetailHeader.h"
 
-@interface FeedDetailViewController : UITableViewController <FetchCenterDelegate,CommentAcessaryViewDelegate,NSFetchedResultsControllerDelegate,PopupViewDelegate,FeedDetailHeaderDelegate>
+@interface FeedDetailViewController : UITableViewController <FetchCenterDelegate,CommentAcessaryViewDelegate,NSFetchedResultsControllerDelegate,FeedDetailHeaderDelegate>
 @property (nonatomic,strong) NSString *feedId; //for Message List View
 @property (strong, nonatomic) FetchCenter *fetchCenter;
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
