@@ -22,8 +22,8 @@
 @property (nonatomic,weak) IBOutlet UIImageView *badgeImageView;
 @property (nonatomic,weak) IBOutlet UIButton *followButton;
 @property (nonatomic,weak) IBOutlet GCPTextView *descriptionTextView;
-@property (nonatomic,strong) Plan *plan;
+
 @property (weak,nonatomic) id <HeaderViewDelegate> delegate;
 + (instancetype)instantiateFromNib:(CGRect)frame;
-
+- (void)updateHeaderWithPlan:(Plan *)plan;
 @end

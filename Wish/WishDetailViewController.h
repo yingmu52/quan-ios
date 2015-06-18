@@ -32,7 +32,6 @@
 @property (nonatomic,strong) NSDictionary *pageInfo;
 
 - (void)setUpNavigationItem;
-- (void)updateHeaderView;
 - (void)fetchResultsControllerDidInsert;
 
 #pragma mark - abstract

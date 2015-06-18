@@ -503,8 +503,7 @@ const NSInteger kGCPNoMaximumStringLength = -1;
     }
     else if ((textLength == 0) && (range.location == 0)) {
         
-        if ([self placeholderIsVisible]) {
-            
+        if ([self placeholderIsVisible] && [_otherDelegate respondsToSelector:@selector(backspaceDidOccurInEmptyField)]) {
             [_otherDelegate backspaceDidOccurInEmptyField];
         }
     }

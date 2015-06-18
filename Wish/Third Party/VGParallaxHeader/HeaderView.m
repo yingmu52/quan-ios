@@ -16,27 +16,20 @@
 @end
 @implementation HeaderView
 
-- (void)setPlan:(Plan *)plan
-{
-    _plan = plan;
+- (void)updateHeaderWithPlan:(Plan *)plan{
     self.headerTitleLabel.text = plan.planTitle;
     self.headerFeedCountLabel.text = [NSString stringWithFormat:@"%@条记录",plan.tryTimes];
     self.headerFollowLabel.text = [NSString stringWithFormat:@"%@人关注",plan.followCount];
-    self.badgeImageView.hidden = (self.plan.planStatus.integerValue != PlanStatusFinished);
+    self.badgeImageView.hidden = (plan.planStatus.integerValue != PlanStatusFinished);
     if ([plan.owner.ownerId isEqualToString:[User uid]]) { //owner don't get to follow its plan
         [self.followButton removeFromSuperview];
-        if (!plan.detailText){
-            [self.descriptionTextView setPlaceholder:@"+添加描述能让别人更了解这件事儿哦~"];
-        }else{
-            self.descriptionTextView.text = plan.detailText;
-        }
-
+        [self.descriptionTextView setPlaceholder:@"+添加描述能让别人更了解这件事儿哦~"];
         [self.descriptionTextView setReturnKeyType:UIReturnKeyDone];
     }else{
-        self.descriptionTextView.text = plan.detailText ? plan.detailText : @"可怜的事儿，连个描述也没有~";
-        self.descriptionTextView.userInteractionEnabled = NO;
+        [self.descriptionTextView setPlaceholder:@"可怜的事儿，连个描述也没有~"];
         [self showFollowButtonWithTitle:(plan.isFollowed.boolValue ? @"已关注" :@"关注")];
     }
+    self.descriptionTextView.text = plan.detailText;
 }
 
 - (void)showFollowButtonWithTitle:(NSString *)title{
@@ -61,6 +54,7 @@
 - (void)awakeFromNib{
     [super awakeFromNib];
     self.backgroundColor = [UIColor clearColor];
+    self.descriptionTextView.userInteractionEnabled = NO;
 }
 
 - (IBAction)followButtonPressed:(UIButton *)sender{

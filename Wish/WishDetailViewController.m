@@ -21,7 +21,7 @@
 - (void)setHeaderView:(HeaderView *)headerView{
     _headerView = headerView;
     _headerView.delegate = self;
-    _headerView.plan = self.plan;
+    [_headerView updateHeaderWithPlan:self.plan];
     self.tableView.tableHeaderView = headerView;
 }
 
@@ -39,10 +39,6 @@
     CGRect frame = CGRectMake(0, 0, self.tableView.frame.size.width, 350.0f/1136*self.tableView.frame.size.height);
     self.headerView = [HeaderView instantiateFromNib:frame];
     self.headerView.descriptionTextView.delegate = self;
-}
-
-- (void)updateHeaderView{
-    self.headerView.plan = self.plan; //set plan to header for updaing info
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
@@ -185,7 +181,7 @@
             break;
     }
     
-    [self updateHeaderView];
+    [self.headerView updateHeaderWithPlan:self.plan];
 }
 
 
@@ -327,6 +323,10 @@
 
 #pragma mark - fetch center delegate 
 
+- (void)didFinishUpdatingPlan:(Plan *)plan{
+    //did finished update plan description
+}
+
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
 //    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
 //                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
@@ -357,7 +357,7 @@
 - (void)didFinishLoadingFeedList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage{
     self.hasNextPage = hasNextPage;
     self.pageInfo = pageInfo;
-    [self updateHeaderView];
+    [self.headerView updateHeaderWithPlan:self.plan];
 //    //update navigation item
 //    self.navigationItem.rightBarButtonItem = nil;
 }
@@ -406,11 +406,11 @@
 }
 
 - (void)didFinishFollowingPlan:(Plan *)plan{
-    [self updateHeaderView];
+    [self.headerView updateHeaderWithPlan:plan];
 }
 
 - (void)didFinishUnFollowingPlan:(Plan *)plan{
-    [self updateHeaderView];
+    [self.headerView updateHeaderWithPlan:plan];
 }
 
 

@@ -26,6 +26,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    self.headerView.descriptionTextView.userInteractionEnabled = YES; //enable text view to enable owner edit permission
     [super viewWillAppear:animated];
     [self loadCornerCamera];
     
