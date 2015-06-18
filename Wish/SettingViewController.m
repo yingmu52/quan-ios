@@ -12,7 +12,6 @@
 #import "MenuViewController.h"
 #import "FetchCenter.h"
 #import "SDWebImageCompat.h"
-#import "LoginViewController.h"
 @interface SettingViewController () <UIGestureRecognizerDelegate,FetchCenterDelegate,UIActionSheetDelegate>
 @property (nonatomic,strong) UIView *currentView;
 
@@ -153,8 +152,9 @@
 }
 
 - (void)showLoginView{
-    LoginViewController *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-    [self presentViewController:loginVC animated:NO completion:nil];
+    [self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"LoginNavigationController"]
+                       animated:NO
+                     completion:nil];
 }
 
 - (void)clearCoreData{
