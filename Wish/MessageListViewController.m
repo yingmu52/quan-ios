@@ -80,8 +80,16 @@
 }
 #pragma mark - Table view data source
 
+#define IS_IPHONE5 (([[UIScreen mainScreen] bounds].size.height - 568.0f) >= 0)
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 140.0/1136 * self.tableView.frame.size.height;
+    if (IS_IPHONE5){
+        return 140.0f/1136 * self.tableView.frame.size.height;
+    }else{
+        //eariler
+        return 150.0f/640 * self.tableView.frame.size.width;
+    }
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

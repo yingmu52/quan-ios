@@ -3112,6 +3112,7 @@
                             <constraint firstItem="yEm-S5-5O6" firstAttribute="height" secondItem="YNa-wI-VBN" secondAttribute="height" id="KyS-aI-sfQ"/>
                             <constraint firstItem="yEm-S5-5O6" firstAttribute="trailing" secondItem="5G4-S6-zx4" secondAttribute="trailingMargin" id="RET-zi-x5t"/>
                             <constraint firstItem="YNa-wI-VBN" firstAttribute="leading" secondItem="5G4-S6-zx4" secondAttribute="leadingMargin" id="RYM-SR-SX3"/>
+                            <constraint firstItem="yEm-S5-5O6" firstAttribute="top" secondItem="UDg-j7-ilp" secondAttribute="bottom" constant="20" id="Rjd-Ne-BYq"/>
                             <constraint firstItem="yEm-S5-5O6" firstAttribute="centerY" secondItem="YNa-wI-VBN" secondAttribute="centerY" constant="34" id="ZYk-5k-dJ9">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
@@ -3130,6 +3131,7 @@
                                 <exclude reference="RYM-SR-SX3"/>
                                 <exclude reference="KyS-aI-sfQ"/>
                                 <exclude reference="RET-zi-x5t"/>
+                                <exclude reference="Rjd-Ne-BYq"/>
                                 <exclude reference="ZYk-5k-dJ9"/>
                                 <exclude reference="haE-1x-E9G"/>
                             </mask>
@@ -3145,7 +3147,8 @@
                                 <include reference="RYM-SR-SX3"/>
                                 <include reference="KyS-aI-sfQ"/>
                                 <include reference="RET-zi-x5t"/>
-                                <include reference="ZYk-5k-dJ9"/>
+                                <include reference="Rjd-Ne-BYq"/>
+                                <exclude reference="ZYk-5k-dJ9"/>
                                 <include reference="haE-1x-E9G"/>
                             </mask>
                         </variation>
@@ -6270,12 +6273,12 @@
         <image name="tips_bg" width="69" height="69"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="uj8-0k-sVO"/>
-        <segue reference="JFc-cO-xBu"/>
-        <segue reference="rjz-Cv-C9H"/>
-        <segue reference="3Cj-2H-t7j"/>
         <segue reference="9SL-Jw-Apx"/>
-        <segue reference="4wk-xv-ETJ"/>
+        <segue reference="JFc-cO-xBu"/>
+        <segue reference="uj8-0k-sVO"/>
+        <segue reference="4ZT-53-1QA"/>
         <segue reference="0NR-qk-ahm"/>
+        <segue reference="3Cj-2H-t7j"/>
+        <segue reference="rjz-Cv-C9H"/>
     </inferredMetricsTieBreakers>
 </document>
