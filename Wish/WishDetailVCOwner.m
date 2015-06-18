@@ -157,12 +157,6 @@
 }
 
 
-#pragma mark - fetch results controller
-
-- (void)fetchResultsControllerDidInsert{
-    [self.tableView setContentOffset:CGPointZero animated:YES]; //scroll to top
-}
-
 #pragma mark - wish detail cell delegate
 - (void)didPressedMoreOnCell:(WishDetailCell *)cell{
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];

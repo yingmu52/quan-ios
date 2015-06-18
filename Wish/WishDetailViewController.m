@@ -162,7 +162,6 @@
         case NSFetchedResultsChangeInsert:
             [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
                                   withRowAnimation:UITableViewRowAnimationNone];
-            [self fetchResultsControllerDidInsert];
             NSLog(@"Feed inserted");
             break;
             
