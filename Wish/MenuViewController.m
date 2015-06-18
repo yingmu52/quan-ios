@@ -147,7 +147,7 @@ typedef enum {
 
 - (void)setVersionLabel:(UILabel *)versionLabel{
     _versionLabel = versionLabel;
-    _versionLabel.text = @"Version 3.1.4";
+    _versionLabel.text = @"Version 3.1.5";
 }
 
 - (IBAction)showSettingsView:(UIButton *)sender{
