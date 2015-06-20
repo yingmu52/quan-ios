@@ -147,7 +147,9 @@ typedef enum {
 
 - (void)setVersionLabel:(UILabel *)versionLabel{
     _versionLabel = versionLabel;
-    _versionLabel.text = @"Version 3.1.5";
+    NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
+    NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
+    _versionLabel.text = [NSString stringWithFormat:@"Version %@ Build %@",version,build];
 }
 
 - (IBAction)showSettingsView:(UIButton *)sender{
