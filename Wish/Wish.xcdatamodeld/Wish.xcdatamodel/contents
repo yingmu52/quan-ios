@@ -55,7 +55,6 @@
         <attribute name="planTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tryTimes" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="updateDate" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="userDeleted" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="feeds" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Feed" inverseName="plan" inverseEntity="Feed" syncable="YES"/>
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="plans" inverseEntity="Owner" syncable="YES"/>
     </entity>
@@ -64,6 +63,6 @@
         <element name="Feed" positionX="-9416" positionY="-81" width="128" height="193"/>
         <element name="Message" positionX="-8892" positionY="-346" width="128" height="178"/>
         <element name="Owner" positionX="-8705" positionY="-43" width="128" height="148"/>
-        <element name="Plan" positionX="-9110" positionY="-324" width="128" height="268"/>
+        <element name="Plan" positionX="-9110" positionY="-324" width="128" height="255"/>
     </elements>
 </model>

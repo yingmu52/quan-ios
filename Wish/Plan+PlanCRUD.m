@@ -65,17 +65,17 @@
         //insert new fetched plan
         plan = [NSEntityDescription insertNewObjectForEntityForName:@"Plan"
                                              inManagedObjectContext:context];
+        plan.createDate = [NSDate dateWithTimeIntervalSince1970:[dict[@"createTime"] integerValue]];
+        plan.planId = dict[@"id"];
     }else{
         //update existing plan
         plan = checks.lastObject;
     }
     
-    plan.planId = dict[@"id"];
+
     plan.planTitle = dict[@"title"];
-    plan.createDate = [NSDate dateWithTimeIntervalSince1970:[dict[@"createTime"] integerValue]];
     plan.updateDate = [NSDate dateWithTimeIntervalSince1970:[dict[@"updateTime"] integerValue]];
     plan.followCount = @([dict[@"followNums"] integerValue]);
-    plan.userDeleted = @(NO);
     plan.planStatus = @([dict[@"state"] integerValue]);
     plan.backgroundNum = dict[@"backGroudPic"];
     plan.isPrivate = @([dict[@"private"] boolValue]);
@@ -95,7 +95,6 @@
     plan.isPrivate = @(isPrivate);
     plan.image = image;
     plan.createDate = [NSDate date];
-    plan.userDeleted = @(NO);
     plan.planStatus = @(PlanStatusOnGoing);
     [plan addMyselfAsOwner];
     return plan;
@@ -104,7 +103,6 @@
 - (void)deleteSelf
 {
     NSManagedObjectContext *context = [AppDelegate getContext];
-    self.userDeleted = @(YES);
     if (self.planId && [self.owner.ownerId isEqualToString:[User uid]]){
         [[[FetchCenter alloc] init] postToDeletePlan:self];
     }else{
