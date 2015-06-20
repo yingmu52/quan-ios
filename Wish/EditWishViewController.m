@@ -15,7 +15,7 @@
 #import "SDWebImageCompat.h"
 #import "GCPTextView.h"
 #import "FetchCenter.h"
-@interface EditWishViewController () <PopupViewDelegate,FetchCenterDelegate>
+@interface EditWishViewController () <PopupViewDelegate,FetchCenterDelegate,UITextViewDelegate>
 @property (nonatomic,weak) IBOutlet UITextField *textField;
 @property (nonatomic,weak) IBOutlet GCPTextView *textView;
 @property (nonatomic,weak) PopupView *popView;
@@ -56,6 +56,7 @@
 
 
 - (void)setupContent{
+    self.textView.delegate = self;
     self.textField.text = self.plan.planTitle;
     [self.textView setPlaceholder:@"添加描述能让别人更了解这件事儿哦~"];
     self.textView.text = self.plan.detailText;
@@ -153,5 +154,16 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+#pragma mark - text view delegate 
 
+- (void)textViewDidChange:(UITextView *)textView{
+    NSInteger maxCount = 75;
+    if (textView.text.length > maxCount) {
+        textView.text = [textView.text substringToIndex:maxCount];
+    }
+    self.wordCountLabel.text = [NSString stringWithFormat:@"%@/%@",@(textView.text.length),@(maxCount)];
+}
 @end
+
+
+
