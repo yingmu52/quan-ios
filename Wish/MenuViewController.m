@@ -193,7 +193,6 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     if (indexPath.section == MenuSectionMid) {
         NSString *identifier;
         switch (indexPath.row) {
@@ -221,6 +220,12 @@ typedef enum {
     }
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    //prevent loading the top view unnecessarily 
+    if (segue.destinationViewController == self.slidingViewController.topViewController) {
+        [self.slidingViewController anchorTopViewToLeftAnimated:YES];
+    }
+}
 
 #pragma mark - cell highlight behavior
 - (void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath
