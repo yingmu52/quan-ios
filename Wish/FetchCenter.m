@@ -557,9 +557,7 @@ typedef enum{
                 NSArray *plans = json[@"data"];
  
                 for (NSDictionary *planInfo in plans) {
-                    Plan *plan = [Plan updatePlanFromServer:planInfo];
-                    [plan addMyselfAsOwner];
-//                    NSLog(@"%@",plan);
+                    [Plan updatePlanFromServer:planInfo ownerInfo:@{@"headUrl":[User updatedProfilePictureId],@"id":[User uid],@"name":[User userDisplayName]}];
                 }
             }
                 break;
@@ -600,10 +598,13 @@ typedef enum{
                 //            NSLog(@"FetchCenterOpGetFollowingPlanList \n %@",json);
                 //save the response following plan list
                 for (NSDictionary *planItem in [json valueForKeyPath:@"data.planList"]) {
-                    Plan *plan = [Plan updatePlanFromServer:planItem];
-                    plan.isFollowed = @(YES);
                     NSDictionary *userInfo = [json valueForKeyPath:[NSString stringWithFormat:@"data.manList.%@",planItem[@"ownerId"]]];
-                    plan.owner = [Owner updateOwnerWithInfo:userInfo];
+                    Plan *plan = [Plan updatePlanFromServer:planItem ownerInfo:userInfo];
+                    
+                    if (![plan.isFollowed isEqualToNumber:@(YES)]){
+                        plan.isFollowed = @(YES);
+                    }
+
                     NSArray *feedsList = planItem[@"feedsList"];
                     if (feedsList.count) {
                         //create all feeds
@@ -655,10 +656,8 @@ typedef enum{
                 NSDictionary *manList = [json valueForKeyPath:@"data.manList"];
                 if (planList && manList){
                     for (NSDictionary *planInfo in planList){
-                        Plan *plan = [Plan updatePlanFromServer:planInfo];
-                        plan.owner = [Owner updateOwnerWithInfo:[manList valueForKey:planInfo[@"ownerId"]]];
+                        Plan *plan = [Plan updatePlanFromServer:planInfo ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]];
                         [plans addObject:plan];
-                        
                     }
                 }
                 [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];

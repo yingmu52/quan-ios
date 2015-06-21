@@ -18,11 +18,9 @@ typedef enum {
     PlanStatusGiveTheFuckingUp
 }PlanStatus;
 
-- (void)updatePlan:(NSString *)newTitle finishDate:(NSDate *)date isPrivated:(BOOL)isPrivated;
-
 - (void)updatePlanStatus:(PlanStatus)planStatus;
 
-+ (Plan *)updatePlanFromServer:(NSDictionary *)dict;
++ (Plan *)updatePlanFromServer:(NSDictionary *)dict ownerInfo:(NSDictionary *)ownerInfo;
 
 + (Plan *)createPlan:(NSString *)title privacy:(BOOL)isPrivate image:(UIImage *)image;
 

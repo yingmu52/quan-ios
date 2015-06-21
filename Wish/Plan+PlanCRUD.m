@@ -16,14 +16,6 @@
     return @[@"进行中",@"达成",@"放弃"];
 }
 
-- (void)updatePlan:(NSString *)newTitle finishDate:(NSDate *)date isPrivated:(BOOL)isPrivated{
-//    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-//    [delegate saveContext];
-
-    self.planTitle = newTitle;
-    self.isPrivate = @(isPrivated);
-    
-}
 
 - (void)updatePlanStatus:(PlanStatus)planStatus{
     
@@ -52,7 +44,7 @@
     }
     self.tryTimes = @(attempts);
 }
-+ (Plan *)updatePlanFromServer:(NSDictionary *)dict{ //owner may be different ! 
++ (Plan *)updatePlanFromServer:(NSDictionary *)dict ownerInfo:(NSDictionary *)ownerInfo{ //owner may be different !
     
     NSManagedObjectContext *context = [AppDelegate getContext];
     Plan *plan;
@@ -67,19 +59,40 @@
                                              inManagedObjectContext:context];
         plan.createDate = [NSDate dateWithTimeIntervalSince1970:[dict[@"createTime"] integerValue]];
         plan.planId = dict[@"id"];
+        plan.owner = [Owner updateOwnerWithInfo:ownerInfo];
     }else{
         //update existing plan
         plan = checks.lastObject;
     }
     
+    if (![plan.planTitle isEqualToString:dict[@"title"]]){
+        plan.planTitle = dict[@"title"];
+    }
 
-    plan.planTitle = dict[@"title"];
-    plan.updateDate = [NSDate dateWithTimeIntervalSince1970:[dict[@"updateTime"] integerValue]];
-    plan.followCount = @([dict[@"followNums"] integerValue]);
-    plan.planStatus = @([dict[@"state"] integerValue]);
-    plan.backgroundNum = dict[@"backGroudPic"];
-    plan.isPrivate = @([dict[@"private"] boolValue]);
-    plan.tryTimes = @([dict[@"tryTimes"] integerValue]);
+    if (![plan.backgroundNum isEqualToString:dict[@"backGroudPic"]]) {
+        plan.backgroundNum = dict[@"backGroudPic"];
+    }
+    
+    if (![plan.updateDate isEqualToDate:[NSDate dateWithTimeIntervalSince1970:[dict[@"updateTime"] integerValue]]]) {
+        plan.updateDate = [NSDate dateWithTimeIntervalSince1970:[dict[@"updateTime"] integerValue]];
+    }
+
+    if (![plan.followCount isEqualToNumber:@([dict[@"followNums"] integerValue])]){
+        plan.followCount = @([dict[@"followNums"] integerValue]);
+    }
+
+    if (![plan.planStatus isEqualToNumber:@([dict[@"state"] integerValue])]){
+        plan.planStatus = @([dict[@"state"] integerValue]);
+    }
+
+
+    if (![plan.isPrivate isEqualToNumber:@([dict[@"private"] boolValue])]){
+        plan.isPrivate = @([dict[@"private"] boolValue]);
+    }
+
+    if (![plan.tryTimes isEqualToNumber:@([dict[@"tryTimes"] integerValue])]){
+        plan.tryTimes = @([dict[@"tryTimes"] integerValue]);
+    }
 
     return plan;
 
