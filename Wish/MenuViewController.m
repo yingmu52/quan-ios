@@ -99,7 +99,9 @@ typedef enum {
 
 - (void)didFinishGettingMessageNotificationWithMessageCount:(NSNumber *)msgCount followCount:(NSNumber *)followCount{
     NSLog(@"message count %@, follow count %@",msgCount,followCount);
-    self.numberOfMessages = @(msgCount.integerValue + followCount.integerValue).integerValue;
+#warning number of message doesn't include follow count
+//    self.numberOfMessages = @(msgCount.integerValue + followCount.integerValue).integerValue;
+    self.numberOfMessages = msgCount.integerValue;
 }
 
 - (void)requestMessageCount{
