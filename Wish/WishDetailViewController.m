@@ -79,20 +79,20 @@
 - (void)goBack{
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     [self.navigationController popToRootViewControllerAnimated:YES];
-}
-
-- (void)dealloc{
-    
-    NSUInteger numberOfPreservingFeeds = 20;
-    NSArray *allFeeds = self.fetchedRC.fetchedObjects;
-    if (allFeeds.count > numberOfPreservingFeeds) {
-        AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-        for (NSUInteger i = numberOfPreservingFeeds; i < allFeeds.count; i++) {
-            Feed *feed = allFeeds[i];
-            [delegate.managedObjectContext deleteObject:feed];
+    dispatch_queue_t queue_cleanUp;
+    queue_cleanUp = dispatch_queue_create("com.stories.WishDetailViewController.cleanup", NULL);
+    dispatch_async(queue_cleanUp, ^{
+        NSUInteger numberOfPreservingFeeds = 20;
+        NSArray *allFeeds = self.fetchedRC.fetchedObjects;
+        if (allFeeds.count > numberOfPreservingFeeds) {
+            AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+            for (NSUInteger i = numberOfPreservingFeeds; i < allFeeds.count; i++) {
+                Feed *feed = allFeeds[i];
+                [delegate.managedObjectContext deleteObject:feed];
+            }
+            [delegate saveContext];
         }
-        [delegate saveContext];
-    }
+    });
 }
 
 - (void)setUpNavigationItem
