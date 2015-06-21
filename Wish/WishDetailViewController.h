@@ -32,7 +32,6 @@
 @property (nonatomic,strong) NSDictionary *pageInfo;
 
 - (void)setUpNavigationItem;
-- (void)fetchResultsControllerDidInsert;
 
 #pragma mark - abstract
 - (NSString *)segueForFeed; //must set to display feed detail

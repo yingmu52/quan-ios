@@ -79,7 +79,11 @@
 - (void)goBack{
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     [self.navigationController popToRootViewControllerAnimated:YES];
-    NSUInteger numberOfPreservingFeeds = 5;
+}
+
+- (void)dealloc{
+    
+    NSUInteger numberOfPreservingFeeds = 20;
     NSArray *allFeeds = self.fetchedRC.fetchedObjects;
     if (allFeeds.count > numberOfPreservingFeeds) {
         AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
@@ -164,11 +168,13 @@
             [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
                                   withRowAnimation:UITableViewRowAnimationNone];
             NSLog(@"Feed inserted");
+            [self setCurrenetBackgroundColor];
             break;
             
         case NSFetchedResultsChangeDelete:
             [self.tableView deleteRowsAtIndexPaths:@[indexPath]
                                   withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self setCurrenetBackgroundColor];
             NSLog(@"Feed deleted");
             break;
             
@@ -177,10 +183,11 @@
                                   withRowAnimation:UITableViewRowAnimationNone];
             NSLog(@"Feed updated");
             break;
+        case NSFetchedResultsChangeMove:
+            break;
         default:
             break;
     }
-    
     [self.headerView updateHeaderWithPlan:self.plan];
 }
 
@@ -188,13 +195,9 @@
 - (void)controllerDidChangeContent:
 (NSFetchedResultsController *)controller
 {
-    [self setCurrenetBackgroundColor];
     [self.tableView endUpdates];
 }
 
-- (void)fetchResultsControllerDidInsert{
-    //abstract
-}
 
 #pragma mark - table view delegate and data source
 

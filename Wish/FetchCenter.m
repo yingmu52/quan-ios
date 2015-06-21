@@ -718,7 +718,12 @@ typedef enum{
                 NSArray *feeds = [json valueForKeyPath:@"data.feedsList"];
                 NSDictionary *pageInfo = [json valueForKeyPath:@"data.attachInfo"];
                 Plan *plan = (Plan *)obj;
-                plan.isFollowed = @([[json valueForKeyPath:@"data.isFollowed"] boolValue]);
+                
+                NSNumber *isFollowed  = @([[json valueForKeyPath:@"data.isFollowed"] boolValue]);
+                if (![plan.isFollowed isEqualToNumber:isFollowed]){
+                    plan.isFollowed = isFollowed;
+                }
+
                 for (NSDictionary *info in feeds){
                     [Feed updateFeedWithInfo:info forPlan:obj]; // obj is Plan*
                 }

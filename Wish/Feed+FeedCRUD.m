@@ -46,23 +46,32 @@
         //create
         feed = [NSEntityDescription insertNewObjectForEntityForName:@"Feed"
                                                    inManagedObjectContext:context];
-        feed.commentCount = @([feedItem[@"commentTimes"] integerValue]);
+        feed.feedId = feedItem[@"id"];
+        feed.imageId = feedItem[@"picurl"];
+        if (plan) feed.plan = plan;
+        
+#warning move these line down when the server supports identifiying wether isSelfLiked
+        feed.selfLiked = @(NO);
         feed.feedTitle = feedItem[@"content"];
         feed.createDate = [NSDate dateWithTimeIntervalSince1970:[feedItem[@"createTime"] integerValue]];
-        feed.feedId = feedItem[@"id"];
-        feed.likeCount = @([feedItem[@"likeTimes"] integerValue]);
-        feed.imageId = feedItem[@"picurl"];
-        feed.selfLiked = @(NO);
-        if (plan) feed.plan = plan;
+
         
     }else{
         //update
         feed = checks.lastObject;
         
     }
-//    if ([context save:nil]) {
-//        NSLog(@"updated feed from server");
-//    }
+
+    if (![feed.likeCount isEqualToNumber:@([feedItem[@"likeTimes"] integerValue])]){
+        feed.likeCount = @([feedItem[@"likeTimes"] integerValue]);
+    }
+
+    if (![feed.commentCount isEqualToNumber:@([feedItem[@"commentTimes"] integerValue])]){
+        feed.commentCount = @([feedItem[@"commentTimes"] integerValue]);
+    }
+
+
+    
     return feed;
 }
 
