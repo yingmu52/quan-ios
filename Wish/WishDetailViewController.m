@@ -162,33 +162,32 @@
      forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath
 {
-    switch(type)
-    {
-        case NSFetchedResultsChangeInsert:
+    switch(type){
+            
+        case NSFetchedResultsChangeInsert:{
             [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
-                                  withRowAnimation:UITableViewRowAnimationNone];
+                                  withRowAnimation:UITableViewRowAnimationFade];
             NSLog(@"Feed inserted");
-            [self setCurrenetBackgroundColor];
+        }
             break;
             
-        case NSFetchedResultsChangeDelete:
+        case NSFetchedResultsChangeDelete:{
             [self.tableView deleteRowsAtIndexPaths:@[indexPath]
-                                  withRowAnimation:UITableViewRowAnimationAutomatic];
-            [self setCurrenetBackgroundColor];
+                                  withRowAnimation:UITableViewRowAnimationFade];
             NSLog(@"Feed deleted");
+        }
             break;
             
-        case NSFetchedResultsChangeUpdate:
+        case NSFetchedResultsChangeUpdate:{
             [self.tableView reloadRowsAtIndexPaths:@[indexPath]
                                   withRowAnimation:UITableViewRowAnimationNone];
             NSLog(@"Feed updated");
+        }
             break;
-        case NSFetchedResultsChangeMove:
-            break;
+
         default:
             break;
     }
-    [self.headerView updateHeaderWithPlan:self.plan];
 }
 
 
@@ -196,6 +195,8 @@
 (NSFetchedResultsController *)controller
 {
     [self.tableView endUpdates];
+    [self setCurrenetBackgroundColor];
+    [self.headerView updateHeaderWithPlan:self.plan];
 }
 
 
@@ -237,7 +238,7 @@
                                              NSError *error,
                                              SDImageCacheType cacheType,
                                              NSURL *imageURL) {
-            feed.image = image;
+//            feed.image = image;
         }];
     }else{
         cell.photoView.image = feed.image;

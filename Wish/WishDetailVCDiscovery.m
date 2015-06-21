@@ -14,17 +14,6 @@
 @end
 @implementation WishDetailVCDiscovery
 
-
-//- (void)dealloc{
-//    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-//    for (Feed *feed in self.fetchedRC.fetchedObjects){
-//        if (![feed.plan.owner.ownerId isEqualToString:[User uid]]) {
-//            [delegate.managedObjectContext deleteObject:feed];
-//        }
-//    }
-//    [delegate saveContext];
-//}
-
 - (NSString *)segueForFeed{
     return @"showDiscoverFeedDetail";
 }
