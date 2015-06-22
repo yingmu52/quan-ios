@@ -7,6 +7,7 @@
 //
 
 #import "FeedDetailViewController.h"
+#import "UIScrollView+SVInfiniteScrolling.h"
 @implementation FeedDetailViewController
 
 - (void)viewDidLoad{
@@ -17,6 +18,14 @@
     //load comments
     self.hasNextPage = YES;
     [self loadComments];
+    
+    
+    __weak typeof(self) weakSelf = self;
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        if (weakSelf.hasNextPage) {
+            [weakSelf loadComments];
+        }
+    }];
 }
 
 - (void)setFeed:(Feed *)feed{
@@ -199,15 +208,8 @@
 }
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-//    self.likeButton.userInteractionEnabled = YES;
+    [self.tableView.infiniteScrollingView stopAnimating];
     NSLog(@"%@",info);
-//    self.navigationItem.rightBarButtonItem = nil;
-
-//    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
-//                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
-//                               delegate:self
-//                      cancelButtonTitle:@"OK"
-//                      otherButtonTitles:nil, nil] show];
 }
 
 #pragma mark - comment
@@ -260,6 +262,12 @@
     self.hasNextPage = hasNextPage;
     self.pageInfo = pageInfo;
     self.feed = feed;
+    
+    [self.tableView.infiniteScrollingView stopAnimating];
+    if (!self.hasNextPage){
+        self.tableView.showsInfiniteScrolling = NO;
+    }
+
 }
 
 #pragma mark - fetched results controller 
@@ -334,33 +342,6 @@
 }
 
 
-#pragma mark - did scroll to bottom
-- (void)scrollViewDidEndDragging:(UIScrollView *)aScrollView
-                  willDecelerate:(BOOL)decelerate
-{
-    CGPoint offset = aScrollView.contentOffset;
-    CGRect bounds = aScrollView.bounds;
-    CGSize size = aScrollView.contentSize;
-    UIEdgeInsets inset = aScrollView.contentInset;
-    CGFloat y = offset.y + bounds.size.height - inset.bottom;
-    CGFloat h = size.height;
-    
-    CGFloat reload_distance = 50.0;
-    if(y > h + reload_distance) {
-        [self loadMore];
-    }
-}
-
-- (void)loadMore{
-    if (self.hasNextPage) {
-        [self loadComments];
-    }else{
-        self.title = @"别拉了，没了！";
-        [self performSelector:@selector(setTitle:) withObject:nil afterDelay:0.5f];
-    }
-}
-
-
 - (void)loadComments{
     // if self.feed is not at local than use feedId to fetchFrom the Cloud
     NSString *feedId = self.feed.feedId ? self.feed.feedId : self.feedId;
@@ -370,12 +351,21 @@
 
 #pragma mark - delete local comments to insync with server
 
-//- (void)dealloc{
-//    for (Comment *comment in self.fetchedRC.fetchedObjects) {
-//        [[AppDelegate getContext] deleteObject:comment];
-//    }
-//    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
-//}
+- (void)dealloc{
+    NSUInteger numberOfPreservingCommentss = 3;
+    NSArray *comments = self.fetchedRC.fetchedObjects;
+    if (comments.count > numberOfPreservingCommentss) {
+        AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+        
+        //order of delete is depending on how the comments are displayed (by older comments are at the top
+        for (NSUInteger i = comments.count -1; i >= numberOfPreservingCommentss; i--) {
+            Comment *comment = comments[i];
+            [delegate.managedObjectContext deleteObject:comment];
+        }
+        [delegate saveContext];
+    }
+
+}
 
 #pragma mark - set up for message view
 

@@ -32,4 +32,5 @@
 @property (nonatomic,strong) FeedDetailHeader *headerView;
 
 - (void)setUpNavigationItem;
+- (void)loadComments;
 @end
