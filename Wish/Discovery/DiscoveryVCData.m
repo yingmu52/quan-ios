@@ -107,8 +107,12 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     // save the plan image background only when user select a certain plan!
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
-    DiscoveryCell *cell = (DiscoveryCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    plan.image = cell.discoveryImageView.image;
+    
+    if (!plan.image){
+        DiscoveryCell *cell = (DiscoveryCell *)[collectionView cellForItemAtIndexPath:indexPath];
+        plan.image = cell.discoveryImageView.image;
+    }
+    
     [self performSegueWithIdentifier:@"showDiscoveryWishDetail" sender:plan];
 }
 

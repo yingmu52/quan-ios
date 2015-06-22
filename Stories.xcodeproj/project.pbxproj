@@ -232,6 +232,10 @@
 		AEF7F2AC1A6884950022410B /* CustomBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F2A81A6884950022410B /* CustomBarItem.m */; };
 		AEF7F2AD1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F2AA1A6884950022410B /* UINavigationItem+CustomItem.m */; };
 		AEF7F2AE1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F2AA1A6884950022410B /* UINavigationItem+CustomItem.m */; };
+		AEFA49161B37C88400FEF0A2 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFA49131B37C88300FEF0A2 /* UIScrollView+SVInfiniteScrolling.m */; };
+		AEFA49171B37C88400FEF0A2 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFA49131B37C88300FEF0A2 /* UIScrollView+SVInfiniteScrolling.m */; };
+		AEFA49181B37C88400FEF0A2 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFA49151B37C88300FEF0A2 /* UIScrollView+SVPullToRefresh.m */; };
+		AEFA49191B37C88400FEF0A2 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFA49151B37C88300FEF0A2 /* UIScrollView+SVPullToRefresh.m */; };
 		AEFA5FDA1AAFBA41001CA0C8 /* NZCircularImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFA5FD91AAFBA41001CA0C8 /* NZCircularImageView.m */; };
 		AEFA5FDD1AAFBAA8001CA0C8 /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFA5FDC1AAFBAA8001CA0C8 /* UIImageView+UIActivityIndicatorForSDWebImage.m */; };
 		AEFA5FE11AAFCAD9001CA0C8 /* ALDBlurImageProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFA5FE01AAFCAD9001CA0C8 /* ALDBlurImageProcessor.m */; };
@@ -508,6 +512,11 @@
 		AEF7F2A81A6884950022410B /* CustomBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomBarItem.m; sourceTree = "<group>"; };
 		AEF7F2A91A6884950022410B /* UINavigationItem+CustomItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+CustomItem.h"; sourceTree = "<group>"; };
 		AEF7F2AA1A6884950022410B /* UINavigationItem+CustomItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+CustomItem.m"; sourceTree = "<group>"; };
+		AEFA49111B37C88300FEF0A2 /* SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPullToRefresh.h; sourceTree = "<group>"; };
+		AEFA49121B37C88300FEF0A2 /* UIScrollView+SVInfiniteScrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVInfiniteScrolling.h"; sourceTree = "<group>"; };
+		AEFA49131B37C88300FEF0A2 /* UIScrollView+SVInfiniteScrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVInfiniteScrolling.m"; sourceTree = "<group>"; };
+		AEFA49141B37C88300FEF0A2 /* UIScrollView+SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVPullToRefresh.h"; sourceTree = "<group>"; };
+		AEFA49151B37C88300FEF0A2 /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
 		AEFA5FD81AAFBA41001CA0C8 /* NZCircularImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZCircularImageView.h; sourceTree = "<group>"; };
 		AEFA5FD91AAFBA41001CA0C8 /* NZCircularImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZCircularImageView.m; sourceTree = "<group>"; };
 		AEFA5FDB1AAFBAA8001CA0C8 /* UIImageView+UIActivityIndicatorForSDWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+UIActivityIndicatorForSDWebImage.h"; sourceTree = "<group>"; };
@@ -986,6 +995,7 @@
 		AEF7F2661A686E8A0022410B /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				AEFA49101B37C88300FEF0A2 /* SVPullToRefresh */,
 				AE1068C81B296865001DA2B5 /* ImagePreview */,
 				AE611ED61B2409E7006332F3 /* AMBCircularButton */,
 				AE8A9E9A1B1FF6E7007BD4E5 /* CustomBadge */,
@@ -1041,6 +1051,18 @@
 				AEF7F2AA1A6884950022410B /* UINavigationItem+CustomItem.m */,
 			);
 			path = CustomNavigationItem;
+			sourceTree = "<group>";
+		};
+		AEFA49101B37C88300FEF0A2 /* SVPullToRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				AEFA49111B37C88300FEF0A2 /* SVPullToRefresh.h */,
+				AEFA49121B37C88300FEF0A2 /* UIScrollView+SVInfiniteScrolling.h */,
+				AEFA49131B37C88300FEF0A2 /* UIScrollView+SVInfiniteScrolling.m */,
+				AEFA49141B37C88300FEF0A2 /* UIScrollView+SVPullToRefresh.h */,
+				AEFA49151B37C88300FEF0A2 /* UIScrollView+SVPullToRefresh.m */,
+			);
+			path = SVPullToRefresh;
 			sourceTree = "<group>";
 		};
 		AEFA5FD71AAFBA41001CA0C8 /* NZCircularImageView */ = {
@@ -1271,6 +1293,7 @@
 				AE95A9F41ACFA7F8007465D5 /* TWImageScrollView.m in Sources */,
 				AE3FCFBF1B07D63900422FB8 /* UIImage+GIF.m in Sources */,
 				AED355F81B228696000427FF /* FeedDetailHeader.m in Sources */,
+				AEFA49181B37C88400FEF0A2 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				AEF7F2811A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				AE3FCFC91B07D63900422FB8 /* UIView+WebCacheOperation.m in Sources */,
 				AEF7F2891A686E8A0022410B /* ECSlidingViewController.m in Sources */,
@@ -1293,6 +1316,7 @@
 				AEE4A6D41A96AFCF00ABF946 /* TriangleCutoutView.m in Sources */,
 				AED5BC671ABEA7EB00EFF398 /* ProfileViewController.m in Sources */,
 				AEF7F2AD1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */,
+				AEFA49161B37C88400FEF0A2 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				AEFEE4001A8EE0A7007E8234 /* FollowingCell.m in Sources */,
 				AE3FCFB71B07D63900422FB8 /* SDWebImageDownloaderOperation.m in Sources */,
 				AEF3F8831AA4E3C0008C2300 /* WishDetailVCFollower.m in Sources */,
@@ -1430,7 +1454,9 @@
 				AE3FCFB21B07D63900422FB8 /* SDWebImageCompat.m in Sources */,
 				AE3FCFBA1B07D63900422FB8 /* SDWebImageManager.m in Sources */,
 				AE3FCFAC1B07D63900422FB8 /* MKAnnotationView+WebCache.m in Sources */,
+				AEFA49191B37C88400FEF0A2 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				AEFEE4011A8EE0A7007E8234 /* FollowingCell.m in Sources */,
+				AEFA49171B37C88400FEF0A2 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				AE8A9EA21B1FF6E7007BD4E5 /* CustomBadge.m in Sources */,
 				AE3FCFBE1B07D63900422FB8 /* UIButton+WebCache.m in Sources */,
 				AE9861FB1AC33C04005544B9 /* EditWishViewController.m in Sources */,

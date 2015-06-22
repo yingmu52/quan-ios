@@ -9,8 +9,8 @@
 #import "WishDetailViewController.h"
 #import "CommentAcessaryView.h"
 #import "UIImageView+WebCache.h"
+#import "UIScrollView+SVInfiniteScrolling.h"
 @interface WishDetailViewController () <CommentAcessaryViewDelegate,HeaderViewDelegate,UIGestureRecognizerDelegate,UITextViewDelegate>
-@property (nonatomic) CGFloat yVel;
 @property (strong,nonatomic) CommentAcessaryView *commentView;
 @end
 
@@ -72,16 +72,27 @@
     //hide follow button first and display later when the correct value is fetched from the server
     self.headerView.followButton.hidden = YES;
     
+    //trigger inital loading
     self.hasNextPage = YES; //important, must set before [self loadMore]
-    [self loadMore];
+    [self.fetchCenter loadFeedsListForPlan:self.plan pageInfo:self.pageInfo];
+    
+    //add infinate scroll
+    __weak typeof(self) weakSelf = self;
+
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        if (weakSelf.hasNextPage) {
+            NSLog(@"Loading More..");
+            [weakSelf.fetchCenter loadFeedsListForPlan:weakSelf.plan pageInfo:weakSelf.pageInfo];
+        }
+    }];
 }
 
 - (void)goBack{
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     [self.navigationController popToRootViewControllerAnimated:YES];
-    dispatch_queue_t queue_cleanUp;
-    queue_cleanUp = dispatch_queue_create("com.stories.WishDetailViewController.cleanup", NULL);
-    dispatch_async(queue_cleanUp, ^{
+//    dispatch_queue_t queue_cleanUp;
+//    queue_cleanUp = dispatch_queue_create("com.stories.WishDetailViewController.cleanup", NULL);
+//    dispatch_async(queue_cleanUp, ^{
         NSUInteger numberOfPreservingFeeds = 20;
         NSArray *allFeeds = self.fetchedRC.fetchedObjects;
         if (allFeeds.count > numberOfPreservingFeeds) {
@@ -92,7 +103,7 @@
             }
             [delegate saveContext];
         }
-    });
+//    });
 }
 
 - (void)setUpNavigationItem
@@ -238,10 +249,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     Feed *feed = [self.fetchedRC objectAtIndexPath:indexPath];
-    
     //save feed image only when user select certain feed
-    WishDetailCell *cell = (WishDetailCell *)[tableView cellForRowAtIndexPath:indexPath];
-    feed.image = cell.photoView.image;
+    if (!feed.image){
+        WishDetailCell *cell = (WishDetailCell *)[tableView cellForRowAtIndexPath:indexPath];
+        feed.image = cell.photoView.image;
+    }
+
     if (feed.feedId){ //prevent crash
         [self performSegueWithIdentifier:[self segueForFeed] sender:feed.feedId];
     }
@@ -271,48 +284,6 @@
     }
 }
 
-//- (void)didFinishUnLikingFeed:(Feed *)feed{
-//    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
-//}
-//
-//- (void)didFinishLikingFeed:(Feed *)feed{
-//    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
-//}
-
-#pragma mark - did scroll to bottom (load more)
-- (void)scrollViewDidEndDragging:(UIScrollView *)aScrollView
-                  willDecelerate:(BOOL)decelerate
-{
-    CGPoint offset = aScrollView.contentOffset;
-    CGRect bounds = aScrollView.bounds;
-    CGSize size = aScrollView.contentSize;
-    UIEdgeInsets inset = aScrollView.contentInset;
-    CGFloat y = offset.y + bounds.size.height - inset.bottom;
-    CGFloat h = size.height;
-    
-    CGFloat reload_distance = 20.0f;
-    if(y > h + reload_distance) {
-        [self loadMore];
-    }
-}
-
-- (void)loadMore{
-    NSLog(@"Loading More..");
-    if (self.hasNextPage) {
-        [self loadFeedFromServer:self.pageInfo];
-    }else{
-        self.title = @"别拉了，没了！";
-        [self performSelector:@selector(setTitle:) withObject:nil afterDelay:0.5f];
-    }
-}
-
-- (void)loadFeedFromServer:(NSDictionary *)pageInfo{
-//    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
-//    [spinner startAnimating];
-    [self.fetchCenter loadFeedsListForPlan:self.plan pageInfo:pageInfo];
-}
-
 
 #pragma mark - wish detail cell delegate
 - (void)didPressedMoreOnCell:(WishDetailCell *)cell{
@@ -332,18 +303,9 @@
 }
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-//    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
-//                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
-//                               delegate:self
-//                      cancelButtonTitle:@"OK"
-//                      otherButtonTitles:nil, nil] show];
     
     self.headerView.followButton.hidden = NO; //show follow button on request failure.
-
-
-//    //update navigation item
-//    self.navigationItem.rightBarButtonItem = nil;
-
+    [self.tableView.infiniteScrollingView stopAnimating];
 
 }
 
@@ -362,8 +324,11 @@
     self.hasNextPage = hasNextPage;
     self.pageInfo = pageInfo;
     [self.headerView updateHeaderWithPlan:self.plan];
-//    //update navigation item
-//    self.navigationItem.rightBarButtonItem = nil;
+    [self.tableView.infiniteScrollingView stopAnimating];
+    
+    if (!self.hasNextPage){
+        self.tableView.showsInfiniteScrolling = NO;
+    }
 }
 
 #pragma mark - segue
