@@ -107,19 +107,16 @@
 }
 
 - (void)setCurrenetBackgroundColor{
-    if (self.fetchedRC.fetchedObjects.count) {
-        Feed *feed = (Feed *)self.fetchedRC.fetchedObjects.firstObject;
-        if (feed.image) {
-            UIImageView *imgView = [[UIImageView alloc] initWithFrame:self.tableView.frame];
-            imgView.contentMode = UIViewContentModeScaleAspectFill;
-            imgView.clipsToBounds = YES;
-            imgView.image = [feed.image applyDarkEffect];
-            self.tableView.backgroundView = imgView;
-        }else{
-            self.tableView.backgroundColor = [Theme wishDetailBackgroundNone:self.tableView];
-        }
+    if (self.plan.image){
+        UIImageView *imgView = [[UIImageView alloc] initWithFrame:self.tableView.frame];
+        imgView.contentMode = UIViewContentModeScaleAspectFill;
+        imgView.clipsToBounds = YES;
+        imgView.image = [self.plan.image applyDarkEffect];
+        self.tableView.backgroundView = imgView;
+
     }else{
-        self.tableView.backgroundColor = [Theme wishDetailBackgroundNone:self.tableView];
+//        self.tableView.backgroundColor = [Theme wishDetailBackgroundNone:self.tableView];
+        self.tableView.backgroundColor = [UIColor blackColor];
     }
 }
 
@@ -195,7 +192,6 @@
 (NSFetchedResultsController *)controller
 {
     [self.tableView endUpdates];
-    [self setCurrenetBackgroundColor];
     [self.headerView updateHeaderWithPlan:self.plan];
 }
 
@@ -233,13 +229,7 @@
     cell.likeCountLabel.text = [NSString stringWithFormat:@"%@",feed.likeCount];
     cell.commentCountLabel.text = [NSString stringWithFormat:@"%@",feed.commentCount];
     if (!feed.image) {
-        [cell.photoView sd_setImageWithURL:[self.fetchCenter urlWithImageID:feed.imageId]
-                                 completed:^(UIImage *image,
-                                             NSError *error,
-                                             SDImageCacheType cacheType,
-                                             NSURL *imageURL) {
-//            feed.image = image;
-        }];
+        [cell.photoView sd_setImageWithURL:[self.fetchCenter urlWithImageID:feed.imageId]];
     }else{
         cell.photoView.image = feed.image;
     }
@@ -248,6 +238,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     Feed *feed = [self.fetchedRC objectAtIndexPath:indexPath];
+    
+    //save feed image only when user select certain feed
+    WishDetailCell *cell = (WishDetailCell *)[tableView cellForRowAtIndexPath:indexPath];
+    feed.image = cell.photoView.image;
     if (feed.feedId){ //prevent crash
         [self performSegueWithIdentifier:[self segueForFeed] sender:feed.feedId];
     }

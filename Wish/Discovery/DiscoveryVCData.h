@@ -9,5 +9,4 @@
 #import "DiscoveryViewController.h"
 
 @interface DiscoveryVCData : DiscoveryViewController
-
 @end

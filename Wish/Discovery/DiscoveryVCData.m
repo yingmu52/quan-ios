@@ -23,8 +23,6 @@
 
 @implementation DiscoveryVCData
 
-static NSUInteger numberOfitems = 4.0; //float is important
-
 - (FetchCenter *)fetchCenter{
     if (!_fetchCenter){
         _fetchCenter = [[FetchCenter alloc] init];
@@ -32,66 +30,60 @@ static NSUInteger numberOfitems = 4.0; //float is important
     }
     return _fetchCenter;
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self discover];
+    [self.fetchCenter getDiscoveryList];
 }
 
 - (void)addWish{
     [self performSegueWithIdentifier:@"showPostViewFromDiscovery" sender:nil];
 }
-//- (void)dealloc{
-//    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-//    for (Plan *plan in self.plans){ //delete plans from other users
-//        if (![plan.owner.ownerId isEqualToString:[User uid]]){
-//            [delegate.managedObjectContext deleteObject:plan];
-//        }
-//    }
-////    NSLog(@"%@",[[AppDelegate getContext] deletedObjects]);
-//    [delegate saveContext];
-//}
-- (void)discover{
-//    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
-//    [spinner startAnimating];
-    [self.fetchCenter getDiscoveryList];
+
+- (void)dealloc{
+    [self removePlans];
 }
 
+- (void)removePlans{
+//    dispatch_queue_t queue_cleanUp;
+//    queue_cleanUp = dispatch_queue_create("com.stories.DiscoveryVCData.cleanup", NULL);
+//    dispatch_async(queue_cleanUp, ^{
+        NSUInteger numberOfPreservingPlans = 8;
+        NSArray *allPlans = self.fetchedRC.fetchedObjects;
+        if (allPlans.count > numberOfPreservingPlans) {
+            AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+            for (NSInteger i = numberOfPreservingPlans ;i < self.fetchedRC.fetchedObjects.count; i ++){
+                Plan *plan = self.fetchedRC.fetchedObjects[i];
+                if (![plan.owner.ownerId isEqualToString:[User uid]] && !plan.isFollowed.boolValue){
+                    NSLog(@"Discovery: removing plan %@",plan.planId);
+                    [delegate.managedObjectContext deleteObject:plan];
+                }
+            }
+            [delegate saveContext];
+        }
+//    });
+
+}
 
 #pragma mark - collection view delegate & data soucce
-- (void)configureCell:(DiscoveryCell *)cell atIndexPath:(NSIndexPath *)indexPath{
-    NSUInteger index = indexPath.section * 4 + indexPath.item;
-    
-    Plan *plan = [self.fetchedRC.fetchedObjects objectAtIndex:index];
 
+- (void)configureCell:(DiscoveryCell *)cell atIndexPath:(NSIndexPath *)indexPath{
+    Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
     [cell.discoveryImageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:plan.backgroundNum]];
     cell.discoveryTitleLabel.text = plan.planTitle;
     cell.discoveryByUserLabel.text = [NSString stringWithFormat:@"by %@",plan.owner.ownerName];
     cell.discoveryFollowerCountLabel.text = [NSString stringWithFormat:@"%@ 关注",plan.followCount];
-}
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return round(((float)self.fetchedRC.fetchedObjects.count) / numberOfitems);;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    if (section != round(((float)self.fetchedRC.fetchedObjects.count) / numberOfitems) - 1){
-        return numberOfitems;
-    }else{
-        return self.fetchedRC.fetchedObjects.count % numberOfitems;
-    }
+    return self.fetchedRC.fetchedObjects.count;
 }
-
 
 #pragma mark - fetch center delegate
 
-//- (NSMutableArray *)plans{
-//    if (!_plans) {
-//        _plans = [[NSMutableArray alloc] init];
-//    }
-//    return _plans;
-//}
+
 - (void)didfinishFetchingDiscovery:(NSArray *)plans{
 //    [self.plans addObjectsFromArray:plans];
 //    [self.collectionView reloadData];
@@ -113,8 +105,10 @@ static NSUInteger numberOfitems = 4.0; //float is important
 
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSUInteger index = indexPath.section * numberOfitems + indexPath.item;
-    Plan *plan = [self.fetchedRC.fetchedObjects objectAtIndex:index];
+    // save the plan image background only when user select a certain plan!
+    Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
+    DiscoveryCell *cell = (DiscoveryCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    plan.image = cell.discoveryImageView.image;
     [self performSegueWithIdentifier:@"showDiscoveryWishDetail" sender:plan];
 }
 
@@ -150,7 +144,7 @@ static NSUInteger numberOfitems = 4.0; //float is important
 
 //- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 //{
-//    self.blockOperation = [NSBlockOperation new];
+////    self.blockOperation = [NSBlockOperation new];
 //}
 //
 //- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
@@ -159,49 +153,40 @@ static NSUInteger numberOfitems = 4.0; //float is important
 //    switch (type) {
 //        case NSFetchedResultsChangeInsert: {
 //            [self.blockOperation addExecutionBlock:^{
-//                [collectionView insertSections:[NSIndexSet indexSetWithIndex:newIndexPath.section] ];
+//                [collectionView insertItemsAtIndexPaths:@[newIndexPath]];
 //            }];
 //            break;
 //        }
 //            
 //        case NSFetchedResultsChangeDelete: {
 //            [self.blockOperation addExecutionBlock:^{
-//                [collectionView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section]];
+//                [collectionView deleteItemsAtIndexPaths:@[indexPath]];
 //            }];
 //            break;
 //        }
 //            
 //        case NSFetchedResultsChangeUpdate: {
 //            [self.blockOperation addExecutionBlock:^{
-//                [collectionView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section]];
+//                [collectionView reloadItemsAtIndexPaths:@[indexPath]];
 //            }];
 //            break;
-//        }
-//            
-//        case NSFetchedResultsChangeMove: {
-//            [self.blockOperation addExecutionBlock:^{
-//                [collectionView moveSection:indexPath.section toSection:newIndexPath.section];
-//            }];
-//            break;
-//        }
-//            
+//        }            
 //        default:
 //            break;
 //    }
 //}
-//
-//- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-//{
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
 //    [self.collectionView performBatchUpdates:^{
 //        [self.blockOperation start];
 //    } completion:^(BOOL finished) {
 //        // Do whatever
 //    }];
-//}
-#warning this is going to be very slow !
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
     [self.collectionView reloadData];
 }
+
+
 @end
 
 
