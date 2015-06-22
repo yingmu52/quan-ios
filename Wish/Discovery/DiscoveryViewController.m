@@ -96,9 +96,13 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGSize cellSize = CGSizeZero;
     CGFloat width = 298.0/640*collectionView.frame.size.width;
-    if (indexPath.row == 1 || indexPath.row == 2) {
+    
+    NSInteger num = ( indexPath.row + 1 ) % 4;
+    if (num == 2 || num == 3){
+        //odd number
         cellSize = CGSizeMake(width,480.0/1136*collectionView.frame.size.height);
-    }else if (indexPath.row == 0 || indexPath.row == 3){
+    }else if (num == 1 || num == 0){
+        //even number
         cellSize = CGSizeMake(width,556.0/1136*collectionView.frame.size.height);
     }
     return cellSize;
