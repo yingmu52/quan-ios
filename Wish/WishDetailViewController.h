@@ -31,6 +31,7 @@
 @property (nonatomic) BOOL hasNextPage;
 @property (nonatomic,strong) NSDictionary *pageInfo;
 
+@property (nonatomic,strong) NSMutableArray *serverFeedIds;
 - (void)setUpNavigationItem;
 
 #pragma mark - abstract

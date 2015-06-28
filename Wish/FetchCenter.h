@@ -38,7 +38,7 @@
 - (void)didfinishFetchingDiscovery:(NSArray *)plans;
 - (void)didFinishSettingPersonalInfo;
 - (void)didFinishSendingFeedBack;
-- (void)didFinishLoadingFeedList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage;
+- (void)didFinishLoadingFeedList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage serverFeedIdList:(NSArray *)serverFeedIds;
 - (void)didFinishDeletingFeed:(Feed *)feed;
 
 

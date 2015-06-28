@@ -320,7 +320,7 @@
     self.commentView.textField.text = @"";
 }
 
-- (void)didFinishLoadingFeedList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage{
+- (void)didFinishLoadingFeedList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage serverFeedIdList:(NSArray *)serverFeedIds{
     self.hasNextPage = hasNextPage;
     self.pageInfo = pageInfo;
     [self.headerView updateHeaderWithPlan:self.plan];
@@ -329,6 +329,32 @@
     if (!self.hasNextPage){
         self.tableView.showsInfiniteScrolling = NO;
     }
+    
+    //upload a local copy of server side feed list
+    [self.serverFeedIds addObjectsFromArray:serverFeedIds];
+    
+    //delete feed from local if it does not appear to be ien the server side feed list
+    if (self.serverFeedIds.count > 0 && self.fetchedRC.fetchedObjects.count > 0){
+        dispatch_queue_t syncQueue = dispatch_queue_create("com.stories.WishDetailViewController.syncFeedList", NULL);
+        dispatch_async(syncQueue, ^{
+            for (Feed *feed in self.fetchedRC.fetchedObjects){
+                if (![self.serverFeedIds containsObject:feed.feedId]) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [feed.managedObjectContext deleteObject:feed];
+                    });
+                    
+                }
+            }
+        });
+    }
+}
+
+
+- (NSMutableArray *)serverFeedIds{
+    if (!_serverFeedIds){
+        _serverFeedIds = [NSMutableArray array];
+    }
+    return _serverFeedIds;
 }
 
 #pragma mark - segue

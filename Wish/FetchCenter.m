@@ -727,8 +727,12 @@ typedef enum{
                 for (NSDictionary *info in feeds){
                     [Feed updateFeedWithInfo:info forPlan:obj]; // obj is Plan*
                 }
+                
+                NSArray *feedIds = [json valueForKeyPath:@"data.feedsList.id"];
+//                NSLog(@"%@",feedIds);
                 [self.delegate didFinishLoadingFeedList:pageInfo
-                                            hasNextPage:[[json valueForKeyPath:@"data.isMore"] boolValue]];
+                                            hasNextPage:[[json valueForKeyPath:@"data.isMore"] boolValue]
+                                       serverFeedIdList:feedIds];
             }
                 break;
                 
