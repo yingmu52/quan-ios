@@ -254,7 +254,12 @@ ImagePickerDelegate>
 
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    [self performSegueWithIdentifier:@"showPlanDetailFromHome" sender:[self.fetchedRC objectAtIndexPath:indexPath]];
+    Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
+    if (!plan.image){
+        HomeCardView *cell = (HomeCardView *)[collectionView cellForItemAtIndexPath:indexPath];
+        plan.image = cell.imageView.image;
+    }
+    [self performSegueWithIdentifier:@"showPlanDetailFromHome" sender:plan];
 }
 
 
