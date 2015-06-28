@@ -69,6 +69,10 @@
         plan.planTitle = dict[@"title"];
     }
 
+    if (![plan.detailText isEqualToString:dict[@"description"]] && ![dict[@"description"] isKindOfClass:[NSNull class]] ){
+        plan.detailText = dict[@"description"];
+    }
+
     if (![plan.backgroundNum isEqualToString:dict[@"backGroudPic"]]) {
         plan.backgroundNum = dict[@"backGroudPic"];
     }
