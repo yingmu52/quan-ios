@@ -142,12 +142,12 @@
 
 }
 - (void)logout{
-    //delete user info
-    [User updateOwnerInfo:nil];
-    
     //delete plans that do not belong to self in core data
     [self clearCoreData];
-    
+
+    //delete user info, this lines must be below [self clearCoreData];
+    [User updateOwnerInfo:nil];
+
     [self showLoginView];
 }
 
