@@ -23,6 +23,7 @@ static NSUInteger numberOfPreloadedFeeds = 3;
 @interface FollowingTVCData () <NSFetchedResultsControllerDelegate,FetchCenterDelegate,FollowingCellDelegate,ECSlidingViewControllerDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
+@property (nonatomic,strong) NSMutableArray *serverPlanList;
 @end
 
 @implementation FollowingTVCData
@@ -40,8 +41,45 @@ static NSUInteger numberOfPreloadedFeeds = 3;
     [self.fetchCenter fetchFollowingPlanList];
 }
 
-- (void)didFinishFetchingFollowingPlanList{
-    [self.tableView reloadData];
+- (void)dealloc{
+    NSUInteger numberOfPreservingFeeds = 20;
+    NSArray *plans = self.fetchedRC.fetchedObjects;
+    if (plans.count > numberOfPreservingFeeds) {
+        AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+        for (NSUInteger i = numberOfPreservingFeeds; i < plans.count; i++) {
+            [delegate.managedObjectContext deleteObject:plans[i]];
+        }
+        [delegate saveContext];
+    }
+}
+
+- (void)didFinishFetchingFollowingPlanList:(NSArray *)planIds{
+    
+    [self.serverPlanList addObjectsFromArray:planIds];
+    
+    //delete feed from local if it does not appear to be ien the server side feed list
+    if (self.serverPlanList.count > 0 && self.fetchedRC.fetchedObjects.count > 0){
+        dispatch_queue_t syncQueue = dispatch_queue_create("com.stories.FollowingTVCData.syncFollowingPlanList", NULL);
+        dispatch_async(syncQueue, ^{
+            for (Plan *plan in self.fetchedRC.fetchedObjects){
+                if (![self.serverPlanList containsObject:plan.planId]) {
+                    NSLog(@"sync following plan list");
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [plan.managedObjectContext deleteObject:plan];
+                    });
+                    
+                }
+            }
+        });
+    }
+    
+}
+
+- (NSMutableArray *)serverPlanList{
+    if (!_serverPlanList){
+        _serverPlanList = [NSMutableArray array];
+    }
+    return _serverPlanList;
 }
 
 #pragma mark - segue
@@ -137,13 +175,56 @@ static NSUInteger numberOfPreloadedFeeds = 3;
 }
 
 
+- (void)controllerWillChangeContent:
+(NSFetchedResultsController *)controller
+{
+    [self.tableView beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath
+{
+    switch(type){
+            
+        case NSFetchedResultsChangeInsert:{
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
+                                  withRowAnimation:UITableViewRowAnimationFade];
+            NSLog(@"Followed Plan inserted");
+        }
+            break;
+            
+        case NSFetchedResultsChangeDelete:{
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath]
+                                  withRowAnimation:UITableViewRowAnimationFade];
+            NSLog(@"Followed Plan deleted");
+        }
+            break;
+            
+        case NSFetchedResultsChangeUpdate:{
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath]
+                                  withRowAnimation:UITableViewRowAnimationNone];
+            NSLog(@"Followed Plan updated");
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+
 - (void)controllerDidChangeContent:
 (NSFetchedResultsController *)controller
 {
-    [self.tableView reloadData];
+    [self.tableView endUpdates];
 }
 
+
 #pragma mark - go to discovery 
+
 - (IBAction)goToDiscovery:(UITapGestureRecognizer *)tap{
     self.slidingViewController.topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"NavigationControllerForDiscovery"];
     

@@ -614,7 +614,9 @@ typedef enum{
                         }
                     }
                 }
-                [self.delegate didFinishFetchingFollowingPlanList];
+                NSArray *planIds = [json valueForKeyPath:@"data.planList.id"];
+//                NSLog(@"%@",json);
+                [self.delegate didFinishFetchingFollowingPlanList:planIds];
             }
                 break;
             case FetchCenterGetOpLoginForUidAndUkey:{

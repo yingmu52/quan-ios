@@ -28,7 +28,7 @@
 
 @protocol FetchCenterDelegate <NSObject>
 @optional
-- (void)didFinishFetchingFollowingPlanList;
+- (void)didFinishFetchingFollowingPlanList:(NSArray *)planIds;
 - (void)didFinishUploadingPlan:(Plan *)plan;
 - (void)didFinishUploadingFeed:(Feed *)feed;
 - (void)didFinishReceivingUid:(NSString *)uid uKey:(NSString *)uKey isNewUser:(BOOL)isNew userInfo:(NSDictionary *)userInfo;
