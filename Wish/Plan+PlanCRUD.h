@@ -36,4 +36,6 @@ typedef enum {
 + (NSArray *)fetchWith:(NSString *)entityName
              predicate:(NSPredicate *)predicate
       keyForDescriptor:(NSString *)key;
+
+- (BOOL)isDeletable;
 @end

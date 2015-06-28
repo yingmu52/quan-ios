@@ -41,20 +41,20 @@
 }
 
 - (void)dealloc{
-    [self removePlans];
+//    [self removePlans];
 }
 
 - (void)removePlans{
 //    dispatch_queue_t queue_cleanUp;
 //    queue_cleanUp = dispatch_queue_create("com.stories.DiscoveryVCData.cleanup", NULL);
 //    dispatch_async(queue_cleanUp, ^{
-        NSUInteger numberOfPreservingPlans = 8;
+        NSUInteger numberOfPreservingPlans = 0;
         NSArray *allPlans = self.fetchedRC.fetchedObjects;
         if (allPlans.count > numberOfPreservingPlans) {
             AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
             for (NSInteger i = numberOfPreservingPlans ;i < self.fetchedRC.fetchedObjects.count; i ++){
                 Plan *plan = self.fetchedRC.fetchedObjects[i];
-                if (![plan.owner.ownerId isEqualToString:[User uid]] && !plan.isFollowed.boolValue){
+                if ([plan isDeletable]){
                     NSLog(@"Discovery: removing plan %@",plan.planId);
                     [delegate.managedObjectContext deleteObject:plan];
                 }

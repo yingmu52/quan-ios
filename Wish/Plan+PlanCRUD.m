@@ -164,6 +164,11 @@
                                                 @"name":[User userDisplayName]}];
 }
 
+- (BOOL)isDeletable{
+    return ![self.owner.ownerId isEqualToString:[User uid]] && !self.isFollowed.boolValue;
+}
+
+
 @end
 
 
