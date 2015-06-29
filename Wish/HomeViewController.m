@@ -312,48 +312,49 @@ ViewForEmptyEventDelegate>
         if (self.guideView){
             [self.guideView removeFromSuperview];
         }
-        
-        [self.collectionView performBatchUpdates: ^{
-            for (NSDictionary *change in self.itemChanges) {
-                [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-                    NSFetchedResultsChangeType type = [key unsignedIntegerValue];
-                    switch(type) {
-                        case NSFetchedResultsChangeInsert:{
-                            [UIView performWithoutAnimation:^{
-                                [self.collectionView insertItemsAtIndexPaths:@[obj]];
-                            }];
-                        }
-                            NSLog(@"Home Card: Inserted Plan");
-                            break;
-                        case NSFetchedResultsChangeDelete:
-                            [self.collectionView deleteItemsAtIndexPaths:@[obj]];
-                            NSLog(@"Home Card: Deleted Plan");
-                            break;
-                        case NSFetchedResultsChangeUpdate:{
-                            Plan *plan = [controller objectAtIndexPath:obj];
-                            if (plan.planId && plan.backgroundNum) {
-                                [UIView performWithoutAnimation:^{
-                                    [self.collectionView reloadItemsAtIndexPaths:@[obj]];
-                                    [self.collectionView scrollToItemAtIndexPath:obj
-                                                                atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
-                                                                        animated:NO];
-                                }];
-                                NSLog(@"Home Card: Updated Plan");
-                            }
-                        }
-                            break;
-                        default:
-                            break;
-                    }
-                }];
-            }
-        } completion:^(BOOL finished) {
-            //            self.title = [NSString stringWithFormat:@"%@ plans",@(self.fetchedRC.fetchedObjects.count)];
-            [(AppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
-            self.itemChanges = nil;;
-            [self updatePage];
-        }];
     }
+    
+    [self.collectionView performBatchUpdates: ^{
+        for (NSDictionary *change in self.itemChanges) {
+            [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+                NSFetchedResultsChangeType type = [key unsignedIntegerValue];
+                switch(type) {
+                    case NSFetchedResultsChangeInsert:{
+                        [UIView performWithoutAnimation:^{
+                            [self.collectionView insertItemsAtIndexPaths:@[obj]];
+                        }];
+                    }
+                        NSLog(@"Home Card: Inserted Plan");
+                        break;
+                    case NSFetchedResultsChangeDelete:
+                        [self.collectionView deleteItemsAtIndexPaths:@[obj]];
+                        NSLog(@"Home Card: Deleted Plan");
+                        break;
+                    case NSFetchedResultsChangeUpdate:{
+                        Plan *plan = [controller objectAtIndexPath:obj];
+                        if (plan.planId && plan.backgroundNum) {
+                            [UIView performWithoutAnimation:^{
+                                [self.collectionView reloadItemsAtIndexPaths:@[obj]];
+                                [self.collectionView scrollToItemAtIndexPath:obj
+                                                            atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
+                                                                    animated:NO];
+                            }];
+                            NSLog(@"Home Card: Updated Plan");
+                        }
+                    }
+                        break;
+                    default:
+                        break;
+                }
+            }];
+        }
+    } completion:^(BOOL finished) {
+        //            self.title = [NSString stringWithFormat:@"%@ plans",@(self.fetchedRC.fetchedObjects.count)];
+        [(AppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
+        self.itemChanges = nil;;
+        [self updatePage];
+    }];
+
 }
 
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -77,8 +77,9 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jbv-Jr-n62" userLabel="cardView">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="snow.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="rhp-Iy-1SU">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rhp-Iy-1SU">
                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                    <color key="backgroundColor" red="0.91372549020000005" green="0.91372549020000005" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="rhp-Iy-1SU" secondAttribute="height" multiplier="1:1" id="3WQ-aD-VG7"/>
                                     </constraints>
@@ -179,25 +180,25 @@
                             <exclude reference="jbv-Jr-n62"/>
                         </mask>
                         <mask key="constraints">
-                            <exclude reference="8KR-tn-c8z"/>
-                            <exclude reference="UgJ-NI-mOg"/>
-                            <exclude reference="Yqi-Fo-tLg"/>
-                            <exclude reference="DVd-p1-nU3"/>
-                            <exclude reference="Pjm-xS-qvm"/>
-                            <exclude reference="mNP-50-KDY"/>
+                            <exclude reference="cng-qL-woO"/>
+                            <exclude reference="ZjV-2r-7aM"/>
+                            <exclude reference="AER-sc-H3P"/>
+                            <exclude reference="E2G-fB-vh5"/>
+                            <exclude reference="LQA-SB-g5q"/>
+                            <exclude reference="YO5-FS-e0o"/>
+                            <exclude reference="sWH-KV-Dvq"/>
                             <exclude reference="Cwx-pB-aet"/>
                             <exclude reference="KFO-dS-IgV"/>
                             <exclude reference="Tt7-H1-rQt"/>
                             <exclude reference="UCT-us-7nb"/>
                             <exclude reference="dti-W8-Pop"/>
                             <exclude reference="zxe-Px-iaf"/>
-                            <exclude reference="AER-sc-H3P"/>
-                            <exclude reference="E2G-fB-vh5"/>
-                            <exclude reference="LQA-SB-g5q"/>
-                            <exclude reference="YO5-FS-e0o"/>
-                            <exclude reference="sWH-KV-Dvq"/>
-                            <exclude reference="ZjV-2r-7aM"/>
-                            <exclude reference="cng-qL-woO"/>
+                            <exclude reference="DVd-p1-nU3"/>
+                            <exclude reference="Pjm-xS-qvm"/>
+                            <exclude reference="mNP-50-KDY"/>
+                            <exclude reference="8KR-tn-c8z"/>
+                            <exclude reference="UgJ-NI-mOg"/>
+                            <exclude reference="Yqi-Fo-tLg"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact">
@@ -210,25 +211,25 @@
                             <include reference="jbv-Jr-n62"/>
                         </mask>
                         <mask key="constraints">
-                            <include reference="8KR-tn-c8z"/>
-                            <include reference="UgJ-NI-mOg"/>
-                            <include reference="Yqi-Fo-tLg"/>
-                            <include reference="DVd-p1-nU3"/>
-                            <include reference="Pjm-xS-qvm"/>
-                            <include reference="mNP-50-KDY"/>
+                            <include reference="cng-qL-woO"/>
+                            <include reference="ZjV-2r-7aM"/>
+                            <include reference="AER-sc-H3P"/>
+                            <include reference="E2G-fB-vh5"/>
+                            <include reference="LQA-SB-g5q"/>
+                            <exclude reference="YO5-FS-e0o"/>
+                            <include reference="sWH-KV-Dvq"/>
                             <include reference="Cwx-pB-aet"/>
                             <exclude reference="KFO-dS-IgV"/>
                             <include reference="Tt7-H1-rQt"/>
                             <include reference="UCT-us-7nb"/>
                             <include reference="dti-W8-Pop"/>
                             <exclude reference="zxe-Px-iaf"/>
-                            <include reference="AER-sc-H3P"/>
-                            <include reference="E2G-fB-vh5"/>
-                            <include reference="LQA-SB-g5q"/>
-                            <exclude reference="YO5-FS-e0o"/>
-                            <include reference="sWH-KV-Dvq"/>
-                            <include reference="ZjV-2r-7aM"/>
-                            <include reference="cng-qL-woO"/>
+                            <include reference="DVd-p1-nU3"/>
+                            <include reference="Pjm-xS-qvm"/>
+                            <include reference="mNP-50-KDY"/>
+                            <include reference="8KR-tn-c8z"/>
+                            <include reference="UgJ-NI-mOg"/>
+                            <include reference="Yqi-Fo-tLg"/>
                         </mask>
                     </variation>
                 </view>
@@ -279,7 +280,6 @@
         <image name="delete_selected" width="220" height="220"/>
         <image name="finish_default" width="192" height="192"/>
         <image name="finish_selected" width="220" height="220"/>
-        <image name="snow.jpg" width="113" height="113"/>
         <image name="split_line" width="4" height="284"/>
     </resources>
 </document>
