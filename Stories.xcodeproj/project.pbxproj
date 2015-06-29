@@ -75,6 +75,10 @@
 		AE52FA501A8D3D76003FF725 /* PostFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE52FA4F1A8D3D76003FF725 /* PostFeedViewController.m */; };
 		AE52FA531A8D55A7003FF725 /* KeyboardAcessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE52FA521A8D55A7003FF725 /* KeyboardAcessoryView.m */; };
 		AE52FA551A8D55CA003FF725 /* KeyboardAcessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE52FA541A8D55CA003FF725 /* KeyboardAcessoryView.xib */; };
+		AE59B5F11B40FB55006CA4AB /* ViewForEmptyEvent.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE59B5F01B40FB55006CA4AB /* ViewForEmptyEvent.xib */; };
+		AE59B5F21B40FB55006CA4AB /* ViewForEmptyEvent.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE59B5F01B40FB55006CA4AB /* ViewForEmptyEvent.xib */; };
+		AE59B5F51B410437006CA4AB /* ViewForEmptyEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = AE59B5F41B410437006CA4AB /* ViewForEmptyEvent.m */; };
+		AE59B5F61B410437006CA4AB /* ViewForEmptyEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = AE59B5F41B410437006CA4AB /* ViewForEmptyEvent.m */; };
 		AE606A201AF4697B003DF16E /* MessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE606A1F1AF4697B003DF16E /* MessageListViewController.m */; };
 		AE606A231AF46991003DF16E /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE606A221AF46991003DF16E /* MessageCell.m */; };
 		AE611ED91B2409E7006332F3 /* AMBCircularButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AE611ED81B2409E7006332F3 /* AMBCircularButton.m */; };
@@ -349,6 +353,9 @@
 		AE52FA511A8D55A7003FF725 /* KeyboardAcessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardAcessoryView.h; sourceTree = "<group>"; };
 		AE52FA521A8D55A7003FF725 /* KeyboardAcessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardAcessoryView.m; sourceTree = "<group>"; };
 		AE52FA541A8D55CA003FF725 /* KeyboardAcessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyboardAcessoryView.xib; sourceTree = "<group>"; };
+		AE59B5F01B40FB55006CA4AB /* ViewForEmptyEvent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewForEmptyEvent.xib; sourceTree = "<group>"; };
+		AE59B5F31B410437006CA4AB /* ViewForEmptyEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewForEmptyEvent.h; sourceTree = "<group>"; };
+		AE59B5F41B410437006CA4AB /* ViewForEmptyEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewForEmptyEvent.m; sourceTree = "<group>"; };
 		AE606A1E1AF4697B003DF16E /* MessageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageListViewController.h; sourceTree = "<group>"; };
 		AE606A1F1AF4697B003DF16E /* MessageListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageListViewController.m; sourceTree = "<group>"; };
 		AE606A211AF46991003DF16E /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
@@ -937,6 +944,9 @@
 		AEEC6C771A6DB6220021B7E4 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				AE59B5F01B40FB55006CA4AB /* ViewForEmptyEvent.xib */,
+				AE59B5F31B410437006CA4AB /* ViewForEmptyEvent.h */,
+				AE59B5F41B410437006CA4AB /* ViewForEmptyEvent.m */,
 				AE0ADF171ABD78CC00692131 /* HomeCardViewController.h */,
 				AE0ADF181ABD78CC00692131 /* HomeCardViewController.m */,
 				AEBFCA351A78614100686EFE /* PostDetailViewController.h */,
@@ -1222,6 +1232,7 @@
 				AEF7F2A01A6875360022410B /* Main.storyboard in Resources */,
 				AE95A9F01ACFA7F8007465D5 /* cameraroll-picker-grip@2x.png in Resources */,
 				AE2A8DE51ACA700100029D52 /* WishDetailCell.xib in Resources */,
+				AE59B5F11B40FB55006CA4AB /* ViewForEmptyEvent.xib in Resources */,
 				AE95A9EE1ACFA7F8007465D5 /* back@2x.png in Resources */,
 				AE6E7A0C1AB0DF1F0023B9C7 /* PopupView.xib in Resources */,
 				AEDD06511AABF7AE00379C17 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
@@ -1246,6 +1257,7 @@
 				AEA89DA11B31F7A0009C5586 /* LICENSE in Resources */,
 				AEF7F29D1A6871F00022410B /* Images.xcassets in Resources */,
 				AEF7F2A11A6875360022410B /* Main.storyboard in Resources */,
+				AE59B5F21B40FB55006CA4AB /* ViewForEmptyEvent.xib in Resources */,
 				AEC068901B2D309E007975D2 /* FeedDetailCell.xib in Resources */,
 				AEEC6C701A6DB0FC0021B7E4 /* HeaderView.xib in Resources */,
 				AED355F51B2285D3000427FF /* FeedDetailHeader.xib in Resources */,
@@ -1304,6 +1316,7 @@
 				AEC068931B2D3D55007975D2 /* FeedDetailVCOwner.m in Sources */,
 				AE95A9F51ACFA7F8007465D5 /* TWPhotoCollectionViewCell.m in Sources */,
 				AE05C0361B0D62BA002F83F1 /* Owner.m in Sources */,
+				AE59B5F51B410437006CA4AB /* ViewForEmptyEvent.m in Sources */,
 				AEF7F2931A686FA30022410B /* Theme.m in Sources */,
 				AEF3F87F1AA4CFA6008C2300 /* WishDetailVCOwner.m in Sources */,
 				AE3FCFBD1B07D63900422FB8 /* UIButton+WebCache.m in Sources */,
@@ -1458,6 +1471,7 @@
 				AEFEE4011A8EE0A7007E8234 /* FollowingCell.m in Sources */,
 				AEFA49171B37C88400FEF0A2 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				AE8A9EA21B1FF6E7007BD4E5 /* CustomBadge.m in Sources */,
+				AE59B5F61B410437006CA4AB /* ViewForEmptyEvent.m in Sources */,
 				AE3FCFBE1B07D63900422FB8 /* UIButton+WebCache.m in Sources */,
 				AE9861FB1AC33C04005544B9 /* EditWishViewController.m in Sources */,
 				AE2F1C851A7A1A1800A32CB5 /* UIImage+ImageEffects.m in Sources */,

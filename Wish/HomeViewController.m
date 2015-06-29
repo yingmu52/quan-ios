@@ -23,6 +23,7 @@
 #import "User.h"
 #import "SDWebImageCompat.h"
 #import "ImagePicker.h"
+#import "ViewForEmptyEvent.h"
 const NSUInteger maxCardNum = 10;
 
 @interface HomeViewController ()
@@ -33,7 +34,8 @@ UIGestureRecognizerDelegate,
 PopupViewDelegate,
 HomeCardViewDelegate,
 UIActionSheetDelegate,
-ImagePickerDelegate>
+ImagePickerDelegate,
+ViewForEmptyEventDelegate>
 
 
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
@@ -42,8 +44,11 @@ ImagePickerDelegate>
 @property (nonatomic,weak) StationView *stationView;
 
 @property (nonatomic,weak) IBOutlet UIButton *pageButton;
+@property (nonatomic,weak) IBOutlet UIView *buttomView;
 
 @property (nonatomic,strong) NSMutableArray *itemChanges;
+
+@property (nonatomic,weak) ViewForEmptyEvent *guideView;
 
 @end
 
@@ -51,7 +56,13 @@ ImagePickerDelegate>
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self updatePage];
+    if (!self.fetchedRC.fetchedObjects.count){
+        [self setUpEmptyView];
+    }else{
+        self.guideView = nil;
+        [self updatePage];
+    }
+
 }
 
 - (NSFetchedResultsController *)fetchedRC
@@ -292,46 +303,57 @@ ImagePickerDelegate>
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    [self.collectionView performBatchUpdates:^{
-        for (NSDictionary *change in self.itemChanges) {
-            [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-                NSFetchedResultsChangeType type = [key unsignedIntegerValue];
-                switch(type) {
-                    case NSFetchedResultsChangeInsert:{
-                        [UIView performWithoutAnimation:^{
-                            [self.collectionView insertItemsAtIndexPaths:@[obj]];
-                        }];
-                    }
-                        NSLog(@"Home Card: Inserted Plan");
-                        break;
-                    case NSFetchedResultsChangeDelete:
-                        [self.collectionView deleteItemsAtIndexPaths:@[obj]];
-                        NSLog(@"Home Card: Deleted Plan");
-                        break;
-                    case NSFetchedResultsChangeUpdate:{
-                        Plan *plan = [controller objectAtIndexPath:obj];
-                        if (plan.planId && plan.backgroundNum) {
-                            [UIView performWithoutAnimation:^{
-                                [self.collectionView reloadItemsAtIndexPaths:@[obj]];
-                                [self.collectionView scrollToItemAtIndexPath:obj
-                                                            atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
-                                                                    animated:NO];
-                            }];
-                            NSLog(@"Home Card: Updated Plan");
-                        }
-                    }
-                        break;
-                    default:
-                        break;
-                }
-            }];
+    
+    if (!controller.fetchedObjects.count){
+        [self setUpEmptyView];
+    }else{
+        self.collectionView.hidden = NO;
+        self.buttomView.hidden = NO;
+        if (self.guideView){
+            [self.guideView removeFromSuperview];
         }
-    } completion:^(BOOL finished) {
-        //            self.title = [NSString stringWithFormat:@"%@ plans",@(self.fetchedRC.fetchedObjects.count)];
-        [(AppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
-        self.itemChanges = nil;;
-        [self updatePage];
-    }];
+        
+        [self.collectionView performBatchUpdates: ^{
+            for (NSDictionary *change in self.itemChanges) {
+                [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+                    NSFetchedResultsChangeType type = [key unsignedIntegerValue];
+                    switch(type) {
+                        case NSFetchedResultsChangeInsert:{
+                            [UIView performWithoutAnimation:^{
+                                [self.collectionView insertItemsAtIndexPaths:@[obj]];
+                            }];
+                        }
+                            NSLog(@"Home Card: Inserted Plan");
+                            break;
+                        case NSFetchedResultsChangeDelete:
+                            [self.collectionView deleteItemsAtIndexPaths:@[obj]];
+                            NSLog(@"Home Card: Deleted Plan");
+                            break;
+                        case NSFetchedResultsChangeUpdate:{
+                            Plan *plan = [controller objectAtIndexPath:obj];
+                            if (plan.planId && plan.backgroundNum) {
+                                [UIView performWithoutAnimation:^{
+                                    [self.collectionView reloadItemsAtIndexPaths:@[obj]];
+                                    [self.collectionView scrollToItemAtIndexPath:obj
+                                                                atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
+                                                                        animated:NO];
+                                }];
+                                NSLog(@"Home Card: Updated Plan");
+                            }
+                        }
+                            break;
+                        default:
+                            break;
+                    }
+                }];
+            }
+        } completion:^(BOOL finished) {
+            //            self.title = [NSString stringWithFormat:@"%@ plans",@(self.fetchedRC.fetchedObjects.count)];
+            [(AppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
+            self.itemChanges = nil;;
+            [self updatePage];
+        }];
+    }
 }
 
 
@@ -345,6 +367,33 @@ ImagePickerDelegate>
     cell.delegate = self;
     [cell layoutIfNeeded]; //fixed auto layout error on iphone 5s or above
 
+}
+
+
+#pragma mark - Handling 0 Events Situation
+- (void)setUpEmptyView{
+    self.collectionView.hidden = YES;
+    self.buttomView.hidden = YES;
+    [self.view addSubview:self.guideView];
+}
+
+- (ViewForEmptyEvent *)guideView{
+    if (!_guideView){
+        //        CGFloat width = 568.0/640 * CGRectGetWidth(self.view.frame);
+        //        CGFloat height = 590.0/1136 * CGRectGetHeight(self.view.frame);
+        CGFloat leftMargin = 30.0f/640 * CGRectGetWidth(self.view.frame);
+        CGFloat width = CGRectGetWidth(self.view.frame) - leftMargin * 2;
+        CGFloat height = 590.0 *width / 568;
+        CGRect rect = CGRectMake(leftMargin,158.0/1136*CGRectGetHeight(self.view.frame),width,height);
+        _guideView = [ViewForEmptyEvent instantiateFromNib:rect];
+        _guideView.delegate = self;
+    }
+    return _guideView;
+}
+
+- (void)didPressButton:(ViewForEmptyEvent *)view{
+    [view removeFromSuperview];
+    [self addWish];
 }
 
 @end

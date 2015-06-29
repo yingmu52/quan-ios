@@ -2228,6 +2228,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Ayl-oc-p2J"/>
                     <connections>
+                        <outlet property="buttomView" destination="0Ql-4c-7xf" id="F38-GS-yqR"/>
                         <outlet property="collectionView" destination="uow-gD-atl" id="WfP-de-Oth"/>
                         <outlet property="pageButton" destination="sVG-wH-ukh" id="SpG-b0-2wv"/>
                         <segue destination="1Y1-uW-81U" kind="show" identifier="showPostFromHome" id="CTd-gb-xTE"/>
@@ -6273,12 +6274,12 @@
         <image name="tips_bg" width="69" height="69"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9SL-Jw-Apx"/>
+        <segue reference="rjz-Cv-C9H"/>
+        <segue reference="cel-0L-eNY"/>
+        <segue reference="4ZT-53-1QA"/>
+        <segue reference="CTd-gb-xTE"/>
         <segue reference="JFc-cO-xBu"/>
         <segue reference="uj8-0k-sVO"/>
-        <segue reference="4ZT-53-1QA"/>
-        <segue reference="0NR-qk-ahm"/>
-        <segue reference="3Cj-2H-t7j"/>
-        <segue reference="rjz-Cv-C9H"/>
+        <segue reference="9SL-Jw-Apx"/>
     </inferredMetricsTieBreakers>
 </document>
