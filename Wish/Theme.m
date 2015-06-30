@@ -192,7 +192,9 @@
 //    return [UIImage imageNamed:@"label_finish"];
 //}
 
-
++ (UIImage *)achieveBadageEmpty{
+    return [UIImage imageNamed:@"finish_empty_image"];
+}
 
 + (UIImage *)likeButtonLiked{
     return [UIImage imageNamed:@"ic_like_selected"];

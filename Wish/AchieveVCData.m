@@ -17,6 +17,8 @@
 #import "FetchCenter.h"
 @interface AchieveVCData () <NSFetchedResultsControllerDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
+@property (nonatomic,strong) UIImageView *emptySignImageView;
+@property (nonatomic,strong) UIView *timeLine;
 @end
 
 @implementation AchieveVCData
@@ -101,10 +103,49 @@
     
 }
 
-
 - (void)controllerDidChangeContent:
 (NSFetchedResultsController *)controller
 {
+    [self setupEmptySign];
     [self.tableView reloadData];
 }
+
+#pragma mark - application life cycle
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self setupEmptySign];
+}
+
+- (void)setupEmptySign{
+    if (!self.fetchedRC.fetchedObjects.count){ //empty data
+        self.tableView.scrollEnabled = NO;
+        if (!self.emptySignImageView){
+            
+            CGFloat width = 206.0f/640 * CGRectGetWidth(self.view.bounds);
+            CGFloat height = width * 249.0f / 206;
+            CGFloat x = self.view.center.x - width/2;
+            CGFloat y = self.view.center.y - height;
+            self.emptySignImageView = [[UIImageView alloc] initWithFrame:CGRectMake(x,y,width,height)];
+            self.emptySignImageView.image = [Theme achieveBadageEmpty];
+            [self.view addSubview:self.emptySignImageView];
+        }
+        if (self.timeLine) [self.timeLine removeFromSuperview];
+    }else{
+        self.tableView.scrollEnabled = YES;
+        if (self.emptySignImageView) [self.emptySignImageView removeFromSuperview];
+        if (!self.timeLine){
+            CGRect rect = CGRectMake(self.view.bounds.origin.x + self.view.bounds.size.width * 170/640,0,2,self.view.bounds.size.height*2);
+            self.timeLine = [[UIView alloc] initWithFrame:rect];
+            
+            //add timeline to background
+            self.timeLine.backgroundColor = [SystemUtil colorFromHexString:@"#33c7b7"];
+            
+            UIView *bgView = [[UIView alloc] initWithFrame:self.view.frame];
+            [bgView addSubview:self.timeLine];
+            self.tableView.backgroundView = bgView;
+        }
+    }
+}
+
 @end

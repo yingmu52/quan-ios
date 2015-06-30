@@ -195,6 +195,8 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+//    [self.slidingViewController resetTopViewAnimated:YES];
+
     if (indexPath.section == MenuSectionMid) {
         NSString *identifier;
         switch (indexPath.row) {
@@ -214,19 +216,15 @@ typedef enum {
             }
                 break;
             default:
+                identifier = @"ShowDiscoveryList";
                 break;
         }
         [self performSegueWithIdentifier:identifier sender:nil];
     }else if (indexPath.section == MenuSectionLogin){
         [self performSegueWithIdentifier:@"ShowAcheivementList" sender:nil];
     }
-}
+    
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    //prevent loading the top view unnecessarily 
-    if (segue.destinationViewController == self.slidingViewController.topViewController) {
-        [self.slidingViewController anchorTopViewToLeftAnimated:YES];
-    }
 }
 
 #pragma mark - cell highlight behavior
