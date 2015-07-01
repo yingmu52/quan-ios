@@ -12,15 +12,16 @@
 #import "MenuViewController.h"
 #import "FetchCenter.h"
 #import "SDWebImageCompat.h"
-@interface SettingViewController () <UIGestureRecognizerDelegate,FetchCenterDelegate,UIActionSheetDelegate>
+#import "UIActionSheet+Blocks.h"
+@interface SettingViewController () <UIGestureRecognizerDelegate,FetchCenterDelegate>
 @property (nonatomic,strong) UIView *currentView;
 
 @property (nonatomic,strong) UIColor *normalBackground;
 
 @property (nonatomic,weak) IBOutlet UIImageView *iconImageView;
 
-@property (nonatomic,strong) NSString *innerNetworkTitle;
-@property (nonatomic,strong) NSString *outerNetworkTitle;
+//@property (nonatomic,strong) NSString *innerNetworkTitle;
+//@property (nonatomic,strong) NSString *outerNetworkTitle;
 @end
 
 @implementation SettingViewController
@@ -48,25 +49,49 @@
 }
 
 
-- (NSString *)innerNetworkTitle{
-    BOOL isUsingInnerNetwork = [[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_INNER_NETWORK];
-    return isUsingInnerNetwork ? @"内网✔️" : @"内网";
-}
+//- (NSString *)innerNetworkTitle{
+//    BOOL isUsingInnerNetwork = [[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_INNER_NETWORK];
+//    return isUsingInnerNetwork ? @"内网✔️" : @"内网";
+//}
+//
+//- (NSString *)outerNetworkTitle{
+//    BOOL isUsingInnerNetwork = [[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_INNER_NETWORK];
+//    return isUsingInnerNetwork ? @"外网" : @"外网✔️";
+//}
 
-- (NSString *)outerNetworkTitle{
-    BOOL isUsingInnerNetwork = [[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_INNER_NETWORK];
-    return isUsingInnerNetwork ? @"外网" : @"外网✔️";
-}
+#define GET_USER_INFO @"获取个人信息"
+
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event{
+    BOOL isUsingInnerNetwork = [[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_INNER_NETWORK];
+
+    NSString *titleForInnerNetWork = isUsingInnerNetwork ? @"内网✔️" : @"内网";
+    NSString *titleFOrOutterNetWork = isUsingInnerNetwork ? @"外网" : @"外网✔️";
     if (motion == UIEventSubtypeMotionShake) {
-        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"选择环境"
-                                                           delegate:self
-                                                  cancelButtonTitle:@"取消"
-                                             destructiveButtonTitle:nil
-                                                  otherButtonTitles:nil, nil];
-        [sheet addButtonWithTitle:self.innerNetworkTitle];
-        [sheet addButtonWithTitle:self.outerNetworkTitle];
-        [sheet showInView:self.view];
+        [UIActionSheet showInView:self.view
+                        withTitle:@"选择环境"
+                cancelButtonTitle:@"取消"
+           destructiveButtonTitle:nil
+                otherButtonTitles:@[titleForInnerNetWork,titleFOrOutterNetWork,GET_USER_INFO]
+                         tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+                            if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:titleForInnerNetWork] &&
+                                !isUsingInnerNetwork){
+                                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SHOULD_USE_INNER_NETWORK];
+                                 [self logout];
+                            }
+                            if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:titleFOrOutterNetWork] &&
+                                isUsingInnerNetwork){
+                                 [[NSUserDefaults standardUserDefaults] setBool:NO forKey:SHOULD_USE_INNER_NETWORK];
+                                 [self logout];
+                            }
+                            if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:GET_USER_INFO]){
+                                [[[UIAlertView alloc] initWithTitle:@"用户信息"
+                                                            message:[NSString stringWithFormat:@"uid:%@\nukey:%@\npicUrl:%@",[User uid],[User uKey],[User updatedProfilePictureId]]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil, nil] show];
+                             }
+                             
+        }];
     }
 }
 - (void)setUpNavigationItem
@@ -115,32 +140,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 2){
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"退出后不会删除任何历史数据，下次登录依然可以使用帐号。"
-                                                                 delegate:self
-                                                        cancelButtonTitle:@"取消"
-                                                   destructiveButtonTitle:@"退出登录"
-                                                        otherButtonTitles:nil, nil];
-        [actionSheet showInView:self.view];
-//        [self logout];
+        [UIActionSheet showInView:self.view
+                        withTitle:@"退出后不会删除任何历史数据，下次登录依然可以使用帐号。"
+                cancelButtonTitle:@"取消"
+           destructiveButtonTitle:@"退出登录"
+                otherButtonTitles:nil
+                         tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+                    if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"退出登录"]){
+                        [self logout];
+                    }
+                }];
     }
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"退出登录"]){
-        [self logout];
-    }
-    if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:self.innerNetworkTitle] &&
-       ![[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_INNER_NETWORK]){
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SHOULD_USE_INNER_NETWORK];
-        [self logout];
-    }
-    if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:self.outerNetworkTitle] &&
-       [[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_INNER_NETWORK]){
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:SHOULD_USE_INNER_NETWORK];
-        [self logout];
-    }
 
-}
 - (void)logout{
     //delete plans that do not belong to self in core data
     [self clearCoreData];
