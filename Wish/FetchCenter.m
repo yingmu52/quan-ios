@@ -340,7 +340,38 @@ typedef enum{
     [self getRequest:baseUrl parameter:args operation:FetchCenterGetOpDeletePlan entity:plan];
 }
 
+#pragma mark - local request log
 
++ (NSString *)requestLogFilePath{
+    return [[NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingString:@"httpRequestLog.txt"];
+}
+- (void)appendRequest:(NSURLRequest *)request andResponse:(NSDictionary *)response{
+//    NSMutableDictionary *logs = [[[NSUserDefaults standardUserDefaults] objectForKey:LOCAL_REQUEST_LOG] mutableCopy];
+    NSString *logPath = [self.class requestLogFilePath];
+    NSFileHandle *fileHandler = [NSFileHandle fileHandleForUpdatingAtPath:logPath];
+    NSString *content = [NSString stringWithFormat:@"[Date]: %@\n\n[Request]: %@\n\n[Response]: %@\n\n\n\n",[NSDate date],request,response];
+    if (fileHandler){
+        [fileHandler seekToEndOfFile];
+        [fileHandler writeData:[content dataUsingEncoding:NSUTF8StringEncoding]];
+        [fileHandler closeFile];
+    }else{
+        [content writeToFile:logPath atomically:NO encoding:NSUTF8StringEncoding error:nil];
+    }
+//    if (![[NSFileManager defaultManager] fileExistsAtPath:logPath]){
+//        NSString *bundle = [[NSBundle mainBundle] pathForResource:@"httpRequestLog" ofType:@"txt"];
+//        [[NSFileManager defaultManager] copyItemAtPath:bundle toPath:logPath error:nil];
+//    }
+    
+//    if (!logs){
+//        logs = [NSMutableDictionary dictionary];
+//    }else{
+//        [logs addEntriesFromDictionary:@{[NSDate date].description:@{@"Request":request,@"Response":response}}];
+////        [logs addObject:@{@"Date":[NSDate date],@"Request":request,@"Response":response}];
+////        if (logs. > 100){
+////            [logs removeObjectAtIndex:0];
+////        }
+//    }
+}
 
 #pragma mark - main get and post method
 
@@ -402,6 +433,7 @@ typedef enum{
                                               [self.delegate didFailSendingRequestWithInfo:responseJson entity:obj];
                                           });
                                       }
+                                      [self appendRequest:request andResponse:responseJson];
                                   }];
     [task resume];
     

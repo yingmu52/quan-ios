@@ -60,6 +60,7 @@
 //}
 
 #define GET_USER_INFO @"获取个人信息"
+#define GET_LOCAL_LOGS @"获取请求日志"
 
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event{
     BOOL isUsingInnerNetwork = [[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_INNER_NETWORK];
@@ -71,7 +72,7 @@
                         withTitle:@"选择环境"
                 cancelButtonTitle:@"取消"
            destructiveButtonTitle:nil
-                otherButtonTitles:@[titleForInnerNetWork,titleFOrOutterNetWork,GET_USER_INFO]
+                otherButtonTitles:@[titleForInnerNetWork,titleFOrOutterNetWork,GET_USER_INFO,GET_LOCAL_LOGS]
                          tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
                             if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:titleForInnerNetWork] &&
                                 !isUsingInnerNetwork){
@@ -89,6 +90,9 @@
                                                            delegate:nil
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil, nil] show];
+                             }
+                             if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:GET_LOCAL_LOGS]){
+                                 [self performSegueWithIdentifier:@"showLocalRequestLog" sender:nil];
                              }
                              
         }];
