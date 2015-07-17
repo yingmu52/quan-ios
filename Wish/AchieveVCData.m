@@ -51,7 +51,7 @@
 
     cell.planStatusLabel.text = plan.planStatusTags[plan.planStatus.integerValue];
     cell.planTitleLabel.text = plan.planTitle;
-    cell.planSubtitleLabel.text = [NSString stringWithFormat:@"%@个努力瞬间",plan.tryTimes];
+    cell.planSubtitleLabel.text = [NSString stringWithFormat:@"%@个记录\t%@人关注",plan.tryTimes,plan.followCount];
     
     UIImage *badge;
     if (plan.planStatus.integerValue == PlanStatusFinished) badge = [Theme achievementFinish];
