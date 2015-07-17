@@ -34,6 +34,7 @@
 #define DELETE_FEED @"splan_feeds_delete_id.php"
 #define COMMENT_FEED @"splan_comment_create.php"
 #define GET_FEED_COMMENTS @"splan_comment_getlist.php"
+#define DELETE_COMMENT @"splan_comment_delete.php"
 
 #define FOLLOW @"follow/"
 #define GET_FOLLOW_LIST @"splan_follow_get_feedslist.php"
@@ -76,6 +77,7 @@ typedef enum{
     FetchCenterGetOpUnLikeAFeed,
     FetchCenterGetOpDeleteFeed,
     FetchCenterGetOpCommentFeed,
+    FetchCenterGetOpDeleteComment,
     FetchCenterGetOpGetFeedCommentList,
     FetchCenterGetOpLoadFeedList,
     FetchCenterGetOpFeedBack,
@@ -127,6 +129,12 @@ typedef enum{
 
 #pragma mark - Comment
 
+- (void)deleteComment:(Comment *)comment{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,DELETE_COMMENT];
+    [self getRequest:rqtStr parameter:@{@"id":comment.commentId,@"feedsId":comment.feed.feedId}
+           operation:FetchCenterGetOpDeleteComment
+              entity:comment];
+}
 - (void)getCommentListForFeed:(NSString *)feedId pageInfo:(NSDictionary *)info{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,GET_FEED_COMMENTS];
     NSString *infoStr = info ? [self convertDictionaryToString:info] : @"";
@@ -346,7 +354,6 @@ typedef enum{
     return [[NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingString:@"httpRequestLog.txt"];
 }
 - (void)appendRequest:(NSURLRequest *)request andResponse:(NSDictionary *)response{
-//    NSMutableDictionary *logs = [[[NSUserDefaults standardUserDefaults] objectForKey:LOCAL_REQUEST_LOG] mutableCopy];
     NSString *logPath = [self.class requestLogFilePath];
     NSFileHandle *fileHandler = [NSFileHandle fileHandleForUpdatingAtPath:logPath];
     NSString *content = [NSString stringWithFormat:@"[Date]: %@\n\n[Request]: %@\n\n[Response]: %@\n\n\n\n",[NSDate date],request,response];
@@ -357,20 +364,6 @@ typedef enum{
     }else{
         [content writeToFile:logPath atomically:NO encoding:NSUTF8StringEncoding error:nil];
     }
-//    if (![[NSFileManager defaultManager] fileExistsAtPath:logPath]){
-//        NSString *bundle = [[NSBundle mainBundle] pathForResource:@"httpRequestLog" ofType:@"txt"];
-//        [[NSFileManager defaultManager] copyItemAtPath:bundle toPath:logPath error:nil];
-//    }
-    
-//    if (!logs){
-//        logs = [NSMutableDictionary dictionary];
-//    }else{
-//        [logs addEntriesFromDictionary:@{[NSDate date].description:@{@"Request":request,@"Response":response}}];
-////        [logs addObject:@{@"Date":[NSDate date],@"Request":request,@"Response":response}];
-////        if (logs. > 100){
-////            [logs removeObjectAtIndex:0];
-////        }
-//    }
 }
 
 #pragma mark - main get and post method
@@ -710,6 +703,13 @@ typedef enum{
                 NSLog(@"unliked feed ID %@",feed.feedId);
             }
                 break;
+            case FetchCenterGetOpDeleteComment:{
+                //decrease feed's commentCount by 1
+                NSLog(@"%@",json);
+                [self.delegate didFinishDeletingComment:obj];
+            }
+                break;
+                
             case FetchCenterGetOpCommentFeed:{
                 //increase comment count by one
                 Feed *feed = (Feed *)obj;

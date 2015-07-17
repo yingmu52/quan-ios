@@ -8,6 +8,7 @@
 
 #import "FeedDetailViewController.h"
 #import "UIScrollView+SVInfiniteScrolling.h"
+#import "UIActionSheet+Blocks.h"
 @implementation FeedDetailViewController
 
 - (void)viewDidLoad{
@@ -153,17 +154,62 @@
     return cell;
 }
 
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     //show comment view for replying
     self.commentView.feedInfoBackground.hidden = NO; // feed info section is for replying
     Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
     
-    if (![comment.owner.ownerId isEqualToString:[User uid]]) { //can't reply to self
+    if (![comment.owner.ownerId isEqualToString:[User uid]]) { //the comment is from other user
         self.commentView.comment = comment;
         [[[UIApplication sharedApplication] keyWindow] addSubview:self.commentView];
     }
     
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+#warning may change this part in the future
+//    if ([self.feed.plan.owner.ownerId isEqualToString:[User uid]]){
+//        return YES;
+//    }else{ //if not, only the comment from self can have delete action
+        Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
+        if ([comment.owner.ownerId isEqualToString:[User uid]]){
+            return YES;
+        }else{
+            return NO;
+        }
+//    }
+}
+
+#pragma mark - edit cell for delete comment 
+
+- (void)tableView:(UITableView *)tableView
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+forRowAtIndexPath:(NSIndexPath *)indexPath{
+    //this method must be implemented in order to get things work.
+}
+
+- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewRowAction *delete = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive
+                                                                      title:@"册除"
+                                                                    handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+    {
+        [UIActionSheet showInView:self.view
+                        withTitle:@"是否删除该条评论？"
+                cancelButtonTitle:@"取消"
+           destructiveButtonTitle:@"删除"
+                otherButtonTitles:nil
+                         tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+                             if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"删除"]){
+                                 //delete this comment
+                                 [self.fetchCenter deleteComment:[self.fetchedRC objectAtIndexPath:indexPath]];
+                             }
+                         }];
+
+    }];
+    
+    return @[delete];
 }
 
 - (CommentAcessaryView *)commentView{
@@ -218,6 +264,12 @@
     self.commentView.feedInfoBackground.hidden = YES; // feed info section is for replying
     [[[UIApplication sharedApplication] keyWindow] addSubview:self.commentView];
     
+}
+
+- (void)didFinishDeletingComment:(Comment *)comment{
+    [[AppDelegate getContext] deleteObject:comment];
+    self.feed.commentCount = @(self.feed.commentCount.integerValue - 1);
+    self.headerView.commentCountLabel.text = [NSString stringWithFormat:@"%@",self.feed.commentCount];
 }
 
 

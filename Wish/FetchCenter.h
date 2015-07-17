@@ -45,7 +45,7 @@
 - (void)didFinishUnLikingFeed:(Feed *)feed;
 - (void)didFinishCommentingFeed:(Feed *)feed commentId:(NSString *)commentId;
 - (void)didFinishLoadingCommentList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage forFeed:(Feed *)feed;
-
+- (void)didFinishDeletingComment:(Comment *)comment;
 
 - (void)didFinishFollowingPlan:(Plan *)plan;
 - (void)didFinishUnFollowingPlan:(Plan *)plan;
@@ -74,6 +74,7 @@
 - (void)commentOnFeed:(Feed *)feed content:(NSString *)text;
 - (void)replyAtFeed:(Feed *)feed content:(NSString *)text toOwner:(NSString *)ownerId;
 - (void)getCommentListForFeed:(NSString *)feedId pageInfo:(NSDictionary *)info;
+- (void)deleteComment:(Comment *)comment;
 
 #pragma mark - Plan
 - (void)fetchPlanListForOwnerId:(NSString *)ownerId;
