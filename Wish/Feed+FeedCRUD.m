@@ -18,20 +18,10 @@
     Feed *feed = [NSEntityDescription insertNewObjectForEntityForName:@"Feed"
                                                inManagedObjectContext:context];
     
-//    feed.feedTitle = title;
     feed.image = image;
     feed.createDate = [NSDate date];
     feed.plan = plan;
     feed.selfLiked = @(NO);
-    //update plan
-    plan.image = image;
-    [plan updateTryTimesOfPlan:YES];
-    NSLog(@"saved feed with image");
-//    if ([context save:nil]) {
-        //upload to server
-//        [[[FetchCenter alloc] init] uploadToCreateFeed:feed];
-
-//    }
     return feed;
 }
 

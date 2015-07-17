@@ -25,10 +25,18 @@ static NSUInteger maxWordCount = 140;
 @property (nonatomic,weak) IBOutlet UILabel *wordCountLabel;
 @property (weak, nonatomic) IBOutlet GCPTextView *textView;
 @property (nonatomic,strong) Feed *feed;
-
+@property (nonatomic,strong) FetchCenter *fetchCenter;
 @end
 
 @implementation PostFeedViewController
+
+- (FetchCenter *)fetchCenter{
+    if (!_fetchCenter){
+        _fetchCenter = [[FetchCenter alloc] init];
+        _fetchCenter.delegate = self;
+    }
+    return _fetchCenter;
+}
 
 - (Feed *)feed{
     if (!_feed){
@@ -106,9 +114,7 @@ static NSUInteger maxWordCount = 140;
     [spinner startAnimating];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
     
-    FetchCenter *fc = [FetchCenter new];
-    fc.delegate = self;
-    [fc uploadToCreateFeed:self.feed];
+    [self.fetchCenter uploadToCreateFeed:self.feed];
 }
 
 #define CONFIRM @"确定"
@@ -167,6 +173,11 @@ static NSUInteger maxWordCount = 140;
         [self performSegueWithIdentifier:@"showWishDetailOnPlanCreation" sender:self.plan];
 
     }
+    
+    //update plan here instead of in createFeedWithImage:inPlan: method
+    feed.plan.image = self.imageForFeed;
+    [feed.plan updateTryTimesOfPlan:YES];
+
 }
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
