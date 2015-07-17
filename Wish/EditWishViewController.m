@@ -51,7 +51,7 @@
 - (void)setupTextField{
     self.textField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,5,1)];
     self.textField.leftViewMode = UITextFieldViewModeAlways;
-//    [self setViewBorder:self.textField];
+    [self.textField addTarget:self action:@selector(textFieldDidUpdate) forControlEvents:UIControlEventEditingChanged];
 }
 
 
@@ -162,6 +162,16 @@
         textView.text = [textView.text substringToIndex:maxCount];
     }
     self.wordCountLabel.text = [NSString stringWithFormat:@"%@/%@",@(textView.text.length),@(maxCount)];
+}
+
+#pragma mark - text field delegate 
+
+- (void)textFieldDidUpdate{
+    if (self.textField.isFirstResponder){
+        //keep maximum 15 characters
+        NSInteger maxCount = 15;
+        if (self.textField.text.length > maxCount) [self.textField setText:[self.textField.text substringToIndex:maxCount]];
+    }
 }
 @end
 

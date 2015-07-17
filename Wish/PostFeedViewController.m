@@ -117,16 +117,15 @@
         self.navigationItem.rightBarButtonItem.enabled = flag;
         UIImage *bg = flag ? [Theme navTikButtonDefault] : [Theme navTikButtonDisable];
         [self.tikButton setImage:bg forState:UIControlStateNormal];
+        
+        NSInteger maxCount = 140;
+        if (textView.text.length > maxCount) {
+            textView.text = [textView.text substringToIndex:maxCount];
+        }
     }
 
 }
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
-{
-    NSUInteger noc = textView.text.length + (text.length - range.length);
-//    NSLog(@"%d",noc);
-    return  noc <= 140;
-}
 
 - (void)backspaceDidOccurInEmptyField{
     //this method prevents crash when user keep hitting back space

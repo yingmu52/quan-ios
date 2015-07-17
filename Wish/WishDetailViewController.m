@@ -53,6 +53,15 @@
     return YES;
 }
 
+- (void)textViewDidChange:(UITextView *)textView{
+    if (textView.isFirstResponder){
+        NSInteger maxCount = 75;
+        if (textView.text.length > maxCount) {
+            textView.text = [textView.text substringToIndex:maxCount];
+        }
+    }
+}
+
 #pragma mark - set up view
 
 - (void)viewWillDisappear:(BOOL)animated{
