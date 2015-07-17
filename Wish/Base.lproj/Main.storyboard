@@ -3073,14 +3073,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yEm-S5-5O6" customClass="GCPTextView">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <connections>
-                                    <outlet property="delegate" destination="XiV-RA-INl" id="FA0-2G-jm5"/>
-                                </connections>
-                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YNa-wI-VBN">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <color key="backgroundColor" red="0.91372549020000005" green="0.91372549020000005" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3111,6 +3103,14 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yEm-S5-5O6" customClass="GCPTextView">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="XiV-RA-INl" id="FA0-2G-jm5"/>
+                                </connections>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" red="0.95686274509803926" green="0.97254901960784312" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
@@ -3134,22 +3134,17 @@
                             <constraint firstItem="yEm-S5-5O6" firstAttribute="leading" secondItem="YNa-wI-VBN" secondAttribute="trailing" constant="60" id="haE-1x-E9G">
                                 <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                             </constraint>
+                            <constraint firstItem="yEm-S5-5O6" firstAttribute="top" secondItem="UDg-j7-ilp" secondAttribute="bottom" constant="20" id="jd0-xq-hpc"/>
                             <constraint firstItem="f5a-dm-fTM" firstAttribute="top" secondItem="sg1-9b-Lc3" secondAttribute="bottom" constant="14" id="qGR-MO-Qcs"/>
                             <constraint firstItem="YNa-wI-VBN" firstAttribute="trailing" secondItem="sg1-9b-Lc3" secondAttribute="trailing" id="rCa-ec-HQM"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="yEm-S5-5O6"/>
                                 <exclude reference="YNa-wI-VBN"/>
                                 <exclude reference="sg1-9b-Lc3"/>
+                                <exclude reference="yEm-S5-5O6"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="LWm-gj-x8J"/>
-                                <exclude reference="qGR-MO-Qcs"/>
-                                <exclude reference="5O7-Qh-ydv"/>
-                                <exclude reference="LuJ-mo-KNJ"/>
-                                <exclude reference="RY3-va-dc6"/>
-                                <exclude reference="Sip-vV-SX1"/>
                                 <exclude reference="1K4-oS-liD"/>
                                 <exclude reference="G5M-d6-8OT"/>
                                 <exclude reference="RYM-SR-SX3"/>
@@ -3159,30 +3154,38 @@
                                 <exclude reference="Rjd-Ne-BYq"/>
                                 <exclude reference="ZYk-5k-dJ9"/>
                                 <exclude reference="haE-1x-E9G"/>
+                                <exclude reference="jd0-xq-hpc"/>
+                                <exclude reference="5O7-Qh-ydv"/>
+                                <exclude reference="LuJ-mo-KNJ"/>
+                                <exclude reference="RY3-va-dc6"/>
+                                <exclude reference="Sip-vV-SX1"/>
+                                <exclude reference="LWm-gj-x8J"/>
+                                <exclude reference="qGR-MO-Qcs"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
-                                <include reference="yEm-S5-5O6"/>
                                 <include reference="YNa-wI-VBN"/>
                                 <include reference="sg1-9b-Lc3"/>
+                                <include reference="yEm-S5-5O6"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="LWm-gj-x8J"/>
-                                <exclude reference="qGR-MO-Qcs"/>
-                                <exclude reference="5O7-Qh-ydv"/>
-                                <exclude reference="LuJ-mo-KNJ"/>
-                                <exclude reference="RY3-va-dc6"/>
-                                <include reference="Sip-vV-SX1"/>
                                 <include reference="1K4-oS-liD"/>
                                 <include reference="G5M-d6-8OT"/>
                                 <include reference="RYM-SR-SX3"/>
                                 <include reference="rCa-ec-HQM"/>
                                 <exclude reference="KyS-aI-sfQ"/>
                                 <include reference="RET-zi-x5t"/>
-                                <include reference="Rjd-Ne-BYq"/>
+                                <exclude reference="Rjd-Ne-BYq"/>
                                 <exclude reference="ZYk-5k-dJ9"/>
                                 <include reference="haE-1x-E9G"/>
+                                <include reference="jd0-xq-hpc"/>
+                                <exclude reference="5O7-Qh-ydv"/>
+                                <exclude reference="LuJ-mo-KNJ"/>
+                                <exclude reference="RY3-va-dc6"/>
+                                <include reference="Sip-vV-SX1"/>
+                                <include reference="LWm-gj-x8J"/>
+                                <exclude reference="qGR-MO-Qcs"/>
                             </mask>
                         </variation>
                         <connections>
