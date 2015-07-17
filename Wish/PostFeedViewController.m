@@ -16,14 +16,16 @@
 #import "AppDelegate.h"
 #import "WishDetailVCOwner.h"
 #import "SJAvatarBrowser.h"
+
+static NSUInteger maxWordCount = 140;
+
 @interface PostFeedViewController () <UITextFieldDelegate,FetchCenterDelegate>
 @property (nonatomic,strong) UIButton *tikButton;
 @property (nonatomic,weak) IBOutlet UIButton *previewButton;
-//@property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (nonatomic,weak) IBOutlet UILabel *wordCountLabel;
 @property (weak, nonatomic) IBOutlet GCPTextView *textView;
-
-
 @property (nonatomic,strong) Feed *feed;
+
 @end
 
 @implementation PostFeedViewController
@@ -42,6 +44,11 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self setupViews];
+    
+    //add observer to detect keyboard height
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
 }
 
 #define placeHolder @"说点什么吧"
@@ -63,6 +70,7 @@
     [self.textView resignFirstResponder];
 }
 
+
 - (void)setupViews
 {
     CGRect frame = CGRectMake(0, 0, 25, 25);
@@ -79,7 +87,7 @@
     self.navigationItem.rightBarButtonItem.enabled = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#2A2A2A"]};
     self.title = self.plan.planTitle;
-//    [self.previewButton setImage:self.imageForFeed forState:UIControlStateNormal];
+    self.wordCountLabel.text = [NSString stringWithFormat:@"0/%@ 字",@(maxWordCount)];
 }
 
 - (void)setPreviewButton:(UIButton *)previewButton{
@@ -118,10 +126,14 @@
         UIImage *bg = flag ? [Theme navTikButtonDefault] : [Theme navTikButtonDisable];
         [self.tikButton setImage:bg forState:UIControlStateNormal];
         
-        NSInteger maxCount = 140;
-        if (textView.text.length > maxCount) {
-            textView.text = [textView.text substringToIndex:maxCount];
+        //limit text length
+        if (textView.text.length > maxWordCount) {
+            textView.text = [textView.text substringToIndex:maxWordCount];
         }
+        
+        //update word count
+        self.wordCountLabel.text = [NSString stringWithFormat:@"%@/%@",@(textView.text.length),@(maxWordCount)];
+        
     }
 
 }
@@ -170,4 +182,38 @@
                       cancelButtonTitle:@"OK"
                       otherButtonTitles:nil, nil] show];
 }
+
+#pragma mark - keyboard interaction notification
+
+- (void)keyboardWillHide:(NSNotification *)note{
+    [self updateFrameWithKeyboardSize:[[[note userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue]];
+}
+
+- (void)keyboardDidChange:(NSNotification *)note{
+    [self updateFrameWithKeyboardSize:[[[note userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue]];
+}
+
+- (void)updateFrameWithKeyboardSize:(CGRect)KBRect{
+    
+    //convert KBRect to self.view coordinate
+    CGRect convertedKBRect = [self.view convertRect:KBRect fromView:[[UIApplication sharedApplication] keyWindow]];
+    
+    //update text view frame
+    CGRect newTVFrame = self.textView.frame;
+    newTVFrame.size.height = convertedKBRect.origin.y - CGRectGetMinY(newTVFrame) - 20.0; //20.0 must be the same as storyboard constraint
+    self.textView.frame = newTVFrame;
+}
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - dismiss keyboard when tap on background
+- (IBAction)tapOnBackground:(id)sender{
+    [self.textView resignFirstResponder];
+}
 @end
+
+
+
+

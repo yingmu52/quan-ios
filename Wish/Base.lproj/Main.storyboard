@@ -3105,31 +3105,55 @@
                                     <action selector="preViewButtonPressed:" destination="XiV-RA-INl" eventType="touchUpInside" id="Hlq-Lc-laS"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/140 字" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sg1-9b-Lc3">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.95686274509803926" green="0.97254901960784312" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="YNa-wI-VBN" secondAttribute="height" multiplier="200:49" id="1K4-oS-liD"/>
+                            <constraint firstItem="sg1-9b-Lc3" firstAttribute="trailing" secondItem="yEm-S5-5O6" secondAttribute="trailing" id="5O7-Qh-ydv"/>
                             <constraint firstItem="YNa-wI-VBN" firstAttribute="top" secondItem="UDg-j7-ilp" secondAttribute="bottom" constant="20" id="G5M-d6-8OT"/>
                             <constraint firstItem="yEm-S5-5O6" firstAttribute="height" secondItem="YNa-wI-VBN" secondAttribute="height" id="KyS-aI-sfQ"/>
+                            <constraint firstItem="f5a-dm-fTM" firstAttribute="top" secondItem="yEm-S5-5O6" secondAttribute="bottom" constant="618" id="LWm-gj-x8J">
+                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                            </constraint>
+                            <constraint firstItem="sg1-9b-Lc3" firstAttribute="trailing" secondItem="yEm-S5-5O6" secondAttribute="trailing" id="LuJ-mo-KNJ"/>
                             <constraint firstItem="yEm-S5-5O6" firstAttribute="trailing" secondItem="5G4-S6-zx4" secondAttribute="trailingMargin" id="RET-zi-x5t"/>
+                            <constraint firstItem="sg1-9b-Lc3" firstAttribute="bottom" secondItem="yEm-S5-5O6" secondAttribute="bottom" id="RY3-va-dc6"/>
                             <constraint firstItem="YNa-wI-VBN" firstAttribute="leading" secondItem="5G4-S6-zx4" secondAttribute="leadingMargin" id="RYM-SR-SX3"/>
                             <constraint firstItem="yEm-S5-5O6" firstAttribute="top" secondItem="UDg-j7-ilp" secondAttribute="bottom" constant="20" id="Rjd-Ne-BYq"/>
+                            <constraint firstItem="sg1-9b-Lc3" firstAttribute="top" secondItem="YNa-wI-VBN" secondAttribute="bottom" constant="8" id="Sip-vV-SX1"/>
                             <constraint firstItem="yEm-S5-5O6" firstAttribute="centerY" secondItem="YNa-wI-VBN" secondAttribute="centerY" constant="34" id="ZYk-5k-dJ9">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
                             <constraint firstItem="yEm-S5-5O6" firstAttribute="leading" secondItem="YNa-wI-VBN" secondAttribute="trailing" constant="60" id="haE-1x-E9G">
                                 <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                             </constraint>
+                            <constraint firstItem="f5a-dm-fTM" firstAttribute="top" secondItem="sg1-9b-Lc3" secondAttribute="bottom" constant="14" id="qGR-MO-Qcs"/>
+                            <constraint firstItem="YNa-wI-VBN" firstAttribute="trailing" secondItem="sg1-9b-Lc3" secondAttribute="trailing" id="rCa-ec-HQM"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="yEm-S5-5O6"/>
                                 <exclude reference="YNa-wI-VBN"/>
+                                <exclude reference="sg1-9b-Lc3"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="LWm-gj-x8J"/>
+                                <exclude reference="qGR-MO-Qcs"/>
+                                <exclude reference="5O7-Qh-ydv"/>
+                                <exclude reference="LuJ-mo-KNJ"/>
+                                <exclude reference="RY3-va-dc6"/>
+                                <exclude reference="Sip-vV-SX1"/>
                                 <exclude reference="1K4-oS-liD"/>
                                 <exclude reference="G5M-d6-8OT"/>
                                 <exclude reference="RYM-SR-SX3"/>
+                                <exclude reference="rCa-ec-HQM"/>
                                 <exclude reference="KyS-aI-sfQ"/>
                                 <exclude reference="RET-zi-x5t"/>
                                 <exclude reference="Rjd-Ne-BYq"/>
@@ -3141,26 +3165,43 @@
                             <mask key="subviews">
                                 <include reference="yEm-S5-5O6"/>
                                 <include reference="YNa-wI-VBN"/>
+                                <include reference="sg1-9b-Lc3"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="LWm-gj-x8J"/>
+                                <exclude reference="qGR-MO-Qcs"/>
+                                <exclude reference="5O7-Qh-ydv"/>
+                                <exclude reference="LuJ-mo-KNJ"/>
+                                <exclude reference="RY3-va-dc6"/>
+                                <include reference="Sip-vV-SX1"/>
                                 <include reference="1K4-oS-liD"/>
                                 <include reference="G5M-d6-8OT"/>
                                 <include reference="RYM-SR-SX3"/>
-                                <include reference="KyS-aI-sfQ"/>
+                                <include reference="rCa-ec-HQM"/>
+                                <exclude reference="KyS-aI-sfQ"/>
                                 <include reference="RET-zi-x5t"/>
                                 <include reference="Rjd-Ne-BYq"/>
                                 <exclude reference="ZYk-5k-dJ9"/>
                                 <include reference="haE-1x-E9G"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="3Ni-31-3fL" appends="YES" id="X0L-u6-s35"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="previewButton" destination="YNa-wI-VBN" id="Dhi-Jp-ea9"/>
                         <outlet property="textView" destination="yEm-S5-5O6" id="huI-cf-GwA"/>
+                        <outlet property="wordCountLabel" destination="sg1-9b-Lc3" id="Xg0-5I-BFz"/>
                         <segue destination="b5E-B5-8Ys" kind="show" identifier="showWishDetailOnPlanCreation" id="0NR-qk-ahm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x2Z-Fs-fXM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="3Ni-31-3fL">
+                    <connections>
+                        <action selector="tapOnBackground:" destination="XiV-RA-INl" id="rTM-Cd-qlh"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3690" y="-3126"/>
         </scene>
@@ -6343,12 +6384,12 @@
         <image name="tips_bg" width="69" height="69"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rjz-Cv-C9H"/>
-        <segue reference="cel-0L-eNY"/>
-        <segue reference="4ZT-53-1QA"/>
-        <segue reference="CTd-gb-xTE"/>
-        <segue reference="JFc-cO-xBu"/>
         <segue reference="uj8-0k-sVO"/>
+        <segue reference="rjz-Cv-C9H"/>
+        <segue reference="CTd-gb-xTE"/>
+        <segue reference="4ZT-53-1QA"/>
+        <segue reference="0NR-qk-ahm"/>
+        <segue reference="JFc-cO-xBu"/>
         <segue reference="9SL-Jw-Apx"/>
     </inferredMetricsTieBreakers>
 </document>
