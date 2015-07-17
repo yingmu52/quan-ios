@@ -16,7 +16,7 @@
 #import "AppDelegate.h"
 #import "WishDetailVCOwner.h"
 #import "SJAvatarBrowser.h"
-
+#import "UIActionSheet+Blocks.h"
 static NSUInteger maxWordCount = 140;
 
 @interface PostFeedViewController () <UITextFieldDelegate,FetchCenterDelegate>
@@ -111,10 +111,15 @@ static NSUInteger maxWordCount = 140;
     [fc uploadToCreateFeed:self.feed];
 }
 
-
+#define CONFIRM @"确定"
 - (void)goBack{
-    [[AppDelegate getContext] deleteObject:self.feed];
-    [self.navigationController popViewControllerAnimated:YES];
+    [UIActionSheet showInView:self.view withTitle:@"是否放弃此次编辑？" cancelButtonTitle:@"取消" destructiveButtonTitle:CONFIRM otherButtonTitles:nil tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+        NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
+        if ([title isEqualToString:CONFIRM]){
+            [[AppDelegate getContext] deleteObject:self.feed];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }];
 }
 #pragma mark - text view delegate
 
