@@ -1336,7 +1336,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="topViewControllerStoryboardId" value="HomeNavigationController"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="topViewControllerStoryboardId" value="NavigationControllerForDiscovery"/>
                         <userDefinedRuntimeAttribute type="string" keyPath="underLeftViewControllerStoryboardId" value="MenuViewController"/>
                     </userDefinedRuntimeAttributes>
                 </viewController>
@@ -3145,6 +3145,12 @@
                                 <exclude reference="yEm-S5-5O6"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="LWm-gj-x8J"/>
+                                <exclude reference="qGR-MO-Qcs"/>
+                                <exclude reference="5O7-Qh-ydv"/>
+                                <exclude reference="LuJ-mo-KNJ"/>
+                                <exclude reference="RY3-va-dc6"/>
+                                <exclude reference="Sip-vV-SX1"/>
                                 <exclude reference="1K4-oS-liD"/>
                                 <exclude reference="G5M-d6-8OT"/>
                                 <exclude reference="RYM-SR-SX3"/>
@@ -3155,12 +3161,6 @@
                                 <exclude reference="ZYk-5k-dJ9"/>
                                 <exclude reference="haE-1x-E9G"/>
                                 <exclude reference="jd0-xq-hpc"/>
-                                <exclude reference="5O7-Qh-ydv"/>
-                                <exclude reference="LuJ-mo-KNJ"/>
-                                <exclude reference="RY3-va-dc6"/>
-                                <exclude reference="Sip-vV-SX1"/>
-                                <exclude reference="LWm-gj-x8J"/>
-                                <exclude reference="qGR-MO-Qcs"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -3170,6 +3170,12 @@
                                 <include reference="yEm-S5-5O6"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="LWm-gj-x8J"/>
+                                <exclude reference="qGR-MO-Qcs"/>
+                                <exclude reference="5O7-Qh-ydv"/>
+                                <exclude reference="LuJ-mo-KNJ"/>
+                                <exclude reference="RY3-va-dc6"/>
+                                <include reference="Sip-vV-SX1"/>
                                 <include reference="1K4-oS-liD"/>
                                 <include reference="G5M-d6-8OT"/>
                                 <include reference="RYM-SR-SX3"/>
@@ -3180,12 +3186,6 @@
                                 <exclude reference="ZYk-5k-dJ9"/>
                                 <include reference="haE-1x-E9G"/>
                                 <include reference="jd0-xq-hpc"/>
-                                <exclude reference="5O7-Qh-ydv"/>
-                                <exclude reference="LuJ-mo-KNJ"/>
-                                <exclude reference="RY3-va-dc6"/>
-                                <include reference="Sip-vV-SX1"/>
-                                <include reference="LWm-gj-x8J"/>
-                                <exclude reference="qGR-MO-Qcs"/>
                             </mask>
                         </variation>
                         <connections>
@@ -4193,7 +4193,7 @@
         <!--Navigation Controller-->
         <scene sceneID="0bo-PJ-66c">
             <objects>
-                <navigationController storyboardIdentifier="NavigationControllerForDiscovery" automaticallyAdjustsScrollViewInsets="NO" id="qWQ-Vi-JtX" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationControllerForDiscovery" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qWQ-Vi-JtX" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Oym-Lx-qWA" customClass="NavigationBar">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
