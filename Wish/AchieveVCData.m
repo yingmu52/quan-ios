@@ -44,7 +44,11 @@
                                                         forIndexPath:indexPath];
 
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
-    cell.dateLabel.text = [SystemUtil stringFromDate:plan.updateDate];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"yyyy-MM-dd";
+    cell.dateLabel.text = [formatter stringFromDate:plan.updateDate];
+
     cell.planStatusLabel.text = plan.planStatusTags[plan.planStatus.integerValue];
     cell.planTitleLabel.text = plan.planTitle;
     cell.planSubtitleLabel.text = [NSString stringWithFormat:@"%@个努力瞬间",plan.tryTimes];
