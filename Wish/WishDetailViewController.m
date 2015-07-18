@@ -81,19 +81,19 @@
     //hide follow button first and display later when the correct value is fetched from the server
     self.headerView.followButton.hidden = YES;
     
-    //trigger inital loading
-    self.hasNextPage = YES; //important, must set before [self loadMore]
-    [self.fetchCenter loadFeedsListForPlan:self.plan pageInfo:self.pageInfo];
-    
     //add infinate scroll
     __weak typeof(self) weakSelf = self;
-
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         if (weakSelf.hasNextPage) {
             NSLog(@"Loading More..");
             [weakSelf.fetchCenter loadFeedsListForPlan:weakSelf.plan pageInfo:weakSelf.pageInfo];
         }
     }];
+
+    //trigger inital loading
+    self.hasNextPage = YES; //important, must set before [self loadMore]
+    [self.fetchCenter loadFeedsListForPlan:self.plan pageInfo:self.pageInfo];
+    [self.tableView triggerInfiniteScrolling];
 }
 
 - (void)goBack{

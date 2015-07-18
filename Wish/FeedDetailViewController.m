@@ -16,17 +16,19 @@
     [self setUpNavigationItem];
     [self.tableView registerNib:[UINib nibWithNibName:@"FeedDetailCell" bundle:nil] forCellReuseIdentifier:FEEDDETAILCELLID];
 
-    //load comments
-    self.hasNextPage = YES;
-    [self loadComments];
-    
-    
     __weak typeof(self) weakSelf = self;
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         if (weakSelf.hasNextPage) {
             [weakSelf loadComments];
         }
     }];
+
+
+    //load comments
+    self.hasNextPage = YES;
+    [self loadComments];
+    [self.tableView triggerInfiniteScrolling];
+    
 }
 
 - (void)setFeed:(Feed *)feed{
