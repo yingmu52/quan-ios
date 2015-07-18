@@ -36,11 +36,13 @@
 #pragma mark Header View
 
 - (void)initialHeaderView{
-    CGRect frame = CGRectMake(0, 0, self.tableView.frame.size.width, 350.0f/1136*self.tableView.frame.size.height);
+    CGFloat planDescriptionHeight = [SystemUtil heightForText:self.plan.detailText withFontSize:12.0f];
+    CGRect frame = CGRectMake(0, 0, self.tableView.frame.size.width, 260.0f/1136*self.tableView.frame.size.height + planDescriptionHeight);
     self.headerView = [HeaderView instantiateFromNib:frame];
     self.headerView.descriptionTextView.delegate = self;
 }
 
+//rquest server to update plan when user hit return key
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     NSRange resultRange = [text rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet] options:NSBackwardsSearch];
     if ([text length] == 1 && resultRange.location != NSNotFound) {
@@ -49,7 +51,6 @@
         [self.fetchCenter updatePlan:self.plan];
         return NO;
     }
-    
     return YES;
 }
 
@@ -60,6 +61,12 @@
             textView.text = [textView.text substringToIndex:maxCount];
         }
     }
+}
+
+//update table header view's frame when the content of text view changes
+- (void)textView:(GCPTextView *)textView contentHeightDidChange:(CGFloat)height{
+    self.tableView.tableHeaderView.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 240.0f/1136*self.tableView.frame.size.height + height);
+    self.tableView.tableHeaderView = self.tableView.tableHeaderView; //this line does the magic of reposition table view cell after the change of the header frame
 }
 
 #pragma mark - set up view
@@ -257,15 +264,18 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    Feed *feed = [self.fetchedRC objectAtIndexPath:indexPath];
-    //save feed image only when user select certain feed
-    if (!feed.image){
-        WishDetailCell *cell = (WishDetailCell *)[tableView cellForRowAtIndexPath:indexPath];
-        feed.image = cell.photoView.image;
-    }
-
-    if (feed.feedId){ //prevent crash
-        [self performSegueWithIdentifier:[self segueForFeed] sender:feed.feedId];
+    
+    if (!self.headerView.descriptionTextView.isFirstResponder){ //enter feed detail only when plan description text view is not being edited
+        Feed *feed = [self.fetchedRC objectAtIndexPath:indexPath];
+        //save feed image only when user select certain feed
+        if (!feed.image){
+            WishDetailCell *cell = (WishDetailCell *)[tableView cellForRowAtIndexPath:indexPath];
+            feed.image = cell.photoView.image;
+        }
+        
+        if (feed.feedId){ //prevent crash
+            [self performSegueWithIdentifier:[self segueForFeed] sender:feed.feedId];
+        }
     }
 }
 
