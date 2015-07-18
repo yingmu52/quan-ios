@@ -65,8 +65,10 @@
 
 //update table header view's frame when the content of text view changes
 - (void)textView:(GCPTextView *)textView contentHeightDidChange:(CGFloat)height{
-    self.tableView.tableHeaderView.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 240.0f/1136*self.tableView.frame.size.height + height);
-    self.tableView.tableHeaderView = self.tableView.tableHeaderView; //this line does the magic of reposition table view cell after the change of the header frame
+    if (textView.isFirstResponder){ //this condition avoids a jerking reposition of the header view
+        self.tableView.tableHeaderView.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 240.0f/1136*self.tableView.frame.size.height + height);
+        self.tableView.tableHeaderView = self.tableView.tableHeaderView; //this line does the magic of reposition table view cell after the change of the header frame
+    }
 }
 
 #pragma mark - set up view
