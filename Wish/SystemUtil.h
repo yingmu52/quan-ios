@@ -23,7 +23,7 @@
 
 + (void)setupShawdowForView:(UIView *)view;
 + (UIImage *)imageFromColor:(UIColor *)color;
-
++ (CGFloat)heightForText:(NSString *)text withFontSize:(CGFloat)size;
 
 
 @end

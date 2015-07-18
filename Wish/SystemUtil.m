@@ -105,5 +105,19 @@
     return image;
 }
 
+#define kAvatarSize 40.0f
++ (CGFloat)heightForText:(NSString *)text withFontSize:(CGFloat)size{
+    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+    paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraphStyle.alignment = NSTextAlignmentLeft;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:size],
+                                 NSParagraphStyleAttributeName: paragraphStyle};
+    
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    
+    CGRect bounds = [text boundingRectWithSize:CGSizeMake(width - kAvatarSize,CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:NULL];
+    return CGRectGetHeight(bounds);
+}
 
 @end

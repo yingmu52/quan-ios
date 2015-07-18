@@ -61,7 +61,7 @@
 
 - (FeedDetailHeader *)headerView{
     if (!_headerView) {
-        CGFloat height = self.tableView.frame.size.width + [self heightForText:self.feed.feedTitle withFontSize:13.0f] + 32.0f + 8.0f; //bottom 32, top 8
+        CGFloat height = self.tableView.frame.size.width + [SystemUtil heightForText:self.feed.feedTitle withFontSize:13.0f] + 32.0f + 8.0f; //bottom 32, top 8
         CGRect frame = CGRectMake(0,0, self.tableView.frame.size.width, height);
         _headerView = [FeedDetailHeader instantiateFromNib:frame];
         _headerView.delegate = self;
@@ -89,26 +89,10 @@
 
 #pragma mark - table view
 
-#define kAvatarSize 40.0f
-
-- (CGFloat)heightForText:(NSString *)text withFontSize:(CGFloat)size{
-    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-    paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
-    paragraphStyle.alignment = NSTextAlignmentLeft;
-
-    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:size],
-                                 NSParagraphStyleAttributeName: paragraphStyle};
-    
-    CGFloat width = CGRectGetWidth(self.view.bounds);
-    
-    CGRect bounds = [text boundingRectWithSize:CGSizeMake(width - kAvatarSize,CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:NULL];
-    return CGRectGetHeight(bounds);
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
     
-    CGFloat height = [self heightForText:comment.content withFontSize:13.0] + [self heightForText:comment.owner.ownerName withFontSize:13.0] + 25.0;
+    CGFloat height = [SystemUtil heightForText:comment.content withFontSize:13.0] + [SystemUtil heightForText:comment.owner.ownerName withFontSize:13.0] + 25.0;
     return height;
 }
 
