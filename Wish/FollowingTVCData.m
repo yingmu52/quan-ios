@@ -134,13 +134,9 @@ static NSUInteger numberOfPreloadedFeeds = 3;
     cell.delegate = self;
     
     //fetch feeds array
-    NSArray *array = plan.feeds.allObjects;
-    if (array.count > numberOfPreloadedFeeds) {
-        array = [array subarrayWithRange:NSMakeRange(0, numberOfPreloadedFeeds)];
-    }
-    cell.feedsArray = [array sortedArrayUsingComparator:^NSComparisonResult(Feed *feed1, Feed *feed2) {
-        return [feed2.createDate compare:feed1.createDate];
-    }];
+    NSArray *sortedArray = [plan.feeds sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]]];
+    cell.feedsArray =  [sortedArray subarrayWithRange:NSMakeRange(0, numberOfPreloadedFeeds)];
+    
     //update User Info
     cell.headUserNameLabel.text = plan.owner.ownerName;
 
