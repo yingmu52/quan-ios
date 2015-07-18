@@ -97,17 +97,16 @@
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:size],
                                  NSParagraphStyleAttributeName: paragraphStyle};
     
-    CGFloat width = CGRectGetWidth(self.tableView.frame);
+    CGFloat width = CGRectGetWidth(self.view.bounds);
     
     CGRect bounds = [text boundingRectWithSize:CGSizeMake(width - kAvatarSize,CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:NULL];
-    return roundf(CGRectGetHeight(bounds));
+    return CGRectGetHeight(bounds);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
     
-    CGFloat height = [self heightForText:comment.content withFontSize:14.0] + 30.0f; //30.0f are approximate margins
-    if (height < 60.0f) height = 60.0f;
+    CGFloat height = [self heightForText:comment.content withFontSize:13.0] + [self heightForText:comment.owner.ownerName withFontSize:13.0] + 25.0;
     return height;
 }
 
@@ -128,7 +127,9 @@
     }else{
         cell.profileImageView.image = comment.owner.image;
     }
-    cell.contentLabel.text = comment.content;
+    
+    cell.contentTextView.text = comment.content;
+    
     NSDictionary *userNameAttribute = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00B9C0"]};
 
     NSString *userAstring = comment.owner.ownerName ? comment.owner.ownerName : @"无用户名";

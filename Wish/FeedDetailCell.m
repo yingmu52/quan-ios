@@ -10,21 +10,8 @@
 
 @implementation FeedDetailCell
 
-//- (void)setBounds:(CGRect)bounds
-//{
-//    [super setBounds:bounds];
-//    
-//    self.contentView.frame = self.bounds;
-//}
-//
-//- (void)layoutSubviews
-//{
-//    [super layoutSubviews];
-//    
-//    [self.contentView updateConstraintsIfNeeded];
-//    [self.contentView layoutIfNeeded];
-//    
-//    self.contentLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.contentLabel.frame);
-//}
-
+- (void)awakeFromNib{
+    [super awakeFromNib];
+    self.contentTextView.textContainerInset = UIEdgeInsetsZero;
+}
 @end
