@@ -35,7 +35,7 @@
     [super viewDidLoad];
     [self setUpNavigationItem];
     [self.fetchCenter getMessageList];
-    [self.view addGestureRecognizer:self.slidingViewController.panGesture];
+    [self.navigationController.navigationBar addGestureRecognizer:self.slidingViewController.panGesture];
 }
 
 - (void)setUpNavigationItem

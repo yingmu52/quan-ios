@@ -20,7 +20,7 @@
 #import "WishDetailVCFollower.h"
 static NSUInteger numberOfPreloadedFeeds = 3;
 
-@interface FollowingTVCData () <NSFetchedResultsControllerDelegate,FetchCenterDelegate,FollowingCellDelegate,ECSlidingViewControllerDelegate>
+@interface FollowingTVCData () <NSFetchedResultsControllerDelegate,FetchCenterDelegate,FollowingCellDelegate,ECSlidingViewControllerDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,strong) NSMutableArray *serverPlanList;
@@ -39,8 +39,15 @@ static NSUInteger numberOfPreloadedFeeds = 3;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.fetchCenter fetchFollowingPlanList];
-    [self.view addGestureRecognizer:self.slidingViewController.panGesture];
+    [self.navigationController.navigationBar addGestureRecognizer:self.slidingViewController.panGesture];
+//    self.slidingViewController.panGesture.delegate = self;
 }
+//
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognize
+//{
+//    //this delegate helps to recognise pan gesture for opening menu and scroll gesture for scrolling tableview
+//    return YES;
+//}
 
 - (void)dealloc{
     NSUInteger numberOfPreservingFeeds = 20;
