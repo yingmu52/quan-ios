@@ -13,7 +13,7 @@
 #import "FeedbackkAccessoryView.h"
 #import "GCPTextView.h"
 #import "UIViewController+ECSlidingViewController.h"
-@interface FeedbackViewController () <FetchCenterDelegate,UITextViewDelegate>
+@interface FeedbackViewController () <FetchCenterDelegate,UITextViewDelegate,UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet GCPTextView *textView;
 @property (nonatomic,strong) UIButton *tikButton;
 @property (nonatomic,strong) FeedbackkAccessoryView *feedbackAccessoryView;
@@ -89,7 +89,6 @@
 }
 
 - (void)dismissController{
-    
     //if self is the root of a navigation controller, this is being modally presented
     if (self.navigationController.viewControllers.firstObject == self) { //self is the root view controller
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -100,11 +99,21 @@
 }
 - (void)didFinishSendingFeedBack{
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
-    [self dismissController];
+    [[[UIAlertView alloc] initWithTitle:@"反馈成功" message:nil delegate:self cancelButtonTitle:@"返回" otherButtonTitles:nil, nil] show];
 }
+
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
+}
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"返回"]) {
+        [self.view endEditing:YES];
+        [self dismissController];
+    }
 }
 
 #pragma mark text view delegate 
@@ -114,17 +123,16 @@
         self.navigationItem.rightBarButtonItem.enabled = flag;
         UIImage *bg = flag ? [Theme navTikButtonDefault] : [Theme navTikButtonDisable];
         [self.tikButton setImage:bg forState:UIControlStateNormal];
+    
+        //limit word count
+        NSUInteger maxCount = 500;
+        if ([textView isFirstResponder] && textView.text.length > maxCount){
+            textView.text = [textView.text substringToIndex:maxCount];
+        }
+
     }
     
 }
-
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
-{
-    NSUInteger noc = textView.text.length + (text.length - range.length);
-    //    NSLog(@"%d",noc);
-    return  noc <= 500;
-}
-
 
 @end
 
