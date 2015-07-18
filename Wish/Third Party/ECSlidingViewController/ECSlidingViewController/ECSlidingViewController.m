@@ -265,9 +265,7 @@
             [self.view addSubview:_topViewController.view];
             [_topViewController endAppearanceTransition];
         }
-    }
-    
-    [topViewController.view addGestureRecognizer:self.panGesture];
+    }    
 }
 
 - (void)setUnderLeftViewController:(UIViewController *)underLeftViewController {

@@ -39,6 +39,7 @@ static NSUInteger numberOfPreloadedFeeds = 3;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.fetchCenter fetchFollowingPlanList];
+    [self.view addGestureRecognizer:self.slidingViewController.panGesture];
 }
 
 - (void)dealloc{

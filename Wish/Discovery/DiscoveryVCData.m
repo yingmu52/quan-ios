@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "User.h"
 #import "WishDetailVCFollower.h"
+#import "UIViewController+ECSlidingViewController.h"
 @interface DiscoveryVCData () <FetchCenterDelegate,NSFetchedResultsControllerDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
@@ -34,6 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.fetchCenter getDiscoveryList];
+    [self.view addGestureRecognizer:self.slidingViewController.panGesture];
 }
 
 - (void)addWish{

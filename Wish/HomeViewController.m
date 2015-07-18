@@ -101,7 +101,7 @@ ViewForEmptyEventDelegate>
     [super viewDidLoad];
     [self setUpNavigationItem];
     [self addLongPressGesture];
-    
+    [self.view addGestureRecognizer:self.slidingViewController.panGesture];
     [[FetchCenter new] fetchPlanListForOwnerId:[User uid]];
 
 }
