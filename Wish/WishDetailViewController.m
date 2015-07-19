@@ -355,18 +355,10 @@
     [self.serverFeedIds addObjectsFromArray:serverFeedIds];
     
     //delete feed from local if it does not appear to be ien the server side feed list
-    if (self.serverFeedIds.count > 0 && self.fetchedRC.fetchedObjects.count > 0){
-        dispatch_queue_t syncQueue = dispatch_queue_create("com.stories.WishDetailViewController.syncFeedList", NULL);
-        dispatch_async(syncQueue, ^{
-            for (Feed *feed in self.fetchedRC.fetchedObjects){
-                if (![self.serverFeedIds containsObject:feed.feedId]) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [feed.managedObjectContext deleteObject:feed];
-                    });
-                    
-                }
-            }
-        });
+    for (Feed *feed in self.fetchedRC.fetchedObjects){
+        if (![self.serverFeedIds containsObject:feed.feedId]) {
+            [feed.managedObjectContext deleteObject:feed];
+        }
     }
 }
 
