@@ -179,7 +179,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 
 - (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewRowAction *delete = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive
-                                                                      title:@"册除"
+                                                                      title:@"删除"
                                                                     handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
     {
         [UIActionSheet showInView:self.view
