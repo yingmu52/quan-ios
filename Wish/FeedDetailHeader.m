@@ -19,6 +19,10 @@
     return view;
 }
 
+- (void)awakeFromNib{
+    [super awakeFromNib];
+    self.titleTextView.textContainerInset = UIEdgeInsetsZero;
+}
 
 - (IBAction)likeButtonPressed{
     [self.delegate didPressedLikeButton:self];

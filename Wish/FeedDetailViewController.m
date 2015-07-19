@@ -61,7 +61,7 @@
 
 - (FeedDetailHeader *)headerView{
     if (!_headerView) {
-        CGFloat height = self.tableView.frame.size.width + [SystemUtil heightForText:self.feed.feedTitle withFontSize:13.0f] + 32.0f + 8.0f; //bottom 32, top 8
+        CGFloat height = self.tableView.frame.size.width + [SystemUtil heightForText:self.feed.feedTitle withFontSize:13.0f] + 40.0f; //40 = 8 top + 8 bottom  + 16 time label height + 8 bottom of label
         CGRect frame = CGRectMake(0,0, self.tableView.frame.size.width, height);
         _headerView = [FeedDetailHeader instantiateFromNib:frame];
         _headerView.delegate = self;
@@ -79,7 +79,7 @@
                                                 feed.image = image;
                                             }];
     }
-    self.headerView.headerLabel.text = feed.feedTitle;
+    self.headerView.titleTextView.text = feed.feedTitle;
     self.headerView.dateLabel.text = [SystemUtil stringFromDate:feed.createDate];
     self.headerView.likeCountLabel.text = [NSString stringWithFormat:@"%@",feed.likeCount];
     self.headerView.commentCountLabel.text = [NSString stringWithFormat:@"%@",feed.commentCount];

@@ -533,4 +533,22 @@ const NSInteger kGCPNoMaximumStringLength = -1;
     return YES;
 }
 
+
+#pragma mark - Custom UPdates
+
+- (BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender
+{
+    return action == @selector(copy:);
+}
+
+- (void)selectAll:(id)sender{
+    if (self.hasText){
+        [super selectAll:sender];
+    }
+}
+
 @end

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "GCPTextView.h"
 @class FeedDetailHeader;
 
 @protocol FeedDetailHeaderDelegate
@@ -20,8 +20,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *likeCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentCountLabel;
 @property (weak, nonatomic) IBOutlet UIView *backgroundView;
-@property (weak, nonatomic) IBOutlet UILabel* headerLabel;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
+@property (weak, nonatomic) IBOutlet GCPTextView *titleTextView;
 
 
 @property (nonatomic,weak) id <FeedDetailHeaderDelegate> delegate;
