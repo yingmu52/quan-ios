@@ -143,7 +143,13 @@ static NSUInteger numberOfPreloadedFeeds = 3;
     
     //fetch feeds array
     NSArray *sortedArray = [plan.feeds sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]]];
-    cell.feedsArray =  [sortedArray subarrayWithRange:NSMakeRange(0, numberOfPreloadedFeeds)];
+    
+    if (sortedArray.count <= numberOfPreloadedFeeds){
+        cell.feedsArray = sortedArray;
+    }else{
+        cell.feedsArray =  [sortedArray subarrayWithRange:NSMakeRange(0, numberOfPreloadedFeeds)];
+    }
+
     
     //update User Info
     cell.headUserNameLabel.text = plan.owner.ownerName;
