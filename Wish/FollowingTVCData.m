@@ -66,20 +66,13 @@ static NSUInteger numberOfPreloadedFeeds = 3;
     [self.serverPlanList addObjectsFromArray:planIds];
     
     //delete feed from local if it does not appear to be ien the server side feed list
-#warning bug : if following plans count is 0 -> self.serverPlanlist = @[] -> no comparasion will occur ~
     if (self.serverPlanList.count > 0 && self.fetchedRC.fetchedObjects.count > 0){
-        dispatch_queue_t syncQueue = dispatch_queue_create("com.stories.FollowingTVCData.syncFollowingPlanList", NULL);
-        dispatch_async(syncQueue, ^{
-            for (Plan *plan in self.fetchedRC.fetchedObjects){
-                if (![self.serverPlanList containsObject:plan.planId]) {
-                    NSLog(@"sync following plan list");
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [plan.managedObjectContext deleteObject:plan];
-                    });
-                    
-                }
+        for (Plan *plan in self.fetchedRC.fetchedObjects){
+            if (![self.serverPlanList containsObject:plan.planId]) {
+                NSLog(@"sync following plan list");
+                [plan.managedObjectContext deleteObject:plan];
             }
-        });
+        }
     }
     
 }
