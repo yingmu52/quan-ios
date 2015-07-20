@@ -350,19 +350,30 @@ typedef enum{
 
 #pragma mark - local request log
 
-+ (NSString *)requestLogFilePath{
-    return [[NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingString:@"httpRequestLog.txt"];
++ (NSString *)requestLogFilePath{ //this file gets remove in applicationWillTerminate Appdelegate
+    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingString:@"httpRequestLog.txt"];
+    
+    NSData *data = [NSData dataWithContentsOfFile:path]; //remove from path if file is too big
+    if (data.length / (1000*1024) > 1){
+        [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+    }
+    return path;
 }
+
 - (void)appendRequest:(NSURLRequest *)request andResponse:(NSDictionary *)response{
     NSString *logPath = [self.class requestLogFilePath];
     NSFileHandle *fileHandler = [NSFileHandle fileHandleForUpdatingAtPath:logPath];
+
     NSString *content = [NSString stringWithFormat:@"[Date]: %@\n\n[Request]: %@\n\n[Response]: %@\n\n\n\n",[NSDate date],request,response];
+    
+    NSString *decodedContent = [NSString stringWithCString:[content cStringUsingEncoding:NSUTF8StringEncoding]
+                                                  encoding:NSNonLossyASCIIStringEncoding];
     if (fileHandler){
         [fileHandler seekToEndOfFile];
-        [fileHandler writeData:[content dataUsingEncoding:NSUTF8StringEncoding]];
+        [fileHandler writeData:[decodedContent dataUsingEncoding:NSUTF8StringEncoding]];
         [fileHandler closeFile];
     }else{
-        [content writeToFile:logPath atomically:NO encoding:NSUTF8StringEncoding error:nil];
+        [decodedContent writeToFile:logPath atomically:NO encoding:NSUTF8StringEncoding error:nil];
     }
 }
 

@@ -9,7 +9,8 @@
 #import "RequestLogViewController.h"
 #import "Theme.h"
 #import "FetchCenter.h"
-@interface RequestLogViewController ()
+@import MessageUI;
+@interface RequestLogViewController () <MFMailComposeViewControllerDelegate>
 @property (nonatomic,weak) IBOutlet UITextView *textView;
 @end
 
@@ -30,7 +31,8 @@
                                       frame:frame];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:back];
 
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(setupContent)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
+                                                                                           target:self action:@selector(sendLogs)];
     self.title = @"请求日志";
 }
 
@@ -49,6 +51,38 @@
         NSRange bottom = NSMakeRange(textView.text.length -1, 1);
         [textView scrollRangeToVisible:bottom];
     }
+}
+
+
+#pragma mark - email 
+
+-(void)sendLogs
+{
+    MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
+    [mail setSubject:@"亮瞎双眼的请求日志"];
+    [mail addAttachmentData:[NSData dataWithContentsOfFile:[FetchCenter requestLogFilePath]]
+                   mimeType:@"text/plain"
+                   fileName:@"httpRequestLog.txt"]; // see FetchCenter requestLogFilePath method
+    
+    [mail setToRecipients:@[@"yingmu52@msn.com"]];
+    mail.mailComposeDelegate = self;
+    if ([MFMailComposeViewController canSendMail]) {
+        mail.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        [self presentViewController:mail animated:YES completion:nil];
+    }
+}
+-(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    
+    if (result == MFMailComposeResultCancelled) {
+    }else if (result == MFMailComposeResultFailed){
+        
+    }else if (result == MFMailComposeResultSaved){
+        
+    }else if (result == MFMailComposeResultSent){
+        
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
