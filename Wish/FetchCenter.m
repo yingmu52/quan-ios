@@ -354,7 +354,7 @@ typedef enum{
     NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingString:@"httpRequestLog.txt"];
     
     NSData *data = [NSData dataWithContentsOfFile:path]; //remove from path if file is too big
-    if (data.length / (1000*1024) > 1){
+    if (data.length > 1024*1024 ){ //delete the file when is over 1MB
         [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
     }
     return path;
