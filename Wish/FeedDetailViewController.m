@@ -92,7 +92,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
     
-    CGFloat height = [SystemUtil heightForText:comment.content withFontSize:13.0] + [SystemUtil heightForText:comment.owner.ownerName withFontSize:13.0] + 25.0;
+    CGFloat height = [SystemUtil heightForText:comment.content withFontSize:14.0] + [SystemUtil heightForText:comment.owner.ownerName withFontSize:13.0] + 25.0;
     return height;
 }
 
