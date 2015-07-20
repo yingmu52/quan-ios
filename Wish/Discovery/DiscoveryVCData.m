@@ -115,12 +115,17 @@
         plan.image = cell.discoveryImageView.image;
     }
     
-    [self performSegueWithIdentifier:@"showDiscoveryWishDetail" sender:plan];
+    if ([plan.owner.ownerId isEqualToString:[User uid]] && ![plan.planStatus isEqualToNumber:@(PlanStatusFinished)]){ //已完成的事件不支持编辑
+        [self performSegueWithIdentifier:@"showWishDetailVCOwnerFromDiscovery" sender:plan];
+    }else{
+        [self performSegueWithIdentifier:@"showDiscoveryWishDetail" sender:plan];
+    }
+
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if ([segue.identifier isEqualToString:@"showDiscoveryWishDetail"]){
-        [segue.destinationViewController setPlan:sender];
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(Plan *)plan{
+    if ([segue.identifier isEqualToString:@"showDiscoveryWishDetail"] || [segue.identifier isEqualToString:@"showWishDetailVCOwnerFromDiscovery"]){
+        [segue.destinationViewController setPlan:plan];
     }
 }
 

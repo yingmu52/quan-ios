@@ -4184,6 +4184,7 @@
                     <connections>
                         <segue destination="rp9-lu-nOr" kind="show" identifier="showDiscoveryWishDetail" id="nE2-oT-ipt"/>
                         <segue destination="1Y1-uW-81U" kind="show" identifier="showPostViewFromDiscovery" id="3Cj-2H-t7j"/>
+                        <segue destination="b5E-B5-8Ys" kind="show" identifier="showWishDetailVCOwnerFromDiscovery" id="lxG-JY-mcL"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="69m-YO-ebd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -6387,12 +6388,12 @@
         <image name="tips_bg" width="69" height="69"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="uj8-0k-sVO"/>
-        <segue reference="rjz-Cv-C9H"/>
-        <segue reference="CTd-gb-xTE"/>
-        <segue reference="4ZT-53-1QA"/>
-        <segue reference="0NR-qk-ahm"/>
         <segue reference="JFc-cO-xBu"/>
+        <segue reference="rjz-Cv-C9H"/>
+        <segue reference="lxG-JY-mcL"/>
+        <segue reference="3Cj-2H-t7j"/>
+        <segue reference="uj8-0k-sVO"/>
+        <segue reference="4ZT-53-1QA"/>
         <segue reference="9SL-Jw-Apx"/>
     </inferredMetricsTieBreakers>
 </document>
