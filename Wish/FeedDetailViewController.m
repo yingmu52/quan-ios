@@ -9,7 +9,7 @@
 #import "FeedDetailViewController.h"
 #import "UIScrollView+SVInfiniteScrolling.h"
 #import "UIActionSheet+Blocks.h"
-@implementation FeedDetailViewController
+@implementation FeedDetailViewController 
 
 - (void)viewDidLoad{
     [super viewDidLoad];
@@ -243,6 +243,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
     [self.tableView.infiniteScrollingView stopAnimating];
     NSLog(@"%@",info);
+    self.title = @"该内容不存在";
 }
 
 #pragma mark - comment
@@ -302,12 +303,14 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
     self.pageInfo = pageInfo;
     self.feed = feed;
     
+    //stop animation
     [self.tableView.infiniteScrollingView stopAnimating];
-    if (!self.hasNextPage){
+    if (!self.hasNextPage){ //stop scroll to load more
         self.tableView.showsInfiniteScrolling = NO;
     }
 
 }
+
 
 #pragma mark - fetched results controller 
 
