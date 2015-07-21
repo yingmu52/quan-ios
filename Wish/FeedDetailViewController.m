@@ -169,6 +169,18 @@
 //    }
 }
 
+#pragma mark - highlight
+
+- (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.backgroundColor = [SystemUtil colorFromHexString:@"#E7F0ED"];
+}
+
+- (void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.backgroundColor = [UIColor whiteColor];
+}
+
 #pragma mark - edit cell for delete comment 
 
 - (void)tableView:(UITableView *)tableView
