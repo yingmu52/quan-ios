@@ -243,7 +243,9 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
     [self.tableView.infiniteScrollingView stopAnimating];
     NSLog(@"%@",info);
-    self.title = @"该内容不存在";
+    if (!self.feed){
+        self.title = @"该内容不存在";
+    }
 }
 
 #pragma mark - comment

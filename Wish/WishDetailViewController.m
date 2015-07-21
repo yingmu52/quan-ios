@@ -7,11 +7,11 @@
 //
 
 #import "WishDetailViewController.h"
-#import "CommentAcessaryView.h"
+//#import "CommentAcessaryView.h"
 #import "UIImageView+WebCache.h"
 #import "UIScrollView+SVInfiniteScrolling.h"
-@interface WishDetailViewController () <CommentAcessaryViewDelegate,HeaderViewDelegate,UIGestureRecognizerDelegate,UITextViewDelegate>
-@property (strong,nonatomic) CommentAcessaryView *commentView;
+@interface WishDetailViewController () <HeaderViewDelegate,UIGestureRecognizerDelegate,UITextViewDelegate>
+//@property (strong,nonatomic) CommentAcessaryView *commentView;
 @end
 
 @implementation WishDetailViewController
@@ -331,16 +331,16 @@
 
 }
 
-- (void)didFinishCommentingFeed:(Feed *)feed commentId:(NSString *)commentId{
-    
-    //update feed count
-    feed.commentCount = @(feed.commentCount.integerValue + 1);
-    
-    //create comment locally
-    [Comment createComment:self.commentView.textField.text commentId:commentId forFeed:feed];
-    
-    self.commentView.textField.text = @"";
-}
+//- (void)didFinishCommentingFeed:(Feed *)feed commentId:(NSString *)commentId{
+//    
+//    //update feed count
+//    feed.commentCount = @(feed.commentCount.integerValue + 1);
+//    
+//    //create comment locally
+////    [Comment createComment:self.commentView.textField.text commentId:commentId forFeed:feed];
+//    
+////    self.commentView.textField.text = @"";
+//}
 
 - (void)didFinishLoadingFeedList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage serverFeedIdList:(NSArray *)serverFeedIds{
     self.hasNextPage = hasNextPage;
@@ -375,7 +375,21 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:[self segueForFeed]]){
-        [segue.destinationViewController setFeedId:sender];
+        
+        if ([sender isKindOfClass:[NSString class]]){
+            [segue.destinationViewController setFeedId:sender];
+        }else if ([sender isKindOfClass:[Feed class]]){ //see didPressedCommentOnCell method
+            Feed *feed = (Feed *)sender;
+            FeedDetailViewController *vc = segue.destinationViewController;
+            vc.feedId = feed.feedId;
+            
+            //show replay view, see didPressedCommentButton in FeedDetailViewController
+            vc.commentView.feedInfoBackground.hidden = YES; // feed info section is for replying
+            [[[UIApplication sharedApplication] keyWindow] addSubview:vc.commentView];
+            [segue.destinationViewController setFeedId:feed.feedId];
+            
+        }
+
     }
 }
 
@@ -384,25 +398,30 @@
 }
 
 #pragma mark - comment
-- (CommentAcessaryView *)commentView{
-    if (!_commentView){
-        _commentView = [CommentAcessaryView instantiateFromNib:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
-        self.commentView.feedInfoBackground.hidden = YES; // feed info section is for replying
-        _commentView.delegate = self;
-    }
-    return _commentView;
-}
+//- (CommentAcessaryView *)commentView{
+//    if (!_commentView){
+//        _commentView = [CommentAcessaryView instantiateFromNib:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+//        self.commentView.feedInfoBackground.hidden = YES; // feed info section is for replying
+//        _commentView.delegate = self;
+//    }
+//    return _commentView;
+//}
+//
 
 - (void)didPressedCommentOnCell:(WishDetailCell *)cell{
-    [[[UIApplication sharedApplication] keyWindow] addSubview:self.commentView];
-    self.commentView.feed = [self.fetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
-}
+    //进入动态详情并呼出键盘
+    Feed *feed = [self.fetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
+    [self performSegueWithIdentifier:[self segueForFeed] sender:feed];
 
-- (void)didPressSend:(CommentAcessaryView *)cav{
-    [self.fetchCenter commentOnFeed:cav.feed content:cav.textField.text];
-    [self.commentView removeFromSuperview];
-
+//    [[[UIApplication sharedApplication] keyWindow] addSubview:self.commentView];
+//    self.commentView.feed = [self.fetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
 }
+//
+//- (void)didPressSend:(CommentAcessaryView *)cav{
+//    [self.fetchCenter commentOnFeed:cav.feed content:cav.textField.text];
+//    [self.commentView removeFromSuperview];
+//
+//}
 
 #pragma mark - follow
 
