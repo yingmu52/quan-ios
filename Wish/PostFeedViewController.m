@@ -17,9 +17,10 @@
 #import "WishDetailVCOwner.h"
 #import "SJAvatarBrowser.h"
 #import "UIActionSheet+Blocks.h"
-static NSUInteger maxWordCount = 140;
+static NSUInteger maxWordCount = 1000;
+static NSUInteger distance = 10;
 
-@interface PostFeedViewController () <UITextFieldDelegate,FetchCenterDelegate>
+@interface PostFeedViewController () <FetchCenterDelegate>
 @property (nonatomic,strong) UIButton *tikButton;
 @property (nonatomic,weak) IBOutlet UIButton *previewButton;
 @property (nonatomic,weak) IBOutlet UILabel *wordCountLabel;
@@ -63,6 +64,7 @@ static NSUInteger maxWordCount = 140;
 
 - (void)setTextView:(GCPTextView *)textView{
     _textView = textView;
+    _textView.showsVerticalScrollIndicator = NO;
     [_textView setPlaceholder:placeHolder];
     _textView.textContainerInset = UIEdgeInsetsZero;
 }
@@ -106,6 +108,7 @@ static NSUInteger maxWordCount = 140;
 - (IBAction)preViewButtonPressed:(UIButton *)button{
     [SJAvatarBrowser showImage:button.imageView];
     [self.textView resignFirstResponder];
+    
 }
 - (void)createFeed{
     self.navigationItem.leftBarButtonItem.enabled = NO;
@@ -131,22 +134,49 @@ static NSUInteger maxWordCount = 140;
 
 
 - (void)textViewDidChange:(UITextView *)textView{
-    if (self.textView.isFirstResponder){
-        BOOL flag = self.textView.text.length*[self.textView.text stringByReplacingOccurrencesOfString:@" " withString:@""].length > 0;
+    if (textView.isFirstResponder){
+        BOOL flag = textView.text.length*[textView.text stringByReplacingOccurrencesOfString:@" " withString:@""].length > 0;
         self.navigationItem.rightBarButtonItem.enabled = flag;
         UIImage *bg = flag ? [Theme navTikButtonDefault] : [Theme navTikButtonDisable];
         [self.tikButton setImage:bg forState:UIControlStateNormal];
         
         //limit text length
-        if (textView.text.length > maxWordCount) {
-            textView.text = [textView.text substringToIndex:maxWordCount];
+        if (textView.text.length > maxWordCount - distance ) { //快到时字数限制的时候显示提示
+            
+            if (textView.text.length > maxWordCount) {
+                
+                //correct Range location
+                NSUInteger curserLocation = textView.selectedRange.location;
+                
+                //删除超出的字数, 光标位置会改变
+                NSUInteger exceedCount = textView.text.length - maxWordCount;
+                NSRange range = NSMakeRange(textView.selectedRange.location - exceedCount, exceedCount);
+                textView.text = [textView.text stringByReplacingCharactersInRange:range withString:@""];
+                
+                //恢复光标正确的位置
+                textView.selectedRange = NSMakeRange(curserLocation - exceedCount, 0);;
+                
+            }
+            
+            //en-visible wordCountLabel
+            self.wordCountLabel.hidden = NO;
         }
         
-        //update word count
-        self.wordCountLabel.text = [NSString stringWithFormat:@"%@/%@",@(textView.text.length),@(maxWordCount)];
-        
-    }
+        if (!self.wordCountLabel.isHidden){
+            //update word count label
+            self.wordCountLabel.text = [NSString stringWithFormat:@"%@/%@",@(textView.text.length),@(maxWordCount)];
 
+        }
+        
+        //追着光标的位置展示
+        [textView scrollRangeToVisible:textView.selectedRange];
+    }
+    
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    return textView.text.length + (text.length - range.length) <= maxWordCount;
 }
 
 

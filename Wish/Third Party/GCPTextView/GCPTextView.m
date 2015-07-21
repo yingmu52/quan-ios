@@ -542,7 +542,7 @@ const NSInteger kGCPNoMaximumStringLength = -1;
 
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender
 {
-    return action == @selector(copy:);
+    return action == @selector(copy:) || action == @selector(paste:);
 }
 
 - (void)selectAll:(id)sender{

@@ -3097,11 +3097,14 @@
                                     <action selector="preViewButtonPressed:" destination="XiV-RA-INl" eventType="touchUpInside" id="Hlq-Lc-laS"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/140 字" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sg1-9b-Lc3">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/1000 字" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sg1-9b-Lc3">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="66" y="190" width="48" height="15"/>
+                                </variation>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yEm-S5-5O6" customClass="GCPTextView">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -6388,12 +6391,12 @@
         <image name="tips_bg" width="69" height="69"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JFc-cO-xBu"/>
-        <segue reference="rjz-Cv-C9H"/>
-        <segue reference="lxG-JY-mcL"/>
-        <segue reference="3Cj-2H-t7j"/>
         <segue reference="uj8-0k-sVO"/>
+        <segue reference="3Cj-2H-t7j"/>
+        <segue reference="rjz-Cv-C9H"/>
         <segue reference="4ZT-53-1QA"/>
+        <segue reference="0NR-qk-ahm"/>
+        <segue reference="JFc-cO-xBu"/>
         <segue reference="9SL-Jw-Apx"/>
     </inferredMetricsTieBreakers>
 </document>
