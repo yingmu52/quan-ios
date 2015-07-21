@@ -123,6 +123,7 @@ static NSUInteger distance = 10;
 #define CONFIRM @"确定"
 - (void)goBack{
     [UIActionSheet showInView:self.view withTitle:@"是否放弃此次编辑？" cancelButtonTitle:@"取消" destructiveButtonTitle:CONFIRM otherButtonTitles:nil tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+        [actionSheet dismissWithClickedButtonIndex:buttonIndex animated:NO];
         NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
         if ([title isEqualToString:CONFIRM]){
             [[AppDelegate getContext] deleteObject:self.feed];
