@@ -55,7 +55,7 @@ static NSUInteger distance = 10;
     [self setupViews];
     
     //add observer to detect keyboard height
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChange:) name:UIKeyboardDidChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
 }
@@ -241,13 +241,9 @@ static NSUInteger distance = 10;
 }
 
 - (void)updateFrameWithKeyboardSize:(CGRect)KBRect{
-    
-    //convert KBRect to self.view coordinate
-    CGRect convertedKBRect = [self.view convertRect:KBRect fromView:[[UIApplication sharedApplication] keyWindow]];
-    
     //update text view frame
     CGRect newTVFrame = self.textView.frame;
-    newTVFrame.size.height = convertedKBRect.origin.y - CGRectGetMinY(newTVFrame) - 20.0; //20.0 must be the same as storyboard constraint
+    newTVFrame.size.height = KBRect.origin.y - CGRectGetMinY(newTVFrame) - 20.0; //20.0 must be the same as storyboard constraint
     self.textView.frame = newTVFrame;
 }
 
