@@ -202,6 +202,8 @@
 		AEE4A6D51A96AFCF00ABF946 /* TriangleCutoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6D31A96AFCF00ABF946 /* TriangleCutoutView.m */; };
 		AEE4A6D81A972FAA00ABF946 /* FollowingTVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6D71A972FAA00ABF946 /* FollowingTVCData.m */; };
 		AEE4A6D91A972FAB00ABF946 /* FollowingTVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6D71A972FAA00ABF946 /* FollowingTVCData.m */; };
+		AEEAC9B81B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEAC9B71B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m */; };
+		AEEAC9B91B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEAC9B71B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m */; };
 		AEEC6C6D1A6DB0FC0021B7E4 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C6B1A6DB0FC0021B7E4 /* HeaderView.m */; };
 		AEEC6C6E1A6DB0FC0021B7E4 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C6B1A6DB0FC0021B7E4 /* HeaderView.m */; };
 		AEEC6C6F1A6DB0FC0021B7E4 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEEC6C6C1A6DB0FC0021B7E4 /* HeaderView.xib */; };
@@ -488,6 +490,8 @@
 		AEE4A6D31A96AFCF00ABF946 /* TriangleCutoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TriangleCutoutView.m; sourceTree = "<group>"; };
 		AEE4A6D61A972FAA00ABF946 /* FollowingTVCData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowingTVCData.h; sourceTree = "<group>"; };
 		AEE4A6D71A972FAA00ABF946 /* FollowingTVCData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowingTVCData.m; sourceTree = "<group>"; };
+		AEEAC9B61B6041170056DC0F /* UITableView+FDTemplateLayoutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCell.h"; sourceTree = "<group>"; };
+		AEEAC9B71B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCell.m"; sourceTree = "<group>"; };
 		AEEC6C6A1A6DB0FC0021B7E4 /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeaderView.h; path = "Third Party/VGParallaxHeader/HeaderView.h"; sourceTree = "<group>"; };
 		AEEC6C6B1A6DB0FC0021B7E4 /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HeaderView.m; path = "Third Party/VGParallaxHeader/HeaderView.m"; sourceTree = "<group>"; };
 		AEEC6C6C1A6DB0FC0021B7E4 /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HeaderView.xib; path = "Third Party/VGParallaxHeader/HeaderView.xib"; sourceTree = "<group>"; };
@@ -932,6 +936,15 @@
 			name = Achievement;
 			sourceTree = "<group>";
 		};
+		AEEAC9B51B6041170056DC0F /* Dynamic Cell Height */ = {
+			isa = PBXGroup;
+			children = (
+				AEEAC9B61B6041170056DC0F /* UITableView+FDTemplateLayoutCell.h */,
+				AEEAC9B71B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m */,
+			);
+			path = "Dynamic Cell Height";
+			sourceTree = "<group>";
+		};
 		AEEC6C751A6DB5EE0021B7E4 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -1011,6 +1024,7 @@
 		AEF7F2661A686E8A0022410B /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				AEEAC9B51B6041170056DC0F /* Dynamic Cell Height */,
 				AEFA49101B37C88300FEF0A2 /* SVPullToRefresh */,
 				AE1068C81B296865001DA2B5 /* ImagePreview */,
 				AE611ED61B2409E7006332F3 /* AMBCircularButton */,
@@ -1358,6 +1372,7 @@
 				AEBECCF31AE7687900EDF385 /* LoginViewController.m in Sources */,
 				AEFB048A1AD12437009EB0D3 /* DiscoveryVCData.m in Sources */,
 				AED5BC631ABE3CB600EFF398 /* SettingViewController.m in Sources */,
+				AEEAC9B81B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				AEC5B9AA1AB7EB40008ECB92 /* User.m in Sources */,
 				AEE4A6D81A972FAA00ABF946 /* FollowingTVCData.m in Sources */,
 				AE95A9FC1ACFC26A007465D5 /* ImagePicker.m in Sources */,
@@ -1430,6 +1445,7 @@
 				AE3FCFC21B07D63900422FB8 /* UIImage+MultiFormat.m in Sources */,
 				AEFB04871AD12437009EB0D3 /* DiscoveryCell.m in Sources */,
 				AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */,
+				AEEAC9B91B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				AEE075391A744A770015155B /* SystemUtil.m in Sources */,
 				AEF7F2821A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				AE479EAF1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */,

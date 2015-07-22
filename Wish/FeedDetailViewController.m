@@ -9,6 +9,7 @@
 #import "FeedDetailViewController.h"
 #import "UIScrollView+SVInfiniteScrolling.h"
 #import "UIActionSheet+Blocks.h"
+#import "UITableView+FDTemplateLayoutCell.h"
 @implementation FeedDetailViewController 
 
 - (void)viewDidLoad{
@@ -90,26 +91,26 @@
 #pragma mark - table view
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
-    
-    CGFloat height = [SystemUtil heightForText:comment.content withFontSize:14.0] + [SystemUtil heightForText:comment.owner.ownerName withFontSize:13.0] + 25.0;
-    return height;
+    return [tableView fd_heightForCellWithIdentifier:FEEDDETAILCELLID
+                                    cacheByIndexPath:indexPath
+                                       configuration:^(id cell) {
+        [self configureCell:cell indexPath:indexPath];
+    }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.fetchedRC.fetchedObjects.count;
 }
 
-- (FeedDetailCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    FeedDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:FEEDDETAILCELLID forIndexPath:indexPath];
+- (void)configureCell:(FeedDetailCell *)cell indexPath:(NSIndexPath *)indexPath{
     Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
     
     if (!comment.owner.image) {
         [cell.profileImageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:comment.owner.headUrl]
-         completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-             comment.owner.image = image;
-         }];
-
+                                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                            comment.owner.image = image;
+                                        }];
+        
     }else{
         cell.profileImageView.image = comment.owner.image;
     }
@@ -117,9 +118,9 @@
     cell.contentTextView.text = comment.content;
     
     NSDictionary *userNameAttribute = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00B9C0"]};
-
+    
     NSString *userAstring = comment.owner.ownerName ? comment.owner.ownerName : @"无用户名";
-
+    
     if (comment.idForReply && comment.nameForReply) { //this is a reply. format: 回复<color_userName>:content
         
         NSString *userBstring = comment.nameForReply ? comment.nameForReply : @"无用户名";
@@ -138,6 +139,11 @@
                                                                             attributes:userNameAttribute];
     }
     cell.dateLabel.text = [SystemUtil timeStringFromDate:comment.createTime];
+}
+
+- (FeedDetailCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    FeedDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:FEEDDETAILCELLID forIndexPath:indexPath];
+    [self configureCell:cell indexPath:indexPath];
     return cell;
 }
 
