@@ -10,8 +10,18 @@
 #import "UIScrollView+SVInfiniteScrolling.h"
 #import "UIActionSheet+Blocks.h"
 #import "UITableView+FDTemplateLayoutCell.h"
+@interface FeedDetailViewController ()
+@property (nonatomic,strong) NSDateFormatter *dateFormatter;
+@end
 @implementation FeedDetailViewController 
 
+- (NSDateFormatter *)dateFormatter{
+    if (!_dateFormatter){
+        _dateFormatter = [[NSDateFormatter alloc] init];
+        _dateFormatter.dateFormat = @"MM-dd HH:mm";
+    }
+    return _dateFormatter;
+}
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self setUpNavigationItem];
@@ -138,7 +148,7 @@
         cell.userNameLabel.attributedText = [[NSAttributedString alloc] initWithString:userAstring
                                                                             attributes:userNameAttribute];
     }
-    cell.dateLabel.text = [SystemUtil timeStringFromDate:comment.createTime];
+    cell.dateLabel.text = [self.dateFormatter stringFromDate:comment.createTime];
 }
 
 - (FeedDetailCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

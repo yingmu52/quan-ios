@@ -15,26 +15,26 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="标题" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="24" translatesAutoresizingMaskIntoConstraints="NO" id="v4m-2y-Be7" userLabel="title">
-                        <rect key="frame" x="64" y="10" width="24" height="15"/>
+                        <rect key="frame" x="56" y="10" width="24" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="40" placeholderIntrinsicHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="Q6l-h6-w8m" customClass="NZCircularImageView">
-                        <rect key="frame" x="16" y="16" width="40" height="40"/>
+                        <rect key="frame" x="8" y="16" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="Q6l-h6-w8m" secondAttribute="height" multiplier="1:1" id="dmK-hH-Eh1"/>
                             <constraint firstAttribute="height" constant="40" id="lzf-hj-VRK"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="32" translatesAutoresizingMaskIntoConstraints="NO" id="LAI-2f-sgd">
-                        <rect key="frame" x="352" y="10" width="32" height="15"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <rect key="frame" x="365" y="12" width="27" height="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textView userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="测试测试，测试测试，测试测试，测试测试，测试测试，测试测试，测试测" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eFD-9N-zmS">
-                        <rect key="frame" x="64" y="33" width="328" height="58"/>
+                        <rect key="frame" x="56" y="33" width="336" height="58"/>
                         <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -43,17 +43,13 @@
                 <constraints>
                     <constraint firstItem="v4m-2y-Be7" firstAttribute="leading" secondItem="Q6l-h6-w8m" secondAttribute="trailing" constant="8" id="05U-lM-VBg"/>
                     <constraint firstAttribute="trailingMargin" secondItem="eFD-9N-zmS" secondAttribute="trailing" id="0us-g0-pbY"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="LAI-2f-sgd" secondAttribute="trailing" constant="8" id="9h7-iy-HKD"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="LAI-2f-sgd" secondAttribute="trailing" id="9h7-iy-HKD"/>
                     <constraint firstItem="v4m-2y-Be7" firstAttribute="top" secondItem="xVs-pO-lbH" secondAttribute="top" constant="10" id="HZC-Q9-43D">
                         <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                     </constraint>
-                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="Q6l-h6-w8m" secondAttribute="bottom" constant="35" id="Wn3-qk-JnQ">
-                        <variation key="heightClass=regular-widthClass=compact" constant="10"/>
-                    </constraint>
-                    <constraint firstItem="v4m-2y-Be7" firstAttribute="leading" secondItem="xVs-pO-lbH" secondAttribute="leading" constant="10" id="aXz-ej-xfi"/>
                     <constraint firstItem="LAI-2f-sgd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="v4m-2y-Be7" secondAttribute="trailing" constant="10" id="dsa-2n-uzN"/>
                     <constraint firstAttribute="bottomMargin" secondItem="eFD-9N-zmS" secondAttribute="bottom" id="eSe-tl-MQA"/>
-                    <constraint firstItem="Q6l-h6-w8m" firstAttribute="leading" secondItem="xVs-pO-lbH" secondAttribute="leadingMargin" constant="8" id="gK3-c7-MyY">
+                    <constraint firstItem="Q6l-h6-w8m" firstAttribute="leading" secondItem="xVs-pO-lbH" secondAttribute="leadingMargin" id="gK3-c7-MyY">
                         <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                     </constraint>
                     <constraint firstItem="Q6l-h6-w8m" firstAttribute="top" secondItem="xVs-pO-lbH" secondAttribute="topMargin" constant="8" id="jSH-1J-K5r">
@@ -63,17 +59,6 @@
                     <constraint firstItem="eFD-9N-zmS" firstAttribute="leading" secondItem="v4m-2y-Be7" secondAttribute="leading" id="p6F-Mg-UtQ"/>
                     <constraint firstItem="eFD-9N-zmS" firstAttribute="top" secondItem="v4m-2y-Be7" secondAttribute="bottom" constant="8" id="yHT-Zh-pFN"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="Wn3-qk-JnQ"/>
-                        <exclude reference="aXz-ej-xfi"/>
-                    </mask>
-                </variation>
-                <variation key="heightClass=regular-widthClass=compact">
-                    <mask key="constraints">
-                        <exclude reference="Wn3-qk-JnQ"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="contentTextView" destination="eFD-9N-zmS" id="lwb-L4-MnW"/>

@@ -12,7 +12,6 @@
 #import "FeedDetailCell.h"
 #import "FetchCenter.h"
 #import "Theme.h"
-#import "SystemUtil.h"
 #import "CommentAcessaryView.h"
 #import "AppDelegate.h"
 #import "UIImageView+WebCache.h"
