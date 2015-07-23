@@ -74,6 +74,16 @@
 }
 
 - (void)deleteSelf{
+    
+    NSArray *sortedArray = [self.plan.feeds sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]]];
+    Feed *firstFeed = [sortedArray firstObject];
+    Feed *second = [sortedArray objectAtIndex:1];
+    if ([self.feedId isEqualToString:firstFeed.feedId]){
+        //delete plan image
+        self.plan.image = second.image;
+        self.plan.backgroundNum = second.imageId;
+    }
+
     //delete Feed
     [[AppDelegate getContext] deleteObject:self];
     //tryTime - 1
