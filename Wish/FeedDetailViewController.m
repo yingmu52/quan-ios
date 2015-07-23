@@ -414,7 +414,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 #pragma mark - delete local comments to insync with server
 
 - (void)dealloc{
-    NSUInteger numberOfPreservingCommentss = 3;
+    NSUInteger numberOfPreservingCommentss = 20;
     NSArray *comments = self.fetchedRC.fetchedObjects;
     if (comments.count > numberOfPreservingCommentss) {
         AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
