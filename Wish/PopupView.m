@@ -22,6 +22,10 @@
     [view layoutIfNeeded];
     view.backgroundColor = [UIColor clearColor];
     view.popUpBackground.backgroundColor = [Theme popupBackground];
+    [view.confirmButton setBackgroundImage:[Theme popupConfirmPressed]
+                                  forState:UIControlStateHighlighted];
+    [view.cancelButton setBackgroundImage:[Theme popupConfirmPressed]
+                                 forState:UIControlStateHighlighted];
     return view;
 }
 

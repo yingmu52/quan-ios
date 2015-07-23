@@ -59,7 +59,7 @@
 + (UIImage *)achieveBadageEmpty;
 //+ (UIImage *)achieveBadageLabelFail;
 //+ (UIImage *)achieveBadageLabelSuccess;
-
++ (UIImage *)popupConfirmPressed;
 + (UIImage *)popupFail;
 + (UIImage *)popupFinish;
 + (UIColor *)popupBackground;

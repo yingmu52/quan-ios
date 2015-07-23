@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -43,7 +43,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9UO-0v-9hK" userLabel="LowerLeft">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jsg-j5-Jym">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jsg-j5-Jym">
                                                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Jsg-j5-Jym" secondAttribute="height" multiplier="109:41" id="gpn-Na-6gh"/>
@@ -101,7 +101,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KPP-M1-dfx" userLabel="LowerRigtht">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fiK-66-Aky">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fiK-66-Aky">
                                                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="fiK-66-Aky" secondAttribute="height" multiplier="109:41" id="KAD-BH-6DN"/>
@@ -228,7 +228,8 @@
                                                     <exclude reference="2cY-eQ-rFG"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact">
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="73" y="25" width="198" height="92"/>
                                                 <mask key="constraints">
                                                     <include reference="2cY-eQ-rFG"/>
                                                 </mask>
@@ -253,7 +254,8 @@
                                                     <exclude reference="n4Y-eF-IZV"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact">
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="73" y="125" width="198" height="21"/>
                                                 <mask key="constraints">
                                                     <exclude reference="n4Y-eF-IZV"/>
                                                 </mask>
@@ -425,6 +427,8 @@
             </variation>
             <connections>
                 <outlet property="HeadDeleteLabel" destination="cZC-xc-6Xz" id="uiO-eM-XXO"/>
+                <outlet property="cancelButton" destination="Jsg-j5-Jym" id="b9g-Wl-QAL"/>
+                <outlet property="confirmButton" destination="fiK-66-Aky" id="HaJ-A6-dpz"/>
                 <outlet property="headBannerImageView" destination="eSK-Jn-vea" id="gpu-ii-v9P"/>
                 <outlet property="headBannerLabel" destination="cVN-sM-Iiy" id="9lp-9O-Prh"/>
                 <outlet property="mainBackground" destination="iHr-Ng-DEY" id="FdO-cW-0V2"/>

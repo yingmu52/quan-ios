@@ -174,6 +174,11 @@
     return [UIImage imageNamed:@"popup_img_finish"];
 }
 
++ (UIImage *)popupConfirmPressed{
+    return [UIImage imageNamed:@"popup_button_pressed"];
+}
+
+
 + (UIColor *)popupBackground{
     return [UIColor colorWithPatternImage:[UIImage imageNamed:@"popup_bg"]];
     
@@ -182,7 +187,6 @@
 + (UIColor *)profileBakground{
     return [UIColor colorWithPatternImage:[UIImage imageNamed:@"profile_bg"]];
 }
-
 
 //+ (UIImage *)achieveBadageLabelFail{
 //    return [UIImage imageNamed:@"label_fail"];
