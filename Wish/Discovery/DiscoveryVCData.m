@@ -76,6 +76,13 @@
     cell.discoveryByUserLabel.text = [NSString stringWithFormat:@"by %@",plan.owner.ownerName];
     cell.discoveryFollowerCountLabel.text = [NSString stringWithFormat:@"%@ 关注",plan.followCount];
 
+    if ([plan.cornerMask isEqualToString:@"top"]){
+#warning ewwwww! top 这个字段有待优化
+        cell.cornerMask.image = [UIImage imageNamed:@"top.png"];
+//        NSLog(@"%@:%@",plan.planTitle,plan.cornerMask);
+    }else{
+        cell.cornerMask.image = nil;
+    }
 }
 
 
@@ -138,7 +145,7 @@
         //do fetchrequest
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
         //        request.predicate = [NSPredicate predicateWithFormat:@"owner.ownerId != %@ && isFollowed == %@",[User uid],@(YES)];
-        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"updateDate" ascending:NO]];
+        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"discoverIndex" ascending:YES]];
         [request setFetchBatchSize:3];
         //create FetchedResultsController with context, sectionNameKeyPath, and you can cache here, so the next work if the same you can use your cashe file.
         NSFetchedResultsController *newFRC =

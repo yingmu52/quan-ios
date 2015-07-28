@@ -694,7 +694,17 @@ typedef enum{
                 NSDictionary *manList = [json valueForKeyPath:@"data.manList"];
                 if (planList && manList){
                     for (NSDictionary *planInfo in planList){
-                        Plan *plan = [Plan updatePlanFromServer:planInfo ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]];
+                        
+                        //后台返回索引
+                        NSNumber *serverIndex = @([planList indexOfObject:planInfo]);
+                        
+                        //字典里添加一个serverIndex字段
+                        NSMutableDictionary *makeupDict = [NSMutableDictionary dictionaryWithDictionary:planInfo];
+                        [makeupDict addEntriesFromDictionary:@{@"serverIndex":serverIndex}];
+                        
+                        
+                        Plan *plan = [Plan updatePlanFromServer:makeupDict
+                                                      ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]];
                         [plans addObject:plan];
                     }
                 }

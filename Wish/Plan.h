@@ -2,7 +2,7 @@
 //  Plan.h
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2015-06-19.
+//  Created by Xinyi Zhuang on 2015-07-27.
 //  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
 //
 
@@ -25,6 +25,8 @@
 @property (nonatomic, retain) NSString * planTitle;
 @property (nonatomic, retain) NSNumber * tryTimes;
 @property (nonatomic, retain) NSDate * updateDate;
+@property (nonatomic, retain) NSNumber * discoverIndex;
+@property (nonatomic, retain) NSString * cornerMask;
 @property (nonatomic, retain) NSSet *feeds;
 @property (nonatomic, retain) Owner *owner;
 @end

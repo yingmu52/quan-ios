@@ -85,8 +85,6 @@
 		AE611EDA1B2409E7006332F3 /* AMBCircularButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AE611ED81B2409E7006332F3 /* AMBCircularButton.m */; };
 		AE6E7A0C1AB0DF1F0023B9C7 /* PopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE6E7A0B1AB0DF1F0023B9C7 /* PopupView.xib */; };
 		AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE72E9541A66F2AA0046B38D /* MenuCell.m */; };
-		AE7487191B352F2900B9ACD2 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7487181B352F2900B9ACD2 /* Plan.m */; };
-		AE74871A1B352F2900B9ACD2 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7487181B352F2900B9ACD2 /* Plan.m */; };
 		AE767E7F1ACE35A600F35137 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE767E7E1ACE35A600F35137 /* FeedbackViewController.m */; };
 		AE767E801ACE35A600F35137 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE767E7E1ACE35A600F35137 /* FeedbackViewController.m */; };
 		AE8A9E981B1FB8B7007BD4E5 /* UIView+Shake.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8A9E971B1FB8B7007BD4E5 /* UIView+Shake.m */; };
@@ -202,6 +200,10 @@
 		AEE4A6D51A96AFCF00ABF946 /* TriangleCutoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6D31A96AFCF00ABF946 /* TriangleCutoutView.m */; };
 		AEE4A6D81A972FAA00ABF946 /* FollowingTVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6D71A972FAA00ABF946 /* FollowingTVCData.m */; };
 		AEE4A6D91A972FAB00ABF946 /* FollowingTVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6D71A972FAA00ABF946 /* FollowingTVCData.m */; };
+		AEE944801B674A1100C130CF /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE9447F1B674A1100C130CF /* Plan.m */; };
+		AEE944811B674A1100C130CF /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE9447F1B674A1100C130CF /* Plan.m */; };
+		AEE944831B674FB100C130CF /* top.png in Resources */ = {isa = PBXBuildFile; fileRef = AEE944821B674FB100C130CF /* top.png */; };
+		AEE944841B674FB100C130CF /* top.png in Resources */ = {isa = PBXBuildFile; fileRef = AEE944821B674FB100C130CF /* top.png */; };
 		AEEAC9B81B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEAC9B71B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m */; };
 		AEEAC9B91B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEAC9B71B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m */; };
 		AEEC6C6D1A6DB0FC0021B7E4 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C6B1A6DB0FC0021B7E4 /* HeaderView.m */; };
@@ -369,8 +371,6 @@
 		AE6E7A0B1AB0DF1F0023B9C7 /* PopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopupView.xib; sourceTree = "<group>"; };
 		AE72E9531A66F2AA0046B38D /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
 		AE72E9541A66F2AA0046B38D /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
-		AE7487171B352F2900B9ACD2 /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
-		AE7487181B352F2900B9ACD2 /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
 		AE767E7D1ACE35A600F35137 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
 		AE767E7E1ACE35A600F35137 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
 		AE8A9E961B1FB8B7007BD4E5 /* UIView+Shake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Shake.h"; sourceTree = "<group>"; };
@@ -490,6 +490,9 @@
 		AEE4A6D31A96AFCF00ABF946 /* TriangleCutoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TriangleCutoutView.m; sourceTree = "<group>"; };
 		AEE4A6D61A972FAA00ABF946 /* FollowingTVCData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowingTVCData.h; sourceTree = "<group>"; };
 		AEE4A6D71A972FAA00ABF946 /* FollowingTVCData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowingTVCData.m; sourceTree = "<group>"; };
+		AEE9447E1B674A1100C130CF /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
+		AEE9447F1B674A1100C130CF /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
+		AEE944821B674FB100C130CF /* top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top.png; sourceTree = "<group>"; };
 		AEEAC9B61B6041170056DC0F /* UITableView+FDTemplateLayoutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCell.h"; sourceTree = "<group>"; };
 		AEEAC9B71B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCell.m"; sourceTree = "<group>"; };
 		AEEC6C6A1A6DB0FC0021B7E4 /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeaderView.h; path = "Third Party/VGParallaxHeader/HeaderView.h"; sourceTree = "<group>"; };
@@ -690,8 +693,8 @@
 		AE30EE711A6F0A8C0044740D /* Database&Networking */ = {
 			isa = PBXGroup;
 			children = (
-				AE7487171B352F2900B9ACD2 /* Plan.h */,
-				AE7487181B352F2900B9ACD2 /* Plan.m */,
+				AEE9447E1B674A1100C130CF /* Plan.h */,
+				AEE9447F1B674A1100C130CF /* Plan.m */,
 				AED4DD241B0EE49B00AF1497 /* Message.h */,
 				AED4DD251B0EE49B00AF1497 /* Message.m */,
 				AED4DD201B0E925300AF1497 /* Message+MessageCRUD.h */,
@@ -1123,6 +1126,7 @@
 				AEFB047D1AD12437009EB0D3 /* DiscoveryFooterView.xib */,
 				AEFB047E1AD12437009EB0D3 /* DiscoveryVCData.h */,
 				AEFB047F1AD12437009EB0D3 /* DiscoveryVCData.m */,
+				AEE944821B674FB100C130CF /* top.png */,
 				AEFB04801AD12437009EB0D3 /* DiscoveryViewController.h */,
 				AEFB04811AD12437009EB0D3 /* DiscoveryViewController.m */,
 			);
@@ -1255,6 +1259,7 @@
 				AE59B5F11B40FB55006CA4AB /* ViewForEmptyEvent.xib in Resources */,
 				AE95A9EE1ACFA7F8007465D5 /* back@2x.png in Resources */,
 				AE6E7A0C1AB0DF1F0023B9C7 /* PopupView.xib in Resources */,
+				AEE944831B674FB100C130CF /* top.png in Resources */,
 				AEDD06511AABF7AE00379C17 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				AE95A9F11ACFA7F8007465D5 /* cameraroll-picker-grip@3x.png in Resources */,
 				AEFB04881AD12437009EB0D3 /* DiscoveryFooterView.xib in Resources */,
@@ -1275,6 +1280,7 @@
 				AEFB04891AD12437009EB0D3 /* DiscoveryFooterView.xib in Resources */,
 				AEC8CE921AAF8823005364F8 /* StationView.xib in Resources */,
 				AEA89DA11B31F7A0009C5586 /* LICENSE in Resources */,
+				AEE944841B674FB100C130CF /* top.png in Resources */,
 				AEF7F29D1A6871F00022410B /* Images.xcassets in Resources */,
 				AEF7F2A11A6875360022410B /* Main.storyboard in Resources */,
 				AE59B5F21B40FB55006CA4AB /* ViewForEmptyEvent.xib in Resources */,
@@ -1312,7 +1318,6 @@
 				AE0172421A65CD8E0014266F /* AppDelegate.m in Sources */,
 				AE3FCFC51B07D63900422FB8 /* UIImageView+HighlightedWebCache.m in Sources */,
 				AE95AABD1ACFD428007465D5 /* UIImagePickerController+DelegateBlocks.m in Sources */,
-				AE7487191B352F2900B9ACD2 /* Plan.m in Sources */,
 				AEF7F2AB1A6884950022410B /* CustomBarItem.m in Sources */,
 				AEE4A6CC1A9684D500ABF946 /* AchieveViewController.m in Sources */,
 				AE9861FA1AC33C04005544B9 /* EditWishViewController.m in Sources */,
@@ -1354,6 +1359,7 @@
 				AE3FCFB71B07D63900422FB8 /* SDWebImageDownloaderOperation.m in Sources */,
 				AEF3F8831AA4E3C0008C2300 /* WishDetailVCFollower.m in Sources */,
 				AE611ED91B2409E7006332F3 /* AMBCircularButton.m in Sources */,
+				AEE944801B674A1100C130CF /* Plan.m in Sources */,
 				AEF7F2831A686E8A0022410B /* ECSlidingAnimationController.m in Sources */,
 				AED4CB1E1AC7556800EE2DA4 /* KTCenterFlowLayout.m in Sources */,
 				AED9A67A1B44BE6E00108729 /* RequestLogViewController.m in Sources */,
@@ -1436,6 +1442,7 @@
 				AEEC6C6E1A6DB0FC0021B7E4 /* HeaderView.m in Sources */,
 				AED5BC641ABE3CB600EFF398 /* SettingViewController.m in Sources */,
 				AED4CB231AC75A0200EE2DA4 /* KeyWordCell.m in Sources */,
+				AEE944811B674A1100C130CF /* Plan.m in Sources */,
 				AE01725C1A65CD8F0014266F /* WishTests.m in Sources */,
 				AE2F28E81AD3937700FC3370 /* WishDetailVCDiscovery.m in Sources */,
 				AEE4A6CD1A9684D500ABF946 /* AchieveViewController.m in Sources */,
@@ -1457,7 +1464,6 @@
 				AED05EDC1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m in Sources */,
 				AE9A198A1B02E9E700590784 /* FeedbackkAccessoryView.m in Sources */,
 				AE1068CC1B296878001DA2B5 /* SJAvatarBrowser.m in Sources */,
-				AE74871A1B352F2900B9ACD2 /* Plan.m in Sources */,
 				AE767E801ACE35A600F35137 /* FeedbackViewController.m in Sources */,
 				AE1E6BAB1AAFEEE400AF2613 /* PopupView.m in Sources */,
 				AEE4A6D51A96AFCF00ABF946 /* TriangleCutoutView.m in Sources */,
