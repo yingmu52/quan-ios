@@ -76,10 +76,9 @@
     cell.discoveryByUserLabel.text = [NSString stringWithFormat:@"by %@",plan.owner.ownerName];
     cell.discoveryFollowerCountLabel.text = [NSString stringWithFormat:@"%@ 关注",plan.followCount];
 
+    //显示置顶的角标
     if ([plan.cornerMask isEqualToString:@"top"]){
-#warning ewwwww! top 这个字段有待优化
-        cell.cornerMask.image = [UIImage imageNamed:@"top.png"];
-//        NSLog(@"%@:%@",plan.planTitle,plan.cornerMask);
+        cell.cornerMask.image = [Theme topImageMask];
     }else{
         cell.cornerMask.image = nil;
     }

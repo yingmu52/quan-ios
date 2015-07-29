@@ -207,5 +207,9 @@
 + (UIImage *)likeButtonUnLiked{
     return [UIImage imageNamed:@"ic_like_default"];
 }
+
++ (UIImage *)topImageMask{
+    return [UIImage imageNamed:@"ic_record"];
+}
 @end
 

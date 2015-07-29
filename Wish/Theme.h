@@ -64,6 +64,6 @@
 + (UIImage *)popupFinish;
 + (UIColor *)popupBackground;
 
-
++ (UIImage *)topImageMask;
 + (UIColor *)profileBakground;
 @end

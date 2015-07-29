@@ -202,8 +202,6 @@
 		AEE4A6D91A972FAB00ABF946 /* FollowingTVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6D71A972FAA00ABF946 /* FollowingTVCData.m */; };
 		AEE944801B674A1100C130CF /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE9447F1B674A1100C130CF /* Plan.m */; };
 		AEE944811B674A1100C130CF /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE9447F1B674A1100C130CF /* Plan.m */; };
-		AEE944831B674FB100C130CF /* top.png in Resources */ = {isa = PBXBuildFile; fileRef = AEE944821B674FB100C130CF /* top.png */; };
-		AEE944841B674FB100C130CF /* top.png in Resources */ = {isa = PBXBuildFile; fileRef = AEE944821B674FB100C130CF /* top.png */; };
 		AEEAC9B81B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEAC9B71B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m */; };
 		AEEAC9B91B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEAC9B71B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m */; };
 		AEEC6C6D1A6DB0FC0021B7E4 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C6B1A6DB0FC0021B7E4 /* HeaderView.m */; };
@@ -492,7 +490,6 @@
 		AEE4A6D71A972FAA00ABF946 /* FollowingTVCData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowingTVCData.m; sourceTree = "<group>"; };
 		AEE9447E1B674A1100C130CF /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
 		AEE9447F1B674A1100C130CF /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
-		AEE944821B674FB100C130CF /* top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top.png; sourceTree = "<group>"; };
 		AEEAC9B61B6041170056DC0F /* UITableView+FDTemplateLayoutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCell.h"; sourceTree = "<group>"; };
 		AEEAC9B71B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCell.m"; sourceTree = "<group>"; };
 		AEEC6C6A1A6DB0FC0021B7E4 /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeaderView.h; path = "Third Party/VGParallaxHeader/HeaderView.h"; sourceTree = "<group>"; };
@@ -1126,7 +1123,6 @@
 				AEFB047D1AD12437009EB0D3 /* DiscoveryFooterView.xib */,
 				AEFB047E1AD12437009EB0D3 /* DiscoveryVCData.h */,
 				AEFB047F1AD12437009EB0D3 /* DiscoveryVCData.m */,
-				AEE944821B674FB100C130CF /* top.png */,
 				AEFB04801AD12437009EB0D3 /* DiscoveryViewController.h */,
 				AEFB04811AD12437009EB0D3 /* DiscoveryViewController.m */,
 			);
@@ -1259,7 +1255,6 @@
 				AE59B5F11B40FB55006CA4AB /* ViewForEmptyEvent.xib in Resources */,
 				AE95A9EE1ACFA7F8007465D5 /* back@2x.png in Resources */,
 				AE6E7A0C1AB0DF1F0023B9C7 /* PopupView.xib in Resources */,
-				AEE944831B674FB100C130CF /* top.png in Resources */,
 				AEDD06511AABF7AE00379C17 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				AE95A9F11ACFA7F8007465D5 /* cameraroll-picker-grip@3x.png in Resources */,
 				AEFB04881AD12437009EB0D3 /* DiscoveryFooterView.xib in Resources */,
@@ -1280,7 +1275,6 @@
 				AEFB04891AD12437009EB0D3 /* DiscoveryFooterView.xib in Resources */,
 				AEC8CE921AAF8823005364F8 /* StationView.xib in Resources */,
 				AEA89DA11B31F7A0009C5586 /* LICENSE in Resources */,
-				AEE944841B674FB100C130CF /* top.png in Resources */,
 				AEF7F29D1A6871F00022410B /* Images.xcassets in Resources */,
 				AEF7F2A11A6875360022410B /* Main.storyboard in Resources */,
 				AE59B5F21B40FB55006CA4AB /* ViewForEmptyEvent.xib in Resources */,
