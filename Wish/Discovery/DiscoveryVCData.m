@@ -17,7 +17,6 @@
 @interface DiscoveryVCData () <FetchCenterDelegate,NSFetchedResultsControllerDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
-//@property (nonatomic,strong) NSMutableArray *plans;
 @property (nonatomic,strong) NSMutableArray *itemChanges;
 @property (nonatomic,strong) NSBlockOperation *blockOperation;
 @end
@@ -43,28 +42,24 @@
 }
 
 - (void)dealloc{
-//    [self removePlans];
+    self.fetchedRC.delegate = nil;
+    [self removePlans];
 }
 
 - (void)removePlans{
-//    dispatch_queue_t queue_cleanUp;
-//    queue_cleanUp = dispatch_queue_create("com.stories.DiscoveryVCData.cleanup", NULL);
-//    dispatch_async(queue_cleanUp, ^{
-        NSUInteger numberOfPreservingPlans = 0;
-        NSArray *allPlans = self.fetchedRC.fetchedObjects;
-        if (allPlans.count > numberOfPreservingPlans) {
-            AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-            for (NSInteger i = numberOfPreservingPlans ;i < self.fetchedRC.fetchedObjects.count; i ++){
-                Plan *plan = self.fetchedRC.fetchedObjects[i];
-                if ([plan isDeletable]){
-                    NSLog(@"Discovery: removing plan %@",plan.planId);
-                    [delegate.managedObjectContext deleteObject:plan];
-                }
+    NSUInteger numberOfPreservingPlans = 100;
+    NSArray *allPlans = self.fetchedRC.fetchedObjects;
+    if (allPlans.count > numberOfPreservingPlans) {
+        AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+        for (NSInteger i = numberOfPreservingPlans ;i < self.fetchedRC.fetchedObjects.count; i ++){
+            Plan *plan = self.fetchedRC.fetchedObjects[i];
+            if ([plan isDeletable]){
+                NSLog(@"Discovery: removing plan %@",plan.planId);
+                [delegate.managedObjectContext deleteObject:plan];
             }
-            [delegate saveContext];
         }
-//    });
-
+        [delegate saveContext];
+    }
 }
 
 #pragma mark - collection view delegate & data soucce
@@ -115,7 +110,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     // save the plan image background only when user select a certain plan!
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
-    
+
     if (!plan.image){
         DiscoveryCell *cell = (DiscoveryCell *)[collectionView cellForItemAtIndexPath:indexPath];
         plan.image = cell.discoveryImageView.image;
@@ -138,14 +133,13 @@
 #pragma mark - fetched results controller delegate
 - (NSFetchedResultsController *)fetchedRC
 {
-    if (_fetchedRC != nil) {
-        return _fetchedRC;
-    }else{
+    if (!_fetchedRC) {
         //do fetchrequest
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
-        //        request.predicate = [NSPredicate predicateWithFormat:@"owner.ownerId != %@ && isFollowed == %@",[User uid],@(YES)];
-        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"discoverIndex" ascending:YES]];
-        [request setFetchBatchSize:3];
+        
+        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"cornerMask" ascending:NO],
+                                    [NSSortDescriptor sortDescriptorWithKey:@"updateDate" ascending:NO]];
+        
         //create FetchedResultsController with context, sectionNameKeyPath, and you can cache here, so the next work if the same you can use your cashe file.
         NSFetchedResultsController *newFRC =
         [[NSFetchedResultsController alloc] initWithFetchRequest:request
@@ -155,8 +149,9 @@
         _fetchedRC = newFRC;
         _fetchedRC.delegate = self;
         [_fetchedRC performFetch:nil];
-        return _fetchedRC;
     }
+    return _fetchedRC;
+
 }
 
 //- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller

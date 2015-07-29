@@ -98,10 +98,6 @@
         plan.tryTimes = @([dict[@"tryTimes"] integerValue]);
     }
     
-    if (![plan.discoverIndex isEqualToNumber:@([dict[@"serverIndex"] integerValue])]){ //make up from front end
-        plan.discoverIndex = @([dict[@"serverIndex"] integerValue]);
-    }
-    
     if (![plan.cornerMask isEqualToString:dict[@"cornerMark"]] && ![dict[@"cornerMark"] isKindOfClass:[NSNull class]]) {
         plan.cornerMask = dict[@"cornerMark"];
     }

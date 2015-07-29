@@ -200,8 +200,8 @@
 		AEE4A6D51A96AFCF00ABF946 /* TriangleCutoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6D31A96AFCF00ABF946 /* TriangleCutoutView.m */; };
 		AEE4A6D81A972FAA00ABF946 /* FollowingTVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6D71A972FAA00ABF946 /* FollowingTVCData.m */; };
 		AEE4A6D91A972FAB00ABF946 /* FollowingTVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6D71A972FAA00ABF946 /* FollowingTVCData.m */; };
-		AEE944801B674A1100C130CF /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE9447F1B674A1100C130CF /* Plan.m */; };
-		AEE944811B674A1100C130CF /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE9447F1B674A1100C130CF /* Plan.m */; };
+		AEE944871B6866D700C130CF /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE944861B6866D700C130CF /* Plan.m */; };
+		AEE944881B6866D700C130CF /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE944861B6866D700C130CF /* Plan.m */; };
 		AEEAC9B81B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEAC9B71B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m */; };
 		AEEAC9B91B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEAC9B71B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m */; };
 		AEEC6C6D1A6DB0FC0021B7E4 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C6B1A6DB0FC0021B7E4 /* HeaderView.m */; };
@@ -488,8 +488,8 @@
 		AEE4A6D31A96AFCF00ABF946 /* TriangleCutoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TriangleCutoutView.m; sourceTree = "<group>"; };
 		AEE4A6D61A972FAA00ABF946 /* FollowingTVCData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowingTVCData.h; sourceTree = "<group>"; };
 		AEE4A6D71A972FAA00ABF946 /* FollowingTVCData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowingTVCData.m; sourceTree = "<group>"; };
-		AEE9447E1B674A1100C130CF /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
-		AEE9447F1B674A1100C130CF /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
+		AEE944851B6866D700C130CF /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
+		AEE944861B6866D700C130CF /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
 		AEEAC9B61B6041170056DC0F /* UITableView+FDTemplateLayoutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCell.h"; sourceTree = "<group>"; };
 		AEEAC9B71B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCell.m"; sourceTree = "<group>"; };
 		AEEC6C6A1A6DB0FC0021B7E4 /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeaderView.h; path = "Third Party/VGParallaxHeader/HeaderView.h"; sourceTree = "<group>"; };
@@ -690,8 +690,8 @@
 		AE30EE711A6F0A8C0044740D /* Database&Networking */ = {
 			isa = PBXGroup;
 			children = (
-				AEE9447E1B674A1100C130CF /* Plan.h */,
-				AEE9447F1B674A1100C130CF /* Plan.m */,
+				AEE944851B6866D700C130CF /* Plan.h */,
+				AEE944861B6866D700C130CF /* Plan.m */,
 				AED4DD241B0EE49B00AF1497 /* Message.h */,
 				AED4DD251B0EE49B00AF1497 /* Message.m */,
 				AED4DD201B0E925300AF1497 /* Message+MessageCRUD.h */,
@@ -1353,7 +1353,7 @@
 				AE3FCFB71B07D63900422FB8 /* SDWebImageDownloaderOperation.m in Sources */,
 				AEF3F8831AA4E3C0008C2300 /* WishDetailVCFollower.m in Sources */,
 				AE611ED91B2409E7006332F3 /* AMBCircularButton.m in Sources */,
-				AEE944801B674A1100C130CF /* Plan.m in Sources */,
+				AEE944871B6866D700C130CF /* Plan.m in Sources */,
 				AEF7F2831A686E8A0022410B /* ECSlidingAnimationController.m in Sources */,
 				AED4CB1E1AC7556800EE2DA4 /* KTCenterFlowLayout.m in Sources */,
 				AED9A67A1B44BE6E00108729 /* RequestLogViewController.m in Sources */,
@@ -1436,7 +1436,7 @@
 				AEEC6C6E1A6DB0FC0021B7E4 /* HeaderView.m in Sources */,
 				AED5BC641ABE3CB600EFF398 /* SettingViewController.m in Sources */,
 				AED4CB231AC75A0200EE2DA4 /* KeyWordCell.m in Sources */,
-				AEE944811B674A1100C130CF /* Plan.m in Sources */,
+				AEE944881B6866D700C130CF /* Plan.m in Sources */,
 				AE01725C1A65CD8F0014266F /* WishTests.m in Sources */,
 				AE2F28E81AD3937700FC3370 /* WishDetailVCDiscovery.m in Sources */,
 				AEE4A6CD1A9684D500ABF946 /* AchieveViewController.m in Sources */,
