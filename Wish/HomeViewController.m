@@ -296,6 +296,10 @@ ViewForEmptyEventDelegate>
         case NSFetchedResultsChangeUpdate:
             change[@(type)] = indexPath;
             break;
+        case NSFetchedResultsChangeMove:
+            change[@(type)] = @[indexPath, newIndexPath];
+            break;
+
         default:
             break;
     }
@@ -319,11 +323,8 @@ ViewForEmptyEventDelegate>
             [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
                 NSFetchedResultsChangeType type = [key unsignedIntegerValue];
                 switch(type) {
-                    case NSFetchedResultsChangeInsert:{
-                        [UIView performWithoutAnimation:^{
-                            [self.collectionView insertItemsAtIndexPaths:@[obj]];
-                        }];
-                    }
+                    case NSFetchedResultsChangeInsert:
+                        [self.collectionView insertItemsAtIndexPaths:@[obj]];
                         NSLog(@"Home Card: Inserted Plan");
                         break;
                     case NSFetchedResultsChangeDelete:
@@ -343,13 +344,17 @@ ViewForEmptyEventDelegate>
                         }
                     }
                         break;
+                    case NSFetchedResultsChangeMove:
+                        [self.collectionView moveItemAtIndexPath:obj[0] toIndexPath:obj[1]];
+                        break;
+
                     default:
                         break;
                 }
             }];
         }
     } completion:^(BOOL finished) {
-        //            self.title = [NSString stringWithFormat:@"%@ plans",@(self.fetchedRC.fetchedObjects.count)];
+        // self.title = [NSString stringWithFormat:@"%@ plans",@(self.fetchedRC.fetchedObjects.count)];
         [(AppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
         self.itemChanges = nil;;
         [self updatePage];
