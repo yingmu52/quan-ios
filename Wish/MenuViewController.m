@@ -14,9 +14,8 @@
 #import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 #import "UIViewController+ECSlidingViewController.h"
 #import "FetchCenter.h"
-#import "UIView+Shake.h"
 #import "CustomBadge.h"
-#import "UIView+Shake.h"
+
 typedef enum {
     MenuTableMyEvent = 0,
 //    MenuTableJourney,
@@ -83,14 +82,8 @@ typedef enum {
         self.badage.center = point;
         [cell addSubview:self.badage];
         
-        //shake
-        if (!self.badage.isShaking) {
-            [self.badage shakeWithOptions:SCShakeOptionsDirectionRotate | SCShakeOptionsForceInterpolationExpDown | SCShakeOptionsAtEndRestart | SCShakeOptionsAutoreverse force:0.15 duration:2.0 iterationDuration:0.03 completionHandler:nil];
-            
-        }
     }else{
         //resume message cell
-        [self.badage endShake];
         [self.badage removeFromSuperview];
         self.badage = nil;
         cell.menuTitle.text = @"消息";

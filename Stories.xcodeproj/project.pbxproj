@@ -87,8 +87,6 @@
 		AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE72E9541A66F2AA0046B38D /* MenuCell.m */; };
 		AE767E7F1ACE35A600F35137 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE767E7E1ACE35A600F35137 /* FeedbackViewController.m */; };
 		AE767E801ACE35A600F35137 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE767E7E1ACE35A600F35137 /* FeedbackViewController.m */; };
-		AE8A9E981B1FB8B7007BD4E5 /* UIView+Shake.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8A9E971B1FB8B7007BD4E5 /* UIView+Shake.m */; };
-		AE8A9E991B1FB8B7007BD4E5 /* UIView+Shake.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8A9E971B1FB8B7007BD4E5 /* UIView+Shake.m */; };
 		AE8A9E9F1B1FF6E7007BD4E5 /* BadgeStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8A9E9C1B1FF6E7007BD4E5 /* BadgeStyle.m */; };
 		AE8A9EA01B1FF6E7007BD4E5 /* BadgeStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8A9E9C1B1FF6E7007BD4E5 /* BadgeStyle.m */; };
 		AE8A9EA11B1FF6E7007BD4E5 /* CustomBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8A9E9E1B1FF6E7007BD4E5 /* CustomBadge.m */; };
@@ -371,8 +369,6 @@
 		AE72E9541A66F2AA0046B38D /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		AE767E7D1ACE35A600F35137 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
 		AE767E7E1ACE35A600F35137 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
-		AE8A9E961B1FB8B7007BD4E5 /* UIView+Shake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Shake.h"; sourceTree = "<group>"; };
-		AE8A9E971B1FB8B7007BD4E5 /* UIView+Shake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Shake.m"; sourceTree = "<group>"; };
 		AE8A9E9B1B1FF6E7007BD4E5 /* BadgeStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgeStyle.h; sourceTree = "<group>"; };
 		AE8A9E9C1B1FF6E7007BD4E5 /* BadgeStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgeStyle.m; sourceTree = "<group>"; };
 		AE8A9E9D1B1FF6E7007BD4E5 /* CustomBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomBadge.h; sourceTree = "<group>"; };
@@ -737,15 +733,6 @@
 			path = AMBCircularButton;
 			sourceTree = "<group>";
 		};
-		AE8A9E951B1FB8B7007BD4E5 /* SCViewShaker */ = {
-			isa = PBXGroup;
-			children = (
-				AE8A9E961B1FB8B7007BD4E5 /* UIView+Shake.h */,
-				AE8A9E971B1FB8B7007BD4E5 /* UIView+Shake.m */,
-			);
-			path = SCViewShaker;
-			sourceTree = "<group>";
-		};
 		AE8A9E9A1B1FF6E7007BD4E5 /* CustomBadge */ = {
 			isa = PBXGroup;
 			children = (
@@ -1029,7 +1016,6 @@
 				AE1068C81B296865001DA2B5 /* ImagePreview */,
 				AE611ED61B2409E7006332F3 /* AMBCircularButton */,
 				AE8A9E9A1B1FF6E7007BD4E5 /* CustomBadge */,
-				AE8A9E951B1FB8B7007BD4E5 /* SCViewShaker */,
 				AE95AA5C1ACFD181007465D5 /* Blocks */,
 				AE95A9E01ACFA7F7007465D5 /* TWPhotoPicker */,
 				AED4CB181AC683AF00EE2DA4 /* GCPTextView */,
@@ -1380,7 +1366,6 @@
 				AE479EAE1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */,
 				AEFB04861AD12437009EB0D3 /* DiscoveryCell.m in Sources */,
 				AEA89DA21B31F7A0009C5586 /* UIImage+WebP.m in Sources */,
-				AE8A9E981B1FB8B7007BD4E5 /* UIView+Shake.m in Sources */,
 				AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */,
 				AE3FCFB11B07D63900422FB8 /* SDWebImageCompat.m in Sources */,
 				AE52FA531A8D55A7003FF725 /* KeyboardAcessoryView.m in Sources */,
@@ -1451,7 +1436,6 @@
 				AEF7F2821A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				AE479EAF1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */,
 				AEE4A6D11A96A5D500ABF946 /* AchieveCell.m in Sources */,
-				AE8A9E991B1FB8B7007BD4E5 /* UIView+Shake.m in Sources */,
 				AE3FCFAE1B07D63900422FB8 /* NSData+ImageContentType.m in Sources */,
 				AE2F1C951A7A23A200A32CB5 /* Feed+FeedCRUD.m in Sources */,
 				AEF7F29C1A686FE90022410B /* NavigationBar.m in Sources */,
