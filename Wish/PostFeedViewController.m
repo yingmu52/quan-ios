@@ -207,6 +207,7 @@ static NSUInteger distance = 10;
     
     //update plan here instead of in createFeedWithImage:inPlan: method
     feed.plan.image = self.imageForFeed;
+    feed.plan.backgroundNum = feed.imageId;
     [feed.plan updateTryTimesOfPlan:YES];
 
 }
