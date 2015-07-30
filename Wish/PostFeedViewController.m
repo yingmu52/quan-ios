@@ -15,8 +15,8 @@
 #import "SDWebImageCompat.h"
 #import "AppDelegate.h"
 #import "WishDetailVCOwner.h"
-#import "SJAvatarBrowser.h"
 #import "UIActionSheet+Blocks.h"
+#import "JTSImageViewController.h"
 static NSUInteger maxWordCount = 1000;
 static NSUInteger distance = 10;
 
@@ -106,9 +106,23 @@ static NSUInteger distance = 10;
 }
 
 - (IBAction)preViewButtonPressed:(UIButton *)button{
-    [SJAvatarBrowser showImage:button.imageView];
     [self.textView resignFirstResponder];
     
+    // Create image info
+    JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
+    imageInfo.image = button.imageView.image;
+    imageInfo.referenceRect = button.frame;
+    imageInfo.referenceView = button.superview;
+    
+    // Setup view controller
+    JTSImageViewController *imageViewer = [[JTSImageViewController alloc]
+                                           initWithImageInfo:imageInfo
+                                           mode:JTSImageViewControllerMode_Image
+                                           backgroundStyle:JTSImageViewControllerBackgroundOption_Scaled];
+    
+    // Present the view controller.
+    [imageViewer showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
+
 }
 - (void)createFeed{
     self.navigationItem.leftBarButtonItem.enabled = NO;
