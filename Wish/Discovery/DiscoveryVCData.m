@@ -33,10 +33,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.fetchCenter getDiscoveryList];
     [self.view addGestureRecognizer:self.slidingViewController.panGesture];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.fetchCenter getDiscoveryList];
+}
 - (void)addWish{
     [self performSegueWithIdentifier:@"showPostViewFromDiscovery" sender:nil];
 }
