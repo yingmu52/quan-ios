@@ -475,7 +475,7 @@ typedef enum{
     //compress image
     NSLog(@"original size %@ KB", @(UIImagePNGRepresentation(image).length/1024.0f));
     [UIImage imageToWebP:image
-                 quality:75.0f
+                 quality:50.0f
                    alpha:1.0f
                   preset:WEBP_PRESET_PHOTO
          completionBlock:^(NSData *result)
@@ -697,6 +697,12 @@ typedef enum{
                         
                         Plan *plan = [Plan updatePlanFromServer:planInfo
                                                       ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]];
+                        
+                        NSNumber *index = @([planList indexOfObject:planInfo]);
+                        if (![plan.discoverIndex isEqualToNumber:index]){
+                            plan.discoverIndex = index; //记录索引方便显示服务器上的顺序
+                        }
+
                         [plans addObject:plan];
                     }
                 }

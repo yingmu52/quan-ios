@@ -137,10 +137,8 @@
         //do fetchrequest
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
         
-        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"cornerMask" ascending:NO],
-                                    [NSSortDescriptor sortDescriptorWithKey:@"updateDate" ascending:NO]];
-        
-        //create FetchedResultsController with context, sectionNameKeyPath, and you can cache here, so the next work if the same you can use your cashe file.
+        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"discoverIndex" ascending:YES]];
+
         NSFetchedResultsController *newFRC =
         [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                             managedObjectContext:[AppDelegate getContext]
@@ -154,48 +152,64 @@
 
 }
 
-//- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-//{
-////    self.blockOperation = [NSBlockOperation new];
-//}
-//
-//- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
-//{
-//    __weak UICollectionView *collectionView = self.collectionView;
-//    switch (type) {
-//        case NSFetchedResultsChangeInsert: {
-//            [self.blockOperation addExecutionBlock:^{
-//                [collectionView insertItemsAtIndexPaths:@[newIndexPath]];
-//            }];
-//            break;
-//        }
-//            
-//        case NSFetchedResultsChangeDelete: {
-//            [self.blockOperation addExecutionBlock:^{
-//                [collectionView deleteItemsAtIndexPaths:@[indexPath]];
-//            }];
-//            break;
-//        }
-//            
-//        case NSFetchedResultsChangeUpdate: {
-//            [self.blockOperation addExecutionBlock:^{
-//                [collectionView reloadItemsAtIndexPaths:@[indexPath]];
-//            }];
-//            break;
-//        }            
-//        default:
-//            break;
-//    }
-//}
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    self.itemChanges = [[NSMutableArray alloc] init];
+}
 
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-//    [self.collectionView performBatchUpdates:^{
-//        [self.blockOperation start];
-//    } completion:^(BOOL finished) {
-//        // Do whatever
-//    }];
-    [self.collectionView reloadData];
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath {
+    NSMutableDictionary *change = [[NSMutableDictionary alloc] init];
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            change[@(type)] = newIndexPath;
+            break;
+        case NSFetchedResultsChangeDelete:
+            change[@(type)] = indexPath;
+            break;
+        case NSFetchedResultsChangeUpdate:
+            change[@(type)] = indexPath;
+            break;
+        case NSFetchedResultsChangeMove:
+            change[@(type)] = @[indexPath, newIndexPath];
+            break;
+        default:
+            break;
+    }
+    [self.itemChanges addObject:change];
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    
+    [self.collectionView performBatchUpdates: ^{
+        for (NSDictionary *change in self.itemChanges) {
+            [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+                NSFetchedResultsChangeType type = [key unsignedIntegerValue];
+                switch(type) {
+                    case NSFetchedResultsChangeInsert:
+                        [self.collectionView insertItemsAtIndexPaths:@[obj]];
+                        break;
+                    case NSFetchedResultsChangeDelete:
+                        [self.collectionView deleteItemsAtIndexPaths:@[obj]];
+                        break;
+                    case NSFetchedResultsChangeUpdate:
+                        [self.collectionView reloadItemsAtIndexPaths:@[obj]];
+                        break;
+                    case NSFetchedResultsChangeMove:
+                        [self.collectionView moveItemAtIndexPath:obj[0] toIndexPath:obj[1]];
+                        break;
+                    default:
+                        break;
+                }
+            }];
+        }
+    } completion:^(BOOL finished) {
+        [(AppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
+        self.itemChanges = nil;;
+    }];
+    
 }
 
 
