@@ -13,6 +13,7 @@
 @protocol FeedDetailHeaderDelegate
 - (void)didPressedLikeButton:(FeedDetailHeader *)headerView;
 - (void)didPressedCommentButton:(FeedDetailHeader *)headerView;
+- (void)didTapOnImageView:(UIImageView *)imageView;
 @end
 @interface FeedDetailHeader : UIView
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;

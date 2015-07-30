@@ -14,9 +14,10 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IYt-7S-XyZ" userLabel="Header View">
                     <rect key="frame" x="0.0" y="64" width="600" height="568"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9v8-m1-bgO">
+                        <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9v8-m1-bgO">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             <color key="backgroundColor" red="0.91372549020000005" green="0.91372549020000005" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <gestureRecognizers/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="9v8-m1-bgO" secondAttribute="height" multiplier="1:1" id="0Z4-hi-JXM"/>
                             </constraints>
@@ -30,6 +31,9 @@
                                     <include reference="0Z4-hi-JXM"/>
                                 </mask>
                             </variation>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="ErL-Ht-07N" appends="YES" id="GD8-xF-ufE"/>
+                            </connections>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="20" translatesAutoresizingMaskIntoConstraints="NO" id="U7W-Kz-TPU">
                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -189,6 +193,17 @@
                             <exclude reference="bcF-J3-CKD"/>
                         </mask>
                         <mask key="constraints">
+                            <exclude reference="H25-DP-bXe"/>
+                            <exclude reference="Pby-jQ-rGq"/>
+                            <exclude reference="swK-02-ZSH"/>
+                            <exclude reference="8g0-Qb-uiD"/>
+                            <exclude reference="9pS-YN-aZ2"/>
+                            <exclude reference="Z2H-AP-3bh"/>
+                            <exclude reference="xbU-L0-mn6"/>
+                            <exclude reference="DzH-Vu-60t"/>
+                            <exclude reference="nDT-aJ-Sat"/>
+                            <exclude reference="uGK-FP-Obo"/>
+                            <exclude reference="hKi-wQ-DHH"/>
                             <exclude reference="BpV-ru-RZi"/>
                             <exclude reference="CJd-f4-a4M"/>
                             <exclude reference="H0x-FO-NNF"/>
@@ -197,20 +212,9 @@
                             <exclude reference="AE4-gn-cww"/>
                             <exclude reference="fGm-u2-fDp"/>
                             <exclude reference="tVH-w0-M0Y"/>
-                            <exclude reference="8g0-Qb-uiD"/>
-                            <exclude reference="9pS-YN-aZ2"/>
-                            <exclude reference="Z2H-AP-3bh"/>
-                            <exclude reference="xbU-L0-mn6"/>
                             <exclude reference="1ee-mX-eGY"/>
                             <exclude reference="ffA-yk-QFn"/>
                             <exclude reference="tgA-zK-UfB"/>
-                            <exclude reference="hKi-wQ-DHH"/>
-                            <exclude reference="DzH-Vu-60t"/>
-                            <exclude reference="nDT-aJ-Sat"/>
-                            <exclude reference="uGK-FP-Obo"/>
-                            <exclude reference="H25-DP-bXe"/>
-                            <exclude reference="Pby-jQ-rGq"/>
-                            <exclude reference="swK-02-ZSH"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact">
@@ -225,6 +229,17 @@
                             <include reference="bcF-J3-CKD"/>
                         </mask>
                         <mask key="constraints">
+                            <include reference="H25-DP-bXe"/>
+                            <include reference="Pby-jQ-rGq"/>
+                            <include reference="swK-02-ZSH"/>
+                            <include reference="8g0-Qb-uiD"/>
+                            <include reference="9pS-YN-aZ2"/>
+                            <include reference="Z2H-AP-3bh"/>
+                            <include reference="xbU-L0-mn6"/>
+                            <include reference="DzH-Vu-60t"/>
+                            <include reference="nDT-aJ-Sat"/>
+                            <include reference="uGK-FP-Obo"/>
+                            <include reference="hKi-wQ-DHH"/>
                             <include reference="BpV-ru-RZi"/>
                             <include reference="CJd-f4-a4M"/>
                             <include reference="H0x-FO-NNF"/>
@@ -233,20 +248,9 @@
                             <include reference="AE4-gn-cww"/>
                             <include reference="fGm-u2-fDp"/>
                             <include reference="tVH-w0-M0Y"/>
-                            <include reference="8g0-Qb-uiD"/>
-                            <include reference="9pS-YN-aZ2"/>
-                            <include reference="Z2H-AP-3bh"/>
-                            <include reference="xbU-L0-mn6"/>
                             <include reference="1ee-mX-eGY"/>
                             <include reference="ffA-yk-QFn"/>
                             <include reference="tgA-zK-UfB"/>
-                            <include reference="hKi-wQ-DHH"/>
-                            <include reference="DzH-Vu-60t"/>
-                            <include reference="nDT-aJ-Sat"/>
-                            <include reference="uGK-FP-Obo"/>
-                            <include reference="H25-DP-bXe"/>
-                            <include reference="Pby-jQ-rGq"/>
-                            <include reference="swK-02-ZSH"/>
                         </mask>
                     </variation>
                 </view>
@@ -304,6 +308,11 @@
                 <action selector="selectAll:" destination="TBB-vW-lVb" id="vU2-dh-3jK"/>
             </connections>
         </pongPressGestureRecognizer>
+        <tapGestureRecognizer id="ErL-Ht-07N">
+            <connections>
+                <action selector="didTapOnImageView:" destination="nlM-PJ-eZc" id="gTH-rc-7hW"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="ic_comment_default" width="64" height="64"/>

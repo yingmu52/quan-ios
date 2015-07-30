@@ -31,4 +31,9 @@
 - (IBAction)commentButtonPressed{
     [self.delegate didPressedCommentButton:self];
 }
+
+- (IBAction)didTapOnImageView:(UITapGestureRecognizer *)tap{
+    [self.delegate didTapOnImageView:self.imageView];
+}
+
 @end

@@ -10,6 +10,7 @@
 #import "UIScrollView+SVInfiniteScrolling.h"
 #import "UIActionSheet+Blocks.h"
 #import "UITableView+FDTemplateLayoutCell.h"
+#import "JTSImageViewController.h"
 @interface FeedDetailViewController ()
 @property (nonatomic,strong) NSDateFormatter *dateFormatter;
 @end
@@ -68,7 +69,26 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
 }
 
-#pragma mark - dynamic feed title height 
+#pragma mark - Feed Detail View Header Delegate 
+
+- (void)didTapOnImageView:(UIImageView *)imageView{
+    // Create image info
+    JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
+    imageInfo.image = imageView.image;
+    imageInfo.referenceRect = imageView.frame;
+    imageInfo.referenceView = imageView.superview;
+    
+    // Setup view controller
+    JTSImageViewController *imageViewer = [[JTSImageViewController alloc]
+                                           initWithImageInfo:imageInfo
+                                           mode:JTSImageViewControllerMode_Image
+                                           backgroundStyle:JTSImageViewControllerBackgroundOption_Scaled];
+    
+    // Present the view controller.
+    [imageViewer showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
+}
+
+#pragma mark - dynamic feed title height
 
 - (FeedDetailHeader *)headerView{
     if (!_headerView) {
