@@ -19,7 +19,14 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    // 初始化SDK, 请使用在Bugly平台上注册应用的 AppId, 注意不要填写AppKey
+    [[CrashReporter sharedInstance] installWithAppId:BUGLY_APP_ID];
+    
     if ([User isUserLogin]){
+        // 设置用户ID, 如果你的APP有登录态, 可以在用户登录后再次调用此接口
+        [[CrashReporter sharedInstance] setUserId:[NSString stringWithFormat:@"%@ - %@",[User uid],[User userDisplayName]]];
+
         ECSlidingViewController *root = (ECSlidingViewController *)self.window.rootViewController;
         root.anchorRightPeekAmount = root.view.frame.size.width * (640 - 290.0)/640;
         root.underLeftViewController.edgesForExtendedLayout = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeLeft;
@@ -30,11 +37,6 @@
         [self.window makeKeyAndVisible];
     }
     
-    // 初始化SDK, 请使用在Bugly平台上注册应用的 AppId, 注意不要填写AppKey
-    [[CrashReporter sharedInstance] installWithAppId:BUGLY_APP_ID];
-    // 初始化之前，开启调式Log
-    [[CrashReporter sharedInstance] enableLog:YES];
-
     return YES;
 }
 
