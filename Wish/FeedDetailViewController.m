@@ -44,8 +44,7 @@
 }
 
 - (void)setFeed:(Feed *)feed{
-    if (_feed != feed){
-        _feed = feed;
+    if (_feed){
         [self updateHeaderInfoForFeed:_feed];
     }
     _feed = feed;

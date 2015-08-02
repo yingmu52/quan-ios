@@ -475,7 +475,7 @@ typedef enum{
     //compress image
     NSLog(@"original size %@ KB", @(UIImagePNGRepresentation(image).length/1024.0f));
     [UIImage imageToWebP:image
-                 quality:50.0f
+                 quality:100.0f
                    alpha:1.0f
                   preset:WEBP_PRESET_PHOTO
          completionBlock:^(NSData *result)
