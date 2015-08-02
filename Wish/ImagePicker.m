@@ -20,9 +20,9 @@
 - (void)showCameraOn:(UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,ImagePickerDelegate>*)controller type:(UIImagePickerControllerSourceType)type{
     UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
     ipc.sourceType = type;
-    ipc.allowsEditing = YES;
+//    ipc.allowsEditing = YES;
     ipc.delegate = self;
-    
+
     if (type == UIImagePickerControllerSourceTypeCamera) {
         ipc.showsCameraControls = YES;
     }
@@ -30,7 +30,7 @@
     [ipc onDidFinishPickingMediaWithInfo:^(UIImagePickerController *picker, NSDictionary *info) {
         [self hideStatusBar];
         [controller dismissViewControllerAnimated:YES completion:^{
-            UIImage *capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage];
+            UIImage *capturedImage = (UIImage *)info[UIImagePickerControllerOriginalImage];
             [self.imagePickerDelegate didFinishPickingImage:capturedImage];
         }];
     }];
