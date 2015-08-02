@@ -9,9 +9,13 @@
 #import "AppDelegate.h"
 #import "ECSlidingViewController.h"
 #import <TencentOpenAPI/TencentOAuth.h>
+#import <Bugly/CrashReporter.h>
 #import "User.h"
 #import "LoginViewController.h"
 #import "FetchCenter.h"
+
+#define BUGLY_APP_ID @"900005293"
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -25,8 +29,15 @@
         self.window.rootViewController = loginVC;
         [self.window makeKeyAndVisible];
     }
+    
+    // 初始化SDK, 请使用在Bugly平台上注册应用的 AppId, 注意不要填写AppKey
+    [[CrashReporter sharedInstance] installWithAppId:BUGLY_APP_ID];
+    // 初始化之前，开启调式Log
+    [[CrashReporter sharedInstance] enableLog:YES];
+
     return YES;
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

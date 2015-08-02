@@ -210,6 +210,7 @@
 		AEE944A31B69F31C00C130CF /* UIApplication+JTSImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE944971B69F31C00C130CF /* UIApplication+JTSImageViewController.m */; };
 		AEE944A41B69F31C00C130CF /* UIImage+JTSImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE944991B69F31C00C130CF /* UIImage+JTSImageEffects.m */; };
 		AEE944A51B69F31C00C130CF /* UIImage+JTSImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE944991B69F31C00C130CF /* UIImage+JTSImageEffects.m */; };
+		AEE944AB1B6ED95300C130CF /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEE944AA1B6ED95300C130CF /* Bugly.framework */; };
 		AEEAC9B81B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEAC9B71B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m */; };
 		AEEAC9B91B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEAC9B71B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m */; };
 		AEEC6C6D1A6DB0FC0021B7E4 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C6B1A6DB0FC0021B7E4 /* HeaderView.m */; };
@@ -506,6 +507,7 @@
 		AEE944971B69F31C00C130CF /* UIApplication+JTSImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+JTSImageViewController.m"; sourceTree = "<group>"; };
 		AEE944981B69F31C00C130CF /* UIImage+JTSImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+JTSImageEffects.h"; sourceTree = "<group>"; };
 		AEE944991B69F31C00C130CF /* UIImage+JTSImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+JTSImageEffects.m"; sourceTree = "<group>"; };
+		AEE944AA1B6ED95300C130CF /* Bugly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bugly.framework; path = "../Bugly-v1.2.8/Bugly_libc++/Bugly.framework"; sourceTree = "<group>"; };
 		AEEAC9B61B6041170056DC0F /* UITableView+FDTemplateLayoutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCell.h"; sourceTree = "<group>"; };
 		AEEAC9B71B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCell.m"; sourceTree = "<group>"; };
 		AEEC6C6A1A6DB0FC0021B7E4 /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeaderView.h; path = "Third Party/VGParallaxHeader/HeaderView.h"; sourceTree = "<group>"; };
@@ -576,6 +578,7 @@
 			files = (
 				AEDD06521AABF7AE00379C17 /* TencentOpenAPI.framework in Frameworks */,
 				AEA89DA41B31F7A0009C5586 /* WebP.framework in Frameworks */,
+				AEE944AB1B6ED95300C130CF /* Bugly.framework in Frameworks */,
 				AEDD06621AABF94500379C17 /* libsqlite3.dylib in Frameworks */,
 				AEDD06601AABF93E00379C17 /* libstdc++.dylib in Frameworks */,
 				AEDD065E1AABF93700379C17 /* libz.1.1.3.dylib in Frameworks */,
@@ -1163,6 +1166,7 @@
 		F3D9C90B14CD662C469ECA13 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AEE944AA1B6ED95300C130CF /* Bugly.framework */,
 				AEDD06611AABF94500379C17 /* libsqlite3.dylib */,
 				AEDD065F1AABF93E00379C17 /* libstdc++.dylib */,
 				AEDD065D1AABF93700379C17 /* libz.1.1.3.dylib */,
@@ -1657,6 +1661,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Wish/Third\\ Party/**",
+					"/Users/xinyi/Desktop/Bugly-v1.2.8/Bugly_libc++",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -1687,6 +1692,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Wish/Third\\ Party/**",
+					"/Users/xinyi/Desktop/Bugly-v1.2.8/Bugly_libc++",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
