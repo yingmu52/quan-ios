@@ -44,10 +44,10 @@
 }
 
 - (void)setFeed:(Feed *)feed{
+    _feed = feed;
     if (_feed){
         [self updateHeaderInfoForFeed:_feed];
     }
-    _feed = feed;
 }
 
 - (void)setUpNavigationItem
