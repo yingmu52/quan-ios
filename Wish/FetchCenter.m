@@ -481,7 +481,7 @@ typedef enum{
 //        quality = standardSize / originalSize * 100;
 //    }
     [UIImage imageToWebP:image
-                 quality:30.0f
+                 quality:50.0f
                    alpha:1.0f
                   preset:WEBP_PRESET_PHOTO
          completionBlock:^(NSData *result)
