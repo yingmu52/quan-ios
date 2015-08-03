@@ -65,6 +65,10 @@
         plan = checks.lastObject;
     }
     
+    if (![plan.owner.ownerName isEqualToString:ownerInfo[@"name"]]){
+        plan.owner.ownerName = ownerInfo[@"name"];
+    }
+    
     if (![plan.planTitle isEqualToString:dict[@"title"]]){
         plan.planTitle = dict[@"title"];
     }
