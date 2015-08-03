@@ -176,7 +176,10 @@
     return ![self.owner.ownerId isEqualToString:[User uid]] && !self.isFollowed.boolValue;
 }
 
-
+- (BOOL)hasDetailText{
+    return self.detailText && ![self.detailText isEqualToString:@""];
+}
 @end
+
 
 

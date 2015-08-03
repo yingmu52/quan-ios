@@ -36,8 +36,10 @@
 #pragma mark Header View
 
 - (void)initialHeaderView{
-    NSString *text = self.plan.detailText ? self.plan.detailText : EMPTY_PLACEHOLDER_OWNER;
-    CGFloat planDescriptionHeight = [SystemUtil heightForText:text withFontSize:12.0f];
+    CGFloat planDescriptionHeight = 0.0f;
+    if (self.plan.hasDetailText) {
+        planDescriptionHeight = [SystemUtil heightForText:self.plan.detailText withFontSize:12.0f];
+    }
     CGRect frame = CGRectMake(0, 0, self.tableView.frame.size.width, 260.0f/1136*self.tableView.frame.size.height + planDescriptionHeight);
     self.headerView = [HeaderView instantiateFromNib:frame];
     self.headerView.descriptionTextView.delegate = self;

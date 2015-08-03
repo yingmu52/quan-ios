@@ -26,7 +26,8 @@
         [self.descriptionTextView setPlaceholder:EMPTY_PLACEHOLDER_OWNER];
         [self.descriptionTextView setReturnKeyType:UIReturnKeyDone];
     }else{
-        [self.descriptionTextView setPlaceholder:EMPTY_PLACEHOLDER_NONOWNER];
+        //描述为空的时候，隐藏事件描述
+        self.descriptionTextView.hidden = !plan.hasDetailText;
         [self showFollowButtonWithTitle:(plan.isFollowed.boolValue ? @"已关注" :@"关注")];
     }
     self.descriptionTextView.text = plan.detailText;

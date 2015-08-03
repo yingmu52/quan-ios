@@ -9,11 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Plan+PlanCRUD.h"
 #import "GCPTextView.h"
-
 #define EMPTY_PLACEHOLDER_OWNER @"+添加描述能让别人更了解这件事儿哦~"
-#define EMPTY_PLACEHOLDER_NONOWNER @"可怜的事儿，连个描述也没有~"
-
-
 @protocol HeaderViewDelegate <NSObject>
 @optional
 - (void)didPressedFollow:(UIButton *)sender;

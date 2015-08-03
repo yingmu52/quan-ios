@@ -11,7 +11,7 @@
 
 @interface Plan (PlanCRUD)
 @property (nonatomic,strong,readonly) NSArray *planStatusTags; //array of strings
-
+@property (nonatomic,readonly) BOOL hasDetailText;
 typedef enum {
     PlanStatusOnGoing = 0,
     PlanStatusFinished,
