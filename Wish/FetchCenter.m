@@ -482,9 +482,9 @@ typedef enum{
 //        quality = standardSize / originalSize * 100;
 //    }
     [UIImage imageToWebP:image
-                 quality:70.0f
+                 quality:75.0f
                    alpha:1.0f
-                  preset:WEBP_PRESET_PHOTO
+                  preset:WEBP_PRESET_PICTURE
          completionBlock:^(NSData *result)
     {
         NSLog(@"compressed size %@ KB", @(result.length/1024.0f));

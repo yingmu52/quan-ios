@@ -22,8 +22,18 @@
 		AE0E794C1A76EB50007C48EE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E794A1A76EB50007C48EE /* Reachability.m */; };
 		AE0E8DD91B6FF1C00089F3CC /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE0E8DD81B6FF1C00089F3CC /* Bugly.framework */; };
 		AE0E8DDA1B6FF1C00089F3CC /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE0E8DD81B6FF1C00089F3CC /* Bugly.framework */; };
-		AE0E8DDE1B703C030089F3CC /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E8DDD1B703C030089F3CC /* UIImage+Resize.m */; };
-		AE0E8DDF1B703C040089F3CC /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E8DDD1B703C030089F3CC /* UIImage+Resize.m */; };
+		AE0E8DEA1B707BB70089F3CC /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = AE0E8DE11B707BB70089F3CC /* LICENSE */; };
+		AE0E8DEB1B707BB70089F3CC /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = AE0E8DE11B707BB70089F3CC /* LICENSE */; };
+		AE0E8DEC1B707BB70089F3CC /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = AE0E8DE21B707BB70089F3CC /* README.md */; };
+		AE0E8DED1B707BB70089F3CC /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = AE0E8DE21B707BB70089F3CC /* README.md */; };
+		AE0E8DEE1B707BB70089F3CC /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E8DE41B707BB70089F3CC /* UIImage+Alpha.m */; };
+		AE0E8DEF1B707BB70089F3CC /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E8DE41B707BB70089F3CC /* UIImage+Alpha.m */; };
+		AE0E8DF01B707BB70089F3CC /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E8DE61B707BB70089F3CC /* UIImage+Resize.m */; };
+		AE0E8DF11B707BB70089F3CC /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E8DE61B707BB70089F3CC /* UIImage+Resize.m */; };
+		AE0E8DF21B707BB70089F3CC /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E8DE81B707BB70089F3CC /* UIImage+RoundedCorner.m */; };
+		AE0E8DF31B707BB70089F3CC /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E8DE81B707BB70089F3CC /* UIImage+RoundedCorner.m */; };
+		AE0E8DF41B707BB70089F3CC /* UIImage-Categories.podspec in Resources */ = {isa = PBXBuildFile; fileRef = AE0E8DE91B707BB70089F3CC /* UIImage-Categories.podspec */; };
+		AE0E8DF51B707BB70089F3CC /* UIImage-Categories.podspec in Resources */ = {isa = PBXBuildFile; fileRef = AE0E8DE91B707BB70089F3CC /* UIImage-Categories.podspec */; };
 		AE17799A1AF585CB005F1BEB /* FeedDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1779991AF585CB005F1BEB /* FeedDetailViewController.m */; };
 		AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
 		AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
@@ -307,8 +317,15 @@
 		AE0E79491A76EB50007C48EE /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		AE0E794A1A76EB50007C48EE /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		AE0E8DD81B6FF1C00089F3CC /* Bugly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bugly.framework; sourceTree = "<group>"; };
-		AE0E8DDC1B703C030089F3CC /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
-		AE0E8DDD1B703C030089F3CC /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		AE0E8DE11B707BB70089F3CC /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		AE0E8DE21B707BB70089F3CC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		AE0E8DE31B707BB70089F3CC /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
+		AE0E8DE41B707BB70089F3CC /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
+		AE0E8DE51B707BB70089F3CC /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		AE0E8DE61B707BB70089F3CC /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		AE0E8DE71B707BB70089F3CC /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
+		AE0E8DE81B707BB70089F3CC /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
+		AE0E8DE91B707BB70089F3CC /* UIImage-Categories.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "UIImage-Categories.podspec"; sourceTree = "<group>"; };
 		AE1779981AF585CB005F1BEB /* FeedDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedDetailViewController.h; sourceTree = "<group>"; };
 		AE1779991AF585CB005F1BEB /* FeedDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedDetailViewController.m; sourceTree = "<group>"; };
 		AE1B6E3A1A6D89FC0026F3CE /* HomeCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCardView.h; sourceTree = "<group>"; };
@@ -693,13 +710,20 @@
 			name = Reachability;
 			sourceTree = "<group>";
 		};
-		AE0E8DDB1B703C030089F3CC /* UIImage+Resize */ = {
+		AE0E8DE01B707BB70089F3CC /* UIImageUtil */ = {
 			isa = PBXGroup;
 			children = (
-				AE0E8DDC1B703C030089F3CC /* UIImage+Resize.h */,
-				AE0E8DDD1B703C030089F3CC /* UIImage+Resize.m */,
+				AE0E8DE11B707BB70089F3CC /* LICENSE */,
+				AE0E8DE21B707BB70089F3CC /* README.md */,
+				AE0E8DE31B707BB70089F3CC /* UIImage+Alpha.h */,
+				AE0E8DE41B707BB70089F3CC /* UIImage+Alpha.m */,
+				AE0E8DE51B707BB70089F3CC /* UIImage+Resize.h */,
+				AE0E8DE61B707BB70089F3CC /* UIImage+Resize.m */,
+				AE0E8DE71B707BB70089F3CC /* UIImage+RoundedCorner.h */,
+				AE0E8DE81B707BB70089F3CC /* UIImage+RoundedCorner.m */,
+				AE0E8DE91B707BB70089F3CC /* UIImage-Categories.podspec */,
 			);
-			path = "UIImage+Resize";
+			path = UIImageUtil;
 			sourceTree = "<group>";
 		};
 		AE2F1C811A7A1A0200A32CB5 /* BlurTheFuckOn */ = {
@@ -1059,7 +1083,7 @@
 		AEF7F2661A686E8A0022410B /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
-				AE0E8DDB1B703C030089F3CC /* UIImage+Resize */,
+				AE0E8DE01B707BB70089F3CC /* UIImageUtil */,
 				AEE9448D1B69F31C00C130CF /* JTS Image View */,
 				AEEAC9B51B6041170056DC0F /* Dynamic Cell Height */,
 				AEFA49101B37C88300FEF0A2 /* SVPullToRefresh */,
@@ -1296,8 +1320,10 @@
 				AEFB04881AD12437009EB0D3 /* DiscoveryFooterView.xib in Resources */,
 				AED355F41B2285D3000427FF /* FeedDetailHeader.xib in Resources */,
 				AEA89DA01B31F7A0009C5586 /* LICENSE in Resources */,
+				AE0E8DEA1B707BB70089F3CC /* LICENSE in Resources */,
 				AEEC6C6F1A6DB0FC0021B7E4 /* HeaderView.xib in Resources */,
 				AEC8CE911AAF8823005364F8 /* StationView.xib in Resources */,
+				AE0E8DF41B707BB70089F3CC /* UIImage-Categories.podspec in Resources */,
 				AE52FA551A8D55CA003FF725 /* KeyboardAcessoryView.xib in Resources */,
 				AE9A19851B02E38800590784 /* FeedbackkAccessoryView.xib in Resources */,
 				AE95A9F21ACFA7F8007465D5 /* straighten-grid@2x.png in Resources */,
@@ -1308,10 +1334,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE0E8DF51B707BB70089F3CC /* UIImage-Categories.podspec in Resources */,
 				AEFB04891AD12437009EB0D3 /* DiscoveryFooterView.xib in Resources */,
 				AEC8CE921AAF8823005364F8 /* StationView.xib in Resources */,
 				AEA89DA11B31F7A0009C5586 /* LICENSE in Resources */,
 				AEF7F29D1A6871F00022410B /* Images.xcassets in Resources */,
+				AE0E8DEB1B707BB70089F3CC /* LICENSE in Resources */,
 				AEF7F2A11A6875360022410B /* Main.storyboard in Resources */,
 				AE59B5F21B40FB55006CA4AB /* ViewForEmptyEvent.xib in Resources */,
 				AEC068901B2D309E007975D2 /* FeedDetailCell.xib in Resources */,
@@ -1353,7 +1381,6 @@
 				AEE4A6CC1A9684D500ABF946 /* AchieveViewController.m in Sources */,
 				AE9861FA1AC33C04005544B9 /* EditWishViewController.m in Sources */,
 				AE01723F1A65CD8E0014266F /* main.m in Sources */,
-				AE0E8DDE1B703C030089F3CC /* UIImage+Resize.m in Sources */,
 				AE1E6BAA1AAFEEE400AF2613 /* PopupView.m in Sources */,
 				AE767E7F1ACE35A600F35137 /* FeedbackViewController.m in Sources */,
 				AED71BEC1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m in Sources */,
@@ -1367,6 +1394,7 @@
 				AE3FCFC91B07D63900422FB8 /* UIView+WebCacheOperation.m in Sources */,
 				AEF7F2891A686E8A0022410B /* ECSlidingViewController.m in Sources */,
 				AEE9449E1B69F31C00C130CF /* JTSImageViewController.m in Sources */,
+				AE0E8DEC1B707BB70089F3CC /* README.md in Sources */,
 				AED4DD221B0E925300AF1497 /* Message+MessageCRUD.m in Sources */,
 				AE95A9F91ACFBCA9007465D5 /* UIActionSheet+Blocks.m in Sources */,
 				AEF7F28B1A686E8B0022410B /* UIViewController+ECSlidingViewController.m in Sources */,
@@ -1403,6 +1431,7 @@
 				AED05EDB1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m in Sources */,
 				AE0172691A65D3140014266F /* MenuViewController.m in Sources */,
 				AE52FA501A8D3D76003FF725 /* PostFeedViewController.m in Sources */,
+				AE0E8DEE1B707BB70089F3CC /* UIImage+Alpha.m in Sources */,
 				AE3D70BF1B019DE1000C0806 /* Comment.m in Sources */,
 				AED4CB2A1AC7633D00EE2DA4 /* NHAlignmentFlowLayout.m in Sources */,
 				AED68EE41A70399A00CDC0DF /* FetchCenter.m in Sources */,
@@ -1426,6 +1455,7 @@
 				AE8A9E9F1B1FF6E7007BD4E5 /* BadgeStyle.m in Sources */,
 				AE17799A1AF585CB005F1BEB /* FeedDetailViewController.m in Sources */,
 				AEFB048C1AD12437009EB0D3 /* DiscoveryViewController.m in Sources */,
+				AE0E8DF21B707BB70089F3CC /* UIImage+RoundedCorner.m in Sources */,
 				AEEC6C731A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,
 				AE3FCFC11B07D63900422FB8 /* UIImage+MultiFormat.m in Sources */,
 				AE47055D1AF9DC080028D7BC /* FeedDetailCell.m in Sources */,
@@ -1450,6 +1480,7 @@
 				AE606A231AF46991003DF16E /* MessageCell.m in Sources */,
 				AED4CB221AC75A0200EE2DA4 /* KeyWordCell.m in Sources */,
 				AEE4A6D01A96A5D500ABF946 /* AchieveCell.m in Sources */,
+				AE0E8DF01B707BB70089F3CC /* UIImage+Resize.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1476,6 +1507,7 @@
 				AEE9449D1B69F31C00C130CF /* JTSImageInfo.m in Sources */,
 				AE3FCFB61B07D63900422FB8 /* SDWebImageDownloader.m in Sources */,
 				AEFB048B1AD12437009EB0D3 /* DiscoveryVCData.m in Sources */,
+				AE0E8DF11B707BB70089F3CC /* UIImage+Resize.m in Sources */,
 				AEEC6C6E1A6DB0FC0021B7E4 /* HeaderView.m in Sources */,
 				AED5BC641ABE3CB600EFF398 /* SettingViewController.m in Sources */,
 				AED4CB231AC75A0200EE2DA4 /* KeyWordCell.m in Sources */,
@@ -1498,8 +1530,8 @@
 				AE3FCFAE1B07D63900422FB8 /* NSData+ImageContentType.m in Sources */,
 				AE2F1C951A7A23A200A32CB5 /* Feed+FeedCRUD.m in Sources */,
 				AEE9449F1B69F31C00C130CF /* JTSImageViewController.m in Sources */,
-				AE0E8DDF1B703C040089F3CC /* UIImage+Resize.m in Sources */,
 				AEF7F29C1A686FE90022410B /* NavigationBar.m in Sources */,
+				AE0E8DED1B707BB70089F3CC /* README.md in Sources */,
 				AED05EDC1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m in Sources */,
 				AE9A198A1B02E9E700590784 /* FeedbackkAccessoryView.m in Sources */,
 				AE767E801ACE35A600F35137 /* FeedbackViewController.m in Sources */,
@@ -1526,6 +1558,7 @@
 				AE8A9EA01B1FF6E7007BD4E5 /* BadgeStyle.m in Sources */,
 				AEE4A6D91A972FAB00ABF946 /* FollowingTVCData.m in Sources */,
 				AE3FCFB01B07D63900422FB8 /* SDImageCache.m in Sources */,
+				AE0E8DF31B707BB70089F3CC /* UIImage+RoundedCorner.m in Sources */,
 				AED4DD271B0EE49B00AF1497 /* Message.m in Sources */,
 				AEE944A31B69F31C00C130CF /* UIApplication+JTSImageViewController.m in Sources */,
 				AEC8CE8F1AAF872A005364F8 /* StationView.m in Sources */,
@@ -1545,6 +1578,7 @@
 				AE3FCFBE1B07D63900422FB8 /* UIButton+WebCache.m in Sources */,
 				AE9861FB1AC33C04005544B9 /* EditWishViewController.m in Sources */,
 				AE2F1C851A7A1A1800A32CB5 /* UIImage+ImageEffects.m in Sources */,
+				AE0E8DEF1B707BB70089F3CC /* UIImage+Alpha.m in Sources */,
 				AE3D70C01B019DE1000C0806 /* Comment.m in Sources */,
 				AE3FCFB41B07D63900422FB8 /* SDWebImageDecoder.m in Sources */,
 				AE3FCFB81B07D63900422FB8 /* SDWebImageDownloaderOperation.m in Sources */,

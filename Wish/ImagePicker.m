@@ -35,8 +35,10 @@
             if (type == UIImagePickerControllerSourceTypeCamera){
                 capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage];
             }else if (type == UIImagePickerControllerSourceTypePhotoLibrary || type == UIImagePickerControllerSourceTypeSavedPhotosAlbum){
-                capturedImage = (UIImage *)info[UIImagePickerControllerOriginalImage];
-                capturedImage = [capturedImage resizedImageToFitInSize:CGSizeMake(controller.view.bounds.size.width*2, capturedImage.size.height*2) scaleIfSmaller:NO];
+                UIImage *image = (UIImage *)info[UIImagePickerControllerOriginalImage];
+                capturedImage = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFit
+                                                            bounds:CGSizeMake(image.size.width * 0.25, image.size.height * 0.25)
+                                              interpolationQuality:kCGInterpolationHigh];
             }
             
             [self.imagePickerDelegate didFinishPickingImage:capturedImage];
