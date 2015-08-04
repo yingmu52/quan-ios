@@ -10,6 +10,7 @@
 #import "TWPhotoPickerController.h"
 #import "UIActionSheet+Blocks.h"
 #import "UIImagePickerController+DelegateBlocks.h"
+#import "UIImage+Resize.h"
 @interface ImagePicker () <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @end
@@ -20,17 +21,24 @@
 - (void)showCameraOn:(UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,ImagePickerDelegate>*)controller type:(UIImagePickerControllerSourceType)type{
     UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
     ipc.sourceType = type;
-//    ipc.allowsEditing = YES;
     ipc.delegate = self;
 
     if (type == UIImagePickerControllerSourceTypeCamera) {
         ipc.showsCameraControls = YES;
+        ipc.allowsEditing = YES;
     }
     [ipc useBlocksForDelegate]; // important !
     [ipc onDidFinishPickingMediaWithInfo:^(UIImagePickerController *picker, NSDictionary *info) {
         [self hideStatusBar];
         [controller dismissViewControllerAnimated:YES completion:^{
-            UIImage *capturedImage = (UIImage *)info[UIImagePickerControllerOriginalImage];
+            UIImage *capturedImage;
+            if (type == UIImagePickerControllerSourceTypeCamera){
+                capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage];
+            }else if (type == UIImagePickerControllerSourceTypePhotoLibrary || type == UIImagePickerControllerSourceTypeSavedPhotosAlbum){
+                capturedImage = (UIImage *)info[UIImagePickerControllerOriginalImage];
+                capturedImage = [capturedImage resizedImageToFitInSize:CGSizeMake(controller.view.bounds.size.width*2, capturedImage.size.height*2) scaleIfSmaller:NO];
+            }
+            
             [self.imagePickerDelegate didFinishPickingImage:capturedImage];
         }];
     }];

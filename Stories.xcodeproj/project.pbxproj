@@ -22,6 +22,8 @@
 		AE0E794C1A76EB50007C48EE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E794A1A76EB50007C48EE /* Reachability.m */; };
 		AE0E8DD91B6FF1C00089F3CC /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE0E8DD81B6FF1C00089F3CC /* Bugly.framework */; };
 		AE0E8DDA1B6FF1C00089F3CC /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE0E8DD81B6FF1C00089F3CC /* Bugly.framework */; };
+		AE0E8DDE1B703C030089F3CC /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E8DDD1B703C030089F3CC /* UIImage+Resize.m */; };
+		AE0E8DDF1B703C040089F3CC /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E8DDD1B703C030089F3CC /* UIImage+Resize.m */; };
 		AE17799A1AF585CB005F1BEB /* FeedDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1779991AF585CB005F1BEB /* FeedDetailViewController.m */; };
 		AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
 		AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
@@ -305,6 +307,8 @@
 		AE0E79491A76EB50007C48EE /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		AE0E794A1A76EB50007C48EE /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		AE0E8DD81B6FF1C00089F3CC /* Bugly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bugly.framework; sourceTree = "<group>"; };
+		AE0E8DDC1B703C030089F3CC /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		AE0E8DDD1B703C030089F3CC /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		AE1779981AF585CB005F1BEB /* FeedDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedDetailViewController.h; sourceTree = "<group>"; };
 		AE1779991AF585CB005F1BEB /* FeedDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedDetailViewController.m; sourceTree = "<group>"; };
 		AE1B6E3A1A6D89FC0026F3CE /* HomeCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCardView.h; sourceTree = "<group>"; };
@@ -689,6 +693,15 @@
 			name = Reachability;
 			sourceTree = "<group>";
 		};
+		AE0E8DDB1B703C030089F3CC /* UIImage+Resize */ = {
+			isa = PBXGroup;
+			children = (
+				AE0E8DDC1B703C030089F3CC /* UIImage+Resize.h */,
+				AE0E8DDD1B703C030089F3CC /* UIImage+Resize.m */,
+			);
+			path = "UIImage+Resize";
+			sourceTree = "<group>";
+		};
 		AE2F1C811A7A1A0200A32CB5 /* BlurTheFuckOn */ = {
 			isa = PBXGroup;
 			children = (
@@ -1046,6 +1059,7 @@
 		AEF7F2661A686E8A0022410B /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				AE0E8DDB1B703C030089F3CC /* UIImage+Resize */,
 				AEE9448D1B69F31C00C130CF /* JTS Image View */,
 				AEEAC9B51B6041170056DC0F /* Dynamic Cell Height */,
 				AEFA49101B37C88300FEF0A2 /* SVPullToRefresh */,
@@ -1339,6 +1353,7 @@
 				AEE4A6CC1A9684D500ABF946 /* AchieveViewController.m in Sources */,
 				AE9861FA1AC33C04005544B9 /* EditWishViewController.m in Sources */,
 				AE01723F1A65CD8E0014266F /* main.m in Sources */,
+				AE0E8DDE1B703C030089F3CC /* UIImage+Resize.m in Sources */,
 				AE1E6BAA1AAFEEE400AF2613 /* PopupView.m in Sources */,
 				AE767E7F1ACE35A600F35137 /* FeedbackViewController.m in Sources */,
 				AED71BEC1A95763400F2DAF4 /* CHTCollectionViewWaterfallLayout.m in Sources */,
@@ -1483,6 +1498,7 @@
 				AE3FCFAE1B07D63900422FB8 /* NSData+ImageContentType.m in Sources */,
 				AE2F1C951A7A23A200A32CB5 /* Feed+FeedCRUD.m in Sources */,
 				AEE9449F1B69F31C00C130CF /* JTSImageViewController.m in Sources */,
+				AE0E8DDF1B703C040089F3CC /* UIImage+Resize.m in Sources */,
 				AEF7F29C1A686FE90022410B /* NavigationBar.m in Sources */,
 				AED05EDC1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m in Sources */,
 				AE9A198A1B02E9E700590784 /* FeedbackkAccessoryView.m in Sources */,
