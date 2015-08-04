@@ -425,17 +425,18 @@ typedef enum{
                                             completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                   {
                                       NSDictionary *responseJson = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-                                      if ([responseJson[@"ret"] integerValue] == -305) {
-                                          NSLog(@"-305: invalid system version");
-                                          return;
-                                      }
-                                      if (!error && ![responseJson[@"ret"] boolValue]){ //successed "ret" = 0;
+                                      
+                                      if (!error && ![responseJson[@"ret"] integerValue]){ //successed "ret" = 0;
                                           [self didFinishSendingGetRequest:responseJson operation:op entity:obj];
-                                      }else{
+                                      }else if (responseJson){
                                           NSLog(@"Fail Get Request :%@\n op: %d \n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@",rqtStr,op,baseURL,dict,responseJson,error);
                                           dispatch_main_async_safe(^{
                                               [self.delegate didFailSendingRequestWithInfo:responseJson entity:obj];
                                           });
+                                      }else{
+                                          dispatch_main_async_safe((^{
+                                              [self.delegate didFailSendingRequestWithInfo:@{@"ret":@"Request Timeout",@"msg":@"Fail sending request to server"} entity:obj];
+                                          }));
                                       }
                                       [self appendRequest:request andResponse:responseJson];
                                   }];
@@ -513,9 +514,10 @@ typedef enum{
                                                               
                                                               if (!json) json = @{@"ret":@"重试",@"msg":@"上传失败 :("};
                                                               [self.delegate didFailUploadingImageWithInfo:json entity:obj];
-                                                              //delete temp file in webpPath
-                                                              [[NSFileManager defaultManager] removeItemAtPath:webPPath error:nil];
                                                           }
+                                                          //delete temp file in webpPath
+                                                          [[NSFileManager defaultManager] removeItemAtPath:webPPath error:nil];
+
                                                       }));
                                                   }];
             [uploadTask resume];
