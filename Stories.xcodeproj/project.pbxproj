@@ -20,8 +20,6 @@
 		AE0ADF1A1ABD78CC00692131 /* HomeCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0ADF181ABD78CC00692131 /* HomeCardViewController.m */; };
 		AE0E794B1A76EB50007C48EE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E794A1A76EB50007C48EE /* Reachability.m */; };
 		AE0E794C1A76EB50007C48EE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E794A1A76EB50007C48EE /* Reachability.m */; };
-		AE0E8DD91B6FF1C00089F3CC /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE0E8DD81B6FF1C00089F3CC /* Bugly.framework */; };
-		AE0E8DDA1B6FF1C00089F3CC /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE0E8DD81B6FF1C00089F3CC /* Bugly.framework */; };
 		AE0E8DEA1B707BB70089F3CC /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = AE0E8DE11B707BB70089F3CC /* LICENSE */; };
 		AE0E8DEB1B707BB70089F3CC /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = AE0E8DE11B707BB70089F3CC /* LICENSE */; };
 		AE0E8DEC1B707BB70089F3CC /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = AE0E8DE21B707BB70089F3CC /* README.md */; };
@@ -34,6 +32,8 @@
 		AE0E8DF31B707BB70089F3CC /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E8DE81B707BB70089F3CC /* UIImage+RoundedCorner.m */; };
 		AE0E8DF41B707BB70089F3CC /* UIImage-Categories.podspec in Resources */ = {isa = PBXBuildFile; fileRef = AE0E8DE91B707BB70089F3CC /* UIImage-Categories.podspec */; };
 		AE0E8DF51B707BB70089F3CC /* UIImage-Categories.podspec in Resources */ = {isa = PBXBuildFile; fileRef = AE0E8DE91B707BB70089F3CC /* UIImage-Categories.podspec */; };
+		AE0E8DF71B71AAE10089F3CC /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE0E8DF61B71AAE10089F3CC /* Bugly.framework */; };
+		AE0E8DF81B71AAE10089F3CC /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE0E8DF61B71AAE10089F3CC /* Bugly.framework */; };
 		AE17799A1AF585CB005F1BEB /* FeedDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1779991AF585CB005F1BEB /* FeedDetailViewController.m */; };
 		AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
 		AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
@@ -316,7 +316,6 @@
 		AE0ADF181ABD78CC00692131 /* HomeCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCardViewController.m; sourceTree = "<group>"; };
 		AE0E79491A76EB50007C48EE /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		AE0E794A1A76EB50007C48EE /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		AE0E8DD81B6FF1C00089F3CC /* Bugly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bugly.framework; sourceTree = "<group>"; };
 		AE0E8DE11B707BB70089F3CC /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		AE0E8DE21B707BB70089F3CC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AE0E8DE31B707BB70089F3CC /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
@@ -326,6 +325,7 @@
 		AE0E8DE71B707BB70089F3CC /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
 		AE0E8DE81B707BB70089F3CC /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		AE0E8DE91B707BB70089F3CC /* UIImage-Categories.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "UIImage-Categories.podspec"; sourceTree = "<group>"; };
+		AE0E8DF61B71AAE10089F3CC /* Bugly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bugly.framework; sourceTree = "<group>"; };
 		AE1779981AF585CB005F1BEB /* FeedDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedDetailViewController.h; sourceTree = "<group>"; };
 		AE1779991AF585CB005F1BEB /* FeedDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedDetailViewController.m; sourceTree = "<group>"; };
 		AE1B6E3A1A6D89FC0026F3CE /* HomeCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCardView.h; sourceTree = "<group>"; };
@@ -598,9 +598,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE0E8DF71B71AAE10089F3CC /* Bugly.framework in Frameworks */,
 				AEDD06521AABF7AE00379C17 /* TencentOpenAPI.framework in Frameworks */,
 				AEA89DA41B31F7A0009C5586 /* WebP.framework in Frameworks */,
-				AE0E8DD91B6FF1C00089F3CC /* Bugly.framework in Frameworks */,
 				AEDD06621AABF94500379C17 /* libsqlite3.dylib in Frameworks */,
 				AEDD06601AABF93E00379C17 /* libstdc++.dylib in Frameworks */,
 				AEDD065E1AABF93700379C17 /* libz.1.1.3.dylib in Frameworks */,
@@ -616,7 +616,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE0E8DDA1B6FF1C00089F3CC /* Bugly.framework in Frameworks */,
+				AE0E8DF81B71AAE10089F3CC /* Bugly.framework in Frameworks */,
 				AEA89DA51B31F7A0009C5586 /* WebP.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1206,7 +1206,7 @@
 		F3D9C90B14CD662C469ECA13 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AE0E8DD81B6FF1C00089F3CC /* Bugly.framework */,
+				AE0E8DF61B71AAE10089F3CC /* Bugly.framework */,
 				AEDD06611AABF94500379C17 /* libsqlite3.dylib */,
 				AEDD065F1AABF93E00379C17 /* libstdc++.dylib */,
 				AEDD065D1AABF93700379C17 /* libz.1.1.3.dylib */,

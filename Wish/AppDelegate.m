@@ -8,8 +8,8 @@
 
 #import "AppDelegate.h"
 #import "ECSlidingViewController.h"
-#import <Bugly/CrashReporter.h>
 #import <TencentOpenAPI/TencentOAuth.h>
+#import <Bugly/CrashReporter.h>
 #import "User.h"
 #import "LoginViewController.h"
 #import "FetchCenter.h"
