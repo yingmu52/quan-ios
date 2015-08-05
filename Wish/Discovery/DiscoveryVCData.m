@@ -91,9 +91,17 @@
 
 
 - (void)didfinishFetchingDiscovery:(NSArray *)plans{
-//    [self.plans addObjectsFromArray:plans];
-//    [self.collectionView reloadData];
-//    self.navigationItem.rightBarButtonItem = nil;
+    
+    //删除在本地缓存的不存在于服务器上的事件，异线。
+    dispatch_queue_t compareList = dispatch_queue_create("DiscoveryVCData.compareList", NULL);
+    dispatch_async(compareList, ^{
+        for (Plan *plan in self.fetchedRC.fetchedObjects){
+            if (![plans containsObject:plan]){
+                [[AppDelegate getContext] deleteObject:plan];
+                NSLog(@"Removing plan %@ : %@",plan.planId,plan.planTitle);
+            }
+        }
+    });
 }
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
