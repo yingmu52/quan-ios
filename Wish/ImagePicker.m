@@ -22,24 +22,24 @@
     UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
     ipc.sourceType = type;
     ipc.delegate = self;
+    ipc.allowsEditing = YES;
 
     if (type == UIImagePickerControllerSourceTypeCamera) {
         ipc.showsCameraControls = YES;
-        ipc.allowsEditing = YES;
     }
     [ipc useBlocksForDelegate]; // important !
     [ipc onDidFinishPickingMediaWithInfo:^(UIImagePickerController *picker, NSDictionary *info) {
         [self hideStatusBar];
         [controller dismissViewControllerAnimated:YES completion:^{
             UIImage *capturedImage;
-            if (type == UIImagePickerControllerSourceTypeCamera){
+//            if (type == UIImagePickerControllerSourceTypeCamera){
                 capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage];
-            }else if (type == UIImagePickerControllerSourceTypePhotoLibrary || type == UIImagePickerControllerSourceTypeSavedPhotosAlbum){
-                UIImage *image = (UIImage *)info[UIImagePickerControllerOriginalImage];
-                capturedImage = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFit
-                                                            bounds:CGSizeMake(image.size.width * 0.25, image.size.height * 0.25)
-                                              interpolationQuality:kCGInterpolationHigh];
-            }
+//            }else if (type == UIImagePickerControllerSourceTypePhotoLibrary || type == UIImagePickerControllerSourceTypeSavedPhotosAlbum){
+//                UIImage *image = (UIImage *)info[UIImagePickerControllerOriginalImage];
+//                capturedImage = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFit
+//                                                            bounds:CGSizeMake(image.size.width * 0.25, image.size.height * 0.25)
+//                                              interpolationQuality:kCGInterpolationHigh];
+//            }
             
             [self.imagePickerDelegate didFinishPickingImage:capturedImage];
         }];
