@@ -10,7 +10,7 @@
 #import "HomeCardView.h"
 
 @interface HomeCardViewController : UIViewController 
-
+@property (nonatomic,weak) IBOutlet UILabel *versionLabel;
 @property (nonatomic,weak) IBOutlet UICollectionView *collectionView;
 
 - (void)configureCollectionViewCell:(HomeCardView *)cell atIndexPath:(NSIndexPath *)indexPath;

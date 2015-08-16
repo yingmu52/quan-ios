@@ -39,16 +39,10 @@ ViewForEmptyEventDelegate>
 
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @property (nonatomic,weak) Plan *currentPlan;
-
 @property (nonatomic,weak) StationView *stationView;
 
-@property (nonatomic,weak) IBOutlet UIButton *pageButton;
-@property (nonatomic,weak) IBOutlet UIView *buttomView;
-
 @property (nonatomic,strong) NSMutableArray *itemChanges;
-
 @property (nonatomic,weak) ViewForEmptyEvent *guideView;
-
 @end
 
 @implementation HomeViewController
@@ -59,7 +53,6 @@ ViewForEmptyEventDelegate>
         [self setUpEmptyView];
     }else{
         self.guideView = nil;
-        [self updatePage];
     }
     self.tabBarController.tabBar.hidden = NO;
 }
@@ -100,9 +93,12 @@ ViewForEmptyEventDelegate>
     [super viewDidLoad];
     [self setUpNavigationItem];
     [self addLongPressGesture];
-//    [self.view addGestureRecognizer:self.slidingViewController.panGesture];
     [[FetchCenter new] fetchPlanListForOwnerId:[User uid]];
-
+    
+    //set veriosn label
+    NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
+    NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
+    self.versionLabel.text = [NSString stringWithFormat:@"Version %@ Build %@",version,build];
 }
 
 - (void)addLongPressGesture{
@@ -115,18 +111,12 @@ ViewForEmptyEventDelegate>
 - (void)setUpNavigationItem
 {
     CGRect frame = CGRectMake(0,0, 25,25);
-//    UIButton *menuBtn = [Theme buttonWithImage:[Theme navMenuDefault]
-//                                        target:self.slidingViewController
-//                                      selector:@selector(anchorTopViewToRightAnimated:)
-//                                         frame:frame];
     UIButton *addBtn = [Theme buttonWithImage:[Theme navAddDefault]
                                        target:self
                                      selector:@selector(addWish)
                                         frame:frame];
-//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
 
-//    self.title = @"我的事儿";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
 }
 
 
@@ -199,18 +189,8 @@ ViewForEmptyEventDelegate>
     }
     self.tabBarController.tabBar.hidden = YES;
 }
+
 #pragma mark -  UICollectionView methods
-- (void)updatePage{
-    NSInteger page = self.collectionView.contentOffset.x / self.collectionView.frame.size.width;
-    [self.pageButton setTitle:[NSString stringWithFormat:@"%@",@(page+1)]
-                     forState:UIControlStateNormal];
-    
-}
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    [self updatePage];
-}
-
-
 - (void)handleLongPress:(UILongPressGestureRecognizer *)longPress{
     
     NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:[longPress locationInView:self.collectionView]];
@@ -312,7 +292,6 @@ ViewForEmptyEventDelegate>
         [self setUpEmptyView];
     }else{
         self.collectionView.hidden = NO;
-        self.buttomView.hidden = NO;
         if (self.guideView){
             [self.guideView removeFromSuperview];
         }
@@ -357,7 +336,6 @@ ViewForEmptyEventDelegate>
         // self.title = [NSString stringWithFormat:@"%@ plans",@(self.fetchedRC.fetchedObjects.count)];
         [(AppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
         self.itemChanges = nil;;
-        [self updatePage];
     }];
 
 }
@@ -386,7 +364,6 @@ ViewForEmptyEventDelegate>
 #pragma mark - Handling 0 Events Situation
 - (void)setUpEmptyView{
     self.collectionView.hidden = YES;
-    self.buttomView.hidden = YES;
     [self.view addSubview:self.guideView];
 }
 
