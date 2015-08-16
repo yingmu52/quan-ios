@@ -14,28 +14,10 @@
 #import "FetchCenter.h"
 #import "UIImageView+WebCache.h"
 @interface HomeCardView ()
-
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak,nonatomic) IBOutlet UILabel *subtitleLabel;
 @property (weak,nonatomic) IBOutlet UIView *canvasView;
 @end
 
 @implementation HomeCardView
-
-- (void)setPlan:(Plan *)plan
-{
-    _plan = plan;
-    if (_plan) {
-        if (!_plan.image){
-            [self.imageView sd_setImageWithURL:[[FetchCenter new] urlWithImageID:_plan.backgroundNum]];
-        }else{
-            self.imageView.image = _plan.image;
-        }
-        self.titleLabel.text = _plan.planTitle;
-        self.subtitleLabel.text = [NSString stringWithFormat:@"%@条记录\t%@人关注",plan.tryTimes,plan.followCount];
-    }
-}
-
 
 - (void)awakeFromNib
 {

@@ -13,7 +13,7 @@
 #import "Owner.h"
 #import "UIImageView+WebCache.h"
 #import "FeedDetailViewController.h"
-#import "UIViewController+ECSlidingViewController.h"
+//#import "UIViewController+ECSlidingViewController.h"
 #import "UIActionSheet+Blocks.h"
 @interface MessageListViewController () <FetchCenterDelegate,NSFetchedResultsControllerDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
@@ -35,17 +35,17 @@
     [super viewDidLoad];
     [self setUpNavigationItem];
     [self.fetchCenter getMessageList];
-    [self.navigationController.navigationBar addGestureRecognizer:self.slidingViewController.panGesture];
+//    [self.navigationController.navigationBar addGestureRecognizer:self.slidingViewController.panGesture];
 }
 
 - (void)setUpNavigationItem
 {
     CGRect frame = CGRectMake(0,0, 25,25);
-    UIButton *back = [Theme buttonWithImage:[Theme navMenuDefault]
-                                     target:self.slidingViewController
-                                   selector:@selector(anchorTopViewToRightAnimated:)
-                                      frame:frame];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:back];
+//    UIButton *back = [Theme buttonWithImage:[Theme navMenuDefault]
+//                                     target:self.slidingViewController
+//                                   selector:@selector(anchorTopViewToRightAnimated:)
+//                                      frame:frame];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:back];
     self.navigationItem.title = @"消息";
  
     UIButton *deleteBtn = [Theme buttonWithImage:[Theme navButtonDeleted]

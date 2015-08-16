@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "ECSlidingViewController.h"
+//#import "ECSlidingViewController.h"
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <Bugly/CrashReporter.h>
 #import "User.h"
@@ -26,10 +26,10 @@
     if ([User isUserLogin]){
         // 设置用户ID, 如果你的APP有登录态, 可以在用户登录后再次调用此接口
         [[CrashReporter sharedInstance] setUserId:[NSString stringWithFormat:@"%@ - %@",[User uid],[User userDisplayName]]];
-
-        ECSlidingViewController *root = (ECSlidingViewController *)self.window.rootViewController;
-        root.anchorRightPeekAmount = root.view.frame.size.width * (640 - 290.0)/640;
-        root.underLeftViewController.edgesForExtendedLayout = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeLeft;
+//
+//        ECSlidingViewController *root = (ECSlidingViewController *)self.window.rootViewController;
+//        root.anchorRightPeekAmount = root.view.frame.size.width * (640 - 290.0)/640;
+//        root.underLeftViewController.edgesForExtendedLayout = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeLeft;
     }else{
         UIStoryboard *storyBoard = self.window.rootViewController.storyboard;
         LoginViewController *loginVC = [storyBoard instantiateViewControllerWithIdentifier:@"LoginNavigationController"];

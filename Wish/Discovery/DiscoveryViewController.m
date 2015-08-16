@@ -8,7 +8,7 @@
 
 #import "DiscoveryViewController.h"
 #import "Theme.h"
-#import "UIViewController+ECSlidingViewController.h"
+//#import "UIViewController+ECSlidingViewController.h"
 #import "CHTCollectionViewWaterfallLayout.h"
 #import "DiscoveryBannerCell.h"
 
@@ -20,7 +20,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setUpNavigationItem];
     [self setupWaterFallCollectionView];
 }
 
@@ -45,27 +44,7 @@
 //                 withReuseIdentifier:BANNERID];
 
 }
-- (void)setUpNavigationItem
-{
-    CGRect frame = CGRectMake(0,0, 25,25);
-    UIButton *menuBtn = [Theme buttonWithImage:[Theme navMenuDefault]
-                                        target:self.slidingViewController
-                                      selector:@selector(anchorTopViewToRightAnimated:)
-                                         frame:frame];
-    
-    UIButton *addBtn = [Theme buttonWithImage:[Theme navAddDefault]
-                                       target:self
-                                     selector:@selector(addWish)
-                                        frame:frame];
 
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
-    self.navigationItem.rightBarButtonItem= [[UIBarButtonItem alloc] initWithCustomView:addBtn];
-}
-
-
-- (void)addWish{
-    //abstract
-}
 #pragma mark <UICollectionViewDataSource>
 
 

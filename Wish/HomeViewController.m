@@ -10,7 +10,6 @@
 #import "PostFeedViewController.h"
 #import "Theme.h"
 #import "MenuViewController.h"
-#import "UIViewController+ECSlidingViewController.h"
 #import "HomeCardView.h"
 #import "Plan+PlanCRUD.h"
 #import "Feed+FeedCRUD.h"
@@ -62,7 +61,7 @@ ViewForEmptyEventDelegate>
         self.guideView = nil;
         [self updatePage];
     }
-
+    self.tabBarController.tabBar.hidden = NO;
 }
 
 - (NSFetchedResultsController *)fetchedRC
@@ -101,7 +100,7 @@ ViewForEmptyEventDelegate>
     [super viewDidLoad];
     [self setUpNavigationItem];
     [self addLongPressGesture];
-    [self.view addGestureRecognizer:self.slidingViewController.panGesture];
+//    [self.view addGestureRecognizer:self.slidingViewController.panGesture];
     [[FetchCenter new] fetchPlanListForOwnerId:[User uid]];
 
 }
@@ -116,18 +115,18 @@ ViewForEmptyEventDelegate>
 - (void)setUpNavigationItem
 {
     CGRect frame = CGRectMake(0,0, 25,25);
-    UIButton *menuBtn = [Theme buttonWithImage:[Theme navMenuDefault]
-                                        target:self.slidingViewController
-                                      selector:@selector(anchorTopViewToRightAnimated:)
-                                         frame:frame];
+//    UIButton *menuBtn = [Theme buttonWithImage:[Theme navMenuDefault]
+//                                        target:self.slidingViewController
+//                                      selector:@selector(anchorTopViewToRightAnimated:)
+//                                         frame:frame];
     UIButton *addBtn = [Theme buttonWithImage:[Theme navAddDefault]
                                        target:self
                                      selector:@selector(addWish)
                                         frame:frame];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
 
-    self.title = @"我的事儿";
+//    self.title = @"我的事儿";
 }
 
 
@@ -173,7 +172,7 @@ ViewForEmptyEventDelegate>
 #pragma mark - Camera Util
 - (void)didPressCameraOnCard:(HomeCardView *)cardView{
     if (self.fetchedRC.fetchedObjects.count) {
-        self.currentPlan = cardView.plan;
+        self.currentPlan = [self.fetchedRC objectAtIndexPath:[self.collectionView indexPathForCell:cardView]];
         [ImagePicker startPickingImageFromLocalSourceFor:self];
     }
 
@@ -198,6 +197,7 @@ ViewForEmptyEventDelegate>
         [segue.destinationViewController setPlan:self.currentPlan];
         [segue.destinationViewController setImageForFeed:sender];
     }
+    self.tabBarController.tabBar.hidden = YES;
 }
 #pragma mark -  UICollectionView methods
 - (void)updatePage{
@@ -369,7 +369,14 @@ ViewForEmptyEventDelegate>
 - (void)configureCollectionViewCell:(HomeCardView *)cell atIndexPath:(NSIndexPath *)indexPath{
 
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
-    cell.plan = plan;
+    if (!plan.image){
+        [cell.imageView sd_setImageWithURL:[[FetchCenter new] urlWithImageID:plan.backgroundNum]];
+    }else{
+        cell.imageView.image = plan.image;
+    }
+    cell.titleLabel.text = plan.planTitle;
+    cell.subtitleLabel.text = [NSString stringWithFormat:@"%@条记录  %@人关注",plan.tryTimes,plan.followCount];
+
     cell.delegate = self;
     [cell layoutIfNeeded]; //fixed auto layout error on iphone 5s or above
 

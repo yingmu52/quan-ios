@@ -8,7 +8,7 @@
 
 #import "FollowingTableViewController.h"
 #import "Theme.h"
-#import "UIViewController+ECSlidingViewController.h"
+//#import "UIViewController+ECSlidingViewController.h"
 #import "FollowingCell.h"
 @interface FollowingTableViewController ()
 @property (nonatomic,weak) IBOutlet UIView *footerView;
@@ -33,12 +33,12 @@
 
 - (void)setUpNavigationItem
 {
-    CGRect frame = CGRectMake(0,0, 25,25);
-    UIButton *menuBtn = [Theme buttonWithImage:[Theme navMenuDefault]
-                                        target:self.slidingViewController
-                                      selector:@selector(anchorTopViewToRightAnimated:)
-                                         frame:frame];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
+//    CGRect frame = CGRectMake(0,0, 25,25);
+//    UIButton *menuBtn = [Theme buttonWithImage:[Theme navMenuDefault]
+//                                        target:self.slidingViewController
+//                                      selector:@selector(anchorTopViewToRightAnimated:)
+//                                         frame:frame];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
     
 }
 

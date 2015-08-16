@@ -18,6 +18,8 @@
 
 @interface HomeCardView : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (nonatomic,strong) Plan *plan;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak,nonatomic) IBOutlet UILabel *subtitleLabel;
+
 @property (nonatomic,weak) id <HomeCardViewDelegate>delegate;
 @end

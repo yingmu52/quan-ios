@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 #import "FetchCenter.h"
 #import "Plan.h"
-#import "UIViewController+ECSlidingViewController.h"
+//#import "UIViewController+ECSlidingViewController.h"
 #import "UIImageView+WebCache.h"
 #import "Theme.h"
 #import "User.h"
@@ -20,7 +20,7 @@
 #import "WishDetailVCFollower.h"
 static NSUInteger numberOfPreloadedFeeds = 3;
 
-@interface FollowingTVCData () <NSFetchedResultsControllerDelegate,FetchCenterDelegate,FollowingCellDelegate,ECSlidingViewControllerDelegate,UIGestureRecognizerDelegate>
+@interface FollowingTVCData () <NSFetchedResultsControllerDelegate,FetchCenterDelegate,FollowingCellDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,strong) NSMutableArray *serverPlanList;
@@ -39,7 +39,7 @@ static NSUInteger numberOfPreloadedFeeds = 3;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.fetchCenter fetchFollowingPlanList];
-    [self.navigationController.navigationBar addGestureRecognizer:self.slidingViewController.panGesture];
+//    [self.navigationController.navigationBar addGestureRecognizer:self.slidingViewController.panGesture];
 //    self.slidingViewController.panGesture.delegate = self;
 }
 //
@@ -230,7 +230,7 @@ static NSUInteger numberOfPreloadedFeeds = 3;
 #pragma mark - go to discovery 
 
 - (IBAction)goToDiscovery:(UITapGestureRecognizer *)tap{
-    self.slidingViewController.topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"NavigationControllerForDiscovery"];
+//    self.slidingViewController.topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"NavigationControllerForDiscovery"];
     
 }
 

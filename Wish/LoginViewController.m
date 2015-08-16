@@ -13,7 +13,7 @@
 #import "SDWebImageCompat.h"
 #import "User.h"
 #import "LoginDetailViewController.h"
-#import "ECSlidingViewController.h"
+//#import "ECSlidingViewController.h"
 
 #define AppKey @"ByYhJYTkXu0721fH"
 #define AppID @"1104337894"
@@ -181,9 +181,9 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"showMainViewFromLogin"]) {
-        ECSlidingViewController *root = (ECSlidingViewController *)segue.destinationViewController;
-        root.anchorRightPeekAmount = root.view.frame.size.width * (640 - 290.0)/640;
-        root.underLeftViewController.edgesForExtendedLayout = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeLeft;
+//        ECSlidingViewController *root = (ECSlidingViewController *)segue.destinationViewController;
+//        root.anchorRightPeekAmount = root.view.frame.size.width * (640 - 290.0)/640;
+//        root.underLeftViewController.edgesForExtendedLayout = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeLeft;
     }
     //    if ([segue.identifier isEqualToString:@"showLoginDetail"]) {
     //        [segue.destinationViewController setUserInfo:sender];

@@ -11,5 +11,4 @@
 
 @interface DiscoveryViewController : UICollectionViewController
 - (void)configureCell:(DiscoveryCell *)cell atIndexPath:(NSIndexPath *)indexPath; //abstract
-- (void)addWish;
 @end

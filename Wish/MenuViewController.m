@@ -12,7 +12,7 @@
 #import "SystemUtil.h"
 #import "User.h"
 #import "UIImageView+UIActivityIndicatorForSDWebImage.h"
-#import "UIViewController+ECSlidingViewController.h"
+//#import "UIViewController+ECSlidingViewController.h"
 #import "FetchCenter.h"
 #import "CustomBadge.h"
 

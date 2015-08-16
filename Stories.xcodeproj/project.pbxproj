@@ -134,6 +134,8 @@
 		AEA89DA51B31F7A0009C5586 /* WebP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA89D9F1B31F7A0009C5586 /* WebP.framework */; };
 		AEA89DA81B322045009C5586 /* UIImage+WebP_SD.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA89DA61B322045009C5586 /* UIImage+WebP_SD.m */; };
 		AEA89DA91B322045009C5586 /* UIImage+WebP_SD.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA89DA61B322045009C5586 /* UIImage+WebP_SD.m */; };
+		AEB003EF1B7FF7190056EA80 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB003EE1B7FF7190056EA80 /* MainTabBarController.m */; };
+		AEB003F01B7FF7190056EA80 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB003EE1B7FF7190056EA80 /* MainTabBarController.m */; };
 		AEBECCF31AE7687900EDF385 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBECCF21AE7687900EDF385 /* LoginViewController.m */; };
 		AEBECCF91AE8A16600EDF385 /* LoginDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBECCF81AE8A16600EDF385 /* LoginDetailViewController.m */; };
 		AEBFCA371A78614100686EFE /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA361A78614100686EFE /* PostDetailViewController.m */; };
@@ -237,18 +239,6 @@
 		AEF3F8831AA4E3C0008C2300 /* WishDetailVCFollower.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF3F8821AA4E3C0008C2300 /* WishDetailVCFollower.m */; };
 		AEF3F8841AA4E3C0008C2300 /* WishDetailVCFollower.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF3F8821AA4E3C0008C2300 /* WishDetailVCFollower.m */; };
 		AEF775441A8134FE000DB73B /* HomeCardFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF775431A8134FE000DB73B /* HomeCardFlowLayout.m */; };
-		AEF7F2811A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F26F1A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m */; };
-		AEF7F2821A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F26F1A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m */; };
-		AEF7F2831A686E8A0022410B /* ECSlidingAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F2711A686E8A0022410B /* ECSlidingAnimationController.m */; };
-		AEF7F2841A686E8A0022410B /* ECSlidingAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F2711A686E8A0022410B /* ECSlidingAnimationController.m */; };
-		AEF7F2851A686E8A0022410B /* ECSlidingInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F2741A686E8A0022410B /* ECSlidingInteractiveTransition.m */; };
-		AEF7F2861A686E8A0022410B /* ECSlidingInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F2741A686E8A0022410B /* ECSlidingInteractiveTransition.m */; };
-		AEF7F2871A686E8A0022410B /* ECSlidingSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F2761A686E8A0022410B /* ECSlidingSegue.m */; };
-		AEF7F2881A686E8A0022410B /* ECSlidingSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F2761A686E8A0022410B /* ECSlidingSegue.m */; };
-		AEF7F2891A686E8A0022410B /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F2781A686E8A0022410B /* ECSlidingViewController.m */; };
-		AEF7F28A1A686E8B0022410B /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F2781A686E8A0022410B /* ECSlidingViewController.m */; };
-		AEF7F28B1A686E8B0022410B /* UIViewController+ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F27A1A686E8A0022410B /* UIViewController+ECSlidingViewController.m */; };
-		AEF7F28C1A686E8B0022410B /* UIViewController+ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F27A1A686E8A0022410B /* UIViewController+ECSlidingViewController.m */; };
 		AEF7F2931A686FA30022410B /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F2921A686FA30022410B /* Theme.m */; };
 		AEF7F2941A686FA30022410B /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F2921A686FA30022410B /* Theme.m */; };
 		AEF7F2971A686FDB0022410B /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F2961A686FDB0022410B /* HomeViewController.m */; };
@@ -439,6 +429,8 @@
 		AEA89D9F1B31F7A0009C5586 /* WebP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebP.framework; sourceTree = "<group>"; };
 		AEA89DA61B322045009C5586 /* UIImage+WebP_SD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WebP_SD.m"; sourceTree = "<group>"; };
 		AEA89DA71B322045009C5586 /* UIImage+WebP_SD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WebP_SD.h"; sourceTree = "<group>"; };
+		AEB003ED1B7FF7190056EA80 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
+		AEB003EE1B7FF7190056EA80 /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
 		AEBECCF11AE7687800EDF385 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		AEBECCF21AE7687900EDF385 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		AEBECCF71AE8A16600EDF385 /* LoginDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginDetailViewController.h; sourceTree = "<group>"; };
@@ -543,19 +535,6 @@
 		AEF3F8821AA4E3C0008C2300 /* WishDetailVCFollower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailVCFollower.m; sourceTree = "<group>"; };
 		AEF775421A8134FE000DB73B /* HomeCardFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCardFlowLayout.h; sourceTree = "<group>"; };
 		AEF775431A8134FE000DB73B /* HomeCardFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCardFlowLayout.m; sourceTree = "<group>"; };
-		AEF7F26E1A686E8A0022410B /* ECPercentDrivenInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPercentDrivenInteractiveTransition.h; sourceTree = "<group>"; };
-		AEF7F26F1A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPercentDrivenInteractiveTransition.m; sourceTree = "<group>"; };
-		AEF7F2701A686E8A0022410B /* ECSlidingAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingAnimationController.h; sourceTree = "<group>"; };
-		AEF7F2711A686E8A0022410B /* ECSlidingAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingAnimationController.m; sourceTree = "<group>"; };
-		AEF7F2721A686E8A0022410B /* ECSlidingConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingConstants.h; sourceTree = "<group>"; };
-		AEF7F2731A686E8A0022410B /* ECSlidingInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingInteractiveTransition.h; sourceTree = "<group>"; };
-		AEF7F2741A686E8A0022410B /* ECSlidingInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingInteractiveTransition.m; sourceTree = "<group>"; };
-		AEF7F2751A686E8A0022410B /* ECSlidingSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingSegue.h; sourceTree = "<group>"; };
-		AEF7F2761A686E8A0022410B /* ECSlidingSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingSegue.m; sourceTree = "<group>"; };
-		AEF7F2771A686E8A0022410B /* ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingViewController.h; sourceTree = "<group>"; };
-		AEF7F2781A686E8A0022410B /* ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingViewController.m; sourceTree = "<group>"; };
-		AEF7F2791A686E8A0022410B /* UIViewController+ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ECSlidingViewController.h"; sourceTree = "<group>"; };
-		AEF7F27A1A686E8A0022410B /* UIViewController+ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ECSlidingViewController.m"; sourceTree = "<group>"; };
 		AEF7F2911A686FA30022410B /* Theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Theme.h; sourceTree = "<group>"; };
 		AEF7F2921A686FA30022410B /* Theme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Theme.m; sourceTree = "<group>"; };
 		AEF7F2951A686FDB0022410B /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
@@ -1022,6 +1001,8 @@
 		AEEC6C771A6DB6220021B7E4 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				AEB003ED1B7FF7190056EA80 /* MainTabBarController.h */,
+				AEB003EE1B7FF7190056EA80 /* MainTabBarController.m */,
 				AE59B5F01B40FB55006CA4AB /* ViewForEmptyEvent.xib */,
 				AE59B5F31B410437006CA4AB /* ViewForEmptyEvent.h */,
 				AE59B5F41B410437006CA4AB /* ViewForEmptyEvent.m */,
@@ -1100,31 +1081,9 @@
 				AE0E79481A76EB3E007C48EE /* Reachability */,
 				AEF7F2A61A6884950022410B /* CustomNavigationItem */,
 				AEA89D9B1B31F7A0009C5586 /* iOS-WebP */,
-				AEF7F26D1A686E8A0022410B /* ECSlidingViewController */,
 			);
 			name = "Third Party";
 			path = "Wish/Third Party";
-			sourceTree = "<group>";
-		};
-		AEF7F26D1A686E8A0022410B /* ECSlidingViewController */ = {
-			isa = PBXGroup;
-			children = (
-				AEF7F26E1A686E8A0022410B /* ECPercentDrivenInteractiveTransition.h */,
-				AEF7F26F1A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m */,
-				AEF7F2701A686E8A0022410B /* ECSlidingAnimationController.h */,
-				AEF7F2711A686E8A0022410B /* ECSlidingAnimationController.m */,
-				AEF7F2721A686E8A0022410B /* ECSlidingConstants.h */,
-				AEF7F2731A686E8A0022410B /* ECSlidingInteractiveTransition.h */,
-				AEF7F2741A686E8A0022410B /* ECSlidingInteractiveTransition.m */,
-				AEF7F2751A686E8A0022410B /* ECSlidingSegue.h */,
-				AEF7F2761A686E8A0022410B /* ECSlidingSegue.m */,
-				AEF7F2771A686E8A0022410B /* ECSlidingViewController.h */,
-				AEF7F2781A686E8A0022410B /* ECSlidingViewController.m */,
-				AEF7F2791A686E8A0022410B /* UIViewController+ECSlidingViewController.h */,
-				AEF7F27A1A686E8A0022410B /* UIViewController+ECSlidingViewController.m */,
-			);
-			name = ECSlidingViewController;
-			path = ECSlidingViewController/ECSlidingViewController;
 			sourceTree = "<group>";
 		};
 		AEF7F2A61A6884950022410B /* CustomNavigationItem */ = {
@@ -1363,7 +1322,6 @@
 				AE8A9EA11B1FF6E7007BD4E5 /* CustomBadge.m in Sources */,
 				AEF775441A8134FE000DB73B /* HomeCardFlowLayout.m in Sources */,
 				AE479E9E1A6F775C00366A0A /* PostViewController.m in Sources */,
-				AEF7F2851A686E8A0022410B /* ECSlidingInteractiveTransition.m in Sources */,
 				AEEC6C6D1A6DB0FC0021B7E4 /* HeaderView.m in Sources */,
 				AE9A19881B02E3A100590784 /* FeedbackkAccessoryView.m in Sources */,
 				AE3FCFC71B07D63900422FB8 /* UIImageView+WebCache.m in Sources */,
@@ -1390,14 +1348,11 @@
 				AE3FCFBF1B07D63900422FB8 /* UIImage+GIF.m in Sources */,
 				AED355F81B228696000427FF /* FeedDetailHeader.m in Sources */,
 				AEFA49181B37C88400FEF0A2 /* UIScrollView+SVPullToRefresh.m in Sources */,
-				AEF7F2811A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				AE3FCFC91B07D63900422FB8 /* UIView+WebCacheOperation.m in Sources */,
-				AEF7F2891A686E8A0022410B /* ECSlidingViewController.m in Sources */,
 				AEE9449E1B69F31C00C130CF /* JTSImageViewController.m in Sources */,
 				AE0E8DEC1B707BB70089F3CC /* README.md in Sources */,
 				AED4DD221B0E925300AF1497 /* Message+MessageCRUD.m in Sources */,
 				AE95A9F91ACFBCA9007465D5 /* UIActionSheet+Blocks.m in Sources */,
-				AEF7F28B1A686E8B0022410B /* UIViewController+ECSlidingViewController.m in Sources */,
 				AEFA5FDA1AAFBA41001CA0C8 /* NZCircularImageView.m in Sources */,
 				AEC068931B2D3D55007975D2 /* FeedDetailVCOwner.m in Sources */,
 				AE95A9F51ACFA7F8007465D5 /* TWPhotoCollectionViewCell.m in Sources */,
@@ -1417,15 +1372,14 @@
 				AEF7F2AD1A6884950022410B /* UINavigationItem+CustomItem.m in Sources */,
 				AEFA49161B37C88400FEF0A2 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				AEFEE4001A8EE0A7007E8234 /* FollowingCell.m in Sources */,
+				AEB003EF1B7FF7190056EA80 /* MainTabBarController.m in Sources */,
 				AE3FCFB71B07D63900422FB8 /* SDWebImageDownloaderOperation.m in Sources */,
 				AEF3F8831AA4E3C0008C2300 /* WishDetailVCFollower.m in Sources */,
 				AE611ED91B2409E7006332F3 /* AMBCircularButton.m in Sources */,
 				AEE9448B1B69C9D800C130CF /* Plan.m in Sources */,
-				AEF7F2831A686E8A0022410B /* ECSlidingAnimationController.m in Sources */,
 				AED4CB1E1AC7556800EE2DA4 /* KTCenterFlowLayout.m in Sources */,
 				AED9A67A1B44BE6E00108729 /* RequestLogViewController.m in Sources */,
 				AEBECCF91AE8A16600EDF385 /* LoginDetailViewController.m in Sources */,
-				AEF7F2871A686E8A0022410B /* ECSlidingSegue.m in Sources */,
 				AEBFCA371A78614100686EFE /* PostDetailViewController.m in Sources */,
 				AEE944A21B69F31C00C130CF /* UIApplication+JTSImageViewController.m in Sources */,
 				AED05EDB1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m in Sources */,
@@ -1491,10 +1445,7 @@
 				AEE944A11B69F31C00C130CF /* JTSSimpleImageDownloader.m in Sources */,
 				AED5AB231AFDE39800719208 /* CommentAcessaryView.m in Sources */,
 				AEC068941B2D3D55007975D2 /* FeedDetailVCOwner.m in Sources */,
-				AEF7F2841A686E8A0022410B /* ECSlidingAnimationController.m in Sources */,
-				AEF7F28C1A686E8B0022410B /* UIViewController+ECSlidingViewController.m in Sources */,
 				AED4CB441AC79F3A00EE2DA4 /* ModalLeftToRightSegue.m in Sources */,
-				AEF7F28A1A686E8B0022410B /* ECSlidingViewController.m in Sources */,
 				AED5BC681ABEA7EB00EFF398 /* ProfileViewController.m in Sources */,
 				AEF7F2941A686FA30022410B /* Theme.m in Sources */,
 				AE3FCFC01B07D63900422FB8 /* UIImage+GIF.m in Sources */,
@@ -1511,19 +1462,18 @@
 				AEEC6C6E1A6DB0FC0021B7E4 /* HeaderView.m in Sources */,
 				AED5BC641ABE3CB600EFF398 /* SettingViewController.m in Sources */,
 				AED4CB231AC75A0200EE2DA4 /* KeyWordCell.m in Sources */,
+				AEB003F01B7FF7190056EA80 /* MainTabBarController.m in Sources */,
 				AEE9448C1B69C9D800C130CF /* Plan.m in Sources */,
 				AE01725C1A65CD8F0014266F /* WishTests.m in Sources */,
 				AE2F28E81AD3937700FC3370 /* WishDetailVCDiscovery.m in Sources */,
 				AEE4A6CD1A9684D500ABF946 /* AchieveViewController.m in Sources */,
 				AEA89DA31B31F7A0009C5586 /* UIImage+WebP.m in Sources */,
-				AEF7F2861A686E8A0022410B /* ECSlidingInteractiveTransition.m in Sources */,
 				AEA89DA91B322045009C5586 /* UIImage+WebP_SD.m in Sources */,
 				AE3FCFC21B07D63900422FB8 /* UIImage+MultiFormat.m in Sources */,
 				AEFB04871AD12437009EB0D3 /* DiscoveryCell.m in Sources */,
 				AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */,
 				AEEAC9B91B6041170056DC0F /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				AEE075391A744A770015155B /* SystemUtil.m in Sources */,
-				AEF7F2821A686E8A0022410B /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				AEE944A51B69F31C00C130CF /* UIImage+JTSImageEffects.m in Sources */,
 				AE479EAF1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */,
 				AEE4A6D11A96A5D500ABF946 /* AchieveCell.m in Sources */,
@@ -1544,7 +1494,6 @@
 				AED5AB1E1AFDCBBB00719208 /* Feed.m in Sources */,
 				AE611EDA1B2409E7006332F3 /* AMBCircularButton.m in Sources */,
 				AED4CB271AC7604E00EE2DA4 /* SGSStaggeredFlowLayout.m in Sources */,
-				AEF7F2881A686E8A0022410B /* ECSlidingSegue.m in Sources */,
 				AE95A9FD1ACFC26A007465D5 /* ImagePicker.m in Sources */,
 				AE9A3AEC1A9B1DB000F0588F /* AchieveVCData.m in Sources */,
 				AEE9449B1B69F31C00C130CF /* JTSAnimatedGIFUtility.m in Sources */,

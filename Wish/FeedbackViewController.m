@@ -12,7 +12,7 @@
 #import "SDWebImageCompat.h"
 #import "FeedbackkAccessoryView.h"
 #import "GCPTextView.h"
-#import "UIViewController+ECSlidingViewController.h"
+//#import "UIViewController+ECSlidingViewController.h"
 @interface FeedbackViewController () <FetchCenterDelegate,UITextViewDelegate,UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet GCPTextView *textView;
 @property (nonatomic,strong) UIButton *tikButton;

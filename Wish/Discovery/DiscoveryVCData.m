@@ -13,7 +13,7 @@
 #import "AppDelegate.h"
 #import "User.h"
 #import "WishDetailVCFollower.h"
-#import "UIViewController+ECSlidingViewController.h"
+//#import "UIViewController+ECSlidingViewController.h"
 @interface DiscoveryVCData () <FetchCenterDelegate,NSFetchedResultsControllerDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
@@ -33,11 +33,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view addGestureRecognizer:self.slidingViewController.panGesture];
+//    [self.view addGestureRecognizer:self.slidingViewController.panGesture];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = NO;
     [self.fetchCenter getDiscoveryList];
 }
 - (void)addWish{
@@ -139,6 +140,7 @@
     if ([segue.identifier isEqualToString:@"showDiscoveryWishDetail"] || [segue.identifier isEqualToString:@"showWishDetailVCOwnerFromDiscovery"]){
         [segue.destinationViewController setPlan:plan];
     }
+    self.tabBarController.tabBar.hidden = YES;
 }
 
 #pragma mark - fetched results controller delegate
