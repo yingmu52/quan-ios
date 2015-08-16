@@ -953,7 +953,7 @@
                         <viewControllerLayoutGuide type="bottom" id="eUx-6Z-ly2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="v3t-7r-vWJ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uow-gD-atl">
@@ -1277,6 +1277,7 @@
                                 <exclude reference="uow-gD-atl"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="Cm1-CL-0Mt"/>
                                 <exclude reference="8FV-vm-4C8"/>
                                 <exclude reference="8pK-94-uOy"/>
                                 <exclude reference="9VM-Xd-CAd"/>
@@ -1288,7 +1289,6 @@
                                 <exclude reference="cMM-qC-5i3"/>
                                 <exclude reference="hSe-Qi-DIt"/>
                                 <exclude reference="prA-3z-51l"/>
-                                <exclude reference="Cm1-CL-0Mt"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -1296,6 +1296,7 @@
                                 <include reference="uow-gD-atl"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="Cm1-CL-0Mt"/>
                                 <exclude reference="8FV-vm-4C8"/>
                                 <include reference="8pK-94-uOy"/>
                                 <exclude reference="9VM-Xd-CAd"/>
@@ -1307,7 +1308,6 @@
                                 <exclude reference="cMM-qC-5i3"/>
                                 <exclude reference="hSe-Qi-DIt"/>
                                 <exclude reference="prA-3z-51l"/>
-                                <include reference="Cm1-CL-0Mt"/>
                             </mask>
                         </variation>
                     </view>
