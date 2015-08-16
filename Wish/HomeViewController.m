@@ -132,7 +132,7 @@ ViewForEmptyEventDelegate>
 - (StationView *)stationView
 {
     if (!_stationView){
-        _stationView = [StationView instantiateFromNib:self.view.frame];
+        _stationView = [StationView instantiateFromNib:[UIScreen mainScreen].bounds];
     }
     return _stationView;
 }
