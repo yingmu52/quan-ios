@@ -1328,7 +1328,12 @@
         <scene sceneID="w0m-7Q-OqX">
             <objects>
                 <navigationController id="m7d-Re-JGr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="消息" id="kSw-bT-wJs"/>
+                    <tabBarItem key="tabBarItem" title="消息" image="tab_ic_message" id="kSw-bT-wJs">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-8"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="tab_ic_message_pressed"/>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="D3Z-Q7-A8z" customClass="NavigationBar">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2315,7 +2320,12 @@
         <scene sceneID="FbS-uZ-glk">
             <objects>
                 <navigationController storyboardIdentifier="HomeNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="81G-fy-O9t" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="事儿" id="kq0-v6-o9I"/>
+                    <tabBarItem key="tabBarItem" title="事儿" image="tab_ic_home" id="kq0-v6-o9I">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-8"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="tab_ic_home_pressed"/>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WjJ-64-HOQ" customClass="NavigationBar">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -3183,7 +3193,12 @@
         <scene sceneID="0bo-PJ-66c">
             <objects>
                 <navigationController storyboardIdentifier="NavigationControllerForDiscovery" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qWQ-Vi-JtX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="新鲜" id="WQy-Li-A97"/>
+                    <tabBarItem key="tabBarItem" title="新鲜" image="tab_ic_discover" id="WQy-Li-A97">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-8"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="tab_ic_discover_pressed"/>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Oym-Lx-qWA" customClass="NavigationBar">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -5362,7 +5377,13 @@
         <image name="profile_ic" width="35" height="35"/>
         <image name="profile_image" width="640" height="100"/>
         <image name="tab_bg_avatar" width="240" height="256"/>
+        <image name="tab_ic_discover" width="20" height="20"/>
+        <image name="tab_ic_discover_pressed" width="20" height="20"/>
+        <image name="tab_ic_home" width="20" height="20"/>
+        <image name="tab_ic_home_pressed" width="20" height="20"/>
         <image name="tab_ic_login_default" width="240" height="256"/>
+        <image name="tab_ic_message" width="20" height="20"/>
+        <image name="tab_ic_message_pressed" width="20" height="20"/>
         <image name="tips_bg" width="69" height="69"/>
     </resources>
     <inferredMetricsTieBreakers>
@@ -5374,4 +5395,5 @@
         <segue reference="CTd-gb-xTE"/>
         <segue reference="cel-0L-eNY"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" red="0.0039215686274509803" green="0.75686274509803919" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
 </document>

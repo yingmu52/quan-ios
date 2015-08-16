@@ -17,11 +17,14 @@
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     CGRect tabFrame = self.tabBar.frame;
-    CGFloat referenceHeight = [UIScreen mainScreen].bounds.size.height;
-    CGFloat height = 120 / 1136.0f * referenceHeight;
+    CGFloat height = 60.0f;
     tabFrame.size.height = height;
     tabFrame.origin.y = self.view.frame.size.height - height;
     self.tabBar.frame = tabFrame;
 }
 
+- (void)awakeFromNib{
+    [super awakeFromNib];
+    [[UITabBar appearance] setTintColor:[SystemUtil colorFromHexString:@"#01C1A8"]];
+}
 @end
