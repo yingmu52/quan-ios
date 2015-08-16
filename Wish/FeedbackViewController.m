@@ -49,8 +49,8 @@
     
     CGRect frame = CGRectMake(0,0, 25,25);
     UIButton *backBtn = [Theme buttonWithImage:[Theme navBackButtonDefault]
-                                        target:self
-                                      selector:@selector(dismissModalViewControllerAnimated:)
+                                        target:self.navigationController
+                                      selector:@selector(popViewControllerAnimated:)
                                          frame:frame];
     self.tikButton = [Theme buttonWithImage:[Theme navTikButtonDefault]
                                      target:self

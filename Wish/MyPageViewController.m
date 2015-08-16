@@ -35,10 +35,8 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     self.iconImageView.hidden = YES;
-    self.navigationController.navigationBar.hidden = YES;
     [self checkUpdate];
     self.tableView.tableHeaderView.frame = CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame),324.0f / 1136 * CGRectGetHeight(self.tableView.frame));
-    
     
     NSString *newPicId = [User updatedProfilePictureId];
     [self.profilePicture setImageWithURL:[self.fetchCenter urlWithImageID:newPicId]
@@ -46,10 +44,13 @@
     
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = YES;
+    self.tabBarController.tabBar.hidden = NO;
     [self becomeFirstResponder];
 }
+
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self resignFirstResponder];
@@ -127,6 +128,18 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0){
+        if (indexPath.row == 1){ // 完成的事儿
+            [self performSegueWithIdentifier:@"ShowAcheivementList" sender:nil];
+        }
+    }
+    
+    if (indexPath.section == 1){
+        if (indexPath.row == 2){ //用户反馈
+            [self performSegueWithIdentifier:@"showFeedbackView" sender:nil];
+        }
+    }
+    
     if (indexPath.section == 2){
         [UIActionSheet showInView:self.view
                         withTitle:@"退出后不会删除任何历史数据，下次登录依然可以使用帐号。"
@@ -202,6 +215,12 @@
     
 }
 
+#pragma mark - segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    self.navigationController.navigationBar.hidden = NO;
+    self.tabBarController.tabBar.hidden = YES;
+}
 @end
 
 

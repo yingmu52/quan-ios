@@ -1290,6 +1290,9 @@
                                 <exclude reference="cDR-93-hn3"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="zKq-M0-sq3"/>
+                                <exclude reference="5gL-kQ-PpW"/>
+                                <exclude reference="Cm1-CL-0Mt"/>
                                 <exclude reference="8FV-vm-4C8"/>
                                 <exclude reference="8pK-94-uOy"/>
                                 <exclude reference="9VM-Xd-CAd"/>
@@ -1301,9 +1304,6 @@
                                 <exclude reference="cMM-qC-5i3"/>
                                 <exclude reference="hSe-Qi-DIt"/>
                                 <exclude reference="prA-3z-51l"/>
-                                <exclude reference="zKq-M0-sq3"/>
-                                <exclude reference="5gL-kQ-PpW"/>
-                                <exclude reference="Cm1-CL-0Mt"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -1312,6 +1312,9 @@
                                 <include reference="cDR-93-hn3"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="zKq-M0-sq3"/>
+                                <include reference="5gL-kQ-PpW"/>
+                                <include reference="Cm1-CL-0Mt"/>
                                 <exclude reference="8FV-vm-4C8"/>
                                 <include reference="8pK-94-uOy"/>
                                 <exclude reference="9VM-Xd-CAd"/>
@@ -1323,9 +1326,6 @@
                                 <exclude reference="cMM-qC-5i3"/>
                                 <exclude reference="hSe-Qi-DIt"/>
                                 <exclude reference="prA-3z-51l"/>
-                                <include reference="zKq-M0-sq3"/>
-                                <include reference="5gL-kQ-PpW"/>
-                                <include reference="Cm1-CL-0Mt"/>
                             </mask>
                         </variation>
                     </view>
@@ -2781,7 +2781,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pt8-1V-Z4d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1480.5" y="2385.75"/>
+            <point key="canvasLocation" x="3085.5" y="-4280.25"/>
         </scene>
         <!--Wish DetailVC Discovery-->
         <scene sceneID="v9l-pC-NeM">
@@ -3233,24 +3233,6 @@
             </objects>
             <point key="canvasLocation" x="-1684.5" y="-1629"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="oql-Pd-j6R">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6Q3-IH-cnc" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uXt-OW-be1" customClass="NavigationBar">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="IHE-Tk-1qk" kind="relationship" relationship="rootViewController" id="sV0-Oo-ve2"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9lj-sH-N4z" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2797.5" y="2420.25"/>
-        </scene>
         <!--我-->
         <scene sceneID="tag-Sl-CNN">
             <objects>
@@ -3275,22 +3257,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qBZ-x7-vS6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3414" y="-3172.5"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="dRt-gq-QIx">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uQz-XF-LbE" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AOj-IP-DMh" customClass="NavigationBar">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="kcp-Id-Hzn" kind="relationship" relationship="rootViewController" id="DTM-of-qhC"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ltE-cf-kVI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2739" y="-4252.5"/>
         </scene>
         <!--Feedback View Controller-->
         <scene sceneID="Q1I-NJ-5oY">
@@ -3353,7 +3319,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q0N-5Z-lB6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1669.5" y="-4213.5"/>
+            <point key="canvasLocation" x="-367.5" y="-3984"/>
         </scene>
         <!--My Page View Controller-->
         <scene sceneID="p9F-bV-MOz">
@@ -4154,11 +4120,14 @@
                     <connections>
                         <outlet property="iconImageView" destination="m8x-Dn-Mul" id="znH-hi-iFg"/>
                         <outlet property="profilePicture" destination="L5M-v3-pcw" id="Hkz-qt-1Ny"/>
+                        <segue destination="1LC-sn-tZg" kind="show" identifier="showLocalRequestLog" id="tNm-06-DMm"/>
+                        <segue destination="IHE-Tk-1qk" kind="show" identifier="ShowAcheivementList" id="Hwy-tI-XM3"/>
+                        <segue destination="kcp-Id-Hzn" kind="show" identifier="showFeedbackView" id="ZFl-9a-0Dk"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bDw-Cl-yWH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1831.5" y="-3217.5"/>
+            <point key="canvasLocation" x="-1870.5" y="-3408.75"/>
         </scene>
         <!--Request Log View Controller-->
         <scene sceneID="QjG-Rl-EMA">
@@ -4226,7 +4195,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vgg-QJ-MlH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="843" y="-5077.5"/>
+            <point key="canvasLocation" x="177" y="-3225"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="Jmd-XO-3ZT">
@@ -5087,7 +5056,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mAH-kH-P45" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-28.5" y="2385.75"/>
+            <point key="canvasLocation" x="4537.5" y="-4280.25"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="JwA-A7-FpT">
@@ -5700,7 +5669,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="beG-lf-B7V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="826.5" y="-4252.5"/>
+            <point key="canvasLocation" x="106.5" y="-5056.5"/>
         </scene>
     </scenes>
     <resources>
