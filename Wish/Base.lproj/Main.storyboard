@@ -3183,6 +3183,7 @@
                         <segue destination="qWQ-Vi-JtX" kind="relationship" relationship="viewControllers" id="iSi-v2-Y4W"/>
                         <segue destination="81G-fy-O9t" kind="relationship" relationship="viewControllers" id="BZF-qU-I16"/>
                         <segue destination="m7d-Re-JGr" kind="relationship" relationship="viewControllers" id="3GI-6H-MGJ"/>
+                        <segue destination="2Fl-7V-mVz" kind="relationship" relationship="viewControllers" id="CiC-QL-bwg"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MS6-VY-ScM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3231,10 +3232,13 @@
             </objects>
             <point key="canvasLocation" x="-2797.5" y="2420.25"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--我-->
         <scene sceneID="tag-Sl-CNN">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2Fl-7V-mVz" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="我" image="tab_ic_me" selectedImage="tab_ic_me_pressed" id="YA3-sO-Hs2">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-8"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Ihv-su-j0c"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hth-tI-cWg" customClass="NavigationBar">
@@ -3242,13 +3246,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="iFY-B5-FXO" kind="relationship" relationship="rootViewController" id="wwL-NV-yXa"/>
-                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qBZ-x7-vS6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1662" y="-3436.5"/>
+            <point key="canvasLocation" x="-3414" y="-3172.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dRt-gq-QIx">
@@ -3282,6 +3283,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="16" y="72" width="368" height="267"/>
+                                </variation>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" red="0.95686274510000002" green="0.97254901959999995" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -3833,6 +3837,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="64" width="400" height="736"/>
+                                </variation>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -5382,6 +5389,8 @@
         <image name="tab_ic_home" width="20" height="20"/>
         <image name="tab_ic_home_pressed" width="20" height="20"/>
         <image name="tab_ic_login_default" width="240" height="256"/>
+        <image name="tab_ic_me" width="20" height="20"/>
+        <image name="tab_ic_me_pressed" width="20" height="20"/>
         <image name="tab_ic_message" width="20" height="20"/>
         <image name="tab_ic_message_pressed" width="20" height="20"/>
         <image name="tips_bg" width="69" height="69"/>

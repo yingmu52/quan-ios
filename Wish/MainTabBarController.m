@@ -25,6 +25,6 @@
 
 - (void)awakeFromNib{
     [super awakeFromNib];
-    [[UITabBar appearance] setTintColor:[SystemUtil colorFromHexString:@"#01C1A8"]];
+    [[UITabBar appearance] setSelectedImageTintColor:[SystemUtil colorFromHexString:@"#01C1A8"]];
 }
 @end
