@@ -34,13 +34,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
-    [self.fetchCenter getMessageList];
-//    [self.navigationController.navigationBar addGestureRecognizer:self.slidingViewController.panGesture];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = NO;
+    [self.fetchCenter getMessageList];
 }
 - (void)setUpNavigationItem
 {
