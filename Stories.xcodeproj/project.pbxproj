@@ -136,6 +136,8 @@
 		AEA89DA91B322045009C5586 /* UIImage+WebP_SD.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA89DA61B322045009C5586 /* UIImage+WebP_SD.m */; };
 		AEB003EF1B7FF7190056EA80 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB003EE1B7FF7190056EA80 /* MainTabBarController.m */; };
 		AEB003F01B7FF7190056EA80 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB003EE1B7FF7190056EA80 /* MainTabBarController.m */; };
+		AEB003F31B8056980056EA80 /* MyPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB003F21B8056980056EA80 /* MyPageViewController.m */; };
+		AEB003F41B8056980056EA80 /* MyPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB003F21B8056980056EA80 /* MyPageViewController.m */; };
 		AEBECCF31AE7687900EDF385 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBECCF21AE7687900EDF385 /* LoginViewController.m */; };
 		AEBECCF91AE8A16600EDF385 /* LoginDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBECCF81AE8A16600EDF385 /* LoginDetailViewController.m */; };
 		AEBFCA371A78614100686EFE /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA361A78614100686EFE /* PostDetailViewController.m */; };
@@ -431,6 +433,8 @@
 		AEA89DA71B322045009C5586 /* UIImage+WebP_SD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WebP_SD.h"; sourceTree = "<group>"; };
 		AEB003ED1B7FF7190056EA80 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
 		AEB003EE1B7FF7190056EA80 /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
+		AEB003F11B8056980056EA80 /* MyPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPageViewController.h; sourceTree = "<group>"; };
+		AEB003F21B8056980056EA80 /* MyPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPageViewController.m; sourceTree = "<group>"; };
 		AEBECCF11AE7687800EDF385 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		AEBECCF21AE7687900EDF385 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		AEBECCF71AE8A16600EDF385 /* LoginDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginDetailViewController.h; sourceTree = "<group>"; };
@@ -921,6 +925,8 @@
 		AED5BC601ABE3C9A00EFF398 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				AEB003F11B8056980056EA80 /* MyPageViewController.h */,
+				AEB003F21B8056980056EA80 /* MyPageViewController.m */,
 				AED9A6781B44BE6E00108729 /* RequestLogViewController.h */,
 				AED9A6791B44BE6E00108729 /* RequestLogViewController.m */,
 				AED4CB411AC79F3A00EE2DA4 /* ModalLeftToRightSegue.h */,
@@ -1327,6 +1333,7 @@
 				AE3FCFC71B07D63900422FB8 /* UIImageView+WebCache.m in Sources */,
 				AE3FCFAF1B07D63900422FB8 /* SDImageCache.m in Sources */,
 				AE606A201AF4697B003DF16E /* MessageListViewController.m in Sources */,
+				AEB003F31B8056980056EA80 /* MyPageViewController.m in Sources */,
 				AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */,
 				AEFA5FE11AAFCAD9001CA0C8 /* ALDBlurImageProcessor.m in Sources */,
 				AE3FCFB91B07D63900422FB8 /* SDWebImageManager.m in Sources */,
@@ -1501,6 +1508,7 @@
 				AEC0E1C61AC64F9600563F7C /* WishDetailVCOwnerAchieved.m in Sources */,
 				AED9A67B1B44BE6E00108729 /* RequestLogViewController.m in Sources */,
 				AED4DD231B0E925300AF1497 /* Message+MessageCRUD.m in Sources */,
+				AEB003F41B8056980056EA80 /* MyPageViewController.m in Sources */,
 				AEBFCA381A78614100686EFE /* PostDetailViewController.m in Sources */,
 				AE3FCFBC1B07D63900422FB8 /* SDWebImagePrefetcher.m in Sources */,
 				AEF7F2AC1A6884950022410B /* CustomBarItem.m in Sources */,
