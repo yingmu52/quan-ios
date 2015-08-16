@@ -9,7 +9,6 @@
 #import "SettingViewController.h"
 #import "User.h"
 #import "AppDelegate.h"
-#import "MenuViewController.h"
 #import "FetchCenter.h"
 #import "SDWebImageCompat.h"
 #import "UIActionSheet+Blocks.h"

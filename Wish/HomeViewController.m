@@ -9,7 +9,6 @@
 #import "HomeViewController.h"
 #import "PostFeedViewController.h"
 #import "Theme.h"
-#import "MenuViewController.h"
 #import "HomeCardView.h"
 #import "Plan+PlanCRUD.h"
 #import "Feed+FeedCRUD.h"

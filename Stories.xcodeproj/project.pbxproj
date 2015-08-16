@@ -12,8 +12,6 @@
 		AE0172451A65CD8E0014266F /* Wish.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AE0172431A65CD8E0014266F /* Wish.xcdatamodeld */; };
 		AE01724D1A65CD8E0014266F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE01724C1A65CD8E0014266F /* Images.xcassets */; };
 		AE01725C1A65CD8F0014266F /* WishTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE01725B1A65CD8F0014266F /* WishTests.m */; };
-		AE0172691A65D3140014266F /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0172681A65D3140014266F /* MenuViewController.m */; };
-		AE01726A1A65D3140014266F /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0172681A65D3140014266F /* MenuViewController.m */; };
 		AE05C0361B0D62BA002F83F1 /* Owner.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05C0351B0D62BA002F83F1 /* Owner.m */; };
 		AE05C0371B0D62BA002F83F1 /* Owner.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05C0351B0D62BA002F83F1 /* Owner.m */; };
 		AE0ADF191ABD78CC00692131 /* HomeCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0ADF181ABD78CC00692131 /* HomeCardViewController.m */; };
@@ -96,7 +94,6 @@
 		AE611ED91B2409E7006332F3 /* AMBCircularButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AE611ED81B2409E7006332F3 /* AMBCircularButton.m */; };
 		AE611EDA1B2409E7006332F3 /* AMBCircularButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AE611ED81B2409E7006332F3 /* AMBCircularButton.m */; };
 		AE6E7A0C1AB0DF1F0023B9C7 /* PopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE6E7A0B1AB0DF1F0023B9C7 /* PopupView.xib */; };
-		AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE72E9541A66F2AA0046B38D /* MenuCell.m */; };
 		AE767E7F1ACE35A600F35137 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE767E7E1ACE35A600F35137 /* FeedbackViewController.m */; };
 		AE767E801ACE35A600F35137 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE767E7E1ACE35A600F35137 /* FeedbackViewController.m */; };
 		AE8A9E9F1B1FF6E7007BD4E5 /* BadgeStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8A9E9C1B1FF6E7007BD4E5 /* BadgeStyle.m */; };
@@ -298,8 +295,6 @@
 		AE0172551A65CD8E0014266F /* StoriesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StoriesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE01725A1A65CD8F0014266F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE01725B1A65CD8F0014266F /* WishTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WishTests.m; sourceTree = "<group>"; };
-		AE0172671A65D3140014266F /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
-		AE0172681A65D3140014266F /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		AE05C0341B0D62BA002F83F1 /* Owner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Owner.h; sourceTree = "<group>"; };
 		AE05C0351B0D62BA002F83F1 /* Owner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Owner.m; sourceTree = "<group>"; };
 		AE08C66A1B11184D00ED8B46 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -389,8 +384,6 @@
 		AE611ED71B2409E7006332F3 /* AMBCircularButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBCircularButton.h; sourceTree = "<group>"; };
 		AE611ED81B2409E7006332F3 /* AMBCircularButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBCircularButton.m; sourceTree = "<group>"; };
 		AE6E7A0B1AB0DF1F0023B9C7 /* PopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopupView.xib; sourceTree = "<group>"; };
-		AE72E9531A66F2AA0046B38D /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
-		AE72E9541A66F2AA0046B38D /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		AE767E7D1ACE35A600F35137 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
 		AE767E7E1ACE35A600F35137 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
 		AE8A9E9B1B1FF6E7007BD4E5 /* BadgeStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgeStyle.h; sourceTree = "<group>"; };
@@ -639,7 +632,7 @@
 				AED355FB1B22889B000427FF /* FeedDetail */,
 				AEEC6C781A6DB6340021B7E4 /* WishDetail */,
 				AEEC6C771A6DB6220021B7E4 /* Home */,
-				AEEC6C751A6DB5EE0021B7E4 /* Menu */,
+				AEEC6C751A6DB5EE0021B7E4 /* Login */,
 				AEF7F29E1A6875360022410B /* Main.storyboard */,
 				AE01724C1A65CD8E0014266F /* Images.xcassets */,
 				AE01724E1A65CD8E0014266F /* LaunchScreen.xib */,
@@ -989,19 +982,15 @@
 			path = "Dynamic Cell Height";
 			sourceTree = "<group>";
 		};
-		AEEC6C751A6DB5EE0021B7E4 /* Menu */ = {
+		AEEC6C751A6DB5EE0021B7E4 /* Login */ = {
 			isa = PBXGroup;
 			children = (
 				AEBECCF71AE8A16600EDF385 /* LoginDetailViewController.h */,
 				AEBECCF81AE8A16600EDF385 /* LoginDetailViewController.m */,
 				AEBECCF11AE7687800EDF385 /* LoginViewController.h */,
 				AEBECCF21AE7687900EDF385 /* LoginViewController.m */,
-				AE72E9531A66F2AA0046B38D /* MenuCell.h */,
-				AE72E9541A66F2AA0046B38D /* MenuCell.m */,
-				AE0172671A65D3140014266F /* MenuViewController.h */,
-				AE0172681A65D3140014266F /* MenuViewController.m */,
 			);
-			name = Menu;
+			name = Login;
 			sourceTree = "<group>";
 		};
 		AEEC6C771A6DB6220021B7E4 /* Home */ = {
@@ -1390,7 +1379,6 @@
 				AEBFCA371A78614100686EFE /* PostDetailViewController.m in Sources */,
 				AEE944A21B69F31C00C130CF /* UIApplication+JTSImageViewController.m in Sources */,
 				AED05EDB1A928DCA00CA1CE6 /* UINavigationBar+CustomHeight.m in Sources */,
-				AE0172691A65D3140014266F /* MenuViewController.m in Sources */,
 				AE52FA501A8D3D76003FF725 /* PostFeedViewController.m in Sources */,
 				AE0E8DEE1B707BB70089F3CC /* UIImage+Alpha.m in Sources */,
 				AE3D70BF1B019DE1000C0806 /* Comment.m in Sources */,
@@ -1409,7 +1397,6 @@
 				AE479EAE1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */,
 				AEFB04861AD12437009EB0D3 /* DiscoveryCell.m in Sources */,
 				AEA89DA21B31F7A0009C5586 /* UIImage+WebP.m in Sources */,
-				AE72E9551A66F2AA0046B38D /* MenuCell.m in Sources */,
 				AE3FCFB11B07D63900422FB8 /* SDWebImageCompat.m in Sources */,
 				AE52FA531A8D55A7003FF725 /* KeyboardAcessoryView.m in Sources */,
 				AEF7F29B1A686FE90022410B /* NavigationBar.m in Sources */,
@@ -1539,7 +1526,6 @@
 				AE3D70C01B019DE1000C0806 /* Comment.m in Sources */,
 				AE3FCFB41B07D63900422FB8 /* SDWebImageDecoder.m in Sources */,
 				AE3FCFB81B07D63900422FB8 /* SDWebImageDownloaderOperation.m in Sources */,
-				AE01726A1A65D3140014266F /* MenuViewController.m in Sources */,
 				AEFB04851AD12437009EB0D3 /* DiscoveryBannerCell.m in Sources */,
 				AEF3F8801AA4CFA6008C2300 /* WishDetailVCOwner.m in Sources */,
 				AE05C0371B0D62BA002F83F1 /* Owner.m in Sources */,
