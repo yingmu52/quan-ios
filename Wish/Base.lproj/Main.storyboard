@@ -149,13 +149,13 @@
                     <navigationItem key="navigationItem" id="epO-j5-Jqz"/>
                     <connections>
                         <outlet property="loginButton" destination="pDI-Je-6Pa" id="s8y-Qw-s7q"/>
-                        <segue destination="vXZ-lx-hvc" kind="show" identifier="showMainViewFromLogin" id="7a4-rm-y7R"/>
                         <segue destination="ssU-9T-OTt" kind="show" identifier="showLoginDetail" id="OAY-5y-BEp"/>
+                        <segue destination="hi1-Qm-xqU" kind="show" identifier="showMainViewFromLogin" id="iCU-RD-fVI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l2d-7Y-UWq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7003.5" y="-693"/>
+            <point key="canvasLocation" x="-4903.5" y="-4072.5"/>
         </scene>
         <!--Login Detail View Controller-->
         <scene sceneID="T5s-oJ-3VH">
@@ -488,6 +488,9 @@
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="hi1-Qm-xqU" kind="show" identifier="showMainView" id="9aF-Be-Lpc"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -502,34 +505,11 @@
                         <outlet property="genderLabel" destination="2sO-WF-rlT" id="quI-7f-al6"/>
                         <outlet property="nameTextField" destination="NeO-2h-MNn" id="YXL-K1-GO0"/>
                         <outlet property="occupationTextField" destination="eYJ-Gx-l8y" id="bOA-fc-uN2"/>
-                        <segue destination="vXZ-lx-hvc" kind="show" identifier="showMainView" id="9SL-Jw-Apx"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P6o-3g-Kou" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-6270" y="-1731"/>
-        </scene>
-        <!--Sliding View Controller-->
-        <scene sceneID="ufC-wZ-h7g">
-            <objects>
-                <viewController storyboardIdentifier="ECSlidingViewController" id="vXZ-lx-hvc" customClass="ECSlidingViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="topViewControllerStoryboardId" value="NavigationControllerForDiscovery"/>
-                        <userDefinedRuntimeAttribute type="string" keyPath="underLeftViewControllerStoryboardId" value="MenuViewController"/>
-                    </userDefinedRuntimeAttributes>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-5433" y="-721.5"/>
+            <point key="canvasLocation" x="-4170" y="-5110.5"/>
         </scene>
         <!--Post View Controller-->
         <scene sceneID="ZVZ-0X-CQC">
@@ -4123,11 +4103,12 @@
                         <segue destination="1LC-sn-tZg" kind="show" identifier="showLocalRequestLog" id="tNm-06-DMm"/>
                         <segue destination="IHE-Tk-1qk" kind="show" identifier="ShowAcheivementList" id="Hwy-tI-XM3"/>
                         <segue destination="kcp-Id-Hzn" kind="show" identifier="showFeedbackView" id="ZFl-9a-0Dk"/>
+                        <segue destination="uFl-DA-hZE" kind="presentation" identifier="showLoginViewFromMyPage" animates="NO" id="7bu-a4-X1f"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bDw-Cl-yWH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1870.5" y="-3408.75"/>
+            <point key="canvasLocation" x="-2158.5" y="-3579.75"/>
         </scene>
         <!--Request Log View Controller-->
         <scene sceneID="QjG-Rl-EMA">
@@ -5074,7 +5055,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oYZ-RU-w02" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7897.5" y="-693"/>
+            <point key="canvasLocation" x="-5797.5" y="-4072.5"/>
         </scene>
         <!--ProfileVC Owner-->
         <scene sceneID="j5f-84-ZIl">
@@ -5704,12 +5685,12 @@
         <image name="tips_bg" width="69" height="69"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rjz-Cv-C9H"/>
-        <segue reference="7a4-rm-y7R"/>
-        <segue reference="4ZT-53-1QA"/>
+        <segue reference="iCU-RD-fVI"/>
         <segue reference="CTd-gb-xTE"/>
         <segue reference="cel-0L-eNY"/>
+        <segue reference="4ZT-53-1QA"/>
         <segue reference="JFc-cO-xBu"/>
+        <segue reference="rjz-Cv-C9H"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686274509803" green="0.75686274509803919" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
 </document>

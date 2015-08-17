@@ -154,20 +154,11 @@
 }
 
 
-- (void)logout{
-    //delete plans that do not belong to self in core data
-    [self clearCoreData];
-    
+- (void)logout{    
     //delete user info, this lines must be below [self clearCoreData];
     [User updateOwnerInfo:nil];
     
-    [self showLoginView];
-}
-
-- (void)showLoginView{
-    [self presentViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"LoginNavigationController"]
-                       animated:NO
-                     completion:nil];
+    [self performSegueWithIdentifier:@"showLoginViewFromMyPage" sender:nil];
 }
 
 - (void)clearCoreData{

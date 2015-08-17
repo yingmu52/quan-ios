@@ -33,7 +33,7 @@
 //    layout.footerHeight = 550.0/1136*self.collectionView.frame.size.height; //banner height
     layout.minimumColumnSpacing = 14.0/16*horizontalInset;
     layout.minimumInteritemSpacing = 12.0/16*horizontalInset;
-    layout.itemRenderDirection = CHTCollectionViewWaterfallLayoutItemRenderDirectionLeftToRight;
+    layout.itemRenderDirection = CHTCollectionViewWaterfallLayoutItemRenderDirectionShortestFirst;
     self.collectionView.collectionViewLayout = layout;
     
     
