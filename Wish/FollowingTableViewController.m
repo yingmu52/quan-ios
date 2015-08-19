@@ -8,7 +8,6 @@
 
 #import "FollowingTableViewController.h"
 #import "Theme.h"
-//#import "UIViewController+ECSlidingViewController.h"
 #import "FollowingCell.h"
 @interface FollowingTableViewController ()
 @property (nonatomic,weak) IBOutlet UIView *footerView;

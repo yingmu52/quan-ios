@@ -10,7 +10,6 @@
 #import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 #import "FetchCenter.h"
 #import "User.h"
-//#import "ECSlidingViewController.h"
 #import "Theme.h"
 #import "GCPTextView.h"
 @interface LoginDetailViewController () <FetchCenterDelegate,UITextFieldDelegate>
@@ -115,9 +114,6 @@
 #pragma mark - segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"showMainView"]) {
-//        ECSlidingViewController *root = (ECSlidingViewController *)segue.destinationViewController;
-//        root.anchorRightPeekAmount = root.view.frame.size.width * (640 - 290.0)/640;
-//        root.underLeftViewController.edgesForExtendedLayout = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeLeft;
     }
 }
 

@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "Theme.h"
-//#import "UIViewController+ECSlidingViewController.h"
 #import "SystemUtil.h"
 
 @interface SettingViewController : UITableViewController

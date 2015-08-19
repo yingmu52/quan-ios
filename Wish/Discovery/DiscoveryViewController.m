@@ -8,7 +8,6 @@
 
 #import "DiscoveryViewController.h"
 #import "Theme.h"
-//#import "UIViewController+ECSlidingViewController.h"
 #import "CHTCollectionViewWaterfallLayout.h"
 #import "DiscoveryBannerCell.h"
 
