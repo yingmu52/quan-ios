@@ -7,8 +7,7 @@
 //
 
 #import "LoginViewController.h"
-#import "Third Party/TencentOpenAPI.framework/Headers/TencentOAuth.h"
-#import "Third Party/TencentOpenAPI.framework/Headers/TencentApiInterface.h"
+#import "AppDelegate.h"
 #import "FetchCenter.h"
 #import "SDWebImageCompat.h"
 #import "User.h"

@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "MainTabBarController.h"
-#import <TencentOpenAPI/TencentOAuth.h>
 #import <Bugly/CrashReporter.h>
 #import "User.h"
 #import "LoginViewController.h"
