@@ -35,9 +35,9 @@
 
 - (void)goBack{
     [self.navigationController popViewControllerAnimated:YES];
-    NavigationBar *navBar = (NavigationBar *)self.navigationController.navigationBar;
-    [navBar showDefaultTextColor];
-    [navBar showDefaultBackground];
+//    NavigationBar *navBar = (NavigationBar *)self.navigationController.navigationBar;
+//    [navBar showDefaultTextColor];
+//    [navBar showDefaultBackground];
 }
 
 
@@ -50,9 +50,9 @@
                                       frame:frame];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:back];
     
-    NavigationBar *navBar = (NavigationBar *)self.navigationController.navigationBar;
-    [navBar showClearBackground];
-    [navBar showTextWithColor:[UIColor whiteColor]];
+//    NavigationBar *navBar = (NavigationBar *)self.navigationController.navigationBar;
+//    [navBar showClearBackground];
+//    [navBar showTextWithColor:[UIColor whiteColor]];
     self.title = @"个人资料";
 }
 

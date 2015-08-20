@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A0B8C8021B857F22009C4572 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */; };
+		A0B8C8031B857F22009C4572 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */; };
 		A0D102171B84EB6A006B0E4E /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D101F71B84EB6A006B0E4E /* MKAnnotationView+WebCache.m */; };
 		A0D102181B84EB6A006B0E4E /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D101F71B84EB6A006B0E4E /* MKAnnotationView+WebCache.m */; };
 		A0D102191B84EB6A006B0E4E /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D101F91B84EB6A006B0E4E /* NSData+ImageContentType.m */; };
@@ -296,6 +298,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A0B8C8001B857F22009C4572 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
+		A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		A0D101F61B84EB6A006B0E4E /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		A0D101F71B84EB6A006B0E4E /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		A0D101F81B84EB6A006B0E4E /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -610,6 +614,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A0B8C7FF1B857F22009C4572 /* HMSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				A0B8C8001B857F22009C4572 /* HMSegmentedControl.h */,
+				A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */,
+			);
+			path = HMSegmentedControl;
+			sourceTree = "<group>";
+		};
 		A0D101F51B84EB6A006B0E4E /* SDWebImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -678,6 +691,7 @@
 		A0F7D3A51B84E851003CCB34 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				A0B8C7FF1B857F22009C4572 /* HMSegmentedControl */,
 				A0D1023B1B84ECDF006B0E4E /* NavBar */,
 				A0D101F51B84EB6A006B0E4E /* SDWebImage */,
 				A0F7D4AF1B84E8A1003CCB34 /* CollectionLayout */,
@@ -1296,6 +1310,7 @@
 				AE479E9E1A6F775C00366A0A /* PostViewController.m in Sources */,
 				AE9A19881B02E3A100590784 /* FeedbackkAccessoryView.m in Sources */,
 				A0F7D4A51B84E851003CCB34 /* UIImage+Resize.m in Sources */,
+				A0B8C8021B857F22009C4572 /* HMSegmentedControl.m in Sources */,
 				A0F7D49D1B84E851003CCB34 /* UIImagePickerController+DelegateBlocks.m in Sources */,
 				AE606A201AF4697B003DF16E /* MessageListViewController.m in Sources */,
 				A0F7D44B1B84E851003CCB34 /* JTSImageViewController.m in Sources */,
@@ -1437,6 +1452,7 @@
 				AED4CB231AC75A0200EE2DA4 /* KeyWordCell.m in Sources */,
 				A0F7D4B41B84EA46003CCB34 /* UIImage+WebP.m in Sources */,
 				AEB003F01B7FF7190056EA80 /* MainTabBarController.m in Sources */,
+				A0B8C8031B857F22009C4572 /* HMSegmentedControl.m in Sources */,
 				A0D102201B84EB6A006B0E4E /* SDWebImageDecoder.m in Sources */,
 				AEE9448C1B69C9D800C130CF /* Plan.m in Sources */,
 				A0F7D49A1B84E851003CCB34 /* UIActionSheet+Blocks.m in Sources */,

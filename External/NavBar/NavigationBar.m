@@ -18,30 +18,27 @@ static CGFloat kEndPoint = 1.5;
 {
     [super awakeFromNib];
     
-    [self showDefaultTextColor];
-    //get the rid the fuck off navigation separator
-    [self showDefaultBackground];
+    //导航文字属性
+    UIColor *color = [SystemUtil colorFromHexString:@"#2B2B2B"];
+    self.titleTextAttributes = @{NSForegroundColorAttributeName:color,
+                                            NSFontAttributeName:[UIFont systemFontOfSize:17.0]};;
+
+    //背影图
+    [self setBackgroundImage:[SystemUtil imageFromColor:[Theme naviBackground] size:CGSizeMake(1,1)]
+               forBarMetrics:UIBarMetricsDefault];
+
+    //去掉分隔线
     self.shadowImage = [UIImage new];
 }
 
-
-- (void)showDefaultTextColor{
-    [self showTextWithColor:[SystemUtil colorFromHexString:@"#2B2B2B"]];
-}
-
-- (void)showTextWithColor:(UIColor *)color{
-    NSDictionary *textAttributes = @{NSForegroundColorAttributeName:color,
-                                     NSFontAttributeName:[UIFont systemFontOfSize:17.0]};
-    self.titleTextAttributes = textAttributes;
-}
-
-- (void)showClearBackground{
-    [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-}
-
-- (void)showDefaultBackground{
-    [self setBackgroundImage:[SystemUtil imageFromColor:[Theme naviBackground]] forBarMetrics:UIBarMetricsDefault];
-}
+//- (void)showClearBackground{
+//    [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+//}
+//
+//- (void)showDefaultBackground{
+//    [self setBackgroundImage:[SystemUtil imageFromColor:[Theme naviBackground] size:CGSizeMake(1,1)]
+//               forBarMetrics:UIBarMetricsDefault];
+//}
 
 void drawLinearGradient(CGContextRef context, CGRect rect, CGColorRef startColor, CGColorRef endColor)
 {

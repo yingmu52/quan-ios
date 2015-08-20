@@ -28,7 +28,8 @@
 
 - (void)awakeFromNib{
     [super awakeFromNib];
-    [[UITabBar appearance] setSelectedImageTintColor:[SystemUtil colorFromHexString:@"#01C1A8"]];
+    UIColor *color = [SystemUtil colorFromHexString:@"#32C9A9"];
+    [[UITabBar appearance] setSelectedImageTintColor:color];
 }
 
 #pragma mark - observe message notification

@@ -94,9 +94,10 @@
 }
 
 
-+ (UIImage *)imageFromColor:(UIColor *)color {
-    CGRect rect = CGRectMake(0, 0, 1, 1);
-    UIGraphicsBeginImageContext(rect.size);
++ (UIImage *)imageFromColor:(UIColor *)color size:(CGSize)size{
+    CGRect rect = CGRectZero;
+    rect.size = size;
+    UIGraphicsBeginImageContext(size);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetFillColorWithColor(context, [color CGColor]);
     CGContextFillRect(context, rect);

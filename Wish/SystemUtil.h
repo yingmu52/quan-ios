@@ -22,7 +22,7 @@
 + (UIImage *)darkLayeredImage:(UIImage *)image inRect:(CGRect)bounds;
 
 + (void)setupShawdowForView:(UIView *)view;
-+ (UIImage *)imageFromColor:(UIColor *)color;
++ (UIImage *)imageFromColor:(UIColor *)color size:(CGSize)size;
 + (CGFloat)heightForText:(NSString *)text withFontSize:(CGFloat)size;
 
 

@@ -10,18 +10,64 @@
 #import "Theme.h"
 #import "CHTCollectionViewWaterfallLayout.h"
 #import "DiscoveryBannerCell.h"
-
+#import "HMSegmentedControl.h"
 
 @interface DiscoveryViewController () <CHTCollectionViewDelegateWaterfallLayout>
+@property (nonatomic,strong) UIColor *navigationSeparatorColor;
 @end
 
 @implementation DiscoveryViewController
 
+- (UIColor *)navigationSeparatorColor{
+    if (!_navigationSeparatorColor){
+        _navigationSeparatorColor = [SystemUtil colorFromHexString:@"#32C9A9"];
+    }
+    return _navigationSeparatorColor;
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    //设置导航分隔线的颜色
+    UIImage *shadow = [SystemUtil imageFromColor:self.navigationSeparatorColor
+                                            size:CGSizeMake(CGRectGetWidth(self.view.frame), 2)];
+    [self.navigationController.navigationBar setShadowImage:shadow];
+
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupWaterFallCollectionView];
+    
+    //在导航添加选项卡
+    HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"我的关注", @"发现"]];
+
+    NSDictionary *normalAttribute = self.navigationController.navigationBar.titleTextAttributes;
+    NSDictionary *selectedAttribute = @{NSFontAttributeName:[UIFont systemFontOfSize:17.0],
+                               NSForegroundColorAttributeName:self.navigationSeparatorColor};
+    segmentedControl.titleTextAttributes = normal;
+    
+    segmentedControl.frame = CGRectMake(0,0,0.8 * CGRectGetWidth(self.view.frame),CGRectGetHeight(self.navigationController.navigationBar.frame));
+    segmentedControl.backgroundColor = [UIColor clearColor];
+    segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
+    segmentedControl.userDraggable = YES;
+    segmentedControl.selectionIndicatorColor = self.navigationSeparatorColor;
+    [segmentedControl addTarget:self action:@selector(switchSegmentedControl:) forControlEvents:UIControlEventValueChanged];
+    
+    //选中项颜色
+    [segmentedControl setTitleFormatter:^NSAttributedString *(HMSegmentedControl *segmentedControl, NSString *title, NSUInteger index, BOOL selected) {
+        if (index == segmentedControl.selectedSegmentIndex) { //选中态颜色
+            return [[NSAttributedString alloc] initWithString:title attributes:selectedAttribute];
+        }else{ //常态颜色
+            return [[NSAttributedString alloc] initWithString:title attributes:normalAttribute];;
+        }
+        
+    }];
+    self.navigationItem.titleView = segmentedControl;
 }
 
+- (void)switchSegmentedControl:(HMSegmentedControl *)control{
+    //abstract
+}
 
 - (void)setupWaterFallCollectionView{
     
