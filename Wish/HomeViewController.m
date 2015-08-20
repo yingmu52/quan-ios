@@ -46,14 +46,27 @@ ViewForEmptyEventDelegate>
 
 @implementation HomeViewController
 
+- (void)updateNavigationTitle{
+    NSArray *plans = self.fetchedRC.fetchedObjects;
+    NSInteger page = self.collectionView.contentOffset.x / CGRectGetWidth(self.collectionView.frame);
+    self.title = [NSString stringWithFormat:@"第%@/%@页",@(page + 1),@(plans.count)];
+}
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     if (!self.fetchedRC.fetchedObjects.count){
         [self setUpEmptyView];
     }else{
         self.guideView = nil;
+        [self updateNavigationTitle];
+        
     }
     self.tabBarController.tabBar.hidden = NO;
+    [self updateNavigationTitle];
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    [self updateNavigationTitle];
 }
 
 - (NSFetchedResultsController *)fetchedRC
@@ -109,12 +122,11 @@ ViewForEmptyEventDelegate>
 
 - (void)setUpNavigationItem
 {
-    CGRect frame = CGRectMake(0,0, 25,25);
+    CGRect frame = CGRectMake(0,0, 48,CGRectGetHeight(self.navigationController.navigationBar.frame));
     UIButton *addBtn = [Theme buttonWithImage:[Theme navAddDefault]
                                        target:self
                                      selector:@selector(addWish)
                                         frame:frame];
-
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
 }
 
@@ -334,7 +346,8 @@ ViewForEmptyEventDelegate>
     } completion:^(BOOL finished) {
         // self.title = [NSString stringWithFormat:@"%@ plans",@(self.fetchedRC.fetchedObjects.count)];
         [(AppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
-        self.itemChanges = nil;;
+        self.itemChanges = nil;
+        [self updateNavigationTitle];
     }];
 
 }

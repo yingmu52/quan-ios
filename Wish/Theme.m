@@ -149,7 +149,7 @@
     return [UIImage imageNamed:@"nav_ic_share_default"];
 }
 + (UIImage *)navAddDefault{
-    return [UIImage imageNamed:@"nav_ic_add_default"];
+    return [UIImage imageNamed:@"navbar_ic_add"];
 }
 
 + (UIImage *)navMenuDefault{
