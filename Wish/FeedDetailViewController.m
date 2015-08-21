@@ -435,10 +435,15 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 
 
 - (void)loadComments{
-    // if self.feed is not at local than use feedId to fetchFrom the Cloud
-    NSString *feedId = self.feed.feedId ? self.feed.feedId : self.feedId;
-    NSAssert(feedId, @"nil feedId");
-    [self.fetchCenter getCommentListForFeed:feedId pageInfo:self.pageInfo];
+    
+    if (self.feed.commentCount.integerValue > 0) {
+        // if self.feed is not at local than use feedId to fetchFrom the Cloud
+        NSString *feedId = self.feed.feedId ? self.feed.feedId : self.feedId;
+        NSAssert(feedId, @"nil feedId");
+        [self.fetchCenter getCommentListForFeed:feedId pageInfo:self.pageInfo];
+    }else{
+        [self.tableView.infiniteScrollingView stopAnimating];
+    }
 }
 
 #pragma mark - delete local comments to insync with server
