@@ -2013,7 +2013,6 @@
                     <navigationItem key="navigationItem" title="我的关注" id="Eyu-XI-q6r"/>
                     <connections>
                         <segue destination="a6S-F3-WCk" kind="show" identifier="showFollowerWishDetail" id="dTf-Xy-FJp"/>
-                        <segue destination="5Kd-hC-Doa" kind="show" identifier="showPersonalInfo" id="pno-r3-3Pj"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jPt-JN-A9f" userLabel="First Responder" sceneMemberID="firstResponder"/>
