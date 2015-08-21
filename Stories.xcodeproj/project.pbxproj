@@ -66,6 +66,8 @@
 		A0D102761B84F750006B0E4E /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D102721B84F750006B0E4E /* TencentOpenAPI.framework */; };
 		A0D102771B84F871006B0E4E /* TencentOpenApi_IOS_Bundle.bundle in Sources */ = {isa = PBXBuildFile; fileRef = A0D102711B84F750006B0E4E /* TencentOpenApi_IOS_Bundle.bundle */; };
 		A0D102781B84FB3A006B0E4E /* TencentOpenApi_IOS_Bundle.bundle in Sources */ = {isa = PBXBuildFile; fileRef = A0D102711B84F750006B0E4E /* TencentOpenApi_IOS_Bundle.bundle */; };
+		A0D37C601B8781D900581EDE /* NewsPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D37C5F1B8781D900581EDE /* NewsPageViewController.m */; };
+		A0D37C611B8781D900581EDE /* NewsPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D37C5F1B8781D900581EDE /* NewsPageViewController.m */; };
 		A0F7D42D1B84E851003CCB34 /* ALDBlurImageProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3A81B84E851003CCB34 /* ALDBlurImageProcessor.m */; };
 		A0F7D42E1B84E851003CCB34 /* ALDBlurImageProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3A81B84E851003CCB34 /* ALDBlurImageProcessor.m */; };
 		A0F7D42F1B84E851003CCB34 /* AMBCircularButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3AB1B84E851003CCB34 /* AMBCircularButton.m */; };
@@ -351,6 +353,8 @@
 		A0D1026F1B84F6BA006B0E4E /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		A0D102711B84F750006B0E4E /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
 		A0D102721B84F750006B0E4E /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
+		A0D37C5E1B8781D900581EDE /* NewsPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsPageViewController.h; sourceTree = "<group>"; };
+		A0D37C5F1B8781D900581EDE /* NewsPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsPageViewController.m; sourceTree = "<group>"; };
 		A0F7D3A71B84E851003CCB34 /* ALDBlurImageProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALDBlurImageProcessor.h; sourceTree = "<group>"; };
 		A0F7D3A81B84E851003CCB34 /* ALDBlurImageProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALDBlurImageProcessor.m; sourceTree = "<group>"; };
 		A0F7D3AA1B84E851003CCB34 /* AMBCircularButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBCircularButton.h; sourceTree = "<group>"; };
@@ -688,6 +692,15 @@
 			path = VGParallaxHeader;
 			sourceTree = "<group>";
 		};
+		A0D37C5D1B8781C100581EDE /* News */ = {
+			isa = PBXGroup;
+			children = (
+				A0D37C5E1B8781D900581EDE /* NewsPageViewController.h */,
+				A0D37C5F1B8781D900581EDE /* NewsPageViewController.m */,
+			);
+			name = News;
+			sourceTree = "<group>";
+		};
 		A0F7D3A51B84E851003CCB34 /* External */ = {
 			isa = PBXGroup;
 			children = (
@@ -887,6 +900,7 @@
 		AE01723B1A65CD8E0014266F /* Wish */ = {
 			isa = PBXGroup;
 			children = (
+				A0D37C5D1B8781C100581EDE /* News */,
 				AE606A1D1AF4693F003DF16E /* Message */,
 				AEFB04781AD12437009EB0D3 /* Discovery */,
 				AED5BC601ABE3C9A00EFF398 /* Settings */,
@@ -1372,6 +1386,7 @@
 				AEBECCF91AE8A16600EDF385 /* LoginDetailViewController.m in Sources */,
 				AEBFCA371A78614100686EFE /* PostDetailViewController.m in Sources */,
 				A0F7D4991B84E851003CCB34 /* UIActionSheet+Blocks.m in Sources */,
+				A0D37C601B8781D900581EDE /* NewsPageViewController.m in Sources */,
 				A0D102771B84F871006B0E4E /* TencentOpenApi_IOS_Bundle.bundle in Sources */,
 				AE52FA501A8D3D76003FF725 /* PostFeedViewController.m in Sources */,
 				AE3D70BF1B019DE1000C0806 /* Comment.m in Sources */,
@@ -1508,6 +1523,7 @@
 				A0D102321B84EB6A006B0E4E /* UIImageView+HighlightedWebCache.m in Sources */,
 				A0D102261B84EB6A006B0E4E /* SDWebImageManager.m in Sources */,
 				AEF3F8841AA4E3C0008C2300 /* WishDetailVCFollower.m in Sources */,
+				A0D37C611B8781D900581EDE /* NewsPageViewController.m in Sources */,
 				AE479E9F1A6F775C00366A0A /* PostViewController.m in Sources */,
 				AEFEE4011A8EE0A7007E8234 /* FollowingCell.m in Sources */,
 				AE59B5F61B410437006CA4AB /* ViewForEmptyEvent.m in Sources */,

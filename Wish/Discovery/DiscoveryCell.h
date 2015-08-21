@@ -12,7 +12,6 @@
 
 @interface DiscoveryCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UILabel *discoveryFollowerCountLabel;
-@property (weak, nonatomic) IBOutlet UIView *discoveryBackgroundView;
 @property (weak, nonatomic) IBOutlet UIImageView *discoveryImageView;
 @property (weak, nonatomic) IBOutlet UILabel *discoveryTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *discoveryByUserLabel;
