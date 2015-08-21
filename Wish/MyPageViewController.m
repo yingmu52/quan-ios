@@ -34,7 +34,7 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     self.iconImageView.hidden = YES;
-    [self checkUpdate];
+    [self.fetchCenter checkVersion];
     self.tableView.tableHeaderView.frame = CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame),324.0f / 1136 * CGRectGetHeight(self.tableView.frame));
     
     NSString *newPicId = [User updatedProfilePictureId];
@@ -175,21 +175,6 @@
     [delegate saveContext];
 }
 
-#pragma mark - check update
-- (void)checkUpdate{
-    FetchCenter *fc = [[FetchCenter alloc] init];
-    fc.delegate = self;
-    [fc checkVersion];
-}
-
-- (void)didFinishCheckingNewVersion:(BOOL)hasNewVersion{
-    self.iconImageView.hidden = !hasNewVersion;
-    NSLog(@"%@",hasNewVersion ? @"has new version" : @"this is latest version");
-}
-
-- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    NSLog(@"%@",info);
-}
 
 #pragma mark - upload image 
 - (IBAction)tapOnCamera:(UIButton *)sender{
@@ -197,8 +182,8 @@
 }
 
 - (void)didFinishPickingImage:(UIImage *)image{
-//    [self showSpinniner];
-//    [self.fetchCenter uploadNewProfilePicture:image];
+    self.profilePicture.image = image;
+    [self.fetchCenter uploadNewProfilePicture:image];
 }
 
 - (void)didFailPickingImage{
@@ -211,6 +196,33 @@
     self.navigationController.navigationBar.hidden = NO;
     self.tabBarController.tabBar.hidden = YES;
 }
+
+#pragma mark fetchcenter Delegate
+
+- (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
+}
+
+- (void)didFinishUploadingPictureForProfile:(NSDictionary *)info{
+    [self.fetchCenter setPersonalInfo:[User userDisplayName]
+                               gender:[User gender]
+                              imageId:[User updatedProfilePictureId]
+                           occupation:[User occupation]
+                         personalInfo:[User personalDetailInfo]];
+}
+
+- (void)didFinishCheckingNewVersion:(BOOL)hasNewVersion{
+    self.iconImageView.hidden = !hasNewVersion;
+    NSLog(@"%@",hasNewVersion ? @"has new version" : @"this is latest version");
+}
+
+- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
+    NSLog(@"%@",info);
+}
+
+- (void)didFinishSettingPersonalInfo{
+    NSLog(@"done");
+}
+
 @end
 
 
