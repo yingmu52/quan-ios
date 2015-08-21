@@ -82,20 +82,26 @@
 {
     [super awakeFromNib];
     self.backgroundColor = [UIColor clearColor];
+    self.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.layer.shadowRadius = 1.0f;
+    self.layer.shadowOpacity = 0.15f;
+    self.layer.masksToBounds = NO;
+    self.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+
 }
 
 
 
-- (void)setFeedBackground:(UIView *)feedBackground{
-    _feedBackground = feedBackground;
-    [SystemUtil setupShawdowForView:_feedBackground];
-}
+//- (void)setFeedBackground:(UIView *)feedBackground{
+//    _feedBackground = feedBackground;
+//    [SystemUtil setupShawdowForView:_feedBackground];
+//}
 
-- (void)setHeadBackground:(UIView *)headBackground{
-    _headBackground = headBackground;
-    _headBackground.backgroundColor = [UIColor whiteColor];
-    [SystemUtil setupShawdowForView:_headBackground];
-}
+//- (void)setHeadBackground:(UIView *)headBackground{
+//    _headBackground = headBackground;
+//    _headBackground.backgroundColor = [UIColor whiteColor];
+//    [SystemUtil setupShawdowForView:_headBackground];
+//}
 
 
 - (CGSize)collectionView:(UICollectionView *)collectionView

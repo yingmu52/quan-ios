@@ -33,6 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero]; // clear empty cell
 }
 
 - (void)viewWillAppear:(BOOL)animated{

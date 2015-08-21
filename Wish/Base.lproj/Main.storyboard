@@ -1618,7 +1618,7 @@
                                                             </connections>
                                                         </button>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="Hqj-BH-cTq" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Whz-hJ-ANi" secondAttribute="bottom" constant="8" id="A28-9U-Ewf">
                                                             <variation key="heightClass=regular-widthClass=compact" constant="5"/>
@@ -1957,16 +1957,16 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottomMargin" secondItem="0Rr-3L-WEg" secondAttribute="bottom" constant="-8" id="67s-Yw-XFs">
-                                            <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
+                                            <variation key="heightClass=regular-widthClass=compact" constant="-16"/>
                                         </constraint>
                                         <constraint firstAttribute="trailingMargin" secondItem="0Rr-3L-WEg" secondAttribute="trailing" constant="-8" id="AC8-6L-50Q">
-                                            <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
+                                            <variation key="heightClass=regular-widthClass=compact" constant="-16"/>
                                         </constraint>
                                         <constraint firstItem="0Rr-3L-WEg" firstAttribute="top" secondItem="faY-b2-CXn" secondAttribute="topMargin" constant="-8" id="GRB-jK-Jzd">
-                                            <variation key="heightClass=regular-widthClass=compact" constant="3"/>
+                                            <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                         </constraint>
                                         <constraint firstItem="0Rr-3L-WEg" firstAttribute="leading" secondItem="faY-b2-CXn" secondAttribute="leadingMargin" constant="-8" id="IYx-F2-h4W">
-                                            <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
+                                            <variation key="heightClass=regular-widthClass=compact" constant="-16"/>
                                         </constraint>
                                     </constraints>
                                     <variation key="default">

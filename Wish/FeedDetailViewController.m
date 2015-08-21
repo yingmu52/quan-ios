@@ -34,6 +34,7 @@
             [weakSelf loadComments];
         }
     }];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero]; // clear empty cell
 
 
     //load comments
