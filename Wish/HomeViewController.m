@@ -49,7 +49,7 @@ ViewForEmptyEventDelegate>
 - (void)updateNavigationTitle{
     NSArray *plans = self.fetchedRC.fetchedObjects;
     NSInteger page = self.collectionView.contentOffset.x / CGRectGetWidth(self.collectionView.frame);
-    self.title = [NSString stringWithFormat:@"第%@/%@页",@(page + 1),@(plans.count)];
+    self.navigationItem.title = [NSString stringWithFormat:@"第%@/%@页",@(page + 1),@(plans.count)];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

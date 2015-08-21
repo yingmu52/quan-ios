@@ -38,16 +38,12 @@ static NSUInteger numberOfPreloadedFeeds = 3;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.fetchCenter fetchFollowingPlanList];
-//    [self.navigationController.navigationBar addGestureRecognizer:self.slidingViewController.panGesture];
-//    self.slidingViewController.panGesture.delegate = self;
 }
-//
-//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognize
-//{
-//    //this delegate helps to recognise pan gesture for opening menu and scroll gesture for scrolling tableview
-//    return YES;
-//}
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = NO;
+}
 - (void)dealloc{
     NSUInteger numberOfPreservingFeeds = 20;
     NSArray *plans = self.fetchedRC.fetchedObjects;
@@ -108,6 +104,8 @@ static NSUInteger numberOfPreloadedFeeds = 3;
     if ([segue.identifier isEqualToString:@"showPersonalInfo"]) {
         [segue.destinationViewController setOwner:sender];
     }
+    self.tabBarController.tabBar.hidden = YES;
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
 }
 
 - (void)didTapOnProfilePicture:(FollowingCell *)cell{

@@ -12,9 +12,13 @@
 @implementation DiscoveryCell
 
 
-- (void)setDiscoveryBackgroundView:(UIView *)discoveryBackgroundView{
-    _discoveryBackgroundView = discoveryBackgroundView;
-    [SystemUtil setupShawdowForView:_discoveryBackgroundView];
-    
+-(void)awakeFromNib{
+    [super awakeFromNib];
+    self.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.layer.shadowRadius = 1.0f;
+    self.layer.shadowOpacity = 0.15f;
+    self.layer.masksToBounds = NO;
+    self.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
 }
+
 @end
