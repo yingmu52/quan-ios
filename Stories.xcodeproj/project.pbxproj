@@ -60,12 +60,9 @@
 		A0D102681B84EFAD006B0E4E /* WebP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D102671B84EFAD006B0E4E /* WebP.framework */; };
 		A0D102691B84EFAD006B0E4E /* WebP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D102671B84EFAD006B0E4E /* WebP.framework */; };
 		A0D102701B84F6BA006B0E4E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D1026F1B84F6BA006B0E4E /* libz.dylib */; };
-		A0D102731B84F750006B0E4E /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0D102711B84F750006B0E4E /* TencentOpenApi_IOS_Bundle.bundle */; };
 		A0D102741B84F750006B0E4E /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0D102711B84F750006B0E4E /* TencentOpenApi_IOS_Bundle.bundle */; };
 		A0D102751B84F750006B0E4E /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D102721B84F750006B0E4E /* TencentOpenAPI.framework */; };
 		A0D102761B84F750006B0E4E /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D102721B84F750006B0E4E /* TencentOpenAPI.framework */; };
-		A0D102771B84F871006B0E4E /* TencentOpenApi_IOS_Bundle.bundle in Sources */ = {isa = PBXBuildFile; fileRef = A0D102711B84F750006B0E4E /* TencentOpenApi_IOS_Bundle.bundle */; };
-		A0D102781B84FB3A006B0E4E /* TencentOpenApi_IOS_Bundle.bundle in Sources */ = {isa = PBXBuildFile; fileRef = A0D102711B84F750006B0E4E /* TencentOpenApi_IOS_Bundle.bundle */; };
 		A0D37C601B8781D900581EDE /* NewsPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D37C5F1B8781D900581EDE /* NewsPageViewController.m */; };
 		A0D37C611B8781D900581EDE /* NewsPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D37C5F1B8781D900581EDE /* NewsPageViewController.m */; };
 		A0F7D42D1B84E851003CCB34 /* ALDBlurImageProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3A81B84E851003CCB34 /* ALDBlurImageProcessor.m */; };
@@ -142,9 +139,9 @@
 		A0F7D4AA1B84E851003CCB34 /* UIImage-Categories.podspec in Resources */ = {isa = PBXBuildFile; fileRef = A0F7D4281B84E851003CCB34 /* UIImage-Categories.podspec */; };
 		A0F7D4B31B84EA46003CCB34 /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D4B21B84EA46003CCB34 /* UIImage+WebP.m */; };
 		A0F7D4B41B84EA46003CCB34 /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D4B21B84EA46003CCB34 /* UIImage+WebP.m */; };
+		A0F8C45E1B88422300A8B120 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0D102711B84F750006B0E4E /* TencentOpenApi_IOS_Bundle.bundle */; };
 		AE01723F1A65CD8E0014266F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE01723E1A65CD8E0014266F /* main.m */; };
 		AE0172421A65CD8E0014266F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0172411A65CD8E0014266F /* AppDelegate.m */; };
-		AE0172451A65CD8E0014266F /* Wish.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AE0172431A65CD8E0014266F /* Wish.xcdatamodeld */; };
 		AE01724D1A65CD8E0014266F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE01724C1A65CD8E0014266F /* Images.xcassets */; };
 		AE01725C1A65CD8F0014266F /* WishTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE01725B1A65CD8F0014266F /* WishTests.m */; };
 		AE05C0361B0D62BA002F83F1 /* Owner.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05C0351B0D62BA002F83F1 /* Owner.m */; };
@@ -1269,6 +1266,7 @@
 				AE59B5F11B40FB55006CA4AB /* ViewForEmptyEvent.xib in Resources */,
 				A0F7D4911B84E851003CCB34 /* straighten-grid@3x.png in Resources */,
 				A0D1025C1B84EF3B006B0E4E /* HeaderView.xib in Resources */,
+				A0F8C45E1B88422300A8B120 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				A0F7D4891B84E851003CCB34 /* back@3x.png in Resources */,
 				AE6E7A0C1AB0DF1F0023B9C7 /* PopupView.xib in Resources */,
 				AEFB04881AD12437009EB0D3 /* DiscoveryFooterView.xib in Resources */,
@@ -1277,7 +1275,6 @@
 				AED355F41B2285D3000427FF /* FeedDetailHeader.xib in Resources */,
 				A0F7D48F1B84E851003CCB34 /* straighten-grid@2x.png in Resources */,
 				A0F7D48D1B84E851003CCB34 /* cameraroll-picker-grip@3x.png in Resources */,
-				A0D102731B84F750006B0E4E /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				AEC8CE911AAF8823005364F8 /* StationView.xib in Resources */,
 				AE52FA551A8D55CA003FF725 /* KeyboardAcessoryView.xib in Resources */,
 				AE9A19851B02E38800590784 /* FeedbackkAccessoryView.xib in Resources */,
@@ -1331,7 +1328,6 @@
 				AEB003F31B8056980056EA80 /* MyPageViewController.m in Sources */,
 				A0F7D44D1B84E851003CCB34 /* JTSSimpleImageDownloader.m in Sources */,
 				AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */,
-				AE0172451A65CD8E0014266F /* Wish.xcdatamodeld in Sources */,
 				A0F7D44F1B84E851003CCB34 /* UIApplication+JTSImageViewController.m in Sources */,
 				AE0172421A65CD8E0014266F /* AppDelegate.m in Sources */,
 				AEE4A6CC1A9684D500ABF946 /* AchieveViewController.m in Sources */,
@@ -1387,7 +1383,6 @@
 				AEBFCA371A78614100686EFE /* PostDetailViewController.m in Sources */,
 				A0F7D4991B84E851003CCB34 /* UIActionSheet+Blocks.m in Sources */,
 				A0D37C601B8781D900581EDE /* NewsPageViewController.m in Sources */,
-				A0D102771B84F871006B0E4E /* TencentOpenApi_IOS_Bundle.bundle in Sources */,
 				AE52FA501A8D3D76003FF725 /* PostFeedViewController.m in Sources */,
 				AE3D70BF1B019DE1000C0806 /* Comment.m in Sources */,
 				A0F7D4951B84E851003CCB34 /* TWPhotoCollectionViewCell.m in Sources */,
@@ -1542,7 +1537,6 @@
 				A0F7D4501B84E851003CCB34 /* UIApplication+JTSImageViewController.m in Sources */,
 				A0F7D49E1B84E851003CCB34 /* UIImagePickerController+DelegateBlocks.m in Sources */,
 				A0D102221B84EB6A006B0E4E /* SDWebImageDownloader.m in Sources */,
-				A0D102781B84FB3A006B0E4E /* TencentOpenApi_IOS_Bundle.bundle in Sources */,
 				A0F7D4361B84E851003CCB34 /* CustomBadge.m in Sources */,
 				AED355F91B228696000427FF /* FeedDetailHeader.m in Sources */,
 				AEF7F2981A686FDB0022410B /* HomeViewController.m in Sources */,
