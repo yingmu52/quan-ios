@@ -140,6 +140,7 @@
 		A0F7D4B31B84EA46003CCB34 /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D4B21B84EA46003CCB34 /* UIImage+WebP.m */; };
 		A0F7D4B41B84EA46003CCB34 /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D4B21B84EA46003CCB34 /* UIImage+WebP.m */; };
 		A0F8C45E1B88422300A8B120 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A0D102711B84F750006B0E4E /* TencentOpenApi_IOS_Bundle.bundle */; };
+		A0F8C4601B88444C00A8B120 /* Wish.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AE0172431A65CD8E0014266F /* Wish.xcdatamodeld */; };
 		AE01723F1A65CD8E0014266F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE01723E1A65CD8E0014266F /* main.m */; };
 		AE0172421A65CD8E0014266F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0172411A65CD8E0014266F /* AppDelegate.m */; };
 		AE01724D1A65CD8E0014266F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE01724C1A65CD8E0014266F /* Images.xcassets */; };
@@ -1315,6 +1316,7 @@
 				AED5AB121AFDC74E00719208 /* Comment+CRUD.m in Sources */,
 				A0F7D4A71B84E851003CCB34 /* UIImage+RoundedCorner.m in Sources */,
 				A0F7D49B1B84E851003CCB34 /* UIImage+ImageEffects.m in Sources */,
+				A0F8C4601B88444C00A8B120 /* Wish.xcdatamodeld in Sources */,
 				A0F7D4311B84E851003CCB34 /* CHTCollectionViewWaterfallLayout.m in Sources */,
 				AEF775441A8134FE000DB73B /* HomeCardFlowLayout.m in Sources */,
 				A0D1024A1B84ED20006B0E4E /* CustomBarItem.m in Sources */,
