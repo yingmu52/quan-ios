@@ -1391,7 +1391,8 @@
                                                             <exclude reference="c6q-1z-AF1"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="319" y="15" width="81" height="82"/>
                                                         <mask key="constraints">
                                                             <include reference="c6q-1z-AF1"/>
                                                         </mask>
@@ -1402,6 +1403,9 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="67" y="24" width="247" height="43"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2014-11-21 13:20" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SL0-KW-OTX">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -2329,6 +2333,9 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" red="0.60784316059999999" green="0.60784316059999999" blue="0.60784316059999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="29" y="58" width="20" height="12"/>
+                                                    </variation>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OVu-Sf-4mg" userLabel="card" customClass="TriangleCutoutView">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -4676,34 +4683,12 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hCb-4G-wLB" userLabel="giveup">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="hCb-4G-wLB" secondAttribute="height" multiplier="1:1" id="yK0-6V-TZf"/>
-                                </constraints>
-                                <state key="normal" image="edit_fail_ic_default">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="yK0-6V-TZf"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="yK0-6V-TZf"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="giveUp:" destination="rNz-bL-QyY" eventType="touchUpInside" id="46C-mm-5m4"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q5h-js-KUK">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Q5h-js-KUK" secondAttribute="height" multiplier="1:1" id="qY8-BC-JdJ"/>
                                 </constraints>
-                                <state key="normal" image="edit_finish_ic_default">
+                                <state key="normal" image="finish_default">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="default">
@@ -4745,6 +4730,28 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hCb-4G-wLB" userLabel="giveup">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="hCb-4G-wLB" secondAttribute="height" multiplier="1:1" id="yK0-6V-TZf"/>
+                                </constraints>
+                                <state key="normal" image="delete_default">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="yK0-6V-TZf"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="yK0-6V-TZf"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="giveUp:" destination="rNz-bL-QyY" eventType="touchUpInside" id="46C-mm-5m4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.80000000000000004" green="0.83921568627450982" blue="0.82352941176470584" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
@@ -4804,12 +4811,12 @@
                             <mask key="subviews">
                                 <exclude reference="xEq-TA-PZ3"/>
                                 <exclude reference="fzL-bq-XFg"/>
-                                <exclude reference="hCb-4G-wLB"/>
                                 <exclude reference="Q5h-js-KUK"/>
                                 <exclude reference="SXE-8r-QOu"/>
                                 <exclude reference="sPq-fR-Qas"/>
                                 <exclude reference="r6f-zr-0TZ"/>
                                 <exclude reference="vrH-cI-Zxd"/>
+                                <exclude reference="hCb-4G-wLB"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="eo7-9M-UoJ"/>
@@ -4842,12 +4849,12 @@
                             <mask key="subviews">
                                 <include reference="xEq-TA-PZ3"/>
                                 <include reference="fzL-bq-XFg"/>
-                                <include reference="hCb-4G-wLB"/>
                                 <include reference="Q5h-js-KUK"/>
                                 <include reference="SXE-8r-QOu"/>
                                 <include reference="sPq-fR-Qas"/>
                                 <include reference="r6f-zr-0TZ"/>
                                 <include reference="vrH-cI-Zxd"/>
+                                <include reference="hCb-4G-wLB"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="eo7-9M-UoJ"/>
@@ -5550,11 +5557,11 @@
     <resources>
         <image name="camera_ic" width="141" height="141"/>
         <image name="card_photo_shadow" width="76" height="88"/>
-        <image name="edit_fail_ic_default" width="192" height="192"/>
-        <image name="edit_finish_ic_default" width="192" height="192"/>
+        <image name="delete_default" width="192" height="192"/>
         <image name="edit_split_line" width="4" height="284"/>
         <image name="feed_ic_more" width="86" height="86"/>
         <image name="find_ic_follow" width="26" height="26"/>
+        <image name="finish_default" width="192" height="192"/>
         <image name="finish_ic" width="120" height="120"/>
         <image name="home_ic_camera" width="472" height="102"/>
         <image name="logo" width="301" height="301"/>
