@@ -386,7 +386,7 @@ ViewForEmptyEventDelegate>
         CGFloat leftMargin = 30.0f/640 * CGRectGetWidth(self.view.frame);
         CGFloat width = CGRectGetWidth(self.view.frame) - leftMargin * 2;
         CGFloat height = 590.0 *width / 568;
-        CGRect rect = CGRectMake(leftMargin,158.0/1136*CGRectGetHeight(self.view.frame),width,height);
+        CGRect rect = CGRectMake(leftMargin,13,width,height); //13 is angle height, see ViewForEmptyEvent.xib
         _guideView = [ViewForEmptyEvent instantiateFromNib:rect];
         _guideView.delegate = self;
     }
