@@ -40,7 +40,8 @@
     if (self.plan.hasDetailText) {
         planDescriptionHeight = [SystemUtil heightForText:self.plan.detailText withFontSize:12.0f];
     }
-    CGRect frame = CGRectMake(0, 0, self.tableView.frame.size.width, 260.0f/1136*self.tableView.frame.size.height + planDescriptionHeight);
+    CGRect mainFrame = [UIScreen mainScreen].bounds;
+    CGRect frame = CGRectMake(0, 0, CGRectGetWidth(mainFrame), 130.0f + planDescriptionHeight);
     self.headerView = [HeaderView instantiateFromNib:frame];
     self.headerView.descriptionTextView.delegate = self;
 }
@@ -235,11 +236,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    CGRect frame = [UIScreen mainScreen].bounds;
     if (IS_IPHONE5){
-        return 750.0f/1136 * CGRectGetHeight(tableView.frame);
+        return 750.0f/1136 * CGRectGetHeight(frame);
     }else{
         //eariler
-        return 785.0f/640 * CGRectGetWidth(tableView.frame);
+        return 785.0f/640 * CGRectGetWidth(frame);
     }
 }
 

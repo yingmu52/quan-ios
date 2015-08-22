@@ -37,12 +37,12 @@ static NSUInteger numberOfPreloadedFeeds = 3;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.fetchCenter fetchFollowingPlanList];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = NO;
+    [self.fetchCenter fetchFollowingPlanList];
 }
 - (void)dealloc{
     NSUInteger numberOfPreservingFeeds = 20;
@@ -179,7 +179,9 @@ static NSUInteger numberOfPreloadedFeeds = 3;
 - (void)controllerWillChangeContent:
 (NSFetchedResultsController *)controller
 {
-    [self.tableView beginUpdates];
+    dispatch_main_async_safe(^{
+        [self.tableView beginUpdates];
+    })
 }
 
 - (void)controller:(NSFetchedResultsController *)controller
@@ -188,39 +190,43 @@ static NSUInteger numberOfPreloadedFeeds = 3;
      forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath
 {
-    switch(type){
-            
-        case NSFetchedResultsChangeInsert:{
-            [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
-                                  withRowAnimation:UITableViewRowAnimationFade];
-            NSLog(@"Followed Plan inserted");
+    dispatch_main_async_safe(^{
+        switch(type){
+                
+            case NSFetchedResultsChangeInsert:{
+                [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
+                                      withRowAnimation:UITableViewRowAnimationFade];
+                NSLog(@"Followed Plan inserted");
+            }
+                break;
+                
+            case NSFetchedResultsChangeDelete:{
+                [self.tableView deleteRowsAtIndexPaths:@[indexPath]
+                                      withRowAnimation:UITableViewRowAnimationFade];
+                NSLog(@"Followed Plan deleted");
+            }
+                break;
+                
+            case NSFetchedResultsChangeUpdate:{
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath]
+                                      withRowAnimation:UITableViewRowAnimationNone];
+                NSLog(@"Followed Plan updated");
+            }
+                break;
+                
+            default:
+                break;
         }
-            break;
-            
-        case NSFetchedResultsChangeDelete:{
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath]
-                                  withRowAnimation:UITableViewRowAnimationFade];
-            NSLog(@"Followed Plan deleted");
-        }
-            break;
-            
-        case NSFetchedResultsChangeUpdate:{
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath]
-                                  withRowAnimation:UITableViewRowAnimationNone];
-            NSLog(@"Followed Plan updated");
-        }
-            break;
-            
-        default:
-            break;
-    }
+    });
 }
 
 
 - (void)controllerDidChangeContent:
 (NSFetchedResultsController *)controller
 {
-    [self.tableView endUpdates];
+    dispatch_main_async_safe(^{
+        [self.tableView endUpdates];
+    })
 }
 
 

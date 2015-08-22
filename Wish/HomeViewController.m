@@ -5,7 +5,6 @@
 //  Created by Xinyi Zhuang on 2015-01-14.
 //  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
 //
-
 #import "HomeViewController.h"
 #import "PostFeedViewController.h"
 #import "Theme.h"
@@ -23,7 +22,6 @@
 #import "ImagePicker.h"
 #import "ViewForEmptyEvent.h"
 const NSUInteger maxCardNum = 10;
-
 @interface HomeViewController ()
 <NSFetchedResultsControllerDelegate,
 UIImagePickerControllerDelegate,
@@ -34,24 +32,22 @@ HomeCardViewDelegate,
 UIActionSheetDelegate,
 ImagePickerDelegate,
 ViewForEmptyEventDelegate>
-
-
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @property (nonatomic,weak) Plan *currentPlan;
 @property (nonatomic,weak) StationView *stationView;
-
 @property (nonatomic,strong) NSMutableArray *itemChanges;
 @property (nonatomic,weak) ViewForEmptyEvent *guideView;
 @end
-
 @implementation HomeViewController
-
 - (void)updateNavigationTitle{
     NSArray *plans = self.fetchedRC.fetchedObjects;
-    NSInteger page = self.collectionView.contentOffset.x / CGRectGetWidth(self.collectionView.frame);
-    self.navigationItem.title = [NSString stringWithFormat:@"第%@/%@页",@(page + 1),@(plans.count)];
+    if (plans.count > 0) {
+        NSInteger page = self.collectionView.contentOffset.x / CGRectGetWidth(self.collectionView.frame);
+        self.navigationItem.title = [NSString stringWithFormat:@"%@/%@",@(page + 1),@(plans.count)];
+    }else{
+        self.navigationItem.title = nil;
+    }
 }
-
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     if (!self.fetchedRC.fetchedObjects.count){
@@ -64,11 +60,9 @@ ViewForEmptyEventDelegate>
     self.tabBarController.tabBar.hidden = NO;
     [self updateNavigationTitle];
 }
-
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     [self updateNavigationTitle];
 }
-
 - (NSFetchedResultsController *)fetchedRC
 {
     NSManagedObjectContext *context = [AppDelegate getContext];
@@ -81,7 +75,6 @@ ViewForEmptyEventDelegate>
     request.predicate = [NSPredicate predicateWithFormat:@"owner.ownerId == %@ && planStatus == %d",[User uid],PlanStatusOnGoing];
     
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
-
     NSFetchedResultsController *newFRC = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
     
     self.fetchedRC = newFRC;
@@ -99,8 +92,6 @@ ViewForEmptyEventDelegate>
     
     
 }
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
@@ -112,14 +103,12 @@ ViewForEmptyEventDelegate>
     NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
     self.versionLabel.text = [NSString stringWithFormat:@"Version %@ Build %@",version,build];
 }
-
 - (void)addLongPressGesture{
     UILongPressGestureRecognizer *lp = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     lp.delaysTouchesBegan = YES;
     lp.minimumPressDuration = 0.5;
     [self.collectionView addGestureRecognizer:lp];
 }
-
 - (void)setUpNavigationItem
 {
     CGRect frame = CGRectMake(0,0, 48,CGRectGetHeight(self.navigationController.navigationBar.frame));
@@ -129,17 +118,10 @@ ViewForEmptyEventDelegate>
                                         frame:frame];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
 }
-
-
 - (void)addWish{
     [self performSegueWithIdentifier:@"showPostFromHome" sender:nil];
 }
-
-
 #pragma mark - Home Card View Delegate
-
-
-
 - (StationView *)stationView
 {
     if (!_stationView){
@@ -147,7 +129,6 @@ ViewForEmptyEventDelegate>
     }
     return _stationView;
 }
-
 - (void)popupViewDidPressConfirm:(PopupView *)popupView
 {
     if (self.stationView){
@@ -161,34 +142,26 @@ ViewForEmptyEventDelegate>
     }
     [self popupViewDidPressCancel:popupView];
 }
-
 - (void)popupViewDidPressCancel:(PopupView *)popupView
 {
     [popupView removeFromSuperview];
     [self.stationView removeFromSuperview];
     self.stationView = nil;
-
 }
-
 #pragma mark - Camera Util
 - (void)didPressCameraOnCard:(HomeCardView *)cardView{
     if (self.fetchedRC.fetchedObjects.count) {
         self.currentPlan = [self.fetchedRC objectAtIndexPath:[self.collectionView indexPathForCell:cardView]];
         [ImagePicker startPickingImageFromLocalSourceFor:self];
     }
-
 }
 - (void)didFinishPickingImage:(UIImage *)image{
     [self performSegueWithIdentifier:@"ShowPostFeedFromHome" sender:image];
 }
-
 - (void)didFailPickingImage{
     NSLog(@"fail picking image");
 }
-
 #pragma mark -
-
-
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"showPlanDetailFromHome"]) {
@@ -200,7 +173,6 @@ ViewForEmptyEventDelegate>
     }
     self.tabBarController.tabBar.hidden = YES;
 }
-
 #pragma mark -  UICollectionView methods
 - (void)handleLongPress:(UILongPressGestureRecognizer *)longPress{
     
@@ -219,11 +191,10 @@ ViewForEmptyEventDelegate>
                 HomeCardView *cardView = (HomeCardView *)[self.collectionView cellForItemAtIndexPath:indexPath];
                 self.stationView.cardImageView.image = cardView.imageView.image;
             }
-
         }else if (longPress.state == UIGestureRecognizerStateChanged){
             //update card location
             self.stationView.currentCardLocation = [longPress locationInView:self.stationView];
-//            NSLog(@"%@",self.stationView.plan.planTitle);
+            //            NSLog(@"%@",self.stationView.plan.planTitle);
             
         }else if (longPress.state == UIGestureRecognizerStateEnded ||
                   longPress.state == UIGestureRecognizerStateFailed ||
@@ -246,15 +217,11 @@ ViewForEmptyEventDelegate>
                 [self popupViewDidPressCancel:popupView];
             }
         }
-
     }
-
 }
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.fetchedRC.fetchedObjects.count;
 }
-
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
     if (!plan.image){
@@ -263,14 +230,10 @@ ViewForEmptyEventDelegate>
     }
     [self performSegueWithIdentifier:@"showPlanDetailFromHome" sender:plan];
 }
-
-
-
 #pragma mark - FetchedResultsController
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     self.itemChanges = [[NSMutableArray alloc] init];
 }
-
 - (void)controller:(NSFetchedResultsController *)controller
    didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath
@@ -290,13 +253,11 @@ ViewForEmptyEventDelegate>
         case NSFetchedResultsChangeMove:
             change[@(type)] = @[indexPath, newIndexPath];
             break;
-
         default:
             break;
     }
     [self.itemChanges addObject:change];
 }
-
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     
     if (!controller.fetchedObjects.count){
@@ -337,7 +298,6 @@ ViewForEmptyEventDelegate>
                     case NSFetchedResultsChangeMove:
                         [self.collectionView moveItemAtIndexPath:obj[0] toIndexPath:obj[1]];
                         break;
-
                     default:
                         break;
                 }
@@ -349,15 +309,9 @@ ViewForEmptyEventDelegate>
         self.itemChanges = nil;
         [self updateNavigationTitle];
     }];
-
 }
-
-
 #pragma mark - implement parent class abstract methods
-
-
 - (void)configureCollectionViewCell:(HomeCardView *)cell atIndexPath:(NSIndexPath *)indexPath{
-
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
     if (!plan.image){
         [cell.imageView sd_setImageWithURL:[[FetchCenter new] urlWithImageID:plan.backgroundNum]];
@@ -366,19 +320,14 @@ ViewForEmptyEventDelegate>
     }
     cell.titleLabel.text = plan.planTitle;
     cell.subtitleLabel.text = [NSString stringWithFormat:@"%@条记录  %@人关注",plan.tryTimes,plan.followCount];
-
     cell.delegate = self;
     [cell layoutIfNeeded]; //fixed auto layout error on iphone 5s or above
-
 }
-
-
 #pragma mark - Handling 0 Events Situation
 - (void)setUpEmptyView{
     self.collectionView.hidden = YES;
     [self.view addSubview:self.guideView];
 }
-
 - (ViewForEmptyEvent *)guideView{
     if (!_guideView){
         //        CGFloat width = 568.0/640 * CGRectGetWidth(self.view.frame);
@@ -392,10 +341,8 @@ ViewForEmptyEventDelegate>
     }
     return _guideView;
 }
-
 - (void)didPressButton:(ViewForEmptyEvent *)view{
     [view removeFromSuperview];
     [self addWish];
 }
-
 @end

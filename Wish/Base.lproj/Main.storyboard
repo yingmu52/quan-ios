@@ -1587,6 +1587,9 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="76" y="14" width="136" height="17"/>
+                                                            </variation>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="更新于2015-08-08" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8sd-oO-FY6">
                                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -1957,16 +1960,16 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottomMargin" secondItem="0Rr-3L-WEg" secondAttribute="bottom" constant="-8" id="67s-Yw-XFs">
-                                            <variation key="heightClass=regular-widthClass=compact" constant="-16"/>
+                                            <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
                                         </constraint>
                                         <constraint firstAttribute="trailingMargin" secondItem="0Rr-3L-WEg" secondAttribute="trailing" constant="-8" id="AC8-6L-50Q">
-                                            <variation key="heightClass=regular-widthClass=compact" constant="-16"/>
+                                            <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
                                         </constraint>
                                         <constraint firstItem="0Rr-3L-WEg" firstAttribute="top" secondItem="faY-b2-CXn" secondAttribute="topMargin" constant="-8" id="GRB-jK-Jzd">
-                                            <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                                            <variation key="heightClass=regular-widthClass=compact" constant="-4"/>
                                         </constraint>
                                         <constraint firstItem="0Rr-3L-WEg" firstAttribute="leading" secondItem="faY-b2-CXn" secondAttribute="leadingMargin" constant="-8" id="IYx-F2-h4W">
-                                            <variation key="heightClass=regular-widthClass=compact" constant="-16"/>
+                                            <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
                                         </constraint>
                                     </constraints>
                                     <variation key="default">
