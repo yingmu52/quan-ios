@@ -29,6 +29,12 @@ static CGFloat kEndPoint = 1.5;
 
     //去掉分隔线
     self.shadowImage = [UIImage new];
+    
+    //修复iphone6 导航不适配问题
+    CGSize size = CGSizeMake([UIScreen mainScreen].bounds.size.width, 44.0);
+    CGRect frame = self.frame;
+    frame.size = size;
+    self.frame = frame;
 }
 
 //- (void)showClearBackground{
