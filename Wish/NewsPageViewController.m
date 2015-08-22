@@ -51,6 +51,9 @@
                                             size:CGSizeMake(CGRectGetWidth(self.view.frame), 2)];
     [self.navigationController.navigationBar setShadowImage:shadow];
     
+    //背影图
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

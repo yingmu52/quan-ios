@@ -23,11 +23,11 @@ static CGFloat kEndPoint = 1.5;
     self.titleTextAttributes = @{NSForegroundColorAttributeName:color,
                                             NSFontAttributeName:[UIFont systemFontOfSize:17.0]};;
 
-    //背影图
-    [self setBackgroundImage:[SystemUtil imageFromColor:[Theme naviBackground] size:CGSizeMake(1,1)]
-               forBarMetrics:UIBarMetricsDefault];
-
+    //背影色
+    self.barTintColor = [Theme homeBackground];
+    self.translucent = NO;
     //去掉分隔线
+    [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.shadowImage = [UIImage new];
     
     //修复iphone6 导航不适配问题

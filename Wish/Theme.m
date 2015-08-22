@@ -159,7 +159,7 @@
     return [[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_navbar"]] colorWithAlphaComponent:0.95];
 }
 + (UIColor *)homeBackground{
-    return [SystemUtil colorFromHexString:@"#F6FAF9"];
+    return [SystemUtil colorFromHexString:@"#EDEFEE"];
 }
 +(UIColor *)menuBackground{
     return [UIColor colorWithPatternImage:[UIImage imageNamed:@"tab_bg"]];
