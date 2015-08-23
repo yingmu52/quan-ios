@@ -538,18 +538,18 @@ typedef enum{
     if (!_buildVersion) {
         NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
         NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
-        _buildVersion = [[NSString stringWithFormat:@"Version %@ Build %@",version,build] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        _buildVersion = [NSString stringWithFormat:@"Version %@ Build %@",version,build];
     }
     return _buildVersion;
 }
 
 //return a new base url string with appened version argument
 - (NSString *)versionForBaseURL:(NSString *)baseURL operation:(FetchCenterGetOp)op{
+    UIDevice *device = [UIDevice currentDevice];
+    NSString *systemInfo = [NSString stringWithFormat:@"appVersion: %@ | sysVersion: %@ | sysModel: %@",self.buildVersion,device.systemVersion,device.model];
     NSMutableDictionary *dict = [@{@"version":@"2.2.2",
                                    @"loginType":@"qq",
-                                   @"sysVersion":[UIDevice currentDevice].systemVersion,
-                                   @"sysModel":[[UIDevice currentDevice].model stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                                   @"appVersion":self.buildVersion} mutableCopy];
+                                   @"systemInfo":[systemInfo stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]} mutableCopy];
     
     if (op != FetchCenterGetOpLoginForUidAndUkey) {
         [dict addEntriesFromDictionary:@{@"uid":[User uid],@"ukey":[User uKey]}];
