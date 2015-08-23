@@ -58,7 +58,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //在导航添加选项卡
-    HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"我的关注", @"发现"]];
+    HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"发现", @"我的关注"]];
     
     NSDictionary *normalAttribute = self.navigationController.navigationBar.titleTextAttributes;
     NSDictionary *selectedAttribute = @{NSFontAttributeName:[UIFont systemFontOfSize:17.0],
@@ -67,8 +67,8 @@
     
     segmentedControl.frame = CGRectMake(0,0,0.8 * CGRectGetWidth(self.view.frame),CGRectGetHeight(self.navigationController.navigationBar.frame));
     segmentedControl.backgroundColor = [UIColor clearColor];
+    segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
     segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
-    segmentedControl.userDraggable = YES;
     segmentedControl.selectionIndicatorColor = self.navigationSeparatorColor;
     [segmentedControl addTarget:self action:@selector(switchSegmentedControl:) forControlEvents:UIControlEventValueChanged];
     
@@ -83,8 +83,8 @@
     }];
     self.navigationItem.titleView = segmentedControl;
     
-    //设置PageViewController
-    [self showController:self.followingVC];
+    //设置PageViewController, 默认为发现页
+    [self showController:self.discoveryVC];
     
     //防止视图进入导航后面
     self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -101,9 +101,9 @@
 
 - (void)switchSegmentedControl:(HMSegmentedControl *)control{
     if (control.selectedSegmentIndex == 0) {
-        [self showController:self.followingVC];
-    }else if (control.selectedSegmentIndex == 1){
         [self showController:self.discoveryVC];
+    }else if (control.selectedSegmentIndex == 1){
+        [self showController:self.followingVC];
     }
 }
 
@@ -112,11 +112,11 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
-    return [viewController isKindOfClass:[DiscoveryVCData class]] ? self.followingVC : nil;
+    return [viewController isKindOfClass:[FollowingTVCData class]] ? self.discoveryVC : nil;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
-    return [viewController isKindOfClass:[FollowingTVCData class]] ? self.discoveryVC : nil;
+    return [viewController isKindOfClass:[DiscoveryVCData class]] ? self.followingVC : nil;
 }
 @end
