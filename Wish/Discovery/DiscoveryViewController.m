@@ -99,14 +99,14 @@
 //    CGFloat movingDistance = CGRectGetHeight(self.view.frame) * 0.5f;
     self.addButton.userInteractionEnabled = !shouldHideCamera;
     if (shouldHideCamera){
-        [self.navigationController setNavigationBarHidden:YES animated:YES];
+//        [self.navigationController setNavigationBarHidden:YES animated:YES];
         [UIView animateWithDuration:0.5 animations:^{
             self.addButton.alpha = 0.0f;
 //            self.addButton.center = CGPointMake(self.addButton.center.x,self.addButton.center.y + movingDistance);
 //            self.navigationController.navigationBar.alpha = 0;
         }];
     }else{
-        [self.navigationController setNavigationBarHidden:NO animated:YES];
+//        [self.navigationController setNavigationBarHidden:NO animated:YES];
         [UIView animateWithDuration:0.5 animations:^{
             self.addButton.alpha = 1.0f;
 //            self.addButton.center = CGPointMake(self.addButton.center.x,self.addButton.center.y - movingDistance);
