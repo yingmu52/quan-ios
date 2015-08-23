@@ -30,12 +30,6 @@
                                 </mask>
                             </variation>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="完成" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FMh-ma-CVP">
-                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="finish_default" highlightedImage="finish_selected" translatesAutoresizingMaskIntoConstraints="NO" id="c5T-zl-Dtl">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             <constraints>
@@ -131,6 +125,12 @@
                                 </mask>
                             </variation>
                         </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="归档" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FMh-ma-CVP">
+                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.35000000000000003" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -173,11 +173,11 @@
                     <variation key="default">
                         <mask key="subviews">
                             <exclude reference="gom-Tr-LUq"/>
-                            <exclude reference="FMh-ma-CVP"/>
                             <exclude reference="c5T-zl-Dtl"/>
                             <exclude reference="Q6S-JZ-XPc"/>
                             <exclude reference="wq7-Lw-8Jm"/>
                             <exclude reference="jbv-Jr-n62"/>
+                            <exclude reference="FMh-ma-CVP"/>
                         </mask>
                         <mask key="constraints">
                             <exclude reference="cng-qL-woO"/>
@@ -204,11 +204,11 @@
                     <variation key="heightClass=regular-widthClass=compact">
                         <mask key="subviews">
                             <include reference="gom-Tr-LUq"/>
-                            <include reference="FMh-ma-CVP"/>
                             <include reference="c5T-zl-Dtl"/>
                             <include reference="Q6S-JZ-XPc"/>
                             <include reference="wq7-Lw-8Jm"/>
                             <include reference="jbv-Jr-n62"/>
+                            <include reference="FMh-ma-CVP"/>
                         </mask>
                         <mask key="constraints">
                             <include reference="cng-qL-woO"/>
