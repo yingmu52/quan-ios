@@ -76,4 +76,73 @@
     }
     return cellSize;
 }
+
+#pragma mark - Scroll view delegate (Add Button Animation)
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    self.lastContentOffSet = scrollView.contentOffset.y;
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    if (self.lastContentOffSet < scrollView.contentOffset.y) {
+        //hide camera
+        if (self.addButton.isUserInteractionEnabled) [self animateCameraIcon:YES];
+        
+    }else if (self.lastContentOffSet > scrollView.contentOffset.y) {
+        //show camera
+        if (!self.addButton.isUserInteractionEnabled) [self animateCameraIcon:NO];
+    }
+    
+}
+
+- (void)animateCameraIcon:(BOOL)shouldHideCamera{
+//    CGFloat movingDistance = CGRectGetHeight(self.view.frame) * 0.5f;
+    self.addButton.userInteractionEnabled = !shouldHideCamera;
+    if (shouldHideCamera){
+        [UIView animateWithDuration:0.5 animations:^{
+//            [self.navigationController setNavigationBarHidden:YES animated:YES];
+            self.addButton.alpha = 0.0f;
+//            self.addButton.center = CGPointMake(self.addButton.center.x,self.addButton.center.y + movingDistance);
+//            self.navigationController.navigationBar.alpha = 0;
+        }];
+    }else{
+        [UIView animateWithDuration:0.5 animations:^{
+//            [self.navigationController setNavigationBarHidden:NO animated:YES];
+            self.addButton.alpha = 1.0f;
+//            self.addButton.center = CGPointMake(self.addButton.center.x,self.addButton.center.y - movingDistance);
+//            self.navigationController.navigationBar.alpha = 1;
+        }];
+    }
+}
+- (void)loaddAddButton{
+    //读取加号按扭
+    UIImage *icon = [Theme discoveryAddButton];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setImage:icon forState:UIControlStateNormal];
+    button.hidden = NO;
+    UIWindow *topView = [[UIApplication sharedApplication] keyWindow];
+    CGFloat trailing = 15;
+    CGFloat bottom = self.tabBarController.tabBar.frame.size.height;
+    CGFloat side = 65.0f;
+    [button setFrame:CGRectMake(topView.frame.size.width - trailing - side,topView.frame.size.height - bottom - side,side,side)];
+    [topView addSubview:button];
+    [button addTarget:self action:@selector(addWish) forControlEvents:UIControlEventTouchUpInside];
+    self.addButton = button;
+}
+
+- (void)addWish{
+    [self performSegueWithIdentifier:@"showPostViewFromDiscovery" sender:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self loaddAddButton];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.addButton removeFromSuperview];
+}
+
+
 @end

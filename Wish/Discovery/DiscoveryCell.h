@@ -16,4 +16,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *discoveryTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *discoveryByUserLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *cornerMask;
+@property (weak, nonatomic) IBOutlet UILabel *discoveryRecordsLabel;
 @end
