@@ -128,6 +128,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0){
+        if (indexPath.row == 0){ //个人资料
+            [self performSegueWithIdentifier:@"showProfileView" sender:nil];
+        }
         if (indexPath.row == 1){ // 完成的事儿
             [self performSegueWithIdentifier:@"ShowAcheivementList" sender:nil];
         }

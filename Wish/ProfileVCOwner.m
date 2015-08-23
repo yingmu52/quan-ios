@@ -14,7 +14,6 @@
 
 @interface ProfileVCOwner () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,FetchCenterDelegate,UITextFieldDelegate,ImagePickerDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
-@property (nonatomic,weak) IBOutlet UIButton *cameraButton;
 @end
 
 @implementation ProfileVCOwner
@@ -34,7 +33,7 @@
 
 - (void)goBack{
     [super goBack];
-    [self uploadPersonalInfo];
+//    [self uploadPersonalInfo];
 }
 - (FetchCenter *)fetchCenter{
     if (!_fetchCenter) {
@@ -59,13 +58,11 @@
 #pragma mark - update info
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 1) {
-        if (indexPath.row == 0){
-            [self.nickNameTextField becomeFirstResponder];
-        }
-        if (indexPath.row == 1){
-            self.genderLabel.text = [self.genderLabel.text isEqualToString:@"男"] ? @"女" : @"男";
-        }
+    if (indexPath.row == 0){
+        [self.nickNameTextField becomeFirstResponder];
+    }
+    if (indexPath.row == 1){
+        self.genderLabel.text = [self.genderLabel.text isEqualToString:@"男"] ? @"女" : @"男";
     }
     [self dismissKeyboard];
 }
@@ -91,7 +88,7 @@
 }
  
 - (void)didFinishPickingImage:(UIImage *)image{
-    [self showSpinniner];
+//    [self showSpinniner];
     [self.fetchCenter uploadNewProfilePicture:image];
 }
  
@@ -101,7 +98,7 @@
 
 #pragma mark - fetch center delegate
 - (void)didFinishSettingPersonalInfo{
-    [self dismissSpinner];
+//    [self dismissSpinner];
     NSURL *newUrl = [self.fetchCenter urlWithImageID:[User updatedProfilePictureId]];
     [self.profilePicture setImageWithURL:newUrl
              usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -121,7 +118,7 @@
 }
  
 - (void)handleFailure:(NSDictionary *)info{
-    [self dismissSpinner];
+//    [self dismissSpinner];
 //    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
 //                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
 //                               delegate:self
@@ -129,16 +126,16 @@
 //                      otherButtonTitles:nil, nil] show];
 }
  
-#pragma mark - activity
- 
-- (void)showSpinniner{
-    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
-    [spinner startAnimating];
-}
- 
-- (void)dismissSpinner{
-    self.navigationItem.rightBarButtonItem = nil;
-}
- 
+//#pragma mark - activity
+// 
+//- (void)showSpinniner{
+//    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+//    [spinner startAnimating];
+//}
+// 
+//- (void)dismissSpinner{
+//    self.navigationItem.rightBarButtonItem = nil;
+//}
+// 
 @end

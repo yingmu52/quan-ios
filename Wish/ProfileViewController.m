@@ -30,7 +30,6 @@
     [super viewDidLoad];
     [self setUpNavigationItem];
     [self setInfoForOwner];
-    self.tableView.scrollEnabled = NO;
 }
 
 - (void)goBack{
@@ -44,30 +43,16 @@
 - (void)setUpNavigationItem
 {
     CGRect frame = CGRectMake(0,0, 25,25);
-    UIButton *back = [Theme buttonWithImage:[Theme navWhiteButtonDefault]
+    UIButton *back = [Theme buttonWithImage:[Theme navBackButtonDefault]
                                      target:self
                                    selector:@selector(goBack)
                                       frame:frame];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:back];
-    
-//    NavigationBar *navBar = (NavigationBar *)self.navigationController.navigationBar;
-//    [navBar showClearBackground];
-//    [navBar showTextWithColor:[UIColor whiteColor]];
-    self.title = @"个人资料";
-}
-
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if (section == 0){
-        return 58.0f / 1136 * tableView.frame.size.height;
-    }
-    return 0.0f;
+    self.navigationItem.title = @"个人资料";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0) {
-        return 400.0f / 1136 * tableView.frame.size.height;
-    }else if (indexPath.section == 1){
+    if (indexPath.section == 0){
         if (indexPath.row != 3){
             return 104.0f / 1136 * tableView.frame.size.height;
         }else{
@@ -79,14 +64,6 @@
     }
     
 }
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    if (section == 2) {
-        return 0;
-    }
-    return [super tableView:tableView numberOfRowsInSection:section];
-}
-
 
 
 - (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
