@@ -26,12 +26,20 @@
     self.tabBar.frame = tabFrame;
 }
 
-- (void)awakeFromNib{
-    [super awakeFromNib];
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    
+    //设置字体大小
+    NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:12.0f]};
+    [[UITabBarItem appearance] setTitleTextAttributes:attributes forState:UIControlStateNormal];
+
+    //设置选中项的颜色
     UIColor *color = [SystemUtil colorFromHexString:@"#32C9A9"];
     [[UITabBar appearance] setSelectedImageTintColor:color];
-}
 
+    //触发消息读取的时钟
+    [self.messageNotificationTimer fire];
+}
 #pragma mark - observe message notification
 
 - (FetchCenter *)fetchCenter{
@@ -78,12 +86,6 @@
         self.messageNotificationTimer = nil;
     }
 }
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self.messageNotificationTimer fire];
-}
-
 
 - (void)dealloc{
     [self.messageNotificationTimer invalidate];
