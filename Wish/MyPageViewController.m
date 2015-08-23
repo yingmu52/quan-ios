@@ -19,6 +19,7 @@
 @property (nonatomic,weak) IBOutlet UIImageView *iconImageView;
 @property (nonatomic,weak) IBOutlet UIImageView *profilePicture;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
+@property (nonatomic,weak) IBOutlet UILabel *versionLabel;
 @end
 
 @implementation MyPageViewController
@@ -41,6 +42,7 @@
     [self.profilePicture setImageWithURL:[self.fetchCenter urlWithImageID:newPicId]
              usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     
+    self.versionLabel.text = [self.fetchCenter.buildVersion stringByReplacingOccurrencesOfString:@"%20" withString:@" "];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

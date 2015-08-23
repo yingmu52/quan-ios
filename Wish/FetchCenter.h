@@ -58,7 +58,7 @@
 @end
 @interface FetchCenter : NSObject
 @property (nonatomic,weak) id <FetchCenterDelegate>delegate;
-
+@property (nonatomic,strong) NSString *buildVersion;
 + (NSString *)requestLogFilePath;
 
 #pragma mark - Message

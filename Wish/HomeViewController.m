@@ -96,12 +96,7 @@ ViewForEmptyEventDelegate>
     [super viewDidLoad];
     [self setUpNavigationItem];
     [self addLongPressGesture];
-    [[FetchCenter new] fetchPlanListForOwnerId:[User uid]];
-    
-    //set veriosn label
-    NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
-    NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
-    self.versionLabel.text = [NSString stringWithFormat:@"Version %@ Build %@",version,build];
+    [[FetchCenter new] fetchPlanListForOwnerId:[User uid]];    
 }
 - (void)addLongPressGesture{
     UILongPressGestureRecognizer *lp = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
