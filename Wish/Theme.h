@@ -66,4 +66,5 @@
 
 + (UIImage *)topImageMask;
 + (UIColor *)profileBakground;
++ (UIImage *)discoveryAddButton;
 @end

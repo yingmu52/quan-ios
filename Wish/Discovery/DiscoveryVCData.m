@@ -18,6 +18,8 @@
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,strong) NSMutableArray *itemChanges;
 @property (nonatomic,strong) NSBlockOperation *blockOperation;
+@property (nonatomic,strong) UIButton *addButton;
+@property (nonatomic) CGFloat lastContentOffSet;
 @end
 
 @implementation DiscoveryVCData
@@ -38,7 +40,13 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = NO;
+    [self loaddAddButton];
     [self.fetchCenter getDiscoveryList];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.addButton removeFromSuperview];
 }
 - (void)addWish{
     [self performSegueWithIdentifier:@"showPostViewFromDiscovery" sender:nil];
@@ -139,6 +147,7 @@
     if ([segue.identifier isEqualToString:@"showDiscoveryWishDetail"] || [segue.identifier isEqualToString:@"showWishDetailVCOwnerFromDiscovery"]){
         [segue.destinationViewController setPlan:plan];
     }
+    self.navigationController.navigationBar.shadowImage = [UIImage new]; //隐藏导航割线
     self.tabBarController.tabBar.hidden = YES;
 }
 
@@ -224,6 +233,52 @@
     
 }
 
+#pragma mark - Scroll view delegate (Add Button Animation)
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    self.lastContentOffSet = scrollView.contentOffset.y;
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    if (self.lastContentOffSet < scrollView.contentOffset.y) {
+        //hide camera
+        if (self.addButton.isUserInteractionEnabled) [self animateCameraIcon:YES];
+        
+    }else if (self.lastContentOffSet > scrollView.contentOffset.y) {
+        //show camera
+        if (!self.addButton.isUserInteractionEnabled) [self animateCameraIcon:NO];
+    }
+    
+}
+
+- (void)animateCameraIcon:(BOOL)shouldHideCamera{
+    CGFloat movingDistance = CGRectGetHeight(self.view.frame) * 0.5f;
+    self.addButton.userInteractionEnabled = !shouldHideCamera;
+    if (shouldHideCamera){
+        [UIView animateWithDuration:1.0 animations:^{
+            self.addButton.center = CGPointMake(self.addButton.center.x,self.addButton.center.y + movingDistance);
+        }];
+    }else{
+        [UIView animateWithDuration:0.7 animations:^{
+            self.addButton.center = CGPointMake(self.addButton.center.x,self.addButton.center.y - movingDistance);
+        }];
+    }
+}
+- (void)loaddAddButton{
+    //读取加号按扭
+    UIImage *icon = [Theme discoveryAddButton];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setImage:icon forState:UIControlStateNormal];
+    button.hidden = NO;
+    UIWindow *topView = [[UIApplication sharedApplication] keyWindow];
+    CGFloat trailing = 15;
+    CGFloat bottom = self.tabBarController.tabBar.frame.size.height;
+    CGFloat side = 65.0f;
+    [button setFrame:CGRectMake(topView.frame.size.width - trailing - side,topView.frame.size.height - bottom - side,side,side)];
+    [topView addSubview:button];
+    [button addTarget:self action:@selector(addWish) forControlEvents:UIControlEventTouchUpInside];
+    self.addButton = button;
+}
 
 @end
 

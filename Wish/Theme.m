@@ -211,5 +211,9 @@
 + (UIImage *)topImageMask{
     return [UIImage imageNamed:@"ic_record"];
 }
+
++ (UIImage *)discoveryAddButton{
+    return [UIImage imageNamed:@"button_creat_plus"];
+}
 @end
 
