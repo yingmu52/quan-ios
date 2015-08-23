@@ -192,17 +192,8 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
-#warning may change this part in the future
-//    if ([self.feed.plan.owner.ownerId isEqualToString:[User uid]]){
-//        return YES;
-//    }else{ //if not, only the comment from self can have delete action
-        Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
-        if ([comment.owner.ownerId isEqualToString:[User uid]]){
-            return YES;
-        }else{
-            return NO;
-        }
-//    }
+    Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
+    return [comment.owner.ownerId isEqualToString:[User uid]];
 }
 
 #pragma mark - highlight
@@ -436,7 +427,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 
 - (void)loadComments{
     
-    if (self.feed.commentCount.integerValue > 0) {
+    //拉取评论的条件是feed有评论数，或feed不存在（拉评论可以拉返回feed
+    if (self.feed.commentCount.integerValue > 0 || !self.feed) {
         // if self.feed is not at local than use feedId to fetchFrom the Cloud
         NSString *feedId = self.feed.feedId ? self.feed.feedId : self.feedId;
         NSAssert(feedId, @"nil feedId");
