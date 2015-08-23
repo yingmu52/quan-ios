@@ -182,7 +182,7 @@
 
 
 #pragma mark - upload image 
-- (IBAction)tapOnCamera:(UIButton *)sender{
+- (IBAction)tapOnCamera:(id)sender{
     [ImagePicker startPickingImageFromLocalSourceFor:self];
 }
 
