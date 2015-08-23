@@ -133,7 +133,9 @@
         if (!isNew) {
             NSDictionary *additionalUserInfo = @{PROFILE_PICTURE_ID_CUSTOM:userInfo[@"headUrl"],
                                                  GENDER:[userInfo[@"gender"] boolValue] ? @"男" : @"女",
-                                                 USER_DISPLAY_NAME:userInfo[@"name"]};
+                                                 USER_DISPLAY_NAME:userInfo[@"name"],
+                                                 OCCUPATION:userInfo[@"profession"],
+                                                 PERSONALDETAIL:userInfo[@"description"]};
             [User updateAttributeFromDictionary:additionalUserInfo];
 //            NSLog(@"%@",localUserInfo);
             if (self.navigationController.presentingViewController){

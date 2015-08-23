@@ -24,4 +24,5 @@
 
 - (void)goBack;
 - (void)setInfoForOwner;
+- (void)dismissKeyboard;
 @end

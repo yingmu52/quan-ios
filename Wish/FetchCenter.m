@@ -683,6 +683,7 @@ typedef enum{
                                                 uKey:ukey
                                            isNewUser:isNewUser
                                             userInfo:userInfo];
+                NSLog(@"%@",json);
             }
                 break;
             case FetchCenterGetOpUpdatePlan:{
@@ -703,6 +704,7 @@ typedef enum{
                                                       OCCUPATION:info[3],
                                                       PERSONALDETAIL:info[4]}];
                 NSLog(@"%@",[User getOwnerInfo]);
+                NSLog(@"%@",json);
                 [self.delegate didFinishSettingPersonalInfo];
             }
                 break;

@@ -33,12 +33,22 @@
 }
 
 - (void)goBack{
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissKeyboard];
+//    [self.navigationController popViewControllerAnimated:YES];
 //    NavigationBar *navBar = (NavigationBar *)self.navigationController.navigationBar;
 //    [navBar showDefaultTextColor];
 //    [navBar showDefaultBackground];
 }
 
+- (void)dismissKeyboard{
+    if (self.nickNameTextField.isFirstResponder) {
+        [self.nickNameTextField resignFirstResponder];
+    }else if (self.occupationTextField.isFirstResponder){
+        [self.occupationTextField resignFirstResponder];
+    }else if (self.descriptionTextView.isFirstResponder){
+        [self.descriptionTextView resignFirstResponder];
+    }
+}
 
 - (void)setUpNavigationItem
 {

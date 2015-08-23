@@ -11,7 +11,7 @@
 #import "User.h"
 #import "SDWebImageCompat.h"
 #import "ImagePicker.h"
-
+#import "UIActionSheet+Blocks.h"
 @interface ProfileVCOwner () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,FetchCenterDelegate,UITextFieldDelegate,ImagePickerDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @end
@@ -31,9 +31,41 @@
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero]; // clear empty cell
 }
 
+#define giveup @"放弃"
+#define confirm @"确认"
 - (void)goBack{
     [super goBack];
-//    [self uploadPersonalInfo];
+    if (!self.nickNameTextField.hasText || [[self.nickNameTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""]) {
+        [UIActionSheet showInView:self.tableView withTitle:@"姓名不能放空" cancelButtonTitle:@"好的" destructiveButtonTitle:nil otherButtonTitles:nil tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+            if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"好的"]) {
+                self.nickNameTextField.text = [User userDisplayName];
+            }
+        }];
+    }else{
+        if (![self.nickNameTextField.text isEqualToString:[User userDisplayName]] ||
+            ![self.genderLabel.text isEqualToString:[User gender]] ||
+            ![self.occupationTextField.text isEqualToString:[User occupation]] ||
+            ![self.descriptionTextView.text isEqualToString:[User personalDetailInfo]]) {
+            [UIActionSheet showInView:self.tableView
+                            withTitle:@"是否确认修改个人信息？"
+                    cancelButtonTitle:giveup
+               destructiveButtonTitle:confirm
+                    otherButtonTitles:nil
+                             tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+                                 NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
+                                 if ([title isEqualToString:giveup]) {
+                                     //放弃编辑
+//                                     [self.navigationController popViewControllerAnimated:YES];
+                                 }
+                                 if ([title isEqualToString:confirm]){
+                                     //确认编辑
+                                     [self uploadPersonalInfo];
+                                 }
+                             }];
+        }else{
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
 }
 - (FetchCenter *)fetchCenter{
     if (!_fetchCenter) {
@@ -66,16 +98,7 @@
     }
     [self dismissKeyboard];
 }
- 
-- (void)dismissKeyboard{
-    if (self.nickNameTextField.isFirstResponder) {
-        [self.nickNameTextField resignFirstResponder];
-    }else if (self.occupationTextField.isFirstResponder){
-        [self.occupationTextField resignFirstResponder];
-    }else if (self.descriptionTextView.isFirstResponder){
-        [self.descriptionTextView resignFirstResponder];
-    }
-}
+
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self dismissKeyboard];
@@ -102,17 +125,17 @@
     NSURL *newUrl = [self.fetchCenter urlWithImageID:[User updatedProfilePictureId]];
     [self.profilePicture setImageWithURL:newUrl
              usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
- 
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    [self handleFailure:info];
-}
- 
-- (void)didFinishUploadingPictureForProfile:(NSDictionary *)info{
-    [self uploadPersonalInfo];
-}
- 
+//- (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
+//    [self handleFailure:info];
+//}
+// 
+//- (void)didFinishUploadingPictureForProfile:(NSDictionary *)info{
+//    [self uploadPersonalInfo];
+//}
+// 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
     [self handleFailure:info];
 }
@@ -137,5 +160,12 @@
 //- (void)dismissSpinner{
 //    self.navigationItem.rightBarButtonItem = nil;
 //}
-// 
+//
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if ([scrollView.panGestureRecognizer translationInView:scrollView].y > 0) {
+        // down
+        [self dismissKeyboard];
+    }
+}
 @end
