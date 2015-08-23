@@ -37,9 +37,13 @@
 
 - (void)initialHeaderView{
     CGFloat planDescriptionHeight = 0.0f;
+    CGFloat fontSize = 12.0f;
     if (self.plan.hasDetailText) {
-        planDescriptionHeight = [SystemUtil heightForText:self.plan.detailText withFontSize:12.0f];
+        planDescriptionHeight = [SystemUtil heightForText:self.plan.detailText withFontSize:fontSize];
+    }else if ([self.plan.owner.ownerId isEqualToString:[User uid]]){ //只记算自己的事件描述高度，客人态描述隐藏
+        planDescriptionHeight = [SystemUtil heightForText:EMPTY_PLACEHOLDER_OWNER withFontSize:fontSize];
     }
+    
     CGRect mainFrame = [UIScreen mainScreen].bounds;
     CGRect frame = CGRectMake(0, 0, CGRectGetWidth(mainFrame), 130.0f + planDescriptionHeight);
     self.headerView = [HeaderView instantiateFromNib:frame];
