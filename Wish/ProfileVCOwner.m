@@ -33,6 +33,7 @@
 
 #define giveup @"放弃"
 #define confirm @"确认"
+#define goback @"返回"
 - (void)goBack{
     [super goBack];
     if (!self.nickNameTextField.hasText || [[self.nickNameTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""]) {
@@ -48,18 +49,21 @@
             ![self.descriptionTextView.text isEqualToString:[User personalDetailInfo]]) {
             [UIActionSheet showInView:self.tableView
                             withTitle:@"是否确认修改个人信息？"
-                    cancelButtonTitle:giveup
+                    cancelButtonTitle:nil
                destructiveButtonTitle:confirm
-                    otherButtonTitles:nil
+                    otherButtonTitles:@[giveup,goback]
                              tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
                                  NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
-                                 if ([title isEqualToString:giveup]) {
-                                     //放弃编辑
-//                                     [self.navigationController popViewControllerAnimated:YES];
-                                 }
+//                                 if ([title isEqualToString:giveup]) {
+//                                     //放弃编辑
+////                                     [self.navigationController popViewControllerAnimated:YES];
+//                                 }
                                  if ([title isEqualToString:confirm]){
                                      //确认编辑
                                      [self uploadPersonalInfo];
+                                 }
+                                 if ([title isEqualToString:goback]){
+                                     [self.navigationController popViewControllerAnimated:YES];
                                  }
                              }];
         }else{
@@ -137,6 +141,7 @@
 //}
 // 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
+    [self.navigationController popViewControllerAnimated:YES];
     [self handleFailure:info];
 }
  
