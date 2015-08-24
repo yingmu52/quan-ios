@@ -26,6 +26,7 @@
 
 - (FollowingCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     FollowingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FollowingCell" forIndexPath:indexPath];
+    [cell removeFromSuperview];
     [self configureFollowingCell:cell atIndexPath:indexPath];
     return cell;
 }
