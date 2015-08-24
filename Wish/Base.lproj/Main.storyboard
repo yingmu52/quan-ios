@@ -939,6 +939,9 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uow-gD-atl">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" red="0.92941176469999998" green="0.93725490199999995" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="uow-gD-atl" secondAttribute="height" multiplier="588:840" id="dUT-te-g0E"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Pbg-Kr-TUR">
                                     <size key="itemSize" width="314" height="521"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -1215,6 +1218,16 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="dUT-te-g0E"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="dUT-te-g0E"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="wW8-3k-YAd" id="Oc8-SB-rSl"/>
                                     <outlet property="delegate" destination="wW8-3k-YAd" id="x5c-Lw-ENS"/>
@@ -1225,31 +1238,10 @@
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="uow-gD-atl" secondAttribute="centerX" constant="8" id="8FV-vm-4C8">
+                            <constraint firstAttribute="height" secondItem="uow-gD-atl" secondAttribute="height" multiplier="1:1" id="H0B-5t-iIi"/>
+                            <constraint firstAttribute="centerX" secondItem="uow-gD-atl" secondAttribute="centerX" id="dZT-8G-nGK"/>
+                            <constraint firstAttribute="centerY" secondItem="uow-gD-atl" secondAttribute="centerY" constant="165.5" id="m48-Gs-KDf">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
-                            </constraint>
-                            <constraint firstAttribute="centerX" secondItem="uow-gD-atl" secondAttribute="centerX" id="8pK-94-uOy"/>
-                            <constraint firstItem="uow-gD-atl" firstAttribute="leading" secondItem="v3t-7r-vWJ" secondAttribute="leadingMargin" constant="-15" id="9VM-Xd-CAd">
-                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
-                            </constraint>
-                            <constraint firstItem="eUx-6Z-ly2" firstAttribute="top" secondItem="uow-gD-atl" secondAttribute="bottom" id="Cm1-CL-0Mt">
-                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
-                            </constraint>
-                            <constraint firstAttribute="centerY" secondItem="uow-gD-atl" secondAttribute="centerY" constant="-7.5" id="H8i-0Q-yVL">
-                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
-                            </constraint>
-                            <constraint firstItem="uow-gD-atl" firstAttribute="top" secondItem="Nsd-Rd-GUf" secondAttribute="bottom" id="I06-uD-SNb">
-                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
-                            </constraint>
-                            <constraint firstItem="uow-gD-atl" firstAttribute="top" secondItem="Nsd-Rd-GUf" secondAttribute="bottom" id="IG5-Yb-o8s"/>
-                            <constraint firstAttribute="centerX" secondItem="uow-gD-atl" secondAttribute="centerX" id="aKZ-ql-gRH"/>
-                            <constraint firstAttribute="width" secondItem="uow-gD-atl" secondAttribute="width" id="bGQ-gi-hiR"/>
-                            <constraint firstAttribute="width" secondItem="uow-gD-atl" secondAttribute="width" multiplier="1:1" id="cMM-qC-5i3"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="uow-gD-atl" secondAttribute="trailing" constant="-16" id="hSe-Qi-DIt">
-                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
-                            </constraint>
-                            <constraint firstAttribute="width" secondItem="uow-gD-atl" secondAttribute="width" id="prA-3z-51l">
-                                <variation key="heightClass=regular-widthClass=compact" constant="1"/>
                             </constraint>
                         </constraints>
                         <variation key="default">
@@ -1257,18 +1249,9 @@
                                 <exclude reference="uow-gD-atl"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Cm1-CL-0Mt"/>
-                                <exclude reference="8FV-vm-4C8"/>
-                                <exclude reference="8pK-94-uOy"/>
-                                <exclude reference="9VM-Xd-CAd"/>
-                                <exclude reference="H8i-0Q-yVL"/>
-                                <exclude reference="I06-uD-SNb"/>
-                                <exclude reference="IG5-Yb-o8s"/>
-                                <exclude reference="aKZ-ql-gRH"/>
-                                <exclude reference="bGQ-gi-hiR"/>
-                                <exclude reference="cMM-qC-5i3"/>
-                                <exclude reference="hSe-Qi-DIt"/>
-                                <exclude reference="prA-3z-51l"/>
+                                <exclude reference="H0B-5t-iIi"/>
+                                <exclude reference="dZT-8G-nGK"/>
+                                <exclude reference="m48-Gs-KDf"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -1276,18 +1259,9 @@
                                 <include reference="uow-gD-atl"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="Cm1-CL-0Mt"/>
-                                <exclude reference="8FV-vm-4C8"/>
-                                <include reference="8pK-94-uOy"/>
-                                <exclude reference="9VM-Xd-CAd"/>
-                                <exclude reference="H8i-0Q-yVL"/>
-                                <include reference="I06-uD-SNb"/>
-                                <exclude reference="IG5-Yb-o8s"/>
-                                <exclude reference="aKZ-ql-gRH"/>
-                                <include reference="bGQ-gi-hiR"/>
-                                <exclude reference="cMM-qC-5i3"/>
-                                <exclude reference="hSe-Qi-DIt"/>
-                                <exclude reference="prA-3z-51l"/>
+                                <include reference="H0B-5t-iIi"/>
+                                <include reference="dZT-8G-nGK"/>
+                                <include reference="m48-Gs-KDf"/>
                             </mask>
                         </variation>
                     </view>
@@ -1372,8 +1346,7 @@
                                                             <exclude reference="c6q-1z-AF1"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="319" y="15" width="81" height="82"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="c6q-1z-AF1"/>
                                                         </mask>
@@ -1384,9 +1357,6 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="67" y="24" width="247" height="43"/>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2014-11-21 13:20" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SL0-KW-OTX">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -2314,9 +2284,6 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" red="0.60784316059999999" green="0.60784316059999999" blue="0.60784316059999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="29" y="58" width="20" height="12"/>
-                                                    </variation>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OVu-Sf-4mg" userLabel="card" customClass="TriangleCutoutView">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -5444,12 +5411,12 @@
         <image name="tips_bg" width="69" height="69"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lxG-JY-mcL"/>
-        <segue reference="3Cj-2H-t7j"/>
         <segue reference="iCU-RD-fVI"/>
-        <segue reference="4ZT-53-1QA"/>
-        <segue reference="sa3-BT-zY6"/>
         <segue reference="JFc-cO-xBu"/>
+        <segue reference="cel-0L-eNY"/>
+        <segue reference="4ZT-53-1QA"/>
+        <segue reference="CTd-gb-xTE"/>
+        <segue reference="sa3-BT-zY6"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686274509803" green="0.75686274509803919" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
 </document>
