@@ -424,7 +424,10 @@ typedef enum{
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request
                                             completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                   {
-                                      NSDictionary *responseJson = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+
+                                      //递归过滤Json里含带的Null数据
+                                      NSDictionary *rawJson = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                                      NSDictionary *responseJson = [self recursiveNullRemove:rawJson];
                                       
                                       if (!error && ![responseJson[@"ret"] integerValue]){ //successed "ret" = 0;
                                           [self didFinishSendingGetRequest:responseJson operation:op entity:obj];
@@ -443,6 +446,39 @@ typedef enum{
     [task resume];
     
     
+}
+
+- (NSMutableDictionary *)recursiveNullRemove:(NSDictionary *)dictionaryResponse {
+    
+    NSMutableDictionary *dictionary = [dictionaryResponse mutableCopy];
+    NSString *nullString = @"";
+    for (NSString *key in [dictionary allKeys]) {
+        id value = dictionary[key];
+        
+        if ([value isKindOfClass:[NSDictionary class]]) {
+            
+            dictionary[key] = [self recursiveNullRemove:(NSMutableDictionary*)value];
+            
+        }else if([value isKindOfClass:[NSArray class]]){
+            
+            NSMutableArray *newArray = [value mutableCopy];
+            for (int i = 0; i < [value count]; ++i) {
+                
+                id value2 = [value objectAtIndex:i];
+                
+                if ([value2 isKindOfClass:[NSDictionary class]]) {
+                    newArray[i] = [self recursiveNullRemove:(NSMutableDictionary*)value2];
+                }
+                else if ([value2 isKindOfClass:[NSNull class]]){
+                    newArray[i] = nullString;
+                }
+            }
+            dictionary[key] = newArray;
+        }else if ([value isKindOfClass:[NSNull class]]){
+            dictionary[key] = nullString;
+        }
+    }
+    return dictionary;
 }
 
 - (void)postImageWithOperation:(id)obj postOp:(FetchCenterPostOp)postOp{ //obj :NSManagedObject or UIimage
@@ -683,7 +719,6 @@ typedef enum{
                                                 uKey:ukey
                                            isNewUser:isNewUser
                                             userInfo:userInfo];
-                NSLog(@"%@",json);
             }
                 break;
             case FetchCenterGetOpUpdatePlan:{
@@ -704,7 +739,6 @@ typedef enum{
                                                       OCCUPATION:info[3],
                                                       PERSONALDETAIL:info[4]}];
                 NSLog(@"%@",[User getOwnerInfo]);
-                NSLog(@"%@",json);
                 [self.delegate didFinishSettingPersonalInfo];
             }
                 break;

@@ -14,7 +14,7 @@
 #import "UIActionSheet+Blocks.h"
 #import "ImagePicker.h"
 #import "UIImageView+UIActivityIndicatorForSDWebImage.h"
-
+#import "Theme.h"
 @interface MyPageViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,FetchCenterDelegate,ImagePickerDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic,weak) IBOutlet UIImageView *iconImageView;
 @property (nonatomic,weak) IBOutlet UIImageView *profilePicture;
@@ -39,8 +39,12 @@
     self.tableView.tableHeaderView.frame = CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame),324.0f / 1136 * CGRectGetHeight(self.tableView.frame));
     
     NSString *newPicId = [User updatedProfilePictureId];
-    [self.profilePicture setImageWithURL:[self.fetchCenter urlWithImageID:newPicId]
-             usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    if (newPicId){
+        [self.profilePicture setImageWithURL:[self.fetchCenter urlWithImageID:newPicId]
+                 usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    }else{
+        self.profilePicture.image = [Theme menuLoginDefault];
+    }
     
     self.versionLabel.text = [self.fetchCenter.buildVersion stringByReplacingOccurrencesOfString:@"%20" withString:@" "];
 }
