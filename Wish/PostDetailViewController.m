@@ -47,7 +47,7 @@
 }
 
 - (void)goBack{
-    [self.plan deleteSelf];
+    if (self.plan) [self.plan deleteSelf];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -102,6 +102,8 @@
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
     [[[UIAlertView alloc] initWithTitle:@"请求失败" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+    self.navigationItem.rightBarButtonItem = nil;
+    if (self.plan) [self.plan deleteSelf];
 }
 
 @end
