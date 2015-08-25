@@ -38,9 +38,7 @@
                                                    inManagedObjectContext:context];
         feed.feedId = feedItem[@"id"];
         feed.imageId = feedItem[@"picurl"];
-        if (plan) feed.plan = plan;
-        
-#warning move these line down when the server supports identifiying wether isSelfLiked
+        if (plan) feed.plan = plan;        
         feed.selfLiked = @(NO);
         feed.feedTitle = feedItem[@"content"];
         feed.createDate = [NSDate dateWithTimeIntervalSince1970:[feedItem[@"createTime"] integerValue]];
