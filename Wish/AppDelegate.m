@@ -13,7 +13,7 @@
 #import "LoginViewController.h"
 #import "FetchCenter.h"
 
-#define BUGLY_APP_ID @"900005293"
+#define BUGLY_APP_ID @"900007998"
 
 @implementation AppDelegate
 
