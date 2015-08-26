@@ -13,7 +13,9 @@
 #import "AppDelegate.h"
 #import "User.h"
 #import "WishDetailVCFollower.h"
-@interface DiscoveryVCData () <FetchCenterDelegate,NSFetchedResultsControllerDelegate>
+#import "ShuffleViewController.h"
+#import "PostFeedViewController.h"
+@interface DiscoveryVCData () <FetchCenterDelegate,NSFetchedResultsControllerDelegate,ShuffleViewControllerDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,strong) NSMutableArray *itemChanges;
@@ -30,10 +32,6 @@
     return _fetchCenter;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-//    [self.view addGestureRecognizer:self.slidingViewController.panGesture];
-}
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -133,12 +131,28 @@
 
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(Plan *)plan{
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
     if ([segue.identifier isEqualToString:@"showDiscoveryWishDetail"] || [segue.identifier isEqualToString:@"showWishDetailVCOwnerFromDiscovery"]){
-        [segue.destinationViewController setPlan:plan];
+        [segue.destinationViewController setPlan:sender];
+        self.tabBarController.tabBar.hidden = YES;
     }
-    self.navigationController.navigationBar.shadowImage = [UIImage new]; //隐藏导航割线
-    self.tabBarController.tabBar.hidden = YES;
+    
+    if ([segue.identifier isEqualToString:@"showShuffleView"]) {
+        ShuffleViewController *svc = segue.destinationViewController;
+        svc.svcDelegate = self; //用于使用相机回调函数
+    }
+    
+    if ([segue.identifier isEqualToString:@"showPostDetailFromDiscovery"]) { //相机选取照片之后
+        PostFeedViewController *pfvc = segue.destinationViewController;
+        NSArray *imageAndPlan = sender;
+        pfvc.imageForFeed = imageAndPlan[0]; //image
+        pfvc.plan = imageAndPlan[1]; //plan
+        self.tabBarController.tabBar.hidden = YES;
+     }
+    
+    //隐藏导航割线
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
 }
 
 #pragma mark - fetched results controller delegate
@@ -221,6 +235,12 @@
         self.itemChanges = nil;;
     }];
     
+}
+
+#pragma mark - Shuffle View Controller Delegate 
+
+- (void)didFinishSelectingImage:(UIImage *)image forPlan:(Plan *)plan{
+    [self performSegueWithIdentifier:@"showPostDetailFromDiscovery" sender:@[image,plan]];
 }
 
 @end

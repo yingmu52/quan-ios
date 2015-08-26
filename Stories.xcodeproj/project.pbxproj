@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A016FDB61B8C4250006E7A09 /* ShuffleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A016FDB51B8C4250006E7A09 /* ShuffleViewController.m */; };
+		A016FDB71B8C4250006E7A09 /* ShuffleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A016FDB51B8C4250006E7A09 /* ShuffleViewController.m */; };
+		A016FDBB1B8D14BA006E7A09 /* PreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A016FDBA1B8D14BA006E7A09 /* PreviewCell.m */; };
+		A016FDBC1B8D14BA006E7A09 /* PreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A016FDBA1B8D14BA006E7A09 /* PreviewCell.m */; };
 		A0B8C8021B857F22009C4572 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */; };
 		A0B8C8031B857F22009C4572 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */; };
 		A0D102171B84EB6A006B0E4E /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D101F71B84EB6A006B0E4E /* MKAnnotationView+WebCache.m */; };
@@ -298,6 +302,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A016FDB41B8C4250006E7A09 /* ShuffleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShuffleViewController.h; sourceTree = "<group>"; };
+		A016FDB51B8C4250006E7A09 /* ShuffleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShuffleViewController.m; sourceTree = "<group>"; };
+		A016FDB91B8D14BA006E7A09 /* PreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewCell.h; sourceTree = "<group>"; };
+		A016FDBA1B8D14BA006E7A09 /* PreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewCell.m; sourceTree = "<group>"; };
 		A0B8C8001B857F22009C4572 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		A0D101F61B84EB6A006B0E4E /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
@@ -1126,6 +1134,8 @@
 		AEFB04781AD12437009EB0D3 /* Discovery */ = {
 			isa = PBXGroup;
 			children = (
+				A016FDB41B8C4250006E7A09 /* ShuffleViewController.h */,
+				A016FDB51B8C4250006E7A09 /* ShuffleViewController.m */,
 				AEFB04791AD12437009EB0D3 /* DiscoveryBannerCell.h */,
 				AEFB047A1AD12437009EB0D3 /* DiscoveryBannerCell.m */,
 				AEFB047B1AD12437009EB0D3 /* DiscoveryCell.h */,
@@ -1135,6 +1145,8 @@
 				AEFB047F1AD12437009EB0D3 /* DiscoveryVCData.m */,
 				AEFB04801AD12437009EB0D3 /* DiscoveryViewController.h */,
 				AEFB04811AD12437009EB0D3 /* DiscoveryViewController.m */,
+				A016FDB91B8D14BA006E7A09 /* PreviewCell.h */,
+				A016FDBA1B8D14BA006E7A09 /* PreviewCell.m */,
 			);
 			path = Discovery;
 			sourceTree = "<group>";
@@ -1324,6 +1336,7 @@
 				AE9A19881B02E3A100590784 /* FeedbackkAccessoryView.m in Sources */,
 				A0F7D4A51B84E851003CCB34 /* UIImage+Resize.m in Sources */,
 				A0B8C8021B857F22009C4572 /* HMSegmentedControl.m in Sources */,
+				A016FDB61B8C4250006E7A09 /* ShuffleViewController.m in Sources */,
 				A0F7D49D1B84E851003CCB34 /* UIImagePickerController+DelegateBlocks.m in Sources */,
 				AE606A201AF4697B003DF16E /* MessageListViewController.m in Sources */,
 				A0F7D44B1B84E851003CCB34 /* JTSImageViewController.m in Sources */,
@@ -1398,6 +1411,7 @@
 				AEFB048A1AD12437009EB0D3 /* DiscoveryVCData.m in Sources */,
 				AED5BC631ABE3CB600EFF398 /* SettingViewController.m in Sources */,
 				AEC5B9AA1AB7EB40008ECB92 /* User.m in Sources */,
+				A016FDBB1B8D14BA006E7A09 /* PreviewCell.m in Sources */,
 				A0D102351B84EB6A006B0E4E /* UIView+WebCacheOperation.m in Sources */,
 				A0F7D4971B84E851003CCB34 /* TWPhotoPickerController.m in Sources */,
 				A0F7D43D1B84E851003CCB34 /* UITableView+FDTemplateLayoutCell.m in Sources */,
@@ -1498,6 +1512,7 @@
 				A0D1022C1B84EB6A006B0E4E /* UIImage+GIF.m in Sources */,
 				A0F7D4321B84E851003CCB34 /* CHTCollectionViewWaterfallLayout.m in Sources */,
 				A0D102241B84EB6A006B0E4E /* SDWebImageDownloaderOperation.m in Sources */,
+				A016FDB71B8C4250006E7A09 /* ShuffleViewController.m in Sources */,
 				A0F7D49C1B84E851003CCB34 /* UIImage+ImageEffects.m in Sources */,
 				AE95A9FD1ACFC26A007465D5 /* ImagePicker.m in Sources */,
 				AE9A3AEC1A9B1DB000F0588F /* AchieveVCData.m in Sources */,
@@ -1538,6 +1553,7 @@
 				A0F7D4A61B84E851003CCB34 /* UIImage+Resize.m in Sources */,
 				A0F7D4501B84E851003CCB34 /* UIApplication+JTSImageViewController.m in Sources */,
 				A0F7D49E1B84E851003CCB34 /* UIImagePickerController+DelegateBlocks.m in Sources */,
+				A016FDBC1B8D14BA006E7A09 /* PreviewCell.m in Sources */,
 				A0D102221B84EB6A006B0E4E /* SDWebImageDownloader.m in Sources */,
 				A0F7D4361B84E851003CCB34 /* CustomBadge.m in Sources */,
 				AED355F91B228696000427FF /* FeedDetailHeader.m in Sources */,

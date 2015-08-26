@@ -150,24 +150,29 @@ ViewForEmptyEventDelegate>
         [ImagePicker startPickingImageFromLocalSourceFor:self];
     }
 }
+
 - (void)didFinishPickingImage:(UIImage *)image{
     [self performSegueWithIdentifier:@"ShowPostFeedFromHome" sender:image];
 }
+
 - (void)didFailPickingImage{
     NSLog(@"fail picking image");
 }
+
 #pragma mark -
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"showPlanDetailFromHome"]) {
         [segue.destinationViewController setPlan:sender];
+        self.tabBarController.tabBar.hidden = YES;
     }
     if ([segue.identifier isEqualToString:@"ShowPostFeedFromHome"]) {
         [segue.destinationViewController setPlan:self.currentPlan];
         [segue.destinationViewController setImageForFeed:sender];
+        self.tabBarController.tabBar.hidden = YES;
     }
-    self.tabBarController.tabBar.hidden = YES;
 }
+
 #pragma mark -  UICollectionView methods
 - (void)handleLongPress:(UILongPressGestureRecognizer *)longPress{
     
