@@ -3425,9 +3425,6 @@
                                             <outlet property="delegate" destination="B14-O4-bHm" id="7qv-cY-HCJ"/>
                                         </connections>
                                     </collectionView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button_triangle" translatesAutoresizingMaskIntoConstraints="NO" id="0RG-pR-xtk">
-                                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -3436,9 +3433,6 @@
                                     </constraint>
                                     <constraint firstAttribute="height" constant="216" id="BVC-Cl-5UA">
                                         <variation key="heightClass=regular-widthClass=compact" constant="212"/>
-                                    </constraint>
-                                    <constraint firstItem="nqp-Ra-UzR" firstAttribute="top" secondItem="0RG-pR-xtk" secondAttribute="bottom" constant="82" id="VdW-O8-qod">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                     </constraint>
                                     <constraint firstItem="3tK-2T-lK5" firstAttribute="leading" secondItem="tQb-2Z-fTQ" secondAttribute="leading" constant="43" id="h9a-eH-GTy">
                                         <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
@@ -3456,9 +3450,6 @@
                                         <variation key="heightClass=regular-widthClass=compact" constant="1"/>
                                     </constraint>
                                     <constraint firstAttribute="trailing" secondItem="7AS-gy-rNo" secondAttribute="trailing" constant="14" id="lal-kl-cHo"/>
-                                    <constraint firstItem="0RG-pR-xtk" firstAttribute="centerX" secondItem="nqp-Ra-UzR" secondAttribute="centerX" constant="-187" id="lbX-LN-FKr">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
-                                    </constraint>
                                     <constraint firstItem="nqp-Ra-UzR" firstAttribute="leading" secondItem="tQb-2Z-fTQ" secondAttribute="leading" constant="66" id="lf5-ZA-dch">
                                         <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                     </constraint>
@@ -3484,7 +3475,6 @@
                                         <exclude reference="aT2-zv-3Mx"/>
                                         <exclude reference="7AS-gy-rNo"/>
                                         <exclude reference="3tK-2T-lK5"/>
-                                        <exclude reference="0RG-pR-xtk"/>
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="BVC-Cl-5UA"/>
@@ -3493,8 +3483,6 @@
                                         <exclude reference="h9a-eH-GTy"/>
                                         <exclude reference="kc9-tv-k0c"/>
                                         <exclude reference="l7g-hq-gxh"/>
-                                        <exclude reference="lbX-LN-FKr"/>
-                                        <exclude reference="VdW-O8-qod"/>
                                         <exclude reference="iYg-wJ-ZFn"/>
                                         <exclude reference="lLD-Sg-TKB"/>
                                         <exclude reference="lf5-ZA-dch"/>
@@ -3513,7 +3501,6 @@
                                         <include reference="aT2-zv-3Mx"/>
                                         <include reference="7AS-gy-rNo"/>
                                         <include reference="3tK-2T-lK5"/>
-                                        <include reference="0RG-pR-xtk"/>
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="BVC-Cl-5UA"/>
@@ -3522,8 +3509,6 @@
                                         <include reference="h9a-eH-GTy"/>
                                         <include reference="kc9-tv-k0c"/>
                                         <include reference="l7g-hq-gxh"/>
-                                        <include reference="lbX-LN-FKr"/>
-                                        <include reference="VdW-O8-qod"/>
                                         <include reference="iYg-wJ-ZFn"/>
                                         <include reference="lLD-Sg-TKB"/>
                                         <include reference="lf5-ZA-dch"/>
@@ -5943,7 +5928,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="button_triangle" width="15" height="15"/>
         <image name="camera_ic" width="141" height="141"/>
         <image name="card_photo_shadow" width="76" height="88"/>
         <image name="create_ic_plus" width="29" height="29"/>
