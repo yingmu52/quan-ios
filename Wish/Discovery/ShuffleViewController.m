@@ -72,11 +72,11 @@
     
 }
 
-//- (void)viewDidAppear:(BOOL)animated{
-//    [super viewDidAppear:animated];
-//    self.selectedIndexPath = [NSIndexPath indexPathForItem:0 inSection:0]; //初始值
-//    [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] animated:NO scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
-//}
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    self.selectedIndexPath = [NSIndexPath indexPathForItem:0 inSection:0]; //初始值
+    [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+}
 
 - (PreviewCell *)collectionView:(UICollectionView *)aCollectionView
           cellForItemAtIndexPath:(NSIndexPath *)indexPath
