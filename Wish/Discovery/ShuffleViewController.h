@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "Plan+PlanCRUD.h"
 
+@class ShuffleViewController;
 @protocol ShuffleViewControllerDelegate <NSObject>
 @optional
 - (void)didFinishSelectingImage:(UIImage *)image forPlan:(Plan *)plan;
+- (void)didPressCreatePlanButton:(ShuffleViewController *)svc;
 @end
 
 @interface ShuffleViewController : UIViewController

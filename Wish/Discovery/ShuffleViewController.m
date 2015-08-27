@@ -25,11 +25,6 @@
 @implementation ShuffleViewController
 
 
-- (void)viewDidLoad{
-    [super viewDidLoad];
-    self.selectedIndexPath = [NSIndexPath indexPathForItem:0 inSection:0]; //初始值
-}
-
 - (IBAction)tapOnBackground:(UITapGestureRecognizer *)tap{
     //支持点击背影关闭退出浮层
     [self dismissViewControllerAnimated:YES completion:^{
@@ -71,11 +66,17 @@
         NSLog(@"Unable to perform fetch.");
         NSLog(@"%@, %@", error, error.localizedDescription);
     }
+    
     return _fetchedRC;
     
     
 }
 
+//- (void)viewDidAppear:(BOOL)animated{
+//    [super viewDidAppear:animated];
+//    self.selectedIndexPath = [NSIndexPath indexPathForItem:0 inSection:0]; //初始值
+//    [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] animated:NO scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+//}
 
 - (PreviewCell *)collectionView:(UICollectionView *)aCollectionView
           cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -93,6 +94,7 @@
         cell = [aCollectionView dequeueReusableCellWithReuseIdentifier:@"PreviewCell_Add" forIndexPath:indexPath];
         cell.layer.borderColor = [SystemUtil colorFromHexString:@"#00C1A8"].CGColor;
         cell.layer.borderWidth = 1.0f;
+        
     }
     return cell;
 }
@@ -127,11 +129,25 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row != self.fetchedRC.fetchedObjects.count) { //is not the last row
-        PreviewCell *cell = (PreviewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        [cell showHeightlightedState];
         self.selectedIndexPath = indexPath;
+    }else{
+        [self dismissViewControllerAnimated:YES completion:^{
+            [self.svcDelegate didPressCreatePlanButton:self];
+        }];
     }
 }
+
+- (void)setSelectedIndexPath:(NSIndexPath *)selectedIndexPath{
+    _selectedIndexPath = selectedIndexPath;
+    PreviewCell *cell = (PreviewCell *)[self.collectionView cellForItemAtIndexPath:_selectedIndexPath];
+    if (self.fetchedRC.fetchedObjects.count > 1) { //除了最后一个cell, 当事件数为空是会闪退
+        [cell showHeightlightedState];
+        self.countLabel.text = [NSString stringWithFormat:@"%@/%@",@(_selectedIndexPath.row + 1),@(self.fetchedRC.fetchedObjects.count)];
+        //将卡片滚到与三角号对齐
+        [self.collectionView scrollToItemAtIndexPath:self.selectedIndexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    }
+}
+
 
 #pragma mark - FetchedResultsController
 

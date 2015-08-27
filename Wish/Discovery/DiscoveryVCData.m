@@ -133,26 +133,27 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
-    if ([segue.identifier isEqualToString:@"showDiscoveryWishDetail"] || [segue.identifier isEqualToString:@"showWishDetailVCOwnerFromDiscovery"]){
-        [segue.destinationViewController setPlan:sender];
-        self.tabBarController.tabBar.hidden = YES;
-    }
     
     if ([segue.identifier isEqualToString:@"showShuffleView"]) {
         ShuffleViewController *svc = segue.destinationViewController;
         svc.svcDelegate = self; //用于使用相机回调函数
+    }else{
+        if ([segue.identifier isEqualToString:@"showPostDetailFromDiscovery"]) { //相机选取照片之后
+            PostFeedViewController *pfvc = segue.destinationViewController;
+            NSArray *imageAndPlan = sender;
+            pfvc.imageForFeed = imageAndPlan[0]; //image
+            pfvc.plan = imageAndPlan[1]; //plan
+        }
+        if ([segue.identifier isEqualToString:@"showDiscoveryWishDetail"] || [segue.identifier isEqualToString:@"showWishDetailVCOwnerFromDiscovery"]){
+            [segue.destinationViewController setPlan:sender];
+        }
+
+        //隐藏导航割线
+        self.navigationController.navigationBar.shadowImage = [UIImage new];
+        
+        self.tabBarController.tabBar.hidden = YES;
     }
     
-    if ([segue.identifier isEqualToString:@"showPostDetailFromDiscovery"]) { //相机选取照片之后
-        PostFeedViewController *pfvc = segue.destinationViewController;
-        NSArray *imageAndPlan = sender;
-        pfvc.imageForFeed = imageAndPlan[0]; //image
-        pfvc.plan = imageAndPlan[1]; //plan
-        self.tabBarController.tabBar.hidden = YES;
-     }
-    
-    //隐藏导航割线
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
 }
 
 #pragma mark - fetched results controller delegate
@@ -243,6 +244,9 @@
     [self performSegueWithIdentifier:@"showPostDetailFromDiscovery" sender:@[image,plan]];
 }
 
+- (void)didPressCreatePlanButton:(ShuffleViewController *)svc{
+    [self performSegueWithIdentifier:@"showPostViewFromDiscovery" sender:nil];
+}
 @end
 
 
