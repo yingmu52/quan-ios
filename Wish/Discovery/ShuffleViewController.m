@@ -17,7 +17,7 @@
 @property (nonatomic,weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic,strong) NSMutableArray *itemChanges;
 @property (nonatomic,weak) IBOutlet UILabel *countLabel;
-@property (nonatomic,strong) NSIndexPath *selectedIndexPath;
+//@property (nonatomic,strong) NSIndexPath *selectedIndexPath;
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @property (nonatomic,strong) ImagePicker *imagePicker;
 @end
@@ -55,9 +55,7 @@
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
     NSFetchedResultsController *newFRC = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
     
-    self.fetchedRC = newFRC;
-    _fetchedRC.delegate = self;
-    
+    _fetchedRC = newFRC;
     // Perform Fetch
     NSError *error = nil;
     [_fetchedRC performFetch:&error];
@@ -66,7 +64,6 @@
         NSLog(@"Unable to perform fetch.");
         NSLog(@"%@, %@", error, error.localizedDescription);
     }
-    
     return _fetchedRC;
     
     
@@ -74,9 +71,16 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    self.selectedIndexPath = [NSIndexPath indexPathForItem:0 inSection:0]; //初始值
-    [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+    if (self.fetchedRC.fetchedObjects.count > 0) {
+        //初始化时选择第一个事件
+//        NSIndexPath *initialSelectionPath = [NSIndexPath indexPathForItem:0 inSection:0];
+//        PreviewCell * cell = (PreviewCell *)[s]
+//        [[self.collectionView cellForItemAtIndexPath:initialSelectionPath]
+//        self.countLabel.text = [NSString stringWithFormat:@"%@/%@",
+//                                @(initialSelectionPath.row + 1),@(self.fetchedRC.fetchedObjects.count)];
+    }
 }
+
 
 - (PreviewCell *)collectionView:(UICollectionView *)aCollectionView
           cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -121,105 +125,23 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row != self.fetchedRC.fetchedObjects.count) { //is not the last row
-        PreviewCell *cell = (PreviewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        [cell showNormalState];
-    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row != self.fetchedRC.fetchedObjects.count) { //is not the last row
-        self.selectedIndexPath = indexPath;
+        PreviewCell *cell = (PreviewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+        if (self.fetchedRC.fetchedObjects.count > 1) { //除了最后一个cell, 当事件数为空是会闪退
+            self.countLabel.text = [NSString stringWithFormat:@"%@/%@",@(indexPath.row + 1),@(self.fetchedRC.fetchedObjects.count)];
+            //将卡片滚到与三角号对齐
+            [collectionView scrollToItemAtIndexPath:indexPath
+                                   atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
+                                           animated:YES];
+        }
     }else{
         [self dismissViewControllerAnimated:YES completion:^{
             [self.svcDelegate didPressCreatePlanButton:self];
         }];
     }
-}
-
-- (void)setSelectedIndexPath:(NSIndexPath *)selectedIndexPath{
-    _selectedIndexPath = selectedIndexPath;
-    PreviewCell *cell = (PreviewCell *)[self.collectionView cellForItemAtIndexPath:_selectedIndexPath];
-    if (self.fetchedRC.fetchedObjects.count > 1) { //除了最后一个cell, 当事件数为空是会闪退
-        [cell showHeightlightedState];
-        self.countLabel.text = [NSString stringWithFormat:@"%@/%@",@(_selectedIndexPath.row + 1),@(self.fetchedRC.fetchedObjects.count)];
-        //将卡片滚到与三角号对齐
-        [self.collectionView scrollToItemAtIndexPath:self.selectedIndexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-    }
-}
-
-
-#pragma mark - FetchedResultsController
-
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    self.itemChanges = [[NSMutableArray alloc] init];
-}
-
-- (void)controller:(NSFetchedResultsController *)controller
-   didChangeObject:(id)anObject
-       atIndexPath:(NSIndexPath *)indexPath
-     forChangeType:(NSFetchedResultsChangeType)type
-      newIndexPath:(NSIndexPath *)newIndexPath {
-    NSMutableDictionary *change = [[NSMutableDictionary alloc] init];
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            change[@(type)] = newIndexPath;
-            break;
-        case NSFetchedResultsChangeDelete:
-            change[@(type)] = indexPath;
-            break;
-        case NSFetchedResultsChangeUpdate:
-            change[@(type)] = indexPath;
-            break;
-        case NSFetchedResultsChangeMove:
-            change[@(type)] = @[indexPath, newIndexPath];
-            break;
-        default:
-            break;
-    }
-    [self.itemChanges addObject:change];
-}
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    [self.collectionView performBatchUpdates: ^{
-        for (NSDictionary *change in self.itemChanges) {
-            [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-                NSFetchedResultsChangeType type = [key unsignedIntegerValue];
-                switch(type) {
-                    case NSFetchedResultsChangeInsert:
-                        [self.collectionView insertItemsAtIndexPaths:@[obj]];
-                        NSLog(@"Home Card: Inserted Plan");
-                        break;
-                    case NSFetchedResultsChangeDelete:
-                        [self.collectionView deleteItemsAtIndexPaths:@[obj]];
-                        NSLog(@"Home Card: Deleted Plan");
-                        break;
-                    case NSFetchedResultsChangeUpdate:{
-                        Plan *plan = [controller objectAtIndexPath:obj];
-                        if (plan.planId && plan.backgroundNum) {
-                            [UIView performWithoutAnimation:^{
-                                [self.collectionView reloadItemsAtIndexPaths:@[obj]];
-                                [self.collectionView scrollToItemAtIndexPath:obj
-                                                            atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
-                                                                    animated:NO];
-                            }];
-                            NSLog(@"Home Card: Updated Plan");
-                        }
-                    }
-                        break;
-                    case NSFetchedResultsChangeMove:
-                        [self.collectionView moveItemAtIndexPath:obj[0] toIndexPath:obj[1]];
-                        break;
-                    default:
-                        break;
-                }
-            }];
-        }
-    } completion:^(BOOL finished) {
-        // self.title = [NSString stringWithFormat:@"%@ plans",@(self.fetchedRC.fetchedObjects.count)];
-        [(AppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
-        self.itemChanges = nil;
-    }];
-
 }
 
 
@@ -233,11 +155,12 @@
 }
 
 - (void)didFinishPickingImage:(UIImage *)image{
-    Plan *plan = [self.fetchedRC objectAtIndexPath:self.selectedIndexPath];
-    [self dismissViewControllerAnimated:YES completion:^{
-        [self.svcDelegate didFinishSelectingImage:image forPlan:plan];
-    }];
-    
+    //get select plan
+    NSIndexPath *indexPath = [[self.collectionView indexPathsForSelectedItems] firstObject];
+    Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
+    [self.svcDelegate didFinishSelectingImage:image forPlan:plan];
+    [self dismissViewControllerAnimated:NO completion:nil];
+
 }
 
 @end

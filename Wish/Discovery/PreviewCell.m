@@ -26,4 +26,12 @@
     self.layer.borderColor = nil;
     self.layer.borderWidth = 0.0f;
 }
+
+- (void)setSelected:(BOOL)selected{
+    if (selected) {
+        [self showHeightlightedState];
+    }else{
+        [self showNormalState];
+    }
+}
 @end
