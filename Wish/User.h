@@ -21,6 +21,7 @@
 #define PERSONALDETAIL @"user_description"
 #define UID @"user_unique_id"
 #define UKEY @"user_unique_request_key"
+#define YOUTU_SIGNATURE @"tencent_Youtu_Signature"
 
 @interface User : NSObject
 
@@ -37,4 +38,6 @@
 + (NSString *)updatedProfilePictureId;
 + (NSString *)occupation;
 + (NSString *)personalDetailInfo;
++ (NSString *)youtuSignature;
++ (void)storeSignature:(NSString *)sign;
 @end

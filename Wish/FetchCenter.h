@@ -55,6 +55,8 @@
 
 - (void)didFinishGettingMessageNotificationWithMessageCount:(NSNumber *)msgCount followCount:(NSNumber *)followCount;
 - (void)didFinishClearingAllMessages;
+
+- (void)didfinishGettingSignature;
 @end
 @interface FetchCenter : NSObject
 @property (nonatomic,weak) id <FetchCenterDelegate>delegate;
@@ -108,5 +110,7 @@
 #pragma mark - login
 - (void)fetchUidandUkeyWithOpenId:(NSString *)openId accessToken:(NSString *)token;
 
+#pragma mark - Tencent Youtu
+- (void)requestSignature;
 @end
 

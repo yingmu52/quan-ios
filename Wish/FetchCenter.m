@@ -58,6 +58,10 @@
 #define GET_MESSAGE_LIST @"splan_message_getlist.php"
 #define GET_MESSAGE_NOTIFICATION @"splan_count_get.php"
 #define CLEAR_ALL_MESSAGES @"splan_message_clear.php"
+
+#define TENCENTYOUTU @"tencentYoutu/"
+#define GET_SIGNATURE @"getsign.php"
+
 typedef enum{
     FetchCenterGetOpCreatePlan = 0,
     FetchCenterGetOpDeletePlan,
@@ -83,7 +87,8 @@ typedef enum{
     FetchCenterGetOpFeedBack,
     FetchCenterGetOpGetMessageList,
     FetchCenterGetOpGetMessageNotificationInfo,
-    FetchCenterGetOpClearAllMessages
+    FetchCenterGetOpClearAllMessages,
+    FetchCenterGetOpGetSignature
 }FetchCenterGetOp;
 
 typedef enum{
@@ -106,7 +111,12 @@ typedef enum{
     return _baseUrl;
 }
 
+#pragma mark - Tencent Youtu
 
+- (void)requestSignature{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,TENCENTYOUTU,GET_SIGNATURE];
+    [self getRequest:rqtStr parameter:nil operation:FetchCenterGetOpGetSignature entity:nil];
+}
 #pragma mark - Message 
 
 - (void)clearAllMessages{
@@ -588,7 +598,11 @@ typedef enum{
                                    @"systemInfo":[systemInfo stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]} mutableCopy];
     
     if (op != FetchCenterGetOpLoginForUidAndUkey) {
-        [dict addEntriesFromDictionary:@{@"uid":[User uid],@"ukey":[User uKey]}];
+        //add user info
+        if ([User uid] && [User uKey]) {
+            [dict addEntriesFromDictionary:@{@"uid":[User uid],@"ukey":[User uKey]}];
+        }
+        //change login type
         dict[@"loginType"] = @"uid";
     }
     return [[baseURL stringByAppendingString:[self argumentStringWithDictionary:dict]] stringByAppendingString:@"&"];
@@ -881,9 +895,20 @@ typedef enum{
 
             }
                 break;
+                
             case FetchCenterGetOpClearAllMessages:
                 [self.delegate didFinishClearingAllMessages];
                 break;
+                
+            case FetchCenterGetOpGetSignature:{
+                NSString *signature = [json valueForKey:@"sign"];
+                if (signature) {
+                    [User storeSignature:signature];
+                    [self.delegate didfinishGettingSignature];
+                }
+            }
+                break;
+                
             default:
                 break;
         }

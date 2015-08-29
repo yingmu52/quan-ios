@@ -82,6 +82,17 @@
     NSDictionary *info = [self.class getOwnerInfo];
     return info[PERSONALDETAIL];
 }
+
++ (NSString *)youtuSignature{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:YOUTU_SIGNATURE];
+}
+
++ (void)storeSignature:(NSString *)sign{
+    if (sign) {
+        [[NSUserDefaults standardUserDefaults] setObject:sign forKey:YOUTU_SIGNATURE];
+    }
+}
+
 #pragma mark - simulator implementation (need to uncomment )
 /*
 
