@@ -80,11 +80,13 @@
                                 !isUsingInnerNetwork){
                                  [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SHOULD_USE_INNER_NETWORK];
                                  [self logout];
+                                 [self clearCoreData];
                              }
                              if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:titleFOrOutterNetWork] &&
                                 isUsingInnerNetwork){
                                  [[NSUserDefaults standardUserDefaults] setBool:NO forKey:SHOULD_USE_INNER_NETWORK];
                                  [self logout];
+                                 [self clearCoreData];
                              }
                              if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:GET_USER_INFO]){
                                  [[[UIAlertView alloc] initWithTitle:@"用户信息"
@@ -166,14 +168,13 @@
 - (void)logout{    
     //delete user info, this lines must be below [self clearCoreData];
     [User updateOwnerInfo:nil];
-    
     [self performSegueWithIdentifier:@"showLoginViewFromMyPage" sender:nil];
 }
 
 - (void)clearCoreData{
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
-    request.predicate = [NSPredicate predicateWithFormat:@"owner.ownerId != %@",[User uid]];
+//    request.predicate = [NSPredicate predicateWithFormat:@"owner.ownerId != %@",[User uid]];
     [request setIncludesPropertyValues:NO]; //only fetch the managedObjectID
     NSError * error = nil;
     NSArray * objects = [delegate.managedObjectContext executeFetchRequest:request error:&error];
@@ -211,7 +212,7 @@
 - (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
 }
 
-- (void)didFinishUploadingPictureForProfile:(NSDictionary *)info{
+- (void)didFinishUploadingPictureForProfile{
     [self.fetchCenter setPersonalInfo:[User userDisplayName]
                                gender:[User gender]
                               imageId:[User updatedProfilePictureId]

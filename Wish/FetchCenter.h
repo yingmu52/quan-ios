@@ -32,7 +32,7 @@
 - (void)didFinishReceivingUid:(NSString *)uid uKey:(NSString *)uKey isNewUser:(BOOL)isNew userInfo:(NSDictionary *)userInfo;
 - (void)didFinishUpdatingPlan:(Plan *)plan;
 - (void)didFinishCheckingNewVersion:(BOOL)hasNewVersion;
-- (void)didFinishUploadingPictureForProfile:(NSDictionary *)info;
+- (void)didFinishUploadingPictureForProfile;
 - (void)didfinishFetchingDiscovery:(NSArray *)plans;
 - (void)didFinishSettingPersonalInfo;
 - (void)didFinishSendingFeedBack;

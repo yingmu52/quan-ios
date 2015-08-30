@@ -84,10 +84,6 @@
     [self handleFailure:info];
 }
 
-- (void)didFinishUploadingPictureForProfile:(NSDictionary *)info{
-    //finish uploading profile picture, imageid saved
-}
-
 - (void)handleFailure:(NSDictionary *)info{
     [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
                                 message:[NSString stringWithFormat:@"%@",info[@"msg"]]

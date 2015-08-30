@@ -22,7 +22,7 @@
     UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
     ipc.sourceType = type;
     ipc.delegate = self;
-    ipc.allowsEditing = YES;
+//    ipc.allowsEditing = YES;
 
     if (type == UIImagePickerControllerSourceTypeCamera) {
         ipc.showsCameraControls = YES;
@@ -33,7 +33,7 @@
         [controller dismissViewControllerAnimated:YES completion:^{
             UIImage *capturedImage;
 //            if (type == UIImagePickerControllerSourceTypeCamera){
-                capturedImage = (UIImage *)info[UIImagePickerControllerEditedImage];
+                capturedImage = (UIImage *)info[UIImagePickerControllerOriginalImage];
 //            }else if (type == UIImagePickerControllerSourceTypePhotoLibrary || type == UIImagePickerControllerSourceTypeSavedPhotosAlbum){
 //                UIImage *image = (UIImage *)info[UIImagePickerControllerOriginalImage];
 //                capturedImage = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFit

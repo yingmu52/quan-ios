@@ -8,6 +8,7 @@
 
 #import "FetchCenter.h"
 #import "UIImage+WebP.h"
+#import "TXYUploadManager.h"
 //#define BASE_URL @"http://182.254.167.228/superplan/"
 
 
@@ -98,6 +99,7 @@ typedef enum{
 
 @interface FetchCenter ()
 @property (nonatomic,strong) NSString *baseUrl;
+@property (nonatomic,strong) TXYUploadManager *uploadManager;
 @end
 @implementation FetchCenter
 
@@ -115,6 +117,7 @@ typedef enum{
 
 - (void)requestSignature{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,TENCENTYOUTU,GET_SIGNATURE];
+//    NSLog(@"signature request url : %@",rqtStr);
     [self getRequest:rqtStr parameter:nil operation:FetchCenterGetOpGetSignature entity:nil];
 }
 #pragma mark - Message 
@@ -491,6 +494,7 @@ typedef enum{
     return dictionary;
 }
 
+#define IMAGE_PREFIX @"IOS-"
 - (void)postImageWithOperation:(id)obj postOp:(FetchCenterPostOp)postOp{ //obj :NSManagedObject or UIimage
     
     //chekc internet
@@ -505,10 +509,6 @@ typedef enum{
     //create webp local path
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *webPPath = [paths[0] stringByAppendingPathComponent:@"image.webp"];
-
-    //set up upload info
-    NSString *rqtUploadImage = [NSString stringWithFormat:@"%@%@%@?",self.baseUrl,PIC,UPLOAD_IMAGE];
-    rqtUploadImage = [self versionForBaseURL:rqtUploadImage operation:-1];
     
     UIImage *image; // = [obj valueForKey:@"image"];
     if ([obj isKindOfClass:[UIImage class]]){
@@ -520,64 +520,85 @@ typedef enum{
     }
     
     //compress image
-//    CGFloat standardSize = 50.0; //KB
-//    CGFloat quality = 100.0f;
-//    CGFloat originalSize = UIImagePNGRepresentation(image).length/1024.0f;
-//    NSLog(@"original size %@ KB", @(originalSize));
-//    if (originalSize > 100.0f){
-//        quality = standardSize / originalSize * 100;
-//    }
+    CGFloat originalSize = UIImagePNGRepresentation(image).length/1024.0f; //in KB
+    NSLog(@"original size %@ KB", @(originalSize));
+    
     [UIImage imageToWebP:image
-                 quality:75.0f
+                 quality:0.50f
                    alpha:1.0f
                   preset:WEBP_PRESET_PICTURE
-         completionBlock:^(NSData *result)
-    {
-        NSLog(@"compressed size %@ KB", @(result.length/1024.0f));
-
-        //write data to local webp path
-        if ([result writeToFile:webPPath atomically:YES]) {
-            
-            //decoding succeed, upload image to server
-            //upload image
-            NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:rqtUploadImage]
-                                                                   cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30.0];
-            request.HTTPMethod = @"POST";
-            NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request
-                                                                       fromData:[NSData dataWithContentsOfFile:webPPath]
-                                                              completionHandler:^(NSData *data,NSURLResponse *response,NSError *error)
-                                                  {
-                                                      dispatch_main_async_safe((^{
-                                                          NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                               options:NSJSONReadingAllowFragments
-                                                                                                                 error:nil];
-                                                          if (!error && ![json[@"ret"] boolValue]){ //upload image successed
-                                                              [self didFinishSendingPostRequest:json
-                                                                                      operation:postOp
-                                                                                         entity:obj];
-                                                          }else{
-                                                              
-                                                              if (!json) json = @{@"ret":@"重试",@"msg":@"上传失败 :("};
-                                                              [self.delegate didFailUploadingImageWithInfo:json entity:obj];
-                                                          }
-                                                          //delete temp file in webpPath
-                                                          [[NSFileManager defaultManager] removeItemAtPath:webPPath error:nil];
-
-                                                      }));
-                                                  }];
-            [uploadTask resume];
-            
+             configBlock:^(WebPConfig *config){
+                 config->lossless = 1;
+                 config->sns_strength = 50.0f;
+                 config->filter_strength = 0.0f;
+                 config->method = 2;
+                 config->preprocessing = 0;
+                 config->filter_sharpness = 0;
+                 config->thread_level = 1;}
+         completionBlock:^(NSData *result){
+             NSLog(@"compressed size %@ KB", @(result.length/1024.0f));
+    
+             //write data to local webp path
+             if ([result writeToFile:webPPath atomically:YES]) {
+                 
+                 [self uploadPictureFrom:webPPath obj:obj postOp:postOp];
         } //end if : writeToFile
         
-    } failureBlock:^(NSError *error) { //compression failed
+    }
+            failureBlock:^(NSError *error)
+    { //compression failed
         NSLog(@"%@", error.localizedDescription);
         [self.delegate didFailUploadingImageWithInfo:@{@"ret":@"请重试",@"msg":@"无法压缩图像"} entity:obj];
     }];
 }
 
+#pragma mark - QCUpload
+- (TXYUploadManager *)uploadManager{
+    if (!_uploadManager) {
+        _uploadManager = [[TXYUploadManager alloc] initWithPersistenceId:@"QCFileUpload"];
+    }
+    return _uploadManager;
+}
 
+- (void)uploadPictureFrom:(NSString *)webPPath obj:(id)obj postOp:(FetchCenterPostOp)postOp{
+    //1.构造TXYPhotoUploadTask上传任务,
+#warning change uuid!!
+    NSString *fileId = [NSString stringWithFormat:@"%@%@",IMAGE_PREFIX,[[NSUUID UUID].UUIDString substringToIndex:26]];//自定义图像id
+    TXYPhotoUploadTask *uploadPhotoTask = [[TXYPhotoUploadTask alloc] initWithPath:webPPath
+                                                                       expiredDate:0
+                                                                        msgContext:@"picture upload successed from iOS"
+                                                                            bucket:@"shier"
+                                                                            fileId:fileId];
+    //2.调用TXYUploadManager的upload接口
+    [self.uploadManager upload:uploadPhotoTask
+                          sign:nil
+                      complete:^(TXYTaskRsp *resp, NSDictionary *context)
+     {
+         //retCode大于等于0，表示上传成功
+         if (resp.retCode >= 0) {
+             //得到图片上传成功后的回包信息
+             TXYPhotoUploadTaskRsp *photoResp = (TXYPhotoUploadTaskRsp *)resp;
+             [self didFinishSendingPostRequest:photoResp.photoFileId operation:postOp entity:obj];
+         }else{
+             if ([self.delegate respondsToSelector:@selector(didFailUploadingImageWithInfo:entity:)]) {
+                 [self.delegate didFailUploadingImageWithInfo:@{@"ret":@"上传图片失败",@"msg":resp.descMsg} entity:obj];
+             }
+             NSLog(@"上传图片失败，code:%d desc:%@", resp.retCode, resp.descMsg);
+         }
+         
+         //delete temp file in webpPath
+         [[NSFileManager defaultManager] removeItemAtPath:webPPath error:nil];
+         
+     }progress:^(int64_t totalSize, int64_t sendSize, NSDictionary *context){
+         //进度
+         long progress = (long)(sendSize * 100.0f/totalSize);
+         NSLog(@"%@",[NSString stringWithFormat:@"上传进度: %ld%%",progress]);
 
+     }stateChange:^(TXYUploadTaskState state, NSDictionary *context) {
+         //上传状态
+     }];
+
+}
 #pragma mark - version control
 
 - (NSString *)buildVersion{
@@ -611,14 +632,20 @@ typedef enum{
 #pragma mark - get image url wraper
 
 - (NSURL *)urlWithImageID:(NSString *)imageId{
-    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@?",self.baseUrl,PIC,GET_IMAGE];
-    NSString *url = [NSString stringWithFormat:@"%@id=%@",[self versionForBaseURL:rqtStr operation:-1],imageId];
+    NSString *url;
+    if ([imageId hasPrefix:IMAGE_PREFIX]) { //优图id
+        url = [NSString stringWithFormat:@"http://shier-%@.image.myqcloud.com/%@",YOUTU_APP_ID,imageId];
+        NSLog(@">>>>>>>>>>%@",url);
+    }else{ //老id
+        NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@?",self.baseUrl,PIC,GET_IMAGE];
+        url = [NSString stringWithFormat:@"%@id=%@",[self versionForBaseURL:rqtStr operation:-1],imageId];
+    }
     return [NSURL URLWithString:url];
 }
 
 #pragma mark - response handler
-- (void)didFinishSendingPostRequest:(NSDictionary *)json operation:(FetchCenterPostOp)op entity:(NSManagedObject *)obj{
-    NSString *fetchedImageId = [json valueForKeyPath:@"data.id"];
+- (void)didFinishSendingPostRequest:(NSString *)fetchedImageId operation:(FetchCenterPostOp)op entity:(NSManagedObject *)obj{
+//    NSString *fetchedImageId = [json valueForKeyPath:@"data.id"];
     switch (op){
         case FetchCenterPostOpUploadImageForCreatingFeed:{
             if (fetchedImageId){
@@ -644,7 +671,9 @@ typedef enum{
             if (fetchedImageId){
                 [User updateAttributeFromDictionary:@{PROFILE_PICTURE_ID_CUSTOM:fetchedImageId}];
                 NSLog(@"image uploaded %@",fetchedImageId);
-                [self.delegate didFinishUploadingPictureForProfile:json];
+                if ([self.delegate respondsToSelector:@selector(didFinishUploadingPictureForProfile)]) {
+                    [self.delegate didFinishUploadingPictureForProfile];
+                }
             }
         }
             break;
@@ -677,6 +706,10 @@ typedef enum{
                 if (fetchedFeedID){
                     Feed *feed = (Feed *)obj;
                     feed.feedId = fetchedFeedID;
+                    //update plan here instead of in createFeedWithImage:inPlan: method
+//                    feed.plan.image = feed.feedId;
+                    feed.plan.backgroundNum = feed.imageId;
+                    [feed.plan updateTryTimesOfPlan:YES];
                     [self.delegate didFinishUploadingFeed:feed];
                     NSLog(@"upload feed successed, ID: %@",fetchedFeedID);
                 }
@@ -913,18 +946,10 @@ typedef enum{
                 break;
         }
 //        NSLog(@"%@",json);
-        [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
+//        [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
     }));
 }
 
 
 @end
-
-
-
-
-
-
-
-
 
