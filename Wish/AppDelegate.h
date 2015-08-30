@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/TencentApiInterface.h>
+#define YOUTU_APP_ID @"10003267"
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

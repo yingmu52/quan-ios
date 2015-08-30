@@ -15,9 +15,9 @@
 #import "TXYUploadManager.h"
 #import "TXYDownloader.h"
 #define BUGLY_APP_ID @"900007998"
-#define YOUTU_APP_ID @"10003267"
 
 @interface AppDelegate () <FetchCenterDelegate>
+@property (nonatomic,strong) FetchCenter *fetchCenter;
 @end
 
 @implementation AppDelegate
@@ -25,13 +25,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     //向后台拉取优图签名
-    if (![User youtuSignature]) {
-        FetchCenter *fetchCenter = [[FetchCenter alloc] init];
-        fetchCenter.delegate = self;
-        [fetchCenter requestSignature];
-    }else{
-        [self registerYoutuAuthentication];
-    }
+    [self.fetchCenter requestSignature];
     
     // 初始化SDK, 请使用在Bugly平台上注册应用的 AppId, 注意不要填写AppKey
     [[CrashReporter sharedInstance] installWithAppId:BUGLY_APP_ID];
@@ -184,18 +178,20 @@
 
 - (void)didfinishGettingSignature{
     //the delegate only gets call when signature returns successfully
-    [self registerYoutuAuthentication];
-}
-
-- (void)registerYoutuAuthentication{
     //上传需要注册appId，应用级sign，userId根据用户需要选填
     [TXYUploadManager authorize:YOUTU_APP_ID userId:nil sign:[User youtuSignature]];
     //下载需要注册appId，sign信息由用户填入url参数中
     [TXYDownloader authorize:YOUTU_APP_ID userId:nil];
-//    NSLog(@"***************************************\n\n%@\n\n",[User youtuSignature]);
-    
+    //    NSLog(@"***************************************\n\n%@\n\n",[User youtuSignature]);
 }
 
+- (FetchCenter *)fetchCenter{
+    if (!_fetchCenter) {
+        _fetchCenter = [[FetchCenter alloc] init];
+        _fetchCenter.delegate = self;
+    }
+    return _fetchCenter;
+}
 @end
 
 
