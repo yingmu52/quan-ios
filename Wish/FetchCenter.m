@@ -440,20 +440,21 @@ typedef enum{
 
                                       //递归过滤Json里含带的Null数据
                                       NSDictionary *rawJson = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                                      
                                       NSDictionary *responseJson = [self recursiveNullRemove:rawJson];
+                                      NSDictionary *timeOutDict = @{@"ret":@"Request Timeout",@"msg":@"Fail sending request to server"};
+                                      NSDictionary *responseInfo = responseJson ? responseJson : timeOutDict;
                                       
                                       if (!error && ![responseJson[@"ret"] integerValue]){ //successed "ret" = 0;
                                           [self didFinishSendingGetRequest:responseJson operation:op entity:obj];
-                                      }else if (responseJson){
-                                          NSLog(@"Fail Get Request :%@\n op: %d \n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@",rqtStr,op,baseURL,dict,responseJson,error);
-                                          dispatch_main_async_safe(^{
-                                              [self.delegate didFailSendingRequestWithInfo:responseJson entity:obj];
-                                          });
                                       }else{
                                           dispatch_main_async_safe((^{
-                                              [self.delegate didFailSendingRequestWithInfo:@{@"ret":@"Request Timeout",@"msg":@"Fail sending request to server"} entity:obj];
+                                              [self.delegate didFailSendingRequestWithInfo:responseInfo entity:obj];
                                           }));
                                       }
+                                      NSLog(@"Fail Get Request :%@\n op: %d \n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
+                                            ,rqtStr,op,baseURL,dict,responseInfo,error);
+
                                       [self appendRequest:request andResponse:responseJson];
                                   }];
     [task resume];
@@ -635,7 +636,7 @@ typedef enum{
     NSString *url;
     if ([imageId hasPrefix:IMAGE_PREFIX]) { //优图id
         url = [NSString stringWithFormat:@"http://shier-%@.image.myqcloud.com/%@",YOUTU_APP_ID,imageId];
-        NSLog(@">>>>>>>>>>%@",url);
+        NSLog(@">>>>>>>>>>%@",imageId);
     }else{ //老id
         NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@?",self.baseUrl,PIC,GET_IMAGE];
         url = [NSString stringWithFormat:@"%@id=%@",[self versionForBaseURL:rqtStr operation:-1],imageId];
