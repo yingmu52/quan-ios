@@ -12,28 +12,24 @@
 #import "SDWebImageCompat.h"
 #import "User.h"
 #import "LoginDetailViewController.h"
-#define AppKey @"ByYhJYTkXu0721fH"
-#define AppID @"1104337894"
+#define QQAppKey @"ByYhJYTkXu0721fH"
+#define QQAppID @"1104337894"
 
 @interface LoginViewController () <TencentSessionDelegate,FetchCenterDelegate>
 @property (nonatomic,strong) TencentOAuth *tencentOAuth;
 @property (nonatomic,strong) APIResponse *apiResponse;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
-@property (nonatomic,weak) IBOutlet UIButton *loginButton;
+@property (nonatomic,weak) IBOutlet UIButton *QQLoginButton;
+@property (nonatomic,weak) IBOutlet UIButton *WechatLoginButton;
 @end
 @implementation LoginViewController
 
-
-- (void)viewDidLoad{
-    [super viewDidLoad];
-    [self.loginButton setTitle:@"QQ账号登陆" forState:UIControlStateNormal];
-    [self.loginButton setTitle:@"登录中..." forState:UIControlStateDisabled];
-}
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
 }
+
 - (FetchCenter *)fetchCenter{
     if (!_fetchCenter) {
         _fetchCenter = [[FetchCenter alloc] init];
@@ -42,45 +38,19 @@
     return _fetchCenter;
 }
 
-- (TencentOAuth *)tencentOAuth{
-    if (!_tencentOAuth) {
-        _tencentOAuth = [[TencentOAuth alloc] initWithAppId:AppID andDelegate:self];
-        _tencentOAuth.redirectURI = @"www.qq.com";
-    }
-    return _tencentOAuth;
-}
-
 #pragma mark - login
 
-- (IBAction)login:(id)sender{
-    
-//#warning !!!
-//    [self performSegueWithIdentifier:@"showLoginDetail" sender:nil];
-//
-//    return;
+- (IBAction)qqlogin{
     NSArray *permissions = @[kOPEN_PERMISSION_GET_USER_INFO,
                              kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
                              kOPEN_PERMISSION_GET_INFO,
                              kOPEN_PERMISSION_GET_OTHER_INFO];
     [self.tencentOAuth authorize:permissions inSafari:NO];
-    self.loginButton.enabled = NO;
+    self.QQLoginButton.enabled = NO;
 }
 
-//login successed
-- (void)tencentDidLogin
-{
-    NSLog(@"login successed");
-    if (self.tencentOAuth.accessToken && [self.tencentOAuth.accessToken length]){
-        [self.tencentOAuth getUserInfo];
-    }else{
-        NSLog(@"login fail, no accesstoken");
-    }
-}
-
-- (void)getUserInfoResponse:(APIResponse *)response{
-    //use openId and access_token to get uid+ukey
-    [self.fetchCenter fetchUidandUkeyWithOpenId:self.tencentOAuth.openId accessToken:self.tencentOAuth.accessToken];
-    self.apiResponse = response;
+- (IBAction)wechatLogin{
+    NSLog(@"pressed");
 }
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
@@ -92,27 +62,6 @@
     [User updateOwnerInfo:nil];
 }
 
-/*
- data =     {
- isNew = 0;
- maninfo =         {
- birthday = 1234;
- createTime = 1429674033;
- followPlanList = "<null>";
- gender = 2;
- headUrl = "pic5537183176a034.11814009";
- id = 100001;
- name = "hello_***_name";
- ownPlanList = "[\"100001_1429674034\",\"100001_1429674035\",\"100001_1429674036\"]";
- setLife = 1000;
- };
- uid = 100001;
- ukey = "ukey553718312f2248.52389148";
- };
- msg = ok;
- ret = 0;
- }
- */
 
 - (void)didFinishReceivingUid:(NSString *)uid uKey:(NSString *)uKey isNewUser:(BOOL)isNew userInfo:(NSDictionary *)userInfo{
     //store access token, openid, expiration date, user photo, username, gender
@@ -149,12 +98,25 @@
         }
         
     }
-    self.loginButton.enabled = YES;
+    self.QQLoginButton.enabled = YES;
 
     NSLog(@"%@",[User getOwnerInfo]);
     
 }
 
+
+#pragma mark - QQ Login
+
+//login successed
+- (void)tencentDidLogin
+{
+    NSLog(@"login successed");
+    if (self.tencentOAuth.accessToken && [self.tencentOAuth.accessToken length]){
+        [self.tencentOAuth getUserInfo];
+    }else{
+        NSLog(@"login fail, no accesstoken");
+    }
+}
 //login fail
 -(void)tencentDidNotLogin:(BOOL)cancelled
 {
@@ -163,14 +125,14 @@
     }else{
         NSLog(@"login fail");
     }
-    self.loginButton.enabled = YES;
+    self.QQLoginButton.enabled = YES;
 }
 
 //no internet
 -(void)tencentDidNotNetWork
 {
     NSLog(@"无网络连接，请设置网络");
-    self.loginButton.enabled = YES;
+    self.QQLoginButton.enabled = YES;
 }
 
 
@@ -182,13 +144,18 @@
  4. 建议应用在用户登录后，即调用getUserInfo接口获得该用户的头像、昵称并显示在界面上，使用户体验统一。
  */
 
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if ([segue.identifier isEqualToString:@"showMainViewFromLogin"]) {
-    }
-//    if ([segue.identifier isEqualToString:@"showLoginDetail"]) {
-//        [segue.destinationViewController setUserInfo:sender];
-//    }
-    
+- (void)getUserInfoResponse:(APIResponse *)response{
+    //use openId and access_token to get uid+ukey
+    [self.fetchCenter fetchUidandUkeyWithOpenId:self.tencentOAuth.openId accessToken:self.tencentOAuth.accessToken];
+    self.apiResponse = response;
 }
+
+- (TencentOAuth *)tencentOAuth{
+    if (!_tencentOAuth) {
+        _tencentOAuth = [[TencentOAuth alloc] initWithAppId:QQAppID andDelegate:self];
+        _tencentOAuth.redirectURI = @"www.qq.com";
+    }
+    return _tencentOAuth;
+}
+
 @end
