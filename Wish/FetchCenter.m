@@ -449,9 +449,11 @@ typedef enum{
                                           [self didFinishSendingGetRequest:responseJson operation:op entity:obj];
                                       }else{
                                           dispatch_main_async_safe((^{
-                                              [self.delegate didFailSendingRequestWithInfo:responseInfo entity:obj];
-                                              NSLog(@"Fail Get Request :%@\n op: %d \n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
-                                                    ,rqtStr,op,baseURL,dict,responseInfo,error);
+                                              if ([self.delegate respondsToSelector:@selector(didFailSendingRequestWithInfo:entity:)]){
+                                                  [self.delegate didFailSendingRequestWithInfo:responseInfo entity:obj];
+                                                  NSLog(@"Fail Get Request :%@\n op: %d \n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
+                                                        ,rqtStr,op,baseURL,dict,responseInfo,error);
+                                              }
                                           }));
                                       }
 
