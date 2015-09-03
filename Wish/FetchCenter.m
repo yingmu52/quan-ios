@@ -509,7 +509,8 @@ typedef enum{
 
     //create webp local path
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *webPPath = [paths[0] stringByAppendingPathComponent:@"image.webp"];
+    NSString *uuidString = [NSUUID UUID].UUIDString;
+    NSString *filePath = [paths[0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg",uuidString]];
     
     UIImage *image; // = [obj valueForKey:@"image"];
     if ([obj isKindOfClass:[UIImage class]]){
@@ -524,33 +525,46 @@ typedef enum{
     CGFloat originalSize = UIImagePNGRepresentation(image).length/1024.0f; //in KB
     NSLog(@"original size %@ KB", @(originalSize));
     
-    [UIImage imageToWebP:image
-                 quality:0.50f
-                   alpha:1.0f
-                  preset:WEBP_PRESET_PICTURE
-             configBlock:^(WebPConfig *config){
-                 config->lossless = 1;
-                 config->sns_strength = 50.0f;
-                 config->filter_strength = 0.0f;
-                 config->method = 2;
-                 config->preprocessing = 0;
-                 config->filter_sharpness = 0;
-                 config->thread_level = 1;}
-         completionBlock:^(NSData *result){
-             NSLog(@"compressed size %@ KB", @(result.length/1024.0f));
-    
-             //write data to local webp path
-             if ([result writeToFile:webPPath atomically:YES]) {
-                 
-                 [self uploadPictureFrom:webPPath obj:obj postOp:postOp];
-        } //end if : writeToFile
-        
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
+    NSLog(@"compressed size %@ KB", @(imageData.length/1024.0f));
+
+    if ([imageData writeToFile:filePath atomically:YES]) {
+        //1.构造TXYPhotoUploadTask上传任务,
+        NSString *fileId = [NSString stringWithFormat:@"%@%@",IMAGE_PREFIX,uuidString];//自定义图像id
+        TXYPhotoUploadTask *uploadPhotoTask = [[TXYPhotoUploadTask alloc] initWithPath:filePath
+                                                                           expiredDate:0
+                                                                            msgContext:@"picture upload successed from iOS"
+                                                                                bucket:@"shier"
+                                                                                fileId:fileId];
+        //2.调用TXYUploadManager的upload接口
+        [self.uploadManager upload:uploadPhotoTask
+                              sign:nil
+                          complete:^(TXYTaskRsp *resp, NSDictionary *context)
+         {
+             //retCode大于等于0，表示上传成功
+             if (resp.retCode >= 0) {
+                 //得到图片上传成功后的回包信息
+                 TXYPhotoUploadTaskRsp *photoResp = (TXYPhotoUploadTaskRsp *)resp;
+                 [self didFinishSendingPostRequest:photoResp.photoFileId operation:postOp entity:obj];
+             }else{
+                 if ([self.delegate respondsToSelector:@selector(didFailUploadingImageWithInfo:entity:)]) {
+                     [self.delegate didFailUploadingImageWithInfo:@{@"ret":@"上传图片失败",@"msg":resp.descMsg} entity:obj];
+                 }
+                 NSLog(@"上传图片失败，code:%d desc:%@", resp.retCode, resp.descMsg);
+                 //delete temp file in webpPath
+                 [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+             }
+             
+         }progress:^(int64_t totalSize, int64_t sendSize, NSDictionary *context){
+             //进度
+             long progress = (long)(sendSize * 100.0f/totalSize);
+             NSLog(@"%@",[NSString stringWithFormat:@"上传进度: %ld%%",progress]);
+             
+         }stateChange:^(TXYUploadTaskState state, NSDictionary *context) {
+             //上传状态
+         }];
     }
-            failureBlock:^(NSError *error)
-    { //compression failed
-        NSLog(@"%@", error.localizedDescription);
-        [self.delegate didFailUploadingImageWithInfo:@{@"ret":@"请重试",@"msg":@"无法压缩图像"} entity:obj];
-    }];
+    
 }
 
 #pragma mark - QCUpload
@@ -561,45 +575,6 @@ typedef enum{
     return _uploadManager;
 }
 
-- (void)uploadPictureFrom:(NSString *)webPPath obj:(id)obj postOp:(FetchCenterPostOp)postOp{
-    //1.构造TXYPhotoUploadTask上传任务,
-#warning change uuid!!
-    NSString *fileId = [NSString stringWithFormat:@"%@%@",IMAGE_PREFIX,[[NSUUID UUID].UUIDString substringToIndex:26]];//自定义图像id
-    TXYPhotoUploadTask *uploadPhotoTask = [[TXYPhotoUploadTask alloc] initWithPath:webPPath
-                                                                       expiredDate:0
-                                                                        msgContext:@"picture upload successed from iOS"
-                                                                            bucket:@"shier"
-                                                                            fileId:fileId];
-    //2.调用TXYUploadManager的upload接口
-    [self.uploadManager upload:uploadPhotoTask
-                          sign:nil
-                      complete:^(TXYTaskRsp *resp, NSDictionary *context)
-     {
-         //retCode大于等于0，表示上传成功
-         if (resp.retCode >= 0) {
-             //得到图片上传成功后的回包信息
-             TXYPhotoUploadTaskRsp *photoResp = (TXYPhotoUploadTaskRsp *)resp;
-             [self didFinishSendingPostRequest:photoResp.photoFileId operation:postOp entity:obj];
-         }else{
-             if ([self.delegate respondsToSelector:@selector(didFailUploadingImageWithInfo:entity:)]) {
-                 [self.delegate didFailUploadingImageWithInfo:@{@"ret":@"上传图片失败",@"msg":resp.descMsg} entity:obj];
-             }
-             NSLog(@"上传图片失败，code:%d desc:%@", resp.retCode, resp.descMsg);
-         }
-         
-         //delete temp file in webpPath
-         [[NSFileManager defaultManager] removeItemAtPath:webPPath error:nil];
-         
-     }progress:^(int64_t totalSize, int64_t sendSize, NSDictionary *context){
-         //进度
-         long progress = (long)(sendSize * 100.0f/totalSize);
-         NSLog(@"%@",[NSString stringWithFormat:@"上传进度: %ld%%",progress]);
-
-     }stateChange:^(TXYUploadTaskState state, NSDictionary *context) {
-         //上传状态
-     }];
-
-}
 #pragma mark - version control
 
 - (NSString *)buildVersion{
@@ -642,6 +617,22 @@ typedef enum{
         url = [NSString stringWithFormat:@"%@id=%@",[self versionForBaseURL:rqtStr operation:-1],imageId];
     }
     return [NSURL URLWithString:url];
+}
+
+- (NSURL *)urlWithImageID:(NSString *)imageId size:(FetchCenterImageSize)size{
+    if (size) {
+        NSString *url;
+        if ([imageId hasPrefix:IMAGE_PREFIX]) { //优图id
+            url = [NSString stringWithFormat:@"http://shier-%@.image.myqcloud.com/%@/%@",YOUTU_APP_ID,imageId,@(size)];
+            NSLog(@">>>>>>>>>>%@",url);
+        }else{ //老id
+            NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@?",self.baseUrl,PIC,GET_IMAGE];
+            url = [NSString stringWithFormat:@"%@id=%@",[self versionForBaseURL:rqtStr operation:-1],imageId];
+        }
+        return [NSURL URLWithString:url];
+    }else{
+        return nil;
+    }
 }
 
 #pragma mark - response handler

@@ -24,6 +24,12 @@
 #define OUTTER_NETWORK_URL @"http://120.24.73.51"
 #define SHOULD_USE_INNER_NETWORK @"kShouldUSeInnerNetwork"
 
+typedef enum {
+    FetchCenterImageSize50 = 50,
+    FetchCenterImageSize100 = 100,
+    FetchCenterImageSize200 = 200,
+}FetchCenterImageSize;
+
 @protocol FetchCenterDelegate <NSObject>
 @optional
 - (void)didFinishFetchingFollowingPlanList:(NSArray *)planIds;
@@ -106,6 +112,7 @@
 
 #pragma mark - ultility
 - (NSURL *)urlWithImageID:(NSString *)imageId;
+- (NSURL *)urlWithImageID:(NSString *)imageId size:(FetchCenterImageSize)size;
 
 #pragma mark - login
 - (void)fetchUidandUkeyWithOpenId:(NSString *)openId accessToken:(NSString *)token;

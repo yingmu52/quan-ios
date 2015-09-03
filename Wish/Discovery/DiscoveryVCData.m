@@ -64,7 +64,8 @@
 
 - (void)configureCell:(DiscoveryCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
-    [cell.discoveryImageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:plan.backgroundNum]];
+    NSURL *imageUrl = [self.fetchCenter urlWithImageID:plan.backgroundNum size:FetchCenterImageSize200];
+    [cell.discoveryImageView sd_setImageWithURL:imageUrl];
     cell.discoveryTitleLabel.text = plan.planTitle;
     cell.discoveryByUserLabel.text = [NSString stringWithFormat:@"by %@",plan.owner.ownerName];
     cell.discoveryFollowerCountLabel.text = [NSString stringWithFormat:@"%@ 关注",plan.followCount];
