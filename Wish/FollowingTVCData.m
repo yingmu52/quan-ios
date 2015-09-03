@@ -237,10 +237,4 @@ static NSUInteger numberOfPreloadedFeeds = 3;
     
 }
 
-#pragma mark - fetch center delegate
-
-- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    NSLog(@"fail");
-
-}
 @end

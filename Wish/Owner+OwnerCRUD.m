@@ -32,7 +32,6 @@
     
     if (![owner.headUrl isEqualToString:dict[@"headUrl"]]){
         owner.headUrl = dict[@"headUrl"];
-        owner.image = nil; //delete the current image when a new headUrl is detected
     }
     
     if (![owner.ownerName isEqualToString:dict[@"name"]]){

@@ -13,7 +13,7 @@
 #import "AchieveCell.h"
 #import "WishDetailVCOwnerAchieved.h"
 #import "User.h"
-#import "UIImageView+UIActivityIndicatorForSDWebImage.h"
+#import "UIImageView+ImageCache.h"
 #import "FetchCenter.h"
 @interface AchieveVCData () <NSFetchedResultsControllerDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
@@ -57,13 +57,8 @@
     if (plan.planStatus.integerValue == PlanStatusFinished) badge = [Theme achievementFinish];
     if (plan.planStatus.integerValue == PlanStatusGiveTheFuckingUp) badge = [Theme achievementFail];
     cell.badgeImageView.image = badge;
-    if (plan.image){
-        cell.planImageView.image = plan.image;
-    }else{
-        [cell.planImageView setImageWithURL:[[FetchCenter new] urlWithImageID:plan.backgroundNum]
-                usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    }
-
+    NSURL *imageUrl = [[FetchCenter new] urlWithImageID:plan.backgroundNum size:FetchCenterImageSize200];
+    [cell.planImageView showImageWithImageUrl:imageUrl];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }

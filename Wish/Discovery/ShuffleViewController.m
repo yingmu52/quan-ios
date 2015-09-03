@@ -90,7 +90,7 @@
     if (indexPath.row != self.fetchedRC.fetchedObjects.count) { //is not the last row
         cell = [aCollectionView dequeueReusableCellWithReuseIdentifier:PREVIEWCELLNORMAL forIndexPath:indexPath];
         Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
-        cell.planImageView.image = plan.image;
+#warning        cell.planImageView.image = plan.image;
         cell.titleLabel.text = plan.planTitle;
         cell.recordCountLabel.text = [NSString stringWithFormat:@"%@个记录",plan.tryTimes];
         [cell layoutIfNeeded]; //fixed auto layout error on iphone 5s or above

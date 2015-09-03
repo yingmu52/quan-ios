@@ -118,7 +118,7 @@
     
     plan.planTitle = title;
     plan.isPrivate = @(isPrivate);
-    plan.image = image;
+#warning    plan.image = image; backgroundnum
     plan.createDate = [NSDate date];
     plan.planStatus = @(PlanStatusOnGoing);
     [plan addMyselfAsOwner];

@@ -8,7 +8,7 @@
 
 #import "StationView.h"
 #import "PopupView.h"
-
+#import "UIImageView+ImageCache.h"
 
 @implementation StationView
 
@@ -29,7 +29,8 @@
 
 - (void)setPlan:(Plan *)plan{
     _plan = plan;
-    self.cardImageView.image = _plan.image;
+    NSURL *imageUrl = [[FetchCenter new] urlWithImageID:plan.backgroundNum size:FetchCenterImageSize50];
+    [self.cardImageView showImageWithImageUrl:imageUrl];
 }
 - (void)updateCardViewToLocation:(CGPoint)location
 {

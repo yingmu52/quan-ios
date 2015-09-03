@@ -2,7 +2,7 @@
 //  Plan.m
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2015-07-29.
+//  Created by Xinyi Zhuang on 2015-09-03.
 //  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
 //
 
@@ -17,8 +17,8 @@
 @dynamic cornerMask;
 @dynamic createDate;
 @dynamic detailText;
+@dynamic discoverIndex;
 @dynamic followCount;
-@dynamic image;
 @dynamic isFollowed;
 @dynamic isPrivate;
 @dynamic planId;
@@ -26,7 +26,6 @@
 @dynamic planTitle;
 @dynamic tryTimes;
 @dynamic updateDate;
-@dynamic discoverIndex;
 @dynamic feeds;
 @dynamic owner;
 

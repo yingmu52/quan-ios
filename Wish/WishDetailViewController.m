@@ -8,7 +8,7 @@
 
 #import "WishDetailViewController.h"
 //#import "CommentAcessaryView.h"
-#import "UIImageView+WebCache.h"
+#import "UIImageView+ImageCache.h"
 #import "UIScrollView+SVInfiniteScrolling.h"
 @interface WishDetailViewController () <HeaderViewDelegate,UIGestureRecognizerDelegate,UITextViewDelegate>
 //@property (strong,nonatomic) CommentAcessaryView *commentView;
@@ -145,17 +145,18 @@
 }
 
 - (void)setCurrenetBackgroundColor{
-    if (self.plan.image){
-        UIImageView *imgView = [[UIImageView alloc] initWithFrame:self.tableView.frame];
-        imgView.contentMode = UIViewContentModeScaleAspectFill;
-        imgView.clipsToBounds = YES;
-        imgView.image = [self.plan.image applyDarkEffect];
-        self.tableView.backgroundView = imgView;
 
-    }else{
+#warning//    if (self.plan.image){
+//        UIImageView *imgView = [[UIImageView alloc] initWithFrame:self.tableView.frame];
+//        imgView.contentMode = UIViewContentModeScaleAspectFill;
+//        imgView.clipsToBounds = YES;
+//        imgView.image = [self.plan.image applyDarkEffect];
+//        self.tableView.backgroundView = imgView;
+
+//    }else{
 //        self.tableView.backgroundColor = [Theme wishDetailBackgroundNone:self.tableView];
         self.tableView.backgroundColor = [UIColor blackColor];
-    }
+//    }
 }
 
 #pragma mark - Fetched Results Controller delegate
@@ -267,24 +268,16 @@
     
     cell.likeCountLabel.text = [NSString stringWithFormat:@"%@",feed.likeCount];
     cell.commentCountLabel.text = [NSString stringWithFormat:@"%@",feed.commentCount];
-    if (!feed.image) {
-        [cell.photoView sd_setImageWithURL:[self.fetchCenter urlWithImageID:feed.imageId]];
-    }else{
-        cell.photoView.image = feed.image;
-    }
+    NSURL *imageUrl = [self.fetchCenter urlWithImageID:feed.imageId size:FetchCenterImageSize200];
+    [cell.photoView showImageWithImageUrl:imageUrl];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (!self.headerView.descriptionTextView.isFirstResponder){ //enter feed detail only when plan description text view is not being edited
+    //enter feed detail only when plan description text view is not being edited
+    if (!self.headerView.descriptionTextView.isFirstResponder){
         Feed *feed = [self.fetchedRC objectAtIndexPath:indexPath];
-        //save feed image only when user select certain feed
-        if (!feed.image){
-            WishDetailCell *cell = (WishDetailCell *)[tableView cellForRowAtIndexPath:indexPath];
-            feed.image = cell.photoView.image;
-        }
-        
         if (feed.feedId){ //prevent crash
             [self performSegueWithIdentifier:[self segueForFeed] sender:feed.feedId];
         }

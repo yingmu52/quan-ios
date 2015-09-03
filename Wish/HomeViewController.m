@@ -21,6 +21,8 @@
 #import "SDWebImageCompat.h"
 #import "ImagePicker.h"
 #import "ViewForEmptyEvent.h"
+#import "UIImageView+ImageCache.h"
+
 const NSUInteger maxCardNum = 10;
 @interface HomeViewController ()
 <NSFetchedResultsControllerDelegate,
@@ -224,10 +226,6 @@ ViewForEmptyEventDelegate>
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
-    if (!plan.image){
-        HomeCardView *cell = (HomeCardView *)[collectionView cellForItemAtIndexPath:indexPath];
-        plan.image = cell.imageView.image;
-    }
     [self performSegueWithIdentifier:@"showPlanDetailFromHome" sender:plan];
 }
 #pragma mark - FetchedResultsController
@@ -313,11 +311,8 @@ ViewForEmptyEventDelegate>
 #pragma mark - implement parent class abstract methods
 - (void)configureCollectionViewCell:(HomeCardView *)cell atIndexPath:(NSIndexPath *)indexPath{
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
-    if (!plan.image){
-        [cell.imageView sd_setImageWithURL:[[FetchCenter new] urlWithImageID:plan.backgroundNum]];
-    }else{
-        cell.imageView.image = plan.image;
-    }
+    NSURL *imageUrl = [[FetchCenter new] urlWithImageID:plan.backgroundNum size:FetchCenterImageSize200];
+    [cell.imageView showImageWithImageUrl:imageUrl];
     cell.titleLabel.text = plan.planTitle;
     cell.subtitleLabel.text = [NSString stringWithFormat:@"%@条记录  %@人关注",plan.tryTimes,plan.followCount];
     cell.delegate = self;

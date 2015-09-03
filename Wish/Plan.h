@@ -2,7 +2,7 @@
 //  Plan.h
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2015-07-29.
+//  Created by Xinyi Zhuang on 2015-09-03.
 //  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
 //
 
@@ -17,8 +17,8 @@
 @property (nonatomic, retain) NSString * cornerMask;
 @property (nonatomic, retain) NSDate * createDate;
 @property (nonatomic, retain) NSString * detailText;
+@property (nonatomic, retain) NSNumber * discoverIndex;
 @property (nonatomic, retain) NSNumber * followCount;
-@property (nonatomic, retain) id image;
 @property (nonatomic, retain) NSNumber * isFollowed;
 @property (nonatomic, retain) NSNumber * isPrivate;
 @property (nonatomic, retain) NSString * planId;
@@ -26,7 +26,6 @@
 @property (nonatomic, retain) NSString * planTitle;
 @property (nonatomic, retain) NSNumber * tryTimes;
 @property (nonatomic, retain) NSDate * updateDate;
-@property (nonatomic, retain) NSNumber * discoverIndex;
 @property (nonatomic, retain) NSSet *feeds;
 @property (nonatomic, retain) Owner *owner;
 @end

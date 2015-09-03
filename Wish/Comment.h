@@ -2,7 +2,7 @@
 //  Comment.h
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2015-05-11.
+//  Created by Xinyi Zhuang on 2015-09-03.
 //  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
 //
 
@@ -17,8 +17,8 @@
 @property (nonatomic, retain) NSString * content;
 @property (nonatomic, retain) NSDate * createTime;
 @property (nonatomic, retain) NSString * idForReply;
-@property (nonatomic, retain) NSString * nameForReply;
 @property (nonatomic, retain) NSNumber * isMyComment;
+@property (nonatomic, retain) NSString * nameForReply;
 @property (nonatomic, retain) Feed *feed;
 @property (nonatomic, retain) Owner *owner;
 

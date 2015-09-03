@@ -14,7 +14,7 @@
 #import "Theme.h"
 #import "CommentAcessaryView.h"
 #import "AppDelegate.h"
-#import "UIImageView+WebCache.h"
+#import "UIImageView+ImageCache.h"
 #import "Feed+FeedCRUD.h"
 #import "SDWebImageCompat.h"
 #import "PopupView.h"

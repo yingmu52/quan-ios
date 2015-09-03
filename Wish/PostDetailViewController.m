@@ -57,7 +57,7 @@
         PostFeedViewController *pfvc = (PostFeedViewController *)segue.destinationViewController;
         Plan *plan = sender;
         pfvc.plan = plan;
-        pfvc.imageForFeed = plan.image;
+#warning        pfvc.imageForFeed = plan.image;
         pfvc.seugeFromPlanCreation = YES; // important!
     }
 }

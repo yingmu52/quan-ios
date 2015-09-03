@@ -102,14 +102,8 @@
 }
 
 - (void)updateHeaderInfoForFeed:(Feed *)feed{
-    if (feed.image){
-        self.headerView.imageView.image = feed.image;
-    }else{
-        [self.headerView.imageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:feed.imageId]
-                                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                                feed.image = image;
-                                            }];
-    }
+    NSURL *imageUrl = [self.fetchCenter urlWithImageID:feed.imageId size:FetchCenterImageSize200];
+    [self.headerView.imageView showImageWithImageUrl:imageUrl];
     self.headerView.titleTextView.text = feed.feedTitle;
     self.headerView.dateLabel.text = [SystemUtil stringFromDate:feed.createDate];
     self.headerView.likeCountLabel.text = [NSString stringWithFormat:@"%@",feed.likeCount];
@@ -134,16 +128,8 @@
 
 - (void)configureCell:(FeedDetailCell *)cell indexPath:(NSIndexPath *)indexPath{
     Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
-    
-    if (!comment.owner.image) {
-        [cell.profileImageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:comment.owner.headUrl]
-                                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                            comment.owner.image = image;
-                                        }];
-        
-    }else{
-        cell.profileImageView.image = comment.owner.image;
-    }
+    NSURL *imageUrl = [self.fetchCenter urlWithImageID:comment.owner.headUrl size:FetchCenterImageSize50];
+    [cell.profileImageView showImageWithImageUrl:imageUrl];
     
     cell.contentTextView.text = comment.content;
     

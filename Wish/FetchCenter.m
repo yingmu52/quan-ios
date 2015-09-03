@@ -450,10 +450,10 @@ typedef enum{
                                       }else{
                                           dispatch_main_async_safe((^{
                                               [self.delegate didFailSendingRequestWithInfo:responseInfo entity:obj];
+                                              NSLog(@"Fail Get Request :%@\n op: %d \n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
+                                                    ,rqtStr,op,baseURL,dict,responseInfo,error);
                                           }));
                                       }
-                                      NSLog(@"Fail Get Request :%@\n op: %d \n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
-                                            ,rqtStr,op,baseURL,dict,responseInfo,error);
 
                                       [self appendRequest:request andResponse:responseJson];
                                   }];

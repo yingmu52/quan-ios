@@ -16,12 +16,8 @@
 
 - (void)setInfoForOwner{
     if (self.owner) {
-        if (self.owner.image) {
-            self.profilePicture.image = self.owner.image;
-        }else{
-            [self.profilePicture setImageWithURL:[[FetchCenter new] urlWithImageID:self.owner.headUrl]
-                     usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        }
+        NSURL *imageUrl = [[FetchCenter new] urlWithImageID:self.owner.headUrl size:FetchCenterImageSize50];
+        [self.profilePicture showImageWithImageUrl:imageUrl];
         self.nickNameTextField.text = self.owner.ownerName;
     }
 }

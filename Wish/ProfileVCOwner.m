@@ -12,6 +12,7 @@
 #import "SDWebImageCompat.h"
 #import "ImagePicker.h"
 #import "UIActionSheet+Blocks.h"
+#import "UIImageView+ImageCache.h"
 @interface ProfileVCOwner () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,FetchCenterDelegate,UITextFieldDelegate,ImagePickerDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @end
@@ -22,8 +23,8 @@
     
     self.profileBackground.backgroundColor = [Theme profileBakground];
     NSString *newPicId = [User updatedProfilePictureId];
-    [self.profilePicture setImageWithURL:[self.fetchCenter urlWithImageID:newPicId]
-             usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    NSURL *imageUrl = [self.fetchCenter urlWithImageID:newPicId size:FetchCenterImageSize50];
+    [self.profilePicture showImageWithImageUrl:imageUrl];
     self.nickNameTextField.text = [User userDisplayName];
     self.genderLabel.text = [User gender];
     self.occupationTextField.text = [User occupation];
@@ -126,9 +127,8 @@
 #pragma mark - fetch center delegate
 - (void)didFinishSettingPersonalInfo{
 //    [self dismissSpinner];
-    NSURL *newUrl = [self.fetchCenter urlWithImageID:[User updatedProfilePictureId]];
-    [self.profilePicture setImageWithURL:newUrl
-             usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    NSURL *newUrl = [self.fetchCenter urlWithImageID:[User updatedProfilePictureId] size:FetchCenterImageSize50];
+    [self.profilePicture showImageWithImageUrl:newUrl];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

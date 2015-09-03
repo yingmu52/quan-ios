@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 #import "FollowingImageCell.h"
 #import "Feed.h"
-#import "UIImageView+WebCache.h"
+#import "UIImageView+ImageCache.h"
 #import "FetchCenter.h"
 @import CoreData;
 @import QuartzCore;
@@ -44,15 +44,9 @@
                                                                              forIndexPath:indexPath];
         Feed *feed = self.feedsArray[indexPath.row];
         NSAssert(feed.imageId, @"null feed image id");
-        if (feed.image) {
-            cell.feedImageView.image = feed.image;
-        }else{
-            [cell.feedImageView sd_setImageWithURL:[[FetchCenter new] urlWithImageID:feed.imageId]
-                                         completed:^(UIImage *image, NSError *error,
-                                                     SDImageCacheType cacheType, NSURL *imageURL) {
-                                             feed.image = image;
-                                         }];            
-        }
+
+        NSURL *imageUrl = [[FetchCenter new] urlWithImageID:feed.imageId size:FetchCenterImageSize100];
+        [cell.feedImageView showImageWithImageUrl:imageUrl];
     }
     return cell;
     

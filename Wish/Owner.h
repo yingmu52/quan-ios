@@ -2,22 +2,22 @@
 //  Owner.h
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2015-05-20.
+//  Created by Xinyi Zhuang on 2015-09-03.
 //  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Comment, Plan;
+@class Comment, Message, Plan;
 
 @interface Owner : NSManagedObject
 
 @property (nonatomic, retain) NSString * headUrl;
 @property (nonatomic, retain) NSString * ownerId;
 @property (nonatomic, retain) NSString * ownerName;
-@property (nonatomic, retain) id image;
 @property (nonatomic, retain) NSSet *comments;
+@property (nonatomic, retain) NSSet *messages;
 @property (nonatomic, retain) NSSet *plans;
 @end
 
@@ -27,6 +27,11 @@
 - (void)removeCommentsObject:(Comment *)value;
 - (void)addComments:(NSSet *)values;
 - (void)removeComments:(NSSet *)values;
+
+- (void)addMessagesObject:(Message *)value;
+- (void)removeMessagesObject:(Message *)value;
+- (void)addMessages:(NSSet *)values;
+- (void)removeMessages:(NSSet *)values;
 
 - (void)addPlansObject:(Plan *)value;
 - (void)removePlansObject:(Plan *)value;

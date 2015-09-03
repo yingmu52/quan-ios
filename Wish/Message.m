@@ -2,7 +2,7 @@
 //  Message.m
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2015-05-21.
+//  Created by Xinyi Zhuang on 2015-09-03.
 //  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
 //
 
@@ -16,10 +16,10 @@
 @dynamic content;
 @dynamic createTime;
 @dynamic feedsId;
+@dynamic isRead;
 @dynamic messageId;
 @dynamic picurl;
 @dynamic targetOwnerId;
-@dynamic isRead;
 @dynamic owner;
 
 @end

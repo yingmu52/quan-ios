@@ -118,13 +118,9 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     // save the plan image background only when user select a certain plan!
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
-
-    if (!plan.image){
-        DiscoveryCell *cell = (DiscoveryCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        plan.image = cell.discoveryImageView.image;
-    }
     
-    if ([plan.owner.ownerId isEqualToString:[User uid]] && ![plan.planStatus isEqualToNumber:@(PlanStatusFinished)]){ //已完成的事件不支持编辑
+    if ([plan.owner.ownerId isEqualToString:[User uid]] &&
+        ![plan.planStatus isEqualToNumber:@(PlanStatusFinished)]){ //已完成的事件不支持编辑
         [self performSegueWithIdentifier:@"showWishDetailVCOwnerFromDiscovery" sender:plan];
     }else{
         [self performSegueWithIdentifier:@"showDiscoveryWishDetail" sender:plan];

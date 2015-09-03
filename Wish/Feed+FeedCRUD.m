@@ -17,8 +17,7 @@
     
     Feed *feed = [NSEntityDescription insertNewObjectForEntityForName:@"Feed"
                                                inManagedObjectContext:context];
-    
-    feed.image = image;
+#warning remove image
     feed.createDate = [NSDate date];
     feed.plan = plan;
     feed.selfLiked = @(NO);
@@ -78,7 +77,6 @@
     Feed *second = [sortedArray objectAtIndex:1];
     if ([self.feedId isEqualToString:firstFeed.feedId]){
         //delete plan image
-        self.plan.image = second.image;
         self.plan.backgroundNum = second.imageId;
     }
 

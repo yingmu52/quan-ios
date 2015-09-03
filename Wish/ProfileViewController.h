@@ -9,10 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "Theme.h"
 #import "SystemUtil.h"
-#import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 #import "Owner.h"
 #import "FetchCenter.h"
-
+#import "UIImageView+ImageCache.h"
 @interface ProfileViewController : UITableViewController
 @property (nonatomic,weak) IBOutlet UIView *profileBackground;
 @property (nonatomic,weak) IBOutlet UIImageView *profilePicture;
