@@ -14,7 +14,6 @@
 #import "FetchCenter.h"
 #import "TXYUploadManager.h"
 #import "TXYDownloader.h"
-#define BUGLY_APP_ID @"900007998"
 
 @interface AppDelegate () <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
@@ -30,14 +29,16 @@
     // 初始化SDK, 请使用在Bugly平台上注册应用的 AppId, 注意不要填写AppKey
     [[CrashReporter sharedInstance] installWithAppId:BUGLY_APP_ID];
     
+    //向微信注册
+    [WXApi registerApp:WECHATAppID];
+    
     if ([User isUserLogin]){
         // 设置用户ID, 如果你的APP有登录态, 可以在用户登录后再次调用此接口
         [[CrashReporter sharedInstance] setUserId:[NSString stringWithFormat:@"%@ - %@",[User uid],[User userDisplayName]]];
         
     }else{
         UIStoryboard *storyBoard = self.window.rootViewController.storyboard;
-        LoginViewController *loginVC = [storyBoard instantiateViewControllerWithIdentifier:@"LoginNavigationController"];
-        self.window.rootViewController = loginVC;
+        self.window.rootViewController = [storyBoard instantiateViewControllerWithIdentifier:@"LoginNavigationController"];
     }
     [self.window makeKeyAndVisible];
     return YES;
@@ -68,14 +69,21 @@
     [self saveContext];
 }
 
-#pragma mark - Tencent
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
-    return [TencentOAuth HandleOpenURL:url];
+#pragma mark - Tencent & Wechat
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation{
+    LoginViewController *loginVC = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    return [WXApi handleOpenURL:url delegate:loginVC] || [TencentOAuth HandleOpenURL:url];
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
-    return [TencentOAuth HandleOpenURL:url];
-} 
+    LoginViewController *loginVC = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    return [WXApi handleOpenURL:url delegate:loginVC] || [TencentOAuth HandleOpenURL:url];
+}
+
 
 
 #pragma mark - Core Data stack
@@ -182,7 +190,7 @@
     [TXYUploadManager authorize:YOUTU_APP_ID userId:nil sign:[User youtuSignature]];
     //下载需要注册appId，sign信息由用户填入url参数中
     [TXYDownloader authorize:YOUTU_APP_ID userId:nil];
-    //    NSLog(@"***************************************\n\n%@\n\n",[User youtuSignature]);
+    //    NSLog(@"***************************************\n\n%@\n\n",[User youtuSignature]);]
 }
 
 - (FetchCenter *)fetchCenter{

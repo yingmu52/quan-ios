@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h" //includes WXApiDelegate
 
-@interface LoginViewController : UIViewController
+@interface LoginViewController : UIViewController <WXApiDelegate>
 
 @end

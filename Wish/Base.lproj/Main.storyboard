@@ -137,6 +137,7 @@
                     <navigationItem key="navigationItem" id="epO-j5-Jqz"/>
                     <connections>
                         <outlet property="QQLoginButton" destination="pDI-Je-6Pa" id="cPH-FU-IO8"/>
+                        <outlet property="WechatLoginButton" destination="lHh-Zh-DDA" id="oYf-Dk-vec"/>
                         <segue destination="ssU-9T-OTt" kind="show" identifier="showLoginDetail" id="OAY-5y-BEp"/>
                         <segue destination="hi1-Qm-xqU" kind="show" identifier="showMainViewFromLogin" id="iCU-RD-fVI"/>
                     </connections>

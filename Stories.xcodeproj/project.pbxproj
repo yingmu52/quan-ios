@@ -23,6 +23,10 @@
 		A04842E21B98C5D20032E927 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = A04842E01B98C5D20032E927 /* Comment.m */; };
 		A04842E91B98CF9E0032E927 /* UIImageView+ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A04842E81B98CF9E0032E927 /* UIImageView+ImageCache.m */; };
 		A04842EA1B98CF9E0032E927 /* UIImageView+ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A04842E81B98CF9E0032E927 /* UIImageView+ImageCache.m */; };
+		A04842F71B99F5360032E927 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A04842F61B99F5360032E927 /* libc++.dylib */; };
+		A04842F81B99F54B0032E927 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A04842F41B99F29C0032E927 /* libsqlite3.0.dylib */; };
+		A04843051B9A02450032E927 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A04843011B9A02450032E927 /* libWeChatSDK.a */; };
+		A04843061B9A02450032E927 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A04843011B9A02450032E927 /* libWeChatSDK.a */; };
 		A0B8C8021B857F22009C4572 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */; };
 		A0B8C8031B857F22009C4572 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */; };
 		A0D102171B84EB6A006B0E4E /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D101F71B84EB6A006B0E4E /* MKAnnotationView+WebCache.m */; };
@@ -260,7 +264,6 @@
 		AEDD06581AABF8FB00379C17 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDD06571AABF8FB00379C17 /* CoreTelephony.framework */; };
 		AEDD065A1AABF90400379C17 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDD06591AABF90400379C17 /* Security.framework */; };
 		AEDD065C1AABF90B00379C17 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDD065B1AABF90B00379C17 /* libiconv.dylib */; };
-		AEDD06621AABF94500379C17 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDD06611AABF94500379C17 /* libsqlite3.dylib */; };
 		AEE075381A744A770015155B /* SystemUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE075371A744A770015155B /* SystemUtil.m */; };
 		AEE075391A744A770015155B /* SystemUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE075371A744A770015155B /* SystemUtil.m */; };
 		AEE4A6CC1A9684D500ABF946 /* AchieveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6CB1A9684D500ABF946 /* AchieveViewController.m */; };
@@ -327,6 +330,11 @@
 		A04842E01B98C5D20032E927 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		A04842E71B98CF9E0032E927 /* UIImageView+ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+ImageCache.h"; sourceTree = "<group>"; };
 		A04842E81B98CF9E0032E927 /* UIImageView+ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+ImageCache.m"; sourceTree = "<group>"; };
+		A04842F41B99F29C0032E927 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		A04842F61B99F5360032E927 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		A04843011B9A02450032E927 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		A04843031B9A02450032E927 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		A04843041B9A02450032E927 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		A0B8C8001B857F22009C4572 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		A0D101F61B84EB6A006B0E4E /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
@@ -618,6 +626,7 @@
 			files = (
 				A0EDFCBB1B90C61900B10594 /* MobileCoreServices.framework in Frameworks */,
 				A0D102751B84F750006B0E4E /* TencentOpenAPI.framework in Frameworks */,
+				A04843051B9A02450032E927 /* libWeChatSDK.a in Frameworks */,
 				A0D1025F1B84EF99006B0E4E /* Bugly.framework in Frameworks */,
 				A0D102681B84EFAD006B0E4E /* WebP.framework in Frameworks */,
 				A0EDFCB61B90C5F100B10594 /* libTXYDownloader.a in Frameworks */,
@@ -626,8 +635,9 @@
 				AEDD06581AABF8FB00379C17 /* CoreTelephony.framework in Frameworks */,
 				AEDD06561AABF8F600379C17 /* CoreGraphics.framework in Frameworks */,
 				AEDD06541AABF8F000379C17 /* SystemConfiguration.framework in Frameworks */,
-				AEDD06621AABF94500379C17 /* libsqlite3.dylib in Frameworks */,
+				A04842F81B99F54B0032E927 /* libsqlite3.0.dylib in Frameworks */,
 				AEDD065C1AABF90B00379C17 /* libiconv.dylib in Frameworks */,
+				A04842F71B99F5360032E927 /* libc++.dylib in Frameworks */,
 				A0EDFCC01B90C64400B10594 /* libstdc++.dylib in Frameworks */,
 				A0EDFCBF1B90C63400B10594 /* libstdc++.6.dylib in Frameworks */,
 				A0EDFCBD1B90C62100B10594 /* libxml2.dylib in Frameworks */,
@@ -641,6 +651,7 @@
 			files = (
 				A0EDFCB71B90C5F100B10594 /* libTXYDownloader.a in Frameworks */,
 				A0D102691B84EFAD006B0E4E /* WebP.framework in Frameworks */,
+				A04843061B9A02450032E927 /* libWeChatSDK.a in Frameworks */,
 				A0EDFCB91B90C5F100B10594 /* libTXYUploader.a in Frameworks */,
 				A0D102761B84F750006B0E4E /* TencentOpenAPI.framework in Frameworks */,
 				A0D102601B84EF99006B0E4E /* Bugly.framework in Frameworks */,
@@ -650,6 +661,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A04842EB1B9916980032E927 /* WeChatSDK_1.5 */ = {
+			isa = PBXGroup;
+			children = (
+				A04843011B9A02450032E927 /* libWeChatSDK.a */,
+				A04843031B9A02450032E927 /* WXApi.h */,
+				A04843041B9A02450032E927 /* WXApiObject.h */,
+			);
+			path = WeChatSDK_1.5;
+			sourceTree = "<group>";
+		};
 		A0B8C7FF1B857F22009C4572 /* HMSegmentedControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -771,6 +792,7 @@
 		A0F7D3A51B84E851003CCB34 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				A04842EB1B9916980032E927 /* WeChatSDK_1.5 */,
 				A0EDFCAD1B90C5F100B10594 /* QCloudDownloadSDK */,
 				A0EDFCB11B90C5F100B10594 /* QCloudUploadSDK */,
 				A0B8C7FF1B857F22009C4572 /* HMSegmentedControl */,
@@ -1234,6 +1256,8 @@
 		F3D9C90B14CD662C469ECA13 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A04842F61B99F5360032E927 /* libc++.dylib */,
+				A04842F41B99F29C0032E927 /* libsqlite3.0.dylib */,
 				A0EDFCBE1B90C63400B10594 /* libstdc++.6.dylib */,
 				A0EDFCBC1B90C62100B10594 /* libxml2.dylib */,
 				A0EDFCBA1B90C61900B10594 /* MobileCoreServices.framework */,
@@ -1771,6 +1795,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/External/QCloudDownloadSDK",
 					"$(PROJECT_DIR)/External/QCloudUploadSDK",
+					"$(PROJECT_DIR)/External/WeChatSDK_1.5",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1809,6 +1834,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/External/QCloudDownloadSDK",
 					"$(PROJECT_DIR)/External/QCloudUploadSDK",
+					"$(PROJECT_DIR)/External/WeChatSDK_1.5",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1840,6 +1866,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/External/QCloudDownloadSDK",
 					"$(PROJECT_DIR)/External/QCloudUploadSDK",
+					"$(PROJECT_DIR)/External/WeChatSDK_1.5",
 				);
 				PRODUCT_NAME = StoriesTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Stories.app/Stories";
@@ -1862,6 +1889,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/External/QCloudDownloadSDK",
 					"$(PROJECT_DIR)/External/QCloudUploadSDK",
+					"$(PROJECT_DIR)/External/WeChatSDK_1.5",
 				);
 				PRODUCT_NAME = StoriesTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Stories.app/Stories";

@@ -7,7 +7,6 @@
 //
 
 #import "LoginViewController.h"
-#import "AppDelegate.h"
 #import "FetchCenter.h"
 #import "SDWebImageCompat.h"
 #import "User.h"
@@ -39,19 +38,6 @@
 }
 
 #pragma mark - login
-
-- (IBAction)qqlogin{
-    NSArray *permissions = @[kOPEN_PERMISSION_GET_USER_INFO,
-                             kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
-                             kOPEN_PERMISSION_GET_INFO,
-                             kOPEN_PERMISSION_GET_OTHER_INFO];
-    [self.tencentOAuth authorize:permissions inSafari:NO];
-    self.QQLoginButton.enabled = NO;
-}
-
-- (IBAction)wechatLogin{
-    NSLog(@"pressed");
-}
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
     [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
@@ -157,5 +143,35 @@
     }
     return _tencentOAuth;
 }
+
+- (IBAction)qqlogin{
+    NSArray *permissions = @[kOPEN_PERMISSION_GET_USER_INFO,
+                             kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
+                             kOPEN_PERMISSION_GET_INFO,
+                             kOPEN_PERMISSION_GET_OTHER_INFO];
+    [self.tencentOAuth authorize:permissions inSafari:NO];
+    self.QQLoginButton.enabled = NO;
+}
+
+#pragma mark - wechat 
+
+- (IBAction)wechatLogin{
+    SendAuthReq *req = [[SendAuthReq alloc] init];
+    req.scope = @"snsapi_message,snsapi_userinfo,snsapi_friend,snsapi_contact"; // @"post_timeline,sns"
+    req.state = @"fuck";
+    req.openID = WECHATAppID;
+    [WXApi sendAuthReq:req viewController:self delegate:self];
+}
+
+
+- (void)onResp:(BaseResp *)resp{
+    SendAuthResp *temp = (SendAuthResp*)resp;
+    NSString *strTitle = [NSString stringWithFormat:@"Auth结果"];
+    NSString *strMsg = [NSString stringWithFormat:@"code:%@,state:%@,errcode:%d", temp.code, temp.state, temp.errCode];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alert show];
+}
+
 
 @end
