@@ -157,7 +157,7 @@
 
 - (IBAction)wechatLogin{
     SendAuthReq *req = [[SendAuthReq alloc] init];
-    req.scope = @"snsapi_message,snsapi_userinfo,snsapi_friend,snsapi_contact"; // @"post_timeline,sns"
+    req.scope = @"snsapi_userinfo,snsapi_base"; // @"post_timeline,sns"
     req.state = @"fuck";
     req.openID = WECHATAppID;
     [WXApi sendAuthReq:req viewController:self delegate:self];
