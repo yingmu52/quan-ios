@@ -15,14 +15,18 @@
 
 
 + (void)updateOwnerInfo:(NSDictionary *)info{
-    [[NSUserDefaults standardUserDefaults] setObject:info forKey:OWNERINFO];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    if (info) {
+        [[NSUserDefaults standardUserDefaults] setObject:info forKey:OWNERINFO];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
 }
 
 + (void)updateAttributeFromDictionary:(NSDictionary *)info{
     NSMutableDictionary *oldOwnerInfo = [[self.class getOwnerInfo] mutableCopy];
     for (NSString *key in [info allKeys]){
-        oldOwnerInfo[key] = info[key];
+        if (info[key]) {
+            oldOwnerInfo[key] = info[key];
+        }
     }
     [self.class updateOwnerInfo:oldOwnerInfo];
 }
@@ -38,53 +42,60 @@
 + (NSString *)uid{
 //    return @"100004";
     NSDictionary *info = [self.class getOwnerInfo];
-    return [NSString stringWithFormat:@"%@", info ? info[UID] : @""];
+    return info[UID] ? info[UID] : @"";
 }
 
 + (NSString *)uKey{
 //    return @"ukey551616ce53da30.10303099";
     NSDictionary *info = [self.class getOwnerInfo];
-    return info[UKEY];
+    return info[UKEY] ? info[UKEY] : @"";
 }
 
 
 + (NSString *)updatedProfilePictureId{
     NSDictionary *info = [self.class getOwnerInfo];
-    return info[PROFILE_PICTURE_ID_CUSTOM];
+    return info[PROFILE_PICTURE_ID_CUSTOM] ? info[PROFILE_PICTURE_ID_CUSTOM] : @"";
 
 }
 
 + (BOOL)isUserLogin{
-    return [[self class] uid] && [[self class] uKey];
+    return [[self class] uid].length > 0 && [[self class] uKey].length > 0;
 }
 
 + (NSURL *)userProfilePictureURL{
     NSDictionary *info = [self.class getOwnerInfo];
-    return [NSURL URLWithString:info[PROFILE_PICTURE_ID]];
+    NSString *picId = info[PROFILE_PICTURE_ID] ? info[PROFILE_PICTURE_ID] : @"";
+    return [NSURL URLWithString:picId] ;
+}
+
++ (NSString *)loginType{
+    NSDictionary *info = [self.class getOwnerInfo];
+    return info[LOGIN_TYPE] ? info[LOGIN_TYPE] : @"";
 }
 
 + (NSString *)userDisplayName{
     NSDictionary *info = [self.class getOwnerInfo];
-    return info[USER_DISPLAY_NAME];
+    return info[USER_DISPLAY_NAME] ? info[USER_DISPLAY_NAME] : @"";
 }
 
 + (NSString *)gender{
     NSDictionary *info = [self.class getOwnerInfo];
-    return info[GENDER];
+    return info[GENDER] ? info[GENDER] : @"";
 }
 
 + (NSString *)occupation{
     NSDictionary *info = [self.class getOwnerInfo];
-    return info[OCCUPATION];
+    return info[OCCUPATION] ? info[OCCUPATION] : @"";
 }
 
 + (NSString *)personalDetailInfo{
     NSDictionary *info = [self.class getOwnerInfo];
-    return info[PERSONALDETAIL];
+    return info[PERSONALDETAIL] ? info[PERSONALDETAIL] : @"";
 }
 
 + (NSString *)youtuSignature{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:YOUTU_SIGNATURE];
+    NSString *signature = [[NSUserDefaults standardUserDefaults] objectForKey:YOUTU_SIGNATURE];
+    return signature ? signature : @"";
 }
 
 + (void)storeSignature:(NSString *)sign{

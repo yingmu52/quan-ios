@@ -45,7 +45,7 @@
 #define USER @"man/"
 #define GETUID @"splan_get_uid.php"
 #define SET_USER_INFO @"splan_man_set.php"
-
+#define GET_ACCESSTOKEN_OPENID @"splan_wx_code2token.php"
 #define OTHER @"other/"
 #define CHECK_NEW_VERSION @"splan_other_new_version.php"
 #define FEED_BACK @"splan_other_support_set.php"
@@ -64,7 +64,7 @@
 #define GET_SIGNATURE @"getsign.php"
 
 typedef enum{
-    FetchCenterGetOpCreatePlan = 0,
+    FetchCenterGetOpCreatePlan,
     FetchCenterGetOpDeletePlan,
     FetchCenterGetOpUploadImage,
     FetchCenterGetOpCreateFeed,
@@ -89,7 +89,8 @@ typedef enum{
     FetchCenterGetOpGetMessageList,
     FetchCenterGetOpGetMessageNotificationInfo,
     FetchCenterGetOpClearAllMessages,
-    FetchCenterGetOpGetSignature
+    FetchCenterGetOpGetSignature,
+    FetchCenterGetOpGetAccessTokenAndOpenIdWithWechatCode
 }FetchCenterGetOp;
 
 typedef enum{
@@ -292,6 +293,7 @@ typedef enum{
 
 
 - (void)fetchUidandUkeyWithOpenId:(NSString *)openId accessToken:(NSString *)token{
+    //loginType在这个函数之前必段保留
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,USER,GETUID];
     [self getRequest:rqtStr
            parameter:@{@"openid":openId,
@@ -300,6 +302,15 @@ typedef enum{
               entity:nil];
 }
 
+- (void)fetchAccessTokenWithWechatCode:(NSString *)code{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,USER,GET_ACCESSTOKEN_OPENID];
+    [self getRequest:rqtStr
+           parameter:@{@"code":code}
+           operation:FetchCenterGetOpGetAccessTokenAndOpenIdWithWechatCode
+              entity:nil];
+
+    
+}
 #pragma mark - personal
 
 - (void)uploadNewProfilePicture:(UIImage *)picture{
@@ -593,7 +604,7 @@ typedef enum{
     UIDevice *device = [UIDevice currentDevice];
     NSString *systemInfo = [NSString stringWithFormat:@"appVersion: %@ | sysVersion: %@ | sysModel: %@",self.buildVersion,device.systemVersion,device.model];
     NSMutableDictionary *dict = [@{@"version":@"2.2.2",
-                                   @"loginType":@"qq",
+                                   @"loginType":[User loginType],
                                    @"systemInfo":[systemInfo stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]} mutableCopy];
     
     if (op != FetchCenterGetOpLoginForUidAndUkey) {
@@ -613,7 +624,7 @@ typedef enum{
     NSString *url;
     if ([imageId hasPrefix:IMAGE_PREFIX]) { //优图id
         url = [NSString stringWithFormat:@"http://shier-%@.image.myqcloud.com/%@",YOUTU_APP_ID,imageId];
-        NSLog(@">>>>>>>>>>%@",imageId);
+//        NSLog(@">>>>>>>>>>%@",imageId);
     }else{ //老id
         NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@?",self.baseUrl,PIC,GET_IMAGE];
         url = [NSString stringWithFormat:@"%@id=%@",[self versionForBaseURL:rqtStr operation:-1],imageId];
@@ -626,7 +637,7 @@ typedef enum{
         NSString *url;
         if ([imageId hasPrefix:IMAGE_PREFIX]) { //优图id
             url = [NSString stringWithFormat:@"http://shier-%@.image.myqcloud.com/%@/%@",YOUTU_APP_ID,imageId,@(size)];
-            NSLog(@">>>>>>>>>>%@",url);
+//            NSLog(@">>>>>>>>>>%@",url);
         }else{ //老id
             NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@?",self.baseUrl,PIC,GET_IMAGE];
             url = [NSString stringWithFormat:@"%@id=%@",[self versionForBaseURL:rqtStr operation:-1],imageId];
@@ -756,10 +767,13 @@ typedef enum{
                 NSString *ukey = [json valueForKeyPath:@"data.ukey"];
                 BOOL isNewUser = [[json valueForKeyPath:@"data.isNew"] boolValue];
                 NSDictionary *userInfo = [json valueForKeyPath:@"data.maninfo"];
-                [self.delegate didFinishReceivingUid:uid
-                                                uKey:ukey
-                                           isNewUser:isNewUser
-                                            userInfo:userInfo];
+                
+                //update local user info & UI
+                NSDictionary *localUserInfo = @{UID:uid,UKEY:ukey};
+                [User updateAttributeFromDictionary:localUserInfo];
+                [self.delegate didFinishReceivingUidAndUKeyForUserInfo:userInfo isNewUser:isNewUser];
+                NSLog(@"uid %@ ukey %@",uid,ukey);
+                NSLog(@"%@",[User getOwnerInfo]);
             }
                 break;
             case FetchCenterGetOpUpdatePlan:{
@@ -936,11 +950,31 @@ typedef enum{
             }
                 break;
                 
+            case FetchCenterGetOpGetAccessTokenAndOpenIdWithWechatCode:{
+                //            NSString *refreshToken = json[@"refresh_token"];
+                //            NSString *scope = json[@"scope"];
+                //            NSString *unionId = json[@"unionid"];
+                /**
+                 此接口用于获取用户个人信息。开发者可通过OpenID来获取用户基本信息。特别需要注意的是，如果开发者拥有多个移动应用、网站应用和公众帐号，可通过获取用户基本信息中的unionid来区分用户的唯一性，因为只要是同一个微信开放平台帐号下的移动应用、网站应用和公众帐号，用户的unionid是唯一的。换句话说，同一用户，对同一个微信开放平台下的不同应用，unionid是相同的。
+                 **/
+                
+                NSString *accessToken = json[@"access_token"];
+                NSString *openId = json[@"openid"];
+                
+                //过期的参照点为当前请求的时刻
+                NSDate *expireDate = [NSDate dateWithTimeInterval:[json[@"expires_in"] integerValue] sinceDate:[NSDate date]];
+                
+                [User updateAttributeFromDictionary:@{ACCESS_TOKEN:accessToken,
+                                                      OPENID:openId,
+                                                      EXPIRATION_DATE:expireDate,
+                                                      LOGIN_TYPE:@"wx"}];
+                [self fetchUidandUkeyWithOpenId:openId accessToken:accessToken];
+            }
+                break;
+                
             default:
                 break;
         }
-//        NSLog(@"%@",json);
-//        [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
     }));
 }
 

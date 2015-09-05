@@ -23,6 +23,7 @@
 #define UKEY @"user_unique_request_key"
 #define YOUTU_SIGNATURE @"tencent_Youtu_Signature"
 
+#define LOGIN_TYPE @"user_login_type"
 @interface User : NSObject
 
 + (void)updateAttributeFromDictionary:(NSDictionary *)info;
@@ -39,5 +40,7 @@
 + (NSString *)occupation;
 + (NSString *)personalDetailInfo;
 + (NSString *)youtuSignature;
++ (NSString *)loginType;
 + (void)storeSignature:(NSString *)sign;
+
 @end

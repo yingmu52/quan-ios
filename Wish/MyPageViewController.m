@@ -167,7 +167,8 @@
 
 - (void)logout{    
     //delete user info, this lines must be below [self clearCoreData];
-    [User updateOwnerInfo:nil];
+    [User updateOwnerInfo:[NSDictionary dictionary]];
+    NSLog(@"%@",[User getOwnerInfo]);
     [self performSegueWithIdentifier:@"showLoginViewFromMyPage" sender:nil];
 }
 

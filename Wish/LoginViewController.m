@@ -11,12 +11,12 @@
 #import "SDWebImageCompat.h"
 #import "User.h"
 #import "LoginDetailViewController.h"
+#import "WeChatAuth.h"
 #define QQAppKey @"ByYhJYTkXu0721fH"
 #define QQAppID @"1104337894"
 
 @interface LoginViewController () <TencentSessionDelegate,FetchCenterDelegate>
 @property (nonatomic,strong) TencentOAuth *tencentOAuth;
-@property (nonatomic,strong) APIResponse *apiResponse;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,weak) IBOutlet UIButton *QQLoginButton;
 @property (nonatomic,weak) IBOutlet UIButton *WechatLoginButton;
@@ -49,45 +49,27 @@
 }
 
 
-- (void)didFinishReceivingUid:(NSString *)uid uKey:(NSString *)uKey isNewUser:(BOOL)isNew userInfo:(NSDictionary *)userInfo{
-    //store access token, openid, expiration date, user photo, username, gender
-    NSDictionary *fetchedUserInfo = [self.apiResponse jsonResponse];
-    
-    if (fetchedUserInfo) {
-        //update local user info & UI
-        NSDictionary *localUserInfo = @{ACCESS_TOKEN:self.tencentOAuth.accessToken,
-                                        OPENID:self.tencentOAuth.openId,
-                                        EXPIRATION_DATE:self.tencentOAuth.expirationDate,
-                                        PROFILE_PICTURE_ID:fetchedUserInfo[@"figureurl_qq_2"],
-                                        GENDER:fetchedUserInfo[@"gender"],
-                                        USER_DISPLAY_NAME:fetchedUserInfo[@"nickname"],
-                                        UID:uid,
-                                        UKEY:uKey};
-        [User updateOwnerInfo:localUserInfo];
-        
-        if (!isNew) {
-            NSDictionary *additionalUserInfo = @{PROFILE_PICTURE_ID_CUSTOM:userInfo[@"headUrl"],
-                                                 GENDER:[userInfo[@"gender"] boolValue] ? @"男" : @"女",
-                                                 USER_DISPLAY_NAME:userInfo[@"name"],
-                                                 OCCUPATION:userInfo[@"profession"],
-                                                 PERSONALDETAIL:userInfo[@"description"]};
-            [User updateAttributeFromDictionary:additionalUserInfo];
-//            NSLog(@"%@",localUserInfo);
-            if (self.navigationController.presentingViewController){
-                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-            }else{
-                [self performSegueWithIdentifier:@"showMainViewFromLogin" sender:nil];
-            }
+- (void)didFinishReceivingUidAndUKeyForUserInfo:(NSDictionary *)userInfo isNewUser:(BOOL)isNew{
 
+    if (!isNew) {
+        NSDictionary *additionalUserInfo = @{PROFILE_PICTURE_ID_CUSTOM:userInfo[@"headUrl"],
+                                             GENDER:[userInfo[@"gender"] boolValue] ? @"男" : @"女",
+                                             USER_DISPLAY_NAME:userInfo[@"name"],
+                                             OCCUPATION:userInfo[@"profession"],
+                                             PERSONALDETAIL:userInfo[@"description"]};
+        [User updateAttributeFromDictionary:additionalUserInfo];
+        //            NSLog(@"%@",localUserInfo);
+        if (self.navigationController.presentingViewController){
+            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
         }else{
-            [self performSegueWithIdentifier:@"showLoginDetail" sender:nil];
+            [self performSegueWithIdentifier:@"showMainViewFromLogin" sender:nil];
         }
         
+    }else{
+        [self performSegueWithIdentifier:@"showLoginDetail" sender:nil];
     }
-    self.QQLoginButton.enabled = YES;
 
-    NSLog(@"%@",[User getOwnerInfo]);
-    
+    self.QQLoginButton.enabled = YES;    
 }
 
 
@@ -131,9 +113,20 @@
  */
 
 - (void)getUserInfoResponse:(APIResponse *)response{
+    //保存accessToken和openId
+    NSDictionary *fetchedUserInfo = [response jsonResponse];
+    
+    NSDictionary *localUserInfo = @{ACCESS_TOKEN:self.tencentOAuth.accessToken,
+                                    OPENID:self.tencentOAuth.openId,
+                                    EXPIRATION_DATE:self.tencentOAuth.expirationDate,
+                                    PROFILE_PICTURE_ID:fetchedUserInfo[@"figureurl_qq_2"],
+                                    GENDER:fetchedUserInfo[@"gender"],
+                                    USER_DISPLAY_NAME:fetchedUserInfo[@"nickname"],
+                                    LOGIN_TYPE:@"qq"};
+    [User updateOwnerInfo:localUserInfo];
+
     //use openId and access_token to get uid+ukey
     [self.fetchCenter fetchUidandUkeyWithOpenId:self.tencentOAuth.openId accessToken:self.tencentOAuth.accessToken];
-    self.apiResponse = response;
 }
 
 - (TencentOAuth *)tencentOAuth{
@@ -165,13 +158,11 @@
 
 
 - (void)onResp:(BaseResp *)resp{
-    SendAuthResp *temp = (SendAuthResp*)resp;
-    NSString *strTitle = [NSString stringWithFormat:@"Auth结果"];
-    NSString *strMsg = [NSString stringWithFormat:@"code:%@,state:%@,errcode:%d", temp.code, temp.state, temp.errCode];
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    [alert show];
-}
+    SendAuthResp *response = (SendAuthResp*)resp;
+    dispatch_main_async_safe(^{
+        [self.fetchCenter fetchAccessTokenWithWechatCode:response.code];
+    })
 
+}
 
 @end
