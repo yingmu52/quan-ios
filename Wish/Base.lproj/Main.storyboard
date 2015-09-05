@@ -138,12 +138,12 @@
                     <connections>
                         <outlet property="QQLoginButton" destination="pDI-Je-6Pa" id="cPH-FU-IO8"/>
                         <outlet property="WechatLoginButton" destination="lHh-Zh-DDA" id="oYf-Dk-vec"/>
-                        <segue destination="ssU-9T-OTt" kind="show" identifier="showLoginDetail" id="OAY-5y-BEp"/>
+                        <segue destination="UWC-h0-VTZ" kind="show" identifier="showLoginDetail" id="OAY-5y-BEp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l2d-7Y-UWq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-6859.5" y="-3094.5"/>
+            <point key="canvasLocation" x="-8215.5" y="-2848.5"/>
         </scene>
         <!--Login Detail View Controller-->
         <scene sceneID="T5s-oJ-3VH">
@@ -485,6 +485,7 @@
                             <outlet property="delegate" destination="ssU-9T-OTt" id="bon-07-fML"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="fhE-2U-XQs"/>
                     <connections>
                         <outlet property="descriptionTextView" destination="DCp-o8-5Ci" id="EhD-fo-HEi"/>
                         <outlet property="genderLabel" destination="2sO-WF-rlT" id="quI-7f-al6"/>
@@ -494,7 +495,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P6o-3g-Kou" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5406" y="-2944.5"/>
+            <point key="canvasLocation" x="-5820" y="-2800.5"/>
         </scene>
         <!--Post View Controller-->
         <scene sceneID="ZVZ-0X-CQC">
@@ -767,7 +768,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RIa-Mp-Cry" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="843" y="-2338.5"/>
+            <point key="canvasLocation" x="1761" y="-2338.5"/>
         </scene>
         <!--Post Detail View Controller-->
         <scene sceneID="nyi-zn-yq6">
@@ -907,7 +908,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2233.5" y="-2355"/>
+            <point key="canvasLocation" x="3151.5" y="-2355"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="fpo-Ov-0kY">
@@ -1261,7 +1262,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d1T-ay-k77" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-486" y="-2319"/>
+            <point key="canvasLocation" x="432" y="-2319"/>
         </scene>
         <!--消息-->
         <scene sceneID="w0m-7Q-OqX">
@@ -2132,7 +2133,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3690" y="-3126"/>
+            <point key="canvasLocation" x="4608" y="-3126"/>
         </scene>
         <!--Feed DetailVC Owner-->
         <scene sceneID="XQH-HN-t6p">
@@ -2174,7 +2175,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b0e-We-ijJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1699.5" y="-2319"/>
+            <point key="canvasLocation" x="-781.5" y="-2319"/>
         </scene>
         <!--AchieveVC Data-->
         <scene sceneID="Eo7-So-zdt">
@@ -3658,7 +3659,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qBZ-x7-vS6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3414" y="-3172.5"/>
+            <point key="canvasLocation" x="-2496" y="-3172.5"/>
         </scene>
         <!--Feedback View Controller-->
         <scene sceneID="Q1I-NJ-5oY">
@@ -4548,7 +4549,7 @@
                         <segue destination="IHE-Tk-1qk" kind="show" identifier="ShowAcheivementList" id="Hwy-tI-XM3"/>
                         <segue destination="kcp-Id-Hzn" kind="show" identifier="showFeedbackView" id="ZFl-9a-0Dk"/>
                         <segue destination="3DT-IO-Q6x" kind="show" identifier="showProfileView" id="UIp-B3-B82"/>
-                        <segue destination="Pro-KE-lhb" kind="presentation" identifier="showLoginViewFromMyPage" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="mFv-Li-7ge"/>
+                        <segue destination="Pro-KE-lhb" kind="presentation" identifier="showLoginViewFromMyPage" id="mFv-Li-7ge"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bDw-Cl-yWH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4558,7 +4559,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-2158.5" y="-3579.75"/>
+            <point key="canvasLocation" x="-1240.5" y="-3579.75"/>
         </scene>
         <!--Request Log View Controller-->
         <scene sceneID="QjG-Rl-EMA">
@@ -4626,7 +4627,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vgg-QJ-MlH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="177" y="-3225"/>
+            <point key="canvasLocation" x="1095" y="-3225"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="Jmd-XO-3ZT">
@@ -5448,7 +5449,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4815" y="-2541"/>
+            <point key="canvasLocation" x="5733" y="-2541"/>
         </scene>
         <!--Feed Detail View Controller-->
         <scene sceneID="fMM-0b-dio">
@@ -5893,6 +5894,25 @@
             </objects>
             <point key="canvasLocation" x="-301.5" y="-4743.75"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="w9V-Ma-zwL">
+            <objects>
+                <navigationController storyboardIdentifier="LoginDetailNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="UWC-h0-VTZ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mEe-4a-G9D" customClass="NavigationBar">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ssU-9T-OTt" kind="relationship" relationship="rootViewController" id="EyV-ZH-MFZ"/>
+                        <segue destination="Pro-KE-lhb" kind="show" identifier="LoginDetailToLoginView" id="If2-2V-uRQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xX1-fa-1O1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-6882" y="-2806.5"/>
+        </scene>
     </scenes>
     <resources>
         <image name="camera_ic" width="141" height="141"/>
@@ -5934,8 +5954,9 @@
         <segue reference="3Cj-2H-t7j"/>
         <segue reference="aAR-cW-sP8"/>
         <segue reference="Y2c-0U-Rmr"/>
-        <segue reference="JFc-cO-xBu"/>
         <segue reference="cel-0L-eNY"/>
+        <segue reference="JFc-cO-xBu"/>
+        <segue reference="If2-2V-uRQ"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686274509803" green="0.75686274509803919" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
 </document>

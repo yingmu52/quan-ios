@@ -36,17 +36,22 @@
 
     CGRect frame = CGRectMake(0,0, 25,25);
     UIButton *backBtn = [Theme buttonWithImage:[Theme navBackButtonDefault]
-                                        target:self.navigationController
-                                      selector:@selector(popViewControllerAnimated:)
+                                        target:self
+                                      selector:@selector(goBackToLogin)
                                          frame:frame];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
 
     self.tikButton = [Theme buttonWithImage:[Theme navTikButtonDefault]
                                      target:self
-                                   selector:@selector(showMainView)
+                                   selector:@selector(uploadUserInfo)
                                       frame:frame];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
     self.navigationItem.rightBarButtonItem.enabled = NO;
+    
+}
+
+- (void)goBackToLogin{
+    [self.navigationController performSegueWithIdentifier:@"LoginDetailToLoginView" sender:nil];
     
 }
 
@@ -92,26 +97,24 @@
                       otherButtonTitles:nil, nil] show];
 }
 
-- (void)showMainView{
+- (void)uploadUserInfo{
     //upload user info
     [self.fetchCenter setPersonalInfo:self.nameTextField.text
                                gender:self.genderLabel.text
                               imageId:[User updatedProfilePictureId]
                            occupation:self.occupationTextField.text
                          personalInfo:self.descriptionTextView.text];
+    [self.nameTextField resignFirstResponder];
+    [self.occupationTextField resignFirstResponder];
+    [self.descriptionTextView resignFirstResponder];
 }
 
 - (void)didFinishSettingPersonalInfo{
     self.navigationController.navigationBar.hidden = YES;
-    [self performSegueWithIdentifier:@"showMainView" sender:nil];
+    [[[UIApplication sharedApplication] keyWindow] setRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"]];
 }
 
 
-#pragma mark - segue
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if ([segue.identifier isEqualToString:@"showMainView"]) {
-    }
-}
 
 #pragma mark - Table View Delegate 
 
