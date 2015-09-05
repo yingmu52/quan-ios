@@ -17,6 +17,7 @@
 
 @interface AppDelegate () <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
+@property (nonatomic,strong) LoginViewController *loginVC;
 @end
 
 @implementation AppDelegate
@@ -37,8 +38,7 @@
         [[CrashReporter sharedInstance] setUserId:[NSString stringWithFormat:@"%@ - %@",[User uid],[User userDisplayName]]];
         
     }else{
-        UIStoryboard *storyBoard = self.window.rootViewController.storyboard;
-        self.window.rootViewController = [storyBoard instantiateViewControllerWithIdentifier:@"LoginNavigationController"];
+        self.window.rootViewController = self.loginVC;
     }
     [self.window makeKeyAndVisible];
     return YES;
@@ -71,17 +71,21 @@
 
 #pragma mark - Tencent & Wechat
 
+- (LoginViewController *)loginVC{
+    if (!_loginVC) {
+        _loginVC = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    }
+    return _loginVC;
+}
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation{
-    LoginViewController *loginVC = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-    return [WXApi handleOpenURL:url delegate:loginVC] || [TencentOAuth HandleOpenURL:url];
+    return [WXApi handleOpenURL:url delegate:self.loginVC] || [TencentOAuth HandleOpenURL:url];
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
-    LoginViewController *loginVC = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-    return [WXApi handleOpenURL:url delegate:loginVC] || [TencentOAuth HandleOpenURL:url];
+    return [WXApi handleOpenURL:url delegate:self.loginVC] || [TencentOAuth HandleOpenURL:url];
 }
 
 

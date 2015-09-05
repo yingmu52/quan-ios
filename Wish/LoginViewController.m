@@ -58,12 +58,9 @@
                                              OCCUPATION:userInfo[@"profession"],
                                              PERSONALDETAIL:userInfo[@"description"]};
         [User updateAttributeFromDictionary:additionalUserInfo];
-        //            NSLog(@"%@",localUserInfo);
-        if (self.navigationController.presentingViewController){
-            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-        }else{
-            [self performSegueWithIdentifier:@"showMainViewFromLogin" sender:nil];
-        }
+
+        //show Main View
+        [[[UIApplication sharedApplication] keyWindow] setRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"]];
         
     }else{
         [self performSegueWithIdentifier:@"showLoginDetail" sender:nil];
@@ -151,7 +148,6 @@
 - (IBAction)wechatLogin{
     SendAuthReq *req = [[SendAuthReq alloc] init];
     req.scope = @"snsapi_userinfo,snsapi_base"; // @"post_timeline,sns"
-    req.state = @"fuck";
     req.openID = WECHATAppID;
     [WXApi sendAuthReq:req viewController:self delegate:self];
 }
@@ -159,10 +155,7 @@
 
 - (void)onResp:(BaseResp *)resp{
     SendAuthResp *response = (SendAuthResp*)resp;
-    dispatch_main_async_safe(^{
-        [self.fetchCenter fetchAccessTokenWithWechatCode:response.code];
-    })
-
+    [self.fetchCenter fetchAccessTokenWithWechatCode:response.code];
 }
 
 @end

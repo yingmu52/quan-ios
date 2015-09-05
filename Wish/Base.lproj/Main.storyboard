@@ -99,17 +99,17 @@
                                 <exclude reference="pDI-Je-6Pa"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="20N-90-A1h"/>
+                                <exclude reference="Hxk-h3-xNr"/>
+                                <exclude reference="PDv-Cq-gHy"/>
+                                <exclude reference="0TC-yd-W1Q"/>
+                                <exclude reference="RrQ-gx-TWa"/>
+                                <exclude reference="X3t-kT-3z3"/>
+                                <exclude reference="sJS-8I-6jo"/>
                                 <exclude reference="E0n-yH-psF"/>
                                 <exclude reference="fff-xR-GoW"/>
                                 <exclude reference="kK3-E8-G7A"/>
                                 <exclude reference="x1O-1O-h0m"/>
-                                <exclude reference="RrQ-gx-TWa"/>
-                                <exclude reference="X3t-kT-3z3"/>
-                                <exclude reference="sJS-8I-6jo"/>
-                                <exclude reference="0TC-yd-W1Q"/>
-                                <exclude reference="Hxk-h3-xNr"/>
-                                <exclude reference="PDv-Cq-gHy"/>
-                                <exclude reference="20N-90-A1h"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -120,17 +120,17 @@
                                 <include reference="pDI-Je-6Pa"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="20N-90-A1h"/>
+                                <include reference="Hxk-h3-xNr"/>
+                                <include reference="PDv-Cq-gHy"/>
+                                <include reference="0TC-yd-W1Q"/>
+                                <include reference="RrQ-gx-TWa"/>
+                                <include reference="X3t-kT-3z3"/>
+                                <include reference="sJS-8I-6jo"/>
                                 <include reference="E0n-yH-psF"/>
                                 <include reference="fff-xR-GoW"/>
                                 <include reference="kK3-E8-G7A"/>
                                 <include reference="x1O-1O-h0m"/>
-                                <include reference="RrQ-gx-TWa"/>
-                                <include reference="X3t-kT-3z3"/>
-                                <include reference="sJS-8I-6jo"/>
-                                <include reference="0TC-yd-W1Q"/>
-                                <include reference="Hxk-h3-xNr"/>
-                                <include reference="PDv-Cq-gHy"/>
-                                <include reference="20N-90-A1h"/>
                             </mask>
                         </variation>
                     </view>
@@ -139,12 +139,11 @@
                         <outlet property="QQLoginButton" destination="pDI-Je-6Pa" id="cPH-FU-IO8"/>
                         <outlet property="WechatLoginButton" destination="lHh-Zh-DDA" id="oYf-Dk-vec"/>
                         <segue destination="ssU-9T-OTt" kind="show" identifier="showLoginDetail" id="OAY-5y-BEp"/>
-                        <segue destination="hi1-Qm-xqU" kind="show" identifier="showMainViewFromLogin" id="iCU-RD-fVI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l2d-7Y-UWq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4903.5" y="-4072.5"/>
+            <point key="canvasLocation" x="-6859.5" y="-3094.5"/>
         </scene>
         <!--Login Detail View Controller-->
         <scene sceneID="T5s-oJ-3VH">
@@ -477,9 +476,6 @@
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="hi1-Qm-xqU" kind="show" identifier="showMainView" id="9aF-Be-Lpc"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -498,7 +494,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P6o-3g-Kou" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4170" y="-5110.5"/>
+            <point key="canvasLocation" x="-5406" y="-2944.5"/>
         </scene>
         <!--Post View Controller-->
         <scene sceneID="ZVZ-0X-CQC">
@@ -3586,7 +3582,7 @@
         <!--Main Tab Bar Controller-->
         <scene sceneID="ktQ-ar-y8A">
             <objects>
-                <tabBarController id="hi1-Qm-xqU" customClass="MainTabBarController" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTabBarController" id="hi1-Qm-xqU" customClass="MainTabBarController" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Yro-uf-EUa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -4551,8 +4547,8 @@
                         <segue destination="1LC-sn-tZg" kind="show" identifier="showLocalRequestLog" id="tNm-06-DMm"/>
                         <segue destination="IHE-Tk-1qk" kind="show" identifier="ShowAcheivementList" id="Hwy-tI-XM3"/>
                         <segue destination="kcp-Id-Hzn" kind="show" identifier="showFeedbackView" id="ZFl-9a-0Dk"/>
-                        <segue destination="uFl-DA-hZE" kind="presentation" identifier="showLoginViewFromMyPage" animates="NO" id="7bu-a4-X1f"/>
                         <segue destination="3DT-IO-Q6x" kind="show" identifier="showProfileView" id="UIp-B3-B82"/>
+                        <segue destination="Pro-KE-lhb" kind="presentation" identifier="showLoginViewFromMyPage" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="mFv-Li-7ge"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bDw-Cl-yWH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5493,24 +5489,6 @@
             </objects>
             <point key="canvasLocation" x="4537.5" y="-4280.25"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="JwA-A7-FpT">
-            <objects>
-                <navigationController storyboardIdentifier="LoginNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="uFl-DA-hZE" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eZ9-zm-34M" customClass="NavigationBar">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Pro-KE-lhb" kind="relationship" relationship="rootViewController" id="gNH-kP-abX"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oYZ-RU-w02" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-5797.5" y="-4072.5"/>
-        </scene>
         <!--ProfileVC Owner-->
         <scene sceneID="j5f-84-ZIl">
             <objects>
@@ -5953,12 +5931,11 @@
         <image name="tips_bg" width="69" height="69"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iCU-RD-fVI"/>
-        <segue reference="cel-0L-eNY"/>
-        <segue reference="JFc-cO-xBu"/>
         <segue reference="3Cj-2H-t7j"/>
         <segue reference="aAR-cW-sP8"/>
         <segue reference="Y2c-0U-Rmr"/>
+        <segue reference="JFc-cO-xBu"/>
+        <segue reference="cel-0L-eNY"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686274509803" green="0.75686274509803919" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
 </document>
