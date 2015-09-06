@@ -585,18 +585,15 @@ typedef enum{
     if (!_buildVersion) {
         NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
         NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey];
-        _buildVersion = [NSString stringWithFormat:@"Version %@ Build %@",version,build];
+        _buildVersion = [NSString stringWithFormat:@"%@.%@",version,build];
     }
     return _buildVersion;
 }
 
 //return a new base url string with appened version argument
 - (NSString *)versionForBaseURL:(NSString *)baseURL operation:(FetchCenterGetOp)op{
-    UIDevice *device = [UIDevice currentDevice];
-    NSString *systemInfo = [NSString stringWithFormat:@"appVersion: %@ | sysVersion: %@ | sysModel: %@",self.buildVersion,device.systemVersion,device.model];
-    NSMutableDictionary *dict = [@{@"version":@"2.2.2",
-                                   @"loginType":[User loginType],
-                                   @"systemInfo":[systemInfo stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]} mutableCopy];
+    
+    NSMutableDictionary *dict = [@{@"version":self.buildVersion,@"loginType":[User loginType]} mutableCopy];
     
     if (op != FetchCenterGetOpLoginForUidAndUkey) {
         //add user info
