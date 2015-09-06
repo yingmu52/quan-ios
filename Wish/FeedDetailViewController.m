@@ -102,7 +102,7 @@
 }
 
 - (void)updateHeaderInfoForFeed:(Feed *)feed{
-    NSURL *imageUrl = [self.fetchCenter urlWithImageID:feed.imageId size:FetchCenterImageSize200];
+    NSURL *imageUrl = [self.fetchCenter urlWithImageID:feed.imageId size:FetchCenterImageSize800];
     [self.headerView.imageView showImageWithImageUrl:imageUrl];
     self.headerView.titleTextView.text = feed.feedTitle;
     self.headerView.dateLabel.text = [SystemUtil stringFromDate:feed.createDate];

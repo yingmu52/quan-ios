@@ -64,8 +64,8 @@
 
 - (void)configureCell:(DiscoveryCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
-    NSURL *imageUrl = [self.fetchCenter urlWithImageID:plan.backgroundNum size:FetchCenterImageSize200];
-    [cell.discoveryImageView sd_setImageWithURL:imageUrl];
+    NSURL *imageUrl = [self.fetchCenter urlWithImageID:plan.backgroundNum size:FetchCenterImageSize400];
+    [cell.discoveryImageView showImageWithImageUrl:imageUrl];
     cell.discoveryTitleLabel.text = plan.planTitle;
     cell.discoveryByUserLabel.text = [NSString stringWithFormat:@"by %@",plan.owner.ownerName];
     cell.discoveryFollowerCountLabel.text = [NSString stringWithFormat:@"%@ 关注",plan.followCount];
@@ -99,19 +99,6 @@
             }
         }
     });
-}
-
-- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    [self handleFailure:info];
-}
-
-- (void)handleFailure:(NSDictionary *)info{
-//    self.navigationItem.rightBarButtonItem = nil;
-//    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
-//                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
-//                               delegate:self
-//                      cancelButtonTitle:@"OK"
-//                      otherButtonTitles:nil, nil] show];
 }
 
 

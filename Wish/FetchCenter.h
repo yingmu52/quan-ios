@@ -28,6 +28,8 @@ typedef enum {
     FetchCenterImageSize50 = 50,
     FetchCenterImageSize100 = 100,
     FetchCenterImageSize200 = 200,
+    FetchCenterImageSize400 = 400,
+    FetchCenterImageSize800 = 800
 }FetchCenterImageSize;
 
 @protocol FetchCenterDelegate <NSObject>
