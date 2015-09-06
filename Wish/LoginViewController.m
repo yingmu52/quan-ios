@@ -63,7 +63,8 @@
         [[[UIApplication sharedApplication] keyWindow] setRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"]];
         
     }else{
-        [self showViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"LoginDetailNavigationViewController"] sender:nil];
+        [[[UIApplication sharedApplication] keyWindow] setRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"LoginDetailNavigationViewController"]];
+
     }
 
     self.QQLoginButton.enabled = YES;    

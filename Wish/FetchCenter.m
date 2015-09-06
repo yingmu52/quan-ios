@@ -772,8 +772,6 @@ typedef enum{
                 NSDictionary *localUserInfo = @{UID:uid,UKEY:ukey};
                 [User updateAttributeFromDictionary:localUserInfo];
                 [self.delegate didFinishReceivingUidAndUKeyForUserInfo:userInfo isNewUser:isNewUser];
-                NSLog(@"uid %@ ukey %@",uid,ukey);
-                NSLog(@"%@",[User getOwnerInfo]);
             }
                 break;
             case FetchCenterGetOpUpdatePlan:{
@@ -968,6 +966,7 @@ typedef enum{
                                                       OPENID:openId,
                                                       EXPIRATION_DATE:expireDate,
                                                       LOGIN_TYPE:@"wx"}];
+                [self fetchWechatUserInfoWithOpenID:openId token:accessToken];
                 [self fetchUidandUkeyWithOpenId:openId accessToken:accessToken];
             }
                 break;
@@ -978,6 +977,29 @@ typedef enum{
     }));
 }
 
+#pragma mark - Wechat Get User Info
+
+- (void)fetchWechatUserInfoWithOpenID:(NSString *)openID token:(NSString *)accessToken{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.weixin.qq.com/sns/userinfo?access_token=%@&openid=%@",accessToken,openID]];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:30.0f];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
+    {
+        if (!connectionError) {
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+            NSLog(@"%@",json);
+            NSString *picUrl = json[@"headimgurl"];
+            NSString *nickname = json[@"nickname"];
+            NSString *gender = [json[@"sex"] integerValue] ? @"男" : @"女";
+            [User updateAttributeFromDictionary:@{PROFILE_PICTURE_ID:picUrl,
+                                                  USER_DISPLAY_NAME:nickname,
+                                                  GENDER:gender}];
+
+        }
+        
+    }];
+}
 
 @end
 

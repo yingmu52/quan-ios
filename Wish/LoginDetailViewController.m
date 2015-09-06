@@ -46,7 +46,7 @@
                                    selector:@selector(uploadUserInfo)
                                       frame:frame];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
-    self.navigationItem.rightBarButtonItem.enabled = NO;
+//    self.navigationItem.rightBarButtonItem.enabled = NO;
     
 }
 
@@ -78,6 +78,9 @@
     [self.nameTextField addTarget:self
                            action:@selector(textFieldDidUpdate)
                  forControlEvents:UIControlEventEditingChanged];
+    
+    self.nameTextField.text = [User userDisplayName];
+    self.genderLabel.text = [User gender];
 
 }
 
@@ -155,7 +158,6 @@
 #pragma mark - Text Field Delegate 
 
 - (void)textFieldDidUpdate{
-#warning shold check if profile picture has been downloaded or not
     if (self.nameTextField.isFirstResponder){
         BOOL flag = self.nameTextField.text.length*[self.nameTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""].length > 0;
         self.navigationItem.rightBarButtonItem.enabled = flag;
