@@ -84,13 +84,13 @@ typedef enum {
 - (void)replyAtFeed:(Feed *)feed content:(NSString *)text toOwner:(NSString *)ownerId;
 - (void)getCommentListForFeed:(NSString *)feedId pageInfo:(NSDictionary *)info;
 - (void)deleteComment:(Comment *)comment;
+- (void)uploadImage:(UIImage *)image toCreateFeed:(Feed *)feed;
 
 #pragma mark - Plan
 - (void)fetchPlanListForOwnerId:(NSString *)ownerId;
 - (void)uploadToCreatePlan:(Plan *)plan;
 - (void)updatePlan:(Plan *)plan;
 - (void)postToDeletePlan:(Plan *)plan;
-- (void)uploadToCreateFeed:(Feed *)feed;
 - (void)updateStatus:(Plan *)plan;
 
 #pragma mark - Follow

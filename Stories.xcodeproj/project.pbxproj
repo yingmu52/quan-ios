@@ -25,8 +25,6 @@
 		A04842EA1B98CF9E0032E927 /* UIImageView+ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A04842E81B98CF9E0032E927 /* UIImageView+ImageCache.m */; };
 		A04842F71B99F5360032E927 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A04842F61B99F5360032E927 /* libc++.dylib */; };
 		A04842F81B99F54B0032E927 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A04842F41B99F29C0032E927 /* libsqlite3.0.dylib */; };
-		A048430B1B9A149E0032E927 /* WeChatAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = A048430A1B9A149E0032E927 /* WeChatAuth.m */; };
-		A048430C1B9A149E0032E927 /* WeChatAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = A048430A1B9A149E0032E927 /* WeChatAuth.m */; };
 		A089A9141B9BCBED00291EC2 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A089A9111B9BCBED00291EC2 /* libWeChatSDK.a */; };
 		A089A9151B9BCBED00291EC2 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A089A9111B9BCBED00291EC2 /* libWeChatSDK.a */; };
 		A0B8C8021B857F22009C4572 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */; };
@@ -161,8 +159,6 @@
 		A0F7D4A01B84E851003CCB34 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = A0F7D4201B84E851003CCB34 /* LICENSE */; };
 		A0F7D4A31B84E851003CCB34 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D4231B84E851003CCB34 /* UIImage+Alpha.m */; };
 		A0F7D4A41B84E851003CCB34 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D4231B84E851003CCB34 /* UIImage+Alpha.m */; };
-		A0F7D4A51B84E851003CCB34 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D4251B84E851003CCB34 /* UIImage+Resize.m */; };
-		A0F7D4A61B84E851003CCB34 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D4251B84E851003CCB34 /* UIImage+Resize.m */; };
 		A0F7D4A71B84E851003CCB34 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D4271B84E851003CCB34 /* UIImage+RoundedCorner.m */; };
 		A0F7D4A81B84E851003CCB34 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D4271B84E851003CCB34 /* UIImage+RoundedCorner.m */; };
 		A0F7D4A91B84E851003CCB34 /* UIImage-Categories.podspec in Resources */ = {isa = PBXBuildFile; fileRef = A0F7D4281B84E851003CCB34 /* UIImage-Categories.podspec */; };
@@ -332,8 +328,6 @@
 		A04842E81B98CF9E0032E927 /* UIImageView+ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+ImageCache.m"; sourceTree = "<group>"; };
 		A04842F41B99F29C0032E927 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		A04842F61B99F5360032E927 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
-		A04843091B9A149E0032E927 /* WeChatAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeChatAuth.h; sourceTree = "<group>"; };
-		A048430A1B9A149E0032E927 /* WeChatAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeChatAuth.m; sourceTree = "<group>"; };
 		A089A9111B9BCBED00291EC2 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		A089A9121B9BCBED00291EC2 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		A089A9131B9BCBED00291EC2 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
@@ -460,8 +454,6 @@
 		A0F7D4201B84E851003CCB34 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		A0F7D4221B84E851003CCB34 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
 		A0F7D4231B84E851003CCB34 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
-		A0F7D4241B84E851003CCB34 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
-		A0F7D4251B84E851003CCB34 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		A0F7D4261B84E851003CCB34 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
 		A0F7D4271B84E851003CCB34 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		A0F7D4281B84E851003CCB34 /* UIImage-Categories.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "UIImage-Categories.podspec"; sourceTree = "<group>"; };
@@ -946,8 +938,6 @@
 				A0F7D4201B84E851003CCB34 /* LICENSE */,
 				A0F7D4221B84E851003CCB34 /* UIImage+Alpha.h */,
 				A0F7D4231B84E851003CCB34 /* UIImage+Alpha.m */,
-				A0F7D4241B84E851003CCB34 /* UIImage+Resize.h */,
-				A0F7D4251B84E851003CCB34 /* UIImage+Resize.m */,
 				A0F7D4261B84E851003CCB34 /* UIImage+RoundedCorner.h */,
 				A0F7D4271B84E851003CCB34 /* UIImage+RoundedCorner.m */,
 				A0F7D4281B84E851003CCB34 /* UIImage-Categories.podspec */,
@@ -1049,8 +1039,6 @@
 		AE30EE711A6F0A8C0044740D /* Database&Networking */ = {
 			isa = PBXGroup;
 			children = (
-				A04843091B9A149E0032E927 /* WeChatAuth.h */,
-				A048430A1B9A149E0032E927 /* WeChatAuth.m */,
 				A04842E71B98CF9E0032E927 /* UIImageView+ImageCache.h */,
 				A04842E81B98CF9E0032E927 /* UIImageView+ImageCache.m */,
 				A04842DF1B98C5D20032E927 /* Comment.h */,
@@ -1426,7 +1414,6 @@
 				A0D1024A1B84ED20006B0E4E /* CustomBarItem.m in Sources */,
 				AE479E9E1A6F775C00366A0A /* PostViewController.m in Sources */,
 				AE9A19881B02E3A100590784 /* FeedbackkAccessoryView.m in Sources */,
-				A0F7D4A51B84E851003CCB34 /* UIImage+Resize.m in Sources */,
 				A0B8C8021B857F22009C4572 /* HMSegmentedControl.m in Sources */,
 				A016FDB61B8C4250006E7A09 /* ShuffleViewController.m in Sources */,
 				A0F7D49D1B84E851003CCB34 /* UIImagePickerController+DelegateBlocks.m in Sources */,
@@ -1537,7 +1524,6 @@
 				AE2F28E71AD3937700FC3370 /* WishDetailVCDiscovery.m in Sources */,
 				AE606A231AF46991003DF16E /* MessageCell.m in Sources */,
 				AED4CB221AC75A0200EE2DA4 /* KeyWordCell.m in Sources */,
-				A048430B1B9A149E0032E927 /* WeChatAuth.m in Sources */,
 				A0D1022D1B84EB6A006B0E4E /* UIImage+MultiFormat.m in Sources */,
 				AEE4A6D01A96A5D500ABF946 /* AchieveCell.m in Sources */,
 			);
@@ -1628,7 +1614,6 @@
 				A0D102321B84EB6A006B0E4E /* UIImageView+HighlightedWebCache.m in Sources */,
 				A0D102261B84EB6A006B0E4E /* SDWebImageManager.m in Sources */,
 				AEF3F8841AA4E3C0008C2300 /* WishDetailVCFollower.m in Sources */,
-				A048430C1B9A149E0032E927 /* WeChatAuth.m in Sources */,
 				A0D37C611B8781D900581EDE /* NewsPageViewController.m in Sources */,
 				AE479E9F1A6F775C00366A0A /* PostViewController.m in Sources */,
 				AEFEE4011A8EE0A7007E8234 /* FollowingCell.m in Sources */,
@@ -1644,7 +1629,6 @@
 				A0D1021E1B84EB6A006B0E4E /* SDWebImageCompat.m in Sources */,
 				AED355FF1B23BBB8000427FF /* ProfileVCOwner.m in Sources */,
 				A04842E21B98C5D20032E927 /* Comment.m in Sources */,
-				A0F7D4A61B84E851003CCB34 /* UIImage+Resize.m in Sources */,
 				A0F7D4501B84E851003CCB34 /* UIApplication+JTSImageViewController.m in Sources */,
 				A0F7D49E1B84E851003CCB34 /* UIImagePickerController+DelegateBlocks.m in Sources */,
 				A016FDBC1B8D14BA006E7A09 /* PreviewCell.m in Sources */,

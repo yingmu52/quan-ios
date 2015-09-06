@@ -22,7 +22,7 @@ typedef enum {
 
 + (Plan *)updatePlanFromServer:(NSDictionary *)dict ownerInfo:(NSDictionary *)ownerInfo;
 
-+ (Plan *)createPlan:(NSString *)title privacy:(BOOL)isPrivate image:(UIImage *)image;
++ (Plan *)createPlan:(NSString *)title privacy:(BOOL)isPrivate;
 
 - (void)deleteSelf;
 

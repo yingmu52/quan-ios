@@ -14,7 +14,9 @@
 #import "FetchCenter.h"
 @interface PostDetailViewController () <ImagePickerDelegate,FetchCenterDelegate>
 @property (weak, nonatomic) IBOutlet UIView *cameraBackground;
+@property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,strong) Plan *plan;
+@property (nonatomic,strong) UIImage *image;
 @end
 @implementation PostDetailViewController
 
@@ -57,7 +59,7 @@
         PostFeedViewController *pfvc = (PostFeedViewController *)segue.destinationViewController;
         Plan *plan = sender;
         pfvc.plan = plan;
-#warning        pfvc.imageForFeed = plan.image;
+        pfvc.imageForFeed = self.image;
         pfvc.seugeFromPlanCreation = YES; // important!
     }
 }
@@ -79,16 +81,17 @@
     [spinner startAnimating];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
     
-    self.plan = [Plan createPlan:self.titleFromPostView privacy:NO image:image];
+    self.plan = [Plan createPlan:self.titleFromPostView privacy:NO];
+    self.image = image;
+    [self.fetchCenter uploadToCreatePlan:self.plan];
 }
 
-
-- (void)setPlan:(Plan *)plan{
-    _plan = plan;
-    //create plan
-    FetchCenter *fc = [[FetchCenter alloc] init];
-    fc.delegate = self;
-    [fc uploadToCreatePlan:_plan];
+- (FetchCenter *)fetchCenter{
+    if (!_fetchCenter) {
+        _fetchCenter = [[FetchCenter alloc] init];
+        _fetchCenter.delegate = self;
+    }
+    return _fetchCenter;
 }
 
 - (void)didFailPickingImage{

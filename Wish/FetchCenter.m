@@ -212,8 +212,8 @@ typedef enum{
     return [[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
-- (void)uploadToCreateFeed:(Feed *)feed{
-    [self postImageWithOperation:feed postOp:FetchCenterPostOpUploadImageForCreatingFeed];
+- (void)uploadImage:(UIImage *)image toCreateFeed:(Feed *)feed{
+    [self postImageWithOperation:image managedObject:feed postOp:FetchCenterPostOpUploadImageForCreatingFeed];
 }
 
 - (void)likeFeed:(Feed *)feed{
@@ -314,7 +314,7 @@ typedef enum{
 #pragma mark - personal
 
 - (void)uploadNewProfilePicture:(UIImage *)picture{
-    [self postImageWithOperation:picture postOp:FetchCenterPostOpUploadImageForUpdaingProfile];
+    [self postImageWithOperation:picture managedObject:nil postOp:FetchCenterPostOpUploadImageForUpdaingProfile];
 }
 
 - (void)setPersonalInfo:(NSString *)nickName gender:(NSString *)gender imageId:(NSString *)imageId occupation:(NSString *)occupation personalInfo:(NSString *)info{
@@ -509,13 +509,13 @@ typedef enum{
 }
 
 #define IMAGE_PREFIX @"IOS-"
-- (void)postImageWithOperation:(id)obj postOp:(FetchCenterPostOp)postOp{ //obj :NSManagedObject or UIimage
+- (void)postImageWithOperation:(UIImage *)image managedObject:(NSManagedObject *)managedObject postOp:(FetchCenterPostOp)postOp{ //obj :NSManagedObject or UIimage
     
     //chekc internet
     if (![self hasActiveInternetConnection]){
         dispatch_main_async_safe((^{
             [self.delegate didFailUploadingImageWithInfo:@{@"ret":@"网络故障",@"msg":@"请检查网络连接"}
-                                                  entity:obj];
+                                                  entity:managedObject];
             return;
         }));
     }
@@ -524,15 +524,6 @@ typedef enum{
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *uuidString = [NSUUID UUID].UUIDString;
     NSString *filePath = [paths[0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg",uuidString]];
-    
-    UIImage *image; // = [obj valueForKey:@"image"];
-    if ([obj isKindOfClass:[UIImage class]]){
-        image = obj;
-    }else if ([obj isKindOfClass:[NSManagedObject class]]){
-        image = [obj valueForKey:@"image"];
-    }else{
-        NSAssert(true, @"postImageWithOperation :invalid obj");
-    }
     
     //compress image
     CGFloat originalSize = UIImagePNGRepresentation(image).length/1024.0f; //in KB
@@ -558,10 +549,10 @@ typedef enum{
              if (resp.retCode >= 0) {
                  //得到图片上传成功后的回包信息
                  TXYPhotoUploadTaskRsp *photoResp = (TXYPhotoUploadTaskRsp *)resp;
-                 [self didFinishSendingPostRequest:photoResp.photoFileId operation:postOp entity:obj];
+                 [self didFinishSendingPostRequest:photoResp.photoFileId operation:postOp entity:managedObject];
              }else{
                  if ([self.delegate respondsToSelector:@selector(didFailUploadingImageWithInfo:entity:)]) {
-                     [self.delegate didFailUploadingImageWithInfo:@{@"ret":@"上传图片失败",@"msg":resp.descMsg} entity:obj];
+                     [self.delegate didFailUploadingImageWithInfo:@{@"ret":@"上传图片失败",@"msg":resp.descMsg} entity:managedObject];
                  }
                  NSLog(@"上传图片失败，code:%d desc:%@", resp.retCode, resp.descMsg);
                  //delete temp file in webpPath

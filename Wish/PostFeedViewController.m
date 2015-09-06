@@ -130,8 +130,7 @@ static NSUInteger distance = 10;
     spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
     [spinner startAnimating];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
-    
-    [self.fetchCenter uploadToCreateFeed:self.feed];
+    [self.fetchCenter uploadImage:self.imageForFeed toCreateFeed:self.feed];
 }
 
 #define CONFIRM @"确定"

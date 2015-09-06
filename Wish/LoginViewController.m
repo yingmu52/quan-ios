@@ -11,7 +11,6 @@
 #import "SDWebImageCompat.h"
 #import "User.h"
 #import "LoginDetailViewController.h"
-#import "WeChatAuth.h"
 #define QQAppKey @"ByYhJYTkXu0721fH"
 #define QQAppID @"1104337894"
 

@@ -109,7 +109,7 @@
     return plan;
 
 }
-+ (Plan *)createPlan:(NSString *)title privacy:(BOOL)isPrivate image:(UIImage *)image{
++ (Plan *)createPlan:(NSString *)title privacy:(BOOL)isPrivate{
 
     NSManagedObjectContext *context = [AppDelegate getContext];
     
@@ -118,7 +118,6 @@
     
     plan.planTitle = title;
     plan.isPrivate = @(isPrivate);
-#warning    plan.image = image; backgroundnum
     plan.createDate = [NSDate date];
     plan.planStatus = @(PlanStatusOnGoing);
     [plan addMyselfAsOwner];
