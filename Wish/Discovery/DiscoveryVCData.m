@@ -231,6 +231,25 @@
 - (void)didPressCreatePlanButton:(ShuffleViewController *)svc{
     [self performSegueWithIdentifier:@"showPostViewFromDiscovery" sender:nil];
 }
+
+#pragma mark - 小罗提出的需求
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressed:)];
+    [self.collectionView addGestureRecognizer:longPress];
+}
+
+- (void)longPressed:(UILongPressGestureRecognizer *)longPress{
+    if (longPress.state == UIGestureRecognizerStateBegan) {
+        CGPoint point = [longPress locationInView:self.collectionView];
+        NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:point];
+        Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
+        NSString *msg = [NSString stringWithFormat:@"用户id:%@\n事件id:%@\n事件名:%@",plan.owner.ownerId,plan.planId,plan.planTitle];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    
+}
 @end
 
 
