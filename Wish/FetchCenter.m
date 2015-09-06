@@ -964,9 +964,7 @@ typedef enum{
                 
                 [User updateAttributeFromDictionary:@{ACCESS_TOKEN:accessToken,
                                                       OPENID:openId,
-                                                      EXPIRATION_DATE:expireDate,
-                                                      LOGIN_TYPE:@"wx"}];
-                [self fetchWechatUserInfoWithOpenID:openId token:accessToken];
+                                                      EXPIRATION_DATE:expireDate}];
                 [self fetchUidandUkeyWithOpenId:openId accessToken:accessToken];
             }
                 break;
@@ -995,7 +993,10 @@ typedef enum{
             [User updateAttributeFromDictionary:@{PROFILE_PICTURE_ID:picUrl,
                                                   USER_DISPLAY_NAME:nickname,
                                                   GENDER:gender}];
-
+            NSLog(@"Fetched WeChat User Info \n%@",[User getOwnerInfo]);
+            dispatch_main_async_safe(^{
+                [self.delegate didFinishGettingWeChatUserInfo];
+            });
         }
         
     }];

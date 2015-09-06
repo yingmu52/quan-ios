@@ -38,6 +38,15 @@
     return info;
 }
 
++ (NSString *)openID{
+    NSDictionary *info = [self.class getOwnerInfo];
+    return info[OPENID] ? info[OPENID] : @"";
+}
+
++ (NSString *)accessToken{
+    NSDictionary *info = [self.class getOwnerInfo];
+    return info[ACCESS_TOKEN] ? info[ACCESS_TOKEN] : @"";
+}
 
 + (NSString *)uid{
 //    return @"100004";

@@ -63,7 +63,12 @@
         [[[UIApplication sharedApplication] keyWindow] setRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"]];
         
     }else{
-        [[[UIApplication sharedApplication] keyWindow] setRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"LoginDetailNavigationViewController"]];
+        if ([[User loginType] isEqualToString:@"qq"]) {
+            [self performSegueWithIdentifier:@"showLoginDetail" sender:nil];
+        }
+        if ([[User loginType] isEqualToString:@"wx"]) {
+            [self.fetchCenter fetchWechatUserInfoWithOpenID:[User openID] token:[User accessToken]];
+        }
 
     }
 
@@ -119,10 +124,9 @@
                                     EXPIRATION_DATE:self.tencentOAuth.expirationDate,
                                     PROFILE_PICTURE_ID:fetchedUserInfo[@"figureurl_qq_2"],
                                     GENDER:fetchedUserInfo[@"gender"],
-                                    USER_DISPLAY_NAME:fetchedUserInfo[@"nickname"],
-                                    LOGIN_TYPE:@"qq"};
-    [User updateOwnerInfo:localUserInfo];
-
+                                    USER_DISPLAY_NAME:fetchedUserInfo[@"nickname"]};
+    [User updateAttributeFromDictionary:localUserInfo];
+    NSLog(@"Fetched QQ User Info \n%@",[User getOwnerInfo]);
     //use openId and access_token to get uid+ukey
     [self.fetchCenter fetchUidandUkeyWithOpenId:self.tencentOAuth.openId accessToken:self.tencentOAuth.accessToken];
 }
@@ -142,6 +146,7 @@
                              kOPEN_PERMISSION_GET_OTHER_INFO];
     [self.tencentOAuth authorize:permissions inSafari:NO];
     self.QQLoginButton.enabled = NO;
+    [User updateOwnerInfo:@{LOGIN_TYPE:@"qq"}];
 }
 
 #pragma mark - wechat 
@@ -151,6 +156,7 @@
     req.scope = @"snsapi_userinfo,snsapi_base"; // @"post_timeline,sns"
     req.openID = WECHATAppID;
     [WXApi sendAuthReq:req viewController:self delegate:self];
+    [User updateOwnerInfo:@{LOGIN_TYPE:@"wx"}];
 }
 
 
@@ -158,5 +164,12 @@
     SendAuthResp *response = (SendAuthResp*)resp;
     [self.fetchCenter fetchAccessTokenWithWechatCode:response.code];
 }
+
+- (void)didFinishGettingWeChatUserInfo{
+    //微信的登陆方式很奇怪，performsegue无法解法，故以此解法。
+    [[[UIApplication sharedApplication] keyWindow] setRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"LoginDetailNavigationViewController"]];
+
+}
+
 
 @end

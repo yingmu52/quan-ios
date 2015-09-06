@@ -29,7 +29,9 @@
 + (void)updateAttributeFromDictionary:(NSDictionary *)info;
 + (void)updateOwnerInfo:(NSDictionary *)info;
 + (NSDictionary *)getOwnerInfo;
-    
+
++ (NSString *)openID;
++ (NSString *)accessToken;
 + (NSString *)uid;
 + (NSString *)uKey;
 + (BOOL)isUserLogin;

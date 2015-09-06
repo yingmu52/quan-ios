@@ -36,6 +36,7 @@ typedef enum {
 - (void)didFinishUploadingPlan:(Plan *)plan;
 - (void)didFinishUploadingFeed:(Feed *)feed;
 - (void)didFinishReceivingUidAndUKeyForUserInfo:(NSDictionary *)userInfo isNewUser:(BOOL)isNew;
+- (void)didFinishGettingWeChatUserInfo;
 - (void)didFinishUpdatingPlan:(Plan *)plan;
 - (void)didFinishCheckingNewVersion:(BOOL)hasNewVersion;
 - (void)didFinishUploadingPictureForProfile;
@@ -117,6 +118,7 @@ typedef enum {
 #pragma mark - login
 - (void)fetchUidandUkeyWithOpenId:(NSString *)openId accessToken:(NSString *)token;
 - (void)fetchAccessTokenWithWechatCode:(NSString *)code;
+- (void)fetchWechatUserInfoWithOpenID:(NSString *)openID token:(NSString *)accessToken;
 
 #pragma mark - Tencent Youtu
 - (void)requestSignature;
