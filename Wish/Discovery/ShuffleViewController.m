@@ -12,6 +12,7 @@
 #import "PreviewCell.h"
 #import "SystemUtil.h"
 #import "ImagePicker.h"
+#import "UIImageView+ImageCache.h"
 @import CoreData;
 @interface ShuffleViewController () <NSFetchedResultsControllerDelegate,UICollectionViewDelegateFlowLayout,ImagePickerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic,weak) IBOutlet UICollectionView *collectionView;
@@ -90,7 +91,10 @@
     if (indexPath.row != self.fetchedRC.fetchedObjects.count) { //is not the last row
         cell = [aCollectionView dequeueReusableCellWithReuseIdentifier:PREVIEWCELLNORMAL forIndexPath:indexPath];
         Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
-#warning        cell.planImageView.image = plan.image;
+        
+        NSURL *imageUrl = [[FetchCenter new] urlWithImageID:plan.backgroundNum size:FetchCenterImageSize200];
+        [cell.planImageView showImageWithImageUrl:imageUrl];
+        
         cell.titleLabel.text = plan.planTitle;
         cell.recordCountLabel.text = [NSString stringWithFormat:@"%@个记录",plan.tryTimes];
         [cell layoutIfNeeded]; //fixed auto layout error on iphone 5s or above
@@ -129,7 +133,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row != self.fetchedRC.fetchedObjects.count) { //is not the last row
-        PreviewCell *cell = (PreviewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+
         if (self.fetchedRC.fetchedObjects.count > 1) { //除了最后一个cell, 当事件数为空是会闪退
             self.countLabel.text = [NSString stringWithFormat:@"%@/%@",@(indexPath.row + 1),@(self.fetchedRC.fetchedObjects.count)];
             //将卡片滚到与三角号对齐

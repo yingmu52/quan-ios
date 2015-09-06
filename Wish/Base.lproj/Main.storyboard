@@ -3152,7 +3152,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vXF-XW-c2K" userLabel="contentView">
                                                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="s4f-Fr-dFa" userLabel="cover">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="s4f-Fr-dFa" userLabel="cover">
                                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                                 </imageView>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KBm-nb-XNJ" userLabel="transparent layer">
@@ -3212,7 +3212,7 @@
                                                                         <mask key="constraints">
                                                                             <include reference="16x-IO-Glz"/>
                                                                             <include reference="3xT-3d-UjP"/>
-                                                                            <include reference="78D-Gy-z9I"/>
+                                                                            <exclude reference="78D-Gy-z9I"/>
                                                                             <include reference="FNt-qB-fnA"/>
                                                                             <include reference="thg-ay-wbX"/>
                                                                             <include reference="aEc-GE-hL0"/>

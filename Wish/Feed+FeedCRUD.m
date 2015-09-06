@@ -17,7 +17,6 @@
     
     Feed *feed = [NSEntityDescription insertNewObjectForEntityForName:@"Feed"
                                                inManagedObjectContext:context];
-#warning remove image
     feed.createDate = [NSDate date];
     feed.plan = plan;
     feed.selfLiked = @(NO);
