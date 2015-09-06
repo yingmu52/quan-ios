@@ -92,7 +92,7 @@
         cell = [aCollectionView dequeueReusableCellWithReuseIdentifier:PREVIEWCELLNORMAL forIndexPath:indexPath];
         Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
         
-        NSURL *imageUrl = [[FetchCenter new] urlWithImageID:plan.backgroundNum size:FetchCenterImageSize200];
+        NSURL *imageUrl = [[FetchCenter new] urlWithImageID:plan.backgroundNum size:FetchCenterImageSize400];
         [cell.planImageView showImageWithImageUrl:imageUrl];
         
         cell.titleLabel.text = plan.planTitle;

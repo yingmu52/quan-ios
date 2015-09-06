@@ -51,7 +51,7 @@
 + (NSString *)uid{
 //    return @"100004";
     NSDictionary *info = [self.class getOwnerInfo];
-    return info[UID] ? info[UID] : @"";
+    return [NSString stringWithFormat:@"%@",info[UID] ? info[UID] : @""];
 }
 
 + (NSString *)uKey{

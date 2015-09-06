@@ -311,7 +311,7 @@ ViewForEmptyEventDelegate>
 #pragma mark - implement parent class abstract methods
 - (void)configureCollectionViewCell:(HomeCardView *)cell atIndexPath:(NSIndexPath *)indexPath{
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
-    NSURL *imageUrl = [[FetchCenter new] urlWithImageID:plan.backgroundNum size:FetchCenterImageSize200];
+    NSURL *imageUrl = [[FetchCenter new] urlWithImageID:plan.backgroundNum size:FetchCenterImageSize800];
     [cell.imageView showImageWithImageUrl:imageUrl];
     cell.titleLabel.text = plan.planTitle;
     cell.subtitleLabel.text = [NSString stringWithFormat:@"%@条记录  %@人关注",plan.tryTimes,plan.followCount];
