@@ -529,7 +529,7 @@ typedef enum{
     CGFloat originalSize = UIImagePNGRepresentation(image).length/1024.0f; //in KB
     NSLog(@"original size %@ KB", @(originalSize));
     
-    NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.8);
     NSLog(@"compressed size %@ KB", @(imageData.length/1024.0f));
 
     if ([imageData writeToFile:filePath atomically:YES]) {
@@ -615,7 +615,7 @@ typedef enum{
     NSString *url;
     if ([imageId hasPrefix:IMAGE_PREFIX]) { //优图id
         url = [NSString stringWithFormat:@"http://shier-%@.image.myqcloud.com/%@",YOUTU_APP_ID,imageId];
-//        NSLog(@">>>>>>>>>>%@",imageId);
+        NSLog(@">>>>>>>>>>%@",imageId);
     }else{ //老id
         NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@?",self.baseUrl,PIC,GET_IMAGE];
         url = [NSString stringWithFormat:@"%@id=%@",[self versionForBaseURL:rqtStr operation:-1],imageId];
@@ -628,7 +628,7 @@ typedef enum{
         NSString *url;
         if ([imageId hasPrefix:IMAGE_PREFIX]) { //优图id
             url = [NSString stringWithFormat:@"http://shier-%@.image.myqcloud.com/%@/%@",YOUTU_APP_ID,imageId,@(size)];
-//            NSLog(@">>>>>>>>>>%@",url);
+            NSLog(@">>>>>>>>>>%@",url);
         }else{ //老id
             NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@?",self.baseUrl,PIC,GET_IMAGE];
             url = [NSString stringWithFormat:@"%@id=%@",[self versionForBaseURL:rqtStr operation:-1],imageId];
