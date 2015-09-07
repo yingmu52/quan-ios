@@ -29,6 +29,8 @@
 		A089A9151B9BCBED00291EC2 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A089A9111B9BCBED00291EC2 /* libWeChatSDK.a */; };
 		A0B8C8021B857F22009C4572 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */; };
 		A0B8C8031B857F22009C4572 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */; };
+		A0B9D7691B9E4F1100EE382B /* DashedBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B9D7681B9E4F1100EE382B /* DashedBorderView.m */; };
+		A0B9D76A1B9E4F1100EE382B /* DashedBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B9D7681B9E4F1100EE382B /* DashedBorderView.m */; };
 		A0D102171B84EB6A006B0E4E /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D101F71B84EB6A006B0E4E /* MKAnnotationView+WebCache.m */; };
 		A0D102181B84EB6A006B0E4E /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D101F71B84EB6A006B0E4E /* MKAnnotationView+WebCache.m */; };
 		A0D102191B84EB6A006B0E4E /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D101F91B84EB6A006B0E4E /* NSData+ImageContentType.m */; };
@@ -333,6 +335,8 @@
 		A089A9131B9BCBED00291EC2 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		A0B8C8001B857F22009C4572 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
+		A0B9D7671B9E4F1100EE382B /* DashedBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashedBorderView.h; sourceTree = "<group>"; };
+		A0B9D7681B9E4F1100EE382B /* DashedBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashedBorderView.m; sourceTree = "<group>"; };
 		A0D101F61B84EB6A006B0E4E /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		A0D101F71B84EB6A006B0E4E /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		A0D101F81B84EB6A006B0E4E /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -1222,6 +1226,8 @@
 				AEFB04811AD12437009EB0D3 /* DiscoveryViewController.m */,
 				A016FDB91B8D14BA006E7A09 /* PreviewCell.h */,
 				A016FDBA1B8D14BA006E7A09 /* PreviewCell.m */,
+				A0B9D7671B9E4F1100EE382B /* DashedBorderView.h */,
+				A0B9D7681B9E4F1100EE382B /* DashedBorderView.m */,
 			);
 			path = Discovery;
 			sourceTree = "<group>";
@@ -1464,6 +1470,7 @@
 				AEA4CAD81AFC33DD00BDE7F9 /* CommentAcessaryView.m in Sources */,
 				A0D102231B84EB6A006B0E4E /* SDWebImageDownloaderOperation.m in Sources */,
 				A0F7D4451B84E851003CCB34 /* GCPTextView.m in Sources */,
+				A0B9D7691B9E4F1100EE382B /* DashedBorderView.m in Sources */,
 				A0F7D4471B84E851003CCB34 /* JTSAnimatedGIFUtility.m in Sources */,
 				AEF7F2971A686FDB0022410B /* HomeViewController.m in Sources */,
 				AE9A3AEB1A9B1DB000F0588F /* AchieveVCData.m in Sources */,
@@ -1537,6 +1544,7 @@
 				A0D102181B84EB6A006B0E4E /* MKAnnotationView+WebCache.m in Sources */,
 				AEC068941B2D3D55007975D2 /* FeedDetailVCOwner.m in Sources */,
 				A0F7D4981B84E851003CCB34 /* TWPhotoPickerController.m in Sources */,
+				A0B9D76A1B9E4F1100EE382B /* DashedBorderView.m in Sources */,
 				A0F7D44E1B84E851003CCB34 /* JTSSimpleImageDownloader.m in Sources */,
 				A0F7D4481B84E851003CCB34 /* JTSAnimatedGIFUtility.m in Sources */,
 				A0F7D4461B84E851003CCB34 /* GCPTextView.m in Sources */,

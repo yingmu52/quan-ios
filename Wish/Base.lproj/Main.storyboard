@@ -3320,7 +3320,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J02-Jc-TEk" userLabel="contentView">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J02-Jc-TEk" userLabel="contentView" customClass="DashedBorderView">
                                                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="创建新的事儿" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rzD-fN-k3o">
@@ -3333,7 +3333,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                                 </imageView>
                                                             </subviews>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="backgroundColor" red="0.92549019607843142" green="0.96862745098039216" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstItem="rzD-fN-k3o" firstAttribute="top" secondItem="cPk-4J-uFZ" secondAttribute="bottom" constant="8" id="Jd8-7M-MVW">
                                                                     <variation key="heightClass=regular-widthClass=compact" constant="18"/>
@@ -3404,6 +3404,9 @@
                                                         <include reference="x22-Lk-5nz"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <outlet property="backgroundView" destination="J02-Jc-TEk" id="uqD-jj-VmU"/>
+                                                </connections>
                                             </collectionViewCell>
                                         </cells>
                                         <connections>

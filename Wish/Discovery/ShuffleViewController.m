@@ -100,9 +100,7 @@
         [cell layoutIfNeeded]; //fixed auto layout error on iphone 5s or above
     }else{
         cell = [aCollectionView dequeueReusableCellWithReuseIdentifier:@"PreviewCell_Add" forIndexPath:indexPath];
-        cell.layer.borderColor = [SystemUtil colorFromHexString:@"#00C1A8"].CGColor;
-        cell.layer.borderWidth = 1.0f;
-        
+
     }
     return cell;
 }

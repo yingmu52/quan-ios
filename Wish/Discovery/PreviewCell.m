@@ -20,11 +20,13 @@
 - (void)showHeightlightedState{
     self.layer.borderColor = self.borderColor.CGColor;
     self.layer.borderWidth = 4.0f;
+    self.transparentLayer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.85];
 }
 
 - (void)showNormalState{
     self.layer.borderColor = nil;
     self.layer.borderWidth = 0.0f;
+    self.transparentLayer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
 }
 
 - (void)setSelected:(BOOL)selected{
@@ -34,4 +36,5 @@
         [self showNormalState];
     }
 }
+
 @end
