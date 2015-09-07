@@ -10,10 +10,11 @@
 
 @implementation UIImageView (ImageCache)
 
-- (void)showImageWithImageUrl:(NSURL *)url{
+- (BOOL)showImageWithImageUrl:(NSURL *)url{
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
     NSString *localKey = [manager cacheKeyForURL:url];
-    if (![manager diskImageExistsForURL:url]) {
+    BOOL isImageExist = [manager diskImageExistsForURL:url];
+    if (!isImageExist) {
         NSLog(@"%@: downloading from internet",self.class);
         [self sd_setImageWithURL:url
                 placeholderImage:nil
@@ -32,6 +33,7 @@
         NSLog(@"%@: loading locally",self.class);
         self.image = [manager.imageCache imageFromDiskCacheForKey:localKey];
     }
+    return isImageExist;
 }
 
 @end

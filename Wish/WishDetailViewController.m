@@ -146,17 +146,28 @@
 
 - (void)setCurrenetBackgroundColor{
 
-#warning//    if (self.plan.image){
-//        UIImageView *imgView = [[UIImageView alloc] initWithFrame:self.tableView.frame];
-//        imgView.contentMode = UIViewContentModeScaleAspectFill;
-//        imgView.clipsToBounds = YES;
-//        imgView.image = [self.plan.image applyDarkEffect];
-//        self.tableView.backgroundView = imgView;
+    if (![self.tableView.backgroundView isKindOfClass:[UIImageView class]]) {
+        UIImageView *imgView = [[UIImageView alloc] initWithFrame:self.tableView.frame];
+        imgView.contentMode = UIViewContentModeScaleAspectFill;
+        imgView.clipsToBounds = YES;
+        self.tableView.backgroundView = imgView;
+        
+        NSURL *imageUrl = [self.fetchCenter urlWithImageID:self.plan.backgroundNum size:FetchCenterImageSize400];
+     
+        SDWebImageManager *manager = [SDWebImageManager sharedManager];
+        NSString *localKey = [manager cacheKeyForURL:imageUrl];
 
-//    }else{
-//        self.tableView.backgroundColor = [Theme wishDetailBackgroundNone:self.tableView];
-        self.tableView.backgroundColor = [UIColor blackColor];
-//    }
+        if ([manager diskImageExistsForURL:imageUrl]) {
+            imgView.image = [[manager.imageCache imageFromDiskCacheForKey:localKey] applyDarkEffect];
+            
+        }else{
+            self.tableView.backgroundColor = [UIColor blackColor];
+            self.tableView.backgroundView = nil;
+        }
+    }else{
+        self.tableView.backgroundColor = [UIColor blackColor];        
+    }
+
 }
 
 #pragma mark - Fetched Results Controller delegate

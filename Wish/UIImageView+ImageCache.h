@@ -13,6 +13,6 @@
 
 @interface UIImageView (ImageCache)
 
-- (void)showImageWithImageUrl:(NSURL *)url;
+- (BOOL)showImageWithImageUrl:(NSURL *)url;
 
 @end
