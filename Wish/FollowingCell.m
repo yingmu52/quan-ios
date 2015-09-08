@@ -45,7 +45,7 @@
         Feed *feed = self.feedsArray[indexPath.row];
         NSAssert(feed.imageId, @"null feed image id");
 
-        NSURL *imageUrl = [[FetchCenter new] urlWithImageID:feed.imageId size:FetchCenterImageSize100];
+        NSURL *imageUrl = [[FetchCenter new] urlWithImageID:feed.imageId size:FetchCenterImageSize400];
         [cell.feedImageView showImageWithImageUrl:imageUrl];
     }
     return cell;
