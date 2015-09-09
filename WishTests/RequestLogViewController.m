@@ -64,7 +64,7 @@
                    mimeType:@"text/plain"
                    fileName:@"httpRequestLog.txt"]; // see FetchCenter requestLogFilePath method
     
-    [mail setToRecipients:@[@"yingmu52@msn.com"]];
+    [mail setToRecipients:@[@"yingmu52@msn.com",@"185740718@qq.com"]];
     mail.mailComposeDelegate = self;
     if ([MFMailComposeViewController canSendMail]) {
         mail.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
