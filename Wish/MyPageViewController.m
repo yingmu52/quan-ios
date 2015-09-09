@@ -46,7 +46,7 @@
         self.profilePicture.image = [Theme menuLoginDefault];
     }
     
-    self.versionLabel.text = [self.fetchCenter.buildVersion stringByReplacingOccurrencesOfString:@"%20" withString:@" "];
+    self.versionLabel.text = [NSString stringWithFormat:@"版本号: v%@",self.fetchCenter.buildVersion];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
