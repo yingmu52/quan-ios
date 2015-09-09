@@ -623,7 +623,7 @@ typedef enum{
 - (NSURL *)urlWithImageID:(NSString *)imageId size:(FetchCenterImageSize)size{
     if (size) {
         NSString *url;
-        if ([imageId hasPrefix:IMAGE_PREFIX]) { //优图id
+        if (imageId.length > 30) { //优图id
             url = [NSString stringWithFormat:@"http://shier-%@.image.myqcloud.com/%@/%@",YOUTU_APP_ID,imageId,@(size)];
             NSLog(@">>>>>>>>>>%@",url);
         }else{ //老id
