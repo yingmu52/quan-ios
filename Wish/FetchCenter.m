@@ -547,14 +547,20 @@ typedef enum{
          {
              //retCode大于等于0，表示上传成功
              if (resp.retCode >= 0) {
-                 //得到图片上传成功后的回包信息
-                 TXYPhotoUploadTaskRsp *photoResp = (TXYPhotoUploadTaskRsp *)resp;
-                 [self didFinishSendingPostRequest:photoResp.photoFileId operation:postOp entity:managedObject];
+                 dispatch_main_async_safe(^{
+                     //得到图片上传成功后的回包信息
+                     TXYPhotoUploadTaskRsp *photoResp = (TXYPhotoUploadTaskRsp *)resp;
+                     [self didFinishSendingPostRequest:photoResp.photoFileId operation:postOp entity:managedObject];
+                 });
              }else{
                  if ([self.delegate respondsToSelector:@selector(didFailUploadingImageWithInfo:entity:)]) {
-                     [self.delegate didFailUploadingImageWithInfo:@{@"ret":@"上传图片失败",@"msg":resp.descMsg} entity:managedObject];
+                     dispatch_main_async_safe((^{
+                             [self.delegate didFailUploadingImageWithInfo:@{@"ret":@"上传图片失败",@"msg":resp.descMsg}
+                                                                   entity:managedObject];
+                     }));
+
                  }
-                 NSLog(@"上传图片失败，code:%d desc:%@", resp.retCode, resp.descMsg);
+//                 NSLog(@"上传图片失败，code:%d desc:%@", resp.retCode, resp.descMsg);
                  //delete temp file in webpPath
                  [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
              }
