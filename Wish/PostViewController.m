@@ -27,7 +27,6 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    self.textField.text = nil;
     [self.textField becomeFirstResponder];
 }
 
