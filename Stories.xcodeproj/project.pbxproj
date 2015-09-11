@@ -96,8 +96,6 @@
 		A0EDFCBF1B90C63400B10594 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EDFCBE1B90C63400B10594 /* libstdc++.6.dylib */; };
 		A0EDFCC01B90C64400B10594 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDD065F1AABF93E00379C17 /* libstdc++.dylib */; };
 		A0EDFCC11B90C75900B10594 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3DC1B84E851003CCB34 /* Reachability.m */; };
-		A0F7D42D1B84E851003CCB34 /* ALDBlurImageProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3A81B84E851003CCB34 /* ALDBlurImageProcessor.m */; };
-		A0F7D42E1B84E851003CCB34 /* ALDBlurImageProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3A81B84E851003CCB34 /* ALDBlurImageProcessor.m */; };
 		A0F7D42F1B84E851003CCB34 /* AMBCircularButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3AB1B84E851003CCB34 /* AMBCircularButton.m */; };
 		A0F7D4301B84E851003CCB34 /* AMBCircularButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3AB1B84E851003CCB34 /* AMBCircularButton.m */; };
 		A0F7D4311B84E851003CCB34 /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3AD1B84E851003CCB34 /* CHTCollectionViewWaterfallLayout.m */; };
@@ -398,8 +396,6 @@
 		A0EDFCBA1B90C61900B10594 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		A0EDFCBC1B90C62100B10594 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		A0EDFCBE1B90C63400B10594 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
-		A0F7D3A71B84E851003CCB34 /* ALDBlurImageProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALDBlurImageProcessor.h; sourceTree = "<group>"; };
-		A0F7D3A81B84E851003CCB34 /* ALDBlurImageProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALDBlurImageProcessor.m; sourceTree = "<group>"; };
 		A0F7D3AA1B84E851003CCB34 /* AMBCircularButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBCircularButton.h; sourceTree = "<group>"; };
 		A0F7D3AB1B84E851003CCB34 /* AMBCircularButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBCircularButton.m; sourceTree = "<group>"; };
 		A0F7D3AC1B84E851003CCB34 /* CHTCollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTCollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
@@ -795,7 +791,6 @@
 				A0D1023B1B84ECDF006B0E4E /* NavBar */,
 				A0D101F51B84EB6A006B0E4E /* SDWebImage */,
 				A0F7D4AF1B84E8A1003CCB34 /* CollectionLayout */,
-				A0F7D3A61B84E851003CCB34 /* ALDBlurImageProcessor */,
 				A0F7D3A91B84E851003CCB34 /* AMBCircularButton */,
 				A0F7D3AE1B84E851003CCB34 /* CustomBadge */,
 				A0F7D3BA1B84E851003CCB34 /* Dynamic Cell Height */,
@@ -810,15 +805,6 @@
 				A0F7D41F1B84E851003CCB34 /* UIImageUtil */,
 			);
 			path = External;
-			sourceTree = "<group>";
-		};
-		A0F7D3A61B84E851003CCB34 /* ALDBlurImageProcessor */ = {
-			isa = PBXGroup;
-			children = (
-				A0F7D3A71B84E851003CCB34 /* ALDBlurImageProcessor.h */,
-				A0F7D3A81B84E851003CCB34 /* ALDBlurImageProcessor.m */,
-			);
-			path = ALDBlurImageProcessor;
 			sourceTree = "<group>";
 		};
 		A0F7D3A91B84E851003CCB34 /* AMBCircularButton */ = {
@@ -1515,7 +1501,6 @@
 				AEEC6C731A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,
 				AE47055D1AF9DC080028D7BC /* FeedDetailCell.m in Sources */,
 				AED8D7CA1A9BE2490035EDE5 /* FollowingImageCell.m in Sources */,
-				A0F7D42D1B84E851003CCB34 /* ALDBlurImageProcessor.m in Sources */,
 				AEFB04841AD12437009EB0D3 /* DiscoveryBannerCell.m in Sources */,
 				A0F7D47F1B84E851003CCB34 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				AEFEE3FC1A8ED9F6007E8234 /* FollowingTableViewController.m in Sources */,
@@ -1551,7 +1536,6 @@
 				A0F7D4A81B84E851003CCB34 /* UIImage+RoundedCorner.m in Sources */,
 				AED4CB441AC79F3A00EE2DA4 /* ModalLeftToRightSegue.m in Sources */,
 				A0F7D45A1B84E851003CCB34 /* Reachability.m in Sources */,
-				A0F7D42E1B84E851003CCB34 /* ALDBlurImageProcessor.m in Sources */,
 				A0F7D4301B84E851003CCB34 /* AMBCircularButton.m in Sources */,
 				AED5BC681ABEA7EB00EFF398 /* ProfileViewController.m in Sources */,
 				AEF7F2941A686FA30022410B /* Theme.m in Sources */,
@@ -1781,7 +1765,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = Wish/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1820,7 +1804,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = Wish/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

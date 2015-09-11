@@ -21,19 +21,6 @@
 }
 
 
-+ (NSInteger)daysBetween:(NSDate *)dt1 and:(NSDate *)dt2 {
-    NSUInteger unitFlags = NSDayCalendarUnit;
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components = [calendar components:unitFlags fromDate:dt1 toDate:dt2 options:0];
-    
-    NSInteger days = [components day]+1;
-    return days <= 0 ? 1 : days;
-}
-
-
-
-
-
 + (NSString *)stringFromDate:(NSDate *)date
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];

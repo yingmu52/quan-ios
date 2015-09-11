@@ -35,7 +35,7 @@
 
     //设置选中项的颜色
     UIColor *color = [SystemUtil colorFromHexString:@"#32C9A9"];
-    [[UITabBar appearance] setSelectedImageTintColor:color];
+    [[UITabBar appearance] setTintColor:color];
 
     //触发消息读取的时钟
     [self.messageNotificationTimer fire];

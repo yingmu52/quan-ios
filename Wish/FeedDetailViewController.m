@@ -412,16 +412,9 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 
 
 - (void)loadComments{
-#warning 当评论为0的还会拉取，后台会返回错误
-    //拉取评论的条件是feed有评论数，或feed不存在（拉评论可以拉返回feed
-//    if (self.feed.commentCount.integerValue > 0 || !self.feed) {
-        // if self.feed is not at local than use feedId to fetchFrom the Cloud
-        NSString *feedId = self.feed.feedId ? self.feed.feedId : self.feedId;
-        NSAssert(feedId, @"nil feedId");
-        [self.fetchCenter getCommentListForFeed:feedId pageInfo:self.pageInfo];
-//    }else{
-//        [self.tableView.infiniteScrollingView stopAnimating];
-//    }
+    NSString *feedId = self.feed.feedId ? self.feed.feedId : self.feedId;
+    NSAssert(feedId, @"nil feedId");
+    [self.fetchCenter getCommentListForFeed:feedId pageInfo:self.pageInfo];
 }
 
 #pragma mark - delete local comments to insync with server
