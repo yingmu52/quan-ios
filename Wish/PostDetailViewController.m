@@ -16,7 +16,8 @@
 @property (weak, nonatomic) IBOutlet UIView *cameraBackground;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,strong) Plan *plan;
-@property (nonatomic,strong) UIImage *image;
+@property (nonatomic,strong) NSArray *images;
+@property (nonatomic,strong) ImagePicker *imagePicker;
 @end
 @implementation PostDetailViewController
 
@@ -59,22 +60,30 @@
         PostFeedViewController *pfvc = (PostFeedViewController *)segue.destinationViewController;
         Plan *plan = sender;
         pfvc.plan = plan;
-        pfvc.imageForFeed = self.image;
+        pfvc.imagesForFeed = self.images;
         pfvc.seugeFromPlanCreation = YES; // important!
     }
 }
 
 #pragma mark - camera
 
+- (ImagePicker *)imagePicker{
+    if (!_imagePicker) {
+        _imagePicker = [[ImagePicker alloc] init];
+        _imagePicker.imagePickerDelegate = self;
+    }
+    return _imagePicker;
+}
+
 - (IBAction)toggleCamera:(UIButton *)sender {
-    [ImagePicker startPickingImageFromLocalSourceFor:self];
+    [self.imagePicker startPickingImageFromLocalSourceFor:self];
 }
 
 - (IBAction)tapOnCameraBackground:(UITapGestureRecognizer *)tap{
     [self toggleCamera:nil];
 }
 
-- (void)didFinishPickingImage:(UIImage *)image{
+- (void)didFinishPickingImage:(NSArray *)images{
     //activity indicator
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0,0, 25,25)];
     spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
@@ -82,7 +91,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
     
     self.plan = [Plan createPlan:self.titleFromPostView privacy:NO];
-    self.image = image;
+    self.images = images;
     [self.fetchCenter uploadToCreatePlan:self.plan];
 }
 

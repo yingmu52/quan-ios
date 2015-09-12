@@ -156,11 +156,11 @@
     return _imagePicker;
 }
 
-- (void)didFinishPickingImage:(UIImage *)image{
+- (void)didFinishPickingImage:(NSArray *)images{
     //get select plan
     NSIndexPath *indexPath = [[self.collectionView indexPathsForSelectedItems] firstObject];
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
-    [self.svcDelegate didFinishSelectingImage:image forPlan:plan];
+    [self.svcDelegate didFinishSelectingImages:images forPlan:plan];
     [self dismissViewControllerAnimated:NO completion:nil];
 
 }

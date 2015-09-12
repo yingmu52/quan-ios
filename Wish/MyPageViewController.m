@@ -20,6 +20,7 @@
 @property (nonatomic,weak) IBOutlet UIImageView *profilePicture;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,weak) IBOutlet UILabel *versionLabel;
+@property (nonatomic,strong) ImagePicker *imagePicker;
 @end
 
 @implementation MyPageViewController
@@ -188,13 +189,22 @@
 
 
 #pragma mark - upload image 
-- (IBAction)tapOnCamera:(id)sender{
-    [ImagePicker startPickingImageFromLocalSourceFor:self];
+
+- (ImagePicker *)imagePicker{
+    if (!_imagePicker) {
+        _imagePicker = [[ImagePicker alloc] init];
+        _imagePicker.imagePickerDelegate = self;
+    }
+    return _imagePicker;
 }
 
-- (void)didFinishPickingImage:(UIImage *)image{
-    self.profilePicture.image = image;
-    [self.fetchCenter uploadNewProfilePicture:image];
+- (IBAction)tapOnCamera:(id)sender{
+    [self.imagePicker startPickingImageFromLocalSourceFor:self];
+}
+
+- (void)didFinishPickingImage:(NSArray *)images{
+    self.profilePicture.image = images.lastObject;
+    [self.fetchCenter uploadNewProfilePicture:self.profilePicture.image];
 }
 
 - (void)didFailPickingImage{

@@ -19,7 +19,7 @@
 //@property (nonatomic,strong) UIImage *capturedImage;
 @property (nonatomic,strong) UIButton *cameraButton;
 @property (nonatomic) CGFloat lastContentOffSet; // for camera animation
-
+@property (nonatomic,strong) ImagePicker *imagePicker;
 @end
 @implementation WishDetailVCOwner
 
@@ -137,20 +137,30 @@
     [super prepareForSegue:segue sender:sender];
     
     if ([segue.identifier isEqualToString:@"showPostFeed"]) {
-        [segue.destinationViewController setImageForFeed:sender];
+        [segue.destinationViewController setImagesForFeed:sender];
         [segue.destinationViewController setPlan:self.plan];
     }
     if ([segue.identifier isEqualToString:@"showEditPage"]){
         [segue.destinationViewController setPlan:sender];
     }
 }
+
+- (ImagePicker *)imagePicker{
+    if (!_imagePicker) {
+        _imagePicker = [[ImagePicker alloc] init];
+        _imagePicker.imagePickerDelegate = self;
+    }
+    return _imagePicker;
+}
+
 - (void)showCamera{
     self.cameraButton.hidden = YES;
-    [ImagePicker startPickingImageFromLocalSourceFor:self];
+    [self.imagePicker startPickingImageFromLocalSourceFor:self];
 }
-- (void)didFinishPickingImage:(UIImage *)image{
+
+- (void)didFinishPickingImage:(NSArray *)images{
     self.cameraButton.hidden = NO;
-    [self performSegueWithIdentifier:@"showPostFeed" sender:image];
+    [self performSegueWithIdentifier:@"showPostFeed" sender:images];
 }
 - (void)didFailPickingImage{
     self.cameraButton.hidden = NO;

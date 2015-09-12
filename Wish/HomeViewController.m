@@ -39,6 +39,7 @@ ViewForEmptyEventDelegate>
 @property (nonatomic,weak) StationView *stationView;
 @property (nonatomic,strong) NSMutableArray *itemChanges;
 @property (nonatomic,weak) ViewForEmptyEvent *guideView;
+@property (nonatomic,strong) ImagePicker *imagePicker;
 @end
 @implementation HomeViewController
 - (void)updateNavigationTitle{
@@ -145,22 +146,25 @@ ViewForEmptyEventDelegate>
     [self.stationView removeFromSuperview];
     self.stationView = nil;
 }
-#pragma mark - Camera Util
+
+#pragma mark - image picker
+- (ImagePicker *)imagePicker{
+    if (!_imagePicker) {
+        _imagePicker = [[ImagePicker alloc] init];
+        _imagePicker.imagePickerDelegate = self;
+    }
+    return _imagePicker;
+}
 - (void)didPressCameraOnCard:(HomeCardView *)cardView{
     if (self.fetchedRC.fetchedObjects.count) {
         self.currentPlan = [self.fetchedRC objectAtIndexPath:[self.collectionView indexPathForCell:cardView]];
-        [ImagePicker startPickingImageFromLocalSourceFor:self];
+        [self.imagePicker startPickingImageFromLocalSourceFor:self];
     }
 }
 
-- (void)didFinishPickingImage:(UIImage *)image{
-    [self performSegueWithIdentifier:@"ShowPostFeedFromHome" sender:image];
+- (void)didFinishPickingImage:(NSArray *)images{
+    [self performSegueWithIdentifier:@"ShowPostFeedFromHome" sender:images];
 }
-
-- (void)didFailPickingImage{
-    NSLog(@"fail picking image");
-}
-
 #pragma mark -
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -170,7 +174,7 @@ ViewForEmptyEventDelegate>
     }
     if ([segue.identifier isEqualToString:@"ShowPostFeedFromHome"]) {
         [segue.destinationViewController setPlan:self.currentPlan];
-        [segue.destinationViewController setImageForFeed:sender];
+        [segue.destinationViewController setImagesForFeed:sender];
         self.tabBarController.tabBar.hidden = YES;
     }
 }

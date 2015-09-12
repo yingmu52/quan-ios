@@ -13,8 +13,6 @@
 #import "FetchCenter.h"
 #import "UIImageView+ImageCache.h"
 @interface ProfileViewController : UITableViewController
-@property (nonatomic,weak) IBOutlet UIView *profileBackground;
-@property (nonatomic,weak) IBOutlet UIImageView *profilePicture;
 @property (nonatomic,weak) IBOutlet UITextField *nickNameTextField;
 @property (nonatomic,weak) IBOutlet UILabel *genderLabel;
 @property (nonatomic,weak) IBOutlet UITextField *occupationTextField;

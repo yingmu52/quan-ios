@@ -16,8 +16,6 @@
 
 - (void)setInfoForOwner{
     if (self.owner) {
-        NSURL *imageUrl = [[FetchCenter new] urlWithImageID:self.owner.headUrl size:FetchCenterImageSize50];
-        [self.profilePicture showImageWithImageUrl:imageUrl];
         self.nickNameTextField.text = self.owner.ownerName;
     }
 }

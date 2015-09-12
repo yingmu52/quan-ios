@@ -11,7 +11,7 @@
 @class ImagePickerDelegate;
 @protocol ImagePickerDelegate <NSObject>
 @optional
-- (void)didFinishPickingImage:(UIImage *)image;
+- (void)didFinishPickingImage:(NSArray *)images;
 - (void)didFailPickingImage;
 @end
 @interface ImagePicker : NSObject <UIImagePickerControllerDelegate,UINavigationBarDelegate>
@@ -19,5 +19,5 @@
 @property (nonatomic,weak) id<ImagePickerDelegate>imagePickerDelegate;
 
 - (void)showCameraOn:(UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,ImagePickerDelegate>*)controller type:(UIImagePickerControllerSourceType)type;
-+ (void)startPickingImageFromLocalSourceFor:(UIViewController<ImagePickerDelegate>*)controller;
+- (void)startPickingImageFromLocalSourceFor:(UIViewController<ImagePickerDelegate>*)controller;
 @end

@@ -31,6 +31,9 @@ static NSUInteger distance = 10;
 
 @implementation PostFeedViewController
 
+- (void)setImagesForFeed:(NSArray *)imagesForFeed{
+    NSLog(@"\n\n%@",imagesForFeed);
+}
 - (FetchCenter *)fetchCenter{
     if (!_fetchCenter){
         _fetchCenter = [[FetchCenter alloc] init];

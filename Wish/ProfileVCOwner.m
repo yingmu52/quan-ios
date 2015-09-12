@@ -10,21 +10,14 @@
 #import "NavigationBar.h"
 #import "User.h"
 #import "SDWebImageCompat.h"
-#import "ImagePicker.h"
 #import "UIActionSheet+Blocks.h"
-#import "UIImageView+ImageCache.h"
-@interface ProfileVCOwner () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,FetchCenterDelegate,UITextFieldDelegate,ImagePickerDelegate>
+@interface ProfileVCOwner () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,FetchCenterDelegate,UITextFieldDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @end
 
 @implementation ProfileVCOwner
 
 - (void)setInfoForOwner{ //overwrite ! don't call super
-    
-    self.profileBackground.backgroundColor = [Theme profileBakground];
-    NSString *newPicId = [User updatedProfilePictureId];
-    NSURL *imageUrl = [self.fetchCenter urlWithImageID:newPicId size:FetchCenterImageSize50];
-    [self.profilePicture showImageWithImageUrl:imageUrl];
     self.nickNameTextField.text = [User userDisplayName];
     self.genderLabel.text = [User gender];
     self.occupationTextField.text = [User occupation];
@@ -55,10 +48,6 @@
                     otherButtonTitles:@[giveup,goback]
                              tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
                                  NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
-//                                 if ([title isEqualToString:giveup]) {
-//                                     //放弃编辑
-////                                     [self.navigationController popViewControllerAnimated:YES];
-//                                 }
                                  if ([title isEqualToString:confirm]){
                                      //确认编辑
                                      [self uploadPersonalInfo];
@@ -109,63 +98,15 @@
     [self dismissKeyboard];
 }
 
-#pragma mark - upload profile pic
-
-- (IBAction)tapOnCamera:(UIButton *)sender{
-    [ImagePicker startPickingImageFromLocalSourceFor:self];
-}
- 
-- (void)didFinishPickingImage:(UIImage *)image{
-//    [self showSpinniner];
-    [self.fetchCenter uploadNewProfilePicture:image];
-}
- 
-- (void)didFailPickingImage{
- 
-}
-
 #pragma mark - fetch center delegate
 - (void)didFinishSettingPersonalInfo{
-//    [self dismissSpinner];
-    NSURL *newUrl = [self.fetchCenter urlWithImageID:[User updatedProfilePictureId] size:FetchCenterImageSize50];
-    [self.profilePicture showImageWithImageUrl:newUrl];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-//- (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-//    [self handleFailure:info];
-//}
-// 
-//- (void)didFinishUploadingPictureForProfile:(NSDictionary *)info{
-//    [self uploadPersonalInfo];
-//}
-// 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
     [self.navigationController popViewControllerAnimated:YES];
-    [self handleFailure:info];
 }
- 
-- (void)handleFailure:(NSDictionary *)info{
-//    [self dismissSpinner];
-//    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
-//                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
-//                               delegate:self
-//                      cancelButtonTitle:@"OK"
-//                      otherButtonTitles:nil, nil] show];
-}
- 
-//#pragma mark - activity
-// 
-//- (void)showSpinniner{
-//    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
-//    [spinner startAnimating];
-//}
-// 
-//- (void)dismissSpinner{
-//    self.navigationItem.rightBarButtonItem = nil;
-//}
-//
+
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if ([scrollView.panGestureRecognizer translationInView:scrollView].y > 0) {

@@ -128,7 +128,7 @@
         if ([segue.identifier isEqualToString:@"showPostDetailFromDiscovery"]) { //相机选取照片之后
             PostFeedViewController *pfvc = segue.destinationViewController;
             NSArray *imageAndPlan = sender;
-            pfvc.imageForFeed = imageAndPlan[0]; //image
+            pfvc.imagesForFeed = imageAndPlan[0]; //images
             pfvc.plan = imageAndPlan[1]; //plan
         }
         if ([segue.identifier isEqualToString:@"showDiscoveryWishDetail"] || [segue.identifier isEqualToString:@"showWishDetailVCOwnerFromDiscovery"]){
@@ -227,8 +227,8 @@
 
 #pragma mark - Shuffle View Controller Delegate 
 
-- (void)didFinishSelectingImage:(UIImage *)image forPlan:(Plan *)plan{
-    [self performSegueWithIdentifier:@"showPostDetailFromDiscovery" sender:@[image,plan]];
+- (void)didFinishSelectingImages:(NSArray *)images forPlan:(Plan *)plan{
+    [self performSegueWithIdentifier:@"showPostDetailFromDiscovery" sender:@[images,plan]];
 }
 
 - (void)didPressCreatePlanButton:(ShuffleViewController *)svc{
