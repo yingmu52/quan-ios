@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+static const NSInteger defaultMaxImageSelectionAllowed = 8;
 @class ImagePickerDelegate;
 @protocol ImagePickerDelegate <NSObject>
 @optional
@@ -18,6 +19,8 @@
 
 @property (nonatomic,weak) id<ImagePickerDelegate>imagePickerDelegate;
 
-- (void)showCameraOn:(UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,ImagePickerDelegate>*)controller type:(UIImagePickerControllerSourceType)type;
+- (void)showCamera:(UIViewController *)controller;
+- (void)showPhotoLibrary:(UIViewController *)controller maxImageCount:(NSInteger )count;
+- (void)showPhotoLibrary:(UIViewController *)controller;
 - (void)startPickingImageFromLocalSourceFor:(UIViewController<ImagePickerDelegate>*)controller;
 @end

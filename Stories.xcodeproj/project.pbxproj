@@ -113,6 +113,8 @@
 		A0D102761B84F750006B0E4E /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D102721B84F750006B0E4E /* TencentOpenAPI.framework */; };
 		A0D37C601B8781D900581EDE /* NewsPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D37C5F1B8781D900581EDE /* NewsPageViewController.m */; };
 		A0D37C611B8781D900581EDE /* NewsPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D37C5F1B8781D900581EDE /* NewsPageViewController.m */; };
+		A0EA22011BA53BF400A83A7A /* ImagePreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0EA22001BA53BF400A83A7A /* ImagePreviewController.m */; };
+		A0EA22021BA53BF400A83A7A /* ImagePreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0EA22001BA53BF400A83A7A /* ImagePreviewController.m */; };
 		A0EDFCB61B90C5F100B10594 /* libTXYDownloader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EDFCB01B90C5F100B10594 /* libTXYDownloader.a */; };
 		A0EDFCB71B90C5F100B10594 /* libTXYDownloader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EDFCB01B90C5F100B10594 /* libTXYDownloader.a */; };
 		A0EDFCB81B90C5F100B10594 /* libTXYUploader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EDFCB51B90C5F100B10594 /* libTXYUploader.a */; };
@@ -420,6 +422,8 @@
 		A0D102721B84F750006B0E4E /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
 		A0D37C5E1B8781D900581EDE /* NewsPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsPageViewController.h; sourceTree = "<group>"; };
 		A0D37C5F1B8781D900581EDE /* NewsPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsPageViewController.m; sourceTree = "<group>"; };
+		A0EA21FF1BA53BF400A83A7A /* ImagePreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePreviewController.h; sourceTree = "<group>"; };
+		A0EA22001BA53BF400A83A7A /* ImagePreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePreviewController.m; sourceTree = "<group>"; };
 		A0EDFCAF1B90C5F100B10594 /* TXYDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXYDownloader.h; sourceTree = "<group>"; };
 		A0EDFCB01B90C5F100B10594 /* libTXYDownloader.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTXYDownloader.a; sourceTree = "<group>"; };
 		A0EDFCB31B90C5F100B10594 /* TXYBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXYBase.h; sourceTree = "<group>"; };
@@ -1105,6 +1109,8 @@
 				AEC068921B2D3D55007975D2 /* FeedDetailVCOwner.m */,
 				AE52FA4E1A8D3D76003FF725 /* PostFeedViewController.h */,
 				AE52FA4F1A8D3D76003FF725 /* PostFeedViewController.m */,
+				A0EA21FF1BA53BF400A83A7A /* ImagePreviewController.h */,
+				A0EA22001BA53BF400A83A7A /* ImagePreviewController.m */,
 			);
 			name = FeedDetail;
 			sourceTree = "<group>";
@@ -1439,6 +1445,7 @@
 				A016FDB61B8C4250006E7A09 /* ShuffleViewController.m in Sources */,
 				A0F7D49D1B84E851003CCB34 /* UIImagePickerController+DelegateBlocks.m in Sources */,
 				A04842D11B98C5D10032E927 /* Owner.m in Sources */,
+				A0EA22011BA53BF400A83A7A /* ImagePreviewController.m in Sources */,
 				AE606A201AF4697B003DF16E /* MessageListViewController.m in Sources */,
 				A0F7D44B1B84E851003CCB34 /* JTSImageViewController.m in Sources */,
 				AEB003F31B8056980056EA80 /* MyPageViewController.m in Sources */,
@@ -1602,6 +1609,7 @@
 				A0F7D4341B84E851003CCB34 /* BadgeStyle.m in Sources */,
 				A04842DA1B98C5D10032E927 /* Feed.m in Sources */,
 				AEE4A6CD1A9684D500ABF946 /* AchieveViewController.m in Sources */,
+				A0EA22021BA53BF400A83A7A /* ImagePreviewController.m in Sources */,
 				AEFB04871AD12437009EB0D3 /* DiscoveryCell.m in Sources */,
 				AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */,
 				A053CF671BA3FF1F0007970A /* ELCAsset.m in Sources */,

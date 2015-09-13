@@ -158,7 +158,7 @@ ViewForEmptyEventDelegate>
 - (void)didPressCameraOnCard:(HomeCardView *)cardView{
     if (self.fetchedRC.fetchedObjects.count) {
         self.currentPlan = [self.fetchedRC objectAtIndexPath:[self.collectionView indexPathForCell:cardView]];
-        [self.imagePicker startPickingImageFromLocalSourceFor:self];
+        [self.imagePicker showPhotoLibrary:self];
     }
 }
 

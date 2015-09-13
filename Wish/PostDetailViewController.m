@@ -60,7 +60,7 @@
         PostFeedViewController *pfvc = (PostFeedViewController *)segue.destinationViewController;
         Plan *plan = sender;
         pfvc.plan = plan;
-        pfvc.imagesForFeed = self.images;
+        pfvc.imagesForFeed = [self.images mutableCopy];
         pfvc.seugeFromPlanCreation = YES; // important!
     }
 }
@@ -76,7 +76,7 @@
 }
 
 - (IBAction)toggleCamera:(UIButton *)sender {
-    [self.imagePicker startPickingImageFromLocalSourceFor:self];
+    [self.imagePicker showPhotoLibrary:self];
 }
 
 - (IBAction)tapOnCameraBackground:(UITapGestureRecognizer *)tap{

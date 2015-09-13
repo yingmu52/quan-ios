@@ -18,14 +18,15 @@
 #import "UIActionSheet+Blocks.h"
 #import "JTSImageViewController.h"
 #import "PostImageCell.h"
+#import "ImagePicker.h"
 static NSUInteger maxWordCount = 1000;
 static NSUInteger distance = 10;
 
-@interface PostFeedViewController () <FetchCenterDelegate>
+@interface PostFeedViewController () <FetchCenterDelegate,UICollectionViewDataSource,UICollectionViewDelegate,ImagePickerDelegate>
 @property (nonatomic,strong) UIButton *tikButton;
 @property (nonatomic,weak) IBOutlet UILabel *wordCountLabel;
 @property (nonatomic,weak) IBOutlet UICollectionView *collectionView;
-
+@property (nonatomic,strong) ImagePicker *imagePicker;
 @property (weak, nonatomic) IBOutlet GCPTextView *textView;
 @property (nonatomic,strong) Feed *feed;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
@@ -78,11 +79,11 @@ static NSUInteger distance = 10;
     [self.textView becomeFirstResponder];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    [self.textView resignFirstResponder];
-}
+//- (void)viewWillDisappear:(BOOL)animated
+//{
+//    [super viewWillDisappear:animated];
+//    [self.textView resignFirstResponder];
+//}
 
 
 - (void)setupViews
@@ -203,6 +204,9 @@ static NSUInteger distance = 10;
     if ([segue.identifier isEqualToString:@"showWishDetailOnPlanCreation"]){
         [segue.destinationViewController setPlan:sender]; //sender is plan
     }
+    if ([segue.identifier isEqualToString:@"showImagePreviewFromPostFeedDetail"]) {
+#warning        segue.destinationViewController
+    }
 }
 #pragma mark - fetch center delegate 
 
@@ -274,9 +278,7 @@ static NSUInteger distance = 10;
 #pragma mark - collection view delegate and data source
 
 - (PostImageCell *)collectionView:(UICollectionView *)aCollectionView
-         cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    
+         cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     PostImageCell *cell;
     if (indexPath.row != self.imagesForFeed.count) { //is not the last row
         cell = [aCollectionView dequeueReusableCellWithReuseIdentifier:POSTIMAGECELL forIndexPath:indexPath];
@@ -294,26 +296,38 @@ static NSUInteger distance = 10;
     return self.imagesForFeed.count + 1; //including the last button
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView
-                  layout:(UICollectionViewLayout *)collectionViewLayout
-  sizeForItemAtIndexPath:(NSIndexPath *)indexPat{
-    return CGSizeMake(76.0f,76.0f);
-}
-
-//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
-//    return 5.0f;
-//}
-
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
-                        layout:(UICollectionViewLayout*)collectionViewLayout
-        insetForSectionAtIndex:(NSInteger)section{
-    return UIEdgeInsetsMake(0, 5.0f, 0, 5.0f);
-}
-
 - (void)setCollectionView:(UICollectionView *)collectionView{
     _collectionView = collectionView;
     _collectionView.layer.borderColor = [SystemUtil colorFromHexString:@"#DFE1E0"].CGColor;
     _collectionView.layer.borderWidth = 1.0f;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row != self.imagesForFeed.count) { //is not the last row
+        [self performSegueWithIdentifier:@"showImagePreviewFromPostFeedDetail" sender:nil];
+    }else{
+        if (self.imagesForFeed.count < defaultMaxImageSelectionAllowed) {
+            NSInteger remain = defaultMaxImageSelectionAllowed - self.imagesForFeed.count;
+            [self.imagePicker showPhotoLibrary:self maxImageCount:remain];
+        }else{
+            //show notification
+        }
+    }
+
+}
+
+#pragma mark - Image Picker Delegate
+- (ImagePicker *)imagePicker{
+    if (!_imagePicker) {
+        _imagePicker = [[ImagePicker alloc] init];
+        _imagePicker.imagePickerDelegate = self;
+    }
+    return _imagePicker;
+}
+
+- (void)didFinishPickingImage:(NSArray *)images{
+    [self.imagesForFeed addObjectsFromArray:images];
+    [self.collectionView reloadData];
 }
 @end
 

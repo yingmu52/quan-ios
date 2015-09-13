@@ -155,7 +155,7 @@
 
 - (void)showCamera{
     self.cameraButton.hidden = YES;
-    [self.imagePicker startPickingImageFromLocalSourceFor:self];
+    [self.imagePicker showPhotoLibrary:self];
 }
 
 - (void)didFinishPickingImage:(NSArray *)images{

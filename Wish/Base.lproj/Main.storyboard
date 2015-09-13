@@ -2067,6 +2067,7 @@
                         <outlet property="keyboardHeight" destination="LBK-bJ-Vhr" id="BVM-Mw-rbq"/>
                         <outlet property="textView" destination="yEm-S5-5O6" id="huI-cf-GwA"/>
                         <segue destination="b5E-B5-8Ys" kind="show" identifier="showWishDetailOnPlanCreation" id="0NR-qk-ahm"/>
+                        <segue destination="HFi-Ck-gog" kind="show" identifier="showImagePreviewFromPostFeedDetail" id="UAc-hc-9K4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x2Z-Fs-fXM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2077,6 +2078,23 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="4608" y="-3126"/>
+        </scene>
+        <!--Image Preview Controller-->
+        <scene sceneID="y9X-Oa-xsk">
+            <objects>
+                <viewController id="HFi-Ck-gog" customClass="ImagePreviewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="z6u-OT-xIi"/>
+                        <viewControllerLayoutGuide type="bottom" id="4ki-oA-uPD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UPb-3Y-Naa">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L9H-Pt-c0Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6181.5" y="-2972.25"/>
         </scene>
         <!--Feed DetailVC Owner-->
         <scene sceneID="XQH-HN-t6p">
@@ -5343,11 +5361,11 @@
         <image name="tab_ic_message_pressed" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3Cj-2H-t7j"/>
-        <segue reference="aAR-cW-sP8"/>
-        <segue reference="Y2c-0U-Rmr"/>
-        <segue reference="0NR-qk-ahm"/>
+        <segue reference="CTd-gb-xTE"/>
         <segue reference="JFc-cO-xBu"/>
+        <segue reference="aAR-cW-sP8"/>
+        <segue reference="0NR-qk-ahm"/>
+        <segue reference="Y2c-0U-Rmr"/>
         <segue reference="If2-2V-uRQ"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686274509803" green="0.75686274509803919" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>

@@ -34,11 +34,11 @@
 }
 
 - (IBAction)tapOnPhotoLibraryButton:(UIButton *)sender{
-    [self.imagePicker showCameraOn:self type:UIImagePickerControllerSourceTypePhotoLibrary];
+    [self.imagePicker showPhotoLibrary:self];
 }
 
 - (IBAction)tapOnCameraButton:(UIButton *)sender{
-    [self.imagePicker showCameraOn:self type:UIImagePickerControllerSourceTypeCamera];
+    [self.imagePicker showCamera:self];
 }
 
 

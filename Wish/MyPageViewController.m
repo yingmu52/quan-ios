@@ -199,7 +199,7 @@
 }
 
 - (IBAction)tapOnCamera:(id)sender{
-    [self.imagePicker startPickingImageFromLocalSourceFor:self];
+    [self.imagePicker showPhotoLibrary:self maxImageCount:1];
 }
 
 - (void)didFinishPickingImage:(NSArray *)images{

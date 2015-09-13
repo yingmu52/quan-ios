@@ -17,31 +17,35 @@
 
 @implementation ImagePicker
 
+#pragma mark - new method
 
-- (void)showCameraOn:(UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,ImagePickerDelegate>*)controller type:(UIImagePickerControllerSourceType)type{
-    if (type == UIImagePickerControllerSourceTypeCamera) {
-        dispatch_main_async_safe(^{
-            UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
-            ipc.sourceType = type;
-            ipc.delegate = self;
-            ipc.showsCameraControls = YES;
-            [controller presentViewController:ipc animated:YES completion:nil];            
-        });
-        
-    }else if (type == UIImagePickerControllerSourceTypePhotoLibrary) {
-        // Create the image picker
-        ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
-        
-        elcPicker.maximumImagesCount = 4; //Set the maximum number of images to select, defaults to 4
-        elcPicker.returnsOriginalImage = NO; //Only return the fullScreenImage, not the fullResolutionImage
-        elcPicker.returnsImage = YES; //Return UIimage if YES. If NO, only return asset location information
-        elcPicker.onOrder = YES; //For multiple image selection, display and return selected order of images
-        elcPicker.imagePickerDelegate = self;
-        
-        //Present modally
-        [controller presentViewController:elcPicker animated:YES completion:nil];
-    }
+- (void)showCamera:(UIViewController *)controller{
+    dispatch_main_async_safe(^{
+        UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
+        ipc.sourceType = UIImagePickerControllerSourceTypeCamera;
+        ipc.delegate = self;
+        ipc.showsCameraControls = YES;
+        [controller presentViewController:ipc animated:YES completion:nil];
+    });
+}
+
+- (void)showPhotoLibrary:(UIViewController *)controller maxImageCount:(NSInteger )count{
+    // Create the image picker
+    ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
     
+    elcPicker.maximumImagesCount = count; //Set the maximum number of images to select, defaults to 4
+    elcPicker.returnsOriginalImage = NO; //Only return the fullScreenImage, not the fullResolutionImage
+    elcPicker.returnsImage = YES; //Return UIimage if YES. If NO, only return asset location information
+    elcPicker.onOrder = YES; //For multiple image selection, display and return selected order of images
+    elcPicker.imagePickerDelegate = self;
+    
+    //Present modally
+    [controller presentViewController:elcPicker animated:YES completion:nil];
+
+}
+
+- (void)showPhotoLibrary:(UIViewController *)controller{
+    [self showPhotoLibrary:controller maxImageCount:defaultMaxImageSelectionAllowed]; //默认可选取的照片数
 }
 
 #pragma mark - ELCImagePickerControllerDelegate
@@ -102,10 +106,10 @@
                      tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex)
     {
         if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:take_photo]) {
-            [self showCameraOn:controller type:UIImagePickerControllerSourceTypeCamera];
+            [self showCamera:controller];
         }
         if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:choose_album]) {
-            [self showCameraOn:controller type:UIImagePickerControllerSourceTypePhotoLibrary];
+            [self showPhotoLibrary:controller];
         }
     }];
 }

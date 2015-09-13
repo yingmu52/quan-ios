@@ -128,7 +128,7 @@
         if ([segue.identifier isEqualToString:@"showPostDetailFromDiscovery"]) { //相机选取照片之后
             PostFeedViewController *pfvc = segue.destinationViewController;
             NSArray *imageAndPlan = sender;
-            pfvc.imagesForFeed = imageAndPlan[0]; //images
+            pfvc.imagesForFeed = [imageAndPlan[0] mutableCopy]; //images
             pfvc.plan = imageAndPlan[1]; //plan
         }
         if ([segue.identifier isEqualToString:@"showDiscoveryWishDetail"] || [segue.identifier isEqualToString:@"showWishDetailVCOwnerFromDiscovery"]){
