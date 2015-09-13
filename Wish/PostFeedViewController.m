@@ -17,23 +17,23 @@
 #import "WishDetailVCOwner.h"
 #import "UIActionSheet+Blocks.h"
 #import "JTSImageViewController.h"
+#import "PostImageCell.h"
 static NSUInteger maxWordCount = 1000;
 static NSUInteger distance = 10;
 
 @interface PostFeedViewController () <FetchCenterDelegate>
 @property (nonatomic,strong) UIButton *tikButton;
-@property (nonatomic,weak) IBOutlet UIButton *previewButton;
 @property (nonatomic,weak) IBOutlet UILabel *wordCountLabel;
+@property (nonatomic,weak) IBOutlet UICollectionView *collectionView;
+
 @property (weak, nonatomic) IBOutlet GCPTextView *textView;
 @property (nonatomic,strong) Feed *feed;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *keyboardHeight;
 @end
 
 @implementation PostFeedViewController
 
-- (void)setImagesForFeed:(NSArray *)imagesForFeed{
-    NSLog(@"\n\n%@",imagesForFeed);
-}
 - (FetchCenter *)fetchCenter{
     if (!_fetchCenter){
         _fetchCenter = [[FetchCenter alloc] init];
@@ -44,7 +44,7 @@ static NSUInteger distance = 10;
 
 - (Feed *)feed{
     if (!_feed){
-        _feed = [Feed createFeedWithImage:self.imageForFeed inPlan:self.plan];
+#warning        _feed = [Feed createFeedWithImage:self.imageForFeed inPlan:self.plan];
         _feed.feedTitle = self.textView.text;
     }
     return _feed;
@@ -59,7 +59,8 @@ static NSUInteger distance = 10;
     
     //add observer to detect keyboard height
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChange:) name:UIKeyboardDidChangeFrameNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 
 }
 
@@ -103,37 +104,34 @@ static NSUInteger distance = 10;
     self.wordCountLabel.text = [NSString stringWithFormat:@"0/%@ 字",@(maxWordCount)];
 }
 
-- (void)setPreviewButton:(UIButton *)previewButton{
-    _previewButton = previewButton;
-    [_previewButton setImage:self.imageForFeed forState:UIControlStateNormal];
-}
 
-- (IBAction)preViewButtonPressed:(UIButton *)button{
-    [self.textView resignFirstResponder];
-    
-    // Create image info
-    JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
-    imageInfo.image = button.imageView.image;
-    imageInfo.referenceRect = button.frame;
-    imageInfo.referenceView = button.superview;
-    
-    // Setup view controller
-    JTSImageViewController *imageViewer = [[JTSImageViewController alloc]
-                                           initWithImageInfo:imageInfo
-                                           mode:JTSImageViewControllerMode_Image
-                                           backgroundStyle:JTSImageViewControllerBackgroundOption_Scaled];
-    
-    // Present the view controller.
-    [imageViewer showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
+//- (IBAction)preViewButtonPressed:(UIButton *)button{
+//    [self.textView resignFirstResponder];
+//    
+//    // Create image info
+//    JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
+//    imageInfo.image = button.imageView.image;
+//    imageInfo.referenceRect = button.frame;
+//    imageInfo.referenceView = button.superview;
+//    
+//    // Setup view controller
+//    JTSImageViewController *imageViewer = [[JTSImageViewController alloc]
+//                                           initWithImageInfo:imageInfo
+//                                           mode:JTSImageViewControllerMode_Image
+//                                           backgroundStyle:JTSImageViewControllerBackgroundOption_Scaled];
+//    
+//    // Present the view controller.
+//    [imageViewer showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
+//
+//}
 
-}
 - (void)createFeed{
     self.navigationItem.leftBarButtonItem.enabled = NO;
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithFrame:self.tikButton.frame];
     spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
     [spinner startAnimating];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
-    [self.fetchCenter uploadImage:self.imageForFeed toCreateFeed:self.feed];
+#warning    [self.fetchCenter uploadImage:self.imageForFeed toCreateFeed:self.feed];
 }
 
 #define CONFIRM @"确定"
@@ -244,28 +242,78 @@ static NSUInteger distance = 10;
 
 #pragma mark - keyboard interaction notification
 
-- (void)keyboardWillHide:(NSNotification *)note{
-    [self updateFrameWithKeyboardSize:[[[note userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue]];
+- (void)keyboardDidHide:(NSNotification *)notification{
+    [self updateViewForNewHeight:0];
 }
 
-- (void)keyboardDidChange:(NSNotification *)note{
-    [self updateFrameWithKeyboardSize:[[[note userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue]];
+- (void)keyboardDidChange:(NSNotification *)notification{
+    CGRect keyboardFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    [self updateViewForNewHeight:CGRectGetHeight(keyboardFrame)];
 }
 
-- (void)updateFrameWithKeyboardSize:(CGRect)KBRect{
-    //update text view frame
-    CGRect newTVFrame = self.textView.frame;
-    newTVFrame.size.height = KBRect.origin.y - CGRectGetMinY(newTVFrame) - 20.0; //20.0 must be the same as storyboard constraint
-    self.textView.frame = newTVFrame;
+- (void)keyboardWillShow:(NSNotification *)notification{
+    CGRect keyboardFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    [self updateViewForNewHeight:CGRectGetHeight(keyboardFrame)];
+    
 }
-
+- (void)updateViewForNewHeight:(CGFloat)height{
+    self.keyboardHeight.constant = height;
+    [self.view layoutIfNeeded];
+}
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - dismiss keyboard when tap on background
-- (IBAction)tapOnBackground:(id)sender{
-    [self.textView resignFirstResponder];
+- (IBAction)tapOnBackground:(UITapGestureRecognizer *)tap{
+    if (self.textView.isFirstResponder) {
+        [self.textView resignFirstResponder];
+    }
+}
+
+#pragma mark - collection view delegate and data source
+
+- (PostImageCell *)collectionView:(UICollectionView *)aCollectionView
+         cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    PostImageCell *cell;
+    if (indexPath.row != self.imagesForFeed.count) { //is not the last row
+        cell = [aCollectionView dequeueReusableCellWithReuseIdentifier:POSTIMAGECELL forIndexPath:indexPath];
+        cell.imageView.image = self.imagesForFeed[indexPath.row];
+//        [cell layoutIfNeeded]; //fixed auto layout error on iphone 5s or above
+    }else{
+        cell = [aCollectionView dequeueReusableCellWithReuseIdentifier:@"PostDetailAddCell" forIndexPath:indexPath];
+        
+    }
+    return cell;
+}
+
+-(NSInteger)collectionView:(UICollectionView *)collectionView
+    numberOfItemsInSection:(NSInteger)section {
+    return self.imagesForFeed.count + 1; //including the last button
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPat{
+    return CGSizeMake(76.0f,76.0f);
+}
+
+//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
+//    return 5.0f;
+//}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
+                        layout:(UICollectionViewLayout*)collectionViewLayout
+        insetForSectionAtIndex:(NSInteger)section{
+    return UIEdgeInsetsMake(0, 5.0f, 0, 5.0f);
+}
+
+- (void)setCollectionView:(UICollectionView *)collectionView{
+    _collectionView = collectionView;
+    _collectionView.layer.borderColor = [SystemUtil colorFromHexString:@"#DFE1E0"].CGColor;
+    _collectionView.layer.borderWidth = 1.0f;
 }
 @end
 

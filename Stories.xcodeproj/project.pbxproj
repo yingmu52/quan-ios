@@ -49,6 +49,8 @@
 		A053CF791BA3FF1F0007970A /* Overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = A053CF621BA3FF1F0007970A /* Overlay.png */; };
 		A053CF7A1BA3FF1F0007970A /* Overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A053CF631BA3FF1F0007970A /* Overlay@2x.png */; };
 		A053CF7B1BA3FF1F0007970A /* Overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A053CF631BA3FF1F0007970A /* Overlay@2x.png */; };
+		A053CF7E1BA4EFF00007970A /* PostImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF7D1BA4EFF00007970A /* PostImageCell.m */; };
+		A053CF7F1BA4EFF00007970A /* PostImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF7D1BA4EFF00007970A /* PostImageCell.m */; };
 		A089A9141B9BCBED00291EC2 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A089A9111B9BCBED00291EC2 /* libWeChatSDK.a */; };
 		A089A9151B9BCBED00291EC2 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A089A9111B9BCBED00291EC2 /* libWeChatSDK.a */; };
 		A0B8C8021B857F22009C4572 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */; };
@@ -356,6 +358,8 @@
 		A053CF611BA3FF1F0007970A /* ELCAssetTablePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAssetTablePicker.xib; sourceTree = "<group>"; };
 		A053CF621BA3FF1F0007970A /* Overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Overlay.png; sourceTree = "<group>"; };
 		A053CF631BA3FF1F0007970A /* Overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Overlay@2x.png"; sourceTree = "<group>"; };
+		A053CF7C1BA4EFF00007970A /* PostImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostImageCell.h; sourceTree = "<group>"; };
+		A053CF7D1BA4EFF00007970A /* PostImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostImageCell.m; sourceTree = "<group>"; };
 		A089A9111B9BCBED00291EC2 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		A089A9121B9BCBED00291EC2 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		A089A9131B9BCBED00291EC2 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
@@ -1087,6 +1091,8 @@
 		AED355FB1B22889B000427FF /* FeedDetail */ = {
 			isa = PBXGroup;
 			children = (
+				A053CF7C1BA4EFF00007970A /* PostImageCell.h */,
+				A053CF7D1BA4EFF00007970A /* PostImageCell.m */,
 				AEC0688E1B2D309E007975D2 /* FeedDetailCell.xib */,
 				AED355F31B2285D3000427FF /* FeedDetailHeader.xib */,
 				AED355F61B228696000427FF /* FeedDetailHeader.h */,
@@ -1442,6 +1448,7 @@
 				AE0172421A65CD8E0014266F /* AppDelegate.m in Sources */,
 				AEE4A6CC1A9684D500ABF946 /* AchieveViewController.m in Sources */,
 				AE9861FA1AC33C04005544B9 /* EditWishViewController.m in Sources */,
+				A053CF7E1BA4EFF00007970A /* PostImageCell.m in Sources */,
 				A04842D91B98C5D10032E927 /* Feed.m in Sources */,
 				A0D102461B84ED0B006B0E4E /* UINavigationItem+CustomItem.m in Sources */,
 				AE01723F1A65CD8E0014266F /* main.m in Sources */,
@@ -1556,6 +1563,7 @@
 				AEC068941B2D3D55007975D2 /* FeedDetailVCOwner.m in Sources */,
 				A0B9D76A1B9E4F1100EE382B /* DashedBorderView.m in Sources */,
 				A0F7D44E1B84E851003CCB34 /* JTSSimpleImageDownloader.m in Sources */,
+				A053CF7F1BA4EFF00007970A /* PostImageCell.m in Sources */,
 				A0F7D4481B84E851003CCB34 /* JTSAnimatedGIFUtility.m in Sources */,
 				A053CF6B1BA3FF1F0007970A /* ELCAssetTablePicker.m in Sources */,
 				A0F7D4461B84E851003CCB34 /* GCPTextView.m in Sources */,
