@@ -11,7 +11,7 @@
 #import "KeyboardAcessoryView.h"
 #import "SystemUtil.h"
 #import "FetchCenter.h"
-#import "GCPTextView.h"
+#import "SZTextView.h"
 #import "SDWebImageCompat.h"
 #import "AppDelegate.h"
 #import "WishDetailVCOwner.h"
@@ -28,7 +28,7 @@ static NSUInteger distance = 10;
 @property (nonatomic,weak) IBOutlet UILabel *wordCountLabel;
 @property (nonatomic,weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic,strong) ImagePicker *imagePicker;
-@property (weak, nonatomic) IBOutlet GCPTextView *textView;
+@property (weak, nonatomic) IBOutlet SZTextView *textView;
 @property (nonatomic,strong) Feed *feed;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *keyboardHeight;
@@ -68,10 +68,11 @@ static NSUInteger distance = 10;
 
 #define placeHolder @"说点什么吧"
 
-- (void)setTextView:(GCPTextView *)textView{
+- (void)setTextView:(SZTextView *)textView{
     _textView = textView;
     _textView.showsVerticalScrollIndicator = NO;
-    [_textView setPlaceholder:placeHolder];
+    _textView.placeholder = placeHolder;
+    _textView.placeholderTextColor = [UIColor lightGrayColor];
     _textView.textContainerInset = UIEdgeInsetsZero;
 }
 

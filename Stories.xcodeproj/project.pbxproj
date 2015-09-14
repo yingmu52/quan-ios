@@ -53,6 +53,8 @@
 		A053CF7F1BA4EFF00007970A /* PostImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF7D1BA4EFF00007970A /* PostImageCell.m */; };
 		A055FB9F1BA6553A0013F91E /* ImagePreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A055FB9E1BA6553A0013F91E /* ImagePreviewCell.m */; };
 		A055FBA01BA6553A0013F91E /* ImagePreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A055FB9E1BA6553A0013F91E /* ImagePreviewCell.m */; };
+		A07115D11BA6B109002C1270 /* SZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A07115D01BA6B109002C1270 /* SZTextView.m */; };
+		A07115D21BA6B109002C1270 /* SZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A07115D01BA6B109002C1270 /* SZTextView.m */; };
 		A089A9141B9BCBED00291EC2 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A089A9111B9BCBED00291EC2 /* libWeChatSDK.a */; };
 		A089A9151B9BCBED00291EC2 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A089A9111B9BCBED00291EC2 /* libWeChatSDK.a */; };
 		A0B8C8021B857F22009C4572 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */; };
@@ -366,6 +368,8 @@
 		A053CF7D1BA4EFF00007970A /* PostImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostImageCell.m; sourceTree = "<group>"; };
 		A055FB9D1BA6553A0013F91E /* ImagePreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePreviewCell.h; sourceTree = "<group>"; };
 		A055FB9E1BA6553A0013F91E /* ImagePreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePreviewCell.m; sourceTree = "<group>"; };
+		A07115CF1BA6B109002C1270 /* SZTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZTextView.h; sourceTree = "<group>"; };
+		A07115D01BA6B109002C1270 /* SZTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZTextView.m; sourceTree = "<group>"; };
 		A089A9111B9BCBED00291EC2 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		A089A9121B9BCBED00291EC2 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		A089A9131B9BCBED00291EC2 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
@@ -728,6 +732,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		A07115CE1BA6B109002C1270 /* SZTextView */ = {
+			isa = PBXGroup;
+			children = (
+				A07115CF1BA6B109002C1270 /* SZTextView.h */,
+				A07115D01BA6B109002C1270 /* SZTextView.m */,
+			);
+			path = SZTextView;
+			sourceTree = "<group>";
+		};
 		A0B8C7FF1B857F22009C4572 /* HMSegmentedControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -839,6 +852,7 @@
 		A0F7D3A51B84E851003CCB34 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				A07115CE1BA6B109002C1270 /* SZTextView */,
 				A053CF4C1BA3FF1F0007970A /* ELCImagePicker */,
 				A04842EB1B9916980032E927 /* WeChatSDK_1.5 */,
 				A0EDFCAD1B90C5F100B10594 /* QCloudDownloadSDK */,
@@ -1535,6 +1549,7 @@
 				A04842E91B98CF9E0032E927 /* UIImageView+ImageCache.m in Sources */,
 				AEE4A6D81A972FAA00ABF946 /* FollowingTVCData.m in Sources */,
 				AE95A9FC1ACFC26A007465D5 /* ImagePicker.m in Sources */,
+				A07115D11BA6B109002C1270 /* SZTextView.m in Sources */,
 				AED355FE1B23BBB8000427FF /* ProfileVCOwner.m in Sources */,
 				A0F7D4511B84E851003CCB34 /* UIImage+JTSImageEffects.m in Sources */,
 				AE479EAE1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */,
@@ -1682,6 +1697,7 @@
 				AED355F91B228696000427FF /* FeedDetailHeader.m in Sources */,
 				AEF7F2981A686FDB0022410B /* HomeViewController.m in Sources */,
 				A053CF651BA3FF1F0007970A /* ELCAlbumPickerController.m in Sources */,
+				A07115D21BA6B109002C1270 /* SZTextView.m in Sources */,
 				AEEC6C741A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,
 				A0D1023A1B84EC03006B0E4E /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */,
 				A0D102451B84ED0B006B0E4E /* UINavigationBar+CustomHeight.m in Sources */,

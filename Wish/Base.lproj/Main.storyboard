@@ -1819,7 +1819,7 @@
         <!--Post Feed View Controller-->
         <scene sceneID="tU0-cc-nXE">
             <objects>
-                <viewController id="XiV-RA-INl" customClass="PostFeedViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="XiV-RA-INl" customClass="PostFeedViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UDg-j7-ilp"/>
                         <viewControllerLayoutGuide type="bottom" id="f5a-dm-fTM"/>
@@ -1828,7 +1828,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yEm-S5-5O6" customClass="GCPTextView">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yEm-S5-5O6" customClass="SZTextView">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1849,7 +1849,7 @@
                                     <size key="itemSize" width="76" height="76"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PostDetailImageCell" id="HDn-vl-S4r" customClass="PostImageCell">
@@ -1913,7 +1913,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="添加" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KfC-oP-wrl">
                                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -2065,7 +2065,7 @@
                     <connections>
                         <outlet property="collectionView" destination="6ho-8h-Ap1" id="93G-Ai-rIh"/>
                         <outlet property="keyboardHeight" destination="LBK-bJ-Vhr" id="BVM-Mw-rbq"/>
-                        <outlet property="textView" destination="yEm-S5-5O6" id="huI-cf-GwA"/>
+                        <outlet property="textView" destination="yEm-S5-5O6" id="6f3-8S-IgX"/>
                         <segue destination="b5E-B5-8Ys" kind="show" identifier="showWishDetailOnPlanCreation" id="0NR-qk-ahm"/>
                         <segue destination="opb-v5-cWV" kind="show" identifier="showImagePreviewFromPostFeedDetail" id="Vr7-2x-iVK"/>
                     </connections>
@@ -2097,7 +2097,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="246" height="412"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="245.5" height="412"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Df1-3t-62p">
@@ -5416,12 +5416,12 @@
         <image name="tab_ic_message_pressed" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CTd-gb-xTE"/>
-        <segue reference="cel-0L-eNY"/>
         <segue reference="4ZT-53-1QA"/>
+        <segue reference="CTd-gb-xTE"/>
+        <segue reference="0NR-qk-ahm"/>
         <segue reference="JFc-cO-xBu"/>
-        <segue reference="Y2c-0U-Rmr"/>
         <segue reference="If2-2V-uRQ"/>
+        <segue reference="Y2c-0U-Rmr"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686274509803" green="0.75686274509803919" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
 </document>
