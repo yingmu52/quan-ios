@@ -19,10 +19,7 @@ static CGFloat kEndPoint = 1.5;
     [super awakeFromNib];
     
     //导航文字属性
-    UIColor *color = [SystemUtil colorFromHexString:@"#2B2B2B"];
-    self.titleTextAttributes = @{NSForegroundColorAttributeName:color,
-                                            NSFontAttributeName:[UIFont systemFontOfSize:17.0]};;
-
+    [self showDefaultTextColor];
     //去掉分隔线, 加背影色
     [self setBackgroundImage:[SystemUtil imageFromColor:[UIColor whiteColor] size:CGSizeMake(1, 1)]
                forBarMetrics:UIBarMetricsDefault];
@@ -35,6 +32,11 @@ static CGFloat kEndPoint = 1.5;
     self.frame = frame;
 }
 
+- (void)showDefaultTextColor{
+    UIColor *color = [SystemUtil colorFromHexString:@"#2B2B2B"];
+    self.titleTextAttributes = @{NSForegroundColorAttributeName:color,
+                                 NSFontAttributeName:[UIFont systemFontOfSize:17.0]};
+}
 //- (void)showClearBackground{
 //    [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
 //}

@@ -19,10 +19,11 @@
 #import "JTSImageViewController.h"
 #import "PostImageCell.h"
 #import "ImagePicker.h"
+#import "ImagePreviewController.h"
 static NSUInteger maxWordCount = 1000;
 static NSUInteger distance = 10;
 
-@interface PostFeedViewController () <FetchCenterDelegate,UICollectionViewDataSource,UICollectionViewDelegate,ImagePickerDelegate>
+@interface PostFeedViewController () <FetchCenterDelegate,UICollectionViewDataSource,UICollectionViewDelegate,ImagePickerDelegate,ImagePreviewControllerDelegate>
 @property (nonatomic,strong) UIButton *tikButton;
 @property (nonatomic,weak) IBOutlet UILabel *wordCountLabel;
 @property (nonatomic,weak) IBOutlet UICollectionView *collectionView;
@@ -151,7 +152,7 @@ static NSUInteger distance = 10;
 
 - (void)textViewDidChange:(UITextView *)textView{
     if (textView.isFirstResponder){
-        BOOL flag = textView.text.length*[textView.text stringByReplacingOccurrencesOfString:@" " withString:@""].length > 0;
+        BOOL flag = textView.text.length*[textView.text stringByReplacingOccurrencesOfString:@" " withString:@""].length > 0 && self.imagesForFeed.count > 0;
         self.navigationItem.rightBarButtonItem.enabled = flag;
         UIImage *bg = flag ? [Theme navTikButtonDefault] : [Theme navTikButtonDisable];
         [self.tikButton setImage:bg forState:UIControlStateNormal];
@@ -205,9 +206,23 @@ static NSUInteger distance = 10;
         [segue.destinationViewController setPlan:sender]; //sender is plan
     }
     if ([segue.identifier isEqualToString:@"showImagePreviewFromPostFeedDetail"]) {
-#warning        segue.destinationViewController
+        //sender : @[self.imagesForFeed,indexPath]];
+        NSArray *array = (NSArray *)sender;
+        ImagePreviewController *ipvc = segue.destinationViewController;
+        ipvc.previewImages = array.firstObject;
+        ipvc.entryIndexPath = array.lastObject;
+        ipvc.delegate = self;
     }
 }
+
+#pragma mark - ImagePickerDelegate
+
+
+- (void)didRemoveImageAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"%@",@(self.imagesForFeed.count));
+    [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
+}
+
 #pragma mark - fetch center delegate 
 
 
@@ -304,7 +319,7 @@ static NSUInteger distance = 10;
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row != self.imagesForFeed.count) { //is not the last row
-        [self performSegueWithIdentifier:@"showImagePreviewFromPostFeedDetail" sender:nil];
+        [self performSegueWithIdentifier:@"showImagePreviewFromPostFeedDetail" sender:@[self.imagesForFeed,indexPath]];
     }else{
         if (self.imagesForFeed.count < defaultMaxImageSelectionAllowed) {
             NSInteger remain = defaultMaxImageSelectionAllowed - self.imagesForFeed.count;

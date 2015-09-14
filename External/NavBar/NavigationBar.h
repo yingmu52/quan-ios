@@ -16,9 +16,8 @@
 
 @property (strong, nonatomic) IBInspectable UIColor *color;
 
--(void)setNavigationBarWithColor:(UIColor *)color;
-
-//- (void)showDefaultTextColor;
+- (void)setNavigationBarWithColor:(UIColor *)color;
+- (void)showDefaultTextColor;
 //- (void)showTextWithColor:(UIColor *)color;
 //- (void)showClearBackground;
 //- (void)showDefaultBackground;
