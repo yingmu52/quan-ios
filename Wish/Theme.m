@@ -188,6 +188,14 @@
     return [UIColor colorWithPatternImage:[UIImage imageNamed:@"profile_bg"]];
 }
 
++ (UIImage *)checkmarkSelected{
+    return [UIImage imageNamed:@"checkbox_selected"];
+}
+
++ (UIImage *)checkmarkUnSelected{
+    return [UIImage imageNamed:@"checkbox_default"];
+}
+
 //+ (UIImage *)achieveBadageLabelFail{
 //    return [UIImage imageNamed:@"label_fail"];
 //}

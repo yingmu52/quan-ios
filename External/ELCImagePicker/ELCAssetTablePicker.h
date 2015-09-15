@@ -11,19 +11,20 @@
 #import "ELCAssetSelectionDelegate.h"
 #import "ELCAssetPickerFilterDelegate.h"
 
-@interface ELCAssetTablePicker : UITableViewController <ELCAssetDelegate>
+@interface ELCAssetTablePicker : UIViewController <ELCAssetDelegate>
 
 @property (nonatomic, weak) id <ELCAssetSelectionDelegate> parent;
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) ALAssetsGroup *assetGroup;
 @property (nonatomic, strong) NSMutableArray *elcAssets;
-@property (nonatomic, strong) IBOutlet UILabel *selectedAssetsLabel;
+@property (nonatomic, strong) IBOutlet UILabel *indicatorLabel;
 @property (nonatomic, assign) BOOL singleSelection;
 @property (nonatomic, assign) BOOL immediateReturn;
 
 // optional, can be used to filter the assets displayed
 @property(nonatomic, weak) id<ELCAssetPickerFilterDelegate> assetPickerFilterDelegate;
 
-- (int)totalSelectedAssets;
+- (NSUInteger)totalSelectedAssets;
 - (void)preparePhotos;
 
 - (void)doneAction:(id)sender;

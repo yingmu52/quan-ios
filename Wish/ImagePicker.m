@@ -36,7 +36,7 @@
     elcPicker.maximumImagesCount = count; //Set the maximum number of images to select, defaults to 4
     elcPicker.returnsOriginalImage = NO; //Only return the fullScreenImage, not the fullResolutionImage
     elcPicker.returnsImage = YES; //Return UIimage if YES. If NO, only return asset location information
-    elcPicker.onOrder = YES; //For multiple image selection, display and return selected order of images
+    elcPicker.onOrder = NO; //For multiple image selection, display and return selected order of images
     elcPicker.imagePickerDelegate = self;
     
     //Present modally

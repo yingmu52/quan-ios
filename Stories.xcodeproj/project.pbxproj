@@ -45,10 +45,6 @@
 		A053CF751BA3FF1F0007970A /* ELCAssetPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = A053CF601BA3FF1F0007970A /* ELCAssetPicker.xib */; };
 		A053CF761BA3FF1F0007970A /* ELCAssetTablePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = A053CF611BA3FF1F0007970A /* ELCAssetTablePicker.xib */; };
 		A053CF771BA3FF1F0007970A /* ELCAssetTablePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = A053CF611BA3FF1F0007970A /* ELCAssetTablePicker.xib */; };
-		A053CF781BA3FF1F0007970A /* Overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = A053CF621BA3FF1F0007970A /* Overlay.png */; };
-		A053CF791BA3FF1F0007970A /* Overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = A053CF621BA3FF1F0007970A /* Overlay.png */; };
-		A053CF7A1BA3FF1F0007970A /* Overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A053CF631BA3FF1F0007970A /* Overlay@2x.png */; };
-		A053CF7B1BA3FF1F0007970A /* Overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A053CF631BA3FF1F0007970A /* Overlay@2x.png */; };
 		A053CF7E1BA4EFF00007970A /* PostImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF7D1BA4EFF00007970A /* PostImageCell.m */; };
 		A053CF7F1BA4EFF00007970A /* PostImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF7D1BA4EFF00007970A /* PostImageCell.m */; };
 		A055FB9F1BA6553A0013F91E /* ImagePreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A055FB9E1BA6553A0013F91E /* ImagePreviewCell.m */; };
@@ -362,8 +358,6 @@
 		A053CF5F1BA3FF1F0007970A /* ELCAlbumPickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAlbumPickerController.xib; sourceTree = "<group>"; };
 		A053CF601BA3FF1F0007970A /* ELCAssetPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAssetPicker.xib; sourceTree = "<group>"; };
 		A053CF611BA3FF1F0007970A /* ELCAssetTablePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAssetTablePicker.xib; sourceTree = "<group>"; };
-		A053CF621BA3FF1F0007970A /* Overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Overlay.png; sourceTree = "<group>"; };
-		A053CF631BA3FF1F0007970A /* Overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Overlay@2x.png"; sourceTree = "<group>"; };
 		A053CF7C1BA4EFF00007970A /* PostImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostImageCell.h; sourceTree = "<group>"; };
 		A053CF7D1BA4EFF00007970A /* PostImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostImageCell.m; sourceTree = "<group>"; };
 		A055FB9D1BA6553A0013F91E /* ImagePreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePreviewCell.h; sourceTree = "<group>"; };
@@ -726,8 +720,6 @@
 				A053CF5F1BA3FF1F0007970A /* ELCAlbumPickerController.xib */,
 				A053CF601BA3FF1F0007970A /* ELCAssetPicker.xib */,
 				A053CF611BA3FF1F0007970A /* ELCAssetTablePicker.xib */,
-				A053CF621BA3FF1F0007970A /* Overlay.png */,
-				A053CF631BA3FF1F0007970A /* Overlay@2x.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1402,7 +1394,6 @@
 				AEC0688F1B2D309E007975D2 /* FeedDetailCell.xib in Resources */,
 				AEA4CADA1AFC340A00BDE7F9 /* CommentAcessaryView.xib in Resources */,
 				AEF7F2A01A6875360022410B /* Main.storyboard in Resources */,
-				A053CF7A1BA3FF1F0007970A /* Overlay@2x.png in Resources */,
 				A053CF721BA3FF1F0007970A /* ELCAlbumPickerController.xib in Resources */,
 				AE2A8DE51ACA700100029D52 /* WishDetailCell.xib in Resources */,
 				AE59B5F11B40FB55006CA4AB /* ViewForEmptyEvent.xib in Resources */,
@@ -1414,7 +1405,6 @@
 				A0F7D49F1B84E851003CCB34 /* LICENSE in Resources */,
 				AED355F41B2285D3000427FF /* FeedDetailHeader.xib in Resources */,
 				AEC8CE911AAF8823005364F8 /* StationView.xib in Resources */,
-				A053CF781BA3FF1F0007970A /* Overlay.png in Resources */,
 				A053CF741BA3FF1F0007970A /* ELCAssetPicker.xib in Resources */,
 				AE52FA551A8D55CA003FF725 /* KeyboardAcessoryView.xib in Resources */,
 				AE9A19851B02E38800590784 /* FeedbackkAccessoryView.xib in Resources */,
@@ -1431,14 +1421,12 @@
 				AEFB04891AD12437009EB0D3 /* DiscoveryFooterView.xib in Resources */,
 				A053CF771BA3FF1F0007970A /* ELCAssetTablePicker.xib in Resources */,
 				AEC8CE921AAF8823005364F8 /* StationView.xib in Resources */,
-				A053CF791BA3FF1F0007970A /* Overlay.png in Resources */,
 				AEF7F29D1A6871F00022410B /* Images.xcassets in Resources */,
 				AEF7F2A11A6875360022410B /* Main.storyboard in Resources */,
 				A053CF751BA3FF1F0007970A /* ELCAssetPicker.xib in Resources */,
 				A0F7D4A01B84E851003CCB34 /* LICENSE in Resources */,
 				AE59B5F21B40FB55006CA4AB /* ViewForEmptyEvent.xib in Resources */,
 				AEC068901B2D309E007975D2 /* FeedDetailCell.xib in Resources */,
-				A053CF7B1BA3FF1F0007970A /* Overlay@2x.png in Resources */,
 				A0D1025D1B84EF3B006B0E4E /* HeaderView.xib in Resources */,
 				AED355F51B2285D3000427FF /* FeedDetailHeader.xib in Resources */,
 			);

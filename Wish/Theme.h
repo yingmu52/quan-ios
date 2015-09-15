@@ -67,4 +67,7 @@
 + (UIImage *)topImageMask;
 + (UIColor *)profileBakground;
 + (UIImage *)discoveryAddButton;
+
++ (UIImage *)checkmarkSelected;
++ (UIImage *)checkmarkUnSelected;
 @end

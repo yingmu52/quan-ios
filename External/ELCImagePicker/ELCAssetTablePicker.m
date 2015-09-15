@@ -10,7 +10,7 @@
 #import "ELCAsset.h"
 #import "ELCAlbumPickerController.h"
 #import "ELCConsole.h"
-
+#import "ELCImagePickerController.h"
 @interface ELCAssetTablePicker ()
 
 @property (nonatomic, assign) int columns;
@@ -36,15 +36,14 @@
 {
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 	[self.tableView setAllowsSelection:NO];
-
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
     self.elcAssets = tempArray;
 	
     if (self.immediateReturn) {
         
     } else {
-        UIBarButtonItem *doneButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneAction:)];
-        [self.navigationItem setRightBarButtonItem:doneButtonItem];
+        UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissController)];
+        [self.navigationItem setRightBarButtonItem:cancelButton];
         [self.navigationItem setTitle:NSLocalizedString(@"Loading...", nil)];
     }
 
@@ -54,10 +53,15 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(preparePhotos) name:ALAssetsLibraryChangedNotification object:nil];
 }
 
+- (void)dismissController{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.columns = self.view.bounds.size.width / 80;
+    [self updateindicatorLabel];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -119,13 +123,13 @@
                                                       animated:NO];
             }
             
-            [self.navigationItem setTitle:self.singleSelection ? NSLocalizedString(@"Pick Photo", nil) : NSLocalizedString(@"Pick Photos", nil)];
+            [self.navigationItem setTitle:self.singleSelection ? NSLocalizedString(@"相机胶卷", nil) : NSLocalizedString(@"相机胶卷", nil)];
         });
     }
 }
 
 
-- (void)doneAction:(id)sender
+- (IBAction)doneAction:(id)sender
 {	
 	NSMutableArray *selectedAssetsImages = [[NSMutableArray alloc] init];
 	    
@@ -168,6 +172,12 @@
         NSArray *singleAssetArray = @[asset];
         [(NSObject *)self.parent performSelector:@selector(selectedAssets:) withObject:singleAssetArray afterDelay:0];
     }
+    [self updateindicatorLabel];
+}
+
+- (void)updateindicatorLabel{
+    __weak ELCImagePickerController *ipc = (ELCImagePickerController *)self.navigationController;
+    self.indicatorLabel.text = [NSString stringWithFormat:@"已选 %@/%@",@([self totalSelectedAssets]),@(ipc.maximumImagesCount)];
 }
 
 - (BOOL)shouldDeselectAsset:(ELCAsset *)asset
@@ -218,6 +228,7 @@
         }
         [self.tableView reloadRowsAtIndexPaths:arrayOfCellsToReload withRowAnimation:UITableViewRowAnimationNone];
     }
+    [self updateindicatorLabel];
 }
 
 #pragma mark UITableViewDataSource Delegate Methods
@@ -251,11 +262,10 @@
     static NSString *CellIdentifier = @"Cell";
         
     ELCAssetCell *cell = (ELCAssetCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
-    if (cell == nil) {		        
+    if (!cell) {
         cell = [[ELCAssetCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    
+
     [cell setAssets:[self assetsForIndexPath:indexPath]];
     
     return cell;
@@ -266,16 +276,15 @@
 	return 79;
 }
 
-- (int)totalSelectedAssets
+- (NSUInteger)totalSelectedAssets
 {
-    int count = 0;
+    NSUInteger count = 0;
     
     for (ELCAsset *asset in self.elcAssets) {
 		if (asset.selected) {
             count++;	
 		}
 	}
-    
     return count;
 }
 

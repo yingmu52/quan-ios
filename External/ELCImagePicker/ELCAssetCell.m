@@ -9,7 +9,7 @@
 #import "ELCAsset.h"
 #import "ELCConsole.h"
 #import "ELCOverlayImageView.h"
-
+#import "Theme.h"
 @interface ELCAssetCell ()
 
 @property (nonatomic, strong) NSArray *rowAssets;
@@ -65,15 +65,17 @@
         
         if (i < [_overlayViewArray count]) {
             ELCOverlayImageView *overlayView = [_overlayViewArray objectAtIndex:i];
-            overlayView.hidden = asset.selected ? NO : YES;
+            [overlayView showAsSelected:asset.selected];
+//            overlayView.hidden = asset.selected ? NO : YES;
             overlayView.labIndex.text = [NSString stringWithFormat:@"%d", asset.index + 1];
         } else {
-            if (overlayImage == nil) {
-                overlayImage = [UIImage imageNamed:@"Overlay.png"];
+            if (!overlayImage) {
+                overlayImage = [Theme checkmarkSelected];
             }
             ELCOverlayImageView *overlayView = [[ELCOverlayImageView alloc] initWithImage:overlayImage];
             [_overlayViewArray addObject:overlayView];
-            overlayView.hidden = asset.selected ? NO : YES;
+            [overlayView showAsSelected:asset.selected];
+//            overlayView.hidden = asset.selected ? NO : YES;
             overlayView.labIndex.text = [NSString stringWithFormat:@"%d", asset.index + 1];
         }
     }
@@ -99,7 +101,9 @@
             ELCAsset *asset = [_rowAssets objectAtIndex:i];
             asset.selected = !asset.selected;
             ELCOverlayImageView *overlayView = [_overlayViewArray objectAtIndex:i];
-            overlayView.hidden = !asset.selected;
+            [overlayView showAsSelected:asset.selected];
+
+//            overlayView.hidden = !asset.selected;
             if (asset.selected) {
                 asset.index = [[ELCConsole mainConsole] numOfSelectedElements];
                 [overlayView setIndex:asset.index+1];
@@ -143,5 +147,9 @@
 	}
 }
 
+- (void)awakeFromNib{
+    [super awakeFromNib];
+    self.backgroundColor = [SystemUtil colorFromHexString:@"#EBEFEE"];
+}
 
 @end

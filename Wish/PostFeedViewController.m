@@ -44,13 +44,13 @@ static NSUInteger distance = 10;
     return _fetchCenter;
 }
 
-- (Feed *)feed{
-    if (!_feed){
-#warning        _feed = [Feed createFeedWithImage:self.imageForFeed inPlan:self.plan];
-        _feed.feedTitle = self.textView.text;
-    }
-    return _feed;
-}
+//- (Feed *)feed{
+//    if (!_feed){
+//#warning        _feed = [Feed createFeedWithImage:self.imageForFeed inPlan:self.plan];
+//        _feed.feedTitle = self.textView.text;
+//    }
+//    return _feed;
+//}
 
 - (NSString *)titleForFeed{
     return self.textView.text;
@@ -143,7 +143,9 @@ static NSUInteger distance = 10;
         [actionSheet dismissWithClickedButtonIndex:buttonIndex animated:NO];
         NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
         if ([title isEqualToString:CONFIRM]){
-            [[AppDelegate getContext] deleteObject:self.feed];
+            if (self.feed) {
+                [[AppDelegate getContext] deleteObject:self.feed];
+            }
             [self.navigationController popViewControllerAnimated:YES];
         }
     }];

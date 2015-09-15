@@ -8,6 +8,11 @@
 
 #import "ELCOverlayImageView.h"
 #import "ELCConsole.h"
+#import "Theme.h"
+
+@interface ELCOverlayImageView()
+@property (nonatomic,strong) UIImageView *checkBox;
+@end
 @implementation ELCOverlayImageView
 
 - (id)initWithFrame:(CGRect)frame
@@ -33,8 +38,10 @@
 {
     self = [super init];
     if (self) {
-        UIImageView *img = [[UIImageView alloc] initWithImage:image];
-        [self addSubview:img];
+        CGFloat margin = 4.0f;
+        self.checkBox = [[UIImageView alloc] initWithFrame:CGRectMake(margin, margin, image.size.width, image.size.height)];
+        self.checkBox.image = image;
+        [self addSubview:self.checkBox];
         
         if ([[ELCConsole mainConsole] onOrder]) {
             self.labIndex = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 16, 16)];
@@ -53,7 +60,8 @@
     return self;
 }
 
-
-
+- (void)showAsSelected:(BOOL)selected{
+    self.checkBox.image = selected ? [Theme checkmarkSelected] : [Theme checkmarkUnSelected];
+}
 
 @end

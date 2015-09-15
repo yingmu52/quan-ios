@@ -14,4 +14,5 @@
 
 - (void)setIndex:(int)_index;
 
+- (void)showAsSelected:(BOOL)selected;
 @end

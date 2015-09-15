@@ -27,9 +27,10 @@
 {
     [super viewDidLoad];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-	
+    
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
 	[self.navigationItem setTitle:NSLocalizedString(@"Loading...", nil)];
-
+    
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self.parent action:@selector(cancelImagePicker)];
 	[self.navigationItem setRightBarButtonItem:cancelButton];
 
@@ -106,7 +107,7 @@
 - (void)reloadTableView
 {
 	[self.tableView reloadData];
-	[self.navigationItem setTitle:NSLocalizedString(@"Select an Album", nil)];
+	[self.navigationItem setTitle:NSLocalizedString(@"相册", nil)];
 }
 
 - (BOOL)shouldSelectAsset:(ELCAsset *)asset previousCount:(NSUInteger)previousCount
