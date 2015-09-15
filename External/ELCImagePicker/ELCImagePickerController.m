@@ -118,10 +118,16 @@
             
                 if (_returnsOriginalImage) {
                     imgRef = [assetRep fullResolutionImage];
-                    orientation = [assetRep orientation];
+                    
+                    NSNumber *orientationValue = [asset valueForProperty:@"ALAssetPropertyOrientation"];
+                    if (orientationValue != nil) {
+                        orientation = [orientationValue intValue];
+                    }
+                    
                 } else {
                     imgRef = [assetRep fullScreenImage];
                 }
+                
                 UIImage *img = [UIImage imageWithCGImage:imgRef
                                                    scale:1.0f
                                              orientation:orientation];

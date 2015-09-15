@@ -17,7 +17,7 @@
 @interface ShuffleViewController () <NSFetchedResultsControllerDelegate,UICollectionViewDelegateFlowLayout,ImagePickerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic,weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic,strong) NSMutableArray *itemChanges;
-@property (nonatomic,weak) IBOutlet UILabel *countLabel;
+//@property (nonatomic,weak) IBOutlet UILabel *countLabel;
 //@property (nonatomic,strong) NSIndexPath *selectedIndexPath;
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @property (nonatomic,strong) ImagePicker *imagePicker;
@@ -133,7 +133,7 @@
     if (indexPath.row != self.fetchedRC.fetchedObjects.count) { //is not the last row
 
         if (self.fetchedRC.fetchedObjects.count > 1) { //除了最后一个cell, 当事件数为空是会闪退
-            self.countLabel.text = [NSString stringWithFormat:@"%@/%@",@(indexPath.row + 1),@(self.fetchedRC.fetchedObjects.count)];
+//            self.countLabel.text = [NSString stringWithFormat:@"%@/%@",@(indexPath.row + 1),@(self.fetchedRC.fetchedObjects.count)];
             //将卡片滚到与三角号对齐
             [collectionView scrollToItemAtIndexPath:indexPath
                                    atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally

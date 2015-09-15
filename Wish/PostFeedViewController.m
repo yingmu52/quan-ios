@@ -140,15 +140,17 @@ static NSUInteger distance = 10;
 #define CONFIRM @"确定"
 - (void)goBack{
     [UIActionSheet showInView:self.view withTitle:@"是否放弃此次编辑？" cancelButtonTitle:@"取消" destructiveButtonTitle:CONFIRM otherButtonTitles:nil tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
-        [actionSheet dismissWithClickedButtonIndex:buttonIndex animated:NO];
         NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
+        __weak typeof(self) weakSelf = self;
+        [actionSheet dismissWithClickedButtonIndex:buttonIndex animated:NO];
         if ([title isEqualToString:CONFIRM]){
-            if (self.feed) {
-                [[AppDelegate getContext] deleteObject:self.feed];
+            if (weakSelf.feed) {
+                [[AppDelegate getContext] deleteObject:weakSelf.feed];
             }
-            [self.navigationController popViewControllerAnimated:YES];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
         }
     }];
+
 }
 #pragma mark - text view delegate
 

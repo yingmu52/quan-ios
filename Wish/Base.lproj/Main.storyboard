@@ -3142,12 +3142,6 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7AS-gy-rNo">
-                                        <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="3tK-2T-lK5">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3454,11 +3448,7 @@
                                     <constraint firstAttribute="centerX" secondItem="nqp-Ra-UzR" secondAttribute="trailing" constant="352" id="lLD-Sg-TKB">
                                         <variation key="heightClass=regular-widthClass=compact" constant="1"/>
                                     </constraint>
-                                    <constraint firstAttribute="trailing" secondItem="7AS-gy-rNo" secondAttribute="trailing" constant="14" id="lal-kl-cHo"/>
                                     <constraint firstItem="nqp-Ra-UzR" firstAttribute="leading" secondItem="tQb-2Z-fTQ" secondAttribute="leading" constant="66" id="lf5-ZA-dch">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
-                                    </constraint>
-                                    <constraint firstItem="7AS-gy-rNo" firstAttribute="centerY" secondItem="aT2-zv-3Mx" secondAttribute="centerY" constant="-1.25" id="mv7-hO-BVB">
                                         <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                     </constraint>
                                     <constraint firstItem="aT2-zv-3Mx" firstAttribute="leading" secondItem="tQb-2Z-fTQ" secondAttribute="leading" constant="8" id="sQf-od-IQk">
@@ -3478,13 +3468,10 @@
                                         <exclude reference="nqp-Ra-UzR"/>
                                         <exclude reference="mTM-tg-9Qs"/>
                                         <exclude reference="aT2-zv-3Mx"/>
-                                        <exclude reference="7AS-gy-rNo"/>
                                         <exclude reference="3tK-2T-lK5"/>
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="BVC-Cl-5UA"/>
-                                        <exclude reference="lal-kl-cHo"/>
-                                        <exclude reference="mv7-hO-BVB"/>
                                         <exclude reference="sQf-od-IQk"/>
                                         <exclude reference="zPW-c8-C9T"/>
                                         <exclude reference="5iN-4k-Yf6"/>
@@ -3504,13 +3491,10 @@
                                         <include reference="nqp-Ra-UzR"/>
                                         <include reference="mTM-tg-9Qs"/>
                                         <include reference="aT2-zv-3Mx"/>
-                                        <include reference="7AS-gy-rNo"/>
                                         <include reference="3tK-2T-lK5"/>
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="BVC-Cl-5UA"/>
-                                        <include reference="lal-kl-cHo"/>
-                                        <include reference="mv7-hO-BVB"/>
                                         <include reference="sQf-od-IQk"/>
                                         <include reference="zPW-c8-C9T"/>
                                         <include reference="5iN-4k-Yf6"/>
@@ -3587,7 +3571,6 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="3tK-2T-lK5" id="1yS-VF-xcJ"/>
-                        <outlet property="countLabel" destination="7AS-gy-rNo" id="Y7k-7b-php"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G5e-Qa-ZML" userLabel="First Responder" sceneMemberID="firstResponder"/>
