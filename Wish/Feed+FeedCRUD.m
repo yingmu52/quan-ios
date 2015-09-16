@@ -11,12 +11,13 @@
 #import "AppDelegate.h"
 @implementation Feed (FeedCRUD)
 
-+ (Feed *)createFeedWithImage:(UIImage *)image inPlan:(Plan *)plan{
++ (Feed *)createFeedInPlan:(Plan *)plan feedTitle:(NSString *)feedTitle{
     
     NSManagedObjectContext *context = [AppDelegate getContext];
     
     Feed *feed = [NSEntityDescription insertNewObjectForEntityForName:@"Feed"
                                                inManagedObjectContext:context];
+    feed.feedTitle = feedTitle;
     feed.createDate = [NSDate date];
     feed.plan = plan;
     feed.selfLiked = @(NO);

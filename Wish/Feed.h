@@ -2,7 +2,7 @@
 //  Feed.h
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2015-09-03.
+//  Created by Xinyi Zhuang on 2015-09-16.
 //  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
 //
 
@@ -20,6 +20,8 @@
 @property (nonatomic, retain) NSString * imageId;
 @property (nonatomic, retain) NSNumber * likeCount;
 @property (nonatomic, retain) NSNumber * selfLiked;
+@property (nonatomic, retain) NSString * picUrls;
+@property (nonatomic, retain) NSNumber * type;
 @property (nonatomic, retain) NSSet *comments;
 @property (nonatomic, retain) Plan *plan;
 @end

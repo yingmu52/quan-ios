@@ -37,6 +37,7 @@ typedef enum {
 - (void)didFinishFetchingFollowingPlanList:(NSArray *)planIds;
 - (void)didFinishUploadingPlan:(Plan *)plan;
 - (void)didFinishUploadingFeed:(Feed *)feed;
+- (void)didFinishUploadingImage:(NSString *)fetchedImageId forFeed:(Feed *)feed;
 - (void)didFinishReceivingUidAndUKeyForUserInfo:(NSDictionary *)userInfo isNewUser:(BOOL)isNew;
 - (void)didFinishGettingWeChatUserInfo;
 - (void)didFinishUpdatingPlan:(Plan *)plan;
@@ -86,7 +87,8 @@ typedef enum {
 - (void)replyAtFeed:(Feed *)feed content:(NSString *)text toOwner:(NSString *)ownerId;
 - (void)getCommentListForFeed:(NSString *)feedId pageInfo:(NSDictionary *)info;
 - (void)deleteComment:(Comment *)comment;
-- (void)uploadImage:(UIImage *)image toCreateFeed:(Feed *)feed;
+- (void)uploadImages:(NSArray *)images toCreateFeed:(Feed *)feed;
+- (void)uploadToCreateFeed:(Feed *)feed fetchedImageIds:(NSArray *)imageIds;
 
 #pragma mark - Plan
 - (void)fetchPlanListForOwnerId:(NSString *)ownerId;

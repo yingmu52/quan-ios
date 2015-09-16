@@ -2,7 +2,7 @@
 //  Feed.m
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2015-09-03.
+//  Created by Xinyi Zhuang on 2015-09-16.
 //  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
 //
 
@@ -20,6 +20,8 @@
 @dynamic imageId;
 @dynamic likeCount;
 @dynamic selfLiked;
+@dynamic picUrls;
+@dynamic type;
 @dynamic comments;
 @dynamic plan;
 

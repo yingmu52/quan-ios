@@ -32,6 +32,7 @@ static NSUInteger distance = 10;
 @property (nonatomic,strong) Feed *feed;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *keyboardHeight;
+@property (nonatomic,strong) NSMutableArray *fetchedImageIds;
 @end
 
 @implementation PostFeedViewController
@@ -44,13 +45,12 @@ static NSUInteger distance = 10;
     return _fetchCenter;
 }
 
-//- (Feed *)feed{
-//    if (!_feed){
-//#warning        _feed = [Feed createFeedWithImage:self.imageForFeed inPlan:self.plan];
-//        _feed.feedTitle = self.textView.text;
-//    }
-//    return _feed;
-//}
+- (Feed *)feed{
+    if (!_feed){
+        _feed = [Feed createFeedInPlan:self.plan feedTitle:self.textView.text];
+    }
+    return _feed;
+}
 
 - (NSString *)titleForFeed{
     return self.textView.text;
@@ -134,7 +134,9 @@ static NSUInteger distance = 10;
     spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
     [spinner startAnimating];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
-#warning    [self.fetchCenter uploadImage:self.imageForFeed toCreateFeed:self.feed];
+    
+    self.fetchedImageIds = [NSMutableArray arrayWithCapacity:self.imagesForFeed.count];
+    [self.fetchCenter uploadImages:self.imagesForFeed toCreateFeed:self.feed];
 }
 
 #define CONFIRM @"确定"
@@ -230,6 +232,12 @@ static NSUInteger distance = 10;
 
 #pragma mark - fetch center delegate 
 
+- (void)didFinishUploadingImage:(NSString *)fetchedImageId forFeed:(Feed *)feed{
+    [self.fetchedImageIds addObject:fetchedImageId];
+    if (self.fetchedImageIds.count == self.imagesForFeed.count) { //所有的图片都上传成功了
+        [self.fetchCenter uploadToCreateFeed:feed fetchedImageIds:self.fetchedImageIds];
+    }
+}
 
 - (void)didFinishUploadingFeed:(Feed *)feed
 {

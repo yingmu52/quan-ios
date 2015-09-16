@@ -17,7 +17,9 @@
         <attribute name="feedTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="imageId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="likeCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="picUrls" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="selfLiked" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="comments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Comment" inverseName="feed" inverseEntity="Comment" syncable="YES"/>
         <relationship name="plan" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Plan" inverseName="feeds" inverseEntity="Plan" syncable="YES"/>
     </entity>
@@ -59,7 +61,7 @@
     </entity>
     <elements>
         <element name="Comment" positionX="-9009" positionY="95" width="128" height="163"/>
-        <element name="Feed" positionX="-9416" positionY="-81" width="128" height="180"/>
+        <element name="Feed" positionX="-9416" positionY="-81" width="128" height="210"/>
         <element name="Message" positionX="-8892" positionY="-346" width="128" height="178"/>
         <element name="Owner" positionX="-8705" positionY="-43" width="128" height="135"/>
         <element name="Plan" positionX="-9110" positionY="-324" width="128" height="270"/>

@@ -8,11 +8,18 @@
 
 #import "Feed.h"
 #import "Plan+PlanCRUD.h"
-
 @import UIKit;
 
+typedef enum {
+    FeedTypeLegacy = 0, //单图
+    FeedTypeNoPicture,
+    FeedTypeSinglePicture,
+    FeedTypeMultiplePicture
+}FeedType;
+
+
 @interface Feed (FeedCRUD)
-+ (Feed *)createFeedWithImage:(UIImage *)image inPlan:(Plan *)plan;
++ (Feed *)createFeedInPlan:(Plan *)plan feedTitle:(NSString *)feedTitle;
 
 + (Feed *)updateFeedWithInfo:(NSDictionary *)feedItem forPlan:(Plan *)plan;
 

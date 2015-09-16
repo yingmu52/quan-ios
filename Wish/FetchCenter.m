@@ -94,7 +94,7 @@ typedef enum{
 }FetchCenterGetOp;
 
 typedef enum{
-    FetchCenterPostOpUploadImageForCreatingFeed = 0,
+    FetchCenterPostOpUploadMutipleImagesForCreatingFeed = 0,
     FetchCenterPostOpUploadImageForUpdaingProfile
 }FetchCenterPostOp;
 
@@ -212,8 +212,35 @@ typedef enum{
     return [[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
-- (void)uploadImage:(UIImage *)image toCreateFeed:(Feed *)feed{
-    [self postImageWithOperation:image managedObject:feed postOp:FetchCenterPostOpUploadImageForCreatingFeed];
+- (void)uploadToCreateFeed:(Feed *)feed fetchedImageIds:(NSArray *)imageIds{
+    if (feed.plan.planId && feed.feedTitle) {
+        
+        feed.plan.backgroundNum = feed.imageId;
+        feed.imageId = imageIds.firstObject;
+        feed.type = @(imageIds.count > 1 ? FeedTypeMultiplePicture : FeedTypeSinglePicture);
+        feed.picUrls = [imageIds componentsJoinedByString:@","];
+        
+        NSString *baseURL = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,CREATE_FEED];
+        NSDictionary *args = @{@"picurl":feed.imageId, //兼容背影图
+                               @"content":[feed.feedTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                               @"planId":feed.plan.planId,
+                               @"picurls":feed.picUrls,
+                               @"feedsType":feed.type};
+        [self getRequest:baseURL
+               parameter:args
+               operation:FetchCenterGetOpCreateFeed entity:feed];
+    }
+
+}
+
+- (void)uploadImages:(NSArray *)images toCreateFeed:(Feed *)feed{
+    __weak typeof(self) weakSelf = self;
+    for (UIImage *image in images) {
+        dispatch_queue_t uploadQueue = dispatch_queue_create("FetchCenter Upload Images", DISPATCH_QUEUE_CONCURRENT);
+        dispatch_async(uploadQueue, ^{
+            [weakSelf postImageWithOperation:image managedObject:feed postOp:FetchCenterPostOpUploadMutipleImagesForCreatingFeed];
+        });
+    }
 }
 
 - (void)likeFeed:(Feed *)feed{
@@ -529,7 +556,7 @@ typedef enum{
     CGFloat originalSize = UIImagePNGRepresentation(image).length/1024.0f; //in KB
     NSLog(@"original size %@ KB", @(originalSize));
     
-    NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.1);
     NSLog(@"compressed size %@ KB", @(imageData.length/1024.0f));
 
     if ([imageData writeToFile:filePath atomically:YES]) {
@@ -644,24 +671,13 @@ typedef enum{
 
 #pragma mark - response handler
 - (void)didFinishSendingPostRequest:(NSString *)fetchedImageId operation:(FetchCenterPostOp)op entity:(NSManagedObject *)obj{
-//    NSString *fetchedImageId = [json valueForKeyPath:@"data.id"];
+
     switch (op){
-        case FetchCenterPostOpUploadImageForCreatingFeed:{
+        case FetchCenterPostOpUploadMutipleImagesForCreatingFeed:{
             if (fetchedImageId){
                 Feed *feed = (Feed *)obj;
-                feed.imageId = fetchedImageId;
-                NSLog(@"fetched image ID: %@",fetchedImageId);
-                //upload feed
-                NSString *baseURL = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,CREATE_FEED];
-                NSDictionary *args;
-                if (feed.plan.planId && feed.feedTitle) {
-                    args = @{@"picurl":fetchedImageId,
-                             @"content":[feed.feedTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                             @"planId":feed.plan.planId};
-                    [self getRequest:baseURL
-                           parameter:args
-                           operation:FetchCenterGetOpCreateFeed entity:obj];
-                }
+                NSLog(@"\n\nfetched image ID: %@\n\n",fetchedImageId);
+                [self.delegate didFinishUploadingImage:fetchedImageId forFeed:feed];
             }
         }
             break;
@@ -705,9 +721,6 @@ typedef enum{
                 if (fetchedFeedID){
                     Feed *feed = (Feed *)obj;
                     feed.feedId = fetchedFeedID;
-                    //update plan here instead of in createFeedWithImage:inPlan: method
-//                    feed.plan.image = feed.feedId;
-                    feed.plan.backgroundNum = feed.imageId;
                     [feed.plan updateTryTimesOfPlan:YES];
                     [self.delegate didFinishUploadingFeed:feed];
                     NSLog(@"upload feed successed, ID: %@",fetchedFeedID);
