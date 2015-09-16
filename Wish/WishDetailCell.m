@@ -14,8 +14,17 @@
 - (void)awakeFromNib {
     // Initialization code
     self.backgroundColor = [UIColor clearColor];
+    
+    //round corner
+    self.pictureCountLabel.layer.cornerRadius = 8;
+    self.pictureCountLabel.layer.masksToBounds = YES;
+    
 }
 
+- (void)setPictureLabelText:(NSString *)text{
+    //set left and right margin
+    self.pictureCountLabel.text = [NSString stringWithFormat:@" %@ ",text];
+}
 - (IBAction)like:(UIButton *)sender{
     [self.delegate didPressedLikeOnCell:self];
 }

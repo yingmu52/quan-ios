@@ -70,6 +70,10 @@
     return feed;
 }
 
+- (NSNumber *)numberOfPictures{
+    return @([self.picUrls componentsSeparatedByString:@","].count);
+}
+
 + (Feed *)fetchFeedWithId:(NSString *)feedId{
     NSArray *results = [Plan fetchWith:@"Feed"
                              predicate:[NSPredicate predicateWithFormat:@"feedId = %@",feedId]

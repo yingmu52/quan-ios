@@ -26,4 +26,6 @@ typedef enum {
 + (Feed *)fetchFeedWithId:(NSString *)feedId;
 
 - (void)deleteSelf;
+
+- (NSNumber *)numberOfPictures;
 @end

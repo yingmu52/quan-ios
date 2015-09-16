@@ -28,11 +28,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet UILabel *likeCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentCountLabel;
-
+@property (weak, nonatomic) IBOutlet UILabel *pictureCountLabel;
 
 
 @property (weak,nonatomic) id <WishDetailCellDelegate> delegate;
 
+- (void)setPictureLabelText:(NSString *)text;
 
 - (IBAction)like:(UIButton *)sender;
 @end

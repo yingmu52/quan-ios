@@ -279,6 +279,8 @@
     
     cell.likeCountLabel.text = [NSString stringWithFormat:@"%@",feed.likeCount];
     cell.commentCountLabel.text = [NSString stringWithFormat:@"%@",feed.commentCount];
+    
+    [cell setPictureLabelText:[NSString stringWithFormat:@"共%@张",[feed numberOfPictures]]];
     NSURL *imageUrl = [self.fetchCenter urlWithImageID:feed.imageId size:FetchCenterImageSize800];
     [cell.photoView showImageWithImageUrl:imageUrl];
     return cell;
