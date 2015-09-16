@@ -56,6 +56,14 @@
     if (![feed.commentCount isEqualToNumber:@([feedItem[@"commentTimes"] integerValue])]){
         feed.commentCount = @([feedItem[@"commentTimes"] integerValue]);
     }
+    
+    if (![feed.picUrls isEqualToString:feedItem[@"picurls"]]) {
+        feed.picUrls = feedItem[@"picurls"];
+    }
+
+    if (![feed.type isEqualToNumber:@([feedItem[@"feedsType"] integerValue])]){
+        feed.type = @([feedItem[@"feedsType"] integerValue]);
+    }
 
 
     

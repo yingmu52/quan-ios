@@ -84,7 +84,7 @@ typedef enum{
     FetchCenterGetOpCommentFeed,
     FetchCenterGetOpDeleteComment,
     FetchCenterGetOpGetFeedCommentList,
-    FetchCenterGetOpLoadFeedList,
+    FetchCenterGetOpGetFeedList,
     FetchCenterGetOpFeedBack,
     FetchCenterGetOpGetMessageList,
     FetchCenterGetOpGetMessageNotificationInfo,
@@ -198,7 +198,7 @@ typedef enum{
     NSDictionary *args = @{@"id":plan.planId,@"attachInfo":infoStr};
     [self getRequest:rqtStr
            parameter:args
-           operation:FetchCenterGetOpLoadFeedList
+           operation:FetchCenterGetOpGetFeedList
               entity:plan];
 }
 
@@ -881,7 +881,7 @@ typedef enum{
                 [self.delegate didFinishDeletingFeed:obj];
             }
                 break;
-            case FetchCenterGetOpLoadFeedList:{
+            case FetchCenterGetOpGetFeedList:{
                 
                 NSArray *feeds = [json valueForKeyPath:@"data.feedsList"];
                 NSDictionary *pageInfo = [json valueForKeyPath:@"data.attachInfo"];
