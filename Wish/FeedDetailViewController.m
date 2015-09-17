@@ -72,20 +72,22 @@
 #pragma mark - Feed Detail View Header Delegate 
 
 - (void)didTapOnImageView:(UIImageView *)imageView{
-    // Create image info
-    JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
-    imageInfo.image = imageView.image;
-    imageInfo.referenceRect = imageView.frame;
-    imageInfo.referenceView = imageView.superview;
-    
-    // Setup view controller
-    JTSImageViewController *imageViewer = [[JTSImageViewController alloc]
-                                           initWithImageInfo:imageInfo
-                                           mode:JTSImageViewControllerMode_Image
-                                           backgroundStyle:JTSImageViewControllerBackgroundOption_Scaled];
-    
-    // Present the view controller.
-    [imageViewer showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
+    if (imageView.image) {
+        // Create image info
+        JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
+        imageInfo.image = imageView.image;
+        imageInfo.referenceRect = imageView.frame;
+        imageInfo.referenceView = imageView.superview;
+        
+        // Setup view controller
+        JTSImageViewController *imageViewer = [[JTSImageViewController alloc]
+                                               initWithImageInfo:imageInfo
+                                               mode:JTSImageViewControllerMode_Image
+                                               backgroundStyle:JTSImageViewControllerBackgroundOption_Scaled];
+        
+        // Present the view controller.
+        [imageViewer showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
+    }
 }
 
 #pragma mark - dynamic feed title height
@@ -97,13 +99,31 @@
         _headerView = [FeedDetailHeader instantiateFromNib:frame];
         _headerView.delegate = self;
         self.tableView.tableHeaderView = _headerView;
+        
+        
+        NSArray *images = [self.feed imageIdArray];
+        CGFloat w = CGRectGetWidth(_headerView.frame);
+        _headerView.scrollView.contentSize = CGSizeMake(w * images.count, w);
+        _headerView.pageControl.numberOfPages = images.count;
+                
+        for (NSUInteger index = 0; index < images.count; index++) {
+            CGRect frame = CGRectMake(index * w, 0, w, w);
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
+            imageView.contentMode = UIViewContentModeScaleAspectFill;
+            imageView.clipsToBounds = YES;
+
+            NSURL *imageUrl = [[FetchCenter new] urlWithImageID:images[index] size:FetchCenterImageSize800];
+            [imageView showImageWithImageUrl:imageUrl];
+            
+            [_headerView.scrollView addSubview:imageView];
+            
+        }
+
     }
     return _headerView;
 }
 
 - (void)updateHeaderInfoForFeed:(Feed *)feed{
-    NSURL *imageUrl = [self.fetchCenter urlWithImageID:feed.imageId size:FetchCenterImageSize800];
-    [self.headerView.imageView showImageWithImageUrl:imageUrl];
     self.headerView.titleTextView.text = feed.feedTitle;
     self.headerView.dateLabel.text = [SystemUtil stringFromDate:feed.createDate];
     self.headerView.likeCountLabel.text = [NSString stringWithFormat:@"%@",feed.likeCount];

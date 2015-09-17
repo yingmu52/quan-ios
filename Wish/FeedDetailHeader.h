@@ -15,17 +15,18 @@
 - (void)didPressedCommentButton:(FeedDetailHeader *)headerView;
 - (void)didTapOnImageView:(UIImageView *)imageView;
 @end
-@interface FeedDetailHeader : UIView
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@interface FeedDetailHeader : UIView <UIScrollViewDelegate>
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *likeCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentCountLabel;
 @property (weak, nonatomic) IBOutlet UIView *backgroundView;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet GCPTextView *titleTextView;
-
+@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 
 @property (nonatomic,weak) id <FeedDetailHeaderDelegate> delegate;
 
 + (instancetype)instantiateFromNib:(CGRect)frame;
+
 @end

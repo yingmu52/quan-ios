@@ -70,10 +70,6 @@
     return feed;
 }
 
-- (NSNumber *)numberOfPictures{
-    return @([self.picUrls componentsSeparatedByString:@","].count);
-}
-
 + (Feed *)fetchFeedWithId:(NSString *)feedId{
     NSArray *results = [Plan fetchWith:@"Feed"
                              predicate:[NSPredicate predicateWithFormat:@"feedId = %@",feedId]
@@ -81,6 +77,7 @@
     NSAssert(results.count <= 1, @"feed id is not unique");
     return results.lastObject;
 }
+
 
 - (void)deleteSelf{
     
@@ -99,6 +96,17 @@
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
 
 }
+
+#pragma mark - picUrls
+
+- (NSNumber *)numberOfPictures{
+    return @([self imageIdArray].count);
+}
+
+- (NSArray *)imageIdArray{
+    return [self.picUrls componentsSeparatedByString:@","];
+}
+
 @end
 
 

@@ -7,7 +7,8 @@
 //
 
 #import "FeedDetailHeader.h"
-
+#import "FetchCenter.h"
+#import "UIImageView+ImageCache.h"
 @implementation FeedDetailHeader
 
 + (instancetype)instantiateFromNib:(CGRect)frame
@@ -22,6 +23,9 @@
 - (void)awakeFromNib{
     [super awakeFromNib];
     self.titleTextView.textContainerInset = UIEdgeInsetsZero;
+    self.scrollView.delegate = self;
+    
+    
 }
 
 - (IBAction)likeButtonPressed{
@@ -32,8 +36,13 @@
     [self.delegate didPressedCommentButton:self];
 }
 
-- (IBAction)didTapOnImageView:(UITapGestureRecognizer *)tap{
-    [self.delegate didTapOnImageView:self.imageView];
+- (IBAction)didTapOnScrollView:(UITapGestureRecognizer *)tap{
+    UIImageView *imageView = [self.scrollView.subviews objectAtIndex:self.pageControl.currentPage];
+    [self.delegate didTapOnImageView:imageView];
 }
 
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    self.pageControl.currentPage = scrollView.contentOffset.x / scrollView.frame.size.width;;
+}
 @end

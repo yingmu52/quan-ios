@@ -28,4 +28,5 @@ typedef enum {
 - (void)deleteSelf;
 
 - (NSNumber *)numberOfPictures;
+- (NSArray *)imageIdArray;
 @end
