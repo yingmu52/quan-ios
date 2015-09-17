@@ -230,13 +230,14 @@ static NSUInteger distance = 10;
     [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
 }
 
-#pragma mark - fetch center delegate 
+#pragma mark - fetch center delegate
 
 - (void)didFinishUploadingImage:(NSString *)fetchedImageId forFeed:(Feed *)feed{
-    [self.fetchedImageIds addObject:fetchedImageId];
-    if (self.fetchedImageIds.count == self.imagesForFeed.count) { //所有的图片都上传成功了
-        [self.fetchCenter uploadToCreateFeed:feed fetchedImageIds:self.fetchedImageIds];
-    }
+    __weak typeof(self) weakSelf = self;
+    [weakSelf.fetchedImageIds addObject:fetchedImageId];
+    if (weakSelf.fetchedImageIds.count == weakSelf.imagesForFeed.count) { //所有的图片都上传成功了
+        [weakSelf.fetchCenter uploadToCreateFeed:feed fetchedImageIds:weakSelf.fetchedImageIds];
+    }    
 }
 
 - (void)didFinishUploadingFeed:(Feed *)feed

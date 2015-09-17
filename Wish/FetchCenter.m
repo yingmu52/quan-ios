@@ -556,7 +556,7 @@ typedef enum{
     CGFloat originalSize = UIImagePNGRepresentation(image).length/1024.0f; //in KB
     NSLog(@"original size %@ KB", @(originalSize));
     
-    NSData *imageData = UIImageJPEGRepresentation(image, 0.1);
+    NSData *imageData = UIImageJPEGRepresentation(image,0.5);
     NSLog(@"compressed size %@ KB", @(imageData.length/1024.0f));
 
     if ([imageData writeToFile:filePath atomically:YES]) {
