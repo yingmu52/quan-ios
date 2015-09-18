@@ -29,6 +29,16 @@
     });
 }
 
+- (void)showImagePickerForUploadProfileImage:(UIViewController *)controller type:(UIImagePickerControllerSourceType)type{
+    dispatch_main_async_safe(^{
+        UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
+        ipc.sourceType = type;
+        ipc.delegate = self;
+//        ipc.showsCameraControls = YES;
+        ipc.allowsEditing = YES;
+        [controller presentViewController:ipc animated:YES completion:nil];
+    });
+}
 - (void)showPhotoLibrary:(UIViewController *)controller maxImageCount:(NSInteger )count{
     // Create the image picker
     ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
@@ -72,7 +82,9 @@
     if ([self.imagePickerDelegate isKindOfClass:[UIViewController class]]) {
         UIViewController *vc = (UIViewController *)self.imagePickerDelegate;
         [vc dismissViewControllerAnimated:YES completion:^{
-            UIImage *capturedImage = (UIImage *)info[UIImagePickerControllerOriginalImage];
+            UIImage *originalImage = (UIImage *)info[UIImagePickerControllerOriginalImage];
+            UIImage *editedImage = (UIImage *)info[UIImagePickerControllerEditedImage];
+            UIImage *capturedImage = editedImage ? editedImage : originalImage;
             [self.imagePickerDelegate didFinishPickingImage:@[capturedImage]];
         }];
 

@@ -23,4 +23,5 @@ static const NSInteger defaultMaxImageSelectionAllowed = 8;
 - (void)showPhotoLibrary:(UIViewController *)controller maxImageCount:(NSInteger )count;
 - (void)showPhotoLibrary:(UIViewController *)controller;
 - (void)startPickingImageFromLocalSourceFor:(UIViewController<ImagePickerDelegate>*)controller;
+- (void)showImagePickerForUploadProfileImage:(UIViewController *)controller type:(UIImagePickerControllerSourceType)type;
 @end

@@ -199,7 +199,8 @@
 }
 
 - (IBAction)tapOnCamera:(id)sender{
-    [self.imagePicker showPhotoLibrary:self maxImageCount:1];
+    [self.imagePicker showImagePickerForUploadProfileImage:self type:UIImagePickerControllerSourceTypePhotoLibrary];
+//    [self.imagePicker showPhotoLibrary:self maxImageCount:1];
 }
 
 - (void)didFinishPickingImage:(NSArray *)images{
