@@ -10,8 +10,9 @@
 #import "UIActionSheet+Blocks.h"
 #import "ELCImagePickerController.h"
 #import "SDWebImageCompat.h"
+#import "QBImagePickerController.h"
 @import AssetsLibrary;
-@interface ImagePicker () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,ELCImagePickerControllerDelegate>
+@interface ImagePicker () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,ELCImagePickerControllerDelegate,QBImagePickerControllerDelegate>
 @property (nonatomic,strong) NSArray *images;
 @end
 
@@ -40,22 +41,81 @@
     });
 }
 - (void)showPhotoLibrary:(UIViewController *)controller maxImageCount:(NSInteger )count{
-    // Create the image picker
-    ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
-    
-    elcPicker.maximumImagesCount = count; //Set the maximum number of images to select, defaults to 4
-    elcPicker.returnsOriginalImage = NO; //Only return the fullScreenImage, not the fullResolutionImage
-    elcPicker.returnsImage = YES; //Return UIimage if YES. If NO, only return asset location information
-    elcPicker.onOrder = NO; //For multiple image selection, display and return selected order of images
-    elcPicker.imagePickerDelegate = self;
-    
-    //Present modally
-    [controller presentViewController:elcPicker animated:YES completion:nil];
+//    // Create the image picker
+//    ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
+//    
+//    elcPicker.maximumImagesCount = count; //Set the maximum number of images to select, defaults to 4
+//    elcPicker.returnsOriginalImage = NO; //Only return the fullScreenImage, not the fullResolutionImage
+//    elcPicker.returnsImage = YES; //Return UIimage if YES. If NO, only return asset location information
+//    elcPicker.onOrder = NO; //For multiple image selection, display and return selected order of images
+//    elcPicker.imagePickerDelegate = self;
+//    
+//    //Present modally
+//    [controller presentViewController:elcPicker animated:YES completion:nil];
 
+    QBImagePickerController *imagePickerController = [QBImagePickerController new];
+    imagePickerController.delegate = self;
+    imagePickerController.allowsMultipleSelection = YES;
+    imagePickerController.maximumNumberOfSelection = count;
+    imagePickerController.showsNumberOfSelectedAssets = YES;
+    imagePickerController.mediaType = QBImagePickerMediaTypeImage;
+    imagePickerController.numberOfColumnsInPortrait = 3;
+    imagePickerController.assetCollectionSubtypes = @[@(PHAssetCollectionSubtypeSmartAlbumUserLibrary), // Camera Roll
+                                                      @(PHAssetCollectionSubtypeAlbumMyPhotoStream), // My Photo Stream
+                                                      @(PHAssetCollectionSubtypeSmartAlbumPanoramas), // Panoramas
+                                                      @(PHAssetCollectionSubtypeSmartAlbumBursts) // Bursts
+                                                      ];
+    [controller presentViewController:imagePickerController animated:YES completion:NULL];
 }
 
 - (void)showPhotoLibrary:(UIViewController *)controller{
     [self showPhotoLibrary:controller maxImageCount:defaultMaxImageSelectionAllowed]; //默认可选取的照片数
+}
+
+#pragma QBImagePickerController
+
+- (BOOL)qb_imagePickerController:(QBImagePickerController *)imagePickerController shouldSelectAsset:(PHAsset *)asset{
+    if (imagePickerController.numberOfSelectedAsset == imagePickerController.maximumNumberOfSelection) {
+        NSString *titleText = [NSString stringWithFormat:@"最后只能选%@张照片哦",@(imagePickerController.maximumNumberOfSelection)];
+        [[[UIAlertView alloc] initWithTitle:titleText message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+        return NO;
+    }
+    return YES;
+}
+
+- (void)qb_imagePickerController:(QBImagePickerController *)imagePickerController didFinishPickingAssets:(NSArray *)assets {
+    if ([self.imagePickerDelegate isKindOfClass:[UIViewController class]]) {
+        PHImageManager *manager = [PHImageManager defaultManager];
+        NSMutableArray *arrayOfUIImages = [NSMutableArray arrayWithCapacity:assets.count];
+        
+        
+        PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+        options.resizeMode = PHImageRequestOptionsResizeModeExact;
+        
+        
+        for (PHAsset *asset in assets) {
+
+            [manager requestImageDataForAsset:asset
+                                      options:options
+                                resultHandler:^(NSData *imageData,
+                                                NSString *dataUTI,
+                                                UIImageOrientation orientation,
+                                                NSDictionary *info)
+            {
+                UIImage *image = [UIImage imageWithData:imageData];
+                [arrayOfUIImages addObject:image];
+                if (arrayOfUIImages.count == assets.count) {
+                    [self.imagePickerDelegate didFinishPickingImage:arrayOfUIImages];
+                }
+            }];
+            
+        }
+        [imagePickerController dismissViewControllerAnimated:YES completion:NULL];
+    }
+}
+
+- (void)qb_imagePickerControllerDidCancel:(QBImagePickerController *)imagePickerController {
+    [imagePickerController dismissViewControllerAnimated:YES completion:NULL];
 }
 
 #pragma mark - ELCImagePickerControllerDelegate
