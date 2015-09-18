@@ -133,13 +133,13 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     if (selectedAssets.count > 0) {
         NSBundle *bundle = self.imagePickerController.assetBundle;
         NSString *format;
-        if (selectedAssets.count > 1) {
+//        if (selectedAssets.count > 1) {
             format = NSLocalizedStringFromTableInBundle(@"assets.toolbar.items-selected", @"QBImagePicker", bundle, nil);
-        } else {
-            format = NSLocalizedStringFromTableInBundle(@"assets.toolbar.item-selected", @"QBImagePicker", bundle, nil);
-        }
+//        } else {
+//            format = NSLocalizedStringFromTableInBundle(@"assets.toolbar.item-selected", @"QBImagePicker", bundle, nil);
+//        }
         
-        NSString *title = [NSString stringWithFormat:format, selectedAssets.count];
+        NSString *title = [NSString stringWithFormat:format, @(selectedAssets.count),@(self.imagePickerController.maximumNumberOfSelection)];
         [(UIBarButtonItem *)self.toolbarItems[1] setTitle:title];
     } else {
         [(UIBarButtonItem *)self.toolbarItems[1] setTitle:@""];
