@@ -98,20 +98,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Photos" id="r7D-Kp-3yC">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="s1M-VA-CeM">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="s1M-VA-CeM">
                             <connections>
                                 <action selector="cancel:" destination="QL5-wR-LYt" id="l9K-7e-2qt"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="laG-jk-Ma2">
-                            <connections>
-                                <action selector="done:" destination="QL5-wR-LYt" id="Try-7j-DzS"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="doneButton" destination="laG-jk-Ma2" id="CV6-AR-B90"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qu9-YY-dvn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -274,7 +266,7 @@
             <objects>
                 <navigationController storyboardIdentifier="QBAlbumsNavigationController" id="8Dq-FL-Kai" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Whc-Ry-EBq">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Whc-Ry-EBq" customClass="NavigationBar">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

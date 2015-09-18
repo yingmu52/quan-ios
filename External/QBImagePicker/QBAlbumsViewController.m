@@ -29,7 +29,7 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
 
 @interface QBAlbumsViewController () <PHPhotoLibraryChangeObserver>
 
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *doneButton;
+//@property (nonatomic, strong) IBOutlet UIBarButtonItem *doneButton;
 
 @property (nonatomic, copy) NSArray *fetchResults;
 @property (nonatomic, copy) NSArray *assetCollections;
@@ -64,13 +64,13 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     self.navigationItem.prompt = self.imagePickerController.prompt;
     
     // Show/hide 'Done' button
-    if (self.imagePickerController.allowsMultipleSelection) {
-        [self.navigationItem setRightBarButtonItem:self.doneButton animated:NO];
-    } else {
-        [self.navigationItem setRightBarButtonItem:nil animated:NO];
-    }
+//    if (self.imagePickerController.allowsMultipleSelection) {
+//        [self.navigationItem setRightBarButtonItem:self.doneButton animated:NO];
+//    } else {
+//        [self.navigationItem setRightBarButtonItem:nil animated:NO];
+//    }
     
-    [self updateControlState];
+//    [self updateControlState];
     [self updateSelectionInfo];
 }
 
@@ -250,10 +250,10 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     return NO;
 }
 
-- (void)updateControlState
-{
-    self.doneButton.enabled = [self isMinimumSelectionLimitFulfilled];
-}
+//- (void)updateControlState
+//{
+//    self.doneButton.enabled = [self isMinimumSelectionLimitFulfilled];
+//}
 
 
 #pragma mark - UITableViewDataSource

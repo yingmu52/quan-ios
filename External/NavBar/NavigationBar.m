@@ -18,6 +18,7 @@ static CGFloat kEndPoint = 1.5;
 {
     [super awakeFromNib];
     
+    self.tintColor = [UIColor blackColor];
     //导航文字属性
     [self showDefaultTextColor];
     //去掉分隔线, 加背影色
