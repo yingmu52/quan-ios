@@ -29,7 +29,9 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jpt-cH-pfH">
                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="25" id="dm9-hd-ahd"/>
+                                <constraint firstAttribute="width" constant="25" id="dm9-hd-ahd">
+                                    <variation key="heightClass=regular-widthClass=compact" constant="22"/>
+                                </constraint>
                                 <constraint firstAttribute="width" secondItem="Jpt-cH-pfH" secondAttribute="height" multiplier="1:1" id="hcR-CI-Mfh"/>
                             </constraints>
                             <state key="normal" image="ic_like_default">
@@ -54,7 +56,9 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IHf-Fx-td1">
                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="25" id="muD-So-DOG"/>
+                                <constraint firstAttribute="width" constant="25" id="muD-So-DOG">
+                                    <variation key="heightClass=regular-widthClass=compact" constant="22"/>
+                                </constraint>
                                 <constraint firstAttribute="width" secondItem="IHf-Fx-td1" secondAttribute="height" multiplier="1:1" id="xLe-a3-Yhs"/>
                             </constraints>
                             <state key="normal" image="ic_comment_default">
