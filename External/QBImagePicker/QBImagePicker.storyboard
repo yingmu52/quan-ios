@@ -236,10 +236,19 @@
                                 </label>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="m2s-7T-bnL" firstAttribute="left" secondItem="sqR-h3-lW1" secondAttribute="left" id="8fv-Sl-lhe"/>
+                                <constraint firstItem="m2s-7T-bnL" firstAttribute="left" secondItem="sqR-h3-lW1" secondAttribute="left" id="8fv-Sl-lhe">
+                                    <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                                </constraint>
                                 <constraint firstAttribute="centerY" secondItem="m2s-7T-bnL" secondAttribute="centerY" id="DrY-pC-Gfi"/>
-                                <constraint firstAttribute="right" secondItem="m2s-7T-bnL" secondAttribute="right" id="lng-sP-3aa"/>
+                                <constraint firstAttribute="right" secondItem="m2s-7T-bnL" secondAttribute="right" id="lng-sP-3aa">
+                                    <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                                </constraint>
                             </constraints>
+                            <variation key="heightClass=regular-widthClass=compact">
+                                <mask key="constraints">
+                                    <exclude reference="lng-sP-3aa"/>
+                                </mask>
+                            </variation>
                         </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="QiH-NZ-ZGN" id="PlE-FW-LqS"/>
@@ -247,15 +256,12 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Album Title" id="wKf-eb-U1x">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="nai-ZV-lR8">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="dUc-Vw-eoO">
                             <connections>
-                                <action selector="done:" destination="QiH-NZ-ZGN" id="RYV-Ik-8ry"/>
+                                <action selector="cancel:" destination="QiH-NZ-ZGN" id="pBN-3r-jdq"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="doneButton" destination="nai-ZV-lR8" id="lxY-18-MpF"/>
-                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qBb-2Q-SxP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

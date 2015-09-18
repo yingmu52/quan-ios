@@ -8,7 +8,7 @@
 
 #import "QBAssetsViewController.h"
 #import <Photos/Photos.h>
-
+#import "Theme.h"
 // Views
 #import "QBImagePickerController.h"
 #import "QBAssetCell.h"
@@ -57,7 +57,7 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
 
 @interface QBAssetsViewController () <PHPhotoLibraryChangeObserver, UICollectionViewDelegateFlowLayout>
 
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *doneButton;
+//@property (nonatomic, strong) IBOutlet UIBarButtonItem *doneButton;
 
 @property (nonatomic, strong) PHFetchResult *fetchResult;
 
@@ -77,9 +77,20 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     
     [self setUpToolbarItems];
     [self resetCachedAssets];
+    [self setUpNavigationItem];
     
     // Register observer
     [[PHPhotoLibrary sharedPhotoLibrary] registerChangeObserver:self];
+}
+
+- (void)setUpNavigationItem
+{
+    CGRect frame = CGRectMake(0,0, 25,25);
+    UIButton *backBtn = [Theme buttonWithImage:[Theme navBackButtonDefault]
+                                        target:self.navigationController
+                                      selector:@selector(popViewControllerAnimated:)
+                                         frame:frame];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -94,13 +105,13 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     self.collectionView.allowsMultipleSelection = self.imagePickerController.allowsMultipleSelection;
     
     // Show/hide 'Done' button
-    if (self.imagePickerController.allowsMultipleSelection) {
-        [self.navigationItem setRightBarButtonItem:self.doneButton animated:NO];
-    } else {
-        [self.navigationItem setRightBarButtonItem:nil animated:NO];
-    }
+//    if (self.imagePickerController.allowsMultipleSelection) {
+//        [self.navigationItem setRightBarButtonItem:self.doneButton animated:NO];
+//    } else {
+//        [self.navigationItem setRightBarButtonItem:nil animated:NO];
+//    }
     
-    [self updateDoneButtonState];
+//    [self updateDoneButtonState];
     [self updateSelectionInfo];
     
     // Scroll to bottom
@@ -183,14 +194,27 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     }
 }
 
-
+- (IBAction)cancel:(id)sender{
+    if ([self.imagePickerController.delegate respondsToSelector:@selector(qb_imagePickerControllerDidCancel:)]) {
+        [self.imagePickerController.delegate qb_imagePickerControllerDidCancel:self.imagePickerController];
+    }
+}
 #pragma mark - Toolbar
 
 - (void)setUpToolbarItems
 {
     // Space
-    UIBarButtonItem *leftSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL];
-    UIBarButtonItem *rightSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL];
+//    UIBarButtonItem *leftSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL];
+//    UIBarButtonItem *rightSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL];
+
+    UIBarButtonItem *centerSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL];
+
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80.0, 35.0)];
+    [button setTitle:@"完成" forState:UIControlStateNormal];
+    button.backgroundColor = [SystemUtil colorFromHexString:@"#51BFA6"];
+    button.layer.cornerRadius = 4.0f;
+    [button addTarget:self action:@selector(done:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *finishButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     
     // Info label
     NSDictionary *attributes = @{ NSForegroundColorAttributeName: [UIColor blackColor] };
@@ -199,7 +223,8 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     [infoButtonItem setTitleTextAttributes:attributes forState:UIControlStateNormal];
     [infoButtonItem setTitleTextAttributes:attributes forState:UIControlStateDisabled];
     
-    self.toolbarItems = @[leftSpace, infoButtonItem, rightSpace];
+    self.toolbarItems = @[infoButtonItem,centerSpace,finishButton];
+
 }
 
 - (void)updateSelectionInfo
@@ -209,16 +234,16 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     if (selectedAssets.count > 0) {
         NSBundle *bundle = self.imagePickerController.assetBundle;
         NSString *format;
-        if (selectedAssets.count > 1) {
+//        if (selectedAssets.count > 1) {
             format = NSLocalizedStringFromTableInBundle(@"assets.toolbar.items-selected", @"QBImagePicker", bundle, nil);
-        } else {
-            format = NSLocalizedStringFromTableInBundle(@"assets.toolbar.item-selected", @"QBImagePicker", bundle, nil);
-        }
-        
-        NSString *title = [NSString stringWithFormat:format, selectedAssets.count];
-        [(UIBarButtonItem *)self.toolbarItems[1] setTitle:title];
+//        } else {
+//            format = NSLocalizedStringFromTableInBundle(@"assets.toolbar.item-selected", @"QBImagePicker", bundle, nil);
+//        }
+
+        NSString *title = [NSString stringWithFormat:format, @(selectedAssets.count),@(self.imagePickerController.maximumNumberOfSelection)];
+        [(UIBarButtonItem *)self.toolbarItems[0] setTitle:title];
     } else {
-        [(UIBarButtonItem *)self.toolbarItems[1] setTitle:@""];
+        [(UIBarButtonItem *)self.toolbarItems[0] setTitle:@""];
     }
 }
 
@@ -276,10 +301,10 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     return NO;
 }
 
-- (void)updateDoneButtonState
-{
-    self.doneButton.enabled = [self isMinimumSelectionLimitFulfilled];
-}
+//- (void)updateDoneButtonState
+//{
+//    self.doneButton.enabled = [self isMinimumSelectionLimitFulfilled];
+//}
 
 
 #pragma mark - Asset Caching
@@ -588,7 +613,7 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
         
         self.lastSelectedItemIndexPath = indexPath;
         
-        [self updateDoneButtonState];
+//        [self updateDoneButtonState];
         
         if (imagePickerController.showsNumberOfSelectedAssets) {
             [self updateSelectionInfo];
@@ -625,7 +650,7 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     
     self.lastSelectedItemIndexPath = nil;
     
-    [self updateDoneButtonState];
+//    [self updateDoneButtonState];
     
     if (imagePickerController.showsNumberOfSelectedAssets) {
         [self updateSelectionInfo];

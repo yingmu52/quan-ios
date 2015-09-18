@@ -30,7 +30,6 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
 @interface QBAlbumsViewController () <PHPhotoLibraryChangeObserver>
 
 //@property (nonatomic, strong) IBOutlet UIBarButtonItem *doneButton;
-
 @property (nonatomic, copy) NSArray *fetchResults;
 @property (nonatomic, copy) NSArray *assetCollections;
 
