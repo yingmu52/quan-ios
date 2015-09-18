@@ -14,7 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet QBVideoIndicatorView *videoIndicatorView;
-
+@property (weak, nonatomic) IBOutlet UIImageView *checkMark;
 @property (nonatomic, assign) BOOL showsOverlayViewWhenSelected;
 
 @end

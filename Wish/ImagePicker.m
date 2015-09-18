@@ -59,7 +59,7 @@
     imagePickerController.maximumNumberOfSelection = count;
     imagePickerController.showsNumberOfSelectedAssets = YES;
     imagePickerController.mediaType = QBImagePickerMediaTypeImage;
-    imagePickerController.numberOfColumnsInPortrait = 3;
+    imagePickerController.numberOfColumnsInPortrait = 4;
     imagePickerController.assetCollectionSubtypes = @[@(PHAssetCollectionSubtypeSmartAlbumUserLibrary), // Camera Roll
                                                       @(PHAssetCollectionSubtypeAlbumMyPhotoStream), // My Photo Stream
                                                       @(PHAssetCollectionSubtypeSmartAlbumPanoramas), // Panoramas

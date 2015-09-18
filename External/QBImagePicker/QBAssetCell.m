@@ -7,7 +7,7 @@
 //
 
 #import "QBAssetCell.h"
-
+#import "Theme.h"
 @interface QBAssetCell ()
 
 @property (weak, nonatomic) IBOutlet UIView *overlayView;
@@ -21,7 +21,12 @@
     [super setSelected:selected];
     
     // Show/hide overlay view
-    self.overlayView.hidden = !(selected && self.showsOverlayViewWhenSelected);
+//    self.overlayView.hidden = !(selected && self.showsOverlayViewWhenSelected);
+    if (selected && self.showsOverlayViewWhenSelected) {
+        self.checkMark.image = [Theme checkmarkSelected];
+    }else{
+        self.checkMark.image = [Theme checkmarkUnSelected];
+    }
 }
 
 @end
