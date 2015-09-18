@@ -671,30 +671,30 @@ typedef enum{
 
 #pragma mark - response handler
 - (void)didFinishSendingPostRequest:(NSString *)fetchedImageId operation:(FetchCenterPostOp)op entity:(NSManagedObject *)obj{
-
-    switch (op){
-        case FetchCenterPostOpUploadMutipleImagesForCreatingFeed:{
-            if (fetchedImageId){
-                Feed *feed = (Feed *)obj;
-                NSLog(@"\n\nfetched image ID: %@\n\n",fetchedImageId);
-                [self.delegate didFinishUploadingImage:fetchedImageId forFeed:feed];
-            }
-        }
-            break;
-        case FetchCenterPostOpUploadImageForUpdaingProfile:{
-            //update local User info
-            if (fetchedImageId){
-                [User updateAttributeFromDictionary:@{PROFILE_PICTURE_ID_CUSTOM:fetchedImageId}];
-                NSLog(@"image uploaded %@",fetchedImageId);
-                if ([self.delegate respondsToSelector:@selector(didFinishUploadingPictureForProfile)]) {
-                    [self.delegate didFinishUploadingPictureForProfile];
+    dispatch_main_async_safe(^{
+        switch (op){
+            case FetchCenterPostOpUploadMutipleImagesForCreatingFeed:{
+                if (fetchedImageId){
+                    Feed *feed = (Feed *)obj;
+                    [self.delegate didFinishUploadingImage:fetchedImageId forFeed:feed];
                 }
             }
+                break;
+            case FetchCenterPostOpUploadImageForUpdaingProfile:{
+                //update local User info
+                if (fetchedImageId){
+                    [User updateAttributeFromDictionary:@{PROFILE_PICTURE_ID_CUSTOM:fetchedImageId}];
+                    NSLog(@"image uploaded %@",fetchedImageId);
+                    if ([self.delegate respondsToSelector:@selector(didFinishUploadingPictureForProfile)]) {
+                        [self.delegate didFinishUploadingPictureForProfile];
+                    }
+                }
+            }
+                break;
+            default:
+                break;
         }
-            break;
-        default:
-            break;
-    }
+    });
 }
 
 - (void)didFinishSendingGetRequest:(NSDictionary *)json operation:(FetchCenterGetOp)op entity:(id)obj{

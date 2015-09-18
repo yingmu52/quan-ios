@@ -237,7 +237,10 @@ static NSUInteger distance = 10;
     [weakSelf.fetchedImageIds addObject:fetchedImageId];
     if (weakSelf.fetchedImageIds.count == weakSelf.imagesForFeed.count) { //所有的图片都上传成功了
         [weakSelf.fetchCenter uploadToCreateFeed:feed fetchedImageIds:weakSelf.fetchedImageIds];
-    }    
+    }
+    NSLog(@"\n\nfetched image ID: %@\n\n",fetchedImageId);
+//    weakSelf.navigationItem.title = [NSString stringWithFormat:@"%@ (%@%%)",weakSelf.plan.planTitle,@(weakSelf.fetchedImageIds.count/weakSelf.imagesForFeed.count)];
+
 }
 
 - (void)didFinishUploadingFeed:(Feed *)feed
