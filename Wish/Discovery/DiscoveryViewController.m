@@ -87,31 +87,32 @@ static CGFloat horizontalInset = 10.0f;
 
 #pragma mark - Scroll view delegate (Add Button Animation)
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    self.lastContentOffSet = scrollView.contentOffset.y;
-}
+//- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+//    self.lastContentOffSet = scrollView.contentOffset.y;
+//}
+//
+//- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+//    if (self.lastContentOffSet < scrollView.contentOffset.y) {
+//        //hide camera
+//        if (self.addButton.isUserInteractionEnabled) [self animateCameraIcon:YES];
+//        
+//    }else if (self.lastContentOffSet > scrollView.contentOffset.y) {
+//        //show camera
+//        if (!self.addButton.isUserInteractionEnabled) [self animateCameraIcon:NO];
+//    }
+//    
+//}
+//
+//- (void)animateCameraIcon:(BOOL)shouldHideButton{
+//    self.addButton.userInteractionEnabled = !shouldHideButton;
+//    if (shouldHideButton){
+////        [self.navigationController setNavigationBarHidden:YES animated:YES];
+//        if (!self.addButton.hidden) self.addButton.hidden = YES;
+//    }else{
+//        if (self.addButton.hidden) self.addButton.hidden = NO;
+//    }
+//}
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    if (self.lastContentOffSet < scrollView.contentOffset.y) {
-        //hide camera
-        if (self.addButton.isUserInteractionEnabled) [self animateCameraIcon:YES];
-        
-    }else if (self.lastContentOffSet > scrollView.contentOffset.y) {
-        //show camera
-        if (!self.addButton.isUserInteractionEnabled) [self animateCameraIcon:NO];
-    }
-    
-}
-
-- (void)animateCameraIcon:(BOOL)shouldHideButton{
-    self.addButton.userInteractionEnabled = !shouldHideButton;
-    if (shouldHideButton){
-//        [self.navigationController setNavigationBarHidden:YES animated:YES];
-        if (!self.addButton.hidden) self.addButton.hidden = YES;
-    }else{
-        if (self.addButton.hidden) self.addButton.hidden = NO;
-    }
-}
 - (void)loaddAddButton{
     //读取加号按扭
     UIImage *icon = [Theme discoveryAddButton];
