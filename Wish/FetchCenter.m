@@ -236,7 +236,9 @@ typedef enum{
 - (void)uploadImages:(NSArray *)images toCreateFeed:(Feed *)feed{
     __weak typeof(self) weakSelf = self;
     for (UIImage *image in images) {
-        dispatch_queue_t uploadQueue = dispatch_queue_create("FetchCenter Upload Images", DISPATCH_QUEUE_CONCURRENT);
+        NSString *label = [NSString stringWithFormat:@"com.FetchCenter.uploadMultipleImages.%@",@([images indexOfObject:image])];
+        NSLog(@"created thread %@",label);
+        dispatch_queue_t uploadQueue = dispatch_queue_create(label.UTF8String, NULL);
         dispatch_async(uploadQueue, ^{
             [weakSelf postImageWithOperation:image managedObject:feed postOp:FetchCenterPostOpUploadMutipleImagesForCreatingFeed];
         });
@@ -567,6 +569,7 @@ typedef enum{
                                                                             msgContext:@"picture upload successed from iOS"
                                                                                 bucket:@"shier"
                                                                                 fileId:fileId];
+
         //2.调用TXYUploadManager的upload接口
         [self.uploadManager upload:uploadPhotoTask
                               sign:nil
@@ -594,11 +597,30 @@ typedef enum{
              
          }progress:^(int64_t totalSize, int64_t sendSize, NSDictionary *context){
              //进度
-             long progress = (long)(sendSize * 100.0f/totalSize);
-             NSLog(@"%@",[NSString stringWithFormat:@"上传进度: %ld%%",progress]);
+//             long progress = (long)(sendSize * 100.0f/totalSize);
+//             NSLog(@"%@",[NSString stringWithFormat:@"上传进度: %ld%%",progress]);
              
          }stateChange:^(TXYUploadTaskState state, NSDictionary *context) {
              //上传状态
+             switch (state) {
+                 case TXYUploadTaskStateConnecting:
+                     NSLog(@"Connecting..");
+                     break;
+                 case TXYUploadTaskStateSending:
+                     NSLog(@"Sending...");
+                     break;
+                 case TXYUploadTaskStateFail:
+                     NSLog(@"Failled");
+                     break;
+                 case TXYUploadTaskStateSuccess:
+                     NSLog(@"Succeed!");
+                     break;
+                 case TXYUploadTaskStateWait:
+                     NSLog(@"Waiting..");
+                     break;
+                 default:
+                     break;
+             }
          }];
     }
     
