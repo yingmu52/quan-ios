@@ -10,6 +10,12 @@
 
 @class QBVideoIndicatorView;
 
+@class QBAssetCell;
+
+@protocol  QBAssetCellDelegate <NSObject>
+- (void)didTapOnInvisibleButton:(QBAssetCell *)cell;
+@end
+
 @interface QBAssetCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -17,4 +23,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *checkMark;
 @property (nonatomic, assign) BOOL showsOverlayViewWhenSelected;
 
+@property (nonatomic,weak) id <QBAssetCellDelegate> invisibleButtonDelegate;
 @end

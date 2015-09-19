@@ -25,6 +25,8 @@
 		A030105B1BABC6AA0041E2CF /* QBSlomoIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = A030104C1BABC6AA0041E2CF /* QBSlomoIconView.m */; };
 		A030105C1BABC6AA0041E2CF /* QBVideoIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = A030104E1BABC6AA0041E2CF /* QBVideoIconView.m */; };
 		A030105D1BABC6AA0041E2CF /* QBVideoIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = A03010501BABC6AA0041E2CF /* QBVideoIndicatorView.m */; };
+		A03010601BACAFBC0041E2CF /* QBPreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A030105F1BACAFBC0041E2CF /* QBPreViewController.m */; };
+		A03010611BACAFBC0041E2CF /* QBPreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A030105F1BACAFBC0041E2CF /* QBPreViewController.m */; };
 		A04842D11B98C5D10032E927 /* Owner.m in Sources */ = {isa = PBXBuildFile; fileRef = A04842D01B98C5D10032E927 /* Owner.m */; };
 		A04842D21B98C5D10032E927 /* Owner.m in Sources */ = {isa = PBXBuildFile; fileRef = A04842D01B98C5D10032E927 /* Owner.m */; };
 		A04842D51B98C5D10032E927 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = A04842D41B98C5D10032E927 /* Message.m */; };
@@ -364,6 +366,8 @@
 		A030104F1BABC6AA0041E2CF /* QBVideoIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBVideoIndicatorView.h; sourceTree = "<group>"; };
 		A03010501BABC6AA0041E2CF /* QBVideoIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBVideoIndicatorView.m; sourceTree = "<group>"; };
 		A03010511BABC6AA0041E2CF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/QBImagePicker.strings"; sourceTree = "<group>"; };
+		A030105E1BACAFBC0041E2CF /* QBPreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBPreViewController.h; sourceTree = "<group>"; };
+		A030105F1BACAFBC0041E2CF /* QBPreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBPreViewController.m; sourceTree = "<group>"; };
 		A04842CF1B98C5D10032E927 /* Owner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Owner.h; sourceTree = "<group>"; };
 		A04842D01B98C5D10032E927 /* Owner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Owner.m; sourceTree = "<group>"; };
 		A04842D31B98C5D10032E927 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
@@ -734,6 +738,8 @@
 				A03010461BABC6AA0041E2CF /* QBCheckmarkView.m */,
 				A03010471BABC6AA0041E2CF /* QBImagePicker.h */,
 				A03010481BABC6AA0041E2CF /* QBImagePicker.storyboard */,
+				A030105E1BACAFBC0041E2CF /* QBPreViewController.h */,
+				A030105F1BACAFBC0041E2CF /* QBPreViewController.m */,
 				A03010491BABC6AA0041E2CF /* QBImagePickerController.h */,
 				A030104A1BABC6AA0041E2CF /* QBImagePickerController.m */,
 				A030104B1BABC6AA0041E2CF /* QBSlomoIconView.h */,
@@ -1570,6 +1576,7 @@
 				AEF3F87F1AA4CFA6008C2300 /* WishDetailVCOwner.m in Sources */,
 				A04842D51B98C5D10032E927 /* Message.m in Sources */,
 				A0F7D4351B84E851003CCB34 /* CustomBadge.m in Sources */,
+				A03010601BACAFBC0041E2CF /* QBPreViewController.m in Sources */,
 				A0D102271B84EB6A006B0E4E /* SDWebImagePrefetcher.m in Sources */,
 				AECE2BFF1AA19F6500B1C58E /* Owner+OwnerCRUD.m in Sources */,
 				A03010581BABC6AA0041E2CF /* QBCheckmarkView.m in Sources */,
@@ -1763,6 +1770,7 @@
 				A053CF691BA3FF1F0007970A /* ELCAssetCell.m in Sources */,
 				A0D102221B84EB6A006B0E4E /* SDWebImageDownloader.m in Sources */,
 				A0F7D4361B84E851003CCB34 /* CustomBadge.m in Sources */,
+				A03010611BACAFBC0041E2CF /* QBPreViewController.m in Sources */,
 				AED355F91B228696000427FF /* FeedDetailHeader.m in Sources */,
 				AEF7F2981A686FDB0022410B /* HomeViewController.m in Sources */,
 				A053CF651BA3FF1F0007970A /* ELCAlbumPickerController.m in Sources */,

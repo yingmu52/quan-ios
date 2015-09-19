@@ -29,4 +29,7 @@
     }
 }
 
+- (IBAction)tapOnInvisibleButton{
+    [self.invisibleButtonDelegate didTapOnInvisibleButton:self];
+}
 @end

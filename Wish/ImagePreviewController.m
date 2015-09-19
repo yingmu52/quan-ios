@@ -57,14 +57,23 @@
     NavigationBar *navBar = (NavigationBar *)self.navigationController.navigationBar;
     [navBar setNavigationBarWithColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.85]];
     navBar.barStyle = UIBarStyleBlackTranslucent;
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+//    [[UIApplication sharedApplication] setStatusBarHidden:YES];
 }
 
 - (void)resetNavbarStyle{
     NavigationBar *navBar = (NavigationBar *)self.navigationController.navigationBar;
     [navBar setNavigationBarWithColor:[UIColor whiteColor]];
     [navBar showDefaultTextColor];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+//    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+}
+
+//- (BOOL)prefersStatusBarHidden{
+//    return YES;
+//}
+
+-(UIViewController *)childViewControllerForStatusBarHidden
+{
+    return nil;
 }
 
 #pragma mark - 删除

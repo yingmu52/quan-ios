@@ -13,7 +13,7 @@
 #import "QBImagePickerController.h"
 #import "QBAssetCell.h"
 #import "QBVideoIndicatorView.h"
-
+#import "QBPreViewController.h"
 static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     return CGSizeMake(size.width * scale, size.height * scale);
 }
@@ -55,7 +55,7 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
 
 @end
 
-@interface QBAssetsViewController () <PHPhotoLibraryChangeObserver, UICollectionViewDelegateFlowLayout>
+@interface QBAssetsViewController () <PHPhotoLibraryChangeObserver, UICollectionViewDelegateFlowLayout,QBAssetCellDelegate>
 
 //@property (nonatomic, strong) IBOutlet UIBarButtonItem *doneButton;
 
@@ -119,12 +119,16 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:(self.fetchResult.count - 1) inSection:0];
         [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
     }
+    
+//    if (self.imagePickerController.selectedAssets.count > 0) {
+//        [self.navigationController setToolbarHidden:NO animated:YES];
+//    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
+//    [self.navigationController setToolbarHidden:YES animated:YES];
     self.disableScrollToBottom = YES;
 }
 
@@ -469,7 +473,7 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     QBAssetCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AssetCell" forIndexPath:indexPath];
     cell.tag = indexPath.item;
     cell.showsOverlayViewWhenSelected = self.imagePickerController.allowsMultipleSelection;
-    
+    cell.invisibleButtonDelegate = self;
     // Image
     PHAsset *asset = self.fetchResult[indexPath.item];
     CGSize itemSize = [(UICollectionViewFlowLayout *)collectionView.collectionViewLayout itemSize];
@@ -573,6 +577,22 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     return nil;
 }
 
+#pragma mark - QBAssetCell Delegate 
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    if ([segue.identifier isEqualToString:@"showImagePreview"] && [sender isKindOfClass:[QBAssetCell class]]) {
+        
+        NSIndexPath *indexPath = [self.collectionView indexPathForCell:sender];
+        PHAsset *asset = self.fetchResult[indexPath.item];
+        QBPreViewController *qbpvc = segue.destinationViewController;
+        qbpvc.arrayOfPhAssets = @[asset];
+        
+    }
+}
+- (void)didTapOnInvisibleButton:(QBAssetCell *)cell{
+    [self performSegueWithIdentifier:@"showImagePreview" sender:cell];
+}
 
 #pragma mark - UICollectionViewDelegate
 
