@@ -7,6 +7,9 @@
 //
 
 @import UIKit;
+#import "Theme.h"
+#import "NavigationBar.h"
+#import "ImagePreviewCell.h"
 
 @protocol ImagePreviewControllerDelegate <NSObject>
 

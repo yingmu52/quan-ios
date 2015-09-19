@@ -11,6 +11,7 @@
 #import "NavigationBar.h"
 @import Photos;
 @interface QBPreViewController ()
+@property (nonatomic,strong) UIButton *checkMarkButton;
 @end
 
 @implementation QBPreViewController
@@ -18,24 +19,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIButton *checkMarkButton = [Theme buttonWithImage:[Theme checkmarkUnSelected]
-                                                target:self
-                                              selector:nil
-                                                 frame:CGRectMake(0, 0, 25, 25)];
+    self.checkMarkButton = [Theme buttonWithImage:[Theme checkmarkUnSelected]
+                                           target:self
+                                         selector:@selector(tapOnCheckMarkButton)
+                                            frame:CGRectMake(0, 0, 25, 25)];
+    [self.checkMarkButton setImage:[Theme checkmarkSelected] forState:UIControlStateSelected];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:checkMarkButton];
+    [self.checkMarkButton setSelected:[self.qbDelegate hasAssetBeingSelectedAtIndexPath:self.entryIndexPath]];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.checkMarkButton];
     [self setUpToolbarItems];
 
 }
 
-- (void)setArrayOfPhAssets:(NSArray *)arrayOfPhAssets{
-    _arrayOfPhAssets = arrayOfPhAssets;
-    PHImageManager *manager = [PHImageManager defaultManager];
-    [manager requestImageForAsset:_arrayOfPhAssets.firstObject targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeAspectFit options:nil resultHandler:^(UIImage *result, NSDictionary *info) {
-        self.previewImages = [@[result] mutableCopy];
-        [self.collectionView reloadData];
-    }];
-}
 
 - (void)setUpToolbarItems
 {
@@ -45,13 +40,14 @@
     [button setTitle:@"完成" forState:UIControlStateNormal];
     button.backgroundColor = [SystemUtil colorFromHexString:@"#51BFA6"];
     button.layer.cornerRadius = 4.0f;
+    [button addTarget:self.qbDelegate action:@selector(InQBPreviewDidPressDone) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *finishButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.toolbarItems = @[space,finishButton];
     
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];    
+    [super viewWillAppear:animated];
     self.navigationController.toolbar.barTintColor = [UIColor blackColor];
 }
 
@@ -59,4 +55,34 @@
     [super viewWillDisappear:animated];
     self.navigationController.toolbar.barTintColor = [UIColor whiteColor];
 }
+
+- (void)tapOnCheckMarkButton{
+    NSIndexPath *indexPath = [self.collectionView indexPathsForVisibleItems].lastObject;
+    BOOL isCurrentIndexSelected = [self.qbDelegate hasAssetBeingSelectedAtIndexPath:indexPath];
+    
+    if (isCurrentIndexSelected) {
+        [self.qbDelegate performActionForAssetAtIndexPath:indexPath shouldSelect:NO];
+        [self.checkMarkButton setSelected:NO];
+    }else if ([self.qbDelegate shouldSelectIndexPath:indexPath]){
+        [self.qbDelegate performActionForAssetAtIndexPath:indexPath shouldSelect:YES];
+        [self.checkMarkButton setSelected:YES];
+    }
+}
+#pragma mark - Collection View Delegate 
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return [self.qbDelegate numberOfCell];
+}
+
+- (ImagePreviewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    ImagePreviewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:POSTFEEDIMAGEPREVIEWCELL
+                                                                       forIndexPath:indexPath];
+    [self.qbDelegate configureCell:cell atIndexPath:indexPath];
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
+    [self.checkMarkButton setSelected:[self.qbDelegate hasAssetBeingSelectedAtIndexPath:indexPath]];
+}
+
 @end

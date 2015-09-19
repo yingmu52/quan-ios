@@ -55,7 +55,7 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
 
 @end
 
-@interface QBAssetsViewController () <PHPhotoLibraryChangeObserver, UICollectionViewDelegateFlowLayout,QBAssetCellDelegate>
+@interface QBAssetsViewController () <PHPhotoLibraryChangeObserver, UICollectionViewDelegateFlowLayout,QBAssetCellDelegate,QBPreViewControllerDelegate>
 
 //@property (nonatomic, strong) IBOutlet UIBarButtonItem *doneButton;
 
@@ -582,12 +582,10 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
     if ([segue.identifier isEqualToString:@"showImagePreview"] && [sender isKindOfClass:[QBAssetCell class]]) {
-        
         NSIndexPath *indexPath = [self.collectionView indexPathForCell:sender];
-        PHAsset *asset = self.fetchResult[indexPath.item];
         QBPreViewController *qbpvc = segue.destinationViewController;
-        qbpvc.arrayOfPhAssets = @[asset];
-        
+        qbpvc.qbDelegate = self;
+        qbpvc.entryIndexPath = indexPath;
     }
 }
 - (void)didTapOnInvisibleButton:(QBAssetCell *)cell{
@@ -703,4 +701,56 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     return CGSizeMake(width, width);
 }
 
+#pragma mark - QBPReviewController Delegate 
+
+- (NSInteger)numberOfCell{
+    return self.fetchResult.count;
+}
+
+- (void)configureCell:(ImagePreviewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
+    PHAsset *asset = self.fetchResult[indexPath.item];
+    cell.imageView.image = nil;
+    [self.imageManager requestImageForAsset:asset
+                                 targetSize:PHImageManagerMaximumSize
+                                contentMode:PHImageContentModeAspectFit
+                                    options:nil
+                              resultHandler:^(UIImage *result, NSDictionary *info) {
+                                  cell.imageView.image = result;
+                              }];
+
+}
+
+- (BOOL)hasAssetBeingSelectedAtIndexPath:(NSIndexPath *)indexPath{
+    PHAsset *asset = self.fetchResult[indexPath.item];
+    return [self.imagePickerController.selectedAssets containsObject:asset];
+}
+
+- (void)performActionForAssetAtIndexPath:(NSIndexPath *)indexPath shouldSelect:(BOOL)shouldSelect{
+    if (shouldSelect) {
+        [self collectionView:self.collectionView didSelectItemAtIndexPath:indexPath];
+        NSLog(@"select %@",indexPath);
+    }else{
+        [self collectionView:self.collectionView didDeselectItemAtIndexPath:indexPath];
+
+        NSLog(@"deselect %@",indexPath);
+    }
+    [self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
+    NSLog(@"selected assets pool count : %@",@(self.imagePickerController.selectedAssets.count));
+}
+
+- (BOOL)shouldSelectIndexPath:(NSIndexPath *)indexPath{
+    return [self collectionView:self.collectionView shouldSelectItemAtIndexPath:indexPath];
+}
+
+- (void)InQBPreviewDidPressDone{
+    [self done:nil];
+}
 @end
+
+
+
+
+
+
+
+

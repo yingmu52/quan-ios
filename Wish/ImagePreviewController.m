@@ -7,9 +7,6 @@
 //
 
 #import "ImagePreviewController.h"
-#import "Theme.h"
-#import "NavigationBar.h"
-#import "ImagePreviewCell.h"
 @interface ImagePreviewController ()
 @property (nonatomic) NSInteger currenetPage;
 
@@ -71,11 +68,6 @@
 //    return YES;
 //}
 
--(UIViewController *)childViewControllerForStatusBarHidden
-{
-    return nil;
-}
-
 #pragma mark - 删除
 
 - (void)deleteCurrentlyShownImage{
@@ -96,7 +88,7 @@
 }
 
 - (void)updateNavigationTitle{
-    if (self.previewImages.count > 0) {
+    if (self.previewImages.count > 1) {
         self.navigationItem.title = [NSString stringWithFormat:@"%@/%@",@(self.currenetPage + 1),@(self.previewImages.count)];
     }else{
         self.navigationItem.title = nil;
