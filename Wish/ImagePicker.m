@@ -8,11 +8,10 @@
 
 #import "ImagePicker.h"
 #import "UIActionSheet+Blocks.h"
-#import "ELCImagePickerController.h"
 #import "SDWebImageCompat.h"
 #import "QBImagePickerController.h"
 @import AssetsLibrary;
-@interface ImagePicker () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,ELCImagePickerControllerDelegate,QBImagePickerControllerDelegate>
+@interface ImagePicker () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,QBImagePickerControllerDelegate>
 @property (nonatomic,strong) NSArray *images;
 @end
 
@@ -41,18 +40,6 @@
     });
 }
 - (void)showPhotoLibrary:(UIViewController *)controller maxImageCount:(NSInteger )count{
-//    // Create the image picker
-//    ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
-//    
-//    elcPicker.maximumImagesCount = count; //Set the maximum number of images to select, defaults to 4
-//    elcPicker.returnsOriginalImage = NO; //Only return the fullScreenImage, not the fullResolutionImage
-//    elcPicker.returnsImage = YES; //Return UIimage if YES. If NO, only return asset location information
-//    elcPicker.onOrder = NO; //For multiple image selection, display and return selected order of images
-//    elcPicker.imagePickerDelegate = self;
-//    
-//    //Present modally
-//    [controller presentViewController:elcPicker animated:YES completion:nil];
-
     QBImagePickerController *imagePickerController = [QBImagePickerController new];
     imagePickerController.delegate = self;
     imagePickerController.allowsMultipleSelection = YES;
@@ -85,56 +72,38 @@
 
 - (void)qb_imagePickerController:(QBImagePickerController *)imagePickerController didFinishPickingAssets:(NSArray *)assets {
     if ([self.imagePickerDelegate isKindOfClass:[UIViewController class]]) {
-        PHImageManager *manager = [PHImageManager defaultManager];
-        NSMutableArray *arrayOfUIImages = [NSMutableArray arrayWithCapacity:assets.count];
-        
-        
-        PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
-        options.resizeMode = PHImageRequestOptionsResizeModeExact;
-        
-        
-        for (PHAsset *asset in assets) {
-
-            [manager requestImageDataForAsset:asset
-                                      options:options
-                                resultHandler:^(NSData *imageData,
-                                                NSString *dataUTI,
-                                                UIImageOrientation orientation,
-                                                NSDictionary *info)
-            {
-                UIImage *image = [UIImage imageWithData:imageData];
-                [arrayOfUIImages addObject:image];
-                if (arrayOfUIImages.count == assets.count) {
-                    [self.imagePickerDelegate didFinishPickingImage:arrayOfUIImages];
-                }
-            }];
+        [imagePickerController dismissViewControllerAnimated:YES completion:^{
+            PHImageManager *manager = [PHImageManager defaultManager];
+            NSMutableArray *arrayOfUIImages = [NSMutableArray arrayWithCapacity:assets.count];
             
-        }
-        [imagePickerController dismissViewControllerAnimated:YES completion:NULL];
+            
+            PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+            options.synchronous = YES;
+            options.deliveryMode = PHImageRequestOptionsDeliveryModeFastFormat;
+            options.resizeMode = PHImageRequestOptionsResizeModeFast;
+            
+            
+            for (PHAsset *asset in assets) {
+                
+                [manager requestImageForAsset:asset
+                                   targetSize:PHImageManagerMaximumSize
+                                  contentMode:PHImageContentModeAspectFit
+                                      options:options
+                                resultHandler:^(UIImage *result, NSDictionary *info) {
+                                    [arrayOfUIImages addObject:result];
+                                    if (arrayOfUIImages.count == assets.count) {
+                                        [self.imagePickerDelegate didFinishPickingImage:arrayOfUIImages];
+                                    }
+                                }];
+                
+            }
+            
+        }];
     }
 }
 
 - (void)qb_imagePickerControllerDidCancel:(QBImagePickerController *)imagePickerController {
-    [imagePickerController dismissViewControllerAnimated:YES completion:NULL];
-}
-
-#pragma mark - ELCImagePickerControllerDelegate
-- (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info{
-    if ([self.imagePickerDelegate isKindOfClass:[UIViewController class]]) {
-        [picker dismissViewControllerAnimated:YES completion:^{
-            NSMutableArray *images = [NSMutableArray array];
-            for (NSDictionary *dict in info) {
-                if (dict[UIImagePickerControllerMediaType] == ALAssetTypePhoto) {
-                    [images addObject:[dict objectForKey:UIImagePickerControllerOriginalImage]];
-                }
-            }
-            [self.imagePickerDelegate didFinishPickingImage:images];
-         }];
-    }
-}
-
-- (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker{
-    [self failPickingImage];
+    [imagePickerController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UIImagePickerViewController Delegate
