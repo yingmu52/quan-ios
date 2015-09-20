@@ -94,7 +94,7 @@
 
 - (FeedDetailHeader *)headerView{
     if (!_headerView) {
-        CGFloat height = self.tableView.frame.size.width + [SystemUtil heightForText:self.feed.feedTitle withFontSize:13.0f] + 40.0f; //40 = 8 top + 8 bottom  + 16 time label height + 8 bottom of label
+        CGFloat height = self.tableView.frame.size.width + [SystemUtil heightForText:self.feed.feedTitle withFontSize:14.0f] + 40.0f; //40 = 8 top + 8 bottom  + 16 time label height + 8 bottom of label
         CGRect frame = CGRectMake(0,0, self.tableView.frame.size.width, height);
         _headerView = [FeedDetailHeader instantiateFromNib:frame];
         _headerView.delegate = self;

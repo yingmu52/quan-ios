@@ -248,17 +248,17 @@
 
 #pragma mark - table view delegate and data source
 
-#define IS_IPHONE5 (([[UIScreen mainScreen] bounds].size.height - 568.0f) >= 0)
+//#define IS_IPHONE5 (([[UIScreen mainScreen] bounds].size.height - 568.0f) >= 0)
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     CGRect frame = [UIScreen mainScreen].bounds;
-    if (IS_IPHONE5){
-        return 750.0f/1136 * CGRectGetHeight(frame);
-    }else{
-        //eariler
+//    if (IS_IPHONE5){
+//        return 750.0f/1136 * CGRectGetHeight(frame);
+//    }else{
+//        //eariler
         return 785.0f/640 * CGRectGetWidth(frame);
-    }
+//    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

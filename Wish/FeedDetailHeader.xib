@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -55,9 +56,9 @@
                         <textView multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TBB-vW-lVb" customClass="GCPTextView">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             <gestureRecognizers/>
-                            <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                             <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             <connections>
                                 <outletCollection property="gestureRecognizers" destination="iqI-Dt-JWl" appends="YES" id="fUr-30-INe"/>
@@ -220,28 +221,28 @@
                             <exclude reference="Jpt-cH-pfH"/>
                         </mask>
                         <mask key="constraints">
-                            <exclude reference="UYU-0b-kek"/>
-                            <exclude reference="V37-Pm-g5b"/>
-                            <exclude reference="fxA-F0-mRb"/>
-                            <exclude reference="lF4-Tf-oLI"/>
-                            <exclude reference="nr5-ke-sya"/>
-                            <exclude reference="0Nz-T9-cT7"/>
-                            <exclude reference="9Tg-5I-TgK"/>
-                            <exclude reference="AE4-gn-cww"/>
-                            <exclude reference="tVH-w0-M0Y"/>
                             <exclude reference="8g0-Qb-uiD"/>
                             <exclude reference="9pS-YN-aZ2"/>
                             <exclude reference="Z2H-AP-3bh"/>
                             <exclude reference="xbU-L0-mn6"/>
-                            <exclude reference="4fz-qO-egn"/>
-                            <exclude reference="Acb-5L-mI7"/>
-                            <exclude reference="j1X-dW-iWl"/>
-                            <exclude reference="Moe-6K-j3r"/>
+                            <exclude reference="0Nz-T9-cT7"/>
                             <exclude reference="EYI-E4-UgM"/>
                             <exclude reference="WZ5-yC-FMD"/>
                             <exclude reference="h6f-Df-ZVi"/>
                             <exclude reference="nDT-aJ-Sat"/>
                             <exclude reference="ybg-bd-AAM"/>
+                            <exclude reference="Moe-6K-j3r"/>
+                            <exclude reference="9Tg-5I-TgK"/>
+                            <exclude reference="AE4-gn-cww"/>
+                            <exclude reference="tVH-w0-M0Y"/>
+                            <exclude reference="UYU-0b-kek"/>
+                            <exclude reference="V37-Pm-g5b"/>
+                            <exclude reference="fxA-F0-mRb"/>
+                            <exclude reference="lF4-Tf-oLI"/>
+                            <exclude reference="nr5-ke-sya"/>
+                            <exclude reference="4fz-qO-egn"/>
+                            <exclude reference="Acb-5L-mI7"/>
+                            <exclude reference="j1X-dW-iWl"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact">
@@ -255,28 +256,28 @@
                             <include reference="Jpt-cH-pfH"/>
                         </mask>
                         <mask key="constraints">
-                            <include reference="UYU-0b-kek"/>
-                            <include reference="V37-Pm-g5b"/>
-                            <include reference="fxA-F0-mRb"/>
-                            <include reference="lF4-Tf-oLI"/>
-                            <include reference="nr5-ke-sya"/>
-                            <include reference="0Nz-T9-cT7"/>
-                            <include reference="9Tg-5I-TgK"/>
-                            <include reference="AE4-gn-cww"/>
-                            <include reference="tVH-w0-M0Y"/>
                             <include reference="8g0-Qb-uiD"/>
                             <exclude reference="9pS-YN-aZ2"/>
                             <include reference="Z2H-AP-3bh"/>
                             <include reference="xbU-L0-mn6"/>
-                            <include reference="4fz-qO-egn"/>
-                            <include reference="Acb-5L-mI7"/>
-                            <include reference="j1X-dW-iWl"/>
-                            <include reference="Moe-6K-j3r"/>
+                            <include reference="0Nz-T9-cT7"/>
                             <include reference="EYI-E4-UgM"/>
                             <include reference="WZ5-yC-FMD"/>
                             <include reference="h6f-Df-ZVi"/>
                             <exclude reference="nDT-aJ-Sat"/>
                             <exclude reference="ybg-bd-AAM"/>
+                            <include reference="Moe-6K-j3r"/>
+                            <include reference="9Tg-5I-TgK"/>
+                            <include reference="AE4-gn-cww"/>
+                            <include reference="tVH-w0-M0Y"/>
+                            <include reference="UYU-0b-kek"/>
+                            <include reference="V37-Pm-g5b"/>
+                            <include reference="fxA-F0-mRb"/>
+                            <include reference="lF4-Tf-oLI"/>
+                            <include reference="nr5-ke-sya"/>
+                            <include reference="4fz-qO-egn"/>
+                            <include reference="Acb-5L-mI7"/>
+                            <include reference="j1X-dW-iWl"/>
                         </mask>
                     </variation>
                 </view>
