@@ -52,6 +52,13 @@ static NSUInteger distance = 10;
     return _feed;
 }
 
+- (Plan *)plan{
+    if (!_plan) {
+        _plan = [Plan createPlan:self.navigationItem.title privacy:NO];
+    }
+    return _plan;
+}
+
 - (NSString *)titleForFeed{
     return self.textView.text;
 }
@@ -103,7 +110,9 @@ static NSUInteger distance = 10;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
     self.navigationItem.rightBarButtonItem.enabled = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#2A2A2A"]};
-    self.title = self.plan.planTitle;
+    if (self.plan) {
+        self.navigationItem.title = self.plan.planTitle;
+    }
     self.wordCountLabel.text = [NSString stringWithFormat:@"0/%@ 字",@(maxWordCount)];
 }
 
@@ -233,14 +242,21 @@ static NSUInteger distance = 10;
 #pragma mark - fetch center delegate
 
 - (void)didFinishUploadingImage:(NSString *)fetchedImageId forFeed:(Feed *)feed{
-    __weak typeof(self) weakSelf = self;
-    [weakSelf.fetchedImageIds addObject:fetchedImageId];
-    if (weakSelf.fetchedImageIds.count == weakSelf.imagesForFeed.count) { //所有的图片都上传成功了
-        [weakSelf.fetchCenter uploadToCreateFeed:feed fetchedImageIds:weakSelf.fetchedImageIds];
+    [self.fetchedImageIds addObject:fetchedImageId];
+    if (self.fetchedImageIds.count == self.imagesForFeed.count) { //所有的图片都上传成功了
+        if (self.plan.planId) {
+            [self.fetchCenter uploadToCreateFeed:feed fetchedImageIds:self.fetchedImageIds];
+        }else{
+            [self.fetchCenter uploadToCreatePlan:self.plan];
+        }
+
     }
     NSLog(@"\n\nfetched image ID: %@\n\n",fetchedImageId);
-//    weakSelf.navigationItem.title = [NSString stringWithFormat:@"%@ (%@%%)",weakSelf.plan.planTitle,@(weakSelf.fetchedImageIds.count/weakSelf.imagesForFeed.count)];
 
+}
+
+- (void)didFinishUploadingPlan:(Plan *)plan{
+    [self.fetchCenter uploadToCreateFeed:self.feed fetchedImageIds:self.fetchedImageIds];
 }
 
 - (void)didFinishUploadingFeed:(Feed *)feed

@@ -14,9 +14,9 @@
 #import "FetchCenter.h"
 @interface PostDetailViewController () <ImagePickerDelegate,FetchCenterDelegate>
 @property (weak, nonatomic) IBOutlet UIView *cameraBackground;
-@property (nonatomic,strong) FetchCenter *fetchCenter;
-@property (nonatomic,strong) Plan *plan;
-@property (nonatomic,strong) NSArray *images;
+//@property (nonatomic,strong) FetchCenter *fetchCenter;
+//@property (nonatomic,strong) Plan *plan;
+//@property (nonatomic,strong) NSArray *images;
 @property (nonatomic,strong) ImagePicker *imagePicker;
 @end
 @implementation PostDetailViewController
@@ -45,12 +45,13 @@
 
     //set navigation bar title and color
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#2A2A2A"]};
-    self.title = self.titleFromPostView;
+    
+    self.navigationItem.title = self.titleFromPostView;
     
 }
 
 - (void)goBack{
-    if (self.plan) [self.plan deleteSelf];
+//    if (self.plan) [self.plan deleteSelf];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -58,10 +59,12 @@
 {
     if ([segue.identifier isEqualToString:@"showPostFeedFromPlanCreation"]) {
         PostFeedViewController *pfvc = (PostFeedViewController *)segue.destinationViewController;
-        Plan *plan = sender;
-        pfvc.plan = plan;
-        pfvc.imagesForFeed = [self.images mutableCopy];
+//        Plan *plan = sender;
+//        pfvc.plan = plan;
+        
+        pfvc.imagesForFeed = [sender mutableCopy];
         pfvc.seugeFromPlanCreation = YES; // important!
+        pfvc.navigationItem.title = self.titleFromPostView;
     }
 }
 
@@ -85,23 +88,24 @@
 
 - (void)didFinishPickingImage:(NSArray *)images{
     //activity indicator
-    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0,0, 25,25)];
-    spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
-    [spinner startAnimating];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+//    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0,0, 25,25)];
+//    spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+//    [spinner startAnimating];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
     
-    self.plan = [Plan createPlan:self.titleFromPostView privacy:NO];
-    self.images = images;
-    [self.fetchCenter uploadToCreatePlan:self.plan];
+//    self.plan = [Plan createPlan:self.titleFromPostView privacy:NO];
+//    self.images = images;
+//    [self.fetchCenter uploadToCreatePlan:self.plan];
+    [self performSegueWithIdentifier:@"showPostFeedFromPlanCreation" sender:images];
 }
 
-- (FetchCenter *)fetchCenter{
-    if (!_fetchCenter) {
-        _fetchCenter = [[FetchCenter alloc] init];
-        _fetchCenter.delegate = self;
-    }
-    return _fetchCenter;
-}
+//- (FetchCenter *)fetchCenter{
+//    if (!_fetchCenter) {
+//        _fetchCenter = [[FetchCenter alloc] init];
+//        _fetchCenter.delegate = self;
+//    }
+//    return _fetchCenter;
+//}
 
 - (void)didFailPickingImage{
     [[[UIAlertView alloc] initWithTitle:@"无法获取图片" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
@@ -115,7 +119,7 @@
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
     [[[UIAlertView alloc] initWithTitle:@"请求失败" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
     self.navigationItem.rightBarButtonItem = nil;
-    if (self.plan) [self.plan deleteSelf];
+//    if (self.plan) [self.plan deleteSelf];
 }
 
 @end

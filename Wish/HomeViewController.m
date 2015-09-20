@@ -118,6 +118,7 @@ ViewForEmptyEventDelegate>
 }
 - (void)addWish{
     [self performSegueWithIdentifier:@"showPostFromHome" sender:nil];
+    self.tabBarController.tabBar.hidden = YES;
 }
 #pragma mark - Home Card View Delegate
 - (StationView *)stationView
