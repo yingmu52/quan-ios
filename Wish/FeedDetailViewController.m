@@ -127,10 +127,13 @@
 - (void)updateHeaderInfoForFeed:(Feed *)feed{
     self.headerView.titleTextView.text = feed.feedTitle;
     self.headerView.dateLabel.text = [SystemUtil stringFromDate:feed.createDate];
-    self.headerView.likeCountLabel.text = [NSString stringWithFormat:@"%@",feed.likeCount];
-    self.headerView.commentCountLabel.text = [NSString stringWithFormat:@"%@",feed.commentCount];
-    [self.headerView.likeButton setImage:(feed.selfLiked.boolValue ? [Theme likeButtonLiked] : [Theme likeButtonUnLiked]) forState:UIControlStateNormal];
-        
+    [self.headerView setLikeButtonText:[NSString stringWithFormat:@"%@",feed.likeCount]];
+//    [self.headerView.likeButton setTitle:[NSString stringWithFormat:@"%@",feed.likeCount] forState:UIControlStateNormal];
+    [self.headerView setCommentButtonText:[NSString stringWithFormat:@"%@",feed.commentCount]];
+//    [self.headerView.commentButton setTitle:[NSString stringWithFormat:@"%@",feed.commentCount] forState:UIControlStateNormal];
+    [self.headerView.likeButton setSelected:feed.selfLiked.boolValue];
+//    [self.headerView.likeButton setImage:(feed.selfLiked.boolValue ? [Theme likeButtonLiked] : [Theme likeButtonUnLiked]) forState:UIControlStateNormal];
+    
 }
 
 #pragma mark - table view
@@ -264,26 +267,23 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 
 - (void)didPressedLikeButton:(FeedDetailHeader *)headerView{
     if (!self.feed.selfLiked.boolValue) {
-        [headerView.likeButton setImage:[Theme likeButtonLiked] forState:UIControlStateNormal];
-        
+        [headerView.likeButton setSelected:YES];
+
         //increase feed like count
         self.feed.likeCount = @(self.feed.likeCount.integerValue + 1);
         self.feed.selfLiked = @(YES);
-        headerView.likeCountLabel.text = [NSString stringWithFormat:@"%@",self.feed.likeCount];
-        
         [self.fetchCenter likeFeed:self.feed];
     }else{
-        [headerView.likeButton setImage:[Theme likeButtonUnLiked] forState:UIControlStateNormal];
+        [headerView.likeButton setSelected:NO];
+//        [headerView.likeButton setImage:[Theme likeButtonUnLiked] forState:UIControlStateNormal];
         
         //decrease feed like count
         self.feed.likeCount = @(self.feed.likeCount.integerValue - 1);
         self.feed.selfLiked = @(NO);
-        headerView.likeCountLabel.text = [NSString stringWithFormat:@"%@",self.feed.likeCount];
-        
         
         [self.fetchCenter unLikeFeed:self.feed];
     }
-    
+    [headerView setLikeButtonText:[NSString stringWithFormat:@"%@",self.feed.likeCount]];
 }
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
@@ -305,7 +305,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 - (void)didFinishDeletingComment:(Comment *)comment{
     [[AppDelegate getContext] deleteObject:comment];
     self.feed.commentCount = @(self.feed.commentCount.integerValue - 1);
-    self.headerView.commentCountLabel.text = [NSString stringWithFormat:@"%@",self.feed.commentCount];
+    [self.headerView setCommentButtonText:[NSString stringWithFormat:@"%@",self.feed.commentCount]];
 }
 
 
@@ -329,7 +329,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
     
     //update feed count
     feed.commentCount = @(feed.commentCount.integerValue + 1);
-    self.headerView.commentCountLabel.text = [NSString stringWithFormat:@"%@",feed.commentCount];
+    [self.headerView setCommentButtonText:[NSString stringWithFormat:@"%@",feed.commentCount]];
 
     //create comment locally
     if (self.commentView.state == CommentAcessaryViewStateComment) {

@@ -9,6 +9,10 @@
 #import "FeedDetailHeader.h"
 #import "FetchCenter.h"
 #import "UIImageView+ImageCache.h"
+
+@interface FeedDetailHeader ()
+
+@end
 @implementation FeedDetailHeader
 
 + (instancetype)instantiateFromNib:(CGRect)frame
@@ -45,4 +49,14 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     self.pageControl.currentPage = scrollView.contentOffset.x / scrollView.frame.size.width;;
 }
+
+- (void)setLikeButtonText:(NSString *)text{
+    [self.likeButton setTitle:[text stringByAppendingString:@" "] forState:UIControlStateNormal];
+    [self.likeButton sizeToFit];
+}
+
+- (void)setCommentButtonText:(NSString *)text{
+    [self.commentButton setTitle:[text stringByAppendingString:@" "] forState:UIControlStateNormal];
+}
+
 @end
