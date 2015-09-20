@@ -75,11 +75,10 @@
     [super viewDidAppear:animated];
     if (self.fetchedRC.fetchedObjects.count > 0) {
         //初始化时选择第一个事件
-//        NSIndexPath *initialSelectionPath = [NSIndexPath indexPathForItem:0 inSection:0];
-//        PreviewCell * cell = (PreviewCell *)[s]
-//        [[self.collectionView cellForItemAtIndexPath:initialSelectionPath]
-//        self.countLabel.text = [NSString stringWithFormat:@"%@/%@",
-//                                @(initialSelectionPath.row + 1),@(self.fetchedRC.fetchedObjects.count)];
+        NSIndexPath *initialSelectionPath = [NSIndexPath indexPathForItem:0 inSection:0];
+        [self.collectionView selectItemAtIndexPath:initialSelectionPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+        [self collectionView:self.collectionView didSelectItemAtIndexPath:initialSelectionPath];
+
     }
 }
 
