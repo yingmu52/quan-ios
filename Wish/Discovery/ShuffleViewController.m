@@ -13,6 +13,7 @@
 #import "SystemUtil.h"
 #import "ImagePicker.h"
 #import "UIImageView+ImageCache.h"
+
 @import CoreData;
 @interface ShuffleViewController () <NSFetchedResultsControllerDelegate,UICollectionViewDelegateFlowLayout,ImagePickerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic,weak) IBOutlet UICollectionView *collectionView;
@@ -28,7 +29,9 @@
 
 - (IBAction)tapOnBackground:(UITapGestureRecognizer *)tap{
     //支持点击背影关闭退出浮层
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:^{
+        ((DiscoveryVCData*)self.svcDelegate).addButton.hidden = NO;
+    }];
 }
 
 - (IBAction)tapOnPhotoLibraryButton:(UIButton *)sender{

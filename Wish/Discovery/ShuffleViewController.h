@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Plan+PlanCRUD.h"
+#import "DiscoveryVCData.h"
 
 @class ShuffleViewController;
 @protocol ShuffleViewControllerDelegate <NSObject>
