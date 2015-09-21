@@ -101,7 +101,7 @@
         self.tableView.tableHeaderView = _headerView;
         
         
-        NSArray *images = [self.feed imageIdArray].count > 0 ? [self.feed imageIdArray] : @[self.feed.imageId];
+        NSArray *images = [self.feed imageIdArray].count > 1 ? [self.feed imageIdArray] : @[self.feed.imageId];
         
         CGFloat w = CGRectGetWidth(_headerView.frame);
         _headerView.scrollView.contentSize = CGSizeMake(w * images.count, w);
