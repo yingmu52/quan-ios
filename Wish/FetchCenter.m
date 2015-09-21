@@ -667,7 +667,7 @@ typedef enum{
     NSString *url;
     if (imageId.length > 30) { //优图id
         url = [NSString stringWithFormat:@"http://shier-%@.image.myqcloud.com/%@",YOUTU_APP_ID,imageId];
-        NSLog(@">>>>>>>>>>%@",imageId);
+//        NSLog(@">>>>>>>>>>%@",imageId);
     }else{ //老id
         NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@?",self.baseUrl,PIC,GET_IMAGE];
         url = [NSString stringWithFormat:@"%@id=%@",[self versionForBaseURL:rqtStr operation:-1],imageId];
@@ -680,7 +680,7 @@ typedef enum{
         NSString *url;
         if (imageId.length > 30) { //优图id
             url = [NSString stringWithFormat:@"http://shier-%@.image.myqcloud.com/%@/%@",YOUTU_APP_ID,imageId,@(size)];
-            NSLog(@">>>>>>>>>>%@",url);
+//            NSLog(@">>>>>>>>>>%@",url);
         }else{ //老id
             NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@?",self.baseUrl,PIC,GET_IMAGE];
             url = [NSString stringWithFormat:@"%@id=%@",[self versionForBaseURL:rqtStr operation:-1],imageId];

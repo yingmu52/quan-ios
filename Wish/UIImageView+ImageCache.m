@@ -15,7 +15,7 @@
     NSString *localKey = [manager cacheKeyForURL:url];
     BOOL isImageExist = [manager diskImageExistsForURL:url];
     if (!isImageExist) {
-        NSLog(@"%@: downloading from internet",self.class);
+//        NSLog(@"%@: downloading from internet",self.class);
         [self sd_setImageWithURL:url
                 placeholderImage:nil
                          options:SDWebImageCacheMemoryOnly
@@ -30,7 +30,7 @@
 
         }];
     }else{
-        NSLog(@"%@: loading locally",self.class);
+//        NSLog(@"%@: loading locally",self.class);
         self.image = [manager.imageCache imageFromDiskCacheForKey:localKey];
     }
     return isImageExist;

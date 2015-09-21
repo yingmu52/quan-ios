@@ -97,8 +97,12 @@
     dispatch_async(compareList, ^{
         for (Plan *plan in self.fetchedRC.fetchedObjects){
             if (![plans containsObject:plan]){
-                [[AppDelegate getContext] deleteObject:plan];
-                NSLog(@"Removing plan %@ : %@",plan.planId,plan.planTitle);
+                if ([plan.owner.ownerId isEqualToString:[User uid]]){
+                    plan.discoverIndex = @(self.fetchedRC.fetchedObjects.count + 1); //不删除自己的事件，并将其排到发现页列表最后。
+                }else{
+                    [[AppDelegate getContext] deleteObject:plan];
+                    NSLog(@"Removing plan %@ : %@",plan.planId,plan.planTitle);
+                }
             }
         }
     });
