@@ -17,7 +17,7 @@
 - (void)didRemoveImageAtIndexPath:(NSIndexPath *)indexPath;
 @end
 @interface ImagePreviewController : UICollectionViewController;
-@property (nonatomic,strong) NSMutableArray *previewImages;
+@property (nonatomic,strong) NSMutableArray *assets;
 @property (nonatomic,strong) NSIndexPath *entryIndexPath;
 @property (nonatomic,weak) id <ImagePreviewControllerDelegate> delegate;
 @end

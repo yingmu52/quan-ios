@@ -7,6 +7,7 @@
 //
 
 #import "ImagePreviewController.h"
+@import Photos;
 @interface ImagePreviewController ()
 @property (nonatomic) NSInteger currenetPage;
 
@@ -71,12 +72,12 @@
 #pragma mark - 删除
 
 - (void)deleteCurrentlyShownImage{
-    [self.previewImages removeObjectAtIndex:self.currenetPage];
+    [self.assets removeObjectAtIndex:self.currenetPage];
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:self.currenetPage inSection:0];
     [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
     [self.delegate didRemoveImageAtIndexPath:indexPath];
     [self updateNavigationTitle];
-    if (!self.previewImages.count) {
+    if (!self.assets.count) {
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
@@ -88,8 +89,8 @@
 }
 
 - (void)updateNavigationTitle{
-    if (self.previewImages.count > 1) {
-        self.navigationItem.title = [NSString stringWithFormat:@"%@/%@",@(self.currenetPage + 1),@(self.previewImages.count)];
+    if (self.assets.count > 1) {
+        self.navigationItem.title = [NSString stringWithFormat:@"%@/%@",@(self.currenetPage + 1),@(self.assets.count)];
     }else{
         self.navigationItem.title = nil;
     }
@@ -109,12 +110,27 @@
           cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ImagePreviewCell *cell = [aCollectionView dequeueReusableCellWithReuseIdentifier:POSTFEEDIMAGEPREVIEWCELL forIndexPath:indexPath];
-    cell.imageView.image = self.previewImages[indexPath.row];
+    PHImageManager *manager = [PHImageManager defaultManager];
+    
+    id imageItem = self.assets[indexPath.row];
+    if ([imageItem isKindOfClass:[UIImage class]]) {
+        cell.imageView.image = imageItem;
+    }else if ([imageItem isKindOfClass:[PHAsset class]]){
+        [manager requestImageDataForAsset:imageItem
+                                  options:nil
+                            resultHandler:^(NSData * _Nullable imageData,
+                                            NSString * _Nullable dataUTI,
+                                            UIImageOrientation orientation,
+                                            NSDictionary * _Nullable info)
+        {
+            cell.imageView.image = [UIImage imageWithData:imageData];
+        }];
+    }
     return cell;
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return self.previewImages.count;
+    return self.assets.count;
 }
 
 @end

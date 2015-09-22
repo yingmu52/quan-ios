@@ -13,7 +13,8 @@
 @class ShuffleViewController;
 @protocol ShuffleViewControllerDelegate <NSObject>
 @optional
-- (void)didFinishSelectingImages:(NSArray *)images forPlan:(Plan *)plan;
+- (void)didFinishSelectingImageAssets:(NSArray *)assets forPlan:(Plan *)plan;
+- (void)didFinishSelectingImage:(UIImage *)image forPlan:(Plan *)plan;
 - (void)didPressCreatePlanButton:(ShuffleViewController *)svc;
 @end
 

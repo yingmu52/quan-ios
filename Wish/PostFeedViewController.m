@@ -20,6 +20,7 @@
 #import "PostImageCell.h"
 #import "ImagePicker.h"
 #import "ImagePreviewController.h"
+
 static NSUInteger maxWordCount = 1000;
 static NSUInteger distance = 10;
 
@@ -88,13 +89,6 @@ static NSUInteger distance = 10;
     [self.textView becomeFirstResponder];
 }
 
-//- (void)viewWillDisappear:(BOOL)animated
-//{
-//    [super viewWillDisappear:animated];
-//    [self.textView resignFirstResponder];
-//}
-
-
 - (void)setupViews
 {
     CGRect frame = CGRectMake(0, 0, 25, 25);
@@ -117,26 +111,6 @@ static NSUInteger distance = 10;
 }
 
 
-//- (IBAction)preViewButtonPressed:(UIButton *)button{
-//    [self.textView resignFirstResponder];
-//    
-//    // Create image info
-//    JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
-//    imageInfo.image = button.imageView.image;
-//    imageInfo.referenceRect = button.frame;
-//    imageInfo.referenceView = button.superview;
-//    
-//    // Setup view controller
-//    JTSImageViewController *imageViewer = [[JTSImageViewController alloc]
-//                                           initWithImageInfo:imageInfo
-//                                           mode:JTSImageViewControllerMode_Image
-//                                           backgroundStyle:JTSImageViewControllerBackgroundOption_Scaled];
-//    
-//    // Present the view controller.
-//    [imageViewer showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
-//
-//}
-
 - (void)createFeed{
     self.navigationItem.leftBarButtonItem.enabled = NO;
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithFrame:self.tikButton.frame];
@@ -144,8 +118,47 @@ static NSUInteger distance = 10;
     [spinner startAnimating];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
     
-    self.fetchedImageIds = [NSMutableArray arrayWithCapacity:self.imagesForFeed.count];
-    [self.fetchCenter uploadImages:self.imagesForFeed toCreateFeed:self.feed];
+    self.fetchedImageIds = [NSMutableArray arrayWithCapacity:self.assets.count];
+    
+    
+    //get asset image
+    PHImageManager *manager = [PHImageManager defaultManager];
+    NSMutableArray *arrayOfUIImages = [NSMutableArray arrayWithCapacity:self.assets.count];
+    PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];
+    option.networkAccessAllowed = YES;
+    option.deliveryMode = PHImageRequestOptionsDeliveryModeFastFormat;
+    option.resizeMode = PHImageRequestOptionsResizeModeExact;
+    
+    for (id item in self.assets) {
+        if ([item isKindOfClass:[PHAsset class]]) {
+//            [manager requestImageDataForAsset:item options:option resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
+//                [arrayOfUIImages addObject:[UIImage imageWithData:imageData scale:0.5]];
+//                if (arrayOfUIImages.count == self.assets.count) {
+//                    [self.fetchCenter uploadImages:arrayOfUIImages
+//                                      toCreateFeed:self.feed];
+//                }
+//            }];
+            [manager requestImageForAsset:item
+                               targetSize:PHImageManagerMaximumSize
+                              contentMode:PHImageContentModeAspectFit
+                                  options:option
+                            resultHandler:^(UIImage *result, NSDictionary *info) {
+                                NSAssert(result,@"null result");
+                                [arrayOfUIImages addObject:result];
+                                if (arrayOfUIImages.count == self.assets.count) {
+                                    [self.fetchCenter uploadImages:arrayOfUIImages
+                                                      toCreateFeed:self.feed];
+                                }
+                            }];
+        }else if ([item isKindOfClass:[UIImage class]]){
+#warning it works, but so fucking ugly!!
+            [arrayOfUIImages addObject:item];
+            if (arrayOfUIImages.count == self.assets.count) {
+                [self.fetchCenter uploadImages:arrayOfUIImages
+                                  toCreateFeed:self.feed];
+            }
+        }
+    }
 }
 
 #define CONFIRM @"确定"
@@ -168,7 +181,7 @@ static NSUInteger distance = 10;
 
 - (void)textViewDidChange:(UITextView *)textView{
     if (textView.isFirstResponder){
-        BOOL flag = textView.text.length*[textView.text stringByReplacingOccurrencesOfString:@" " withString:@""].length > 0 && self.imagesForFeed.count > 0;
+        BOOL flag = textView.text.length*[textView.text stringByReplacingOccurrencesOfString:@" " withString:@""].length > 0 && self.assets.count > 0;
         self.navigationItem.rightBarButtonItem.enabled = flag;
         UIImage *bg = flag ? [Theme navTikButtonDefault] : [Theme navTikButtonDisable];
         [self.tikButton setImage:bg forState:UIControlStateNormal];
@@ -225,7 +238,7 @@ static NSUInteger distance = 10;
         //sender : @[self.imagesForFeed,indexPath]];
         NSArray *array = (NSArray *)sender;
         ImagePreviewController *ipvc = segue.destinationViewController;
-        ipvc.previewImages = array.firstObject;
+        ipvc.assets = self.assets;
         ipvc.entryIndexPath = array.lastObject;
         ipvc.delegate = self;
     }
@@ -235,7 +248,7 @@ static NSUInteger distance = 10;
 
 
 - (void)didRemoveImageAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"%@",@(self.imagesForFeed.count));
+    NSLog(@"%@",@(self.assets.count));
     [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
 }
 
@@ -243,7 +256,7 @@ static NSUInteger distance = 10;
 
 - (void)didFinishUploadingImage:(NSString *)fetchedImageId forFeed:(Feed *)feed{
     [self.fetchedImageIds addObject:fetchedImageId];
-    if (self.fetchedImageIds.count == self.imagesForFeed.count) { //所有的图片都上传成功了
+    if (self.fetchedImageIds.count == self.assets.count) { //所有的图片都上传成功了
         if (self.plan.planId) {
             [self.fetchCenter uploadToCreateFeed:feed fetchedImageIds:self.fetchedImageIds];
         }else{
@@ -328,10 +341,24 @@ static NSUInteger distance = 10;
 - (PostImageCell *)collectionView:(UICollectionView *)aCollectionView
          cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     PostImageCell *cell;
-    if (indexPath.row != self.imagesForFeed.count) { //is not the last row
+    if (indexPath.row != self.assets.count) { //is not the last row
         cell = [aCollectionView dequeueReusableCellWithReuseIdentifier:POSTIMAGECELL forIndexPath:indexPath];
-        cell.imageView.image = self.imagesForFeed[indexPath.row];
-//        [cell layoutIfNeeded]; //fixed auto layout error on iphone 5s or above
+        
+        id imageItem = self.assets[indexPath.row];
+        if ([imageItem isKindOfClass:[PHAsset class]]) {
+            PHImageManager *manager = [PHImageManager defaultManager];
+            [manager requestImageForAsset:self.assets[indexPath.row]
+                               targetSize:CGSizeMake(140.0f, 140.0f)
+                              contentMode:PHImageContentModeAspectFit
+                                  options:nil
+                            resultHandler:^(UIImage *result, NSDictionary *info) {
+                                cell.imageView.image = result;
+                            }];
+
+        }else if ([imageItem isKindOfClass:[UIImage class]]){
+            cell.imageView.image = imageItem;
+        }
+        
     }else{
         cell = [aCollectionView dequeueReusableCellWithReuseIdentifier:@"PostDetailAddCell" forIndexPath:indexPath];
         
@@ -341,7 +368,8 @@ static NSUInteger distance = 10;
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView
     numberOfItemsInSection:(NSInteger)section {
-    return self.imagesForFeed.count + 1; //including the last button
+//    return self.imagesForFeed.count + 1; //including the last button
+    return self.assets.count + 1; //including the last button
 }
 
 - (void)setCollectionView:(UICollectionView *)collectionView{
@@ -351,11 +379,11 @@ static NSUInteger distance = 10;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row != self.imagesForFeed.count) { //is not the last row
-        [self performSegueWithIdentifier:@"showImagePreviewFromPostFeedDetail" sender:@[self.imagesForFeed,indexPath]];
+    if (indexPath.row != self.assets.count) { //is not the last row
+        [self performSegueWithIdentifier:@"showImagePreviewFromPostFeedDetail" sender:@[self.assets,indexPath]];
     }else{
-        if (self.imagesForFeed.count < defaultMaxImageSelectionAllowed) {
-            NSInteger remain = defaultMaxImageSelectionAllowed - self.imagesForFeed.count;
+        if (self.assets.count < defaultMaxImageSelectionAllowed) {
+            NSInteger remain = defaultMaxImageSelectionAllowed - self.assets.count;
             [self.imagePicker showPhotoLibrary:self maxImageCount:remain];
         }else{
             //show notification
@@ -373,8 +401,8 @@ static NSUInteger distance = 10;
     return _imagePicker;
 }
 
-- (void)didFinishPickingImage:(NSArray *)images{
-    [self.imagesForFeed addObjectsFromArray:images];
+- (void)didFinishPickingPhAssets:(NSArray *)assets{
+    [self.assets addObjectsFromArray:assets];
     [self.collectionView reloadData];
 }
 @end

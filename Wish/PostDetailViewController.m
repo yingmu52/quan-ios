@@ -59,10 +59,7 @@
 {
     if ([segue.identifier isEqualToString:@"showPostFeedFromPlanCreation"]) {
         PostFeedViewController *pfvc = (PostFeedViewController *)segue.destinationViewController;
-//        Plan *plan = sender;
-//        pfvc.plan = plan;
-        
-        pfvc.imagesForFeed = [sender mutableCopy];
+        pfvc.assets = sender;
         pfvc.seugeFromPlanCreation = YES; // important!
         pfvc.navigationItem.title = self.titleFromPostView;
     }
@@ -86,26 +83,9 @@
     [self toggleCamera:nil];
 }
 
-- (void)didFinishPickingImage:(NSArray *)images{
-    //activity indicator
-//    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0,0, 25,25)];
-//    spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
-//    [spinner startAnimating];
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
-    
-//    self.plan = [Plan createPlan:self.titleFromPostView privacy:NO];
-//    self.images = images;
-//    [self.fetchCenter uploadToCreatePlan:self.plan];
-    [self performSegueWithIdentifier:@"showPostFeedFromPlanCreation" sender:images];
+- (void)didFinishPickingPhAssets:(NSArray *)assets{
+    [self performSegueWithIdentifier:@"showPostFeedFromPlanCreation" sender:[assets mutableCopy]];
 }
-
-//- (FetchCenter *)fetchCenter{
-//    if (!_fetchCenter) {
-//        _fetchCenter = [[FetchCenter alloc] init];
-//        _fetchCenter.delegate = self;
-//    }
-//    return _fetchCenter;
-//}
 
 - (void)didFailPickingImage{
     [[[UIAlertView alloc] initWithTitle:@"无法获取图片" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];

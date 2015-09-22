@@ -137,8 +137,9 @@
     [super prepareForSegue:segue sender:sender];
     
     if ([segue.identifier isEqualToString:@"showPostFeed"]) {
-        [segue.destinationViewController setImagesForFeed:sender];
-        [segue.destinationViewController setPlan:self.plan];
+        PostFeedViewController *pfvc = segue.destinationViewController;
+        pfvc.assets = sender;
+        pfvc.plan = self.plan;
     }
     if ([segue.identifier isEqualToString:@"showEditPage"]){
         [segue.destinationViewController setPlan:sender];
@@ -158,9 +159,9 @@
     [self.imagePicker showPhotoLibrary:self];
 }
 
-- (void)didFinishPickingImage:(NSArray *)images{
+- (void)didFinishPickingPhAssets:(NSArray *)assets{
     self.cameraButton.hidden = NO;
-    [self performSegueWithIdentifier:@"showPostFeed" sender:images];
+    [self performSegueWithIdentifier:@"showPostFeed" sender:assets];
 }
 - (void)didFailPickingImage{
     self.cameraButton.hidden = NO;

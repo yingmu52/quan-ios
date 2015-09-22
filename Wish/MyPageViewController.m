@@ -200,16 +200,13 @@
 
 - (IBAction)tapOnCamera:(id)sender{
     [self.imagePicker showImagePickerForUploadProfileImage:self type:UIImagePickerControllerSourceTypePhotoLibrary];
-//    [self.imagePicker showPhotoLibrary:self maxImageCount:1];
 }
 
-- (void)didFinishPickingImage:(NSArray *)images{
-    self.profilePicture.image = images.lastObject;
-    [self.fetchCenter uploadNewProfilePicture:self.profilePicture.image];
-}
-
-- (void)didFailPickingImage{
-    
+- (void)didFinishPickingPhAssets:(NSArray *)assets{
+    if (assets.count == 1 && [assets.firstObject isKindOfClass:[UIImage class]]) {
+        self.profilePicture.image = assets.firstObject;
+        [self.fetchCenter uploadNewProfilePicture:self.profilePicture.image];
+    }
 }
 
 #pragma mark - segue

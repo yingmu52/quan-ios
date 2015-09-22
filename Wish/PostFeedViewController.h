@@ -12,6 +12,6 @@
 @interface PostFeedViewController : UIViewController
 
 @property (nonatomic,strong) Plan *plan;
-@property (nonatomic,strong) NSMutableArray *imagesForFeed;
+@property (nonatomic,strong) NSMutableArray *assets;
 @property (nonatomic) BOOL seugeFromPlanCreation;
 @end

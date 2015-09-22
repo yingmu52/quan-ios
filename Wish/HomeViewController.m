@@ -163,8 +163,8 @@ ViewForEmptyEventDelegate>
     }
 }
 
-- (void)didFinishPickingImage:(NSArray *)images{
-    [self performSegueWithIdentifier:@"ShowPostFeedFromHome" sender:images];
+- (void)didFinishPickingPhAssets:(NSArray *)assets{
+    [self performSegueWithIdentifier:@"ShowPostFeedFromHome" sender:assets];
 }
 #pragma mark -
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -174,8 +174,9 @@ ViewForEmptyEventDelegate>
         self.tabBarController.tabBar.hidden = YES;
     }
     if ([segue.identifier isEqualToString:@"ShowPostFeedFromHome"]) {
-        [segue.destinationViewController setPlan:self.currentPlan];
-        [segue.destinationViewController setImagesForFeed:sender];
+        PostFeedViewController *pfvc = segue.destinationViewController;
+        pfvc.plan = self.currentPlan;
+        pfvc.assets = sender;
         self.tabBarController.tabBar.hidden = YES;
     }
 }

@@ -7,14 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIActionSheet+Blocks.h"
+#import "SDWebImageCompat.h"
+#import "QBImagePickerController.h"
+@import Photos;
 
 static const NSInteger defaultMaxImageSelectionAllowed = 8;
+
 @class ImagePickerDelegate;
 @protocol ImagePickerDelegate <NSObject>
 @optional
-- (void)didFinishPickingImage:(NSArray *)images;
 - (void)didFailPickingImage;
+- (void)didFinishPickingPhAssets:(NSArray *)assets;
 @end
+
 @interface ImagePicker : NSObject <UIImagePickerControllerDelegate,UINavigationBarDelegate>
 
 @property (nonatomic,weak) id<ImagePickerDelegate>imagePickerDelegate;
