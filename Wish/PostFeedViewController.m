@@ -124,32 +124,38 @@ static NSUInteger distance = 10;
     //get asset image
     PHImageManager *manager = [PHImageManager defaultManager];
     NSMutableArray *arrayOfUIImages = [NSMutableArray arrayWithCapacity:self.assets.count];
-    PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];
-    option.networkAccessAllowed = YES;
-    option.deliveryMode = PHImageRequestOptionsDeliveryModeFastFormat;
-    option.resizeMode = PHImageRequestOptionsResizeModeExact;
+//    PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];
+//    option.networkAccessAllowed = YES;
+//    option.deliveryMode = PHImageRequestOptionsDeliveryModeFastFormat;
+//    option.resizeMode = PHImageRequestOptionsResizeModeExact;
     
     for (id item in self.assets) {
         if ([item isKindOfClass:[PHAsset class]]) {
-//            [manager requestImageDataForAsset:item options:option resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
-//                [arrayOfUIImages addObject:[UIImage imageWithData:imageData scale:0.5]];
-//                if (arrayOfUIImages.count == self.assets.count) {
-//                    [self.fetchCenter uploadImages:arrayOfUIImages
-//                                      toCreateFeed:self.feed];
-//                }
-//            }];
-            [manager requestImageForAsset:item
-                               targetSize:PHImageManagerMaximumSize
-                              contentMode:PHImageContentModeAspectFit
-                                  options:option
-                            resultHandler:^(UIImage *result, NSDictionary *info) {
-                                NSAssert(result,@"null result");
-                                [arrayOfUIImages addObject:result];
-                                if (arrayOfUIImages.count == self.assets.count) {
-                                    [self.fetchCenter uploadImages:arrayOfUIImages
-                                                      toCreateFeed:self.feed];
-                                }
-                            }];
+            [manager requestImageDataForAsset:item
+                                      options:nil
+                                resultHandler:^(NSData * _Nullable imageData,
+                                                NSString * _Nullable dataUTI,
+                                                UIImageOrientation orientation,
+                                                NSDictionary * _Nullable info)
+            {
+                [arrayOfUIImages addObject:[UIImage imageWithData:imageData scale:0.5]];
+                if (arrayOfUIImages.count == self.assets.count) {
+                    [self.fetchCenter uploadImages:arrayOfUIImages
+                                      toCreateFeed:self.feed];
+                }
+            }];
+//            [manager requestImageForAsset:item
+//                               targetSize:PHImageManagerMaximumSize
+//                              contentMode:PHImageContentModeDefault
+//                                  options:nil
+//                            resultHandler:^(UIImage *result, NSDictionary *info) {
+//                                NSAssert(result,@"null result");
+//                                [arrayOfUIImages addObject:result];
+//                                if (arrayOfUIImages.count == self.assets.count) {
+//                                    [self.fetchCenter uploadImages:arrayOfUIImages
+//                                                      toCreateFeed:self.feed];
+//                                }
+//                            }];
         }else if ([item isKindOfClass:[UIImage class]]){
 #warning it works, but so fucking ugly!!
             [arrayOfUIImages addObject:item];

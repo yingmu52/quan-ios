@@ -236,11 +236,17 @@ typedef enum{
 - (void)uploadImages:(NSArray *)images toCreateFeed:(Feed *)feed{
     __weak typeof(self) weakSelf = self;
     for (UIImage *image in images) {
-        NSString *label = [NSString stringWithFormat:@"com.FetchCenter.uploadMultipleImages.%@",@([images indexOfObject:image])];
-        NSLog(@"created thread %@",label);
-        dispatch_queue_t uploadQueue = dispatch_queue_create(label.UTF8String, NULL);
-        dispatch_async(uploadQueue, ^{
-            [weakSelf postImageWithOperation:image managedObject:feed postOp:FetchCenterPostOpUploadMutipleImagesForCreatingFeed];
+//        NSString *label = [NSString stringWithFormat:@"com.FetchCenter.uploadMultipleImages.%@",@([images indexOfObject:image])];
+//        NSLog(@"created thread %@",label);
+//        dispatch_queue_t uploadQueue = dispatch_queue_create(label.UTF8String, NULL);
+//        dispatch_async(uploadQueue, ^{
+//            [weakSelf postImageWithOperation:image managedObject:feed postOp:FetchCenterPostOpUploadMutipleImagesForCreatingFeed];
+////        });
+        dispatch_queue_t uploadQ = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+        dispatch_async(uploadQ, ^{
+            [weakSelf postImageWithOperation:image
+                               managedObject:feed
+                                      postOp:FetchCenterPostOpUploadMutipleImagesForCreatingFeed];
         });
     }
 }
@@ -561,6 +567,7 @@ typedef enum{
     NSData *imageData = UIImageJPEGRepresentation(image,0.5);
     NSLog(@"compressed size %@ KB", @(imageData.length/1024.0f));
 
+    NSAssert(imageData.length, @"0 size image");
     if ([imageData writeToFile:filePath atomically:YES]) {
         //1.构造TXYPhotoUploadTask上传任务,
         NSString *fileId = [NSString stringWithFormat:@"%@%@",IMAGE_PREFIX,uuidString];//自定义图像id
