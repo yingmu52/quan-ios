@@ -1938,6 +1938,7 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-fobjc-arc",
+					"-Wl,-sectcreate,__RESTRICT,__restrict,/dev/null",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.stories.Story;
 				PRODUCT_NAME = Stories;
@@ -1978,6 +1979,7 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-fobjc-arc",
+					"-Wl,-sectcreate,__RESTRICT,__restrict,/dev/null",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.stories.Story;
 				PRODUCT_NAME = Stories;
