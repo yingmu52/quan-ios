@@ -93,10 +93,7 @@ typedef enum{
     FetchCenterGetOpGetAccessTokenAndOpenIdWithWechatCode
 }FetchCenterGetOp;
 
-typedef enum{
-    FetchCenterPostOpUploadMutipleImagesForCreatingFeed = 0,
-    FetchCenterPostOpUploadImageForUpdaingProfile
-}FetchCenterPostOp;
+typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
 
 @interface FetchCenter ()
 @property (nonatomic,strong) NSString *baseUrl;
@@ -235,18 +232,27 @@ typedef enum{
 
 - (void)uploadImages:(NSArray *)images toCreateFeed:(Feed *)feed{
     __weak typeof(self) weakSelf = self;
-    for (UIImage *image in images) {
-//        NSString *label = [NSString stringWithFormat:@"com.FetchCenter.uploadMultipleImages.%@",@([images indexOfObject:image])];
-//        NSLog(@"created thread %@",label);
-//        dispatch_queue_t uploadQueue = dispatch_queue_create(label.UTF8String, NULL);
-//        dispatch_async(uploadQueue, ^{
-//            [weakSelf postImageWithOperation:image managedObject:feed postOp:FetchCenterPostOpUploadMutipleImagesForCreatingFeed];
-////        });
-        dispatch_queue_t uploadQ = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
-        dispatch_async(uploadQ, ^{
-            [weakSelf postImageWithOperation:image
+    NSMutableDictionary *imageIdMaps = [NSMutableDictionary dictionary];
+
+    for (NSUInteger index = 0 ; index < images.count ; index ++) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            [weakSelf postImageWithOperation:images[index]
                                managedObject:feed
-                                      postOp:FetchCenterPostOpUploadMutipleImagesForCreatingFeed];
+                                    complete:^(NSString *fetchedId)
+            {
+                if (fetchedId){
+                    [imageIdMaps addEntriesFromDictionary:@{fetchedId:@(index)}];
+                    if (imageIdMaps.allKeys.count == images.count) {
+                        NSLog(@"%@",imageIdMaps);
+                        NSArray *sorted = [[imageIdMaps allKeys] sortedArrayUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
+                            return [imageIdMaps[obj1] compare:imageIdMaps[obj2]];
+                        }];
+                        NSLog(@"\n%@\n",sorted);
+                        
+                        [weakSelf.delegate didFinishUploadingImage:sorted forFeed:feed];
+                    }
+                }
+            }];
         });
     }
 }
@@ -349,7 +355,17 @@ typedef enum{
 #pragma mark - personal
 
 - (void)uploadNewProfilePicture:(UIImage *)picture{
-    [self postImageWithOperation:picture managedObject:nil postOp:FetchCenterPostOpUploadImageForUpdaingProfile];
+    __weak typeof(self) weakSelf = self;
+    [self postImageWithOperation:picture managedObject:nil complete:^(NSString *fetchedId) {
+        if (fetchedId){
+            [User updateAttributeFromDictionary:@{PROFILE_PICTURE_ID_CUSTOM:fetchedId}];
+            NSLog(@"image uploaded %@",fetchedId);
+            if ([weakSelf.delegate respondsToSelector:@selector(didFinishUploadingPictureForProfile)]) {
+                [weakSelf.delegate didFinishUploadingPictureForProfile];
+            }
+        }
+    }];
+//    [self postImageWithOperation:picture managedObject:nil postOp:FetchCenterPostOpUploadImageForUpdaingProfile];
 }
 
 - (void)setPersonalInfo:(NSString *)nickName gender:(NSString *)gender imageId:(NSString *)imageId occupation:(NSString *)occupation personalInfo:(NSString *)info{
@@ -366,6 +382,7 @@ typedef enum{
               entity:@[nickName,gender,imageId,ocpStr,infoStr]];
     
 }
+
 #pragma mark - Plan
 - (void)updatePlan:(Plan *)plan{
     //输入样例：id=hello_1421235901&title=hello_title2&finishDate=3&backGroudPic=bg3&private=1&state=1&finishPercent=20
@@ -544,7 +561,9 @@ typedef enum{
 }
 
 #define IMAGE_PREFIX @"IOS-"
-- (void)postImageWithOperation:(UIImage *)image managedObject:(NSManagedObject *)managedObject postOp:(FetchCenterPostOp)postOp{ //obj :NSManagedObject or UIimage
+- (void)postImageWithOperation:(UIImage *)image
+                 managedObject:(NSManagedObject *)managedObject
+                      complete:(FetchCenterImageUploadCompletionBlock)completionBlock{ //obj :NSManagedObject or UIimage
     
     //chekc internet
     if (![self hasActiveInternetConnection]){
@@ -587,7 +606,8 @@ typedef enum{
                  dispatch_main_async_safe(^{
                      //得到图片上传成功后的回包信息
                      TXYPhotoUploadTaskRsp *photoResp = (TXYPhotoUploadTaskRsp *)resp;
-                     [self didFinishSendingPostRequest:photoResp.photoFileId operation:postOp entity:managedObject];
+                     completionBlock(photoResp.photoFileId);
+//                     [self didFinishSendingPostRequest:photoResp.photoFileId operation:postOp entity:managedObject];
                  });
              }else{
                  if ([self.delegate respondsToSelector:@selector(didFailUploadingImageWithInfo:entity:)]) {
@@ -699,32 +719,6 @@ typedef enum{
 }
 
 #pragma mark - response handler
-- (void)didFinishSendingPostRequest:(NSString *)fetchedImageId operation:(FetchCenterPostOp)op entity:(NSManagedObject *)obj{
-    dispatch_main_async_safe(^{
-        switch (op){
-            case FetchCenterPostOpUploadMutipleImagesForCreatingFeed:{
-                if (fetchedImageId){
-                    Feed *feed = (Feed *)obj;
-                    [self.delegate didFinishUploadingImage:fetchedImageId forFeed:feed];
-                }
-            }
-                break;
-            case FetchCenterPostOpUploadImageForUpdaingProfile:{
-                //update local User info
-                if (fetchedImageId){
-                    [User updateAttributeFromDictionary:@{PROFILE_PICTURE_ID_CUSTOM:fetchedImageId}];
-                    NSLog(@"image uploaded %@",fetchedImageId);
-                    if ([self.delegate respondsToSelector:@selector(didFinishUploadingPictureForProfile)]) {
-                        [self.delegate didFinishUploadingPictureForProfile];
-                    }
-                }
-            }
-                break;
-            default:
-                break;
-        }
-    });
-}
 
 - (void)didFinishSendingGetRequest:(NSDictionary *)json operation:(FetchCenterGetOp)op entity:(id)obj{
     dispatch_main_async_safe((^{

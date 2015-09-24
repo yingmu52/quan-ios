@@ -33,7 +33,7 @@ static NSUInteger distance = 10;
 @property (nonatomic,strong) Feed *feed;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *keyboardHeight;
-@property (nonatomic,strong) NSMutableArray *fetchedImageIds;
+@property (nonatomic,strong) NSArray *fetchedImageIds;
 @end
 
 @implementation PostFeedViewController
@@ -117,9 +117,6 @@ static NSUInteger distance = 10;
     spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
     [spinner startAnimating];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
-    
-    self.fetchedImageIds = [NSMutableArray arrayWithCapacity:self.assets.count];
-    
     
     //get asset image
     PHImageManager *manager = [PHImageManager defaultManager];
@@ -260,18 +257,13 @@ static NSUInteger distance = 10;
 
 #pragma mark - fetch center delegate
 
-- (void)didFinishUploadingImage:(NSString *)fetchedImageId forFeed:(Feed *)feed{
-    [self.fetchedImageIds addObject:fetchedImageId];
-    if (self.fetchedImageIds.count == self.assets.count) { //所有的图片都上传成功了
-        if (self.plan.planId) {
-            [self.fetchCenter uploadToCreateFeed:feed fetchedImageIds:self.fetchedImageIds];
-        }else{
-            [self.fetchCenter uploadToCreatePlan:self.plan];
-        }
-
+- (void)didFinishUploadingImage:(NSArray *)imageIds forFeed:(Feed *)feed{
+    if (self.plan.planId) {
+        [self.fetchCenter uploadToCreateFeed:feed fetchedImageIds:imageIds];
+    }else{
+        self.fetchedImageIds = imageIds;
+        [self.fetchCenter uploadToCreatePlan:self.plan];
     }
-    NSLog(@"\n\nfetched image ID: %@\n\n",fetchedImageId);
-
 }
 
 - (void)didFinishUploadingPlan:(Plan *)plan{
@@ -280,6 +272,8 @@ static NSUInteger distance = 10;
 
 - (void)didFinishUploadingFeed:(Feed *)feed
 {
+#warning this is fucking ugly !!!
+    self.fetchedImageIds = nil;
     self.navigationItem.leftBarButtonItem.enabled = YES;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
     

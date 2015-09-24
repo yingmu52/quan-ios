@@ -37,7 +37,9 @@ typedef enum {
 - (void)didFinishFetchingFollowingPlanList:(NSArray *)planIds;
 - (void)didFinishUploadingPlan:(Plan *)plan;
 - (void)didFinishUploadingFeed:(Feed *)feed;
-- (void)didFinishUploadingImage:(NSString *)fetchedImageId forFeed:(Feed *)feed;
+
+- (void)didFinishUploadingImage:(NSArray *)imageIds forFeed:(Feed *)feed;
+
 - (void)didFinishReceivingUidAndUKeyForUserInfo:(NSDictionary *)userInfo isNewUser:(BOOL)isNew;
 - (void)didFinishGettingWeChatUserInfo;
 - (void)didFinishUpdatingPlan:(Plan *)plan;
