@@ -157,13 +157,11 @@
 }
 
 - (void)didFinishPickingPhAssets:(NSArray *)assets{
-    [self dismissViewControllerAnimated:YES completion:^{
-        //get select plan
-        NSIndexPath *indexPath = [[self.collectionView indexPathsForSelectedItems] firstObject];
-        Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
-        [self.svcDelegate didFinishSelectingImageAssets:assets forPlan:plan];
-    }];
-    
+    //get select plan
+    NSIndexPath *indexPath = [[self.collectionView indexPathsForSelectedItems] firstObject];
+    Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
+    [self.svcDelegate didFinishSelectingImageAssets:assets forPlan:plan];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
