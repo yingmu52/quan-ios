@@ -11,12 +11,8 @@
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/TencentApiInterface.h>
 #import "WXApi.h"
-
 #define YOUTU_APP_ID @"10003267"
-#define BUGLY_APP_ID @"900007998"
 #define WECHATAppID @"wxf4957fc61a006431"
-#define QQ_URLSCHEME @"tencent1104337894"
-#define YOUTU_APP_ID @"10003267"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

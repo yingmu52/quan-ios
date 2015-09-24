@@ -138,6 +138,11 @@
 		A0EDFCBF1B90C63400B10594 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EDFCBE1B90C63400B10594 /* libstdc++.6.dylib */; };
 		A0EDFCC01B90C64400B10594 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDD065F1AABF93E00379C17 /* libstdc++.dylib */; };
 		A0EDFCC11B90C75900B10594 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3DC1B84E851003CCB34 /* Reachability.m */; };
+		A0EE8C571BB3E87600C5DAC3 /* PgySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EE8C551BB3E87600C5DAC3 /* PgySDK.framework */; settings = {ASSET_TAGS = (); }; };
+		A0EE8C581BB3E87600C5DAC3 /* PgyUpdate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EE8C561BB3E87600C5DAC3 /* PgyUpdate.framework */; settings = {ASSET_TAGS = (); }; };
+		A0EE8C5A1BB3E89600C5DAC3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EE8C591BB3E89600C5DAC3 /* OpenGLES.framework */; };
+		A0EE8C5C1BB3E93300C5DAC3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EE8C5B1BB3E93300C5DAC3 /* AudioToolbox.framework */; };
+		A0EE8C5E1BB3E93D00C5DAC3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EE8C5D1BB3E93D00C5DAC3 /* AVFoundation.framework */; };
 		A0F7D42F1B84E851003CCB34 /* AMBCircularButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3AB1B84E851003CCB34 /* AMBCircularButton.m */; };
 		A0F7D4301B84E851003CCB34 /* AMBCircularButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3AB1B84E851003CCB34 /* AMBCircularButton.m */; };
 		A0F7D4311B84E851003CCB34 /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3AD1B84E851003CCB34 /* CHTCollectionViewWaterfallLayout.m */; };
@@ -476,6 +481,11 @@
 		A0EDFCBA1B90C61900B10594 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		A0EDFCBC1B90C62100B10594 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		A0EDFCBE1B90C63400B10594 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
+		A0EE8C551BB3E87600C5DAC3 /* PgySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PgySDK.framework; sourceTree = "<group>"; };
+		A0EE8C561BB3E87600C5DAC3 /* PgyUpdate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PgyUpdate.framework; sourceTree = "<group>"; };
+		A0EE8C591BB3E89600C5DAC3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		A0EE8C5B1BB3E93300C5DAC3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		A0EE8C5D1BB3E93D00C5DAC3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		A0F7D3AA1B84E851003CCB34 /* AMBCircularButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBCircularButton.h; sourceTree = "<group>"; };
 		A0F7D3AB1B84E851003CCB34 /* AMBCircularButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBCircularButton.m; sourceTree = "<group>"; };
 		A0F7D3AC1B84E851003CCB34 /* CHTCollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTCollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
@@ -684,6 +694,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0EE8C5E1BB3E93D00C5DAC3 /* AVFoundation.framework in Frameworks */,
+				A0EE8C5C1BB3E93300C5DAC3 /* AudioToolbox.framework in Frameworks */,
+				A0EE8C5A1BB3E89600C5DAC3 /* OpenGLES.framework in Frameworks */,
 				A0EDFCBB1B90C61900B10594 /* MobileCoreServices.framework in Frameworks */,
 				A0D102751B84F750006B0E4E /* TencentOpenAPI.framework in Frameworks */,
 				A089A9141B9BCBED00291EC2 /* libWeChatSDK.a in Frameworks */,
@@ -698,6 +711,8 @@
 				A04842F81B99F54B0032E927 /* libsqlite3.0.dylib in Frameworks */,
 				AEDD065C1AABF90B00379C17 /* libiconv.dylib in Frameworks */,
 				A04842F71B99F5360032E927 /* libc++.dylib in Frameworks */,
+				A0EE8C581BB3E87600C5DAC3 /* PgyUpdate.framework in Frameworks */,
+				A0EE8C571BB3E87600C5DAC3 /* PgySDK.framework in Frameworks */,
 				A0EDFCC01B90C64400B10594 /* libstdc++.dylib in Frameworks */,
 				A0EDFCBF1B90C63400B10594 /* libstdc++.6.dylib in Frameworks */,
 				A0EDFCBD1B90C62100B10594 /* libxml2.dylib in Frameworks */,
@@ -914,9 +929,19 @@
 			path = Headers;
 			sourceTree = "<group>";
 		};
+		A0EE8C541BB3E86300C5DAC3 /* Pgyer */ = {
+			isa = PBXGroup;
+			children = (
+				A0EE8C551BB3E87600C5DAC3 /* PgySDK.framework */,
+				A0EE8C561BB3E87600C5DAC3 /* PgyUpdate.framework */,
+			);
+			name = Pgyer;
+			sourceTree = "<group>";
+		};
 		A0F7D3A51B84E851003CCB34 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				A0EE8C541BB3E86300C5DAC3 /* Pgyer */,
 				A03010361BABC6AA0041E2CF /* QBImagePicker */,
 				A07115CE1BA6B109002C1270 /* SZTextView */,
 				A053CF4C1BA3FF1F0007970A /* ELCImagePicker */,
@@ -1352,6 +1377,9 @@
 		F3D9C90B14CD662C469ECA13 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A0EE8C5D1BB3E93D00C5DAC3 /* AVFoundation.framework */,
+				A0EE8C5B1BB3E93300C5DAC3 /* AudioToolbox.framework */,
+				A0EE8C591BB3E89600C5DAC3 /* OpenGLES.framework */,
 				A04842F61B99F5360032E927 /* libc++.dylib */,
 				A04842F41B99F29C0032E927 /* libsqlite3.0.dylib */,
 				A0EDFCBE1B90C63400B10594 /* libstdc++.6.dylib */,

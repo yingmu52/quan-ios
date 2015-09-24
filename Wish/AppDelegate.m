@@ -15,6 +15,13 @@
 #import "TXYUploadManager.h"
 #import "TXYDownloader.h"
 
+#import <PgySDK/PgyManager.h>
+#import <PgyUpdate/PgyUpdateManager.h>
+
+#define BUGLY_APP_ID @"900007998"
+#define QQ_URLSCHEME @"tencent1104337894"
+#define PGY_APPID @"7f1cd492fc0f48875650e0d1c702093b"
+
 @interface AppDelegate () <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,strong) LoginViewController *loginVC;
@@ -33,6 +40,14 @@
     //向微信注册
     [WXApi registerApp:WECHATAppID];
     
+    //薄公英启动基本SDK
+    PgyManager *pgYmanager = [PgyManager sharedPgyManager];
+    [pgYmanager startManagerWithAppId:PGY_APPID];
+    [pgYmanager setEnableFeedback:NO];
+//    [pgYmanager setFeedbackActiveType:kPGYFeedbackActiveTypeShake];
+//    [pgYmanager setShakingThreshold:3.0]; //摇一摇触发反馈
+
+
     if ([User isUserLogin]){
         // 设置用户ID, 如果你的APP有登录态, 可以在用户登录后再次调用此接口
         [[CrashReporter sharedInstance] setUserId:[NSString stringWithFormat:@"%@ - %@",[User uid],[User userDisplayName]]];
