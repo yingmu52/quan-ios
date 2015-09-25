@@ -345,13 +345,13 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
 }
 
 - (void)fetchAccessTokenWithWechatCode:(NSString *)code{
-    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,USER,GET_ACCESSTOKEN_OPENID];
-    [self getRequest:rqtStr
-           parameter:@{@"code":code}
-           operation:FetchCenterGetOpGetAccessTokenAndOpenIdWithWechatCode
-              entity:nil];
-
-    
+    if (code) {
+        NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,USER,GET_ACCESSTOKEN_OPENID];
+        [self getRequest:rqtStr
+               parameter:@{@"code":code}
+               operation:FetchCenterGetOpGetAccessTokenAndOpenIdWithWechatCode
+                  entity:nil];
+    }
 }
 #pragma mark - personal
 
