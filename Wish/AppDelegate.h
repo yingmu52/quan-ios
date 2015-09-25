@@ -11,6 +11,17 @@
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/TencentApiInterface.h>
 #import "WXApi.h"
+#import "MainTabBarController.h"
+#import <Bugly/CrashReporter.h>
+#import "User.h"
+#import "LoginViewController.h"
+#import "FetchCenter.h"
+#import "TXYUploadManager.h"
+#import "TXYDownloader.h"
+
+#import <PgySDK/PgyManager.h>
+#import <PgyUpdate/PgyUpdateManager.h>
+
 #define YOUTU_APP_ID @"10003267"
 #define WECHATAppID @"wxf4957fc61a006431"
 

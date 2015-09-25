@@ -7,17 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "MainTabBarController.h"
-#import <Bugly/CrashReporter.h>
-#import "User.h"
-#import "LoginViewController.h"
-#import "FetchCenter.h"
-#import "TXYUploadManager.h"
-#import "TXYDownloader.h"
-
-#import <PgySDK/PgyManager.h>
-#import <PgyUpdate/PgyUpdateManager.h>
-
 #define BUGLY_APP_ID @"900007998"
 #define QQ_URLSCHEME @"tencent1104337894"
 #define PGY_APPID @"7f1cd492fc0f48875650e0d1c702093b"

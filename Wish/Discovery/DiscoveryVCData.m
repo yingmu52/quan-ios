@@ -233,8 +233,9 @@
 
 - (void)didFinishSelectingImageAssets:(NSArray *)assets forPlan:(Plan *)plan{
     //asset could be either UIImage or PHAsset
-    [self performSegueWithIdentifier:@"showPostDetailFromDiscovery" sender:@[assets,plan]];
-
+    if (assets && plan) {
+        [self performSegueWithIdentifier:@"showPostDetailFromDiscovery" sender:@[assets,plan]];
+    }
 }
 
 - (void)didPressCreatePlanButton:(ShuffleViewController *)svc{
