@@ -57,11 +57,6 @@
     return _messageNotificationTimer;
 }
 
-- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    //do nothing
-}
-
-
 - (void)setNumberOfMessages:(NSInteger)numberOfMessages{
     id messageTab = [self.tabBar.items objectAtIndex:2];
     _numberOfMessages = numberOfMessages;

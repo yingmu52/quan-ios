@@ -87,19 +87,6 @@
 
 #pragma mark - new user registration
 
-
-- (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    [self handleFailure:info];
-}
-
-- (void)handleFailure:(NSDictionary *)info{
-    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
-                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
-                               delegate:self
-                      cancelButtonTitle:@"OK"
-                      otherButtonTitles:nil, nil] show];
-}
-
 - (void)uploadUserInfo{
     //upload user info
     [self.fetchCenter setPersonalInfo:self.nameTextField.text

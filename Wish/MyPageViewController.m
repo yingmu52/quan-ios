@@ -218,9 +218,6 @@
 
 #pragma mark fetchcenter Delegate
 
-- (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-}
-
 - (void)didFinishUploadingPictureForProfile{
     [self.fetchCenter setPersonalInfo:[User userDisplayName]
                                gender:[User gender]
@@ -232,10 +229,6 @@
 - (void)didFinishCheckingNewVersion:(BOOL)hasNewVersion{
     self.iconImageView.hidden = !hasNewVersion;
     NSLog(@"%@",hasNewVersion ? @"has new version" : @"this is latest version");
-}
-
-- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    NSLog(@"%@",info);
 }
 
 - (void)didFinishSettingPersonalInfo{

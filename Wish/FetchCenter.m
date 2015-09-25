@@ -98,6 +98,7 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
 @interface FetchCenter ()
 @property (nonatomic,strong) NSString *baseUrl;
 @property (nonatomic,strong) TXYUploadManager *uploadManager;
+@property (nonatomic,strong) Reachability *reachability;
 @end
 @implementation FetchCenter
 
@@ -453,6 +454,32 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
     }
 }
 
+#pragma mark - Reachability 
+
+- (BOOL)hasActiveInternetConnection{
+    return self.reachability.currentReachabilityStatus != NotReachable;
+//    if (self.reachability.currentReachabilityStatus == NotReachable) {
+//        dispatch_main_async_safe((^{
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"网络故障"
+//                                                            message:@"请检查网络连接"
+//                                                           delegate:nil
+//                                                  cancelButtonTitle:@"好"
+//                                                  otherButtonTitles:nil, nil];
+//            [alert show];
+//        }));
+//        return NO;
+//    }else{
+//        return YES;
+//    }
+}
+
+- (Reachability *)reachability{
+    if (!_reachability) {
+        _reachability = [Reachability reachabilityForInternetConnection];
+    }
+    return _reachability;
+}
+
 #pragma mark - main get and post method
 
 - (NSString *)argumentStringWithDictionary:(NSDictionary *)dict{
@@ -463,26 +490,12 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
     return [array componentsJoinedByString:@"&"];
 }
 
-
-
-- (BOOL)hasActiveInternetConnection
-{
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    return reachability.currentReachabilityStatus != NotReachable;
-}
-
-
-
 - (void)getRequest:(NSString *)baseURL parameter:(NSDictionary *)dict operation:(FetchCenterGetOp)op entity:(id)obj{
     
     //check internet connection
-    if (![self hasActiveInternetConnection]){
-        dispatch_main_async_safe((^{
-            [self.delegate didFailSendingRequestWithInfo:@{@"ret":@"网络故障",@"msg":@"请检查网络连接"}
-                                                  entity:obj];
-            return;
-        }))
-    }
+    //chekc internet
+    if (![self hasActiveInternetConnection]) return;
+    
     //base url with version
     baseURL = [baseURL stringByAppendingString:@"?"];
     baseURL = [self versionForBaseURL:baseURL operation:op];
@@ -566,13 +579,7 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
                       complete:(FetchCenterImageUploadCompletionBlock)completionBlock{ //obj :NSManagedObject or UIimage
     
     //chekc internet
-    if (![self hasActiveInternetConnection]){
-        dispatch_main_async_safe((^{
-            [self.delegate didFailUploadingImageWithInfo:@{@"ret":@"网络故障",@"msg":@"请检查网络连接"}
-                                                  entity:managedObject];
-            return;
-        }));
-    }
+    if (![self hasActiveInternetConnection]) return;
 
     //create webp local path
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -607,7 +614,6 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
                      //得到图片上传成功后的回包信息
                      TXYPhotoUploadTaskRsp *photoResp = (TXYPhotoUploadTaskRsp *)resp;
                      completionBlock(photoResp.photoFileId);
-//                     [self didFinishSendingPostRequest:photoResp.photoFileId operation:postOp entity:managedObject];
                  });
              }else{
                  if ([self.delegate respondsToSelector:@selector(didFailUploadingImageWithInfo:entity:)]) {

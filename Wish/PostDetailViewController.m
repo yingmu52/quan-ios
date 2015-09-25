@@ -11,12 +11,8 @@
 #import "SystemUtil.h"
 #import "ImagePicker.h"
 #import "PostFeedViewController.h"
-#import "FetchCenter.h"
-@interface PostDetailViewController () <ImagePickerDelegate,FetchCenterDelegate>
+@interface PostDetailViewController () <ImagePickerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *cameraBackground;
-//@property (nonatomic,strong) FetchCenter *fetchCenter;
-//@property (nonatomic,strong) Plan *plan;
-//@property (nonatomic,strong) NSArray *images;
 @property (nonatomic,strong) ImagePicker *imagePicker;
 @end
 @implementation PostDetailViewController
@@ -51,7 +47,6 @@
 }
 
 - (void)goBack{
-//    if (self.plan) [self.plan deleteSelf];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -91,15 +86,5 @@
     [[[UIAlertView alloc] initWithTitle:@"无法获取图片" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
 }
 
-- (void)didFinishUploadingPlan:(Plan *)plan{
-    self.navigationItem.rightBarButtonItem = nil;
-    [self performSegueWithIdentifier:@"showPostFeedFromPlanCreation" sender:plan];
-}
-
-- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    [[[UIAlertView alloc] initWithTitle:@"请求失败" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-    self.navigationItem.rightBarButtonItem = nil;
-//    if (self.plan) [self.plan deleteSelf];
-}
 
 @end

@@ -286,25 +286,6 @@ static NSUInteger distance = 10;
     
 }
 
-- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    [self handleFailure:info];
-}
-
-- (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    [self handleFailure:info];
-}
-
-
-- (void)handleFailure:(NSDictionary *)info{
-    self.navigationItem.leftBarButtonItem.enabled = YES;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
-    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
-                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
-                               delegate:self
-                      cancelButtonTitle:@"OK"
-                      otherButtonTitles:nil, nil] show];
-}
-
 #pragma mark - keyboard interaction notification
 
 - (void)keyboardDidHide:(NSNotification *)notification{
