@@ -73,32 +73,6 @@
             if ([self.imagePickerDelegate respondsToSelector:@selector(didFinishPickingPhAssets:)]) {
                 [self.imagePickerDelegate didFinishPickingPhAssets:assets];
             }
-//            else{
-//                PHImageManager *manager = [PHImageManager defaultManager];
-//                NSMutableArray *arrayOfUIImages = [NSMutableArray arrayWithCapacity:assets.count];
-//                
-//                
-//                PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
-//                options.synchronous = YES;
-//                options.deliveryMode = PHImageRequestOptionsDeliveryModeFastFormat;
-//                options.resizeMode = PHImageRequestOptionsResizeModeFast;
-//                
-//                
-//                for (PHAsset *asset in assets) {
-//                    
-//                    [manager requestImageForAsset:asset
-//                                       targetSize:PHImageManagerMaximumSize
-//                                      contentMode:PHImageContentModeAspectFit
-//                                          options:options
-//                                    resultHandler:^(UIImage *result, NSDictionary *info) {
-//                                        [arrayOfUIImages addObject:result];
-//                                        if (arrayOfUIImages.count == assets.count) {
-//                                            [self.imagePickerDelegate didFinishPickingImage:arrayOfUIImages];
-//                                        }
-//                                    }];
-//                    
-//                }
-//            }
         }];
     }
 }

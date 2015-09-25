@@ -39,26 +39,6 @@
 		A04842EA1B98CF9E0032E927 /* UIImageView+ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A04842E81B98CF9E0032E927 /* UIImageView+ImageCache.m */; };
 		A04842F71B99F5360032E927 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A04842F61B99F5360032E927 /* libc++.dylib */; };
 		A04842F81B99F54B0032E927 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A04842F41B99F29C0032E927 /* libsqlite3.0.dylib */; };
-		A053CF641BA3FF1F0007970A /* ELCAlbumPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF4E1BA3FF1F0007970A /* ELCAlbumPickerController.m */; };
-		A053CF651BA3FF1F0007970A /* ELCAlbumPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF4E1BA3FF1F0007970A /* ELCAlbumPickerController.m */; };
-		A053CF661BA3FF1F0007970A /* ELCAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF501BA3FF1F0007970A /* ELCAsset.m */; };
-		A053CF671BA3FF1F0007970A /* ELCAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF501BA3FF1F0007970A /* ELCAsset.m */; };
-		A053CF681BA3FF1F0007970A /* ELCAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF521BA3FF1F0007970A /* ELCAssetCell.m */; };
-		A053CF691BA3FF1F0007970A /* ELCAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF521BA3FF1F0007970A /* ELCAssetCell.m */; };
-		A053CF6A1BA3FF1F0007970A /* ELCAssetTablePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF561BA3FF1F0007970A /* ELCAssetTablePicker.m */; };
-		A053CF6B1BA3FF1F0007970A /* ELCAssetTablePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF561BA3FF1F0007970A /* ELCAssetTablePicker.m */; };
-		A053CF6C1BA3FF1F0007970A /* ELCConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF581BA3FF1F0007970A /* ELCConsole.m */; };
-		A053CF6D1BA3FF1F0007970A /* ELCConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF581BA3FF1F0007970A /* ELCConsole.m */; };
-		A053CF6E1BA3FF1F0007970A /* ELCImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF5A1BA3FF1F0007970A /* ELCImagePickerController.m */; };
-		A053CF6F1BA3FF1F0007970A /* ELCImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF5A1BA3FF1F0007970A /* ELCImagePickerController.m */; };
-		A053CF701BA3FF1F0007970A /* ELCOverlayImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF5D1BA3FF1F0007970A /* ELCOverlayImageView.m */; };
-		A053CF711BA3FF1F0007970A /* ELCOverlayImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF5D1BA3FF1F0007970A /* ELCOverlayImageView.m */; };
-		A053CF721BA3FF1F0007970A /* ELCAlbumPickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A053CF5F1BA3FF1F0007970A /* ELCAlbumPickerController.xib */; };
-		A053CF731BA3FF1F0007970A /* ELCAlbumPickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A053CF5F1BA3FF1F0007970A /* ELCAlbumPickerController.xib */; };
-		A053CF741BA3FF1F0007970A /* ELCAssetPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = A053CF601BA3FF1F0007970A /* ELCAssetPicker.xib */; };
-		A053CF751BA3FF1F0007970A /* ELCAssetPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = A053CF601BA3FF1F0007970A /* ELCAssetPicker.xib */; };
-		A053CF761BA3FF1F0007970A /* ELCAssetTablePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = A053CF611BA3FF1F0007970A /* ELCAssetTablePicker.xib */; };
-		A053CF771BA3FF1F0007970A /* ELCAssetTablePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = A053CF611BA3FF1F0007970A /* ELCAssetTablePicker.xib */; };
 		A053CF7E1BA4EFF00007970A /* PostImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF7D1BA4EFF00007970A /* PostImageCell.m */; };
 		A053CF7F1BA4EFF00007970A /* PostImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF7D1BA4EFF00007970A /* PostImageCell.m */; };
 		A055FB9F1BA6553A0013F91E /* ImagePreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A055FB9E1BA6553A0013F91E /* ImagePreviewCell.m */; };
@@ -385,26 +365,6 @@
 		A04842E81B98CF9E0032E927 /* UIImageView+ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+ImageCache.m"; sourceTree = "<group>"; };
 		A04842F41B99F29C0032E927 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		A04842F61B99F5360032E927 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
-		A053CF4D1BA3FF1F0007970A /* ELCAlbumPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAlbumPickerController.h; sourceTree = "<group>"; };
-		A053CF4E1BA3FF1F0007970A /* ELCAlbumPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAlbumPickerController.m; sourceTree = "<group>"; };
-		A053CF4F1BA3FF1F0007970A /* ELCAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAsset.h; sourceTree = "<group>"; };
-		A053CF501BA3FF1F0007970A /* ELCAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAsset.m; sourceTree = "<group>"; };
-		A053CF511BA3FF1F0007970A /* ELCAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetCell.h; sourceTree = "<group>"; };
-		A053CF521BA3FF1F0007970A /* ELCAssetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAssetCell.m; sourceTree = "<group>"; };
-		A053CF531BA3FF1F0007970A /* ELCAssetPickerFilterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetPickerFilterDelegate.h; sourceTree = "<group>"; };
-		A053CF541BA3FF1F0007970A /* ELCAssetSelectionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetSelectionDelegate.h; sourceTree = "<group>"; };
-		A053CF551BA3FF1F0007970A /* ELCAssetTablePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetTablePicker.h; sourceTree = "<group>"; };
-		A053CF561BA3FF1F0007970A /* ELCAssetTablePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAssetTablePicker.m; sourceTree = "<group>"; };
-		A053CF571BA3FF1F0007970A /* ELCConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCConsole.h; sourceTree = "<group>"; };
-		A053CF581BA3FF1F0007970A /* ELCConsole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCConsole.m; sourceTree = "<group>"; };
-		A053CF591BA3FF1F0007970A /* ELCImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCImagePickerController.h; sourceTree = "<group>"; };
-		A053CF5A1BA3FF1F0007970A /* ELCImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCImagePickerController.m; sourceTree = "<group>"; };
-		A053CF5B1BA3FF1F0007970A /* ELCImagePickerHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCImagePickerHeader.h; sourceTree = "<group>"; };
-		A053CF5C1BA3FF1F0007970A /* ELCOverlayImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCOverlayImageView.h; sourceTree = "<group>"; };
-		A053CF5D1BA3FF1F0007970A /* ELCOverlayImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCOverlayImageView.m; sourceTree = "<group>"; };
-		A053CF5F1BA3FF1F0007970A /* ELCAlbumPickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAlbumPickerController.xib; sourceTree = "<group>"; };
-		A053CF601BA3FF1F0007970A /* ELCAssetPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAssetPicker.xib; sourceTree = "<group>"; };
-		A053CF611BA3FF1F0007970A /* ELCAssetTablePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAssetTablePicker.xib; sourceTree = "<group>"; };
 		A053CF7C1BA4EFF00007970A /* PostImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostImageCell.h; sourceTree = "<group>"; };
 		A053CF7D1BA4EFF00007970A /* PostImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostImageCell.m; sourceTree = "<group>"; };
 		A055FB9D1BA6553A0013F91E /* ImagePreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePreviewCell.h; sourceTree = "<group>"; };
@@ -778,41 +738,6 @@
 			path = WeChatSDK_1.5;
 			sourceTree = "<group>";
 		};
-		A053CF4C1BA3FF1F0007970A /* ELCImagePicker */ = {
-			isa = PBXGroup;
-			children = (
-				A053CF4D1BA3FF1F0007970A /* ELCAlbumPickerController.h */,
-				A053CF4E1BA3FF1F0007970A /* ELCAlbumPickerController.m */,
-				A053CF4F1BA3FF1F0007970A /* ELCAsset.h */,
-				A053CF501BA3FF1F0007970A /* ELCAsset.m */,
-				A053CF511BA3FF1F0007970A /* ELCAssetCell.h */,
-				A053CF521BA3FF1F0007970A /* ELCAssetCell.m */,
-				A053CF531BA3FF1F0007970A /* ELCAssetPickerFilterDelegate.h */,
-				A053CF541BA3FF1F0007970A /* ELCAssetSelectionDelegate.h */,
-				A053CF551BA3FF1F0007970A /* ELCAssetTablePicker.h */,
-				A053CF561BA3FF1F0007970A /* ELCAssetTablePicker.m */,
-				A053CF571BA3FF1F0007970A /* ELCConsole.h */,
-				A053CF581BA3FF1F0007970A /* ELCConsole.m */,
-				A053CF591BA3FF1F0007970A /* ELCImagePickerController.h */,
-				A053CF5A1BA3FF1F0007970A /* ELCImagePickerController.m */,
-				A053CF5B1BA3FF1F0007970A /* ELCImagePickerHeader.h */,
-				A053CF5C1BA3FF1F0007970A /* ELCOverlayImageView.h */,
-				A053CF5D1BA3FF1F0007970A /* ELCOverlayImageView.m */,
-				A053CF5E1BA3FF1F0007970A /* Resources */,
-			);
-			path = ELCImagePicker;
-			sourceTree = "<group>";
-		};
-		A053CF5E1BA3FF1F0007970A /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				A053CF5F1BA3FF1F0007970A /* ELCAlbumPickerController.xib */,
-				A053CF601BA3FF1F0007970A /* ELCAssetPicker.xib */,
-				A053CF611BA3FF1F0007970A /* ELCAssetTablePicker.xib */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		A07115CE1BA6B109002C1270 /* SZTextView */ = {
 			isa = PBXGroup;
 			children = (
@@ -945,7 +870,6 @@
 				A0EE8C541BB3E86300C5DAC3 /* Pgyer */,
 				A03010361BABC6AA0041E2CF /* QBImagePicker */,
 				A07115CE1BA6B109002C1270 /* SZTextView */,
-				A053CF4C1BA3FF1F0007970A /* ELCImagePicker */,
 				A04842EB1B9916980032E927 /* WeChatSDK_1.5 */,
 				A0EDFCAD1B90C5F100B10594 /* QCloudDownloadSDK */,
 				A0EDFCB11B90C5F100B10594 /* QCloudUploadSDK */,
@@ -1499,19 +1423,16 @@
 				AEA4CADA1AFC340A00BDE7F9 /* CommentAcessaryView.xib in Resources */,
 				AEF7F2A01A6875360022410B /* Main.storyboard in Resources */,
 				A03010521BABC6AA0041E2CF /* QBImagePicker.strings in Resources */,
-				A053CF721BA3FF1F0007970A /* ELCAlbumPickerController.xib in Resources */,
 				AE2A8DE51ACA700100029D52 /* WishDetailCell.xib in Resources */,
 				AE59B5F11B40FB55006CA4AB /* ViewForEmptyEvent.xib in Resources */,
 				A0D1025C1B84EF3B006B0E4E /* HeaderView.xib in Resources */,
 				A0F8C45E1B88422300A8B120 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				AE6E7A0C1AB0DF1F0023B9C7 /* PopupView.xib in Resources */,
-				A053CF761BA3FF1F0007970A /* ELCAssetTablePicker.xib in Resources */,
 				A03010591BABC6AA0041E2CF /* QBImagePicker.storyboard in Resources */,
 				AEFB04881AD12437009EB0D3 /* DiscoveryFooterView.xib in Resources */,
 				A0F7D49F1B84E851003CCB34 /* LICENSE in Resources */,
 				AED355F41B2285D3000427FF /* FeedDetailHeader.xib in Resources */,
 				AEC8CE911AAF8823005364F8 /* StationView.xib in Resources */,
-				A053CF741BA3FF1F0007970A /* ELCAssetPicker.xib in Resources */,
 				AE52FA551A8D55CA003FF725 /* KeyboardAcessoryView.xib in Resources */,
 				AE9A19851B02E38800590784 /* FeedbackkAccessoryView.xib in Resources */,
 				A03010531BABC6AA0041E2CF /* Info.plist in Resources */,
@@ -1522,15 +1443,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A053CF731BA3FF1F0007970A /* ELCAlbumPickerController.xib in Resources */,
 				A0D102741B84F750006B0E4E /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				A0F7D4AA1B84E851003CCB34 /* UIImage-Categories.podspec in Resources */,
 				AEFB04891AD12437009EB0D3 /* DiscoveryFooterView.xib in Resources */,
-				A053CF771BA3FF1F0007970A /* ELCAssetTablePicker.xib in Resources */,
 				AEC8CE921AAF8823005364F8 /* StationView.xib in Resources */,
 				AEF7F29D1A6871F00022410B /* Images.xcassets in Resources */,
 				AEF7F2A11A6875360022410B /* Main.storyboard in Resources */,
-				A053CF751BA3FF1F0007970A /* ELCAssetPicker.xib in Resources */,
 				A0F7D4A01B84E851003CCB34 /* LICENSE in Resources */,
 				AE59B5F21B40FB55006CA4AB /* ViewForEmptyEvent.xib in Resources */,
 				AEC068901B2D309E007975D2 /* FeedDetailCell.xib in Resources */,
@@ -1551,7 +1469,6 @@
 				A0F7D49B1B84E851003CCB34 /* UIImage+ImageEffects.m in Sources */,
 				A0F8C4601B88444C00A8B120 /* Wish.xcdatamodeld in Sources */,
 				A0F7D4311B84E851003CCB34 /* CHTCollectionViewWaterfallLayout.m in Sources */,
-				A053CF6C1BA3FF1F0007970A /* ELCConsole.m in Sources */,
 				AEF775441A8134FE000DB73B /* HomeCardFlowLayout.m in Sources */,
 				A0D1024A1B84ED20006B0E4E /* CustomBarItem.m in Sources */,
 				AE479E9E1A6F775C00366A0A /* PostViewController.m in Sources */,
@@ -1582,7 +1499,6 @@
 				A0D102311B84EB6A006B0E4E /* UIImageView+HighlightedWebCache.m in Sources */,
 				A0D1021B1B84EB6A006B0E4E /* SDImageCache.m in Sources */,
 				A0D102211B84EB6A006B0E4E /* SDWebImageDownloader.m in Sources */,
-				A053CF701BA3FF1F0007970A /* ELCOverlayImageView.m in Sources */,
 				A0D102331B84EB6A006B0E4E /* UIImageView+WebCache.m in Sources */,
 				AEE075381A744A770015155B /* SystemUtil.m in Sources */,
 				A0D102441B84ED0B006B0E4E /* UINavigationBar+CustomHeight.m in Sources */,
@@ -1590,7 +1506,6 @@
 				AE0ADF191ABD78CC00692131 /* HomeCardViewController.m in Sources */,
 				AED355F81B228696000427FF /* FeedDetailHeader.m in Sources */,
 				A0F7D4331B84E851003CCB34 /* BadgeStyle.m in Sources */,
-				A053CF681BA3FF1F0007970A /* ELCAssetCell.m in Sources */,
 				A03010571BABC6AA0041E2CF /* QBAssetsViewController.m in Sources */,
 				AED4DD221B0E925300AF1497 /* Message+MessageCRUD.m in Sources */,
 				A0F7D42F1B84E851003CCB34 /* AMBCircularButton.m in Sources */,
@@ -1626,14 +1541,11 @@
 				AEFEE4001A8EE0A7007E8234 /* FollowingCell.m in Sources */,
 				AEB003EF1B7FF7190056EA80 /* MainTabBarController.m in Sources */,
 				A0F7D4571B84E851003CCB34 /* NZCircularImageView.m in Sources */,
-				A053CF6E1BA3FF1F0007970A /* ELCImagePickerController.m in Sources */,
 				A03010561BABC6AA0041E2CF /* QBAssetCell.m in Sources */,
 				AEF3F8831AA4E3C0008C2300 /* WishDetailVCFollower.m in Sources */,
 				AED9A67A1B44BE6E00108729 /* RequestLogViewController.m in Sources */,
 				AEBECCF91AE8A16600EDF385 /* LoginDetailViewController.m in Sources */,
-				A053CF641BA3FF1F0007970A /* ELCAlbumPickerController.m in Sources */,
 				AEBFCA371A78614100686EFE /* PostDetailViewController.m in Sources */,
-				A053CF661BA3FF1F0007970A /* ELCAsset.m in Sources */,
 				A0F7D4991B84E851003CCB34 /* UIActionSheet+Blocks.m in Sources */,
 				A03010551BABC6AA0041E2CF /* QBAlbumsViewController.m in Sources */,
 				A0D37C601B8781D900581EDE /* NewsPageViewController.m in Sources */,
@@ -1673,7 +1585,6 @@
 				A0F7D4531B84E851003CCB34 /* KTCenterFlowLayout.m in Sources */,
 				A055FB9F1BA6553A0013F91E /* ImagePreviewCell.m in Sources */,
 				A0D1021F1B84EB6A006B0E4E /* SDWebImageDecoder.m in Sources */,
-				A053CF6A1BA3FF1F0007970A /* ELCAssetTablePicker.m in Sources */,
 				AED4CB431AC79F3A00EE2DA4 /* ModalLeftToRightSegue.m in Sources */,
 				AE30EE6D1A6E19D00044740D /* WishDetailCell.m in Sources */,
 				AEC0E1C51AC64F9600563F7C /* WishDetailVCOwnerAchieved.m in Sources */,
@@ -1699,7 +1610,6 @@
 				A0F7D44E1B84E851003CCB34 /* JTSSimpleImageDownloader.m in Sources */,
 				A053CF7F1BA4EFF00007970A /* PostImageCell.m in Sources */,
 				A0F7D4481B84E851003CCB34 /* JTSAnimatedGIFUtility.m in Sources */,
-				A053CF6B1BA3FF1F0007970A /* ELCAssetTablePicker.m in Sources */,
 				A0F7D4461B84E851003CCB34 /* GCPTextView.m in Sources */,
 				A0F7D4A81B84E851003CCB34 /* UIImage+RoundedCorner.m in Sources */,
 				AED4CB441AC79F3A00EE2DA4 /* ModalLeftToRightSegue.m in Sources */,
@@ -1710,7 +1620,6 @@
 				AE0ADF1A1ABD78CC00692131 /* HomeCardViewController.m in Sources */,
 				AEFB048D1AD12437009EB0D3 /* DiscoveryViewController.m in Sources */,
 				AECE2C001AA19F6500B1C58E /* Owner+OwnerCRUD.m in Sources */,
-				A053CF6F1BA3FF1F0007970A /* ELCImagePickerController.m in Sources */,
 				AED68EE51A70399A00CDC0DF /* FetchCenter.m in Sources */,
 				A0D1021C1B84EB6A006B0E4E /* SDImageCache.m in Sources */,
 				AEFB048B1AD12437009EB0D3 /* DiscoveryVCData.m in Sources */,
@@ -1739,7 +1648,6 @@
 				A0EA22021BA53BF400A83A7A /* ImagePreviewController.m in Sources */,
 				AEFB04871AD12437009EB0D3 /* DiscoveryCell.m in Sources */,
 				AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */,
-				A053CF671BA3FF1F0007970A /* ELCAsset.m in Sources */,
 				A04842D21B98C5D10032E927 /* Owner.m in Sources */,
 				A0D1022E1B84EB6A006B0E4E /* UIImage+MultiFormat.m in Sources */,
 				AEE075391A744A770015155B /* SystemUtil.m in Sources */,
@@ -1770,10 +1678,8 @@
 				AEB003F41B8056980056EA80 /* MyPageViewController.m in Sources */,
 				AEBFCA381A78614100686EFE /* PostDetailViewController.m in Sources */,
 				A0F7D4821B84E851003CCB34 /* UIScrollView+SVPullToRefresh.m in Sources */,
-				A053CF6D1BA3FF1F0007970A /* ELCConsole.m in Sources */,
 				A0F7D4801B84E851003CCB34 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				AEE4A6D91A972FAB00ABF946 /* FollowingTVCData.m in Sources */,
-				A053CF711BA3FF1F0007970A /* ELCOverlayImageView.m in Sources */,
 				A0F7D4561B84E851003CCB34 /* NHAlignmentFlowLayout.m in Sources */,
 				AEC8CE8F1AAF872A005364F8 /* StationView.m in Sources */,
 				A0D102321B84EB6A006B0E4E /* UIImageView+HighlightedWebCache.m in Sources */,
@@ -1796,13 +1702,11 @@
 				A0F7D4501B84E851003CCB34 /* UIApplication+JTSImageViewController.m in Sources */,
 				A0F7D49E1B84E851003CCB34 /* UIImagePickerController+DelegateBlocks.m in Sources */,
 				A016FDBC1B8D14BA006E7A09 /* PreviewCell.m in Sources */,
-				A053CF691BA3FF1F0007970A /* ELCAssetCell.m in Sources */,
 				A0D102221B84EB6A006B0E4E /* SDWebImageDownloader.m in Sources */,
 				A0F7D4361B84E851003CCB34 /* CustomBadge.m in Sources */,
 				A03010611BACAFBC0041E2CF /* QBPreViewController.m in Sources */,
 				AED355F91B228696000427FF /* FeedDetailHeader.m in Sources */,
 				AEF7F2981A686FDB0022410B /* HomeViewController.m in Sources */,
-				A053CF651BA3FF1F0007970A /* ELCAlbumPickerController.m in Sources */,
 				A07115D21BA6B109002C1270 /* SZTextView.m in Sources */,
 				AEEC6C741A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,
 				A0D1023A1B84EC03006B0E4E /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */,
