@@ -171,8 +171,12 @@ static NSUInteger distance = 10;
         __weak typeof(self) weakSelf = self;
         [actionSheet dismissWithClickedButtonIndex:buttonIndex animated:NO];
         if ([title isEqualToString:CONFIRM]){
+            NSManagedObjectContext *context = [AppDelegate getContext];
+            if (!weakSelf.plan.planId) {
+                [context deleteObject:weakSelf.plan];
+            }
             if (weakSelf.feed) {
-                [[AppDelegate getContext] deleteObject:weakSelf.feed];
+                [context deleteObject:weakSelf.feed];
             }
             [weakSelf.navigationController popViewControllerAnimated:YES];
         }
