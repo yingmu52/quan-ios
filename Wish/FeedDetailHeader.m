@@ -56,4 +56,13 @@
     [self.commentButton setTitle:[text stringByAppendingString:@" "] forState:UIControlStateNormal];
 }
 
+- (IBAction)longpressOnLabel:(UILongPressGestureRecognizer *)longpress{
+    [self.titleTextLabel handleLongpress:longpress];
+}
+
+- (IBAction)tapOnLabel:(UITapGestureRecognizer *)tap{
+    [self.titleTextLabel resetNormalState];
+}
+
+
 @end

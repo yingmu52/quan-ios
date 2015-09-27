@@ -7,18 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MSLabel.h"
 @class FeedDetailHeader;
 
 @protocol FeedDetailHeaderDelegate
 - (void)didPressedLikeButton:(FeedDetailHeader *)headerView;
 - (void)didPressedCommentButton:(FeedDetailHeader *)headerView;
 - (void)didTapOnImageView:(UIImageView *)imageView;
+- (void)didLongpressOnLabel:(MSLabel *)label gesture:(UILongPressGestureRecognizer *)longpress;
 @end
 @interface FeedDetailHeader : UIView <UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UIView *backgroundView;
-@property (weak, nonatomic) IBOutlet UILabel *titleTextLabel;
+@property (weak, nonatomic) IBOutlet MSLabel *titleTextLabel;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet UIButton *commentButton;

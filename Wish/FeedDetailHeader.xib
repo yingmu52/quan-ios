@@ -126,8 +126,9 @@
                                 <action selector="likeButtonPressed" destination="nlM-PJ-eZc" eventType="touchUpInside" id="U36-sj-6au"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q11-FQ-xrh">
+                        <label opaque="NO" contentMode="left" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q11-FQ-xrh" customClass="MSLabel">
                             <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                            <gestureRecognizers/>
                             <string key="text">测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容</string>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
@@ -135,6 +136,10 @@
                             <variation key="heightClass=regular-widthClass=compact">
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                             </variation>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="WHe-Wx-3Yq" appends="YES" id="G8R-wT-5Qx"/>
+                                <outletCollection property="gestureRecognizers" destination="5fa-Gg-1wI" appends="YES" id="E7z-ek-PFt"/>
+                            </connections>
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -297,13 +302,22 @@
                 <outlet property="likeButton" destination="Jpt-cH-pfH" id="JFP-DL-bGZ"/>
                 <outlet property="pageControl" destination="obH-IT-XD4" id="A4H-Gu-7Bw"/>
                 <outlet property="scrollView" destination="yUT-i0-nlr" id="jev-NE-ky8"/>
-                <outlet property="titleTextLabel" destination="q11-FQ-xrh" id="iKE-Gr-m0d"/>
+                <outlet property="titleTextLabel" destination="q11-FQ-xrh" id="tD6-Bf-XhZ"/>
             </connections>
         </view>
-        <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="iqI-Dt-JWl"/>
-        <tapGestureRecognizer cancelsTouchesInView="NO" id="zi8-Rn-f5G">
+        <tapGestureRecognizer cancelsTouchesInView="NO" id="zi8-Rn-f5G" userLabel="Tap on scrollView">
             <connections>
                 <action selector="didTapOnScrollView:" destination="nlM-PJ-eZc" id="aza-fV-Kis"/>
+            </connections>
+        </tapGestureRecognizer>
+        <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="WHe-Wx-3Yq" userLabel="Long Press on Label">
+            <connections>
+                <action selector="longpressOnLabel:" destination="nlM-PJ-eZc" id="BuP-8D-ogc"/>
+            </connections>
+        </pongPressGestureRecognizer>
+        <tapGestureRecognizer id="5fa-Gg-1wI" userLabel="Tap on Label">
+            <connections>
+                <action selector="tapOnLabel:" destination="nlM-PJ-eZc" id="hGo-gl-Qmh"/>
             </connections>
         </tapGestureRecognizer>
     </objects>
