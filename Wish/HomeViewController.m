@@ -12,7 +12,6 @@
 #import "Plan+PlanCRUD.h"
 #import "Feed+FeedCRUD.h"
 #import "AppDelegate.h"
-#import "FetchCenter.h"
 #import "WishDetailViewController.h"
 #import "HomeCardFlowLayout.h"
 #import "StationView.h"
@@ -99,7 +98,7 @@ ViewForEmptyEventDelegate>
     [super viewDidLoad];
     [self setUpNavigationItem];
     [self addLongPressGesture];
-    [[FetchCenter new] fetchPlanListForOwnerId:[User uid]];    
+    [self.fetchCenter fetchPlanListForOwnerId:[User uid]];
 }
 - (void)addLongPressGesture{
     UILongPressGestureRecognizer *lp = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
@@ -317,7 +316,7 @@ ViewForEmptyEventDelegate>
 #pragma mark - implement parent class abstract methods
 - (void)configureCollectionViewCell:(HomeCardView *)cell atIndexPath:(NSIndexPath *)indexPath{
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
-    NSURL *imageUrl = [[FetchCenter new] urlWithImageID:plan.backgroundNum size:FetchCenterImageSize800];
+    NSURL *imageUrl = [self.fetchCenter urlWithImageID:plan.backgroundNum size:FetchCenterImageSize800];
     [cell.imageView showImageWithImageUrl:imageUrl];
     cell.titleLabel.text = plan.planTitle;
     cell.subtitleLabel.text = [NSString stringWithFormat:@"%@条记录  %@人关注",plan.tryTimes,plan.followCount];

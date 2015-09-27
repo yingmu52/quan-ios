@@ -45,6 +45,8 @@
 		A055FBA01BA6553A0013F91E /* ImagePreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A055FB9E1BA6553A0013F91E /* ImagePreviewCell.m */; };
 		A066C3851BB793DA003B51D5 /* MSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A066C3841BB793DA003B51D5 /* MSLabel.m */; settings = {ASSET_TAGS = (); }; };
 		A066C3861BB793DA003B51D5 /* MSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A066C3841BB793DA003B51D5 /* MSLabel.m */; settings = {ASSET_TAGS = (); }; };
+		A066C3891BB7AE08003B51D5 /* MSSuperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A066C3881BB7AE08003B51D5 /* MSSuperViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A066C38A1BB7AE08003B51D5 /* MSSuperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A066C3881BB7AE08003B51D5 /* MSSuperViewController.m */; settings = {ASSET_TAGS = (); }; };
 		A07115D11BA6B109002C1270 /* SZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A07115D01BA6B109002C1270 /* SZTextView.m */; };
 		A07115D21BA6B109002C1270 /* SZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A07115D01BA6B109002C1270 /* SZTextView.m */; };
 		A089A9141B9BCBED00291EC2 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A089A9111B9BCBED00291EC2 /* libWeChatSDK.a */; };
@@ -373,6 +375,8 @@
 		A055FB9E1BA6553A0013F91E /* ImagePreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePreviewCell.m; sourceTree = "<group>"; };
 		A066C3831BB793DA003B51D5 /* MSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSLabel.h; sourceTree = "<group>"; };
 		A066C3841BB793DA003B51D5 /* MSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSLabel.m; sourceTree = "<group>"; };
+		A066C3871BB7AE08003B51D5 /* MSSuperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSSuperViewController.h; sourceTree = "<group>"; };
+		A066C3881BB7AE08003B51D5 /* MSSuperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSSuperViewController.m; sourceTree = "<group>"; };
 		A07115CF1BA6B109002C1270 /* SZTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZTextView.h; sourceTree = "<group>"; };
 		A07115D01BA6B109002C1270 /* SZTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZTextView.m; sourceTree = "<group>"; };
 		A089A9111B9BCBED00291EC2 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
@@ -1052,6 +1056,8 @@
 		AE01723C1A65CD8E0014266F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A066C3871BB7AE08003B51D5 /* MSSuperViewController.h */,
+				A066C3881BB7AE08003B51D5 /* MSSuperViewController.m */,
 				AE95A9FA1ACFC26A007465D5 /* ImagePicker.h */,
 				AE95A9FB1ACFC26A007465D5 /* ImagePicker.m */,
 				AEC5B9A81AB7EB40008ECB92 /* User.h */,
@@ -1526,6 +1532,7 @@
 				AEF3F87F1AA4CFA6008C2300 /* WishDetailVCOwner.m in Sources */,
 				A04842D51B98C5D10032E927 /* Message.m in Sources */,
 				A0F7D4351B84E851003CCB34 /* CustomBadge.m in Sources */,
+				A066C3891BB7AE08003B51D5 /* MSSuperViewController.m in Sources */,
 				A03010601BACAFBC0041E2CF /* QBPreViewController.m in Sources */,
 				A0D102271B84EB6A006B0E4E /* SDWebImagePrefetcher.m in Sources */,
 				AECE2BFF1AA19F6500B1C58E /* Owner+OwnerCRUD.m in Sources */,
@@ -1618,6 +1625,7 @@
 				A053CF7F1BA4EFF00007970A /* PostImageCell.m in Sources */,
 				A0F7D4481B84E851003CCB34 /* JTSAnimatedGIFUtility.m in Sources */,
 				A0F7D4461B84E851003CCB34 /* GCPTextView.m in Sources */,
+				A066C38A1BB7AE08003B51D5 /* MSSuperViewController.m in Sources */,
 				A0F7D4A81B84E851003CCB34 /* UIImage+RoundedCorner.m in Sources */,
 				AED4CB441AC79F3A00EE2DA4 /* ModalLeftToRightSegue.m in Sources */,
 				A0F7D45A1B84E851003CCB34 /* Reachability.m in Sources */,

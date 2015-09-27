@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "HomeCardView.h"
-
-@interface HomeCardViewController : UIViewController 
+#import "MSSuperViewController.h"
+@interface HomeCardViewController : MSSuperViewController
 @property (nonatomic,weak) IBOutlet UICollectionView *collectionView;
 - (void)configureCollectionViewCell:(HomeCardView *)cell atIndexPath:(NSIndexPath *)indexPath;
 
