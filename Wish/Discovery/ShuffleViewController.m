@@ -18,8 +18,7 @@
 @interface ShuffleViewController () <NSFetchedResultsControllerDelegate,UICollectionViewDelegateFlowLayout,ImagePickerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic,weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic,strong) NSMutableArray *itemChanges;
-//@property (nonatomic,weak) IBOutlet UILabel *countLabel;
-//@property (nonatomic,strong) NSIndexPath *selectedIndexPath;
+@property (nonatomic,strong) NSIndexPath *selectedIndexPath;
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @property (nonatomic,strong) ImagePicker *imagePicker;
 @end
@@ -71,17 +70,25 @@
     
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     if (self.fetchedRC.fetchedObjects.count > 0) {
         //初始化时选择第一个事件
-        NSIndexPath *initialSelectionPath = [NSIndexPath indexPathForItem:0 inSection:0];
-        [self.collectionView selectItemAtIndexPath:initialSelectionPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
-        [self collectionView:self.collectionView didSelectItemAtIndexPath:initialSelectionPath];
+        [self.collectionView selectItemAtIndexPath:self.selectedIndexPath
+                                          animated:NO
+                                    scrollPosition:UICollectionViewScrollPositionNone];
+        [self collectionView:self.collectionView
+    didSelectItemAtIndexPath:self.selectedIndexPath];
 
     }
 }
 
+- (NSIndexPath *)selectedIndexPath{
+    if (!_selectedIndexPath) {
+        _selectedIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+    }
+    return _selectedIndexPath;
+}
 
 - (PreviewCell *)collectionView:(UICollectionView *)aCollectionView
           cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -130,10 +137,10 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    self.selectedIndexPath = indexPath;
     if (indexPath.row != self.fetchedRC.fetchedObjects.count) { //is not the last row
 
         if (self.fetchedRC.fetchedObjects.count > 1) { //除了最后一个cell, 当事件数为空是会闪退
-//            self.countLabel.text = [NSString stringWithFormat:@"%@/%@",@(indexPath.row + 1),@(self.fetchedRC.fetchedObjects.count)];
             //将卡片滚到与三角号对齐
             [collectionView scrollToItemAtIndexPath:indexPath
                                    atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
@@ -158,8 +165,7 @@
 
 - (void)didFinishPickingPhAssets:(NSArray *)assets{
     //get select plan
-    NSIndexPath *indexPath = [[self.collectionView indexPathsForSelectedItems] firstObject];
-    Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
+    Plan *plan = [self.fetchedRC objectAtIndexPath:self.selectedIndexPath];
     [self.svcDelegate didFinishSelectingImageAssets:assets forPlan:plan];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
