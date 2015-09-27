@@ -13,7 +13,10 @@
 #import "JTSImageViewController.h"
 @interface FeedDetailViewController ()
 @property (nonatomic,strong) NSDateFormatter *dateFormatter;
+@property (nonatomic,strong) NSDictionary *textAttributes;
+//@property (nonatomic,strong) NSString *testtext;
 @end
+
 @implementation FeedDetailViewController 
 
 - (NSDateFormatter *)dateFormatter{
@@ -45,8 +48,8 @@
 }
 
 - (void)setFeed:(Feed *)feed{
-    _feed = feed;
-    if (_feed){
+    if (feed != _feed) {
+        _feed = feed;
         [self updateHeaderInfoForFeed:_feed];
     }
 }
@@ -91,11 +94,38 @@
 }
 
 #pragma mark - dynamic feed title height
+#define FONTSIZE 14.0f
+- (NSDictionary *)textAttributes{
+    if (!_textAttributes) {
+        NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+        paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+        paragraphStyle.alignment = NSTextAlignmentLeft;
+        paragraphStyle.lineSpacing = 10.0f;
+//        paragraphStyle.minimumLineHeight = FONTSIZE;
+        _textAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:FONTSIZE],
+                            NSParagraphStyleAttributeName:paragraphStyle};
+    }
+    return _textAttributes;
+}
+
+- (CGFloat)heightForText:(NSString *)text withFontSize:(CGFloat)size referenceWidth:(CGFloat)width{
+    
+    CGRect bounds = [text boundingRectWithSize:CGSizeMake(width - 24.0f,CGFLOAT_MAX) //label左右有12.0f的距离
+                                       options:NSStringDrawingUsesLineFragmentOrigin
+                                    attributes:[self textAttributes]
+                                       context:nil];
+    return CGRectGetHeight(bounds);
+}
 
 - (FeedDetailHeader *)headerView{
     if (!_headerView) {
-        CGFloat height = self.tableView.frame.size.width + [SystemUtil heightForText:self.feed.feedTitle withFontSize:14.0f] + 40.0f; //40 = 8 top + 8 bottom  + 16 time label height + 8 bottom of label
-        CGRect frame = CGRectMake(0,0, self.tableView.frame.size.width, height);
+        
+        //计算高度
+        CGFloat width = CGRectGetWidth(self.view.frame);
+        CGFloat height = width + 10.0f + 48.0f + //referece FeedDetailHeader.xib
+        [self heightForText:self.feed.feedTitle withFontSize:FONTSIZE referenceWidth:width];
+        
+        CGRect frame = CGRectMake(0,0, CGRectGetHeight(self.view.frame), height);
         _headerView = [FeedDetailHeader instantiateFromNib:frame];
         _headerView.delegate = self;
         self.tableView.tableHeaderView = _headerView;
@@ -124,16 +154,20 @@
     return _headerView;
 }
 
+//- (NSString *)testtext{
+//    if (!_testtext) {
+//        _testtext = [SystemUtil randomLorumIpsum];
+//    }
+//    return _testtext;
+//}
+
 - (void)updateHeaderInfoForFeed:(Feed *)feed{
-    self.headerView.titleTextView.text = feed.feedTitle;
+    self.headerView.titleTextLabel.attributedText = [[NSAttributedString alloc] initWithString:self.feed.feedTitle
+                                                                                    attributes:self.textAttributes];
     self.headerView.dateLabel.text = [SystemUtil stringFromDate:feed.createDate];
     [self.headerView setLikeButtonText:[NSString stringWithFormat:@"%@",feed.likeCount]];
-//    [self.headerView.likeButton setTitle:[NSString stringWithFormat:@"%@",feed.likeCount] forState:UIControlStateNormal];
     [self.headerView setCommentButtonText:[NSString stringWithFormat:@"%@",feed.commentCount]];
-//    [self.headerView.commentButton setTitle:[NSString stringWithFormat:@"%@",feed.commentCount] forState:UIControlStateNormal];
     [self.headerView.likeButton setSelected:feed.selfLiked.boolValue];
-//    [self.headerView.likeButton setImage:(feed.selfLiked.boolValue ? [Theme likeButtonLiked] : [Theme likeButtonUnLiked]) forState:UIControlStateNormal];
-    
 }
 
 #pragma mark - table view

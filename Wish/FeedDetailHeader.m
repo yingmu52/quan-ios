@@ -26,10 +26,7 @@
 
 - (void)awakeFromNib{
     [super awakeFromNib];
-    self.titleTextView.textContainerInset = UIEdgeInsetsZero;
     self.scrollView.delegate = self;
-    
-    
 }
 
 - (IBAction)likeButtonPressed{

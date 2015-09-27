@@ -23,6 +23,6 @@
 + (void)setupShawdowForView:(UIView *)view;
 + (UIImage *)imageFromColor:(UIColor *)color size:(CGSize)size;
 + (CGFloat)heightForText:(NSString *)text withFontSize:(CGFloat)size;
-
++ (NSString *)randomLorumIpsum;
 
 @end

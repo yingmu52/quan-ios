@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GCPTextView.h"
 @class FeedDetailHeader;
 
 @protocol FeedDetailHeaderDelegate
@@ -19,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UIView *backgroundView;
-@property (weak, nonatomic) IBOutlet GCPTextView *titleTextView;
+@property (weak, nonatomic) IBOutlet UILabel *titleTextLabel;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet UIButton *commentButton;
