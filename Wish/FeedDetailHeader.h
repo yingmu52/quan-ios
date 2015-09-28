@@ -14,7 +14,6 @@
 - (void)didPressedLikeButton:(FeedDetailHeader *)headerView;
 - (void)didPressedCommentButton:(FeedDetailHeader *)headerView;
 - (void)didTapOnImageView:(UIImageView *)imageView;
-- (void)didLongpressOnLabel:(MSLabel *)label gesture:(UILongPressGestureRecognizer *)longpress;
 @end
 @interface FeedDetailHeader : UIView <UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
