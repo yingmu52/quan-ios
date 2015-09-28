@@ -21,6 +21,7 @@
     self.headerFeedCountLabel.text = [NSString stringWithFormat:@"%@条记录",plan.tryTimes];
     self.headerFollowLabel.text = [NSString stringWithFormat:@"%@人关注",plan.followCount];
     self.badgeImageView.hidden = (plan.planStatus.integerValue != PlanStatusFinished);
+    self.userNameLabel.text = [NSString stringWithFormat:@"by %@",plan.owner.ownerName];
     if ([plan.owner.ownerId isEqualToString:[User uid]]) { //owner don't get to follow its plan
         [self.followButton removeFromSuperview];
         [self.descriptionTextView setPlaceholder:EMPTY_PLACEHOLDER_OWNER];

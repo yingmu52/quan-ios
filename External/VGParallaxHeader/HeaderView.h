@@ -16,6 +16,7 @@
 - (void)didPressedUnFollow:(UIButton *)sender;
 @end
 @interface HeaderView : UIView
+@property (nonatomic,weak) IBOutlet UILabel *userNameLabel;
 @property (nonatomic,weak) IBOutlet UILabel *headerTitleLabel;
 @property (nonatomic,weak) IBOutlet UILabel *headerFeedCountLabel;
 @property (nonatomic,weak) IBOutlet UILabel *headerFollowLabel;
