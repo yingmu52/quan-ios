@@ -39,6 +39,8 @@
 		A04842EA1B98CF9E0032E927 /* UIImageView+ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A04842E81B98CF9E0032E927 /* UIImageView+ImageCache.m */; };
 		A04842F71B99F5360032E927 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A04842F61B99F5360032E927 /* libc++.dylib */; };
 		A04842F81B99F54B0032E927 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A04842F41B99F29C0032E927 /* libsqlite3.0.dylib */; };
+		A04942991BBA3A67002A8A3A /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A04942981BBA3A67002A8A3A /* CommentViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A049429A1BBA3A67002A8A3A /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A04942981BBA3A67002A8A3A /* CommentViewController.m */; settings = {ASSET_TAGS = (); }; };
 		A053CF7E1BA4EFF00007970A /* PostImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF7D1BA4EFF00007970A /* PostImageCell.m */; };
 		A053CF7F1BA4EFF00007970A /* PostImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF7D1BA4EFF00007970A /* PostImageCell.m */; };
 		A055FB9F1BA6553A0013F91E /* ImagePreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A055FB9E1BA6553A0013F91E /* ImagePreviewCell.m */; };
@@ -369,6 +371,8 @@
 		A04842E81B98CF9E0032E927 /* UIImageView+ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+ImageCache.m"; sourceTree = "<group>"; };
 		A04842F41B99F29C0032E927 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		A04842F61B99F5360032E927 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		A04942971BBA3A67002A8A3A /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
+		A04942981BBA3A67002A8A3A /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
 		A053CF7C1BA4EFF00007970A /* PostImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostImageCell.h; sourceTree = "<group>"; };
 		A053CF7D1BA4EFF00007970A /* PostImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostImageCell.m; sourceTree = "<group>"; };
 		A055FB9D1BA6553A0013F91E /* ImagePreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePreviewCell.h; sourceTree = "<group>"; };
@@ -1149,6 +1153,8 @@
 				AE47055C1AF9DC080028D7BC /* FeedDetailCell.m */,
 				AE1779981AF585CB005F1BEB /* FeedDetailViewController.h */,
 				AE1779991AF585CB005F1BEB /* FeedDetailViewController.m */,
+				A04942971BBA3A67002A8A3A /* CommentViewController.h */,
+				A04942981BBA3A67002A8A3A /* CommentViewController.m */,
 				A066C3831BB793DA003B51D5 /* MSLabel.h */,
 				A066C3841BB793DA003B51D5 /* MSLabel.m */,
 				AEC068911B2D3D55007975D2 /* FeedDetailVCOwner.h */,
@@ -1545,6 +1551,7 @@
 				A0F7D4451B84E851003CCB34 /* GCPTextView.m in Sources */,
 				A0B9D7691B9E4F1100EE382B /* DashedBorderView.m in Sources */,
 				A0F7D4471B84E851003CCB34 /* JTSAnimatedGIFUtility.m in Sources */,
+				A04942991BBA3A67002A8A3A /* CommentViewController.m in Sources */,
 				AEF7F2971A686FDB0022410B /* HomeViewController.m in Sources */,
 				AE9A3AEB1A9B1DB000F0588F /* AchieveVCData.m in Sources */,
 				A0300FAC1BA9FBFA0041E2CF /* Feed.m in Sources */,
@@ -1629,6 +1636,7 @@
 				A0F7D4A81B84E851003CCB34 /* UIImage+RoundedCorner.m in Sources */,
 				AED4CB441AC79F3A00EE2DA4 /* ModalLeftToRightSegue.m in Sources */,
 				A0F7D45A1B84E851003CCB34 /* Reachability.m in Sources */,
+				A049429A1BBA3A67002A8A3A /* CommentViewController.m in Sources */,
 				A0F7D4301B84E851003CCB34 /* AMBCircularButton.m in Sources */,
 				AED5BC681ABEA7EB00EFF398 /* ProfileViewController.m in Sources */,
 				AEF7F2941A686FA30022410B /* Theme.m in Sources */,

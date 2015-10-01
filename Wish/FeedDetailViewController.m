@@ -331,9 +331,9 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 #pragma mark - comment
 
 -(void)didPressedCommentButton:(FeedDetailHeader *)headerView{
-    self.commentView.feedInfoBackground.hidden = YES; // feed info section is for replying
-    [[[UIApplication sharedApplication] keyWindow] addSubview:self.commentView];
-    
+//    self.commentView.feedInfoBackground.hidden = YES; // feed info section is for replying
+//    [[[UIApplication sharedApplication] keyWindow] addSubview:self.commentView];
+    [self performSegueWithIdentifier:@"showCommentViewController" sender:nil];
 }
 
 - (void)didFinishDeletingComment:(Comment *)comment{
