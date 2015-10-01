@@ -406,9 +406,9 @@
             vc.feedId = feed.feedId;
             
             //show replay view, see didPressedCommentButton in FeedDetailViewController
-            vc.commentView.feedInfoBackground.hidden = YES; // feed info section is for replying
-            [[[UIApplication sharedApplication] keyWindow] addSubview:vc.commentView];
-            [segue.destinationViewController setFeedId:feed.feedId];
+//            vc.commentView.feedInfoBackground.hidden = YES; // feed info section is for replying
+//            [[[UIApplication sharedApplication] keyWindow] addSubview:vc.commentView];
+//            [segue.destinationViewController setFeedId:feed.feedId];
             
         }
 

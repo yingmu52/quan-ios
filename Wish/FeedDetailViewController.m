@@ -11,6 +11,7 @@
 #import "UIActionSheet+Blocks.h"
 #import "UITableView+FDTemplateLayoutCell.h"
 #import "JTSImageViewController.h"
+#import "CommentViewController.h"
 @interface FeedDetailViewController ()
 @property (nonatomic,strong) NSDateFormatter *dateFormatter;
 @property (nonatomic,strong) NSDictionary *textAttributes;
@@ -225,12 +226,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     //show comment view for replying
-    self.commentView.feedInfoBackground.hidden = NO; // feed info section is for replying
+//    self.commentView.feedInfoBackground.hidden = NO; // feed info section is for replying
     Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
     
     if (![comment.owner.ownerId isEqualToString:[User uid]]) { //the comment is from other user
-        self.commentView.comment = comment;
-        [[[UIApplication sharedApplication] keyWindow] addSubview:self.commentView];
+//        self.commentView.comment = comment;
+//        [[[UIApplication sharedApplication] keyWindow] addSubview:self.commentView];
+        [self performSegueWithIdentifier:@"showCommentViewController" sender:comment];
     }
     
 }
@@ -282,14 +284,14 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
     return @[delete];
 }
 
-- (CommentAcessaryView *)commentView{
-    if (!_commentView){
-        _commentView = [CommentAcessaryView instantiateFromNib:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
-        _commentView.delegate = self;
-
-    }
-    return _commentView;
-}
+//- (CommentAcessaryView *)commentView{
+//    if (!_commentView){
+//        _commentView = [CommentAcessaryView instantiateFromNib:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+//        _commentView.delegate = self;
+//
+//    }
+//    return _commentView;
+//}
 #pragma mark - like
 - (FetchCenter *)fetchCenter{
     if (!_fetchCenter){
@@ -328,6 +330,17 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
     }
 }
 
+#pragma mark - Segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"showCommentViewController"]) {
+        CommentViewController *cvc = segue.destinationViewController;
+        if (sender) {
+            cvc.comment = sender;
+        }
+        cvc.feedDetailViewController = self;
+    }
+}
 #pragma mark - comment
 
 -(void)didPressedCommentButton:(FeedDetailHeader *)headerView{
@@ -340,44 +353,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
     [[AppDelegate getContext] deleteObject:comment];
     self.feed.commentCount = @(self.feed.commentCount.integerValue - 1);
     [self.headerView setCommentButtonText:[NSString stringWithFormat:@"%@",self.feed.commentCount]];
-}
-
-
-#pragma mark - comment accessary view delegate 
-- (void)didPressSend:(CommentAcessaryView *)cav{
-    if (cav.textField.hasText){
-        if (cav.state == CommentAcessaryViewStateComment) {
-            [self.fetchCenter commentOnFeed:self.feed
-                                    content:cav.textField.text];
-        }else if (cav.state == CommentAcessaryViewStateReply){
-            [self.fetchCenter replyAtFeed:self.feed
-                                  content:cav.textField.text
-                                  toOwner:cav.comment.owner.ownerId];
-        }
-        [self.commentView removeFromSuperview];
-    }
-}
-
-#pragma mark - fetch center delegate 
-- (void)didFinishCommentingFeed:(Feed *)feed commentId:(NSString *)commentId{
-    
-    //update feed count
-    feed.commentCount = @(feed.commentCount.integerValue + 1);
-    [self.headerView setCommentButtonText:[NSString stringWithFormat:@"%@",feed.commentCount]];
-
-    //create comment locally
-    if (self.commentView.state == CommentAcessaryViewStateComment) {
-        [Comment createComment:self.commentView.textField.text
-                     commentId:commentId
-                       forFeed:feed];
-        
-    }else if (self.commentView.state == CommentAcessaryViewStateReply){
-        [Comment replyToOwner:self.commentView.comment.owner // this is done in didSelectRowAtIndexPath
-                      content:self.commentView.textField.text
-                    commentId:commentId
-                      forFeed:feed];
-    }
-    self.commentView.textField.text = @"";
 }
 
 - (void)didFinishLoadingCommentList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage forFeed:(Feed *)feed{

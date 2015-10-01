@@ -2338,6 +2338,9 @@
                                                 <include reference="toO-qr-ggF"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <action selector="sendComment:" destination="1JX-oc-sKH" eventType="touchUpInside" id="Nvs-8U-mzx"/>
+                                        </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="3fd-dp-Suu" customClass="SZTextView">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -2412,6 +2415,9 @@
                             <constraint firstItem="u60-Bp-9MQ" firstAttribute="centerX" secondItem="Tdg-ut-lGM" secondAttribute="centerX" id="UGt-ia-UJK"/>
                             <constraint firstItem="KhU-Tn-dX2" firstAttribute="centerX" secondItem="Tdg-ut-lGM" secondAttribute="centerX" id="WT5-Ed-c44"/>
                             <constraint firstItem="Ig8-th-wJU" firstAttribute="width" secondItem="Tdg-ut-lGM" secondAttribute="width" id="htw-AN-uEh"/>
+                            <constraint firstItem="u60-Bp-9MQ" firstAttribute="top" secondItem="Ig8-th-wJU" secondAttribute="bottom" constant="72" id="i7k-Rj-9J1">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
                             <constraint firstItem="KhU-Tn-dX2" firstAttribute="width" secondItem="Tdg-ut-lGM" secondAttribute="width" id="mmh-OH-6KW"/>
                             <constraint firstItem="rM1-kv-z9l" firstAttribute="top" secondItem="u60-Bp-9MQ" secondAttribute="bottom" constant="106" id="nQd-MY-XwO">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
@@ -2428,7 +2434,6 @@
                                 <exclude reference="u60-Bp-9MQ"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="nQd-MY-XwO"/>
                                 <exclude reference="8tU-Bz-83E"/>
                                 <exclude reference="IzK-sf-RqH"/>
                                 <exclude reference="htw-AN-uEh"/>
@@ -2436,8 +2441,10 @@
                                 <exclude reference="WT5-Ed-c44"/>
                                 <exclude reference="mmh-OH-6KW"/>
                                 <exclude reference="UGt-ia-UJK"/>
+                                <exclude reference="i7k-Rj-9J1"/>
                                 <exclude reference="oub-8j-EpE"/>
                                 <exclude reference="vIt-cv-Hm4"/>
+                                <exclude reference="nQd-MY-XwO"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -2447,16 +2454,17 @@
                                 <include reference="u60-Bp-9MQ"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="nQd-MY-XwO"/>
                                 <include reference="8tU-Bz-83E"/>
                                 <include reference="IzK-sf-RqH"/>
                                 <include reference="htw-AN-uEh"/>
-                                <include reference="9cf-yi-J2h"/>
+                                <exclude reference="9cf-yi-J2h"/>
                                 <include reference="WT5-Ed-c44"/>
                                 <include reference="mmh-OH-6KW"/>
                                 <include reference="UGt-ia-UJK"/>
+                                <include reference="i7k-Rj-9J1"/>
                                 <include reference="oub-8j-EpE"/>
                                 <include reference="vIt-cv-Hm4"/>
+                                <include reference="nQd-MY-XwO"/>
                             </mask>
                         </variation>
                     </view>
@@ -2466,6 +2474,7 @@
                         <outlet property="textView" destination="3fd-dp-Suu" id="rIA-L6-H3U"/>
                         <outlet property="textViewBackgroundHeight" destination="gue-gB-4Jt" id="sYw-ad-PtS"/>
                         <outlet property="timeLabel" destination="owF-yU-B69" id="1Xo-im-PLk"/>
+                        <outlet property="userBackgroundView" destination="KhU-Tn-dX2" id="9rt-IG-Xne"/>
                         <outlet property="userNameLabel" destination="8aC-nZ-x4b" id="hTG-Mw-ghR"/>
                         <outlet property="userProfileImageView" destination="3Bh-hs-OQw" id="r0x-8u-vjY"/>
                     </connections>

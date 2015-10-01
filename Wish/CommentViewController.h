@@ -7,5 +7,9 @@
 //
 
 #import "MSSuperViewController.h"
+#import "Comment.h"
+#import "FeedDetailViewController.h"
 @interface CommentViewController : MSSuperViewController
+@property (nonatomic,weak) Comment *comment;
+@property (nonatomic,weak) FeedDetailViewController *feedDetailViewController;
 @end
