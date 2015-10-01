@@ -2195,6 +2195,7 @@
                         <viewControllerLayoutGuide type="bottom" id="rM1-kv-z9l"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Tdg-ut-lGM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KhU-Tn-dX2" userLabel="Feed Section Background">
@@ -2272,8 +2273,6 @@
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="7of-DX-eJF"/>
-                                        <exclude reference="Z9X-4M-JVd"/>
-                                        <exclude reference="enF-Mv-4Nm"/>
                                         <exclude reference="4M8-nF-ohm"/>
                                         <exclude reference="YT5-lS-uGw"/>
                                         <exclude reference="LsG-mK-u0v"/>
@@ -2282,6 +2281,8 @@
                                         <exclude reference="yiU-Xg-2l9"/>
                                         <exclude reference="7d1-VB-KPK"/>
                                         <exclude reference="tzC-N7-B5g"/>
+                                        <exclude reference="Z9X-4M-JVd"/>
+                                        <exclude reference="enF-Mv-4Nm"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -2293,8 +2294,6 @@
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="7of-DX-eJF"/>
-                                        <include reference="Z9X-4M-JVd"/>
-                                        <include reference="enF-Mv-4Nm"/>
                                         <include reference="4M8-nF-ohm"/>
                                         <include reference="YT5-lS-uGw"/>
                                         <include reference="LsG-mK-u0v"/>
@@ -2303,6 +2302,8 @@
                                         <include reference="yiU-Xg-2l9"/>
                                         <include reference="7d1-VB-KPK"/>
                                         <include reference="tzC-N7-B5g"/>
+                                        <include reference="Z9X-4M-JVd"/>
+                                        <include reference="enF-Mv-4Nm"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -2373,13 +2374,13 @@
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="gue-gB-4Jt"/>
-                                        <exclude reference="5gr-7j-ea2"/>
-                                        <exclude reference="k7P-oB-Zrl"/>
-                                        <exclude reference="mEd-ew-p3e"/>
                                         <exclude reference="N1c-nj-exu"/>
                                         <exclude reference="UKR-Bg-s3w"/>
                                         <exclude reference="bvb-Ug-AXD"/>
                                         <exclude reference="oh2-bz-QQo"/>
+                                        <exclude reference="5gr-7j-ea2"/>
+                                        <exclude reference="k7P-oB-Zrl"/>
+                                        <exclude reference="mEd-ew-p3e"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -2389,13 +2390,13 @@
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="gue-gB-4Jt"/>
-                                        <include reference="5gr-7j-ea2"/>
-                                        <include reference="k7P-oB-Zrl"/>
-                                        <include reference="mEd-ew-p3e"/>
                                         <include reference="N1c-nj-exu"/>
                                         <include reference="UKR-Bg-s3w"/>
                                         <include reference="bvb-Ug-AXD"/>
                                         <include reference="oh2-bz-QQo"/>
+                                        <include reference="5gr-7j-ea2"/>
+                                        <include reference="k7P-oB-Zrl"/>
+                                        <include reference="mEd-ew-p3e"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -2427,6 +2428,7 @@
                                 <exclude reference="u60-Bp-9MQ"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="nQd-MY-XwO"/>
                                 <exclude reference="8tU-Bz-83E"/>
                                 <exclude reference="IzK-sf-RqH"/>
                                 <exclude reference="htw-AN-uEh"/>
@@ -2436,7 +2438,6 @@
                                 <exclude reference="UGt-ia-UJK"/>
                                 <exclude reference="oub-8j-EpE"/>
                                 <exclude reference="vIt-cv-Hm4"/>
-                                <exclude reference="nQd-MY-XwO"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -2446,6 +2447,7 @@
                                 <include reference="u60-Bp-9MQ"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="nQd-MY-XwO"/>
                                 <include reference="8tU-Bz-83E"/>
                                 <include reference="IzK-sf-RqH"/>
                                 <include reference="htw-AN-uEh"/>
@@ -2455,7 +2457,6 @@
                                 <include reference="UGt-ia-UJK"/>
                                 <include reference="oub-8j-EpE"/>
                                 <include reference="vIt-cv-Hm4"/>
-                                <include reference="nQd-MY-XwO"/>
                             </mask>
                         </variation>
                     </view>

@@ -41,26 +41,37 @@
     //设置输入框
     self.textView.delegate = self;
     self.textView.placeholder = @"说点什么吧";
+    
+    //设置输入框UI
     self.textView.layer.cornerRadius = 4.0f;
-    self.textView.contentInset = UIEdgeInsetsMake(5.0, 0, 5.0, 0);
+    self.textView.layer.borderWidth = 1.0f;
+    self.textView.layer.borderColor = [UIColor lightGrayColor].CGColor;
 }
 
 - (void)textViewDidChange:(UITextView *)textView
 {
+    //设置行数限制
     NSUInteger maxNumberOfLines = 4;
+    
+    //高数当前行数约值
     NSUInteger numLines = textView.contentSize.height/textView.font.lineHeight;
+    
     if (numLines < maxNumberOfLines){
         CGFloat computedHeightDifference = textView.contentSize.height - (textView.frame.size.height + textView.textContainerInset.top + textView.textContainerInset.bottom);
         
+        //换行后扩展边框
         if (computedHeightDifference) {
             [UIView animateWithDuration:0.5 animations:^{
                 self.textViewBackgroundHeight.constant = textView.contentSize.height + textView.textContainerInset.top + textView.textContainerInset.bottom;
                 [self.view layoutIfNeeded];
             }];
         }
-       
+    }else{
+        //滚到输入框最底部
+        CGPoint bottomOffset = CGPointMake(0, textView.contentSize.height - textView.frame.size.height);
+        [textView setContentOffset:bottomOffset animated:NO];
     }
-
+    
 }
 
 #pragma mark - Text View Delegate
