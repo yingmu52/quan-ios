@@ -106,15 +106,12 @@
 
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row != self.fetchedRC.fetchedObjects.count) { //is not the last row
-
-        if (self.fetchedRC.fetchedObjects.count > 1) { //除了最后一个cell, 当事件数为空是会闪退
+    if (self.fetchedRC.fetchedObjects.count > 0 && indexPath.row != self.fetchedRC.fetchedObjects.count) { //场景：1个事件，+号在最后面，此时事件数>0，+号的索引为1
             //将卡片滚到与三角号对齐
             [collectionView scrollToItemAtIndexPath:indexPath
                                    atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
                                            animated:YES];
             [self.imagePicker showPhotoLibrary:self];
-        }
     }else{
         [self dismissViewControllerAnimated:YES completion:^{
             [self.svcDelegate didPressCreatePlanButton:self];
