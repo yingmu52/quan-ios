@@ -97,10 +97,10 @@
         for (Plan *plan in self.fetchedRC.fetchedObjects){
             if (![plans containsObject:plan]){
                 if ([plan isDeletable]){
-                    plan.discoverIndex = nil;
-                }else{
                     [[AppDelegate getContext] deleteObject:plan];
                     NSLog(@"Removing plan %@ : %@",plan.planId,plan.planTitle);
+                }else{
+                    plan.discoverIndex = nil;
                 }
             }
         }
