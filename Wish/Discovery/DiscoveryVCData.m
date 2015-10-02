@@ -92,19 +92,21 @@
 
 - (void)didfinishFetchingDiscovery:(NSArray *)plans{
     //删除在本地缓存的不存在于服务器上的事件，异线。
-    dispatch_queue_t compareList = dispatch_queue_create("DiscoveryVCData.compareList", NULL);
-    dispatch_async(compareList, ^{
-        for (Plan *plan in self.fetchedRC.fetchedObjects){
-            if (![plans containsObject:plan]){
-                if ([plan isDeletable]){
-                    [[AppDelegate getContext] deleteObject:plan];
-                    NSLog(@"Removing plan %@ : %@",plan.planId,plan.planTitle);
-                }else{
-                    plan.discoverIndex = nil;
+    if (plans.count > 0){ //判断服务器的列表是否有数据，如果没有的话不要处理本地的事件
+        dispatch_queue_t compareList = dispatch_queue_create("DiscoveryVCData.compareList", NULL);
+        dispatch_async(compareList, ^{
+            for (Plan *plan in self.fetchedRC.fetchedObjects){
+                if (![plans containsObject:plan]){
+                    if ([plan isDeletable]){
+                        [[AppDelegate getContext] deleteObject:plan];
+                        NSLog(@"Removing plan %@ : %@",plan.planId,plan.planTitle);
+                    }else{
+                        plan.discoverIndex = nil;
+                    }
                 }
             }
-        }
-    });
+        });
+    }
 }
 
 
