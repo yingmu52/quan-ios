@@ -38,7 +38,7 @@
             [weakSelf loadComments];
         }
     }];
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero]; // clear empty cell
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), 44.0)]; // clear empty cell
 
 
     //load comments
@@ -226,12 +226,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     //show comment view for replying
-//    self.commentView.feedInfoBackground.hidden = NO; // feed info section is for replying
     Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
     
     if (![comment.owner.ownerId isEqualToString:[User uid]]) { //the comment is from other user
-//        self.commentView.comment = comment;
-//        [[[UIApplication sharedApplication] keyWindow] addSubview:self.commentView];
         [self performSegueWithIdentifier:@"showCommentViewController" sender:comment];
     }
     
@@ -284,14 +281,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
     return @[delete];
 }
 
-//- (CommentAcessaryView *)commentView{
-//    if (!_commentView){
-//        _commentView = [CommentAcessaryView instantiateFromNib:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
-//        _commentView.delegate = self;
-//
-//    }
-//    return _commentView;
-//}
 #pragma mark - like
 - (FetchCenter *)fetchCenter{
     if (!_fetchCenter){
@@ -311,7 +300,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
         [self.fetchCenter likeFeed:self.feed];
     }else{
         [headerView.likeButton setSelected:NO];
-//        [headerView.likeButton setImage:[Theme likeButtonUnLiked] forState:UIControlStateNormal];
         
         //decrease feed like count
         self.feed.likeCount = @(self.feed.likeCount.integerValue - 1);
@@ -344,8 +332,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 #pragma mark - comment
 
 -(void)didPressedCommentButton:(FeedDetailHeader *)headerView{
-//    self.commentView.feedInfoBackground.hidden = YES; // feed info section is for replying
-//    [[[UIApplication sharedApplication] keyWindow] addSubview:self.commentView];
     [self performSegueWithIdentifier:@"showCommentViewController" sender:nil];
 }
 

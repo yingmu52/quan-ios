@@ -12,7 +12,6 @@
 #import "FeedDetailCell.h"
 #import "FetchCenter.h"
 #import "Theme.h"
-//#import "CommentAcessaryView.h"
 #import "AppDelegate.h"
 #import "UIImageView+ImageCache.h"
 #import "Feed+FeedCRUD.h"
@@ -24,7 +23,6 @@
 @property (nonatomic,strong) NSString *feedId; //for Message List View
 @property (strong, nonatomic) FetchCenter *fetchCenter;
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
-//@property (strong,nonatomic) CommentAcessaryView *commentView;
 @property (nonatomic,strong) Feed *feed;
 @property (nonatomic) BOOL hasNextPage;
 @property (nonatomic,strong) NSDictionary *pageInfo;
