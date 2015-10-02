@@ -91,14 +91,13 @@
 
 
 - (void)didfinishFetchingDiscovery:(NSArray *)plans{
-    
     //删除在本地缓存的不存在于服务器上的事件，异线。
     dispatch_queue_t compareList = dispatch_queue_create("DiscoveryVCData.compareList", NULL);
     dispatch_async(compareList, ^{
         for (Plan *plan in self.fetchedRC.fetchedObjects){
             if (![plans containsObject:plan]){
-                if ([plan.owner.ownerId isEqualToString:[User uid]]){
-                    plan.discoverIndex = @(self.fetchedRC.fetchedObjects.count + 1); //不删除自己的事件，并将其排到发现页列表最后。
+                if ([plan isDeletable]){
+                    plan.discoverIndex = nil;
                 }else{
                     [[AppDelegate getContext] deleteObject:plan];
                     NSLog(@"Removing plan %@ : %@",plan.planId,plan.planTitle);
@@ -153,6 +152,8 @@
     if (!_fetchedRC) {
         //do fetchrequest
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
+        
+        request.predicate = [NSPredicate predicateWithFormat:@"discoverIndex != nil"];
         
         request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"discoverIndex" ascending:YES]];
 
