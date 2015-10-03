@@ -881,7 +881,7 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
             }
                 break;
             case FetchCenterGetOpGetFeedCommentList:{
-                NSArray *comments = [json valueForKeyPath:@"data.commentList"];
+                
                 NSDictionary *ownerInfo = [json valueForKeyPath:@"data.manList"];
                 BOOL hasNextPage = [[json valueForKeyPath:@"data.isMore"] boolValue];
                 NSDictionary *pageInfo = [json valueForKeyPath:@"data.attachInfo"];
@@ -889,20 +889,26 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
                 
                 Feed *feed = [Feed updateFeedWithInfo:feedInfo forPlan:nil];
                 
-                for (NSDictionary *commentInfo in comments){
-                    Comment *comment = [Comment updateCommentWithInfo:commentInfo];
-                    
-                    NSDictionary *userInfo = comment.isMyComment.boolValue ? @{@"headUrl":[User updatedProfilePictureId],@"id":[User uid],@"name":[User userDisplayName]} : ownerInfo[commentInfo[@"ownerId"]];
-                    
-                    comment.owner = [Owner updateOwnerWithInfo:userInfo];
-                    comment.feed = feed;
-                    if (comment.idForReply) {
-                        comment.nameForReply = [ownerInfo[comment.idForReply] objectForKey:@"name"];
-                    }
-//                    NSLog(@"Comments %@",comment);
-//                    NSLog(@"Owner %@",comment.owner);
+                id commentList = [json valueForKeyPath:@"data.commentList"];
+                NSArray *comments;
+                if ([commentList isKindOfClass:[NSArray class]]) {
+                    comments = commentList;
                 }
-//                NSLog(@"%@",json);
+                if (comments.count > 0) {
+                    for (NSDictionary *commentInfo in comments){
+                        Comment *comment = [Comment updateCommentWithInfo:commentInfo];
+                        
+                        NSDictionary *userInfo = comment.isMyComment.boolValue ? @{@"headUrl":[User updatedProfilePictureId],@"id":[User uid],@"name":[User userDisplayName]} : ownerInfo[commentInfo[@"ownerId"]];
+                        
+                        comment.owner = [Owner updateOwnerWithInfo:userInfo];
+                        comment.feed = feed;
+                        if (comment.idForReply) {
+                            comment.nameForReply = [ownerInfo[comment.idForReply] objectForKey:@"name"];
+                        }
+                    }
+
+                }
+                
                 [self.delegate didFinishLoadingCommentList:pageInfo hasNextPage:hasNextPage forFeed:feed];
             }
                 break;
