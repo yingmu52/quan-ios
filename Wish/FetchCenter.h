@@ -118,7 +118,7 @@ typedef enum {
            personalInfo:(NSString *)info;
 
 #pragma mark - ultility
-- (NSURL *)urlWithImageID:(NSString *)imageId;
+//- (NSURL *)urlWithImageID:(NSString *)imageId;
 - (NSURL *)urlWithImageID:(NSString *)imageId size:(FetchCenterImageSize)size;
 
 #pragma mark - login

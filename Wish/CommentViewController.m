@@ -52,7 +52,7 @@
     self.userBackgroundView.hidden = !self.comment;
     if (self.comment) {
         self.userNameLabel.text = self.comment.owner.ownerName;
-        [self.userProfileImageView showImageWithImageUrl:[self.fetchCenter urlWithImageID:self.comment.owner.headUrl]];
+        [self.userProfileImageView showImageWithImageUrl:[self.fetchCenter urlWithImageID:self.comment.owner.headUrl size:FetchCenterImageSize100]];
         self.commentContentLabel.text = self.comment.content;
         self.timeLabel.text = [SystemUtil timeStringFromDate:self.comment.createTime];
     }

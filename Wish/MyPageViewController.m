@@ -41,7 +41,7 @@
     
     NSString *newPicId = [User updatedProfilePictureId];
     if (newPicId){
-        [self.profilePicture setImageWithURL:[self.fetchCenter urlWithImageID:newPicId]
+        [self.profilePicture setImageWithURL:[self.fetchCenter urlWithImageID:newPicId size:FetchCenterImageSize200]
                  usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     }else{
         self.profilePicture.image = [Theme menuLoginDefault];

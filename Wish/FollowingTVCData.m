@@ -144,7 +144,7 @@ static NSUInteger numberOfPreloadedFeeds = 3;
     //update User Info
     cell.headUserNameLabel.text = plan.owner.ownerName;
 
-    [cell.headProfilePic setCircularImageWithURL:[self.fetchCenter urlWithImageID:plan.owner.headUrl]
+    [cell.headProfilePic setCircularImageWithURL:[self.fetchCenter urlWithImageID:plan.owner.headUrl size:FetchCenterImageSize100]
                                         forState:UIControlStateNormal];
 
 }
