@@ -889,11 +889,8 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
                 
                 Feed *feed = [Feed updateFeedWithInfo:feedInfo forPlan:nil];
                 
-                id commentList = [json valueForKeyPath:@"data.commentList"];
-                NSArray *comments;
-                if ([commentList isKindOfClass:[NSArray class]]) {
-                    comments = commentList;
-                }
+                NSArray *comments = [json valueForKeyPath:@"data.commentList"];
+                
                 if (comments.count > 0) {
                     for (NSDictionary *commentInfo in comments){
                         Comment *comment = [Comment updateCommentWithInfo:commentInfo];
