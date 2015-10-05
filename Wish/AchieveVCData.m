@@ -19,6 +19,7 @@
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @property (nonatomic,strong) UIImageView *emptySignImageView;
 @property (nonatomic,strong) UIView *timeLine;
+@property (nonatomic,strong) NSDateFormatter *formatter;
 @end
 
 @implementation AchieveVCData
@@ -32,7 +33,13 @@
     }
 }
 
-
+- (NSDateFormatter *)formatter{
+    if (!_formatter) {
+        _formatter = [[NSDateFormatter alloc] init];
+        _formatter.dateFormat = @"yyyy-MM-dd";
+    }
+    return _formatter;
+}
 #pragma mark - UITableViewController Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -45,9 +52,7 @@
 
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
     
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"yyyy-MM-dd";
-    cell.dateLabel.text = [formatter stringFromDate:plan.updateDate];
+    cell.dateLabel.text = [NSString stringWithFormat:@"%@ - ",[self.formatter stringFromDate:plan.updateDate]];
 
     cell.planStatusLabel.text = plan.planStatusTags[plan.planStatus.integerValue];
     cell.planTitleLabel.text = plan.planTitle;
@@ -134,7 +139,7 @@
         self.tableView.scrollEnabled = YES;
         if (self.emptySignImageView) [self.emptySignImageView removeFromSuperview];
         if (!self.timeLine){
-            CGRect rect = CGRectMake(self.view.bounds.origin.x + self.view.bounds.size.width * 170/640,0,2,self.view.bounds.size.height*2);
+            CGRect rect = CGRectMake(self.view.bounds.origin.x + self.view.bounds.size.width * 178/640,0,2,self.view.bounds.size.height*2);
             self.timeLine = [[UIView alloc] initWithFrame:rect];
             
             //add timeline to background

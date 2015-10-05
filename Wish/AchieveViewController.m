@@ -12,7 +12,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];    
-    self.title = @"已完结";
+    self.title = @"归档";
 }
 
 - (void)setUpNavigationItem
