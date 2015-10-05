@@ -94,6 +94,7 @@ typedef enum{
 }FetchCenterGetOp;
 
 typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
+typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 
 @interface FetchCenter ()
 @property (nonatomic,strong) NSString *baseUrl;
@@ -160,18 +161,36 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
     [self replyAtFeed:feed content:text toOwner:nil];
 }
 
-- (void)replyAtFeed:(Feed *)feed content:(NSString *)text toOwner:(NSString *)ownerId{
+- (void)replyAtFeed:(Feed *)feed content:(NSString *)text toOwner:(Owner *)owner{
     
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,COMMENT_FEED];
     NSDictionary *args = @{@"feedsId":feed.feedId,
                            @"content":[text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                           @"commentTo": (ownerId ? ownerId : @"")};
-    [self getRequest:rqtStr
-           parameter:args
-           operation:FetchCenterGetOpCommentFeed
-              entity:feed];
+                           @"commentTo": (owner ? owner.ownerId : @"")};
+    
+    [self getRequest:rqtStr parameter:args completion:^(NSDictionary *responseJson) {
+        //increase comment count by one
+        NSString *commentId = [responseJson valueForKeyPath:@"data.id"];
+        
+        if (owner){ //回复
+            [Comment replyToOwner:owner
+                          content:text
+                        commentId:commentId
+                          forFeed:feed];
+        }else{ //评论
+            [Comment createComment:text
+                         commentId:commentId
+                           forFeed:feed];
+        }
+        //update feed count
+        feed.commentCount = @(feed.commentCount.integerValue + 1);
+        if ([self.delegate respondsToSelector:@selector(didFinishCommentingFeed:commentId:)]) {
+            [self.delegate didFinishCommentingFeed:feed commentId:commentId];
+        }
 
+    }];
 }
+
 
 #pragma mark - 事件动态，又称事件片段，Feed
 //superplan/feeds/splan_feeds_delete_id.php
@@ -637,6 +656,57 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
              }
          }];
     }
+    
+}
+
+/**
+ * 新版请求函数（测试阶段）
+ * 目前正在使用该函数的功能: [评论和回复]
+ */
+- (void)getRequest:(NSString *)baseURL parameter:(NSDictionary *)dict completion:(FetchCenterGetRequestCompletionBlock)completionBlock{
+    
+    //check internet connection
+    //chekc internet
+    if (![self hasActiveInternetConnection]) return;
+    
+    //base url with version
+    baseURL = [baseURL stringByAppendingString:@"?"];
+    baseURL = [self addGeneralArgumentsForBaseURL:baseURL];
+    
+    
+    //content arguments
+    NSString *rqtStr = [baseURL stringByAppendingString:[self argumentStringWithDictionary:dict]];
+    
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:rqtStr]
+                                                           cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30.0];
+    request.HTTPMethod = @"GET";
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+                                  {
+                                      //递归过滤Json里含带的Null数据
+                                      NSDictionary *rawJson = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                                      
+                                      NSDictionary *responseJson = [self recursiveNullRemove:rawJson];
+                                      NSDictionary *timeOutDict = @{@"ret":@"Request Timeout",@"msg":@"Fail sending request to server"};
+                                      NSDictionary *responseInfo = responseJson ? responseJson : timeOutDict;
+                                      
+                                      dispatch_main_async_safe(^{
+                                          if (!error && ![responseJson[@"ret"] integerValue]){ //successed "ret" = 0;
+                                              completionBlock(responseJson);
+                                          }else{
+#warning 新版请求函数，失败时不做任何回调
+                                              NSLog(@"Fail Get Request :%@\n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
+                                                    ,rqtStr,baseURL,dict,responseInfo,error);
+                                          }
+                                      });
+
+                                      [self appendRequest:request andResponse:responseJson];
+                                  }];
+    [task resume];
+    
     
 }
 

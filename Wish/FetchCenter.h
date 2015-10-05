@@ -75,39 +75,41 @@ typedef enum {
 @property (nonatomic,strong) NSString *buildVersion;
 + (NSString *)requestLogFilePath;
 
-#pragma mark - Message
+#pragma mark - 消息
 - (void)clearAllMessages;
 - (void)getMessageList;
 - (void)getMessageNotificationInfo;
 
-#pragma mark - Feed
+#pragma mark - 事件动态，（Feed）
 - (void)loadFeedsListForPlan:(Plan *)plan pageInfo:(NSDictionary *)info;
 - (void)likeFeed:(Feed *)feed;
 - (void)unLikeFeed:(Feed *)feed;
 - (void)deleteFeed:(Feed *)feed;
-- (void)commentOnFeed:(Feed *)feed content:(NSString *)text;
-- (void)replyAtFeed:(Feed *)feed content:(NSString *)text toOwner:(NSString *)ownerId;
-- (void)getCommentListForFeed:(NSString *)feedId pageInfo:(NSDictionary *)info;
-- (void)deleteComment:(Comment *)comment;
 - (void)uploadImages:(NSArray *)images toCreateFeed:(Feed *)feed;
 - (void)uploadToCreateFeed:(Feed *)feed fetchedImageIds:(NSArray *)imageIds;
 
-#pragma mark - Plan
+#pragma mark - 评论回复
+- (void)commentOnFeed:(Feed *)feed content:(NSString *)text;
+- (void)replyAtFeed:(Feed *)feed content:(NSString *)text toOwner:(Owner *)owner;
+- (void)getCommentListForFeed:(NSString *)feedId pageInfo:(NSDictionary *)info;
+- (void)deleteComment:(Comment *)comment;
+
+#pragma mark - 事件
 - (void)fetchPlanListForOwnerId:(NSString *)ownerId;
 - (void)uploadToCreatePlan:(Plan *)plan;
 - (void)updatePlan:(Plan *)plan;
 - (void)postToDeletePlan:(Plan *)plan;
 - (void)updateStatus:(Plan *)plan;
 
-#pragma mark - Follow
+#pragma mark - 关注
 - (void)followPlan:(Plan *)plan;
 - (void)unFollowPlan:(Plan *)plan;
 
-#pragma mark - Discover
+#pragma mark - 发现
 - (void)getDiscoveryList;
 - (void)fetchFollowingPlanList;
 
-#pragma mark - Other
+#pragma mark - 个人
 - (void)sendFeedback:(NSString *)content content:(NSString *)email;
 - (void)checkVersion;
 - (void)uploadNewProfilePicture:(UIImage *)picture;
@@ -120,12 +122,12 @@ typedef enum {
 #pragma mark - ultility
 - (NSURL *)urlWithImageID:(NSString *)imageId size:(FetchCenterImageSize)size;
 
-#pragma mark - login
+#pragma mark - 登陆
 - (void)fetchUidandUkeyWithOpenId:(NSString *)openId accessToken:(NSString *)token;
 - (void)fetchAccessTokenWithWechatCode:(NSString *)code;
 - (void)fetchWechatUserInfoWithOpenID:(NSString *)openID token:(NSString *)accessToken;
 
-#pragma mark - Tencent Youtu
+#pragma mark - 优图
 - (void)requestSignature;
 @end
 

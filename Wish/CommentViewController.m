@@ -116,29 +116,10 @@
     if (self.comment) { //有回复的对象
         [self.fetchCenter replyAtFeed:self.comment.feed
                               content:self.textView.text
-                              toOwner:self.comment.owner.ownerId];
+                              toOwner:self.comment.owner];
     }else{
         [self.fetchCenter commentOnFeed:self.feedDetailViewController.feed
                                 content:self.textView.text];
-    }
-}
-
-#pragma mark - fetch center delegate
-- (void)didFinishCommentingFeed:(Feed *)feed commentId:(NSString *)commentId{
-    //update feed count
-    feed.commentCount = @(feed.commentCount.integerValue + 1);
-    [self.feedDetailViewController.headerView setCommentButtonText:[NSString stringWithFormat:@"%@",feed.commentCount]];
-
-    //create comment locally
-    if (self.comment) {
-        [Comment replyToOwner:self.comment.owner // this is done in didSelectRowAtIndexPath
-                      content:self.textView.text
-                    commentId:commentId
-                      forFeed:feed];
-    }else{
-        [Comment createComment:self.textView.text
-                     commentId:commentId
-                       forFeed:feed];
     }
     [self dismissView];
 }
