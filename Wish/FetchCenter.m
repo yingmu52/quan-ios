@@ -102,24 +102,21 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
 @end
 @implementation FetchCenter
 
-- (NSString *)baseUrl{
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_INNER_NETWORK]) {
-        _baseUrl = [NSString stringWithFormat:@"%@%@",INNER_NETWORK_URL,PROJECT];
-    }else{
-        _baseUrl = [NSString stringWithFormat:@"%@%@",OUTTER_NETWORK_URL,PROJECT];
-    }
-//    NSLog(@"%@",_baseUrl);
-    return _baseUrl;
-}
+#pragma mark - 万象优图
 
-#pragma mark - Tencent Youtu
+- (TXYUploadManager *)uploadManager{
+    if (!_uploadManager) {
+        _uploadManager = [[TXYUploadManager alloc] initWithPersistenceId:@"QCFileUpload"];
+    }
+    return _uploadManager;
+}
 
 - (void)requestSignature{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,TENCENTYOUTU,GET_SIGNATURE];
 //    NSLog(@"signature request url : %@",rqtStr);
     [self getRequest:rqtStr parameter:nil operation:FetchCenterGetOpGetSignature entity:nil];
 }
-#pragma mark - Message 
+#pragma mark - 消息
 
 - (void)clearAllMessages{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,MESSAGE,CLEAR_ALL_MESSAGES];
@@ -139,7 +136,7 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
     [self getRequest:rqtStr parameter:nil operation:FetchCenterGetOpGetMessageNotificationInfo entity:nil];
 }
 
-#pragma mark - Comment
+#pragma mark - 评论和回复
 
 - (void)deleteComment:(Comment *)comment{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,DELETE_COMMENT];
@@ -176,7 +173,7 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
 
 }
 
-#pragma mark - Feed
+#pragma mark - 事件动态，又称事件片段，Feed
 //superplan/feeds/splan_feeds_delete_id.php
 - (void)deleteFeed:(Feed *)feed{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,DELETE_FEED];
@@ -279,7 +276,7 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
     }
 }
 
-#pragma mark - following list
+#pragma mark - 事件关注
 
 - (void)followPlan:(Plan *)plan{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FOLLOW,FOLLOW_PLAN];
@@ -305,7 +302,7 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
               entity:nil];
 }
 
-#pragma mark - Discovery Related
+#pragma mark - 发现事件
 
 - (void)getDiscoveryList{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,DISCOVER,GET_DISCOVER_LIST];
@@ -313,7 +310,7 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
 }
 
 
-#pragma mark - Login&out & update personal info
+#pragma mark - 反馈，版本检测
 
 - (void)sendFeedback:(NSString *)content content:(NSString *)email{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,OTHER,FEED_BACK];
@@ -333,27 +330,7 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
               entity:nil];
 }
 
-
-- (void)fetchUidandUkeyWithOpenId:(NSString *)openId accessToken:(NSString *)token{
-    //loginType在这个函数之前必段保留
-    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,USER,GETUID];
-    [self getRequest:rqtStr
-           parameter:@{@"openid":openId,
-                       @"token":token}
-           operation:FetchCenterGetOpLoginForUidAndUkey
-              entity:nil];
-}
-
-- (void)fetchAccessTokenWithWechatCode:(NSString *)code{
-    if (code) {
-        NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,USER,GET_ACCESSTOKEN_OPENID];
-        [self getRequest:rqtStr
-               parameter:@{@"code":code}
-               operation:FetchCenterGetOpGetAccessTokenAndOpenIdWithWechatCode
-                  entity:nil];
-    }
-}
-#pragma mark - personal
+#pragma mark - 个人信息
 
 - (void)uploadNewProfilePicture:(UIImage *)picture{
     __weak typeof(self) weakSelf = self;
@@ -384,7 +361,7 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
     
 }
 
-#pragma mark - Plan
+#pragma mark - 事件
 - (void)updatePlan:(Plan *)plan{
     //输入样例：id=hello_1421235901&title=hello_title2&finishDate=3&backGroudPic=bg3&private=1&state=1&finishPercent=20
     //—— 每一项都可以单独更新
@@ -425,7 +402,7 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
     [self getRequest:baseUrl parameter:args operation:FetchCenterGetOpDeletePlan entity:plan];
 }
 
-#pragma mark - local request log
+#pragma mark - 缓存请求日志
 
 + (NSString *)requestLogFilePath{ //this file gets remove in applicationWillTerminate Appdelegate
     NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingString:@"httpRequestLog.txt"];
@@ -454,23 +431,10 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
     }
 }
 
-#pragma mark - Reachability 
+#pragma mark - 网络检测
 
 - (BOOL)hasActiveInternetConnection{
     return self.reachability.currentReachabilityStatus != NotReachable;
-//    if (self.reachability.currentReachabilityStatus == NotReachable) {
-//        dispatch_main_async_safe((^{
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"网络故障"
-//                                                            message:@"请检查网络连接"
-//                                                           delegate:nil
-//                                                  cancelButtonTitle:@"好"
-//                                                  otherButtonTitles:nil, nil];
-//            [alert show];
-//        }));
-//        return NO;
-//    }else{
-//        return YES;
-//    }
 }
 
 - (Reachability *)reachability{
@@ -480,8 +444,21 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
     return _reachability;
 }
 
-#pragma mark - main get and post method
+#pragma mark - 核心请求函数
 
+- (NSString *)baseUrl{
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_INNER_NETWORK]) {
+        _baseUrl = [NSString stringWithFormat:@"%@%@",INNER_NETWORK_URL,PROJECT];
+    }else{
+        _baseUrl = [NSString stringWithFormat:@"%@%@",OUTTER_NETWORK_URL,PROJECT];
+    }
+    //    NSLog(@"%@",_baseUrl);
+    return _baseUrl;
+}
+
+/**
+ * 将字典里的参数和值转换成 ‘参数1’=‘值1’&‘参数2’=‘值2... 的格式
+ */
 - (NSString *)argumentStringWithDictionary:(NSDictionary *)dict{
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:dict.allKeys.count];
     [dict enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL* stop) {
@@ -540,6 +517,10 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
     
 }
 
+
+/**
+ * 排查后面返回字典的参数里<Null>值，并将其替换成“”
+ */
 - (NSMutableDictionary *)recursiveNullRemove:(NSDictionary *)dictionaryResponse {
     
     NSMutableDictionary *dictionary = [dictionaryResponse mutableCopy];
@@ -659,15 +640,7 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
     
 }
 
-#pragma mark - QCUpload
-- (TXYUploadManager *)uploadManager{
-    if (!_uploadManager) {
-        _uploadManager = [[TXYUploadManager alloc] initWithPersistenceId:@"QCFileUpload"];
-    }
-    return _uploadManager;
-}
-
-#pragma mark - version control
+#pragma mark - 请求统一参数
 
 - (NSString *)buildVersion{
     if (!_buildVersion) {
@@ -692,7 +665,7 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
     return [[baseURL stringByAppendingString:[self argumentStringWithDictionary:dict]] stringByAppendingString:@"&"];
 }
 
-#pragma mark - get image url wraper
+#pragma mark - 图片id转换成图片请求的函数
 
 - (NSURL *)urlWithImageID:(NSString *)imageId size:(FetchCenterImageSize)size{
     if (size) {
@@ -1000,7 +973,7 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
     }));
 }
 
-#pragma mark - Wechat Get User Info
+#pragma mark - 登陆相关
 
 - (void)fetchWechatUserInfoWithOpenID:(NSString *)openID token:(NSString *)accessToken{
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.weixin.qq.com/sns/userinfo?access_token=%@&openid=%@",accessToken,openID]];
@@ -1026,6 +999,27 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
         
     }];
 }
+
+- (void)fetchUidandUkeyWithOpenId:(NSString *)openId accessToken:(NSString *)token{
+    //loginType在这个函数之前必段保留
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,USER,GETUID];
+    [self getRequest:rqtStr
+           parameter:@{@"openid":openId,
+                       @"token":token}
+           operation:FetchCenterGetOpLoginForUidAndUkey
+              entity:nil];
+}
+
+- (void)fetchAccessTokenWithWechatCode:(NSString *)code{
+    if (code) {
+        NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,USER,GET_ACCESSTOKEN_OPENID];
+        [self getRequest:rqtStr
+               parameter:@{@"code":code}
+               operation:FetchCenterGetOpGetAccessTokenAndOpenIdWithWechatCode
+                  entity:nil];
+    }
+}
+
 
 @end
 
