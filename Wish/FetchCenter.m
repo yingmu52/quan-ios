@@ -498,7 +498,7 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
     
     //base url with version
     baseURL = [baseURL stringByAppendingString:@"?"];
-    baseURL = [self versionForBaseURL:baseURL operation:op];
+    baseURL = [self addGeneralArgumentsForBaseURL:baseURL];
     
     
     //content arguments
@@ -679,18 +679,16 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
 }
 
 //return a new base url string with appened version argument
-- (NSString *)versionForBaseURL:(NSString *)baseURL operation:(FetchCenterGetOp)op{
-    
+- (NSString *)addGeneralArgumentsForBaseURL:(NSString *)baseURL{
     NSMutableDictionary *dict = [@{@"version":self.buildVersion,@"loginType":[User loginType]} mutableCopy];
     
-    if (op != FetchCenterGetOpLoginForUidAndUkey) {
-        //add user info
-        if ([User uid] && [User uKey]) {
-            [dict addEntriesFromDictionary:@{@"uid":[User uid],@"ukey":[User uKey]}];
-        }
+    //add user info
+    if ([User uid].length > 0 && [User uKey].length > 0) {
+        [dict addEntriesFromDictionary:@{@"uid":[User uid],@"ukey":[User uKey]}];
         //change login type
         dict[@"loginType"] = @"uid";
     }
+
     return [[baseURL stringByAppendingString:[self argumentStringWithDictionary:dict]] stringByAppendingString:@"&"];
 }
 
@@ -704,7 +702,7 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
 //            NSLog(@">>>>>>>>>>%@",url);
         }else{ //老id
             NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@?",self.baseUrl,PIC,GET_IMAGE];
-            url = [NSString stringWithFormat:@"%@id=%@",[self versionForBaseURL:rqtStr operation:-1],imageId];
+            url = [NSString stringWithFormat:@"%@id=%@",[self addGeneralArgumentsForBaseURL:rqtStr],imageId];
         }
         return [NSURL URLWithString:url];
     }else{
