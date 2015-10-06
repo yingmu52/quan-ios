@@ -171,29 +171,23 @@
 #pragma mark - wish detail cell delegate
 - (void)didPressedMoreOnCell:(WishDetailCell *)cell{
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
-    [UIActionSheet showInView:window
-                    withTitle:nil
-            cancelButtonTitle:@"取消"
-       destructiveButtonTitle:@"删除"
-            otherButtonTitles:@[@"分享这张照片"]
-                     tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex)
-    {
-        NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
-        if ([title isEqualToString:@"分享这张照片"]) {
-            NSLog(@"share feed");
-        }else if ([title isEqualToString:@"删除"]){
-            
-            NSString *popupViewTitle = [self isDeletingTheLastFeed] ?
-            @"这是最后一条记录啦！\n这件事儿也会被删除哦~" : @"真的要删除这条记录吗？";
-            
-            PopupView *popupView = [PopupView showPopupDeleteinFrame:window.frame
-                                                           withTitle:popupViewTitle];
-            popupView.delegate = self;
-            popupView.feed = [self.fetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
-            [window addSubview:popupView];
-        }
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *delete = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSString *popupViewTitle = [self isDeletingTheLastFeed] ?
+        @"这是最后一条记录啦！\n这件事儿也会被删除哦~" : @"真的要删除这条记录吗？";
+        
+        PopupView *popupView = [PopupView showPopupDeleteinFrame:window.frame
+                                                       withTitle:popupViewTitle];
+        popupView.delegate = self;
+        popupView.feed = [self.fetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
+        [window addSubview:popupView];
+        
     }];
+    [actionSheet addAction:delete];
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:actionSheet animated:YES completion:nil];
 }
+
 #pragma mark - delete feed
 
 
