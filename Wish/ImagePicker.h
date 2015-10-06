@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UIActionSheet+Blocks.h"
 #import "SDWebImageCompat.h"
 #import "QBImagePickerController.h"
 @import Photos;

@@ -345,12 +345,13 @@
 
 #pragma mark - wish detail cell delegate
 - (void)didPressedMoreOnCell:(WishDetailCell *)cell{
-    [UIActionSheet showInView:self.tableView withTitle:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"分享这张照片"] tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
-        NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
-        if ([title isEqualToString:@"分享这张照片"]) {
-            NSLog(@"share feed");
-        }
-    }];
+//    
+//    [UIActionSheet showInView:self.tableView withTitle:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"分享这张照片"] tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+//        NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
+//        if ([title isEqualToString:@"分享这张照片"]) {
+//            NSLog(@"share feed");
+//        }
+//    }];
 }
 
 

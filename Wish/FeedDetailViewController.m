@@ -8,7 +8,6 @@
 
 #import "FeedDetailViewController.h"
 #import "UIScrollView+SVInfiniteScrolling.h"
-#import "UIActionSheet+Blocks.h"
 #import "UITableView+FDTemplateLayoutCell.h"
 #import "JTSImageViewController.h"
 #import "CommentViewController.h"

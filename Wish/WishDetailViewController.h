@@ -15,7 +15,6 @@
 #import "AppDelegate.h"
 #import "FetchCenter.h"
 #import "SDWebImageCompat.h"
-#import "UIActionSheet+Blocks.h"
 #import "HeaderView.h"
 #import "FeedDetailViewController.h"
 #import "UIImageView+ImageCache.h"

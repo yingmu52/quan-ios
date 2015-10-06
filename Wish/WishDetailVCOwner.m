@@ -10,7 +10,6 @@
 #import "PostFeedViewController.h"
 #import "EditWishViewController.h"
 #import "ImagePicker.h"
-#import "UIActionSheet+Blocks.h"
 #import "PopupView.h"
 @interface WishDetailVCOwner () <UIImagePickerControllerDelegate,UIGestureRecognizerDelegate,UINavigationControllerDelegate,ImagePickerDelegate,PopupViewDelegate>
 

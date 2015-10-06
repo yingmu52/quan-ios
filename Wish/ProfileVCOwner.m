@@ -10,7 +10,7 @@
 #import "NavigationBar.h"
 #import "User.h"
 #import "SDWebImageCompat.h"
-#import "UIActionSheet+Blocks.h"
+
 @interface ProfileVCOwner () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,FetchCenterDelegate,UITextFieldDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @end

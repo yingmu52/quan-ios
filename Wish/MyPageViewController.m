@@ -11,7 +11,6 @@
 #import "AppDelegate.h"
 #import "FetchCenter.h"
 #import "SDWebImageCompat.h"
-#import "UIActionSheet+Blocks.h"
 #import "ImagePicker.h"
 #import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 #import "Theme.h"

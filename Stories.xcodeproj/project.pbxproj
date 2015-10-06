@@ -164,8 +164,6 @@
 		A0F7D4801B84E851003CCB34 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D4061B84E851003CCB34 /* UIScrollView+SVInfiniteScrolling.m */; };
 		A0F7D4811B84E851003CCB34 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D4081B84E851003CCB34 /* UIScrollView+SVPullToRefresh.m */; };
 		A0F7D4821B84E851003CCB34 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D4081B84E851003CCB34 /* UIScrollView+SVPullToRefresh.m */; };
-		A0F7D4991B84E851003CCB34 /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D41A1B84E851003CCB34 /* UIActionSheet+Blocks.m */; };
-		A0F7D49A1B84E851003CCB34 /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D41A1B84E851003CCB34 /* UIActionSheet+Blocks.m */; };
 		A0F7D49B1B84E851003CCB34 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D41C1B84E851003CCB34 /* UIImage+ImageEffects.m */; };
 		A0F7D49C1B84E851003CCB34 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D41C1B84E851003CCB34 /* UIImage+ImageEffects.m */; };
 		A0F7D49D1B84E851003CCB34 /* UIImagePickerController+DelegateBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D41E1B84E851003CCB34 /* UIImagePickerController+DelegateBlocks.m */; };
@@ -494,8 +492,6 @@
 		A0F7D4061B84E851003CCB34 /* UIScrollView+SVInfiniteScrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVInfiniteScrolling.m"; sourceTree = "<group>"; };
 		A0F7D4071B84E851003CCB34 /* UIScrollView+SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVPullToRefresh.h"; sourceTree = "<group>"; };
 		A0F7D4081B84E851003CCB34 /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
-		A0F7D4191B84E851003CCB34 /* UIActionSheet+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIActionSheet+Blocks.h"; path = "../External/TWPhotoPicker/UIActionSheet+Blocks.h"; sourceTree = "<group>"; };
-		A0F7D41A1B84E851003CCB34 /* UIActionSheet+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIActionSheet+Blocks.m"; path = "../External/TWPhotoPicker/UIActionSheet+Blocks.m"; sourceTree = "<group>"; };
 		A0F7D41B1B84E851003CCB34 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "../UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		A0F7D41C1B84E851003CCB34 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "../UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		A0F7D41D1B84E851003CCB34 /* UIImagePickerController+DelegateBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImagePickerController+DelegateBlocks.h"; path = "../UIImagePickerController+DelegateBlocks.h"; sourceTree = "<group>"; };
@@ -1067,8 +1063,6 @@
 				AE0172411A65CD8E0014266F /* AppDelegate.m */,
 				AE01723D1A65CD8E0014266F /* Info.plist */,
 				AE01723E1A65CD8E0014266F /* main.m */,
-				A0F7D4191B84E851003CCB34 /* UIActionSheet+Blocks.h */,
-				A0F7D41A1B84E851003CCB34 /* UIActionSheet+Blocks.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1554,7 +1548,6 @@
 				AED9A67A1B44BE6E00108729 /* RequestLogViewController.m in Sources */,
 				AEBECCF91AE8A16600EDF385 /* LoginDetailViewController.m in Sources */,
 				AEBFCA371A78614100686EFE /* PostDetailViewController.m in Sources */,
-				A0F7D4991B84E851003CCB34 /* UIActionSheet+Blocks.m in Sources */,
 				A03010551BABC6AA0041E2CF /* QBAlbumsViewController.m in Sources */,
 				A0D37C601B8781D900581EDE /* NewsPageViewController.m in Sources */,
 				AE52FA501A8D3D76003FF725 /* PostFeedViewController.m in Sources */,
@@ -1640,7 +1633,6 @@
 				A0B8C8031B857F22009C4572 /* HMSegmentedControl.m in Sources */,
 				A04842EA1B98CF9E0032E927 /* UIImageView+ImageCache.m in Sources */,
 				A0D102201B84EB6A006B0E4E /* SDWebImageDecoder.m in Sources */,
-				A0F7D49A1B84E851003CCB34 /* UIActionSheet+Blocks.m in Sources */,
 				A0F7D4521B84E851003CCB34 /* UIImage+JTSImageEffects.m in Sources */,
 				AE01725C1A65CD8F0014266F /* WishTests.m in Sources */,
 				AE2F28E81AD3937700FC3370 /* WishDetailVCDiscovery.m in Sources */,

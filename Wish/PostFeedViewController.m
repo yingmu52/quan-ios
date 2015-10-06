@@ -15,7 +15,6 @@
 #import "SDWebImageCompat.h"
 #import "AppDelegate.h"
 #import "WishDetailVCOwner.h"
-#import "UIActionSheet+Blocks.h"
 #import "JTSImageViewController.h"
 #import "PostImageCell.h"
 #import "ImagePicker.h"
@@ -164,7 +163,6 @@ static NSUInteger distance = 10;
     }
 }
 
-#define CONFIRM @"确定"
 - (void)goBack{
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"是否放弃此次编辑？" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
