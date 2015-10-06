@@ -63,17 +63,13 @@
 
 #pragma mark - clear all message 
 - (void)clearAllMessages{
-    [UIActionSheet showInView:self.view
-                    withTitle:@"确定要清空所有消息吗？"
-            cancelButtonTitle:@"取消"
-       destructiveButtonTitle:@"确定"
-            otherButtonTitles:nil
-                     tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
-                         NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
-                         if ([title isEqualToString:@"确定"]) {
-                             [self.fetchCenter clearAllMessages];
-                         }
-                     }];
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"确定要清空所有消息吗？" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self.fetchCenter clearAllMessages];
+    }];
+    [actionSheet addAction:confirm];
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:actionSheet animated:YES completion:nil];    
 }
 
 - (void)didFinishClearingAllMessages{
