@@ -166,21 +166,22 @@ static NSUInteger distance = 10;
 
 #define CONFIRM @"确定"
 - (void)goBack{
-    [UIActionSheet showInView:self.view withTitle:@"是否放弃此次编辑？" cancelButtonTitle:@"取消" destructiveButtonTitle:CONFIRM otherButtonTitles:nil tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
-        NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
-        __weak typeof(self) weakSelf = self;
-        [actionSheet dismissWithClickedButtonIndex:buttonIndex animated:NO];
-        if ([title isEqualToString:CONFIRM]){
-            NSManagedObjectContext *context = [AppDelegate getContext];
-            if (!weakSelf.plan.planId) {
-                [context deleteObject:weakSelf.plan];
-            }
-            if (weakSelf.feed) {
-                [context deleteObject:weakSelf.feed];
-            }
-            [weakSelf.navigationController popViewControllerAnimated:YES];
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"是否放弃此次编辑？" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSManagedObjectContext *context = [AppDelegate getContext];
+        if (!self.plan.planId) {
+            [context deleteObject:self.plan];
         }
+        if (self.feed) {
+            [context deleteObject:self.feed];
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+
     }];
+    
+    [actionSheet addAction:confirm];
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:actionSheet animated:YES completion:nil];
 
 }
 #pragma mark - text view delegate
