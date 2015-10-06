@@ -123,24 +123,24 @@
     }
 }
 
-#define take_photo @"拍照"
-#define choose_album @"从手机相册选择"
-
-- (void)startPickingImageFromLocalSourceFor:(UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,ImagePickerDelegate>*)controller{
-    [UIActionSheet showInView:controller.view
-                    withTitle:nil
-            cancelButtonTitle:@"取消"
-       destructiveButtonTitle:nil
-            otherButtonTitles:@[take_photo,choose_album]
-                     tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex)
-    {
-        if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:take_photo]) {
-            [self showCamera:controller];
-        }
-        if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:choose_album]) {
-            [self showPhotoLibrary:controller];
-        }
-    }];
-}
+//#define take_photo @"拍照"
+//#define choose_album @"从手机相册选择"
+//
+//- (void)startPickingImageFromLocalSourceFor:(UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,ImagePickerDelegate>*)controller{
+//    [UIActionSheet showInView:controller.view
+//                    withTitle:nil
+//            cancelButtonTitle:@"取消"
+//       destructiveButtonTitle:nil
+//            otherButtonTitles:@[take_photo,choose_album]
+//                     tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex)
+//    {
+//        if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:take_photo]) {
+//            [self showCamera:controller];
+//        }
+//        if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:choose_album]) {
+//            [self showPhotoLibrary:controller];
+//        }
+//    }];
+//}
 
 @end
