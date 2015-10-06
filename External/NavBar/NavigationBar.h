@@ -19,6 +19,6 @@
 - (void)setNavigationBarWithColor:(UIColor *)color;
 - (void)showDefaultTextColor;
 //- (void)showTextWithColor:(UIColor *)color;
-//- (void)showClearBackground;
-//- (void)showDefaultBackground;
+- (void)showClearBackground;
+- (void)showDefaultBackground;
 @end

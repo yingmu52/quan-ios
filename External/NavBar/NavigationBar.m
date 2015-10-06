@@ -19,12 +19,7 @@ static CGFloat kEndPoint = 1.5;
     [super awakeFromNib];
     
     self.tintColor = [UIColor blackColor];
-    //导航文字属性
-    [self showDefaultTextColor];
-    //去掉分隔线, 加背影色
-    [self setBackgroundImage:[SystemUtil imageFromColor:[UIColor whiteColor] size:CGSizeMake(1, 1)]
-               forBarMetrics:UIBarMetricsDefault];
-    self.shadowImage = [UIImage new];
+    [self showDefaultBackground];
     
     //修复iphone6 导航不适配问题
     CGSize size = CGSizeMake([UIScreen mainScreen].bounds.size.width, 44.0);
@@ -38,14 +33,21 @@ static CGFloat kEndPoint = 1.5;
     self.titleTextAttributes = @{NSForegroundColorAttributeName:color,
                                  NSFontAttributeName:[UIFont systemFontOfSize:17.0]};
 }
-//- (void)showClearBackground{
-//    [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-//}
-//
-//- (void)showDefaultBackground{
-//    [self setBackgroundImage:[SystemUtil imageFromColor:[Theme naviBackground] size:CGSizeMake(1,1)]
-//               forBarMetrics:UIBarMetricsDefault];
-//}
+- (void)showClearBackground{
+    [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.shadowImage = [UIImage new];
+    self.translucent = YES;
+}
+
+- (void)showDefaultBackground{
+    self.tintColor = [UIColor blackColor];
+    //导航文字属性
+    [self showDefaultTextColor];
+    //去掉分隔线, 加背影色
+    [self setBackgroundImage:[SystemUtil imageFromColor:[UIColor whiteColor] size:CGSizeMake(1, 1)]
+               forBarMetrics:UIBarMetricsDefault];
+    self.shadowImage = [UIImage new];
+}
 
 void drawLinearGradient(CGContextRef context, CGRect rect, CGColorRef startColor, CGColorRef endColor)
 {

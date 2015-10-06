@@ -15,6 +15,7 @@
 #import "ImagePicker.h"
 #import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 #import "Theme.h"
+#import "NavigationBar.h"
 
 @interface MyPageViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,FetchCenterDelegate,ImagePickerDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic,weak) IBOutlet UIImageView *iconImageView;
@@ -62,12 +63,28 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.tabBarController.tabBar.hidden = NO;
+    
+    //导航透明
+    NavigationBar *nav = (NavigationBar *)self.navigationController.navigationBar;
+    [nav showClearBackground];
+    
+    //隐藏下方菜单
+    self.tabBarController.tabBar.hidden = YES;
+    
+    //用于检测摇一摇
     [self becomeFirstResponder];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    
+    //回复导航颜色
+    NavigationBar *nav = (NavigationBar *)self.navigationController.navigationBar;
+    [nav showDefaultBackground];
+    
+    //隐藏下方菜单
+    self.tabBarController.tabBar.hidden = NO;
+    
     [self resignFirstResponder];
 }
 
