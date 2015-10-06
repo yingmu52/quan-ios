@@ -113,7 +113,7 @@
     
     CGRect bounds = [text boundingRectWithSize:CGSizeMake(width - 24.0f,CGFLOAT_MAX) //label左右有12.0f的距离
                                        options:NSStringDrawingUsesLineFragmentOrigin
-                                    attributes:[self textAttributes]
+                                    attributes:self.textAttributes
                                        context:nil];
     return CGRectGetHeight(bounds);
 }

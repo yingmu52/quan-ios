@@ -11,7 +11,7 @@
 #import "UIImageView+ImageCache.h"
 #import "UIScrollView+SVInfiniteScrolling.h"
 @interface WishDetailViewController () <HeaderViewDelegate,UIGestureRecognizerDelegate,UITextViewDelegate>
-//@property (strong,nonatomic) CommentAcessaryView *commentView;
+@property (nonatomic,strong) NSDictionary *textAttributes;
 @end
 
 @implementation WishDetailViewController
@@ -248,17 +248,31 @@
 
 #pragma mark - table view delegate and data source
 
-//#define IS_IPHONE5 (([[UIScreen mainScreen] bounds].size.height - 568.0f) >= 0)
-
+#define FONTSIZE 14.0f
+- (NSDictionary *)textAttributes{
+    if (!_textAttributes) {
+        NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+        paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+        paragraphStyle.alignment = NSTextAlignmentLeft;
+        _textAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:FONTSIZE],
+                            NSParagraphStyleAttributeName:paragraphStyle};
+    }
+    return _textAttributes;
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    Feed *feed = [self.fetchedRC objectAtIndexPath:indexPath];
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGRect bounds = [feed.feedTitle boundingRectWithSize:CGSizeMake(width - 16.0f,CGFLOAT_MAX) //label左右有8.0f的距离
+                                       options:NSStringDrawingUsesLineFragmentOrigin
+                                    attributes:self.textAttributes
+                                       context:nil];
     
-    CGRect frame = [UIScreen mainScreen].bounds;
-//    if (IS_IPHONE5){
-//        return 750.0f/1136 * CGRectGetHeight(frame);
-//    }else{
-//        //eariler
-        return 785.0f/640 * CGRectGetWidth(frame);
-//    }
+    CGFloat limit = 80.0f;
+    CGFloat height = CGRectGetHeight(bounds);
+    if (height > limit) height = limit;
+    return  height + width + 33.0f; // 剩余的padding约33.0f;
+
+//    return 430.0f;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
