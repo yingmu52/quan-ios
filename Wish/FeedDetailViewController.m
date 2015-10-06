@@ -230,6 +230,8 @@
     
     if (![comment.owner.ownerId isEqualToString:[User uid]]) { //the comment is from other user
         [self performSegueWithIdentifier:@"showCommentViewController" sender:comment];
+    }else{
+        [self deleteActionAtIndexPath:indexPath];
     }
     
 }
@@ -264,21 +266,22 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
                                                                       title:@"删除"
                                                                     handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
     {
-        [UIActionSheet showInView:self.view
-                        withTitle:@"是否删除该条评论？"
-                cancelButtonTitle:@"取消"
-           destructiveButtonTitle:@"删除"
-                otherButtonTitles:nil
-                         tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
-                             if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"删除"]){
-                                 //delete this comment
-                                 [self.fetchCenter deleteComment:[self.fetchedRC objectAtIndexPath:indexPath]];
-                             }
-                         }];
+        [self deleteActionAtIndexPath:indexPath];
 
     }];
     
     return @[delete];
+}
+
+- (void)deleteActionAtIndexPath:(NSIndexPath *)indexPath{
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"是否删除该条评论？" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self.fetchCenter deleteComment:[self.fetchedRC objectAtIndexPath:indexPath]];
+    }];
+    
+    [actionSheet addAction:deleteAction];
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
 #pragma mark - like
