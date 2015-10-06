@@ -72,7 +72,10 @@
     self.tabBarController.tabBar.hidden = YES;
     
     //用于检测摇一摇
-    [self becomeFirstResponder];
+    NSArray *knownLists = @[@"100004",@"100014",@"100005",@"100007",@"100015",@"100001"]; //Vicky,R,Cliff,Amy,Jie,Xinyi
+    if ([knownLists containsObject:[User uid]]) {
+        [self becomeFirstResponder];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -81,9 +84,6 @@
     //回复导航颜色
     NavigationBar *nav = (NavigationBar *)self.navigationController.navigationBar;
     [nav showDefaultBackground];
-    
-    //隐藏下方菜单
-    self.tabBarController.tabBar.hidden = NO;
     
     [self resignFirstResponder];
 }
@@ -94,39 +94,50 @@
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event{
     BOOL isUsingInnerNetwork = [[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_INNER_NETWORK];
     
-    NSString *titleForInnerNetWork = isUsingInnerNetwork ? @"内网✔️" : @"内网";
-    NSString *titleFOrOutterNetWork = isUsingInnerNetwork ? @"外网" : @"外网✔️";
+    NSString *testEnvTitle = isUsingInnerNetwork ? @"内网✔️" : @"内网";
+    NSString *proEnvTitle = isUsingInnerNetwork ? @"外网" : @"外网✔️";
     if (motion == UIEventSubtypeMotionShake) {
-        [UIActionSheet showInView:self.view
-                        withTitle:@"选择环境"
-                cancelButtonTitle:@"取消"
-           destructiveButtonTitle:nil
-                otherButtonTitles:@[titleForInnerNetWork,titleFOrOutterNetWork,GET_USER_INFO,GET_LOCAL_LOGS]
-                         tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
-                             if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:titleForInnerNetWork] &&
-                                !isUsingInnerNetwork){
-                                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SHOULD_USE_INNER_NETWORK];
-                                 [self logout];
-                                 [self clearCoreData];
-                             }
-                             if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:titleFOrOutterNetWork] &&
-                                isUsingInnerNetwork){
-                                 [[NSUserDefaults standardUserDefaults] setBool:NO forKey:SHOULD_USE_INNER_NETWORK];
-                                 [self logout];
-                                 [self clearCoreData];
-                             }
-                             if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:GET_USER_INFO]){
-                                 [[[UIAlertView alloc] initWithTitle:@"用户信息"
-                                                             message:[NSString stringWithFormat:@"uid:%@\nukey:%@\npicUrl:%@",[User uid],[User uKey],[User updatedProfilePictureId]]
-                                                            delegate:nil
-                                                   cancelButtonTitle:@"OK"
-                                                   otherButtonTitles:nil, nil] show];
-                             }
-                             if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:GET_LOCAL_LOGS]){
-                                 [self performSegueWithIdentifier:@"showLocalRequestLog" sender:nil];
-                             }
-                             
-                         }];
+        
+        UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"此功能只对内部公开" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        //选择内网
+        UIAlertAction *testEnv = [UIAlertAction actionWithTitle:testEnvTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            if (!isUsingInnerNetwork) {
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SHOULD_USE_INNER_NETWORK];
+                [self logout];
+                [self clearCoreData];
+            }
+        }];
+        
+        //选择外网
+        UIAlertAction *proEnv = [UIAlertAction actionWithTitle:proEnvTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            if (isUsingInnerNetwork) {
+                [[NSUserDefaults standardUserDefaults] setBool:NO forKey:SHOULD_USE_INNER_NETWORK];
+                [self logout];
+                [self clearCoreData];
+            }
+        }];
+        
+        //获取用户信息
+        UIAlertAction *getUserInfo = [UIAlertAction actionWithTitle:GET_USER_INFO style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSString *userInfo = [NSString stringWithFormat:@"uid:%@\nukey:%@\npicUrl:%@",[User uid],[User uKey],[User updatedProfilePictureId]];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:userInfo preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+            [self presentViewController:alert animated:YES completion:nil];
+        }];
+        
+        
+        UIAlertAction *getRequestLog = [UIAlertAction actionWithTitle:GET_LOCAL_LOGS style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self performSegueWithIdentifier:@"showLocalRequestLog" sender:nil];
+        }];
+        
+        [actionSheet addAction:testEnv];
+        [actionSheet addAction:proEnv];
+        [actionSheet addAction:getUserInfo];
+        [actionSheet addAction:getRequestLog];
+        [actionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:actionSheet animated:YES completion:nil];
+
     }
 }
 
