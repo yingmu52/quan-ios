@@ -43,11 +43,22 @@
     imagePickerController.showsNumberOfSelectedAssets = YES;
     imagePickerController.mediaType = QBImagePickerMediaTypeImage;
     imagePickerController.numberOfColumnsInPortrait = 4;
-    imagePickerController.assetCollectionSubtypes = @[@(PHAssetCollectionSubtypeSmartAlbumUserLibrary), // Camera Roll
-                                                      @(PHAssetCollectionSubtypeAlbumMyPhotoStream), // My Photo Stream
+    
+    imagePickerController.assetCollectionSubtypes = @[@(PHAssetCollectionSubtypeSmartAlbumRecentlyAdded), //最近添加
+                                                      @(PHAssetCollectionSubtypeSmartAlbumUserLibrary), // Camera Roll
                                                       @(PHAssetCollectionSubtypeSmartAlbumPanoramas), // Panoramas
-                                                      @(PHAssetCollectionSubtypeSmartAlbumBursts) // Bursts
-                                                      ];
+                                                      @(PHAssetCollectionSubtypeSmartAlbumBursts),
+                                                      @(PHAssetCollectionSubtypeSmartAlbumGeneric),
+                                                      @(PHAssetCollectionSubtypeSmartAlbumScreenshots),
+                                                      @(PHAssetCollectionSubtypeSmartAlbumSelfPortraits),
+                                                      @(PHAssetCollectionSubtypeAlbumMyPhotoStream),
+                                                      @(PHAssetCollectionSubtypeAlbumCloudShared),
+                                                      @(PHAssetCollectionSubtypeAlbumSyncedAlbum),
+                                                      @(PHAssetCollectionSubtypeAlbumSyncedEvent),
+                                                      @(PHAssetCollectionSubtypeAlbumSyncedFaces),
+                                                      @(PHAssetCollectionSubtypeAlbumImported),
+                                                      @(PHAssetCollectionSubtypeSmartAlbumAllHidden)];
+
     [controller presentViewController:imagePickerController animated:YES completion:NULL];
 }
 
