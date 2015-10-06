@@ -29,7 +29,7 @@
 - (IBAction)tapOnBackground:(UITapGestureRecognizer *)tap{
     //支持点击背影关闭退出浮层
     [self dismissViewControllerAnimated:YES completion:^{
-        ((DiscoveryVCData*)self.svcDelegate).addButton.hidden = NO;
+#warning        ((DiscoveryVCData*)self.svcDelegate).addButton.hidden = NO;
     }];
 }
 

@@ -21,6 +21,7 @@
 #import "ImagePicker.h"
 #import "ViewForEmptyEvent.h"
 #import "UIImageView+ImageCache.h"
+#import "ShuffleViewController.h"
 
 const NSUInteger maxCardNum = 10;
 @interface HomeViewController ()
@@ -32,7 +33,8 @@ PopupViewDelegate,
 HomeCardViewDelegate,
 UIActionSheetDelegate,
 ImagePickerDelegate,
-ViewForEmptyEventDelegate>
+ViewForEmptyEventDelegate,
+ShuffleViewControllerDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @property (nonatomic,weak) Plan *currentPlan;
 @property (nonatomic,weak) StationView *stationView;
@@ -111,10 +113,15 @@ ViewForEmptyEventDelegate>
     CGRect frame = CGRectMake(0,0, 48,CGRectGetHeight(self.navigationController.navigationBar.frame));
     UIButton *addBtn = [Theme buttonWithImage:[Theme navAddDefault]
                                        target:self
-                                     selector:@selector(addWish)
+                                     selector:@selector(showShuffView)
                                         frame:frame];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
 }
+
+- (void)showShuffView{
+    [self performSegueWithIdentifier:@"showShuffViewFromHome" sender:nil];
+}
+
 - (void)addWish{
     [self performSegueWithIdentifier:@"showPostFromHome" sender:nil];
     self.tabBarController.tabBar.hidden = YES;
@@ -163,7 +170,7 @@ ViewForEmptyEventDelegate>
 }
 
 - (void)didFinishPickingPhAssets:(NSArray *)assets{
-    [self performSegueWithIdentifier:@"ShowPostFeedFromHome" sender:assets];
+    [self performSegueWithIdentifier:@"ShowPostFeedFromHome" sender:@[assets,self.currentPlan]];
 }
 #pragma mark -
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -174,10 +181,31 @@ ViewForEmptyEventDelegate>
     }
     if ([segue.identifier isEqualToString:@"ShowPostFeedFromHome"]) {
         PostFeedViewController *pfvc = segue.destinationViewController;
-        pfvc.plan = self.currentPlan;
-        pfvc.assets = sender;
+        NSArray *array = sender;
+        pfvc.assets = array.firstObject;
+        pfvc.plan = array.lastObject;
+//        pfvc.plan = self.currentPlan;
+//        pfvc.assets = sender;
         self.tabBarController.tabBar.hidden = YES;
     }
+    if ([segue.identifier isEqualToString:@"showShuffViewFromHome"]) {
+        ShuffleViewController *svc = segue.destinationViewController;
+        svc.svcDelegate = self;
+    }
+    
+}
+
+#pragma mark - 加号浮层回调函数
+
+- (void)didFinishSelectingImageAssets:(NSArray *)assets forPlan:(Plan *)plan{
+    //asset could be either UIImage or PHAsset
+    if (assets && plan) {
+        [self performSegueWithIdentifier:@"ShowPostFeedFromHome" sender:@[assets,plan]];
+    }
+}
+
+- (void)didPressCreatePlanButton:(ShuffleViewController *)svc{
+    [self addWish];
 }
 
 #pragma mark -  UICollectionView methods

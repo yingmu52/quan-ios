@@ -1039,6 +1039,7 @@
                                             <outlet property="imageView" destination="jNc-yv-qCH" id="9rR-nx-qRe"/>
                                             <outlet property="subtitleLabel" destination="5V3-1K-OgO" id="clG-Ub-ZSe"/>
                                             <outlet property="titleLabel" destination="Ppn-UI-eqX" id="Ihh-TB-Wms"/>
+                                            <segue destination="B14-O4-bHm" kind="presentation" identifier="showShuffViewFromHome" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="pLe-UU-1DP"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -5619,11 +5620,12 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="mFv-Li-7ge"/>
-        <segue reference="4ZT-53-1QA"/>
-        <segue reference="CTd-gb-xTE"/>
-        <segue reference="0NR-qk-ahm"/>
         <segue reference="sa3-BT-zY6"/>
         <segue reference="hrM-4j-5CW"/>
+        <segue reference="pLe-UU-1DP"/>
+        <segue reference="4ZT-53-1QA"/>
+        <segue reference="CTd-gb-xTE"/>
+        <segue reference="cel-0L-eNY"/>
         <segue reference="JFc-cO-xBu"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
