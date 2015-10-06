@@ -25,37 +25,30 @@
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero]; // clear empty cell
 }
 
-#define giveup @"放弃"
-#define confirm @"确认"
-#define goback @"返回"
 - (void)goBack{
     [super goBack];
     if (!self.nickNameTextField.hasText || [[self.nickNameTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""]) {
-        [UIActionSheet showInView:self.tableView withTitle:@"姓名不能放空" cancelButtonTitle:@"好的" destructiveButtonTitle:nil otherButtonTitles:nil tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
-            if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"好的"]) {
-                self.nickNameTextField.text = [User userDisplayName];
-            }
-        }];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"姓名不能放空" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            self.nickNameTextField.text = [User userDisplayName];
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
     }else{
         if (![self.nickNameTextField.text isEqualToString:[User userDisplayName]] ||
             ![self.genderLabel.text isEqualToString:[User gender]] ||
             ![self.occupationTextField.text isEqualToString:[User occupation]] ||
             ![self.descriptionTextView.text isEqualToString:[User personalDetailInfo]]) {
-            [UIActionSheet showInView:self.tableView
-                            withTitle:@"是否确认修改个人信息？"
-                    cancelButtonTitle:nil
-               destructiveButtonTitle:confirm
-                    otherButtonTitles:@[giveup,goback]
-                             tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
-                                 NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
-                                 if ([title isEqualToString:confirm]){
-                                     //确认编辑
-                                     [self uploadPersonalInfo];
-                                 }
-                                 if ([title isEqualToString:goback]){
-                                     [self.navigationController popViewControllerAnimated:YES];
-                                 }
-                             }];
+            
+            UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"是否确认修改个人信息？" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+            UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [self uploadPersonalInfo];
+            }];
+            UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }];
+            [actionSheet addAction:confirm];
+            [actionSheet addAction:cancel];
+            [self presentViewController:actionSheet animated:YES completion:nil];
         }else{
             [self.navigationController popViewControllerAnimated:YES];
         }
