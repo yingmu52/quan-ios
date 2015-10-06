@@ -245,13 +245,29 @@
     [self performSegueWithIdentifier:@"showPostViewFromDiscovery" sender:nil];
 }
 
-#pragma mark - 小罗提出的需求
+- (void)showShuffView{
+    [self performSegueWithIdentifier:@"showShuffleView" sender:nil];
+}
+
 - (void)viewDidLoad{
     [super viewDidLoad];
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressed:)];
     [self.collectionView addGestureRecognizer:longPress];
+    [self setUpNavigationItem];
 }
 
+- (void)setUpNavigationItem
+{
+    CGRect frame = CGRectMake(0,0, 48,CGRectGetHeight(self.navigationController.navigationBar.frame));
+    UIButton *addBtn = [Theme buttonWithImage:[Theme navAddDefault]
+                                       target:self
+                                     selector:@selector(showShuffView)
+                                        frame:frame];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
+}
+
+
+#pragma mark - 长按事件可显示相关信息
 - (void)longPressed:(UILongPressGestureRecognizer *)longPress{
     if (longPress.state == UIGestureRecognizerStateBegan) {
         CGPoint point = [longPress locationInView:self.collectionView];

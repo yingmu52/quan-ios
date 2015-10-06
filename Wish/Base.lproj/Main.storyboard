@@ -2893,7 +2893,7 @@
             </objects>
             <point key="canvasLocation" x="3139.5" y="553.5"/>
         </scene>
-        <!--发生啥事-->
+        <!--DiscoveryVC Data-->
         <scene sceneID="LW9-Wg-cfa">
             <objects>
                 <collectionViewController storyboardIdentifier="DiscoveryVCData" id="b5t-1p-y8a" customClass="DiscoveryVCData" sceneMemberID="viewController">
@@ -3289,7 +3289,7 @@
                             <outlet property="delegate" destination="b5t-1p-y8a" id="Aej-XV-FMS"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="发生啥事" id="LOQ-Fv-cfJ"/>
+                    <navigationItem key="navigationItem" id="LOQ-Fv-cfJ"/>
                     <connections>
                         <segue destination="rp9-lu-nOr" kind="show" identifier="showDiscoveryWishDetail" id="nE2-oT-ipt"/>
                         <segue destination="1Y1-uW-81U" kind="show" identifier="showPostViewFromDiscovery" id="3Cj-2H-t7j"/>
@@ -3761,11 +3761,11 @@
             </objects>
             <point key="canvasLocation" x="-4432.5" y="-1920"/>
         </scene>
-        <!--新鲜-->
+        <!--发现-->
         <scene sceneID="0bo-PJ-66c">
             <objects>
                 <navigationController storyboardIdentifier="NavigationControllerForDiscovery" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qWQ-Vi-JtX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="新鲜" image="tab_ic_discover" id="WQy-Li-A97">
+                    <tabBarItem key="tabBarItem" title="发现" image="tab_ic_discover" id="WQy-Li-A97">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-8"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="tab_ic_discover_pressed"/>
@@ -3778,22 +3778,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="RYY-M2-Qwd" kind="relationship" relationship="rootViewController" id="0pD-CA-yhE"/>
+                        <segue destination="b5t-1p-y8a" kind="relationship" relationship="rootViewController" id="Y6D-VB-u8k"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="48c-PE-EQl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2854.5" y="-1635"/>
-        </scene>
-        <!--News Page View Controller-->
-        <scene sceneID="I9i-cP-Aqd">
-            <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="RYY-M2-Qwd" customClass="NewsPageViewController" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="Gmv-10-I78"/>
-                </pageViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HCF-Jf-H84" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1699.5" y="-1534.5"/>
         </scene>
         <!--我-->
         <scene sceneID="tag-Sl-CNN">
@@ -5622,10 +5612,10 @@
         <segue reference="mFv-Li-7ge"/>
         <segue reference="sa3-BT-zY6"/>
         <segue reference="hrM-4j-5CW"/>
-        <segue reference="pLe-UU-1DP"/>
-        <segue reference="4ZT-53-1QA"/>
-        <segue reference="CTd-gb-xTE"/>
-        <segue reference="cel-0L-eNY"/>
+        <segue reference="3Cj-2H-t7j"/>
+        <segue reference="aAR-cW-sP8"/>
+        <segue reference="lxG-JY-mcL"/>
+        <segue reference="mLO-08-f2R"/>
         <segue reference="JFc-cO-xBu"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>

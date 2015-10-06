@@ -18,8 +18,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupWaterFallCollectionView];
-    [self loaddAddButton];
+//    [self loaddAddButton];
     self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    self.navigationItem.title = @"发现";
 }
 
 static CGFloat horizontalInset = 10.0f;
@@ -114,52 +115,52 @@ static CGFloat horizontalInset = 10.0f;
 //    }
 //}
 
-- (void)loaddAddButton{
-    //读取加号按扭
-    UIImage *icon = [Theme discoveryAddButton];
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setImage:icon forState:UIControlStateNormal];
-    button.hidden = NO;
-    UIWindow *topView = [[UIApplication sharedApplication] keyWindow];
-    CGFloat trailing = 15;
-    CGFloat bottom = self.tabBarController.tabBar.frame.size.height;
-    CGFloat side = 65.0f;
-    [button setFrame:CGRectMake(topView.frame.size.width - trailing - side,topView.frame.size.height - bottom - side,side,side)];
-    [topView addSubview:button];
-    [button addTarget:self action:@selector(addWish) forControlEvents:UIControlEventTouchUpInside];
-    self.addButton = button;
-}
+//- (void)loaddAddButton{
+//    //读取加号按扭
+//    UIImage *icon = [Theme discoveryAddButton];
+//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [button setImage:icon forState:UIControlStateNormal];
+//    button.hidden = NO;
+//    UIWindow *topView = [[UIApplication sharedApplication] keyWindow];
+//    CGFloat trailing = 15;
+//    CGFloat bottom = self.tabBarController.tabBar.frame.size.height;
+//    CGFloat side = 65.0f;
+//    [button setFrame:CGRectMake(topView.frame.size.width - trailing - side,topView.frame.size.height - bottom - side,side,side)];
+//    [topView addSubview:button];
+//    [button addTarget:self action:@selector(addWish) forControlEvents:UIControlEventTouchUpInside];
+//    self.addButton = button;
+//}
 
-- (UIButton *)addButton{
-    if (!_addButton) {
-        //读取加号按扭
-        UIImage *icon = [Theme discoveryAddButton];
-        _addButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_addButton setImage:icon forState:UIControlStateNormal];
-        UIWindow *topView = [[UIApplication sharedApplication] keyWindow];
-        CGFloat trailing = 15;
-        CGFloat bottom = self.tabBarController.tabBar.frame.size.height;
-        CGFloat side = 65.0f;
-        [_addButton setFrame:CGRectMake(topView.frame.size.width - trailing - side,topView.frame.size.height - bottom - side,side,side)];
-        [_addButton addTarget:self action:@selector(addWish) forControlEvents:UIControlEventTouchUpInside];
-        [topView addSubview:_addButton];
-    }
-    return _addButton;
-}
+//- (UIButton *)addButton{
+//    if (!_addButton) {
+//        //读取加号按扭
+//        UIImage *icon = [Theme discoveryAddButton];
+//        _addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [_addButton setImage:icon forState:UIControlStateNormal];
+//        UIWindow *topView = [[UIApplication sharedApplication] keyWindow];
+//        CGFloat trailing = 15;
+//        CGFloat bottom = self.tabBarController.tabBar.frame.size.height;
+//        CGFloat side = 65.0f;
+//        [_addButton setFrame:CGRectMake(topView.frame.size.width - trailing - side,topView.frame.size.height - bottom - side,side,side)];
+//        [_addButton addTarget:self action:@selector(addWish) forControlEvents:UIControlEventTouchUpInside];
+//        [topView addSubview:_addButton];
+//    }
+//    return _addButton;
+//}
 - (void)addWish{
-    [self performSegueWithIdentifier:@"showShuffleView" sender:self.addButton];
-    self.addButton.hidden = YES;
+//    [self performSegueWithIdentifier:@"showShuffleView" sender:self.addButton];
+//    self.addButton.hidden = YES;
 }
 
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.addButton.hidden = NO;
+//    self.addButton.hidden = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    self.addButton.hidden = YES;
+//    self.addButton.hidden = YES;
 }
 
 
