@@ -92,7 +92,7 @@
     //update navigation item
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
     
-    //show alerts
+#warning replace with alert controller
     [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
                                 message:[NSString stringWithFormat:@"%@",info[@"msg"]]
                                delegate:self

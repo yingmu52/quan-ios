@@ -82,9 +82,4 @@
     [self performSegueWithIdentifier:@"showPostFeedFromPlanCreation" sender:[assets mutableCopy]];
 }
 
-- (void)didFailPickingImage{
-    [[[UIAlertView alloc] initWithTitle:@"无法获取图片" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-}
-
-
 @end

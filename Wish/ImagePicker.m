@@ -71,7 +71,9 @@
 - (BOOL)qb_imagePickerController:(QBImagePickerController *)imagePickerController shouldSelectAsset:(PHAsset *)asset{
     if (imagePickerController.numberOfSelectedAsset == imagePickerController.maximumNumberOfSelection) {
         NSString *titleText = [NSString stringWithFormat:@"最多只能选%@张照片哦",@(imagePickerController.maximumNumberOfSelection)];
-        [[[UIAlertView alloc] initWithTitle:titleText message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:titleText message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+        [imagePickerController presentViewController:alert animated:YES completion:nil];
         return NO;
     }
     return YES;
