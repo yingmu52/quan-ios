@@ -22,6 +22,8 @@
 #import "ViewForEmptyEvent.h"
 #import "UIImageView+ImageCache.h"
 #import "ShuffleViewController.h"
+#import "NZCircularImageView.h"
+#import "UIImageView+ImageCache.h"
 
 const NSUInteger maxCardNum = 10;
 @interface HomeViewController ()
@@ -110,12 +112,29 @@ ShuffleViewControllerDelegate>
 }
 - (void)setUpNavigationItem
 {
-    CGRect frame = CGRectMake(0,0, 48,CGRectGetHeight(self.navigationController.navigationBar.frame));
+    //1.左上角个人头像图标
+    NZCircularImageView *myIcon = [[NZCircularImageView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+    myIcon.backgroundColor = [UIColor lightGrayColor];
+    NSString *newPicId = [User updatedProfilePictureId];
+    myIcon.userInteractionEnabled = YES;
+    myIcon.gestureRecognizers = @[[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showProfileView)]];
+    if (newPicId){
+        [myIcon showImageWithImageUrl:[self.fetchCenter urlWithImageID:newPicId size:FetchCenterImageSize100]];
+    }else{
+        myIcon.image = [Theme menuLoginDefault];
+    }
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:myIcon];
+    
+    //2.右上角加号浮层入口
     UIButton *addBtn = [Theme buttonWithImage:[Theme navAddDefault]
                                        target:self
                                      selector:@selector(showShuffView)
-                                        frame:frame];
+                                        frame:CGRectMake(0,0, 48,CGRectGetHeight(self.navigationController.navigationBar.frame))];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
+}
+
+- (void)showProfileView{
+    [self performSegueWithIdentifier:@"showMyPageFromHome" sender:nil];
 }
 
 - (void)showShuffView{

@@ -15,6 +15,7 @@
 #import "ImagePicker.h"
 #import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 #import "Theme.h"
+
 @interface MyPageViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,FetchCenterDelegate,ImagePickerDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic,weak) IBOutlet UIImageView *iconImageView;
 @property (nonatomic,weak) IBOutlet UIImageView *profilePicture;
@@ -35,10 +36,12 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    self.iconImageView.hidden = YES;
+
     [self.fetchCenter checkVersion];
     self.tableView.tableHeaderView.frame = CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame),324.0f / 1136 * CGRectGetHeight(self.tableView.frame));
     
+    //设置头像
+//    self.iconImageView.hidden = YES;
     NSString *newPicId = [User updatedProfilePictureId];
     if (newPicId){
         [self.profilePicture setImageWithURL:[self.fetchCenter urlWithImageID:newPicId size:FetchCenterImageSize200]
@@ -47,12 +50,18 @@
         self.profilePicture.image = [Theme menuLoginDefault];
     }
     
+    //设置标题
     self.versionLabel.text = [NSString stringWithFormat:@"版本号: v%@",self.fetchCenter.buildVersion];
+    
+    //左返回图标
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+    [backButton setImage:[Theme navWhiteButtonDefault] forState:UIControlStateNormal];
+    [backButton addTarget:self.navigationController action:@selector(popViewControllerAnimated:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.hidden = YES;
     self.tabBarController.tabBar.hidden = NO;
     [self becomeFirstResponder];
 }

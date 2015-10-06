@@ -1097,6 +1097,7 @@
                         <segue destination="b5E-B5-8Ys" kind="show" identifier="showPlanDetailFromHome" id="cel-0L-eNY"/>
                         <segue destination="XiV-RA-INl" kind="show" identifier="ShowPostFeedFromHome" id="4ZT-53-1QA"/>
                         <segue destination="B14-O4-bHm" kind="presentation" identifier="showShuffViewFromHome" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="KCv-z9-IUy"/>
+                        <segue destination="iFY-B5-FXO" kind="show" identifier="showMyPageFromHome" id="Z2c-w5-iPe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d1T-ay-k77" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1348,7 +1349,7 @@
                         <color key="backgroundColor" red="0.92941176469999998" green="0.93725490199999995" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FollowingCell" rowHeight="396" id="bYm-9O-ytA" customClass="FollowingCell">
-                                <rect key="frame" x="0.0" y="22" width="600" height="396"/>
+                                <rect key="frame" x="0.0" y="86" width="600" height="396"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bYm-9O-ytA" id="faY-b2-CXn">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="396"/>
@@ -2523,7 +2524,7 @@
                         <color key="backgroundColor" red="0.92941176469999998" green="0.93725490199999995" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AchievementCell" rowHeight="301" id="jI3-hw-mZK" customClass="AchieveCell">
-                                <rect key="frame" x="0.0" y="86" width="600" height="301"/>
+                                <rect key="frame" x="0.0" y="22" width="600" height="301"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jI3-hw-mZK" id="0n8-tR-n6o">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="301"/>
@@ -2909,7 +2910,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DiscoveryCell" id="EXX-E0-MY0" customClass="DiscoveryCell">
-                                <rect key="frame" x="0.0" y="0.0" width="192" height="323"/>
+                                <rect key="frame" x="0.0" y="64" width="192" height="323"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="192" height="323"/>
@@ -3281,7 +3282,7 @@
                             </collectionViewCell>
                         </cells>
                         <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DiscoveryBannerCell" id="du3-5G-hdA">
-                            <rect key="frame" x="0.0" y="323" width="600" height="50"/>
+                            <rect key="frame" x="0.0" y="387" width="600" height="50"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </collectionReusableView>
                         <connections>
@@ -3827,7 +3828,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="72" width="360" height="266.5"/>
+                                    <rect key="frame" x="20" y="28" width="360" height="266.5"/>
                                 </variation>
                             </textView>
                         </subviews>
@@ -3881,7 +3882,7 @@
             <objects>
                 <tableViewController id="iFY-B5-FXO" customClass="MyPageViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="L9V-RS-3sc">
-                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.85098039219999999" green="0.87450980389999999" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="separatorColor" red="0.85490196078431369" green="0.87058823529411766" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3909,13 +3910,29 @@
                                                 </mask>
                                             </variation>
                                         </imageView>
-                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tab_ic_login_default" translatesAutoresizingMaskIntoConstraints="NO" id="L5M-v3-pcw" customClass="NZCircularImageView">
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                            <gestureRecognizers/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ba9-ed-s4A">
+                                            <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="ba9-ed-s4A" secondAttribute="height" multiplier="1:1" id="BJ4-vq-KqK"/>
+                                            </constraints>
+                                            <state key="normal" image="photo_ic_default">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="BJ4-vq-KqK"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <mask key="constraints">
+                                                    <include reference="BJ4-vq-KqK"/>
+                                                </mask>
+                                            </variation>
                                             <connections>
-                                                <outletCollection property="gestureRecognizers" destination="ISo-MQ-Rnf" appends="YES" id="ErN-s1-m9g"/>
+                                                <action selector="tapOnCamera:" destination="3DT-IO-Q6x" eventType="touchUpInside" id="2Nh-Bz-CYU"/>
+                                                <action selector="tapOnCamera:" destination="iFY-B5-FXO" eventType="touchUpInside" id="qRh-rL-NDm"/>
                                             </connections>
-                                        </imageView>
+                                        </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o5a-E2-de6" userLabel="bottomMargin">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -3941,29 +3958,13 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ba9-ed-s4A">
-                                            <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="ba9-ed-s4A" secondAttribute="height" multiplier="1:1" id="BJ4-vq-KqK"/>
-                                            </constraints>
-                                            <state key="normal" image="photo_ic_default">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="BJ4-vq-KqK"/>
-                                                </mask>
-                                            </variation>
-                                            <variation key="heightClass=regular-widthClass=compact">
-                                                <mask key="constraints">
-                                                    <include reference="BJ4-vq-KqK"/>
-                                                </mask>
-                                            </variation>
+                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tab_ic_login_default" translatesAutoresizingMaskIntoConstraints="NO" id="L5M-v3-pcw" customClass="NZCircularImageView">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                            <gestureRecognizers/>
                                             <connections>
-                                                <action selector="tapOnCamera:" destination="3DT-IO-Q6x" eventType="touchUpInside" id="2Nh-Bz-CYU"/>
-                                                <action selector="tapOnCamera:" destination="iFY-B5-FXO" eventType="touchUpInside" id="qRh-rL-NDm"/>
+                                                <outletCollection property="gestureRecognizers" destination="ISo-MQ-Rnf" appends="YES" id="ErN-s1-m9g"/>
                                             </connections>
-                                        </button>
+                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" red="0.31764705879999999" green="0.74901960779999999" blue="0.65098039220000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
@@ -3996,10 +3997,10 @@
                                     <variation key="default">
                                         <mask key="subviews">
                                             <exclude reference="yFj-Jx-F8P"/>
-                                            <exclude reference="L5M-v3-pcw"/>
+                                            <exclude reference="ba9-ed-s4A"/>
                                             <exclude reference="o5a-E2-de6"/>
                                             <exclude reference="idO-h0-TbP"/>
-                                            <exclude reference="ba9-ed-s4A"/>
+                                            <exclude reference="L5M-v3-pcw"/>
                                         </mask>
                                         <mask key="constraints">
                                             <exclude reference="LfA-4K-eZS"/>
@@ -4022,10 +4023,10 @@
                                     <variation key="heightClass=regular-widthClass=compact">
                                         <mask key="subviews">
                                             <include reference="yFj-Jx-F8P"/>
-                                            <include reference="L5M-v3-pcw"/>
+                                            <include reference="ba9-ed-s4A"/>
                                             <include reference="o5a-E2-de6"/>
                                             <include reference="idO-h0-TbP"/>
-                                            <include reference="ba9-ed-s4A"/>
+                                            <include reference="L5M-v3-pcw"/>
                                         </mask>
                                         <mask key="constraints">
                                             <include reference="LfA-4K-eZS"/>
@@ -4745,7 +4746,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="4" y="64" width="392" height="687"/>
+                                    <rect key="frame" x="4" y="20" width="392" height="780"/>
                                 </variation>
                             </textView>
                         </subviews>
@@ -5161,7 +5162,7 @@
                             <tableViewSection id="OiI-Kd-Lfv">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="70" id="4mp-A9-RTP">
-                                        <rect key="frame" x="0.0" y="64" width="600" height="70"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4mp-A9-RTP" id="2GH-OZ-oib">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="69.5"/>
@@ -5260,7 +5261,7 @@
                                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="70" id="fE5-uA-Pxj">
-                                        <rect key="frame" x="0.0" y="134" width="600" height="70"/>
+                                        <rect key="frame" x="0.0" y="70" width="600" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fE5-uA-Pxj" id="3jK-mp-p26">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="69.5"/>
@@ -5350,7 +5351,7 @@
                                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="70" id="30g-ri-nTV">
-                                        <rect key="frame" x="0.0" y="204" width="600" height="70"/>
+                                        <rect key="frame" x="0.0" y="140" width="600" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="30g-ri-nTV" id="Ca4-XF-9ET">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="69.5"/>
@@ -5442,7 +5443,7 @@
                                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="260" id="gL2-uh-HOx">
-                                        <rect key="frame" x="0.0" y="274" width="600" height="260"/>
+                                        <rect key="frame" x="0.0" y="210" width="600" height="260"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gL2-uh-HOx" id="SHw-Ah-NGg">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="259.5"/>
