@@ -1039,7 +1039,6 @@
                                             <outlet property="imageView" destination="jNc-yv-qCH" id="9rR-nx-qRe"/>
                                             <outlet property="subtitleLabel" destination="5V3-1K-OgO" id="clG-Ub-ZSe"/>
                                             <outlet property="titleLabel" destination="Ppn-UI-eqX" id="Ihh-TB-Wms"/>
-                                            <segue destination="B14-O4-bHm" kind="presentation" identifier="showShuffViewFromHome" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="pLe-UU-1DP"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -1097,6 +1096,7 @@
                         <segue destination="1Y1-uW-81U" kind="show" identifier="showPostFromHome" id="CTd-gb-xTE"/>
                         <segue destination="b5E-B5-8Ys" kind="show" identifier="showPlanDetailFromHome" id="cel-0L-eNY"/>
                         <segue destination="XiV-RA-INl" kind="show" identifier="ShowPostFeedFromHome" id="4ZT-53-1QA"/>
+                        <segue destination="B14-O4-bHm" kind="presentation" identifier="showShuffViewFromHome" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="KCv-z9-IUy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d1T-ay-k77" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1338,7 +1338,7 @@
             </objects>
             <point key="canvasLocation" x="-153" y="-282.75"/>
         </scene>
-        <!--我的关注-->
+        <!--关注-->
         <scene sceneID="lyA-XV-6dq">
             <objects>
                 <tableViewController storyboardIdentifier="FollowingTVCData" id="806-RF-bHk" customClass="FollowingTVCData" sceneMemberID="viewController">
@@ -1794,7 +1794,7 @@
                             <outlet property="delegate" destination="806-RF-bHk" id="V1z-Nl-PGu"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="我的关注" id="Eyu-XI-q6r"/>
+                    <navigationItem key="navigationItem" title="关注" id="Eyu-XI-q6r"/>
                     <connections>
                         <segue destination="a6S-F3-WCk" kind="show" identifier="showFollowerWishDetail" id="dTf-Xy-FJp"/>
                     </connections>
@@ -2489,11 +2489,11 @@
             </objects>
             <point key="canvasLocation" x="6808.5" y="-967.5"/>
         </scene>
-        <!--事儿-->
+        <!--关注-->
         <scene sceneID="FbS-uZ-glk">
             <objects>
                 <navigationController storyboardIdentifier="HomeNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="81G-fy-O9t" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="事儿" image="tab_ic_home" id="kq0-v6-o9I">
+                    <tabBarItem key="tabBarItem" title="关注" image="tab_ic_home" id="kq0-v6-o9I">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-8"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="tab_ic_home_pressed"/>
@@ -2506,12 +2506,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="wW8-3k-YAd" kind="relationship" relationship="rootViewController" id="rdy-vM-FMw"/>
+                        <segue destination="806-RF-bHk" kind="relationship" relationship="rootViewController" id="GpT-2L-BPV"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b0e-We-ijJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-781.5" y="-2319"/>
+            <point key="canvasLocation" x="-1572" y="645"/>
         </scene>
         <!--AchieveVC Data-->
         <scene sceneID="Eo7-So-zdt">
@@ -3803,12 +3803,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="iFY-B5-FXO" kind="relationship" relationship="rootViewController" id="AVv-Qo-UyO"/>
+                        <segue destination="wW8-3k-YAd" kind="relationship" relationship="rootViewController" id="d7w-Ai-rUi"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qBZ-x7-vS6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2496" y="-3172.5"/>
+            <point key="canvasLocation" x="-2400" y="-2692.5"/>
         </scene>
         <!--Feedback View Controller-->
         <scene sceneID="Q1I-NJ-5oY">
@@ -3826,6 +3826,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="72" width="360" height="266.5"/>
+                                </variation>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" red="0.95686274510000002" green="0.97254901959999995" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -4741,6 +4744,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="4" y="64" width="392" height="687"/>
+                                </variation>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -5610,13 +5616,13 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="mFv-Li-7ge"/>
+        <segue reference="JFc-cO-xBu"/>
+        <segue reference="4ZT-53-1QA"/>
         <segue reference="sa3-BT-zY6"/>
         <segue reference="hrM-4j-5CW"/>
-        <segue reference="3Cj-2H-t7j"/>
-        <segue reference="aAR-cW-sP8"/>
-        <segue reference="lxG-JY-mcL"/>
-        <segue reference="mLO-08-f2R"/>
-        <segue reference="JFc-cO-xBu"/>
+        <segue reference="CTd-gb-xTE"/>
+        <segue reference="cel-0L-eNY"/>
+        <segue reference="KCv-z9-IUy"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
 </document>
