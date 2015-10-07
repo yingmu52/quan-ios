@@ -100,6 +100,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 @property (nonatomic,strong) NSString *baseUrl;
 @property (nonatomic,strong) TXYUploadManager *uploadManager;
 @property (nonatomic,strong) Reachability *reachability;
+@property (nonatomic,strong) NSDictionary *backendErrorCode;
 @end
 @implementation FetchCenter
 
@@ -521,15 +522,15 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
                                           [self didFinishSendingGetRequest:responseJson operation:op entity:obj];
                                       }else{
                                           dispatch_main_async_safe((^{
+                                              [self alertWithBackendErrorCode:@([responseJson[@"ret"] integerValue])];
                                               if ([self.delegate respondsToSelector:@selector(didFailSendingRequestWithInfo:entity:)]){
                                                   [self.delegate didFailSendingRequestWithInfo:responseInfo entity:obj];
                                                   NSLog(@"Fail Get Request :%@\n op: %d \n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
                                                         ,rqtStr,op,baseURL,dict,responseInfo,error);
                                               }
                                           }));
+                                          [self appendRequest:request andResponse:responseInfo];
                                       }
-
-                                      [self appendRequest:request andResponse:responseJson];
                                   }];
     [task resume];
     
@@ -697,13 +698,14 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
                                           if (!error && ![responseJson[@"ret"] integerValue]){ //successed "ret" = 0;
                                               completionBlock(responseJson);
                                           }else{
+                                              [self alertWithBackendErrorCode:@([responseJson[@"ret"] integerValue])];
 #warning 新版请求函数，失败时不做任何回调
                                               NSLog(@"Fail Get Request :%@\n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
                                                     ,rqtStr,baseURL,dict,responseInfo,error);
+                                              [self appendRequest:request andResponse:responseInfo];
                                           }
                                       });
 
-                                      [self appendRequest:request andResponse:responseJson];
                                   }];
     [task resume];
     
@@ -1088,6 +1090,54 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
                operation:FetchCenterGetOpGetAccessTokenAndOpenIdWithWechatCode
                   entity:nil];
     }
+}
+
+#pragma mark - 后台错误码
+
+- (NSDictionary *)backendErrorCode{
+    if (!_backendErrorCode) {
+        _backendErrorCode = @{
+                              @(-100):@"数据库连接失败",
+                              @(-101):@"数据库执行失败",
+//                              @(-102):@"没有这个数据或数据原本就这样", //由于出现这条错误的频率较高，暂时不提示这条
+                              @(-200):@"输入的参数没有想要的",
+                              @(-201):@"输入参数缺少id",
+                              @(-202):@"缺少想要的输入参数",
+                              @(-203):@"Post Body部分是空的",
+                              @(-204):@"登陆数据有误",
+                              @(-205):@"缺少登录态数据",
+                              @(-206):@"非法的登录信息，验证失败",
+                              @(-207):@"错误的key，没有权限执行",
+                              @(-301):@"删除plan时，在个人信息里planlist是空的",
+                              @(-302):@"删除plan时，在planlist中没有找到",
+                              @(-303):@"arrayId是空的",
+                              @(-304):@"列表是空的",
+                              @(-305):@"版本的格式错误",
+                              @(-306):@"版本太低，需要升级",
+                              @(-307):@"版本为空",
+                              @(-310):@"不应该到这里",
+                              @(-320):@"检测到脏词",
+                              @(-321):@"没有权限，因为不是主人",
+                              @(-322):@"只有一条feeds，不允许删除",
+                              @(-400):@"不能超过个人创建的上限",
+                              @(-401):@"不能超过单个plan允许的feeds上限",
+                              @(-402):@"列表满了"
+                              };
+    }
+    return _backendErrorCode;
+}
+
+- (void)alertWithBackendErrorCode:(NSNumber *)errorCode{
+    if ([self.backendErrorCode.allKeys containsObject:errorCode]) {
+        if ([self.delegate isKindOfClass:[UIViewController class]]) {
+            NSString *msg = self.backendErrorCode[errorCode];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"来自后台的提示" message:msg preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+            UIViewController *vc = (UIViewController *)self.delegate;
+            [vc presentViewController:alert animated:YES completion:nil];
+        }
+    }
+    
 }
 
 
