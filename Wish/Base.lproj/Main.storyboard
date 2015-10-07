@@ -2350,17 +2350,48 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mX8-0c-M8Y" userLabel="Emoji Button">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="51" id="BEf-WU-szJ">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="50"/>
+                                            </constraint>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <state key="normal" title="😐">
+                                            <color key="titleColor" red="0.92941176469999998" green="0.93725490199999995" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="BEf-WU-szJ"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="BEf-WU-szJ"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="clickOnEmojiButton:" destination="1JX-oc-sKH" eventType="touchUpInside" id="cTi-Lu-xqN"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.90588235289999997" green="0.91764705879999997" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="3fd-dp-Suu" firstAttribute="leading" secondItem="u60-Bp-9MQ" secondAttribute="leading" constant="-43" id="5gr-7j-ea2">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="8"/>
+                                    <constraint firstAttribute="bottom" secondItem="mX8-0c-M8Y" secondAttribute="bottom" constant="-1" id="0SH-6M-Rhb">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                     </constraint>
+                                    <constraint firstItem="3fd-dp-Suu" firstAttribute="leading" secondItem="u60-Bp-9MQ" secondAttribute="leading" constant="-43" id="5gr-7j-ea2">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="50"/>
+                                    </constraint>
+                                    <constraint firstItem="3fd-dp-Suu" firstAttribute="leading" secondItem="mX8-0c-M8Y" secondAttribute="trailing" id="Mbc-AV-UQs"/>
                                     <constraint firstItem="pSb-6W-GTy" firstAttribute="leading" secondItem="3fd-dp-Suu" secondAttribute="trailing" constant="14" id="N1c-nj-exu">
                                         <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                     </constraint>
+                                    <constraint firstItem="mX8-0c-M8Y" firstAttribute="leading" secondItem="u60-Bp-9MQ" secondAttribute="leading" id="NeD-rk-Zqd"/>
                                     <constraint firstAttribute="bottom" secondItem="pSb-6W-GTy" secondAttribute="bottom" id="UKR-Bg-s3w"/>
                                     <constraint firstItem="pSb-6W-GTy" firstAttribute="top" secondItem="u60-Bp-9MQ" secondAttribute="top" id="bvb-Ug-AXD"/>
+                                    <constraint firstItem="mX8-0c-M8Y" firstAttribute="top" secondItem="u60-Bp-9MQ" secondAttribute="top" id="d4G-f2-xc6"/>
                                     <constraint firstAttribute="height" id="gue-gB-4Jt">
                                         <variation key="heightClass=regular-widthClass=compact" constant="44"/>
                                     </constraint>
@@ -2376,14 +2407,19 @@
                                     <mask key="subviews">
                                         <exclude reference="pSb-6W-GTy"/>
                                         <exclude reference="3fd-dp-Suu"/>
+                                        <exclude reference="mX8-0c-M8Y"/>
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="gue-gB-4Jt"/>
+                                        <exclude reference="0SH-6M-Rhb"/>
+                                        <exclude reference="NeD-rk-Zqd"/>
+                                        <exclude reference="d4G-f2-xc6"/>
                                         <exclude reference="N1c-nj-exu"/>
                                         <exclude reference="UKR-Bg-s3w"/>
                                         <exclude reference="bvb-Ug-AXD"/>
                                         <exclude reference="oh2-bz-QQo"/>
                                         <exclude reference="5gr-7j-ea2"/>
+                                        <exclude reference="Mbc-AV-UQs"/>
                                         <exclude reference="k7P-oB-Zrl"/>
                                         <exclude reference="mEd-ew-p3e"/>
                                     </mask>
@@ -2392,14 +2428,19 @@
                                     <mask key="subviews">
                                         <include reference="pSb-6W-GTy"/>
                                         <include reference="3fd-dp-Suu"/>
+                                        <include reference="mX8-0c-M8Y"/>
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="gue-gB-4Jt"/>
+                                        <include reference="0SH-6M-Rhb"/>
+                                        <include reference="NeD-rk-Zqd"/>
+                                        <include reference="d4G-f2-xc6"/>
                                         <include reference="N1c-nj-exu"/>
                                         <include reference="UKR-Bg-s3w"/>
                                         <include reference="bvb-Ug-AXD"/>
                                         <include reference="oh2-bz-QQo"/>
-                                        <include reference="5gr-7j-ea2"/>
+                                        <exclude reference="5gr-7j-ea2"/>
+                                        <include reference="Mbc-AV-UQs"/>
                                         <include reference="k7P-oB-Zrl"/>
                                         <include reference="mEd-ew-p3e"/>
                                     </mask>

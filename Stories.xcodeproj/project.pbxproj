@@ -53,6 +53,10 @@
 		A07115D21BA6B109002C1270 /* SZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A07115D01BA6B109002C1270 /* SZTextView.m */; };
 		A089A9141B9BCBED00291EC2 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A089A9111B9BCBED00291EC2 /* libWeChatSDK.a */; };
 		A089A9151B9BCBED00291EC2 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A089A9111B9BCBED00291EC2 /* libWeChatSDK.a */; };
+		A0994E631BC4CF9500D45845 /* SYEmojiCharacters.m in Sources */ = {isa = PBXBuildFile; fileRef = A0994E601BC4CF9500D45845 /* SYEmojiCharacters.m */; settings = {ASSET_TAGS = (); }; };
+		A0994E641BC4CF9500D45845 /* SYEmojiPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = A0994E621BC4CF9500D45845 /* SYEmojiPopover.m */; settings = {ASSET_TAGS = (); }; };
+		A0994E6A1BC4D1FB00D45845 /* WYPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0994E671BC4D1FB00D45845 /* WYPopoverController.m */; settings = {ASSET_TAGS = (); }; };
+		A0994E6B1BC4D1FB00D45845 /* WYStoryboardPopoverSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = A0994E691BC4D1FB00D45845 /* WYStoryboardPopoverSegue.m */; settings = {ASSET_TAGS = (); }; };
 		A0B8C8021B857F22009C4572 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */; };
 		A0B8C8031B857F22009C4572 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */; };
 		A0B9D7691B9E4F1100EE382B /* DashedBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B9D7681B9E4F1100EE382B /* DashedBorderView.m */; };
@@ -382,6 +386,14 @@
 		A089A9121B9BCBED00291EC2 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		A089A9131B9BCBED00291EC2 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		A0994E491BC398BA00D45845 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		A0994E5F1BC4CF9500D45845 /* SYEmojiCharacters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYEmojiCharacters.h; sourceTree = "<group>"; };
+		A0994E601BC4CF9500D45845 /* SYEmojiCharacters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYEmojiCharacters.m; sourceTree = "<group>"; };
+		A0994E611BC4CF9500D45845 /* SYEmojiPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYEmojiPopover.h; sourceTree = "<group>"; };
+		A0994E621BC4CF9500D45845 /* SYEmojiPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYEmojiPopover.m; sourceTree = "<group>"; };
+		A0994E661BC4D1FB00D45845 /* WYPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYPopoverController.h; sourceTree = "<group>"; };
+		A0994E671BC4D1FB00D45845 /* WYPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYPopoverController.m; sourceTree = "<group>"; };
+		A0994E681BC4D1FB00D45845 /* WYStoryboardPopoverSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYStoryboardPopoverSegue.h; sourceTree = "<group>"; };
+		A0994E691BC4D1FB00D45845 /* WYStoryboardPopoverSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYStoryboardPopoverSegue.m; sourceTree = "<group>"; };
 		A0B8C8001B857F22009C4572 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		A0B9D7671B9E4F1100EE382B /* DashedBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashedBorderView.h; sourceTree = "<group>"; };
@@ -748,6 +760,29 @@
 			path = SZTextView;
 			sourceTree = "<group>";
 		};
+		A0994E5E1BC4CF9500D45845 /* SYEmojiPopover */ = {
+			isa = PBXGroup;
+			children = (
+				A0994E651BC4D1FB00D45845 /* WYPopoverController */,
+				A0994E5F1BC4CF9500D45845 /* SYEmojiCharacters.h */,
+				A0994E601BC4CF9500D45845 /* SYEmojiCharacters.m */,
+				A0994E611BC4CF9500D45845 /* SYEmojiPopover.h */,
+				A0994E621BC4CF9500D45845 /* SYEmojiPopover.m */,
+			);
+			path = SYEmojiPopover;
+			sourceTree = "<group>";
+		};
+		A0994E651BC4D1FB00D45845 /* WYPopoverController */ = {
+			isa = PBXGroup;
+			children = (
+				A0994E661BC4D1FB00D45845 /* WYPopoverController.h */,
+				A0994E671BC4D1FB00D45845 /* WYPopoverController.m */,
+				A0994E681BC4D1FB00D45845 /* WYStoryboardPopoverSegue.h */,
+				A0994E691BC4D1FB00D45845 /* WYStoryboardPopoverSegue.m */,
+			);
+			path = WYPopoverController;
+			sourceTree = "<group>";
+		};
 		A0B8C7FF1B857F22009C4572 /* HMSegmentedControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -868,6 +903,7 @@
 		A0F7D3A51B84E851003CCB34 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				A0994E5E1BC4CF9500D45845 /* SYEmojiPopover */,
 				A0EE8C541BB3E86300C5DAC3 /* Pgyer */,
 				A03010361BABC6AA0041E2CF /* QBImagePicker */,
 				A07115CE1BA6B109002C1270 /* SZTextView */,
@@ -1513,12 +1549,15 @@
 				AEC068931B2D3D55007975D2 /* FeedDetailVCOwner.m in Sources */,
 				A03010541BABC6AA0041E2CF /* QBAlbumCell.m in Sources */,
 				A04842DD1B98C5D20032E927 /* Plan.m in Sources */,
+				A0994E6B1BC4D1FB00D45845 /* WYStoryboardPopoverSegue.m in Sources */,
+				A0994E631BC4CF9500D45845 /* SYEmojiCharacters.m in Sources */,
 				A0D102251B84EB6A006B0E4E /* SDWebImageManager.m in Sources */,
 				A0D1025A1B84EF3B006B0E4E /* HeaderView.m in Sources */,
 				A0F7D4A31B84E851003CCB34 /* UIImage+Alpha.m in Sources */,
 				AE59B5F51B410437006CA4AB /* ViewForEmptyEvent.m in Sources */,
 				AEF7F2931A686FA30022410B /* Theme.m in Sources */,
 				AEF3F87F1AA4CFA6008C2300 /* WishDetailVCOwner.m in Sources */,
+				A0994E641BC4CF9500D45845 /* SYEmojiPopover.m in Sources */,
 				A04842D51B98C5D10032E927 /* Message.m in Sources */,
 				A0F7D4351B84E851003CCB34 /* CustomBadge.m in Sources */,
 				A066C3891BB7AE08003B51D5 /* MSSuperViewController.m in Sources */,
@@ -1574,6 +1613,7 @@
 				AE479EAE1A6F7A5B00366A0A /* Plan+PlanCRUD.m in Sources */,
 				AEFB04861AD12437009EB0D3 /* DiscoveryCell.m in Sources */,
 				AE52FA531A8D55A7003FF725 /* KeyboardAcessoryView.m in Sources */,
+				A0994E6A1BC4D1FB00D45845 /* WYPopoverController.m in Sources */,
 				A0D1021D1B84EB6A006B0E4E /* SDWebImageCompat.m in Sources */,
 				AE17799A1AF585CB005F1BEB /* FeedDetailViewController.m in Sources */,
 				AEFB048C1AD12437009EB0D3 /* DiscoveryViewController.m in Sources */,

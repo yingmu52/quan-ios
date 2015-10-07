@@ -10,7 +10,8 @@
 #import "NZCircularImageView.h"
 #import "SZTextView.h"
 #import "UIImageView+ImageCache.h"
-@interface CommentViewController () <UITextViewDelegate>
+#import "SYEmojiPopover.h"
+@interface CommentViewController () <UITextViewDelegate,SYEmojiPopoverDelegate>
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *keyboardHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewBackgroundHeight;
 @property (weak, nonatomic) IBOutlet UIView *userBackgroundView;
@@ -19,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet NZCircularImageView *userProfileImageView;
 @property (weak, nonatomic) IBOutlet SZTextView *textView;
+@property (nonatomic,strong) SYEmojiPopover *emojiView;
 @end
 
 @implementation CommentViewController
@@ -128,4 +130,40 @@
     [self.textView resignFirstResponder];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark - Emoji 表情
+
+- (SYEmojiPopover *)emojiView{
+    if (!_emojiView) {
+        _emojiView = [[SYEmojiPopover alloc] init];
+        _emojiView.delegate = self;
+    }
+    return _emojiView;
+}
+
+//SYEmojiPopoverDelegate methods
+
+-(void)emojiPopover:(SYEmojiPopover *)emojiPopover didClickedOnCharacter:(NSString *)character
+{
+    self.textView.text = [self.textView.text stringByAppendingString:character];
+    [self textViewDidChange:self.textView];
+}
+
+- (IBAction)clickOnEmojiButton:(UIButton *)sender{
+    [self.emojiView showFromPoint:CGPointMake(sender.center.x, CGRectGetHeight(self.view.frame) - self.keyboardHeight.constant - self.textViewBackgroundHeight.constant)
+                           inView:self.view withTitle:@"点击插入表情"];
+}
+
 @end
+
+
+
+
+
+
+
+
+
+
+
+
