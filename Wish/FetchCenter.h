@@ -19,6 +19,7 @@
 #import "AppDelegate.h"
 #import "User.h"
 #import "Message+MessageCRUD.h"
+#import "TXYUploadManager.h"
 
 #define INNER_NETWORK_URL @"http://182.254.167.228"
 #define OUTTER_NETWORK_URL @"http://120.24.73.51"
@@ -76,6 +77,8 @@ typedef void(^FetchCenterGetRequestPlanCreationCompleted)(void); //创建事件�
 @interface FetchCenter : NSObject
 @property (nonatomic,weak) id <FetchCenterDelegate>delegate;
 @property (nonatomic,strong) NSString *buildVersion;
+@property (nonatomic,strong) TXYUploadManager *uploadManager;
+
 + (NSString *)requestLogFilePath;
 
 #pragma mark - 消息

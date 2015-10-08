@@ -110,7 +110,6 @@ static NSUInteger distance = 10;
 
 
 - (void)createFeed{
-    self.navigationItem.leftBarButtonItem.enabled = NO;
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithFrame:self.tikButton.frame];
     spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
     [spinner startAnimating];
@@ -149,12 +148,19 @@ static NSUInteger distance = 10;
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"是否放弃此次编辑？" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         NSManagedObjectContext *context = [AppDelegate getContext];
+
+        //取消所有上传任何
+        [self.fetchCenter.uploadManager clear];
+        
+        //删除已经缓存的feed或事件
         if (!self.plan.planId) {
             [context deleteObject:self.plan];
         }
         if (self.feed) {
             [context deleteObject:self.feed];
         }
+        
+        //返回上一级
         [self.navigationController popViewControllerAnimated:YES];
 
     }];
@@ -254,7 +260,6 @@ static NSUInteger distance = 10;
 
 - (void)didFinishUploadingFeed:(Feed *)feed
 {
-    self.navigationItem.leftBarButtonItem.enabled = YES;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
     
     if (!self.seugeFromPlanCreation) {

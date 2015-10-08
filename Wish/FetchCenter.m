@@ -7,8 +7,6 @@
 //
 
 #import "FetchCenter.h"
-#import "UIImage+WebP.h"
-#import "TXYUploadManager.h"
 //#define BASE_URL @"http://182.254.167.228/superplan/"
 
 
@@ -99,7 +97,6 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
 
 @interface FetchCenter ()
 @property (nonatomic,strong) NSString *baseUrl;
-@property (nonatomic,strong) TXYUploadManager *uploadManager;
 @property (nonatomic,strong) Reachability *reachability;
 @property (nonatomic,strong) NSDictionary *backendErrorCode;
 @end
