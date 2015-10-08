@@ -1110,7 +1110,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
                               @(-207):@"错误的key，没有权限执行",
                               @(-301):@"删除plan时，在个人信息里planlist是空的",
                               @(-302):@"删除plan时，在planlist中没有找到",
-                              @(-303):@"arrayId是空的",
+//                              @(-303):@"arrayId是空的",  //数组里不存在任何信息，（例如：没有评论）
                               @(-304):@"列表是空的",
                               @(-305):@"版本的格式错误",
                               @(-306):@"版本太低，需要升级",
