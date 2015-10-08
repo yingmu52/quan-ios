@@ -70,6 +70,9 @@ typedef enum {
 
 - (void)didfinishGettingSignature;
 @end
+
+typedef void(^FetchCenterGetRequestPlanCreationCompleted)(void); //创建事件完成 (成功或失败）
+
 @interface FetchCenter : NSObject
 @property (nonatomic,weak) id <FetchCenterDelegate>delegate;
 @property (nonatomic,strong) NSString *buildVersion;
@@ -96,7 +99,8 @@ typedef enum {
 
 #pragma mark - 事件
 - (void)fetchPlanListForOwnerId:(NSString *)ownerId;
-- (void)uploadToCreatePlan:(Plan *)plan;
+- (void)uploadToCreatePlan:(Plan *)plan
+                completion:(FetchCenterGetRequestPlanCreationCompleted)completionBlock;
 - (void)updatePlan:(Plan *)plan;
 - (void)postToDeletePlan:(Plan *)plan;
 - (void)updateStatus:(Plan *)plan;

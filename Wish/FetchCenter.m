@@ -93,8 +93,9 @@ typedef enum{
     FetchCenterGetOpGetAccessTokenAndOpenIdWithWechatCode
 }FetchCenterGetOp;
 
-typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId);
-typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
+typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId); //上传图像成功
+typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson); //请求成功
+typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSError *error); //请求失败
 
 @interface FetchCenter ()
 @property (nonatomic,strong) NSString *baseUrl;
@@ -189,7 +190,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
             [self.delegate didFinishCommentingFeed:feed commentId:commentId];
         }
 
-    }];
+    }failure:nil];
 }
 
 
@@ -242,6 +243,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
         //设置多图id
         feed.picUrls = [imageIds componentsJoinedByString:@","];
         
+        //设置请求参数
         NSString *baseURL = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,CREATE_FEED];
         NSDictionary *args = @{@"picurl":feed.imageId, //兼容背影图
                                @"content":[feed.feedTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
@@ -414,11 +416,23 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 
 }
 
--(void)uploadToCreatePlan:(Plan *)plan{
+- (void)uploadToCreatePlan:(Plan *)plan
+               completion:(FetchCenterGetRequestPlanCreationCompleted)completionBlock{
     NSString *baseUrl = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,CREATE_PLAN];
     NSDictionary *args = @{@"title":[plan.planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                            @"private":plan.isPrivate};
-    [self getRequest:baseUrl parameter:args operation:FetchCenterGetOpCreatePlan entity:plan];
+    [self getRequest:baseUrl parameter:args completion:^(NSDictionary *json) {
+        NSString *fetchedPlanId = [json valueForKeyPath:@"data.id"];
+        NSString *bgString = [json valueForKeyPath:@"data.backGroudPic"];
+        if (fetchedPlanId && bgString) {
+            plan.planId = fetchedPlanId;
+            plan.backgroundNum = bgString;
+            NSLog(@"create plan succeed, ID: %@",fetchedPlanId);
+            completionBlock();
+        }
+    }failure:^(NSDictionary *responseJson, NSError *error) {
+        completionBlock();
+    }];
 }
 
 
@@ -671,23 +685,23 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
  * 新版请求函数（测试阶段）
  * 目前正在使用该函数的功能: [评论和回复]
  */
-- (void)getRequest:(NSString *)baseURL parameter:(NSDictionary *)dict completion:(FetchCenterGetRequestCompletionBlock)completionBlock{
+- (void)getRequest:(NSString *)baseURL
+         parameter:(NSDictionary *)dict
+        completion:(FetchCenterGetRequestCompletionBlock)completionBlock
+           failure:(FetchCenterGetRequestFailBlock)failureBlock{
     
-    //check internet connection
-    //chekc internet
+    //检测网络
     if (![self hasActiveInternetConnection]) return;
     
-    //base url with version
+    //设置请求统一参数
     baseURL = [baseURL stringByAppendingString:@"?"];
     baseURL = [self addGeneralArgumentsForBaseURL:baseURL];
     
-    
-    //content arguments
+    //拼接参数
     NSString *rqtStr = [baseURL stringByAppendingString:[self argumentStringWithDictionary:dict]];
-    
-    
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:rqtStr]
-                                                           cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30.0];
+                                                           cachePolicy:NSURLRequestReloadIgnoringCacheData
+                                                       timeoutInterval:30.0];
     request.HTTPMethod = @"GET";
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     
@@ -695,24 +709,29 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
                                             completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                   {
                                       //递归过滤Json里含带的Null数据
-                                      NSDictionary *rawJson = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-                                      
+                                      NSDictionary *rawJson = [NSJSONSerialization JSONObjectWithData:data
+                                                                                              options:NSJSONReadingAllowFragments
+                                                                                                error:nil];
                                       NSDictionary *responseJson = [self recursiveNullRemove:rawJson];
-                                      NSDictionary *timeOutDict = @{@"ret":@"Request Timeout",@"msg":@"Fail sending request to server"};
-                                      NSDictionary *responseInfo = responseJson ? responseJson : timeOutDict;
                                       
-                                      dispatch_main_async_safe(^{
-                                          if (!error && ![responseJson[@"ret"] integerValue]){ //successed "ret" = 0;
-                                              completionBlock(responseJson);
-                                          }else{
-                                              [self alertWithBackendErrorCode:@([responseJson[@"ret"] integerValue])];
-#warning 新版请求函数，失败时不做任何回调
-                                              NSLog(@"Fail Get Request :%@\n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
-                                                    ,rqtStr,baseURL,dict,responseInfo,error);
-                                              [self appendRequest:request andResponse:responseInfo];
-                                          }
-                                      });
-
+                                      if (responseJson) {
+                                          dispatch_main_async_safe(^{
+                                              if (!error && ![responseJson[@"ret"] integerValue]){ //成功
+                                                  completionBlock(responseJson);
+                                              }else{ //失败
+                                                  
+                                                  //在委托中跳出后台的提示
+                                                  [self alertWithBackendErrorCode:@([responseJson[@"ret"] integerValue])];
+                                                  
+                                                  //假失败写入请求日志
+                                                  [self appendRequest:request andResponse:responseJson];
+                                                  
+                                                  failureBlock(responseJson,error);
+                                                  NSLog(@"Fail Get Request :%@\n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
+                                                        ,rqtStr,baseURL,dict,responseJson,error);
+                                              }
+                                          });
+                                      }
                                   }];
     [task resume];
     

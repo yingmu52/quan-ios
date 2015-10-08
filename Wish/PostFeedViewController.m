@@ -32,7 +32,6 @@ static NSUInteger distance = 10;
 @property (nonatomic,strong) Feed *feed;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *keyboardHeight;
-@property (nonatomic,strong) NSArray *fetchedImageIds;
 @end
 
 @implementation PostFeedViewController
@@ -120,11 +119,6 @@ static NSUInteger distance = 10;
     //get asset image
     PHImageManager *manager = [PHImageManager defaultManager];
     NSMutableArray *arrayOfUIImages = [NSMutableArray arrayWithCapacity:self.assets.count];
-//    PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];
-//    option.networkAccessAllowed = YES;
-//    option.deliveryMode = PHImageRequestOptionsDeliveryModeFastFormat;
-//    option.resizeMode = PHImageRequestOptionsResizeModeExact;
-    
     for (id item in self.assets) {
         if ([item isKindOfClass:[PHAsset class]]) {
             [manager requestImageDataForAsset:item
@@ -140,18 +134,6 @@ static NSUInteger distance = 10;
                                       toCreateFeed:self.feed];
                 }
             }];
-//            [manager requestImageForAsset:item
-//                               targetSize:PHImageManagerMaximumSize
-//                              contentMode:PHImageContentModeDefault
-//                                  options:nil
-//                            resultHandler:^(UIImage *result, NSDictionary *info) {
-//                                NSAssert(result,@"null result");
-//                                [arrayOfUIImages addObject:result];
-//                                if (arrayOfUIImages.count == self.assets.count) {
-//                                    [self.fetchCenter uploadImages:arrayOfUIImages
-//                                                      toCreateFeed:self.feed];
-//                                }
-//                            }];
         }else if ([item isKindOfClass:[UIImage class]]){
 #warning it works, but so fucking ugly!!
             [arrayOfUIImages addObject:item];
@@ -264,19 +246,14 @@ static NSUInteger distance = 10;
     if (self.plan.planId) {
         [self.fetchCenter uploadToCreateFeed:feed fetchedImageIds:imageIds];
     }else{
-        self.fetchedImageIds = imageIds;
-        [self.fetchCenter uploadToCreatePlan:self.plan];
+        [self.fetchCenter uploadToCreatePlan:self.plan completion:^{
+            [self.fetchCenter uploadToCreateFeed:feed fetchedImageIds:imageIds];
+        }];
     }
-}
-
-- (void)didFinishUploadingPlan:(Plan *)plan{
-    [self.fetchCenter uploadToCreateFeed:self.feed fetchedImageIds:self.fetchedImageIds];
 }
 
 - (void)didFinishUploadingFeed:(Feed *)feed
 {
-#warning this is fucking ugly !!!
-    self.fetchedImageIds = nil;
     self.navigationItem.leftBarButtonItem.enabled = YES;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
     
