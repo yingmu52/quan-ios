@@ -57,6 +57,7 @@
 		A0994E641BC4CF9500D45845 /* SYEmojiPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = A0994E621BC4CF9500D45845 /* SYEmojiPopover.m */; settings = {ASSET_TAGS = (); }; };
 		A0994E6A1BC4D1FB00D45845 /* WYPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0994E671BC4D1FB00D45845 /* WYPopoverController.m */; settings = {ASSET_TAGS = (); }; };
 		A0994E6B1BC4D1FB00D45845 /* WYStoryboardPopoverSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = A0994E691BC4D1FB00D45845 /* WYStoryboardPopoverSegue.m */; settings = {ASSET_TAGS = (); }; };
+		A0994E711BC6DF6200D45845 /* LocalDataTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A0994E701BC6DF6100D45845 /* LocalDataTest.m */; settings = {ASSET_TAGS = (); }; };
 		A0B8C8021B857F22009C4572 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */; };
 		A0B8C8031B857F22009C4572 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */; };
 		A0B9D7691B9E4F1100EE382B /* DashedBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B9D7681B9E4F1100EE382B /* DashedBorderView.m */; };
@@ -394,6 +395,7 @@
 		A0994E671BC4D1FB00D45845 /* WYPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYPopoverController.m; sourceTree = "<group>"; };
 		A0994E681BC4D1FB00D45845 /* WYStoryboardPopoverSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYStoryboardPopoverSegue.h; sourceTree = "<group>"; };
 		A0994E691BC4D1FB00D45845 /* WYStoryboardPopoverSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYStoryboardPopoverSegue.m; sourceTree = "<group>"; };
+		A0994E701BC6DF6100D45845 /* LocalDataTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalDataTest.m; sourceTree = "<group>"; };
 		A0B8C8001B857F22009C4572 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		A0B9D7671B9E4F1100EE382B /* DashedBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashedBorderView.h; sourceTree = "<group>"; };
@@ -1107,6 +1109,7 @@
 			isa = PBXGroup;
 			children = (
 				AE01725B1A65CD8F0014266F /* WishTests.m */,
+				A0994E701BC6DF6100D45845 /* LocalDataTest.m */,
 				AE0172591A65CD8F0014266F /* Supporting Files */,
 			);
 			path = WishTests;
@@ -1676,6 +1679,7 @@
 				A0F7D4521B84E851003CCB34 /* UIImage+JTSImageEffects.m in Sources */,
 				AE01725C1A65CD8F0014266F /* WishTests.m in Sources */,
 				AE2F28E81AD3937700FC3370 /* WishDetailVCDiscovery.m in Sources */,
+				A0994E711BC6DF6200D45845 /* LocalDataTest.m in Sources */,
 				A0D1024B1B84ED20006B0E4E /* CustomBarItem.m in Sources */,
 				A0D1022A1B84EB6A006B0E4E /* UIButton+WebCache.m in Sources */,
 				A0D102471B84ED0B006B0E4E /* UINavigationItem+CustomItem.m in Sources */,
