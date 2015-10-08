@@ -230,9 +230,16 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 - (void)uploadToCreateFeed:(Feed *)feed fetchedImageIds:(NSArray *)imageIds{
     if (feed.plan.planId && feed.feedTitle) {
         
-        feed.plan.backgroundNum = feed.imageId;
+        //设置Feed的封面
         feed.imageId = imageIds.firstObject;
+        
+        //设置事件封面
+        feed.plan.backgroundNum = feed.imageId;
+        
+        //设置feed的类型
         feed.type = @(imageIds.count > 1 ? FeedTypeMultiplePicture : FeedTypeSinglePicture);
+        
+        //设置多图id
         feed.picUrls = [imageIds componentsJoinedByString:@","];
         
         NSString *baseURL = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,CREATE_FEED];
