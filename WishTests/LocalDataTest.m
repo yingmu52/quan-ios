@@ -53,10 +53,16 @@
         //读取最新一条feed
         NSArray *feeds = [plan.feeds sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]]];
         Feed *feed = feeds.firstObject;
+        
+        //图片id不能为空
+        XCTAssertTrue(feed.imageId,@"Null imageid in feed id %@",feed.feedId);
+        XCTAssertTrue(plan.backgroundNum,@"Null backgroundNum in plan id %@",plan.backgroundNum);
+        
+        //匹配
         if (![plan.backgroundNum isEqualToString:feed.imageId]) {
             NSLog(@"Feed Cover : %@",feed.imageId);
             NSLog(@"Plan Cover : %@",feed.plan.backgroundNum);
-            XCTAssertTrue(false,@"Mismatched Post Cover");
+            XCTAssertTrue(NO,@"Mismatched Post Cover");
         }
     }
 }
