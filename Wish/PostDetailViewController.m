@@ -78,7 +78,7 @@
     [self toggleCamera:nil];
 }
 
-- (void)didFinishPickingPhAssets:(NSArray *)assets{
+- (void)didFinishPickingPhAssets:(NSMutableArray *)assets{
     [self performSegueWithIdentifier:@"showPostFeedFromPlanCreation" sender:[assets mutableCopy]];
 }
 

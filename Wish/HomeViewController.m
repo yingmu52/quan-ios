@@ -188,7 +188,7 @@ ShuffleViewControllerDelegate>
     }
 }
 
-- (void)didFinishPickingPhAssets:(NSArray *)assets{
+- (void)didFinishPickingPhAssets:(NSMutableArray *)assets{
     [self performSegueWithIdentifier:@"ShowPostFeedFromHome" sender:@[assets,self.currentPlan]];
 }
 #pragma mark -

@@ -17,7 +17,7 @@ static const NSInteger defaultMaxImageSelectionAllowed = 8;
 @protocol ImagePickerDelegate <NSObject>
 @optional
 - (void)didFailPickingImage;
-- (void)didFinishPickingPhAssets:(NSArray *)assets;
+- (void)didFinishPickingPhAssets:(NSMutableArray *)assets;
 @end
 
 @interface ImagePicker : NSObject <UIImagePickerControllerDelegate,UINavigationBarDelegate>

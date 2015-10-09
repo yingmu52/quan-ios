@@ -236,7 +236,7 @@
     [self.imagePicker showImagePickerForUploadProfileImage:self type:UIImagePickerControllerSourceTypePhotoLibrary];
 }
 
-- (void)didFinishPickingPhAssets:(NSArray *)assets{
+- (void)didFinishPickingPhAssets:(NSMutableArray *)assets{
     if (assets.count == 1 && [assets.firstObject isKindOfClass:[UIImage class]]) {
         self.profilePicture.image = assets.firstObject;
         [self.fetchCenter uploadNewProfilePicture:self.profilePicture.image];

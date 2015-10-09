@@ -84,7 +84,9 @@
         [imagePickerController dismissViewControllerAnimated:YES completion:^{
             
             if ([self.imagePickerDelegate respondsToSelector:@selector(didFinishPickingPhAssets:)]) {
-                [self.imagePickerDelegate didFinishPickingPhAssets:assets];
+                // passing mutable copy prevents crash,
+                // see http://stackoverflow.com/questions/16163081/getting-nsarrayi-addobjectsfromarray-unrecognized-selector-sent-to-instan
+                [self.imagePickerDelegate didFinishPickingPhAssets:[assets mutableCopy]];
             }
         }];
     }
@@ -102,7 +104,7 @@
             UIImage *originalImage = (UIImage *)info[UIImagePickerControllerOriginalImage];
             UIImage *editedImage = (UIImage *)info[UIImagePickerControllerEditedImage];
             UIImage *capturedImage = editedImage ? editedImage : originalImage;
-            [self.imagePickerDelegate didFinishPickingPhAssets:@[capturedImage]];
+            [self.imagePickerDelegate didFinishPickingPhAssets:[NSMutableArray arrayWithObject:capturedImage]];
         }];
 
     }

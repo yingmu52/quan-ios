@@ -158,7 +158,7 @@
     [self.imagePicker showPhotoLibrary:self];
 }
 
-- (void)didFinishPickingPhAssets:(NSArray *)assets{
+- (void)didFinishPickingPhAssets:(NSMutableArray *)assets{
     self.cameraButton.hidden = NO;
     [self performSegueWithIdentifier:@"showPostFeed" sender:assets];
 }

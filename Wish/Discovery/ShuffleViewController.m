@@ -129,7 +129,7 @@
     return _imagePicker;
 }
 
-- (void)didFinishPickingPhAssets:(NSArray *)assets{
+- (void)didFinishPickingPhAssets:(NSMutableArray *)assets{
     //get select plan
     Plan *plan = [self.fetchedRC objectAtIndexPath:[self.collectionView indexPathsForSelectedItems].lastObject];
     [self.svcDelegate didFinishSelectingImageAssets:assets forPlan:plan];

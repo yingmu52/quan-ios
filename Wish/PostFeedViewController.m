@@ -374,7 +374,7 @@ static NSUInteger distance = 10;
     return _imagePicker;
 }
 
-- (void)didFinishPickingPhAssets:(NSArray *)assets{
+- (void)didFinishPickingPhAssets:(NSMutableArray *)assets{
     [self.assets addObjectsFromArray:assets];
     [self.collectionView reloadData];
 }
