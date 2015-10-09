@@ -11,6 +11,8 @@
 #import "SZTextView.h"
 #import "UIImageView+ImageCache.h"
 #import "SYEmojiPopover.h"
+
+#define CURRENT_TEXT @"com.Stories.CommentViewController.currentText"
 @interface CommentViewController () <UITextViewDelegate,SYEmojiPopoverDelegate>
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *keyboardHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewBackgroundHeight;
@@ -29,6 +31,7 @@
 - (IBAction)tapOnBackground:(UITapGestureRecognizer *)tap{
     [self.textView resignFirstResponder];
     [self dismissView];
+    [[NSUserDefaults standardUserDefaults] setObject:self.textView.text forKey:CURRENT_TEXT];
 }
 
 - (void)viewDidLoad{
@@ -43,13 +46,16 @@
     [self.textView becomeFirstResponder];
     
     //设置输入框
-//    self.textView.delegate = self;
     self.textView.placeholder = self.comment ? [NSString stringWithFormat:@"回复%@：",self.comment.owner.ownerName] : @"说点什么吧...";
     
     //设置输入框UI
     self.textView.layer.cornerRadius = 4.0f;
     self.textView.layer.borderWidth = 1.0f;
     self.textView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    
+    //输入框文字缓存
+    NSString *currentText = [[NSUserDefaults standardUserDefaults] objectForKey:CURRENT_TEXT];
+    if (currentText) self.textView.text = currentText;
     
     self.userBackgroundView.hidden = !self.comment;
     if (self.comment) {
@@ -94,7 +100,7 @@
 }
 
 
-#pragma mark - keyboard interaction notification
+#pragma mark - 响应键盘高度的改变
 
 - (void)keyboardDidHide:(NSNotification *)notification{
     [self updateViewForNewHeight:0];
@@ -130,6 +136,7 @@
         [self.fetchCenter commentOnFeed:self.feedDetailViewController.feed
                                 content:self.textView.text];
     }
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:CURRENT_TEXT];
     [self dismissView];
 }
 
