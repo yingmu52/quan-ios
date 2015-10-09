@@ -264,18 +264,25 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
                                managedObject:feed
                                     complete:^(NSString *fetchedId)
             {
-                if (fetchedId){
-                    [imageIdMaps addEntriesFromDictionary:@{fetchedId:@(index)}];
-                    if (imageIdMaps.allKeys.count == images.count) {
-                        NSLog(@"%@",imageIdMaps);
-                        NSArray *sorted = [[imageIdMaps allKeys] sortedArrayUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
-                            return [imageIdMaps[obj1] compare:imageIdMaps[obj2]];
-                        }];
-                        NSLog(@"\n%@\n",sorted);
-                        
-                        [weakSelf.delegate didFinishUploadingImage:sorted forFeed:feed];
+                dispatch_main_async_safe(^{
+                    if (fetchedId){
+                        [imageIdMaps addEntriesFromDictionary:@{fetchedId:@(index)}];
+                        if (imageIdMaps.allKeys.count == images.count) {
+                            NSLog(@"%@",imageIdMaps);
+                            NSArray *sorted = [[imageIdMaps allKeys] sortedArrayUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
+                                return [imageIdMaps[obj1] compare:imageIdMaps[obj2]];
+                            }];
+                            NSLog(@"\n%@\n",sorted);
+                            
+                            [weakSelf.delegate didFinishUploadingImage:sorted forFeed:feed];
+                        }else{
+                            if ([self.delegate respondsToSelector:@selector(didReceivedCurrentProgressForUploadingImage:)]) {
+                                CGFloat progress = (imageIdMaps.allKeys.count - 1e-3) / images.count;
+                                [self.delegate didReceivedCurrentProgressForUploadingImage:progress];
+                            }
+                        }
                     }
-                }
+                });
             }];
         });
     }

@@ -1844,6 +1844,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BP3-eI-grs">
+                                <rect key="frame" x="0.0" y="-2" width="150" height="2"/>
+                            </progressView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yEm-S5-5O6" customClass="SZTextView">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <gestureRecognizers/>
@@ -2028,15 +2031,26 @@
                         <color key="backgroundColor" red="0.92941176470588238" green="0.96862745098039216" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="BP3-eI-grs" firstAttribute="centerX" secondItem="5G4-S6-zx4" secondAttribute="centerX" id="3lN-GP-bQx"/>
                             <constraint firstItem="f5a-dm-fTM" firstAttribute="top" secondItem="6ho-8h-Ap1" secondAttribute="bottom" constant="8" id="LBK-bJ-Vhr">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
+                            <constraint firstItem="BP3-eI-grs" firstAttribute="top" secondItem="UDg-j7-ilp" secondAttribute="bottom" constant="49" id="VkB-Tu-924">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
                             <constraint firstItem="yEm-S5-5O6" firstAttribute="leading" secondItem="5G4-S6-zx4" secondAttribute="leadingMargin" id="gVH-oJ-z4C"/>
                             <constraint firstAttribute="centerX" secondItem="6ho-8h-Ap1" secondAttribute="centerX" constant="6" id="gYV-Qk-szJ">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
+                            <constraint firstItem="BP3-eI-grs" firstAttribute="width" secondItem="5G4-S6-zx4" secondAttribute="width" id="jpB-YN-1Vj"/>
                             <constraint firstItem="yEm-S5-5O6" firstAttribute="top" secondItem="UDg-j7-ilp" secondAttribute="bottom" constant="8" id="o2N-Sp-CEG">
                                 <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                            </constraint>
+                            <constraint firstAttribute="trailingMargin" secondItem="BP3-eI-grs" secondAttribute="trailing" constant="194" id="o7V-mj-bMT">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
+                            <constraint firstItem="BP3-eI-grs" firstAttribute="leading" secondItem="5G4-S6-zx4" secondAttribute="leadingMargin" constant="16" id="oUL-Fb-lmV">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
                             <constraint firstItem="6ho-8h-Ap1" firstAttribute="top" secondItem="yEm-S5-5O6" secondAttribute="bottom" constant="638" id="q65-ll-jge">
                                 <variation key="heightClass=regular-widthClass=compact" constant="8"/>
@@ -2046,32 +2060,44 @@
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
+                                <exclude reference="BP3-eI-grs"/>
                                 <exclude reference="yEm-S5-5O6"/>
                                 <exclude reference="6ho-8h-Ap1"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="LBK-bJ-Vhr"/>
+                                <exclude reference="3lN-GP-bQx"/>
+                                <exclude reference="VkB-Tu-924"/>
+                                <exclude reference="jpB-YN-1Vj"/>
+                                <exclude reference="o7V-mj-bMT"/>
+                                <exclude reference="oUL-Fb-lmV"/>
                                 <exclude reference="gVH-oJ-z4C"/>
                                 <exclude reference="o2N-Sp-CEG"/>
                                 <exclude reference="ryA-cH-PRk"/>
                                 <exclude reference="gYV-Qk-szJ"/>
                                 <exclude reference="q65-ll-jge"/>
                                 <exclude reference="ylI-w7-LQd"/>
+                                <exclude reference="LBK-bJ-Vhr"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
+                                <include reference="BP3-eI-grs"/>
                                 <include reference="yEm-S5-5O6"/>
                                 <include reference="6ho-8h-Ap1"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="LBK-bJ-Vhr"/>
+                                <include reference="3lN-GP-bQx"/>
+                                <include reference="VkB-Tu-924"/>
+                                <include reference="jpB-YN-1Vj"/>
+                                <exclude reference="o7V-mj-bMT"/>
+                                <exclude reference="oUL-Fb-lmV"/>
                                 <include reference="gVH-oJ-z4C"/>
                                 <include reference="o2N-Sp-CEG"/>
                                 <include reference="ryA-cH-PRk"/>
                                 <include reference="gYV-Qk-szJ"/>
                                 <include reference="q65-ll-jge"/>
                                 <include reference="ylI-w7-LQd"/>
+                                <include reference="LBK-bJ-Vhr"/>
                             </mask>
                         </variation>
                         <connections>
@@ -2081,6 +2107,7 @@
                     <connections>
                         <outlet property="collectionView" destination="6ho-8h-Ap1" id="93G-Ai-rIh"/>
                         <outlet property="keyboardHeight" destination="LBK-bJ-Vhr" id="BVM-Mw-rbq"/>
+                        <outlet property="progressBar" destination="BP3-eI-grs" id="dmb-hL-PZ1"/>
                         <outlet property="textView" destination="yEm-S5-5O6" id="6f3-8S-IgX"/>
                         <segue destination="b5E-B5-8Ys" kind="show" identifier="showWishDetailOnPlanCreation" id="0NR-qk-ahm"/>
                         <segue destination="opb-v5-cWV" kind="show" identifier="showImagePreviewFromPostFeedDetail" id="Vr7-2x-iVK"/>
@@ -5650,14 +5677,14 @@
         <image name="tab_ic_message_pressed" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="KCv-z9-IUy"/>
+        <segue reference="4ZT-53-1QA"/>
+        <segue reference="CTd-gb-xTE"/>
+        <segue reference="0NR-qk-ahm"/>
         <segue reference="mFv-Li-7ge"/>
         <segue reference="JFc-cO-xBu"/>
-        <segue reference="4ZT-53-1QA"/>
         <segue reference="sa3-BT-zY6"/>
         <segue reference="hrM-4j-5CW"/>
-        <segue reference="CTd-gb-xTE"/>
-        <segue reference="cel-0L-eNY"/>
-        <segue reference="KCv-z9-IUy"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
 </document>

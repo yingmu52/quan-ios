@@ -40,6 +40,7 @@ typedef enum {
 - (void)didFinishUploadingFeed:(Feed *)feed;
 
 - (void)didFinishUploadingImage:(NSArray *)imageIds forFeed:(Feed *)feed;
+- (void)didReceivedCurrentProgressForUploadingImage:(CGFloat)percentage;
 
 - (void)didFinishReceivingUidAndUKeyForUserInfo:(NSDictionary *)userInfo isNewUser:(BOOL)isNew;
 - (void)didFinishGettingWeChatUserInfo;

@@ -32,6 +32,7 @@ static NSUInteger distance = 10;
 @property (nonatomic,strong) Feed *feed;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *keyboardHeight;
+@property (weak, nonatomic) IBOutlet UIProgressView *progressBar;
 @end
 
 @implementation PostFeedViewController
@@ -115,7 +116,7 @@ static NSUInteger distance = 10;
     [spinner startAnimating];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
     
-    //get asset image
+    //处理用户选取的图片 array of PHAsset/UIImage
     PHImageManager *manager = [PHImageManager defaultManager];
     NSMutableArray *arrayOfUIImages = [NSMutableArray arrayWithCapacity:self.assets.count];
     for (id item in self.assets) {
@@ -142,6 +143,8 @@ static NSUInteger distance = 10;
             }
         }
     }
+    
+    self.progressBar.hidden = NO;
 }
 
 - (void)goBack{
@@ -266,9 +269,13 @@ static NSUInteger distance = 10;
         [self.navigationController popViewControllerAnimated:YES];
     }else{
         [self performSegueWithIdentifier:@"showWishDetailOnPlanCreation" sender:self.plan];
-
     }
-    
+    self.progressBar.hidden = NO;
+
+}
+
+- (void)didReceivedCurrentProgressForUploadingImage:(CGFloat)percentage{
+    [self.progressBar setProgress:percentage animated:YES];
 }
 
 #pragma mark - keyboard interaction notification
