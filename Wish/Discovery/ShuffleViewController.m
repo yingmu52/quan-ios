@@ -18,7 +18,6 @@
 @interface ShuffleViewController () <NSFetchedResultsControllerDelegate,UICollectionViewDelegateFlowLayout,ImagePickerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic,weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic,strong) NSMutableArray *itemChanges;
-//@property (nonatomic,strong) NSIndexPath *selectedIndexPath;
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @property (nonatomic,strong) ImagePicker *imagePicker;
 @end
@@ -28,9 +27,7 @@
 
 - (IBAction)tapOnBackground:(UITapGestureRecognizer *)tap{
     //支持点击背影关闭退出浮层
-    [self dismissViewControllerAnimated:YES completion:^{
-#warning        ((DiscoveryVCData*)self.svcDelegate).addButton.hidden = NO;
-    }];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (NSFetchedResultsController *)fetchedRC

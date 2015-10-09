@@ -135,7 +135,7 @@ static NSUInteger distance = 10;
                 }
             }];
         }else if ([item isKindOfClass:[UIImage class]]){
-#warning it works, but so fucking ugly!!
+#warning 恶心的实现，要改啊！
             [arrayOfUIImages addObject:item];
             if (arrayOfUIImages.count == self.assets.count) {
                 [self.fetchCenter uploadImages:arrayOfUIImages

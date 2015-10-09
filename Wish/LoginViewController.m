@@ -39,12 +39,6 @@
 #pragma mark - login
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-#warning replace this with alert controller
-    [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@",info[@"ret"]]
-                                message:[NSString stringWithFormat:@"%@",info[@"msg"]]
-                               delegate:self
-                      cancelButtonTitle:@"OK"
-                      otherButtonTitles:nil, nil] show];
     [User updateOwnerInfo:nil];
 }
 

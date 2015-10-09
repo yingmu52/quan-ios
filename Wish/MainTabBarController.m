@@ -68,9 +68,7 @@
 }
 
 - (void)didFinishGettingMessageNotificationWithMessageCount:(NSNumber *)msgCount followCount:(NSNumber *)followCount{
-    NSLog(@"message count %@, follow count %@",msgCount,followCount);
-#warning number of message doesn't include follow count
-//    self.numberOfMessages = @(msgCount.integerValue + followCount.integerValue).integerValue;
+#warning 消息页的通知暂时不包括关注的数量提醒
     self.numberOfMessages = msgCount.integerValue;
 }
 
