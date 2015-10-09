@@ -58,33 +58,62 @@
         self.commentContentLabel.text = self.comment.content;
         self.timeLabel.text = [SystemUtil timeStringFromDate:self.comment.createTime];
     }
+    
+    [self.textView addObserver:self
+                    forKeyPath:@"contentSize"
+                       options:NSKeyValueObservingOptionNew
+                       context:NULL];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object 
+                        change:(NSDictionary<NSString *,id> *)change
+                       context:(void *)context{
+    SZTextView *textView = object;
+
+    //设置行数限制，有回复对象时限3行，无回复对象时限6行
+    NSUInteger maxNumberOfLines = self.comment ? 6 : 8;
+    NSUInteger numLines = fabs((textView.contentSize.height -
+                                textView.textContainerInset.top -
+                                textView.textContainerInset.bottom) /
+                               textView.font.lineHeight);
+    if (numLines < maxNumberOfLines){
+        //当输入框中的文字没到行限时，动态改变高度
+        CGFloat topCorrect = textView.bounds.size.height - textView.contentSize.height;
+        [UIView animateWithDuration:0.1 animations:^{
+            self.textViewBackgroundHeight.constant -= topCorrect;
+            [self.view layoutIfNeeded];
+        }];
+    }else{
+        //滚到输入框最底部
+        CGPoint bottomOffset = CGPointMake(0, textView.contentSize.height - textView.frame.size.height);
+        [textView setContentOffset:bottomOffset animated:NO];
+    }
 }
 
 #pragma mark - Text View Delegate
 
 - (void)textViewDidChange:(UITextView *)textView
 {
-    //设置行数限制
-    NSUInteger maxNumberOfLines = 5;
-    
-    //高数当前行数约值
-    NSUInteger numLines = textView.contentSize.height/textView.font.lineHeight;
-    
-    if (numLines < maxNumberOfLines){
-        CGFloat computedHeightDifference = textView.contentSize.height - (textView.frame.size.height + textView.textContainerInset.top + textView.textContainerInset.bottom);
-        
-        //换行后扩展边框
-        if (computedHeightDifference) {
-            [UIView animateWithDuration:0.5 animations:^{
-                self.textViewBackgroundHeight.constant = textView.contentSize.height + textView.textContainerInset.top + textView.textContainerInset.bottom;
-                [self.view layoutIfNeeded];
-            }];
-        }
-    }else{
-        //滚到输入框最底部
-        CGPoint bottomOffset = CGPointMake(0, textView.contentSize.height - textView.frame.size.height);
-        [textView setContentOffset:bottomOffset animated:NO];
-    }
+//
+//    //高数当前行数约值
+//    NSUInteger numLines = fabs((textView.contentSize.height -
+//                                textView.textContainerInset.top -
+//                                textView.textContainerInset.bottom) /
+//                               textView.font.lineHeight);
+//    
+//    if (numLines < maxNumberOfLines){
+//        CGFloat computedHeightDifference =
+//        textView.contentSize.height +
+//        textView.textContainerInset.top +
+//        textView.textContainerInset.bottom -
+//        textView.frame.size.height;
+//        
+//        //换行后扩展边框
+//        if (computedHeightDifference) {
+//        }
+//    }else{
+//    }
     
 }
 
@@ -110,6 +139,7 @@
 }
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self.textView removeObserver:self forKeyPath:@"contentSize"];
     [self.textView resignFirstResponder];
 }
 
