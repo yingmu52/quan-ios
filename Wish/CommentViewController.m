@@ -43,7 +43,7 @@
     [self.textView becomeFirstResponder];
     
     //设置输入框
-    self.textView.delegate = self;
+//    self.textView.delegate = self;
     self.textView.placeholder = self.comment ? [NSString stringWithFormat:@"回复%@：",self.comment.owner.ownerName] : @"说点什么吧...";
     
     //设置输入框UI
@@ -64,6 +64,8 @@
                        options:NSKeyValueObservingOptionNew
                        context:NULL];
 }
+
+#pragma mark - textview的大小改变执行的操作
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object 
@@ -91,31 +93,6 @@
     }
 }
 
-#pragma mark - Text View Delegate
-
-- (void)textViewDidChange:(UITextView *)textView
-{
-//
-//    //高数当前行数约值
-//    NSUInteger numLines = fabs((textView.contentSize.height -
-//                                textView.textContainerInset.top -
-//                                textView.textContainerInset.bottom) /
-//                               textView.font.lineHeight);
-//    
-//    if (numLines < maxNumberOfLines){
-//        CGFloat computedHeightDifference =
-//        textView.contentSize.height +
-//        textView.textContainerInset.top +
-//        textView.textContainerInset.bottom -
-//        textView.frame.size.height;
-//        
-//        //换行后扩展边框
-//        if (computedHeightDifference) {
-//        }
-//    }else{
-//    }
-    
-}
 
 #pragma mark - keyboard interaction notification
 
@@ -173,14 +150,13 @@
 
 //SYEmojiPopoverDelegate methods
 
--(void)emojiPopover:(SYEmojiPopover *)emojiPopover didClickedOnCharacter:(NSString *)character
-{
+-(void)emojiPopover:(SYEmojiPopover *)emojiPopover didClickedOnCharacter:(NSString *)character{
     self.textView.text = [self.textView.text stringByAppendingString:character];
-    [self textViewDidChange:self.textView];
 }
 
 - (IBAction)clickOnEmojiButton:(UIButton *)sender{
-    [self.emojiView showFromPoint:CGPointMake(sender.center.x, CGRectGetHeight(self.view.frame) - self.keyboardHeight.constant - self.textViewBackgroundHeight.constant)
+    CGPoint point = CGPointMake(sender.center.x, CGRectGetHeight(self.view.frame) - self.keyboardHeight.constant - 22.0); //表情图标高度为44.0f
+    [self.emojiView showFromPoint:point
                            inView:self.view withTitle:@"点击插入表情"];
 }
 
