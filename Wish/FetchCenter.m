@@ -954,15 +954,30 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
                 
                 if (comments.count > 0) {
                     for (NSDictionary *commentInfo in comments){
+                        
+                        //读取评论信息
                         Comment *comment = [Comment updateCommentWithInfo:commentInfo];
                         
+                        //读取用户信息
                         NSDictionary *userInfo = comment.isMyComment.boolValue ? @{@"headUrl":[User updatedProfilePictureId],@"id":[User uid],@"name":[User userDisplayName]} : ownerInfo[commentInfo[@"ownerId"]];
+                        Owner *owner = [Owner updateOwnerWithInfo:userInfo];
                         
-                        comment.owner = [Owner updateOwnerWithInfo:userInfo];
-                        comment.feed = feed;
-                        if (comment.idForReply) {
-                            comment.nameForReply = [ownerInfo[comment.idForReply] objectForKey:@"name"];
+                        //防止更新相同的评论数据
+                        if (comment.owner != owner) {
+                            comment.owner = owner;
                         }
+                        if (comment.feed != feed) {
+                            comment.feed = feed;
+                        }
+                        if (comment.idForReply) {
+                            NSString *nameForReply = [ownerInfo[comment.idForReply] objectForKey:@"name"];
+                            if (![comment.nameForReply isEqualToString:nameForReply]) {
+                                comment.nameForReply = nameForReply;
+                            }
+                        }
+                        
+                        
+                        
                     }
 
                 }
