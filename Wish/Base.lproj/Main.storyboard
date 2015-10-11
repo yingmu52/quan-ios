@@ -1372,6 +1372,9 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="79" y="16" width="138" height="17"/>
+                                                            </variation>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="更新于2015-08-08" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8sd-oO-FY6">
                                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -2688,6 +2691,9 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                             <color key="backgroundColor" red="0.91372549020000005" green="0.91372549020000005" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <gestureRecognizers/>
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="3" y="2" width="229" height="237"/>
+                                                            </variation>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2736,7 +2742,8 @@
                                                             <exclude reference="oqj-m3-d7r"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="151" y="1" width="233" height="291"/>
                                                         <mask key="subviews">
                                                             <include reference="SQ1-Lr-Tqq"/>
                                                             <include reference="9PA-iz-Mae"/>
@@ -3616,10 +3623,10 @@
                                                                             <exclude reference="itt-D5-XiC"/>
                                                                         </mask>
                                                                         <mask key="constraints">
-                                                                            <exclude reference="9jy-TF-JJx"/>
-                                                                            <exclude reference="TMy-7k-dm7"/>
                                                                             <exclude reference="3jl-w7-7gm"/>
                                                                             <exclude reference="RLJ-Jo-pfs"/>
+                                                                            <exclude reference="9jy-TF-JJx"/>
+                                                                            <exclude reference="TMy-7k-dm7"/>
                                                                         </mask>
                                                                     </variation>
                                                                     <variation key="heightClass=regular-widthClass=compact">
@@ -3628,10 +3635,10 @@
                                                                             <include reference="itt-D5-XiC"/>
                                                                         </mask>
                                                                         <mask key="constraints">
-                                                                            <include reference="9jy-TF-JJx"/>
-                                                                            <include reference="TMy-7k-dm7"/>
                                                                             <include reference="3jl-w7-7gm"/>
                                                                             <include reference="RLJ-Jo-pfs"/>
+                                                                            <include reference="9jy-TF-JJx"/>
+                                                                            <include reference="TMy-7k-dm7"/>
                                                                         </mask>
                                                                     </variation>
                                                                 </view>
@@ -3852,9 +3859,9 @@
                     </tabBar>
                     <connections>
                         <segue destination="qWQ-Vi-JtX" kind="relationship" relationship="viewControllers" id="iSi-v2-Y4W"/>
-                        <segue destination="81G-fy-O9t" kind="relationship" relationship="viewControllers" id="BZF-qU-I16"/>
-                        <segue destination="m7d-Re-JGr" kind="relationship" relationship="viewControllers" id="3GI-6H-MGJ"/>
                         <segue destination="2Fl-7V-mVz" kind="relationship" relationship="viewControllers" id="KBr-BE-YAB"/>
+                        <segue destination="m7d-Re-JGr" kind="relationship" relationship="viewControllers" id="3GI-6H-MGJ"/>
+                        <segue destination="81G-fy-O9t" kind="relationship" relationship="viewControllers" id="BZF-qU-I16"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MS6-VY-ScM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3885,11 +3892,11 @@
             </objects>
             <point key="canvasLocation" x="-2854.5" y="-1635"/>
         </scene>
-        <!--我-->
+        <!--事儿-->
         <scene sceneID="tag-Sl-CNN">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2Fl-7V-mVz" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="我" image="tab_ic_me" selectedImage="tab_ic_me_pressed" id="YA3-sO-Hs2">
+                    <tabBarItem key="tabBarItem" title="事儿" image="tab_ic_me" selectedImage="tab_ic_me_pressed" id="YA3-sO-Hs2">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-8"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="tab_ic_me_pressed"/>
@@ -4000,7 +4007,8 @@
                                                     <exclude reference="Fge-Y2-tqe"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact">
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="69" y="165" width="263" height="281"/>
                                                 <mask key="constraints">
                                                     <include reference="Fge-Y2-tqe"/>
                                                 </mask>
@@ -4019,7 +4027,8 @@
                                                     <exclude reference="BJ4-vq-KqK"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact">
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="242" y="356" width="90" height="90"/>
                                                 <mask key="constraints">
                                                     <include reference="BJ4-vq-KqK"/>
                                                 </mask>
@@ -4057,6 +4066,9 @@
                                         <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tab_ic_login_default" translatesAutoresizingMaskIntoConstraints="NO" id="L5M-v3-pcw" customClass="NZCircularImageView">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                             <gestureRecognizers/>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="69" y="165" width="263" height="281"/>
+                                            </variation>
                                             <connections>
                                                 <outletCollection property="gestureRecognizers" destination="ISo-MQ-Rnf" appends="YES" id="ErN-s1-m9g"/>
                                             </connections>
@@ -4705,7 +4717,8 @@
                                                                     <exclude reference="pVs-CS-DGJ"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact">
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="129" y="23" width="24" height="24"/>
                                                                 <mask key="constraints">
                                                                     <include reference="pVs-CS-DGJ"/>
                                                                 </mask>

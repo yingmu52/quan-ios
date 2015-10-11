@@ -113,7 +113,7 @@ ShuffleViewControllerDelegate>
 - (void)setUpNavigationItem
 {
     //1.左上角个人头像图标
-    NZCircularImageView *myIcon = [[NZCircularImageView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+    NZCircularImageView *myIcon = [[NZCircularImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     myIcon.backgroundColor = [UIColor lightGrayColor];
     NSString *newPicId = [User updatedProfilePictureId];
     myIcon.userInteractionEnabled = YES;
