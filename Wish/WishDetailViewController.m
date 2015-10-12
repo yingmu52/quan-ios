@@ -116,22 +116,22 @@
 
 - (void)goBack{
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-    [self.navigationController popToRootViewControllerAnimated:YES];
-//    dispatch_queue_t queue_cleanUp;
-//    queue_cleanUp = dispatch_queue_create("com.stories.WishDetailViewController.cleanup", NULL);
-//    dispatch_async(queue_cleanUp, ^{
-        NSUInteger numberOfPreservingFeeds = 20;
-        NSArray *allFeeds = self.fetchedRC.fetchedObjects;
-        if (allFeeds.count > numberOfPreservingFeeds) {
-            AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-            for (NSUInteger i = numberOfPreservingFeeds; i < allFeeds.count; i++) {
-                Feed *feed = allFeeds[i];
-                [delegate.managedObjectContext deleteObject:feed];
-            }
-            [delegate saveContext];
+    [self.navigationController popViewControllerAnimated:YES];
+    
+    self.fetchedRC.delegate = nil;
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    NSUInteger numberOfPreservingFeeds = 20;
+    NSArray *allFeeds = self.fetchedRC.fetchedObjects;
+    if (allFeeds.count > numberOfPreservingFeeds) {
+        for (NSUInteger i = numberOfPreservingFeeds; i < allFeeds.count; i++) {
+            Feed *feed = allFeeds[i];
+            [delegate.managedObjectContext deleteObject:feed];
         }
-//    });
+        [delegate saveContext];
+    }
+
 }
+
 
 - (void)setUpNavigationItem
 {
@@ -302,6 +302,7 @@
         cell.pictureCountLabel.hidden = YES;
     }
     
+    [[SDWebImageManager sharedManager] cancelAll];
     NSURL *imageUrl = [self.fetchCenter urlWithImageID:feed.imageId size:FetchCenterImageSize800];
     [cell.photoView showImageWithImageUrl:imageUrl];
     return cell;
