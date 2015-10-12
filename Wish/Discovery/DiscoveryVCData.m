@@ -65,6 +65,7 @@
 - (void)configureCell:(DiscoveryCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
     
+    [[SDWebImageManager sharedManager] cancelAll];
     NSURL *imageUrl = [self.fetchCenter urlWithImageID:plan.backgroundNum size:FetchCenterImageSize400];
     cell.discoveryImageView.image = nil;
     [cell.discoveryImageView showImageWithImageUrl:imageUrl];
