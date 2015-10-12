@@ -67,7 +67,6 @@
     
     [[SDWebImageManager sharedManager] cancelAll];
     NSURL *imageUrl = [self.fetchCenter urlWithImageID:plan.backgroundNum size:FetchCenterImageSize400];
-    cell.discoveryImageView.image = nil;
     [cell.discoveryImageView showImageWithImageUrl:imageUrl];
 
     cell.discoveryTitleLabel.text = plan.planTitle;
