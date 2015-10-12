@@ -8,6 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "FetchCenter.h"
-@interface MSSuperViewController : UIViewController <FetchCenterDelegate>
+@import CoreData;
+@interface MSSuperViewController : UIViewController <FetchCenterDelegate,NSFetchedResultsControllerDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
+
+
+#pragma mark - Collection View 
+@property (nonatomic,strong) NSFetchedResultsController *collectionFetchedRC;
+
+
+#pragma mark - Table View 
+@property (nonatomic,weak) IBOutlet UITableView *tableView;
+@property (nonatomic,strong) NSFetchedResultsController *tableFetchedRC;
+
+//MARK !!!: 必须设置
+@property (nonatomic,strong) NSFetchRequest *tableFetchRequest;
+
 @end
