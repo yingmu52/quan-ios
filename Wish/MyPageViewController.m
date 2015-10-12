@@ -84,63 +84,6 @@
     [self resignFirstResponder];
 }
 
-#define GET_USER_INFO @"获取个人信息"
-#define GET_LOCAL_LOGS @"获取请求日志"
-
-- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event{
-    NSArray *knownLists = @[@"100004",@"100014",@"100005",@"100007",@"100015",@"100001"]; //Vicky,R,Cliff,Amy,Jie,Xinyi
-
-    if ([knownLists containsObject:[User uid]]) {
-        BOOL isUsingInnerNetwork = [[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_INNER_NETWORK];
-        
-        NSString *testEnvTitle = isUsingInnerNetwork ? @"内网✔️" : @"内网";
-        NSString *proEnvTitle = isUsingInnerNetwork ? @"外网" : @"外网✔️";
-        if (motion == UIEventSubtypeMotionShake) {
-            
-            UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"此功能只对内部公开" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-            
-            //选择内网
-            UIAlertAction *testEnv = [UIAlertAction actionWithTitle:testEnvTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                if (!isUsingInnerNetwork) {
-                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SHOULD_USE_INNER_NETWORK];
-                    [self logout];
-                    [self clearCoreData];
-                }
-            }];
-            
-            //选择外网
-            UIAlertAction *proEnv = [UIAlertAction actionWithTitle:proEnvTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                if (isUsingInnerNetwork) {
-                    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:SHOULD_USE_INNER_NETWORK];
-                    [self logout];
-                    [self clearCoreData];
-                }
-            }];
-            
-            //获取用户信息
-            UIAlertAction *getUserInfo = [UIAlertAction actionWithTitle:GET_USER_INFO style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                NSString *userInfo = [NSString stringWithFormat:@"uid:%@\nukey:%@\npicUrl:%@",[User uid],[User uKey],[User updatedProfilePictureId]];
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:userInfo preferredStyle:UIAlertControllerStyleAlert];
-                [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
-                [self presentViewController:alert animated:YES completion:nil];
-            }];
-            
-            
-            UIAlertAction *getRequestLog = [UIAlertAction actionWithTitle:GET_LOCAL_LOGS style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [self performSegueWithIdentifier:@"showLocalRequestLog" sender:nil];
-            }];
-            
-            [actionSheet addAction:testEnv];
-            [actionSheet addAction:proEnv];
-            [actionSheet addAction:getUserInfo];
-            [actionSheet addAction:getRequestLog];
-            [actionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-            [self presentViewController:actionSheet animated:YES completion:nil];
-            
-        }        
-    }
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 104.0f / 1136 * self.view.frame.size.height;
 }
@@ -169,9 +112,6 @@
     }
 }
 
-#pragma mark - Functionality
-
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0){
         if (indexPath.row == 0){ //个人资料
@@ -199,6 +139,7 @@
     }
 }
 
+#pragma mark - 登出操作
 
 - (void)logout{    
     //delete user info, this lines must be below [self clearCoreData];
@@ -208,21 +149,39 @@
 }
 
 - (void)clearCoreData{
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
-//    request.predicate = [NSPredicate predicateWithFormat:@"owner.ownerId != %@",[User uid]];
-    [request setIncludesPropertyValues:NO]; //only fetch the managedObjectID
-    NSError * error = nil;
-    NSArray * objects = [delegate.managedObjectContext executeFetchRequest:request error:&error];
-    //error handling goes here
-    for (Plan *plan in objects) {
-        [delegate.managedObjectContext deleteObject:plan];
-    }
-    [delegate saveContext];
+    
+    //删除本地数据库
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        
+        //1
+        [NSUserDefaults resetStandardUserDefaults];
+        
+        //2. 删除所有Core Data数据 
+        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        
+        //Each thread needs to have its own moc
+        NSManagedObjectContext *backgroundMoc = [[NSManagedObjectContext alloc] init];
+        [backgroundMoc setPersistentStoreCoordinator:delegate.managedObjectContext.persistentStoreCoordinator];
+
+        for (NSEntityDescription *entity in delegate.managedObjectModel.entities) {
+            NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:entity.name];
+            [request setIncludesPropertyValues:NO]; //only fetch the managedObjectID
+            NSArray * objects = [backgroundMoc executeFetchRequest:request error:nil];
+            //error handling goes here
+            for (Plan *plan in objects) {
+                [backgroundMoc deleteObject:plan];
+            }
+        }
+        
+        //3
+        [backgroundMoc save:nil];
+    });
+
 }
 
 
-#pragma mark - upload image 
+#pragma mark - 上传头像
 
 - (ImagePicker *)imagePicker{
     if (!_imagePicker) {
@@ -250,7 +209,7 @@
     self.tabBarController.tabBar.hidden = YES;
 }
 
-#pragma mark fetchcenter Delegate
+#pragma mark - Fetchcenter Delegate
 
 - (void)didFinishUploadingPictureForProfile{
     [self.fetchCenter setPersonalInfo:[User userDisplayName]
@@ -268,6 +227,66 @@
 - (void)didFinishSettingPersonalInfo{
     NSLog(@"done");
 }
+
+#pragma mark - 摇一摇
+
+// MARK: 检测到摇一摇
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event{
+    
+    BOOL isUsingInnerNetwork = [[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_INNER_NETWORK];
+    NSArray *knownUsersList = @[@"100004",@"100014",@"100005",@"100007",@"100015",@"100001"]; //Vicky,R,Cliff,Amy,Jie,Xinyi
+    
+    //支持摇一摇的条件是 1. 外网的已知id 2. 用户在内网
+    if ([knownUsersList containsObject:[User uid]] || isUsingInnerNetwork) {
+        
+        NSString *testEnvTitle = isUsingInnerNetwork ? @"内网✔️" : @"内网";
+        NSString *proEnvTitle = isUsingInnerNetwork ? @"外网" : @"外网✔️";
+        if (motion == UIEventSubtypeMotionShake) {
+            
+            UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"此功能只对内部公开" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+            
+            //选择内网
+            UIAlertAction *testEnv = [UIAlertAction actionWithTitle:testEnvTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                if (!isUsingInnerNetwork) {
+                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SHOULD_USE_INNER_NETWORK];
+                    [self logout];
+                    [self clearCoreData];
+                }
+            }];
+            
+            //选择外网
+            UIAlertAction *proEnv = [UIAlertAction actionWithTitle:proEnvTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                if (isUsingInnerNetwork) {
+                    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:SHOULD_USE_INNER_NETWORK];
+                    [self logout];
+                    [self clearCoreData];
+                }
+            }];
+            
+            //获取用户信息
+            UIAlertAction *getUserInfo = [UIAlertAction actionWithTitle:@"获取个人信息" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                NSString *userInfo = [NSString stringWithFormat:@"uid:%@\nukey:%@\npicUrl:%@",[User uid],[User uKey],[User updatedProfilePictureId]];
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:userInfo preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+                [self presentViewController:alert animated:YES completion:nil];
+            }];
+            
+            
+            UIAlertAction *getRequestLog = [UIAlertAction actionWithTitle:@"获取请求日志" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [self performSegueWithIdentifier:@"showLocalRequestLog" sender:nil];
+            }];
+            
+            [actionSheet addAction:testEnv];
+            [actionSheet addAction:proEnv];
+            [actionSheet addAction:getUserInfo];
+            [actionSheet addAction:getRequestLog];
+            [actionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+            [self presentViewController:actionSheet animated:YES completion:nil];
+            
+        }
+    }
+}
+
 
 @end
 
