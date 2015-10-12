@@ -186,7 +186,7 @@
 
 - (void)configureCell:(FeedDetailCell *)cell indexPath:(NSIndexPath *)indexPath{
     Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
-    NSURL *imageUrl = [self.fetchCenter urlWithImageID:comment.owner.headUrl size:FetchCenterImageSize50];
+    NSURL *imageUrl = [self.fetchCenter urlWithImageID:comment.owner.headUrl size:FetchCenterImageSize100];
     [cell.profileImageView showImageWithImageUrl:imageUrl];
     
     cell.contentTextView.text = comment.content;
