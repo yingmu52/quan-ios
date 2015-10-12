@@ -53,6 +53,8 @@
 		A07115D21BA6B109002C1270 /* SZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A07115D01BA6B109002C1270 /* SZTextView.m */; };
 		A089A9141B9BCBED00291EC2 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A089A9111B9BCBED00291EC2 /* libWeChatSDK.a */; };
 		A089A9151B9BCBED00291EC2 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A089A9111B9BCBED00291EC2 /* libWeChatSDK.a */; };
+		A095D8341BCB884500ED3DFD /* PgySDk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A095D8321BCB884500ED3DFD /* PgySDk.framework */; settings = {ASSET_TAGS = (); }; };
+		A095D8351BCB884500ED3DFD /* PgyUpdate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A095D8331BCB884500ED3DFD /* PgyUpdate.framework */; settings = {ASSET_TAGS = (); }; };
 		A0994E631BC4CF9500D45845 /* SYEmojiCharacters.m in Sources */ = {isa = PBXBuildFile; fileRef = A0994E601BC4CF9500D45845 /* SYEmojiCharacters.m */; settings = {ASSET_TAGS = (); }; };
 		A0994E641BC4CF9500D45845 /* SYEmojiPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = A0994E621BC4CF9500D45845 /* SYEmojiPopover.m */; settings = {ASSET_TAGS = (); }; };
 		A0994E6A1BC4D1FB00D45845 /* WYPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0994E671BC4D1FB00D45845 /* WYPopoverController.m */; settings = {ASSET_TAGS = (); }; };
@@ -129,8 +131,6 @@
 		A0EDFCBF1B90C63400B10594 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EDFCBE1B90C63400B10594 /* libstdc++.6.dylib */; };
 		A0EDFCC01B90C64400B10594 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDD065F1AABF93E00379C17 /* libstdc++.dylib */; };
 		A0EDFCC11B90C75900B10594 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3DC1B84E851003CCB34 /* Reachability.m */; };
-		A0EE8C571BB3E87600C5DAC3 /* PgySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EE8C551BB3E87600C5DAC3 /* PgySDK.framework */; settings = {ASSET_TAGS = (); }; };
-		A0EE8C581BB3E87600C5DAC3 /* PgyUpdate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EE8C561BB3E87600C5DAC3 /* PgyUpdate.framework */; settings = {ASSET_TAGS = (); }; };
 		A0EE8C5A1BB3E89600C5DAC3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EE8C591BB3E89600C5DAC3 /* OpenGLES.framework */; };
 		A0EE8C5C1BB3E93300C5DAC3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EE8C5B1BB3E93300C5DAC3 /* AudioToolbox.framework */; };
 		A0EE8C5E1BB3E93D00C5DAC3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EE8C5D1BB3E93D00C5DAC3 /* AVFoundation.framework */; };
@@ -387,6 +387,8 @@
 		A089A9111B9BCBED00291EC2 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		A089A9121B9BCBED00291EC2 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		A089A9131B9BCBED00291EC2 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		A095D8321BCB884500ED3DFD /* PgySDk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PgySDk.framework; sourceTree = "<group>"; };
+		A095D8331BCB884500ED3DFD /* PgyUpdate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PgyUpdate.framework; sourceTree = "<group>"; };
 		A0994E5F1BC4CF9500D45845 /* SYEmojiCharacters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYEmojiCharacters.h; sourceTree = "<group>"; };
 		A0994E601BC4CF9500D45845 /* SYEmojiCharacters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYEmojiCharacters.m; sourceTree = "<group>"; };
 		A0994E611BC4CF9500D45845 /* SYEmojiPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYEmojiPopover.h; sourceTree = "<group>"; };
@@ -463,8 +465,6 @@
 		A0EDFCBA1B90C61900B10594 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		A0EDFCBC1B90C62100B10594 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		A0EDFCBE1B90C63400B10594 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
-		A0EE8C551BB3E87600C5DAC3 /* PgySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PgySDK.framework; sourceTree = "<group>"; };
-		A0EE8C561BB3E87600C5DAC3 /* PgyUpdate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PgyUpdate.framework; sourceTree = "<group>"; };
 		A0EE8C591BB3E89600C5DAC3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		A0EE8C5B1BB3E93300C5DAC3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A0EE8C5D1BB3E93D00C5DAC3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -670,11 +670,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A095D8341BCB884500ED3DFD /* PgySDk.framework in Frameworks */,
 				A0EE8C5E1BB3E93D00C5DAC3 /* AVFoundation.framework in Frameworks */,
 				A0EE8C5C1BB3E93300C5DAC3 /* AudioToolbox.framework in Frameworks */,
 				A0EE8C5A1BB3E89600C5DAC3 /* OpenGLES.framework in Frameworks */,
 				A0EDFCBB1B90C61900B10594 /* MobileCoreServices.framework in Frameworks */,
 				A0D102751B84F750006B0E4E /* TencentOpenAPI.framework in Frameworks */,
+				A095D8351BCB884500ED3DFD /* PgyUpdate.framework in Frameworks */,
 				A089A9141B9BCBED00291EC2 /* libWeChatSDK.a in Frameworks */,
 				A0D1025F1B84EF99006B0E4E /* Bugly.framework in Frameworks */,
 				A0D102681B84EFAD006B0E4E /* WebP.framework in Frameworks */,
@@ -687,8 +689,6 @@
 				A04842F81B99F54B0032E927 /* libsqlite3.0.dylib in Frameworks */,
 				AEDD065C1AABF90B00379C17 /* libiconv.dylib in Frameworks */,
 				A04842F71B99F5360032E927 /* libc++.dylib in Frameworks */,
-				A0EE8C581BB3E87600C5DAC3 /* PgyUpdate.framework in Frameworks */,
-				A0EE8C571BB3E87600C5DAC3 /* PgySDK.framework in Frameworks */,
 				A0EDFCC01B90C64400B10594 /* libstdc++.dylib in Frameworks */,
 				A0EDFCBF1B90C63400B10594 /* libstdc++.6.dylib in Frameworks */,
 				A0EDFCBD1B90C62100B10594 /* libxml2.dylib in Frameworks */,
@@ -893,20 +893,10 @@
 			path = Headers;
 			sourceTree = "<group>";
 		};
-		A0EE8C541BB3E86300C5DAC3 /* Pgyer */ = {
-			isa = PBXGroup;
-			children = (
-				A0EE8C551BB3E87600C5DAC3 /* PgySDK.framework */,
-				A0EE8C561BB3E87600C5DAC3 /* PgyUpdate.framework */,
-			);
-			name = Pgyer;
-			sourceTree = "<group>";
-		};
 		A0F7D3A51B84E851003CCB34 /* External */ = {
 			isa = PBXGroup;
 			children = (
 				A0994E5E1BC4CF9500D45845 /* SYEmojiPopover */,
-				A0EE8C541BB3E86300C5DAC3 /* Pgyer */,
 				A03010361BABC6AA0041E2CF /* QBImagePicker */,
 				A07115CE1BA6B109002C1270 /* SZTextView */,
 				A04842EB1B9916980032E927 /* WeChatSDK_1.5 */,
@@ -1343,6 +1333,8 @@
 		F3D9C90B14CD662C469ECA13 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A095D8321BCB884500ED3DFD /* PgySDk.framework */,
+				A095D8331BCB884500ED3DFD /* PgyUpdate.framework */,
 				A0EE8C5D1BB3E93D00C5DAC3 /* AVFoundation.framework */,
 				A0EE8C5B1BB3E93300C5DAC3 /* AudioToolbox.framework */,
 				A0EE8C591BB3E89600C5DAC3 /* OpenGLES.framework */,
