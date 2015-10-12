@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface MessageListViewController : UITableViewController
+#import "MSSuperViewController.h"
+@interface MessageListViewController : MSSuperViewController
 
 @end

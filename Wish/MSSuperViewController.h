@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "FetchCenter.h"
 @import CoreData;
-@interface MSSuperViewController : UIViewController <FetchCenterDelegate,NSFetchedResultsControllerDelegate>
+@interface MSSuperViewController : UIViewController <FetchCenterDelegate,NSFetchedResultsControllerDelegate>{
+    @protected
+    NSFetchRequest *_tableFetchRequest; //让子类可以access实例变量
+}
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 
 

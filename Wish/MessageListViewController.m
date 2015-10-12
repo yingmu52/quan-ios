@@ -14,21 +14,11 @@
 #import "UIImageView+WebCache.h"
 #import "FeedDetailViewController.h"
 
-@interface MessageListViewController () <FetchCenterDelegate,NSFetchedResultsControllerDelegate>
-@property (nonatomic,strong) FetchCenter *fetchCenter;
-@property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
+@interface MessageListViewController ()
+//@property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @end
 
 @implementation MessageListViewController
-
-
-- (FetchCenter *)fetchCenter{
-    if (!_fetchCenter){
-        _fetchCenter = [[FetchCenter alloc] init];
-        _fetchCenter.delegate = self;
-    }
-    return _fetchCenter;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -58,7 +48,7 @@
                                            frame:frame];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:deleteBtn];
-    self.navigationItem.rightBarButtonItem.enabled = self.fetchedRC.fetchedObjects.count > 0;
+    self.navigationItem.rightBarButtonItem.enabled = self.tableFetchedRC.fetchedObjects.count > 0;
 }
 
 #pragma mark - clear all message 
@@ -74,34 +64,28 @@
 
 - (void)didFinishClearingAllMessages{
     NSManagedObjectContext *context = [AppDelegate getContext];
-    for (Message *message in self.fetchedRC.fetchedObjects) {
+    for (Message *message in self.tableFetchedRC.fetchedObjects) {
         [context deleteObject:message];
     }
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
 }
-#pragma mark - Table view data source
+#pragma mark - Table view 
 
 #define IS_IPHONE5 (([[UIScreen mainScreen] bounds].size.height - 568.0f) >= 0)
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (IS_IPHONE5){
-        return 140.0f/1136 * self.tableView.frame.size.height;
-    }else{
-        //eariler
-        return 150.0f/640 * self.tableView.frame.size.width;
-    }
-
+    return 75.0f;
 }
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.fetchedRC.fetchedObjects.count;
-}
+//
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+//    return self.fetchedRC.fetchedObjects.count;
+//}
 
 
 - (MessageCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MessageCell" forIndexPath:indexPath];
     
-    Message *message = [self.fetchedRC objectAtIndexPath:indexPath];
+    Message *message = [self.tableFetchedRC objectAtIndexPath:indexPath];
     
     [cell.profilePictureImageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:message.owner.headUrl size:FetchCenterImageSize100]];
     [cell.feedImageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:message.picurl size:FetchCenterImageSize100]];
@@ -116,8 +100,8 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"yyyy-MM-dd HH:mm";
     cell.dateLabel.text = [formatter stringFromDate:message.createTime];
-
-//    cell.backgroundColor = message.isRead.boolValue ? [self normalColor] : [self highlightColor];
+    
+    //    cell.backgroundColor = message.isRead.boolValue ? [self normalColor] : [self highlightColor];
     return cell;
 }
 
@@ -126,9 +110,8 @@
 }
 - (UIColor *)highlightColor{
     return [SystemUtil colorFromHexString:@"#E7F0ED"];
-
+    
 }
-#pragma mark - Table View Delegate 
 
 - (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -145,7 +128,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    Message *message = [self.fetchedRC objectAtIndexPath:indexPath];
+    Message *message = [self.tableFetchedRC objectAtIndexPath:indexPath];
     message.isRead = @(YES);
     [self performSegueWithIdentifier:@"showFeedDetailFromMessage" sender:message.feedsId];
 }
@@ -157,74 +140,21 @@
     self.tabBarController.tabBar.hidden = YES;
 }
 
-#pragma mark - NSFetchedResultsController Delegate 
+#pragma mark - Override Methods
 
-- (NSFetchedResultsController *)fetchedRC
-{
-    if (!_fetchedRC){
-        
-        //do fetchrequest
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Message"];
-        request.predicate = [NSPredicate predicateWithFormat:@"targetOwnerId = %@",[User uid]];
-        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createTime" ascending:NO]];
-        [request setFetchBatchSize:3];
-        
-        NSFetchedResultsController *newFRC =
-        [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                            managedObjectContext:[AppDelegate getContext]
-                                              sectionNameKeyPath:nil
-                                                       cacheName:nil];
-        self.fetchedRC = newFRC;
-        _fetchedRC.delegate = self;
-        NSError *error;
-        [_fetchedRC performFetch:&error];
-        
+- (NSFetchRequest *)tableFetchRequest{
+    if (!_tableFetchRequest) {
+        _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Message"];
+        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"targetOwnerId = %@",[User uid]];
+        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createTime" ascending:NO]];
+        [_tableFetchRequest setFetchBatchSize:3];
     }
-    return _fetchedRC;
+    return _tableFetchRequest;
 }
 
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-{
-    [self.tableView beginUpdates];
-}
-
-- (void)controller:(NSFetchedResultsController *)controller
-   didChangeObject:(id)anObject
-       atIndexPath:(NSIndexPath *)indexPath
-     forChangeType:(NSFetchedResultsChangeType)type
-      newIndexPath:(NSIndexPath *)newIndexPath
-{
-    switch(type)
-    {
-        case NSFetchedResultsChangeInsert:
-            [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
-                                  withRowAnimation:UITableViewRowAnimationNone];
-            NSLog(@"Message inserted");
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath]
-                                  withRowAnimation:UITableViewRowAnimationAutomatic];
-            NSLog(@"Message deleted");
-            break;
-            
-        case NSFetchedResultsChangeUpdate:
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath]
-                                  withRowAnimation:UITableViewRowAnimationNone];
-            NSLog(@"Message updated");
-            break;
-        default:
-            break;
-    }
-    
-}
-
-
-- (void)controllerDidChangeContent:
-(NSFetchedResultsController *)controller
-{
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
+    [super controllerDidChangeContent:controller];
     self.navigationItem.rightBarButtonItem.enabled = controller.fetchedObjects.count > 0;
-    [self.tableView endUpdates];
 }
 
 
