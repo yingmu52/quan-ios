@@ -82,6 +82,8 @@
     self.layer.masksToBounds = NO;
     self.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
 
+    //当同一个控制器有多个scrollView实例时，需要保证其中的一个实例scrollToTop为YES，其它为NO，这样才不会干扰轻点状态栏返回顶部这个操作
+    self.collectionView.scrollsToTop = NO;
 }
 
 
