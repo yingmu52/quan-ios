@@ -302,7 +302,7 @@
         cell.pictureCountLabel.hidden = YES;
     }
     
-    [[SDWebImageManager sharedManager] cancelAll];
+//    [[SDWebImageManager sharedManager] cancelAll];
     NSURL *imageUrl = [self.fetchCenter urlWithImageID:feed.imageId size:FetchCenterImageSize800];
     [cell.photoView showImageWithImageUrl:imageUrl];
     return cell;
