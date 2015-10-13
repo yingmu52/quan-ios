@@ -106,7 +106,9 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
 
 - (TXYUploadManager *)uploadManager{
     if (!_uploadManager) {
-        _uploadManager = [[TXYUploadManager alloc] initWithPersistenceId:@"QCFileUpload"];
+        _uploadManager = [[TXYUploadManager alloc] initWithCloudType:TXYCloudTypeForImage
+                                                       persistenceId:@"QCFileUpload"
+                                                               appId:YOUTU_APP_ID];
     }
     return _uploadManager;
 }
@@ -621,17 +623,19 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
 
     NSAssert(imageData.length, @"0 size image");
     if ([imageData writeToFile:filePath atomically:YES]) {
+        
         //1.构造TXYPhotoUploadTask上传任务,
         NSString *fileId = [NSString stringWithFormat:@"%@%@",IMAGE_PREFIX,uuidString];//自定义图像id
+        NSString *signature = [User youtuSignature];
+        NSAssert(![signature isEqualToString:@""], @"Invalid Youtu Signature");
         TXYPhotoUploadTask *uploadPhotoTask = [[TXYPhotoUploadTask alloc] initWithPath:filePath
-                                                                           expiredDate:0
-                                                                            msgContext:@"picture upload successed from iOS"
+                                                                                  sign:[User youtuSignature]
                                                                                 bucket:@"shier"
+                                                                           expiredDate:3600
+                                                                            msgContext:@"picture upload successed from iOS"
                                                                                 fileId:fileId];
-
         //2.调用TXYUploadManager的upload接口
         [self.uploadManager upload:uploadPhotoTask
-                              sign:nil
                           complete:^(TXYTaskRsp *resp, NSDictionary *context)
          {
              //retCode大于等于0，表示上传成功

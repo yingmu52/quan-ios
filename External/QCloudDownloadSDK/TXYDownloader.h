@@ -20,6 +20,18 @@ typedef NS_ENUM(NSInteger, TXYDownloaderParam) {
 };
 
 /*!
+ @enum TXYDownloadType enum
+ @abstract 下载的类型.
+ */
+typedef NS_ENUM(NSInteger, TXYDownloadType) {
+    /*! 下载图片  */
+    TXYDownloadTypePhoto,
+    /*! 下载视频 */
+    TXYDownloadTypeVideo,
+    /*! 下载文件 */
+    TXYDownloadTypeFile,
+};
+/*!
  * 腾讯云下载接口
  */
 
@@ -59,14 +71,14 @@ typedef NS_ENUM(NSInteger, TXYDownloaderParam) {
  * @param persistenceId 值不同表示缓存目录不同，为nil内部会自动创建一个缓存目录统一管理
  * @return TXYDownloader实例
  */
-+ (instancetype)sharedInstanceWithPersistenceId:(NSString *)persistenceId;
++ (instancetype)sharedInstanceWithPersistenceId:(NSString *)persistenceId type:(TXYDownloadType)type;
 
 /*!
  * @brief TXYDownloader构造函数
  * @param persistenceId 值不同表示缓存目录不同，为nil内部会自动创建一个缓存目录统一管理
  * @return TXYDownloader实例
  */
-- (instancetype)initWithPersistenceId:(NSString *)persistenceId;
+- (instancetype)initWithPersistenceId:(NSString *)persistenceId type:(TXYDownloadType)type;
 
 /*!
  * @brief 指定下载是否支持断点续传

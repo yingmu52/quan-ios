@@ -194,9 +194,9 @@
 - (void)didfinishGettingSignature{
     //the delegate only gets call when signature returns successfully
     //上传需要注册appId，应用级sign，userId根据用户需要选填
-    [TXYUploadManager authorize:YOUTU_APP_ID userId:nil sign:[User youtuSignature]];
+//    [TXYUploadManager authorize:YOUTU_APP_ID userId:nil sign:[User youtuSignature]];
     //下载需要注册appId，sign信息由用户填入url参数中
-    [TXYDownloader authorize:YOUTU_APP_ID userId:nil];
+//    [TXYDownloader authorize:YOUTU_APP_ID userId:nil];
     //    NSLog(@"***************************************\n\n%@\n\n",[User youtuSignature]);]
 }
 

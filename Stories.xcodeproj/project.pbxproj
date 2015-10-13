@@ -122,15 +122,13 @@
 		A0D37C611B8781D900581EDE /* NewsPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D37C5F1B8781D900581EDE /* NewsPageViewController.m */; };
 		A0EA22011BA53BF400A83A7A /* ImagePreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0EA22001BA53BF400A83A7A /* ImagePreviewController.m */; };
 		A0EA22021BA53BF400A83A7A /* ImagePreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0EA22001BA53BF400A83A7A /* ImagePreviewController.m */; };
-		A0EDFCB61B90C5F100B10594 /* libTXYDownloader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EDFCB01B90C5F100B10594 /* libTXYDownloader.a */; };
-		A0EDFCB71B90C5F100B10594 /* libTXYDownloader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EDFCB01B90C5F100B10594 /* libTXYDownloader.a */; };
-		A0EDFCB81B90C5F100B10594 /* libTXYUploader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EDFCB51B90C5F100B10594 /* libTXYUploader.a */; };
-		A0EDFCB91B90C5F100B10594 /* libTXYUploader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EDFCB51B90C5F100B10594 /* libTXYUploader.a */; };
 		A0EDFCBB1B90C61900B10594 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EDFCBA1B90C61900B10594 /* MobileCoreServices.framework */; };
 		A0EDFCBD1B90C62100B10594 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EDFCBC1B90C62100B10594 /* libxml2.dylib */; };
 		A0EDFCBF1B90C63400B10594 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EDFCBE1B90C63400B10594 /* libstdc++.6.dylib */; };
 		A0EDFCC01B90C64400B10594 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDD065F1AABF93E00379C17 /* libstdc++.dylib */; };
 		A0EDFCC11B90C75900B10594 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3DC1B84E851003CCB34 /* Reachability.m */; };
+		A0EE65CA1BCC84DF002CC49B /* libTXYDownloader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EE65C41BCC84DF002CC49B /* libTXYDownloader.a */; settings = {ASSET_TAGS = (); }; };
+		A0EE65CB1BCC84DF002CC49B /* libTXYUploader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EE65C71BCC84DF002CC49B /* libTXYUploader.a */; settings = {ASSET_TAGS = (); }; };
 		A0EE8C5A1BB3E89600C5DAC3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EE8C591BB3E89600C5DAC3 /* OpenGLES.framework */; };
 		A0EE8C5C1BB3E93300C5DAC3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EE8C5B1BB3E93300C5DAC3 /* AudioToolbox.framework */; };
 		A0EE8C5E1BB3E93D00C5DAC3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EE8C5D1BB3E93D00C5DAC3 /* AVFoundation.framework */; };
@@ -457,14 +455,14 @@
 		A0D37C5F1B8781D900581EDE /* NewsPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsPageViewController.m; sourceTree = "<group>"; };
 		A0EA21FF1BA53BF400A83A7A /* ImagePreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePreviewController.h; sourceTree = "<group>"; };
 		A0EA22001BA53BF400A83A7A /* ImagePreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePreviewController.m; sourceTree = "<group>"; };
-		A0EDFCAF1B90C5F100B10594 /* TXYDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXYDownloader.h; sourceTree = "<group>"; };
-		A0EDFCB01B90C5F100B10594 /* libTXYDownloader.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTXYDownloader.a; sourceTree = "<group>"; };
-		A0EDFCB31B90C5F100B10594 /* TXYBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXYBase.h; sourceTree = "<group>"; };
-		A0EDFCB41B90C5F100B10594 /* TXYUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXYUploadManager.h; sourceTree = "<group>"; };
-		A0EDFCB51B90C5F100B10594 /* libTXYUploader.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTXYUploader.a; sourceTree = "<group>"; };
 		A0EDFCBA1B90C61900B10594 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		A0EDFCBC1B90C62100B10594 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		A0EDFCBE1B90C63400B10594 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
+		A0EE65C41BCC84DF002CC49B /* libTXYDownloader.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTXYDownloader.a; sourceTree = "<group>"; };
+		A0EE65C51BCC84DF002CC49B /* TXYDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXYDownloader.h; sourceTree = "<group>"; };
+		A0EE65C71BCC84DF002CC49B /* libTXYUploader.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTXYUploader.a; sourceTree = "<group>"; };
+		A0EE65C81BCC84DF002CC49B /* TXYBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXYBase.h; sourceTree = "<group>"; };
+		A0EE65C91BCC84DF002CC49B /* TXYUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXYUploadManager.h; sourceTree = "<group>"; };
 		A0EE8C591BB3E89600C5DAC3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		A0EE8C5B1BB3E93300C5DAC3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A0EE8C5D1BB3E93D00C5DAC3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -676,12 +674,11 @@
 				A0EE8C5A1BB3E89600C5DAC3 /* OpenGLES.framework in Frameworks */,
 				A0EDFCBB1B90C61900B10594 /* MobileCoreServices.framework in Frameworks */,
 				A0D102751B84F750006B0E4E /* TencentOpenAPI.framework in Frameworks */,
+				A0EE65CA1BCC84DF002CC49B /* libTXYDownloader.a in Frameworks */,
 				A095D8351BCB884500ED3DFD /* PgyUpdate.framework in Frameworks */,
 				A089A9141B9BCBED00291EC2 /* libWeChatSDK.a in Frameworks */,
 				A0D1025F1B84EF99006B0E4E /* Bugly.framework in Frameworks */,
 				A0D102681B84EFAD006B0E4E /* WebP.framework in Frameworks */,
-				A0EDFCB61B90C5F100B10594 /* libTXYDownloader.a in Frameworks */,
-				A0EDFCB81B90C5F100B10594 /* libTXYUploader.a in Frameworks */,
 				AEDD065A1AABF90400379C17 /* Security.framework in Frameworks */,
 				AEDD06581AABF8FB00379C17 /* CoreTelephony.framework in Frameworks */,
 				AEDD06561AABF8F600379C17 /* CoreGraphics.framework in Frameworks */,
@@ -693,6 +690,7 @@
 				A0EDFCBF1B90C63400B10594 /* libstdc++.6.dylib in Frameworks */,
 				A0EDFCBD1B90C62100B10594 /* libxml2.dylib in Frameworks */,
 				A0D102701B84F6BA006B0E4E /* libz.dylib in Frameworks */,
+				A0EE65CB1BCC84DF002CC49B /* libTXYUploader.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -700,10 +698,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0EDFCB71B90C5F100B10594 /* libTXYDownloader.a in Frameworks */,
 				A0D102691B84EFAD006B0E4E /* WebP.framework in Frameworks */,
 				A089A9151B9BCBED00291EC2 /* libWeChatSDK.a in Frameworks */,
-				A0EDFCB91B90C5F100B10594 /* libTXYUploader.a in Frameworks */,
 				A0D102761B84F750006B0E4E /* TencentOpenAPI.framework in Frameworks */,
 				A0D102601B84EF99006B0E4E /* Bugly.framework in Frameworks */,
 			);
@@ -858,50 +854,34 @@
 			name = News;
 			sourceTree = "<group>";
 		};
-		A0EDFCAD1B90C5F100B10594 /* QCloudDownloadSDK */ = {
+		A0EE65C31BCC84DF002CC49B /* QCloudDownloadSDK */ = {
 			isa = PBXGroup;
 			children = (
-				A0EDFCAE1B90C5F100B10594 /* Headers */,
-				A0EDFCB01B90C5F100B10594 /* libTXYDownloader.a */,
+				A0EE65C41BCC84DF002CC49B /* libTXYDownloader.a */,
+				A0EE65C51BCC84DF002CC49B /* TXYDownloader.h */,
 			);
 			path = QCloudDownloadSDK;
 			sourceTree = "<group>";
 		};
-		A0EDFCAE1B90C5F100B10594 /* Headers */ = {
+		A0EE65C61BCC84DF002CC49B /* QCloudUploadSDK */ = {
 			isa = PBXGroup;
 			children = (
-				A0EDFCAF1B90C5F100B10594 /* TXYDownloader.h */,
-			);
-			path = Headers;
-			sourceTree = "<group>";
-		};
-		A0EDFCB11B90C5F100B10594 /* QCloudUploadSDK */ = {
-			isa = PBXGroup;
-			children = (
-				A0EDFCB21B90C5F100B10594 /* Headers */,
-				A0EDFCB51B90C5F100B10594 /* libTXYUploader.a */,
+				A0EE65C71BCC84DF002CC49B /* libTXYUploader.a */,
+				A0EE65C81BCC84DF002CC49B /* TXYBase.h */,
+				A0EE65C91BCC84DF002CC49B /* TXYUploadManager.h */,
 			);
 			path = QCloudUploadSDK;
-			sourceTree = "<group>";
-		};
-		A0EDFCB21B90C5F100B10594 /* Headers */ = {
-			isa = PBXGroup;
-			children = (
-				A0EDFCB31B90C5F100B10594 /* TXYBase.h */,
-				A0EDFCB41B90C5F100B10594 /* TXYUploadManager.h */,
-			);
-			path = Headers;
 			sourceTree = "<group>";
 		};
 		A0F7D3A51B84E851003CCB34 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				A0EE65C31BCC84DF002CC49B /* QCloudDownloadSDK */,
+				A0EE65C61BCC84DF002CC49B /* QCloudUploadSDK */,
 				A0994E5E1BC4CF9500D45845 /* SYEmojiPopover */,
 				A03010361BABC6AA0041E2CF /* QBImagePicker */,
 				A07115CE1BA6B109002C1270 /* SZTextView */,
 				A04842EB1B9916980032E927 /* WeChatSDK_1.5 */,
-				A0EDFCAD1B90C5F100B10594 /* QCloudDownloadSDK */,
-				A0EDFCB11B90C5F100B10594 /* QCloudUploadSDK */,
 				A0B8C7FF1B857F22009C4572 /* HMSegmentedControl */,
 				A0D1023B1B84ECDF006B0E4E /* NavBar */,
 				A0D101F51B84EB6A006B0E4E /* SDWebImage */,
