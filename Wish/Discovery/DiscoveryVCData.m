@@ -96,12 +96,13 @@
         dispatch_async(compareList, ^{
             for (Plan *plan in self.fetchedRC.fetchedObjects){
                 if (![plans containsObject:plan]){
-                    if ([plan isDeletable]){
-                        [[AppDelegate getContext] deleteObject:plan];
-                        NSLog(@"Removing plan %@ : %@",plan.planId,plan.planTitle);
-                    }else{
-                        plan.discoverIndex = nil;
-                    }
+                    plan.discoverIndex = nil;
+//                    if ([plan isDeletable]){
+//                        [[AppDelegate getContext] deleteObject:plan];
+//                        NSLog(@"Removing plan %@ : %@",plan.planId,plan.planTitle);
+//                    }else{
+//                        plan.discoverIndex = nil;
+//                    }
                 }
             }
         });
