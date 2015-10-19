@@ -73,7 +73,8 @@ typedef enum {
 - (void)didfinishGettingSignature;
 @end
 
-typedef void(^FetchCenterGetRequestPlanCreationCompleted)(void); //创建事件完成 (成功或失败）
+typedef void(^FetchCenterGetRequestPlanCreationCompleted)(void); //创建事件完成
+typedef void(^FetchCenterGetRequestGetCircleListCompleted)(NSArray *circles); //请求圈子列表完成
 
 @interface FetchCenter : NSObject
 @property (nonatomic,weak) id <FetchCenterDelegate>delegate;
@@ -81,6 +82,9 @@ typedef void(^FetchCenterGetRequestPlanCreationCompleted)(void); //创建事件�
 @property (nonatomic,strong) TXYUploadManager *uploadManager;
 
 + (NSString *)requestLogFilePath;
+
+#pragma mark - 圈子
+- (void)getCircleList:(FetchCenterGetRequestGetCircleListCompleted)completionBlock;
 
 #pragma mark - 消息
 - (void)clearAllMessages;

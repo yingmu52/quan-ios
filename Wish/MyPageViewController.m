@@ -271,15 +271,38 @@
                 [self presentViewController:alert animated:YES completion:nil];
             }];
             
-            
+            //获取请求日志
             UIAlertAction *getRequestLog = [UIAlertAction actionWithTitle:@"获取请求日志" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 [self performSegueWithIdentifier:@"showLocalRequestLog" sender:nil];
             }];
             
+            //FIXME: 切换圈子 (实现方式需要改进）
+            UIAlertAction *switchCircle = [UIAlertAction actionWithTitle:@"切换圈子"
+                                                                   style:UIAlertActionStyleDefault
+                                                                 handler:^(UIAlertAction * _Nonnull action)
+            {
+                [self.fetchCenter getCircleList:^(NSArray *circles) {
+                    UIAlertController *circleList = [UIAlertController alertControllerWithTitle:@"选择想要切换的圈子"
+                                                                                        message:nil
+                                                                                 preferredStyle:UIAlertControllerStyleActionSheet];
+                    for (NSDictionary *info in circles){
+                        UIAlertAction *action = [UIAlertAction actionWithTitle:info[@"name"]
+                                                                         style:UIAlertActionStyleDefault
+                                                                       handler:^(UIAlertAction * _Nonnull action)
+                        {
+                            NSLog(@"%@",info);
+                        }];
+                        [circleList addAction:action];
+                    }
+                    [self presentViewController:circleList animated:YES completion:nil];
+                }];
+                
+            }];
             [actionSheet addAction:testEnv];
             [actionSheet addAction:proEnv];
             [actionSheet addAction:getUserInfo];
             [actionSheet addAction:getRequestLog];
+            [actionSheet addAction:switchCircle];
             [actionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
             [self presentViewController:actionSheet animated:YES completion:nil];
             

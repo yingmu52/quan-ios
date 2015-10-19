@@ -53,6 +53,9 @@
 #define GET_DISCOVER_LIST @"splan_find_planlist.php"
 
 
+#define TOOL @"tool/"
+#define GET_CIRCLE_LIST @"tool_quan_get.php"
+
 #define MESSAGE @"message/"
 #define GET_MESSAGE_LIST @"splan_message_getlist.php"
 #define GET_MESSAGE_NOTIFICATION @"splan_count_get.php"
@@ -101,6 +104,18 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
 @property (nonatomic,strong) NSDictionary *backendErrorCode;
 @end
 @implementation FetchCenter
+
+#pragma mark - 圈子
+- (void)getCircleList:(FetchCenterGetRequestGetCircleListCompleted)completionBlock{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,TOOL,GET_CIRCLE_LIST];
+    [self getRequest:rqtStr
+           parameter:@{@"key":[@"123$%^abc" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]}
+    includeArguments:NO
+          completion:^(NSDictionary *responseJson) {
+              NSArray *circles = [responseJson valueForKey:@"data"];
+              completionBlock(circles);
+          } failure:nil];
+}
 
 #pragma mark - 万象优图
 
@@ -169,7 +184,7 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
                            @"content":[text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                            @"commentTo": (owner ? owner.ownerId : @"")};
     
-    [self getRequest:rqtStr parameter:args completion:^(NSDictionary *responseJson) {
+    [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
         //increase comment count by one
         NSString *commentId = [responseJson valueForKeyPath:@"data.id"];
         
@@ -427,7 +442,7 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
     NSString *baseUrl = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,CREATE_PLAN];
     NSDictionary *args = @{@"title":[plan.planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                            @"private":plan.isPrivate};
-    [self getRequest:baseUrl parameter:args completion:^(NSDictionary *json) {
+    [self getRequest:baseUrl parameter:args includeArguments:YES completion:^(NSDictionary *json) {
         NSString *fetchedPlanId = [json valueForKeyPath:@"data.id"];
         NSString *bgString = [json valueForKeyPath:@"data.backGroudPic"];
         if (fetchedPlanId && bgString) {
@@ -537,26 +552,30 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request
                                             completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                   {
-
-                                      //递归过滤Json里含带的Null数据
-                                      NSDictionary *rawJson = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-                                      
-                                      NSDictionary *responseJson = [self recursiveNullRemove:rawJson];
-                                      NSDictionary *timeOutDict = @{@"ret":@"Request Timeout",@"msg":@"Fail sending request to server"};
-                                      NSDictionary *responseInfo = responseJson ? responseJson : timeOutDict;
-                                      
-                                      if (!error && ![responseJson[@"ret"] integerValue]){ //successed "ret" = 0;
-                                          [self didFinishSendingGetRequest:responseJson operation:op entity:obj];
-                                      }else{
-                                          dispatch_main_async_safe((^{
-                                              [self alertWithBackendErrorCode:@([responseJson[@"ret"] integerValue])];
-                                              if ([self.delegate respondsToSelector:@selector(didFailSendingRequestWithInfo:entity:)]){
-                                                  [self.delegate didFailSendingRequestWithInfo:responseInfo entity:obj];
-                                                  NSLog(@"Fail Get Request :%@\n op: %d \n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
-                                                        ,rqtStr,op,baseURL,dict,responseInfo,error);
-                                              }
-                                          }));
-                                          [self appendRequest:request andResponse:responseInfo];
+                                      @try {
+                                          //递归过滤Json里含带的Null数据
+                                          NSDictionary *rawJson = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                                          
+                                          NSDictionary *responseJson = [self recursiveNullRemove:rawJson];
+                                          NSDictionary *timeOutDict = @{@"ret":@"Request Timeout",@"msg":@"Fail sending request to server"};
+                                          NSDictionary *responseInfo = responseJson ? responseJson : timeOutDict;
+                                          
+                                          if (!error && ![responseJson[@"ret"] integerValue]){ //successed "ret" = 0;
+                                              [self didFinishSendingGetRequest:responseJson operation:op entity:obj];
+                                          }else{
+                                              dispatch_main_async_safe((^{
+                                                  [self alertWithBackendErrorCode:@([responseJson[@"ret"] integerValue])];
+                                                  if ([self.delegate respondsToSelector:@selector(didFailSendingRequestWithInfo:entity:)]){
+                                                      [self.delegate didFailSendingRequestWithInfo:responseInfo entity:obj];
+                                                      NSLog(@"Fail Get Request :%@\n op: %d \n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
+                                                            ,rqtStr,op,baseURL,dict,responseInfo,error);
+                                                  }
+                                              }));
+                                              [self appendRequest:request andResponse:responseInfo];
+                                          }
+                                      }
+                                      @catch (NSException *exception) {
+                                          NSLog(@"%@",exception);
                                       }
                                   }];
     [task resume];
@@ -695,6 +714,7 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
  */
 - (void)getRequest:(NSString *)baseURL
          parameter:(NSDictionary *)dict
+  includeArguments:(BOOL)shouldInclude //针对工具类的CGI不需要加统一参数
         completion:(FetchCenterGetRequestCompletionBlock)completionBlock
            failure:(FetchCenterGetRequestFailBlock)failureBlock{
     
@@ -703,7 +723,7 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
     
     //设置请求统一参数
     baseURL = [baseURL stringByAppendingString:@"?"];
-    baseURL = [self addGeneralArgumentsForBaseURL:baseURL];
+    baseURL = shouldInclude ? [self addGeneralArgumentsForBaseURL:baseURL] : baseURL;
     
     //拼接参数
     NSString *rqtStr = [baseURL stringByAppendingString:[self argumentStringWithDictionary:dict]];
@@ -717,28 +737,33 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
                                             completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                   {
                                       //递归过滤Json里含带的Null数据
-                                      NSDictionary *rawJson = [NSJSONSerialization JSONObjectWithData:data
-                                                                                              options:NSJSONReadingAllowFragments
-                                                                                                error:nil];
-                                      NSDictionary *responseJson = [self recursiveNullRemove:rawJson];
-                                      
-                                      if (responseJson) {
-                                          dispatch_main_async_safe(^{
-                                              if (!error && ![responseJson[@"ret"] integerValue]){ //成功
-                                                  completionBlock(responseJson);
-                                              }else{ //失败
-                                                  
-                                                  //在委托中跳出后台的提示
-                                                  [self alertWithBackendErrorCode:@([responseJson[@"ret"] integerValue])];
-                                                  
-                                                  //假失败写入请求日志
-                                                  [self appendRequest:request andResponse:responseJson];
-                                                  
-                                                  failureBlock(responseJson,error);
-                                                  NSLog(@"Fail Get Request :%@\n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
-                                                        ,rqtStr,baseURL,dict,responseJson,error);
-                                              }
-                                          });
+                                      @try {
+                                          NSDictionary *rawJson = [NSJSONSerialization JSONObjectWithData:data
+                                                                                                  options:NSJSONReadingAllowFragments
+                                                                                                    error:nil];
+                                          NSDictionary *responseJson = [self recursiveNullRemove:rawJson];
+                                          
+                                          if (responseJson) {
+                                              dispatch_main_async_safe(^{
+                                                  if (!error && ![responseJson[@"ret"] integerValue]){ //成功
+                                                      completionBlock(responseJson);
+                                                  }else{ //失败
+                                                      
+                                                      //在委托中跳出后台的提示
+                                                      [self alertWithBackendErrorCode:@([responseJson[@"ret"] integerValue])];
+                                                      
+                                                      //假失败写入请求日志
+                                                      [self appendRequest:request andResponse:responseJson];
+                                                      
+                                                      failureBlock(responseJson,error);
+                                                      NSLog(@"Fail Get Request :%@\n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
+                                                            ,rqtStr,baseURL,dict,responseJson,error);
+                                                  }
+                                              });
+                                          }
+                                      }
+                                      @catch (NSException *exception) {
+                                          NSLog(@"%@",exception);
                                       }
                                   }];
     [task resume];
