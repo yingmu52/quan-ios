@@ -302,10 +302,16 @@
         cell.pictureCountLabel.hidden = YES;
     }
     
-//    [[SDWebImageManager sharedManager] cancelAll];
     NSURL *imageUrl = [self.fetchCenter urlWithImageID:feed.imageId size:FetchCenterImageSize800];
     [cell.photoView showImageWithImageUrl:imageUrl];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView
+didEndDisplayingCell:(nonnull WishDetailCell *)cell
+forRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
+    cell.photoView.image = nil;
+    [cell.photoView sd_cancelCurrentImageLoad];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

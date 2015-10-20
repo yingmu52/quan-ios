@@ -10,6 +10,7 @@
 #import "CHTCollectionViewWaterfallLayout.h"
 #import "DiscoveryBannerCell.h"
 #import "MainTabBarController.h"
+#import "UIImageView+WebCache.h"
 @interface DiscoveryViewController () <CHTCollectionViewDelegateWaterfallLayout>
 //@property (nonatomic,strong) UIColor *navigationSeparatorColor;
 @end
@@ -85,6 +86,13 @@ static CGFloat horizontalInset = 10.0f;
         cellSize = CGSizeMake(width,556.0 * 0.5);
     }
     return cellSize;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView
+  didEndDisplayingCell:(DiscoveryCell *)cell
+    forItemAtIndexPath:(NSIndexPath *)indexPath{
+    cell.discoveryImageView.image = nil;
+    [cell.discoveryImageView sd_cancelCurrentImageLoad];
 }
 
 #pragma mark - Scroll view delegate (Add Button Animation)
