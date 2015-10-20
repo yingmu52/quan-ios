@@ -23,7 +23,7 @@
 static NSUInteger maxWordCount = 1000;
 static NSUInteger distance = 10;
 
-@interface PostFeedViewController () <FetchCenterDelegate,UICollectionViewDataSource,UICollectionViewDelegate,ImagePickerDelegate,ImagePreviewControllerDelegate>
+@interface PostFeedViewController () <FetchCenterDelegate,UICollectionViewDataSource,UICollectionViewDelegate,ImagePickerDelegate,ImagePreviewControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic,strong) UIButton *tikButton;
 @property (nonatomic,weak) IBOutlet UILabel *wordCountLabel;
 @property (nonatomic,weak) IBOutlet UICollectionView *collectionView;
@@ -230,6 +230,7 @@ static NSUInteger distance = 10;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"showWishDetailOnPlanCreation"]){
         [segue.destinationViewController setPlan:sender]; //sender is plan
+        self.navigationController.delegate = self;
     }
     if ([segue.identifier isEqualToString:@"showImagePreviewFromPostFeedDetail"]) {
         //sender : @[self.imagesForFeed,indexPath]];
@@ -238,6 +239,14 @@ static NSUInteger distance = 10;
         ipvc.assets = self.assets;
         ipvc.entryIndexPath = array.lastObject;
         ipvc.delegate = self;
+    }
+}
+
+- (void)navigationController:(UINavigationController *)navigationController
+       didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    //这个方法修复了创建事件完成后进入动态详情时，按返回又回到发布页面
+    if ([viewController isKindOfClass:[WishDetailVCOwner class]]) {
+        [navigationController setViewControllers:@[navigationController.viewControllers.firstObject,viewController] animated:NO];
     }
 }
 
