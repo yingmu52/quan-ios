@@ -10,12 +10,8 @@
 #import "PostFeedViewController.h"
 #import "EditWishViewController.h"
 #import "ImagePicker.h"
-#import "PopupView.h"
-@interface WishDetailVCOwner () <UIImagePickerControllerDelegate,UIGestureRecognizerDelegate,UINavigationControllerDelegate,ImagePickerDelegate,PopupViewDelegate>
+@interface WishDetailVCOwner () <UIImagePickerControllerDelegate,UIGestureRecognizerDelegate,UINavigationControllerDelegate,ImagePickerDelegate>
 
-//@property (nonatomic,strong) UIButton *logoButton;
-//@property (nonatomic,strong) UILabel *labelUnderLogo;
-//@property (nonatomic,strong) UIImage *capturedImage;
 @property (nonatomic,strong) UIButton *cameraButton;
 @property (nonatomic) CGFloat lastContentOffSet; // for camera animation
 @property (nonatomic,strong) ImagePicker *imagePicker;
@@ -169,17 +165,40 @@
 
 #pragma mark - wish detail cell delegate
 - (void)didPressedMoreOnCell:(WishDetailCell *)cell{
-    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
-    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    UIAlertAction *delete = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil
+                                                                         message:nil
+                                                                  preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *delete = [UIAlertAction actionWithTitle:@"删除"
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * _Nonnull action)
+    {
         NSString *popupViewTitle = [self isDeletingTheLastFeed] ?
         @"这是最后一条记录啦！\n这件事儿也会被删除哦~" : @"真的要删除这条记录吗？";
         
-        PopupView *popupView = [PopupView showPopupDeleteinFrame:window.frame
-                                                       withTitle:popupViewTitle];
-        popupView.delegate = self;
-        popupView.feed = [self.fetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
-        [window addSubview:popupView];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:popupViewTitle
+                                                                       message:nil
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定"
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction * _Nonnull action)
+        {
+            //执行删除操作
+            Feed *feed = [self.fetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
+            if (feed.feedId && feed.plan.planId && feed.imageId){
+                [self.fetchCenter deleteFeed:feed];
+            }else if (!feed.feedId){ //local feed
+                if ([self isDeletingTheLastFeed]){ // delete the last plan
+                    [self deletePlan];
+                }else{
+                    [feed deleteSelf];
+                }
+            }
+        }];
+        [alert addAction:confirm];
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
         
     }];
     [actionSheet addAction:delete];
@@ -193,29 +212,6 @@
 - (BOOL)isDeletingTheLastFeed{
     return self.fetchedRC.fetchedObjects.count == 1;
 }
-
-- (void)popupViewDidPressConfirm:(PopupView *)popupView{
-    Feed *feed = popupView.feed;
-    if (feed.feedId && feed.plan.planId && feed.imageId){
-        
-        [self.fetchCenter deleteFeed:feed];
-        
-    }else if (!feed.feedId){ //local feed
-        
-        if ([self isDeletingTheLastFeed]){ // delete the last plan
-            [self deletePlan];
-        }else{
-            [feed deleteSelf];
-        }
-    }
-    [self popupViewDidPressCancel:popupView];
-
-}
-
-- (void)popupViewDidPressCancel:(PopupView *)popupView{
-    [popupView removeFromSuperview];
-}
-
 
 - (void)deletePlan{
     //delete plan and pop back. Notice place deletion is cascade
