@@ -7,18 +7,12 @@
 //
 
 #import "WishDetailVCOwnerAchieved.h"
-#import "PopupView.h"
-@interface WishDetailVCOwnerAchieved () <PopupViewDelegate>
+@interface WishDetailVCOwnerAchieved ()
 
 @end
 
 @implementation WishDetailVCOwnerAchieved
 
-
-//- (void)viewDidLoad{
-//    [super viewDidLoad];
-//    [self setupBadageImageView];
-//}
 
 
 - (void)setUpNavigationItem{
@@ -35,20 +29,22 @@
 
 -(void)deletePlan{
 
-    UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
-    PopupView *popupView = [PopupView showPopupDeleteinFrame:keyWindow.frame];
-    popupView.delegate = self;
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"删除的事件不恢复哦！"
+                                                                   message:nil
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定"
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action)
+                              {
+                                  //执行删除操作
+                                  [self.plan deleteSelf];
+                                  [self.navigationController popViewControllerAnimated:YES];
+                              }];
+    [alert addAction:confirm];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+    
 
-    [keyWindow addSubview:popupView];
-}
-
-- (void)popupViewDidPressCancel:(PopupView *)popupView{
-    [popupView removeFromSuperview];
-}
-- (void)popupViewDidPressConfirm:(PopupView *)popupView{
-    [self.plan deleteSelf];
-    [self popupViewDidPressCancel:popupView];
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (NSString *)segueForFeed{
