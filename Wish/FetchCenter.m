@@ -55,6 +55,7 @@
 
 #define TOOL @"tool/"
 #define GET_CIRCLE_LIST @"tool_quan_get.php"
+#define SWITCH_CIRCLE @"tool_quan_man.php"
 
 #define MESSAGE @"message/"
 #define GET_MESSAGE_LIST @"splan_message_getlist.php"
@@ -106,10 +107,29 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
 @implementation FetchCenter
 
 #pragma mark - 圈子
+#define TOOLCGIKEY @"123$%^abc"
+//MARK: 切换圈子
+- (void)switchToCircle:(NSString *)circleId completion:(FetchCenterGetRequestSwithCircleCompleted)completionBlock{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,TOOL,SWITCH_CIRCLE];
+    [self getRequest:rqtStr
+           parameter:@{@"key":[TOOLCGIKEY stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                       @"id":circleId,
+                       @"manId":[User uid],
+                       @"operate":[@"add" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]}
+    includeArguments:NO
+          completion:^(NSDictionary *responseJson) {
+              NSLog(@"%@",responseJson);
+              completionBlock();
+          } failure:nil];
+
+    
+}
+
+//MARK: 获取圈子列表
 - (void)getCircleList:(FetchCenterGetRequestGetCircleListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,TOOL,GET_CIRCLE_LIST];
     [self getRequest:rqtStr
-           parameter:@{@"key":[@"123$%^abc" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]}
+           parameter:@{@"key":[TOOLCGIKEY stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]}
     includeArguments:NO
           completion:^(NSDictionary *responseJson) {
               NSArray *circles = [responseJson valueForKey:@"data"];
@@ -567,10 +587,10 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
                                                   [self alertWithBackendErrorCode:@([responseJson[@"ret"] integerValue])];
                                                   if ([self.delegate respondsToSelector:@selector(didFailSendingRequestWithInfo:entity:)]){
                                                       [self.delegate didFailSendingRequestWithInfo:responseInfo entity:obj];
-                                                      NSLog(@"Fail Get Request :%@\n op: %d \n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
-                                                            ,rqtStr,op,baseURL,dict,responseInfo,error);
                                                   }
                                               }));
+                                              NSLog(@"Fail Get Request :%@\n op: %d \n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
+                                                    ,rqtStr,op,baseURL,dict,responseInfo,error);
                                               [self appendRequest:request andResponse:responseInfo];
                                           }
                                       }
@@ -718,26 +738,26 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
         completion:(FetchCenterGetRequestCompletionBlock)completionBlock
            failure:(FetchCenterGetRequestFailBlock)failureBlock{
     
-    //检测网络
-    if (![self hasActiveInternetConnection]) return;
-    
-    //设置请求统一参数
-    baseURL = [baseURL stringByAppendingString:@"?"];
-    baseURL = shouldInclude ? [self addGeneralArgumentsForBaseURL:baseURL] : baseURL;
-    
-    //拼接参数
-    NSString *rqtStr = [baseURL stringByAppendingString:[self argumentStringWithDictionary:dict]];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:rqtStr]
-                                                           cachePolicy:NSURLRequestReloadIgnoringCacheData
-                                                       timeoutInterval:30.0];
-    request.HTTPMethod = @"GET";
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
-                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
-                                  {
-                                      //递归过滤Json里含带的Null数据
-                                      @try {
+    @try {
+        //检测网络
+        if (![self hasActiveInternetConnection]) return;
+        
+        //设置请求统一参数
+        baseURL = [baseURL stringByAppendingString:@"?"];
+        baseURL = shouldInclude ? [self addGeneralArgumentsForBaseURL:baseURL] : baseURL;
+        
+        //拼接参数
+        NSString *rqtStr = [baseURL stringByAppendingString:[self argumentStringWithDictionary:dict]];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:rqtStr]
+                                                               cachePolicy:NSURLRequestReloadIgnoringCacheData
+                                                           timeoutInterval:30.0];
+        request.HTTPMethod = @"GET";
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+        
+        NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+                                                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+                                      {
+                                          //递归过滤Json里含带的Null数据
                                           NSDictionary *rawJson = [NSJSONSerialization JSONObjectWithData:data
                                                                                                   options:NSJSONReadingAllowFragments
                                                                                                     error:nil];
@@ -761,14 +781,12 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
                                                   }
                                               });
                                           }
-                                      }
-                                      @catch (NSException *exception) {
-                                          NSLog(@"%@",exception);
-                                      }
-                                  }];
-    [task resume];
-    
-    
+                                      }];
+        [task resume];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception);
+    }
 }
 
 #pragma mark - 请求统一参数
@@ -923,9 +941,12 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
                 break;
             case FetchCenterGetOpDiscoverPlans:{
                 //stored the lastet
-                NSMutableArray *plans = [[NSMutableArray alloc] init];
+                NSMutableArray *plans = [NSMutableArray array];
                 NSArray *planList = [json valueForKeyPath:@"data.planList"];
                 NSDictionary *manList = [json valueForKeyPath:@"data.manList"];
+                NSString *title = [json valueForKeyPath:@"data.quanInfo.name"];
+
+                //缓存并更新本地事件
                 if (planList && manList){
                     for (NSDictionary *planInfo in planList){
                         
@@ -940,10 +961,19 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
                         [plans addObject:plan];
                     }
                 }
-                [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
-                [self.delegate didfinishFetchingDiscovery:plans];
+                
+                //Log
+//                NSLog(@"当前圈名 %@",title);
+//                for (NSDictionary *dict in planList){
+//                    NSLog(@"%@ : %@, flag : %@, index %@",dict[@"id"],dict[@"title"],dict[@"cornerMark"],@([planList indexOfObject:dict]));
+//                }
+                
+                //完成回调
+                [self.delegate didfinishFetchingDiscovery:plans circleTitle:title];
             }
+                
                 break;
+                
             case FetchCenterGetOpLikeAFeed:{
                 Feed *feed = (Feed *)obj;
 //                [self.delegate didFinishLikingFeed:feed];

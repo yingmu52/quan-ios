@@ -47,7 +47,7 @@ typedef enum {
 - (void)didFinishUpdatingPlan:(Plan *)plan;
 - (void)didFinishCheckingNewVersion:(BOOL)hasNewVersion;
 - (void)didFinishUploadingPictureForProfile;
-- (void)didfinishFetchingDiscovery:(NSArray *)plans;
+- (void)didfinishFetchingDiscovery:(NSArray *)plans circleTitle:(NSString *)title;
 - (void)didFinishSettingPersonalInfo;
 - (void)didFinishSendingFeedBack;
 - (void)didFinishLoadingFeedList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage serverFeedIdList:(NSArray *)serverFeedIds;
@@ -75,6 +75,7 @@ typedef enum {
 
 typedef void(^FetchCenterGetRequestPlanCreationCompleted)(void); //创建事件完成
 typedef void(^FetchCenterGetRequestGetCircleListCompleted)(NSArray *circles); //请求圈子列表完成
+typedef void(^FetchCenterGetRequestSwithCircleCompleted)(void); //切换圈子
 
 @interface FetchCenter : NSObject
 @property (nonatomic,weak) id <FetchCenterDelegate>delegate;
@@ -84,7 +85,19 @@ typedef void(^FetchCenterGetRequestGetCircleListCompleted)(NSArray *circles); //
 + (NSString *)requestLogFilePath;
 
 #pragma mark - 圈子
+
+/**
+ * 获取圈子列表
+ *
+ * @param completionBlock 返回圈子列表数组
+ */
 - (void)getCircleList:(FetchCenterGetRequestGetCircleListCompleted)completionBlock;
+
+/**
+ * 切换圈子
+ * @param circleId 目标圈子的id
+ */
+- (void)switchToCircle:(NSString *)circleId completion:(FetchCenterGetRequestSwithCircleCompleted)completionBlock;
 
 #pragma mark - 消息
 - (void)clearAllMessages;

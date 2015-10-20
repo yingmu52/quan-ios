@@ -290,10 +290,22 @@
                                                                          style:UIAlertActionStyleDefault
                                                                        handler:^(UIAlertAction * _Nonnull action)
                         {
-                            NSLog(@"%@",info);
+                            if (![[User currentCircleId] isEqualToString:info[@"id"]]) {
+                                [self.fetchCenter switchToCircle:info[@"id"] completion:^{
+                                    //删除所有事件
+                                    NSLog(@"Switch to : \n %@",info);
+                                    
+                                    //拉取发现数据
+                                    [self.fetchCenter getDiscoveryList];
+                                    
+                                    //返回 
+                                    [self.navigationController popViewControllerAnimated:YES];
+                                }];
+                            }
                         }];
                         [circleList addAction:action];
                     }
+                    [circleList addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
                     [self presentViewController:circleList animated:YES completion:nil];
                 }];
                 

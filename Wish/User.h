@@ -22,7 +22,7 @@
 #define UID @"user_unique_id"
 #define UKEY @"user_unique_request_key"
 #define YOUTU_SIGNATURE @"tencent_Youtu_Signature"
-
+#define CURRENT_CIRCLE_ID @"current_circle_identifier"
 #define LOGIN_TYPE @"user_login_type"
 @interface User : NSObject
 
@@ -44,5 +44,5 @@
 + (NSString *)youtuSignature;
 + (NSString *)loginType;
 + (void)storeSignature:(NSString *)sign;
-
++ (NSString *)currentCircleId;
 @end

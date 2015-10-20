@@ -113,6 +113,10 @@
     }
 }
 
++ (NSString *)currentCircleId{
+    NSDictionary *info = [self.class getOwnerInfo];
+    return info[CURRENT_CIRCLE_ID] ? info[CURRENT_CIRCLE_ID] : @"";
+}
 #pragma mark - simulator implementation (need to uncomment )
 /*
 
