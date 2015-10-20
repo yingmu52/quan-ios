@@ -11,14 +11,12 @@
 #import "SystemUtil.h"
 #import "Plan+PlanCRUD.h"
 #import "AppDelegate.h"
-#import "PopupView.h"
 #import "SDWebImageCompat.h"
 #import "GCPTextView.h"
 #import "FetchCenter.h"
-@interface EditWishViewController () <PopupViewDelegate,FetchCenterDelegate,UITextViewDelegate>
+@interface EditWishViewController () <FetchCenterDelegate,UITextViewDelegate>
 @property (nonatomic,weak) IBOutlet UITextField *textField;
 @property (nonatomic,weak) IBOutlet GCPTextView *textView;
-@property (nonatomic,weak) PopupView *popView;
 @property (nonatomic,weak) IBOutlet UILabel *wordCountLabel;
 @property (nonatomic,strong) UIButton *tikButton;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
@@ -105,46 +103,34 @@
 }
 
 - (IBAction)giveUp:(UIButton *)sender{
-    [self showPopViewFor:PlanStatusGiveTheFuckingUp];
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"删除后的事件不能恢复哦！" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定"
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action) {
+                                                        //改变状态
+                                                        [self.plan deleteSelf];
+                                                        [self.navigationController popToRootViewControllerAnimated:YES];
+                                                    }];
+    
+    [alert addAction:confirm];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (IBAction)finish:(UIButton *)sender{
-    [self showPopViewFor:PlanStatusFinished];
-}
-
-
-- (void)showPopViewFor:(PlanStatus)status{
-    UIView *keyWindow = [[UIApplication sharedApplication] keyWindow];
-    if (status == PlanStatusFinished) {
-        self.popView = [PopupView showPopupFinishinFrame:keyWindow.frame];
-    }else if (status == PlanStatusGiveTheFuckingUp){
-        self.popView = [PopupView showPopupFailinFrame:keyWindow.frame];
-    }
-    self.popView.delegate = self;
-    [keyWindow addSubview:self.popView];
-}
-
-
-#pragma mark - pop up view delegate
-
-
-- (void)popupViewDidPressCancel:(PopupView *)popupView{
-    [popupView removeFromSuperview];
-}
-
-- (void)popupViewDidPressConfirm:(PopupView *)popupView{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确定归档？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定"
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action) {
+                                                        //改变状态
+                                                        [self.plan updatePlanStatus:PlanStatusFinished];
+                                                        [self.navigationController popToRootViewControllerAnimated:YES];
+                                                    }];
     
-    if (popupView.state == PopupViewStateFinish){
-        [self.plan updatePlanStatus:PlanStatusFinished];
-
-    }else if (popupView.state == PopupViewStateGiveUp){
-        [self.plan updatePlanStatus:PlanStatusGiveTheFuckingUp];
-
-    }else {
-        NSAssert(false, @"error");
-    }
-    [popupView removeFromSuperview];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [alert addAction:confirm];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - text view delegate 
