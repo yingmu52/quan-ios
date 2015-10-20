@@ -88,6 +88,7 @@ static CGFloat horizontalInset = 10.0f;
     return cellSize;
 }
 
+#warning - This should go to super view ~
 - (void)collectionView:(UICollectionView *)collectionView
   didEndDisplayingCell:(DiscoveryCell *)cell
     forItemAtIndexPath:(NSIndexPath *)indexPath{

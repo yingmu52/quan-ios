@@ -307,6 +307,7 @@
     return cell;
 }
 
+#warning - This should go to super view ~ 
 - (void)tableView:(UITableView *)tableView
 didEndDisplayingCell:(nonnull WishDetailCell *)cell
 forRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
