@@ -195,8 +195,6 @@
 		AE17799A1AF585CB005F1BEB /* FeedDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1779991AF585CB005F1BEB /* FeedDetailViewController.m */; };
 		AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
 		AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
-		AE1E6BAA1AAFEEE400AF2613 /* PopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1E6BA91AAFEEE400AF2613 /* PopupView.m */; };
-		AE1E6BAB1AAFEEE400AF2613 /* PopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1E6BA91AAFEEE400AF2613 /* PopupView.m */; };
 		AE2A8DE51ACA700100029D52 /* WishDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE2A8DE41ACA700100029D52 /* WishDetailCell.xib */; };
 		AE2F1C941A7A23A200A32CB5 /* Feed+FeedCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2F1C931A7A23A200A32CB5 /* Feed+FeedCRUD.m */; };
 		AE2F1C951A7A23A200A32CB5 /* Feed+FeedCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2F1C931A7A23A200A32CB5 /* Feed+FeedCRUD.m */; };
@@ -217,7 +215,6 @@
 		AE59B5F61B410437006CA4AB /* ViewForEmptyEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = AE59B5F41B410437006CA4AB /* ViewForEmptyEvent.m */; };
 		AE606A201AF4697B003DF16E /* MessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE606A1F1AF4697B003DF16E /* MessageListViewController.m */; };
 		AE606A231AF46991003DF16E /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE606A221AF46991003DF16E /* MessageCell.m */; };
-		AE6E7A0C1AB0DF1F0023B9C7 /* PopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE6E7A0B1AB0DF1F0023B9C7 /* PopupView.xib */; };
 		AE767E7F1ACE35A600F35137 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE767E7E1ACE35A600F35137 /* FeedbackViewController.m */; };
 		AE767E801ACE35A600F35137 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE767E7E1ACE35A600F35137 /* FeedbackViewController.m */; };
 		AE95A9FC1ACFC26A007465D5 /* ImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = AE95A9FB1ACFC26A007465D5 /* ImagePicker.m */; };
@@ -535,8 +532,6 @@
 		AE1779991AF585CB005F1BEB /* FeedDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedDetailViewController.m; sourceTree = "<group>"; };
 		AE1B6E3A1A6D89FC0026F3CE /* HomeCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCardView.h; sourceTree = "<group>"; };
 		AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCardView.m; sourceTree = "<group>"; };
-		AE1E6BA81AAFEEE400AF2613 /* PopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupView.h; sourceTree = "<group>"; };
-		AE1E6BA91AAFEEE400AF2613 /* PopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupView.m; sourceTree = "<group>"; };
 		AE2A8DE41ACA700100029D52 /* WishDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WishDetailCell.xib; sourceTree = "<group>"; };
 		AE2F1C921A7A23A200A32CB5 /* Feed+FeedCRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Feed+FeedCRUD.h"; sourceTree = "<group>"; };
 		AE2F1C931A7A23A200A32CB5 /* Feed+FeedCRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Feed+FeedCRUD.m"; sourceTree = "<group>"; };
@@ -564,7 +559,6 @@
 		AE606A1F1AF4697B003DF16E /* MessageListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageListViewController.m; sourceTree = "<group>"; };
 		AE606A211AF46991003DF16E /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
 		AE606A221AF46991003DF16E /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
-		AE6E7A0B1AB0DF1F0023B9C7 /* PopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopupView.xib; sourceTree = "<group>"; };
 		AE767E7D1ACE35A600F35137 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
 		AE767E7E1ACE35A600F35137 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
 		AE95A9FA1ACFC26A007465D5 /* ImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePicker.h; sourceTree = "<group>"; };
@@ -1235,9 +1229,6 @@
 				AEF775431A8134FE000DB73B /* HomeCardFlowLayout.m */,
 				A0A083561BD5FF9E0057CD65 /* StationViewController.h */,
 				A0A083571BD5FF9E0057CD65 /* StationViewController.m */,
-				AE1E6BA81AAFEEE400AF2613 /* PopupView.h */,
-				AE1E6BA91AAFEEE400AF2613 /* PopupView.m */,
-				AE6E7A0B1AB0DF1F0023B9C7 /* PopupView.xib */,
 				AED4CB201AC75A0200EE2DA4 /* KeyWordCell.h */,
 				AED4CB211AC75A0200EE2DA4 /* KeyWordCell.m */,
 			);
@@ -1438,7 +1429,6 @@
 				AE59B5F11B40FB55006CA4AB /* ViewForEmptyEvent.xib in Resources */,
 				A0D1025C1B84EF3B006B0E4E /* HeaderView.xib in Resources */,
 				A0F8C45E1B88422300A8B120 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
-				AE6E7A0C1AB0DF1F0023B9C7 /* PopupView.xib in Resources */,
 				A03010591BABC6AA0041E2CF /* QBImagePicker.storyboard in Resources */,
 				AEFB04881AD12437009EB0D3 /* DiscoveryFooterView.xib in Resources */,
 				A0F7D49F1B84E851003CCB34 /* LICENSE in Resources */,
@@ -1500,7 +1490,6 @@
 				A053CF7E1BA4EFF00007970A /* PostImageCell.m in Sources */,
 				A0D102461B84ED0B006B0E4E /* UINavigationItem+CustomItem.m in Sources */,
 				AE01723F1A65CD8E0014266F /* main.m in Sources */,
-				AE1E6BAA1AAFEEE400AF2613 /* PopupView.m in Sources */,
 				AE767E7F1ACE35A600F35137 /* FeedbackViewController.m in Sources */,
 				A0D1024E1B84EDCA006B0E4E /* UIImage+sdWebP.m in Sources */,
 				A030105D1BABC6AA0041E2CF /* QBVideoIndicatorView.m in Sources */,
@@ -1675,7 +1664,6 @@
 				AE9A198A1B02E9E700590784 /* FeedbackkAccessoryView.m in Sources */,
 				AE767E801ACE35A600F35137 /* FeedbackViewController.m in Sources */,
 				A0300FAD1BA9FBFA0041E2CF /* Feed.m in Sources */,
-				AE1E6BAB1AAFEEE400AF2613 /* PopupView.m in Sources */,
 				AEE4A6D51A96AFCF00ABF946 /* TriangleCutoutView.m in Sources */,
 				A0D1022C1B84EB6A006B0E4E /* UIImage+GIF.m in Sources */,
 				A0F7D4321B84E851003CCB34 /* CHTCollectionViewWaterfallLayout.m in Sources */,
