@@ -16,7 +16,6 @@
 #import "UIImageView+ImageCache.h"
 #import "Feed+FeedCRUD.h"
 #import "SDWebImageCompat.h"
-#import "PopupView.h"
 #import "FeedDetailHeader.h"
 
 @interface FeedDetailViewController : UITableViewController <FetchCenterDelegate,NSFetchedResultsControllerDelegate,FeedDetailHeaderDelegate>

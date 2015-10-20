@@ -61,6 +61,8 @@
 		A0994E6B1BC4D1FB00D45845 /* WYStoryboardPopoverSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = A0994E691BC4D1FB00D45845 /* WYStoryboardPopoverSegue.m */; settings = {ASSET_TAGS = (); }; };
 		A0994E711BC6DF6200D45845 /* LocalDataTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A0994E701BC6DF6100D45845 /* LocalDataTest.m */; settings = {ASSET_TAGS = (); }; };
 		A0A083551BD3528C0057CD65 /* FetchCenterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A083541BD3528C0057CD65 /* FetchCenterTest.m */; settings = {ASSET_TAGS = (); }; };
+		A0A083581BD5FF9E0057CD65 /* StationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A083571BD5FF9E0057CD65 /* StationViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A0A083591BD5FF9E0057CD65 /* StationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A083571BD5FF9E0057CD65 /* StationViewController.m */; settings = {ASSET_TAGS = (); }; };
 		A0B8C8021B857F22009C4572 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */; };
 		A0B8C8031B857F22009C4572 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */; };
 		A0B9D7691B9E4F1100EE382B /* DashedBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B9D7681B9E4F1100EE382B /* DashedBorderView.m */; };
@@ -242,10 +244,6 @@
 		AEC0E1C51AC64F9600563F7C /* WishDetailVCOwnerAchieved.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC0E1C41AC64F9600563F7C /* WishDetailVCOwnerAchieved.m */; };
 		AEC0E1C61AC64F9600563F7C /* WishDetailVCOwnerAchieved.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC0E1C41AC64F9600563F7C /* WishDetailVCOwnerAchieved.m */; };
 		AEC5B9AA1AB7EB40008ECB92 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC5B9A91AB7EB40008ECB92 /* User.m */; };
-		AEC8CE8E1AAF872A005364F8 /* StationView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC8CE8D1AAF872A005364F8 /* StationView.m */; };
-		AEC8CE8F1AAF872A005364F8 /* StationView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC8CE8D1AAF872A005364F8 /* StationView.m */; };
-		AEC8CE911AAF8823005364F8 /* StationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC8CE901AAF8823005364F8 /* StationView.xib */; };
-		AEC8CE921AAF8823005364F8 /* StationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC8CE901AAF8823005364F8 /* StationView.xib */; };
 		AECE2BFF1AA19F6500B1C58E /* Owner+OwnerCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AECE2BFE1AA19F6500B1C58E /* Owner+OwnerCRUD.m */; };
 		AECE2C001AA19F6500B1C58E /* Owner+OwnerCRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = AECE2BFE1AA19F6500B1C58E /* Owner+OwnerCRUD.m */; };
 		AED355F41B2285D3000427FF /* FeedDetailHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED355F31B2285D3000427FF /* FeedDetailHeader.xib */; };
@@ -398,6 +396,8 @@
 		A0994E691BC4D1FB00D45845 /* WYStoryboardPopoverSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYStoryboardPopoverSegue.m; sourceTree = "<group>"; };
 		A0994E701BC6DF6100D45845 /* LocalDataTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalDataTest.m; sourceTree = "<group>"; };
 		A0A083541BD3528C0057CD65 /* FetchCenterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchCenterTest.m; sourceTree = "<group>"; };
+		A0A083561BD5FF9E0057CD65 /* StationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationViewController.h; sourceTree = "<group>"; };
+		A0A083571BD5FF9E0057CD65 /* StationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationViewController.m; sourceTree = "<group>"; };
 		A0B8C8001B857F22009C4572 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		A0B9D7671B9E4F1100EE382B /* DashedBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashedBorderView.h; sourceTree = "<group>"; };
@@ -593,9 +593,6 @@
 		AEC0E1C41AC64F9600563F7C /* WishDetailVCOwnerAchieved.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailVCOwnerAchieved.m; sourceTree = "<group>"; };
 		AEC5B9A81AB7EB40008ECB92 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		AEC5B9A91AB7EB40008ECB92 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		AEC8CE8C1AAF872A005364F8 /* StationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationView.h; sourceTree = "<group>"; };
-		AEC8CE8D1AAF872A005364F8 /* StationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationView.m; sourceTree = "<group>"; };
-		AEC8CE901AAF8823005364F8 /* StationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StationView.xib; sourceTree = "<group>"; };
 		AECE2BFD1AA19F6500B1C58E /* Owner+OwnerCRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Owner+OwnerCRUD.h"; sourceTree = "<group>"; };
 		AECE2BFE1AA19F6500B1C58E /* Owner+OwnerCRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Owner+OwnerCRUD.m"; sourceTree = "<group>"; };
 		AED355F31B2285D3000427FF /* FeedDetailHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedDetailHeader.xib; sourceTree = "<group>"; };
@@ -1236,9 +1233,8 @@
 				AEF7F2961A686FDB0022410B /* HomeViewController.m */,
 				AEF775421A8134FE000DB73B /* HomeCardFlowLayout.h */,
 				AEF775431A8134FE000DB73B /* HomeCardFlowLayout.m */,
-				AEC8CE8C1AAF872A005364F8 /* StationView.h */,
-				AEC8CE8D1AAF872A005364F8 /* StationView.m */,
-				AEC8CE901AAF8823005364F8 /* StationView.xib */,
+				A0A083561BD5FF9E0057CD65 /* StationViewController.h */,
+				A0A083571BD5FF9E0057CD65 /* StationViewController.m */,
 				AE1E6BA81AAFEEE400AF2613 /* PopupView.h */,
 				AE1E6BA91AAFEEE400AF2613 /* PopupView.m */,
 				AE6E7A0B1AB0DF1F0023B9C7 /* PopupView.xib */,
@@ -1447,7 +1443,6 @@
 				AEFB04881AD12437009EB0D3 /* DiscoveryFooterView.xib in Resources */,
 				A0F7D49F1B84E851003CCB34 /* LICENSE in Resources */,
 				AED355F41B2285D3000427FF /* FeedDetailHeader.xib in Resources */,
-				AEC8CE911AAF8823005364F8 /* StationView.xib in Resources */,
 				AE52FA551A8D55CA003FF725 /* KeyboardAcessoryView.xib in Resources */,
 				AE9A19851B02E38800590784 /* FeedbackkAccessoryView.xib in Resources */,
 				A03010531BABC6AA0041E2CF /* Info.plist in Resources */,
@@ -1461,7 +1456,6 @@
 				A0D102741B84F750006B0E4E /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				A0F7D4AA1B84E851003CCB34 /* UIImage-Categories.podspec in Resources */,
 				AEFB04891AD12437009EB0D3 /* DiscoveryFooterView.xib in Resources */,
-				AEC8CE921AAF8823005364F8 /* StationView.xib in Resources */,
 				AEF7F29D1A6871F00022410B /* Images.xcassets in Resources */,
 				AEF7F2A11A6875360022410B /* Main.storyboard in Resources */,
 				A0F7D4A01B84E851003CCB34 /* LICENSE in Resources */,
@@ -1524,6 +1518,7 @@
 				A03010571BABC6AA0041E2CF /* QBAssetsViewController.m in Sources */,
 				AED4DD221B0E925300AF1497 /* Message+MessageCRUD.m in Sources */,
 				A0F7D42F1B84E851003CCB34 /* AMBCircularButton.m in Sources */,
+				A0A083581BD5FF9E0057CD65 /* StationViewController.m in Sources */,
 				AEC068931B2D3D55007975D2 /* FeedDetailVCOwner.m in Sources */,
 				A03010541BABC6AA0041E2CF /* QBAlbumCell.m in Sources */,
 				A04842DD1B98C5D20032E927 /* Plan.m in Sources */,
@@ -1573,7 +1568,6 @@
 				A030105C1BABC6AA0041E2CF /* QBVideoIconView.m in Sources */,
 				A0F7D4491B84E851003CCB34 /* JTSImageInfo.m in Sources */,
 				AED68EE41A70399A00CDC0DF /* FetchCenter.m in Sources */,
-				AEC8CE8E1AAF872A005364F8 /* StationView.m in Sources */,
 				AEBECCF31AE7687900EDF385 /* LoginViewController.m in Sources */,
 				A0D102171B84EB6A006B0E4E /* MKAnnotationView+WebCache.m in Sources */,
 				AEFB048A1AD12437009EB0D3 /* DiscoveryVCData.m in Sources */,
@@ -1704,8 +1698,8 @@
 				A0F7D4801B84E851003CCB34 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				AEE4A6D91A972FAB00ABF946 /* FollowingTVCData.m in Sources */,
 				A0F7D4561B84E851003CCB34 /* NHAlignmentFlowLayout.m in Sources */,
-				AEC8CE8F1AAF872A005364F8 /* StationView.m in Sources */,
 				A0D102321B84EB6A006B0E4E /* UIImageView+HighlightedWebCache.m in Sources */,
+				A0A083591BD5FF9E0057CD65 /* StationViewController.m in Sources */,
 				A0D102261B84EB6A006B0E4E /* SDWebImageManager.m in Sources */,
 				AEF3F8841AA4E3C0008C2300 /* WishDetailVCFollower.m in Sources */,
 				A0D37C611B8781D900581EDE /* NewsPageViewController.m in Sources */,

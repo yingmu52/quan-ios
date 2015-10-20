@@ -14,8 +14,6 @@
 #import "AppDelegate.h"
 #import "WishDetailViewController.h"
 #import "HomeCardFlowLayout.h"
-#import "StationView.h"
-#import "PopupView.h"
 #import "User.h"
 #import "SDWebImageCompat.h"
 #import "ImagePicker.h"
@@ -24,6 +22,7 @@
 #import "ShuffleViewController.h"
 #import "NZCircularImageView.h"
 #import "UIImageView+ImageCache.h"
+#import "StationViewController.h"
 
 const NSUInteger maxCardNum = 10;
 @interface HomeViewController ()
@@ -31,7 +30,6 @@ const NSUInteger maxCardNum = 10;
 UIImagePickerControllerDelegate,
 UINavigationControllerDelegate,
 UIGestureRecognizerDelegate,
-PopupViewDelegate,
 HomeCardViewDelegate,
 UIActionSheetDelegate,
 ImagePickerDelegate,
@@ -39,7 +37,6 @@ ViewForEmptyEventDelegate,
 ShuffleViewControllerDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @property (nonatomic,weak) Plan *currentPlan;
-@property (nonatomic,weak) StationView *stationView;
 @property (nonatomic,strong) NSMutableArray *itemChanges;
 @property (nonatomic,weak) ViewForEmptyEvent *guideView;
 @property (nonatomic,strong) ImagePicker *imagePicker;
@@ -107,7 +104,7 @@ ShuffleViewControllerDelegate>
 - (void)addLongPressGesture{
     UILongPressGestureRecognizer *lp = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     lp.delaysTouchesBegan = YES;
-    lp.minimumPressDuration = 0.5;
+    lp.minimumPressDuration = 0.3;
     [self.collectionView addGestureRecognizer:lp];
 }
 - (void)setUpNavigationItem
@@ -145,33 +142,7 @@ ShuffleViewControllerDelegate>
     [self performSegueWithIdentifier:@"showPostFromHome" sender:nil];
     self.tabBarController.tabBar.hidden = YES;
 }
-#pragma mark - Home Card View Delegate
-- (StationView *)stationView
-{
-    if (!_stationView){
-        _stationView = [StationView instantiateFromNib:[UIScreen mainScreen].bounds];
-    }
-    return _stationView;
-}
-- (void)popupViewDidPressConfirm:(PopupView *)popupView
-{
-    if (self.stationView){
-        if (self.stationView.selection == StationViewSelectionFinish){
-            [popupView.plan updatePlanStatus:PlanStatusFinished];
-        }else if (self.stationView.selection == StationViewSelectionGiveUp){
-            [popupView.plan updatePlanStatus:PlanStatusGiveTheFuckingUp];
-        }else if (self.stationView.selection == StationViewSelectionDelete){
-            [popupView.plan deleteSelf];
-        }
-    }
-    [self popupViewDidPressCancel:popupView];
-}
-- (void)popupViewDidPressCancel:(PopupView *)popupView
-{
-    [popupView removeFromSuperview];
-    [self.stationView removeFromSuperview];
-    self.stationView = nil;
-}
+
 
 #pragma mark - image picker
 - (ImagePicker *)imagePicker{
@@ -212,6 +183,13 @@ ShuffleViewControllerDelegate>
         svc.svcDelegate = self;
     }
     
+    if ([segue.identifier isEqualToString:@"showStationView"]) {
+        StationViewController *svc = segue.destinationViewController;
+        NSArray *obj = (NSArray *)sender;
+        svc.plan = obj.firstObject;
+        svc.longPress = obj.lastObject;
+    }
+    
 }
 
 #pragma mark - 加号浮层回调函数
@@ -233,43 +211,8 @@ ShuffleViewControllerDelegate>
     NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:[longPress locationInView:self.collectionView]];
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
     if (plan) {
-        UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
         if (longPress.state == UIGestureRecognizerStateBegan) {
-            [keyWindow addSubview:self.stationView];
-            [self.stationView layoutIfNeeded]; //important for next line to work
-            self.stationView.currentCardLocation = [longPress locationInView:self.stationView];
-            
-            self.stationView.plan = plan;
-            
-            if (!self.stationView.cardImageView.image){
-                HomeCardView *cardView = (HomeCardView *)[self.collectionView cellForItemAtIndexPath:indexPath];
-                self.stationView.cardImageView.image = cardView.imageView.image;
-            }
-        }else if (longPress.state == UIGestureRecognizerStateChanged){
-            //update card location
-            self.stationView.currentCardLocation = [longPress locationInView:self.stationView];
-            //            NSLog(@"%@",self.stationView.plan.planTitle);
-            
-        }else if (longPress.state == UIGestureRecognizerStateEnded ||
-                  longPress.state == UIGestureRecognizerStateFailed ||
-                  longPress.state == UIGestureRecognizerStateCancelled) {
-            //detect selection
-            PopupView *popupView;
-            //        [self.stationView layoutIfNeeded];
-            if (self.stationView.selection == StationViewSelectionFinish){
-                popupView = [PopupView showPopupFinishinFrame:keyWindow.frame];
-            }else if (self.stationView.selection == StationViewSelectionGiveUp){
-                popupView = [PopupView showPopupFailinFrame:keyWindow.frame];
-            }else if (self.stationView.selection == StationViewSelectionDelete){
-                popupView = [PopupView showPopupDeleteinFrame:keyWindow.frame];
-            }
-            if (popupView) {
-                popupView.delegate = self;
-                popupView.plan = self.stationView.plan;
-                [keyWindow addSubview:popupView];
-            }else{
-                [self popupViewDidPressCancel:popupView];
-            }
+            [self performSegueWithIdentifier:@"showStationView" sender:@[plan,longPress]];
         }
     }
 }
