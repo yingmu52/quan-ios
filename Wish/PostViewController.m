@@ -71,8 +71,8 @@
         UIImage *bg = flag ? [Theme navTikButtonDefault] : [Theme navTikButtonDisable];
         [self.tikButton setImage:bg forState:UIControlStateNormal];
         
-        //keep maximum 15 characters
-        NSInteger maxCount = 15;
+        //keep maximum 50 characters
+        NSInteger maxCount = 50;
         if (self.textField.text.length > maxCount) [self.textField setText:[self.textField.text substringToIndex:maxCount]];
     }
 }
