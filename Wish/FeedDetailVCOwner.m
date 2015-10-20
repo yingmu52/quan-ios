@@ -8,7 +8,7 @@
 
 #import "FeedDetailVCOwner.h"
 
-@interface FeedDetailVCOwner () <PopupViewDelegate>
+@interface FeedDetailVCOwner ()
 
 @end
 
@@ -48,29 +48,29 @@
 
 - (void)showPopupView{
     if (self.feed){
-        UIWindow *window = [[UIApplication sharedApplication] keyWindow];
-        NSString *popupViewTitle = [self isDeletingTheLastFeed] ?
+        NSString *title = [self isDeletingTheLastFeed] ?
         @"这是最后一条记录啦！\n这件事儿也会被删除哦~" : @"真的要删除这条记录吗？";
-        PopupView *popupView = [PopupView showPopupDeleteinFrame:window.frame
-                                                       withTitle:popupViewTitle];
-        popupView.delegate = self;
-        [window addSubview:popupView];
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
+                                                                       message:nil
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定"
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction * _Nonnull action) {
+                                                            if ([self isDeletingTheLastFeed]){
+                                                                [self.feed.plan deleteSelf];
+                                                                [self.navigationController popToRootViewControllerAnimated:YES];
+                                                            }else{
+                                                                [self.fetchCenter deleteFeed:self.feed];
+                                                            }
+                                                        }];
+        
+        [alert addAction:confirm];
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
-- (void)popupViewDidPressCancel:(PopupView *)popupView{
-    [popupView removeFromSuperview];
-}
-
-- (void)popupViewDidPressConfirm:(PopupView *)popupView{
-    if ([self isDeletingTheLastFeed]){
-        [self.feed.plan deleteSelf];
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }else{
-        [self.fetchCenter deleteFeed:self.feed];
-    }
-    [self popupViewDidPressCancel:popupView];
-}
 
 - (void)didFinishDeletingFeed:(Feed *)feed{
     [feed deleteSelf];
