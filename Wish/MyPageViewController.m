@@ -234,10 +234,8 @@
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event{
     
     BOOL isUsingInnerNetwork = [[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_INNER_NETWORK];
-    NSArray *knownUsersList = @[@"100004",@"100014",@"100005",@"100007",@"100015",@"100001"]; //Vicky,R,Cliff,Amy,Jie,Xinyi
-    
     //支持摇一摇的条件是 1. 外网的已知id 2. 用户在内网
-    if ([knownUsersList containsObject:[User uid]] || isUsingInnerNetwork) {
+    if ([User isSuperUser] || isUsingInnerNetwork) {
         
         NSString *testEnvTitle = isUsingInnerNetwork ? @"内网✔️" : @"内网";
         NSString *proEnvTitle = isUsingInnerNetwork ? @"外网" : @"外网✔️";
@@ -276,45 +274,11 @@
                 [self performSegueWithIdentifier:@"showLocalRequestLog" sender:nil];
             }];
             
-            //FIXME: 切换圈子 (实现方式需要改进）
-            UIAlertAction *switchCircle = [UIAlertAction actionWithTitle:@"切换圈子"
-                                                                   style:UIAlertActionStyleDefault
-                                                                 handler:^(UIAlertAction * _Nonnull action)
-            {
-                [self.fetchCenter getCircleList:^(NSArray *circles) {
-                    UIAlertController *circleList = [UIAlertController alertControllerWithTitle:@"选择想要切换的圈子"
-                                                                                        message:nil
-                                                                                 preferredStyle:UIAlertControllerStyleActionSheet];
-                    for (NSDictionary *info in circles){
-                        UIAlertAction *action = [UIAlertAction actionWithTitle:info[@"name"]
-                                                                         style:UIAlertActionStyleDefault
-                                                                       handler:^(UIAlertAction * _Nonnull action)
-                        {
-                            if (![[User currentCircleId] isEqualToString:info[@"id"]]) {
-                                [self.fetchCenter switchToCircle:info[@"id"] completion:^{
-                                    //删除所有事件
-                                    NSLog(@"Switch to : \n %@",info);
-                                    
-                                    //拉取发现数据
-                                    [self.fetchCenter getDiscoveryList];
-                                    
-                                    //返回 
-                                    [self.navigationController popViewControllerAnimated:YES];
-                                }];
-                            }
-                        }];
-                        [circleList addAction:action];
-                    }
-                    [circleList addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-                    [self presentViewController:circleList animated:YES completion:nil];
-                }];
-                
-            }];
+            
             [actionSheet addAction:testEnv];
             [actionSheet addAction:proEnv];
             [actionSheet addAction:getUserInfo];
             [actionSheet addAction:getRequestLog];
-            [actionSheet addAction:switchCircle];
             [actionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
             [self presentViewController:actionSheet animated:YES completion:nil];
             

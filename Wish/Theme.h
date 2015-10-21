@@ -46,6 +46,7 @@
 + (UIImage *)navTikButtonDefault;
 + (UIImage *)navTikButtonDisable;
 + (UIImage *)navButtonDeleted;
++ (UIImage *)navCircleIcon;
 
 + (UIImage *)wishDetailCameraDefault;
 + (UIImage *)wishDetailBackgroundNonLogo;
@@ -57,8 +58,6 @@
 + (UIImage *)achievementFail;
 + (UIImage *)achievementFinish;
 + (UIImage *)achieveBadageEmpty;
-//+ (UIImage *)achieveBadageLabelFail;
-//+ (UIImage *)achieveBadageLabelSuccess;
 + (UIImage *)popupConfirmPressed;
 + (UIImage *)popupFail;
 + (UIImage *)popupFinish;
@@ -70,4 +69,8 @@
 
 + (UIImage *)checkmarkSelected;
 + (UIImage *)checkmarkUnSelected;
+
+
++ (UIImage *)circleListCheckBoxDefault;
++ (UIImage *)circleListCheckBoxSelected;
 @end

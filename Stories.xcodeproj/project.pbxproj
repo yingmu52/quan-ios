@@ -31,8 +31,6 @@
 		A04842D21B98C5D10032E927 /* Owner.m in Sources */ = {isa = PBXBuildFile; fileRef = A04842D01B98C5D10032E927 /* Owner.m */; };
 		A04842D51B98C5D10032E927 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = A04842D41B98C5D10032E927 /* Message.m */; };
 		A04842D61B98C5D10032E927 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = A04842D41B98C5D10032E927 /* Message.m */; };
-		A04842DD1B98C5D20032E927 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = A04842DC1B98C5D20032E927 /* Plan.m */; };
-		A04842DE1B98C5D20032E927 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = A04842DC1B98C5D20032E927 /* Plan.m */; };
 		A04842E11B98C5D20032E927 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = A04842E01B98C5D20032E927 /* Comment.m */; };
 		A04842E21B98C5D20032E927 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = A04842E01B98C5D20032E927 /* Comment.m */; };
 		A04842E91B98CF9E0032E927 /* UIImageView+ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A04842E81B98CF9E0032E927 /* UIImageView+ImageCache.m */; };
@@ -63,6 +61,14 @@
 		A0A083551BD3528C0057CD65 /* FetchCenterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A083541BD3528C0057CD65 /* FetchCenterTest.m */; settings = {ASSET_TAGS = (); }; };
 		A0A083581BD5FF9E0057CD65 /* StationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A083571BD5FF9E0057CD65 /* StationViewController.m */; settings = {ASSET_TAGS = (); }; };
 		A0A083591BD5FF9E0057CD65 /* StationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A083571BD5FF9E0057CD65 /* StationViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A0A0835C1BD74F260057CD65 /* CircleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A0835B1BD74F260057CD65 /* CircleListViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A0A0835D1BD74F260057CD65 /* CircleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A0835B1BD74F260057CD65 /* CircleListViewController.m */; settings = {ASSET_TAGS = (); }; };
+		A0A083841BD75E3E0057CD65 /* Circle.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A083811BD75E3E0057CD65 /* Circle.m */; settings = {ASSET_TAGS = (); }; };
+		A0A083851BD75E3E0057CD65 /* Circle.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A083811BD75E3E0057CD65 /* Circle.m */; settings = {ASSET_TAGS = (); }; };
+		A0A083921BD765F00057CD65 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A0838D1BD765F00057CD65 /* Plan.m */; settings = {ASSET_TAGS = (); }; };
+		A0A083931BD765F00057CD65 /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A0838D1BD765F00057CD65 /* Plan.m */; settings = {ASSET_TAGS = (); }; };
+		A0A083941BD765F00057CD65 /* Circle+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A0838F1BD765F00057CD65 /* Circle+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		A0A083951BD765F00057CD65 /* Circle+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A0838F1BD765F00057CD65 /* Circle+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
 		A0B8C8021B857F22009C4572 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */; };
 		A0B8C8031B857F22009C4572 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */; };
 		A0B9D7691B9E4F1100EE382B /* DashedBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B9D7681B9E4F1100EE382B /* DashedBorderView.m */; };
@@ -357,8 +363,6 @@
 		A04842D01B98C5D10032E927 /* Owner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Owner.m; sourceTree = "<group>"; };
 		A04842D31B98C5D10032E927 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		A04842D41B98C5D10032E927 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
-		A04842DB1B98C5D20032E927 /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
-		A04842DC1B98C5D20032E927 /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
 		A04842DF1B98C5D20032E927 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		A04842E01B98C5D20032E927 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		A04842E71B98CF9E0032E927 /* UIImageView+ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+ImageCache.h"; sourceTree = "<group>"; };
@@ -395,6 +399,14 @@
 		A0A083541BD3528C0057CD65 /* FetchCenterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchCenterTest.m; sourceTree = "<group>"; };
 		A0A083561BD5FF9E0057CD65 /* StationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationViewController.h; sourceTree = "<group>"; };
 		A0A083571BD5FF9E0057CD65 /* StationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationViewController.m; sourceTree = "<group>"; };
+		A0A0835A1BD74F260057CD65 /* CircleListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleListViewController.h; sourceTree = "<group>"; };
+		A0A0835B1BD74F260057CD65 /* CircleListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleListViewController.m; sourceTree = "<group>"; };
+		A0A083801BD75E3E0057CD65 /* Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Circle.h; sourceTree = "<group>"; };
+		A0A083811BD75E3E0057CD65 /* Circle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Circle.m; sourceTree = "<group>"; };
+		A0A0838C1BD765F00057CD65 /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
+		A0A0838D1BD765F00057CD65 /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
+		A0A0838E1BD765F00057CD65 /* Circle+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Circle+CoreDataProperties.h"; sourceTree = "<group>"; };
+		A0A0838F1BD765F00057CD65 /* Circle+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Circle+CoreDataProperties.m"; sourceTree = "<group>"; };
 		A0B8C8001B857F22009C4572 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		A0B9D7671B9E4F1100EE382B /* DashedBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashedBorderView.h; sourceTree = "<group>"; };
@@ -1090,14 +1102,18 @@
 		AE30EE711A6F0A8C0044740D /* Database&Networking */ = {
 			isa = PBXGroup;
 			children = (
+				A0A0838C1BD765F00057CD65 /* Plan.h */,
+				A0A0838D1BD765F00057CD65 /* Plan.m */,
+				A0A0838E1BD765F00057CD65 /* Circle+CoreDataProperties.h */,
+				A0A0838F1BD765F00057CD65 /* Circle+CoreDataProperties.m */,
+				A0A083801BD75E3E0057CD65 /* Circle.h */,
+				A0A083811BD75E3E0057CD65 /* Circle.m */,
 				A0300FAA1BA9FBFA0041E2CF /* Feed.h */,
 				A0300FAB1BA9FBFA0041E2CF /* Feed.m */,
 				A04842E71B98CF9E0032E927 /* UIImageView+ImageCache.h */,
 				A04842E81B98CF9E0032E927 /* UIImageView+ImageCache.m */,
 				A04842DF1B98C5D20032E927 /* Comment.h */,
 				A04842E01B98C5D20032E927 /* Comment.m */,
-				A04842DB1B98C5D20032E927 /* Plan.h */,
-				A04842DC1B98C5D20032E927 /* Plan.m */,
 				A04842D31B98C5D10032E927 /* Message.h */,
 				A04842D41B98C5D10032E927 /* Message.m */,
 				A04842CF1B98C5D10032E927 /* Owner.h */,
@@ -1266,6 +1282,8 @@
 		AEFB04781AD12437009EB0D3 /* Discovery */ = {
 			isa = PBXGroup;
 			children = (
+				A0A0835A1BD74F260057CD65 /* CircleListViewController.h */,
+				A0A0835B1BD74F260057CD65 /* CircleListViewController.m */,
 				A016FDB41B8C4250006E7A09 /* ShuffleViewController.h */,
 				A016FDB51B8C4250006E7A09 /* ShuffleViewController.m */,
 				AEFB04791AD12437009EB0D3 /* DiscoveryBannerCell.h */,
@@ -1477,6 +1495,7 @@
 				A016FDB61B8C4250006E7A09 /* ShuffleViewController.m in Sources */,
 				A0F7D49D1B84E851003CCB34 /* UIImagePickerController+DelegateBlocks.m in Sources */,
 				A04842D11B98C5D10032E927 /* Owner.m in Sources */,
+				A0A083841BD75E3E0057CD65 /* Circle.m in Sources */,
 				A0EA22011BA53BF400A83A7A /* ImagePreviewController.m in Sources */,
 				AE606A201AF4697B003DF16E /* MessageListViewController.m in Sources */,
 				A0F7D44B1B84E851003CCB34 /* JTSImageViewController.m in Sources */,
@@ -1493,6 +1512,7 @@
 				AE767E7F1ACE35A600F35137 /* FeedbackViewController.m in Sources */,
 				A0D1024E1B84EDCA006B0E4E /* UIImage+sdWebP.m in Sources */,
 				A030105D1BABC6AA0041E2CF /* QBVideoIndicatorView.m in Sources */,
+				A0A083921BD765F00057CD65 /* Plan.m in Sources */,
 				A0D102391B84EC03006B0E4E /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */,
 				A0D102311B84EB6A006B0E4E /* UIImageView+HighlightedWebCache.m in Sources */,
 				A0D1021B1B84EB6A006B0E4E /* SDImageCache.m in Sources */,
@@ -1500,6 +1520,7 @@
 				A0D102331B84EB6A006B0E4E /* UIImageView+WebCache.m in Sources */,
 				AEE075381A744A770015155B /* SystemUtil.m in Sources */,
 				A0D102441B84ED0B006B0E4E /* UINavigationBar+CustomHeight.m in Sources */,
+				A0A083941BD765F00057CD65 /* Circle+CoreDataProperties.m in Sources */,
 				A0D1022B1B84EB6A006B0E4E /* UIImage+GIF.m in Sources */,
 				AE0ADF191ABD78CC00692131 /* HomeCardViewController.m in Sources */,
 				AED355F81B228696000427FF /* FeedDetailHeader.m in Sources */,
@@ -1510,7 +1531,6 @@
 				A0A083581BD5FF9E0057CD65 /* StationViewController.m in Sources */,
 				AEC068931B2D3D55007975D2 /* FeedDetailVCOwner.m in Sources */,
 				A03010541BABC6AA0041E2CF /* QBAlbumCell.m in Sources */,
-				A04842DD1B98C5D20032E927 /* Plan.m in Sources */,
 				A0994E6B1BC4D1FB00D45845 /* WYStoryboardPopoverSegue.m in Sources */,
 				A0994E631BC4CF9500D45845 /* SYEmojiCharacters.m in Sources */,
 				A0D102251B84EB6A006B0E4E /* SDWebImageManager.m in Sources */,
@@ -1524,6 +1544,7 @@
 				A0F7D4351B84E851003CCB34 /* CustomBadge.m in Sources */,
 				A066C3891BB7AE08003B51D5 /* MSSuperViewController.m in Sources */,
 				A03010601BACAFBC0041E2CF /* QBPreViewController.m in Sources */,
+				A0A0835C1BD74F260057CD65 /* CircleListViewController.m in Sources */,
 				A0D102271B84EB6A006B0E4E /* SDWebImagePrefetcher.m in Sources */,
 				AECE2BFF1AA19F6500B1C58E /* Owner+OwnerCRUD.m in Sources */,
 				A03010581BABC6AA0041E2CF /* QBCheckmarkView.m in Sources */,
@@ -1627,6 +1648,7 @@
 				AED68EE51A70399A00CDC0DF /* FetchCenter.m in Sources */,
 				A0A083551BD3528C0057CD65 /* FetchCenterTest.m in Sources */,
 				A0D1021C1B84EB6A006B0E4E /* SDImageCache.m in Sources */,
+				A0A083931BD765F00057CD65 /* Plan.m in Sources */,
 				AEFB048B1AD12437009EB0D3 /* DiscoveryVCData.m in Sources */,
 				AED4CB231AC75A0200EE2DA4 /* KeyWordCell.m in Sources */,
 				A0F7D4B41B84EA46003CCB34 /* UIImage+WebP.m in Sources */,
@@ -1675,7 +1697,6 @@
 				A0D1023F1B84ECDF006B0E4E /* NavigationBar.m in Sources */,
 				AED8D7CB1A9BE2490035EDE5 /* FollowingImageCell.m in Sources */,
 				AEC0E1C61AC64F9600563F7C /* WishDetailVCOwnerAchieved.m in Sources */,
-				A04842DE1B98C5D20032E927 /* Plan.m in Sources */,
 				AED9A67B1B44BE6E00108729 /* RequestLogViewController.m in Sources */,
 				A0F7D43E1B84E851003CCB34 /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				A0D1024F1B84EDCA006B0E4E /* UIImage+sdWebP.m in Sources */,
@@ -1683,6 +1704,7 @@
 				AEB003F41B8056980056EA80 /* MyPageViewController.m in Sources */,
 				AEBFCA381A78614100686EFE /* PostDetailViewController.m in Sources */,
 				A0F7D4821B84E851003CCB34 /* UIScrollView+SVPullToRefresh.m in Sources */,
+				A0A0835D1BD74F260057CD65 /* CircleListViewController.m in Sources */,
 				A0F7D4801B84E851003CCB34 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				AEE4A6D91A972FAB00ABF946 /* FollowingTVCData.m in Sources */,
 				A0F7D4561B84E851003CCB34 /* NHAlignmentFlowLayout.m in Sources */,
@@ -1707,9 +1729,11 @@
 				A0F7D4501B84E851003CCB34 /* UIApplication+JTSImageViewController.m in Sources */,
 				A0F7D49E1B84E851003CCB34 /* UIImagePickerController+DelegateBlocks.m in Sources */,
 				A016FDBC1B8D14BA006E7A09 /* PreviewCell.m in Sources */,
+				A0A083851BD75E3E0057CD65 /* Circle.m in Sources */,
 				A0D102221B84EB6A006B0E4E /* SDWebImageDownloader.m in Sources */,
 				A0F7D4361B84E851003CCB34 /* CustomBadge.m in Sources */,
 				A03010611BACAFBC0041E2CF /* QBPreViewController.m in Sources */,
+				A0A083951BD765F00057CD65 /* Circle+CoreDataProperties.m in Sources */,
 				AED355F91B228696000427FF /* FeedDetailHeader.m in Sources */,
 				AEF7F2981A686FDB0022410B /* HomeViewController.m in Sources */,
 				A07115D21BA6B109002C1270 /* SZTextView.m in Sources */,

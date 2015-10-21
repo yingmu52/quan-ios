@@ -45,4 +45,6 @@
 + (NSString *)loginType;
 + (void)storeSignature:(NSString *)sign;
 + (NSString *)currentCircleId;
+
++ (BOOL)isSuperUser;
 @end

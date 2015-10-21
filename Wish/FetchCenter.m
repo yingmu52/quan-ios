@@ -132,7 +132,12 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
            parameter:@{@"key":[TOOLCGIKEY stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]}
     includeArguments:NO
           completion:^(NSDictionary *responseJson) {
-              NSArray *circles = [responseJson valueForKey:@"data"];
+              NSArray *circleInfo = [responseJson valueForKey:@"data"];
+              NSMutableArray *circles = [NSMutableArray arrayWithCapacity:circleInfo.count];
+              for (NSDictionary *info in circleInfo) {
+                  [circles addObject:[Circle updateCircleWithInfo:info]];
+              }
+//              NSLog(@"%@",circles);
               completionBlock(circles);
           } failure:nil];
 }

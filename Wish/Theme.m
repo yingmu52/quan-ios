@@ -196,14 +196,6 @@
     return [UIImage imageNamed:@"checkbox_default"];
 }
 
-//+ (UIImage *)achieveBadageLabelFail{
-//    return [UIImage imageNamed:@"label_fail"];
-//}
-
-//+ (UIImage *)achieveBadageLabelSuccess{
-//    return [UIImage imageNamed:@"label_finish"];
-//}
-
 + (UIImage *)achieveBadageEmpty{
     return [UIImage imageNamed:@"finish_empty_image"];
 }
@@ -222,6 +214,18 @@
 
 + (UIImage *)discoveryAddButton{
     return [UIImage imageNamed:@"button_creat_plus"];
+}
+
++ (UIImage *)navCircleIcon{
+    return [UIImage imageNamed:@"group_icon"];
+}
+
++ (UIImage *)circleListCheckBoxDefault{
+    return [UIImage imageNamed:@"circle_checkbox_default"];
+}
+
++ (UIImage *)circleListCheckBoxSelected{
+    return [UIImage imageNamed:@"circle_checkbox_selected"];
 }
 @end
 

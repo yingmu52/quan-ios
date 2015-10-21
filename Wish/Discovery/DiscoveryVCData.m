@@ -252,21 +252,32 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
+    
+    //长按显示事件信息，方便开发调试
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressed:)];
     [self.collectionView addGestureRecognizer:longPress];
+    
+    //设置导航项目
     [self setUpNavigationItem];
 }
 
 - (void)setUpNavigationItem
 {
-    CGRect frame = CGRectMake(0,0, 48,CGRectGetHeight(self.navigationController.navigationBar.frame));
-    UIButton *addBtn = [Theme buttonWithImage:[Theme navAddDefault]
-                                       target:self
-                                     selector:@selector(showShuffView)
-                                        frame:frame];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
+    if ([User isSuperUser]) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[Theme navCircleIcon]
+                                                                                 style:UIBarButtonItemStylePlain
+                                                                                target:self
+                                                                                action:@selector(showCircleList)];
+    }
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[Theme navAddDefault]
+                                                                              style:UIBarButtonItemStylePlain
+                                                                             target:self
+                                                                             action:@selector(showShuffView)];
 }
 
+- (void)showCircleList{
+    [self performSegueWithIdentifier:@"showCircleListView" sender:nil];
+}
 
 #pragma mark - 长按事件可显示相关信息
 - (void)longPressed:(UILongPressGestureRecognizer *)longPress{

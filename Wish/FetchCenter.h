@@ -20,7 +20,7 @@
 #import "User.h"
 #import "Message+MessageCRUD.h"
 #import "TXYUploadManager.h"
-
+#import "Circle.h"
 #define INNER_NETWORK_URL @"http://182.254.167.228"
 #define OUTTER_NETWORK_URL @"http://120.24.73.51"
 #define SHOULD_USE_INNER_NETWORK @"kShouldUSeInnerNetwork"
