@@ -300,6 +300,7 @@ ShuffleViewControllerDelegate>
         // self.title = [NSString stringWithFormat:@"%@ plans",@(self.fetchedRC.fetchedObjects.count)];
         self.itemChanges = nil;
         [self updateNavigationTitle];
+        [(AppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
     }];
 }
 #pragma mark - implement parent class abstract methods

@@ -52,7 +52,9 @@ static NSUInteger numberOfPreloadedFeeds = 3;
         for (NSUInteger i = numberOfPreservingFeeds; i < plans.count; i++) {
             [delegate.managedObjectContext deleteObject:plans[i]];
         }
+        [delegate saveContext];
     }
+    
 }
 
 - (void)didFinishFetchingFollowingPlanList:(NSArray *)planIds{

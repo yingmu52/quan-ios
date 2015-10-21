@@ -128,7 +128,7 @@
             [delegate.managedObjectContext deleteObject:feed];
         }
     }
-
+    [delegate saveContext];
 }
 
 

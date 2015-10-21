@@ -67,6 +67,7 @@
     for (Message *message in self.tableFetchedRC.fetchedObjects) {
         [context deleteObject:message];
     }
+    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
 }
 #pragma mark - Table view 
 

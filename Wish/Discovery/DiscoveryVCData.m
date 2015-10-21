@@ -56,6 +56,7 @@
                 [delegate.managedObjectContext deleteObject:plan];
             }
         }
+        [delegate saveContext];
     }
 }
 
@@ -229,6 +230,7 @@
         }
     } completion:^(BOOL finished) {
         self.itemChanges = nil;;
+        [(AppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
     }];
     
 }

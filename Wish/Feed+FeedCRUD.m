@@ -90,10 +90,11 @@
     }
 
     //delete Feed
-    [[AppDelegate getContext] deleteObject:self];
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    [delegate.managedObjectContext deleteObject:self];
     //tryTime - 1
     self.plan.tryTimes = @(self.plan.tryTimes.integerValue - 1);
-
+    [delegate saveContext];
 }
 
 #pragma mark - picUrls
