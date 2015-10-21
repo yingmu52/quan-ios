@@ -848,8 +848,6 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
             }
                 break;
             case FetchCenterGetOpDeletePlan:{
-                AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-                [delegate saveContext];
                 NSLog(@"deleted successed %@",json);
             }
                 break;

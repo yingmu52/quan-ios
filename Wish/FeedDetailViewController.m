@@ -450,7 +450,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
             Comment *comment = comments[i];
             [delegate.managedObjectContext deleteObject:comment];
         }
-        [delegate saveContext];
     }
 
 }

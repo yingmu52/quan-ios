@@ -83,7 +83,6 @@
 - (void)didFinishUpdatingPlan:(Plan *)plan{
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
     [self.navigationController popToRootViewControllerAnimated:YES];
-    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
 }
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{

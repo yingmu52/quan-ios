@@ -127,7 +127,6 @@
             Feed *feed = allFeeds[i];
             [delegate.managedObjectContext deleteObject:feed];
         }
-        [delegate saveContext];
     }
 
 }
