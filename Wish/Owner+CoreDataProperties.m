@@ -1,5 +1,5 @@
 //
-//  Circle+CoreDataProperties.m
+//  Owner+CoreDataProperties.m
 //  Stories
 //
 //  Created by Xinyi Zhuang on 2015-10-22.
@@ -9,13 +9,15 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "Circle+CoreDataProperties.h"
+#import "Owner+CoreDataProperties.h"
 
-@implementation Circle (CoreDataProperties)
+@implementation Owner (CoreDataProperties)
 
-@dynamic circleId;
-@dynamic circleName;
-@dynamic createDate;
-@dynamic invitationCode;
+@dynamic headUrl;
+@dynamic ownerId;
+@dynamic ownerName;
+@dynamic comments;
+@dynamic messages;
+@dynamic plans;
 
 @end

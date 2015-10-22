@@ -1,5 +1,5 @@
 //
-//  Circle+CoreDataProperties.m
+//  Comment+CoreDataProperties.m
 //  Stories
 //
 //  Created by Xinyi Zhuang on 2015-10-22.
@@ -9,13 +9,17 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "Circle+CoreDataProperties.h"
+#import "Comment+CoreDataProperties.h"
 
-@implementation Circle (CoreDataProperties)
+@implementation Comment (CoreDataProperties)
 
-@dynamic circleId;
-@dynamic circleName;
-@dynamic createDate;
-@dynamic invitationCode;
+@dynamic commentId;
+@dynamic content;
+@dynamic createTime;
+@dynamic idForReply;
+@dynamic isMyComment;
+@dynamic nameForReply;
+@dynamic feed;
+@dynamic owner;
 
 @end

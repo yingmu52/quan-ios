@@ -9,7 +9,7 @@
 #import "AchieveVCData.h"
 @import CoreData;
 #import "AppDelegate.h"
-#import "Plan+PlanCRUD.h"
+#import "Plan.h"
 #import "AchieveCell.h"
 #import "WishDetailVCOwnerAchieved.h"
 #import "User.h"

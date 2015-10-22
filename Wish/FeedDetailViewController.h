@@ -14,7 +14,6 @@
 #import "Theme.h"
 #import "AppDelegate.h"
 #import "UIImageView+ImageCache.h"
-#import "Feed+FeedCRUD.h"
 #import "SDWebImageCompat.h"
 #import "FeedDetailHeader.h"
 

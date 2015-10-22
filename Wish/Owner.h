@@ -2,8 +2,8 @@
 //  Owner.h
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2015-09-03.
-//  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
+//  Created by Xinyi Zhuang on 2015-10-22.
+//  Copyright © 2015 Xinyi Zhuang. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -11,31 +11,14 @@
 
 @class Comment, Message, Plan;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface Owner : NSManagedObject
 
-@property (nonatomic, retain) NSString * headUrl;
-@property (nonatomic, retain) NSString * ownerId;
-@property (nonatomic, retain) NSString * ownerName;
-@property (nonatomic, retain) NSSet *comments;
-@property (nonatomic, retain) NSSet *messages;
-@property (nonatomic, retain) NSSet *plans;
-@end
-
-@interface Owner (CoreDataGeneratedAccessors)
-
-- (void)addCommentsObject:(Comment *)value;
-- (void)removeCommentsObject:(Comment *)value;
-- (void)addComments:(NSSet *)values;
-- (void)removeComments:(NSSet *)values;
-
-- (void)addMessagesObject:(Message *)value;
-- (void)removeMessagesObject:(Message *)value;
-- (void)addMessages:(NSSet *)values;
-- (void)removeMessages:(NSSet *)values;
-
-- (void)addPlansObject:(Plan *)value;
-- (void)removePlansObject:(Plan *)value;
-- (void)addPlans:(NSSet *)values;
-- (void)removePlans:(NSSet *)values;
++ (Owner *)updateOwnerWithInfo:(NSDictionary *)dict;
 
 @end
+
+NS_ASSUME_NONNULL_END
+
+#import "Owner+CoreDataProperties.h"

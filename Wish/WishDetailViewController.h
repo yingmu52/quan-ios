@@ -10,7 +10,7 @@
 #import "Theme.h"
 #import "WishDetailCell.h"
 #import "SystemUtil.h"
-#import "Feed+FeedCRUD.h"
+#import "Feed.h"
 #import "UIImage+ImageEffects.h"
 #import "AppDelegate.h"
 #import "FetchCenter.h"

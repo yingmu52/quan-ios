@@ -9,7 +9,7 @@
 #import "EditWishViewController.h"
 #import "Theme.h"
 #import "SystemUtil.h"
-#import "Plan+PlanCRUD.h"
+#import "Plan.h"
 #import "AppDelegate.h"
 #import "SDWebImageCompat.h"
 #import "GCPTextView.h"

@@ -2,8 +2,8 @@
 //  Feed.h
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2015-09-16.
-//  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
+//  Created by Xinyi Zhuang on 2015-10-22.
+//  Copyright © 2015 Xinyi Zhuang. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -11,26 +11,30 @@
 
 @class Comment, Plan;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface Feed : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * commentCount;
-@property (nonatomic, retain) NSDate * createDate;
-@property (nonatomic, retain) NSString * feedId;
-@property (nonatomic, retain) NSString * feedTitle;
-@property (nonatomic, retain) NSString * imageId;
-@property (nonatomic, retain) NSNumber * likeCount;
-@property (nonatomic, retain) NSNumber * selfLiked;
-@property (nonatomic, retain) NSString * picUrls;
-@property (nonatomic, retain) NSNumber * type;
-@property (nonatomic, retain) NSSet *comments;
-@property (nonatomic, retain) Plan *plan;
-@end
+typedef enum {
+    FeedTypeLegacy = 0, //单图
+    FeedTypeNoPicture,
+    FeedTypeSinglePicture,
+    FeedTypeMultiplePicture
+}FeedType;
 
-@interface Feed (CoreDataGeneratedAccessors)
++ (Feed *)createFeedInPlan:(Plan *)plan feedTitle:(NSString *)feedTitle;
 
-- (void)addCommentsObject:(Comment *)value;
-- (void)removeCommentsObject:(Comment *)value;
-- (void)addComments:(NSSet *)values;
-- (void)removeComments:(NSSet *)values;
++ (Feed *)updateFeedWithInfo:(NSDictionary *)feedItem forPlan:(Plan *)plan;
+
++ (Feed *)fetchFeedWithId:(NSString *)feedId;
+
+- (void)deleteSelf;
+
+- (NSNumber *)numberOfPictures;
+- (NSArray *)imageIdArray;
 
 @end
+
+NS_ASSUME_NONNULL_END
+
+#import "Feed+CoreDataProperties.h"

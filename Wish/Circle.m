@@ -7,7 +7,7 @@
 //
 
 #import "Circle.h"
-#import "Plan+PlanCRUD.h"
+#import "Plan.h"
 #import "AppDelegate.h"
 @implementation Circle
 
