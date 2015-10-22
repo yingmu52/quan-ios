@@ -28,7 +28,7 @@
     if (size >= FetchCenterImageSize400) {
         NSURL *urlOriginal = [fetchCenter urlWithImageID:imageId size:FetchCenterImageSizeOriginal];
         if ([manager diskImageExistsForURL:urlOriginal]) { //本地有原图的缓存
-            NSLog(@"检测到原图");
+//            NSLog(@"检测到原图");
             self.image = [manager.imageCache imageFromDiskCacheForKey:[manager cacheKeyForURL:urlOriginal]];
             return;
         }
@@ -36,8 +36,7 @@
     
     //下载图片
     if (!isImageExist) {
-        //NSLog(@"%@: downloading from internet",self.class);
-        NSLog(@"正在下载：%@\n",url);
+//        NSLog(@"正在下载：%@\n",url);
         [self sd_setImageWithURL:url
                 placeholderImage:nil
                          options:SDWebImageContinueInBackground

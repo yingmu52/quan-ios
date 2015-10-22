@@ -230,8 +230,10 @@
             NSLog(@"Feed updated");
         }
             break;
-
-        default:
+        case NSFetchedResultsChangeMove:{
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
             break;
     }
 }

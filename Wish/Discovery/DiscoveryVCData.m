@@ -202,34 +202,34 @@
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    
-    [self.collectionView performBatchUpdates: ^{
-        for (NSDictionary *change in self.itemChanges) {
-            [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-                NSFetchedResultsChangeType type = [key unsignedIntegerValue];
-                switch(type) {
-                    case NSFetchedResultsChangeInsert:
-                        [self.collectionView insertItemsAtIndexPaths:@[obj]];
-                        break;
-                    case NSFetchedResultsChangeDelete:
-                        [self.collectionView deleteItemsAtIndexPaths:@[obj]];
-                        break;
-                    case NSFetchedResultsChangeUpdate:
-                        [self.collectionView reloadItemsAtIndexPaths:@[obj]];
-                        break;
-                    case NSFetchedResultsChangeMove:
-                        [self.collectionView moveItemAtIndexPath:obj[0] toIndexPath:obj[1]];
-                        break;
-                    default:
-                        break;
-                }
-            }];
-        }
-    } completion:^(BOOL finished) {
-        self.itemChanges = nil;;
-        [(AppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
-    }];
-    
+    dispatch_main_async_safe(^{
+        [self.collectionView performBatchUpdates: ^{
+            for (NSDictionary *change in self.itemChanges) {
+                [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+                    NSFetchedResultsChangeType type = [key unsignedIntegerValue];
+                    switch(type) {
+                        case NSFetchedResultsChangeInsert:
+                            [self.collectionView insertItemsAtIndexPaths:@[obj]];
+                            break;
+                        case NSFetchedResultsChangeDelete:
+                            [self.collectionView deleteItemsAtIndexPaths:@[obj]];
+                            break;
+                        case NSFetchedResultsChangeUpdate:
+                            [self.collectionView reloadItemsAtIndexPaths:@[obj]];
+                            break;
+                        case NSFetchedResultsChangeMove:
+                            [self.collectionView moveItemAtIndexPath:obj[0] toIndexPath:obj[1]];
+                            break;
+                        default:
+                            break;
+                    }
+                }];
+            }
+        } completion:^(BOOL finished) {
+            self.itemChanges = nil;;
+            [(AppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
+        }];
+    })
 }
 
 #pragma mark - Shuffle View Controller Delegate 
