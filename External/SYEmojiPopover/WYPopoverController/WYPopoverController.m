@@ -1824,9 +1824,7 @@ static WYPopoverTheme *defaultTheme_ = nil;
     if (CGSizeEqualToSize(result, CGSizeZero))
     {
         CGSize windowSize = [[UIApplication sharedApplication] keyWindow].bounds.size;
-        
-        UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-        
+        UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
         result = CGSizeMake(320, UIDeviceOrientationIsLandscape(orientation) ? windowSize.width : windowSize.height);
     }
     
@@ -2150,7 +2148,7 @@ static WYPopoverTheme *defaultTheme_ = nil;
     
     if (backgroundView.arrowHeight > 0)
     {
-        if (UIDeviceOrientationIsLandscape(orientation)) {
+        if (UIDeviceOrientationIsLandscape([[UIDevice currentDevice] orientation])) {
             containerViewSize.width = backgroundView.frame.size.height;
             containerViewSize.height = backgroundView.frame.size.width;
         }
@@ -2967,7 +2965,7 @@ static float WYStatusBarHeight() {
         CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
         statusBarHeight = statusBarFrame.size.height;
         
-        if (UIDeviceOrientationIsLandscape(orienation))
+        if (UIDeviceOrientationIsLandscape([[UIDevice currentDevice] orientation]))
         {
             statusBarHeight = statusBarFrame.size.width;
         }

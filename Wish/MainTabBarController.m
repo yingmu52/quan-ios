@@ -68,7 +68,6 @@
 }
 
 - (void)didFinishGettingMessageNotificationWithMessageCount:(NSNumber *)msgCount followCount:(NSNumber *)followCount{
-#warning 消息页的通知暂时不包括关注的数量提醒
     self.numberOfMessages = msgCount.integerValue;
 }
 

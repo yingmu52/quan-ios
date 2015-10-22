@@ -150,8 +150,8 @@
     if(!self->_navController)
         self->_navController = [[UINavigationController alloc] initWithRootViewController:self];
     
-    NSDictionary *attr = @{UITextAttributeTextColor: [UIColor colorWithRed:0.329f green:0.341f blue:0.353f alpha:1.f],
-                           UITextAttributeFont: [UIFont fontWithName:@"HelveticaNeue-Bold" size:15.f]};
+    NSDictionary *attr = @{NSForegroundColorAttributeName:[UIColor colorWithRed:0.329f green:0.341f blue:0.353f alpha:1.f],
+                           NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Bold" size:15.f]};
     
     [self->_navController.navigationBar setTitleTextAttributes:attr];
 }
