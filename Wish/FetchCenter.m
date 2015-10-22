@@ -297,37 +297,38 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
 }
 
 - (void)uploadImages:(NSArray *)images toCreateFeed:(Feed *)feed{
-    __weak typeof(self) weakSelf = self;
-    NSMutableDictionary *imageIdMaps = [NSMutableDictionary dictionary];
-
-    for (NSUInteger index = 0 ; index < images.count ; index ++) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            [weakSelf postImageWithOperation:images[index]
-                               managedObject:feed
-                                    complete:^(NSString *fetchedId)
-            {
-                dispatch_main_async_safe(^{
-                    if (fetchedId){
-                        [imageIdMaps addEntriesFromDictionary:@{fetchedId:@(index)}];
-                        if (imageIdMaps.allKeys.count == images.count) {
-                            NSLog(@"%@",imageIdMaps);
-                            NSArray *sorted = [[imageIdMaps allKeys] sortedArrayUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
-                                return [imageIdMaps[obj1] compare:imageIdMaps[obj2]];
-                            }];
-                            NSLog(@"\n%@\n",sorted);
-                            
-                            [weakSelf.delegate didFinishUploadingImage:sorted forFeed:feed];
-                        }else{
-                            if ([self.delegate respondsToSelector:@selector(didReceivedCurrentProgressForUploadingImage:)]) {
-                                CGFloat progress = (imageIdMaps.allKeys.count - 1e-3) / images.count;
-                                [self.delegate didReceivedCurrentProgressForUploadingImage:progress];
-                            }
-                        }
-                    }
-                });
-            }];
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
+    dispatch_async(queue, ^{
+        NSMutableDictionary *imageIdMaps = [NSMutableDictionary dictionary];
+        dispatch_apply(images.count, queue, ^(size_t index){
+            [self postImageWithOperation:images[index]
+                           managedObject:feed
+                                complete:^(NSString *fetchedId)
+             {
+                 dispatch_main_async_safe(^{
+                     if (fetchedId){
+                         [imageIdMaps addEntriesFromDictionary:@{fetchedId:@(index)}];
+                         if (imageIdMaps.allKeys.count == images.count) {
+                             NSLog(@"%@",imageIdMaps);
+                             NSArray *sorted = [[imageIdMaps allKeys] sortedArrayUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
+                                 return [imageIdMaps[obj1] compare:imageIdMaps[obj2]];
+                             }];
+                             NSLog(@"\n%@\n",sorted);
+                             
+                             [self.delegate didFinishUploadingImage:sorted forFeed:feed];
+                         }else{
+                             if ([self.delegate respondsToSelector:@selector(didReceivedCurrentProgressForUploadingImage:)]) {
+                                 CGFloat progress = (imageIdMaps.allKeys.count - 1e-3) / images.count;
+                                 [self.delegate didReceivedCurrentProgressForUploadingImage:progress];
+                             }
+                         }
+                     }
+                 });
+             }];
         });
-    }
+    });
+    
 }
 
 - (void)likeFeed:(Feed *)feed{
