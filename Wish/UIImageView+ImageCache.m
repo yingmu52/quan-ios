@@ -51,7 +51,7 @@
                            
                        }];
     }else{
-        NSLog(@"可从本地获取");
+//        NSLog(@"可从本地获取");
         self.image = [manager.imageCache imageFromDiskCacheForKey:localKey];
     }
 }

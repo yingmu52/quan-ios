@@ -252,56 +252,45 @@ ShuffleViewControllerDelegate>
     [self.itemChanges addObject:change];
 }
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    
-    if (!controller.fetchedObjects.count){
-        [self setUpEmptyView];
-    }else{
-        self.collectionView.hidden = NO;
-        if (self.guideView){
-            [self.guideView removeFromSuperview];
+    dispatch_main_async_safe(^{
+        if (!controller.fetchedObjects.count){
+            [self setUpEmptyView];
+        }else{
+            self.collectionView.hidden = NO;
+            if (self.guideView){
+                [self.guideView removeFromSuperview];
+            }
         }
-    }
-    
-    [self.collectionView performBatchUpdates: ^{
-        for (NSDictionary *change in self.itemChanges) {
-            [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-                NSFetchedResultsChangeType type = [key unsignedIntegerValue];
-                switch(type) {
-                    case NSFetchedResultsChangeInsert:
-                        [self.collectionView insertItemsAtIndexPaths:@[obj]];
-                        NSLog(@"Home Card: Inserted Plan");
-                        break;
-                    case NSFetchedResultsChangeDelete:
-                        [self.collectionView deleteItemsAtIndexPaths:@[obj]];
-                        NSLog(@"Home Card: Deleted Plan");
-                        break;
-                    case NSFetchedResultsChangeUpdate:{
-                        Plan *plan = [controller objectAtIndexPath:obj];
-                        if (plan.planId && plan.backgroundNum) {
+        [self.collectionView performBatchUpdates: ^{
+            for (NSDictionary *change in self.itemChanges) {
+                [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+                    NSFetchedResultsChangeType type = [key unsignedIntegerValue];
+                    switch(type) {
+                        case NSFetchedResultsChangeInsert:
+                            [self.collectionView insertItemsAtIndexPaths:@[obj]];
+                            break;
+                        case NSFetchedResultsChangeDelete:
+                            [self.collectionView deleteItemsAtIndexPaths:@[obj]];
+                            break;
+                        case NSFetchedResultsChangeUpdate:{
                             [UIView performWithoutAnimation:^{
                                 [self.collectionView reloadItemsAtIndexPaths:@[obj]];
-                                [self.collectionView scrollToItemAtIndexPath:obj
-                                                            atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
-                                                                    animated:NO];
                             }];
-                            NSLog(@"Home Card: Updated Plan");
                         }
+                            break;
+                        case NSFetchedResultsChangeMove:
+                            [self.collectionView moveItemAtIndexPath:obj[0] toIndexPath:obj[1]];
+                            break;
                     }
-                        break;
-                    case NSFetchedResultsChangeMove:
-                        [self.collectionView moveItemAtIndexPath:obj[0] toIndexPath:obj[1]];
-                        break;
-                    default:
-                        break;
-                }
-            }];
-        }
-    } completion:^(BOOL finished) {
-        // self.title = [NSString stringWithFormat:@"%@ plans",@(self.fetchedRC.fetchedObjects.count)];
-        self.itemChanges = nil;
-        [self updateNavigationTitle];
-        [(AppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
-    }];
+                }];
+            }
+        } completion:^(BOOL finished) {
+            // self.title = [NSString stringWithFormat:@"%@ plans",@(self.fetchedRC.fetchedObjects.count)];
+            self.itemChanges = nil;
+            [self updateNavigationTitle];
+            [(AppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
+        }];
+    });
 }
 #pragma mark - implement parent class abstract methods
 - (void)configureCollectionViewCell:(HomeCardView *)cell atIndexPath:(NSIndexPath *)indexPath{
