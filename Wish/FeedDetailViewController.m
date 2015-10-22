@@ -162,8 +162,8 @@
     self.headerView.titleTextLabel.attributedText = [[NSAttributedString alloc] initWithString:self.feed.feedTitle
                                                                                     attributes:self.textAttributes];
     self.headerView.dateLabel.text = [SystemUtil stringFromDate:feed.createDate];
-    [self.headerView setLikeButtonText:[NSString stringWithFormat:@"%@",feed.likeCount]];
-    [self.headerView setCommentButtonText:[NSString stringWithFormat:@"%@",feed.commentCount]];
+    [self.headerView setLikeButtonText:feed.likeCount];
+    [self.headerView setCommentButtonText:feed.commentCount];
     [self.headerView.likeButton setSelected:feed.selfLiked.boolValue];
 }
 
@@ -304,7 +304,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
         
         [self.fetchCenter unLikeFeed:self.feed];
     }
-    [headerView setLikeButtonText:[NSString stringWithFormat:@"%@",self.feed.likeCount]];
+    [headerView setLikeButtonText:self.feed.likeCount];
 }
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
@@ -335,7 +335,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 - (void)didFinishDeletingComment:(Comment *)comment{
     [[AppDelegate getContext] deleteObject:comment];
     self.feed.commentCount = @(self.feed.commentCount.integerValue - 1);
-    [self.headerView setCommentButtonText:[NSString stringWithFormat:@"%@",self.feed.commentCount]];
+    [self.headerView setCommentButtonText:self.feed.commentCount];
 }
 
 - (void)didFinishLoadingCommentList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage forFeed:(Feed *)feed{

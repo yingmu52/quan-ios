@@ -28,6 +28,6 @@
 
 + (instancetype)instantiateFromNib:(CGRect)frame;
 
-- (void)setLikeButtonText:(NSString *)text;
-- (void)setCommentButtonText:(NSString *)text;
+- (void)setLikeButtonText:(NSNumber *)text;
+- (void)setCommentButtonText:(NSNumber *)text;
 @end

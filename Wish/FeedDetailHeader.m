@@ -47,12 +47,14 @@
     self.pageControl.currentPage = scrollView.contentOffset.x / scrollView.frame.size.width;;
 }
 
-- (void)setLikeButtonText:(NSString *)text{
+- (void)setLikeButtonText:(NSNumber *)count{
+    NSString *text = count.integerValue ? [NSString stringWithFormat:@"%@",count] : @"赞";
     [self.likeButton setTitle:[text stringByAppendingString:@" "] forState:UIControlStateNormal];
     [self.likeButton sizeToFit];
 }
 
-- (void)setCommentButtonText:(NSString *)text{
+- (void)setCommentButtonText:(NSNumber *)count{
+    NSString *text = count.integerValue ? [NSString stringWithFormat:@"%@",count] : @"评论";
     [self.commentButton setTitle:[text stringByAppendingString:@" "] forState:UIControlStateNormal];
 }
 

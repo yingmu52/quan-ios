@@ -292,8 +292,8 @@
     
     cell.titleLabel.text = feed.feedTitle;
     
-    cell.likeCountLabel.text = [NSString stringWithFormat:@"%@",feed.likeCount];
-    cell.commentCountLabel.text = [NSString stringWithFormat:@"%@",feed.commentCount];
+    cell.likeCountLabel.text = feed.likeCount.integerValue ? [NSString stringWithFormat:@"%@",feed.likeCount] : @"赞";
+    cell.commentCountLabel.text = feed.commentCount.integerValue ? [NSString stringWithFormat:@"%@",feed.commentCount] : @"评论";
     
     NSNumber *numberOfPictures = [feed numberOfPictures];
     if (numberOfPictures.integerValue > 1) {
