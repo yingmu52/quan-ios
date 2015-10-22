@@ -684,28 +684,37 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
          {
              //retCode大于等于0，表示上传成功
              if (resp.retCode >= 0) {
+                 //得到图片上传成功后的回包信息
+                 TXYPhotoUploadTaskRsp *photoResp = (TXYPhotoUploadTaskRsp *)resp;
+                 
                  dispatch_main_async_safe(^{
-                     //得到图片上传成功后的回包信息
-                     TXYPhotoUploadTaskRsp *photoResp = (TXYPhotoUploadTaskRsp *)resp;
                      completionBlock(photoResp.photoFileId);
                  });
+                 
+                 //缓存图片
+                 NSURL *url = [self urlWithImageID:photoResp.photoFileId size:FetchCenterImageSizeOriginal];
+                 SDWebImageManager *manager = [SDWebImageManager sharedManager];
+                 [manager.imageCache storeImage:image forKey:[manager cacheKeyForURL:url]];
+
+
+                 
              }else{
                  if ([self.delegate respondsToSelector:@selector(didFailUploadingImageWithInfo:entity:)]) {
                      dispatch_main_async_safe((^{
-                             [self.delegate didFailUploadingImageWithInfo:@{@"ret":@"上传图片失败",@"msg":resp.descMsg}
+                         [self.delegate didFailUploadingImageWithInfo:@{@"ret":@"上传图片失败",@"msg":resp.descMsg}
                                                                    entity:managedObject];
                      }));
 
                  }
-//                 NSLog(@"上传图片失败，code:%d desc:%@", resp.retCode, resp.descMsg);
+                 //NSLog(@"上传图片失败，code:%d desc:%@", resp.retCode, resp.descMsg);
                  //delete temp file in webpPath
                  [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
              }
              
          }progress:^(int64_t totalSize, int64_t sendSize, NSDictionary *context){
              //进度
-//             long progress = (long)(sendSize * 100.0f/totalSize);
-//             NSLog(@"%@",[NSString stringWithFormat:@"上传进度: %ld%%",progress]);
+             //long progress = (long)(sendSize * 100.0f/totalSize);
+             //NSLog(@"%@",[NSString stringWithFormat:@"上传进度: %ld%%",progress]);
              
          }stateChange:^(TXYUploadTaskState state, NSDictionary *context) {
              //上传状态
@@ -822,19 +831,15 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
 #pragma mark - 图片id转换成图片请求的函数
 
 - (NSURL *)urlWithImageID:(NSString *)imageId size:(FetchCenterImageSize)size{
-    if (size) {
-        NSString *url;
-        if (imageId.length > 30) { //优图id
-            url = [NSString stringWithFormat:@"http://shier-%@.image.myqcloud.com/%@/%@",YOUTU_APP_ID,imageId,@(size)];
-//            NSLog(@">>>>>>>>>>%@",url);
-        }else{ //老id
-            NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@?",self.baseUrl,PIC,GET_IMAGE];
-            url = [NSString stringWithFormat:@"%@id=%@",[self addGeneralArgumentsForBaseURL:rqtStr],imageId];
-        }
-        return [NSURL URLWithString:url];
-    }else{
-        return nil;
+    NSString *url;
+    if (imageId.length > 30) { //优图id
+        NSString *base = [NSString stringWithFormat:@"http://shier-%@.image.myqcloud.com/%@",YOUTU_APP_ID,imageId];
+        url = (size == FetchCenterImageSizeOriginal) ? base : [base stringByAppendingFormat:@"/%@",@(size)];
+    }else{ //老id
+        NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@?",self.baseUrl,PIC,GET_IMAGE];
+        url = [NSString stringWithFormat:@"%@id=%@",[self addGeneralArgumentsForBaseURL:rqtStr],imageId];
     }
+    return [NSURL URLWithString:url];
 }
 
 #pragma mark - response handler

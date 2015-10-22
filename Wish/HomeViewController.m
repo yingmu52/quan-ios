@@ -116,7 +116,7 @@ ShuffleViewControllerDelegate>
     myIcon.userInteractionEnabled = YES;
     myIcon.gestureRecognizers = @[[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showProfileView)]];
     if (newPicId){
-        [myIcon showImageWithImageUrl:[self.fetchCenter urlWithImageID:newPicId size:FetchCenterImageSize100]];
+        [myIcon downloadImageWithImageId:newPicId size:FetchCenterImageSize100];
     }else{
         myIcon.image = [Theme menuLoginDefault];
     }
@@ -306,8 +306,7 @@ ShuffleViewControllerDelegate>
 #pragma mark - implement parent class abstract methods
 - (void)configureCollectionViewCell:(HomeCardView *)cell atIndexPath:(NSIndexPath *)indexPath{
     Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
-    NSURL *imageUrl = [self.fetchCenter urlWithImageID:plan.backgroundNum size:FetchCenterImageSize800];
-    [cell.imageView showImageWithImageUrl:imageUrl];
+    [cell.imageView downloadImageWithImageId:plan.backgroundNum size:FetchCenterImageSize800];
     cell.titleLabel.text = plan.planTitle;
     cell.subtitleLabel.text = [NSString stringWithFormat:@"%@条记录  %@人关注",plan.tryTimes,plan.followCount];
     cell.delegate = self;

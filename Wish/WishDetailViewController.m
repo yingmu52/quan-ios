@@ -300,9 +300,7 @@
     }else{
         cell.pictureCountLabel.hidden = YES;
     }
-    
-    NSURL *imageUrl = [self.fetchCenter urlWithImageID:feed.imageId size:FetchCenterImageSize800];
-    [cell.photoView showImageWithImageUrl:imageUrl];
+    [cell.photoView downloadImageWithImageId:feed.imageId size:FetchCenterImageSize800];
     return cell;
 }
 

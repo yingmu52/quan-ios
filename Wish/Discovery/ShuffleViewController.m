@@ -67,8 +67,7 @@
         cell = [aCollectionView dequeueReusableCellWithReuseIdentifier:PREVIEWCELLNORMAL forIndexPath:indexPath];
         Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
         
-        NSURL *imageUrl = [[FetchCenter new] urlWithImageID:plan.backgroundNum size:FetchCenterImageSize400];
-        [cell.planImageView showImageWithImageUrl:imageUrl];
+        [cell.planImageView downloadImageWithImageId:plan.backgroundNum size:FetchCenterImageSize400];
         
         cell.titleLabel.text = plan.planTitle;
         cell.recordCountLabel.text = [NSString stringWithFormat:@"%@个记录",plan.tryTimes];

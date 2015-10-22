@@ -13,6 +13,6 @@
 
 @interface UIImageView (ImageCache)
 
-- (BOOL)showImageWithImageUrl:(NSURL *)url;
+- (void)downloadImageWithImageId:(NSString *)imageId size:(FetchCenterImageSize)size;
 
 @end

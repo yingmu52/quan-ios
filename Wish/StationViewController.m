@@ -32,8 +32,7 @@ typedef enum {
     [self.view insertSubview:layer atIndex:0];
     
     //设置小卡片封面
-    NSURL *imageUrl = [self.fetchCenter urlWithImageID:self.plan.backgroundNum size:FetchCenterImageSize50];
-    [self.cardImageView showImageWithImageUrl:imageUrl];
+    [self.cardImageView downloadImageWithImageId:self.plan.backgroundNum size:FetchCenterImageSize50]; 
 
 }
 

@@ -44,9 +44,7 @@
                                                                              forIndexPath:indexPath];
         Feed *feed = self.feedsArray[indexPath.row];
         NSAssert(feed.imageId, @"null feed image id");
-
-        NSURL *imageUrl = [[FetchCenter new] urlWithImageID:feed.imageId size:FetchCenterImageSize400];
-        [cell.feedImageView showImageWithImageUrl:imageUrl];
+        [cell.feedImageView downloadImageWithImageId:feed.imageId size:FetchCenterImageSize400];
     }
     return cell;
     

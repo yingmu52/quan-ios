@@ -142,10 +142,7 @@
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
             imageView.contentMode = UIViewContentModeScaleAspectFill;
             imageView.clipsToBounds = YES;
-
-            NSURL *imageUrl = [[FetchCenter new] urlWithImageID:images[index] size:FetchCenterImageSize800];
-            [imageView showImageWithImageUrl:imageUrl];
-            
+            [imageView downloadImageWithImageId:images[index] size:FetchCenterImageSize800];
             [_headerView.scrollView addSubview:imageView];
             
         }
@@ -186,9 +183,7 @@
 
 - (void)configureCell:(FeedDetailCell *)cell indexPath:(NSIndexPath *)indexPath{
     Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
-    NSURL *imageUrl = [self.fetchCenter urlWithImageID:comment.owner.headUrl size:FetchCenterImageSize100];
-    [cell.profileImageView showImageWithImageUrl:imageUrl];
-    
+    [cell.profileImageView downloadImageWithImageId:comment.owner.headUrl size:FetchCenterImageSize100];
     cell.contentTextView.text = comment.content;
     
     NSDictionary *userNameAttribute = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00B9C0"]};
