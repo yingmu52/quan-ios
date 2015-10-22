@@ -18,7 +18,6 @@ static CGFloat kEndPoint = 1.5;
 {
     [super awakeFromNib];
     
-    self.tintColor = [UIColor blackColor];
     [self showDefaultBackground];
     
     //修复iphone6 导航不适配问题
@@ -34,19 +33,20 @@ static CGFloat kEndPoint = 1.5;
                                  NSFontAttributeName:[UIFont systemFontOfSize:17.0]};
 }
 - (void)showClearBackground{
-    [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    self.shadowImage = [UIImage new];
-    self.translucent = YES;
+    [self setNavigationBarWithColor:[UIColor clearColor]];
 }
 
 - (void)showDefaultBackground{
+    
+    //防止图标被染色
     self.tintColor = [UIColor blackColor];
+
+    //去掉分隔线, 加背影色
+    [self setNavigationBarWithColor:[UIColor whiteColor]];
+    
     //导航文字属性
     [self showDefaultTextColor];
-    //去掉分隔线, 加背影色
-    [self setBackgroundImage:[SystemUtil imageFromColor:[UIColor whiteColor] size:CGSizeMake(1, 1)]
-               forBarMetrics:UIBarMetricsDefault];
-    self.shadowImage = [UIImage new];
+
 }
 
 void drawLinearGradient(CGContextRef context, CGRect rect, CGColorRef startColor, CGColorRef endColor)
@@ -106,8 +106,6 @@ void drawLinearGradient(CGContextRef context, CGRect rect, CGColorRef startColor
     [self setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
     [self setBarStyle:UIBarStyleDefault];
     [self setShadowImage:[UIImage new]];
-    [self setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-    [self setTintColor:[UIColor whiteColor]];
     [self setTranslucent:YES];
     
 }

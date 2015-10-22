@@ -90,7 +90,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.navigationBar.shadowImage = [UIImage new]; //主页到详情时，隐藏导航分隔线
     [self setUpNavigationItem];
     [self initialHeaderView];
     [self.tableView registerNib:[UINib nibWithNibName:@"WishDetailCell" bundle:nil]
