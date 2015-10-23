@@ -46,8 +46,6 @@
     if (newPicId){
         [self.profilePicture setImageWithURL:[self.fetchCenter urlWithImageID:newPicId size:FetchCenterImageSize200]
                  usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    }else{
-        self.profilePicture.image = [Theme menuLoginDefault];
     }
     
     //设置标题

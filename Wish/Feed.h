@@ -24,7 +24,7 @@ typedef enum {
 
 + (Feed *)createFeedInPlan:(Plan *)plan feedTitle:(NSString *)feedTitle;
 
-+ (Feed *)updateFeedWithInfo:(NSDictionary *)feedItem forPlan:(Plan *)plan;
++ (Feed *)updateFeedWithInfo:(NSDictionary *)feedItem forPlan:(nullable Plan *)plan;
 
 + (Feed *)fetchFeedWithId:(NSString *)feedId;
 

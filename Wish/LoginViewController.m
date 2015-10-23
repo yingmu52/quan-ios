@@ -66,7 +66,6 @@
 
     }
 
-    self.QQLoginButton.enabled = YES;    
 }
 
 
@@ -90,14 +89,12 @@
     }else{
         NSLog(@"login fail");
     }
-    self.QQLoginButton.enabled = YES;
 }
 
 //no internet
 -(void)tencentDidNotNetWork
 {
     NSLog(@"无网络连接，请设置网络");
-    self.QQLoginButton.enabled = YES;
 }
 
 
@@ -139,7 +136,6 @@
                              kOPEN_PERMISSION_GET_INFO,
                              kOPEN_PERMISSION_GET_OTHER_INFO];
     [self.tencentOAuth authorize:permissions inSafari:NO];
-    self.QQLoginButton.enabled = NO;
     [User updateOwnerInfo:@{LOGIN_TYPE:@"qq"}];
 }
 

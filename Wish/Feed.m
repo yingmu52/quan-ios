@@ -27,7 +27,7 @@
     return feed;
 }
 
-+ (Feed *)updateFeedWithInfo:(NSDictionary *)feedItem forPlan:(Plan *)plan{
++ (Feed *)updateFeedWithInfo:(NSDictionary *)feedItem forPlan:(nullable Plan *)plan{
     NSArray *checks = [Plan fetchWith:@"Feed"
                             predicate:[NSPredicate predicateWithFormat:@"feedId == %@",feedItem[@"id"]]
                      keyForDescriptor:@"createDate"];

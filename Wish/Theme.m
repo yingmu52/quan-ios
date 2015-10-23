@@ -66,11 +66,6 @@
     return [UIImage imageNamed:@"tips_bg"];
 }
 
-+ (UIImage *)menuLoginDefault
-{
-    return [UIImage imageNamed:@"tab_ic_login_default"];
-}
-
 + (UIImage *)menuWishListDefault
 {
     return [UIImage imageNamed:@"tab_ic_home_default"];

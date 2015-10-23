@@ -25,7 +25,6 @@
 + (UIColor *)privacyBackgroundSelected;
 + (UIColor *)privacyBackgroundDefault;
 
-+ (UIImage *)menuLoginDefault;
 + (UIImage *)menuWishListDefault;
 + (UIImage *)menuWishListSelected;
 + (UIImage *)menuJourneyDefault;

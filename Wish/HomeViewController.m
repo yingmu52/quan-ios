@@ -117,8 +117,6 @@ ShuffleViewControllerDelegate>
     myIcon.gestureRecognizers = @[[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showProfileView)]];
     if (newPicId){
         [myIcon downloadImageWithImageId:newPicId size:FetchCenterImageSize100];
-    }else{
-        myIcon.image = [Theme menuLoginDefault];
     }
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:myIcon];
     
