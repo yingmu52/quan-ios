@@ -8,7 +8,6 @@
 #import "DiscoveryViewController.h"
 #import "Theme.h"
 #import "CHTCollectionViewWaterfallLayout.h"
-#import "DiscoveryBannerCell.h"
 #import "MainTabBarController.h"
 #import "UIImageView+WebCache.h"
 @interface DiscoveryViewController () <CHTCollectionViewDelegateWaterfallLayout>

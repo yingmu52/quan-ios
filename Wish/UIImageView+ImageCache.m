@@ -25,14 +25,20 @@
     BOOL isImageExist = [manager diskImageExistsForURL:url];
     
     //请求较大的图片时，如果原图存在时直接设置原图，（主人发图时，原图被缓存下来，可以直接使用）
-    if (size >= FetchCenterImageSize400) {
-        NSURL *urlOriginal = [fetchCenter urlWithImageID:imageId size:FetchCenterImageSizeOriginal];
-        if ([manager diskImageExistsForURL:urlOriginal]) { //本地有原图的缓存
-//            NSLog(@"检测到原图");
-            self.image = [manager.imageCache imageFromDiskCacheForKey:[manager cacheKeyForURL:urlOriginal]];
-            return;
-        }
-    }
+//    if (size >= FetchCenterImageSize400) {
+//        __block UIImage *image;
+//        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//            NSURL *urlOriginal = [fetchCenter urlWithImageID:imageId size:FetchCenterImageSizeOriginal];
+//            if ([manager diskImageExistsForURL:urlOriginal]) { //本地有原图的缓存
+//                NSLog(@"检测到原图");
+//                image = [manager.imageCache imageFromDiskCacheForKey:[manager cacheKeyForURL:urlOriginal]];
+//            }
+//            dispatch_async(dispatch_get_main_queue(), ^(void){
+//                self.image = image;
+//                return;
+//            });
+//        });
+//    }
     
     //下载图片
     if (!isImageExist) {

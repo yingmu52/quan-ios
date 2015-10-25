@@ -7,8 +7,6 @@
 //
 
 #import "FetchCenter.h"
-//#define BASE_URL @"http://182.254.167.228/superplan/"
-
 
 #define INNER_NETWORK_URL @"http://182.254.167.228"
 #define OUTTER_NETWORK_URL @"http://120.24.73.51"
@@ -654,22 +652,22 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
     //chekc internet
     if (![self hasActiveInternetConnection]) return;
 
-    //create webp local path
+    //创建本地路径
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *uuidString = [NSUUID UUID].UUIDString;
     NSString *filePath = [paths[0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg",uuidString]];
     
-    //compress image
+    //压缩图片
     CGFloat originalSize = UIImagePNGRepresentation(image).length/1024.0f; //in KB
     NSLog(@"original size %@ KB", @(originalSize));
-    
     NSData *imageData = UIImageJPEGRepresentation(image,0.5);
     NSLog(@"compressed size %@ KB", @(imageData.length/1024.0f));
 
+    //缓存压缩图像
     NSAssert(imageData.length, @"0 size image");
     if ([imageData writeToFile:filePath atomically:YES]) {
         
-        //1.构造TXYPhotoUploadTask上传任务,
+        //构造TXYPhotoUploadTask上传任务,
         NSString *fileId = [NSString stringWithFormat:@"%@%@",IMAGE_PREFIX,uuidString];//自定义图像id
         NSString *signature = [User youtuSignature];
         NSAssert(![signature isEqualToString:@""], @"Invalid Youtu Signature");
@@ -679,7 +677,7 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
                                                                            expiredDate:3600
                                                                             msgContext:@"picture upload successed from iOS"
                                                                                 fileId:fileId];
-        //2.调用TXYUploadManager的upload接口
+        //调用TXYUploadManager的upload接口
         [self.uploadManager upload:uploadPhotoTask
                           complete:^(TXYTaskRsp *resp, NSDictionary *context)
          {
@@ -693,11 +691,10 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
                  });
                  
                  //缓存图片
-                 NSURL *url = [self urlWithImageID:photoResp.photoFileId size:FetchCenterImageSizeOriginal];
-                 SDWebImageManager *manager = [SDWebImageManager sharedManager];
-                 [manager.imageCache storeImage:image forKey:[manager cacheKeyForURL:url]];
-
-
+//                 NSURL *url = [self urlWithImageID:photoResp.photoFileId size:FetchCenterImageSizeOriginal];
+//                 SDWebImageManager *manager = [SDWebImageManager sharedManager];
+//                 NSLog(@"orientation :%@",@(image.imageOrientation));
+//                 [manager.imageCache storeImage:image forKey:[manager cacheKeyForURL:url]];
                  
              }else{
                  if ([self.delegate respondsToSelector:@selector(didFailUploadingImageWithInfo:entity:)]) {
@@ -707,10 +704,13 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
                      }));
 
                  }
-                 //NSLog(@"上传图片失败，code:%d desc:%@", resp.retCode, resp.descMsg);
-                 //delete temp file in webpPath
-                 [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
              }
+             
+             //NSLog(@"上传图片失败，code:%d desc:%@", resp.retCode, resp.descMsg);
+             //删除缓存
+             [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+             NSAssert(![[NSFileManager defaultManager] fileExistsAtPath:filePath],@"没有成功删除压缩缓存");
+
              
          }progress:^(int64_t totalSize, int64_t sendSize, NSDictionary *context){
              //进度
