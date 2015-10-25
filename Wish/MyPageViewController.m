@@ -166,9 +166,8 @@
             NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:entity.name];
             [request setIncludesPropertyValues:NO]; //only fetch the managedObjectID
             NSArray * objects = [backgroundMoc executeFetchRequest:request error:nil];
-            //error handling goes here
-            for (Plan *plan in objects) {
-                [backgroundMoc deleteObject:plan];
+            for (NSManagedObject *entity in objects) {
+                [backgroundMoc deleteObject:entity];
             }
         }
         
