@@ -147,6 +147,10 @@
     return [UIImage imageNamed:@"navbar_ic_add"];
 }
 
++ (UIImage *)navInviteDefault{
+    return [UIImage imageNamed:@"navbar_ic_invite"];
+}
+
 + (UIImage *)navMenuDefault{
     return [UIImage imageNamed:@"nav_ic_tab_default"];
 }

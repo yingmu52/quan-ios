@@ -257,7 +257,7 @@
 - (void)setUpNavigationItem
 {
     if ([User isSuperUser]) {
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[Theme navCircleIcon]
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[Theme navInviteDefault]
                                                                                  style:UIBarButtonItemStylePlain
                                                                                 target:self
                                                                                 action:@selector(showCircleList)];

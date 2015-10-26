@@ -46,6 +46,7 @@
 + (UIImage *)navTikButtonDisable;
 + (UIImage *)navButtonDeleted;
 + (UIImage *)navCircleIcon;
++ (UIImage *)navInviteDefault;
 
 + (UIImage *)wishDetailCameraDefault;
 + (UIImage *)wishDetailBackgroundNonLogo;
