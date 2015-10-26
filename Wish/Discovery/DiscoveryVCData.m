@@ -87,26 +87,20 @@
 
 
 - (void)didfinishFetchingDiscovery:(NSArray *)plans circleTitle:(NSString *)title{
-    //删除在本地缓存的不存在于服务器上的事件，异线。
-    if (plans.count > 0){ //判断服务器的列表是否有数据，如果没有的话不要处理本地的事件
-        dispatch_queue_t compareList = dispatch_queue_create("DiscoveryVCData.compareList", NULL);
-        dispatch_async(compareList, ^{
-            @try { //当修改plan的属性时，会引起fetchedObjects的数量改变，引起数组索引超出范围。
-                for (Plan *plan in self.fetchedRC.fetchedObjects){
-                    if (![plans containsObject:plan]){
-                        NSLog(@"Removing plan %@ : %@",plan.planId,plan.planTitle);
-                        plan.discoverIndex = nil;
-                    }
-                }
-            }
-            @catch (NSException *exception) {
-                NSLog(@"%@",exception);
-            }
-        });
-    }
     
     //设置导航标题
     self.navigationItem.title = title;
+    
+    //移除发现页的不存在于服务器上的事件，异线。
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        for (Plan *plan in [self.fetchedRC.fetchedObjects copy]){
+            if (![plans containsObject:plan]){
+                NSLog(@"Removing plan %@ : %@",plan.planId,plan.planTitle);
+                plan.discoverIndex = nil;
+            }
+        }
+    });
+
 }
 
 

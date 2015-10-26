@@ -102,8 +102,10 @@
         plan.tryTimes = @([dict[@"tryTimes"] integerValue]);
     }
     
-    if (![plan.cornerMask isEqualToString:dict[@"cornerMark"]] && ![dict[@"cornerMark"] isKindOfClass:[NSNull class]]) {
-        plan.cornerMask = dict[@"cornerMark"];
+    NSString *cornerMask = dict[@"cornerMark"];
+    if (![plan.cornerMask isEqualToString:cornerMask] &&
+        [cornerMask isEqualToString:@"top"]){
+        plan.cornerMask = cornerMask;
     }
     
     return plan;
