@@ -9,7 +9,6 @@
 #import "NavigationBar.h"
 @import QuartzCore;
 #import "Theme.h"
-#import "UINavigationBar+CustomHeight.h"
 @implementation NavigationBar
 
 static CGFloat kEndPoint = 1.5;

@@ -97,12 +97,6 @@
 		A0D1023A1B84EC03006B0E4E /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D102381B84EC03006B0E4E /* UIImageView+UIActivityIndicatorForSDWebImage.m */; };
 		A0D1023E1B84ECDF006B0E4E /* NavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D1023D1B84ECDF006B0E4E /* NavigationBar.m */; };
 		A0D1023F1B84ECDF006B0E4E /* NavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D1023D1B84ECDF006B0E4E /* NavigationBar.m */; };
-		A0D102441B84ED0B006B0E4E /* UINavigationBar+CustomHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D102411B84ED0B006B0E4E /* UINavigationBar+CustomHeight.m */; };
-		A0D102451B84ED0B006B0E4E /* UINavigationBar+CustomHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D102411B84ED0B006B0E4E /* UINavigationBar+CustomHeight.m */; };
-		A0D102461B84ED0B006B0E4E /* UINavigationItem+CustomItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D102431B84ED0B006B0E4E /* UINavigationItem+CustomItem.m */; };
-		A0D102471B84ED0B006B0E4E /* UINavigationItem+CustomItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D102431B84ED0B006B0E4E /* UINavigationItem+CustomItem.m */; };
-		A0D1024A1B84ED20006B0E4E /* CustomBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D102491B84ED20006B0E4E /* CustomBarItem.m */; };
-		A0D1024B1B84ED20006B0E4E /* CustomBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D102491B84ED20006B0E4E /* CustomBarItem.m */; };
 		A0D1024E1B84EDCA006B0E4E /* UIImage+sdWebP.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D1024D1B84EDCA006B0E4E /* UIImage+sdWebP.m */; };
 		A0D1024F1B84EDCA006B0E4E /* UIImage+sdWebP.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D1024D1B84EDCA006B0E4E /* UIImage+sdWebP.m */; };
 		A0D1025A1B84EF3B006B0E4E /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D102581B84EF3B006B0E4E /* HeaderView.m */; };
@@ -433,12 +427,6 @@
 		A0D102381B84EC03006B0E4E /* UIImageView+UIActivityIndicatorForSDWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+UIActivityIndicatorForSDWebImage.m"; sourceTree = "<group>"; };
 		A0D1023C1B84ECDF006B0E4E /* NavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationBar.h; sourceTree = "<group>"; };
 		A0D1023D1B84ECDF006B0E4E /* NavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationBar.m; sourceTree = "<group>"; };
-		A0D102401B84ED0B006B0E4E /* UINavigationBar+CustomHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+CustomHeight.h"; sourceTree = "<group>"; };
-		A0D102411B84ED0B006B0E4E /* UINavigationBar+CustomHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+CustomHeight.m"; sourceTree = "<group>"; };
-		A0D102421B84ED0B006B0E4E /* UINavigationItem+CustomItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+CustomItem.h"; sourceTree = "<group>"; };
-		A0D102431B84ED0B006B0E4E /* UINavigationItem+CustomItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+CustomItem.m"; sourceTree = "<group>"; };
-		A0D102481B84ED20006B0E4E /* CustomBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomBarItem.h; sourceTree = "<group>"; };
-		A0D102491B84ED20006B0E4E /* CustomBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomBarItem.m; sourceTree = "<group>"; };
 		A0D1024C1B84EDCA006B0E4E /* UIImage+sdWebP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+sdWebP.h"; sourceTree = "<group>"; };
 		A0D1024D1B84EDCA006B0E4E /* UIImage+sdWebP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+sdWebP.m"; sourceTree = "<group>"; };
 		A0D102571B84EF3B006B0E4E /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeaderView.h; path = ../External/VGParallaxHeader/HeaderView.h; sourceTree = "<group>"; };
@@ -832,12 +820,6 @@
 		A0D1023B1B84ECDF006B0E4E /* NavBar */ = {
 			isa = PBXGroup;
 			children = (
-				A0D102481B84ED20006B0E4E /* CustomBarItem.h */,
-				A0D102491B84ED20006B0E4E /* CustomBarItem.m */,
-				A0D102401B84ED0B006B0E4E /* UINavigationBar+CustomHeight.h */,
-				A0D102411B84ED0B006B0E4E /* UINavigationBar+CustomHeight.m */,
-				A0D102421B84ED0B006B0E4E /* UINavigationItem+CustomItem.h */,
-				A0D102431B84ED0B006B0E4E /* UINavigationItem+CustomItem.m */,
 				A0D1023C1B84ECDF006B0E4E /* NavigationBar.h */,
 				A0D1023D1B84ECDF006B0E4E /* NavigationBar.m */,
 			);
@@ -1475,7 +1457,6 @@
 				A0F8C4601B88444C00A8B120 /* Wish.xcdatamodeld in Sources */,
 				A0F7D4311B84E851003CCB34 /* CHTCollectionViewWaterfallLayout.m in Sources */,
 				AEF775441A8134FE000DB73B /* HomeCardFlowLayout.m in Sources */,
-				A0D1024A1B84ED20006B0E4E /* CustomBarItem.m in Sources */,
 				AE479E9E1A6F775C00366A0A /* PostViewController.m in Sources */,
 				AE9A19881B02E3A100590784 /* FeedbackkAccessoryView.m in Sources */,
 				A0B8C8021B857F22009C4572 /* HMSegmentedControl.m in Sources */,
@@ -1495,7 +1476,6 @@
 				AE9861FA1AC33C04005544B9 /* EditWishViewController.m in Sources */,
 				A053CF7E1BA4EFF00007970A /* PostImageCell.m in Sources */,
 				A0F5132A1BD98B9600279B9D /* Message.m in Sources */,
-				A0D102461B84ED0B006B0E4E /* UINavigationItem+CustomItem.m in Sources */,
 				AE01723F1A65CD8E0014266F /* main.m in Sources */,
 				AE767E7F1ACE35A600F35137 /* FeedbackViewController.m in Sources */,
 				A0D1024E1B84EDCA006B0E4E /* UIImage+sdWebP.m in Sources */,
@@ -1506,7 +1486,6 @@
 				A0D102211B84EB6A006B0E4E /* SDWebImageDownloader.m in Sources */,
 				A0D102331B84EB6A006B0E4E /* UIImageView+WebCache.m in Sources */,
 				AEE075381A744A770015155B /* SystemUtil.m in Sources */,
-				A0D102441B84ED0B006B0E4E /* UINavigationBar+CustomHeight.m in Sources */,
 				A0F513241BD98B9600279B9D /* Owner+CoreDataProperties.m in Sources */,
 				A0A083941BD765F00057CD65 /* Circle+CoreDataProperties.m in Sources */,
 				A0D1022B1B84EB6A006B0E4E /* UIImage+GIF.m in Sources */,
@@ -1651,9 +1630,7 @@
 				AE01725C1A65CD8F0014266F /* WishTests.m in Sources */,
 				AE2F28E81AD3937700FC3370 /* WishDetailVCDiscovery.m in Sources */,
 				A0994E711BC6DF6200D45845 /* LocalDataTest.m in Sources */,
-				A0D1024B1B84ED20006B0E4E /* CustomBarItem.m in Sources */,
 				A0D1022A1B84EB6A006B0E4E /* UIButton+WebCache.m in Sources */,
-				A0D102471B84ED0B006B0E4E /* UINavigationItem+CustomItem.m in Sources */,
 				A0F7D44A1B84E851003CCB34 /* JTSImageInfo.m in Sources */,
 				A0D102361B84EB6A006B0E4E /* UIView+WebCacheOperation.m in Sources */,
 				A0D1021A1B84EB6A006B0E4E /* NSData+ImageContentType.m in Sources */,
@@ -1727,7 +1704,6 @@
 				A0F5131F1BD98B9600279B9D /* Plan.m in Sources */,
 				AEEC6C741A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,
 				A0D1023A1B84EC03006B0E4E /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */,
-				A0D102451B84ED0B006B0E4E /* UINavigationBar+CustomHeight.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
