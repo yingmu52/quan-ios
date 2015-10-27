@@ -12,13 +12,14 @@
 @interface MSSuperViewController : UIViewController <FetchCenterDelegate,NSFetchedResultsControllerDelegate>{
     @protected
     NSFetchRequest *_tableFetchRequest; //让子类可以access实例变量
+    NSFetchRequest *_collectionFetchRequest;
 }
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 
 
 #pragma mark - Collection View 
 @property (nonatomic,strong) NSFetchedResultsController *collectionFetchedRC;
-
+@property (nonatomic,weak) IBOutlet UICollectionView *collectionView;
 
 #pragma mark - Table View 
 @property (nonatomic,weak) IBOutlet UITableView *tableView;
@@ -26,5 +27,5 @@
 
 //MARK !!!: 必须设置
 @property (nonatomic,strong) NSFetchRequest *tableFetchRequest;
-
+@property (nonatomic,strong) NSFetchRequest *collectionFetchRequest;
 @end

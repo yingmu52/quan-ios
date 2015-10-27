@@ -15,10 +15,7 @@
 #import "UIImageView+ImageCache.h"
 
 @import CoreData;
-@interface ShuffleViewController () <NSFetchedResultsControllerDelegate,UICollectionViewDelegateFlowLayout,ImagePickerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
-@property (nonatomic,weak) IBOutlet UICollectionView *collectionView;
-@property (nonatomic,strong) NSMutableArray *itemChanges;
-@property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
+@interface ShuffleViewController () <UICollectionViewDelegateFlowLayout,ImagePickerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic,strong) ImagePicker *imagePicker;
 @end
 
@@ -30,32 +27,14 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (NSFetchedResultsController *)fetchedRC
-{
-    NSManagedObjectContext *context = [AppDelegate getContext];
-    if (_fetchedRC != nil) {
-        return _fetchedRC;
+- (NSFetchRequest *)collectionFetchRequest{
+    if (!_collectionFetchRequest) {
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
+        request.predicate = [NSPredicate predicateWithFormat:@"owner.ownerId == %@ && planStatus == %d",[User uid],PlanStatusOnGoing];
+        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
+        _collectionFetchRequest = request;
     }
-    //do fetchrequest
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
-    
-    request.predicate = [NSPredicate predicateWithFormat:@"owner.ownerId == %@ && planStatus == %d",[User uid],PlanStatusOnGoing];
-    
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
-    NSFetchedResultsController *newFRC = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
-    
-    _fetchedRC = newFRC;
-    // Perform Fetch
-    NSError *error = nil;
-    [_fetchedRC performFetch:&error];
-    
-    if (error) {
-        NSLog(@"Unable to perform fetch.");
-        NSLog(@"%@, %@", error, error.localizedDescription);
-    }
-    return _fetchedRC;
-    
-    
+    return _collectionFetchRequest;
 }
 
 - (PreviewCell *)collectionView:(UICollectionView *)aCollectionView
@@ -63,9 +42,9 @@
 {
     
     PreviewCell *cell;
-    if (indexPath.row != self.fetchedRC.fetchedObjects.count) { //is not the last row
+    if (indexPath.row != self.collectionFetchedRC.fetchedObjects.count) { //is not the last row
         cell = [aCollectionView dequeueReusableCellWithReuseIdentifier:PREVIEWCELLNORMAL forIndexPath:indexPath];
-        Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
+        Plan *plan = [self.collectionFetchedRC objectAtIndexPath:indexPath];
         
         [cell.planImageView downloadImageWithImageId:plan.backgroundNum size:FetchCenterImageSize400];
         
@@ -81,7 +60,7 @@
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView
     numberOfItemsInSection:(NSInteger)section {
-    return self.fetchedRC.fetchedObjects.count + 1; //including the last button
+    return self.collectionFetchedRC.fetchedObjects.count + 1; //including the last button
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
@@ -102,7 +81,8 @@
 
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (self.fetchedRC.fetchedObjects.count > 0 && indexPath.row != self.fetchedRC.fetchedObjects.count) { //场景：1个事件，+号在最后面，此时事件数>0，+号的索引为1
+    if (self.collectionFetchedRC.fetchedObjects.count > 0 &&
+        indexPath.row != self.collectionFetchedRC.fetchedObjects.count) { //场景：1个事件，+号在最后面，此时事件数>0，+号的索引为1
             //将卡片滚到与三角号对齐
             [collectionView scrollToItemAtIndexPath:indexPath
                                    atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
@@ -127,7 +107,7 @@
 
 - (void)didFinishPickingPhAssets:(NSMutableArray *)assets{
     //get select plan
-    Plan *plan = [self.fetchedRC objectAtIndexPath:[self.collectionView indexPathsForSelectedItems].lastObject];
+    Plan *plan = [self.collectionFetchedRC objectAtIndexPath:[self.collectionView indexPathsForSelectedItems].lastObject];
     [self.svcDelegate didFinishSelectingImageAssets:assets forPlan:plan];
     [self dismissViewControllerAnimated:YES completion:nil];
 }

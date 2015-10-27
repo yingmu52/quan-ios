@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Plan.h"
 #import "DiscoveryVCData.h"
-
+#import "MSSuperViewController.h"
 @class ShuffleViewController;
 @protocol ShuffleViewControllerDelegate <NSObject>
 @optional
@@ -33,7 +33,7 @@
 /**
  `ShuffleViewController` 加号浮层控制器，通过发现页，我的事儿页的加号触发
  */
-@interface ShuffleViewController : UIViewController
+@interface ShuffleViewController : MSSuperViewController
 
 /**
  svcDelegate 加号浮层的委托对象
