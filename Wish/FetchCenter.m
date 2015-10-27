@@ -95,7 +95,6 @@ typedef enum{
 
 typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId); //上传图像成功
 typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson); //请求成功
-typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSError *error); //请求失败
 
 @interface FetchCenter ()
 @property (nonatomic,strong) NSString *baseUrl;
@@ -119,7 +118,7 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
           completion:^(NSDictionary *responseJson) {
               NSLog(@"%@",responseJson);
               completionBlock();
-          } failure:nil];
+          }];
 
     
 }
@@ -138,7 +137,7 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
               }
 //              NSLog(@"%@",circles);
               completionBlock(circles);
-          } failure:nil];
+          }];
 }
 
 #pragma mark - 万象优图
@@ -228,7 +227,7 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
             [self.delegate didFinishCommentingFeed:feed commentId:commentId];
         }
 
-    }failure:nil];
+    }];
 }
 
 
@@ -399,7 +398,7 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
             }];
         }
         completionBlock(plans,title);
-    } failure:nil];
+    }];
 }
 
 
@@ -494,8 +493,6 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
             NSLog(@"create plan succeed, ID: %@",fetchedPlanId);
             completionBlock();
         }
-    }failure:^(NSDictionary *responseJson, NSError *error) {
-        completionBlock();
     }];
 }
 
@@ -769,8 +766,7 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
 - (void)getRequest:(NSString *)baseURL
          parameter:(NSDictionary *)dict
   includeArguments:(BOOL)shouldInclude //针对工具类的CGI不需要加统一参数
-        completion:(FetchCenterGetRequestCompletionBlock)completionBlock
-           failure:(FetchCenterGetRequestFailBlock)failureBlock{
+        completion:(FetchCenterGetRequestCompletionBlock)completionBlock{
     
     @try {
         //检测网络
@@ -808,7 +804,6 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
                                                       //假失败写入请求日志
                                                       [self appendRequest:request andResponse:responseJson];
                                                       
-                                                      failureBlock(responseJson,error);
                                                       NSLog(@"Fail Get Request :%@\n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
                                                             ,rqtStr,baseURL,dict,responseJson,error);
                                                   }
