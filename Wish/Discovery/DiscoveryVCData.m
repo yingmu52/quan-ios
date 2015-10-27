@@ -36,7 +36,22 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = NO;
-    [self.fetchCenter getDiscoveryList];
+    
+    [self.fetchCenter getDiscoveryList:^(NSArray *plans, NSString *circleTitle) {
+        
+        //设置导航标题
+        self.navigationItem.title = circleTitle;
+        
+        //移除发现页的不存在于服务器上的事件，异线。
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            for (Plan *plan in [self.fetchedRC.fetchedObjects copy]){
+                if (![plans containsObject:plan]){
+                    NSLog(@"Removing plan %@ : %@",plan.planId,plan.planTitle);
+                    plan.discoverIndex = nil;
+                }
+            }
+        });
+    }];
 }
 
 - (void)dealloc{
@@ -82,27 +97,6 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.fetchedRC.fetchedObjects.count;
 }
-
-#pragma mark - fetch center delegate
-
-
-- (void)didfinishFetchingDiscovery:(NSArray *)plans circleTitle:(NSString *)title{
-    
-    //设置导航标题
-    self.navigationItem.title = title;
-    
-    //移除发现页的不存在于服务器上的事件，异线。
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        for (Plan *plan in [self.fetchedRC.fetchedObjects copy]){
-            if (![plans containsObject:plan]){
-                NSLog(@"Removing plan %@ : %@",plan.planId,plan.planTitle);
-                plan.discoverIndex = nil;
-            }
-        }
-    });
-
-}
-
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     // save the plan image background only when user select a certain plan!
@@ -223,7 +217,7 @@
             self.itemChanges = nil;;
             [(AppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
         }];
-    })
+    });
 }
 
 #pragma mark - Shuffle View Controller Delegate 

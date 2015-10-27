@@ -77,7 +77,8 @@ typedef enum {
 
 typedef void(^FetchCenterGetRequestPlanCreationCompleted)(void); //创建事件完成
 typedef void(^FetchCenterGetRequestGetCircleListCompleted)(NSArray *circles); //请求圈子列表完成
-typedef void(^FetchCenterGetRequestSwithCircleCompleted)(void); //切换圈子
+typedef void(^FetchCenterGetRequestSwithCircleCompleted)(void); //切换圈子完成
+typedef void(^FetchCenterGetRequestGetDiscoverListCompleted)(NSArray *plans, NSString *circleTitle); //发现页拉取列表完成
 
 @interface FetchCenter : NSObject
 @property (nonatomic,weak) id <FetchCenterDelegate>delegate;
@@ -133,7 +134,7 @@ typedef void(^FetchCenterGetRequestSwithCircleCompleted)(void); //切换圈子
 - (void)unFollowPlan:(Plan *)plan;
 
 #pragma mark - 发现
-- (void)getDiscoveryList;
+- (void)getDiscoveryList:(FetchCenterGetRequestGetDiscoverListCompleted)completionBlock;
 - (void)fetchFollowingPlanList;
 
 #pragma mark - 个人

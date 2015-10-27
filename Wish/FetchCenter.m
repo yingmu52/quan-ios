@@ -378,9 +378,27 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
 
 #pragma mark - 发现事件
 
-- (void)getDiscoveryList{
+- (void)getDiscoveryList:(FetchCenterGetRequestGetDiscoverListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,DISCOVER,GET_DISCOVER_LIST];
-    [self getRequest:rqtStr parameter:nil operation:FetchCenterGetOpDiscoverPlans entity:nil];
+    [self getRequest:rqtStr parameter:nil includeArguments:YES completion:^(NSDictionary *responseJson) {
+
+        NSMutableArray *plans = [NSMutableArray array];
+        NSArray *planList = [responseJson valueForKeyPath:@"data.planList"];
+        NSDictionary *manList = [responseJson valueForKeyPath:@"data.manList"];
+        NSString *title = [responseJson valueForKeyPath:@"data.quanInfo.name"];
+        
+        //缓存并更新本地事件
+        if (planList && manList){
+            [planList enumerateObjectsUsingBlock:^(NSDictionary * planInfo, NSUInteger idx, BOOL * _Nonnull stop) {
+                Plan *plan = [Plan updatePlanFromServer:planInfo
+                                              ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]];
+                plan.discoverIndex = @(idx); //记录索引方便显示服务器上的顺序
+                [plans addObject:plan];
+                NSLog(@"%@, mask : %@, index %@",plan.planTitle,plan.cornerMask,plan.discoverIndex);
+            }];
+        }
+        completionBlock(plans,title);
+    } failure:nil];
 }
 
 
@@ -959,25 +977,14 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
 
                 //缓存并更新本地事件
                 if (planList && manList){
-                    for (NSDictionary *planInfo in planList){
-                        
+                    [planList enumerateObjectsUsingBlock:^(NSDictionary * planInfo, NSUInteger idx, BOOL * _Nonnull stop) {
                         Plan *plan = [Plan updatePlanFromServer:planInfo
                                                       ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]];
-                        
-                        NSNumber *index = @([planList indexOfObject:planInfo]);
-                        if (![plan.discoverIndex isEqualToNumber:index]){
-                            plan.discoverIndex = index; //记录索引方便显示服务器上的顺序
-                        }
-
+                        plan.discoverIndex = @(idx); //记录索引方便显示服务器上的顺序
                         [plans addObject:plan];
-                    }
+                        NSLog(@"%@, mask : %@, index %@",plan.planTitle,plan.cornerMask,plan.discoverIndex);
+                    }];
                 }
-                
-                //Log
-//                NSLog(@"当前圈名 %@",title);
-//                for (NSDictionary *dict in planList){
-//                    NSLog(@"%@ : %@, flag : %@, index %@",dict[@"id"],dict[@"title"],dict[@"cornerMark"],@([planList indexOfObject:dict]));
-//                }
                 
                 //完成回调
                 [self.delegate didfinishFetchingDiscovery:plans circleTitle:title];
