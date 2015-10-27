@@ -213,11 +213,16 @@
 - (void)showCircleList{
     if (self.dropdownView) {
         if (!self.dropdownView.isOpen){
+            self.tabBarController.tabBar.hidden = YES;
             [self.dropdownView showFromNavigationController:self.navigationController withContentView:self.tableView];
         }else{
             [self.dropdownView hide];
         }
     }
+}
+
+- (void)dropdownViewDidHide:(LMDropdownView *)dropdownView{
+    self.tabBarController.tabBar.hidden = NO;
 }
 
 #define cellHeight 38.0f
