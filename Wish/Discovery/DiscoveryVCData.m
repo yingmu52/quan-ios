@@ -209,10 +209,10 @@
 }
 
 #pragma mark - 下拉菜单 
+
 - (void)showCircleList{
     if (self.dropdownView) {
         if (!self.dropdownView.isOpen){
-//            [self.dropdownView showInView:self.collectionView withContentView:self.tableView atOrigin:CGPointMake(0, 2.0)];
             [self.dropdownView showFromNavigationController:self.navigationController withContentView:self.tableView];
         }else{
             [self.dropdownView hide];
@@ -227,6 +227,9 @@
         _dropdownView = [LMDropdownView dropdownView];
         _dropdownView.delegate = self;
         self.tableView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), self.tableFetchedRC.fetchedObjects.count * cellHeight);
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        self.tableView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.95];
+
     }
     return _dropdownView;
 }
@@ -249,6 +252,13 @@
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     Circle *circle = [self.tableFetchedRC objectAtIndexPath:indexPath];
     cell.textLabel.text = circle.circleName;
+    cell.backgroundColor = [UIColor clearColor];
+    
+    //设置选中颜色
+    cell.selectionStyle = UITableViewCellSeparatorStyleSingleLine;
+    UIView *bgColorView = [[UIView alloc] init];
+    bgColorView.backgroundColor = [SystemUtil colorFromHexString:@"#D7EBEB"];
+    [cell setSelectedBackgroundView:bgColorView];
     return cell;
 }
 
@@ -263,6 +273,7 @@
     }
     [self.dropdownView hide];
 }
+
 
 @end
 
