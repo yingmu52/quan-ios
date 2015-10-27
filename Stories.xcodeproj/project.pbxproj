@@ -35,6 +35,8 @@
 		A053CF7F1BA4EFF00007970A /* PostImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF7D1BA4EFF00007970A /* PostImageCell.m */; };
 		A055FB9F1BA6553A0013F91E /* ImagePreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A055FB9E1BA6553A0013F91E /* ImagePreviewCell.m */; };
 		A055FBA01BA6553A0013F91E /* ImagePreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A055FB9E1BA6553A0013F91E /* ImagePreviewCell.m */; };
+		A05AB6D41BDF783800E79F36 /* LMDropdownView.m in Sources */ = {isa = PBXBuildFile; fileRef = A05AB6D01BDF783800E79F36 /* LMDropdownView.m */; };
+		A05AB6D51BDF783800E79F36 /* UIImage+LMExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = A05AB6D31BDF783800E79F36 /* UIImage+LMExtension.m */; };
 		A066C3851BB793DA003B51D5 /* MSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A066C3841BB793DA003B51D5 /* MSLabel.m */; };
 		A066C3861BB793DA003B51D5 /* MSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A066C3841BB793DA003B51D5 /* MSLabel.m */; };
 		A066C3891BB7AE08003B51D5 /* MSSuperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A066C3881BB7AE08003B51D5 /* MSSuperViewController.m */; };
@@ -358,6 +360,10 @@
 		A053CF7D1BA4EFF00007970A /* PostImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostImageCell.m; sourceTree = "<group>"; };
 		A055FB9D1BA6553A0013F91E /* ImagePreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePreviewCell.h; sourceTree = "<group>"; };
 		A055FB9E1BA6553A0013F91E /* ImagePreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePreviewCell.m; sourceTree = "<group>"; };
+		A05AB6CF1BDF783800E79F36 /* LMDropdownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMDropdownView.h; sourceTree = "<group>"; };
+		A05AB6D01BDF783800E79F36 /* LMDropdownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMDropdownView.m; sourceTree = "<group>"; };
+		A05AB6D21BDF783800E79F36 /* UIImage+LMExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+LMExtension.h"; sourceTree = "<group>"; };
+		A05AB6D31BDF783800E79F36 /* UIImage+LMExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+LMExtension.m"; sourceTree = "<group>"; };
 		A066C3831BB793DA003B51D5 /* MSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSLabel.h; sourceTree = "<group>"; };
 		A066C3841BB793DA003B51D5 /* MSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSLabel.m; sourceTree = "<group>"; };
 		A066C3871BB7AE08003B51D5 /* MSSuperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSSuperViewController.h; sourceTree = "<group>"; };
@@ -736,6 +742,25 @@
 			path = WeChatSDK_1.5;
 			sourceTree = "<group>";
 		};
+		A05AB6CE1BDF783800E79F36 /* LMDropdownView */ = {
+			isa = PBXGroup;
+			children = (
+				A05AB6CF1BDF783800E79F36 /* LMDropdownView.h */,
+				A05AB6D01BDF783800E79F36 /* LMDropdownView.m */,
+				A05AB6D11BDF783800E79F36 /* Vender */,
+			);
+			path = LMDropdownView;
+			sourceTree = "<group>";
+		};
+		A05AB6D11BDF783800E79F36 /* Vender */ = {
+			isa = PBXGroup;
+			children = (
+				A05AB6D21BDF783800E79F36 /* UIImage+LMExtension.h */,
+				A05AB6D31BDF783800E79F36 /* UIImage+LMExtension.m */,
+			);
+			path = Vender;
+			sourceTree = "<group>";
+		};
 		A07115CE1BA6B109002C1270 /* SZTextView */ = {
 			isa = PBXGroup;
 			children = (
@@ -857,6 +882,7 @@
 		A0F7D3A51B84E851003CCB34 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				A05AB6CE1BDF783800E79F36 /* LMDropdownView */,
 				A0EE65C31BCC84DF002CC49B /* QCloudDownloadSDK */,
 				A0EE65C61BCC84DF002CC49B /* QCloudUploadSDK */,
 				A0994E5E1BC4CF9500D45845 /* SYEmojiPopover */,
@@ -1509,6 +1535,7 @@
 				AEF7F2931A686FA30022410B /* Theme.m in Sources */,
 				AEF3F87F1AA4CFA6008C2300 /* WishDetailVCOwner.m in Sources */,
 				A0994E641BC4CF9500D45845 /* SYEmojiPopover.m in Sources */,
+				A05AB6D51BDF783800E79F36 /* UIImage+LMExtension.m in Sources */,
 				A0F7D4351B84E851003CCB34 /* CustomBadge.m in Sources */,
 				A066C3891BB7AE08003B51D5 /* MSSuperViewController.m in Sources */,
 				A03010601BACAFBC0041E2CF /* QBPreViewController.m in Sources */,
@@ -1584,6 +1611,7 @@
 				A0EDFCC11B90C75900B10594 /* Reachability.m in Sources */,
 				AE2F28E71AD3937700FC3370 /* WishDetailVCDiscovery.m in Sources */,
 				AE606A231AF46991003DF16E /* MessageCell.m in Sources */,
+				A05AB6D41BDF783800E79F36 /* LMDropdownView.m in Sources */,
 				AED4CB221AC75A0200EE2DA4 /* KeyWordCell.m in Sources */,
 				A0D1022D1B84EB6A006B0E4E /* UIImage+MultiFormat.m in Sources */,
 				AEE4A6D01A96A5D500ABF946 /* AchieveCell.m in Sources */,
