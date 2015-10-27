@@ -3071,32 +3071,36 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y7F-Uz-vxB">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y7F-Uz-vxB" userLabel="qq">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                         <state key="normal" image="invite_ic_qq"/>
+                                        <connections>
+                                            <action selector="tapOnQQ" destination="hHC-dm-tO3" eventType="touchUpInside" id="Hbl-Qm-U7E"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WcH-nk-wzd">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WcH-nk-wzd" userLabel="wechat">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                         <state key="normal" image="invite_ic_wechat"/>
+                                        <connections>
+                                            <action selector="tapOnWechat" destination="hHC-dm-tO3" eventType="touchUpInside" id="5t1-7a-N4g"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="73I-Di-Bum">
-                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微信好友" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5sY-fb-kbG">
+                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="微信好友">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wF3-mS-XgE">
-                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QQ好友" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cxd-qn-4Xu">
+                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="QQ好友">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="wF3-mS-XgE" firstAttribute="centerX" secondItem="Y7F-Uz-vxB" secondAttribute="centerX" id="1Xt-Qt-Qr9"/>
+                                    <constraint firstItem="Cxd-qn-4Xu" firstAttribute="centerX" secondItem="Y7F-Uz-vxB" secondAttribute="centerX" id="IbH-ct-CnC"/>
                                     <constraint firstItem="WcH-nk-wzd" firstAttribute="centerY" secondItem="bOs-Yb-UVM" secondAttribute="centerY" id="JIt-24-tp3"/>
                                     <constraint firstItem="WcH-nk-wzd" firstAttribute="top" secondItem="aeC-bR-Cnc" secondAttribute="bottom" constant="20" id="OIE-Nx-Mwc">
                                         <variation key="heightClass=regular-widthClass=compact" constant="26"/>
@@ -3104,17 +3108,15 @@
                                     <constraint firstItem="aeC-bR-Cnc" firstAttribute="top" secondItem="bOs-Yb-UVM" secondAttribute="top" constant="45" id="PmT-DF-3My">
                                         <variation key="heightClass=regular-widthClass=compact" constant="22"/>
                                     </constraint>
+                                    <constraint firstItem="5sY-fb-kbG" firstAttribute="centerX" secondItem="WcH-nk-wzd" secondAttribute="centerX" id="RBD-ld-mjF"/>
                                     <constraint firstItem="Y7F-Uz-vxB" firstAttribute="centerY" secondItem="WcH-nk-wzd" secondAttribute="centerY" id="TTY-jL-nO8"/>
-                                    <constraint firstItem="73I-Di-Bum" firstAttribute="centerX" secondItem="WcH-nk-wzd" secondAttribute="centerX" id="haG-vm-C0T"/>
-                                    <constraint firstItem="wF3-mS-XgE" firstAttribute="top" secondItem="Y7F-Uz-vxB" secondAttribute="bottom" constant="5" id="jri-lX-wxv"/>
                                     <constraint firstAttribute="height" constant="128" id="kgL-B8-nCI">
                                         <variation key="heightClass=regular-widthClass=compact" constant="170"/>
                                     </constraint>
+                                    <constraint firstItem="Cxd-qn-4Xu" firstAttribute="top" secondItem="Y7F-Uz-vxB" secondAttribute="bottom" constant="8" id="lnc-WW-wp5"/>
+                                    <constraint firstItem="5sY-fb-kbG" firstAttribute="top" secondItem="WcH-nk-wzd" secondAttribute="bottom" constant="5" id="mF7-BQ-j4I"/>
                                     <constraint firstItem="Y7F-Uz-vxB" firstAttribute="leading" secondItem="bOs-Yb-UVM" secondAttribute="centerX" constant="252" id="qm4-i6-Ktj">
                                         <variation key="heightClass=regular-widthClass=compact" constant="60"/>
-                                    </constraint>
-                                    <constraint firstItem="73I-Di-Bum" firstAttribute="top" secondItem="WcH-nk-wzd" secondAttribute="bottom" constant="4" id="rzf-Bb-gnG">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="5"/>
                                     </constraint>
                                     <constraint firstAttribute="centerX" secondItem="WcH-nk-wzd" secondAttribute="trailing" constant="60" id="sK6-HY-fe8"/>
                                     <constraint firstItem="aeC-bR-Cnc" firstAttribute="centerX" secondItem="bOs-Yb-UVM" secondAttribute="centerX" id="wyM-Ud-jID"/>
@@ -3125,23 +3127,23 @@
                                         <exclude reference="aeC-bR-Cnc"/>
                                         <exclude reference="Y7F-Uz-vxB"/>
                                         <exclude reference="WcH-nk-wzd"/>
-                                        <exclude reference="73I-Di-Bum"/>
-                                        <exclude reference="wF3-mS-XgE"/>
+                                        <exclude reference="5sY-fb-kbG"/>
+                                        <exclude reference="Cxd-qn-4Xu"/>
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="kgL-B8-nCI"/>
                                         <exclude reference="JIt-24-tp3"/>
                                         <exclude reference="OIE-Nx-Mwc"/>
                                         <exclude reference="sK6-HY-fe8"/>
-                                        <exclude reference="haG-vm-C0T"/>
-                                        <exclude reference="rzf-Bb-gnG"/>
+                                        <exclude reference="RBD-ld-mjF"/>
+                                        <exclude reference="mF7-BQ-j4I"/>
                                         <exclude reference="PmT-DF-3My"/>
                                         <exclude reference="wyM-Ud-jID"/>
                                         <exclude reference="TTY-jL-nO8"/>
                                         <exclude reference="qm4-i6-Ktj"/>
                                         <exclude reference="z9N-BE-2KW"/>
-                                        <exclude reference="1Xt-Qt-Qr9"/>
-                                        <exclude reference="jri-lX-wxv"/>
+                                        <exclude reference="IbH-ct-CnC"/>
+                                        <exclude reference="lnc-WW-wp5"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -3149,23 +3151,23 @@
                                         <include reference="aeC-bR-Cnc"/>
                                         <include reference="Y7F-Uz-vxB"/>
                                         <include reference="WcH-nk-wzd"/>
-                                        <include reference="73I-Di-Bum"/>
-                                        <include reference="wF3-mS-XgE"/>
+                                        <include reference="5sY-fb-kbG"/>
+                                        <include reference="Cxd-qn-4Xu"/>
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="kgL-B8-nCI"/>
                                         <exclude reference="JIt-24-tp3"/>
                                         <include reference="OIE-Nx-Mwc"/>
                                         <include reference="sK6-HY-fe8"/>
-                                        <include reference="haG-vm-C0T"/>
-                                        <include reference="rzf-Bb-gnG"/>
+                                        <include reference="RBD-ld-mjF"/>
+                                        <include reference="mF7-BQ-j4I"/>
                                         <include reference="PmT-DF-3My"/>
                                         <include reference="wyM-Ud-jID"/>
                                         <include reference="TTY-jL-nO8"/>
                                         <include reference="qm4-i6-Ktj"/>
                                         <exclude reference="z9N-BE-2KW"/>
-                                        <include reference="1Xt-Qt-Qr9"/>
-                                        <include reference="jri-lX-wxv"/>
+                                        <include reference="IbH-ct-CnC"/>
+                                        <include reference="lnc-WW-wp5"/>
                                     </mask>
                                 </variation>
                             </view>
