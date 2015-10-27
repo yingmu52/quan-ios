@@ -101,6 +101,7 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
 @property (nonatomic,strong) NSString *baseUrl;
 @property (nonatomic,strong) Reachability *reachability;
 @property (nonatomic,strong) NSDictionary *backendErrorCode;
+@property (nonatomic,strong) NSURLSession *session;
 @end
 @implementation FetchCenter
 
@@ -785,19 +786,18 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
                                                                cachePolicy:NSURLRequestReloadIgnoringCacheData
                                                            timeoutInterval:30.0];
         request.HTTPMethod = @"GET";
-        NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
         
-        NSURLSessionDataTask *task = [session dataTaskWithRequest:request
-                                                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+        NSURLSessionDataTask *task = [self.session dataTaskWithRequest:request
+                                                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                       {
-                                          //递归过滤Json里含带的Null数据
-                                          NSDictionary *rawJson = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                  options:NSJSONReadingAllowFragments
-                                                                                                    error:nil];
-                                          NSDictionary *responseJson = [self recursiveNullRemove:rawJson];
-                                          
-                                          if (responseJson) {
-                                              dispatch_main_async_safe(^{
+                                          dispatch_main_async_safe(^{
+                                              //递归过滤Json里含带的Null数据
+                                              NSDictionary *rawJson = [NSJSONSerialization JSONObjectWithData:data
+                                                                                                      options:NSJSONReadingAllowFragments
+                                                                                                        error:nil];
+                                              NSDictionary *responseJson = [self recursiveNullRemove:rawJson];
+                                              
+                                              if (responseJson) {
                                                   if (!error && ![responseJson[@"ret"] integerValue]){ //成功
                                                       completionBlock(responseJson);
                                                   }else{ //失败
@@ -812,8 +812,9 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
                                                       NSLog(@"Fail Get Request :%@\n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
                                                             ,rqtStr,baseURL,dict,responseJson,error);
                                                   }
-                                              });
-                                          }
+                                              }
+                                          });
+
                                       }];
         [task resume];
     }
@@ -822,6 +823,12 @@ typedef void(^FetchCenterGetRequestFailBlock)(NSDictionary *responseJson, NSErro
     }
 }
 
+- (NSURLSession *)session{
+    if (!_session) {
+        _session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    }
+    return _session;
+}
 #pragma mark - 请求统一参数
 
 - (NSString *)buildVersion{
