@@ -36,12 +36,11 @@
 //}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    NSInteger rows = 0;
-    if (self.tableFetchedRC.sections.count > 0) {
-        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.tableFetchedRC sections] objectAtIndex:section];
-        rows = [sectionInfo numberOfObjects];
-    }
-    return rows;
+    return self.tableFetchedRC.fetchedObjects.count;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return self.collectionFetchedRC.fetchedObjects.count;
 }
 
 // MARK: Table View Fetched Results Controller

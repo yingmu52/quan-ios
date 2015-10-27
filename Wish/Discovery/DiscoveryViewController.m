@@ -78,14 +78,6 @@ static CGFloat horizontalInset = 10.0f;
     [cell.discoveryImageView sd_cancelCurrentImageLoad];
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-}
-
 
 @end
 

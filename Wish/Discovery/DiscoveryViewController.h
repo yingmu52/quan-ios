@@ -8,10 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DiscoveryCell.h"
-
-@interface DiscoveryViewController : UICollectionViewController
-//@property (nonatomic,strong) UIButton *addButton;
-//@property (nonatomic) CGFloat lastContentOffSet;
-
+#import "MSSuperViewController.h"
+@interface DiscoveryViewController : MSSuperViewController
 - (void)configureCell:(DiscoveryCell *)cell atIndexPath:(NSIndexPath *)indexPath; //abstract
 @end

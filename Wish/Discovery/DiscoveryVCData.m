@@ -15,23 +15,10 @@
 #import "WishDetailVCFollower.h"
 #import "ShuffleViewController.h"
 #import "PostFeedViewController.h"
-@interface DiscoveryVCData () <FetchCenterDelegate,NSFetchedResultsControllerDelegate,ShuffleViewControllerDelegate>
-@property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
-@property (nonatomic,strong) FetchCenter *fetchCenter;
-@property (nonatomic,strong) NSMutableArray *itemChanges;
-@property (nonatomic,strong) NSBlockOperation *blockOperation;
+@interface DiscoveryVCData () <FetchCenterDelegate,ShuffleViewControllerDelegate>
 @end
 
 @implementation DiscoveryVCData
-
-- (FetchCenter *)fetchCenter{
-    if (!_fetchCenter){
-        _fetchCenter = [[FetchCenter alloc] init];
-        _fetchCenter.delegate = self;
-    }
-    return _fetchCenter;
-}
-
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -44,7 +31,7 @@
         
         //移除发现页的不存在于服务器上的事件，异线。
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            for (Plan *plan in [self.fetchedRC.fetchedObjects copy]){
+            for (Plan *plan in [self.collectionFetchedRC.fetchedObjects copy]){
                 if (![plans containsObject:plan]){
                     NSLog(@"Removing plan %@ : %@",plan.planId,plan.planTitle);
                     plan.discoverIndex = nil;
@@ -55,17 +42,17 @@
 }
 
 - (void)dealloc{
-    self.fetchedRC.delegate = nil;
+    self.collectionFetchedRC.delegate = nil;
     [self removePlans];
 }
 
 - (void)removePlans{
     NSUInteger numberOfPreservingPlans = 100;
-    NSArray *allPlans = self.fetchedRC.fetchedObjects;
+    NSArray *allPlans = self.collectionFetchedRC.fetchedObjects;
     if (allPlans.count > numberOfPreservingPlans) {
         AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-        for (NSInteger i = numberOfPreservingPlans ;i < self.fetchedRC.fetchedObjects.count; i ++){
-            Plan *plan = self.fetchedRC.fetchedObjects[i];
+        for (NSInteger i = numberOfPreservingPlans ;i < self.collectionFetchedRC.fetchedObjects.count; i ++){
+            Plan *plan = self.collectionFetchedRC.fetchedObjects[i];
             if ([plan isDeletable]){
                 NSLog(@"Discovery: removing plan %@",plan.planId);
                 [delegate.managedObjectContext deleteObject:plan];
@@ -78,7 +65,7 @@
 #pragma mark - collection view delegate & data soucce
 
 - (void)configureCell:(DiscoveryCell *)cell atIndexPath:(NSIndexPath *)indexPath{
-    Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
+    Plan *plan = [self.collectionFetchedRC objectAtIndexPath:indexPath];
     [cell.discoveryImageView downloadImageWithImageId:plan.backgroundNum size:FetchCenterImageSize400];
     cell.discoveryTitleLabel.text = plan.planTitle;
     cell.discoveryByUserLabel.text = [NSString stringWithFormat:@"by %@",plan.owner.ownerName];
@@ -94,13 +81,9 @@
 }
 
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.fetchedRC.fetchedObjects.count;
-}
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     // save the plan image background only when user select a certain plan!
-    Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
+    Plan *plan = [self.collectionFetchedRC objectAtIndexPath:indexPath];
     
     if ([plan.owner.ownerId isEqualToString:[User uid]] &&
         ![plan.planStatus isEqualToNumber:@(PlanStatusFinished)]){ //已完成的事件不支持编辑
@@ -136,88 +119,16 @@
     
 }
 
-#pragma mark - fetched results controller delegate
-- (NSFetchedResultsController *)fetchedRC
-{
-    if (!_fetchedRC) {
-        //do fetchrequest
+- (NSFetchRequest *)collectionFetchRequest{
+    if (!_collectionFetchRequest) {
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
         
         request.predicate = [NSPredicate predicateWithFormat:@"discoverIndex != nil"];
         
         request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"discoverIndex" ascending:YES]];
-
-        NSFetchedResultsController *newFRC =
-        [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                            managedObjectContext:[AppDelegate getContext]
-                                              sectionNameKeyPath:nil
-                                                       cacheName:nil];
-        _fetchedRC = newFRC;
-        _fetchedRC.delegate = self;
-        [_fetchedRC performFetch:nil];
+        _collectionFetchRequest = request;
     }
-    return _fetchedRC;
-
-}
-
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    self.itemChanges = [[NSMutableArray alloc] init];
-}
-
-- (void)controller:(NSFetchedResultsController *)controller
-   didChangeObject:(id)anObject
-       atIndexPath:(NSIndexPath *)indexPath
-     forChangeType:(NSFetchedResultsChangeType)type
-      newIndexPath:(NSIndexPath *)newIndexPath {
-    NSMutableDictionary *change = [[NSMutableDictionary alloc] init];
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            change[@(type)] = newIndexPath;
-            break;
-        case NSFetchedResultsChangeDelete:
-            change[@(type)] = indexPath;
-            break;
-        case NSFetchedResultsChangeUpdate:
-            change[@(type)] = indexPath;
-            break;
-        case NSFetchedResultsChangeMove:
-            change[@(type)] = @[indexPath, newIndexPath];
-            break;
-        default:
-            break;
-    }
-    [self.itemChanges addObject:change];
-}
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    dispatch_main_async_safe(^{
-        [self.collectionView performBatchUpdates: ^{
-            for (NSDictionary *change in self.itemChanges) {
-                [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-                    NSFetchedResultsChangeType type = [key unsignedIntegerValue];
-                    switch(type) {
-                        case NSFetchedResultsChangeInsert:
-                            [self.collectionView insertItemsAtIndexPaths:@[obj]];
-                            break;
-                        case NSFetchedResultsChangeDelete:
-                            [self.collectionView deleteItemsAtIndexPaths:@[obj]];
-                            break;
-                        case NSFetchedResultsChangeUpdate:
-                            [self.collectionView reloadItemsAtIndexPaths:@[obj]];
-                            break;
-                        case NSFetchedResultsChangeMove:
-                            [self.collectionView moveItemAtIndexPath:obj[0] toIndexPath:obj[1]];
-                            break;
-                        default:
-                            break;
-                    }
-                }];
-            }
-        } completion:^(BOOL finished) {
-            self.itemChanges = nil;;
-            [(AppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
-        }];
-    });
+    return _collectionFetchRequest;
 }
 
 #pragma mark - Shuffle View Controller Delegate 
@@ -271,7 +182,7 @@
     if (longPress.state == UIGestureRecognizerStateBegan) {
         CGPoint point = [longPress locationInView:self.collectionView];
         NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:point];
-        Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
+        Plan *plan = [self.collectionFetchedRC objectAtIndexPath:indexPath];
         NSString *msg = [NSString stringWithFormat:@"用户id:%@\n事件id:%@\n事件名:%@",plan.owner.ownerId,plan.planId,plan.planTitle];
         
         //显示弹出提示窗口
