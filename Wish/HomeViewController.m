@@ -60,7 +60,6 @@ ShuffleViewControllerDelegate>
         [self updateNavigationTitle];
         
     }
-    self.tabBarController.tabBar.hidden = NO;
     [self updateNavigationTitle];
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
@@ -138,7 +137,6 @@ ShuffleViewControllerDelegate>
 
 - (void)addWish{
     [self performSegueWithIdentifier:@"showPostFromHome" sender:nil];
-    self.tabBarController.tabBar.hidden = YES;
 }
 
 
@@ -165,16 +163,12 @@ ShuffleViewControllerDelegate>
 {
     if ([segue.identifier isEqualToString:@"showPlanDetailFromHome"]) {
         [segue.destinationViewController setPlan:sender];
-        self.tabBarController.tabBar.hidden = YES;
     }
     if ([segue.identifier isEqualToString:@"ShowPostFeedFromHome"]) {
         PostFeedViewController *pfvc = segue.destinationViewController;
         NSArray *array = sender;
         pfvc.assets = array.firstObject;
         pfvc.plan = array.lastObject;
-//        pfvc.plan = self.currentPlan;
-//        pfvc.assets = sender;
-        self.tabBarController.tabBar.hidden = YES;
     }
     if ([segue.identifier isEqualToString:@"showShuffViewFromHome"]) {
         ShuffleViewController *svc = segue.destinationViewController;
@@ -187,6 +181,7 @@ ShuffleViewControllerDelegate>
         svc.plan = obj.firstObject;
         svc.longPress = obj.lastObject;
     }
+    segue.destinationViewController.hidesBottomBarWhenPushed = YES;
     
 }
 

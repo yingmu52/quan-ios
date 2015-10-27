@@ -41,7 +41,6 @@ static NSUInteger numberOfPreloadedFeeds = 3;
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.tabBarController.tabBar.hidden = NO;
     [self.fetchCenter fetchFollowingPlanList];
 }
 - (void)dealloc{
@@ -105,7 +104,7 @@ static NSUInteger numberOfPreloadedFeeds = 3;
     if ([segue.identifier isEqualToString:@"showPersonalInfo"]) {
         [segue.destinationViewController setOwner:sender];
     }
-    self.tabBarController.tabBar.hidden = YES;
+    segue.destinationViewController.hidesBottomBarWhenPushed = YES;
     self.navigationController.navigationBar.shadowImage = [UIImage new];
 }
 

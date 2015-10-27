@@ -29,7 +29,6 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.tabBarController.tabBar.hidden = NO;
     [self.fetchCenter getMessageList];
 }
 - (void)setUpNavigationItem
@@ -137,7 +136,7 @@
     if ([segue.identifier isEqualToString:@"showFeedDetailFromMessage"]) {
         [segue.destinationViewController setFeedId:sender];
     }
-    self.tabBarController.tabBar.hidden = YES;
+    segue.destinationViewController.hidesBottomBarWhenPushed = YES;
 }
 
 #pragma mark - Override Methods

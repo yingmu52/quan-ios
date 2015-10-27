@@ -24,8 +24,6 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.tabBarController.tabBar.hidden = NO;
-    
     if ([User isSuperUser]) {
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                               action:@selector(showCircleList)];
@@ -125,15 +123,13 @@
             NSArray *AssetsAndPlan = sender;
             pfvc.assets = [AssetsAndPlan[0] mutableCopy]; //assets
             pfvc.plan = AssetsAndPlan[1]; //plan
+            segue.destinationViewController.hidesBottomBarWhenPushed = YES;
         }
         if ([segue.identifier isEqualToString:@"showDiscoveryWishDetail"] || [segue.identifier isEqualToString:@"showWishDetailVCOwnerFromDiscovery"]){
             [segue.destinationViewController setPlan:sender];
+            segue.destinationViewController.hidesBottomBarWhenPushed = YES;
         }
-
-        //隐藏导航割线
-        self.navigationController.navigationBar.shadowImage = [UIImage new];
         
-        self.tabBarController.tabBar.hidden = YES;
     }
     
 }
@@ -184,12 +180,16 @@
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[Theme navInviteDefault]
                                                                                  style:UIBarButtonItemStylePlain
                                                                                 target:self
-                                                                                action:nil];
+                                                                                action:@selector(showInvitationView)];
     }
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[Theme navAddDefault]
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(showShuffView)];
+}
+
+- (void)showInvitationView{
+    [self performSegueWithIdentifier:@"showInvitationView" sender:nil];
 }
 
 #pragma mark - 长按事件可显示相关信息

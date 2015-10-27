@@ -65,9 +65,6 @@
     NavigationBar *nav = (NavigationBar *)self.navigationController.navigationBar;
     [nav showClearBackground];
     
-    //隐藏下方菜单
-    self.tabBarController.tabBar.hidden = YES;
-    
     //用于检测摇一摇
     [self becomeFirstResponder];
 }
@@ -203,7 +200,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     self.navigationController.navigationBar.hidden = NO;
-    self.tabBarController.tabBar.hidden = YES;
+    segue.destinationViewController.hidesBottomBarWhenPushed = YES;
 }
 
 #pragma mark - Fetchcenter Delegate
