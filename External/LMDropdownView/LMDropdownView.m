@@ -103,7 +103,8 @@
 
 - (void)showFromNavigationController:(UINavigationController *)navigationController withContentView:(UIView *)contentView
 {
-    [self showInView:navigationController.visibleViewController.view withContentView:contentView atOrigin:CGPointZero];
+    CGFloat y = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame) + CGRectGetHeight(navigationController.navigationBar.frame) + 2.0; //2.0是小缝隙，美观
+    [self showInView:navigationController.visibleViewController.view withContentView:contentView atOrigin:CGPointMake(0,y)];
 }
 
 - (void)hide

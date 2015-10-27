@@ -15,7 +15,9 @@
 #import "WishDetailVCFollower.h"
 #import "ShuffleViewController.h"
 #import "PostFeedViewController.h"
-@interface DiscoveryVCData () <FetchCenterDelegate,ShuffleViewControllerDelegate>
+#import "LMDropdownView.h"
+@interface DiscoveryVCData () <FetchCenterDelegate,ShuffleViewControllerDelegate,LMDropdownViewDelegate>
+@property (nonatomic,strong) LMDropdownView *dropdownView;
 @end
 
 @implementation DiscoveryVCData
@@ -24,6 +26,23 @@
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = NO;
     
+    if ([User isSuperUser]) {
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                              action:@selector(showCircleList)];
+        self.navigationController.navigationBar.userInteractionEnabled = YES;
+        [self.navigationController.navigationBar addGestureRecognizer:tap];
+    }
+
+    [self getDiscoveryList];
+    [self.fetchCenter getCircleList:^(NSArray *circles){}];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBar.gestureRecognizers = nil;
+}
+
+- (void)getDiscoveryList{
     [self.fetchCenter getDiscoveryList:^(NSArray *plans, NSString *circleTitle) {
         
         //设置导航标题
@@ -165,16 +184,12 @@
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[Theme navInviteDefault]
                                                                                  style:UIBarButtonItemStylePlain
                                                                                 target:self
-                                                                                action:@selector(showCircleList)];
+                                                                                action:nil];
     }
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[Theme navAddDefault]
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(showShuffView)];
-}
-
-- (void)showCircleList{
-    [self performSegueWithIdentifier:@"showCircleListView" sender:nil];
 }
 
 #pragma mark - 长按事件可显示相关信息
@@ -192,6 +207,63 @@
     }
     
 }
+
+#pragma mark - 下拉菜单 
+- (void)showCircleList{
+    if (self.dropdownView) {
+        if (!self.dropdownView.isOpen){
+//            [self.dropdownView showInView:self.collectionView withContentView:self.tableView atOrigin:CGPointMake(0, 2.0)];
+            [self.dropdownView showFromNavigationController:self.navigationController withContentView:self.tableView];
+        }else{
+            [self.dropdownView hide];
+        }
+    }
+}
+
+#define cellHeight 38.0f
+
+- (LMDropdownView *)dropdownView{
+    if (!_dropdownView) {
+        _dropdownView = [LMDropdownView dropdownView];
+        _dropdownView.delegate = self;
+        self.tableView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), self.tableFetchedRC.fetchedObjects.count * cellHeight);
+    }
+    return _dropdownView;
+}
+
+- (NSFetchRequest *)tableFetchRequest{
+    if (!_tableFetchRequest) {
+        _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Circle"];
+        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
+    }
+    return _tableFetchRequest;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return cellHeight;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CircleListCell"];
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    Circle *circle = [self.tableFetchedRC objectAtIndexPath:indexPath];
+    cell.textLabel.text = circle.circleName;
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    Circle *circle = [self.tableFetchedRC objectAtIndexPath:indexPath];
+    if (![[User currentCircleId] isEqualToString:circle.circleId]) { //当选择了与当前不同的圈子时才执行操作
+        self.navigationItem.title = @"正在切换圈子...";
+        [self.fetchCenter switchToCircle:circle.circleId completion:^{ //请求换圈
+            [User updateAttributeFromDictionary:@{CURRENT_CIRCLE_ID:circle.circleId}]; //缓存圈子id
+            [self getDiscoveryList];
+        }];
+    }
+    [self.dropdownView hide];
+}
+
 @end
 
 
