@@ -207,34 +207,36 @@
      forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath
 {
-    switch(type){
-            
-        case NSFetchedResultsChangeInsert:{
-            [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
-                                  withRowAnimation:UITableViewRowAnimationFade];
-            NSLog(@"Feed inserted");
+    dispatch_main_sync_safe(^{
+        switch(type){
+                
+            case NSFetchedResultsChangeInsert:{
+                [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
+                                      withRowAnimation:UITableViewRowAnimationFade];
+                NSLog(@"Feed inserted");
+            }
+                break;
+                
+            case NSFetchedResultsChangeDelete:{
+                [self.tableView deleteRowsAtIndexPaths:@[indexPath]
+                                      withRowAnimation:UITableViewRowAnimationFade];
+                NSLog(@"Feed deleted");
+            }
+                break;
+                
+            case NSFetchedResultsChangeUpdate:{
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath]
+                                      withRowAnimation:UITableViewRowAnimationNone];
+                NSLog(@"Feed updated");
+            }
+                break;
+            case NSFetchedResultsChangeMove:{
+                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            }
+                break;
         }
-            break;
-            
-        case NSFetchedResultsChangeDelete:{
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath]
-                                  withRowAnimation:UITableViewRowAnimationFade];
-            NSLog(@"Feed deleted");
-        }
-            break;
-            
-        case NSFetchedResultsChangeUpdate:{
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath]
-                                  withRowAnimation:UITableViewRowAnimationNone];
-            NSLog(@"Feed updated");
-        }
-            break;
-        case NSFetchedResultsChangeMove:{
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-        }
-            break;
-    }
+    });
 }
 
 
@@ -351,13 +353,6 @@ forRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
 
 #pragma mark - wish detail cell delegate
 - (void)didPressedMoreOnCell:(WishDetailCell *)cell{
-//    
-//    [UIActionSheet showInView:self.tableView withTitle:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"分享这张照片"] tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
-//        NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
-//        if ([title isEqualToString:@"分享这张照片"]) {
-//            NSLog(@"share feed");
-//        }
-//    }];
 }
 
 
@@ -374,16 +369,6 @@ forRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
 
 }
 
-//- (void)didFinishCommentingFeed:(Feed *)feed commentId:(NSString *)commentId{
-//    
-//    //update feed count
-//    feed.commentCount = @(feed.commentCount.integerValue + 1);
-//    
-//    //create comment locally
-////    [Comment createComment:self.commentView.textField.text commentId:commentId forFeed:feed];
-//    
-////    self.commentView.textField.text = @"";
-//}
 
 - (void)didFinishLoadingFeedList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage serverFeedIdList:(NSArray *)serverFeedIds{
     self.hasNextPage = hasNextPage;
@@ -425,12 +410,6 @@ forRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
             Feed *feed = (Feed *)sender;
             FeedDetailViewController *vc = segue.destinationViewController;
             vc.feedId = feed.feedId;
-            
-            //show replay view, see didPressedCommentButton in FeedDetailViewController
-//            vc.commentView.feedInfoBackground.hidden = YES; // feed info section is for replying
-//            [[[UIApplication sharedApplication] keyWindow] addSubview:vc.commentView];
-//            [segue.destinationViewController setFeedId:feed.feedId];
-            
         }
 
     }
@@ -440,31 +419,11 @@ forRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     return nil; //abstract
 }
 
-#pragma mark - comment
-//- (CommentAcessaryView *)commentView{
-//    if (!_commentView){
-//        _commentView = [CommentAcessaryView instantiateFromNib:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
-//        self.commentView.feedInfoBackground.hidden = YES; // feed info section is for replying
-//        _commentView.delegate = self;
-//    }
-//    return _commentView;
-//}
-//
-
 - (void)didPressedCommentOnCell:(WishDetailCell *)cell{
     //进入动态详情并呼出键盘
     Feed *feed = [self.fetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
     [self performSegueWithIdentifier:[self segueForFeed] sender:feed];
-
-//    [[[UIApplication sharedApplication] keyWindow] addSubview:self.commentView];
-//    self.commentView.feed = [self.fetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
 }
-//
-//- (void)didPressSend:(CommentAcessaryView *)cav{
-//    [self.fetchCenter commentOnFeed:cav.feed content:cav.textField.text];
-//    [self.commentView removeFromSuperview];
-//
-//}
 
 #pragma mark - follow
 
