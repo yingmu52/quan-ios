@@ -47,7 +47,7 @@
     }
 
     [self getDiscoveryList];
-    [self.fetchCenter getCircleList:^(NSArray *circles){}];
+    [self.fetchCenter getCircleList:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -56,42 +56,29 @@
 }
 
 - (void)getDiscoveryList{
-    [self.fetchCenter getDiscoveryList:^(NSArray *plans, NSString *circleTitle) {
-        
+    [self.fetchCenter getDiscoveryList:^(NSMutableArray *plans, NSString *circleTitle) {
         //设置导航标题
         self.navigationItem.title = circleTitle;
         
         //移除发现页的不存在于服务器上的事件，异线。
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            for (Plan *plan in [self.collectionFetchedRC.fetchedObjects copy]){
-                if (![plans containsObject:plan] && plan.discoverIndex){
+            
+            NSMutableArray *currentCopy = [self.collectionFetchedRC.fetchedObjects mutableCopy];
+            NSPredicate *predicate =[NSPredicate predicateWithFormat:@"NOT (SELF IN %@)",plans];
+            NSArray *trashPlans = [currentCopy filteredArrayUsingPredicate:predicate]; //a copy of subset of 'currentCopy‘
+
+            dispatch_main_sync_safe(^{
+                for (Plan *plan in trashPlans){
+                    if (plan.isDeletable) {
+                        [plan.managedObjectContext deleteObject:plan];
+                    }else{
+                        plan.discoverIndex = nil;
+                    }
                     NSLog(@"Removing plan %@ : %@",plan.planId,plan.planTitle);
-                    [plan.managedObjectContext deleteObject:plan];
                 }
-            }
+            });
         });
     }];
-}
-
-- (void)dealloc{
-    self.collectionFetchedRC.delegate = nil;
-//    [self removePlans];
-}
-
-- (void)removePlans{
-    NSUInteger numberOfPreservingPlans = 100;
-    NSArray *allPlans = self.collectionFetchedRC.fetchedObjects;
-    if (allPlans.count > numberOfPreservingPlans) {
-        AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-        for (NSInteger i = numberOfPreservingPlans ;i < self.collectionFetchedRC.fetchedObjects.count; i ++){
-            Plan *plan = self.collectionFetchedRC.fetchedObjects[i];
-            if ([plan isDeletable]){
-                NSLog(@"Discovery: removing plan %@",plan.planId);
-                [delegate.managedObjectContext deleteObject:plan];
-            }
-        }
-        [delegate saveContext];
-    }
 }
 
 #pragma mark - collection view delegate & data soucce
@@ -102,7 +89,7 @@
     cell.discoveryTitleLabel.text = plan.planTitle;
     cell.discoveryByUserLabel.text = [NSString stringWithFormat:@"by %@",plan.owner.ownerName];
     cell.discoveryFollowerCountLabel.text = [NSString stringWithFormat:@"%@ 关注",plan.followCount];
-    cell.discoveryRecordsLabel.text = [NSString stringWithFormat:@"%@",plan.discoverIndex];
+    cell.discoveryRecordsLabel.text = [NSString stringWithFormat:@"%@ 记录",plan.tryTimes];
 
     //显示置顶的角标
     if ([plan.cornerMask isEqualToString:@"top"]){

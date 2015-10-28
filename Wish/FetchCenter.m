@@ -136,7 +136,9 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
                   [circles addObject:[Circle updateCircleWithInfo:info]];
               }
 //              NSLog(@"%@",circles);
-              completionBlock(circles);
+              if (completionBlock) {
+                  completionBlock(circles);
+              }
           }];
 }
 
@@ -795,7 +797,9 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
                                               
                                               if (responseJson) {
                                                   if (!error && ![responseJson[@"ret"] integerValue]){ //成功
-                                                      completionBlock(responseJson);
+                                                      if (completionBlock) {
+                                                          completionBlock(responseJson);
+                                                      }
                                                   }else{ //失败
                                                       
                                                       //在委托中跳出后台的提示
