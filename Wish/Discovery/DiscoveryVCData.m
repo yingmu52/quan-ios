@@ -22,11 +22,26 @@
 
 @implementation DiscoveryVCData
 
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    
+    //长按显示事件信息，方便开发调试
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]
+                                               initWithTarget:self
+                                               action:@selector(longPressed:)];
+    [self.collectionView addGestureRecognizer:longPress];
+    
+    //设置导航项目
+    [self setUpNavigationItem];
+}
+
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     if ([User isSuperUser]) {
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                              action:@selector(showCircleList)];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                       initWithTarget:self
+                                       action:@selector(showCircleList)];
         self.navigationController.navigationBar.userInteractionEnabled = YES;
         [self.navigationController.navigationBar addGestureRecognizer:tap];
     }
@@ -47,11 +62,11 @@
         self.navigationItem.title = circleTitle;
         
         //移除发现页的不存在于服务器上的事件，异线。
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             for (Plan *plan in [self.collectionFetchedRC.fetchedObjects copy]){
-                if (![plans containsObject:plan]){
+                if (![plans containsObject:plan] && plan.discoverIndex){
                     NSLog(@"Removing plan %@ : %@",plan.planId,plan.planTitle);
-                    plan.discoverIndex = nil;
+                    [plan.managedObjectContext deleteObject:plan];
                 }
             }
         });
@@ -60,7 +75,7 @@
 
 - (void)dealloc{
     self.collectionFetchedRC.delegate = nil;
-    [self removePlans];
+//    [self removePlans];
 }
 
 - (void)removePlans{
@@ -87,8 +102,8 @@
     cell.discoveryTitleLabel.text = plan.planTitle;
     cell.discoveryByUserLabel.text = [NSString stringWithFormat:@"by %@",plan.owner.ownerName];
     cell.discoveryFollowerCountLabel.text = [NSString stringWithFormat:@"%@ 关注",plan.followCount];
-    cell.discoveryRecordsLabel.text = [NSString stringWithFormat:@"%@ 记录",plan.tryTimes];
-    
+    cell.discoveryRecordsLabel.text = [NSString stringWithFormat:@"%@",plan.discoverIndex];
+
     //显示置顶的角标
     if ([plan.cornerMask isEqualToString:@"top"]){
         cell.cornerMask.image = [Theme topImageMask];
@@ -136,17 +151,17 @@
 
 - (NSFetchRequest *)collectionFetchRequest{
     if (!_collectionFetchRequest) {
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
-        
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        request.entity = [NSEntityDescription entityForName:@"Plan" inManagedObjectContext:[AppDelegate getContext]];
         request.predicate = [NSPredicate predicateWithFormat:@"discoverIndex != nil"];
-        
         request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"discoverIndex" ascending:YES]];
+        
         _collectionFetchRequest = request;
     }
     return _collectionFetchRequest;
 }
 
-#pragma mark - Shuffle View Controller Delegate 
+#pragma mark - 加号浮云
 
 - (void)didFinishSelectingImageAssets:(NSArray *)assets forPlan:(Plan *)plan{
     //asset could be either UIImage or PHAsset
@@ -163,16 +178,6 @@
     [self performSegueWithIdentifier:@"showShuffleView" sender:nil];
 }
 
-- (void)viewDidLoad{
-    [super viewDidLoad];
-    
-    //长按显示事件信息，方便开发调试
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressed:)];
-    [self.collectionView addGestureRecognizer:longPress];
-    
-    //设置导航项目
-    [self setUpNavigationItem];
-}
 
 - (void)setUpNavigationItem
 {
@@ -271,8 +276,14 @@
     Circle *circle = [self.tableFetchedRC objectAtIndexPath:indexPath];
     if (![[User currentCircleId] isEqualToString:circle.circleId]) { //当选择了与当前不同的圈子时才执行操作
         self.navigationItem.title = @"正在切换圈子...";
-        [self.fetchCenter switchToCircle:circle.circleId completion:^{ //请求换圈
-            [User updateAttributeFromDictionary:@{CURRENT_CIRCLE_ID:circle.circleId}]; //缓存圈子id
+        
+        //发送切换圈子请求
+        [self.fetchCenter switchToCircle:circle.circleId completion:^{
+            
+            //缓存当前圈子id
+            [User updateAttributeFromDictionary:@{CURRENT_CIRCLE_ID:circle.circleId}];
+            
+            //刷新发现页列表
             [self getDiscoveryList];
         }];
     }
