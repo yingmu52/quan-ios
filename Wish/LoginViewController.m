@@ -12,7 +12,6 @@
 #import "User.h"
 #import "LoginDetailViewController.h"
 #define QQAppKey @"ByYhJYTkXu0721fH"
-#define QQAppID @"1104337894"
 
 @interface LoginViewController () <TencentSessionDelegate,FetchCenterDelegate,WXApiManagerDelegate>
 @property (nonatomic,strong) TencentOAuth *tencentOAuth;

@@ -83,11 +83,17 @@
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
-    return [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]] || [TencentOAuth HandleOpenURL:url];
+    return
+    [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]] ||
+    [TencentOAuth HandleOpenURL:url] ||
+    [QQApiInterface handleOpenURL:url delegate:nil];
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
-    return [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]] || [TencentOAuth HandleOpenURL:url];
+    return
+    [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]] ||
+    [TencentOAuth HandleOpenURL:url] || 
+    [QQApiInterface handleOpenURL:url delegate:nil];
 }
 
 

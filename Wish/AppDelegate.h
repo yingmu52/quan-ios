@@ -20,9 +20,11 @@
 #import "WXApiManager.h"
 #import <PgySDK/PgyManager.h>
 #import <PgyUpdate/PgyUpdateManager.h>
+#import <TencentOpenAPI/QQApiInterface.h>
 
 #define YOUTU_APP_ID @"10003267"
 #define WECHATAppID @"wxf4957fc61a006431"
+#define QQAppID @"1104337894"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
