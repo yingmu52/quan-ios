@@ -16,24 +16,19 @@
 #pragma mark - new method
 
 - (void)showCamera:(UIViewController *)controller{
-    dispatch_main_async_safe(^{
-        UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
-        ipc.sourceType = UIImagePickerControllerSourceTypeCamera;
-        ipc.delegate = self;
-        ipc.showsCameraControls = YES;
-        [controller presentViewController:ipc animated:YES completion:nil];
-    });
+    UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
+    ipc.sourceType = UIImagePickerControllerSourceTypeCamera;
+    ipc.delegate = self;
+    ipc.showsCameraControls = YES;
+    [controller presentViewController:ipc animated:YES completion:nil];
 }
 
 - (void)showImagePickerForUploadProfileImage:(UIViewController *)controller type:(UIImagePickerControllerSourceType)type{
-    dispatch_main_async_safe(^{
-        UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
-        ipc.sourceType = type;
-        ipc.delegate = self;
-//        ipc.showsCameraControls = YES;
-        ipc.allowsEditing = YES;
-        [controller presentViewController:ipc animated:YES completion:nil];
-    });
+    UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
+    ipc.sourceType = type;
+    ipc.delegate = self;
+    ipc.allowsEditing = YES;
+    [controller presentViewController:ipc animated:YES completion:nil];
 }
 - (void)showPhotoLibrary:(UIViewController *)controller maxImageCount:(NSInteger )count{
     QBImagePickerController *imagePickerController = [QBImagePickerController new];

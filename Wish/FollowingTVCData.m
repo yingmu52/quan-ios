@@ -179,9 +179,7 @@ static NSUInteger numberOfPreloadedFeeds = 3;
 - (void)controllerWillChangeContent:
 (NSFetchedResultsController *)controller
 {
-    dispatch_main_async_safe(^{
-        [self.tableView beginUpdates];
-    })
+    [self.tableView beginUpdates];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller
@@ -190,7 +188,6 @@ static NSUInteger numberOfPreloadedFeeds = 3;
      forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath
 {
-    dispatch_main_async_safe(^{
         switch(type){
                 
             case NSFetchedResultsChangeInsert:{
@@ -217,16 +214,13 @@ static NSUInteger numberOfPreloadedFeeds = 3;
             default:
                 break;
         }
-    });
 }
 
 
 - (void)controllerDidChangeContent:
 (NSFetchedResultsController *)controller
 {
-    dispatch_main_async_safe(^{
-        [self.tableView endUpdates];
-    })
+    [self.tableView endUpdates];
 }
 
 

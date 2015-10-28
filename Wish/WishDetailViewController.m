@@ -207,7 +207,6 @@
      forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath
 {
-    dispatch_main_sync_safe(^{
         switch(type){
                 
             case NSFetchedResultsChangeInsert:{
@@ -236,7 +235,6 @@
             }
                 break;
         }
-    });
 }
 
 

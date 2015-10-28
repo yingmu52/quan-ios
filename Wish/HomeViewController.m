@@ -245,7 +245,6 @@ ShuffleViewControllerDelegate>
     [self.itemChanges addObject:change];
 }
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    dispatch_main_async_safe(^{
         if (!controller.fetchedObjects.count){
             [self setUpEmptyView];
         }else{
@@ -283,7 +282,6 @@ ShuffleViewControllerDelegate>
             [self updateNavigationTitle];
             [(AppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
         }];
-    });
 }
 #pragma mark - implement parent class abstract methods
 - (void)configureCollectionViewCell:(HomeCardView *)cell atIndexPath:(NSIndexPath *)indexPath{
