@@ -14,7 +14,7 @@
 #define QQAppKey @"ByYhJYTkXu0721fH"
 #define QQAppID @"1104337894"
 
-@interface LoginViewController () <TencentSessionDelegate,FetchCenterDelegate>
+@interface LoginViewController () <TencentSessionDelegate,FetchCenterDelegate,WXApiManagerDelegate>
 @property (nonatomic,strong) TencentOAuth *tencentOAuth;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,weak) IBOutlet UIButton *QQLoginButton;
@@ -145,13 +145,15 @@
     SendAuthReq *req = [[SendAuthReq alloc] init];
     req.scope = @"snsapi_userinfo,snsapi_base"; // @"post_timeline,sns"
     req.openID = WECHATAppID;
-    [WXApi sendAuthReq:req viewController:self delegate:self];
+    
+    WXApiManager *manager = [WXApiManager sharedManager];
+    manager.delegate = self;
+    [WXApi sendAuthReq:req viewController:self delegate:manager];
+
     [User updateOwnerInfo:@{LOGIN_TYPE:@"wx"}];
 }
 
-
-- (void)onResp:(BaseResp *)resp{
-    SendAuthResp *response = (SendAuthResp*)resp;
+- (void)managerDidRecvAuthResponse:(SendAuthResp *)response{
     [self.fetchCenter fetchAccessTokenWithWechatCode:response.code];
 }
 

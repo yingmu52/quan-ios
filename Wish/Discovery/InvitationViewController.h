@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface InvitationViewController : UIViewController
+@interface InvitationViewController : UIViewController 
 
 @end

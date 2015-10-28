@@ -10,10 +10,10 @@
 #define BUGLY_APP_ID @"900007998"
 #define QQ_URLSCHEME @"tencent1104337894"
 #define PGY_APPID @"7f1cd492fc0f48875650e0d1c702093b"
-
+#import "LoginViewController.h"
 @interface AppDelegate () <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
-@property (nonatomic,strong) LoginViewController *loginVC;
+@property (nonatomic,weak) LoginViewController *loginVC;
 @end
 
 @implementation AppDelegate
@@ -81,17 +81,14 @@
     }
     return _loginVC;
 }
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation{
-    return [WXApi handleOpenURL:url delegate:self.loginVC] || [TencentOAuth HandleOpenURL:url];
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    return [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]] || [TencentOAuth HandleOpenURL:url];
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
-    return [WXApi handleOpenURL:url delegate:self.loginVC] || [TencentOAuth HandleOpenURL:url];
+    return [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]] || [TencentOAuth HandleOpenURL:url];
 }
-
 
 
 #pragma mark - Core Data stack

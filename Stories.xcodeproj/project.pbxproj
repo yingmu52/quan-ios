@@ -45,8 +45,12 @@
 		A07115D21BA6B109002C1270 /* SZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A07115D01BA6B109002C1270 /* SZTextView.m */; };
 		A07C66AF1BE01AB800413D32 /* InvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A07C66AE1BE01AB800413D32 /* InvitationViewController.m */; };
 		A07C66B01BE01AB800413D32 /* InvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A07C66AE1BE01AB800413D32 /* InvitationViewController.m */; };
-		A089A9141B9BCBED00291EC2 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A089A9111B9BCBED00291EC2 /* libWeChatSDK.a */; };
-		A089A9151B9BCBED00291EC2 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A089A9111B9BCBED00291EC2 /* libWeChatSDK.a */; };
+		A07C66BA1BE0707300413D32 /* WXApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A07C66B51BE0707300413D32 /* WXApiManager.m */; };
+		A07C66BB1BE0707300413D32 /* WXApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A07C66B51BE0707300413D32 /* WXApiManager.m */; };
+		A07C66C41BE070E400413D32 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A07C66C01BE070E400413D32 /* libWeChatSDK.a */; };
+		A07C66C51BE070E400413D32 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A07C66C01BE070E400413D32 /* libWeChatSDK.a */; };
+		A07C66C61BE070E400413D32 /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = A07C66C11BE070E400413D32 /* read_me.txt */; };
+		A07C66C71BE070E400413D32 /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = A07C66C11BE070E400413D32 /* read_me.txt */; };
 		A095D8341BCB884500ED3DFD /* PgySDk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A095D8321BCB884500ED3DFD /* PgySDk.framework */; };
 		A095D8351BCB884500ED3DFD /* PgyUpdate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A095D8331BCB884500ED3DFD /* PgyUpdate.framework */; };
 		A0994E631BC4CF9500D45845 /* SYEmojiCharacters.m in Sources */ = {isa = PBXBuildFile; fileRef = A0994E601BC4CF9500D45845 /* SYEmojiCharacters.m */; };
@@ -375,9 +379,12 @@
 		A07115D01BA6B109002C1270 /* SZTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZTextView.m; sourceTree = "<group>"; };
 		A07C66AD1BE01AB800413D32 /* InvitationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationViewController.h; sourceTree = "<group>"; };
 		A07C66AE1BE01AB800413D32 /* InvitationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationViewController.m; sourceTree = "<group>"; };
-		A089A9111B9BCBED00291EC2 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
-		A089A9121B9BCBED00291EC2 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
-		A089A9131B9BCBED00291EC2 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		A07C66B41BE0707300413D32 /* WXApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiManager.h; sourceTree = "<group>"; };
+		A07C66B51BE0707300413D32 /* WXApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXApiManager.m; sourceTree = "<group>"; };
+		A07C66C01BE070E400413D32 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		A07C66C11BE070E400413D32 /* read_me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = read_me.txt; sourceTree = "<group>"; };
+		A07C66C21BE070E400413D32 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		A07C66C31BE070E400413D32 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		A095D8321BCB884500ED3DFD /* PgySDk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PgySDk.framework; sourceTree = "<group>"; };
 		A095D8331BCB884500ED3DFD /* PgyUpdate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PgyUpdate.framework; sourceTree = "<group>"; };
 		A0994E5F1BC4CF9500D45845 /* SYEmojiCharacters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYEmojiCharacters.h; sourceTree = "<group>"; };
@@ -671,9 +678,9 @@
 				A0EE8C5A1BB3E89600C5DAC3 /* OpenGLES.framework in Frameworks */,
 				A0EDFCBB1B90C61900B10594 /* MobileCoreServices.framework in Frameworks */,
 				A0D102751B84F750006B0E4E /* TencentOpenAPI.framework in Frameworks */,
+				A07C66C41BE070E400413D32 /* libWeChatSDK.a in Frameworks */,
 				A0EE65CA1BCC84DF002CC49B /* libTXYDownloader.a in Frameworks */,
 				A095D8351BCB884500ED3DFD /* PgyUpdate.framework in Frameworks */,
-				A089A9141B9BCBED00291EC2 /* libWeChatSDK.a in Frameworks */,
 				A0D1025F1B84EF99006B0E4E /* Bugly.framework in Frameworks */,
 				A0D102681B84EFAD006B0E4E /* WebP.framework in Frameworks */,
 				AEDD065A1AABF90400379C17 /* Security.framework in Frameworks */,
@@ -696,8 +703,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0D102691B84EFAD006B0E4E /* WebP.framework in Frameworks */,
-				A089A9151B9BCBED00291EC2 /* libWeChatSDK.a in Frameworks */,
 				A0D102761B84F750006B0E4E /* TencentOpenAPI.framework in Frameworks */,
+				A07C66C51BE070E400413D32 /* libWeChatSDK.a in Frameworks */,
 				A0D102601B84EF99006B0E4E /* Bugly.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -736,13 +743,17 @@
 			path = QBImagePicker;
 			sourceTree = "<group>";
 		};
-		A04842EB1B9916980032E927 /* WeChatSDK_1.5 */ = {
+		A04842EB1B9916980032E927 /* WeChatSDK_1.6 */ = {
 			isa = PBXGroup;
 			children = (
-				A089A9111B9BCBED00291EC2 /* libWeChatSDK.a */,
-				A089A9121B9BCBED00291EC2 /* WXApi.h */,
-				A089A9131B9BCBED00291EC2 /* WXApiObject.h */,
+				A07C66C01BE070E400413D32 /* libWeChatSDK.a */,
+				A07C66C11BE070E400413D32 /* read_me.txt */,
+				A07C66C21BE070E400413D32 /* WXApi.h */,
+				A07C66C31BE070E400413D32 /* WXApiObject.h */,
+				A07C66B41BE0707300413D32 /* WXApiManager.h */,
+				A07C66B51BE0707300413D32 /* WXApiManager.m */,
 			);
+			name = WeChatSDK_1.6;
 			path = WeChatSDK_1.5;
 			sourceTree = "<group>";
 		};
@@ -892,7 +903,7 @@
 				A0994E5E1BC4CF9500D45845 /* SYEmojiPopover */,
 				A03010361BABC6AA0041E2CF /* QBImagePicker */,
 				A07115CE1BA6B109002C1270 /* SZTextView */,
-				A04842EB1B9916980032E927 /* WeChatSDK_1.5 */,
+				A04842EB1B9916980032E927 /* WeChatSDK_1.6 */,
 				A0B8C7FF1B857F22009C4572 /* HMSegmentedControl */,
 				A0D1023B1B84ECDF006B0E4E /* NavBar */,
 				A0D101F51B84EB6A006B0E4E /* SDWebImage */,
@@ -1449,6 +1460,7 @@
 				AEF7F2A01A6875360022410B /* Main.storyboard in Resources */,
 				A03010521BABC6AA0041E2CF /* QBImagePicker.strings in Resources */,
 				AE2A8DE51ACA700100029D52 /* WishDetailCell.xib in Resources */,
+				A07C66C61BE070E400413D32 /* read_me.txt in Resources */,
 				AE59B5F11B40FB55006CA4AB /* ViewForEmptyEvent.xib in Resources */,
 				A0D1025C1B84EF3B006B0E4E /* HeaderView.xib in Resources */,
 				A0F8C45E1B88422300A8B120 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
@@ -1469,6 +1481,7 @@
 				A0F7D4AA1B84E851003CCB34 /* UIImage-Categories.podspec in Resources */,
 				AEF7F29D1A6871F00022410B /* Images.xcassets in Resources */,
 				AEF7F2A11A6875360022410B /* Main.storyboard in Resources */,
+				A07C66C71BE070E400413D32 /* read_me.txt in Resources */,
 				A0F7D4A01B84E851003CCB34 /* LICENSE in Resources */,
 				AE59B5F21B40FB55006CA4AB /* ViewForEmptyEvent.xib in Resources */,
 				AEC068901B2D309E007975D2 /* FeedDetailCell.xib in Resources */,
@@ -1620,6 +1633,7 @@
 				A05AB6D41BDF783800E79F36 /* LMDropdownView.m in Sources */,
 				AED4CB221AC75A0200EE2DA4 /* KeyWordCell.m in Sources */,
 				A07C66AF1BE01AB800413D32 /* InvitationViewController.m in Sources */,
+				A07C66BA1BE0707300413D32 /* WXApiManager.m in Sources */,
 				A0D1022D1B84EB6A006B0E4E /* UIImage+MultiFormat.m in Sources */,
 				AEE4A6D01A96A5D500ABF946 /* AchieveCell.m in Sources */,
 			);
@@ -1706,6 +1720,7 @@
 				A0F7D4821B84E851003CCB34 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				A0F5132B1BD98B9600279B9D /* Message.m in Sources */,
 				A0A0835D1BD74F260057CD65 /* CircleListViewController.m in Sources */,
+				A07C66BB1BE0707300413D32 /* WXApiManager.m in Sources */,
 				A0F7D4801B84E851003CCB34 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				AEE4A6D91A972FAB00ABF946 /* FollowingTVCData.m in Sources */,
 				A0F7D4561B84E851003CCB34 /* NHAlignmentFlowLayout.m in Sources */,

@@ -13,12 +13,11 @@
 #import "WXApi.h"
 #import "MainTabBarController.h"
 #import <Bugly/CrashReporter.h>
-#import "User.h"
 #import "LoginViewController.h"
 #import "FetchCenter.h"
 #import "TXYUploadManager.h"
 #import "TXYDownloader.h"
-
+#import "WXApiManager.h"
 #import <PgySDK/PgyManager.h>
 #import <PgyUpdate/PgyUpdateManager.h>
 
