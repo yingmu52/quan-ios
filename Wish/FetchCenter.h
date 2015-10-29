@@ -68,6 +68,8 @@ typedef enum {
 
 - (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
+/** 新版请求的失败回调函数*/
+- (void)didFailSendingRequest;
 
 - (void)didFinishGettingMessageNotificationWithMessageCount:(NSNumber *)msgCount followCount:(NSNumber *)followCount;
 - (void)didFinishClearingAllMessages;
@@ -75,10 +77,16 @@ typedef enum {
 - (void)didfinishGettingSignature;
 @end
 
-typedef void(^FetchCenterGetRequestPlanCreationCompleted)(void); //创建事件完成
-typedef void(^FetchCenterGetRequestGetCircleListCompleted)(NSArray *circles); //请求圈子列表完成
-typedef void(^FetchCenterGetRequestSwithCircleCompleted)(void); //切换圈子完成
-typedef void(^FetchCenterGetRequestGetDiscoverListCompleted)(NSMutableArray *plans, NSString *circleTitle); //发现页拉取列表完成
+/** 创建事件完成*/
+typedef void(^FetchCenterGetRequestPlanCreationCompleted)(void);
+/** 请求圈子列表完成*/
+typedef void(^FetchCenterGetRequestGetCircleListCompleted)(NSArray *circles);
+/** 切换圈子完成*/
+typedef void(^FetchCenterGetRequestSwithCircleCompleted)(void);
+/** 填写邀请码完成*/
+typedef void(^FetchCenterGetRequestJoinCircleCompleted)(NSString *circleId);
+/** 发现页拉取列表完成*/
+typedef void(^FetchCenterGetRequestGetDiscoverListCompleted)(NSMutableArray *plans, NSString *circleTitle);
 
 @interface FetchCenter : NSObject
 @property (nonatomic,weak) id <FetchCenterDelegate>delegate;
@@ -89,17 +97,13 @@ typedef void(^FetchCenterGetRequestGetDiscoverListCompleted)(NSMutableArray *pla
 
 #pragma mark - 圈子
 
-/**
- * 获取圈子列表
- *
- * @param completionBlock 返回圈子列表数组
- */
+/**加入圈子*/
+- (void)joinCircle:(NSString *)invitationCode completion:(FetchCenterGetRequestJoinCircleCompleted)completionBlock;
+
+/**获取圈子列表*/
 - (void)getCircleList:(FetchCenterGetRequestGetCircleListCompleted)completionBlock;
 
-/**
- * 切换圈子
- * @param circleId 目标圈子的id
- */
+/**切换圈子*/
 - (void)switchToCircle:(NSString *)circleId completion:(FetchCenterGetRequestSwithCircleCompleted)completionBlock;
 
 #pragma mark - 消息

@@ -50,7 +50,8 @@
 #define DISCOVER @"find/"
 #define GET_DISCOVER_LIST @"splan_find_planlist.php"
 
-
+#define CIRCLE @"quan/"
+#define JOINT_CIRCLE @"splan_quan_join.php"
 #define TOOL @"tool/"
 #define GET_CIRCLE_LIST @"tool_quan_get.php"
 #define SWITCH_CIRCLE @"tool_quan_man.php"
@@ -62,6 +63,8 @@
 
 #define TENCENTYOUTU @"tencentYoutu/"
 #define GET_SIGNATURE @"getsign.php"
+
+
 
 typedef enum{
     FetchCenterGetOpCreatePlan,
@@ -106,6 +109,22 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 
 #pragma mark - 圈子
 #define TOOLCGIKEY @"123$%^abc"
+
+- (void)joinCircle:(NSString *)invitationCode completion:(FetchCenterGetRequestJoinCircleCompleted)completionBlock{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,JOINT_CIRCLE];
+    [self getRequest:rqtStr
+           parameter:@{@"addCode":invitationCode}
+    includeArguments:YES
+          completion:^(NSDictionary *responseJson) {
+        NSLog(@"%@",responseJson);
+              NSString *circleId = [responseJson valueForKeyPath:@"quanInfo.id"];
+              if (circleId){
+                  [User updateAttributeFromDictionary:@{CURRENT_CIRCLE_ID:circleId}];
+              }
+              if (completionBlock) completionBlock(circleId);
+    }];
+}
+
 //MARK: 切换圈子
 - (void)switchToCircle:(NSString *)circleId completion:(FetchCenterGetRequestSwithCircleCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,TOOL,SWITCH_CIRCLE];
@@ -117,6 +136,8 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     includeArguments:NO
           completion:^(NSDictionary *responseJson) {
               NSLog(@"%@",responseJson);
+              //缓存当前圈子id
+              [User updateAttributeFromDictionary:@{CURRENT_CIRCLE_ID:circleId}];
               completionBlock();
           }];
 
@@ -810,6 +831,10 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
                                                       
                                                       NSLog(@"Fail Get Request :%@\n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
                                                             ,rqtStr,baseURL,dict,responseJson,error);
+                                                      
+                                                      if ([self.delegate respondsToSelector:@selector(didFailSendingRequest)]){
+                                                          [self.delegate didFailSendingRequest];
+                                                      }
                                                   }
                                               }
                                           });

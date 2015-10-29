@@ -62,6 +62,8 @@
 		A0994E6A1BC4D1FB00D45845 /* WYPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0994E671BC4D1FB00D45845 /* WYPopoverController.m */; };
 		A0994E6B1BC4D1FB00D45845 /* WYStoryboardPopoverSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = A0994E691BC4D1FB00D45845 /* WYStoryboardPopoverSegue.m */; };
 		A0994E711BC6DF6200D45845 /* LocalDataTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A0994E701BC6DF6100D45845 /* LocalDataTest.m */; };
+		A099CC4F1BE1B23600D38145 /* InvitationCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A099CC4E1BE1B23600D38145 /* InvitationCodeViewController.m */; };
+		A099CC501BE1B23600D38145 /* InvitationCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A099CC4E1BE1B23600D38145 /* InvitationCodeViewController.m */; };
 		A0A083551BD3528C0057CD65 /* FetchCenterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A083541BD3528C0057CD65 /* FetchCenterTest.m */; };
 		A0A083581BD5FF9E0057CD65 /* StationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A083571BD5FF9E0057CD65 /* StationViewController.m */; };
 		A0A083591BD5FF9E0057CD65 /* StationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A083571BD5FF9E0057CD65 /* StationViewController.m */; };
@@ -398,6 +400,8 @@
 		A0994E681BC4D1FB00D45845 /* WYStoryboardPopoverSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYStoryboardPopoverSegue.h; sourceTree = "<group>"; };
 		A0994E691BC4D1FB00D45845 /* WYStoryboardPopoverSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYStoryboardPopoverSegue.m; sourceTree = "<group>"; };
 		A0994E701BC6DF6100D45845 /* LocalDataTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalDataTest.m; sourceTree = "<group>"; };
+		A099CC4D1BE1B23600D38145 /* InvitationCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationCodeViewController.h; sourceTree = "<group>"; };
+		A099CC4E1BE1B23600D38145 /* InvitationCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationCodeViewController.m; sourceTree = "<group>"; };
 		A0A083541BD3528C0057CD65 /* FetchCenterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchCenterTest.m; sourceTree = "<group>"; };
 		A0A083561BD5FF9E0057CD65 /* StationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationViewController.h; sourceTree = "<group>"; };
 		A0A083571BD5FF9E0057CD65 /* StationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationViewController.m; sourceTree = "<group>"; };
@@ -1232,6 +1236,8 @@
 		AEEC6C751A6DB5EE0021B7E4 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				A099CC4D1BE1B23600D38145 /* InvitationCodeViewController.h */,
+				A099CC4E1BE1B23600D38145 /* InvitationCodeViewController.m */,
 				AEBECCF71AE8A16600EDF385 /* LoginDetailViewController.h */,
 				AEBECCF81AE8A16600EDF385 /* LoginDetailViewController.m */,
 				AEBECCF11AE7687800EDF385 /* LoginViewController.h */,
@@ -1617,6 +1623,7 @@
 				AEEC6C731A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,
 				AE47055D1AF9DC080028D7BC /* FeedDetailCell.m in Sources */,
 				AED8D7CA1A9BE2490035EDE5 /* FollowingImageCell.m in Sources */,
+				A099CC4F1BE1B23600D38145 /* InvitationCodeViewController.m in Sources */,
 				A0F7D47F1B84E851003CCB34 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				AEFEE3FC1A8ED9F6007E8234 /* FollowingTableViewController.m in Sources */,
 				A0F7D4811B84E851003CCB34 /* UIScrollView+SVPullToRefresh.m in Sources */,
@@ -1676,6 +1683,7 @@
 				A04842EA1B98CF9E0032E927 /* UIImageView+ImageCache.m in Sources */,
 				A0D102201B84EB6A006B0E4E /* SDWebImageDecoder.m in Sources */,
 				A0F7D4521B84E851003CCB34 /* UIImage+JTSImageEffects.m in Sources */,
+				A099CC501BE1B23600D38145 /* InvitationCodeViewController.m in Sources */,
 				AE01725C1A65CD8F0014266F /* WishTests.m in Sources */,
 				AE2F28E81AD3937700FC3370 /* WishDetailVCDiscovery.m in Sources */,
 				A0994E711BC6DF6200D45845 /* LocalDataTest.m in Sources */,

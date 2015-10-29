@@ -266,10 +266,7 @@
         
         //发送切换圈子请求
         [self.fetchCenter switchToCircle:circle.circleId completion:^{
-            
-            //缓存当前圈子id
-            [User updateAttributeFromDictionary:@{CURRENT_CIRCLE_ID:circle.circleId}];
-            
+                        
             //刷新发现页列表
             [self getDiscoveryList];
         }];

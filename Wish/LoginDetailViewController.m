@@ -101,7 +101,7 @@
 
 - (void)didFinishSettingPersonalInfo{
     self.navigationController.navigationBar.hidden = YES;
-    [[[UIApplication sharedApplication] keyWindow] setRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"]];
+    [self performSegueWithIdentifier:@"showInvitationCodeView" sender:nil];
 }
 
 

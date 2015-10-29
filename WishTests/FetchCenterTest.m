@@ -31,13 +31,21 @@
     [super tearDown];
 }
 
-- (void)testFetchCircleList{
+- (void)testAll{
+    NSLog(@"测试圈子列表");
     [self.fetchCenter getCircleList:^(NSArray *circles) {
         XCTAssertNotNil(circles,@"Null Circle List");
         XCTAssertTrue(circles.count > 0, @"Nothing in Circle List");
+        
+        NSLog(@"测试切换圈子");
+        Circle *circle = circles.lastObject;
+        [self.fetchCenter switchToCircle:circle.circleId completion:nil];
     }];
-}
+    
+    NSLog(@"测试加入圈子");
+    [self.fetchCenter joinCircle:@"1001" completion:nil];
 
+}
 
 @end
 
