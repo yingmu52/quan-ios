@@ -168,12 +168,11 @@
 
 - (void)setUpNavigationItem
 {
-    if ([User isSuperUser]) {
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[Theme navInviteDefault]
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[Theme navInviteDefault]
                                                                                  style:UIBarButtonItemStylePlain
                                                                                 target:self
                                                                                 action:@selector(showInvitationView)];
-    }
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[Theme navAddDefault]
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
