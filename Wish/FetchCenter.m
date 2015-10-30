@@ -111,37 +111,42 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 #define TOOLCGIKEY @"123$%^abc"
 
 - (void)joinCircle:(NSString *)invitationCode completion:(FetchCenterGetRequestJoinCircleCompleted)completionBlock{
-    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,JOINT_CIRCLE];
-    [self getRequest:rqtStr
-           parameter:@{@"addCode":invitationCode}
-    includeArguments:YES
-          completion:^(NSDictionary *responseJson) {
-        NSLog(@"%@",responseJson);
-              NSString *circleId = [responseJson valueForKeyPath:@"quanInfo.id"];
-              if (circleId){
-                  [User updateAttributeFromDictionary:@{CURRENT_CIRCLE_ID:circleId}];
-              }
-              if (completionBlock) completionBlock(circleId);
-    }];
+    if (invitationCode) {
+        NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,JOINT_CIRCLE];
+        [self getRequest:rqtStr
+               parameter:@{@"addCode":invitationCode}
+        includeArguments:YES
+              completion:^(NSDictionary *responseJson) {
+                  NSLog(@"%@",responseJson);
+                  NSString *circleId = [responseJson valueForKeyPath:@"quanInfo.id"];
+                  if (circleId){
+                      [User updateAttributeFromDictionary:@{CURRENT_CIRCLE_ID:circleId}];
+                  }
+                  NSLog(@"成功加入圈子id %@",[User currentCircleId]);
+                  if (completionBlock) completionBlock(circleId);
+              }];
+    }
 }
 
 //MARK: 切换圈子
 - (void)switchToCircle:(NSString *)circleId completion:(FetchCenterGetRequestSwithCircleCompleted)completionBlock{
-    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,TOOL,SWITCH_CIRCLE];
-    [self getRequest:rqtStr
-           parameter:@{@"key":[TOOLCGIKEY stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                       @"id":circleId,
-                       @"manId":[User uid],
-                       @"operate":[@"add" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]}
-    includeArguments:NO
-          completion:^(NSDictionary *responseJson) {
-              NSLog(@"%@",responseJson);
-              //缓存当前圈子id
-              [User updateAttributeFromDictionary:@{CURRENT_CIRCLE_ID:circleId}];
-              completionBlock();
-          }];
-
-    
+    if (circleId) {
+        NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,TOOL,SWITCH_CIRCLE];
+        [self getRequest:rqtStr
+               parameter:@{@"key":[TOOLCGIKEY stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                           @"id":circleId,
+                           @"manId":[User uid],
+                           @"operate":[@"add" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]}
+        includeArguments:NO
+              completion:^(NSDictionary *responseJson) {
+                  NSLog(@"%@",responseJson);
+                  //缓存当前圈子id
+                  [User updateAttributeFromDictionary:@{CURRENT_CIRCLE_ID:circleId}];
+                  if (completionBlock) {
+                      completionBlock();
+                  }
+              }];
+    }
 }
 
 //MARK: 获取圈子列表
@@ -417,7 +422,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
                                               ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]];
                 plan.discoverIndex = @(idx); //记录索引方便显示服务器上的顺序
                 [plans addObject:plan];
-                NSLog(@"%@, mask : %@, index %@",plan.planTitle,plan.cornerMask,plan.discoverIndex);
+//                NSLog(@"%@, mask : %@, index %@",plan.planTitle,plan.cornerMask,plan.discoverIndex);
             }];
         }
         completionBlock(plans,title);
