@@ -89,6 +89,10 @@ typedef void(^FetchCenterGetRequestJoinCircleCompleted)(NSString *circleId);
 typedef void(^FetchCenterGetRequestGetDiscoverListCompleted)(NSMutableArray *plans, NSString *circleTitle);
 /** 拉取主人id的事件列表完成*/
 typedef void(^FetchCenterGetRequestGetPlanListCompleted)(NSArray *plans);
+/** 赞某条Feed完成*/
+typedef void(^FetchCenterGetRequestLikeFeedCompleted)(void);
+/** 不赞某条Feed完成*/
+typedef void(^FetchCenterGetRequestUnLikeFeedCompleted)(void);
 
 
 @interface FetchCenter : NSObject
@@ -116,8 +120,13 @@ typedef void(^FetchCenterGetRequestGetPlanListCompleted)(NSArray *plans);
 
 #pragma mark - 事件动态，（Feed）
 - (void)loadFeedsListForPlan:(Plan *)plan pageInfo:(NSDictionary *)info;
-- (void)likeFeed:(Feed *)feed;
-- (void)unLikeFeed:(Feed *)feed;
+
+/**赞*/
+- (void)likeFeed:(Feed *)feed completion:(FetchCenterGetRequestLikeFeedCompleted)completionBlock;
+
+/**取消赞*/
+- (void)unLikeFeed:(Feed *)feed completion:(FetchCenterGetRequestUnLikeFeedCompleted)completionBlock;
+
 - (void)deleteFeed:(Feed *)feed;
 - (void)uploadImages:(NSArray *)images toCreateFeed:(Feed *)feed;
 - (void)uploadToCreateFeed:(Feed *)feed fetchedImageIds:(NSArray *)imageIds;

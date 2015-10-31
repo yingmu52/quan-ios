@@ -336,7 +336,7 @@ forRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
         feed.selfLiked = @(YES);
         
         //send like request
-        [self.fetchCenter likeFeed:feed];
+        [self.fetchCenter likeFeed:feed completion:nil];
     }else{
         
         //decrease feed like count
@@ -344,7 +344,7 @@ forRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
         feed.selfLiked = @(NO);
         
         //send unlike request
-        [self.fetchCenter unLikeFeed:feed];
+        [self.fetchCenter unLikeFeed:feed completion:nil];
     }
 }
 

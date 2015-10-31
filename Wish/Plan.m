@@ -148,7 +148,7 @@
 }
 
 + (NSArray *)fetchWith:(NSString *)entityName
-             predicate:(NSPredicate *)predicate
+             predicate:(NSPredicate  * _Nullable)predicate
       keyForDescriptor:(NSString *)key{
     
     NSManagedObjectContext *context = [AppDelegate getContext];

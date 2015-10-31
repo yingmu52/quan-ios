@@ -115,6 +115,36 @@ static NSTimeInterval expectationTimeout = 5.0;
 
 }
 
+- (void)testLikeAndUnLikeFeed{
+    NSArray *array = [Plan fetchWith:@"Feed" predicate:nil keyForDescriptor:@"createDate"];
+    XCTAssertTrue(array.count > 0, @"本地没有缓存到feed");
+    
+
+    for (NSUInteger i = 0; i < 10; i ++) {
+        XCTestExpectation *expectation = [self expectationWithDescription:@"赞与取消赞接口"];
+        Feed *feed = array[i];
+        NSInteger currentLikesStatic = feed.likeCount.integerValue;
+        __block NSInteger currentLikesDynamic = currentLikesStatic;
+        
+        [self.fetchCenter likeFeed:feed completion:^{
+            currentLikesDynamic += 1;
+            [self.fetchCenter unLikeFeed:feed completion:^{
+                currentLikesDynamic -= 1;
+                [expectation fulfill];
+            }];
+        }];
+        
+        XCTAssertTrue(currentLikesDynamic == currentLikesStatic,@"赞与非赞的执行次数不一致");
+        [self waitForExpectationsWithTimeout:10.0 handler:^(NSError * _Nullable error) {
+            XCTAssertNil(error,@"赞与取消赞接口错误");
+            if (error) {
+                NSLog(@"%@",feed);
+            }
+        }];
+    }
+    
+
+}
 @end
 
 
