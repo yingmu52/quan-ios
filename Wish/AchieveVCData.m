@@ -60,7 +60,6 @@
     
     UIImage *badge;
     if (plan.planStatus.integerValue == PlanStatusFinished) badge = [Theme achievementFinish];
-    if (plan.planStatus.integerValue == PlanStatusGiveTheFuckingUp) badge = [Theme achievementFail];
     cell.badgeImageView.image = badge;
     [cell.planImageView downloadImageWithImageId:plan.backgroundNum size:FetchCenterImageSize200];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

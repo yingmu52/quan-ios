@@ -93,6 +93,8 @@ typedef void(^FetchCenterGetRequestGetPlanListCompleted)(NSArray *plans);
 typedef void(^FetchCenterGetRequestLikeFeedCompleted)(void);
 /** 不赞某条Feed完成*/
 typedef void(^FetchCenterGetRequestUnLikeFeedCompleted)(void);
+/** 更新事件完成*/
+typedef void(^FetchCenterGetRequestUpdatePlanCompleted)(void);
 
 
 @interface FetchCenter : NSObject
@@ -145,7 +147,7 @@ typedef void(^FetchCenterGetRequestUnLikeFeedCompleted)(void);
 
 - (void)uploadToCreatePlan:(Plan *)plan
                 completion:(FetchCenterGetRequestPlanCreationCompleted)completionBlock;
-- (void)updatePlan:(Plan *)plan;
+- (void)updatePlan:(Plan *)plan completion:(FetchCenterGetRequestUpdatePlanCompleted)completionBlock;;
 - (void)postToDeletePlan:(Plan *)plan;
 - (void)updateStatus:(Plan *)plan;
 

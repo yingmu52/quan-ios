@@ -63,11 +63,25 @@
 
 - (void)doneEditing{
     
-    if (self.textField.hasText && ![self.textField.text isEqualToString:self.plan.planTitle] | ![self.textView.text isEqualToString:self.plan.detailText]){
+    [self.textField resignFirstResponder];
+    [self.textView resignFirstResponder];
+    
+    if (self.textField.hasText &&
+        ![self.textField.text isEqualToString:self.plan.planTitle] |
+        ![self.textView.text isEqualToString:self.plan.detailText]){
         //update Plan
         self.plan.planTitle = self.textField.text;
         self.plan.detailText = self.textView.text;
-        [self.fetchCenter updatePlan:self.plan];
+
+        UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        [spinner startAnimating];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+        [self.fetchCenter updatePlan:self.plan completion:^{
+            [spinner stopAnimating];
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
+        }];
     }else{
         [self.navigationController popViewControllerAnimated:YES];
     }
@@ -79,11 +93,6 @@
         _fetchCenter.delegate = self;
     }
     return _fetchCenter;
-}
-- (void)didFinishUpdatingPlan:(Plan *)plan{
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
 }
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{

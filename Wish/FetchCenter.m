@@ -483,18 +483,21 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 }
 
 #pragma mark - 事件
-- (void)updatePlan:(Plan *)plan{
+- (void)updatePlan:(Plan *)plan completion:(FetchCenterGetRequestUpdatePlanCompleted)completionBlock{
     //输入样例：id=hello_1421235901&title=hello_title2&finishDate=3&backGroudPic=bg3&private=1&state=1&finishPercent=20
     //—— 每一项都可以单独更新
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,UPDATE_PLAN];
-    [self getRequest:rqtStr parameter:@{@"id":plan.planId,
-                                        @"title":[plan.planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                                        @"private":plan.isPrivate,
-                                        @"description":plan.detailText ? [plan.detailText stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] : @""}
-           operation:FetchCenterGetOpUpdatePlan
-              entity:plan];
-   
+    NSDictionary *args = @{@"id":plan.planId,
+                           @"title":[plan.planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                           @"private":plan.isPrivate,
+                           @"description":plan.detailText ? [plan.detailText stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] : @""};
+    [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
+        if (completionBlock) {
+            completionBlock();
+        }
+    }];
 }
+
 - (void)updateStatus:(Plan *)plan{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,UPDATE_PLAN_STATUS];
     [self getRequest:rqtStr parameter:@{@"id":plan.planId,

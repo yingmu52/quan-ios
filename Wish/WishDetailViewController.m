@@ -56,7 +56,10 @@
     if ([text length] == 1 && resultRange.location != NSNotFound) {
         [textView resignFirstResponder];
         self.plan.detailText = textView.text;
-        [self.fetchCenter updatePlan:self.plan];
+
+        [self.fetchCenter updatePlan:self.plan completion:^{
+            [textView resignFirstResponder];
+        }];
         return NO;
     }
     return YES;
@@ -355,10 +358,6 @@ forRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
 
 
 #pragma mark - fetch center delegate 
-
-- (void)didFinishUpdatingPlan:(Plan *)plan{
-    //did finished update plan description
-}
 
 - (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
     

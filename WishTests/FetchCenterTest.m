@@ -145,6 +145,33 @@ static NSTimeInterval expectationTimeout = 5.0;
     
 
 }
+
+- (void)testUpdatePlan{
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"planTitle = %@",@"PlanForUnitTesting"];
+    NSArray *array = [Plan fetchWith:@"Plan" predicate:predicate keyForDescriptor:@"createDate"];
+    XCTAssertTrue(array.count == 1, @"事件不存在");
+
+    Plan *plan = array.lastObject;
+    NSUInteger numberOfCycles = 100;
+    for (NSInteger i = 0; i <= numberOfCycles; i++) {
+        plan.detailText = [NSUUID UUID].UUIDString; //修改事件描述
+        plan.planStatus = i == numberOfCycles ? @(PlanStatusOnGoing) : @(PlanStatusFinished); //修改事件状态
+        XCTestExpectation *expectation = [self expectationWithDescription:@"更新事件内容接口"];
+        [self.fetchCenter updatePlan:plan completion:^{
+            [expectation fulfill];
+        }];
+        
+        [self waitForExpectationsWithTimeout:10.0 handler:^(NSError * _Nullable error) {
+            XCTAssertNil(error,@"更新事件内容接口错误");
+            if (error) {
+                NSLog(@"%@",plan);
+            }
+        }];
+    }
+    [plan.managedObjectContext save:nil];
+
+}
 @end
 
 

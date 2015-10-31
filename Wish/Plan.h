@@ -20,7 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 typedef enum {
     PlanStatusOnGoing = 0,
     PlanStatusFinished,
-    PlanStatusGiveTheFuckingUp
 }PlanStatus;
 
 - (void)updatePlanStatus:(PlanStatus)planStatus;
