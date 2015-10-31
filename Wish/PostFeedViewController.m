@@ -262,25 +262,27 @@ static NSUInteger distance = 10;
 
 - (void)didFinishUploadingImage:(NSArray *)imageIds forFeed:(Feed *)feed{
     if (self.plan.planId) {
-        [self.fetchCenter uploadToCreateFeed:feed fetchedImageIds:imageIds];
+        [self.fetchCenter uploadToCreateFeed:feed fetchedImageIds:imageIds completion:^(Feed *feed) {
+            [self finishUploadingFeed:feed];
+        }];
     }else{
         [self.fetchCenter uploadToCreatePlan:self.plan completion:^(Plan *plan) {
-            [self.fetchCenter uploadToCreateFeed:feed fetchedImageIds:imageIds];
+            [self.fetchCenter uploadToCreateFeed:feed fetchedImageIds:imageIds completion:^(Feed *feed) {
+                [self finishUploadingFeed:feed];
+            }];
         }];
     }
 }
 
-- (void)didFinishUploadingFeed:(Feed *)feed
+- (void)finishUploadingFeed:(Feed *)feed
 {
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
-    
     if (!self.seugeFromPlanCreation) {
         [self.navigationController popViewControllerAnimated:YES];
     }else{
         [self performSegueWithIdentifier:@"showWishDetailOnPlanCreation" sender:self.plan];
     }
     self.progressBar.hidden = NO;
-
 }
 
 - (void)didReceivedCurrentProgressForUploadingImage:(CGFloat)percentage{

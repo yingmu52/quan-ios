@@ -61,7 +61,10 @@
                                                                 [self.feed.plan deleteSelf];
                                                                 [self.navigationController popToRootViewControllerAnimated:YES];
                                                             }else{
-                                                                [self.fetchCenter deleteFeed:self.feed];
+                                                                [self.fetchCenter deleteFeed:self.feed completion:^{
+                                                                    [self.feed deleteSelf];
+                                                                    [self.navigationController popViewControllerAnimated:YES];
+                                                                }];
                                                             }
                                                         }];
         
@@ -71,11 +74,6 @@
     }
 }
 
-
-- (void)didFinishDeletingFeed:(Feed *)feed{
-    [feed deleteSelf];
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 - (BOOL)isDeletingTheLastFeed{
     return self.feed.plan.feeds.count == 1;

@@ -173,10 +173,12 @@ static NSTimeInterval expectationTimeout = 5.0;
 
 }
 
+#define testPlanTitle @"PlanForUnitTesting"
+
 - (void)testUpdatePlanStatus{
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"planTitle = %@",@"PlanForUnitTesting"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"planTitle = %@",testPlanTitle];
     NSArray *array = [Plan fetchWith:@"Plan" predicate:predicate keyForDescriptor:@"createDate"];
-    XCTAssertTrue(array.count == 1, @"事件不存在");
+    XCTAssertFalse(array.count == 0, @"事件不存在");
     
     Plan *plan = array.lastObject;
     NSUInteger numberOfCycles = 10;
@@ -202,11 +204,10 @@ static NSTimeInterval expectationTimeout = 5.0;
 
 - (void)testCreateAndDeletePlan{
     NSUInteger numberOfCycles = 10;
-//    NSString *planTitle = @"testCreateAndDeletePlan";
     Plan *plan;
     for (NSInteger i = 0; i <= numberOfCycles; i++) {
         XCTestExpectation *expectation = [self expectationWithDescription:@"事件创建与删除接口"];
-        plan = [Plan createPlan:@"testCreateAndDeletePlan" privacy:YES];
+        plan = [Plan createPlan:testPlanTitle privacy:YES];
         [self.fetchCenter uploadToCreatePlan:plan completion:^(Plan *plan) {
             XCTAssertTrue(plan.planId,@"事件没有缓存后台传来的id");
             [self.fetchCenter postToDeletePlan:plan completion:^{
@@ -222,15 +223,42 @@ static NSTimeInterval expectationTimeout = 5.0;
         }];
     }
     [plan.managedObjectContext save:nil];
-    
-//    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
-//    request.predicate = [NSPredicate predicateWithFormat:@"planTitle = %@",planTitle];
-//    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"planTitle" ascending:NO]];
-//    NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest:request];
-
 }
 
+
+- (void)testCreateAndDeleteFeed{
+
+    NSArray *array = [Plan fetchWith:@"Plan"
+                           predicate:[NSPredicate predicateWithFormat:@"planTitle = %@",testPlanTitle]
+                    keyForDescriptor:@"planTitle"];
+    XCTAssertFalse(array.count == 0,@"找不到测试事件");
+    Plan *plan = array.lastObject;
+    
+    NSUInteger numberOfCycles = 10;
+    for (NSInteger i = 0; i <= numberOfCycles; i++) {
+        NSArray *imageIds = @[@"bg1",@"bg2",@"bg3"];
+        Feed *feed = [Feed createFeedInPlan:plan feedTitle:@"testFeedTitle"];
+        
+        XCTestExpectation *expectation = [self expectationWithDescription:@"创建与删除Feed接口"];
+        [self.fetchCenter uploadToCreateFeed:feed fetchedImageIds:imageIds completion:^(Feed *feed) {
+            XCTAssertTrue(feed.feedId,@"从后台获取Feed id失败");
+            [self.fetchCenter deleteFeed:feed completion:^{ //这个请求处理了对Feed的删除操作
+                [feed deleteSelf];
+                [expectation fulfill];
+            }];
+            
+        }];
+        
+        [self waitForExpectationsWithTimeout:expectationTimeout handler:^(NSError * _Nullable error) {
+            XCTAssertNil(error,@"创建与删除Feed接口错误");
+            if (error) {
+                NSLog(@"%@",feed);
+            }
+        }];   
+    }
+}
 @end
+
 
 
 

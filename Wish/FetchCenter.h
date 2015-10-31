@@ -99,6 +99,10 @@ typedef void(^FetchCenterGetRequestUpdatePlanCompleted)(void);
 typedef void(^FetchCenterGetRequestUpdatePlanStatusCompleted)(void);
 /** 更新事件状态完成*/
 typedef void(^FetchCenterGetRequestDeletePlanCompleted)(void);
+/** 上传Feed完成*/
+typedef void(^FetchCenterGetRequestUploadFeedCompleted)(Feed *feed);
+/** 删除Feed完成*/
+typedef void(^FetchCenterGetRequestDeleteFeedCompleted)(void);
 
 
 @interface FetchCenter : NSObject
@@ -133,9 +137,11 @@ typedef void(^FetchCenterGetRequestDeletePlanCompleted)(void);
 /**取消赞*/
 - (void)unLikeFeed:(Feed *)feed completion:(FetchCenterGetRequestUnLikeFeedCompleted)completionBlock;
 
-- (void)deleteFeed:(Feed *)feed;
+- (void)deleteFeed:(Feed *)feed completion:(FetchCenterGetRequestDeleteFeedCompleted)completionBlock;;
 - (void)uploadImages:(NSArray *)images toCreateFeed:(Feed *)feed;
-- (void)uploadToCreateFeed:(Feed *)feed fetchedImageIds:(NSArray *)imageIds;
+- (void)uploadToCreateFeed:(Feed *)feed
+           fetchedImageIds:(NSArray *)imageIds
+                completion:(FetchCenterGetRequestUploadFeedCompleted)completionBlock;;
 
 #pragma mark - 评论回复
 - (void)commentOnFeed:(Feed *)feed content:(NSString *)text;

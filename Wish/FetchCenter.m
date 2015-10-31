@@ -261,15 +261,17 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 
 #pragma mark - 事件动态，又称事件片段，Feed
 //superplan/feeds/splan_feeds_delete_id.php
-- (void)deleteFeed:(Feed *)feed{
+- (void)deleteFeed:(Feed *)feed completion:(FetchCenterGetRequestDeleteFeedCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,DELETE_FEED];
     NSDictionary *args = @{@"id":feed.feedId,
                            @"picId":feed.imageId,
                            @"planId":feed.plan.planId};
-    [self getRequest:rqtStr
-           parameter:args
-           operation:FetchCenterGetOpDeleteFeed
-              entity:feed];
+    [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
+        NSLog(@"delete feed successed, ID:%@",feed.feedId);
+        if (completionBlock) {
+            completionBlock();
+        }
+    }];
 }
 
 
@@ -293,7 +295,9 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     return [[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
-- (void)uploadToCreateFeed:(Feed *)feed fetchedImageIds:(NSArray *)imageIds{
+- (void)uploadToCreateFeed:(Feed *)feed
+           fetchedImageIds:(NSArray *)imageIds
+                completion:(FetchCenterGetRequestUploadFeedCompleted)completionBlock{
     if (feed.plan.planId && feed.feedTitle) {
         
         //设置Feed的封面
@@ -309,15 +313,22 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
         feed.picUrls = [imageIds componentsJoinedByString:@","];
         
         //设置请求参数
-        NSString *baseURL = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,CREATE_FEED];
+        NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,CREATE_FEED];
         NSDictionary *args = @{@"picurl":feed.imageId, //兼容背影图
                                @"content":[feed.feedTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                                @"planId":feed.plan.planId,
                                @"picurls":feed.picUrls,
                                @"feedsType":feed.type};
-        [self getRequest:baseURL
-               parameter:args
-               operation:FetchCenterGetOpCreateFeed entity:feed];
+        
+        [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
+            NSString *fetchedFeedID = [responseJson valueForKeyPath:@"data.id"];
+            feed.feedId = fetchedFeedID;
+            [feed.plan updateTryTimesOfPlan:YES];
+            if (completionBlock) {
+                completionBlock(feed);
+                NSLog(@"upload feed successed, ID: %@",feed.feedId);
+            }
+        }];
     }
 
 }

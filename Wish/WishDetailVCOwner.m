@@ -187,7 +187,13 @@
             //执行删除操作
             Feed *feed = [self.fetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
             if (feed.feedId && feed.plan.planId && feed.imageId){
-                [self.fetchCenter deleteFeed:feed];
+                [self.fetchCenter deleteFeed:feed completion:^{
+                    if ([self isDeletingTheLastFeed]) {
+                        [self deletePlan];
+                    }else{
+                        [feed deleteSelf];
+                    }
+                }];
             }else if (!feed.feedId){ //local feed
                 if ([self isDeletingTheLastFeed]){ // delete the last plan
                     [self deletePlan];
@@ -221,13 +227,6 @@
 }
 #pragma mark - fetch center delegate
 
-- (void)didFinishDeletingFeed:(Feed *)feed{
-    if ([self isDeletingTheLastFeed]) {
-        [self deletePlan];
-    }else{
-        [feed deleteSelf];
-    }
-}
 
 - (NSString *)segueForFeed{
     return @"showFeedDetailFromOwner";
