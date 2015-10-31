@@ -425,19 +425,15 @@ forRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
 #pragma mark - follow
 
 - (void)didPressedUnFollow:(UIButton *)sender{
-    [self.fetchCenter unFollowPlan:self.plan];
+    [self.fetchCenter unFollowPlan:self.plan completion:^{
+        [self.headerView updateHeaderWithPlan:self.plan];
+    }];
 }
 
 - (void)didPressedFollow:(UIButton *)sender{
-    [self.fetchCenter followPlan:self.plan];
-}
-
-- (void)didFinishFollowingPlan:(Plan *)plan{
-    [self.headerView updateHeaderWithPlan:plan];
-}
-
-- (void)didFinishUnFollowingPlan:(Plan *)plan{
-    [self.headerView updateHeaderWithPlan:plan];
+    [self.fetchCenter followPlan:self.plan completion:^{
+        [self.headerView updateHeaderWithPlan:self.plan];
+    }];
 }
 
 

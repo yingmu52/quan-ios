@@ -392,20 +392,28 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 
 #pragma mark - 事件关注
 
-- (void)followPlan:(Plan *)plan{
+- (void)followPlan:(Plan *)plan completion:(FetchCenterGetRequestFollowPlanCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FOLLOW,FOLLOW_PLAN];
-    [self getRequest:rqtStr
-           parameter:@{@"planId":plan.planId}
-           operation:FetchCenterGetOpFollowPlanAction
-              entity:plan];
+    [self getRequest:rqtStr parameter:@{@"planId":plan.planId} includeArguments:YES completion:^(NSDictionary *responseJson) {
+        plan.followCount = @(plan.followCount.integerValue + 1);
+        plan.isFollowed = @(YES);
+        NSLog(@"followed plan ID %@",plan.planId);
+        if (completionBlock) {
+            completionBlock();
+        }
+    }];
 }
 
-- (void)unFollowPlan:(Plan *)plan{
+- (void)unFollowPlan:(Plan *)plan completion:(FetchCenterGetRequestUnFollowPlanCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FOLLOW,UNFOLLOW_PLAN];
-    [self getRequest:rqtStr
-           parameter:@{@"planId":plan.planId}
-           operation:FetchCenterGetOpUnFollowPlanAction
-              entity:plan];
+    [self getRequest:rqtStr parameter:@{@"planId":plan.planId} includeArguments:YES completion:^(NSDictionary *responseJson) {
+        plan.followCount = @(plan.followCount.integerValue - 1);
+        plan.isFollowed = @(NO);
+        NSLog(@"unfollowed plan ID %@",plan.planId);
+        if (completionBlock) {
+            completionBlock();
+        }
+    }];
 }
 
 - (void)fetchFollowingPlanList{

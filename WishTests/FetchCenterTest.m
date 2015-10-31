@@ -8,9 +8,10 @@
 
 #import <XCTest/XCTest.h>
 #import "FetchCenter.h"
-static NSTimeInterval expectationTimeout = 5.0;
+static NSTimeInterval expectationTimeout = 30.0f;
 @interface FetchCenterTest : XCTestCase <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
+@property (nonatomic,strong) Plan *testPlan;
 @end
 
 @implementation FetchCenterTest
@@ -173,32 +174,40 @@ static NSTimeInterval expectationTimeout = 5.0;
 
 }
 
+
 #define testPlanTitle @"PlanForUnitTesting"
 
+- (Plan *)testPlan{
+    if (!_testPlan) {
+        NSArray *array = [Plan fetchWith:@"Plan"
+                               predicate:[NSPredicate predicateWithFormat:@"planTitle = %@",testPlanTitle]
+                        keyForDescriptor:@"planTitle"];
+        XCTAssertFalse(array.count == 0,@"找不到测试事件");
+        _testPlan = array.lastObject;
+    }
+    XCTAssertNotNil(_testPlan,@"Null事件");
+    return _testPlan;
+}
+
 - (void)testUpdatePlanStatus{
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"planTitle = %@",testPlanTitle];
-    NSArray *array = [Plan fetchWith:@"Plan" predicate:predicate keyForDescriptor:@"createDate"];
-    XCTAssertFalse(array.count == 0, @"事件不存在");
-    
-    Plan *plan = array.lastObject;
     NSUInteger numberOfCycles = 10;
     for (NSInteger i = 0; i <= numberOfCycles; i++) {
-        plan.detailText = [NSUUID UUID].UUIDString; //修改事件描述
-        PlanStatus status  =  [plan.planStatus isEqualToNumber:@(PlanStatusFinished)] ? PlanStatusOnGoing : PlanStatusFinished; //修改事件状态
-        [plan updatePlanStatus:status];
+        self.testPlan.detailText = [NSUUID UUID].UUIDString; //修改事件描述
+        PlanStatus status  =  [self.testPlan.planStatus isEqualToNumber:@(PlanStatusFinished)] ? PlanStatusOnGoing : PlanStatusFinished; //修改事件状态
+        [self.testPlan updatePlanStatus:status];
         XCTestExpectation *expectation = [self expectationWithDescription:@"更新事件状态接口"];
-        [self.fetchCenter updateStatus:plan completion:^{
+        [self.fetchCenter updateStatus:self.testPlan completion:^{
             [expectation fulfill];
         }];
 
         [self waitForExpectationsWithTimeout:expectationTimeout handler:^(NSError * _Nullable error) {
             XCTAssertNil(error,@"更新事件状态接口错误");
             if (error) {
-                NSLog(@"%@",plan);
+                NSLog(@"%@",self.testPlan);
             }
         }];
     }
-    [plan.managedObjectContext save:nil];
+    [self.testPlan.managedObjectContext save:nil];
    
 }
 
@@ -228,16 +237,10 @@ static NSTimeInterval expectationTimeout = 5.0;
 
 - (void)testCreateAndDeleteFeed{
 
-    NSArray *array = [Plan fetchWith:@"Plan"
-                           predicate:[NSPredicate predicateWithFormat:@"planTitle = %@",testPlanTitle]
-                    keyForDescriptor:@"planTitle"];
-    XCTAssertFalse(array.count == 0,@"找不到测试事件");
-    Plan *plan = array.lastObject;
-    
     NSUInteger numberOfCycles = 10;
     for (NSInteger i = 0; i <= numberOfCycles; i++) {
         NSArray *imageIds = @[@"bg1",@"bg2",@"bg3"];
-        Feed *feed = [Feed createFeedInPlan:plan feedTitle:@"testFeedTitle"];
+        Feed *feed = [Feed createFeedInPlan:self.testPlan feedTitle:@"testFeedTitle"];
         
         XCTestExpectation *expectation = [self expectationWithDescription:@"创建与删除Feed接口"];
         [self.fetchCenter uploadToCreateFeed:feed fetchedImageIds:imageIds completion:^(Feed *feed) {
@@ -257,6 +260,22 @@ static NSTimeInterval expectationTimeout = 5.0;
         }];   
     }
 }
+
+- (void)testFollowAndUnfollowPlan{
+    NSUInteger numberOfCycles = 10;
+    for (NSInteger i = 0; i <= numberOfCycles; i++) {
+        XCTestExpectation *expectation = [self expectationWithDescription:@"关注与取消关注事件接口"];
+        [self.fetchCenter followPlan:self.testPlan completion:^{
+            [self.fetchCenter unFollowPlan:self.testPlan completion:^{
+                [expectation fulfill];
+            }];
+        }];
+        [self waitForExpectationsWithTimeout:expectationTimeout handler:^(NSError * _Nullable error) {
+            XCTAssertNil(error,@"关注与取消关注事件接口错误");
+        }];
+    }
+}
+
 @end
 
 
