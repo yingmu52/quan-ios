@@ -264,7 +264,7 @@ static NSUInteger distance = 10;
     if (self.plan.planId) {
         [self.fetchCenter uploadToCreateFeed:feed fetchedImageIds:imageIds];
     }else{
-        [self.fetchCenter uploadToCreatePlan:self.plan completion:^{
+        [self.fetchCenter uploadToCreatePlan:self.plan completion:^(Plan *plan) {
             [self.fetchCenter uploadToCreateFeed:feed fetchedImageIds:imageIds];
         }];
     }

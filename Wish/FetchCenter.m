@@ -525,8 +525,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 
 }
 
-- (void)uploadToCreatePlan:(Plan *)plan
-               completion:(FetchCenterGetRequestPlanCreationCompleted)completionBlock{
+- (void)uploadToCreatePlan:(Plan *)plan completion:(FetchCenterGetRequestPlanCreationCompleted)completionBlock{
     NSString *baseUrl = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,CREATE_PLAN];
     NSDictionary *args = @{@"title":[plan.planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                            @"private":plan.isPrivate};
@@ -537,17 +536,22 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
             plan.planId = fetchedPlanId;
             plan.backgroundNum = bgString;
             NSLog(@"create plan succeed, ID: %@",fetchedPlanId);
-            completionBlock();
+            completionBlock(plan);
         }
     }];
 }
 
 
-- (void)postToDeletePlan:(Plan *)plan
-{
+- (void)postToDeletePlan:(Plan *)plan completion:(FetchCenterGetRequestDeletePlanCompleted)completionBlock{
     NSString *baseUrl = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,DELETE_PLAN];
     NSDictionary *args = @{@"id":plan.planId};
-    [self getRequest:baseUrl parameter:args operation:FetchCenterGetOpDeletePlan entity:plan];
+    [self getRequest:baseUrl parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
+        NSLog(@"delete plan succeed, ID: %@",plan.planId);
+        [plan.managedObjectContext save:nil];
+        if (completionBlock) {
+            completionBlock();
+        }
+    }];
 }
 
 #pragma mark - 缓存请求日志

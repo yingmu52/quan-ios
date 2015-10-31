@@ -78,7 +78,7 @@ typedef enum {
 @end
 
 /** 创建事件完成*/
-typedef void(^FetchCenterGetRequestPlanCreationCompleted)(void);
+typedef void(^FetchCenterGetRequestPlanCreationCompleted)(Plan *plan);
 /** 请求圈子列表完成*/
 typedef void(^FetchCenterGetRequestGetCircleListCompleted)(NSArray *circles);
 /** 切换圈子完成*/
@@ -97,6 +97,8 @@ typedef void(^FetchCenterGetRequestUnLikeFeedCompleted)(void);
 typedef void(^FetchCenterGetRequestUpdatePlanCompleted)(void);
 /** 更新事件状态完成*/
 typedef void(^FetchCenterGetRequestUpdatePlanStatusCompleted)(void);
+/** 更新事件状态完成*/
+typedef void(^FetchCenterGetRequestDeletePlanCompleted)(void);
 
 
 @interface FetchCenter : NSObject
@@ -149,8 +151,8 @@ typedef void(^FetchCenterGetRequestUpdatePlanStatusCompleted)(void);
 
 - (void)uploadToCreatePlan:(Plan *)plan
                 completion:(FetchCenterGetRequestPlanCreationCompleted)completionBlock;
-- (void)updatePlan:(Plan *)plan completion:(FetchCenterGetRequestUpdatePlanCompleted)completionBlock;;
-- (void)postToDeletePlan:(Plan *)plan;
+- (void)updatePlan:(Plan *)plan completion:(FetchCenterGetRequestUpdatePlanCompleted)completionBlock;
+- (void)postToDeletePlan:(Plan *)plan completion:(FetchCenterGetRequestDeletePlanCompleted)completionBlock;
 - (void)updateStatus:(Plan *)plan completion:(FetchCenterGetRequestUpdatePlanStatusCompleted)completionBlock;
 
 #pragma mark - 关注

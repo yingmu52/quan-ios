@@ -199,6 +199,27 @@ static NSTimeInterval expectationTimeout = 5.0;
     [plan.managedObjectContext save:nil];
    
 }
+
+- (void)testCreateAndDeletePlan{
+    NSUInteger numberOfCycles = 10;
+    for (NSInteger i = 0; i <= numberOfCycles; i++) {
+        XCTestExpectation *expectation = [self expectationWithDescription:@"事件创建与删除接口"];
+        Plan *plan = [Plan createPlan:@"testCreateAndDeletePlan" privacy:YES];
+        [self.fetchCenter uploadToCreatePlan:plan completion:^(Plan *plan) {
+            XCTAssertTrue(plan.planId,@"事件没有缓存后台传来的id");
+            [self.fetchCenter postToDeletePlan:plan completion:^{
+                [expectation fulfill];
+            }];
+        }];
+        [self waitForExpectationsWithTimeout:expectationTimeout handler:^(NSError * _Nullable error) {
+            XCTAssertNil(error,@"事件创建与删除错误");
+            if (error) {
+                NSLog(@"%@",plan);
+            }
+        }];
+    }
+}
+
 @end
 
 

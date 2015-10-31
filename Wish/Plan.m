@@ -126,7 +126,7 @@
 {
     NSManagedObjectContext *context = [AppDelegate getContext];
     if (self.planId && [self.owner.ownerId isEqualToString:[User uid]]){
-        [[[FetchCenter alloc] init] postToDeletePlan:self];
+        [[[FetchCenter alloc] init] postToDeletePlan:self completion:nil];
     }else{
         NSLog(@"delete from local");
     }
