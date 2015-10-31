@@ -483,12 +483,15 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
            operation:FetchCenterGetOpFeedBack
               entity:nil];
 }
-- (void)checkVersion{
+- (void)checkVersion:(FetchCenterGetRequestCheckVersionCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,OTHER,CHECK_NEW_VERSION];
-    [self getRequest:rqtStr
-           parameter:nil
-           operation:FetchCenterGetOpCheckNewVersion
-              entity:nil];
+    [self getRequest:rqtStr parameter:nil includeArguments:YES completion:^(NSDictionary *responseJson) {
+        if (completionBlock) {
+            BOOL hasNewVersion = [[responseJson valueForKeyPath:@"data.haveNew"] boolValue];
+            NSLog(@"%@",hasNewVersion ? @"有新版本" : @"无新版本");
+            completionBlock(hasNewVersion);
+        }
+    }];
 }
 
 #pragma mark - 个人信息

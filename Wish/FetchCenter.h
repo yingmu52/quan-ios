@@ -109,6 +109,8 @@ typedef void(^FetchCenterGetRequestFollowPlanCompleted)(void);
 typedef void(^FetchCenterGetRequestUnFollowPlanCompleted)(void);
 /** 拉取关注事件列表完成*/
 typedef void(^FetchCenterGetRequestGetFollowingPlanListCompleted)(NSArray *planIds);
+/** 测试是否有新版本完成*/
+typedef void(^FetchCenterGetRequestCheckVersionCompleted)(BOOL hasNewVersion);
 
 
 @interface FetchCenter : NSObject
@@ -177,7 +179,7 @@ typedef void(^FetchCenterGetRequestGetFollowingPlanListCompleted)(NSArray *planI
 
 #pragma mark - 个人
 - (void)sendFeedback:(NSString *)content content:(NSString *)email;
-- (void)checkVersion;
+- (void)checkVersion:(FetchCenterGetRequestCheckVersionCompleted)completionBlock;
 - (void)uploadNewProfilePicture:(UIImage *)picture;
 - (void)setPersonalInfo:(NSString *)nickName
                  gender:(NSString *)gender

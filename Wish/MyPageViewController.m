@@ -37,7 +37,10 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
 
-    [self.fetchCenter checkVersion];
+    [self.fetchCenter checkVersion:^(BOOL hasNewVersion) {
+        self.iconImageView.hidden = !hasNewVersion;
+    }];
+    
     self.tableView.tableHeaderView.frame = CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame),324.0f / 1136 * CGRectGetHeight(self.tableView.frame));
     
     //设置头像
@@ -211,11 +214,6 @@
                               imageId:[User updatedProfilePictureId]
                            occupation:[User occupation]
                          personalInfo:[User personalDetailInfo]];
-}
-
-- (void)didFinishCheckingNewVersion:(BOOL)hasNewVersion{
-    self.iconImageView.hidden = !hasNewVersion;
-    NSLog(@"%@",hasNewVersion ? @"has new version" : @"this is latest version");
 }
 
 - (void)didFinishSettingPersonalInfo{

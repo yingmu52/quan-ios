@@ -290,6 +290,23 @@ static NSTimeInterval expectationTimeout = 30.0f;
                                  }];
     
 }
+
+- (void)testCheckNewVersion{
+    
+    for (NSInteger i = 0 ; i < 100; i ++) {
+        XCTestExpectation *expectation = [self expectationWithDescription:@"新版本提示接口"];
+        
+        [self.fetchCenter checkVersion:^(BOOL hasNewVersion) {
+            [expectation fulfill];
+        }];
+        
+        [self waitForExpectationsWithTimeout:expectationTimeout
+                                     handler:^(NSError * _Nullable error) {
+                                         XCTAssertNil(error,@"新版本提示接口错误");
+                                     }];
+    }
+    
+}
 @end
 
 
