@@ -87,6 +87,9 @@ typedef void(^FetchCenterGetRequestSwithCircleCompleted)(void);
 typedef void(^FetchCenterGetRequestJoinCircleCompleted)(NSString *circleId);
 /** 发现页拉取列表完成*/
 typedef void(^FetchCenterGetRequestGetDiscoverListCompleted)(NSMutableArray *plans, NSString *circleTitle);
+/** 拉取主人id的事件列表完成*/
+typedef void(^FetchCenterGetRequestGetPlanListCompleted)(NSArray *plans);
+
 
 @interface FetchCenter : NSObject
 @property (nonatomic,weak) id <FetchCenterDelegate>delegate;
@@ -126,7 +129,11 @@ typedef void(^FetchCenterGetRequestGetDiscoverListCompleted)(NSMutableArray *pla
 - (void)deleteComment:(Comment *)comment;
 
 #pragma mark - 事件
-- (void)fetchPlanListForOwnerId:(NSString *)ownerId;
+
+/**拉取主人id的事件列表*/
+- (void)getPlanListForOwnerId:(NSString *)ownerId
+                   completion:(FetchCenterGetRequestGetPlanListCompleted)completionBlock;
+
 - (void)uploadToCreatePlan:(Plan *)plan
                 completion:(FetchCenterGetRequestPlanCreationCompleted)completionBlock;
 - (void)updatePlan:(Plan *)plan;

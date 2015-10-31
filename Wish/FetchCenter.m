@@ -501,9 +501,19 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
            operation:FetchCenterGetOpSetPlanStatus entity:plan];
 
 }
-- (void)fetchPlanListForOwnerId:(NSString *)ownerId{
+- (void)getPlanListForOwnerId:(NSString *)ownerId completion:(FetchCenterGetRequestGetPlanListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,GET_LIST];
-    [self getRequest:rqtStr parameter:@{@"id":ownerId} operation:FetchCenterGetOpGetPlanList entity:nil];
+    [self getRequest:rqtStr parameter:@{@"id":ownerId} includeArguments:YES completion:^(NSDictionary *responseJson) {
+        NSArray *plans = responseJson[@"data"];
+        NSMutableArray *planEntities = [NSMutableArray arrayWithCapacity:plans.count];
+        for (NSDictionary *planInfo in plans) {
+            Plan * plan = [Plan updatePlanFromServer:planInfo ownerInfo:[Owner myWebInfo]];
+            [planEntities addObject:plan];
+        }
+        if (completionBlock) {
+            completionBlock(planEntities.mutableCopy);
+        }
+    }];
 
 }
 

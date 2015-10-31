@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Owner : NSManagedObject
 
 + (Owner *)updateOwnerWithInfo:(NSDictionary *)dict;
-
++ (NSDictionary *)myWebInfo;
 @end
 
 NS_ASSUME_NONNULL_END

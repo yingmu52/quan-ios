@@ -98,7 +98,7 @@ ShuffleViewControllerDelegate>
     [super viewDidLoad];
     [self setUpNavigationItem];
     [self addLongPressGesture];
-    [self.fetchCenter fetchPlanListForOwnerId:[User uid]];
+    [self.fetchCenter getPlanListForOwnerId:[User uid] completion:nil];
 }
 - (void)addLongPressGesture{
     UILongPressGestureRecognizer *lp = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];

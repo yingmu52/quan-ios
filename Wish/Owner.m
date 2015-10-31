@@ -45,4 +45,11 @@
     return owner;
 }
 
++ (NSDictionary *)myWebInfo{
+    return @{@"headUrl":[User updatedProfilePictureId],
+             @"id":[User uid],
+             @"name":[User userDisplayName]};
+}
 @end
+
+

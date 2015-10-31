@@ -61,7 +61,7 @@ static NSTimeInterval expectationTimeout = 5.0;
 
 - (void)testSwitchToCircle{
     XCTAssert([User currentCircleId].length > 0,@"当前圈子id为空");
-    XCTestExpectation *expectation = [self expectationWithDescription:@"切换圈子接口正常"];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"切换圈子接口"];
 
     [self.fetchCenter getCircleList:^(NSArray *circles) {
         XCTAssert(circles.count > 0,@"圈子数量不能为0");
@@ -90,7 +90,7 @@ static NSTimeInterval expectationTimeout = 5.0;
 - (void)testJointCircle{
     NSArray *codes = @[@"1001",@"1002",@"2001",@"2002"]; //诗歌，旅游，灌水，极品
     for (NSString *code in codes){
-        XCTestExpectation *expectation = [self expectationWithDescription:@"加入圈子接口正常"];
+        XCTestExpectation *expectation = [self expectationWithDescription:@"加入圈子接口"];
         [self.fetchCenter joinCircle:code completion:^(NSString *circleId) {
             [expectation fulfill];
         }];
@@ -98,6 +98,21 @@ static NSTimeInterval expectationTimeout = 5.0;
             XCTAssertNil(error,@"加入圈子接口错误");
         }];
     }
+}
+
+- (void)testGetPlanList{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"事件列表拉取接口"];
+
+    [self.fetchCenter getPlanListForOwnerId:[User uid] completion:^(NSArray *plans) {
+        if (plans.count > 0) {
+            [expectation fulfill];
+        }
+    }];
+    [self waitForExpectationsWithTimeout:expectationTimeout
+                                 handler:^(NSError * _Nullable error) {
+                                     XCTAssertNil(error,@"事件列表拉取接口错误");
+                                 }];
+
 }
 
 @end
