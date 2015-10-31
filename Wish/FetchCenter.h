@@ -115,6 +115,10 @@ typedef void(^FetchCenterGetRequestCheckVersionCompleted)(BOOL hasNewVersion);
 typedef void(^FetchCenterGetRequestSendFeedbackCompleted)(void);
 /** 优图签名完成*/
 typedef void(^FetchCenterGetRequestGetYoutuSignatureCompleted)(NSString *signature);
+/** 登陆并获取uid和ukey完成*/
+typedef void(^FetchCenterGetRequestGetUidAndUkeyCompleted)(NSDictionary *userInfo, BOOL isNewUser);
+/** 微信登陆完成*/
+typedef void(^FetchCenterGetRequestGetAccessTokenWithWechatCodeCompleted)(NSString *openId, NSString *accessToken);
 
 
 @interface FetchCenter : NSObject
@@ -198,8 +202,13 @@ typedef void(^FetchCenterGetRequestGetYoutuSignatureCompleted)(NSString *signatu
 - (NSURL *)urlWithImageID:(NSString *)imageId size:(FetchCenterImageSize)size;
 
 #pragma mark - 登陆
-- (void)fetchUidandUkeyWithOpenId:(NSString *)openId accessToken:(NSString *)token;
-- (void)fetchAccessTokenWithWechatCode:(NSString *)code;
+- (void)getUidandUkeyWithOpenId:(NSString *)openId
+                    accessToken:(NSString *)token
+                     completion:(FetchCenterGetRequestGetUidAndUkeyCompleted)completionBlock;
+
+- (void)getAccessTokenWithWechatCode:(NSString *)code
+                          completion:(FetchCenterGetRequestGetUidAndUkeyCompleted)completionBlock;
+
 - (void)fetchWechatUserInfoWithOpenID:(NSString *)openID token:(NSString *)accessToken;
 
 #pragma mark - 优图

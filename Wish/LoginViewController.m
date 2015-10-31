@@ -41,33 +41,6 @@
     [User updateOwnerInfo:nil];
 }
 
-
-- (void)didFinishReceivingUidAndUKeyForUserInfo:(NSDictionary *)userInfo isNewUser:(BOOL)isNew{
-
-    if (!isNew) {
-        NSDictionary *additionalUserInfo = @{PROFILE_PICTURE_ID_CUSTOM:userInfo[@"headUrl"],
-                                             GENDER:[userInfo[@"gender"] boolValue] ? @"男" : @"女",
-                                             USER_DISPLAY_NAME:userInfo[@"name"],
-                                             OCCUPATION:userInfo[@"profession"],
-                                             PERSONALDETAIL:userInfo[@"description"]};
-        [User updateAttributeFromDictionary:additionalUserInfo];
-
-        //show Main View
-        [[[UIApplication sharedApplication] keyWindow] setRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"]];
-        
-    }else{
-        if ([[User loginType] isEqualToString:@"qq"]) {
-            [self performSegueWithIdentifier:@"showLoginDetail" sender:nil];
-        }
-        if ([[User loginType] isEqualToString:@"wx"]) {
-            [self.fetchCenter fetchWechatUserInfoWithOpenID:[User openID] token:[User accessToken]];
-        }
-
-    }
-
-}
-
-
 #pragma mark - QQ Login
 
 //login successed
@@ -118,7 +91,36 @@
     [User updateAttributeFromDictionary:localUserInfo];
     NSLog(@"Fetched QQ User Info \n%@",[User getOwnerInfo]);
     //use openId and access_token to get uid+ukey
-    [self.fetchCenter fetchUidandUkeyWithOpenId:self.tencentOAuth.openId accessToken:self.tencentOAuth.accessToken];
+
+    [self.fetchCenter getUidandUkeyWithOpenId:self.tencentOAuth.openId
+                                  accessToken:self.tencentOAuth.accessToken
+                                   completion:^(NSDictionary *userInfo, BOOL isNewUser)
+    {
+        [self processLoginWithUserInfo:userInfo isUser:isNewUser];
+    }];
+}
+
+- (void)processLoginWithUserInfo:(NSDictionary *)userInfo isUser:(BOOL)isNewUser{
+    if (!isNewUser) {
+        NSDictionary *additionalUserInfo = @{PROFILE_PICTURE_ID_CUSTOM:userInfo[@"headUrl"],
+                                             GENDER:[userInfo[@"gender"] boolValue] ? @"男" : @"女",
+                                             USER_DISPLAY_NAME:userInfo[@"name"],
+                                             OCCUPATION:userInfo[@"profession"],
+                                             PERSONALDETAIL:userInfo[@"description"]};
+        [User updateAttributeFromDictionary:additionalUserInfo];
+        
+        //show Main View
+        [[[UIApplication sharedApplication] keyWindow] setRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"]];
+        
+    }else{
+        if ([[User loginType] isEqualToString:@"qq"]) {
+            [self performSegueWithIdentifier:@"showLoginDetail" sender:nil];
+        }
+        if ([[User loginType] isEqualToString:@"wx"]) {
+            [self.fetchCenter fetchWechatUserInfoWithOpenID:[User openID] token:[User accessToken]];
+        }
+        
+    }
 }
 
 - (TencentOAuth *)tencentOAuth{
@@ -153,7 +155,10 @@
 }
 
 - (void)managerDidRecvAuthResponse:(SendAuthResp *)response{
-    [self.fetchCenter fetchAccessTokenWithWechatCode:response.code];
+    [self.fetchCenter getAccessTokenWithWechatCode:response.code
+                                        completion:^(NSDictionary *userInfo, BOOL isNewUser) {
+        [self processLoginWithUserInfo:userInfo isUser:isNewUser];
+    }];
 }
 
 - (void)didFinishGettingWeChatUserInfo{

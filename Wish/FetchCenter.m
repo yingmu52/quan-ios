@@ -1271,7 +1271,8 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
                 [User updateAttributeFromDictionary:@{ACCESS_TOKEN:accessToken,
                                                       OPENID:openId,
                                                       EXPIRATION_DATE:expireDate}];
-                [self fetchUidandUkeyWithOpenId:openId accessToken:accessToken];
+
+                [self getUidandUkeyWithOpenId:openId accessToken:accessToken completion:nil];
             }
                 break;
                 
@@ -1308,23 +1309,50 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     }];
 }
 
-- (void)fetchUidandUkeyWithOpenId:(NSString *)openId accessToken:(NSString *)token{
+- (void)getUidandUkeyWithOpenId:(NSString *)openId
+                    accessToken:(NSString *)token
+                     completion:(FetchCenterGetRequestGetUidAndUkeyCompleted)completionBlock{
     //loginType在这个函数之前必段保留
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,USER,GETUID];
-    [self getRequest:rqtStr
-           parameter:@{@"openid":openId,
-                       @"token":token}
-           operation:FetchCenterGetOpLoginForUidAndUkey
-              entity:nil];
+    NSDictionary *args = @{@"openid":openId,
+                           @"token":token};
+    [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
+        NSString *uid = [responseJson valueForKeyPath:@"data.uid"];
+        NSString *ukey = [responseJson valueForKeyPath:@"data.ukey"];
+        BOOL isNewUser = [[responseJson valueForKeyPath:@"data.isNew"] boolValue];
+        NSDictionary *userInfo = [responseJson valueForKeyPath:@"data.maninfo"];
+        
+        //update local user info & UI
+        NSDictionary *localUserInfo = @{UID:uid,UKEY:ukey};
+        [User updateAttributeFromDictionary:localUserInfo];
+        if (completionBlock) {
+            completionBlock(userInfo,isNewUser);
+        }
+    }];
 }
 
-- (void)fetchAccessTokenWithWechatCode:(NSString *)code{
+- (void)getAccessTokenWithWechatCode:(NSString *)code
+                          completion:(FetchCenterGetRequestGetUidAndUkeyCompleted)completionBlock{
     if (code) {
         NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,USER,GET_ACCESSTOKEN_OPENID];
-        [self getRequest:rqtStr
-               parameter:@{@"code":code}
-               operation:FetchCenterGetOpGetAccessTokenAndOpenIdWithWechatCode
-                  entity:nil];
+        [self getRequest:rqtStr parameter:@{@"code":code} includeArguments:YES completion:^(NSDictionary *responseJson) {
+            NSString *accessToken = responseJson[@"access_token"];
+            NSString *openId = responseJson[@"openid"];
+            
+            //过期的参照点为当前请求的时刻
+            NSDate *expireDate = [NSDate dateWithTimeInterval:[responseJson[@"expires_in"] integerValue]
+                                                    sinceDate:[NSDate date]];
+            
+            [User updateAttributeFromDictionary:@{ACCESS_TOKEN:accessToken,
+                                                  OPENID:openId,
+                                                  EXPIRATION_DATE:expireDate}];
+            
+            [self getUidandUkeyWithOpenId:openId accessToken:accessToken completion:^(NSDictionary *userInfo, BOOL isNewUser) {
+                if (completionBlock) {
+                    completionBlock(userInfo,isNewUser);
+                }
+            }];
+        }];
     }
 }
 
