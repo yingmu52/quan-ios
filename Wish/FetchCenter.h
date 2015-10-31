@@ -111,7 +111,8 @@ typedef void(^FetchCenterGetRequestUnFollowPlanCompleted)(void);
 typedef void(^FetchCenterGetRequestGetFollowingPlanListCompleted)(NSArray *planIds);
 /** 测试是否有新版本完成*/
 typedef void(^FetchCenterGetRequestCheckVersionCompleted)(BOOL hasNewVersion);
-
+/** 反馈完成*/
+typedef void(^FetchCenterGetRequestSendFeedbackCompleted)(void);
 
 @interface FetchCenter : NSObject
 @property (nonatomic,weak) id <FetchCenterDelegate>delegate;
@@ -178,7 +179,10 @@ typedef void(^FetchCenterGetRequestCheckVersionCompleted)(BOOL hasNewVersion);
 - (void)getFollowingPlanList:(FetchCenterGetRequestGetFollowingPlanListCompleted)completionBlock;
 
 #pragma mark - 个人
-- (void)sendFeedback:(NSString *)content content:(NSString *)email;
+- (void)sendFeedback:(NSString *)content
+             content:(NSString *)email
+          completion:(FetchCenterGetRequestSendFeedbackCompleted)completionBlock;
+
 - (void)checkVersion:(FetchCenterGetRequestCheckVersionCompleted)completionBlock;
 - (void)uploadNewProfilePicture:(UIImage *)picture;
 - (void)setPersonalInfo:(NSString *)nickName

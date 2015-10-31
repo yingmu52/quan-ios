@@ -83,7 +83,17 @@
         FetchCenter *fetchCenter = [[FetchCenter alloc] init];
         fetchCenter.delegate = self;
         [fetchCenter sendFeedback:self.textView.text
-                          content:((FeedbackkAccessoryView *)self.textView.inputAccessoryView).textField.text];
+                          content:((FeedbackkAccessoryView *)self.textView.inputAccessoryView).textField.text
+                       completion:^{
+                           self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
+                           
+                           UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"反馈成功" message:nil preferredStyle:UIAlertControllerStyleAlert];
+                           [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                               [self.textView resignFirstResponder];
+                               [self dismissController];
+                           }]];
+                           [self presentViewController:alert animated:YES completion:nil];
+                       }];
     }
 }
 
@@ -96,22 +106,10 @@
     }
 
 }
-- (void)didFinishSendingFeedBack{
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
-    
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"反馈成功" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self.textView resignFirstResponder];
-        [self dismissController];
-    }]];
-    [self presentViewController:alert animated:YES completion:nil];
-}
 
-
-- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
+- (void)didFailSendingRequest{
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
 }
-
 
 #pragma mark text view delegate 
 - (void)textViewDidChange:(UITextView *)textView{

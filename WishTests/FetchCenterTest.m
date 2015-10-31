@@ -307,6 +307,20 @@ static NSTimeInterval expectationTimeout = 30.0f;
     }
     
 }
+
+- (void)testSendingFeedBack{
+    for (NSInteger i = 0 ; i < 100; i ++) {
+        XCTestExpectation *expectation = [self expectationWithDescription:@"反馈接口"];
+        NSString *content = [NSString stringWithFormat:@"测试%@",@(i)];
+        [self.fetchCenter sendFeedback:content content:content completion:^{
+            [expectation fulfill];
+        }];
+        [self waitForExpectationsWithTimeout:expectationTimeout
+                                     handler:^(NSError * _Nullable error) {
+                                         XCTAssertNil(error,@"反馈接口错误");
+                                     }];
+    }
+}
 @end
 
 

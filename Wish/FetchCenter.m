@@ -473,15 +473,19 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 
 #pragma mark - 反馈，版本检测
 
-- (void)sendFeedback:(NSString *)content content:(NSString *)email{
+- (void)sendFeedback:(NSString *)content
+             content:(NSString *)email
+          completion:(FetchCenterGetRequestSendFeedbackCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,OTHER,FEED_BACK];
-//    NSString *moreInfo = [[[Reachability reachabilityForInternetConnection] currentReachabilityString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    [self getRequest:rqtStr
-           parameter:@{@"title":[@"Feedback From iOS Client Application" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                       @"content":[content stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                       @"moreInfo":[email ? email : @"User did not specify contact info" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]}
-           operation:FetchCenterGetOpFeedBack
-              entity:nil];
+    NSDictionary *args = @{@"title":[@"Feedback From iOS Client Application" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                           @"content":[content stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                           @"moreInfo":[email ? email : @"User did not specify contact info" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]};
+    [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
+        NSLog(@"反馈成功");
+        if (completionBlock) {
+            completionBlock();
+        }
+    }];
 }
 - (void)checkVersion:(FetchCenterGetRequestCheckVersionCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,OTHER,CHECK_NEW_VERSION];
