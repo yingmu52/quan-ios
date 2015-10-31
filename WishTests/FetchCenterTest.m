@@ -321,6 +321,23 @@ static NSTimeInterval expectationTimeout = 30.0f;
                                      }];
     }
 }
+
+- (void)testGetYoutuSignature{
+    for (NSInteger i = 0 ; i < 100; i ++) {
+        XCTestExpectation *expectation = [self expectationWithDescription:@"拉取优图签名接口"];
+        [self.fetchCenter requestSignature:^(NSString *signature) {
+            if (signature) {
+                NSLog(@"签名:%@",signature);
+                [expectation fulfill];
+            }
+        }];
+        [self waitForExpectationsWithTimeout:expectationTimeout
+                                     handler:^(NSError * _Nullable error) {
+                                         XCTAssertNil(error,@"拉取优图签名错误");
+                                     }];
+    }
+}
+
 @end
 
 

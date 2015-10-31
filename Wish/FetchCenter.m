@@ -179,11 +179,20 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     return _uploadManager;
 }
 
-- (void)requestSignature{
+- (void)requestSignature:(FetchCenterGetRequestGetYoutuSignatureCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,TENCENTYOUTU,GET_SIGNATURE];
-//    NSLog(@"signature request url : %@",rqtStr);
-    [self getRequest:rqtStr parameter:nil operation:FetchCenterGetOpGetSignature entity:nil];
+    [self getRequest:rqtStr parameter:nil includeArguments:YES completion:^(NSDictionary *responseJson) {
+        NSString *signature = [responseJson valueForKey:@"sign"];
+        if (signature) {
+            [User storeSignature:signature];
+        }
+        if (completionBlock) {
+            completionBlock(signature);
+        }
+        
+    }];
 }
+
 #pragma mark - 消息
 
 - (void)clearAllMessages{

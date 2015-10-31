@@ -21,7 +21,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     //向后台拉取优图签名
-    [self.fetchCenter requestSignature];
+    [self.fetchCenter requestSignature:nil];
     
     // 初始化SDK, 请使用在Bugly平台上注册应用的 AppId, 注意不要填写AppKey
     [[CrashReporter sharedInstance] installWithAppId:BUGLY_APP_ID];

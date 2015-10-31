@@ -113,6 +113,9 @@ typedef void(^FetchCenterGetRequestGetFollowingPlanListCompleted)(NSArray *planI
 typedef void(^FetchCenterGetRequestCheckVersionCompleted)(BOOL hasNewVersion);
 /** 反馈完成*/
 typedef void(^FetchCenterGetRequestSendFeedbackCompleted)(void);
+/** 优图签名完成*/
+typedef void(^FetchCenterGetRequestGetYoutuSignatureCompleted)(NSString *signature);
+
 
 @interface FetchCenter : NSObject
 @property (nonatomic,weak) id <FetchCenterDelegate>delegate;
@@ -191,7 +194,7 @@ typedef void(^FetchCenterGetRequestSendFeedbackCompleted)(void);
              occupation:(NSString *)occupation
            personalInfo:(NSString *)info;
 
-#pragma mark - ultility
+#pragma mark - 工具
 - (NSURL *)urlWithImageID:(NSString *)imageId size:(FetchCenterImageSize)size;
 
 #pragma mark - 登陆
@@ -200,6 +203,6 @@ typedef void(^FetchCenterGetRequestSendFeedbackCompleted)(void);
 - (void)fetchWechatUserInfoWithOpenID:(NSString *)openID token:(NSString *)accessToken;
 
 #pragma mark - 优图
-- (void)requestSignature;
+- (void)requestSignature:(FetchCenterGetRequestGetYoutuSignatureCompleted)completionBlock;
 @end
 
