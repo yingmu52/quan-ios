@@ -416,12 +416,33 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     }];
 }
 
-- (void)fetchFollowingPlanList{
+- (void)getFollowingPlanList:(FetchCenterGetRequestGetFollowingPlanListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FOLLOW,GET_FOLLOW_LIST];
-    [self getRequest:rqtStr
-           parameter:@{@"id":[User uid]}
-           operation:FetchCenterGetOpFollowingPlanList
-              entity:nil];
+    
+    [self getRequest:rqtStr parameter:@{@"id":[User uid]} includeArguments:YES completion:^(NSDictionary *responseJson) {
+        for (NSDictionary *planItem in [responseJson valueForKeyPath:@"data.planList"]) {
+            NSDictionary *userInfo = [responseJson valueForKeyPath:[NSString stringWithFormat:@"data.manList.%@",planItem[@"ownerId"]]];
+            Plan *plan = [Plan updatePlanFromServer:planItem ownerInfo:userInfo];
+            
+            if (![plan.isFollowed isEqualToNumber:@(YES)]){
+                plan.isFollowed = @(YES);
+            }
+            
+            NSArray *feedsList = planItem[@"feedsList"];
+            if (feedsList.count) {
+                //create all feeds
+                for (NSDictionary *feedItem in feedsList) {
+                    [Feed updateFeedWithInfo:feedItem forPlan:plan];
+                    //use alternative way to load and cache image
+                }
+            }
+        }
+        if (completionBlock){
+            NSArray *planIds = [responseJson valueForKeyPath:@"data.planList.id"];
+            completionBlock(planIds);
+        }
+
+    }];
 }
 
 #pragma mark - 发现事件

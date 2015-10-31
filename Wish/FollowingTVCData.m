@@ -41,8 +41,22 @@ static NSUInteger numberOfPreloadedFeeds = 3;
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.fetchCenter fetchFollowingPlanList];
+
+    [self.fetchCenter getFollowingPlanList:^(NSArray *planIds) {
+        [self.serverPlanList addObjectsFromArray:planIds];
+        //delete feed from local if it does not appear to be ien the server side feed list
+        if (self.serverPlanList.count > 0 && self.fetchedRC.fetchedObjects.count > 0){
+            for (Plan *plan in self.fetchedRC.fetchedObjects){
+                if (![self.serverPlanList containsObject:plan.planId]) {
+                    NSLog(@"sync following plan list");
+                    [plan.managedObjectContext deleteObject:plan];
+                }
+            }
+        }
+    }];
 }
+
+
 - (void)dealloc{
     NSUInteger numberOfPreservingFeeds = 20;
     NSArray *plans = self.fetchedRC.fetchedObjects;
@@ -52,22 +66,6 @@ static NSUInteger numberOfPreloadedFeeds = 3;
             [delegate.managedObjectContext deleteObject:plans[i]];
         }
         [delegate saveContext];
-    }
-    
-}
-
-- (void)didFinishFetchingFollowingPlanList:(NSArray *)planIds{
-    
-    [self.serverPlanList addObjectsFromArray:planIds];
-    
-    //delete feed from local if it does not appear to be ien the server side feed list
-    if (self.serverPlanList.count > 0 && self.fetchedRC.fetchedObjects.count > 0){
-        for (Plan *plan in self.fetchedRC.fetchedObjects){
-            if (![self.serverPlanList containsObject:plan.planId]) {
-                NSLog(@"sync following plan list");
-                [plan.managedObjectContext deleteObject:plan];
-            }
-        }
     }
     
 }

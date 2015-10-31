@@ -276,6 +276,20 @@ static NSTimeInterval expectationTimeout = 30.0f;
     }
 }
 
+- (void)testGetFollowingPlanList{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"关注事件列表拉取接口"];
+    
+    [self.fetchCenter getFollowingPlanList:^(NSArray *planIds) {
+        if (planIds) {
+            [expectation fulfill];
+        }
+    }];
+    [self waitForExpectationsWithTimeout:expectationTimeout
+                                 handler:^(NSError * _Nullable error) {
+                                     XCTAssertNil(error,@"关注事件列表拉取接口错误");
+                                 }];
+    
+}
 @end
 
 
