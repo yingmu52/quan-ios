@@ -27,11 +27,7 @@
     NSAssert1(planStatus == PlanStatusOnGoing || planStatus == PlanStatusFinished,@"invalid plan status %d", planStatus);
     self.planStatus = @(planStatus);
     self.updateDate = [NSDate date];
-    
     NSAssert(self.planId, @"nil plan id");
-    
-    //update status to server
-    [[FetchCenter new] updateStatus:self];
 }
 
 

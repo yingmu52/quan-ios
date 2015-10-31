@@ -498,12 +498,16 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     }];
 }
 
-- (void)updateStatus:(Plan *)plan{
+- (void)updateStatus:(Plan *)plan completion:(FetchCenterGetRequestUpdatePlanStatusCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,UPDATE_PLAN_STATUS];
-    [self getRequest:rqtStr parameter:@{@"id":plan.planId,
-                                        @"state":plan.planStatus}
-           operation:FetchCenterGetOpSetPlanStatus entity:plan];
-
+    NSDictionary *args = @{@"id":plan.planId,
+                           @"state":plan.planStatus};
+    [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
+        NSLog(@"%@",responseJson);
+        if (completionBlock) {
+            completionBlock();
+        }
+    }];
 }
 - (void)getPlanListForOwnerId:(NSString *)ownerId completion:(FetchCenterGetRequestGetPlanListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,GET_LIST];

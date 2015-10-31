@@ -133,8 +133,18 @@
                                                       style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * _Nonnull action) {
                                                         //改变状态
+                                                        
+                                                        UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+                                                        [spinner startAnimating];
+                                                        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+
                                                         [self.plan updatePlanStatus:PlanStatusFinished];
-                                                        [self.navigationController popToRootViewControllerAnimated:YES];
+                                                        [self.fetchCenter updateStatus:self.plan completion:^{
+                                                            [spinner stopAnimating];
+                                                            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
+                                                            [self.navigationController popToRootViewControllerAnimated:YES];
+                                                            [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
+                                                        }];
                                                     }];
     
     [alert addAction:confirm];

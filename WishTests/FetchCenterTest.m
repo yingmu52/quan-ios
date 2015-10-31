@@ -135,7 +135,7 @@ static NSTimeInterval expectationTimeout = 5.0;
         }];
         
         XCTAssertTrue(currentLikesDynamic == currentLikesStatic,@"赞与非赞的执行次数不一致");
-        [self waitForExpectationsWithTimeout:10.0 handler:^(NSError * _Nullable error) {
+        [self waitForExpectationsWithTimeout:expectationTimeout handler:^(NSError * _Nullable error) {
             XCTAssertNil(error,@"赞与取消赞接口错误");
             if (error) {
                 NSLog(@"%@",feed);
@@ -162,7 +162,7 @@ static NSTimeInterval expectationTimeout = 5.0;
             [expectation fulfill];
         }];
         
-        [self waitForExpectationsWithTimeout:10.0 handler:^(NSError * _Nullable error) {
+        [self waitForExpectationsWithTimeout:expectationTimeout handler:^(NSError * _Nullable error) {
             XCTAssertNil(error,@"更新事件内容接口错误");
             if (error) {
                 NSLog(@"%@",plan);
@@ -171,6 +171,33 @@ static NSTimeInterval expectationTimeout = 5.0;
     }
     [plan.managedObjectContext save:nil];
 
+}
+
+- (void)testUpdatePlanStatus{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"planTitle = %@",@"PlanForUnitTesting"];
+    NSArray *array = [Plan fetchWith:@"Plan" predicate:predicate keyForDescriptor:@"createDate"];
+    XCTAssertTrue(array.count == 1, @"事件不存在");
+    
+    Plan *plan = array.lastObject;
+    NSUInteger numberOfCycles = 10;
+    for (NSInteger i = 0; i <= numberOfCycles; i++) {
+        plan.detailText = [NSUUID UUID].UUIDString; //修改事件描述
+        PlanStatus status  =  [plan.planStatus isEqualToNumber:@(PlanStatusFinished)] ? PlanStatusOnGoing : PlanStatusFinished; //修改事件状态
+        [plan updatePlanStatus:status];
+        XCTestExpectation *expectation = [self expectationWithDescription:@"更新事件状态接口"];
+        [self.fetchCenter updateStatus:plan completion:^{
+            [expectation fulfill];
+        }];
+
+        [self waitForExpectationsWithTimeout:expectationTimeout handler:^(NSError * _Nullable error) {
+            XCTAssertNil(error,@"更新事件状态接口错误");
+            if (error) {
+                NSLog(@"%@",plan);
+            }
+        }];
+    }
+    [plan.managedObjectContext save:nil];
+   
 }
 @end
 

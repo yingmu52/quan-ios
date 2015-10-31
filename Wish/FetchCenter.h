@@ -95,6 +95,8 @@ typedef void(^FetchCenterGetRequestLikeFeedCompleted)(void);
 typedef void(^FetchCenterGetRequestUnLikeFeedCompleted)(void);
 /** 更新事件完成*/
 typedef void(^FetchCenterGetRequestUpdatePlanCompleted)(void);
+/** 更新事件状态完成*/
+typedef void(^FetchCenterGetRequestUpdatePlanStatusCompleted)(void);
 
 
 @interface FetchCenter : NSObject
@@ -149,7 +151,7 @@ typedef void(^FetchCenterGetRequestUpdatePlanCompleted)(void);
                 completion:(FetchCenterGetRequestPlanCreationCompleted)completionBlock;
 - (void)updatePlan:(Plan *)plan completion:(FetchCenterGetRequestUpdatePlanCompleted)completionBlock;;
 - (void)postToDeletePlan:(Plan *)plan;
-- (void)updateStatus:(Plan *)plan;
+- (void)updateStatus:(Plan *)plan completion:(FetchCenterGetRequestUpdatePlanStatusCompleted)completionBlock;
 
 #pragma mark - 关注
 - (void)followPlan:(Plan *)plan;
