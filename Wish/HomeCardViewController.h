@@ -10,7 +10,5 @@
 #import "HomeCardView.h"
 #import "MSSuperViewController.h"
 @interface HomeCardViewController : MSSuperViewController
-@property (nonatomic,weak) IBOutlet UICollectionView *collectionView;
 - (void)configureCollectionViewCell:(HomeCardView *)cell atIndexPath:(NSIndexPath *)indexPath;
-
 @end
