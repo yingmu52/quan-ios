@@ -195,9 +195,13 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 
 #pragma mark - 消息
 
-- (void)clearAllMessages{
+- (void)clearAllMessages:(FetchCenterGetRequestClearMessageListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,MESSAGE,CLEAR_ALL_MESSAGES];
-    [self getRequest:rqtStr parameter:nil operation:FetchCenterGetOpClearAllMessages entity:nil];
+    [self getRequest:rqtStr parameter:nil includeArguments:YES completion:^(NSDictionary *responseJson) {
+        if (completionBlock) {
+            completionBlock();
+        }
+    }];
 }
 
 

@@ -125,6 +125,8 @@ typedef void(^FetchCenterGetRequestGetFeedsListCompleted)(NSDictionary *pageInfo
 typedef void(^FetchCenterGetRequestGetMessageNotificationCompleted)(NSNumber *messageCount,NSNumber *followCount);
 /** 拉取消息列表完成*/
 typedef void(^FetchCenterGetRequestGetMessageListCompleted)(NSArray *messages);
+/** 清空消息列表完成*/
+typedef void(^FetchCenterGetRequestClearMessageListCompleted)(void);
 
 
 @interface FetchCenter : NSObject
@@ -146,7 +148,7 @@ typedef void(^FetchCenterGetRequestGetMessageListCompleted)(NSArray *messages);
 - (void)switchToCircle:(NSString *)circleId completion:(FetchCenterGetRequestSwithCircleCompleted)completionBlock;
 
 #pragma mark - 消息
-- (void)clearAllMessages;
+- (void)clearAllMessages:(FetchCenterGetRequestClearMessageListCompleted)completionBlock;
 - (void)getMessageList:(FetchCenterGetRequestGetMessageListCompleted)completionBlock;
 - (void)getMessageNotificationInfo:(FetchCenterGetRequestGetMessageNotificationCompleted)completionBlock;
 

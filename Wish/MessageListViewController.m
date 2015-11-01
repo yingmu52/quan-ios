@@ -64,20 +64,18 @@
 - (void)clearAllMessages{
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"确定要清空所有消息吗？" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self.fetchCenter clearAllMessages];
+        [self.fetchCenter clearAllMessages:^{
+            for (Message *message in self.tableFetchedRC.fetchedObjects) {
+                [message.managedObjectContext deleteObject:message];
+            }
+            [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
+        }];
     }];
     [actionSheet addAction:confirm];
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:actionSheet animated:YES completion:nil];    
 }
 
-- (void)didFinishClearingAllMessages{
-    NSManagedObjectContext *context = [AppDelegate getContext];
-    for (Message *message in self.tableFetchedRC.fetchedObjects) {
-        [context deleteObject:message];
-    }
-    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
-}
 #pragma mark - Table view 
 
 #define IS_IPHONE5 (([[UIScreen mainScreen] bounds].size.height - 568.0f) >= 0)
