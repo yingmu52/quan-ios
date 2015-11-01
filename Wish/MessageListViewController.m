@@ -15,7 +15,6 @@
 #import "FeedDetailViewController.h"
 
 @interface MessageListViewController ()
-//@property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @end
 
 @implementation MessageListViewController
@@ -29,18 +28,29 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.fetchCenter getMessageList];
+    [self.fetchCenter getMessageList:^(NSArray *messages) {
+        //同步
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            NSMutableArray *currentCopy = [self.collectionFetchedRC.fetchedObjects mutableCopy];
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"NOT (messageId IN %@)",messages];
+            NSArray *trash = [currentCopy filteredArrayUsingPredicate:predicate]; //a copy of subset of 'currentCopy‘
+            
+            dispatch_main_sync_safe(^{
+                for (Message *message in trash){
+                    [message.managedObjectContext deleteObject:message];
+                    NSLog(@"Removing message %@",message.messageId);
+                }
+            });
+        });
+
+        
+    }];
 }
 - (void)setUpNavigationItem
 {
     CGRect frame = CGRectMake(0,0, 25,25);
-//    UIButton *back = [Theme buttonWithImage:[Theme navMenuDefault]
-//                                     target:self.slidingViewController
-//                                   selector:@selector(anchorTopViewToRightAnimated:)
-//                                      frame:frame];
-//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:back];
-    self.navigationItem.title = @"消息";
- 
+    self.navigationItem.title = @"消息"; 
     UIButton *deleteBtn = [Theme buttonWithImage:[Theme navButtonDeleted]
                                           target:self
                                         selector:@selector(clearAllMessages)
@@ -75,11 +85,6 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 75.0f;
 }
-//
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    return self.fetchedRC.fetchedObjects.count;
-//}
-
 
 - (MessageCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MessageCell" forIndexPath:indexPath];

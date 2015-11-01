@@ -201,11 +201,23 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 }
 
 
-- (void)getMessageList{
+- (void)getMessageList:(FetchCenterGetRequestGetMessageListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,MESSAGE,GET_MESSAGE_LIST];
-    [self getRequest:rqtStr parameter:@{@"id":[User uid]}
-           operation:FetchCenterGetOpGetMessageList entity:nil];
-
+    [self getRequest:rqtStr
+           parameter:@{@"id":[User uid]}
+    includeArguments:YES completion:^(NSDictionary *responseJson) {
+        NSArray *messagesArray = [responseJson valueForKeyPath:@"data.messageList"];
+        NSDictionary *owners = [responseJson valueForKeyPath:@"data.manList"];
+        for (NSDictionary *message in messagesArray){
+            NSDictionary *ownerInfo = owners[message[@"operatorId"]];
+            [Message updateMessageWithInfo:message ownerInfo:ownerInfo];
+        }
+//        NSLog(@"%@",responseJson);
+        if (completionBlock) {
+            NSArray *messageIds = [responseJson valueForKeyPath:@"data.messageList.messageId"];
+            completionBlock(messageIds);
+        }
+    }];
 }
 
 - (void)getMessageNotificationInfo:(FetchCenterGetRequestGetMessageNotificationCompleted)completionBlock{

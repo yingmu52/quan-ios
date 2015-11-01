@@ -123,6 +123,8 @@ typedef void(^FetchCenterGetRequestGetWechatUserInfoCompleted)(void);
 typedef void(^FetchCenterGetRequestGetFeedsListCompleted)(NSDictionary *pageInfo, BOOL hasNextPage, NSArray *feedIds);
 /** 消息提醒完成*/
 typedef void(^FetchCenterGetRequestGetMessageNotificationCompleted)(NSNumber *messageCount,NSNumber *followCount);
+/** 拉取消息列表完成*/
+typedef void(^FetchCenterGetRequestGetMessageListCompleted)(NSArray *messages);
 
 
 @interface FetchCenter : NSObject
@@ -145,7 +147,7 @@ typedef void(^FetchCenterGetRequestGetMessageNotificationCompleted)(NSNumber *me
 
 #pragma mark - 消息
 - (void)clearAllMessages;
-- (void)getMessageList;
+- (void)getMessageList:(FetchCenterGetRequestGetMessageListCompleted)completionBlock;
 - (void)getMessageNotificationInfo:(FetchCenterGetRequestGetMessageNotificationCompleted)completionBlock;
 
 #pragma mark - 事件动态，（Feed）
