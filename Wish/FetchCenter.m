@@ -568,18 +568,33 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 //    [self postImageWithOperation:picture managedObject:nil postOp:FetchCenterPostOpUploadImageForUpdaingProfile];
 }
 
-- (void)setPersonalInfo:(NSString *)nickName gender:(NSString *)gender imageId:(NSString *)imageId occupation:(NSString *)occupation personalInfo:(NSString *)info{
+- (void)setPersonalInfo:(NSString *)nickName
+                 gender:(NSString *)gender
+                imageId:(NSString *)imageId
+             occupation:(NSString *)occupation
+           personalInfo:(NSString *)info
+             completion:(FetchCenterGetRequestSetPersonalInfoCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,USER,SET_USER_INFO];
     
     NSString *ocpStr = occupation ? occupation : @"";
     NSString *infoStr = info ? info : @"";
-    [self getRequest:rqtStr parameter:@{@"name":[nickName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                                        @"gender":[gender isEqualToString:@"男"] ? @(1):@(0),
-                                        @"headUrl":imageId,
-                                        @"profession":[ocpStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                                        @"description":[infoStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]}
-           operation:FetchCenterGetOpSetPersonalInfo
-              entity:@[nickName,gender,imageId,ocpStr,infoStr]];
+    NSDictionary *args = @{@"name":[nickName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                           @"gender":[gender isEqualToString:@"男"] ? @(1):@(0),
+                           @"headUrl":imageId,
+                           @"profession":[ocpStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                           @"description":[infoStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]};
+    
+    [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
+        [User updateAttributeFromDictionary:@{USER_DISPLAY_NAME:nickName,
+                                              GENDER:gender,
+                                              PROFILE_PICTURE_ID_CUSTOM:imageId,
+                                              OCCUPATION:occupation,
+                                              PERSONALDETAIL:info}];
+        NSLog(@"%@",[User getOwnerInfo]);
+        if (completionBlock) {
+            completionBlock();
+        }
+    }];
     
 }
 

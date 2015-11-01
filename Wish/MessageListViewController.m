@@ -76,7 +76,7 @@
     [self presentViewController:actionSheet animated:YES completion:nil];    
 }
 
-#pragma mark - Table view 
+#pragma mark - Table view
 
 #define IS_IPHONE5 (([[UIScreen mainScreen] bounds].size.height - 568.0f) >= 0)
 

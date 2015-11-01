@@ -353,6 +353,36 @@ static NSTimeInterval expectationTimeout = 30.0f;
     }
 }
 
+- (void)testSetPersonalInfo{
+    NSUInteger numberOfCycles = 10;
+    for (NSInteger i = 0 ; i < numberOfCycles; i ++) {
+        XCTestExpectation *expectation = [self expectationWithDescription:@"设置用户信息接口"];
+        if (i != numberOfCycles - 1) {
+            NSString *content = [NSString stringWithFormat:@"%@",@(i)];
+            [self.fetchCenter setPersonalInfo:content
+                                       gender:content
+                                      imageId:content
+                                   occupation:content
+                                 personalInfo:content completion:^{
+                [expectation fulfill];
+            }];
+        }else{
+            [self.fetchCenter setPersonalInfo:@"阿溢"
+                                       gender:@"男"
+                                      imageId:@"IOS-01A5D97E-91F2-4B4F-BD70-97BD6345D856" //我弹吉他的照片id
+                                   occupation:@"吉他手"
+                                 personalInfo:@"这是来自测试自动填写的信息"
+                                   completion:^{
+                [expectation fulfill];
+            }];
+        }
+        [self waitForExpectationsWithTimeout:expectationTimeout
+                                     handler:^(NSError * _Nullable error) {
+                                         XCTAssertNil(error,@"设置用户信息接口错误");
+                                     }];
+    }
+    
+}
 @end
 
 

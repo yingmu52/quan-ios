@@ -213,11 +213,10 @@
                                gender:[User gender]
                               imageId:[User updatedProfilePictureId]
                            occupation:[User occupation]
-                         personalInfo:[User personalDetailInfo]];
-}
-
-- (void)didFinishSettingPersonalInfo{
-    NSLog(@"done");
+                         personalInfo:[User personalDetailInfo]
+                           completion:^{
+                               NSLog(@"done");
+                         }];
 }
 
 #pragma mark - 摇一摇

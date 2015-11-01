@@ -67,11 +67,15 @@
 
 
 - (void)uploadPersonalInfo{
+    __weak typeof(self) weakSelf = self;
     [self.fetchCenter setPersonalInfo:self.nickNameTextField.text
                                gender:self.genderLabel.text
                               imageId:[User updatedProfilePictureId]
                            occupation:self.occupationTextField.text
-                         personalInfo:self.descriptionTextView.text];
+                         personalInfo:self.descriptionTextView.text
+                           completion:^{
+                               [weakSelf.navigationController popViewControllerAnimated:YES];
+                           }];
 }
  
 #pragma mark - update info
@@ -92,14 +96,6 @@
 }
 
 #pragma mark - fetch center delegate
-- (void)didFinishSettingPersonalInfo{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if ([scrollView.panGestureRecognizer translationInView:scrollView].y > 0) {

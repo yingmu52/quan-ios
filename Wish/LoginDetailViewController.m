@@ -89,22 +89,19 @@
 
 - (void)uploadUserInfo{
     //upload user info
+    __weak typeof(self) weakSelf = self;
     [self.fetchCenter setPersonalInfo:self.nameTextField.text
                                gender:self.genderLabel.text
                               imageId:[User updatedProfilePictureId]
                            occupation:self.occupationTextField.text
-                         personalInfo:self.descriptionTextView.text];
+                         personalInfo:self.descriptionTextView.text completion:^{
+                             weakSelf.navigationController.navigationBar.hidden = YES;
+                             [weakSelf performSegueWithIdentifier:@"showInvitationCodeView" sender:nil];
+                         }];
     [self.nameTextField resignFirstResponder];
     [self.occupationTextField resignFirstResponder];
     [self.descriptionTextView resignFirstResponder];
 }
-
-- (void)didFinishSettingPersonalInfo{
-    self.navigationController.navigationBar.hidden = YES;
-    [self performSegueWithIdentifier:@"showInvitationCodeView" sender:nil];
-}
-
-
 
 #pragma mark - Table View Delegate 
 

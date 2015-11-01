@@ -127,6 +127,8 @@ typedef void(^FetchCenterGetRequestGetMessageNotificationCompleted)(NSNumber *me
 typedef void(^FetchCenterGetRequestGetMessageListCompleted)(NSArray *messages);
 /** 清空消息列表完成*/
 typedef void(^FetchCenterGetRequestClearMessageListCompleted)(void);
+/** 设置用户信息完成*/
+typedef void(^FetchCenterGetRequestSetPersonalInfoCompleted)(void);
 
 
 @interface FetchCenter : NSObject
@@ -206,7 +208,8 @@ typedef void(^FetchCenterGetRequestClearMessageListCompleted)(void);
                  gender:(NSString *)gender
                 imageId:(NSString *)imageId 
              occupation:(NSString *)occupation
-           personalInfo:(NSString *)info;
+           personalInfo:(NSString *)info
+             completion:(FetchCenterGetRequestSetPersonalInfoCompleted)completionBlock;;
 
 #pragma mark - 工具
 - (NSURL *)urlWithImageID:(NSString *)imageId size:(FetchCenterImageSize)size;
