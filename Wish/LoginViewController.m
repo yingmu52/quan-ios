@@ -117,7 +117,10 @@
             [self performSegueWithIdentifier:@"showLoginDetail" sender:nil];
         }
         if ([[User loginType] isEqualToString:@"wx"]) {
-            [self.fetchCenter fetchWechatUserInfoWithOpenID:[User openID] token:[User accessToken]];
+            [self.fetchCenter getWechatUserInfoWithOpenID:[User openID] token:[User accessToken] completion:^{
+                //微信的登陆方式很奇怪，performsegue无法解法，故以此解法。
+                [[[UIApplication sharedApplication] keyWindow] setRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"LoginDetailNavigationViewController"]];
+            }];
         }
         
     }
@@ -160,12 +163,5 @@
         [self processLoginWithUserInfo:userInfo isUser:isNewUser];
     }];
 }
-
-- (void)didFinishGettingWeChatUserInfo{
-    //微信的登陆方式很奇怪，performsegue无法解法，故以此解法。
-    [[[UIApplication sharedApplication] keyWindow] setRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"LoginDetailNavigationViewController"]];
-
-}
-
 
 @end

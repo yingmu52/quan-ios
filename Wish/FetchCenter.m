@@ -1284,28 +1284,24 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 
 #pragma mark - 登陆相关
 
-- (void)fetchWechatUserInfoWithOpenID:(NSString *)openID token:(NSString *)accessToken{
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.weixin.qq.com/sns/userinfo?access_token=%@&openid=%@",accessToken,openID]];
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:30.0f];
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
-    {
-        if (!connectionError) {
-            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-            NSLog(@"%@",json);
-            NSString *picUrl = json[@"headimgurl"];
-            NSString *nickname = json[@"nickname"];
-            NSString *gender = [json[@"sex"] integerValue] ? @"男" : @"女";
-            [User updateAttributeFromDictionary:@{PROFILE_PICTURE_ID:picUrl,
-                                                  USER_DISPLAY_NAME:nickname,
-                                                  GENDER:gender}];
-            NSLog(@"Fetched WeChat User Info \n%@",[User getOwnerInfo]);
-            dispatch_main_async_safe(^{
-                [self.delegate didFinishGettingWeChatUserInfo];
-            });
+- (void)getWechatUserInfoWithOpenID:(NSString *)openID
+                              token:(NSString *)accessToken
+                         completion:(FetchCenterGetRequestGetWechatUserInfoCompleted)completionBlock{
+    
+    NSString *rqtStr = [NSString stringWithFormat:@"https://api.weixin.qq.com/sns/userinfo"];
+    NSDictionary *args = @{@"access_token":accessToken,
+                           @"openid":openID};
+    [self getRequest:rqtStr parameter:args includeArguments:NO completion:^(NSDictionary *responseJson) {
+        NSString *picUrl = responseJson[@"headimgurl"];
+        NSString *nickname = responseJson[@"nickname"];
+        NSString *gender = [responseJson[@"sex"] integerValue] ? @"男" : @"女";
+        [User updateAttributeFromDictionary:@{PROFILE_PICTURE_ID:picUrl,
+                                              USER_DISPLAY_NAME:nickname,
+                                              GENDER:gender}];
+        NSLog(@"Fetched WeChat User Info \n%@",[User getOwnerInfo]);
+        if (completionBlock) {
+            completionBlock();
         }
-        
     }];
 }
 
