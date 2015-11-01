@@ -106,13 +106,22 @@
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         if (weakSelf.hasNextPage) {
             NSLog(@"Loading More..");
-            [weakSelf.fetchCenter loadFeedsListForPlan:weakSelf.plan pageInfo:weakSelf.pageInfo];
+            [weakSelf.fetchCenter loadFeedsListForPlan:weakSelf.plan
+                                              pageInfo:weakSelf.pageInfo
+                                            completion:^(NSDictionary *pageInfo, BOOL hasNextPage, NSArray *feedIds) {
+                                                [weakSelf process:pageInfo hasNextPage:hasNextPage serverFeedIdList:feedIds];
+             }];
         }
     }];
 
     //trigger inital loading
-    self.hasNextPage = YES; //important, must set before [self loadMore]
-    [self.fetchCenter loadFeedsListForPlan:self.plan pageInfo:self.pageInfo];
+    self.hasNextPage = YES;
+    [self.fetchCenter loadFeedsListForPlan:self.plan
+                                  pageInfo:self.pageInfo
+                                completion:^(NSDictionary *pageInfo, BOOL hasNextPage, NSArray *feedIds)
+    {
+        [self process:pageInfo hasNextPage:hasNextPage serverFeedIdList:feedIds];
+    }];
     [self.tableView triggerInfiniteScrolling];
 }
 
@@ -367,7 +376,7 @@ forRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
 }
 
 
-- (void)didFinishLoadingFeedList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage serverFeedIdList:(NSArray *)serverFeedIds{
+- (void)process:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage serverFeedIdList:(NSArray *)serverFeedIds{
     self.hasNextPage = hasNextPage;
     self.pageInfo = pageInfo;
     [self.headerView updateHeaderWithPlan:self.plan];

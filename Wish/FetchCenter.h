@@ -119,7 +119,8 @@ typedef void(^FetchCenterGetRequestGetYoutuSignatureCompleted)(NSString *signatu
 typedef void(^FetchCenterGetRequestGetUidAndUkeyCompleted)(NSDictionary *userInfo, BOOL isNewUser);
 /** 微信拉取用户信息完成*/
 typedef void(^FetchCenterGetRequestGetWechatUserInfoCompleted)(void);
-
+/** 微信拉取用户信息完成*/
+typedef void(^FetchCenterGetRequestGetFeedsListCompleted)(NSDictionary *pageInfo, BOOL hasNextPage, NSArray *feedIds);
 
 @interface FetchCenter : NSObject
 @property (nonatomic,weak) id <FetchCenterDelegate>delegate;
@@ -145,7 +146,9 @@ typedef void(^FetchCenterGetRequestGetWechatUserInfoCompleted)(void);
 - (void)getMessageNotificationInfo;
 
 #pragma mark - 事件动态，（Feed）
-- (void)loadFeedsListForPlan:(Plan *)plan pageInfo:(NSDictionary *)info;
+- (void)loadFeedsListForPlan:(Plan *)plan
+                    pageInfo:(NSDictionary *)info
+                  completion:(FetchCenterGetRequestGetFeedsListCompleted)completionBlock;
 
 /**赞*/
 - (void)likeFeed:(Feed *)feed completion:(FetchCenterGetRequestLikeFeedCompleted)completionBlock;

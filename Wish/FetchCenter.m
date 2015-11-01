@@ -284,14 +284,37 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 }
 
 
-- (void)loadFeedsListForPlan:(Plan *)plan pageInfo:(NSDictionary *)info{
+- (void)loadFeedsListForPlan:(Plan *)plan
+                    pageInfo:(NSDictionary *)info
+                  completion:(FetchCenterGetRequestGetFeedsListCompleted)completionBlock{
+    
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,LOAD_FEED_LIST];
     NSString *infoStr = info ? [self convertDictionaryToString:info] : @"";
     NSDictionary *args = @{@"id":plan.planId,@"attachInfo":infoStr};
     [self getRequest:rqtStr
            parameter:args
-           operation:FetchCenterGetOpGetFeedList
-              entity:plan];
+    includeArguments:YES
+          completion:^(NSDictionary *responseJson)
+    {
+        
+        NSArray *feeds = [responseJson valueForKeyPath:@"data.feedsList"];
+        NSDictionary *pageInfo = [responseJson valueForKeyPath:@"data.attachInfo"];
+        
+        NSNumber *isFollowed  = @([[responseJson valueForKeyPath:@"data.isFollowed"] boolValue]);
+        if (![plan.isFollowed isEqualToNumber:isFollowed]){
+            plan.isFollowed = isFollowed;
+        }
+        
+        for (NSDictionary *info in feeds){
+            [Feed updateFeedWithInfo:info forPlan:plan];
+        }
+        
+        NSArray *feedIds = [responseJson valueForKeyPath:@"data.feedsList.id"];
+        BOOL hasNextPage = [[responseJson valueForKeyPath:@"data.isMore"] boolValue];
+        if (completionBlock) {
+            completionBlock(pageInfo,hasNextPage,feedIds);
+        }
+    }];
 }
 
 - (NSString*)convertDictionaryToString:(NSDictionary*)dict{
