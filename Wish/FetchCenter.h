@@ -121,6 +121,9 @@ typedef void(^FetchCenterGetRequestGetUidAndUkeyCompleted)(NSDictionary *userInf
 typedef void(^FetchCenterGetRequestGetWechatUserInfoCompleted)(void);
 /** 微信拉取用户信息完成*/
 typedef void(^FetchCenterGetRequestGetFeedsListCompleted)(NSDictionary *pageInfo, BOOL hasNextPage, NSArray *feedIds);
+/** 消息提醒完成*/
+typedef void(^FetchCenterGetRequestGetMessageNotificationCompleted)(NSNumber *messageCount,NSNumber *followCount);
+
 
 @interface FetchCenter : NSObject
 @property (nonatomic,weak) id <FetchCenterDelegate>delegate;
@@ -143,7 +146,7 @@ typedef void(^FetchCenterGetRequestGetFeedsListCompleted)(NSDictionary *pageInfo
 #pragma mark - 消息
 - (void)clearAllMessages;
 - (void)getMessageList;
-- (void)getMessageNotificationInfo;
+- (void)getMessageNotificationInfo:(FetchCenterGetRequestGetMessageNotificationCompleted)completionBlock;
 
 #pragma mark - 事件动态，（Feed）
 - (void)loadFeedsListForPlan:(Plan *)plan

@@ -208,9 +208,15 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 
 }
 
-- (void)getMessageNotificationInfo{
+- (void)getMessageNotificationInfo:(FetchCenterGetRequestGetMessageNotificationCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,MESSAGE,GET_MESSAGE_NOTIFICATION];
-    [self getRequest:rqtStr parameter:nil operation:FetchCenterGetOpGetMessageNotificationInfo entity:nil];
+    [self getRequest:rqtStr parameter:nil includeArguments:YES completion:^(NSDictionary *responseJson) {
+        NSNumber *unreadFollowCount = @([[responseJson valueForKeyPath:@"data.unreadCountFollow"] integerValue]);
+        NSNumber *unreadMsgCount = @([[responseJson valueForKeyPath:@"data.unreadCountMsg"] integerValue]);
+        if (completionBlock) {
+            completionBlock(unreadMsgCount,unreadFollowCount);
+        }
+    }];
 }
 
 #pragma mark - 评论和回复

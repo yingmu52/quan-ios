@@ -67,13 +67,11 @@
     }
 }
 
-- (void)didFinishGettingMessageNotificationWithMessageCount:(NSNumber *)msgCount followCount:(NSNumber *)followCount{
-    self.numberOfMessages = msgCount.integerValue;
-}
-
 - (void)requestMessageCount{
     if ([User isUserLogin]) {
-        [self.fetchCenter getMessageNotificationInfo];
+        [self.fetchCenter getMessageNotificationInfo:^(NSNumber *messageCount, NSNumber *followCount) {
+            self.numberOfMessages = messageCount.integerValue;
+        }];
     }else{
         self.messageNotificationTimer = nil;
     }
