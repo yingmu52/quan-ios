@@ -148,29 +148,24 @@ static NSTimeInterval expectationTimeout = 30.0f;
 }
 
 - (void)testUpdatePlan{
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"planTitle = %@",@"PlanForUnitTesting"];
-    NSArray *array = [Plan fetchWith:@"Plan" predicate:predicate keyForDescriptor:@"createDate"];
-    XCTAssertTrue(array.count == 1, @"事件不存在");
 
-    Plan *plan = array.lastObject;
-    NSUInteger numberOfCycles = 100;
+    NSUInteger numberOfCycles = 30;
     for (NSInteger i = 0; i <= numberOfCycles; i++) {
-        plan.detailText = [NSUUID UUID].UUIDString; //修改事件描述
-        plan.planStatus = i == numberOfCycles ? @(PlanStatusOnGoing) : @(PlanStatusFinished); //修改事件状态
+        self.testPlan.detailText = [NSUUID UUID].UUIDString; //修改事件描述
+        self.testPlan.planStatus = i == numberOfCycles ? @(PlanStatusOnGoing) : @(PlanStatusFinished); //修改事件状态
         XCTestExpectation *expectation = [self expectationWithDescription:@"更新事件内容接口"];
-        [self.fetchCenter updatePlan:plan completion:^{
+        [self.fetchCenter updatePlan:self.testPlan completion:^{
             [expectation fulfill];
         }];
         
         [self waitForExpectationsWithTimeout:expectationTimeout handler:^(NSError * _Nullable error) {
             XCTAssertNil(error,@"更新事件内容接口错误");
             if (error) {
-                NSLog(@"%@",plan);
+                NSLog(@"%@",self.testPlan);
             }
         }];
     }
-    [plan.managedObjectContext save:nil];
+    [self.testPlan.managedObjectContext save:nil];
 
 }
 
@@ -190,7 +185,7 @@ static NSTimeInterval expectationTimeout = 30.0f;
 }
 
 - (void)testUpdatePlanStatus{
-    NSUInteger numberOfCycles = 10;
+    NSUInteger numberOfCycles = 30;
     for (NSInteger i = 0; i <= numberOfCycles; i++) {
         self.testPlan.detailText = [NSUUID UUID].UUIDString; //修改事件描述
         PlanStatus status  =  [self.testPlan.planStatus isEqualToNumber:@(PlanStatusFinished)] ? PlanStatusOnGoing : PlanStatusFinished; //修改事件状态
@@ -216,7 +211,8 @@ static NSTimeInterval expectationTimeout = 30.0f;
     Plan *plan;
     for (NSInteger i = 0; i <= numberOfCycles; i++) {
         XCTestExpectation *expectation = [self expectationWithDescription:@"事件创建与删除接口"];
-        plan = [Plan createPlan:testPlanTitle privacy:YES];
+        NSString *planTitle = [NSString stringWithFormat:@"测试事件%@",[NSDate date]];
+        plan = [Plan createPlan:planTitle privacy:YES];
         [self.fetchCenter uploadToCreatePlan:plan completion:^(Plan *plan) {
             XCTAssertTrue(plan.planId,@"事件没有缓存后台传来的id");
             [self.fetchCenter postToDeletePlan:plan completion:^{
@@ -339,12 +335,10 @@ static NSTimeInterval expectationTimeout = 30.0f;
 }
 
 - (void)testGetMessageList{
-    for (NSInteger i = 0 ; i < 100; i ++) {
+    for (NSInteger i = 0 ; i < 10; i ++) {
         XCTestExpectation *expectation = [self expectationWithDescription:@"拉取消息接口"];
         [self.fetchCenter getMessageList:^(NSArray *messages) {
-            if (messages) {
-                [expectation fulfill];
-            }
+            [expectation fulfill];
         }];
         [self waitForExpectationsWithTimeout:expectationTimeout
                                      handler:^(NSError * _Nullable error) {
@@ -371,7 +365,7 @@ static NSTimeInterval expectationTimeout = 30.0f;
                                        gender:@"男"
                                       imageId:@"IOS-01A5D97E-91F2-4B4F-BD70-97BD6345D856" //我弹吉他的照片id
                                    occupation:@"吉他手"
-                                 personalInfo:@"这是来自测试自动填写的信息"
+                                 personalInfo:[NSString stringWithFormat:@"这是来自测试自动填写的信息, 日期%@",[NSDate date]]
                                    completion:^{
                 [expectation fulfill];
             }];
