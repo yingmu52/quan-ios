@@ -237,22 +237,65 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 
 #pragma mark - 评论和回复
 
-- (void)deleteComment:(Comment *)comment{
+- (void)deleteComment:(Comment *)comment
+           completion:(FetchCenterGetRequestDeleteCommentCompleted)completionBlock{
+    
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,DELETE_COMMENT];
-    [self getRequest:rqtStr parameter:@{@"id":comment.commentId,@"feedsId":comment.feed.feedId}
-           operation:FetchCenterGetOpDeleteComment
-              entity:comment];
+    NSDictionary *args = @{@"id":comment.commentId,@"feedsId":comment.feed.feedId};
+    [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
+        if (completionBlock) {
+            NSLog(@"评论删除成功 %@",comment.commentId);
+            completionBlock();
+        }
+    }];
 }
-- (void)getCommentListForFeed:(NSString *)feedId pageInfo:(NSDictionary *)info{
+- (void)getCommentListForFeed:(NSString *)feedId
+                     pageInfo:(NSDictionary *)info
+                   completion:(FetchCenterGetRequestGetCommentListCompleted)completionBlock{
+    
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,GET_FEED_COMMENTS];
     NSString *infoStr = info ? [self convertDictionaryToString:info] : @"";
     
     NSDictionary *args = @{@"feedsId":feedId,
                            @"attachInfo":infoStr};
-    [self getRequest:rqtStr
-           parameter:args
-           operation:FetchCenterGetOpGetFeedCommentList
-              entity:nil];
+    [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
+        NSLog(@"%@",responseJson);
+        NSDictionary *ownerInfo = [responseJson valueForKeyPath:@"data.manList"];
+        BOOL hasNextPage = [[responseJson valueForKeyPath:@"data.isMore"] boolValue];
+        NSDictionary *pageInfo = [responseJson valueForKeyPath:@"data.attachInfo"];
+        NSDictionary *feedInfo = [responseJson valueForKeyPath:@"data.feeds"];
+
+        Feed *feed = [Feed updateFeedWithInfo:feedInfo forPlan:nil];
+        NSArray *comments = [responseJson valueForKeyPath:@"data.commentList"];
+        NSMutableArray *localComments = [NSMutableArray arrayWithCapacity:comments.count];
+        if (comments.count > 0) {
+            for (NSDictionary *commentInfo in comments){
+                //读取评论信息
+                Comment *comment = [Comment updateCommentWithInfo:commentInfo];
+                //读取用户信息
+                NSDictionary *userInfo = comment.isMyComment.boolValue ? [Owner myWebInfo] : ownerInfo[commentInfo[@"ownerId"]];
+                Owner *owner = [Owner updateOwnerWithInfo:userInfo];
+                
+                //防止更新相同的评论数据
+                if (comment.owner != owner) {
+                    comment.owner = owner;
+                }
+                if (comment.feed != feed) {
+                    comment.feed = feed;
+                }
+                if (comment.idForReply) {
+                    NSString *nameForReply = [ownerInfo[comment.idForReply] objectForKey:@"name"];
+                    if (![comment.nameForReply isEqualToString:nameForReply]) {
+                        comment.nameForReply = nameForReply;
+                    }
+                }
+                [localComments addObject:comment];
+            }
+        }
+        if (completionBlock) {
+            completionBlock(pageInfo,hasNextPage,localComments,feed);
+        }
+    }];
 }
 
 - (void)commentOnFeed:(Feed *)feed

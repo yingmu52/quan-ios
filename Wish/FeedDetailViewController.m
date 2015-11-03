@@ -270,7 +270,12 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 - (void)deleteActionAtIndexPath:(NSIndexPath *)indexPath{
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"是否删除该条评论？" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self.fetchCenter deleteComment:[self.fetchedRC objectAtIndexPath:indexPath]];
+        Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
+        [self.fetchCenter deleteComment:comment completion:^{
+            [comment.managedObjectContext  deleteObject:comment];
+            self.feed.commentCount = @(self.feed.commentCount.integerValue - 1);
+            [self.headerView setCommentButtonText:self.feed.commentCount];
+        }];
     }];
     
     [actionSheet addAction:deleteAction];
@@ -331,26 +336,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 -(void)didPressedCommentButton:(FeedDetailHeader *)headerView{
     [self performSegueWithIdentifier:@"showCommentViewController" sender:nil];
 }
-
-- (void)didFinishDeletingComment:(Comment *)comment{
-    [[AppDelegate getContext] deleteObject:comment];
-    self.feed.commentCount = @(self.feed.commentCount.integerValue - 1);
-    [self.headerView setCommentButtonText:self.feed.commentCount];
-}
-
-- (void)didFinishLoadingCommentList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage forFeed:(Feed *)feed{
-    self.hasNextPage = hasNextPage;
-    self.pageInfo = pageInfo;
-    self.feed = feed;
-    
-    //stop animation
-    [self.tableView.infiniteScrollingView stopAnimating];
-    if (!self.hasNextPage){ //stop scroll to load more
-        self.tableView.showsInfiniteScrolling = NO;
-    }
-
-}
-
 
 #pragma mark - fetched results controller 
 
@@ -429,7 +414,25 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 - (void)loadComments{
     NSString *feedId = self.feed.feedId ? self.feed.feedId : self.feedId;
     NSAssert(feedId, @"nil feedId");
-    [self.fetchCenter getCommentListForFeed:feedId pageInfo:self.pageInfo];
+    [self.fetchCenter getCommentListForFeed:feedId
+                                   pageInfo:self.pageInfo
+                                 completion:^(NSDictionary *pageInfo,
+                                              BOOL hasNextPage,
+                                              NSArray *commmentIds,
+                                              Feed *feed)
+    {
+        
+#warning 同步评论列表
+        self.hasNextPage = hasNextPage;
+        self.pageInfo = pageInfo;
+        self.feed = feed;
+        
+        //stop animation
+        [self.tableView.infiniteScrollingView stopAnimating];
+        if (!self.hasNextPage){ //stop scroll to load more
+            self.tableView.showsInfiniteScrolling = NO;
+        }
+    }];
 }
 
 #pragma mark - delete local comments to insync with server

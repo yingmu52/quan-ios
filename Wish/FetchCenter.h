@@ -131,7 +131,10 @@ typedef void(^FetchCenterGetRequestClearMessageListCompleted)(void);
 typedef void(^FetchCenterGetRequestSetPersonalInfoCompleted)(void);
 /** 评论或回复完成*/
 typedef void(^FetchCenterGetRequestCommentCompleted)(Comment *comment);
-
+/** 摘取评论列表完成*/
+typedef void(^FetchCenterGetRequestGetCommentListCompleted)(NSDictionary *pageInfo, BOOL hasNextPage, NSArray *comments, Feed *feed);
+/** 删除评论完成*/
+typedef void(^FetchCenterGetRequestDeleteCommentCompleted)(void);
 
 
 @interface FetchCenter : NSObject
@@ -185,8 +188,12 @@ typedef void(^FetchCenterGetRequestCommentCompleted)(Comment *comment);
          completion:(FetchCenterGetRequestCommentCompleted)completionBlock;
 
 
-- (void)getCommentListForFeed:(NSString *)feedId pageInfo:(NSDictionary *)info;
-- (void)deleteComment:(Comment *)comment;
+- (void)getCommentListForFeed:(NSString *)feedId
+                     pageInfo:(NSDictionary *)info
+                   completion:(FetchCenterGetRequestGetCommentListCompleted)completionBlock;
+
+- (void)deleteComment:(Comment *)comment
+           completion:(FetchCenterGetRequestDeleteCommentCompleted)completionBlock;;
 
 #pragma mark - 事件
 

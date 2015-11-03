@@ -384,16 +384,18 @@ static NSTimeInterval expectationTimeout = 30.0f;
     
 }
 
-- (void)testCommentAndReply{
-    Feed *feed = [self.testPlan.feeds sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"feedId" ascending:NO]]].lastObject;
+- (void)testCommentFeature{
+    Feed *feed = self.testPlan.feeds.allObjects.lastObject;
     XCTAssertTrue(feed != nil,@"测试Feed不存在");
-    NSUInteger numberOfCycles = 10;
+    
+    //测试添加评论/回复
+    NSUInteger numberOfCycles = 100;
     for (NSInteger i = 0 ; i < numberOfCycles; i ++) {
-        XCTestExpectation *expectation = [self expectationWithDescription:@"评论与回复接口"];
+        XCTestExpectation *exp1 = [self expectationWithDescription:@"评论与回复接口"];
         NSString *content = [NSString stringWithFormat:@"测试数据%@",@(i)];
         [self.fetchCenter commentOnFeed:feed content:content completion:^(Comment *comment) {
             if (comment) {
-                [expectation fulfill];
+                [exp1 fulfill];
             }
         }];
         [self waitForExpectationsWithTimeout:expectationTimeout
@@ -402,6 +404,49 @@ static NSTimeInterval expectationTimeout = 30.0f;
                                      }];
     }
     
+    //获取评论列表以及翻页功能
+    __block NSDictionary *tempPageInfo;
+    __block BOOL tempHasNextPage;
+    __block NSMutableArray *localComments = [NSMutableArray array];
+    while (tempHasNextPage) {
+        XCTestExpectation *exp2 = [self expectationWithDescription:@"获取评论列表翻页接口"];
+        [self.fetchCenter getCommentListForFeed:feed.feedId
+                                       pageInfo:tempPageInfo
+                                     completion:^(NSDictionary *pageInfo,
+                                                  BOOL hasNextPage,
+                                                  NSArray *comments, Feed *feed)
+        {
+            if (pageInfo && feed) {
+                tempHasNextPage = hasNextPage;
+                tempPageInfo = pageInfo;
+                [localComments addObjectsFromArray:comments];
+                [exp2 fulfill];
+            }
+        }];
+        [self waitForExpectationsWithTimeout:expectationTimeout
+                                     handler:^(NSError * _Nullable error) {
+                                         XCTAssertNil(error,@"获取评论列表翻页接口错误");
+                                     }];
+
+    }
+    
+    //删除评论
+    for (Feed *feed in self.testPlan.feeds.allObjects) {
+        if (feed.comments.count > 0) {
+            for (Comment *comment in feed.comments.allObjects) {
+                XCTestExpectation *exp3 = [self expectationWithDescription:@"删除评论接口"];
+                [self.fetchCenter deleteComment:comment completion:^{
+                    [comment.managedObjectContext deleteObject:comment];
+                    [exp3 fulfill];
+                }];
+                [self waitForExpectationsWithTimeout:expectationTimeout
+                                             handler:^(NSError * _Nullable error) {
+                                                 XCTAssertNil(error,@"删除评论接口错误");
+                                             }];
+            }
+        }
+    }
+    [self.testPlan.managedObjectContext save:nil];
 }
 
 
