@@ -383,6 +383,28 @@ static NSTimeInterval expectationTimeout = 30.0f;
     }
     
 }
+
+- (void)testCommentAndReply{
+    Feed *feed = [self.testPlan.feeds sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"feedId" ascending:NO]]].lastObject;
+    XCTAssertTrue(feed != nil,@"测试Feed不存在");
+    NSUInteger numberOfCycles = 10;
+    for (NSInteger i = 0 ; i < numberOfCycles; i ++) {
+        XCTestExpectation *expectation = [self expectationWithDescription:@"评论与回复接口"];
+        NSString *content = [NSString stringWithFormat:@"测试数据%@",@(i)];
+        [self.fetchCenter commentOnFeed:feed content:content completion:^(Comment *comment) {
+            if (comment) {
+                [expectation fulfill];
+            }
+        }];
+        [self waitForExpectationsWithTimeout:expectationTimeout
+                                     handler:^(NSError * _Nullable error) {
+                                         XCTAssertNil(error,@"评论与回复接口错误");
+                                     }];
+    }
+    
+}
+
+
 @end
 
 

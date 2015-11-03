@@ -131,10 +131,12 @@
     if (self.comment) { //有回复的对象
         [self.fetchCenter replyAtFeed:self.comment.feed
                               content:self.textView.text
-                              toOwner:self.comment.owner];
+                              toOwner:self.comment.owner
+                           completion:nil];
     }else{
         [self.fetchCenter commentOnFeed:self.feedDetailViewController.feed
-                                content:self.textView.text];
+                                content:self.textView.text
+                             completion:nil];
     }
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:CURRENT_TEXT];
     [self dismissView];

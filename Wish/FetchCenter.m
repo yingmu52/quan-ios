@@ -255,11 +255,16 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
               entity:nil];
 }
 
-- (void)commentOnFeed:(Feed *)feed content:(NSString *)text{
-    [self replyAtFeed:feed content:text toOwner:nil];
+- (void)commentOnFeed:(Feed *)feed
+              content:(NSString *)text
+           completion:(FetchCenterGetRequestCommentCompleted)completionBlock{
+    [self replyAtFeed:feed content:text toOwner:nil completion:completionBlock];
 }
 
-- (void)replyAtFeed:(Feed *)feed content:(NSString *)text toOwner:(Owner *)owner{
+- (void)replyAtFeed:(Feed *)feed
+            content:(NSString *)text
+            toOwner:(Owner *)owner
+         completion:(FetchCenterGetRequestCommentCompleted)completionBlock{
     
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,COMMENT_FEED];
     NSDictionary *args = @{@"feedsId":feed.feedId,
@@ -269,23 +274,18 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
         //increase comment count by one
         NSString *commentId = [responseJson valueForKeyPath:@"data.id"];
-        
+        Comment *comment;
         if (owner){ //回复
-            [Comment replyToOwner:owner
-                          content:text
-                        commentId:commentId
-                          forFeed:feed];
+            comment = [Comment replyToOwner:owner content:text commentId:commentId forFeed:feed];
         }else{ //评论
-            [Comment createComment:text
-                         commentId:commentId
-                           forFeed:feed];
+            comment = [Comment createComment:text commentId:commentId forFeed:feed];
         }
         //update feed count
         feed.commentCount = @(feed.commentCount.integerValue + 1);
-        if ([self.delegate respondsToSelector:@selector(didFinishCommentingFeed:commentId:)]) {
-            [self.delegate didFinishCommentingFeed:feed commentId:commentId];
+        if (completionBlock) {
+            NSLog(@"评论完成%@",comment.commentId);
+            completionBlock(comment);
         }
-
     }];
 }
 
