@@ -37,44 +37,13 @@ typedef enum {
 
 @protocol FetchCenterDelegate <NSObject>
 @optional
-- (void)didFinishFetchingFollowingPlanList:(NSArray *)planIds;
-- (void)didFinishUploadingPlan:(Plan *)plan;
-- (void)didFinishUploadingFeed:(Feed *)feed;
-
 - (void)didFinishUploadingImage:(NSArray *)imageIds forFeed:(Feed *)feed;
 - (void)didReceivedCurrentProgressForUploadingImage:(CGFloat)percentage;
-
-- (void)didFinishReceivingUidAndUKeyForUserInfo:(NSDictionary *)userInfo isNewUser:(BOOL)isNew;
-- (void)didFinishGettingWeChatUserInfo;
-- (void)didFinishUpdatingPlan:(Plan *)plan;
-- (void)didFinishCheckingNewVersion:(BOOL)hasNewVersion;
 - (void)didFinishUploadingPictureForProfile;
-- (void)didfinishFetchingDiscovery:(NSArray *)plans circleTitle:(NSString *)title;
-- (void)didFinishSettingPersonalInfo;
-- (void)didFinishSendingFeedBack;
-- (void)didFinishLoadingFeedList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage serverFeedIdList:(NSArray *)serverFeedIds;
-- (void)didFinishDeletingFeed:(Feed *)feed;
-
-
-
-- (void)didFinishLikingFeed:(Feed *)feed;
-- (void)didFinishUnLikingFeed:(Feed *)feed;
-- (void)didFinishCommentingFeed:(Feed *)feed commentId:(NSString *)commentId;
-- (void)didFinishLoadingCommentList:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage forFeed:(Feed *)feed;
-- (void)didFinishDeletingComment:(Comment *)comment;
-
-- (void)didFinishFollowingPlan:(Plan *)plan;
-- (void)didFinishUnFollowingPlan:(Plan *)plan;
-
 - (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
-- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
-/** 新版请求的失败回调函数*/
+
+/** GET请求的失败回调函数*/
 - (void)didFailSendingRequest;
-
-- (void)didFinishGettingMessageNotificationWithMessageCount:(NSNumber *)msgCount followCount:(NSNumber *)followCount;
-- (void)didFinishClearingAllMessages;
-
-- (void)didfinishGettingSignature;
 @end
 
 /** 创建事件完成*/
