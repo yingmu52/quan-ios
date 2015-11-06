@@ -195,7 +195,18 @@
 - (void)didFinishPickingPhAssets:(NSMutableArray *)assets{
     if (assets.count == 1 && [assets.firstObject isKindOfClass:[UIImage class]]) {
         self.profilePicture.image = assets.firstObject;
-        [self.fetchCenter uploadNewProfilePicture:self.profilePicture.image];
+        [self.fetchCenter uploadNewProfilePicture:self.profilePicture.image
+                                       completion:^(NSArray *imageIds)
+        {
+            [self.fetchCenter setPersonalInfo:[User userDisplayName]
+                                       gender:[User gender]
+                                      imageId:[User updatedProfilePictureId]
+                                   occupation:[User occupation]
+                                 personalInfo:[User personalDetailInfo]
+                                   completion:^{
+                                       NSLog(@"done");
+                                   }];
+        }];
     }
 }
 
@@ -204,19 +215,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     self.navigationController.navigationBar.hidden = NO;
     segue.destinationViewController.hidesBottomBarWhenPushed = YES;
-}
-
-#pragma mark - Fetchcenter Delegate
-
-- (void)didFinishUploadingPictureForProfile{
-    [self.fetchCenter setPersonalInfo:[User userDisplayName]
-                               gender:[User gender]
-                              imageId:[User updatedProfilePictureId]
-                           occupation:[User occupation]
-                         personalInfo:[User personalDetailInfo]
-                           completion:^{
-                               NSLog(@"done");
-                         }];
 }
 
 #pragma mark - 摇一摇

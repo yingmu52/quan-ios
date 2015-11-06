@@ -448,6 +448,7 @@ static NSTimeInterval expectationTimeout = 30.0f;
 - (void)testYoutu{
     //上传图片
     NSArray *testImages = @[[UIImage imageNamed:@"test.jpg"]];
+    XCTAssertTrue(testImages,@"testImages 不能为空");
     XCTestExpectation *expectation = [self expectationWithDescription:@"测试优图上传接口"];
     
     [self.fetchCenter uploadImages:testImages completion:^(NSArray *imageIds) {
@@ -461,7 +462,21 @@ static NSTimeInterval expectationTimeout = 30.0f;
 
 }
 
-
+- (void)testUploadProfilePicture{
+    UIImage *image = [UIImage imageNamed:@"test.jpg"];
+    XCTAssertTrue(image,@"testImages 不能为空");
+    XCTestExpectation *expectation = [self expectationWithDescription:@"测试上传头像接口"];
+    [self.fetchCenter uploadNewProfilePicture:image completion:^(NSArray *imageIds) {
+        XCTAssertTrue(imageIds.count == 1,@"上传超过一张图？");
+        XCTAssertTrue([[User updatedProfilePictureId] isEqualToString:imageIds.lastObject],@"头像id缓存失败");
+        [expectation fulfill];
+    }];
+    [self waitForExpectationsWithTimeout:expectationTimeout
+                                 handler:^(NSError * _Nullable error) {
+                                     XCTAssertNil(error,@"测试上传头像接口错误");
+                                 }];
+    
+}
 @end
 
 

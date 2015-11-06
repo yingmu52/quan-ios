@@ -39,7 +39,6 @@ typedef enum {
 @optional
 - (void)didFinishUploadingImage:(NSArray *)imageIds forFeed:(Feed *)feed;
 - (void)didReceivedCurrentProgressForUploadingImage:(CGFloat)percentage;
-- (void)didFinishUploadingPictureForProfile;
 - (void)didFailUploadingImage:(UIImage *)image;
 
 /** GET请求的失败回调函数*/
@@ -195,7 +194,9 @@ typedef void(^FetchCenterPostRequestUploadImagesCompleted)(NSArray *imageIds);
           completion:(FetchCenterGetRequestSendFeedbackCompleted)completionBlock;
 
 - (void)checkVersion:(FetchCenterGetRequestCheckVersionCompleted)completionBlock;
-- (void)uploadNewProfilePicture:(UIImage *)picture;
+- (void)uploadNewProfilePicture:(UIImage *)picture
+                     completion:(FetchCenterPostRequestUploadImagesCompleted)completionBlock;
+;
 - (void)setPersonalInfo:(NSString *)nickName
                  gender:(NSString *)gender
                 imageId:(NSString *)imageId 

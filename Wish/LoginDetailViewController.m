@@ -67,7 +67,7 @@
                         completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
                             if (image) {
                                 // do something with image
-                                [self.fetchCenter uploadNewProfilePicture:image];
+                                [self.fetchCenter uploadNewProfilePicture:image completion:nil];
                             }
                         }];
 

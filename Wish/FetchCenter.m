@@ -567,14 +567,14 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 
 #pragma mark - 个人信息
 
-- (void)uploadNewProfilePicture:(UIImage *)picture{
-    __weak typeof(self) weakSelf = self;
+- (void)uploadNewProfilePicture:(UIImage *)picture
+                     completion:(FetchCenterPostRequestUploadImagesCompleted)completionBlock{
     [self postImageWithOperation:picture complete:^(NSString *fetchedId) {
         if (fetchedId){
             [User updateAttributeFromDictionary:@{PROFILE_PICTURE_ID_CUSTOM:fetchedId}];
             NSLog(@"image uploaded %@",fetchedId);
-            if ([weakSelf.delegate respondsToSelector:@selector(didFinishUploadingPictureForProfile)]) {
-                [weakSelf.delegate didFinishUploadingPictureForProfile];
+            if (completionBlock) {
+                completionBlock(@[fetchedId]);
             }
         }
     }];
