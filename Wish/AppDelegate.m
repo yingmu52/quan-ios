@@ -41,9 +41,9 @@
         // 设置用户ID, 如果你的APP有登录态, 可以在用户登录后再次调用此接口
         [[CrashReporter sharedInstance] setUserId:[NSString stringWithFormat:@"%@ - %@",[User uid],[User userDisplayName]]];
         
-        if (![User currentCircleId].length) { //没有归属的圈子,弹出邀请码填写页面
-            self.window.rootViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"InvitationCodeViewController"];
-        }
+//        if (![User currentCircleId].length) { //没有归属的圈子,弹出邀请码填写页面
+//            self.window.rootViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"InvitationCodeViewController"];
+//        }
         
     }else{
         self.window.rootViewController = self.loginVC;
