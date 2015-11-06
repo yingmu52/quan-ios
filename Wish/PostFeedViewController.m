@@ -131,7 +131,9 @@ static NSUInteger distance = 10;
                 [arrayOfUIImages addObject:[UIImage imageWithData:imageData scale:0.5]];
                 if (arrayOfUIImages.count == self.assets.count) {
                     [self.fetchCenter uploadImages:arrayOfUIImages
-                                      toCreateFeed:self.feed];
+                                        completion:^(NSArray *imageIds) {
+                        [self finishUploadingImages:imageIds];
+                    }];
                 }
             }];
         }else if ([item isKindOfClass:[UIImage class]]){
@@ -139,7 +141,9 @@ static NSUInteger distance = 10;
             [arrayOfUIImages addObject:item];
             if (arrayOfUIImages.count == self.assets.count) {
                 [self.fetchCenter uploadImages:arrayOfUIImages
-                                  toCreateFeed:self.feed];
+                                    completion:^(NSArray *imageIds) {
+                    [self finishUploadingImages:imageIds];
+                }];
             }
         }
     }
@@ -260,14 +264,14 @@ static NSUInteger distance = 10;
 
 #pragma mark - fetch center delegate
 
-- (void)didFinishUploadingImage:(NSArray *)imageIds forFeed:(Feed *)feed{
+- (void)finishUploadingImages:(NSArray *)imageIds{
     if (self.plan.planId) {
-        [self.fetchCenter uploadToCreateFeed:feed fetchedImageIds:imageIds completion:^(Feed *feed) {
+        [self.fetchCenter uploadToCreateFeed:self.feed fetchedImageIds:imageIds completion:^(Feed *feed) {
             [self finishUploadingFeed:feed];
         }];
     }else{
         [self.fetchCenter uploadToCreatePlan:self.plan completion:^(Plan *plan) {
-            [self.fetchCenter uploadToCreateFeed:feed fetchedImageIds:imageIds completion:^(Feed *feed) {
+            [self.fetchCenter uploadToCreateFeed:self.feed fetchedImageIds:imageIds completion:^(Feed *feed) {
                 [self finishUploadingFeed:feed];
             }];
         }];

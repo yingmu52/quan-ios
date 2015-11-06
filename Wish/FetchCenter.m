@@ -398,14 +398,13 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 
 }
 
-- (void)uploadImages:(NSArray *)images toCreateFeed:(Feed *)feed{
+- (void)uploadImages:(NSArray *)images completion:(FetchCenterPostRequestUploadImagesCompleted)completionBlock{
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
     dispatch_async(queue, ^{
         NSMutableDictionary *imageIdMaps = [NSMutableDictionary dictionary];
         dispatch_apply(images.count, queue, ^(size_t index){
             [self postImageWithOperation:images[index]
-                           managedObject:feed
                                 complete:^(NSString *fetchedId)
              {
                  dispatch_main_async_safe(^{
@@ -418,7 +417,10 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
                              }];
                              NSLog(@"\n%@\n",sorted);
                              
-                             [self.delegate didFinishUploadingImage:sorted forFeed:feed];
+                             if (completionBlock) {
+                                 completionBlock(sorted);
+                             }
+//                             [self.delegate didFinishUploadingImage:sorted forFeed:feed];
                          }else{
                              if ([self.delegate respondsToSelector:@selector(didReceivedCurrentProgressForUploadingImage:)]) {
                                  CGFloat progress = (imageIdMaps.allKeys.count - 1e-3) / images.count;
@@ -567,7 +569,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 
 - (void)uploadNewProfilePicture:(UIImage *)picture{
     __weak typeof(self) weakSelf = self;
-    [self postImageWithOperation:picture managedObject:nil complete:^(NSString *fetchedId) {
+    [self postImageWithOperation:picture complete:^(NSString *fetchedId) {
         if (fetchedId){
             [User updateAttributeFromDictionary:@{PROFILE_PICTURE_ID_CUSTOM:fetchedId}];
             NSLog(@"image uploaded %@",fetchedId);
@@ -576,7 +578,6 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
             }
         }
     }];
-//    [self postImageWithOperation:picture managedObject:nil postOp:FetchCenterPostOpUploadImageForUpdaingProfile];
 }
 
 - (void)setPersonalInfo:(NSString *)nickName
@@ -784,7 +785,6 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 
 #define IMAGE_PREFIX @"IOS-"
 - (void)postImageWithOperation:(UIImage *)image
-                 managedObject:(NSManagedObject *)managedObject
                       complete:(FetchCenterImageUploadCompletionBlock)completionBlock{ //obj :NSManagedObject or UIimage
     
     //chekc internet
@@ -835,12 +835,9 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 //                 [manager.imageCache storeImage:image forKey:[manager cacheKeyForURL:url]];
                  
              }else{
-                 if ([self.delegate respondsToSelector:@selector(didFailUploadingImageWithInfo:entity:)]) {
-                     dispatch_main_async_safe((^{
-                         [self.delegate didFailUploadingImageWithInfo:@{@"ret":@"上传图片失败",@"msg":resp.descMsg}
-                                                                   entity:managedObject];
-                     }));
-
+                 NSLog(@"上传失败");
+                 if ([self.delegate respondsToSelector:@selector(didFailUploadingImage:)]) {
+                     [self.delegate didFailUploadingImage:image];
                  }
              }
              

@@ -40,7 +40,7 @@ typedef enum {
 - (void)didFinishUploadingImage:(NSArray *)imageIds forFeed:(Feed *)feed;
 - (void)didReceivedCurrentProgressForUploadingImage:(CGFloat)percentage;
 - (void)didFinishUploadingPictureForProfile;
-- (void)didFailUploadingImageWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject;
+- (void)didFailUploadingImage:(UIImage *)image;
 
 /** GET请求的失败回调函数*/
 - (void)didFailSendingRequest;
@@ -104,6 +104,8 @@ typedef void(^FetchCenterGetRequestCommentCompleted)(Comment *comment);
 typedef void(^FetchCenterGetRequestGetCommentListCompleted)(NSDictionary *pageInfo, BOOL hasNextPage, NSArray *comments, Feed *feed);
 /** 删除评论完成*/
 typedef void(^FetchCenterGetRequestDeleteCommentCompleted)(void);
+/** 上传图片完成*/
+typedef void(^FetchCenterPostRequestUploadImagesCompleted)(NSArray *imageIds);
 
 
 @interface FetchCenter : NSObject
@@ -140,8 +142,11 @@ typedef void(^FetchCenterGetRequestDeleteCommentCompleted)(void);
 /**取消赞*/
 - (void)unLikeFeed:(Feed *)feed completion:(FetchCenterGetRequestUnLikeFeedCompleted)completionBlock;
 
-- (void)deleteFeed:(Feed *)feed completion:(FetchCenterGetRequestDeleteFeedCompleted)completionBlock;;
-- (void)uploadImages:(NSArray *)images toCreateFeed:(Feed *)feed;
+- (void)deleteFeed:(Feed *)feed completion:(FetchCenterGetRequestDeleteFeedCompleted)completionBlock;
+
+- (void)uploadImages:(NSArray *)images
+          completion:(FetchCenterPostRequestUploadImagesCompleted)completionBlock;
+
 - (void)uploadToCreateFeed:(Feed *)feed
            fetchedImageIds:(NSArray *)imageIds
                 completion:(FetchCenterGetRequestUploadFeedCompleted)completionBlock;

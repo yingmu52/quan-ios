@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "FetchCenter.h"
+#import "Theme.h"
 static NSTimeInterval expectationTimeout = 30.0f;
 @interface FetchCenterTest : XCTestCase <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
@@ -441,6 +442,23 @@ static NSTimeInterval expectationTimeout = 30.0f;
         }
     }
     [self.testPlan.managedObjectContext save:nil];
+}
+
+
+- (void)testYoutu{
+    //上传图片
+    NSArray *testImages = @[[UIImage imageNamed:@"test.jpg"]];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"测试优图上传接口"];
+    
+    [self.fetchCenter uploadImages:testImages completion:^(NSArray *imageIds) {
+        [expectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:expectationTimeout
+                                 handler:^(NSError * _Nullable error) {
+                                     XCTAssertNil(error,@"测试优图上传接口错误");
+                                 }];
+
 }
 
 
