@@ -14,15 +14,18 @@
 #import "User.h"
 @implementation Comment
 
-+ (Comment *)updateCommentWithInfo:(NSDictionary *)dict{
++ (Comment *)updateCommentWithInfo:(NSDictionary *)dict
+              managedObjectContext:(nonnull NSManagedObjectContext *)context{
     
     Comment *comment;
     NSArray *results = [Plan fetchWith:@"Comment"
                              predicate:[NSPredicate predicateWithFormat:@"commentId == %@",dict[@"id"]]
-                      keyForDescriptor:@"commentId"]; //utility method from Plan+PlanCRUD.h
+                      keyForDescriptor:@"commentId"
+                  managedObjectContext:context]; //utility method from Plan+PlanCRUD.h
+    
     NSAssert(results.count <= 1, @"ownerId must be a unique!");
     if (!results.count) {
-        comment = [NSEntityDescription insertNewObjectForEntityForName:@"Comment" inManagedObjectContext:[AppDelegate getContext]];
+        comment = [NSEntityDescription insertNewObjectForEntityForName:@"Comment" inManagedObjectContext:context];
         comment.commentId = dict[@"id"];
         comment.content = dict[@"content"];
         comment.createTime = [NSDate dateWithTimeIntervalSince1970:[dict[@"createTime"] integerValue]];
@@ -42,14 +45,14 @@
 
 + (Comment *)createComment:(NSString *)content commentId:(NSString *)commendId forFeed:(Feed *)feed{
     
-    
+    NSManagedObjectContext *context = [AppDelegate getContext];
     Comment *comment = [NSEntityDescription insertNewObjectForEntityForName:@"Comment"
-                                                     inManagedObjectContext:[AppDelegate getContext]];
+                                                     inManagedObjectContext:context];
     comment.commentId = commendId;
     comment.content = content;
     comment.createTime = [NSDate date];
     comment.feed = feed;
-    comment.owner = [Owner updateOwnerWithInfo:@{@"headUrl":[User updatedProfilePictureId],@"id":[User uid],@"name":[User userDisplayName]}];
+    comment.owner = [Owner updateOwnerWithInfo:[Owner myWebInfo] managedObjectContext:context];
     return comment;
     
 }

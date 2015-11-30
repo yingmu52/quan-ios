@@ -14,13 +14,16 @@
 
 @implementation Owner
 
-+ (Owner *)updateOwnerWithInfo:(NSDictionary *)dict{
-    NSManagedObjectContext *context = [AppDelegate getContext];
++ (Owner *)updateOwnerWithInfo:(NSDictionary *)dict
+          managedObjectContext:(nonnull NSManagedObjectContext *)context{
+
     Owner *owner;
     //check existance
     NSArray *checks = [Plan fetchWith:@"Owner"
                             predicate:[NSPredicate predicateWithFormat:@"ownerId == %@",dict[@"id"]]
-                     keyForDescriptor:@"ownerId"];
+                     keyForDescriptor:@"ownerId"
+                 managedObjectContext:context];
+    
     NSAssert(checks.count <= 1, @"ownerId must be a unique!");
     if (!checks.count) {
         //insert new fetched Owner

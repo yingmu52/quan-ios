@@ -12,16 +12,17 @@
 @implementation Circle
 
 // Insert code here to add functionality to your managed object subclass
-+ (Circle *)updateCircleWithInfo:(NSDictionary *)info{
++ (Circle *)updateCircleWithInfo:(NSDictionary *)info managedObjectContext:(nonnull NSManagedObjectContext *)context{
     Circle *circle;
     
     NSArray *results = [Plan fetchWith:@"Circle"
                              predicate:[NSPredicate predicateWithFormat:@"circleId == %@",info[@"id"]]
-                      keyForDescriptor:@"createDate"]; //utility method from Plan+PlanCRUD.h
+                      keyForDescriptor:@"createDate"
+                  managedObjectContext:context]; //utility method from Plan+PlanCRUD.h
     
     if (!results.count) {
         circle = [NSEntityDescription insertNewObjectForEntityForName:@"Circle"
-                                                inManagedObjectContext:[AppDelegate getContext]];
+                                                inManagedObjectContext:context];
 
         circle.circleId = info[@"id"];
         circle.createDate = [NSDate dateWithTimeIntervalSince1970:[info[@"createTime"] integerValue]];

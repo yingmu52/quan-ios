@@ -127,7 +127,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
               NSArray *circleInfo = [responseJson valueForKey:@"data"];
               NSMutableArray *circles = [NSMutableArray arrayWithCapacity:circleInfo.count];
               for (NSDictionary *info in circleInfo) {
-                  [circles addObject:[Circle updateCircleWithInfo:info]];
+                  [circles addObject:[Circle updateCircleWithInfo:info managedObjectContext:[AppDelegate getContext]]];
               }
 //              NSLog(@"%@",circles);
               if (completionBlock) {
@@ -182,7 +182,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
         NSDictionary *owners = [responseJson valueForKeyPath:@"data.manList"];
         for (NSDictionary *message in messagesArray){
             NSDictionary *ownerInfo = owners[message[@"operatorId"]];
-            [Message updateMessageWithInfo:message ownerInfo:ownerInfo];
+            [Message updateMessageWithInfo:message ownerInfo:ownerInfo managedObjectContext:[AppDelegate getContext]];
         }
 //        NSLog(@"%@",responseJson);
         if (completionBlock) {
@@ -233,16 +233,17 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
         NSDictionary *pageInfo = [responseJson valueForKeyPath:@"data.attachInfo"];
         NSDictionary *feedInfo = [responseJson valueForKeyPath:@"data.feeds"];
 
-        Feed *feed = [Feed updateFeedWithInfo:feedInfo forPlan:nil];
+        NSManagedObjectContext *context = [AppDelegate getContext];
+        Feed *feed = [Feed updateFeedWithInfo:feedInfo forPlan:nil managedObjectContext:context];
         NSArray *comments = [responseJson valueForKeyPath:@"data.commentList"];
         NSMutableArray *localComments = [NSMutableArray arrayWithCapacity:comments.count];
         if (comments.count > 0) {
             for (NSDictionary *commentInfo in comments){
                 //读取评论信息
-                Comment *comment = [Comment updateCommentWithInfo:commentInfo];
+                Comment *comment = [Comment updateCommentWithInfo:commentInfo managedObjectContext:context];
                 //读取用户信息
                 NSDictionary *userInfo = comment.isMyComment.boolValue ? [Owner myWebInfo] : ownerInfo[commentInfo[@"ownerId"]];
-                Owner *owner = [Owner updateOwnerWithInfo:userInfo];
+                Owner *owner = [Owner updateOwnerWithInfo:userInfo managedObjectContext:context];
                 
                 //防止更新相同的评论数据
                 if (comment.owner != owner) {
@@ -339,7 +340,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
         }
         
         for (NSDictionary *info in feeds){
-            [Feed updateFeedWithInfo:info forPlan:plan];
+            [Feed updateFeedWithInfo:info forPlan:plan managedObjectContext:[AppDelegate getContext]];
         }
         
         NSArray *feedIds = [responseJson valueForKeyPath:@"data.feedsList.id"];
@@ -486,10 +487,12 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 - (void)getFollowingPlanList:(FetchCenterGetRequestGetFollowingPlanListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FOLLOW,GET_FOLLOW_LIST];
     
+    NSManagedObjectContext *context = [AppDelegate getContext];
+    
     [self getRequest:rqtStr parameter:@{@"id":[User uid]} includeArguments:YES completion:^(NSDictionary *responseJson) {
         for (NSDictionary *planItem in [responseJson valueForKeyPath:@"data.planList"]) {
             NSDictionary *userInfo = [responseJson valueForKeyPath:[NSString stringWithFormat:@"data.manList.%@",planItem[@"ownerId"]]];
-            Plan *plan = [Plan updatePlanFromServer:planItem ownerInfo:userInfo];
+            Plan *plan = [Plan updatePlanFromServer:planItem ownerInfo:userInfo managedObjectContext:context];
             
             if (![plan.isFollowed isEqualToNumber:@(YES)]){
                 plan.isFollowed = @(YES);
@@ -499,7 +502,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
             if (feedsList.count) {
                 //create all feeds
                 for (NSDictionary *feedItem in feedsList) {
-                    [Feed updateFeedWithInfo:feedItem forPlan:plan];
+                    [Feed updateFeedWithInfo:feedItem forPlan:plan managedObjectContext:context];
                     //use alternative way to load and cache image
                 }
             }
@@ -527,7 +530,8 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
         if (planList && manList){
             [planList enumerateObjectsUsingBlock:^(NSDictionary * planInfo, NSUInteger idx, BOOL * _Nonnull stop) {
                 Plan *plan = [Plan updatePlanFromServer:planInfo
-                                              ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]];
+                                              ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]
+                                   managedObjectContext:[AppDelegate getContext]];
                 plan.discoverIndex = @(idx); //记录索引方便显示服务器上的顺序
                 [plans addObject:plan];
 //                NSLog(@"%@, mask : %@, index %@",plan.planTitle,plan.cornerMask,plan.discoverIndex);
@@ -643,7 +647,9 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
         NSArray *plans = responseJson[@"data"];
         NSMutableArray *planEntities = [NSMutableArray arrayWithCapacity:plans.count];
         for (NSDictionary *planInfo in plans) {
-            Plan * plan = [Plan updatePlanFromServer:planInfo ownerInfo:[Owner myWebInfo]];
+            Plan * plan = [Plan updatePlanFromServer:planInfo
+                                           ownerInfo:[Owner myWebInfo]
+                                managedObjectContext:[AppDelegate getContext]];
             [planEntities addObject:plan];
         }
         if (completionBlock) {
