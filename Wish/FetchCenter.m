@@ -72,8 +72,16 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 @property (nonatomic,strong) Reachability *reachability;
 @property (nonatomic,strong) NSDictionary *backendErrorCode;
 @property (nonatomic,strong) NSURLSession *session;
+@property (nonatomic,weak) AppDelegate *appDelegate;
 @end
 @implementation FetchCenter
+
+- (AppDelegate *)appDelegate{
+    if (!_appDelegate) {
+        _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    }
+    return _appDelegate;
+}
 
 #pragma mark - 圈子
 #define TOOLCGIKEY @"123$%^abc"
@@ -519,25 +527,37 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 
 - (void)getDiscoveryList:(FetchCenterGetRequestGetDiscoverListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,DISCOVER,GET_DISCOVER_LIST];
-    [self getRequest:rqtStr parameter:nil includeArguments:YES completion:^(NSDictionary *responseJson) {
-
-        NSMutableArray *plans = [NSMutableArray array];
-        NSArray *planList = [responseJson valueForKeyPath:@"data.planList"];
-        NSDictionary *manList = [responseJson valueForKeyPath:@"data.manList"];
-        NSString *title = [responseJson valueForKeyPath:@"data.quanInfo.name"];
-        
-        //缓存并更新本地事件
-        if (planList && manList){
-            [planList enumerateObjectsUsingBlock:^(NSDictionary * planInfo, NSUInteger idx, BOOL * _Nonnull stop) {
-                Plan *plan = [Plan updatePlanFromServer:planInfo
-                                              ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]
-                                   managedObjectContext:[AppDelegate getContext]];
-                plan.discoverIndex = @(idx); //记录索引方便显示服务器上的顺序
-                [plans addObject:plan];
-//                NSLog(@"%@, mask : %@, index %@",plan.planTitle,plan.cornerMask,plan.discoverIndex);
-            }];
-        }
-        completionBlock(plans,title);
+    [self getRequest:rqtStr
+           parameter:nil
+    includeArguments:YES
+          completion:^(NSDictionary *responseJson) {
+              
+        __block NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        workerContext.parentContext = self.appDelegate.managedObjectContext;
+              
+        [workerContext performBlock:^{
+            
+            NSMutableArray *plans = [NSMutableArray array];
+            NSArray *planList = [responseJson valueForKeyPath:@"data.planList"];
+            NSDictionary *manList = [responseJson valueForKeyPath:@"data.manList"];
+            NSString *title = [responseJson valueForKeyPath:@"data.quanInfo.name"];
+            
+            //缓存并更新本地事件
+            if (planList && manList){
+                [planList enumerateObjectsUsingBlock:^(NSDictionary * planInfo, NSUInteger idx, BOOL * _Nonnull stop) {
+                    Plan *plan = [Plan updatePlanFromServer:planInfo
+                                                  ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]
+                                       managedObjectContext:workerContext];
+                    plan.discoverIndex = @(idx); //记录索引方便显示服务器上的顺序
+                    [plans addObject:plan];
+                    //                NSLog(@"%@, mask : %@, index %@",plan.planTitle,plan.cornerMask,plan.discoverIndex);
+                }];
+            }
+            
+            [self.appDelegate saveContext:workerContext];
+            completionBlock(plans,title);
+            
+        }];
     }];
 }
 
