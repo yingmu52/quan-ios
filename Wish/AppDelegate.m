@@ -17,6 +17,7 @@
 @end
 
 @implementation AppDelegate
+@synthesize writerManagedObjectContext = _writerManagedObjectContext;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
@@ -151,20 +152,35 @@
 }
 
 
-- (NSManagedObjectContext *)managedObjectContext {
-    // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.)
+#pragma mark - Core Data stack
+
+// Returns the managed object context for the application.
+// If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
+- (NSManagedObjectContext *)managedObjectContext{
     if (_managedObjectContext != nil) {
         return _managedObjectContext;
     }
     
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (!coordinator) {
-        return nil;
-    }
-    _managedObjectContext = [[NSManagedObjectContext alloc] init];
-    [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    _managedObjectContext.parentContext = [self writerManagedObjectContext];
+    
     return _managedObjectContext;
 }
+
+// Parent context
+- (NSManagedObjectContext *)writerManagedObjectContext{
+    if (_writerManagedObjectContext != nil) {
+        return _writerManagedObjectContext;
+    }
+    
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (coordinator != nil) {
+        _writerManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        [_writerManagedObjectContext setPersistentStoreCoordinator:coordinator];
+    }
+    return _writerManagedObjectContext;
+}
+
 
 #pragma mark - Core Data Saving support
 
@@ -188,6 +204,41 @@
         [fileManager removeItemAtURL:modelURL error:nil];
         [fileManager removeItemAtURL:storeURL error:nil];
     }
+}
+
+- (void)saveContext:(NSManagedObjectContext *)context{
+    // Save the context.
+    NSError *error = nil;
+    NSLog(@"Saving to PSC");
+    if (![context save:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    
+    [self.managedObjectContext performBlock:^{
+        // Save the context.
+        NSError *error = nil;
+        if (![self.managedObjectContext save:&error]) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
+        
+        [self.writerManagedObjectContext performBlock:^{
+            // Save the context.
+            NSError *error = nil;
+            if (![self.writerManagedObjectContext save:&error]) {
+                // Replace this implementation with code to handle the error appropriately.
+                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+                abort();
+            }
+            
+        }]; // writer
+    }]; // main
 }
 
 + (NSManagedObjectContext *)getContext
