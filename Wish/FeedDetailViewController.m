@@ -31,6 +31,8 @@
     [self setUpNavigationItem];
     [self.tableView registerNib:[UINib nibWithNibName:@"FeedDetailCell" bundle:nil] forCellReuseIdentifier:FEEDDETAILCELLID];
 
+    self.hasNextPage = YES;
+    
     __weak typeof(self) weakSelf = self;
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         if (weakSelf.hasNextPage) {
@@ -39,10 +41,6 @@
     }];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), 44.0)]; // clear empty cell
 
-
-    //load comments
-    self.hasNextPage = YES;
-    [self loadComments];
     [self.tableView triggerInfiniteScrolling];
     
 }
@@ -421,17 +419,20 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
                                               NSArray *commmentIds,
                                               Feed *feed)
     {
-        
+        dispatch_main_async_safe(^{
 #warning 同步评论列表
-        self.hasNextPage = hasNextPage;
-        self.pageInfo = pageInfo;
-        self.feed = feed;
-        
-        //stop animation
-        [self.tableView.infiniteScrollingView stopAnimating];
-        if (!self.hasNextPage){ //stop scroll to load more
-            self.tableView.showsInfiniteScrolling = NO;
-        }
+            self.hasNextPage = hasNextPage;
+            self.pageInfo = pageInfo;
+            
+//            [self updateHeaderInfoForFeed:feed];
+            
+            //stop animation
+            [self.tableView.infiniteScrollingView stopAnimating];
+            if (!self.hasNextPage){ //stop scroll to load more
+                self.tableView.showsInfiniteScrolling = NO;
+            }
+            
+        });
     }];
 }
 

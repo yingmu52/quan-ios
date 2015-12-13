@@ -225,6 +225,8 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
         }
     }];
 }
+
+
 - (void)getCommentListForFeed:(NSString *)feedId
                      pageInfo:(NSDictionary *)info
                    completion:(FetchCenterGetRequestGetCommentListCompleted)completionBlock{
@@ -235,43 +237,56 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     NSDictionary *args = @{@"feedsId":feedId,
                            @"attachInfo":infoStr};
     [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
-        NSLog(@"%@",responseJson);
-        NSDictionary *ownerInfo = [responseJson valueForKeyPath:@"data.manList"];
-        BOOL hasNextPage = [[responseJson valueForKeyPath:@"data.isMore"] boolValue];
-        NSDictionary *pageInfo = [responseJson valueForKeyPath:@"data.attachInfo"];
-        NSDictionary *feedInfo = [responseJson valueForKeyPath:@"data.feeds"];
+        
+        
+        __block NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        workerContext.parentContext = self.appDelegate.managedObjectContext;
+        
+        [workerContext performBlock:^{
 
-        NSManagedObjectContext *context = [AppDelegate getContext];
-        Feed *feed = [Feed updateFeedWithInfo:feedInfo forPlan:nil ownerInfo:nil managedObjectContext:context];
-        NSArray *comments = [responseJson valueForKeyPath:@"data.commentList"];
-        NSMutableArray *localComments = [NSMutableArray arrayWithCapacity:comments.count];
-        if (comments.count > 0) {
-            for (NSDictionary *commentInfo in comments){
-                //读取评论信息
-                Comment *comment = [Comment updateCommentWithInfo:commentInfo managedObjectContext:context];
-                //读取用户信息
-                NSDictionary *userInfo = comment.isMyComment.boolValue ? [Owner myWebInfo] : ownerInfo[commentInfo[@"ownerId"]];
-                Owner *owner = [Owner updateOwnerWithInfo:userInfo managedObjectContext:context];
-                
-                //防止更新相同的评论数据
-                if (comment.owner != owner) {
-                    comment.owner = owner;
-                }
-                if (comment.feed != feed) {
-                    comment.feed = feed;
-                }
-                if (comment.idForReply) {
-                    NSString *nameForReply = [ownerInfo[comment.idForReply] objectForKey:@"name"];
-                    if (![comment.nameForReply isEqualToString:nameForReply]) {
-                        comment.nameForReply = nameForReply;
+//            NSLog(@"%@",responseJson);
+            NSDictionary *ownerInfo = [responseJson valueForKeyPath:@"data.manList"];
+            BOOL hasNextPage = [[responseJson valueForKeyPath:@"data.isMore"] boolValue];
+            NSDictionary *pageInfo = [responseJson valueForKeyPath:@"data.attachInfo"];
+            NSDictionary *feedInfo = [responseJson valueForKeyPath:@"data.feeds"];
+            
+            Feed *feed = [Feed updateFeedWithInfo:feedInfo forPlan:nil ownerInfo:nil managedObjectContext:workerContext];
+            NSArray *comments = [responseJson valueForKeyPath:@"data.commentList"];
+            NSMutableArray *localComments = [NSMutableArray arrayWithCapacity:comments.count];
+            if (comments.count > 0) {
+                for (NSDictionary *commentInfo in comments){
+                    //读取评论信息
+                    Comment *comment = [Comment updateCommentWithInfo:commentInfo managedObjectContext:workerContext];
+                    //读取用户信息
+                    NSDictionary *userInfo = comment.isMyComment.boolValue ? [Owner myWebInfo] : ownerInfo[commentInfo[@"ownerId"]];
+                    Owner *owner = [Owner updateOwnerWithInfo:userInfo managedObjectContext:workerContext];
+                    
+                    //防止更新相同的评论数据
+                    if (!comment.owner) {
+                        comment.owner = owner;
                     }
+                    if (!comment.feed) {
+                        comment.feed = feed;
+                    }
+                    if (comment.idForReply) {
+                        NSString *nameForReply = [ownerInfo[comment.idForReply] objectForKey:@"name"];
+                        if (![comment.nameForReply isEqualToString:nameForReply]) {
+                            comment.nameForReply = nameForReply;
+                        }
+                    }
+                    [localComments addObject:comment];
+                    
                 }
-                [localComments addObject:comment];
             }
-        }
-        if (completionBlock) {
-            completionBlock(pageInfo,hasNextPage,localComments,feed);
-        }
+            
+            [self.appDelegate saveContext:workerContext];
+
+            if (completionBlock) {
+                completionBlock(pageInfo,hasNextPage,localComments,feed);
+            }
+            
+        }]; //end of performBlock
+        
     }];
 }
 
