@@ -242,7 +242,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
         NSDictionary *feedInfo = [responseJson valueForKeyPath:@"data.feeds"];
 
         NSManagedObjectContext *context = [AppDelegate getContext];
-        Feed *feed = [Feed updateFeedWithInfo:feedInfo forPlan:nil managedObjectContext:context];
+        Feed *feed = [Feed updateFeedWithInfo:feedInfo forPlan:nil ownerInfo:nil managedObjectContext:context];
         NSArray *comments = [responseJson valueForKeyPath:@"data.commentList"];
         NSMutableArray *localComments = [NSMutableArray arrayWithCapacity:comments.count];
         if (comments.count > 0) {
@@ -339,23 +339,35 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
           completion:^(NSDictionary *responseJson)
     {
         
-        NSArray *feeds = [responseJson valueForKeyPath:@"data.feedsList"];
-        NSDictionary *pageInfo = [responseJson valueForKeyPath:@"data.attachInfo"];
-        
-        NSNumber *isFollowed  = @([[responseJson valueForKeyPath:@"data.isFollowed"] boolValue]);
-        if (![plan.isFollowed isEqualToNumber:isFollowed]){
-            plan.isFollowed = isFollowed;
-        }
-        
-        for (NSDictionary *info in feeds){
-            [Feed updateFeedWithInfo:info forPlan:plan managedObjectContext:[AppDelegate getContext]];
-        }
-        
-        NSArray *feedIds = [responseJson valueForKeyPath:@"data.feedsList.id"];
-        BOOL hasNextPage = [[responseJson valueForKeyPath:@"data.isMore"] boolValue];
-        if (completionBlock) {
-            completionBlock(pageInfo,hasNextPage,feedIds);
-        }
+        __block NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        workerContext.parentContext = self.appDelegate.managedObjectContext;
+
+        [workerContext performBlock:^{
+            NSArray *feeds = [responseJson valueForKeyPath:@"data.feedsList"];
+            NSDictionary *pageInfo = [responseJson valueForKeyPath:@"data.attachInfo"];
+            NSNumber *isFollowed  = @([[responseJson valueForKeyPath:@"data.isFollowed"] boolValue]);
+            NSDictionary *planInfo = [responseJson valueForKeyPath:@"data.plan"];
+            NSDictionary *ownerInfo = [responseJson valueForKeyPath:@"data.man"];
+            if (![plan.isFollowed isEqualToNumber:isFollowed]){
+                plan.isFollowed = isFollowed;
+            }
+            
+            for (NSDictionary *feedInfo in feeds){
+                [Feed updateFeedWithInfo:feedInfo
+                                 forPlan:planInfo
+                               ownerInfo:ownerInfo
+                    managedObjectContext:workerContext];
+            }
+            
+            NSArray *feedIds = [responseJson valueForKeyPath:@"data.feedsList.id"];
+            BOOL hasNextPage = [[responseJson valueForKeyPath:@"data.isMore"] boolValue];
+            
+            [self.appDelegate saveContext:workerContext];
+            
+            if (completionBlock) {
+                completionBlock(pageInfo,hasNextPage,feedIds);
+            }
+        }];
     }];
 }
 
@@ -509,8 +521,9 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
             NSArray *feedsList = planItem[@"feedsList"];
             if (feedsList.count) {
                 //create all feeds
-                for (NSDictionary *feedItem in feedsList) {
-                    [Feed updateFeedWithInfo:feedItem forPlan:plan managedObjectContext:context];
+                for (NSDictionary *feedInfo in feedsList) {
+                    [Feed updateFeedWithInfo:feedInfo forPlan:nil ownerInfo:nil managedObjectContext:context];
+
                     //use alternative way to load and cache image
                 }
             }

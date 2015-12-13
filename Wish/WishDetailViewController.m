@@ -102,26 +102,23 @@
     self.headerView.followButton.hidden = YES;
     
     //add infinate scroll
+    self.hasNextPage = YES;
     __weak typeof(self) weakSelf = self;
-    [self.tableView addInfiniteScrollingWithActionHandler:^{
+    [weakSelf.tableView addInfiniteScrollingWithActionHandler:^{
         if (weakSelf.hasNextPage) {
             NSLog(@"Loading More..");
             [weakSelf.fetchCenter loadFeedsListForPlan:weakSelf.plan
                                               pageInfo:weakSelf.pageInfo
                                             completion:^(NSDictionary *pageInfo, BOOL hasNextPage, NSArray *feedIds) {
-                                                [weakSelf process:pageInfo hasNextPage:hasNextPage serverFeedIdList:feedIds];
+                                                dispatch_main_async_safe(^{
+                                                    [weakSelf process:pageInfo hasNextPage:hasNextPage serverFeedIdList:feedIds];
+                                                });
+                                                
              }];
         }
     }];
 
     //trigger inital loading
-    self.hasNextPage = YES;
-    [self.fetchCenter loadFeedsListForPlan:self.plan
-                                  pageInfo:self.pageInfo
-                                completion:^(NSDictionary *pageInfo, BOOL hasNextPage, NSArray *feedIds)
-    {
-        [self process:pageInfo hasNextPage:hasNextPage serverFeedIdList:feedIds];
-    }];
     [self.tableView triggerInfiniteScrolling];
 }
 
@@ -195,7 +192,7 @@
         //create FetchedResultsController with context, sectionNameKeyPath, and you can cache here, so the next work if the same you can use your cash file.
         NSFetchedResultsController *newFRC =
         [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                            managedObjectContext:self.plan.managedObjectContext
+                                            managedObjectContext:[AppDelegate getContext]
                                               sectionNameKeyPath:nil
                                                        cacheName:nil];
         self.fetchedRC = newFRC;
