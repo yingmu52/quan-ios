@@ -522,32 +522,44 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 - (void)getFollowingPlanList:(FetchCenterGetRequestGetFollowingPlanListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FOLLOW,GET_FOLLOW_LIST];
     
-    NSManagedObjectContext *context = [AppDelegate getContext];
-    
     [self getRequest:rqtStr parameter:@{@"id":[User uid]} includeArguments:YES completion:^(NSDictionary *responseJson) {
-        for (NSDictionary *planItem in [responseJson valueForKeyPath:@"data.planList"]) {
-            NSDictionary *userInfo = [responseJson valueForKeyPath:[NSString stringWithFormat:@"data.manList.%@",planItem[@"ownerId"]]];
-            Plan *plan = [Plan updatePlanFromServer:planItem ownerInfo:userInfo managedObjectContext:context];
-            
-            if (![plan.isFollowed isEqualToNumber:@(YES)]){
-                plan.isFollowed = @(YES);
-            }
-            
-            NSArray *feedsList = planItem[@"feedsList"];
-            if (feedsList.count) {
-                //create all feeds
-                for (NSDictionary *feedInfo in feedsList) {
-                    [Feed updateFeedWithInfo:feedInfo forPlan:nil ownerInfo:nil managedObjectContext:context];
-
-                    //use alternative way to load and cache image
+        
+        __block NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        workerContext.parentContext = self.appDelegate.managedObjectContext;
+        
+        [workerContext performBlock:^{
+            for (NSDictionary *planInfo in [responseJson valueForKeyPath:@"data.planList"]) {
+                NSDictionary *userInfo = [responseJson valueForKeyPath:[NSString stringWithFormat:@"data.manList.%@",planInfo[@"ownerId"]]];
+                Plan *plan = [Plan updatePlanFromServer:planInfo
+                                              ownerInfo:userInfo
+                                   managedObjectContext:workerContext];
+                
+                if (![plan.isFollowed isEqualToNumber:@(YES)]){
+                    plan.isFollowed = @(YES);
+                }
+                
+                NSArray *feedsList = planInfo[@"feedsList"];
+                if (feedsList.count) {
+                    //create all feeds
+                    for (NSDictionary *feedInfo in feedsList) {
+                        [Feed updateFeedWithInfo:feedInfo
+                                         forPlan:planInfo
+                                       ownerInfo:userInfo
+                            managedObjectContext:workerContext];
+                        
+                        //use alternative way to load and cache image
+                    }
                 }
             }
-        }
-        if (completionBlock){
-            NSArray *planIds = [responseJson valueForKeyPath:@"data.planList.id"];
-            completionBlock(planIds);
-        }
-
+            
+            [self.appDelegate saveContext:workerContext];
+            
+            if (completionBlock){
+                NSArray *planIds = [responseJson valueForKeyPath:@"data.planList.id"];
+                completionBlock(planIds);
+            }
+            
+        }];
     }];
 }
 
@@ -959,36 +971,38 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
         NSURLSessionDataTask *task = [self.session dataTaskWithRequest:request
                                                      completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                       {
-                                          dispatch_main_async_safe(^{
-                                              //递归过滤Json里含带的Null数据
-                                              NSDictionary *rawJson = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                      options:NSJSONReadingAllowFragments
-                                                                                                        error:nil];
-                                              NSDictionary *responseJson = [self recursiveNullRemove:rawJson];
-                                              
-                                              if (responseJson) {
-                                                  if (!error && ![responseJson[@"ret"] integerValue]){ //成功
-                                                      if (completionBlock) {
-                                                          completionBlock(responseJson);
-                                                      }
-                                                  }else{ //失败
-                                                      
-                                                      //在委托中跳出后台的提示
-                                                      [self alertWithBackendErrorCode:@([responseJson[@"ret"] integerValue])];
-                                                      
-                                                      //假失败写入请求日志
-                                                      [self appendRequest:request andResponse:responseJson];
-                                                      
-                                                      NSLog(@"Fail Get Request :%@\n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
-                                                            ,rqtStr,baseURL,dict,responseJson,error);
-                                                      
-                                                      if ([self.delegate respondsToSelector:@selector(didFailSendingRequest)]){
-                                                          [self.delegate didFailSendingRequest];
+                                          if (data){
+                                              dispatch_main_async_safe(^{
+                                                  //递归过滤Json里含带的Null数据
+                                                  NSDictionary *rawJson = [NSJSONSerialization JSONObjectWithData:data
+                                                                                                          options:NSJSONReadingAllowFragments
+                                                                                                            error:nil];
+                                                  NSDictionary *responseJson = [self recursiveNullRemove:rawJson];
+                                                  
+                                                  if (responseJson) {
+                                                      if (!error && ![responseJson[@"ret"] integerValue]){ //成功
+                                                          if (completionBlock) {
+                                                              completionBlock(responseJson);
+                                                          }
+                                                      }else{ //失败
+                                                          
+                                                          //在委托中跳出后台的提示
+                                                          [self alertWithBackendErrorCode:@([responseJson[@"ret"] integerValue])];
+                                                          
+                                                          //假失败写入请求日志
+                                                          [self appendRequest:request andResponse:responseJson];
+                                                          
+                                                          NSLog(@"Fail Get Request :%@\n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
+                                                                ,rqtStr,baseURL,dict,responseJson,error);
+                                                          
+                                                          if ([self.delegate respondsToSelector:@selector(didFailSendingRequest)]){
+                                                              [self.delegate didFailSendingRequest];
+                                                          }
                                                       }
                                                   }
-                                              }
-                                          });
+                                              });
 
+                                          }
                                       }];
         [task resume];
     }
