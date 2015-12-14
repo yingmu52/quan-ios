@@ -375,30 +375,27 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
     switch(type)
     {
         case NSFetchedResultsChangeInsert:{
-            [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
-                                  withRowAnimation:UITableViewRowAnimationAutomatic];
-            [self.headerView setCommentButtonText:self.feed.commentCount];
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             NSLog(@"Comment inserted");
         }
             break;
             
         case NSFetchedResultsChangeDelete:{
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath]
-                                  withRowAnimation:UITableViewRowAnimationAutomatic];
-            [self.headerView setCommentButtonText:self.feed.commentCount];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             NSLog(@"Comment deleted");
         }
             break;
             
-        case NSFetchedResultsChangeUpdate:{
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath]
-                                  withRowAnimation:UITableViewRowAnimationAutomatic];
-            NSLog(@"Comment updated");
-        }
+        case NSFetchedResultsChangeUpdate:
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
-        default:
+            
+        case NSFetchedResultsChangeMove:
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
+
 }
 
 
@@ -423,8 +420,10 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 #warning 同步评论列表
             self.hasNextPage = hasNextPage;
             self.pageInfo = pageInfo;
-            
-//            [self updateHeaderInfoForFeed:feed];
+
+            if (!self.feed) {
+                self.feed = [self.fetchedRC.managedObjectContext objectWithID:feed.objectID];
+            }
             
             //stop animation
             [self.tableView.infiniteScrollingView stopAnimating];
