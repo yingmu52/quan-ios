@@ -376,12 +376,14 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
     {
         case NSFetchedResultsChangeInsert:{
             [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.headerView setCommentButtonText:self.feed.commentCount];
             NSLog(@"Comment inserted");
         }
             break;
             
         case NSFetchedResultsChangeDelete:{
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.headerView setCommentButtonText:self.feed.commentCount];
             NSLog(@"Comment deleted");
         }
             break;
