@@ -293,18 +293,9 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 - (void)didPressedLikeButton:(FeedDetailHeader *)headerView{
     if (!self.feed.selfLiked.boolValue) {
         [headerView.likeButton setSelected:YES];
-
-        //increase feed like count
-        self.feed.likeCount = @(self.feed.likeCount.integerValue + 1);
-        self.feed.selfLiked = @(YES);
         [self.fetchCenter likeFeed:self.feed completion:nil];
     }else{
-        [headerView.likeButton setSelected:NO];
-        
-        //decrease feed like count
-        self.feed.likeCount = @(self.feed.likeCount.integerValue - 1);
-        self.feed.selfLiked = @(NO);
-        
+        [headerView.likeButton setSelected:NO];        
         [self.fetchCenter unLikeFeed:self.feed completion:nil];
     }
     [headerView setLikeButtonText:self.feed.likeCount];

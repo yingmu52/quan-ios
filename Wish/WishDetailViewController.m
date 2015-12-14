@@ -192,7 +192,7 @@
         //create FetchedResultsController with context, sectionNameKeyPath, and you can cache here, so the next work if the same you can use your cash file.
         NSFetchedResultsController *newFRC =
         [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                            managedObjectContext:[AppDelegate getContext]
+                                            managedObjectContext:self.plan.managedObjectContext
                                               sectionNameKeyPath:nil
                                                        cacheName:nil];
         self.fetchedRC = newFRC;
@@ -340,18 +340,9 @@ forRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     //the following request must respect the current cell.feed like/dislike status
     Feed *feed = [self.fetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
     if (!feed.selfLiked.boolValue) {
-        //increase feed like count
-        feed.likeCount = @(feed.likeCount.integerValue + 1);
-        feed.selfLiked = @(YES);
-        
         //send like request
         [self.fetchCenter likeFeed:feed completion:nil];
     }else{
-        
-        //decrease feed like count
-        feed.likeCount = @(feed.likeCount.integerValue - 1);
-        feed.selfLiked = @(NO);
-        
         //send unlike request
         [self.fetchCenter unLikeFeed:feed completion:nil];
     }

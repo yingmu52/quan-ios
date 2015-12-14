@@ -481,6 +481,11 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 
 - (void)likeFeed:(Feed *)feed completion:(FetchCenterGetRequestLikeFeedCompleted)completionBlock{
     if (feed.feedId){
+        
+        //increase feed like count
+        feed.likeCount = @(feed.likeCount.integerValue + 1);
+        feed.selfLiked = @(YES);
+
         NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,LIKE_FEED];
         [self getRequest:rqtStr parameter:@{@"id":feed.feedId} includeArguments:YES completion:^(NSDictionary *responseJson) {
             if (completionBlock) {
@@ -492,6 +497,11 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 
 - (void)unLikeFeed:(Feed *)feed completion:(FetchCenterGetRequestUnLikeFeedCompleted)completionBlock{
     if (feed.feedId){
+        
+        //decrease feed like count
+        feed.likeCount = @(feed.likeCount.integerValue - 1);
+        feed.selfLiked = @(NO);
+
         NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,UNLIKE_FEED];
         [self getRequest:rqtStr parameter:@{@"id":feed.feedId} includeArguments:YES completion:^(NSDictionary *responseJson) {
             if (completionBlock) {
