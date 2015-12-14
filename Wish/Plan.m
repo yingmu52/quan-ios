@@ -40,14 +40,15 @@
     }
     self.tryTimes = @(attempts);
 }
-+ (Plan *)updatePlanFromServer:(NSDictionary *)dict ownerInfo:(NSDictionary *)ownerInfo{ //owner may be different !
++ (Plan *)updatePlanFromServer:(NSDictionary *)dict
+                     ownerInfo:(NSDictionary *)ownerInfo
+          managedObjectContext:(nonnull NSManagedObjectContext *)context{ //owner may be different !
     
-    NSManagedObjectContext *context = [AppDelegate getContext];
     Plan *plan;
     //check existance
     NSArray *checks = [Plan fetchWith:@"Plan"
                             predicate:[NSPredicate predicateWithFormat:@"planId == %@",dict[@"id"]]
-                     keyForDescriptor:@"createDate"];
+                     keyForDescriptor:@"createDate" managedObjectContext:context];
     NSAssert(checks.count <= 1, @"planId must be a unique!");
     if (!checks.count) {
         //insert new fetched plan
@@ -55,7 +56,7 @@
                                              inManagedObjectContext:context];
         plan.createDate = [NSDate dateWithTimeIntervalSince1970:[dict[@"createTime"] integerValue]];
         plan.planId = dict[@"id"];
-        plan.owner = [Owner updateOwnerWithInfo:ownerInfo];
+        plan.owner = [Owner updateOwnerWithInfo:ownerInfo managedObjectContext:context];
     }else{
         //update existing plan
         plan = checks.lastObject;
@@ -145,10 +146,9 @@
 
 + (NSArray *)fetchWith:(NSString *)entityName
              predicate:(NSPredicate  * _Nullable)predicate
-      keyForDescriptor:(NSString *)key{
-    
-    NSManagedObjectContext *context = [AppDelegate getContext];
-    
+      keyForDescriptor:(NSString *)key
+  managedObjectContext:(nonnull NSManagedObjectContext *)context{
+        
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName
                                               inManagedObjectContext:context];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -170,7 +170,8 @@
 - (void)addMyselfAsOwner{
     self.owner = [Owner updateOwnerWithInfo:@{@"headUrl":[User updatedProfilePictureId],
                                               @"id":[User uid],
-                                              @"name":[User userDisplayName]}];
+                                              @"name":[User userDisplayName]}
+                       managedObjectContext:[AppDelegate getContext]];
 }
 
 - (BOOL)isDeletable{

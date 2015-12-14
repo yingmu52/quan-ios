@@ -24,7 +24,9 @@ typedef enum {
 
 - (void)updatePlanStatus:(PlanStatus)planStatus;
 
-+ (Plan *)updatePlanFromServer:(NSDictionary *)dict ownerInfo:(NSDictionary *)ownerInfo;
++ (Plan *)updatePlanFromServer:(NSDictionary *)dict
+                     ownerInfo:(NSDictionary *)ownerInfo
+          managedObjectContext:(NSManagedObjectContext *)context;
 
 + (Plan *)createPlan:(NSString *)title privacy:(BOOL)isPrivate;
 
@@ -39,7 +41,8 @@ typedef enum {
 
 + (NSArray *)fetchWith:(NSString *)entityName
              predicate:(NSPredicate  * _Nullable )predicate
-      keyForDescriptor:(NSString *)key;
+      keyForDescriptor:(NSString *)key
+  managedObjectContext:(NSManagedObjectContext *)context;
 
 /**
  * 能被删除的事件要符合2个条件：

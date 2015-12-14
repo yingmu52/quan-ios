@@ -14,17 +14,20 @@
 @implementation Message
 
 
-+ (Message *)updateMessageWithInfo:(NSDictionary *)messageInfo ownerInfo:(NSDictionary *)ownerInfo{
++ (Message *)updateMessageWithInfo:(NSDictionary *)messageInfo
+                         ownerInfo:(NSDictionary *)ownerInfo
+              managedObjectContext:(nonnull NSManagedObjectContext *)context{
     
     Message *message;
     NSArray *results = [Plan fetchWith:@"Message"
                              predicate:[NSPredicate predicateWithFormat:@"messageId == %@",messageInfo[@"messageId"]]
-                      keyForDescriptor:@"createTime"]; //utility method from Plan+PlanCRUD.h
+                      keyForDescriptor:@"createTime"
+                  managedObjectContext:context]; //utility method from Plan+PlanCRUD.h
     
     NSAssert(results.count <= 1, @"messageId must be a unique!");
     if (!results.count) {
         message = [NSEntityDescription insertNewObjectForEntityForName:@"Message"
-                                                inManagedObjectContext:[AppDelegate getContext]];
+                                                inManagedObjectContext:context];
         message.commentId = messageInfo[@"commentId"];
         message.content = messageInfo[@"content"];
         message.feedsId = messageInfo[@"feedsId"];
@@ -33,7 +36,7 @@
         
         message.createTime = [NSDate dateWithTimeIntervalSince1970:[messageInfo[@"createTime"] integerValue]];
         
-        message.owner = [Owner updateOwnerWithInfo:ownerInfo];
+        message.owner = [Owner updateOwnerWithInfo:ownerInfo managedObjectContext:context];
         
         message.targetOwnerId = [User uid]; //this message is requested by the current user ~
         

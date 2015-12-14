@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Comment : NSManagedObject
 
-+ (Comment *)updateCommentWithInfo:(NSDictionary *)dict;
++ (Comment *)updateCommentWithInfo:(NSDictionary *)dict managedObjectContext:(NSManagedObjectContext *)context;
 + (Comment *)createComment:(NSString *)content commentId:(NSString *)commendId forFeed:(Feed *)feed;
 + (Comment *)replyToOwner:(Owner *)owner content:(NSString *)text commentId:(NSString *)commentId forFeed:(Feed *)feed;
 

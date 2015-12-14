@@ -31,9 +31,13 @@
 @property (strong, nonatomic) UIWindow *window;
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (readonly, strong, nonatomic) NSManagedObjectContext *writerManagedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
 - (void)saveContext;
+/** 保存异线的MOC */
+- (void)saveContext:(NSManagedObjectContext *)context;
 - (NSURL *)applicationDocumentsDirectory;
 + (NSManagedObjectContext *)getContext;
 @end

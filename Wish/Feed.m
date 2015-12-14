@@ -27,11 +27,16 @@
     return feed;
 }
 
-+ (Feed *)updateFeedWithInfo:(NSDictionary *)feedItem forPlan:(nullable Plan *)plan{
++ (Feed *)updateFeedWithInfo:(NSDictionary *)feedItem
+                     forPlan:(nullable NSDictionary *)planInfo
+                   ownerInfo:(nullable NSDictionary *)ownerInfo
+        managedObjectContext:(nonnull NSManagedObjectContext *)context{
+    
     NSArray *checks = [Plan fetchWith:@"Feed"
                             predicate:[NSPredicate predicateWithFormat:@"feedId == %@",feedItem[@"id"]]
-                     keyForDescriptor:@"createDate"];
-    NSManagedObjectContext *context = [AppDelegate getContext];
+                     keyForDescriptor:@"createDate"
+                 managedObjectContext:context];
+    
     Feed *feed;
     NSAssert(checks.count <= 1, @"non unique feed found");
     if (!checks.count) {
@@ -40,11 +45,12 @@
                                              inManagedObjectContext:context];
         feed.feedId = feedItem[@"id"];
         feed.imageId = feedItem[@"picurl"];
-        if (plan) feed.plan = plan;
         feed.selfLiked = @(NO);
         feed.feedTitle = feedItem[@"content"];
         feed.createDate = [NSDate dateWithTimeIntervalSince1970:[feedItem[@"createTime"] integerValue]];
-        
+        if (planInfo && ownerInfo) {
+            feed.plan = [Plan updatePlanFromServer:planInfo ownerInfo:ownerInfo managedObjectContext:context];
+        }
         
     }else{
         //update
@@ -73,10 +79,13 @@
     return feed;
 }
 
+
 + (Feed *)fetchFeedWithId:(NSString *)feedId{
     NSArray *results = [Plan fetchWith:@"Feed"
                              predicate:[NSPredicate predicateWithFormat:@"feedId = %@",feedId]
-                      keyForDescriptor:@"createDate"];
+                      keyForDescriptor:@"createDate"
+                  managedObjectContext:[AppDelegate getContext]];
+    
     NSAssert(results.count <= 1, @"feed id is not unique");
     return results.lastObject;
 }

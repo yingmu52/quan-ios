@@ -14,7 +14,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Message : NSManagedObject
-+ (Message *)updateMessageWithInfo:(NSDictionary *)messageInfo ownerInfo:(NSDictionary *)ownerInfo;
++ (Message *)updateMessageWithInfo:(NSDictionary *)messageInfo
+                         ownerInfo:(NSDictionary *)ownerInfo
+              managedObjectContext:(NSManagedObjectContext *)context;
 @end
 
 NS_ASSUME_NONNULL_END

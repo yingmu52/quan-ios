@@ -31,6 +31,8 @@
     [self setUpNavigationItem];
     [self.tableView registerNib:[UINib nibWithNibName:@"FeedDetailCell" bundle:nil] forCellReuseIdentifier:FEEDDETAILCELLID];
 
+    self.hasNextPage = YES;
+    
     __weak typeof(self) weakSelf = self;
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         if (weakSelf.hasNextPage) {
@@ -39,10 +41,6 @@
     }];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), 44.0)]; // clear empty cell
 
-
-    //load comments
-    self.hasNextPage = YES;
-    [self loadComments];
     [self.tableView triggerInfiniteScrolling];
     
 }
@@ -295,18 +293,9 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 - (void)didPressedLikeButton:(FeedDetailHeader *)headerView{
     if (!self.feed.selfLiked.boolValue) {
         [headerView.likeButton setSelected:YES];
-
-        //increase feed like count
-        self.feed.likeCount = @(self.feed.likeCount.integerValue + 1);
-        self.feed.selfLiked = @(YES);
         [self.fetchCenter likeFeed:self.feed completion:nil];
     }else{
-        [headerView.likeButton setSelected:NO];
-        
-        //decrease feed like count
-        self.feed.likeCount = @(self.feed.likeCount.integerValue - 1);
-        self.feed.selfLiked = @(NO);
-        
+        [headerView.likeButton setSelected:NO];        
         [self.fetchCenter unLikeFeed:self.feed completion:nil];
     }
     [headerView setLikeButtonText:self.feed.likeCount];
@@ -377,30 +366,29 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
     switch(type)
     {
         case NSFetchedResultsChangeInsert:{
-            [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
-                                  withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             [self.headerView setCommentButtonText:self.feed.commentCount];
             NSLog(@"Comment inserted");
         }
             break;
             
         case NSFetchedResultsChangeDelete:{
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath]
-                                  withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             [self.headerView setCommentButtonText:self.feed.commentCount];
             NSLog(@"Comment deleted");
         }
             break;
             
-        case NSFetchedResultsChangeUpdate:{
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath]
-                                  withRowAnimation:UITableViewRowAnimationAutomatic];
-            NSLog(@"Comment updated");
-        }
+        case NSFetchedResultsChangeUpdate:
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
-        default:
+            
+        case NSFetchedResultsChangeMove:
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
+
 }
 
 
@@ -421,17 +409,22 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
                                               NSArray *commmentIds,
                                               Feed *feed)
     {
-        
+        dispatch_main_async_safe(^{
 #warning 同步评论列表
-        self.hasNextPage = hasNextPage;
-        self.pageInfo = pageInfo;
-        self.feed = feed;
-        
-        //stop animation
-        [self.tableView.infiniteScrollingView stopAnimating];
-        if (!self.hasNextPage){ //stop scroll to load more
-            self.tableView.showsInfiniteScrolling = NO;
-        }
+            self.hasNextPage = hasNextPage;
+            self.pageInfo = pageInfo;
+
+            if (!self.feed) {
+                self.feed = [self.fetchedRC.managedObjectContext objectWithID:feed.objectID];
+            }
+            
+            //stop animation
+            [self.tableView.infiniteScrollingView stopAnimating];
+            if (!self.hasNextPage){ //stop scroll to load more
+                self.tableView.showsInfiniteScrolling = NO;
+            }
+            
+        });
     }];
 }
 

@@ -102,26 +102,23 @@
     self.headerView.followButton.hidden = YES;
     
     //add infinate scroll
+    self.hasNextPage = YES;
     __weak typeof(self) weakSelf = self;
-    [self.tableView addInfiniteScrollingWithActionHandler:^{
+    [weakSelf.tableView addInfiniteScrollingWithActionHandler:^{
         if (weakSelf.hasNextPage) {
             NSLog(@"Loading More..");
             [weakSelf.fetchCenter loadFeedsListForPlan:weakSelf.plan
                                               pageInfo:weakSelf.pageInfo
                                             completion:^(NSDictionary *pageInfo, BOOL hasNextPage, NSArray *feedIds) {
-                                                [weakSelf process:pageInfo hasNextPage:hasNextPage serverFeedIdList:feedIds];
+                                                dispatch_main_async_safe(^{
+                                                    [weakSelf process:pageInfo hasNextPage:hasNextPage serverFeedIdList:feedIds];
+                                                });
+                                                
              }];
         }
     }];
 
     //trigger inital loading
-    self.hasNextPage = YES;
-    [self.fetchCenter loadFeedsListForPlan:self.plan
-                                  pageInfo:self.pageInfo
-                                completion:^(NSDictionary *pageInfo, BOOL hasNextPage, NSArray *feedIds)
-    {
-        [self process:pageInfo hasNextPage:hasNextPage serverFeedIdList:feedIds];
-    }];
     [self.tableView triggerInfiniteScrolling];
 }
 
@@ -343,18 +340,9 @@ forRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     //the following request must respect the current cell.feed like/dislike status
     Feed *feed = [self.fetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
     if (!feed.selfLiked.boolValue) {
-        //increase feed like count
-        feed.likeCount = @(feed.likeCount.integerValue + 1);
-        feed.selfLiked = @(YES);
-        
         //send like request
         [self.fetchCenter likeFeed:feed completion:nil];
     }else{
-        
-        //decrease feed like count
-        feed.likeCount = @(feed.likeCount.integerValue - 1);
-        feed.selfLiked = @(NO);
-        
         //send unlike request
         [self.fetchCenter unLikeFeed:feed completion:nil];
     }

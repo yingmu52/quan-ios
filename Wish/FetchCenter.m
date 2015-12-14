@@ -72,8 +72,16 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 @property (nonatomic,strong) Reachability *reachability;
 @property (nonatomic,strong) NSDictionary *backendErrorCode;
 @property (nonatomic,strong) NSURLSession *session;
+@property (nonatomic,weak) AppDelegate *appDelegate;
 @end
 @implementation FetchCenter
+
+- (AppDelegate *)appDelegate{
+    if (!_appDelegate) {
+        _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    }
+    return _appDelegate;
+}
 
 #pragma mark - 圈子
 #define TOOLCGIKEY @"123$%^abc"
@@ -127,7 +135,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
               NSArray *circleInfo = [responseJson valueForKey:@"data"];
               NSMutableArray *circles = [NSMutableArray arrayWithCapacity:circleInfo.count];
               for (NSDictionary *info in circleInfo) {
-                  [circles addObject:[Circle updateCircleWithInfo:info]];
+                  [circles addObject:[Circle updateCircleWithInfo:info managedObjectContext:[AppDelegate getContext]]];
               }
 //              NSLog(@"%@",circles);
               if (completionBlock) {
@@ -178,17 +186,25 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     [self getRequest:rqtStr
            parameter:@{@"id":[User uid]}
     includeArguments:YES completion:^(NSDictionary *responseJson) {
-        NSArray *messagesArray = [responseJson valueForKeyPath:@"data.messageList"];
-        NSDictionary *owners = [responseJson valueForKeyPath:@"data.manList"];
-        for (NSDictionary *message in messagesArray){
-            NSDictionary *ownerInfo = owners[message[@"operatorId"]];
-            [Message updateMessageWithInfo:message ownerInfo:ownerInfo];
-        }
-//        NSLog(@"%@",responseJson);
-        if (completionBlock) {
-            NSArray *messageIds = [responseJson valueForKeyPath:@"data.messageList.messageId"];
-            completionBlock(messageIds);
-        }
+        
+        __block NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        workerContext.parentContext = self.appDelegate.managedObjectContext;
+        
+        [workerContext performBlock:^{
+            NSArray *messagesArray = [responseJson valueForKeyPath:@"data.messageList"];
+            NSDictionary *owners = [responseJson valueForKeyPath:@"data.manList"];
+            for (NSDictionary *message in messagesArray){
+                NSDictionary *ownerInfo = owners[message[@"operatorId"]];
+                [Message updateMessageWithInfo:message ownerInfo:ownerInfo managedObjectContext:[AppDelegate getContext]];
+            }
+            //        NSLog(@"%@",responseJson);
+            [self.appDelegate saveContext:workerContext];
+            if (completionBlock) {
+                NSArray *messageIds = [responseJson valueForKeyPath:@"data.messageList.messageId"];
+                completionBlock(messageIds);
+            }
+            
+        }];
     }];
 }
 
@@ -217,6 +233,8 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
         }
     }];
 }
+
+
 - (void)getCommentListForFeed:(NSString *)feedId
                      pageInfo:(NSDictionary *)info
                    completion:(FetchCenterGetRequestGetCommentListCompleted)completionBlock{
@@ -227,42 +245,56 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     NSDictionary *args = @{@"feedsId":feedId,
                            @"attachInfo":infoStr};
     [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
-        NSLog(@"%@",responseJson);
-        NSDictionary *ownerInfo = [responseJson valueForKeyPath:@"data.manList"];
-        BOOL hasNextPage = [[responseJson valueForKeyPath:@"data.isMore"] boolValue];
-        NSDictionary *pageInfo = [responseJson valueForKeyPath:@"data.attachInfo"];
-        NSDictionary *feedInfo = [responseJson valueForKeyPath:@"data.feeds"];
+        
+        
+        __block NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        workerContext.parentContext = self.appDelegate.managedObjectContext;
+        
+        [workerContext performBlock:^{
 
-        Feed *feed = [Feed updateFeedWithInfo:feedInfo forPlan:nil];
-        NSArray *comments = [responseJson valueForKeyPath:@"data.commentList"];
-        NSMutableArray *localComments = [NSMutableArray arrayWithCapacity:comments.count];
-        if (comments.count > 0) {
-            for (NSDictionary *commentInfo in comments){
-                //读取评论信息
-                Comment *comment = [Comment updateCommentWithInfo:commentInfo];
-                //读取用户信息
-                NSDictionary *userInfo = comment.isMyComment.boolValue ? [Owner myWebInfo] : ownerInfo[commentInfo[@"ownerId"]];
-                Owner *owner = [Owner updateOwnerWithInfo:userInfo];
-                
-                //防止更新相同的评论数据
-                if (comment.owner != owner) {
-                    comment.owner = owner;
-                }
-                if (comment.feed != feed) {
-                    comment.feed = feed;
-                }
-                if (comment.idForReply) {
-                    NSString *nameForReply = [ownerInfo[comment.idForReply] objectForKey:@"name"];
-                    if (![comment.nameForReply isEqualToString:nameForReply]) {
-                        comment.nameForReply = nameForReply;
+//            NSLog(@"%@",responseJson);
+            NSDictionary *ownerInfo = [responseJson valueForKeyPath:@"data.manList"];
+            BOOL hasNextPage = [[responseJson valueForKeyPath:@"data.isMore"] boolValue];
+            NSDictionary *pageInfo = [responseJson valueForKeyPath:@"data.attachInfo"];
+            NSDictionary *feedInfo = [responseJson valueForKeyPath:@"data.feeds"];
+            
+            Feed *feed = [Feed updateFeedWithInfo:feedInfo forPlan:nil ownerInfo:nil managedObjectContext:workerContext];
+            NSArray *comments = [responseJson valueForKeyPath:@"data.commentList"];
+            NSMutableArray *localComments = [NSMutableArray arrayWithCapacity:comments.count];
+            if (comments.count > 0) {
+                for (NSDictionary *commentInfo in comments){
+                    //读取评论信息
+                    Comment *comment = [Comment updateCommentWithInfo:commentInfo managedObjectContext:workerContext];
+                    //读取用户信息
+                    NSDictionary *userInfo = comment.isMyComment.boolValue ? [Owner myWebInfo] : ownerInfo[commentInfo[@"ownerId"]];
+                    Owner *owner = [Owner updateOwnerWithInfo:userInfo managedObjectContext:workerContext];
+                    
+                    //防止更新相同的评论数据
+                    if (!comment.owner) {
+                        comment.owner = owner;
                     }
+                    if (!comment.feed) {
+                        comment.feed = feed;
+                    }
+                    if (comment.idForReply) {
+                        NSString *nameForReply = [ownerInfo[comment.idForReply] objectForKey:@"name"];
+                        if (![comment.nameForReply isEqualToString:nameForReply]) {
+                            comment.nameForReply = nameForReply;
+                        }
+                    }
+                    [localComments addObject:comment];
+                    
                 }
-                [localComments addObject:comment];
             }
-        }
-        if (completionBlock) {
-            completionBlock(pageInfo,hasNextPage,localComments,feed);
-        }
+            
+            [self.appDelegate saveContext:workerContext];
+
+            if (completionBlock) {
+                completionBlock(pageInfo,hasNextPage,localComments,feed);
+            }
+            
+        }]; //end of performBlock
+        
     }];
 }
 
@@ -330,23 +362,35 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
           completion:^(NSDictionary *responseJson)
     {
         
-        NSArray *feeds = [responseJson valueForKeyPath:@"data.feedsList"];
-        NSDictionary *pageInfo = [responseJson valueForKeyPath:@"data.attachInfo"];
-        
-        NSNumber *isFollowed  = @([[responseJson valueForKeyPath:@"data.isFollowed"] boolValue]);
-        if (![plan.isFollowed isEqualToNumber:isFollowed]){
-            plan.isFollowed = isFollowed;
-        }
-        
-        for (NSDictionary *info in feeds){
-            [Feed updateFeedWithInfo:info forPlan:plan];
-        }
-        
-        NSArray *feedIds = [responseJson valueForKeyPath:@"data.feedsList.id"];
-        BOOL hasNextPage = [[responseJson valueForKeyPath:@"data.isMore"] boolValue];
-        if (completionBlock) {
-            completionBlock(pageInfo,hasNextPage,feedIds);
-        }
+        __block NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        workerContext.parentContext = self.appDelegate.managedObjectContext;
+
+        [workerContext performBlock:^{
+            NSArray *feeds = [responseJson valueForKeyPath:@"data.feedsList"];
+            NSDictionary *pageInfo = [responseJson valueForKeyPath:@"data.attachInfo"];
+            NSNumber *isFollowed  = @([[responseJson valueForKeyPath:@"data.isFollowed"] boolValue]);
+            NSDictionary *planInfo = [responseJson valueForKeyPath:@"data.plan"];
+            NSDictionary *ownerInfo = [responseJson valueForKeyPath:@"data.man"];
+            if (![plan.isFollowed isEqualToNumber:isFollowed]){
+                plan.isFollowed = isFollowed;
+            }
+            
+            for (NSDictionary *feedInfo in feeds){
+                [Feed updateFeedWithInfo:feedInfo
+                                 forPlan:planInfo
+                               ownerInfo:ownerInfo
+                    managedObjectContext:workerContext];
+            }
+            
+            NSArray *feedIds = [responseJson valueForKeyPath:@"data.feedsList.id"];
+            BOOL hasNextPage = [[responseJson valueForKeyPath:@"data.isMore"] boolValue];
+            
+            [self.appDelegate saveContext:workerContext];
+            
+            if (completionBlock) {
+                completionBlock(pageInfo,hasNextPage,feedIds);
+            }
+        }];
     }];
 }
 
@@ -437,6 +481,11 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 
 - (void)likeFeed:(Feed *)feed completion:(FetchCenterGetRequestLikeFeedCompleted)completionBlock{
     if (feed.feedId){
+        
+        //increase feed like count
+        feed.likeCount = @(feed.likeCount.integerValue + 1);
+        feed.selfLiked = @(YES);
+
         NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,LIKE_FEED];
         [self getRequest:rqtStr parameter:@{@"id":feed.feedId} includeArguments:YES completion:^(NSDictionary *responseJson) {
             if (completionBlock) {
@@ -448,6 +497,11 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 
 - (void)unLikeFeed:(Feed *)feed completion:(FetchCenterGetRequestUnLikeFeedCompleted)completionBlock{
     if (feed.feedId){
+        
+        //decrease feed like count
+        feed.likeCount = @(feed.likeCount.integerValue - 1);
+        feed.selfLiked = @(NO);
+
         NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,UNLIKE_FEED];
         [self getRequest:rqtStr parameter:@{@"id":feed.feedId} includeArguments:YES completion:^(NSDictionary *responseJson) {
             if (completionBlock) {
@@ -487,28 +541,43 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FOLLOW,GET_FOLLOW_LIST];
     
     [self getRequest:rqtStr parameter:@{@"id":[User uid]} includeArguments:YES completion:^(NSDictionary *responseJson) {
-        for (NSDictionary *planItem in [responseJson valueForKeyPath:@"data.planList"]) {
-            NSDictionary *userInfo = [responseJson valueForKeyPath:[NSString stringWithFormat:@"data.manList.%@",planItem[@"ownerId"]]];
-            Plan *plan = [Plan updatePlanFromServer:planItem ownerInfo:userInfo];
-            
-            if (![plan.isFollowed isEqualToNumber:@(YES)]){
-                plan.isFollowed = @(YES);
-            }
-            
-            NSArray *feedsList = planItem[@"feedsList"];
-            if (feedsList.count) {
-                //create all feeds
-                for (NSDictionary *feedItem in feedsList) {
-                    [Feed updateFeedWithInfo:feedItem forPlan:plan];
-                    //use alternative way to load and cache image
+        
+        __block NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        workerContext.parentContext = self.appDelegate.managedObjectContext;
+        
+        [workerContext performBlock:^{
+            for (NSDictionary *planInfo in [responseJson valueForKeyPath:@"data.planList"]) {
+                NSDictionary *userInfo = [responseJson valueForKeyPath:[NSString stringWithFormat:@"data.manList.%@",planInfo[@"ownerId"]]];
+                Plan *plan = [Plan updatePlanFromServer:planInfo
+                                              ownerInfo:userInfo
+                                   managedObjectContext:workerContext];
+                
+                if (![plan.isFollowed isEqualToNumber:@(YES)]){
+                    plan.isFollowed = @(YES);
+                }
+                
+                NSArray *feedsList = planInfo[@"feedsList"];
+                if (feedsList.count) {
+                    //create all feeds
+                    for (NSDictionary *feedInfo in feedsList) {
+                        [Feed updateFeedWithInfo:feedInfo
+                                         forPlan:planInfo
+                                       ownerInfo:userInfo
+                            managedObjectContext:workerContext];
+                        
+                        //use alternative way to load and cache image
+                    }
                 }
             }
-        }
-        if (completionBlock){
-            NSArray *planIds = [responseJson valueForKeyPath:@"data.planList.id"];
-            completionBlock(planIds);
-        }
-
+            
+            [self.appDelegate saveContext:workerContext];
+            
+            if (completionBlock){
+                NSArray *planIds = [responseJson valueForKeyPath:@"data.planList.id"];
+                completionBlock(planIds);
+            }
+            
+        }];
     }];
 }
 
@@ -516,24 +585,37 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 
 - (void)getDiscoveryList:(FetchCenterGetRequestGetDiscoverListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,DISCOVER,GET_DISCOVER_LIST];
-    [self getRequest:rqtStr parameter:nil includeArguments:YES completion:^(NSDictionary *responseJson) {
-
-        NSMutableArray *plans = [NSMutableArray array];
-        NSArray *planList = [responseJson valueForKeyPath:@"data.planList"];
-        NSDictionary *manList = [responseJson valueForKeyPath:@"data.manList"];
-        NSString *title = [responseJson valueForKeyPath:@"data.quanInfo.name"];
-        
-        //缓存并更新本地事件
-        if (planList && manList){
-            [planList enumerateObjectsUsingBlock:^(NSDictionary * planInfo, NSUInteger idx, BOOL * _Nonnull stop) {
-                Plan *plan = [Plan updatePlanFromServer:planInfo
-                                              ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]];
-                plan.discoverIndex = @(idx); //记录索引方便显示服务器上的顺序
-                [plans addObject:plan];
-//                NSLog(@"%@, mask : %@, index %@",plan.planTitle,plan.cornerMask,plan.discoverIndex);
-            }];
-        }
-        completionBlock(plans,title);
+    [self getRequest:rqtStr
+           parameter:nil
+    includeArguments:YES
+          completion:^(NSDictionary *responseJson) {
+              
+        __block NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        workerContext.parentContext = self.appDelegate.managedObjectContext;
+              
+        [workerContext performBlock:^{
+            
+            NSMutableArray *plans = [NSMutableArray array];
+            NSArray *planList = [responseJson valueForKeyPath:@"data.planList"];
+            NSDictionary *manList = [responseJson valueForKeyPath:@"data.manList"];
+            NSString *title = [responseJson valueForKeyPath:@"data.quanInfo.name"];
+            
+            //缓存并更新本地事件
+            if (planList && manList){
+                [planList enumerateObjectsUsingBlock:^(NSDictionary * planInfo, NSUInteger idx, BOOL * _Nonnull stop) {
+                    Plan *plan = [Plan updatePlanFromServer:planInfo
+                                                  ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]
+                                       managedObjectContext:workerContext];
+                    plan.discoverIndex = @(idx); //记录索引方便显示服务器上的顺序
+                    [plans addObject:plan];
+                    //                NSLog(@"%@, mask : %@, index %@",plan.planTitle,plan.cornerMask,plan.discoverIndex);
+                }];
+            }
+            
+            [self.appDelegate saveContext:workerContext];
+            completionBlock(plans,title);
+            
+        }];
     }];
 }
 
@@ -643,7 +725,9 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
         NSArray *plans = responseJson[@"data"];
         NSMutableArray *planEntities = [NSMutableArray arrayWithCapacity:plans.count];
         for (NSDictionary *planInfo in plans) {
-            Plan * plan = [Plan updatePlanFromServer:planInfo ownerInfo:[Owner myWebInfo]];
+            Plan * plan = [Plan updatePlanFromServer:planInfo
+                                           ownerInfo:[Owner myWebInfo]
+                                managedObjectContext:[AppDelegate getContext]];
             [planEntities addObject:plan];
         }
         if (completionBlock) {
@@ -905,36 +989,38 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
         NSURLSessionDataTask *task = [self.session dataTaskWithRequest:request
                                                      completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                       {
-                                          dispatch_main_async_safe(^{
-                                              //递归过滤Json里含带的Null数据
-                                              NSDictionary *rawJson = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                      options:NSJSONReadingAllowFragments
-                                                                                                        error:nil];
-                                              NSDictionary *responseJson = [self recursiveNullRemove:rawJson];
-                                              
-                                              if (responseJson) {
-                                                  if (!error && ![responseJson[@"ret"] integerValue]){ //成功
-                                                      if (completionBlock) {
-                                                          completionBlock(responseJson);
-                                                      }
-                                                  }else{ //失败
-                                                      
-                                                      //在委托中跳出后台的提示
-                                                      [self alertWithBackendErrorCode:@([responseJson[@"ret"] integerValue])];
-                                                      
-                                                      //假失败写入请求日志
-                                                      [self appendRequest:request andResponse:responseJson];
-                                                      
-                                                      NSLog(@"Fail Get Request :%@\n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
-                                                            ,rqtStr,baseURL,dict,responseJson,error);
-                                                      
-                                                      if ([self.delegate respondsToSelector:@selector(didFailSendingRequest)]){
-                                                          [self.delegate didFailSendingRequest];
+                                          if (data){
+                                              dispatch_main_async_safe(^{
+                                                  //递归过滤Json里含带的Null数据
+                                                  NSDictionary *rawJson = [NSJSONSerialization JSONObjectWithData:data
+                                                                                                          options:NSJSONReadingAllowFragments
+                                                                                                            error:nil];
+                                                  NSDictionary *responseJson = [self recursiveNullRemove:rawJson];
+                                                  
+                                                  if (responseJson) {
+                                                      if (!error && ![responseJson[@"ret"] integerValue]){ //成功
+                                                          if (completionBlock) {
+                                                              completionBlock(responseJson);
+                                                          }
+                                                      }else{ //失败
+                                                          
+                                                          //在委托中跳出后台的提示
+                                                          [self alertWithBackendErrorCode:@([responseJson[@"ret"] integerValue])];
+                                                          
+                                                          //假失败写入请求日志
+                                                          [self appendRequest:request andResponse:responseJson];
+                                                          
+                                                          NSLog(@"Fail Get Request :%@\n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
+                                                                ,rqtStr,baseURL,dict,responseJson,error);
+                                                          
+                                                          if ([self.delegate respondsToSelector:@selector(didFailSendingRequest)]){
+                                                              [self.delegate didFailSendingRequest];
+                                                          }
                                                       }
                                                   }
-                                              }
-                                          });
+                                              });
 
+                                          }
                                       }];
         [task resume];
     }

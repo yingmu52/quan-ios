@@ -118,7 +118,10 @@ static NSTimeInterval expectationTimeout = 30.0f;
 }
 
 - (void)testLikeAndUnLikeFeed{
-    NSArray *array = [Plan fetchWith:@"Feed" predicate:nil keyForDescriptor:@"createDate"];
+    NSArray *array = [Plan fetchWith:@"Feed"
+                           predicate:nil
+                    keyForDescriptor:@"createDate"
+                managedObjectContext:[AppDelegate getContext]];
     XCTAssertTrue(array.count > 0, @"本地没有缓存到feed");
     
 
@@ -177,7 +180,8 @@ static NSTimeInterval expectationTimeout = 30.0f;
     if (!_testPlan) {
         NSArray *array = [Plan fetchWith:@"Plan"
                                predicate:[NSPredicate predicateWithFormat:@"planTitle = %@",testPlanTitle]
-                        keyForDescriptor:@"planTitle"];
+                        keyForDescriptor:@"planTitle"
+                    managedObjectContext:[AppDelegate getContext]];
         XCTAssertFalse(array.count == 0,@"找不到测试事件");
         _testPlan = array.lastObject;
     }
