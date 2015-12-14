@@ -186,17 +186,25 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     [self getRequest:rqtStr
            parameter:@{@"id":[User uid]}
     includeArguments:YES completion:^(NSDictionary *responseJson) {
-        NSArray *messagesArray = [responseJson valueForKeyPath:@"data.messageList"];
-        NSDictionary *owners = [responseJson valueForKeyPath:@"data.manList"];
-        for (NSDictionary *message in messagesArray){
-            NSDictionary *ownerInfo = owners[message[@"operatorId"]];
-            [Message updateMessageWithInfo:message ownerInfo:ownerInfo managedObjectContext:[AppDelegate getContext]];
-        }
-//        NSLog(@"%@",responseJson);
-        if (completionBlock) {
-            NSArray *messageIds = [responseJson valueForKeyPath:@"data.messageList.messageId"];
-            completionBlock(messageIds);
-        }
+        
+        __block NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        workerContext.parentContext = self.appDelegate.managedObjectContext;
+        
+        [workerContext performBlock:^{
+            NSArray *messagesArray = [responseJson valueForKeyPath:@"data.messageList"];
+            NSDictionary *owners = [responseJson valueForKeyPath:@"data.manList"];
+            for (NSDictionary *message in messagesArray){
+                NSDictionary *ownerInfo = owners[message[@"operatorId"]];
+                [Message updateMessageWithInfo:message ownerInfo:ownerInfo managedObjectContext:[AppDelegate getContext]];
+            }
+            //        NSLog(@"%@",responseJson);
+            [self.appDelegate saveContext:workerContext];
+            if (completionBlock) {
+                NSArray *messageIds = [responseJson valueForKeyPath:@"data.messageList.messageId"];
+                completionBlock(messageIds);
+            }
+            
+        }];
     }];
 }
 
