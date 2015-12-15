@@ -99,7 +99,12 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
                       [User updateAttributeFromDictionary:@{CURRENT_CIRCLE_ID:circleId}];
                   }
                   NSLog(@"成功加入圈子id %@",[User currentCircleId]);
-                  if (completionBlock) completionBlock(circleId);
+                  if (completionBlock) {
+                      dispatch_main_async_safe(^{
+                          completionBlock(circleId);
+                      });
+                      
+                  }
               }];
     }
 }
@@ -119,7 +124,10 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
                   //缓存当前圈子id
                   [User updateAttributeFromDictionary:@{CURRENT_CIRCLE_ID:circleId}];
                   if (completionBlock) {
-                      completionBlock();
+                      dispatch_main_async_safe(^{
+                          completionBlock();
+                      });
+                      
                   }
               }];
     }
@@ -139,7 +147,9 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
               }
 //              NSLog(@"%@",circles);
               if (completionBlock) {
-                  completionBlock(circles);
+                  dispatch_main_async_safe(^{
+                      completionBlock(circles);                      
+                  });
               }
           }];
 }
