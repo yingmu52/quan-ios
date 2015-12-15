@@ -190,7 +190,7 @@ static NSTimeInterval expectationTimeout = 30.0f;
 }
 
 - (void)testUpdatePlanStatus{
-    NSUInteger numberOfCycles = 30;
+    NSUInteger numberOfCycles = 10;
     for (NSInteger i = 0; i <= numberOfCycles; i++) {
         self.testPlan.detailText = [NSUUID UUID].UUIDString; //修改事件描述
         PlanStatus status  =  [self.testPlan.planStatus isEqualToNumber:@(PlanStatusFinished)] ? PlanStatusOnGoing : PlanStatusFinished; //修改事件状态
@@ -294,7 +294,7 @@ static NSTimeInterval expectationTimeout = 30.0f;
 
 - (void)testCheckNewVersion{
     
-    for (NSInteger i = 0 ; i < 100; i ++) {
+    for (NSInteger i = 0 ; i < 10; i ++) {
         XCTestExpectation *expectation = [self expectationWithDescription:@"新版本提示接口"];
         
         [self.fetchCenter checkVersion:^(BOOL hasNewVersion) {
@@ -310,7 +310,7 @@ static NSTimeInterval expectationTimeout = 30.0f;
 }
 
 - (void)testSendingFeedBack{
-    for (NSInteger i = 0 ; i < 100; i ++) {
+    for (NSInteger i = 0 ; i < 10; i ++) {
         XCTestExpectation *expectation = [self expectationWithDescription:@"反馈接口"];
         NSString *content = [NSString stringWithFormat:@"测试%@",@(i)];
         [self.fetchCenter sendFeedback:content content:content completion:^{
@@ -324,7 +324,7 @@ static NSTimeInterval expectationTimeout = 30.0f;
 }
 
 - (void)testGetYoutuSignature{
-    for (NSInteger i = 0 ; i < 100; i ++) {
+    for (NSInteger i = 0 ; i < 10; i ++) {
         XCTestExpectation *expectation = [self expectationWithDescription:@"拉取优图签名接口"];
         [self.fetchCenter requestSignature:^(NSString *signature) {
             if (signature) {
@@ -388,7 +388,7 @@ static NSTimeInterval expectationTimeout = 30.0f;
     XCTAssertTrue(feed != nil,@"测试Feed不存在");
     
     //测试添加评论/回复
-    NSUInteger numberOfCycles = 100;
+    NSUInteger numberOfCycles = 10;
     for (NSInteger i = 0 ; i < numberOfCycles; i ++) {
         XCTestExpectation *exp1 = [self expectationWithDescription:@"评论与回复接口"];
         NSString *content = [NSString stringWithFormat:@"测试数据%@",@(i)];

@@ -148,7 +148,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 //              NSLog(@"%@",circles);
               if (completionBlock) {
                   dispatch_main_async_safe(^{
-                      completionBlock(circles);                      
+                      completionBlock(circles);
                   });
               }
           }];
@@ -173,7 +173,9 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
             [User storeSignature:signature];
         }
         if (completionBlock) {
-            completionBlock(signature);
+            dispatch_main_async_safe(^{
+                completionBlock(signature);
+            });
         }
         
     }];
@@ -185,7 +187,9 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,MESSAGE,CLEAR_ALL_MESSAGES];
     [self getRequest:rqtStr parameter:nil includeArguments:YES completion:^(NSDictionary *responseJson) {
         if (completionBlock) {
-            completionBlock();
+            dispatch_main_async_safe(^{
+                completionBlock();
+            });
         }
     }];
 }
@@ -209,8 +213,11 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
         //        NSLog(@"%@",responseJson);
         [self.appDelegate saveContext:workerContext];
         if (completionBlock) {
-            NSArray *messageIds = [responseJson valueForKeyPath:@"data.messageList.messageId"];
-            completionBlock(messageIds);
+            dispatch_main_async_safe(^{
+                NSArray *messageIds = [responseJson valueForKeyPath:@"data.messageList.messageId"];
+                completionBlock(messageIds);
+            });
+
         }
 
         
@@ -223,7 +230,9 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
         NSNumber *unreadFollowCount = @([[responseJson valueForKeyPath:@"data.unreadCountFollow"] integerValue]);
         NSNumber *unreadMsgCount = @([[responseJson valueForKeyPath:@"data.unreadCountMsg"] integerValue]);
         if (completionBlock) {
-            completionBlock(unreadMsgCount,unreadFollowCount);
+            dispatch_main_async_safe(^{
+                completionBlock(unreadMsgCount,unreadFollowCount);
+            });
         }
     }];
 }
@@ -237,8 +246,10 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     NSDictionary *args = @{@"id":comment.commentId,@"feedsId":comment.feed.feedId};
     [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
         if (completionBlock) {
-            NSLog(@"评论删除成功 %@",comment.commentId);
-            completionBlock();
+            dispatch_main_async_safe(^{
+                NSLog(@"评论删除成功 %@",comment.commentId);
+                completionBlock();
+            });
         }
     }];
 }
@@ -296,7 +307,9 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
         [self.appDelegate saveContext:workerContext];
         
         if (completionBlock) {
-            completionBlock(pageInfo,hasNextPage,localComments,feed);
+            dispatch_main_async_safe(^{
+                completionBlock(pageInfo,hasNextPage,localComments,feed);
+            });
         }
         
     }];
@@ -330,8 +343,10 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
         //update feed count
         feed.commentCount = @(feed.commentCount.integerValue + 1);
         if (completionBlock) {
-            NSLog(@"评论完成%@",comment.commentId);
-            completionBlock(comment);
+            dispatch_main_async_safe(^{
+                NSLog(@"评论完成%@",comment.commentId);
+                completionBlock(comment);
+            });
         }
     }];
 }
@@ -347,7 +362,9 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
         NSLog(@"delete feed successed, ID:%@",feed.feedId);
         if (completionBlock) {
-            completionBlock();
+            dispatch_main_async_safe(^{
+                completionBlock();
+            });
         }
     }];
 }
@@ -391,7 +408,9 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
         [self.appDelegate saveContext:workerContext];
         
         if (completionBlock) {
-            completionBlock(pageInfo,hasNextPage,feedIds);
+            dispatch_main_async_safe(^{
+                completionBlock(pageInfo,hasNextPage,feedIds);
+            });
         }
 
     }];
@@ -404,7 +423,9 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
                                                        options:0
                                                          error:&error];
     
-    return [[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    return [[[NSString alloc] initWithData:jsonData
+                                  encoding:NSUTF8StringEncoding]
+            stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
 - (void)uploadToCreateFeed:(Feed *)feed
@@ -437,8 +458,10 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
             feed.feedId = fetchedFeedID;
             [feed.plan updateTryTimesOfPlan:YES];
             if (completionBlock) {
-                completionBlock(feed);
-                NSLog(@"upload feed successed, ID: %@",feed.feedId);
+                dispatch_main_async_safe(^{
+                    completionBlock(feed);
+                    NSLog(@"upload feed successed, ID: %@",feed.feedId);
+                });
             }
         }];
     }
@@ -492,7 +515,10 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
         NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,LIKE_FEED];
         [self getRequest:rqtStr parameter:@{@"id":feed.feedId} includeArguments:YES completion:^(NSDictionary *responseJson) {
             if (completionBlock) {
-                completionBlock();
+                dispatch_main_async_safe(^{
+                    completionBlock();
+                });
+
             }
         }];
     }
@@ -508,7 +534,9 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
         NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,UNLIKE_FEED];
         [self getRequest:rqtStr parameter:@{@"id":feed.feedId} includeArguments:YES completion:^(NSDictionary *responseJson) {
             if (completionBlock) {
-                completionBlock();
+                dispatch_main_async_safe(^{
+                    completionBlock();
+                });
             }
         }];
     }
@@ -523,7 +551,9 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
         plan.isFollowed = @(YES);
         NSLog(@"followed plan ID %@",plan.planId);
         if (completionBlock) {
-            completionBlock();
+            dispatch_main_async_safe(^{
+                completionBlock();
+            });
         }
     }];
 }
@@ -535,7 +565,9 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
         plan.isFollowed = @(NO);
         NSLog(@"unfollowed plan ID %@",plan.planId);
         if (completionBlock) {
-            completionBlock();
+            dispatch_main_async_safe(^{
+                completionBlock();
+            });
         }
     }];
 }
@@ -575,8 +607,10 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
         [self.appDelegate saveContext:workerContext];
         
         if (completionBlock){
-            NSArray *planIds = [responseJson valueForKeyPath:@"data.planList.id"];
-            completionBlock(planIds);
+            dispatch_main_async_safe(^{
+                NSArray *planIds = [responseJson valueForKeyPath:@"data.planList.id"];
+                completionBlock(planIds);
+            });
         }
         
     }];
@@ -589,7 +623,8 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     [self getRequest:rqtStr
            parameter:nil
     includeArguments:YES
-          completion:^(NSDictionary *responseJson) {
+          completion:^(NSDictionary *responseJson)
+    {
               
         __block NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
         workerContext.parentContext = self.appDelegate.managedObjectContext;
@@ -612,7 +647,12 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
         }
 
         [self.appDelegate saveContext:workerContext];
-        completionBlock(plans,title);
+                      
+        if (completionBlock) {
+            dispatch_main_async_safe(^{
+                completionBlock(plans,title);
+            });
+        }
 
     }];
 }
@@ -630,7 +670,9 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
         NSLog(@"反馈成功");
         if (completionBlock) {
-            completionBlock();
+            dispatch_main_async_safe(^{
+                completionBlock();
+            });
         }
     }];
 }
@@ -638,9 +680,11 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,OTHER,CHECK_NEW_VERSION];
     [self getRequest:rqtStr parameter:nil includeArguments:YES completion:^(NSDictionary *responseJson) {
         if (completionBlock) {
-            BOOL hasNewVersion = [[responseJson valueForKeyPath:@"data.haveNew"] boolValue];
-            NSLog(@"%@",hasNewVersion ? @"有新版本" : @"无新版本");
-            completionBlock(hasNewVersion);
+            dispatch_main_async_safe(^{
+                BOOL hasNewVersion = [[responseJson valueForKeyPath:@"data.haveNew"] boolValue];
+                NSLog(@"%@",hasNewVersion ? @"有新版本" : @"无新版本");
+                completionBlock(hasNewVersion);
+            });
         }
     }];
 }
@@ -654,7 +698,9 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
             [User updateAttributeFromDictionary:@{PROFILE_PICTURE_ID_CUSTOM:fetchedId}];
             NSLog(@"image uploaded %@",fetchedId);
             if (completionBlock) {
-                completionBlock(@[fetchedId]);
+                dispatch_main_async_safe(^{
+                    completionBlock(@[fetchedId]);
+                });
             }
         }
     }];
@@ -684,7 +730,9 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
                                               PERSONALDETAIL:info}];
         NSLog(@"%@",[User getOwnerInfo]);
         if (completionBlock) {
-            completionBlock();
+            dispatch_main_async_safe(^{
+                completionBlock();
+            });
         }
     }];
     
@@ -701,7 +749,9 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
                            @"description":plan.detailText ? [plan.detailText stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] : @""};
     [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
         if (completionBlock) {
-            completionBlock();
+            dispatch_main_async_safe(^{
+                completionBlock();
+            });
         }
     }];
 }
@@ -713,7 +763,9 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
         NSLog(@"%@",responseJson);
         if (completionBlock) {
-            completionBlock();
+            dispatch_main_async_safe(^{
+                completionBlock();
+            });
         }
     }];
 }
@@ -729,7 +781,9 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
             [planEntities addObject:plan];
         }
         if (completionBlock) {
-            completionBlock(planEntities.mutableCopy);
+            dispatch_main_async_safe(^{
+                completionBlock(planEntities.mutableCopy);
+            });
         }
     }];
 
@@ -746,7 +800,11 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
             plan.planId = fetchedPlanId;
             plan.backgroundNum = bgString;
             NSLog(@"create plan succeed, ID: %@",fetchedPlanId);
-            completionBlock(plan);
+            if (completionBlock) {
+                dispatch_main_async_safe(^{
+                    completionBlock(plan);
+                });
+            }
         }
     }];
 }
@@ -759,7 +817,9 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
         NSLog(@"delete plan succeed, ID: %@",plan.planId);
         [plan.managedObjectContext save:nil];
         if (completionBlock) {
-            completionBlock();
+            dispatch_main_async_safe(^{
+                completionBlock();
+            });
         }
     }];
 }
@@ -1087,7 +1147,10 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
                                               GENDER:gender}];
         NSLog(@"Fetched WeChat User Info \n%@",[User getOwnerInfo]);
         if (completionBlock) {
-            completionBlock();
+            dispatch_main_async_safe(^{
+                completionBlock();
+            });
+
         }
     }];
 }
@@ -1109,7 +1172,9 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
         NSDictionary *localUserInfo = @{UID:uid,UKEY:ukey};
         [User updateAttributeFromDictionary:localUserInfo];
         if (completionBlock) {
-            completionBlock(userInfo,isNewUser);
+            dispatch_main_async_safe(^{
+                completionBlock(userInfo,isNewUser);
+            });
         }
     }];
 }
@@ -1132,7 +1197,9 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
             
             [self getUidandUkeyWithOpenId:openId accessToken:accessToken completion:^(NSDictionary *userInfo, BOOL isNewUser) {
                 if (completionBlock) {
-                    completionBlock(userInfo,isNewUser);
+                    dispatch_main_async_safe(^{
+                        completionBlock(userInfo,isNewUser);                        
+                    });
                 }
             }];
         }];
