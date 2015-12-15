@@ -83,6 +83,11 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     return _appDelegate;
 }
 
+- (NSManagedObjectContext *)workerContext{
+    NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    context.parentContext = self.appDelegate.managedObjectContext;
+    return context;
+}
 #pragma mark - 圈子
 #define TOOLCGIKEY @"123$%^abc"
 
@@ -140,12 +145,17 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
            parameter:@{@"key":[TOOLCGIKEY stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]}
     includeArguments:NO
           completion:^(NSDictionary *responseJson) {
+              NSManagedObjectContext *workerContext = [self workerContext];
+              
               NSArray *circleInfo = [responseJson valueForKey:@"data"];
               NSMutableArray *circles = [NSMutableArray arrayWithCapacity:circleInfo.count];
               for (NSDictionary *info in circleInfo) {
-                  [circles addObject:[Circle updateCircleWithInfo:info managedObjectContext:[AppDelegate getContext]]];
+                  [circles addObject:[Circle updateCircleWithInfo:info managedObjectContext:workerContext]];
               }
 //              NSLog(@"%@",circles);
+              
+              [self.appDelegate saveContext:workerContext];
+              
               if (completionBlock) {
                   dispatch_main_async_safe(^{
                       completionBlock(circles);
@@ -201,14 +211,14 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
            parameter:@{@"id":[User uid]}
     includeArguments:YES completion:^(NSDictionary *responseJson) {
         
-        NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        workerContext.parentContext = self.appDelegate.managedObjectContext;
+        
+        NSManagedObjectContext *workerContext = [self workerContext];
         
         NSArray *messagesArray = [responseJson valueForKeyPath:@"data.messageList"];
         NSDictionary *owners = [responseJson valueForKeyPath:@"data.manList"];
         for (NSDictionary *message in messagesArray){
             NSDictionary *ownerInfo = owners[message[@"operatorId"]];
-            [Message updateMessageWithInfo:message ownerInfo:ownerInfo managedObjectContext:[AppDelegate getContext]];
+            [Message updateMessageWithInfo:message ownerInfo:ownerInfo managedObjectContext:workerContext];
         }
         //        NSLog(@"%@",responseJson);
         [self.appDelegate saveContext:workerContext];
@@ -267,8 +277,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
         
         
-        NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        workerContext.parentContext = self.appDelegate.managedObjectContext;
+        NSManagedObjectContext *workerContext = [self workerContext];
         
         NSDictionary *ownerInfo = [responseJson valueForKeyPath:@"data.manList"];
         BOOL hasNextPage = [[responseJson valueForKeyPath:@"data.isMore"] boolValue];
@@ -383,8 +392,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
           completion:^(NSDictionary *responseJson)
     {
         
-        NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        workerContext.parentContext = self.appDelegate.managedObjectContext;
+        NSManagedObjectContext *workerContext = [self workerContext];
 
         NSArray *feeds = [responseJson valueForKeyPath:@"data.feedsList"];
         NSDictionary *pageInfo = [responseJson valueForKeyPath:@"data.attachInfo"];
@@ -577,8 +585,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     
     [self getRequest:rqtStr parameter:@{@"id":[User uid]} includeArguments:YES completion:^(NSDictionary *responseJson) {
         
-        NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        workerContext.parentContext = self.appDelegate.managedObjectContext;
+        NSManagedObjectContext *workerContext = [self workerContext];
         
         for (NSDictionary *planInfo in [responseJson valueForKeyPath:@"data.planList"]) {
             NSDictionary *userInfo = [responseJson valueForKeyPath:[NSString stringWithFormat:@"data.manList.%@",planInfo[@"ownerId"]]];
@@ -627,8 +634,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
           completion:^(NSDictionary *responseJson)
      {
          
-         NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-         workerContext.parentContext = self.appDelegate.managedObjectContext;
+         NSManagedObjectContext *workerContext = [self workerContext];
          
          NSMutableArray *plans = [NSMutableArray array];
          NSArray *planList = [responseJson valueForKeyPath:@"data.planList"];
@@ -788,8 +794,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,GET_LIST];
     [self getRequest:rqtStr parameter:@{@"id":ownerId} includeArguments:YES completion:^(NSDictionary *responseJson) {
         
-        NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        workerContext.parentContext = self.appDelegate.managedObjectContext;
+        NSManagedObjectContext *workerContext = [self workerContext];
 
         NSArray *plans = responseJson[@"data"];
         NSMutableArray *planEntities = [NSMutableArray arrayWithCapacity:plans.count];

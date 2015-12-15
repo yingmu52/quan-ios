@@ -409,7 +409,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
                                               NSArray *commmentIds,
                                               Feed *feed)
     {
-        dispatch_main_async_safe(^{
 #warning 同步评论列表
             self.hasNextPage = hasNextPage;
             self.pageInfo = pageInfo;
@@ -423,8 +422,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
             if (!self.hasNextPage){ //stop scroll to load more
                 self.tableView.showsInfiniteScrolling = NO;
             }
-            
-        });
     }];
 }
 
