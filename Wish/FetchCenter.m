@@ -71,7 +71,6 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 @property (nonatomic,strong) NSString *baseUrl;
 @property (nonatomic,strong) Reachability *reachability;
 @property (nonatomic,strong) NSDictionary *backendErrorCode;
-@property (nonatomic,strong) NSURLSession *session;
 @property (nonatomic,weak) AppDelegate *appDelegate;
 @end
 @implementation FetchCenter
@@ -1071,39 +1070,38 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
                                                            timeoutInterval:30.0];
         request.HTTPMethod = @"GET";
         
-        NSURLSessionDataTask *task = [self.session dataTaskWithRequest:request
-                                                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
-                                      {
-                                          if (data){
-                                              //递归过滤Json里含带的Null数据
-                                              NSDictionary *rawJson = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                      options:NSJSONReadingAllowFragments
-                                                                                                        error:nil];
-                                              NSDictionary *responseJson = [self recursiveNullRemove:rawJson];
-                                              
-                                              if (responseJson) {
-                                                  if (!error && ![responseJson[@"ret"] integerValue]){ //成功
-                                                      if (completionBlock) {
-                                                          completionBlock(responseJson);
-                                                      }
-                                                  }else{ //失败
-                                                      
-                                                      //在委托中跳出后台的提示
-                                                      [self alertWithBackendErrorCode:@([responseJson[@"ret"] integerValue])];
-                                                      
-                                                      //假失败写入请求日志
-                                                      [self appendRequest:request andResponse:responseJson];
-                                                      
-                                                      NSLog(@"Fail Get Request :%@\n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
-                                                            ,rqtStr,baseURL,dict,responseJson,error);
-                                                      
-                                                      if ([self.delegate respondsToSelector:@selector(didFailSendingRequest)]){
-                                                          [self.delegate didFailSendingRequest];
-                                                      }
-                                                  }
-                                              }
-                                          }
-                                      }];
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+        NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
+            if (data){
+                //递归过滤Json里含带的Null数据
+                NSDictionary *rawJson = [NSJSONSerialization JSONObjectWithData:data
+                                                                          options:NSJSONReadingAllowFragments
+                                                                            error:nil];
+                NSDictionary *responseJson = [self recursiveNullRemove:rawJson];
+                  
+                if (responseJson) {
+                    if (!error && ![responseJson[@"ret"] integerValue]){ //成功
+                        if (completionBlock) {
+                            completionBlock(responseJson);
+                        }
+                    }else{ //失败
+                          
+                        //在委托中跳出后台的提示
+                        [self alertWithBackendErrorCode:@([responseJson[@"ret"] integerValue])];
+                          
+                        //假失败写入请求日志
+                        [self appendRequest:request andResponse:responseJson];
+                          
+                        NSLog(@"Fail Get Request :%@\n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
+                              ,rqtStr,baseURL,dict,responseJson,error);
+                          
+                        if ([self.delegate respondsToSelector:@selector(didFailSendingRequest)]){
+                            [self.delegate didFailSendingRequest];
+                        }
+                    }
+                }
+            }
+        }];
         [task resume];
     }
     @catch (NSException *exception) {
@@ -1111,12 +1109,6 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     }
 }
 
-- (NSURLSession *)session{
-    if (!_session) {
-        _session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    }
-    return _session;
-}
 #pragma mark - 请求统一参数
 
 - (NSString *)buildVersion{
