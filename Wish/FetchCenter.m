@@ -1082,7 +1082,11 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
                 if (responseJson) {
                     if (!error && ![responseJson[@"ret"] integerValue]){ //成功
                         if (completionBlock) {
-                            completionBlock(responseJson);
+                            //创建一个新线程，因为每个线程必须有自己的MOC
+                            dispatch_queue_t queue = dispatch_queue_create([NSUUID UUID].UUIDString.UTF8String  , NULL);
+                            dispatch_async(queue, ^{
+                                completionBlock(responseJson);
+                            });
                         }
                     }else{ //失败
                           
