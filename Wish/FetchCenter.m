@@ -618,45 +618,60 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 
 #pragma mark - 发现事件
 
-- (void)getDiscoveryList:(FetchCenterGetRequestGetDiscoverListCompleted)completionBlock{
+- (void)getDiscoveryList:(NSMutableArray *)currentPlans
+              completion:(FetchCenterGetRequestGetDiscoverListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,DISCOVER,GET_DISCOVER_LIST];
     [self getRequest:rqtStr
            parameter:nil
     includeArguments:YES
           completion:^(NSDictionary *responseJson)
-    {
-              
-        __block NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        workerContext.parentContext = self.appDelegate.managedObjectContext;
+     {
+         
+         __block NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+         workerContext.parentContext = self.appDelegate.managedObjectContext;
+         
+         NSMutableArray *plans = [NSMutableArray array];
+         NSArray *planList = [responseJson valueForKeyPath:@"data.planList"];
+         NSDictionary *manList = [responseJson valueForKeyPath:@"data.manList"];
+         NSString *title = [responseJson valueForKeyPath:@"data.quanInfo.name"];
+         
+         //缓存并更新本地事件
+         if (planList && manList){
+             [planList enumerateObjectsUsingBlock:^(NSDictionary * planInfo, NSUInteger idx, BOOL * _Nonnull stop) {
+                 Plan *plan = [Plan updatePlanFromServer:planInfo
+                                               ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]
+                                    managedObjectContext:workerContext];
+                 plan.discoverIndex = @(idx); //记录索引方便显示服务器上的顺序
+                 [plans addObject:plan];
+ //              NSLog(@"%@, mask : %@, index %@",plan.planTitle,plan.cornerMask,plan.discoverIndex);
+             }];
+         }
+         
+         //移除发现页的不存在于服务器上的事件，异线。
+         if (currentPlans.count > 0) {
+             NSArray *planIds = [plans valueForKey:@"planId"];
+             NSPredicate *predicate =[NSPredicate predicateWithFormat:@"NOT (planId IN %@)",planIds];
+             NSArray *trashPlans = [currentPlans filteredArrayUsingPredicate:predicate];
+             for (Plan *plan in trashPlans){
+                 if (plan.isDeletable) {
+                     [plan.managedObjectContext deleteObject:plan];
+                 }else{
+                     plan.discoverIndex = nil;
+                 }
+                 //             NSLog(@"Removing plan %@ : %@",plan.planId,plan.planTitle);
+             }
+         }
 
-        NSMutableArray *plans = [NSMutableArray array];
-        NSArray *planList = [responseJson valueForKeyPath:@"data.planList"];
-        NSDictionary *manList = [responseJson valueForKeyPath:@"data.manList"];
-        NSString *title = [responseJson valueForKeyPath:@"data.quanInfo.name"];
-
-        //缓存并更新本地事件
-        if (planList && manList){
-          [planList enumerateObjectsUsingBlock:^(NSDictionary * planInfo, NSUInteger idx, BOOL * _Nonnull stop) {
-              Plan *plan = [Plan updatePlanFromServer:planInfo
-                                            ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]
-                                 managedObjectContext:workerContext];
-              plan.discoverIndex = @(idx); //记录索引方便显示服务器上的顺序
-              [plans addObject:plan];
-              //                NSLog(@"%@, mask : %@, index %@",plan.planTitle,plan.cornerMask,plan.discoverIndex);
-          }];
-        }
-
-        [self.appDelegate saveContext:workerContext];
-                      
-        if (completionBlock) {
-            dispatch_main_async_safe(^{
-                completionBlock(plans,title);
-            });
-        }
-
-    }];
+         [self.appDelegate saveContext:workerContext];
+         
+         if (completionBlock) {
+             dispatch_main_async_safe(^{
+                 completionBlock(title);
+             });
+         }
+         
+     }];
 }
-
 
 #pragma mark - 反馈，版本检测
 

@@ -37,11 +37,13 @@ static NSTimeInterval expectationTimeout = 30.0f;
 
 - (void)testGetDiscoveryList{
     XCTestExpectation *expectation = [self expectationWithDescription:@"发现页事件列表拉取接口"];
-    [self.fetchCenter getDiscoveryList:^(NSMutableArray *plans, NSString *circleTitle) {
-        if (plans.count > 0 && circleTitle) {
+    [self.fetchCenter getDiscoveryList:nil completion:^(NSString *circleTitle) {
+        if (circleTitle) {
             [expectation fulfill];
         }
+
     }];
+
     [self waitForExpectationsWithTimeout:expectationTimeout
                                  handler:^(NSError * _Nullable error) {
         XCTAssertNil(error,@"发现页事件列表拉取错误");
