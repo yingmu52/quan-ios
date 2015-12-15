@@ -201,7 +201,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
            parameter:@{@"id":[User uid]}
     includeArguments:YES completion:^(NSDictionary *responseJson) {
         
-        __block NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
         workerContext.parentContext = self.appDelegate.managedObjectContext;
         
         NSArray *messagesArray = [responseJson valueForKeyPath:@"data.messageList"];
@@ -267,7 +267,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
         
         
-        __block NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
         workerContext.parentContext = self.appDelegate.managedObjectContext;
         
         NSDictionary *ownerInfo = [responseJson valueForKeyPath:@"data.manList"];
@@ -383,7 +383,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
           completion:^(NSDictionary *responseJson)
     {
         
-        __block NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
         workerContext.parentContext = self.appDelegate.managedObjectContext;
 
         NSArray *feeds = [responseJson valueForKeyPath:@"data.feedsList"];
@@ -577,7 +577,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     
     [self getRequest:rqtStr parameter:@{@"id":[User uid]} includeArguments:YES completion:^(NSDictionary *responseJson) {
         
-        __block NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
         workerContext.parentContext = self.appDelegate.managedObjectContext;
         
         for (NSDictionary *planInfo in [responseJson valueForKeyPath:@"data.planList"]) {
@@ -627,7 +627,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
           completion:^(NSDictionary *responseJson)
      {
          
-         __block NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+         NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
          workerContext.parentContext = self.appDelegate.managedObjectContext;
          
          NSMutableArray *plans = [NSMutableArray array];
