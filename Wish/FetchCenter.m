@@ -787,14 +787,21 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 - (void)getPlanListForOwnerId:(NSString *)ownerId completion:(FetchCenterGetRequestGetPlanListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,GET_LIST];
     [self getRequest:rqtStr parameter:@{@"id":ownerId} includeArguments:YES completion:^(NSDictionary *responseJson) {
+        
+        NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        workerContext.parentContext = self.appDelegate.managedObjectContext;
+
         NSArray *plans = responseJson[@"data"];
         NSMutableArray *planEntities = [NSMutableArray arrayWithCapacity:plans.count];
         for (NSDictionary *planInfo in plans) {
             Plan * plan = [Plan updatePlanFromServer:planInfo
                                            ownerInfo:[Owner myWebInfo]
-                                managedObjectContext:[AppDelegate getContext]];
+                                managedObjectContext:workerContext];
             [planEntities addObject:plan];
         }
+        
+        [self.appDelegate saveContext:workerContext];
+        
         if (completionBlock) {
             dispatch_main_async_safe(^{
                 completionBlock(planEntities.mutableCopy);
