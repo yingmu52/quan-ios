@@ -333,11 +333,8 @@
 		A016FDB91B8D14BA006E7A09 /* PreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewCell.h; sourceTree = "<group>"; };
 		A016FDBA1B8D14BA006E7A09 /* PreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewCell.m; sourceTree = "<group>"; };
 		A02E852B1BEC80A10093EDE8 /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpg; sourceTree = "<group>"; };
-		A03010381BABC6AA0041E2CF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/QBImagePicker.strings; sourceTree = "<group>"; };
 		A03010391BABC6AA0041E2CF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/QBImagePicker.strings; sourceTree = "<group>"; };
-		A030103A1BABC6AA0041E2CF /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/QBImagePicker.strings; sourceTree = "<group>"; };
 		A030103B1BABC6AA0041E2CF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A030103C1BABC6AA0041E2CF /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/QBImagePicker.strings; sourceTree = "<group>"; };
 		A030103D1BABC6AA0041E2CF /* QBAlbumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBAlbumCell.h; sourceTree = "<group>"; };
 		A030103E1BABC6AA0041E2CF /* QBAlbumCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBAlbumCell.m; sourceTree = "<group>"; };
 		A030103F1BABC6AA0041E2CF /* QBAlbumsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBAlbumsViewController.h; sourceTree = "<group>"; };
@@ -1440,13 +1437,6 @@
 				Base,
 				"zh-Hans",
 				"zh-Hant",
-				ca,
-				de,
-				es,
-				fr,
-				it,
-				pt,
-				ja,
 			);
 			mainGroup = AE0172301A65CD8E0014266F;
 			productRefGroup = AE01723A1A65CD8E0014266F /* Products */;
@@ -1786,10 +1776,7 @@
 		A03010371BABC6AA0041E2CF /* QBImagePicker.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A03010381BABC6AA0041E2CF /* de */,
 				A03010391BABC6AA0041E2CF /* en */,
-				A030103A1BABC6AA0041E2CF /* es */,
-				A030103C1BABC6AA0041E2CF /* ja */,
 				A03010511BABC6AA0041E2CF /* zh-Hans */,
 			);
 			name = QBImagePicker.strings;
