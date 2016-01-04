@@ -34,7 +34,7 @@
     self.hasNextPage = YES;
     
     __weak typeof(self) weakSelf = self;
-    [self.tableView addInfiniteScrollingWithActionHandler:^{
+    [weakSelf.tableView addInfiniteScrollingWithActionHandler:^{
         if (weakSelf.hasNextPage) {
             [weakSelf loadComments];
         }
@@ -46,10 +46,8 @@
 }
 
 - (void)setFeed:(Feed *)feed{
-    if (feed != _feed) {
-        _feed = feed;
-        [self updateHeaderInfoForFeed:_feed];
-    }
+    _feed = feed;
+    [self updateHeaderInfoForFeed:_feed];
 }
 
 - (void)setUpNavigationItem
@@ -157,12 +155,14 @@
 //}
 
 - (void)updateHeaderInfoForFeed:(Feed *)feed{
-    self.headerView.titleTextLabel.attributedText = [[NSAttributedString alloc] initWithString:self.feed.feedTitle
-                                                                                    attributes:self.textAttributes];
-    self.headerView.dateLabel.text = [SystemUtil stringFromDate:feed.createDate];
-    [self.headerView setLikeButtonText:feed.likeCount];
-    [self.headerView setCommentButtonText:feed.commentCount];
-    [self.headerView.likeButton setSelected:feed.selfLiked.boolValue];
+    if (feed) {
+        self.headerView.titleTextLabel.attributedText = [[NSAttributedString alloc] initWithString:feed.feedTitle
+                                                                                        attributes:self.textAttributes];
+        self.headerView.dateLabel.text = [SystemUtil stringFromDate:feed.createDate];
+        [self.headerView setLikeButtonText:feed.likeCount];
+        [self.headerView setCommentButtonText:feed.commentCount];
+        [self.headerView.likeButton setSelected:feed.selfLiked.boolValue];
+    }
 }
 
 #pragma mark - table view
@@ -301,9 +301,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
     [headerView setLikeButtonText:self.feed.likeCount];
 }
 
-- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
+- (void)didFailSendingRequest{
     [self.tableView.infiniteScrollingView stopAnimating];
-    NSLog(@"%@",info);
     if (!self.feed){
         self.title = @"该内容不存在";
     }
