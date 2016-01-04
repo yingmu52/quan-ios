@@ -54,7 +54,7 @@ typedef void(^FetchCenterGetRequestSwithCircleCompleted)(void);
 /** 填写邀请码完成*/
 typedef void(^FetchCenterGetRequestJoinCircleCompleted)(NSString *circleId);
 /** 发现页拉取列表完成*/
-typedef void(^FetchCenterGetRequestGetDiscoverListCompleted)(NSMutableArray *plans, NSString *circleTitle);
+typedef void(^FetchCenterGetRequestGetDiscoverListCompleted)(NSString *circleTitle);
 /** 拉取主人id的事件列表完成*/
 typedef void(^FetchCenterGetRequestGetPlanListCompleted)(NSArray *plans);
 /** 赞某条Feed完成*/
@@ -185,7 +185,9 @@ typedef void(^FetchCenterPostRequestUploadImagesCompleted)(NSArray *imageIds);
 - (void)unFollowPlan:(Plan *)plan completion:(FetchCenterGetRequestUnFollowPlanCompleted)completionBlock;;
 
 #pragma mark - 发现
-- (void)getDiscoveryList:(FetchCenterGetRequestGetDiscoverListCompleted)completionBlock;
+- (void)getDiscoveryList:(NSMutableArray *)currentPlans
+              completion:(FetchCenterGetRequestGetDiscoverListCompleted)completionBlock;
+
 - (void)getFollowingPlanList:(FetchCenterGetRequestGetFollowingPlanListCompleted)completionBlock;
 
 #pragma mark - 个人

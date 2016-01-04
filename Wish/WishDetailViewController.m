@@ -110,10 +110,7 @@
             [weakSelf.fetchCenter loadFeedsListForPlan:weakSelf.plan
                                               pageInfo:weakSelf.pageInfo
                                             completion:^(NSDictionary *pageInfo, BOOL hasNextPage, NSArray *feedIds) {
-                                                dispatch_main_async_safe(^{
-                                                    [weakSelf process:pageInfo hasNextPage:hasNextPage serverFeedIdList:feedIds];
-                                                });
-                                                
+                                                [weakSelf process:pageInfo hasNextPage:hasNextPage serverFeedIdList:feedIds];
              }];
         }
     }];

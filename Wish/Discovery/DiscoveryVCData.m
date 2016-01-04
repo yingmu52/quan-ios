@@ -56,27 +56,10 @@
 }
 
 - (void)getDiscoveryList{
-    [self.fetchCenter getDiscoveryList:^(NSMutableArray *plans, NSString *circleTitle) {
-        //移除发现页的不存在于服务器上的事件，异线。
-        dispatch_main_sync_safe((^{
-            NSArray *planIds = [plans valueForKey:@"planId"];
-            NSMutableArray *currentCopy = [self.collectionFetchedRC.fetchedObjects mutableCopy];
-            NSPredicate *predicate =[NSPredicate predicateWithFormat:@"NOT (planId IN %@)",planIds];
-            NSArray *trashPlans = [currentCopy filteredArrayUsingPredicate:predicate]; //a copy of subset of 'currentCopy‘
-            for (Plan *plan in trashPlans){
-                if (plan.isDeletable) {
-                    [plan.managedObjectContext deleteObject:plan];
-                }else{
-                    plan.discoverIndex = nil;
-                }
-                NSLog(@"Removing plan %@ : %@",plan.planId,plan.planTitle);
-            }
-            
-            //设置导航标题
-            self.navigationItem.title = circleTitle;
-            
-        }));
-
+    [self.fetchCenter getDiscoveryList:self.collectionFetchedRC.fetchedObjects.mutableCopy
+                            completion:^(NSString *circleTitle) {
+        //设置导航标题
+        self.navigationItem.title = circleTitle;
     }];
 }
 

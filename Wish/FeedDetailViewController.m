@@ -34,7 +34,7 @@
     self.hasNextPage = YES;
     
     __weak typeof(self) weakSelf = self;
-    [self.tableView addInfiniteScrollingWithActionHandler:^{
+    [weakSelf.tableView addInfiniteScrollingWithActionHandler:^{
         if (weakSelf.hasNextPage) {
             [weakSelf loadComments];
         }
@@ -46,10 +46,8 @@
 }
 
 - (void)setFeed:(Feed *)feed{
-    if (feed != _feed) {
-        _feed = feed;
-        [self updateHeaderInfoForFeed:_feed];
-    }
+    _feed = feed;
+    [self updateHeaderInfoForFeed:_feed];
 }
 
 - (void)setUpNavigationItem
@@ -157,12 +155,14 @@
 //}
 
 - (void)updateHeaderInfoForFeed:(Feed *)feed{
-    self.headerView.titleTextLabel.attributedText = [[NSAttributedString alloc] initWithString:self.feed.feedTitle
-                                                                                    attributes:self.textAttributes];
-    self.headerView.dateLabel.text = [SystemUtil stringFromDate:feed.createDate];
-    [self.headerView setLikeButtonText:feed.likeCount];
-    [self.headerView setCommentButtonText:feed.commentCount];
-    [self.headerView.likeButton setSelected:feed.selfLiked.boolValue];
+    if (feed) {
+        self.headerView.titleTextLabel.attributedText = [[NSAttributedString alloc] initWithString:feed.feedTitle
+                                                                                        attributes:self.textAttributes];
+        self.headerView.dateLabel.text = [SystemUtil stringFromDate:feed.createDate];
+        [self.headerView setLikeButtonText:feed.likeCount];
+        [self.headerView setCommentButtonText:feed.commentCount];
+        [self.headerView.likeButton setSelected:feed.selfLiked.boolValue];
+    }
 }
 
 #pragma mark - table view
@@ -301,9 +301,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
     [headerView setLikeButtonText:self.feed.likeCount];
 }
 
-- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
+- (void)didFailSendingRequest{
     [self.tableView.infiniteScrollingView stopAnimating];
-    NSLog(@"%@",info);
     if (!self.feed){
         self.title = @"该内容不存在";
     }
@@ -366,26 +365,30 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
     switch(type)
     {
         case NSFetchedResultsChangeInsert:{
-            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             [self.headerView setCommentButtonText:self.feed.commentCount];
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             NSLog(@"Comment inserted");
         }
             break;
             
         case NSFetchedResultsChangeDelete:{
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             [self.headerView setCommentButtonText:self.feed.commentCount];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             NSLog(@"Comment deleted");
         }
             break;
             
         case NSFetchedResultsChangeUpdate:
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath]
+                                  withRowAnimation:UITableViewRowAnimationFade];
             break;
             
-        case NSFetchedResultsChangeMove:
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+        case NSFetchedResultsChangeMove:{
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
+                                  withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath]
+                                  withRowAnimation:UITableViewRowAnimationFade];
+        }
             break;
     }
 
@@ -409,7 +412,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
                                               NSArray *commmentIds,
                                               Feed *feed)
     {
-        dispatch_main_async_safe(^{
 #warning 同步评论列表
             self.hasNextPage = hasNextPage;
             self.pageInfo = pageInfo;
@@ -423,8 +425,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
             if (!self.hasNextPage){ //stop scroll to load more
                 self.tableView.showsInfiniteScrolling = NO;
             }
-            
-        });
     }];
 }
 
