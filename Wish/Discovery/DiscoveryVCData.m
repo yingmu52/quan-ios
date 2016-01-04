@@ -175,7 +175,10 @@
         
         //显示弹出提示窗口
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:msg preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"点击可复制内容" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //把msg的内容复制到粘帖版上
+            [[UIPasteboard generalPasteboard] setString:msg];
+        }]];
         [self presentViewController:alert animated:YES completion:nil];
     }
     
