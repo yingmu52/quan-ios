@@ -365,14 +365,12 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
     switch(type)
     {
         case NSFetchedResultsChangeInsert:{
-            [self.headerView setCommentButtonText:self.feed.commentCount];
             [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             NSLog(@"Comment inserted");
         }
             break;
             
         case NSFetchedResultsChangeDelete:{
-            [self.headerView setCommentButtonText:self.feed.commentCount];
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             NSLog(@"Comment deleted");
         }
@@ -390,6 +388,11 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
                                   withRowAnimation:UITableViewRowAnimationFade];
         }
             break;
+    }
+    
+    if ((type == NSFetchedResultsChangeInsert ||
+         type == NSFetchedResultsChangeDelete) && self.feed) {
+        [self.headerView setCommentButtonText:self.feed.commentCount];
     }
 
 }
