@@ -230,8 +230,10 @@
                 break;
                 
             case NSFetchedResultsChangeUpdate:{
-                [self.tableView reloadRowsAtIndexPaths:@[indexPath]
-                                      withRowAnimation:UITableViewRowAnimationNone];
+                //see https://developer.apple.com/library/ios/documentation/CoreData/Reference/NSFetchedResultsControllerDelegate_Protocol/index.html#//apple_ref/occ/intf/NSFetchedResultsControllerDelegate
+                //they don't use the 'reload' method anymore
+                [self configureCell:[self.tableView cellForRowAtIndexPath:indexPath]
+                        atIndexPath:indexPath];
                 NSLog(@"Feed updated");
             }
                 break;
@@ -288,6 +290,11 @@
 
 - (WishDetailCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     WishDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WishDetailCell" forIndexPath:indexPath];
+    [self configureCell:cell atIndexPath:indexPath];
+    return cell;
+}
+
+- (void)configureCell:(WishDetailCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     cell.delegate = self;
     Feed *feed = [self.fetchedRC objectAtIndexPath:indexPath];
     cell.dateLabel.text = [SystemUtil stringFromDate:feed.createDate];
@@ -308,7 +315,6 @@
         cell.pictureCountLabel.hidden = YES;
     }
     [cell.photoView downloadImageWithImageId:feed.imageId size:FetchCenterImageSize800];
-    return cell;
 }
 
 #warning - This should go to super view ~ 
