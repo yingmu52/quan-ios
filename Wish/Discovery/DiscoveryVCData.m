@@ -143,11 +143,6 @@
     [self performSegueWithIdentifier:@"showPostViewFromDiscovery" sender:nil];
 }
 
-- (void)showShuffView{
-    [self performSegueWithIdentifier:@"showShuffleView" sender:nil];
-}
-
-
 - (void)setUpNavigationItem
 {
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[Theme navInviteDefault]
@@ -155,10 +150,10 @@
                                                                                 target:self
                                                                                 action:@selector(showInvitationView)];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[Theme navAddDefault]
-                                                                              style:UIBarButtonItemStylePlain
-                                                                             target:self
-                                                                             action:@selector(showShuffView)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[Theme navAddDefault]
+//                                                                              style:UIBarButtonItemStylePlain
+//                                                                             target:self
+//                                                                             action:@selector(showShuffView)];
 }
 
 - (void)showInvitationView{

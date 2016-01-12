@@ -66,7 +66,7 @@
 + (UIImage *)topImageMask;
 + (UIColor *)profileBakground;
 + (UIImage *)discoveryAddButton;
-
++ (UIImage *)tabbarAddButton;
 + (UIImage *)checkmarkSelected;
 + (UIImage *)checkmarkUnSelected;
 

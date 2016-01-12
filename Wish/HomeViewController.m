@@ -119,20 +119,17 @@ ShuffleViewControllerDelegate>
     }
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:myIcon];
     
-    //2.右上角加号浮层入口
-    UIButton *addBtn = [Theme buttonWithImage:[Theme navAddDefault]
-                                       target:self
-                                     selector:@selector(showShuffView)
-                                        frame:CGRectMake(0,0, 48,CGRectGetHeight(self.navigationController.navigationBar.frame))];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
+//    //2.右上角加号浮层入口
+//    UIButton *addBtn = [Theme buttonWithImage:[Theme navAddDefault]
+//                                       target:self
+//                                     selector:nil
+//                                        frame:CGRectMake(0,0, 48,CGRectGetHeight(self.navigationController.navigationBar.frame))];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
+    
 }
 
 - (void)showProfileView{
     [self performSegueWithIdentifier:@"showMyPageFromHome" sender:nil];
-}
-
-- (void)showShuffView{
-    [self performSegueWithIdentifier:@"showShuffViewFromHome" sender:nil];
 }
 
 - (void)addWish{

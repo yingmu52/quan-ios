@@ -215,6 +215,10 @@
     return [UIImage imageNamed:@"button_creat_plus"];
 }
 
++ (UIImage *)tabbarAddButton{
+    return [UIImage imageNamed:@"tab_ic_plus"];
+}
+
 + (UIImage *)navCircleIcon{
     return [UIImage imageNamed:@"group_icon"];
 }

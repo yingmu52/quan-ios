@@ -9,6 +9,7 @@
 #import "MainTabBarController.h"
 #import "SystemUtil.h"
 #import "FetchCenter.h"
+#import "Theme.h"
 @interface MainTabBarController () <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,strong) NSTimer *messageNotificationTimer;
@@ -19,12 +20,36 @@
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
+    
+    //设置Tabar的高度
     CGRect tabFrame = self.tabBar.frame;
     CGFloat height = 60.0f;
     tabFrame.size.height = height;
     tabFrame.origin.y = self.view.frame.size.height - height;
     self.tabBar.frame = tabFrame;
+    
+    
+    //设置中间的加号按扭
+    UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *buttonImage = [Theme tabbarAddButton];
+    addButton.frame = CGRectMake(tabFrame.size.width * 0.5 - buttonImage.size.width * 0.5,
+                                 tabFrame.size.height * 0.5 - buttonImage.size.height * 0.5,
+                                 buttonImage.size.width,
+                                 buttonImage.size.height);
+    [addButton setBackgroundImage:buttonImage forState:UIControlStateNormal];
+
+    [addButton addTarget:self
+                  action:@selector(showShuffleView)
+        forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.tabBar addSubview:addButton];
+
 }
+
+- (void)showShuffleView{
+    [self performSegueWithIdentifier:@"showShuffleViewFromTabbar" sender:nil];
+}
+
 
 - (void)viewDidLoad{
     [super viewDidLoad];
