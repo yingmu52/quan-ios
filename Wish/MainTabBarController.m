@@ -83,12 +83,22 @@
 }
 
 - (void)setNumberOfMessages:(NSInteger)numberOfMessages{
-    id messageTab = [self.tabBar.items objectAtIndex:2];
-    _numberOfMessages = numberOfMessages;
-    if (numberOfMessages > 0) { //显示记数
-        [messageTab setBadgeValue:[NSString stringWithFormat:@"%@",@(numberOfMessages)]];
-    }else{ //隐蔽记数
-        [messageTab setBadgeValue:nil];
+    UITabBarItem *messageTab;
+    //找到消息项
+    for (UITabBarItem *item in self.tabBar.items) {
+        if ([item.title isEqualToString:@"消息"]) {
+            messageTab = item;
+        }
+    }
+    
+    //设置项右上角的数字提示
+    if (messageTab) {
+        _numberOfMessages = numberOfMessages;
+        if (numberOfMessages > 0) { //显示记数
+            [messageTab setBadgeValue:[NSString stringWithFormat:@"%@",@(numberOfMessages)]];
+        }else{ //隐蔽记数
+            [messageTab setBadgeValue:nil];
+        }
     }
 }
 
