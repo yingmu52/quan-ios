@@ -153,19 +153,24 @@ static NSUInteger distance = 10;
 
 - (void)goBack{
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"是否放弃此次编辑？" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSManagedObjectContext *context = [AppDelegate getContext];
-
+    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定"
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action)
+    {
         //取消所有上传任何
         [self.fetchCenter.uploadManager clear];
         
         //删除已经缓存的feed或事件
+        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         if (!self.plan.planId) {
-            [context deleteObject:self.plan];
+            [self.plan.managedObjectContext deleteObject:self.plan];
+            [delegate saveContext];
         }
         if (self.feed) {
-            [context deleteObject:self.feed];
+            [self.feed.managedObjectContext deleteObject:self.feed];
+            [delegate saveContext];
         }
+        
         
         //返回上一级
         [self.navigationController popViewControllerAnimated:YES];
