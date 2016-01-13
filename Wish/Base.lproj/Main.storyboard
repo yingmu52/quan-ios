@@ -1285,6 +1285,7 @@
                         <segue destination="XiV-RA-INl" kind="show" identifier="ShowPostFeedFromHome" id="4ZT-53-1QA"/>
                         <segue destination="iFY-B5-FXO" kind="show" identifier="showMyPageFromHome" id="Z2c-w5-iPe"/>
                         <segue destination="1dn-MG-e4k" kind="presentation" identifier="showStationView" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="4rk-wL-bnq"/>
+                        <segue destination="1Y1-uW-81U" kind="show" identifier="showPostFromHome" id="HDW-gM-fhf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d1T-ay-k77" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -6568,9 +6569,10 @@
     <inferredMetricsTieBreakers>
         <segue reference="rjz-Cv-C9H"/>
         <segue reference="hrM-4j-5CW"/>
-        <segue reference="9iF-Ie-E5K"/>
-        <segue reference="evE-nl-2lN"/>
+        <segue reference="cel-0L-eNY"/>
         <segue reference="4ZT-53-1QA"/>
+        <segue reference="HDW-gM-fhf"/>
+        <segue reference="evE-nl-2lN"/>
         <segue reference="mFv-Li-7ge"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
