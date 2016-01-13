@@ -210,18 +210,16 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self.dropdownView hide];
     Circle *circle = [self.tableFetchedRC objectAtIndexPath:indexPath];
     if (![[User currentCircleId] isEqualToString:circle.circleId]) { //当选择了与当前不同的圈子时才执行操作
         self.navigationItem.title = @"正在切换圈子...";
-        
         //发送切换圈子请求
         [self.fetchCenter switchToCircle:circle.circleId completion:^{
-                        
             //刷新发现页列表
             [self getDiscoveryList];
         }];
     }
-    [self.dropdownView hide];
 }
 
 
