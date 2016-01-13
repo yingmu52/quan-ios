@@ -13,10 +13,8 @@
 #import "AppDelegate.h"
 #import "User.h"
 #import "WishDetailVCFollower.h"
-#import "ShuffleViewController.h"
-#import "PostFeedViewController.h"
 #import "LMDropdownView.h"
-@interface DiscoveryVCData () <FetchCenterDelegate,ShuffleViewControllerDelegate,LMDropdownViewDelegate>
+@interface DiscoveryVCData () <FetchCenterDelegate,LMDropdownViewDelegate>
 @property (nonatomic,strong) LMDropdownView *dropdownView;
 @end
 
@@ -96,26 +94,10 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    
-    
-    if ([segue.identifier isEqualToString:@"showShuffleView"]) {
-        ShuffleViewController *svc = segue.destinationViewController;
-        svc.svcDelegate = self; //用于使用相机回调函数
-    }else{
-        if ([segue.identifier isEqualToString:@"showPostDetailFromDiscovery"]) { //相机选取照片之后
-            PostFeedViewController *pfvc = segue.destinationViewController;
-            NSArray *AssetsAndPlan = sender;
-            pfvc.assets = [AssetsAndPlan[0] mutableCopy]; //assets
-            pfvc.plan = AssetsAndPlan[1]; //plan
-            segue.destinationViewController.hidesBottomBarWhenPushed = YES;
-        }
-        if ([segue.identifier isEqualToString:@"showDiscoveryWishDetail"] || [segue.identifier isEqualToString:@"showWishDetailVCOwnerFromDiscovery"]){
-            [segue.destinationViewController setPlan:sender];
-            segue.destinationViewController.hidesBottomBarWhenPushed = YES;
-        }
-        
+    if ([segue.identifier isEqualToString:@"showDiscoveryWishDetail"] || [segue.identifier isEqualToString:@"showWishDetailVCOwnerFromDiscovery"]){
+        [segue.destinationViewController setPlan:sender];
+        segue.destinationViewController.hidesBottomBarWhenPushed = YES;
     }
-    
 }
 
 - (NSFetchRequest *)collectionFetchRequest{
@@ -131,17 +113,6 @@
 }
 
 #pragma mark - 加号浮云
-
-- (void)didFinishSelectingImageAssets:(NSArray *)assets forPlan:(Plan *)plan{
-    //asset could be either UIImage or PHAsset
-    if (assets && plan) {
-        [self performSegueWithIdentifier:@"showPostDetailFromDiscovery" sender:@[assets,plan]];
-    }
-}
-
-- (void)didPressCreatePlanButton:(ShuffleViewController *)svc{
-    [self performSegueWithIdentifier:@"showPostViewFromDiscovery" sender:nil];
-}
 
 - (void)setUpNavigationItem
 {

@@ -19,7 +19,6 @@
 #import "ImagePicker.h"
 #import "ViewForEmptyEvent.h"
 #import "UIImageView+ImageCache.h"
-#import "ShuffleViewController.h"
 #import "NZCircularImageView.h"
 #import "UIImageView+ImageCache.h"
 #import "StationViewController.h"
@@ -33,8 +32,7 @@ UIGestureRecognizerDelegate,
 HomeCardViewDelegate,
 UIActionSheetDelegate,
 ImagePickerDelegate,
-ViewForEmptyEventDelegate,
-ShuffleViewControllerDelegate>
+ViewForEmptyEventDelegate>
 @property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @property (nonatomic,weak) Plan *currentPlan;
 @property (nonatomic,strong) NSMutableArray *itemChanges;
@@ -161,16 +159,6 @@ ShuffleViewControllerDelegate>
     if ([segue.identifier isEqualToString:@"showPlanDetailFromHome"]) {
         [segue.destinationViewController setPlan:sender];
     }
-    if ([segue.identifier isEqualToString:@"ShowPostFeedFromHome"]) {
-        PostFeedViewController *pfvc = segue.destinationViewController;
-        NSArray *array = sender;
-        pfvc.assets = array.firstObject;
-        pfvc.plan = array.lastObject;
-    }
-    if ([segue.identifier isEqualToString:@"showShuffViewFromHome"]) {
-        ShuffleViewController *svc = segue.destinationViewController;
-        svc.svcDelegate = self;
-    }
     
     if ([segue.identifier isEqualToString:@"showStationView"]) {
         StationViewController *svc = segue.destinationViewController;
@@ -182,18 +170,6 @@ ShuffleViewControllerDelegate>
     
 }
 
-#pragma mark - 加号浮层回调函数
-
-- (void)didFinishSelectingImageAssets:(NSArray *)assets forPlan:(Plan *)plan{
-    //asset could be either UIImage or PHAsset
-    if (assets && plan) {
-        [self performSegueWithIdentifier:@"ShowPostFeedFromHome" sender:@[assets,plan]];
-    }
-}
-
-- (void)didPressCreatePlanButton:(ShuffleViewController *)svc{
-    [self addWish];
-}
 
 #pragma mark -  UICollectionView methods
 - (void)handleLongPress:(UILongPressGestureRecognizer *)longPress{

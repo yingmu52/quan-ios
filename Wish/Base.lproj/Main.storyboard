@@ -794,7 +794,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RIa-Mp-Cry" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1761" y="-2338.5"/>
+            <point key="canvasLocation" x="357" y="-955.5"/>
         </scene>
         <!--Post Detail View Controller-->
         <scene sceneID="nyi-zn-yq6">
@@ -1281,7 +1281,6 @@
                     <navigationItem key="navigationItem" id="Ayl-oc-p2J"/>
                     <connections>
                         <outlet property="collectionView" destination="uow-gD-atl" id="WfP-de-Oth"/>
-                        <segue destination="1Y1-uW-81U" kind="show" identifier="showPostFromHome" id="CTd-gb-xTE"/>
                         <segue destination="b5E-B5-8Ys" kind="show" identifier="showPlanDetailFromHome" id="cel-0L-eNY"/>
                         <segue destination="XiV-RA-INl" kind="show" identifier="ShowPostFeedFromHome" id="4ZT-53-1QA"/>
                         <segue destination="iFY-B5-FXO" kind="show" identifier="showMyPageFromHome" id="Z2c-w5-iPe"/>
@@ -3859,8 +3858,6 @@
                         <outlet property="tableView" destination="tzt-qK-KGi" id="b1z-Om-ohX"/>
                         <segue destination="rp9-lu-nOr" kind="show" identifier="showDiscoveryWishDetail" id="JVq-VY-XxP"/>
                         <segue destination="b5E-B5-8Ys" kind="show" identifier="showWishDetailVCOwnerFromDiscovery" id="9iF-Ie-E5K"/>
-                        <segue destination="XiV-RA-INl" kind="show" identifier="showPostDetailFromDiscovery" id="FEw-eo-lxT"/>
-                        <segue destination="1Y1-uW-81U" kind="show" identifier="showPostViewFromDiscovery" id="yb7-5f-Plc"/>
                         <segue destination="hHC-dm-tO3" kind="presentation" identifier="showInvitationView" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="aGn-B4-aDl"/>
                     </connections>
                 </viewController>
@@ -3897,7 +3894,7 @@
                     </connections>
                 </tableView>
             </objects>
-            <point key="canvasLocation" x="-301.5" y="-1645.5"/>
+            <point key="canvasLocation" x="-1225.5" y="-2035.5"/>
         </scene>
         <!--Shuffle View Controller-->
         <scene sceneID="Ahi-9g-gWw">
@@ -3915,6 +3912,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="4" y="20" width="392" height="607"/>
+                                </variation>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="xGf-qb-TVc" appends="YES" id="3jc-If-Xzy"/>
                                 </connections>
@@ -4359,8 +4359,11 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="Ivf-5I-BhJ"/>
                     <connections>
                         <outlet property="collectionView" destination="3tK-2T-lK5" id="wvR-vU-YMv"/>
+                        <segue destination="XiV-RA-INl" kind="show" identifier="showPostFeedViewFromShuffleView" id="XiB-xT-Plv"/>
+                        <segue destination="1Y1-uW-81U" kind="show" identifier="showPostViewFromShuffleView" id="T3Y-fE-Qhc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G5e-Qa-ZML" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4370,7 +4373,23 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-4891.5" y="-955.5"/>
+            <point key="canvasLocation" x="-4036.5" y="-522"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="aJQ-rK-FGA">
+            <objects>
+                <navigationController id="NWB-iQ-1BC" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="srR-wT-KFT">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="B14-O4-bHm" kind="relationship" relationship="rootViewController" id="q29-bi-Xi7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jh7-wh-mG1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4792.5" y="-963"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="00e-ZG-TeN">
@@ -4381,6 +4400,7 @@
                         <viewControllerLayoutGuide type="bottom" id="NJ0-as-aFB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="IUZ-OK-K9U">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -4402,12 +4422,12 @@
                         <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="B14-O4-bHm" kind="presentation" identifier="showShuffleViewFromTabbar" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="6Yv-oK-HVw"/>
                         <segue destination="qWQ-Vi-JtX" kind="relationship" relationship="viewControllers" id="iSi-v2-Y4W"/>
                         <segue destination="81G-fy-O9t" kind="relationship" relationship="viewControllers" id="BZF-qU-I16"/>
                         <segue destination="xwS-Yf-juI" kind="relationship" relationship="viewControllers" id="6BS-ae-Nzz"/>
                         <segue destination="m7d-Re-JGr" kind="relationship" relationship="viewControllers" id="3GI-6H-MGJ"/>
                         <segue destination="2Fl-7V-mVz" kind="relationship" relationship="viewControllers" id="KBr-BE-YAB"/>
+                        <segue destination="NWB-iQ-1BC" kind="presentation" identifier="showShuffleViewFromTabbar" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="HSr-If-USB"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MS6-VY-ScM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -6546,13 +6566,12 @@
         <image name="tab_ic_message_pressed" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yb7-5f-Plc"/>
         <segue reference="rjz-Cv-C9H"/>
         <segue reference="hrM-4j-5CW"/>
-        <segue reference="cel-0L-eNY"/>
+        <segue reference="9iF-Ie-E5K"/>
         <segue reference="evE-nl-2lN"/>
+        <segue reference="4ZT-53-1QA"/>
         <segue reference="mFv-Li-7ge"/>
-        <segue reference="tsq-QX-XiL"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
 </document>
