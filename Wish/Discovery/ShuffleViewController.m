@@ -21,10 +21,10 @@
 
 @implementation ShuffleViewController
 
-
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
+    [self.fetchCenter getPlanListForOwnerId:[User uid] completion:nil];
 }
 
 - (IBAction)tapOnBackground:(UITapGestureRecognizer *)tap{
