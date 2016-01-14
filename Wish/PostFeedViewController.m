@@ -287,7 +287,17 @@ static NSUInteger distance = 10;
 {
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
     if (!self.seugeFromPlanCreation) {
-        [self.navigationController popViewControllerAnimated:YES];
+        
+        //选项卡加号入口进入时入时应该使用DimissModalView方法
+        if (self.navigationController.presentingViewController) {
+            //隐藏键盘
+            [self.textView resignFirstResponder];
+            //关闭当前视图
+            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        }else{
+            //返回上一级
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }else{
         [self performSegueWithIdentifier:@"showWishDetailOnPlanCreation" sender:self.plan];
     }

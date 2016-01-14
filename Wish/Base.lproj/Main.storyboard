@@ -4380,7 +4380,7 @@
         <scene sceneID="aJQ-rK-FGA">
             <objects>
                 <navigationController id="NWB-iQ-1BC" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="srR-wT-KFT">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="srR-wT-KFT" customClass="NavigationBar">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
