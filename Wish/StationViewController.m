@@ -25,11 +25,10 @@ typedef enum {
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    
     //设置模糊背影
-    UIToolbar *layer = [[UIToolbar alloc] initWithFrame:self.view.frame];
-    layer.barStyle = UIBarStyleBlackOpaque;
-    [self.view insertSubview:layer atIndex:0];
+    UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
+    visualEffectView.frame = self.view.frame;
+    [self.view insertSubview:visualEffectView atIndex:0];
     
     //设置小卡片封面
     [self.cardImageView downloadImageWithImageId:self.plan.backgroundNum size:FetchCenterImageSize50]; 
