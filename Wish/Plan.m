@@ -125,13 +125,15 @@
 
 - (void)deleteSelf
 {
-    NSManagedObjectContext *context = [AppDelegate getContext];
     if (self.planId && [self.owner.ownerId isEqualToString:[User uid]]){
-        [[[FetchCenter alloc] init] postToDeletePlan:self completion:nil];
+        [[FetchCenter new] postToDeletePlan:self completion:^{
+            [self.managedObjectContext deleteObject:self];
+        }];
     }else{
         NSLog(@"delete from local");
+        [self.managedObjectContext deleteObject:self];
     }
-    [context deleteObject:self];
+    [self.managedObjectContext save:nil];
 }
 
 - (Feed *)fetchLastUpdatedFeed{
