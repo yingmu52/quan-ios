@@ -232,9 +232,11 @@
             case NSFetchedResultsChangeUpdate:{
                 //see https://developer.apple.com/library/ios/documentation/CoreData/Reference/NSFetchedResultsControllerDelegate_Protocol/index.html#//apple_ref/occ/intf/NSFetchedResultsControllerDelegate
                 //they don't use the 'reload' method anymore
-                [self configureCell:[self.tableView cellForRowAtIndexPath:indexPath]
-                        atIndexPath:indexPath];
-                NSLog(@"Feed updated");
+                if (indexPath) {
+                    [self configureCell:[self.tableView cellForRowAtIndexPath:indexPath]
+                            atIndexPath:indexPath];
+                    NSLog(@"Feed updated");
+                }
             }
                 break;
             case NSFetchedResultsChangeMove:{
