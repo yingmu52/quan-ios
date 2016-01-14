@@ -153,19 +153,24 @@ static NSUInteger distance = 10;
 
 - (void)goBack{
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"是否放弃此次编辑？" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSManagedObjectContext *context = [AppDelegate getContext];
-
+    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定"
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action)
+    {
         //取消所有上传任何
         [self.fetchCenter.uploadManager clear];
         
         //删除已经缓存的feed或事件
+        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         if (!self.plan.planId) {
-            [context deleteObject:self.plan];
+            [self.plan.managedObjectContext deleteObject:self.plan];
+            [delegate saveContext];
         }
         if (self.feed) {
-            [context deleteObject:self.feed];
+            [self.feed.managedObjectContext deleteObject:self.feed];
+            [delegate saveContext];
         }
+        
         
         //返回上一级
         [self.navigationController popViewControllerAnimated:YES];
@@ -282,7 +287,17 @@ static NSUInteger distance = 10;
 {
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
     if (!self.seugeFromPlanCreation) {
-        [self.navigationController popViewControllerAnimated:YES];
+        
+        //选项卡加号入口进入时入时应该使用DimissModalView方法
+        if (self.navigationController.presentingViewController) {
+            //隐藏键盘
+            [self.textView resignFirstResponder];
+            //关闭当前视图
+            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        }else{
+            //返回上一级
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }else{
         [self performSegueWithIdentifier:@"showWishDetailOnPlanCreation" sender:self.plan];
     }

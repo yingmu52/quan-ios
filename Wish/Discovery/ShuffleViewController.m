@@ -13,7 +13,7 @@
 #import "SystemUtil.h"
 #import "ImagePicker.h"
 #import "UIImageView+ImageCache.h"
-
+#import "PostFeedViewController.h"
 @import CoreData;
 @interface ShuffleViewController () <UICollectionViewDelegateFlowLayout,ImagePickerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic,strong) ImagePicker *imagePicker;
@@ -21,6 +21,11 @@
 
 @implementation ShuffleViewController
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = YES;
+    [self.fetchCenter getPlanListForOwnerId:[User uid] completion:nil];
+}
 
 - (IBAction)tapOnBackground:(UITapGestureRecognizer *)tap{
     //支持点击背影关闭退出浮层
@@ -89,9 +94,7 @@
                                            animated:YES];
             [self.imagePicker showPhotoLibrary:self];
     }else{
-        [self dismissViewControllerAnimated:YES completion:^{
-            [self.svcDelegate didPressCreatePlanButton:self];
-        }];
+            [self performSegueWithIdentifier:@"showPostViewFromShuffleView" sender:nil];
     }
 }
 
@@ -108,10 +111,19 @@
 - (void)didFinishPickingPhAssets:(NSMutableArray *)assets{
     //get select plan
     Plan *plan = [self.collectionFetchedRC objectAtIndexPath:[self.collectionView indexPathsForSelectedItems].lastObject];
-    [self.svcDelegate didFinishSelectingImageAssets:assets forPlan:plan];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self performSegueWithIdentifier:@"showPostFeedViewFromShuffleView" sender:@[assets,plan]];
 }
 
+#pragma mark - Segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"showPostFeedViewFromShuffleView"]) {
+        PostFeedViewController *pfvc = segue.destinationViewController;
+        pfvc.assets = [sender firstObject];
+        pfvc.plan = [sender lastObject];
+    }
+    self.navigationController.navigationBar.hidden = NO;
+}
 @end
 
 

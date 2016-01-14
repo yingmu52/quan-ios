@@ -7,7 +7,6 @@
 //
 
 #import "WishDetailViewController.h"
-//#import "CommentAcessaryView.h"
 #import "UIImageView+ImageCache.h"
 #import "UIScrollView+SVInfiniteScrolling.h"
 @interface WishDetailViewController () <HeaderViewDelegate,UIGestureRecognizerDelegate,UITextViewDelegate>
@@ -154,15 +153,24 @@
         UIImageView *imgView = [[UIImageView alloc] initWithFrame:self.tableView.frame];
         imgView.contentMode = UIViewContentModeScaleAspectFill;
         imgView.clipsToBounds = YES;
+        
+        //添加模糊
+        UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
+        visualEffectView.frame = imgView.frame;
+        [imgView addSubview:visualEffectView];
+
+        //设置背影
         self.tableView.backgroundView = imgView;
         
+        
+        //下载图片
         NSURL *imageUrl = [self.fetchCenter urlWithImageID:self.plan.backgroundNum size:FetchCenterImageSize400];
      
         SDWebImageManager *manager = [SDWebImageManager sharedManager];
         NSString *localKey = [manager cacheKeyForURL:imageUrl];
 
         if ([manager diskImageExistsForURL:imageUrl]) {
-            imgView.image = [[manager.imageCache imageFromDiskCacheForKey:localKey] applyDarkEffect];
+            imgView.image = [manager.imageCache imageFromDiskCacheForKey:localKey];
             
         }else{
             self.tableView.backgroundColor = [UIColor blackColor];
@@ -232,9 +240,11 @@
             case NSFetchedResultsChangeUpdate:{
                 //see https://developer.apple.com/library/ios/documentation/CoreData/Reference/NSFetchedResultsControllerDelegate_Protocol/index.html#//apple_ref/occ/intf/NSFetchedResultsControllerDelegate
                 //they don't use the 'reload' method anymore
-                [self configureCell:[self.tableView cellForRowAtIndexPath:indexPath]
-                        atIndexPath:indexPath];
-                NSLog(@"Feed updated");
+                if (indexPath) {
+                    [self configureCell:[self.tableView cellForRowAtIndexPath:indexPath]
+                            atIndexPath:indexPath];
+                    NSLog(@"Feed updated");
+                }
             }
                 break;
             case NSFetchedResultsChangeMove:{

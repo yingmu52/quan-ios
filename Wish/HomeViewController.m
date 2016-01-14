@@ -19,31 +19,26 @@
 #import "ImagePicker.h"
 #import "ViewForEmptyEvent.h"
 #import "UIImageView+ImageCache.h"
-#import "ShuffleViewController.h"
 #import "NZCircularImageView.h"
 #import "UIImageView+ImageCache.h"
 #import "StationViewController.h"
 
 const NSUInteger maxCardNum = 10;
 @interface HomeViewController ()
-<NSFetchedResultsControllerDelegate,
-UIImagePickerControllerDelegate,
+<UIImagePickerControllerDelegate,
 UINavigationControllerDelegate,
 UIGestureRecognizerDelegate,
 HomeCardViewDelegate,
 UIActionSheetDelegate,
 ImagePickerDelegate,
-ViewForEmptyEventDelegate,
-ShuffleViewControllerDelegate>
-@property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
+ViewForEmptyEventDelegate>
 @property (nonatomic,weak) Plan *currentPlan;
-@property (nonatomic,strong) NSMutableArray *itemChanges;
 @property (nonatomic,weak) ViewForEmptyEvent *guideView;
 @property (nonatomic,strong) ImagePicker *imagePicker;
 @end
 @implementation HomeViewController
 - (void)updateNavigationTitle{
-    NSArray *plans = self.fetchedRC.fetchedObjects;
+    NSArray *plans = self.collectionFetchedRC.fetchedObjects;
     if (plans.count > 0) {
         NSInteger page = self.collectionView.contentOffset.x / CGRectGetWidth(self.collectionView.frame);
         self.navigationItem.title = [NSString stringWithFormat:@"%@/%@",@(page + 1),@(plans.count)];
@@ -53,7 +48,7 @@ ShuffleViewControllerDelegate>
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    if (!self.fetchedRC.fetchedObjects.count){
+    if (!self.collectionFetchedRC.fetchedObjects.count){
         [self setUpEmptyView];
     }else{
         self.guideView = nil;
@@ -65,35 +60,18 @@ ShuffleViewControllerDelegate>
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     [self updateNavigationTitle];
 }
-- (NSFetchedResultsController *)fetchedRC
-{
-    NSManagedObjectContext *context = [AppDelegate getContext];
-    if (_fetchedRC != nil) {
-        return _fetchedRC;
+
+- (NSFetchRequest *)collectionFetchRequest{
+    if (!_collectionFetchRequest) {
+        _collectionFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
+        
+        _collectionFetchRequest.predicate = [NSPredicate predicateWithFormat:@"owner.ownerId == %@ && planStatus == %d",[User uid],PlanStatusOnGoing];
+        
+        _collectionFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
     }
-    //do fetchrequest
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
-    
-    request.predicate = [NSPredicate predicateWithFormat:@"owner.ownerId == %@ && planStatus == %d",[User uid],PlanStatusOnGoing];
-    
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
-    NSFetchedResultsController *newFRC = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
-    
-    self.fetchedRC = newFRC;
-    _fetchedRC.delegate = self;
-    
-    // Perform Fetch
-    NSError *error = nil;
-    [_fetchedRC performFetch:&error];
-    
-    if (error) {
-        NSLog(@"Unable to perform fetch.");
-        NSLog(@"%@, %@", error, error.localizedDescription);
-    }
-    return _fetchedRC;
-    
-    
+    return _collectionFetchRequest;
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
@@ -106,6 +84,7 @@ ShuffleViewControllerDelegate>
     lp.minimumPressDuration = 0.3;
     [self.collectionView addGestureRecognizer:lp];
 }
+
 - (void)setUpNavigationItem
 {
     //1.左上角个人头像图标
@@ -118,27 +97,11 @@ ShuffleViewControllerDelegate>
         [myIcon downloadImageWithImageId:newPicId size:FetchCenterImageSize100];
     }
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:myIcon];
-    
-    //2.右上角加号浮层入口
-    UIButton *addBtn = [Theme buttonWithImage:[Theme navAddDefault]
-                                       target:self
-                                     selector:@selector(showShuffView)
-                                        frame:CGRectMake(0,0, 48,CGRectGetHeight(self.navigationController.navigationBar.frame))];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addBtn];
 }
 
 - (void)showProfileView{
     [self performSegueWithIdentifier:@"showMyPageFromHome" sender:nil];
 }
-
-- (void)showShuffView{
-    [self performSegueWithIdentifier:@"showShuffViewFromHome" sender:nil];
-}
-
-- (void)addWish{
-    [self performSegueWithIdentifier:@"showPostFromHome" sender:nil];
-}
-
 
 #pragma mark - image picker
 - (ImagePicker *)imagePicker{
@@ -149,8 +112,8 @@ ShuffleViewControllerDelegate>
     return _imagePicker;
 }
 - (void)didPressCameraOnCard:(HomeCardView *)cardView{
-    if (self.fetchedRC.fetchedObjects.count) {
-        self.currentPlan = [self.fetchedRC objectAtIndexPath:[self.collectionView indexPathForCell:cardView]];
+    if (self.collectionFetchedRC.fetchedObjects.count) {
+        self.currentPlan = [self.collectionFetchedRC objectAtIndexPath:[self.collectionView indexPathForCell:cardView]];
         [self.imagePicker showPhotoLibrary:self];
     }
 }
@@ -161,18 +124,15 @@ ShuffleViewControllerDelegate>
 #pragma mark -
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"showPlanDetailFromHome"]) {
-        [segue.destinationViewController setPlan:sender];
-    }
     if ([segue.identifier isEqualToString:@"ShowPostFeedFromHome"]) {
         PostFeedViewController *pfvc = segue.destinationViewController;
         NSArray *array = sender;
         pfvc.assets = array.firstObject;
         pfvc.plan = array.lastObject;
     }
-    if ([segue.identifier isEqualToString:@"showShuffViewFromHome"]) {
-        ShuffleViewController *svc = segue.destinationViewController;
-        svc.svcDelegate = self;
+    
+    if ([segue.identifier isEqualToString:@"showPlanDetailFromHome"]) {
+        [segue.destinationViewController setPlan:sender];
     }
     
     if ([segue.identifier isEqualToString:@"showStationView"]) {
@@ -185,66 +145,27 @@ ShuffleViewControllerDelegate>
     
 }
 
-#pragma mark - 加号浮层回调函数
-
-- (void)didFinishSelectingImageAssets:(NSArray *)assets forPlan:(Plan *)plan{
-    //asset could be either UIImage or PHAsset
-    if (assets && plan) {
-        [self performSegueWithIdentifier:@"ShowPostFeedFromHome" sender:@[assets,plan]];
-    }
-}
-
-- (void)didPressCreatePlanButton:(ShuffleViewController *)svc{
-    [self addWish];
-}
 
 #pragma mark -  UICollectionView methods
 - (void)handleLongPress:(UILongPressGestureRecognizer *)longPress{
     
     NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:[longPress locationInView:self.collectionView]];
-    Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
+    Plan *plan = [self.collectionFetchedRC objectAtIndexPath:indexPath];
     if (plan) {
         if (longPress.state == UIGestureRecognizerStateBegan) {
             [self performSegueWithIdentifier:@"showStationView" sender:@[plan,longPress]];
         }
     }
 }
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.fetchedRC.fetchedObjects.count;
-}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
+    Plan *plan = [self.collectionFetchedRC objectAtIndexPath:indexPath];
     [self performSegueWithIdentifier:@"showPlanDetailFromHome" sender:plan];
 }
-#pragma mark - FetchedResultsController
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    self.itemChanges = [[NSMutableArray alloc] init];
-}
-- (void)controller:(NSFetchedResultsController *)controller
-   didChangeObject:(id)anObject
-       atIndexPath:(NSIndexPath *)indexPath
-     forChangeType:(NSFetchedResultsChangeType)type
-      newIndexPath:(NSIndexPath *)newIndexPath {
-    NSMutableDictionary *change = [[NSMutableDictionary alloc] init];
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            change[@(type)] = newIndexPath;
-            break;
-        case NSFetchedResultsChangeDelete:
-            change[@(type)] = indexPath;
-            break;
-        case NSFetchedResultsChangeUpdate:
-            change[@(type)] = indexPath;
-            break;
-        case NSFetchedResultsChangeMove:
-            change[@(type)] = @[indexPath, newIndexPath];
-            break;
-        default:
-            break;
-    }
-    [self.itemChanges addObject:change];
-}
+
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    if (controller == self.collectionFetchedRC) {
+        [super controllerDidChangeContent:controller];
         if (!controller.fetchedObjects.count){
             [self setUpEmptyView];
         }else{
@@ -253,39 +174,12 @@ ShuffleViewControllerDelegate>
                 [self.guideView removeFromSuperview];
             }
         }
-        [self.collectionView performBatchUpdates: ^{
-            for (NSDictionary *change in self.itemChanges) {
-                [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-                    NSFetchedResultsChangeType type = [key unsignedIntegerValue];
-                    switch(type) {
-                        case NSFetchedResultsChangeInsert:
-                            [self.collectionView insertItemsAtIndexPaths:@[obj]];
-                            break;
-                        case NSFetchedResultsChangeDelete:
-                            [self.collectionView deleteItemsAtIndexPaths:@[obj]];
-                            break;
-                        case NSFetchedResultsChangeUpdate:{
-                            [UIView performWithoutAnimation:^{
-                                [self.collectionView reloadItemsAtIndexPaths:@[obj]];
-                            }];
-                        }
-                            break;
-                        case NSFetchedResultsChangeMove:
-                            [self.collectionView moveItemAtIndexPath:obj[0] toIndexPath:obj[1]];
-                            break;
-                    }
-                }];
-            }
-        } completion:^(BOOL finished) {
-            // self.title = [NSString stringWithFormat:@"%@ plans",@(self.fetchedRC.fetchedObjects.count)];
-            self.itemChanges = nil;
-            [self updateNavigationTitle];
-            [(AppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
-        }];
+    }
 }
+
 #pragma mark - implement parent class abstract methods
 - (void)configureCollectionViewCell:(HomeCardView *)cell atIndexPath:(NSIndexPath *)indexPath{
-    Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
+    Plan *plan = [self.collectionFetchedRC objectAtIndexPath:indexPath];
     [cell.imageView downloadImageWithImageId:plan.backgroundNum size:FetchCenterImageSize800];
     cell.titleLabel.text = plan.planTitle;
     cell.subtitleLabel.text = [NSString stringWithFormat:@"%@条记录  %@人关注",plan.tryTimes,plan.followCount];
@@ -312,6 +206,6 @@ ShuffleViewControllerDelegate>
 }
 - (void)didPressButton:(ViewForEmptyEvent *)view{
     [view removeFromSuperview];
-    [self addWish];
+    [self performSegueWithIdentifier:@"showPostFromHome" sender:nil];
 }
 @end
