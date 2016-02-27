@@ -55,6 +55,10 @@
 #define TOOL @"tool/"
 #define GET_CIRCLE_LIST @"tool_quan_get.php"
 #define SWITCH_CIRCLE @"tool_quan_man.php"
+#define CREATE_CIRCLE @"splan_quan_create.php"
+#define DELETE_CIRCLE @"splan_quan_delete_id.php"
+#define UPDATE_CIRCLE @"splan_quan_update.php"
+
 
 #define MESSAGE @"message/"
 #define GET_MESSAGE_LIST @"splan_message_getlist.php"
@@ -90,6 +94,78 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 #pragma mark - 圈子
 #define TOOLCGIKEY @"123$%^abc"
 
+- (void)updateCircle:(NSString *)circleId
+                name:(NSString *)circleName
+         description:(NSString *)circleDescription
+     backgroundImage:(NSString *)imageId
+          completion:(FetchCenterGetRequestUpdateCircleCompleted)completionBlock{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,UPDATE_CIRCLE];
+    
+    if (circleId) {
+        NSDictionary *inputParams = @{@"id":circleId,
+                                      @"name":circleName ? [circleName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] : @"",
+                                      @"description":circleDescription ? [circleDescription stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] : @"",
+                                      @"backGroudPic":imageId ? imageId : @""};
+        [self getRequest:rqtStr
+               parameter:inputParams
+        includeArguments:YES
+              completion:^(NSDictionary *responseJson){
+                  if (completionBlock) {
+                      dispatch_main_async_safe(^{
+                          //TODO: 更新本地Circle实例
+                          completionBlock();
+                      });
+                  }
+              }
+         ];
+    }
+}
+
+- (void)createCircle:(NSString *)circleName
+         description:(NSString *)circleDescription
+   backgroundImageId:(NSString *)imageId
+          completion:(FetchCenterGetRequestCreateCircleCompleted)completionBlock{
+    if (circleName) {
+        NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,CREATE_CIRCLE];
+        [self getRequest:rqtStr
+               parameter:@{@"name":[circleName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                           @"description":circleDescription ? [circleDescription stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] : @"",
+                           @"backGroudPic":imageId ? imageId : @""}
+        includeArguments:YES
+              completion:^(NSDictionary *responseJson)
+        {
+            NSString *circleId = [responseJson valueForKeyPath:@"data.id"];
+            if (circleId) {
+                //TODO: 马上切换到当前圈子
+                //TODO: 在本地数据库创建圈子实例
+                //完成
+                if (completionBlock) {
+                    dispatch_main_async_safe(^{
+                        completionBlock(circleId);
+                    });
+                }
+            }
+        }];
+    }
+}
+
+
+- (void)deleteCircle:(NSString *)circleId completion:(FetchCenterGetRequestDeleteCircleCompleted)completionBlock{
+    //TODO: 判断当前用户是否有删除圈子的权限
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,DELETE_CIRCLE];
+    [self getRequest:rqtStr
+           parameter:@{@"id":circleId}
+    includeArguments:YES
+          completion:^(NSDictionary *responseJson)
+    {
+        if (completionBlock) {
+            completionBlock(YES);
+        }
+    }];
+    
+    
+}
+
 - (void)joinCircle:(NSString *)invitationCode completion:(FetchCenterGetRequestJoinCircleCompleted)completionBlock{
     if (invitationCode) {
         NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,JOINT_CIRCLE];
@@ -113,7 +189,6 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     }
 }
 
-//MARK: 切换圈子
 - (void)switchToCircle:(NSString *)circleId completion:(FetchCenterGetRequestSwithCircleCompleted)completionBlock{
     if (circleId) {
         NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,TOOL,SWITCH_CIRCLE];
@@ -137,7 +212,6 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     }
 }
 
-//MARK: 获取圈子列表
 - (void)getCircleList:(FetchCenterGetRequestGetCircleListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,TOOL,GET_CIRCLE_LIST];
     [self getRequest:rqtStr

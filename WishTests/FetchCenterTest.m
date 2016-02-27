@@ -483,6 +483,45 @@ static NSTimeInterval expectationTimeout = 30.0f;
                                  }];
     
 }
+
+- (void)testCUDCircle{
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"测试圈子创建与删除接口"];
+    //1. Upload image
+//    UIImage *image = [UIImage imageNamed:@"test.jpg"];
+//    [self.fetchCenter uploadImages:@[image] completion:^(NSArray *imageIds) {
+    
+        //2. Create circle
+    
+        NSString *imageId = @"IOS-4E5B1EFA-7A66-4ACF-84A6-FB819FE3BA9C";
+        [self.fetchCenter createCircle:@"Test Name"
+                           description:@"Test Desc"
+                     backgroundImageId:imageId
+                            completion:^(NSString *circleId)
+        {
+            //3. Update
+            [self.fetchCenter updateCircle:circleId
+                                      name:@"New Name"
+                               description:@"New Desc"
+                           backgroundImage:imageId
+                                completion:^{
+                                    
+                //4. Delete Circle
+                [self.fetchCenter deleteCircle:circleId
+                                    completion:^(BOOL isCurrentLegalToDelete)
+                 {
+                     [expectation fulfill];
+                 }];
+            }];
+        }];
+//    }];
+    
+    [self waitForExpectationsWithTimeout:expectationTimeout
+                                 handler:^(NSError * _Nullable error) {
+                                     XCTAssertNil(error,@"测试圈子创建与删除接口错误");
+                                 }];
+
+}
 @end
 
 

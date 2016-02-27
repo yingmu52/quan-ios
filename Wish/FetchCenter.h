@@ -116,6 +116,26 @@ typedef void(^FetchCenterPostRequestUploadImagesCompleted)(NSArray *imageIds);
 
 #pragma mark - 圈子
 
+/** 设置圈子资料*/
+typedef void(^FetchCenterGetRequestUpdateCircleCompleted)(void);
+- (void)updateCircle:(NSString *)circleId
+                name:(NSString *)circleName
+         description:(NSString *)circleDescription
+     backgroundImage:(NSString *)imageId
+          completion:(FetchCenterGetRequestUpdateCircleCompleted)completionBlock;
+
+/** 创建圈子*/
+typedef void(^FetchCenterGetRequestCreateCircleCompleted)(NSString *circleId);
+- (void)createCircle:(NSString *)circleName
+         description:(NSString *)circleDescription
+   backgroundImageId:(NSString *)imageId
+          completion:(FetchCenterGetRequestCreateCircleCompleted)completionBlock;
+
+
+/** 删除圈子*/
+typedef void(^FetchCenterGetRequestDeleteCircleCompleted)(BOOL isCurrentLegalToDelete);
+- (void)deleteCircle:(NSString *)circleId completion:(FetchCenterGetRequestDeleteCircleCompleted)completionBlock;
+
 /**加入圈子*/
 - (void)joinCircle:(NSString *)invitationCode completion:(FetchCenterGetRequestJoinCircleCompleted)completionBlock;
 
