@@ -27,6 +27,7 @@
 		A030105D1BABC6AA0041E2CF /* QBVideoIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = A03010501BABC6AA0041E2CF /* QBVideoIndicatorView.m */; };
 		A03010601BACAFBC0041E2CF /* QBPreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A030105F1BACAFBC0041E2CF /* QBPreViewController.m */; };
 		A03010611BACAFBC0041E2CF /* QBPreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A030105F1BACAFBC0041E2CF /* QBPreViewController.m */; };
+		A0342B8A1C816EA400803BD7 /* CircleListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A0342B891C816EA400803BD7 /* CircleListCell.m */; };
 		A04842E91B98CF9E0032E927 /* UIImageView+ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A04842E81B98CF9E0032E927 /* UIImageView+ImageCache.m */; };
 		A04842EA1B98CF9E0032E927 /* UIImageView+ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A04842E81B98CF9E0032E927 /* UIImageView+ImageCache.m */; };
 		A04842F71B99F5360032E927 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A04842F61B99F5360032E927 /* libc++.dylib */; };
@@ -45,6 +46,7 @@
 		A066C38A1BB7AE08003B51D5 /* MSSuperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A066C3881BB7AE08003B51D5 /* MSSuperViewController.m */; };
 		A07115D11BA6B109002C1270 /* SZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A07115D01BA6B109002C1270 /* SZTextView.m */; };
 		A07115D21BA6B109002C1270 /* SZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A07115D01BA6B109002C1270 /* SZTextView.m */; };
+		A07C21231C8163BF0084976A /* ButtonWithPathedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A07C21221C8163BF0084976A /* ButtonWithPathedImage.m */; };
 		A07C66AF1BE01AB800413D32 /* InvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A07C66AE1BE01AB800413D32 /* InvitationViewController.m */; };
 		A07C66B01BE01AB800413D32 /* InvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A07C66AE1BE01AB800413D32 /* InvitationViewController.m */; };
 		A07C66BA1BE0707300413D32 /* WXApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A07C66B51BE0707300413D32 /* WXApiManager.m */; };
@@ -358,6 +360,8 @@
 		A03010511BABC6AA0041E2CF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/QBImagePicker.strings"; sourceTree = "<group>"; };
 		A030105E1BACAFBC0041E2CF /* QBPreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBPreViewController.h; sourceTree = "<group>"; };
 		A030105F1BACAFBC0041E2CF /* QBPreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBPreViewController.m; sourceTree = "<group>"; };
+		A0342B881C816EA400803BD7 /* CircleListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleListCell.h; sourceTree = "<group>"; };
+		A0342B891C816EA400803BD7 /* CircleListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleListCell.m; sourceTree = "<group>"; };
 		A04842E71B98CF9E0032E927 /* UIImageView+ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+ImageCache.h"; sourceTree = "<group>"; };
 		A04842E81B98CF9E0032E927 /* UIImageView+ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+ImageCache.m"; sourceTree = "<group>"; };
 		A04842F41B99F29C0032E927 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
@@ -379,6 +383,8 @@
 		A06ED0F41BCAFB8A0051E7F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		A07115CF1BA6B109002C1270 /* SZTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZTextView.h; sourceTree = "<group>"; };
 		A07115D01BA6B109002C1270 /* SZTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZTextView.m; sourceTree = "<group>"; };
+		A07C21211C8163BF0084976A /* ButtonWithPathedImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonWithPathedImage.h; sourceTree = "<group>"; };
+		A07C21221C8163BF0084976A /* ButtonWithPathedImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonWithPathedImage.m; sourceTree = "<group>"; };
 		A07C66AD1BE01AB800413D32 /* InvitationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationViewController.h; sourceTree = "<group>"; };
 		A07C66AE1BE01AB800413D32 /* InvitationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationViewController.m; sourceTree = "<group>"; };
 		A07C66B41BE0707300413D32 /* WXApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiManager.h; sourceTree = "<group>"; };
@@ -1100,6 +1106,8 @@
 				AE0172411A65CD8E0014266F /* AppDelegate.m */,
 				AE01723D1A65CD8E0014266F /* Info.plist */,
 				AE01723E1A65CD8E0014266F /* main.m */,
+				A07C21211C8163BF0084976A /* ButtonWithPathedImage.h */,
+				A07C21221C8163BF0084976A /* ButtonWithPathedImage.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1306,6 +1314,8 @@
 		AEFB04781AD12437009EB0D3 /* Discovery */ = {
 			isa = PBXGroup;
 			children = (
+				A0342B881C816EA400803BD7 /* CircleListCell.h */,
+				A0342B891C816EA400803BD7 /* CircleListCell.m */,
 				A07C66AD1BE01AB800413D32 /* InvitationViewController.h */,
 				A07C66AE1BE01AB800413D32 /* InvitationViewController.m */,
 				A0A0835A1BD74F260057CD65 /* CircleListViewController.h */,
@@ -1617,6 +1627,7 @@
 				AE17799A1AF585CB005F1BEB /* FeedDetailViewController.m in Sources */,
 				AEFB048C1AD12437009EB0D3 /* DiscoveryViewController.m in Sources */,
 				AEEC6C731A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,
+				A07C21231C8163BF0084976A /* ButtonWithPathedImage.m in Sources */,
 				AE47055D1AF9DC080028D7BC /* FeedDetailCell.m in Sources */,
 				AED8D7CA1A9BE2490035EDE5 /* FollowingImageCell.m in Sources */,
 				A099CC4F1BE1B23600D38145 /* InvitationCodeViewController.m in Sources */,
@@ -1627,6 +1638,7 @@
 				A055FB9F1BA6553A0013F91E /* ImagePreviewCell.m in Sources */,
 				A0D1021F1B84EB6A006B0E4E /* SDWebImageDecoder.m in Sources */,
 				AED4CB431AC79F3A00EE2DA4 /* ModalLeftToRightSegue.m in Sources */,
+				A0342B8A1C816EA400803BD7 /* CircleListCell.m in Sources */,
 				AE30EE6D1A6E19D00044740D /* WishDetailCell.m in Sources */,
 				AEC0E1C51AC64F9600563F7C /* WishDetailVCOwnerAchieved.m in Sources */,
 				A0D102191B84EB6A006B0E4E /* NSData+ImageContentType.m in Sources */,

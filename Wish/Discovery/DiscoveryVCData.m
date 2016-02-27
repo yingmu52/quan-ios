@@ -14,6 +14,8 @@
 #import "User.h"
 #import "WishDetailVCFollower.h"
 #import "LMDropdownView.h"
+#import "CircleListCell.h"
+
 @interface DiscoveryVCData () <FetchCenterDelegate,LMDropdownViewDelegate>
 @property (nonatomic,strong) LMDropdownView *dropdownView;
 @end
@@ -167,15 +169,24 @@
     self.tabBarController.tabBar.hidden = NO;
 }
 
-#define cellHeight 38.0f
+#define cellHeight 65.0
 
 - (LMDropdownView *)dropdownView{
     if (!_dropdownView) {
         _dropdownView = [LMDropdownView dropdownView];
         _dropdownView.delegate = self;
-        self.tableView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), self.tableFetchedRC.fetchedObjects.count * cellHeight);
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        CGFloat height = self.tableFetchedRC.fetchedObjects.count * cellHeight;
+        if (height > 460.0) height = 460;
+        self.tableView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds),height);
         self.tableView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.95];
+        
+        //设置“新增圈子”的背景视图高度
+        CGRect frame = self.tableView.tableHeaderView.frame;
+        frame.size.height = 60.0;
+        self.tableView.tableHeaderView.frame = frame;
+        
+
 
     }
     return _dropdownView;
@@ -194,18 +205,14 @@
     return cellHeight;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CircleListCell"];
-    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+- (CircleListCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    CircleListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CircleListCell"];
+
     Circle *circle = [self.tableFetchedRC objectAtIndexPath:indexPath];
-    cell.textLabel.text = circle.circleName;
-    cell.backgroundColor = [UIColor clearColor];
+    cell.circleListTitle.text = circle.circleName;
+    cell.circleListSubtitle.text = circle.circleId;
+    cell.circleListImageView.image = [UIImage imageNamed:@"test.jpg"];
     
-    //设置选中颜色
-    cell.selectionStyle = UITableViewCellSeparatorStyleSingleLine;
-    UIView *bgColorView = [[UIView alloc] init];
-    bgColorView.backgroundColor = [SystemUtil colorFromHexString:@"#D7EBEB"];
-    [cell setSelectedBackgroundView:bgColorView];
     return cell;
 }
 
