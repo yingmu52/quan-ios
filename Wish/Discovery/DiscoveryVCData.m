@@ -210,8 +210,8 @@
 
     Circle *circle = [self.tableFetchedRC objectAtIndexPath:indexPath];
     cell.circleListTitle.text = circle.circleName;
-    cell.circleListSubtitle.text = circle.circleId;
-    cell.circleListImageView.image = [UIImage imageNamed:@"test.jpg"];
+    cell.circleListSubtitle.text = circle.circleDescription;
+    [cell.circleListImageView downloadImageWithImageId:circle.imageId size:FetchCenterImageSize100];
     
     return cell;
 }
