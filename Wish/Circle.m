@@ -22,28 +22,39 @@
     
     if (!results.count) {
         circle = [NSEntityDescription insertNewObjectForEntityForName:@"Circle"
-                                                inManagedObjectContext:context];
-
+                                               inManagedObjectContext:context];
+        
         circle.circleId = info[@"id"];
         circle.createDate = [NSDate dateWithTimeIntervalSince1970:[info[@"createTime"] integerValue]];
-        
+        circle.ownerId = info[@"ownerId"];
     }else{
         NSAssert(results.count <= 1, @"Circle id must be a unique!");
         circle = results.lastObject;
     }
     
+    //圈名
     if (![circle.circleName isEqualToString:info[@"name"]]) {
         circle.circleName = info[@"name"];
     }
     
+    //邀请码
     NSString *invitationCode = [NSString stringWithFormat:@"%@",info[@"addCode"]];
     if (![circle.invitationCode isEqualToString:invitationCode]) {
         circle.invitationCode = invitationCode;
     }
-
-
+    
+    //圈子描述
+    if (![circle.circleDescription isEqualToString:info[@"description"]]) {
+        circle.circleDescription = info[@"description"];
+    }
+    
+    //背影图
+    if (![circle.imageId isEqualToString:info[@"backGroudPic"]]) {
+        circle.imageId = info[@"backGroudPic"];
+    }
+    
     return circle;
-
+    
 }
 
 @end

@@ -135,7 +135,11 @@
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Wish.sqlite"];
     NSError *error = nil;
     NSString *failureReason = @"There was an error creating or loading the application's saved data.";
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+    
+    NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption:@(YES),
+                              NSInferMappingModelAutomaticallyOption:@(YES)};
+    
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
         // Report any error we got.
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";
@@ -185,23 +189,29 @@
 #pragma mark - Core Data Saving support
 
 - (void)saveContext {
-    @try {
-        NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-        if (managedObjectContext != nil) {
-            NSError *error = nil;
-            if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            }
+    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+    if (managedObjectContext != nil) {
+        NSError *error = nil;
+        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         }
     }
-    @catch (NSException *exception) {
-        //data model 有变化，删除重建以避免闪退。如果有保留用户数据的需求，应该使用data migration
-        NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Wish" withExtension:@"momd"];
-        NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Wish.sqlite"];
-        NSFileManager *fileManager = [NSFileManager defaultManager];
+}
+
+- (void)resetDataStore{
+    //data model 有变化，删除重建以避免闪退。如果有保留用户数据的需求，应该使用data migration
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Wish" withExtension:@"momd"];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Wish.sqlite"];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:modelURL.path]) {
+        NSLog(@"Deleting Data Model ...");
         [fileManager removeItemAtURL:modelURL error:nil];
+    }
+    
+    if ([fileManager fileExistsAtPath:storeURL.path]) {
+        NSLog(@"Deleting Store URL ...");
         [fileManager removeItemAtURL:storeURL error:nil];
     }
 }

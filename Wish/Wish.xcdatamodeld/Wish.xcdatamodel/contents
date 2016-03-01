@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="14F27" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15B42" minimumToolsVersion="Automatic">
     <entity name="Circle" representedClassName="Circle" syncable="YES">
+        <attribute name="circleDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="circleId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="circleName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="imageId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="invitationCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ownerId" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Comment" representedClassName="Comment" syncable="YES">
         <attribute name="commentId" optional="YES" attributeType="String" syncable="YES"/>
@@ -66,11 +69,11 @@
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="plans" inverseEntity="Owner" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Circle" positionX="-9288" positionY="-234" width="128" height="150"/>
         <element name="Comment" positionX="-9009" positionY="95" width="128" height="163"/>
         <element name="Feed" positionX="-9306" positionY="-72" width="128" height="210"/>
         <element name="Message" positionX="-8892" positionY="-346" width="128" height="178"/>
         <element name="Owner" positionX="-8705" positionY="-43" width="128" height="135"/>
         <element name="Plan" positionX="-9110" positionY="-324" width="128" height="268"/>
-        <element name="Circle" positionX="-9288" positionY="-234" width="128" height="103"/>
     </elements>
 </model>
