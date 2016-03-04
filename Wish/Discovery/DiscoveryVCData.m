@@ -229,6 +229,11 @@
     }
 }
 
+- (IBAction)buttonPressedForCreatingCircle{
+    [self performSegueWithIdentifier:@"showCircleCreationView" sender:nil];
+    [self.dropdownView hide];
+}
+
 
 @end
 

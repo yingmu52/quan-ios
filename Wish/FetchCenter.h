@@ -229,6 +229,10 @@ typedef void(^FetchCenterGetRequestDeleteCircleCompleted)(BOOL isCurrentLegalToD
 #pragma mark - 工具
 - (NSURL *)urlWithImageID:(NSString *)imageId size:(FetchCenterImageSize)size;
 
+typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId); //上传图像成功
+typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson); //请求成功
+- (void)postImageWithOperation:(UIImage *)image
+                      complete:(FetchCenterImageUploadCompletionBlock)completionBlock;
 #pragma mark - 登陆
 - (void)getUidandUkeyWithOpenId:(NSString *)openId
                     accessToken:(NSString *)token

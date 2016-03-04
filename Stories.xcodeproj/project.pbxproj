@@ -210,6 +210,7 @@
 		A0F7D4B31B84EA46003CCB34 /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D4B21B84EA46003CCB34 /* UIImage+WebP.m */; };
 		A0F7D4B41B84EA46003CCB34 /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D4B21B84EA46003CCB34 /* UIImage+WebP.m */; };
 		A0F8C4601B88444C00A8B120 /* Wish.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AE0172431A65CD8E0014266F /* Wish.xcdatamodeld */; };
+		A0FEC1331C8616CC004C48F1 /* CircleCreationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0FEC1321C8616CC004C48F1 /* CircleCreationViewController.m */; };
 		AE01723F1A65CD8E0014266F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE01723E1A65CD8E0014266F /* main.m */; };
 		AE0172421A65CD8E0014266F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0172411A65CD8E0014266F /* AppDelegate.m */; };
 		AE01724D1A65CD8E0014266F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE01724C1A65CD8E0014266F /* Images.xcassets */; };
@@ -549,6 +550,8 @@
 		A0F7D4281B84E851003CCB34 /* UIImage-Categories.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "UIImage-Categories.podspec"; sourceTree = "<group>"; };
 		A0F7D4B11B84EA46003CCB34 /* UIImage+WebP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WebP.h"; sourceTree = "<group>"; };
 		A0F7D4B21B84EA46003CCB34 /* UIImage+WebP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WebP.m"; sourceTree = "<group>"; };
+		A0FEC1311C8616CC004C48F1 /* CircleCreationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleCreationViewController.h; sourceTree = "<group>"; };
+		A0FEC1321C8616CC004C48F1 /* CircleCreationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleCreationViewController.m; sourceTree = "<group>"; };
 		AE0172391A65CD8E0014266F /* Stories.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stories.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE01723D1A65CD8E0014266F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE01723E1A65CD8E0014266F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1044,6 +1047,15 @@
 			name = CollectionLayout;
 			sourceTree = "<group>";
 		};
+		A0FEC1301C86167D004C48F1 /* Circles */ = {
+			isa = PBXGroup;
+			children = (
+				A0FEC1311C8616CC004C48F1 /* CircleCreationViewController.h */,
+				A0FEC1321C8616CC004C48F1 /* CircleCreationViewController.m */,
+			);
+			name = Circles;
+			sourceTree = "<group>";
+		};
 		AE0172301A65CD8E0014266F = {
 			isa = PBXGroup;
 			children = (
@@ -1067,6 +1079,7 @@
 		AE01723B1A65CD8E0014266F /* Wish */ = {
 			isa = PBXGroup;
 			children = (
+				A0FEC1301C86167D004C48F1 /* Circles */,
 				A0D37C5D1B8781C100581EDE /* News */,
 				AE606A1D1AF4693F003DF16E /* Message */,
 				AEFB04781AD12437009EB0D3 /* Discovery */,
@@ -1568,6 +1581,7 @@
 				A0994E641BC4CF9500D45845 /* SYEmojiPopover.m in Sources */,
 				A05AB6D51BDF783800E79F36 /* UIImage+LMExtension.m in Sources */,
 				A0F7D4351B84E851003CCB34 /* CustomBadge.m in Sources */,
+				A0FEC1331C8616CC004C48F1 /* CircleCreationViewController.m in Sources */,
 				A066C3891BB7AE08003B51D5 /* MSSuperViewController.m in Sources */,
 				A03010601BACAFBC0041E2CF /* QBPreViewController.m in Sources */,
 				A0A0835C1BD74F260057CD65 /* CircleListViewController.m in Sources */,

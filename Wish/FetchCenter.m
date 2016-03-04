@@ -68,9 +68,6 @@
 #define TENCENTYOUTU @"tencentYoutu/"
 #define GET_SIGNATURE @"getsign.php"
 
-typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId); //上传图像成功
-typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson); //请求成功
-
 @interface FetchCenter ()
 @property (nonatomic,strong) NSString *baseUrl;
 @property (nonatomic,strong) Reachability *reachability;
@@ -136,14 +133,22 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
         {
             NSString *circleId = [responseJson valueForKeyPath:@"data.id"];
             if (circleId) {
-                //TODO: 马上切换到当前圈子
-                //TODO: 在本地数据库创建圈子实例
-                //完成
-                if (completionBlock) {
-                    dispatch_main_async_safe(^{
+                //在本地数据库创建圈子实例
+                NSManagedObjectContext *workerContext = [self workerContext];
+                [Circle createCircle:circleId
+                                name:circleName
+                                desc:circleDescription
+                             imageId:imageId
+                             context:workerContext];
+                [self.appDelegate saveContext:workerContext];
+                
+                //切换到当前圈子
+                [self switchToCircle:circleId completion:^{
+                    //完成
+                    if (completionBlock) {
                         completionBlock(circleId);
-                    });
-                }
+                    }
+                }];
             }
         }];
     }
@@ -1026,7 +1031,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 
 #define IMAGE_PREFIX @"IOS-"
 - (void)postImageWithOperation:(UIImage *)image
-                      complete:(FetchCenterImageUploadCompletionBlock)completionBlock{ //obj :NSManagedObject or UIimage
+                      complete:(FetchCenterImageUploadCompletionBlock)completionBlock{
     
     //chekc internet
     if (![self hasActiveInternetConnection]) return;

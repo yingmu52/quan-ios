@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "SystemUtil.h"
 @interface Theme : UIColor
+
++ (UIColor *)globleColor;
 + (UIButton *)buttonWithImage:(UIImage *)image
                        target:(id)target
                      selector:(SEL)method
@@ -73,4 +75,5 @@
 
 + (UIImage *)circleListCheckBoxDefault;
 + (UIImage *)circleListCheckBoxSelected;
++ (UIImage *)circleCreationImageBackground;
 @end

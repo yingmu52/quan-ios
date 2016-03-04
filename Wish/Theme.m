@@ -10,6 +10,10 @@
 #import "SystemUtil.h"
 @implementation Theme
 
++ (UIColor *)globleColor{
+    return [SystemUtil colorFromHexString:@"#01C1A8"];
+}
+
 + (UIButton *)buttonWithImage:(UIImage *)image target:(id)target
                      selector:(SEL)method
                         frame:(CGRect)frame{
@@ -229,6 +233,10 @@
 
 + (UIImage *)circleListCheckBoxSelected{
     return [UIImage imageNamed:@"circle_checkbox_selected"];
+}
+
++ (UIImage *)circleCreationImageBackground{
+    return [UIImage imageNamed:@"create_avatar_logo"];
 }
 @end
 

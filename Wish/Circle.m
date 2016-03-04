@@ -61,4 +61,22 @@
     
 }
 
++ (void)createCircle:(NSString *)circleId
+                name:(NSString *)circleName
+                desc:(NSString *)desc
+             imageId:(NSString *)imageId
+             context:(NSManagedObjectContext *)context{
+    Circle *circle = [NSEntityDescription insertNewObjectForEntityForName:@"Circle"
+                                                   inManagedObjectContext:context];
+    circle.circleId = circleId;
+    circle.circleName = circleName;
+    circle.circleDescription = desc;
+    circle.imageId = imageId;
+    circle.createDate = [NSDate date];
+    circle.ownerId = [User uid];
+}
 @end
+
+
+
+
