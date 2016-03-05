@@ -16,7 +16,8 @@
 #import "LMDropdownView.h"
 #import "CircleListCell.h"
 #import "CircleSettingViewController.h"
-@interface DiscoveryVCData () <FetchCenterDelegate,LMDropdownViewDelegate,CircleSettingViewControllerDelegate>
+#import "CircleCreationViewController.h"
+@interface DiscoveryVCData () <FetchCenterDelegate,LMDropdownViewDelegate,CircleSettingViewControllerDelegate,CircleCreationViewControllerDelegate>
 @property (nonatomic,strong) LMDropdownView *dropdownView;
 @property (nonatomic,weak) Circle *currentCircle;
 @property (nonatomic,strong) NSArray *presentingCircleIds;
@@ -69,9 +70,21 @@
 
 - (void)getDiscoveryList{
     [self.fetchCenter getDiscoveryList:self.collectionFetchedRC.fetchedObjects.mutableCopy
-                            completion:^(NSString *circleTitle) {
-        //设置导航标题
-        self.navigationItem.title = circleTitle;
+                            completion:^(NSString *circleTitle)
+    {
+        if (!self.navigationItem.title) {
+            //设置导航标题
+            self.navigationItem.title = circleTitle;
+        }
+    }];
+}
+
+- (void)switchToCircle:(Circle *)circle{
+    [self.fetchCenter switchToCircle:circle.circleId completion:^{
+        [self setUpRightBarItem];
+        self.navigationItem.title = circle.circleName;
+        //刷新发现页列表
+        [self getDiscoveryList];
     }];
 }
 
@@ -117,16 +130,24 @@
         csc.delegate = self;
         csc.circle = self.currentCircle;
     }
+    if ([segue.identifier isEqualToString:@"showCircleCreationView"]) {
+        CircleCreationViewController *ccc = segue.destinationViewController;
+        ccc.delegate = self;
+    }
+    
 }
+
+- (void)didFinishCreatingCircle:(Circle *)circle{
+    [self switchToCircle:circle];
+}
+
 
 - (void)didFinishDeletingCircle{
     Circle *circle = self.tableFetchedRC.fetchedObjects.firstObject;
     if (![circle.ownerId isEqualToString:[User uid]]) {
         self.navigationItem.rightBarButtonItem = nil;
     }
-    [self.fetchCenter switchToCircle:circle.circleId completion:^{
-        [self getDiscoveryList];
-    }];
+    [self switchToCircle:circle];
 }
 
 - (NSFetchRequest *)collectionFetchRequest{
@@ -259,11 +280,7 @@
     if (![[User currentCircleId] isEqualToString:circle.circleId]) { //当选择了与当前不同的圈子时才执行操作
         self.navigationItem.title = @"正在切换圈子...";
         //发送切换圈子请求
-        [self.fetchCenter switchToCircle:circle.circleId completion:^{
-            [self setUpRightBarItem];
-            //刷新发现页列表
-            [self getDiscoveryList];
-        }];
+        [self switchToCircle:circle];
     }
 }
 

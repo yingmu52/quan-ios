@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 // Insert code here to declare functionality of your managed object subclass
 + (Circle *)updateCircleWithInfo:(NSDictionary *)info managedObjectContext:(NSManagedObjectContext *)context;
 
-+ (void)createCircle:(NSString *)circleId
++ (Circle *)createCircle:(NSString *)circleId
                 name:(NSString *)circleName
                 desc:(NSString *)desc
              imageId:(NSString *)imageId

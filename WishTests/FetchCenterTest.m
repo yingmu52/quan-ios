@@ -497,17 +497,17 @@ static NSTimeInterval expectationTimeout = 30.0f;
         [self.fetchCenter createCircle:@"Test Name"
                            description:@"Test Desc"
                      backgroundImageId:imageId
-                            completion:^(NSString *circleId)
+                            completion:^(Circle *circle)
         {
             //3. Update
-            [self.fetchCenter updateCircle:circleId
+            [self.fetchCenter updateCircle:circle.circleId
                                       name:@"New Name"
                                description:@"New Desc"
                            backgroundImage:imageId
                                 completion:^{
                                     
                 //4. Delete Circle
-                [self.fetchCenter deleteCircle:circleId
+                [self.fetchCenter deleteCircle:circle
                                     completion:^(BOOL isCurrentLegalToDelete)
                  {
                      [expectation fulfill];

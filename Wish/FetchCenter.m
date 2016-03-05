@@ -137,18 +137,18 @@
             if (circleId) {
                 //在本地数据库创建圈子实例
                 NSManagedObjectContext *workerContext = [self workerContext];
-                [Circle createCircle:circleId
-                                name:circleName
-                                desc:circleDescription
-                             imageId:imageId
-                             context:workerContext];
+                Circle *circle = [Circle createCircle:circleId
+                                                 name:circleName
+                                                 desc:circleDescription
+                                              imageId:imageId
+                                              context:workerContext];
                 [self.appDelegate saveContext:workerContext];
                 
                 //切换到当前圈子
                 [self switchToCircle:circleId completion:^{
                     //完成
                     if (completionBlock) {
-                        completionBlock(circleId);
+                        completionBlock(circle);
                     }
                 }];
             }

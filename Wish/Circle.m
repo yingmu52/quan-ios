@@ -61,7 +61,7 @@
     
 }
 
-+ (void)createCircle:(NSString *)circleId
++ (Circle *)createCircle:(NSString *)circleId
                 name:(NSString *)circleName
                 desc:(NSString *)desc
              imageId:(NSString *)imageId
@@ -74,6 +74,7 @@
     circle.imageId = imageId;
     circle.createDate = [NSDate date];
     circle.ownerId = [User uid];
+    return circle;
 }
 
 + (Circle *)getCircle:(NSString *)circleID{

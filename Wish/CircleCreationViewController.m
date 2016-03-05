@@ -95,8 +95,9 @@
     [self.fetchCenter createCircle:self.titleTextField.text
                        description:self.detailTextView.text
                  backgroundImageId:imageId
-                        completion:^(NSString *circleId)
+                        completion:^(Circle *circle)
      {
+         [self.delegate didFinishCreatingCircle:circle];
          //返回上一级
          self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:sender];
          [self.navigationController popViewControllerAnimated:YES];

@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "MSSuperViewController.h"
-@interface CircleCreationViewController : MSSuperViewController
 
+@class CircleCreationViewController;
+@protocol CircleCreationViewControllerDelegate <NSObject>
+- (void)didFinishCreatingCircle:(Circle *)circle;
+@end
+@interface CircleCreationViewController : MSSuperViewController
+@property (nonatomic,weak) id <CircleCreationViewControllerDelegate> delegate;
 @end

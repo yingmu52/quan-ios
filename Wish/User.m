@@ -119,7 +119,7 @@
 }
 
 + (BOOL)isSuperUser{
-    NSArray *knownUsersList = @[@"100004",@"100014",@"100005",@"100007",@"100015",@"100001"]; //Vicky,R,Cliff,Amy,Jie,Xinyi
+    NSArray *knownUsersList = @[@"100004",@"100014",@"100005",@"100007",@"100015",@"100001",@"100012"]; //Vicky,R,Cliff,Amy,Jie,Xinyi
     return [knownUsersList containsObject:[User uid]];
 }
 #pragma mark - simulator implementation (need to uncomment )
