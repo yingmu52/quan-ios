@@ -49,6 +49,7 @@
 + (UIImage *)navButtonDeleted;
 + (UIImage *)navCircleIcon;
 + (UIImage *)navInviteDefault;
++ (UIImage *)navSettingIcon;
 
 + (UIImage *)wishDetailCameraDefault;
 + (UIImage *)wishDetailBackgroundNonLogo;

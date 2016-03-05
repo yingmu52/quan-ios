@@ -123,12 +123,15 @@
                                                                                 target:self
                                                                                 action:@selector(showInvitationView)];
     
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[Theme navAddDefault]
-//                                                                              style:UIBarButtonItemStylePlain
-//                                                                             target:self
-//                                                                             action:@selector(showShuffView)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[Theme navSettingIcon]
+                                                                              style:UIBarButtonItemStylePlain
+                                                                             target:self
+                                                                             action:@selector(showCircleSettingView)];
 }
 
+- (void)showCircleSettingView{
+    [self performSegueWithIdentifier:@"showCircleSettingView" sender:nil];
+}
 - (void)showInvitationView{
     [self performSegueWithIdentifier:@"showInvitationView" sender:nil];
 }

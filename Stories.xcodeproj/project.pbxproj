@@ -77,6 +77,7 @@
 		A0A083851BD75E3E0057CD65 /* Circle.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A083811BD75E3E0057CD65 /* Circle.m */; };
 		A0A083941BD765F00057CD65 /* Circle+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A0838F1BD765F00057CD65 /* Circle+CoreDataProperties.m */; };
 		A0A083951BD765F00057CD65 /* Circle+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A0838F1BD765F00057CD65 /* Circle+CoreDataProperties.m */; };
+		A0AD96981C8A899E00B0091D /* CircleSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0AD96971C8A899E00B0091D /* CircleSettingViewController.m */; };
 		A0B8C8021B857F22009C4572 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */; };
 		A0B8C8031B857F22009C4572 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */; };
 		A0B9D7691B9E4F1100EE382B /* DashedBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B9D7681B9E4F1100EE382B /* DashedBorderView.m */; };
@@ -361,8 +362,8 @@
 		A03010511BABC6AA0041E2CF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/QBImagePicker.strings"; sourceTree = "<group>"; };
 		A030105E1BACAFBC0041E2CF /* QBPreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBPreViewController.h; sourceTree = "<group>"; };
 		A030105F1BACAFBC0041E2CF /* QBPreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBPreViewController.m; sourceTree = "<group>"; };
-		A0342B881C816EA400803BD7 /* CircleListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleListCell.h; sourceTree = "<group>"; };
-		A0342B891C816EA400803BD7 /* CircleListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleListCell.m; sourceTree = "<group>"; };
+		A0342B881C816EA400803BD7 /* CircleListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircleListCell.h; path = Discovery/CircleListCell.h; sourceTree = "<group>"; };
+		A0342B891C816EA400803BD7 /* CircleListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircleListCell.m; path = Discovery/CircleListCell.m; sourceTree = "<group>"; };
 		A04842E71B98CF9E0032E927 /* UIImageView+ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+ImageCache.h"; sourceTree = "<group>"; };
 		A04842E81B98CF9E0032E927 /* UIImageView+ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+ImageCache.m"; sourceTree = "<group>"; };
 		A04842F41B99F29C0032E927 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
@@ -412,12 +413,14 @@
 		A0A083541BD3528C0057CD65 /* FetchCenterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchCenterTest.m; sourceTree = "<group>"; };
 		A0A083561BD5FF9E0057CD65 /* StationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationViewController.h; sourceTree = "<group>"; };
 		A0A083571BD5FF9E0057CD65 /* StationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationViewController.m; sourceTree = "<group>"; };
-		A0A0835A1BD74F260057CD65 /* CircleListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleListViewController.h; sourceTree = "<group>"; };
-		A0A0835B1BD74F260057CD65 /* CircleListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleListViewController.m; sourceTree = "<group>"; };
+		A0A0835A1BD74F260057CD65 /* CircleListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircleListViewController.h; path = Discovery/CircleListViewController.h; sourceTree = "<group>"; };
+		A0A0835B1BD74F260057CD65 /* CircleListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircleListViewController.m; path = Discovery/CircleListViewController.m; sourceTree = "<group>"; };
 		A0A083801BD75E3E0057CD65 /* Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Circle.h; sourceTree = "<group>"; };
 		A0A083811BD75E3E0057CD65 /* Circle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Circle.m; sourceTree = "<group>"; };
 		A0A0838E1BD765F00057CD65 /* Circle+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Circle+CoreDataProperties.h"; sourceTree = "<group>"; };
 		A0A0838F1BD765F00057CD65 /* Circle+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Circle+CoreDataProperties.m"; sourceTree = "<group>"; };
+		A0AD96961C8A899E00B0091D /* CircleSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleSettingViewController.h; sourceTree = "<group>"; };
+		A0AD96971C8A899E00B0091D /* CircleSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleSettingViewController.m; sourceTree = "<group>"; };
 		A0B8C8001B857F22009C4572 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		A0B9D7671B9E4F1100EE382B /* DashedBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashedBorderView.h; sourceTree = "<group>"; };
@@ -1052,6 +1055,12 @@
 			children = (
 				A0FEC1311C8616CC004C48F1 /* CircleCreationViewController.h */,
 				A0FEC1321C8616CC004C48F1 /* CircleCreationViewController.m */,
+				A0A0835A1BD74F260057CD65 /* CircleListViewController.h */,
+				A0A0835B1BD74F260057CD65 /* CircleListViewController.m */,
+				A0342B881C816EA400803BD7 /* CircleListCell.h */,
+				A0342B891C816EA400803BD7 /* CircleListCell.m */,
+				A0AD96961C8A899E00B0091D /* CircleSettingViewController.h */,
+				A0AD96971C8A899E00B0091D /* CircleSettingViewController.m */,
 			);
 			name = Circles;
 			sourceTree = "<group>";
@@ -1327,12 +1336,8 @@
 		AEFB04781AD12437009EB0D3 /* Discovery */ = {
 			isa = PBXGroup;
 			children = (
-				A0342B881C816EA400803BD7 /* CircleListCell.h */,
-				A0342B891C816EA400803BD7 /* CircleListCell.m */,
 				A07C66AD1BE01AB800413D32 /* InvitationViewController.h */,
 				A07C66AE1BE01AB800413D32 /* InvitationViewController.m */,
-				A0A0835A1BD74F260057CD65 /* CircleListViewController.h */,
-				A0A0835B1BD74F260057CD65 /* CircleListViewController.m */,
 				A016FDB41B8C4250006E7A09 /* ShuffleViewController.h */,
 				A016FDB51B8C4250006E7A09 /* ShuffleViewController.m */,
 				AEFB047B1AD12437009EB0D3 /* DiscoveryCell.h */,
@@ -1593,6 +1598,7 @@
 				A0D1023E1B84ECDF006B0E4E /* NavigationBar.m in Sources */,
 				A0D102231B84EB6A006B0E4E /* SDWebImageDownloaderOperation.m in Sources */,
 				A0F7D4451B84E851003CCB34 /* GCPTextView.m in Sources */,
+				A0AD96981C8A899E00B0091D /* CircleSettingViewController.m in Sources */,
 				A0F5131C1BD98B9600279B9D /* Plan+CoreDataProperties.m in Sources */,
 				A0B9D7691B9E4F1100EE382B /* DashedBorderView.m in Sources */,
 				A0F7D4471B84E851003CCB34 /* JTSAnimatedGIFUtility.m in Sources */,

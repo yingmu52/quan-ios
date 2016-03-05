@@ -161,6 +161,10 @@
 + (UIColor *)naviBackground{
     return [[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_navbar"]] colorWithAlphaComponent:0.95];
 }
+
++ (UIImage *)navSettingIcon{
+    return [UIImage imageNamed:@"navbar_ic_setting"];
+}
 + (UIColor *)homeBackground{
     return [SystemUtil colorFromHexString:@"#EDEFEE"];
 }
