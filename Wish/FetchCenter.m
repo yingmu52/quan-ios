@@ -53,7 +53,7 @@
 #define CIRCLE @"quan/"
 #define JOINT_CIRCLE @"splan_quan_join.php"
 #define TOOL @"tool/"
-#define GET_CIRCLE_LIST @"tool_quan_get.php"
+#define GET_CIRCLE_LIST @"splan_quan_get_quanlist.php"
 #define SWITCH_CIRCLE @"tool_quan_man.php"
 #define CREATE_CIRCLE @"splan_quan_create.php"
 #define DELETE_CIRCLE @"splan_quan_delete_id.php"
@@ -218,10 +218,10 @@
 }
 
 - (void)getCircleList:(FetchCenterGetRequestGetCircleListCompleted)completionBlock{
-    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,TOOL,GET_CIRCLE_LIST];
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,GET_CIRCLE_LIST];
     [self getRequest:rqtStr
-           parameter:@{@"key":[TOOLCGIKEY stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]}
-    includeArguments:NO
+           parameter:@{@"id":[User uid]}
+    includeArguments:YES
           completion:^(NSDictionary *responseJson) {
               NSManagedObjectContext *workerContext = [self workerContext];
               
