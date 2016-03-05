@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
                 desc:(NSString *)desc
              imageId:(NSString *)imageId
              context:(NSManagedObjectContext *)context;
+
++ (Circle *)getCircle:(NSString *)circleID;
 @end
 
 NS_ASSUME_NONNULL_END

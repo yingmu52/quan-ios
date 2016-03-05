@@ -75,6 +75,16 @@
     circle.createDate = [NSDate date];
     circle.ownerId = [User uid];
 }
+
++ (Circle *)getCircle:(NSString *)circleID{
+    
+    NSArray *results = [Plan fetchWith:@"Circle"
+                             predicate:[NSPredicate predicateWithFormat:@"circleId == %@",circleID]
+                      keyForDescriptor:@"createDate"
+                  managedObjectContext:[AppDelegate getContext]]; //utility method from Plan+PlanCRUD.h
+    return results.lastObject;
+}
+
 @end
 
 

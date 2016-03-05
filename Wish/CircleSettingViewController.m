@@ -59,6 +59,7 @@
      {
          [spinner stopAnimating];
          self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:sender];
+         [self.delegate didFinishDeletingCircle];
          [self.navigationController popViewControllerAnimated:YES];
      }];
 }

@@ -207,7 +207,7 @@
                parameter:@{@"key":[TOOLCGIKEY stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                            @"id":circleId,
                            @"manId":[User uid],
-                           @"operate":[@"add" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]}
+                           @"operate":[@"del" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]}
         includeArguments:NO
               completion:^(NSDictionary *responseJson) {
                   NSLog(@"%@",responseJson);

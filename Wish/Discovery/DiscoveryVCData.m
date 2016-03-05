@@ -16,7 +16,7 @@
 #import "LMDropdownView.h"
 #import "CircleListCell.h"
 #import "CircleSettingViewController.h"
-@interface DiscoveryVCData () <FetchCenterDelegate,LMDropdownViewDelegate>
+@interface DiscoveryVCData () <FetchCenterDelegate,LMDropdownViewDelegate,CircleSettingViewControllerDelegate>
 @property (nonatomic,strong) LMDropdownView *dropdownView;
 @property (nonatomic,weak) Circle *currentCircle;
 @property (nonatomic,strong) NSArray *presentingCircleIds;
@@ -114,8 +114,19 @@
     }
     if ([segue.identifier isEqualToString:@"showCircleSettingView"]) {
         CircleSettingViewController *csc = segue.destinationViewController;
+        csc.delegate = self;
         csc.circle = self.currentCircle;
     }
+}
+
+- (void)didFinishDeletingCircle{
+    Circle *circle = self.tableFetchedRC.fetchedObjects.firstObject;
+    if (![circle.ownerId isEqualToString:[User uid]]) {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+    [self.fetchCenter switchToCircle:circle.circleId completion:^{
+        [self getDiscoveryList];
+    }];
 }
 
 - (NSFetchRequest *)collectionFetchRequest{
@@ -138,11 +149,19 @@
                                                                                  style:UIBarButtonItemStylePlain
                                                                                 target:self
                                                                                 action:@selector(showInvitationView)];
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[Theme navSettingIcon]
-                                                                              style:UIBarButtonItemStylePlain
-                                                                             target:self
-                                                                             action:@selector(showCircleSettingView)];
+    [self setUpRightBarItem];
+}
+
+- (void)setUpRightBarItem{
+    Circle *circle = [Circle getCircle:[User currentCircleId]];
+    if ([circle.ownerId isEqualToString:[User uid]]) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[Theme navSettingIcon]
+                                                                                  style:UIBarButtonItemStylePlain
+                                                                                 target:self
+                                                                                 action:@selector(showCircleSettingView)];
+    }else{
+        self.navigationItem.rightBarButtonItem = nil;
+    }
 }
 
 - (void)showCircleSettingView{
@@ -241,6 +260,7 @@
         self.navigationItem.title = @"正在切换圈子...";
         //发送切换圈子请求
         [self.fetchCenter switchToCircle:circle.circleId completion:^{
+            [self setUpRightBarItem];
             //刷新发现页列表
             [self getDiscoveryList];
         }];

@@ -9,6 +9,11 @@
 @import UIKit;
 #import "Circle.h"
 
+@class CircleSettingViewController;
+@protocol CircleSettingViewControllerDelegate <NSObject>
+- (void)didFinishDeletingCircle;
+@end
 @interface CircleSettingViewController : UITableViewController
 @property (nonatomic,weak) Circle *circle;
+@property (nonatomic,weak) id <CircleSettingViewControllerDelegate> delegate;
 @end
