@@ -8,12 +8,20 @@
 
 #import "CircleSettingViewController.h"
 #import "Theme.h"
-
-@interface CircleSettingViewController ()
-
+#import "FetchCenter.h"
+@interface CircleSettingViewController () <FetchCenterDelegate>
+@property (nonatomic,strong) FetchCenter *fetchCenter;
 @end
 
 @implementation CircleSettingViewController
+
+- (FetchCenter *)fetchCenter{
+    if (!_fetchCenter) {
+        _fetchCenter = [[FetchCenter alloc] init];
+        _fetchCenter.delegate = self;
+    }
+    return _fetchCenter;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,13 +39,28 @@
                                          frame:frame];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     
-    UIButton *deleteBtn = [Theme buttonWithImage:[Theme navButtonDeleted]
-                                          target:self
-                                        selector:nil
-                                           frame:frame];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:deleteBtn];
+    if ([self.circle.ownerId isEqualToString:[User uid]]) {
+        UIButton *deleteBtn = [Theme buttonWithImage:[Theme navButtonDeleted]
+                                              target:self
+                                            selector:@selector(deleteCircle:)
+                                               frame:frame];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:deleteBtn];
+    }
     //Title
     self.navigationItem.title = @"设置";
+}
+
+- (void)deleteCircle:(UIButton *)sender{
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [spinner startAnimating];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+    [self.fetchCenter deleteCircle:self.circle
+                        completion:^(BOOL isCurrentLegalToDelete)
+     {
+         [spinner stopAnimating];
+         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:sender];
+         [self.navigationController popViewControllerAnimated:YES];
+     }];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

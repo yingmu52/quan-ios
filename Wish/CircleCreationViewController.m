@@ -37,7 +37,7 @@
     [doneBtn setFrame:CGRectMake(0, 0, 40, 25)];
     [doneBtn setTitle:@"完成" forState:UIControlStateNormal];
     [doneBtn setTintColor:[Theme globleColor]];
-    [doneBtn addTarget:self action:@selector(donePressed) forControlEvents:UIControlEventTouchUpInside];
+    [doneBtn addTarget:self action:@selector(donePressed:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:doneBtn];
     
     //Title
@@ -58,9 +58,14 @@
 
 
 
-- (void)donePressed{
+- (void)donePressed:(UIButton *)sender{
     if (self.titleTextField.hasText) {
-        self.navigationItem.rightBarButtonItem.enabled = NO;
+        [self.titleTextField resignFirstResponder];
+        //菊花开放
+        UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        [spinner startAnimating];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+
         UIImage *image = self.imageButton.imageView.image;
         //如果设置了封面就先上传封面
         if (image) {
@@ -72,10 +77,10 @@
             UIGraphicsEndImageContext();
             [self.fetchCenter postImageWithOperation:resizedImage complete:^(NSString *fetchedId) {
                 //创建圈子
-                [self createCircle:fetchedId];
+                [self createCircle:fetchedId sender:sender];
             }];
         }else{
-            [self createCircle:nil];
+            [self createCircle:nil sender:sender];
         }
     }else{
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请填写圈子的名字"
@@ -86,14 +91,14 @@
     }
 }
 
-- (void)createCircle:(NSString *)imageId{
+- (void)createCircle:(NSString *)imageId sender:(UIButton *)sender{
     [self.fetchCenter createCircle:self.titleTextField.text
                        description:self.detailTextView.text
                  backgroundImageId:imageId
                         completion:^(NSString *circleId)
      {
          //返回上一级
-         self.navigationItem.rightBarButtonItem.enabled = NO;
+         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:sender];
          [self.navigationController popViewControllerAnimated:YES];
      }];
 }

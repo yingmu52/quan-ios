@@ -7,7 +7,8 @@
 //
 
 @import UIKit;
+#import "Circle.h"
 
 @interface CircleSettingViewController : UITableViewController
-
+@property (nonatomic,weak) Circle *circle;
 @end

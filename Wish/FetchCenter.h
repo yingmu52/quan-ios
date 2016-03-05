@@ -48,7 +48,7 @@ typedef enum {
 /** 创建事件完成*/
 typedef void(^FetchCenterGetRequestPlanCreationCompleted)(Plan *plan);
 /** 请求圈子列表完成*/
-typedef void(^FetchCenterGetRequestGetCircleListCompleted)(NSArray *circles);
+typedef void(^FetchCenterGetRequestGetCircleListCompleted)(NSArray *circleIds);
 /** 切换圈子完成*/
 typedef void(^FetchCenterGetRequestSwithCircleCompleted)(void);
 /** 填写邀请码完成*/
@@ -134,7 +134,7 @@ typedef void(^FetchCenterGetRequestCreateCircleCompleted)(NSString *circleId);
 
 /** 删除圈子*/
 typedef void(^FetchCenterGetRequestDeleteCircleCompleted)(BOOL isCurrentLegalToDelete);
-- (void)deleteCircle:(NSString *)circleId completion:(FetchCenterGetRequestDeleteCircleCompleted)completionBlock;
+- (void)deleteCircle:(Circle *)circle completion:(FetchCenterGetRequestDeleteCircleCompleted)completionBlock;
 
 /**加入圈子*/
 - (void)joinCircle:(NSString *)invitationCode completion:(FetchCenterGetRequestJoinCircleCompleted)completionBlock;

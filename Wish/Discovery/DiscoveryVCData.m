@@ -15,12 +15,22 @@
 #import "WishDetailVCFollower.h"
 #import "LMDropdownView.h"
 #import "CircleListCell.h"
-
+#import "CircleSettingViewController.h"
 @interface DiscoveryVCData () <FetchCenterDelegate,LMDropdownViewDelegate>
 @property (nonatomic,strong) LMDropdownView *dropdownView;
+@property (nonatomic,weak) Circle *currentCircle;
+@property (nonatomic,strong) NSArray *presentingCircleIds;
 @end
 
 @implementation DiscoveryVCData
+
+- (Circle *)currentCircle{
+    Circle *circle = [self.tableFetchedRC objectAtIndexPath:[self.tableView indexPathForSelectedRow]];
+    if (!circle) {
+        circle = self.tableFetchedRC.fetchedObjects.firstObject;
+    }
+    return circle;
+}
 
 - (void)viewDidLoad{
     [super viewDidLoad];
@@ -47,7 +57,9 @@
     }
 
     [self getDiscoveryList];
-    [self.fetchCenter getCircleList:nil];
+    [self.fetchCenter getCircleList:^(NSArray *circleIds) {
+        self.presentingCircleIds = circleIds;
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -99,6 +111,10 @@
     if ([segue.identifier isEqualToString:@"showDiscoveryWishDetail"] || [segue.identifier isEqualToString:@"showWishDetailVCOwnerFromDiscovery"]){
         [segue.destinationViewController setPlan:sender];
         segue.destinationViewController.hidesBottomBarWhenPushed = YES;
+    }
+    if ([segue.identifier isEqualToString:@"showCircleSettingView"]) {
+        CircleSettingViewController *csc = segue.destinationViewController;
+        csc.circle = self.currentCircle;
     }
 }
 
@@ -189,8 +205,6 @@
         frame.size.height = 60.0;
         self.tableView.tableHeaderView.frame = frame;
         
-
-
     }
     return _dropdownView;
 }
@@ -198,6 +212,7 @@
 - (NSFetchRequest *)tableFetchRequest{
     if (!_tableFetchRequest) {
         _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Circle"];
+        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"circleId IN %@ OR ownerId == %@",self.presentingCircleIds,[User uid]];
         _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
     }
     return _tableFetchRequest;

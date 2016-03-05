@@ -157,16 +157,20 @@
 }
 
 
-- (void)deleteCircle:(NSString *)circleId completion:(FetchCenterGetRequestDeleteCircleCompleted)completionBlock{
+- (void)deleteCircle:(Circle *)circle completion:(FetchCenterGetRequestDeleteCircleCompleted)completionBlock{
     //TODO: 判断当前用户是否有删除圈子的权限
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,DELETE_CIRCLE];
     [self getRequest:rqtStr
-           parameter:@{@"id":circleId}
+           parameter:@{@"id":circle.circleId}
     includeArguments:YES
           completion:^(NSDictionary *responseJson)
     {
         if (completionBlock) {
-            completionBlock(YES);
+            dispatch_main_async_safe(^{
+                [circle.managedObjectContext deleteObject:circle];
+                [self.appDelegate saveContext];
+                completionBlock(YES);
+            });
         }
     }];
     
@@ -229,6 +233,16 @@
            parameter:@{@"key":[TOOLCGIKEY stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]}
     includeArguments:NO
           completion:^(NSDictionary *responseJson) {
+ 
+              if (completionBlock) {
+                  dispatch_main_async_safe(^{
+                      NSArray *circleListFromServer = [responseJson valueForKeyPath:@"data.id"];
+//                      NSLog(@"%@",circleListFromServer);
+//                      NSLog(@"%@ posts",@(circleListFromServer.count));
+                      completionBlock(circleListFromServer);
+                  });
+              }
+              
               NSManagedObjectContext *workerContext = [self workerContext];
               
               NSArray *circleInfo = [responseJson valueForKey:@"data"];
@@ -239,12 +253,7 @@
 //              NSLog(@"%@",circles);
               
               [self.appDelegate saveContext:workerContext];
-              
-              if (completionBlock) {
-                  dispatch_main_async_safe(^{
-                      completionBlock(circles);
-                  });
-              }
+
           }];
 }
 
