@@ -11,7 +11,7 @@
 
 @class CircleCreationViewController;
 @protocol CircleCreationViewControllerDelegate <NSObject>
-- (void)didFinishCreatingCircle:(Circle *)circle;
+- (void)didFinishCreatingCircle;
 @end
 @interface CircleCreationViewController : MSSuperViewController
 @property (nonatomic,weak) id <CircleCreationViewControllerDelegate> delegate;

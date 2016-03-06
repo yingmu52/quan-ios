@@ -17,10 +17,12 @@
 #import "CircleListCell.h"
 #import "CircleSettingViewController.h"
 #import "CircleCreationViewController.h"
+#import "EmptyCircleView.h"
 @interface DiscoveryVCData () <FetchCenterDelegate,LMDropdownViewDelegate,CircleSettingViewControllerDelegate,CircleCreationViewControllerDelegate>
 @property (nonatomic,strong) LMDropdownView *dropdownView;
 @property (nonatomic,weak) Circle *currentCircle;
 @property (nonatomic,strong) NSArray *presentingCircleIds;
+@property (nonatomic,strong) EmptyCircleView *emptyView;
 @end
 
 @implementation DiscoveryVCData
@@ -137,8 +139,11 @@
     
 }
 
-- (void)didFinishCreatingCircle:(Circle *)circle{
+- (void)didFinishCreatingCircle{
+    //这个点tableFetchedRC会获取到新创建的circle
+    Circle *circle = self.tableFetchedRC.fetchedObjects.firstObject;
     [self switchToCircle:circle];
+    [self setUpEmptyView:circle];
 }
 
 
@@ -289,6 +294,26 @@
     [self.dropdownView hide];
 }
 
+
+#pragma mark - 处理当圈子没有事件的情况
+
+- (void)setUpEmptyView:(Circle *)circle{
+    self.collectionView.hidden = YES;
+    [self.emptyView.circleImageView downloadImageWithImageId:circle.imageId size:FetchCenterImageSize200];
+    self.emptyView.circleTitleLabel.text = circle.circleName;
+    self.emptyView.circleDescriptionLabel.text = circle.circleDescription;
+    [self.view addSubview:self.emptyView];
+}
+- (EmptyCircleView *)emptyView{
+    if (!_emptyView){
+        CGFloat margin = 30.0f/640 * CGRectGetWidth(self.view.frame);
+        CGFloat width = CGRectGetWidth(self.view.frame) - margin * 2;
+        CGFloat height = 590.0 *width / 568;
+        CGRect rect = CGRectMake(margin,100,width,height);
+        _emptyView = [EmptyCircleView instantiateFromNib:rect];
+    }
+    return _emptyView;
+}
 
 @end
 
