@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="EmptyCircleView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lzs-53-wnx">
+                    <rect key="frame" x="250" y="40" width="100" height="100"/>
+                    <color key="backgroundColor" red="0.91372549020000005" green="0.91372549020000005" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="clp-PZ-oh1"/>
+                        <constraint firstAttribute="width" constant="100" id="ktV-ff-IPh"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ePz-Qa-6Hh" customClass="ButtonWithPathedImage">
+                    <rect key="frame" x="25" y="522" width="550" height="38"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="38" id="GFL-va-54l"/>
+                    </constraints>
+                    <state key="normal" title="开始记录" backgroundImage="create_button">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="buttonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="itk-T4-5Hb"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="标题" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4VN-JB-4gZ">
+                    <rect key="frame" x="25" y="155" width="550" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tcd-XY-hcg">
+                    <rect key="frame" x="22" y="193" width="556" height="115"/>
+                    <mutableString key="text">LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel</mutableString>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Lzs-53-wnx" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="HBC-VK-Jp8"/>
+                <constraint firstAttribute="trailing" secondItem="tcd-XY-hcg" secondAttribute="trailing" constant="22" id="JP1-vq-lDb"/>
+                <constraint firstItem="tcd-XY-hcg" firstAttribute="top" secondItem="4VN-JB-4gZ" secondAttribute="bottom" constant="20" id="K5b-RO-BoT"/>
+                <constraint firstItem="4VN-JB-4gZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="25" id="Tfc-5V-hne"/>
+                <constraint firstItem="4VN-JB-4gZ" firstAttribute="top" secondItem="Lzs-53-wnx" secondAttribute="bottom" constant="15" id="UKd-7h-f5g"/>
+                <constraint firstAttribute="trailing" secondItem="4VN-JB-4gZ" secondAttribute="trailing" constant="25" id="XLE-H8-OUV"/>
+                <constraint firstItem="ePz-Qa-6Hh" firstAttribute="top" relation="greaterThanOrEqual" secondItem="tcd-XY-hcg" secondAttribute="bottom" constant="20" id="fWz-R0-c6q"/>
+                <constraint firstItem="ePz-Qa-6Hh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="25" id="gCD-ew-cfQ"/>
+                <constraint firstAttribute="trailing" secondItem="ePz-Qa-6Hh" secondAttribute="trailing" constant="25" id="k1t-Xq-VpD"/>
+                <constraint firstItem="tcd-XY-hcg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="22" id="kYN-tf-bZR"/>
+                <constraint firstAttribute="bottom" secondItem="ePz-Qa-6Hh" secondAttribute="bottom" constant="40" id="tSa-Kl-sMy"/>
+                <constraint firstItem="Lzs-53-wnx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="40" id="yPX-2W-szw"/>
+            </constraints>
+            <connections>
+                <outlet property="circleDescriptionLabel" destination="tcd-XY-hcg" id="LZw-y7-adT"/>
+                <outlet property="circleImageView" destination="Lzs-53-wnx" id="Jxr-Kf-FHb"/>
+                <outlet property="circleTitleLabel" destination="4VN-JB-4gZ" id="hpH-RX-ax8"/>
+            </connections>
+            <point key="canvasLocation" x="300" y="-5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="create_button" width="54" height="38"/>
+    </resources>
+</document>
