@@ -148,7 +148,9 @@
                 [self switchToCircle:circleId completion:^{
                     //完成
                     if (completionBlock) {
-                        completionBlock(circle);
+                        dispatch_main_async_safe(^{
+                            completionBlock(circle);
+                        })
                     }
                 }];
             }
