@@ -144,15 +144,12 @@
                                               context:workerContext];
                 [self.appDelegate saveContext:workerContext];
                 
-                //切换到当前圈子
-                [self switchToCircle:circleId completion:^{
-                    //完成
-                    if (completionBlock) {
-                        dispatch_main_async_safe(^{
-                            completionBlock(circle);
-                        })
-                    }
-                }];
+                //完成
+                if (completionBlock) {
+                    dispatch_main_async_safe(^{
+                        completionBlock(circle);
+                    })
+                }
             }
         }];
     }
