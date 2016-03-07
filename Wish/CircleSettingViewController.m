@@ -9,6 +9,7 @@
 #import "CircleSettingViewController.h"
 #import "Theme.h"
 #import "FetchCenter.h"
+#import "CircleEditViewController.h"
 @interface CircleSettingViewController () <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @end
@@ -72,4 +73,15 @@
     return 2.5;
 }
 
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"showCircleEditingView"]) {
+        CircleEditViewController *cec = segue.destinationViewController;
+        cec.circle = self.circle;
+    }
+    
+}
 @end
+
+
+

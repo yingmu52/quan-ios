@@ -111,7 +111,6 @@
               completion:^(NSDictionary *responseJson){
                   if (completionBlock) {
                       dispatch_main_async_safe(^{
-                          //TODO: 更新本地Circle实例
                           completionBlock();
                       });
                   }
