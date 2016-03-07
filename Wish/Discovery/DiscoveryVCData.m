@@ -18,7 +18,7 @@
 #import "CircleSettingViewController.h"
 #import "CircleCreationViewController.h"
 #import "EmptyCircleView.h"
-@interface DiscoveryVCData () <FetchCenterDelegate,LMDropdownViewDelegate,CircleSettingViewControllerDelegate,CircleCreationViewControllerDelegate>
+@interface DiscoveryVCData () <FetchCenterDelegate,LMDropdownViewDelegate,CircleSettingViewControllerDelegate,CircleCreationViewControllerDelegate,EmptyCircleViewDelegate>
 @property (nonatomic,strong) LMDropdownView *dropdownView;
 @property (nonatomic,weak) Circle *currentCircle;
 @property (nonatomic,strong) NSArray *presentingCircleIds;
@@ -136,7 +136,6 @@
         CircleCreationViewController *ccc = segue.destinationViewController;
         ccc.delegate = self;
     }
-    
 }
 
 - (void)didFinishCreatingCircle{
@@ -311,8 +310,13 @@
         CGFloat height = 590.0 *width / 568;
         CGRect rect = CGRectMake(margin,100,width,height);
         _emptyView = [EmptyCircleView instantiateFromNib:rect];
+        _emptyView.delegate = self;
     }
     return _emptyView;
+}
+
+- (void)didPressedButtonOnEmptyCircleView:(EmptyCircleView *)emptyView{
+    [self performSegueWithIdentifier:@"showPlanCreationView" sender:nil];
 }
 
 @end

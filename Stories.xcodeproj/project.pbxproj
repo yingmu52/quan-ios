@@ -82,8 +82,8 @@
 		A0B8C8031B857F22009C4572 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */; };
 		A0B9D7691B9E4F1100EE382B /* DashedBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B9D7681B9E4F1100EE382B /* DashedBorderView.m */; };
 		A0B9D76A1B9E4F1100EE382B /* DashedBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B9D7681B9E4F1100EE382B /* DashedBorderView.m */; };
-		A0CBDCA81C8BC90300DA53FF /* EmptyCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CBDCA61C8BC90300DA53FF /* EmptyCircleView.m */; };
-		A0CBDCA91C8BC90300DA53FF /* EmptyCircleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0CBDCA71C8BC90300DA53FF /* EmptyCircleView.xib */; };
+		A0CBDCB51C8DF09800DA53FF /* EmptyCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CBDCB31C8DF09800DA53FF /* EmptyCircleView.m */; };
+		A0CBDCB61C8DF09800DA53FF /* EmptyCircleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0CBDCB41C8DF09800DA53FF /* EmptyCircleView.xib */; };
 		A0D102171B84EB6A006B0E4E /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D101F71B84EB6A006B0E4E /* MKAnnotationView+WebCache.m */; };
 		A0D102181B84EB6A006B0E4E /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D101F71B84EB6A006B0E4E /* MKAnnotationView+WebCache.m */; };
 		A0D102191B84EB6A006B0E4E /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D101F91B84EB6A006B0E4E /* NSData+ImageContentType.m */; };
@@ -427,9 +427,9 @@
 		A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		A0B9D7671B9E4F1100EE382B /* DashedBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashedBorderView.h; sourceTree = "<group>"; };
 		A0B9D7681B9E4F1100EE382B /* DashedBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashedBorderView.m; sourceTree = "<group>"; };
-		A0CBDCA51C8BC90300DA53FF /* EmptyCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyCircleView.h; sourceTree = "<group>"; };
-		A0CBDCA61C8BC90300DA53FF /* EmptyCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyCircleView.m; sourceTree = "<group>"; };
-		A0CBDCA71C8BC90300DA53FF /* EmptyCircleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyCircleView.xib; sourceTree = "<group>"; };
+		A0CBDCB21C8DF09800DA53FF /* EmptyCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyCircleView.h; sourceTree = "<group>"; };
+		A0CBDCB31C8DF09800DA53FF /* EmptyCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyCircleView.m; sourceTree = "<group>"; };
+		A0CBDCB41C8DF09800DA53FF /* EmptyCircleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyCircleView.xib; sourceTree = "<group>"; };
 		A0D101F61B84EB6A006B0E4E /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		A0D101F71B84EB6A006B0E4E /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		A0D101F81B84EB6A006B0E4E /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -1066,9 +1066,9 @@
 				A0342B891C816EA400803BD7 /* CircleListCell.m */,
 				A0AD96961C8A899E00B0091D /* CircleSettingViewController.h */,
 				A0AD96971C8A899E00B0091D /* CircleSettingViewController.m */,
-				A0CBDCA51C8BC90300DA53FF /* EmptyCircleView.h */,
-				A0CBDCA61C8BC90300DA53FF /* EmptyCircleView.m */,
-				A0CBDCA71C8BC90300DA53FF /* EmptyCircleView.xib */,
+				A0CBDCB21C8DF09800DA53FF /* EmptyCircleView.h */,
+				A0CBDCB31C8DF09800DA53FF /* EmptyCircleView.m */,
+				A0CBDCB41C8DF09800DA53FF /* EmptyCircleView.xib */,
 			);
 			name = Circles;
 			sourceTree = "<group>";
@@ -1492,7 +1492,7 @@
 			files = (
 				A07C66CA1BE078EE00413D32 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				AE01724D1A65CD8E0014266F /* Images.xcassets in Resources */,
-				A0CBDCA91C8BC90300DA53FF /* EmptyCircleView.xib in Resources */,
+				A0CBDCB61C8DF09800DA53FF /* EmptyCircleView.xib in Resources */,
 				A0F7D4A91B84E851003CCB34 /* UIImage-Categories.podspec in Resources */,
 				AEC0688F1B2D309E007975D2 /* FeedDetailCell.xib in Resources */,
 				AEF7F2A01A6875360022410B /* Main.storyboard in Resources */,
@@ -1540,7 +1540,7 @@
 				A0F7D49B1B84E851003CCB34 /* UIImage+ImageEffects.m in Sources */,
 				A0F8C4601B88444C00A8B120 /* Wish.xcdatamodeld in Sources */,
 				A0F7D4311B84E851003CCB34 /* CHTCollectionViewWaterfallLayout.m in Sources */,
-				A0CBDCA81C8BC90300DA53FF /* EmptyCircleView.m in Sources */,
+				A0CBDCB51C8DF09800DA53FF /* EmptyCircleView.m in Sources */,
 				AEF775441A8134FE000DB73B /* HomeCardFlowLayout.m in Sources */,
 				AE479E9E1A6F775C00366A0A /* PostViewController.m in Sources */,
 				AE9A19881B02E3A100590784 /* FeedbackkAccessoryView.m in Sources */,

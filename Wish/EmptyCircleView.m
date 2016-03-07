@@ -35,6 +35,7 @@
 }
 
 - (IBAction)buttonPressed:(id)sender{
+    [self.delegate didPressedButtonOnEmptyCircleView:self];
 }
 
 @end

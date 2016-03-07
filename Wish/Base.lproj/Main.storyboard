@@ -3984,6 +3984,7 @@
                         <segue destination="hHC-dm-tO3" kind="presentation" identifier="showInvitationView" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="aGn-B4-aDl"/>
                         <segue destination="axp-Mk-gVG" kind="show" identifier="showCircleCreationView" id="nwg-UX-WeF"/>
                         <segue destination="AFd-gJ-u6i" kind="show" identifier="showCircleSettingView" id="Zzj-nw-EVi"/>
+                        <segue destination="1Y1-uW-81U" kind="show" identifier="showPlanCreationView" id="TvX-zc-I4j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="szU-gC-KV4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -7040,12 +7041,12 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="4ZT-53-1QA"/>
+        <segue reference="mFv-Li-7ge"/>
         <segue reference="7ZJ-tG-Hnl"/>
         <segue reference="hrM-4j-5CW"/>
+        <segue reference="TvX-zc-I4j"/>
         <segue reference="9iF-Ie-E5K"/>
         <segue reference="evE-nl-2lN"/>
-        <segue reference="HDW-gM-fhf"/>
-        <segue reference="mFv-Li-7ge"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
 </document>
