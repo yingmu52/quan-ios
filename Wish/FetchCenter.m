@@ -731,6 +731,13 @@
          NSDictionary *manList = [responseJson valueForKeyPath:@"data.manList"];
          NSString *title = [responseJson valueForKeyPath:@"data.quanInfo.name"];
          
+         //设置圈子信息
+         NSDictionary *circleInfo = [responseJson valueForKeyPath:@"data.quanInfo"];
+         Circle *circle;
+         if (circleInfo) {
+             circle = [Circle updateCircleWithInfo:circleInfo managedObjectContext:workerContext];
+         }
+         
          //缓存并更新本地事件
          if (planList && manList){
              [planList enumerateObjectsUsingBlock:^(NSDictionary * planInfo, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -738,6 +745,10 @@
                                                ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]
                                     managedObjectContext:workerContext];
                  plan.discoverIndex = @(idx); //记录索引方便显示服务器上的顺序
+                 
+                 if (circle) {
+                     [plan addCirclesObject:circle];
+                 }
                  [plans addObject:plan];
  //              NSLog(@"%@, mask : %@, index %@",plan.planTitle,plan.cornerMask,plan.discoverIndex);
              }];

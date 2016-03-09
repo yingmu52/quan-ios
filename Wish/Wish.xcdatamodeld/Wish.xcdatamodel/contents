@@ -8,6 +8,7 @@
         <attribute name="imageId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="invitationCode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="ownerId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="plans" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Plan" inverseName="circles" inverseEntity="Plan" syncable="YES"/>
     </entity>
     <entity name="Comment" representedClassName="Comment" syncable="YES">
         <attribute name="commentId" optional="YES" attributeType="String" syncable="YES"/>
@@ -65,15 +66,16 @@
         <attribute name="planTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tryTimes" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="updateDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="circles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Circle" inverseName="plans" inverseEntity="Circle" syncable="YES"/>
         <relationship name="feeds" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Feed" inverseName="plan" inverseEntity="Feed" syncable="YES"/>
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="plans" inverseEntity="Owner" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Circle" positionX="-9288" positionY="-234" width="128" height="150"/>
+        <element name="Circle" positionX="-9290" positionY="-271" width="128" height="163"/>
         <element name="Comment" positionX="-9009" positionY="95" width="128" height="163"/>
-        <element name="Feed" positionX="-9306" positionY="-72" width="128" height="210"/>
+        <element name="Feed" positionX="-9288" positionY="-30" width="128" height="210"/>
         <element name="Message" positionX="-8892" positionY="-346" width="128" height="178"/>
         <element name="Owner" positionX="-8705" positionY="-43" width="128" height="135"/>
-        <element name="Plan" positionX="-9110" positionY="-324" width="128" height="268"/>
+        <element name="Plan" positionX="-9110" positionY="-324" width="128" height="283"/>
     </elements>
 </model>
