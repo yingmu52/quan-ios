@@ -97,6 +97,8 @@
     [cell.discoveryImageView downloadImageWithImageId:plan.backgroundNum size:FetchCenterImageSize400];
     cell.discoveryTitleLabel.text = plan.planTitle;
     cell.discoveryByUserLabel.text = [NSString stringWithFormat:@"by %@",plan.owner.ownerName];
+//    NSArray *circles = [plan.circles.allObjects valueForKeyPath:@"circleName"];
+//    cell.discoveryByUserLabel.text = [NSString stringWithFormat:@"%@",[circles componentsJoinedByString:@","]];
     cell.discoveryFollowerCountLabel.text = [NSString stringWithFormat:@"%@ 关注",plan.followCount];
     cell.discoveryRecordsLabel.text = [NSString stringWithFormat:@"%@ 记录",plan.tryTimes];
 
@@ -256,7 +258,6 @@
 - (NSFetchRequest *)tableFetchRequest{
     if (!_tableFetchRequest) {
         _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Circle"];
-        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"circleId IN %@ OR ownerId == %@",self.presentingCircleIds,[User uid]];
         _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
     }
     return _tableFetchRequest;
