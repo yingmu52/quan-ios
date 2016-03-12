@@ -52,6 +52,7 @@
 
 #define CIRCLE @"quan/"
 #define JOINT_CIRCLE @"splan_quan_join.php"
+#define GET_MEMBER_LIST @"splan_quan_get_manlist.php"
 #define TOOL @"tool/"
 //#define GET_CIRCLE_LIST @"splan_quan_get_quanlist.php"
 #define GET_CIRCLE_LIST @"tool_quan_get.php"
@@ -93,6 +94,31 @@
 #pragma mark - 圈子
 #define TOOLCGIKEY @"123$%^abc"
 
+
+- (void)getMemberListForCircle:(Circle *)circle
+                    completion:(FetchCenterGetRequestGetMemberListCompleted)completionBlock{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,GET_MEMBER_LIST];
+    NSDictionary *inputParams = @{@"id":circle.circleId};
+    [self getRequest:rqtStr
+           parameter:inputParams
+    includeArguments:YES
+          completion:^(NSDictionary *responseJson){
+              NSArray *manList = [responseJson valueForKey:@"manList"];
+              NSDictionary *manData = [responseJson valueForKey:@"manData"];
+              for (NSString *userID in manList) {
+                  NSManagedObjectContext *workerContext = [self workerContext];
+                  Owner *owner = [Owner updateOwnerWithInfo:manData[userID]
+                                       managedObjectContext:workerContext];
+                  [owner addCirclesObject:circle];
+              }
+              if (completionBlock) {
+                  dispatch_main_async_safe(^{
+                      completionBlock(manList);
+                  });
+              }
+          }
+     ];
+}
 - (void)updateCircle:(NSString *)circleId
                 name:(NSString *)circleName
          description:(NSString *)circleDescription

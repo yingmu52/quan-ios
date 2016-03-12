@@ -2,8 +2,8 @@
 //  Owner+CoreDataProperties.h
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2015-10-22.
-//  Copyright © 2015 Xinyi Zhuang. All rights reserved.
+//  Created by Xinyi Zhuang on 2016-03-12.
+//  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
 //  to delete and recreate this implementation file for your updated model.
@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSSet<Comment *> *comments;
 @property (nullable, nonatomic, retain) NSSet<Message *> *messages;
 @property (nullable, nonatomic, retain) NSSet<Plan *> *plans;
+@property (nullable, nonatomic, retain) NSSet<Circle *> *circles;
 
 @end
 
@@ -40,6 +41,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removePlansObject:(Plan *)value;
 - (void)addPlans:(NSSet<Plan *> *)values;
 - (void)removePlans:(NSSet<Plan *> *)values;
+
+- (void)addCirclesObject:(Circle *)value;
+- (void)removeCirclesObject:(Circle *)value;
+- (void)addCircles:(NSSet<Circle *> *)values;
+- (void)removeCircles:(NSSet<Circle *> *)values;
 
 @end
 

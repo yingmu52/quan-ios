@@ -59,6 +59,8 @@
 		A07C66CB1BE078EE00413D32 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A07C66C81BE078EE00413D32 /* TencentOpenApi_IOS_Bundle.bundle */; };
 		A07C66CC1BE078EE00413D32 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A07C66C91BE078EE00413D32 /* TencentOpenAPI.framework */; };
 		A07C66CD1BE078EE00413D32 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A07C66C91BE078EE00413D32 /* TencentOpenAPI.framework */; };
+		A081FCED1C90A3260025ABD5 /* MemberListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A081FCEC1C90A3260025ABD5 /* MemberListViewController.m */; };
+		A081FCF01C90A3D10025ABD5 /* MemberListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A081FCEF1C90A3D10025ABD5 /* MemberListCell.m */; };
 		A095D8341BCB884500ED3DFD /* PgySDk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A095D8321BCB884500ED3DFD /* PgySDk.framework */; };
 		A095D8351BCB884500ED3DFD /* PgyUpdate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A095D8331BCB884500ED3DFD /* PgyUpdate.framework */; };
 		A0994E631BC4CF9500D45845 /* SYEmojiCharacters.m in Sources */ = {isa = PBXBuildFile; fileRef = A0994E601BC4CF9500D45845 /* SYEmojiCharacters.m */; };
@@ -400,6 +402,10 @@
 		A07C66C31BE070E400413D32 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		A07C66C81BE078EE00413D32 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
 		A07C66C91BE078EE00413D32 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
+		A081FCEB1C90A3260025ABD5 /* MemberListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberListViewController.h; sourceTree = "<group>"; };
+		A081FCEC1C90A3260025ABD5 /* MemberListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberListViewController.m; sourceTree = "<group>"; };
+		A081FCEE1C90A3D10025ABD5 /* MemberListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberListCell.h; sourceTree = "<group>"; };
+		A081FCEF1C90A3D10025ABD5 /* MemberListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberListCell.m; sourceTree = "<group>"; };
 		A095D8321BCB884500ED3DFD /* PgySDk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PgySDk.framework; sourceTree = "<group>"; };
 		A095D8331BCB884500ED3DFD /* PgyUpdate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PgyUpdate.framework; sourceTree = "<group>"; };
 		A0994E5F1BC4CF9500D45845 /* SYEmojiCharacters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYEmojiCharacters.h; sourceTree = "<group>"; };
@@ -1061,6 +1067,10 @@
 		A0FEC1301C86167D004C48F1 /* Circles */ = {
 			isa = PBXGroup;
 			children = (
+				A081FCEB1C90A3260025ABD5 /* MemberListViewController.h */,
+				A081FCEC1C90A3260025ABD5 /* MemberListViewController.m */,
+				A081FCEE1C90A3D10025ABD5 /* MemberListCell.h */,
+				A081FCEF1C90A3D10025ABD5 /* MemberListCell.m */,
 				A0FEC1311C8616CC004C48F1 /* CircleCreationViewController.h */,
 				A0FEC1321C8616CC004C48F1 /* CircleCreationViewController.m */,
 				A0A0835A1BD74F260057CD65 /* CircleListViewController.h */,
@@ -1574,6 +1584,7 @@
 				A0D102311B84EB6A006B0E4E /* UIImageView+HighlightedWebCache.m in Sources */,
 				A0D1021B1B84EB6A006B0E4E /* SDImageCache.m in Sources */,
 				A0D102211B84EB6A006B0E4E /* SDWebImageDownloader.m in Sources */,
+				A081FCED1C90A3260025ABD5 /* MemberListViewController.m in Sources */,
 				A0D102331B84EB6A006B0E4E /* UIImageView+WebCache.m in Sources */,
 				AEE075381A744A770015155B /* SystemUtil.m in Sources */,
 				A0F513241BD98B9600279B9D /* Owner+CoreDataProperties.m in Sources */,
@@ -1663,6 +1674,7 @@
 				AE17799A1AF585CB005F1BEB /* FeedDetailViewController.m in Sources */,
 				AEFB048C1AD12437009EB0D3 /* DiscoveryViewController.m in Sources */,
 				AEEC6C731A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,
+				A081FCF01C90A3D10025ABD5 /* MemberListCell.m in Sources */,
 				A07C21231C8163BF0084976A /* ButtonWithPathedImage.m in Sources */,
 				AE47055D1AF9DC080028D7BC /* FeedDetailCell.m in Sources */,
 				AED8D7CA1A9BE2490035EDE5 /* FollowingImageCell.m in Sources */,

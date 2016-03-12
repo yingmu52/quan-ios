@@ -242,5 +242,18 @@
 + (UIImage *)circleCreationImageBackground{
     return [UIImage imageNamed:@"create_avatar_logo"];
 }
+
++ (UIImage *)circleOwnerIcon{
+    return [UIImage imageNamed:@"groupleader_icon"];
+}
+
++ (UIImage *)circleAdminIcon{
+    return [UIImage imageNamed:@"administrator_icon"];
+}
 @end
+
+
+
+
+
 

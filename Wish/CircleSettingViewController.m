@@ -10,6 +10,7 @@
 #import "Theme.h"
 #import "FetchCenter.h"
 #import "CircleEditViewController.h"
+#import "MemberListViewController.h"
 @interface CircleSettingViewController () <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @end
@@ -78,6 +79,10 @@
     if ([segue.identifier isEqualToString:@"showCircleEditingView"]) {
         CircleEditViewController *cec = segue.destinationViewController;
         cec.circle = self.circle;
+    }
+    if ([segue.identifier isEqualToString:@"showMemberListView"]) {
+        MemberListViewController *mlc = segue.destinationViewController;
+        mlc.circle = self.circle;
     }
     
 }

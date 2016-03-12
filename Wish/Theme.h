@@ -77,4 +77,7 @@
 + (UIImage *)circleListCheckBoxDefault;
 + (UIImage *)circleListCheckBoxSelected;
 + (UIImage *)circleCreationImageBackground;
+
++ (UIImage *)circleOwnerIcon;
++ (UIImage *)circleAdminIcon;
 @end
