@@ -19,6 +19,5 @@
 @dynamic comments;
 @dynamic messages;
 @dynamic plans;
-@dynamic circles;
 
 @end

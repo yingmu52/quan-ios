@@ -23,7 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *invitationCode;
 @property (nullable, nonatomic, retain) NSString *ownerId;
 @property (nullable, nonatomic, retain) NSSet<Plan *> *plans;
-@property (nullable, nonatomic, retain) NSSet<Owner *> *members;
 
 @end
 
@@ -33,11 +32,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removePlansObject:(Plan *)value;
 - (void)addPlans:(NSSet<Plan *> *)values;
 - (void)removePlans:(NSSet<Plan *> *)values;
-
-- (void)addMembersObject:(Owner *)value;
-- (void)removeMembersObject:(Owner *)value;
-- (void)addMembers:(NSSet<Owner *> *)values;
-- (void)removeMembers:(NSSet<Owner *> *)values;
 
 @end
 

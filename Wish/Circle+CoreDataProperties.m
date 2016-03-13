@@ -21,6 +21,5 @@
 @dynamic invitationCode;
 @dynamic ownerId;
 @dynamic plans;
-@dynamic members;
 
 @end

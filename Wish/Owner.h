@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Comment, Message, Plan, Circle;
+@class Comment, Message, Plan;
 
 NS_ASSUME_NONNULL_BEGIN
 

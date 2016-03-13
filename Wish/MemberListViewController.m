@@ -20,9 +20,9 @@
     [super viewDidLoad];
     [self setUpNavigationItem];
     [self.fetchCenter getMemberListForCircle:self.circle completion:^(NSArray *memberIDs) {
-        NSLog(@"%@",memberIDs);
+        
         self.tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Owner"];
-        self.tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"ownerId = %@ OR ownerId IN %@",self.circle.ownerId,memberIDs];
+        self.tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"%@ CONTAINS[cd] ownerId",memberIDs];
         self.tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"ownerId" ascending:NO]];
         [self.tableView reloadData];
     }];
@@ -63,15 +63,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     Owner *owner = [self.tableFetchedRC objectAtIndexPath:indexPath];
-    
-    NSString *identifier = [self.circle.ownerId isEqualToString:owner.ownerId] ? @"MemberListCellAdmin" : @"MemberListCellNormal";
+    NSString *identifier = [owner.ownerId isEqualToString:self.circle.ownerId] ? @"MemberListCellAdmin" : @"MemberListCellNormal";
     MemberListCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-
-    if ([self.circle.ownerId isEqualToString:owner.ownerId]) {
-        cell.iconImageView.image = [Theme circleOwnerIcon];
+    
+    if (owner.ownerName.length > 0) {
+        cell.nameLabel.text = owner.ownerName;
+    }else{
+        cell.nameLabel.text = @"该用户还没有设置名字";
     }
-    cell.nameLabel.text = owner.ownerName;
-
+    
     [cell.headImageView downloadImageWithImageId:owner.headUrl
                                             size:FetchCenterImageSize100];
 

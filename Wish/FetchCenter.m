@@ -107,9 +107,7 @@
               NSDictionary *manData = [responseJson valueForKey:@"manData"];
               for (NSString *userID in manList) {
                   NSManagedObjectContext *workerContext = [self workerContext];
-                  Owner *owner = [Owner updateOwnerWithInfo:manData[userID]
-                                       managedObjectContext:workerContext];
-                  [owner addCirclesObject:circle];
+                  [Owner updateOwnerWithInfo:manData[userID] managedObjectContext:workerContext];
               }
               if (completionBlock) {
                   dispatch_main_async_safe(^{
