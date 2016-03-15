@@ -116,6 +116,12 @@ typedef void(^FetchCenterPostRequestUploadImagesCompleted)(NSArray *imageIds);
 
 #pragma mark - 圈子
 
+/** 删除成员 **/
+typedef void(^FetchCenterGetRequestDeleteMemberCompleted)(void);
+- (void)deleteMember:(NSString *)memberID
+            inCircle:(NSString *)circleID
+          completion:(FetchCenterGetRequestDeleteMemberCompleted)completionBlock;
+
 /** 圈子成员列表 **/
 typedef void(^FetchCenterGetRequestGetMemberListCompleted)(NSArray *memberIDs);
 - (void)getMemberListForCircle:(Circle *)circle

@@ -56,6 +56,7 @@
 #define TOOL @"tool/"
 //#define GET_CIRCLE_LIST @"splan_quan_get_quanlist.php"
 #define GET_CIRCLE_LIST @"tool_quan_get.php"
+#define DELETE_MEMBER @"splan_quan_man_del.php"
 
 #define SWITCH_CIRCLE @"tool_quan_man.php"
 #define CREATE_CIRCLE @"splan_quan_create.php"
@@ -94,7 +95,24 @@
 #pragma mark - 圈子
 #define TOOLCGIKEY @"123$%^abc"
 
-
+- (void)deleteMember:(NSString *)memberID
+            inCircle:(NSString *)circleID
+          completion:(FetchCenterGetRequestDeleteMemberCompleted)completionBlock{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,DELETE_MEMBER];
+    NSDictionary *inputParams = @{@"manId":memberID,
+                                  @"quanId":circleID};
+    [self getRequest:rqtStr
+           parameter:inputParams
+    includeArguments:YES
+          completion:^(NSDictionary *responseJson){
+              if (completionBlock) {
+                  dispatch_main_async_safe(^{
+                      completionBlock();
+                  });
+              }
+          }
+     ];
+}
 - (void)getMemberListForCircle:(Circle *)circle
                     completion:(FetchCenterGetRequestGetMemberListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,GET_MEMBER_LIST];
