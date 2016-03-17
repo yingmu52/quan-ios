@@ -2,7 +2,7 @@
 //  Plan+CoreDataProperties.h
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2016-03-08.
+//  Created by Xinyi Zhuang on 2016-03-16.
 //  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -28,9 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *planTitle;
 @property (nullable, nonatomic, retain) NSNumber *tryTimes;
 @property (nullable, nonatomic, retain) NSDate *updateDate;
+@property (nullable, nonatomic, retain) Circle *circle;
 @property (nullable, nonatomic, retain) NSSet<Feed *> *feeds;
 @property (nullable, nonatomic, retain) Owner *owner;
-@property (nullable, nonatomic, retain) NSSet<Circle *> *circles;
 
 @end
 
@@ -40,11 +40,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removeFeedsObject:(Feed *)value;
 - (void)addFeeds:(NSSet<Feed *> *)values;
 - (void)removeFeeds:(NSSet<Feed *> *)values;
-
-- (void)addCirclesObject:(Circle *)value;
-- (void)removeCirclesObject:(Circle *)value;
-- (void)addCircles:(NSSet<Circle *> *)values;
-- (void)removeCircles:(NSSet<Circle *> *)values;
 
 @end
 

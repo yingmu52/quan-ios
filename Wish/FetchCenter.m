@@ -787,10 +787,7 @@
                                                ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]
                                     managedObjectContext:workerContext];
                  plan.discoverIndex = @(idx); //记录索引方便显示服务器上的顺序
-                 
-                 if (circle) {
-                     [plan addCirclesObject:circle];
-                 }
+                 plan.circle = circle;
                  [plans addObject:plan];
  //              NSLog(@"%@, mask : %@, index %@",plan.planTitle,plan.cornerMask,plan.discoverIndex);
              }];

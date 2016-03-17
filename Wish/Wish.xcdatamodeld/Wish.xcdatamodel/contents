@@ -8,7 +8,7 @@
         <attribute name="imageId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="invitationCode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="ownerId" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="plans" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Plan" inverseName="circles" inverseEntity="Plan" syncable="YES"/>
+        <relationship name="plans" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Plan" inverseName="circle" inverseEntity="Plan" syncable="YES"/>
     </entity>
     <entity name="Comment" representedClassName="Comment" syncable="YES">
         <attribute name="commentId" optional="YES" attributeType="String" syncable="YES"/>
@@ -66,7 +66,7 @@
         <attribute name="planTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tryTimes" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="updateDate" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="circles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Circle" inverseName="plans" inverseEntity="Circle" syncable="YES"/>
+        <relationship name="circle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Circle" inverseName="plans" inverseEntity="Circle" syncable="YES"/>
         <relationship name="feeds" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Feed" inverseName="plan" inverseEntity="Feed" syncable="YES"/>
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="plans" inverseEntity="Owner" syncable="YES"/>
     </entity>
