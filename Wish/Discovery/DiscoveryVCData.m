@@ -13,16 +13,16 @@
 #import "AppDelegate.h"
 #import "User.h"
 #import "WishDetailVCFollower.h"
-#import "LMDropdownView.h"
-#import "CircleListCell.h"
+//#import "LMDropdownView.h"
+//#import "CircleListCell.h"
 #import "CircleSettingViewController.h"
 #import "CircleCreationViewController.h"
-#import "EmptyCircleView.h"
-@interface DiscoveryVCData () <FetchCenterDelegate,LMDropdownViewDelegate,CircleSettingViewControllerDelegate,CircleCreationViewControllerDelegate,EmptyCircleViewDelegate>
-@property (nonatomic,strong) LMDropdownView *dropdownView;
+//#import "EmptyCircleView.h"
+@interface DiscoveryVCData () <FetchCenterDelegate,CircleSettingViewControllerDelegate,CircleCreationViewControllerDelegate>
+//@property (nonatomic,strong) LMDropdownView *dropdownView;
 @property (nonatomic,weak) Circle *currentCircle;
 @property (nonatomic,strong) NSArray *presentingCircleIds;
-@property (nonatomic,strong) EmptyCircleView *emptyView;
+//@property (nonatomic,strong) EmptyCircleView *emptyView;
 @end
 
 @implementation DiscoveryVCData
@@ -51,13 +51,13 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    if ([User isSuperUser]) {
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-                                       initWithTarget:self
-                                       action:@selector(showCircleList)];
-        self.navigationController.navigationBar.userInteractionEnabled = YES;
-        [self.navigationController.navigationBar addGestureRecognizer:tap];
-    }
+//    if ([User isSuperUser]) {
+//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+//                                       initWithTarget:self
+//                                       action:@selector(showCircleList)];
+//        self.navigationController.navigationBar.userInteractionEnabled = YES;
+//        [self.navigationController.navigationBar addGestureRecognizer:tap];
+//    }
 
     [self getDiscoveryList];
     [self.fetchCenter getCircleList:^(NSArray *circleIds) {
@@ -74,21 +74,21 @@
     [self.fetchCenter getDiscoveryList:self.collectionFetchedRC.fetchedObjects.mutableCopy
                             completion:^(NSString *circleTitle)
     {
-        if (!self.navigationItem.title) {
-            //设置导航标题
-            self.navigationItem.title = circleTitle;
-        }
+//        if (!self.navigationItem.title) {
+//            //设置导航标题
+//            self.navigationItem.title = circleTitle;
+//        }
     }];
 }
 
-- (void)switchToCircle:(Circle *)circle{
-    [self.fetchCenter switchToCircle:circle.circleId completion:^{
-        [self setUpRightBarItem];
-        self.navigationItem.title = circle.circleName;
-        //刷新发现页列表
-        [self getDiscoveryList];
-    }];
-}
+//- (void)switchToCircle:(Circle *)circle{
+//    [self.fetchCenter switchToCircle:circle.circleId completion:^{
+//        [self setUpRightBarItem];
+//        self.navigationItem.title = circle.circleName;
+//        //刷新发现页列表
+//        [self getDiscoveryList];
+//    }];
+//}
 
 #pragma mark - collection view delegate & data soucce
 
@@ -142,9 +142,9 @@
 
 - (void)didFinishCreatingCircle{
     //这个点tableFetchedRC会获取到新创建的circle
-    Circle *circle = self.tableFetchedRC.fetchedObjects.firstObject;
-    [self switchToCircle:circle];
-    [self setUpEmptyView:circle];
+//    Circle *circle = self.tableFetchedRC.fetchedObjects.firstObject;
+//    [self switchToCircle:circle];
+//    [self setUpEmptyView:circle];
 }
 
 
@@ -153,14 +153,21 @@
     if (![circle.ownerId isEqualToString:[User uid]]) {
         self.navigationItem.rightBarButtonItem = nil;
     }
-    [self switchToCircle:circle];
+//    [self switchToCircle:circle];
 }
 
 - (NSFetchRequest *)collectionFetchRequest{
     if (!_collectionFetchRequest) {
         NSFetchRequest *request = [[NSFetchRequest alloc] init];
         request.entity = [NSEntityDescription entityForName:@"Plan" inManagedObjectContext:[AppDelegate getContext]];
-        request.predicate = [NSPredicate predicateWithFormat:@"discoverIndex != nil"];
+        if (self.circle){
+            //圈子列表->事件瀑布流
+            request.predicate = [NSPredicate predicateWithFormat:@"circle.circleId == %@",self.circle.circleId];
+        }else{
+            //发现页
+            request.predicate = [NSPredicate predicateWithFormat:@"discoverIndex != nil"];
+        }
+        
         request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"discoverIndex" ascending:YES]];
         
         _collectionFetchRequest = request;
@@ -172,23 +179,27 @@
 
 - (void)setUpNavigationItem
 {
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[Theme navInviteDefault]
-                                                                                 style:UIBarButtonItemStylePlain
-                                                                                target:self
-                                                                                action:@selector(showInvitationView)];
-    [self setUpRightBarItem];
-}
+    if (self.circle) {
+        CGRect frame = CGRectMake(0,0, 25,25);
+        UIButton *backBtn = [Theme buttonWithImage:[Theme navBackButtonDefault]
+                                            target:self.navigationController
+                                          selector:@selector(popViewControllerAnimated:)
+                                             frame:frame];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+        self.navigationItem.title = self.circle.circleName;
+        
+        //只有主人才能设置圈子
+        if ([self.circle.ownerId isEqualToString:[User uid]]) {
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[Theme navSettingIcon]
+                                                                                      style:UIBarButtonItemStylePlain
+                                                                                     target:self
+                                                                                     action:@selector(showCircleSettingView)];
+        }
 
-- (void)setUpRightBarItem{
-    Circle *circle = [Circle getCircle:[User currentCircleId]];
-    if ([circle.ownerId isEqualToString:[User uid]]) {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[Theme navSettingIcon]
-                                                                                  style:UIBarButtonItemStylePlain
-                                                                                 target:self
-                                                                                 action:@selector(showCircleSettingView)];
     }else{
-        self.navigationItem.rightBarButtonItem = nil;
+        self.navigationItem.title = @"圈里事";
     }
+
 }
 
 - (void)showCircleSettingView{
@@ -219,106 +230,106 @@
 
 #pragma mark - 下拉菜单 
 
-- (void)showCircleList{
-    if (self.dropdownView) {
-        if (!self.dropdownView.isOpen){
-            self.tabBarController.tabBar.hidden = YES;
-            [self.dropdownView showFromNavigationController:self.navigationController withContentView:self.tableView];
-        }else{
-            [self.dropdownView hide];
-        }
-    }
-}
+//- (void)showCircleList{
+//    if (self.dropdownView) {
+//        if (!self.dropdownView.isOpen){
+//            self.tabBarController.tabBar.hidden = YES;
+//            [self.dropdownView showFromNavigationController:self.navigationController withContentView:self.tableView];
+//        }else{
+//            [self.dropdownView hide];
+//        }
+//    }
+//}
 
-- (void)dropdownViewDidHide:(LMDropdownView *)dropdownView{
-    self.tabBarController.tabBar.hidden = NO;
-}
+//- (void)dropdownViewDidHide:(LMDropdownView *)dropdownView{
+//    self.tabBarController.tabBar.hidden = NO;
+//}
 
-#define cellHeight 65.0
+//#define cellHeight 65.0
+//
+//- (LMDropdownView *)dropdownView{
+//    if (!_dropdownView) {
+//        _dropdownView = [LMDropdownView dropdownView];
+//        _dropdownView.delegate = self;
+//        
+//        CGFloat height = self.tableFetchedRC.fetchedObjects.count * cellHeight;
+//        if (height > 460.0) height = 460;
+//        self.tableView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds),height);
+//        self.tableView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.95];
+//        
+//        //设置“新增圈子”的背景视图高度
+//        CGRect frame = self.tableView.tableHeaderView.frame;
+//        frame.size.height = 60.0;
+//        self.tableView.tableHeaderView.frame = frame;
+//        
+//    }
+//    return _dropdownView;
+//}
 
-- (LMDropdownView *)dropdownView{
-    if (!_dropdownView) {
-        _dropdownView = [LMDropdownView dropdownView];
-        _dropdownView.delegate = self;
-        
-        CGFloat height = self.tableFetchedRC.fetchedObjects.count * cellHeight;
-        if (height > 460.0) height = 460;
-        self.tableView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds),height);
-        self.tableView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.95];
-        
-        //设置“新增圈子”的背景视图高度
-        CGRect frame = self.tableView.tableHeaderView.frame;
-        frame.size.height = 60.0;
-        self.tableView.tableHeaderView.frame = frame;
-        
-    }
-    return _dropdownView;
-}
+//- (NSFetchRequest *)tableFetchRequest{
+//    if (!_tableFetchRequest) {
+//        _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Circle"];
+//        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
+//    }
+//    return _tableFetchRequest;
+//}
+//
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return cellHeight;
+//}
+//
+//- (CircleListCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    CircleListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CircleListCell"];
+//
+//    Circle *circle = [self.tableFetchedRC objectAtIndexPath:indexPath];
+//    cell.circleListTitle.text = circle.circleName;
+//    cell.circleListSubtitle.text = circle.circleDescription;
+//    [cell.circleListImageView downloadImageWithImageId:circle.imageId size:FetchCenterImageSize100];
+//    
+//    return cell;
+//}
+//
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    [self.dropdownView hide];
+//    Circle *circle = [self.tableFetchedRC objectAtIndexPath:indexPath];
+//    if (![[User currentCircleId] isEqualToString:circle.circleId]) { //当选择了与当前不同的圈子时才执行操作
+//        self.navigationItem.title = @"正在切换圈子...";
+//        //发送切换圈子请求
+//        [self switchToCircle:circle];
+//    }
+//}
 
-- (NSFetchRequest *)tableFetchRequest{
-    if (!_tableFetchRequest) {
-        _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Circle"];
-        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
-    }
-    return _tableFetchRequest;
-}
-
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return cellHeight;
-}
-
-- (CircleListCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    CircleListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CircleListCell"];
-
-    Circle *circle = [self.tableFetchedRC objectAtIndexPath:indexPath];
-    cell.circleListTitle.text = circle.circleName;
-    cell.circleListSubtitle.text = circle.circleDescription;
-    [cell.circleListImageView downloadImageWithImageId:circle.imageId size:FetchCenterImageSize100];
-    
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self.dropdownView hide];
-    Circle *circle = [self.tableFetchedRC objectAtIndexPath:indexPath];
-    if (![[User currentCircleId] isEqualToString:circle.circleId]) { //当选择了与当前不同的圈子时才执行操作
-        self.navigationItem.title = @"正在切换圈子...";
-        //发送切换圈子请求
-        [self switchToCircle:circle];
-    }
-}
-
-- (IBAction)buttonPressedForCreatingCircle{
-    [self performSegueWithIdentifier:@"showCircleCreationView" sender:nil];
-    [self.dropdownView hide];
-}
+//- (IBAction)buttonPressedForCreatingCircle{
+//    [self performSegueWithIdentifier:@"showCircleCreationView" sender:nil];
+//    [self.dropdownView hide];
+//}
 
 
-#pragma mark - 处理当圈子没有事件的情况
+//#pragma mark - 处理当圈子没有事件的情况
 
-- (void)setUpEmptyView:(Circle *)circle{
-    self.collectionView.hidden = YES;
-    [self.emptyView.circleImageView downloadImageWithImageId:circle.imageId size:FetchCenterImageSize200];
-    self.emptyView.circleTitleLabel.text = circle.circleName;
-    self.emptyView.circleDescriptionLabel.text = circle.circleDescription;
-    [self.view addSubview:self.emptyView];
-}
-- (EmptyCircleView *)emptyView{
-    if (!_emptyView){
-        CGFloat margin = 30.0f/640 * CGRectGetWidth(self.view.frame);
-        CGFloat width = CGRectGetWidth(self.view.frame) - margin * 2;
-        CGFloat height = 590.0 *width / 568;
-        CGRect rect = CGRectMake(margin,100,width,height);
-        _emptyView = [EmptyCircleView instantiateFromNib:rect];
-        _emptyView.delegate = self;
-    }
-    return _emptyView;
-}
-
-- (void)didPressedButtonOnEmptyCircleView:(EmptyCircleView *)emptyView{
-    [self performSegueWithIdentifier:@"showPlanCreationView" sender:nil];
-}
+//- (void)setUpEmptyView:(Circle *)circle{
+//    self.collectionView.hidden = YES;
+//    [self.emptyView.circleImageView downloadImageWithImageId:circle.imageId size:FetchCenterImageSize200];
+//    self.emptyView.circleTitleLabel.text = circle.circleName;
+//    self.emptyView.circleDescriptionLabel.text = circle.circleDescription;
+//    [self.view addSubview:self.emptyView];
+//}
+//- (EmptyCircleView *)emptyView{
+//    if (!_emptyView){
+//        CGFloat margin = 30.0f/640 * CGRectGetWidth(self.view.frame);
+//        CGFloat width = CGRectGetWidth(self.view.frame) - margin * 2;
+//        CGFloat height = 590.0 *width / 568;
+//        CGRect rect = CGRectMake(margin,100,width,height);
+//        _emptyView = [EmptyCircleView instantiateFromNib:rect];
+//        _emptyView.delegate = self;
+//    }
+//    return _emptyView;
+//}
+//
+//- (void)didPressedButtonOnEmptyCircleView:(EmptyCircleView *)emptyView{
+//    [self performSegueWithIdentifier:@"showPlanCreationView" sender:nil];
+//}
 
 @end
 

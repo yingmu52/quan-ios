@@ -8,54 +8,83 @@
 
 #import "CircleListViewController.h"
 #import "Theme.h"
+#import "CircleListCell.h"
+#import "UIImageView+ImageCache.h"
+#import "DiscoveryVCData.h"
 @interface CircleListViewController () <UITableViewDelegate>
 @end
 
 @implementation CircleListViewController
 
 - (void)viewDidLoad{
+    [super viewDidLoad];
     
-    //设置导航项目
-    UIButton *backBtn = [Theme buttonWithImage:[Theme navBackButtonDefault]
-                                        target:self.navigationController
-                                      selector:@selector(popViewControllerAnimated:)
-                                         frame:CGRectMake(0, 0, 25, 25)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
-
-    //清除空白的Cell
+    //设置“新增圈子”的背景视图高度
+    CGRect frame = self.tableView.tableHeaderView.frame;
+    frame.size.height = 60.0;
+    self.tableView.tableHeaderView.frame = frame;
+    
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-
-    //请求圈子列表
-    [self.fetchCenter getCircleList:^(NSArray *circles){}];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CircleListCell"];
-    Circle *circle = [self.tableFetchedRC objectAtIndexPath:indexPath];
-    cell.textLabel.text = circle.circleName;
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     
-    UIImage *image = [[User currentCircleId] isEqualToString:circle.circleId] ? [Theme circleListCheckBoxSelected] : [Theme circleListCheckBoxDefault];
-    cell.accessoryView = [[UIImageView alloc] initWithImage:image];
-    return cell;
+    [self.fetchCenter getCircleList:^(NSArray *circleIds) {
+        
+        //同步列表
+        if (self.tableFetchedRC.fetchedObjects.count != circleIds.count) {
+            
+            //1. Change Fetch Request
+            self.tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"circleId IN %@",circleIds];
+            
+            //2. reFetch
+            [self.tableFetchedRC performFetch:nil];
+            [self.tableView reloadData];
+        }
+        
+        
+    }];
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    Circle *circle = [self.tableFetchedRC objectAtIndexPath:indexPath];
-    if (![[User currentCircleId] isEqualToString:circle.circleId]) { //当选择了与当前不同的圈子时才执行操作
-        [self.fetchCenter switchToCircle:circle.circleId completion:^{ //请求换圈
-            [User updateAttributeFromDictionary:@{CURRENT_CIRCLE_ID:circle.circleId}]; //缓存圈子id
-            [self.navigationController popViewControllerAnimated:YES]; //返回
-        }];
-    }
-}
-
-#pragma mark - Override Methods
 - (NSFetchRequest *)tableFetchRequest{
     if (!_tableFetchRequest) {
         _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Circle"];
         _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
     }
     return _tableFetchRequest;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 65.0;
+}
+
+- (CircleListCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    CircleListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CircleListCell"];
+
+    Circle *circle = [self.tableFetchedRC objectAtIndexPath:indexPath];
+    cell.circleListTitle.text = circle.circleName;
+    cell.circleListSubtitle.text = circle.circleDescription;
+    [cell.circleListImageView downloadImageWithImageId:circle.imageId size:FetchCenterImageSize100];
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    Circle *circle = [self.tableFetchedRC objectAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:@"showPlansView" sender:circle];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (IBAction)buttonPressedForCreatingCircle{
+    [self performSegueWithIdentifier:@"showCircleCreationView" sender:nil];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"showPlansView"]) {
+        DiscoveryVCData *dvd = segue.destinationViewController;
+        dvd.circle = sender;
+    }
 }
 
 
