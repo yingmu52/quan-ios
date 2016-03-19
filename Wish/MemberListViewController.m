@@ -22,7 +22,7 @@
     [self.fetchCenter getMemberListForCircle:self.circle completion:^(NSArray *memberIDs) {
         
         self.tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Owner"];
-        self.tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"%@ CONTAINS[cd] ownerId",memberIDs];
+        self.tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"ownerId IN %@",memberIDs];
         self.tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"ownerId" ascending:NO]];
         [self.tableView reloadData];
     }];
@@ -110,6 +110,7 @@
         [self presentViewController:actionSheet animated:YES completion:nil];
 
     }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
 

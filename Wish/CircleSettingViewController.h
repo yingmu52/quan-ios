@@ -14,6 +14,6 @@
 - (void)didFinishDeletingCircle;
 @end
 @interface CircleSettingViewController : UITableViewController
-@property (nonatomic,weak) Circle *circle;
+@property (nonatomic,strong) Circle *circle;
 @property (nonatomic,weak) id <CircleSettingViewControllerDelegate> delegate;
 @end

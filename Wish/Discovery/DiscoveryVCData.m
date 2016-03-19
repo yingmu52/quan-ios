@@ -20,20 +20,20 @@
 //#import "EmptyCircleView.h"
 @interface DiscoveryVCData () <FetchCenterDelegate,CircleSettingViewControllerDelegate,CircleCreationViewControllerDelegate>
 //@property (nonatomic,strong) LMDropdownView *dropdownView;
-@property (nonatomic,weak) Circle *currentCircle;
+//@property (nonatomic,weak) Circle *currentCircle;
 @property (nonatomic,strong) NSArray *presentingCircleIds;
 //@property (nonatomic,strong) EmptyCircleView *emptyView;
 @end
 
 @implementation DiscoveryVCData
 
-- (Circle *)currentCircle{
-    Circle *circle = [self.tableFetchedRC objectAtIndexPath:[self.tableView indexPathForSelectedRow]];
-    if (!circle) {
-        circle = self.tableFetchedRC.fetchedObjects.firstObject;
-    }
-    return circle;
-}
+//- (Circle *)currentCircle{
+//    Circle *circle = [self.tableFetchedRC objectAtIndexPath:[self.tableView indexPathForSelectedRow]];
+//    if (!circle) {
+//        circle = self.tableFetchedRC.fetchedObjects.firstObject;
+//    }
+//    return circle;
+//}
 
 - (void)viewDidLoad{
     [super viewDidLoad];
@@ -99,7 +99,7 @@
     if ([segue.identifier isEqualToString:@"showCircleSettingView"]) {
         CircleSettingViewController *csc = segue.destinationViewController;
         csc.delegate = self;
-        csc.circle = self.currentCircle;
+        csc.circle = self.circle;
     }
     if ([segue.identifier isEqualToString:@"showCircleCreationView"]) {
         CircleCreationViewController *ccc = segue.destinationViewController;

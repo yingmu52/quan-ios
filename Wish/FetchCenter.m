@@ -183,10 +183,11 @@
           completion:^(NSDictionary *responseJson){
               NSArray *manList = [responseJson valueForKey:@"manList"];
               NSDictionary *manData = [responseJson valueForKey:@"manData"];
+              NSManagedObjectContext *workerContext = [self workerContext];
               for (NSString *userID in manList) {
-                  NSManagedObjectContext *workerContext = [self workerContext];
                   [Owner updateOwnerWithInfo:manData[userID] managedObjectContext:workerContext];
               }
+              [self.appDelegate saveContext:workerContext];
               if (completionBlock) {
                   dispatch_main_async_safe(^{
                       completionBlock(manList);
