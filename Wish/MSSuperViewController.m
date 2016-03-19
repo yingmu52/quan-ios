@@ -175,6 +175,10 @@
     }
 }
 
+- (void)configureTableViewCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
+    //Abstract!
+}
+
 @end
 
 

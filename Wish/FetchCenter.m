@@ -54,8 +54,8 @@
 #define JOINT_CIRCLE @"splan_quan_join.php"
 #define GET_MEMBER_LIST @"splan_quan_get_manlist.php"
 #define TOOL @"tool/"
-//#define GET_CIRCLE_LIST @"splan_quan_get_quanlist.php"
-#define GET_CIRCLE_LIST @"tool_quan_get.php"
+#define GET_CIRCLE_LIST @"splan_quan_get_quanlist.php"
+//#define GET_CIRCLE_LIST @"tool_quan_get.php"
 #define DELETE_MEMBER @"splan_quan_man_del.php"
 #define GET_CIRCLE_PLAN_LIST @"splan_quan_get_planlist.php"
 
@@ -325,23 +325,12 @@
 
 - (void)getCircleList:(FetchCenterGetRequestGetCircleListCompleted)completionBlock{
 //    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,GET_CIRCLE_LIST];
-    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,TOOL,GET_CIRCLE_LIST];
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,GET_CIRCLE_LIST];
 
     [self getRequest:rqtStr
-//           parameter:@{@"id":[User uid]}
-//         includeArguments:YES
-           parameter:@{@"key":[TOOLCGIKEY stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]}
-    includeArguments:NO
+           parameter:@{@"id":[User uid]}
+         includeArguments:YES
           completion:^(NSDictionary *responseJson) {
- 
-              if (completionBlock) {
-                  dispatch_main_async_safe(^{
-                      NSArray *circleListFromServer = [responseJson valueForKeyPath:@"data.id"];
-//                      NSLog(@"%@",circleListFromServer);
-//                      NSLog(@"%@ posts",@(circleListFromServer.count));
-                      completionBlock(circleListFromServer);
-                  });
-              }
               
               NSManagedObjectContext *workerContext = [self workerContext];
               
@@ -350,9 +339,14 @@
               for (NSDictionary *info in circleInfo) {
                   [circles addObject:[Circle updateCircleWithInfo:info managedObjectContext:workerContext]];
               }
-//              NSLog(@"%@",circles);
               
               [self.appDelegate saveContext:workerContext];
+              
+              if (completionBlock) {
+                  dispatch_main_async_safe(^{
+                      completionBlock([responseJson valueForKeyPath:@"data.id"]);
+                  });
+              }
 
           }];
 }

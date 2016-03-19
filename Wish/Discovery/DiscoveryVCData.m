@@ -130,7 +130,7 @@
         if (self.circle){
             //圈子列表->事件瀑布流
             _collectionFetchRequest.predicate = [NSPredicate predicateWithFormat:@"circle.circleId == %@",self.circle.circleId];
-            _collectionFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"updateDate" ascending:YES]];
+            _collectionFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"updateDate" ascending:NO]];
         }else{
             //发现页
             _collectionFetchRequest.predicate = [NSPredicate predicateWithFormat:@"discoverIndex != nil"];

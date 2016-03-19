@@ -436,8 +436,7 @@
                                                             <exclude reference="qHR-hW-Em1"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="64.5"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="subviews">
                                                             <include reference="K5m-ul-Xw1"/>
                                                             <include reference="C7G-pU-hlg"/>
@@ -3736,11 +3735,11 @@
             </objects>
             <point key="canvasLocation" x="6808.5" y="-967.5"/>
         </scene>
-        <!--关注-->
+        <!--圈子-->
         <scene sceneID="FbS-uZ-glk">
             <objects>
                 <navigationController storyboardIdentifier="HomeNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="81G-fy-O9t" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="关注" image="tab_ic_follow" id="kq0-v6-o9I">
+                    <tabBarItem key="tabBarItem" title="圈子" image="tab_ic_follow" id="kq0-v6-o9I">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-8"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="tab_ic_follow_pressed"/>
