@@ -150,8 +150,8 @@ typedef void(^FetchCenterGetRequestCreateCircleCompleted)(Circle *circle);
 
 
 /** 删除圈子*/
-typedef void(^FetchCenterGetRequestDeleteCircleCompleted)(BOOL isCurrentLegalToDelete);
-- (void)deleteCircle:(Circle *)circle completion:(FetchCenterGetRequestDeleteCircleCompleted)completionBlock;
+typedef void(^FetchCenterGetRequestDeleteCircleCompleted)(void);
+- (void)deleteCircle:(NSString *)circleId completion:(FetchCenterGetRequestDeleteCircleCompleted)completionBlock;
 
 /**加入圈子*/
 - (void)joinCircle:(NSString *)invitationCode completion:(FetchCenterGetRequestJoinCircleCompleted)completionBlock;

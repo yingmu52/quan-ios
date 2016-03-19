@@ -507,8 +507,8 @@ static NSTimeInterval expectationTimeout = 30.0f;
                                 completion:^{
                                     
                 //4. Delete Circle
-                [self.fetchCenter deleteCircle:circle
-                                    completion:^(BOOL isCurrentLegalToDelete)
+                [self.fetchCenter deleteCircle:circle.circleId
+                                    completion:^
                  {
                      [expectation fulfill];
                  }];

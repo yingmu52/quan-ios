@@ -56,13 +56,17 @@
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [spinner startAnimating];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
-    [self.fetchCenter deleteCircle:self.circle
-                        completion:^(BOOL isCurrentLegalToDelete)
+    [self.fetchCenter deleteCircle:self.circle.circleId
+                        completion:^
      {
          [spinner stopAnimating];
          self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:sender];
-         [self.delegate didFinishDeletingCircle];
-         [self.navigationController popViewControllerAnimated:YES];
+//         [self.delegate didFinishDeletingCircle];
+         [self.circle.managedObjectContext deleteObject:self.circle];
+         AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+         [delegate saveContext];
+         
+         [self.navigationController popToRootViewControllerAnimated:YES];
      }];
 }
 

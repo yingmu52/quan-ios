@@ -258,19 +258,18 @@
 }
 
 
-- (void)deleteCircle:(Circle *)circle completion:(FetchCenterGetRequestDeleteCircleCompleted)completionBlock{
+- (void)deleteCircle:(NSString *)circleId
+          completion:(FetchCenterGetRequestDeleteCircleCompleted)completionBlock{
     //TODO: 判断当前用户是否有删除圈子的权限
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,DELETE_CIRCLE];
     [self getRequest:rqtStr
-           parameter:@{@"id":circle.circleId}
+           parameter:@{@"id":circleId}
     includeArguments:YES
           completion:^(NSDictionary *responseJson)
     {
         if (completionBlock) {
             dispatch_main_async_safe(^{
-                [circle.managedObjectContext deleteObject:circle];
-                [self.appDelegate saveContext];
-                completionBlock(YES);
+                completionBlock();
             });
         }
     }];
