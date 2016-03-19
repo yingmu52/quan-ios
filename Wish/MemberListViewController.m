@@ -65,17 +65,20 @@
     Owner *owner = [self.tableFetchedRC objectAtIndexPath:indexPath];
     NSString *identifier = [owner.ownerId isEqualToString:self.circle.ownerId] ? @"MemberListCellAdmin" : @"MemberListCellNormal";
     MemberListCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    
+    [self configureTableViewCell:cell atIndexPath:indexPath];
+
+    return cell;
+}
+
+- (void)configureTableViewCell:(MemberListCell *)cell atIndexPath:(NSIndexPath *)indexPath{
+    Owner *owner = [self.tableFetchedRC objectAtIndexPath:indexPath];
     if (owner.ownerName.length > 0) {
         cell.nameLabel.text = owner.ownerName;
     }else{
         cell.nameLabel.text = @"该用户还没有设置名字";
     }
-    
     [cell.headImageView downloadImageWithImageId:owner.headUrl
                                             size:FetchCenterImageSize100];
-
-    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

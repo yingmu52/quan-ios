@@ -51,44 +51,13 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    if ([User isSuperUser]) {
-//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-//                                       initWithTarget:self
-//                                       action:@selector(showCircleList)];
-//        self.navigationController.navigationBar.userInteractionEnabled = YES;
-//        [self.navigationController.navigationBar addGestureRecognizer:tap];
-//    }
-
-    [self getDiscoveryList];
-    [self.fetchCenter getCircleList:^(NSArray *circleIds) {
-        self.presentingCircleIds = circleIds;
-    }];
+    if (self.circle) {
+        [self.fetchCenter getPlanListInCircle:self.circle.circleId currentPlans:self.tableFetchedRC.fetchedObjects.mutableCopy completion:nil];
+    }else{
+        [self.fetchCenter getDiscoveryList:self.collectionFetchedRC.fetchedObjects.mutableCopy
+                                completion:nil];
+    }
 }
-
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    self.navigationController.navigationBar.gestureRecognizers = nil;
-}
-
-- (void)getDiscoveryList{
-    [self.fetchCenter getDiscoveryList:self.collectionFetchedRC.fetchedObjects.mutableCopy
-                            completion:^(NSString *circleTitle)
-    {
-//        if (!self.navigationItem.title) {
-//            //设置导航标题
-//            self.navigationItem.title = circleTitle;
-//        }
-    }];
-}
-
-//- (void)switchToCircle:(Circle *)circle{
-//    [self.fetchCenter switchToCircle:circle.circleId completion:^{
-//        [self setUpRightBarItem];
-//        self.navigationItem.title = circle.circleName;
-//        //刷新发现页列表
-//        [self getDiscoveryList];
-//    }];
-//}
 
 #pragma mark - collection view delegate & data soucce
 
@@ -97,8 +66,6 @@
     [cell.discoveryImageView downloadImageWithImageId:plan.backgroundNum size:FetchCenterImageSize400];
     cell.discoveryTitleLabel.text = plan.planTitle;
     cell.discoveryByUserLabel.text = [NSString stringWithFormat:@"by %@",plan.owner.ownerName];
-//    NSArray *circles = [plan.circles.allObjects valueForKeyPath:@"circleName"];
-//    cell.discoveryByUserLabel.text = [NSString stringWithFormat:@"%@",[circles componentsJoinedByString:@","]];
     cell.discoveryFollowerCountLabel.text = [NSString stringWithFormat:@"%@ 关注",plan.followCount];
     cell.discoveryRecordsLabel.text = [NSString stringWithFormat:@"%@ 记录",plan.tryTimes];
 
@@ -158,19 +125,18 @@
 
 - (NSFetchRequest *)collectionFetchRequest{
     if (!_collectionFetchRequest) {
-        NSFetchRequest *request = [[NSFetchRequest alloc] init];
-        request.entity = [NSEntityDescription entityForName:@"Plan" inManagedObjectContext:[AppDelegate getContext]];
+        _collectionFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
+        
         if (self.circle){
             //圈子列表->事件瀑布流
-            request.predicate = [NSPredicate predicateWithFormat:@"circle.circleId == %@",self.circle.circleId];
+            _collectionFetchRequest.predicate = [NSPredicate predicateWithFormat:@"circle.circleId == %@",self.circle.circleId];
+            _collectionFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"updateDate" ascending:YES]];
         }else{
             //发现页
-            request.predicate = [NSPredicate predicateWithFormat:@"discoverIndex != nil"];
+            _collectionFetchRequest.predicate = [NSPredicate predicateWithFormat:@"discoverIndex != nil"];
+            _collectionFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"discoverIndex" ascending:YES]];
         }
         
-        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"discoverIndex" ascending:YES]];
-        
-        _collectionFetchRequest = request;
     }
     return _collectionFetchRequest;
 }

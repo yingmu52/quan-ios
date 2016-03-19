@@ -57,6 +57,7 @@
 //#define GET_CIRCLE_LIST @"splan_quan_get_quanlist.php"
 #define GET_CIRCLE_LIST @"tool_quan_get.php"
 #define DELETE_MEMBER @"splan_quan_man_del.php"
+#define GET_CIRCLE_PLAN_LIST @"splan_quan_get_planlist.php"
 
 #define SWITCH_CIRCLE @"tool_quan_man.php"
 #define CREATE_CIRCLE @"splan_quan_create.php"
@@ -94,6 +95,65 @@
 }
 #pragma mark - 圈子
 #define TOOLCGIKEY @"123$%^abc"
+
+- (void)getPlanListInCircle:(NSString *)circleId
+               currentPlans:(NSMutableArray *)currentPlans
+                 completion:(FetchCenterGetRequestGetCirclePlanListCompleted)completionBlock{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,GET_CIRCLE_PLAN_LIST];
+    NSDictionary *inputParams = @{@"id":circleId};
+    [self getRequest:rqtStr
+           parameter:inputParams
+    includeArguments:YES
+          completion:^(NSDictionary *responseJson)
+    {
+        NSManagedObjectContext *workerContext = [self workerContext];
+        
+        NSMutableArray *plans = [NSMutableArray array];
+        NSArray *planList = [responseJson valueForKeyPath:@"data.planList"];
+        NSDictionary *manList = [responseJson valueForKeyPath:@"data.manList"];
+        //设置圈子信息
+        NSDictionary *circleInfo = [responseJson valueForKeyPath:@"data.quanInfo"];
+        Circle *circle;
+        if (circleInfo) {
+            circle = [Circle updateCircleWithInfo:circleInfo
+                             managedObjectContext:workerContext];
+        }
+        
+        //缓存并更新本地事件
+        if (planList && manList){
+            for (NSDictionary *planInfo in planList) {
+                Plan *plan = [Plan updatePlanFromServer:planInfo
+                                              ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]
+                                   managedObjectContext:workerContext];
+                plan.circle = circle;
+                [plans addObject:plan];
+            }
+        }
+    
+        //移除发现页的不存在于服务器上的事件，异线。
+        if (currentPlans.count > 0) {
+            NSArray *planIds = [plans valueForKey:@"planId"];
+            NSPredicate *predicate =[NSPredicate predicateWithFormat:@"NOT (planId IN %@)",planIds];
+            NSArray *trashPlans = [currentPlans filteredArrayUsingPredicate:predicate];
+            for (Plan *plan in trashPlans){
+                if (plan.isDeletable) {
+                    [plan.managedObjectContext deleteObject:plan];
+                }
+            }
+        }
+
+        [self.appDelegate saveContext:workerContext];
+        
+        if (completionBlock) {
+            dispatch_main_async_safe(^{
+                completionBlock([planList valueForKeyPath:@"id"]);
+            });
+        }
+
+
+    
+    }];
+}
 
 - (void)deleteMember:(NSString *)memberID
             inCircle:(NSString *)circleID

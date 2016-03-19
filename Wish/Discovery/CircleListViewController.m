@@ -61,13 +61,17 @@
 
 - (CircleListCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     CircleListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CircleListCell"];
+    [self configureTableViewCell:cell atIndexPath:indexPath];
+    return cell;
+}
 
+- (void)configureTableViewCell:(CircleListCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     Circle *circle = [self.tableFetchedRC objectAtIndexPath:indexPath];
     cell.circleListTitle.text = circle.circleName;
     cell.circleListSubtitle.text = circle.circleDescription;
-    [cell.circleListImageView downloadImageWithImageId:circle.imageId size:FetchCenterImageSize100];
-    
-    return cell;
+    [cell.circleListImageView downloadImageWithImageId:circle.imageId
+                                                  size:FetchCenterImageSize100];
+
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
