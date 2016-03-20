@@ -97,7 +97,7 @@
                  backgroundImageId:imageId
                         completion:^(Circle *circle)
      {
-         [self.delegate didFinishCreatingCircle];
+//         [self.delegate didFinishCreatingCircle];
          //返回上一级
          self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:sender];
          [self.navigationController popViewControllerAnimated:YES];

@@ -31,19 +31,12 @@
     [super viewWillAppear:animated];
     
     [self.fetchCenter getCircleList:^(NSArray *circleIds) {
-        
         //同步列表
-        if (self.tableFetchedRC.fetchedObjects.count != circleIds.count) {
-            
-            //1. Change Fetch Request
-            self.tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"circleId IN %@",circleIds];
-            
-            //2. reFetch
-            [self.tableFetchedRC performFetch:nil];
-            [self.tableView reloadData];
+        for (Circle *circle in self.tableFetchedRC.fetchedObjects) {
+            if (![circleIds containsObject:circle.circleId]) {
+                [circle.managedObjectContext deleteObject:circle];
+            }
         }
-        
-        
     }];
 }
 

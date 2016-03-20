@@ -522,6 +522,29 @@ static NSTimeInterval expectationTimeout = 30.0f;
                                  }];
 
 }
+
+
+- (void)testSyncCGICircleCreationAndCircleList{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"创建圈子与拉取摘取圈子列表需要同步"];
+
+    [self.fetchCenter createCircle:@"TEST"
+                       description:@"TEST"
+                 backgroundImageId:nil
+                        completion:^(Circle *circle) {
+                            NSLog(@"%@ created",circle.circleId);
+        [self.fetchCenter getCircleList:^(NSArray *circleIds) {
+            NSLog(@"List: %@",circleIds);
+            if ([circleIds containsObject:circle.circleId]) {
+                [expectation fulfill];
+            }
+        }];
+    }];
+    [self waitForExpectationsWithTimeout:expectationTimeout
+                                 handler:^(NSError * _Nullable error) {
+                                     XCTAssertNil(error,@"创建圈子与拉取摘取圈子列表需要同步");
+                                 }];
+
+}
 @end
 
 

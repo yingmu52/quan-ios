@@ -106,52 +106,60 @@
     includeArguments:YES
           completion:^(NSDictionary *responseJson)
     {
-        NSManagedObjectContext *workerContext = [self workerContext];
         
-        NSMutableArray *plans = [NSMutableArray array];
-        NSArray *planList = [responseJson valueForKeyPath:@"data.planList"];
-        NSDictionary *manList = [responseJson valueForKeyPath:@"data.manList"];
-        //设置圈子信息
-        NSDictionary *circleInfo = [responseJson valueForKeyPath:@"data.quanInfo"];
-        Circle *circle;
-        if (circleInfo) {
-            circle = [Circle updateCircleWithInfo:circleInfo
-                             managedObjectContext:workerContext];
-        }
+        NSArray *planIDList = @[];
         
-        //缓存并更新本地事件
-        if (planList && manList){
-            for (NSDictionary *planInfo in planList) {
-                Plan *plan = [Plan updatePlanFromServer:planInfo
-                                              ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]
-                                   managedObjectContext:workerContext];
-                plan.circle = circle;
-                [plans addObject:plan];
+        
+        if ([[responseJson valueForKey:@"data"] length] > 0) { //
+            NSManagedObjectContext *workerContext = [self workerContext];
+            
+            NSMutableArray *plans = [NSMutableArray array];
+            NSArray *planList = [responseJson valueForKeyPath:@"data.planList"];
+            NSDictionary *manList = [responseJson valueForKeyPath:@"data.manList"];
+            
+            planIDList = [planList valueForKeyPath:@"id"];
+            //设置圈子信息
+            NSDictionary *circleInfo = [responseJson valueForKeyPath:@"data.quanInfo"];
+            Circle *circle;
+            if (circleInfo) {
+                circle = [Circle updateCircleWithInfo:circleInfo
+                                 managedObjectContext:workerContext];
             }
-        }
-    
-        //移除发现页的不存在于服务器上的事件，异线。
-        if (currentPlans.count > 0) {
-            NSArray *planIds = [plans valueForKey:@"planId"];
-            NSPredicate *predicate =[NSPredicate predicateWithFormat:@"NOT (planId IN %@)",planIds];
-            NSArray *trashPlans = [currentPlans filteredArrayUsingPredicate:predicate];
-            for (Plan *plan in trashPlans){
-                if (plan.isDeletable) {
-                    [plan.managedObjectContext deleteObject:plan];
+            
+            //缓存并更新本地事件
+            if (planList && manList){
+                for (NSDictionary *planInfo in planList) {
+                    Plan *plan = [Plan updatePlanFromServer:planInfo
+                                                  ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]
+                                       managedObjectContext:workerContext];
+                    plan.circle = circle;
+                    [plans addObject:plan];
                 }
             }
+            
+            //移除发现页的不存在于服务器上的事件，异线。
+            if (currentPlans.count > 0) {
+                NSArray *planIds = [plans valueForKey:@"planId"];
+                NSPredicate *predicate =[NSPredicate predicateWithFormat:@"NOT (planId IN %@)",planIds];
+                NSArray *trashPlans = [currentPlans filteredArrayUsingPredicate:predicate];
+                for (Plan *plan in trashPlans){
+                    if (plan.isDeletable) {
+                        [plan.managedObjectContext deleteObject:plan];
+                    }
+                }
+            }
+            
+            [self.appDelegate saveContext:workerContext];
+            
         }
 
-        [self.appDelegate saveContext:workerContext];
         
         if (completionBlock) {
             dispatch_main_async_safe(^{
-                completionBlock([planList valueForKeyPath:@"id"]);
+                completionBlock(planIDList);
             });
         }
 
-
-    
     }];
 }
 
@@ -181,13 +189,31 @@
            parameter:inputParams
     includeArguments:YES
           completion:^(NSDictionary *responseJson){
-              NSArray *manList = [responseJson valueForKey:@"manList"];
-              NSDictionary *manData = [responseJson valueForKey:@"manData"];
+              
+              //后台在成员列表里没有返回主人ID，需要特别处理
+              NSMutableArray *manList = [NSMutableArray array];
+
               NSManagedObjectContext *workerContext = [self workerContext];
-              for (NSString *userID in manList) {
-                  [Owner updateOwnerWithInfo:manData[userID] managedObjectContext:workerContext];
+              
+              if ([[responseJson valueForKey:@"data"] length] > 0) { //非空列表
+                  manList = [responseJson valueForKeyPath:@"data.manList"];
+                  NSDictionary *manData = [responseJson valueForKeyPath:@"data.manData"];
+                  
+                  for (NSString *userID in manList) {
+                      [Owner updateOwnerWithInfo:manData[userID] managedObjectContext:workerContext];
+                  }
+
               }
+
+              if ([circle.ownerId isEqualToString:[User uid]] && !manList.count) {
+                  [manList addObject:[User uid]];
+                  
+                  //防止主人的owner实例不在本地
+                  [Owner updateOwnerWithInfo:[Owner myWebInfo] managedObjectContext:workerContext];
+              }
+              
               [self.appDelegate saveContext:workerContext];
+              
               if (completionBlock) {
                   dispatch_main_async_safe(^{
                       completionBlock(manList);
@@ -1264,7 +1290,7 @@
                                                                cachePolicy:NSURLRequestReloadIgnoringCacheData
                                                            timeoutInterval:30.0];
         request.HTTPMethod = @"GET";
-        
+//        NSLog(@"%@",rqtStr);
         NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
         NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
             if (data){
@@ -1273,7 +1299,7 @@
                                                                           options:NSJSONReadingAllowFragments
                                                                             error:nil];
                 NSDictionary *responseJson = [self recursiveNullRemove:rawJson];
-                  
+//                NSLog(@"%@",responseJson);
                 if (responseJson) {
                     if (!error && ![responseJson[@"ret"] integerValue]){ //成功
                         if (completionBlock) {
