@@ -16,13 +16,13 @@
 //#import "LMDropdownView.h"
 //#import "CircleListCell.h"
 #import "CircleSettingViewController.h"
-#import "CircleCreationViewController.h"
-//#import "EmptyCircleView.h"
-@interface DiscoveryVCData () <FetchCenterDelegate,CircleSettingViewControllerDelegate,CircleCreationViewControllerDelegate>
+//#import "CircleCreationViewController.h"
+#import "EmptyCircleView.h"
+@interface DiscoveryVCData () <FetchCenterDelegate,EmptyCircleViewDelegate>
 //@property (nonatomic,strong) LMDropdownView *dropdownView;
 //@property (nonatomic,weak) Circle *currentCircle;
 @property (nonatomic,strong) NSArray *presentingCircleIds;
-//@property (nonatomic,strong) EmptyCircleView *emptyView;
+@property (nonatomic,strong) EmptyCircleView *emptyView;
 @end
 
 @implementation DiscoveryVCData
@@ -52,7 +52,12 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     if (self.circle) {
-        [self.fetchCenter getPlanListInCircle:self.circle.circleId currentPlans:self.tableFetchedRC.fetchedObjects.mutableCopy completion:nil];
+        [self.fetchCenter getPlanListInCircle:self.circle.circleId
+                                 currentPlans:self.tableFetchedRC.fetchedObjects.mutableCopy
+                                   completion:^(NSArray *planIds)
+        {
+            if (!planIds.count) [self setUpEmptyView];
+        }];
     }else{
         [self.fetchCenter getDiscoveryList:self.collectionFetchedRC.fetchedObjects.mutableCopy
                                 completion:nil];
@@ -98,30 +103,31 @@
     }
     if ([segue.identifier isEqualToString:@"showCircleSettingView"]) {
         CircleSettingViewController *csc = segue.destinationViewController;
-        csc.delegate = self;
+//        csc.delegate = self;
         csc.circle = self.circle;
     }
-    if ([segue.identifier isEqualToString:@"showCircleCreationView"]) {
-        CircleCreationViewController *ccc = segue.destinationViewController;
-        ccc.delegate = self;
-    }
+//    if ([segue.identifier isEqualToString:@"showCircleCreationView"]) {
+//        CircleCreationViewController *ccc = segue.destinationViewController;
+////        ccc.delegate = self;
+//    }
 }
 
-- (void)didFinishCreatingCircle{
+//- (void)didFinishCreatingCircle{
+//    [self setUpEmptyView]
     //这个点tableFetchedRC会获取到新创建的circle
 //    Circle *circle = self.tableFetchedRC.fetchedObjects.firstObject;
 //    [self switchToCircle:circle];
 //    [self setUpEmptyView:circle];
-}
+//}
 
 
-- (void)didFinishDeletingCircle{
-    Circle *circle = self.tableFetchedRC.fetchedObjects.firstObject;
-    if (![circle.ownerId isEqualToString:[User uid]]) {
-        self.navigationItem.rightBarButtonItem = nil;
-    }
-//    [self switchToCircle:circle];
-}
+//- (void)didFinishDeletingCircle{
+//    Circle *circle = self.tableFetchedRC.fetchedObjects.firstObject;
+//    if (![circle.ownerId isEqualToString:[User uid]]) {
+//        self.navigationItem.rightBarButtonItem = nil;
+//    }
+////    [self switchToCircle:circle];
+//}
 
 - (NSFetchRequest *)collectionFetchRequest{
     if (!_collectionFetchRequest) {
@@ -129,7 +135,7 @@
         
         if (self.circle){
             //圈子列表->事件瀑布流
-            _collectionFetchRequest.predicate = [NSPredicate predicateWithFormat:@"circle.circleId == %@",self.circle.circleId];
+            _collectionFetchRequest.predicate = [NSPredicate predicateWithFormat:@"circle == %@",self.circle];
             _collectionFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"updateDate" ascending:NO]];
         }else{
             //发现页
@@ -171,9 +177,9 @@
 - (void)showCircleSettingView{
     [self performSegueWithIdentifier:@"showCircleSettingView" sender:nil];
 }
-- (void)showInvitationView{
-    [self performSegueWithIdentifier:@"showInvitationView" sender:nil];
-}
+//- (void)showInvitationView{
+//    [self performSegueWithIdentifier:@"showInvitationView" sender:nil];
+//}
 
 #pragma mark - 长按事件可显示相关信息
 - (void)longPressed:(UILongPressGestureRecognizer *)longPress{
@@ -272,30 +278,47 @@
 //}
 
 
-//#pragma mark - 处理当圈子没有事件的情况
+#pragma mark - 处理当圈子没有事件的情况
 
-//- (void)setUpEmptyView:(Circle *)circle{
-//    self.collectionView.hidden = YES;
-//    [self.emptyView.circleImageView downloadImageWithImageId:circle.imageId size:FetchCenterImageSize200];
-//    self.emptyView.circleTitleLabel.text = circle.circleName;
-//    self.emptyView.circleDescriptionLabel.text = circle.circleDescription;
-//    [self.view addSubview:self.emptyView];
-//}
-//- (EmptyCircleView *)emptyView{
-//    if (!_emptyView){
-//        CGFloat margin = 30.0f/640 * CGRectGetWidth(self.view.frame);
-//        CGFloat width = CGRectGetWidth(self.view.frame) - margin * 2;
-//        CGFloat height = 590.0 *width / 568;
-//        CGRect rect = CGRectMake(margin,100,width,height);
-//        _emptyView = [EmptyCircleView instantiateFromNib:rect];
-//        _emptyView.delegate = self;
-//    }
-//    return _emptyView;
-//}
-//
-//- (void)didPressedButtonOnEmptyCircleView:(EmptyCircleView *)emptyView{
-//    [self performSegueWithIdentifier:@"showPlanCreationView" sender:nil];
-//}
+- (void)setUpEmptyView{
+    if (!self.collectionFetchedRC.fetchedObjects.count){
+        self.collectionView.hidden = YES;
+        if (self.circle) {
+            [self.emptyView.circleImageView downloadImageWithImageId:self.circle.imageId size:FetchCenterImageSize200];
+            self.emptyView.circleTitleLabel.text = self.circle.circleName;
+            self.emptyView.circleDescriptionLabel.text = self.circle.circleDescription;
+            [self.view addSubview:self.emptyView];
+        }
+    }else{
+        self.collectionView.hidden = NO;
+        if ([self.view.subviews containsObject:self.emptyView]) {
+            [self.emptyView removeFromSuperview];
+        }
+    }
+}
+- (EmptyCircleView *)emptyView{
+    if (!_emptyView){
+        CGFloat margin = 30.0f/640 * CGRectGetWidth(self.view.frame);
+        CGFloat width = CGRectGetWidth(self.view.frame) - margin * 2;
+        CGFloat height = 590.0 *width / 568;
+        CGRect rect = CGRectMake(margin,100,width,height);
+        _emptyView = [EmptyCircleView instantiateFromNib:rect];
+        _emptyView.delegate = self;
+    }
+    return _emptyView;
+}
+
+- (void)didPressedButtonOnEmptyCircleView:(EmptyCircleView *)emptyView{
+    [self performSegueWithIdentifier:@"ShowPostFromDiscovery" sender:nil];
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
+    if (controller == self.collectionFetchedRC) {
+        [super controllerDidChangeContent:controller];
+        [self setUpEmptyView];
+    }
+}
+
 
 @end
 
