@@ -110,7 +110,7 @@
         NSArray *planIDList = @[];
         
         
-        if ([[responseJson valueForKey:@"data"] length] > 0) { //
+        if ([responseJson[@"data"] isKindOfClass:[NSDictionary class]]) { //无事件时 .data = ""
             NSManagedObjectContext *workerContext = [self workerContext];
             
             NSMutableArray *plans = [NSMutableArray array];
@@ -195,7 +195,7 @@
 
               NSManagedObjectContext *workerContext = [self workerContext];
               
-              if ([[responseJson valueForKey:@"data"] length] > 0) { //非空列表
+              if ([responseJson[@"data"] isKindOfClass:[NSDictionary class]]) { //非空列表
                   manList = [responseJson valueForKeyPath:@"data.manList"];
                   NSDictionary *manData = [responseJson valueForKeyPath:@"data.manData"];
                   
@@ -1014,22 +1014,27 @@
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,GET_LIST];
     [self getRequest:rqtStr parameter:@{@"id":ownerId} includeArguments:YES completion:^(NSDictionary *responseJson) {
         
-        NSManagedObjectContext *workerContext = [self workerContext];
-
-        NSArray *plans = responseJson[@"data"];
-        NSMutableArray *planEntities = [NSMutableArray arrayWithCapacity:plans.count];
-        for (NSDictionary *planInfo in plans) {
-            Plan * plan = [Plan updatePlanFromServer:planInfo
-                                           ownerInfo:[Owner myWebInfo]
-                                managedObjectContext:workerContext];
-            [planEntities addObject:plan];
-        }
         
-        [self.appDelegate saveContext:workerContext];
+        NSMutableArray *planEntities;
+        
+        if ([responseJson[@"data"] isKindOfClass:[NSDictionary class]]) { //non empty array
+            
+            NSManagedObjectContext *workerContext = [self workerContext];
+            NSArray *plans = responseJson[@"data"];
+            planEntities = [NSMutableArray arrayWithCapacity:plans.count];
+            for (NSDictionary *planInfo in plans) {
+                Plan * plan = [Plan updatePlanFromServer:planInfo
+                                               ownerInfo:[Owner myWebInfo]
+                                    managedObjectContext:workerContext];
+                [planEntities addObject:plan];
+            }
+            
+            [self.appDelegate saveContext:workerContext];
+        }
         
         if (completionBlock) {
             dispatch_main_async_safe(^{
-                completionBlock(planEntities.mutableCopy);
+                completionBlock(planEntities);
             });
         }
     }];
