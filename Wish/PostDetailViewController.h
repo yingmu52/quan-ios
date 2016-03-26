@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Circle.h"
 @interface PostDetailViewController : UIViewController
 @property (nonatomic,strong) NSString *titleFromPostView;
-
+@property (nonatomic,strong) Circle *circle;
 @end

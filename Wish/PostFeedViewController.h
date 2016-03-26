@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "Feed.h"
 #import "Plan.h"
+#import "Circle.h"
 @interface PostFeedViewController : UIViewController
-
+@property (nonatomic,strong) Circle *circle;
 @property (nonatomic,strong) Plan *plan;
 @property (nonatomic,strong) NSMutableArray *assets;
 @property (nonatomic) BOOL seugeFromPlanCreation;

@@ -187,7 +187,7 @@
         CGPoint point = [longPress locationInView:self.collectionView];
         NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:point];
         Plan *plan = [self.collectionFetchedRC objectAtIndexPath:indexPath];
-        NSString *msg = [NSString stringWithFormat:@"用户id:%@\n事件id:%@\n事件名:%@",plan.owner.ownerId,plan.planId,plan.planTitle];
+        NSString *msg = [NSString stringWithFormat:@"用户id:%@\n事件id:%@\n事件名:%@\n圈名:%@\n圈ID:%@",plan.owner.ownerId,plan.planId,plan.planTitle,plan.circle.circleName,plan.circle.circleId];
         
         //显示弹出提示窗口
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:msg preferredStyle:UIAlertControllerStyleAlert];

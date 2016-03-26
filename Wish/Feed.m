@@ -15,15 +15,15 @@
 @implementation Feed
 
 + (Feed *)createFeedInPlan:(Plan *)plan feedTitle:(NSString *)feedTitle{
-    
-    NSManagedObjectContext *context = [AppDelegate getContext];
-    
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+
     Feed *feed = [NSEntityDescription insertNewObjectForEntityForName:@"Feed"
-                                               inManagedObjectContext:context];
+                                               inManagedObjectContext:delegate.managedObjectContext];
     feed.feedTitle = feedTitle;
     feed.createDate = [NSDate date];
     feed.plan = plan;
     feed.selfLiked = @(NO);
+    [delegate saveContext];
     return feed;
 }
 

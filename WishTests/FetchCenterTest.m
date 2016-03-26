@@ -219,7 +219,7 @@ static NSTimeInterval expectationTimeout = 30.0f;
     for (NSInteger i = 0; i <= numberOfCycles; i++) {
         XCTestExpectation *expectation = [self expectationWithDescription:@"事件创建与删除接口"];
         NSString *planTitle = [NSString stringWithFormat:@"测试事件%@",[NSDate date]];
-        plan = [Plan createPlan:planTitle privacy:YES];
+        plan = [Plan createPlan:planTitle inCircle:nil];
         [self.fetchCenter uploadToCreatePlan:plan completion:^(Plan *plan) {
             XCTAssertTrue(plan.planId,@"事件没有缓存后台传来的id");
             [self.fetchCenter postToDeletePlan:plan completion:^{

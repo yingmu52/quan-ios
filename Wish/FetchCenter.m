@@ -1044,7 +1044,8 @@
 - (void)uploadToCreatePlan:(Plan *)plan completion:(FetchCenterGetRequestPlanCreationCompleted)completionBlock{
     NSString *baseUrl = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,CREATE_PLAN];
     NSDictionary *args = @{@"title":[plan.planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                           @"private":plan.isPrivate};
+                           @"private":plan.isPrivate,
+                           @"quanId":plan.circle.circleId};
     [self getRequest:baseUrl parameter:args includeArguments:YES completion:^(NSDictionary *json) {
         NSString *fetchedPlanId = [json valueForKeyPath:@"data.id"];
         NSString *bgString = [json valueForKeyPath:@"data.backGroudPic"];

@@ -108,18 +108,21 @@
     return plan;
     
 }
-+ (Plan *)createPlan:(NSString *)title privacy:(BOOL)isPrivate{
++ (Plan *)createPlan:(NSString *)title inCircle:(Circle *)circle{
     
-    NSManagedObjectContext *context = [AppDelegate getContext];
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     Plan *plan = [NSEntityDescription insertNewObjectForEntityForName:@"Plan"
-                                               inManagedObjectContext:context];
+                                               inManagedObjectContext:delegate.managedObjectContext];
     
     plan.planTitle = title;
-    plan.isPrivate = @(isPrivate);
+    plan.isPrivate = @(NO);
     plan.createDate = [NSDate date];
     plan.planStatus = @(PlanStatusOnGoing);
     [plan addMyselfAsOwner];
+    plan.circle = circle;
+    
+    [delegate saveContext];
     return plan;
 }
 

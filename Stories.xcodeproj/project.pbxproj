@@ -44,6 +44,7 @@
 		A066C3861BB793DA003B51D5 /* MSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A066C3841BB793DA003B51D5 /* MSLabel.m */; };
 		A066C3891BB7AE08003B51D5 /* MSSuperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A066C3881BB7AE08003B51D5 /* MSSuperViewController.m */; };
 		A066C38A1BB7AE08003B51D5 /* MSSuperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A066C3881BB7AE08003B51D5 /* MSSuperViewController.m */; };
+		A06CA10D1CA5BA92005D6171 /* CirclePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A06CA10C1CA5BA92005D6171 /* CirclePickerViewController.m */; };
 		A07115D11BA6B109002C1270 /* SZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A07115D01BA6B109002C1270 /* SZTextView.m */; };
 		A07115D21BA6B109002C1270 /* SZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A07115D01BA6B109002C1270 /* SZTextView.m */; };
 		A07C21231C8163BF0084976A /* ButtonWithPathedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A07C21221C8163BF0084976A /* ButtonWithPathedImage.m */; };
@@ -387,6 +388,8 @@
 		A066C3841BB793DA003B51D5 /* MSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSLabel.m; sourceTree = "<group>"; };
 		A066C3871BB7AE08003B51D5 /* MSSuperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSSuperViewController.h; sourceTree = "<group>"; };
 		A066C3881BB7AE08003B51D5 /* MSSuperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSSuperViewController.m; sourceTree = "<group>"; };
+		A06CA10B1CA5BA92005D6171 /* CirclePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CirclePickerViewController.h; sourceTree = "<group>"; };
+		A06CA10C1CA5BA92005D6171 /* CirclePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CirclePickerViewController.m; sourceTree = "<group>"; };
 		A06ED0F41BCAFB8A0051E7F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		A07115CF1BA6B109002C1270 /* SZTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZTextView.h; sourceTree = "<group>"; };
 		A07115D01BA6B109002C1270 /* SZTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZTextView.m; sourceTree = "<group>"; };
@@ -1067,6 +1070,8 @@
 		A0FEC1301C86167D004C48F1 /* Circles */ = {
 			isa = PBXGroup;
 			children = (
+				A06CA10B1CA5BA92005D6171 /* CirclePickerViewController.h */,
+				A06CA10C1CA5BA92005D6171 /* CirclePickerViewController.m */,
 				A081FCEB1C90A3260025ABD5 /* MemberListViewController.h */,
 				A081FCEC1C90A3260025ABD5 /* MemberListViewController.m */,
 				A081FCEE1C90A3D10025ABD5 /* MemberListCell.h */,
@@ -1587,6 +1592,7 @@
 				A081FCED1C90A3260025ABD5 /* MemberListViewController.m in Sources */,
 				A0D102331B84EB6A006B0E4E /* UIImageView+WebCache.m in Sources */,
 				AEE075381A744A770015155B /* SystemUtil.m in Sources */,
+				A06CA10D1CA5BA92005D6171 /* CirclePickerViewController.m in Sources */,
 				A0F513241BD98B9600279B9D /* Owner+CoreDataProperties.m in Sources */,
 				A0A083941BD765F00057CD65 /* Circle+CoreDataProperties.m in Sources */,
 				A0D1022B1B84EB6A006B0E4E /* UIImage+GIF.m in Sources */,
