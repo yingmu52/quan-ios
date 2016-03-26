@@ -55,7 +55,7 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self setUpNavigationItem];
-    if (self.circle.imageId) {
+    if (self.circle.imageId.length > 0) {
         [self.coverImageView downloadImageWithImageId:self.circle.imageId
                                                  size:FetchCenterImageSize100];
     }
