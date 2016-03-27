@@ -28,4 +28,6 @@
 //MARK !!!: 必须设置
 @property (nonatomic,strong) NSFetchRequest *tableFetchRequest;
 @property (nonatomic,strong) NSFetchRequest *collectionFetchRequest;
+
+- (void)configureTableViewCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 @end

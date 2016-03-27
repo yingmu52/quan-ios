@@ -47,7 +47,9 @@
 
 - (void)setFeed:(Feed *)feed{
     _feed = feed;
-    [self updateHeaderInfoForFeed:_feed];
+    if (_feed.feedId) {
+        [self updateHeaderInfoForFeed:_feed];
+    }
 }
 
 - (void)setUpNavigationItem

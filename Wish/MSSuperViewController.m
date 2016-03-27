@@ -104,7 +104,8 @@
                 break;
                 
             case NSFetchedResultsChangeUpdate:
-                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                [self configureTableViewCell:[self.tableView cellForRowAtIndexPath:indexPath]
+                                 atIndexPath:indexPath];
                 break;
                 
             case NSFetchedResultsChangeMove:
@@ -172,6 +173,10 @@
         }];
 
     }
+}
+
+- (void)configureTableViewCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
+    //Abstract!
 }
 
 @end

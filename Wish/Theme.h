@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "SystemUtil.h"
 @interface Theme : UIColor
+
++ (UIColor *)globleColor;
 + (UIButton *)buttonWithImage:(UIImage *)image
                        target:(id)target
                      selector:(SEL)method
@@ -47,6 +49,7 @@
 + (UIImage *)navButtonDeleted;
 + (UIImage *)navCircleIcon;
 + (UIImage *)navInviteDefault;
++ (UIImage *)navSettingIcon;
 
 + (UIImage *)wishDetailCameraDefault;
 + (UIImage *)wishDetailBackgroundNonLogo;
@@ -73,4 +76,8 @@
 
 + (UIImage *)circleListCheckBoxDefault;
 + (UIImage *)circleListCheckBoxSelected;
++ (UIImage *)circleCreationImageBackground;
+
++ (UIImage *)circleOwnerIcon;
++ (UIImage *)circleAdminIcon;
 @end

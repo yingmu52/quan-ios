@@ -11,9 +11,11 @@
 #import "PostDetailViewController.h"
 #import "KeyWordCell.h"
 #import "NHAlignmentFlowLayout.h"
-@interface PostViewController ()
+#import "CirclePickerViewController.h"
+@interface PostViewController () <CirclePickerViewControllerDelegate>
 @property (nonatomic,weak) IBOutlet UITextField *textField;
 @property (nonatomic,strong) UIButton *tikButton;
+@property (nonatomic,weak) IBOutlet UILabel *infoLabel;
 @end
 
 @implementation PostViewController
@@ -62,6 +64,9 @@
     
     [self.textField addTarget:self action:@selector(textFieldDidUpdate) forControlEvents:UIControlEventEditingChanged];
     
+    if (self.circle) {
+        self.infoLabel.text = [NSString stringWithFormat:@"所属圈子：%@",self.circle.circleName];
+    }
 }
 
 - (void)textFieldDidUpdate{
@@ -80,7 +85,17 @@
 
 - (void)goToNextView
 {
-    [self performSegueWithIdentifier:@"showWritePostDetail" sender:nil];
+    if (!self.circle) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请选择一个圈子" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"好" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self performSegueWithIdentifier:@"showCirclePickerFromPost" sender:nil];
+        }]];
+        [self.textField resignFirstResponder];
+        [self presentViewController:alert animated:YES completion:nil];
+    }else{
+        [self performSegueWithIdentifier:@"showWritePostDetail" sender:nil];
+    }
+    
 }
 
 
@@ -89,7 +104,31 @@
     if ([segue.identifier isEqualToString:@"showWritePostDetail"]) {
         PostDetailViewController *pdvc = segue.destinationViewController;
         pdvc.titleFromPostView = self.textField.text;
+        pdvc.circle = self.circle;
+    }
+    if ([segue.identifier isEqualToString:@"showCirclePickerFromPost"]) {
+        CirclePickerViewController *cpc = segue.destinationViewController;
+        cpc.delegate = self;
     }
 }
 
+- (void)didFinishPickingCircle:(Circle *)circle{
+    self.circle = circle;
+}
+
+- (void)setCircle:(Circle *)circle{
+    _circle = circle;
+    self.infoLabel.text = [NSString stringWithFormat:@"所属圈子：%@",circle.circleName];
+}
+
 @end
+
+
+
+
+
+
+
+
+
+

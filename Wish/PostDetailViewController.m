@@ -54,6 +54,7 @@
 {
     if ([segue.identifier isEqualToString:@"showPostFeedFromPlanCreation"]) {
         PostFeedViewController *pfvc = (PostFeedViewController *)segue.destinationViewController;
+        pfvc.circle = self.circle;
         pfvc.assets = sender;
         pfvc.seugeFromPlanCreation = YES; // important!
         pfvc.navigationItem.title = self.titleFromPostView;

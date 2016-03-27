@@ -86,7 +86,11 @@
 
 - (MessageCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MessageCell" forIndexPath:indexPath];
-    
+    [self configureTableViewCell:cell atIndexPath:indexPath];
+    return cell;
+}
+
+- (void)configureTableViewCell:(MessageCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     Message *message = [self.tableFetchedRC objectAtIndexPath:indexPath];
     
     [cell.profilePictureImageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:message.owner.headUrl size:FetchCenterImageSize100]];
@@ -104,7 +108,6 @@
     cell.dateLabel.text = [formatter stringFromDate:message.createTime];
     
     //    cell.backgroundColor = message.isRead.boolValue ? [self normalColor] : [self highlightColor];
-    return cell;
 }
 
 - (UIColor *)normalColor{

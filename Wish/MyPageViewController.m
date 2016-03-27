@@ -147,7 +147,7 @@
 }
 
 - (void)clearCoreData{
-    
+    //see Updated Solution for iOS 9+ in http://stackoverflow.com/questions/1077810/delete-reset-all-entries-in-core-data
     //删除本地数据库
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{

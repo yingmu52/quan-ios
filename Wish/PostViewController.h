@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Circle.h"
 @interface PostViewController : UIViewController
-
+@property (nonatomic,strong) Circle *circle;
 @end

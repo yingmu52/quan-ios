@@ -219,7 +219,7 @@ static NSTimeInterval expectationTimeout = 30.0f;
     for (NSInteger i = 0; i <= numberOfCycles; i++) {
         XCTestExpectation *expectation = [self expectationWithDescription:@"事件创建与删除接口"];
         NSString *planTitle = [NSString stringWithFormat:@"测试事件%@",[NSDate date]];
-        plan = [Plan createPlan:planTitle privacy:YES];
+        plan = [Plan createPlan:planTitle inCircle:nil];
         [self.fetchCenter uploadToCreatePlan:plan completion:^(Plan *plan) {
             XCTAssertTrue(plan.planId,@"事件没有缓存后台传来的id");
             [self.fetchCenter postToDeletePlan:plan completion:^{
@@ -482,6 +482,68 @@ static NSTimeInterval expectationTimeout = 30.0f;
                                      XCTAssertNil(error,@"测试上传头像接口错误");
                                  }];
     
+}
+
+- (void)testCUDCircle{
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"测试圈子创建与删除接口"];
+    //1. Upload image
+//    UIImage *image = [UIImage imageNamed:@"test.jpg"];
+//    [self.fetchCenter uploadImages:@[image] completion:^(NSArray *imageIds) {
+    
+        //2. Create circle
+    
+        NSString *imageId = @"IOS-4E5B1EFA-7A66-4ACF-84A6-FB819FE3BA9C";
+        [self.fetchCenter createCircle:@"Test Name"
+                           description:@"Test Desc"
+                     backgroundImageId:imageId
+                            completion:^(Circle *circle)
+        {
+            //3. Update
+            [self.fetchCenter updateCircle:circle.circleId
+                                      name:@"New Name"
+                               description:@"New Desc"
+                           backgroundImage:imageId
+                                completion:^{
+                                    
+                //4. Delete Circle
+                [self.fetchCenter deleteCircle:circle.circleId
+                                    completion:^
+                 {
+                     [expectation fulfill];
+                 }];
+            }];
+        }];
+//    }];
+    
+    [self waitForExpectationsWithTimeout:expectationTimeout
+                                 handler:^(NSError * _Nullable error) {
+                                     XCTAssertNil(error,@"测试圈子创建与删除接口错误");
+                                 }];
+
+}
+
+
+- (void)testSyncCGICircleCreationAndCircleList{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"创建圈子与拉取摘取圈子列表需要同步"];
+
+    [self.fetchCenter createCircle:@"TEST"
+                       description:@"TEST"
+                 backgroundImageId:nil
+                        completion:^(Circle *circle) {
+                            NSLog(@"%@ created",circle.circleId);
+        [self.fetchCenter getCircleList:^(NSArray *circleIds) {
+            NSLog(@"List: %@",circleIds);
+            if ([circleIds containsObject:circle.circleId]) {
+                [expectation fulfill];
+            }
+        }];
+    }];
+    [self waitForExpectationsWithTimeout:expectationTimeout
+                                 handler:^(NSError * _Nullable error) {
+                                     XCTAssertNil(error,@"创建圈子与拉取摘取圈子列表需要同步");
+                                 }];
+
 }
 @end
 

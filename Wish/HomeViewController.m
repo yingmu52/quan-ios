@@ -48,14 +48,20 @@ ViewForEmptyEventDelegate>
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    if (!self.collectionFetchedRC.fetchedObjects.count){
-        [self setUpEmptyView];
-    }else{
-        self.guideView = nil;
-        [self updateNavigationTitle];
+    [self.fetchCenter getPlanListForOwnerId:[User uid] completion:^(NSArray *plans) {
+        if (!plans.count){
+            [self setUpEmptyView];
+        }
         
-    }
-    [self updateNavigationTitle];
+        //同步列表
+        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        for (Plan *plan in self.collectionFetchedRC.fetchedObjects) {
+            if (![plans containsObject:plan.planId]) {
+                [delegate.managedObjectContext deleteObject:plan];
+            }
+        }
+        [delegate saveContext];
+    }];
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     [self updateNavigationTitle];
@@ -76,7 +82,6 @@ ViewForEmptyEventDelegate>
     [super viewDidLoad];
     [self setUpNavigationItem];
     [self addLongPressGesture];
-    [self.fetchCenter getPlanListForOwnerId:[User uid] completion:nil];
 }
 - (void)addLongPressGesture{
     UILongPressGestureRecognizer *lp = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
@@ -189,6 +194,7 @@ ViewForEmptyEventDelegate>
 #pragma mark - Handling 0 Events Situation
 - (void)setUpEmptyView{
     self.collectionView.hidden = YES;
+    self.navigationItem.title = nil;
     [self.view addSubview:self.guideView];
 }
 - (ViewForEmptyEvent *)guideView{

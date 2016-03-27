@@ -12,7 +12,6 @@
 #import <TencentOpenAPI/TencentApiInterface.h>
 #import "WXApi.h"
 #import "MainTabBarController.h"
-#import <Bugly/CrashReporter.h>
 #import "LoginViewController.h"
 #import "FetchCenter.h"
 #import "TXYUploadManager.h"

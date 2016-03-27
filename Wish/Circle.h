@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "Plan.h"
+#import "AppDelegate.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,6 +18,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Insert code here to declare functionality of your managed object subclass
 + (Circle *)updateCircleWithInfo:(NSDictionary *)info managedObjectContext:(NSManagedObjectContext *)context;
+
++ (Circle *)createCircle:(NSString *)circleId
+                name:(NSString *)circleName
+                desc:(NSString *)desc
+             imageId:(NSString *)imageId
+             context:(NSManagedObjectContext *)context;
+
++ (Circle *)getCircle:(NSString *)circleID;
 @end
 
 NS_ASSUME_NONNULL_END

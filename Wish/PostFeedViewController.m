@@ -54,7 +54,12 @@ static NSUInteger distance = 10;
 
 - (Plan *)plan{
     if (!_plan) {
-        _plan = [Plan createPlan:self.navigationItem.title privacy:NO];
+        if (self.circle) {
+            _plan = [Plan createPlan:self.navigationItem.title inCircle:self.circle];
+        }else{
+            NSLog(@"No Circle Exists");
+        }
+        
     }
     return _plan;
 }
@@ -164,13 +169,11 @@ static NSUInteger distance = 10;
         AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         if (!self.plan.planId) {
             [self.plan.managedObjectContext deleteObject:self.plan];
-            [delegate saveContext];
         }
         if (self.feed) {
             [self.feed.managedObjectContext deleteObject:self.feed];
-            [delegate saveContext];
         }
-        
+        [delegate saveContext];
         
         //返回上一级
         [self.navigationController popViewControllerAnimated:YES];

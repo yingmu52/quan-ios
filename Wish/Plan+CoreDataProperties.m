@@ -2,8 +2,8 @@
 //  Plan+CoreDataProperties.m
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2015-10-22.
-//  Copyright © 2015 Xinyi Zhuang. All rights reserved.
+//  Created by Xinyi Zhuang on 2016-03-16.
+//  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
 //  to delete and recreate this implementation file for your updated model.
@@ -26,6 +26,7 @@
 @dynamic planTitle;
 @dynamic tryTimes;
 @dynamic updateDate;
+@dynamic circle;
 @dynamic feeds;
 @dynamic owner;
 

@@ -52,9 +52,18 @@
 
 #define CIRCLE @"quan/"
 #define JOINT_CIRCLE @"splan_quan_join.php"
+#define GET_MEMBER_LIST @"splan_quan_get_manlist.php"
 #define TOOL @"tool/"
-#define GET_CIRCLE_LIST @"tool_quan_get.php"
+#define GET_CIRCLE_LIST @"splan_quan_get_quanlist.php"
+//#define GET_CIRCLE_LIST @"tool_quan_get.php"
+#define DELETE_MEMBER @"splan_quan_man_del.php"
+#define GET_CIRCLE_PLAN_LIST @"splan_quan_get_planlist.php"
+
 #define SWITCH_CIRCLE @"tool_quan_man.php"
+#define CREATE_CIRCLE @"splan_quan_create.php"
+#define DELETE_CIRCLE @"splan_quan_delete_id.php"
+#define UPDATE_CIRCLE @"splan_quan_update.php"
+
 
 #define MESSAGE @"message/"
 #define GET_MESSAGE_LIST @"splan_message_getlist.php"
@@ -63,9 +72,6 @@
 
 #define TENCENTYOUTU @"tencentYoutu/"
 #define GET_SIGNATURE @"getsign.php"
-
-typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId); //上传图像成功
-typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson); //请求成功
 
 @interface FetchCenter ()
 @property (nonatomic,strong) NSString *baseUrl;
@@ -90,6 +96,213 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 #pragma mark - 圈子
 #define TOOLCGIKEY @"123$%^abc"
 
+- (void)getPlanListInCircle:(NSString *)circleId
+               currentPlans:(NSMutableArray *)currentPlans
+                 completion:(FetchCenterGetRequestGetCirclePlanListCompleted)completionBlock{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,GET_CIRCLE_PLAN_LIST];
+    NSDictionary *inputParams = @{@"id":circleId};
+    [self getRequest:rqtStr
+           parameter:inputParams
+    includeArguments:YES
+          completion:^(NSDictionary *responseJson)
+    {
+        
+        NSArray *planIDList = @[];
+        
+        
+        if ([responseJson[@"data"] isKindOfClass:[NSDictionary class]]) { //无事件时 .data = ""
+            NSManagedObjectContext *workerContext = [self workerContext];
+            
+            NSMutableArray *plans = [NSMutableArray array];
+            NSArray *planList = [responseJson valueForKeyPath:@"data.planList"];
+            NSDictionary *manList = [responseJson valueForKeyPath:@"data.manList"];
+            
+            planIDList = [planList valueForKeyPath:@"id"];
+            //设置圈子信息
+            NSDictionary *circleInfo = [responseJson valueForKeyPath:@"data.quanInfo"];
+            Circle *circle;
+            if (circleInfo) {
+                circle = [Circle updateCircleWithInfo:circleInfo
+                                 managedObjectContext:workerContext];
+            }
+            
+            //缓存并更新本地事件
+            if (planList && manList){
+                for (NSDictionary *planInfo in planList) {
+                    Plan *plan = [Plan updatePlanFromServer:planInfo
+                                                  ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]
+                                       managedObjectContext:workerContext];
+                    plan.circle = circle;
+                    [plans addObject:plan];
+                }
+            }
+            
+            //移除发现页的不存在于服务器上的事件，异线。
+            if (currentPlans.count > 0) {
+                NSArray *planIds = [plans valueForKey:@"planId"];
+                NSPredicate *predicate =[NSPredicate predicateWithFormat:@"NOT (planId IN %@)",planIds];
+                NSArray *trashPlans = [currentPlans filteredArrayUsingPredicate:predicate];
+                for (Plan *plan in trashPlans){
+                    if (plan.isDeletable) {
+                        [plan.managedObjectContext deleteObject:plan];
+                    }
+                }
+            }
+            
+            [self.appDelegate saveContext:workerContext];
+            
+        }
+
+        
+        if (completionBlock) {
+            dispatch_main_async_safe(^{
+                completionBlock(planIDList);
+            });
+        }
+
+    }];
+}
+
+- (void)deleteMember:(NSString *)memberID
+            inCircle:(NSString *)circleID
+          completion:(FetchCenterGetRequestDeleteMemberCompleted)completionBlock{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,DELETE_MEMBER];
+    NSDictionary *inputParams = @{@"manId":memberID,
+                                  @"quanId":circleID};
+    [self getRequest:rqtStr
+           parameter:inputParams
+    includeArguments:YES
+          completion:^(NSDictionary *responseJson){
+              if (completionBlock) {
+                  dispatch_main_async_safe(^{
+                      completionBlock();
+                  });
+              }
+          }
+     ];
+}
+- (void)getMemberListForCircle:(Circle *)circle
+                    completion:(FetchCenterGetRequestGetMemberListCompleted)completionBlock{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,GET_MEMBER_LIST];
+    NSDictionary *inputParams = @{@"id":circle.circleId};
+    [self getRequest:rqtStr
+           parameter:inputParams
+    includeArguments:YES
+          completion:^(NSDictionary *responseJson){
+              
+              //后台在成员列表里没有返回主人ID，需要特别处理
+              NSMutableArray *manList = [NSMutableArray array];
+
+              NSManagedObjectContext *workerContext = [self workerContext];
+              
+              if ([responseJson[@"data"] isKindOfClass:[NSDictionary class]]) { //非空列表
+                  manList = [responseJson valueForKeyPath:@"data.manList"];
+                  NSDictionary *manData = [responseJson valueForKeyPath:@"data.manData"];
+                  
+                  for (NSString *userID in manList) {
+                      [Owner updateOwnerWithInfo:manData[userID] managedObjectContext:workerContext];
+                  }
+
+              }
+
+              if ([circle.ownerId isEqualToString:[User uid]] && !manList.count) {
+                  [manList addObject:[User uid]];
+                  
+                  //防止主人的owner实例不在本地
+                  [Owner updateOwnerWithInfo:[Owner myWebInfo] managedObjectContext:workerContext];
+              }
+              
+              [self.appDelegate saveContext:workerContext];
+              
+              if (completionBlock) {
+                  dispatch_main_async_safe(^{
+                      completionBlock(manList);
+                  });
+              }
+          }
+     ];
+}
+- (void)updateCircle:(NSString *)circleId
+                name:(NSString *)circleName
+         description:(NSString *)circleDescription
+     backgroundImage:(NSString *)imageId
+          completion:(FetchCenterGetRequestUpdateCircleCompleted)completionBlock{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,UPDATE_CIRCLE];
+    
+    if (circleId) {
+        NSDictionary *inputParams = @{@"id":circleId,
+                                      @"name":circleName ? [circleName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] : @"",
+                                      @"description":circleDescription ? [circleDescription stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] : @"",
+                                      @"backGroudPic":imageId ? imageId : @""};
+        [self getRequest:rqtStr
+               parameter:inputParams
+        includeArguments:YES
+              completion:^(NSDictionary *responseJson){
+                  if (completionBlock) {
+                      dispatch_main_async_safe(^{
+                          completionBlock();
+                      });
+                  }
+              }
+         ];
+    }
+}
+
+- (void)createCircle:(NSString *)circleName
+         description:(NSString *)circleDescription
+   backgroundImageId:(NSString *)imageId
+          completion:(FetchCenterGetRequestCreateCircleCompleted)completionBlock{
+    if (circleName) {
+        NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,CREATE_CIRCLE];
+        [self getRequest:rqtStr
+               parameter:@{@"name":[circleName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                           @"description":circleDescription ? [circleDescription stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] : @"",
+                           @"backGroudPic":imageId ? imageId : @""}
+        includeArguments:YES
+              completion:^(NSDictionary *responseJson)
+        {
+            NSString *circleId = [responseJson valueForKeyPath:@"data.id"];
+            if (circleId) {
+                //在本地数据库创建圈子实例
+                NSManagedObjectContext *workerContext = [self workerContext];
+                Circle *circle = [Circle createCircle:circleId
+                                                 name:circleName
+                                                 desc:circleDescription
+                                              imageId:imageId
+                                              context:workerContext];
+                [self.appDelegate saveContext:workerContext];
+                
+                //完成
+                if (completionBlock) {
+                    dispatch_main_async_safe(^{
+                        completionBlock(circle);
+                    })
+                }
+            }
+        }];
+    }
+}
+
+
+- (void)deleteCircle:(NSString *)circleId
+          completion:(FetchCenterGetRequestDeleteCircleCompleted)completionBlock{
+    //TODO: 判断当前用户是否有删除圈子的权限
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,DELETE_CIRCLE];
+    [self getRequest:rqtStr
+           parameter:@{@"id":circleId}
+    includeArguments:YES
+          completion:^(NSDictionary *responseJson)
+    {
+        if (completionBlock) {
+            dispatch_main_async_safe(^{
+                completionBlock();
+            });
+        }
+    }];
+    
+    
+}
+
 - (void)joinCircle:(NSString *)invitationCode completion:(FetchCenterGetRequestJoinCircleCompleted)completionBlock{
     if (invitationCode) {
         NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,JOINT_CIRCLE];
@@ -113,7 +326,6 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     }
 }
 
-//MARK: 切换圈子
 - (void)switchToCircle:(NSString *)circleId completion:(FetchCenterGetRequestSwithCircleCompleted)completionBlock{
     if (circleId) {
         NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,TOOL,SWITCH_CIRCLE];
@@ -137,13 +349,15 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     }
 }
 
-//MARK: 获取圈子列表
 - (void)getCircleList:(FetchCenterGetRequestGetCircleListCompleted)completionBlock{
-    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,TOOL,GET_CIRCLE_LIST];
+//    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,GET_CIRCLE_LIST];
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,GET_CIRCLE_LIST];
+
     [self getRequest:rqtStr
-           parameter:@{@"key":[TOOLCGIKEY stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]}
-    includeArguments:NO
+           parameter:@{@"id":[User uid]}
+         includeArguments:YES
           completion:^(NSDictionary *responseJson) {
+              
               NSManagedObjectContext *workerContext = [self workerContext];
               
               NSArray *circleInfo = [responseJson valueForKey:@"data"];
@@ -151,15 +365,15 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
               for (NSDictionary *info in circleInfo) {
                   [circles addObject:[Circle updateCircleWithInfo:info managedObjectContext:workerContext]];
               }
-//              NSLog(@"%@",circles);
               
               [self.appDelegate saveContext:workerContext];
               
               if (completionBlock) {
                   dispatch_main_async_safe(^{
-                      completionBlock(circles);
+                      completionBlock([responseJson valueForKeyPath:@"data.id"]);
                   });
               }
+
           }];
 }
 
@@ -639,6 +853,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
          NSDictionary *manList = [responseJson valueForKeyPath:@"data.manList"];
          NSString *title = [responseJson valueForKeyPath:@"data.quanInfo.name"];
          
+         
          //缓存并更新本地事件
          if (planList && manList){
              [planList enumerateObjectsUsingBlock:^(NSDictionary * planInfo, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -647,7 +862,6 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
                                     managedObjectContext:workerContext];
                  plan.discoverIndex = @(idx); //记录索引方便显示服务器上的顺序
                  [plans addObject:plan];
- //              NSLog(@"%@, mask : %@, index %@",plan.planTitle,plan.cornerMask,plan.discoverIndex);
              }];
          }
          
@@ -792,22 +1006,24 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,GET_LIST];
     [self getRequest:rqtStr parameter:@{@"id":ownerId} includeArguments:YES completion:^(NSDictionary *responseJson) {
         
-        NSManagedObjectContext *workerContext = [self workerContext];
-
-        NSArray *plans = responseJson[@"data"];
-        NSMutableArray *planEntities = [NSMutableArray arrayWithCapacity:plans.count];
-        for (NSDictionary *planInfo in plans) {
-            Plan * plan = [Plan updatePlanFromServer:planInfo
-                                           ownerInfo:[Owner myWebInfo]
-                                managedObjectContext:workerContext];
-            [planEntities addObject:plan];
+        NSArray *planIds = [NSArray array];
+        if ([responseJson[@"data"] isKindOfClass:[NSArray class]]) { //non empty array
+            
+            NSManagedObjectContext *workerContext = [self workerContext];
+            NSArray *plans = responseJson[@"data"];
+            planIds = [responseJson valueForKeyPath:@"data.id"];
+            for (NSDictionary *planInfo in plans) {
+                [Plan updatePlanFromServer:planInfo
+                                 ownerInfo:[Owner myWebInfo]
+                      managedObjectContext:workerContext];
+            }
+            
+            [self.appDelegate saveContext:workerContext];
         }
-        
-        [self.appDelegate saveContext:workerContext];
         
         if (completionBlock) {
             dispatch_main_async_safe(^{
-                completionBlock(planEntities.mutableCopy);
+                completionBlock(planIds);
             });
         }
     }];
@@ -817,7 +1033,8 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 - (void)uploadToCreatePlan:(Plan *)plan completion:(FetchCenterGetRequestPlanCreationCompleted)completionBlock{
     NSString *baseUrl = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,CREATE_PLAN];
     NSDictionary *args = @{@"title":[plan.planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                           @"private":plan.isPrivate};
+                           @"private":plan.isPrivate,
+                           @"quanId":plan.circle.circleId};
     [self getRequest:baseUrl parameter:args includeArguments:YES completion:^(NSDictionary *json) {
         NSString *fetchedPlanId = [json valueForKeyPath:@"data.id"];
         NSString *bgString = [json valueForKeyPath:@"data.backGroudPic"];
@@ -952,7 +1169,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 
 #define IMAGE_PREFIX @"IOS-"
 - (void)postImageWithOperation:(UIImage *)image
-                      complete:(FetchCenterImageUploadCompletionBlock)completionBlock{ //obj :NSManagedObject or UIimage
+                      complete:(FetchCenterImageUploadCompletionBlock)completionBlock{
     
     //chekc internet
     if (![self hasActiveInternetConnection]) return;
@@ -1068,7 +1285,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
                                                                cachePolicy:NSURLRequestReloadIgnoringCacheData
                                                            timeoutInterval:30.0];
         request.HTTPMethod = @"GET";
-        
+//        NSLog(@"%@",rqtStr);
         NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
         NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
             if (data){
@@ -1077,7 +1294,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
                                                                           options:NSJSONReadingAllowFragments
                                                                             error:nil];
                 NSDictionary *responseJson = [self recursiveNullRemove:rawJson];
-                  
+//                NSLog(@"%@",responseJson);
                 if (responseJson) {
                     if (!error && ![responseJson[@"ret"] integerValue]){ //成功
                         if (completionBlock) {

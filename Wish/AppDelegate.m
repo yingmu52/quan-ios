@@ -24,9 +24,6 @@
     //向后台拉取优图签名
     [self.fetchCenter requestSignature:nil];
     
-    // 初始化SDK, 请使用在Bugly平台上注册应用的 AppId, 注意不要填写AppKey
-    [[CrashReporter sharedInstance] installWithAppId:BUGLY_APP_ID];
-    
     //向微信注册
     [WXApi registerApp:WECHATAppID];
     
@@ -38,17 +35,10 @@
 //    [pgYmanager setShakingThreshold:3.0]; //摇一摇触发反馈
 
 
-    if ([User isUserLogin]){
-        // 设置用户ID, 如果你的APP有登录态, 可以在用户登录后再次调用此接口
-        [[CrashReporter sharedInstance] setUserId:[NSString stringWithFormat:@"%@ - %@",[User uid],[User userDisplayName]]];
-        
-//        if (![User currentCircleId].length) { //没有归属的圈子,弹出邀请码填写页面
-//            self.window.rootViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"InvitationCodeViewController"];
-//        }
-        
-    }else{
+    if (![User isUserLogin]){
         self.window.rootViewController = self.loginVC;
     }
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -135,7 +125,11 @@
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Wish.sqlite"];
     NSError *error = nil;
     NSString *failureReason = @"There was an error creating or loading the application's saved data.";
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+    
+    NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption:@(YES),
+                              NSInferMappingModelAutomaticallyOption:@(YES)};
+    
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
         // Report any error we got.
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";
@@ -185,56 +179,61 @@
 #pragma mark - Core Data Saving support
 
 - (void)saveContext {
-    @try {
-        NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-        if (managedObjectContext != nil) {
-            NSError *error = nil;
-            if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            }
+    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+    if (managedObjectContext != nil) {
+        NSError *error = nil;
+        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         }
     }
-    @catch (NSException *exception) {
-        //data model 有变化，删除重建以避免闪退。如果有保留用户数据的需求，应该使用data migration
-        NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Wish" withExtension:@"momd"];
-        NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Wish.sqlite"];
-        NSFileManager *fileManager = [NSFileManager defaultManager];
+}
+
+- (void)resetDataStore{
+    //data model 有变化，删除重建以避免闪退。如果有保留用户数据的需求，应该使用data migration
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Wish" withExtension:@"momd"];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Wish.sqlite"];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:modelURL.path]) {
+        NSLog(@"Deleting Data Model ...");
         [fileManager removeItemAtURL:modelURL error:nil];
+    }
+    
+    if ([fileManager fileExistsAtPath:storeURL.path]) {
+        NSLog(@"Deleting Store URL ...");
         [fileManager removeItemAtURL:storeURL error:nil];
     }
 }
 
 - (void)saveContext:(NSManagedObjectContext *)context{
     // Save the context.
-    NSError *error = nil;
-    NSLog(@"Saving to PSC");
-    if (![context save:&error]) {
-        // Replace this implementation with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
+    [context performBlock:^{
+        NSError *error = nil;
+        if (context.hasChanges && ![context save:&error]) {
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        }else{
+            NSLog(@"Saved Worker Context");
+        }
+    }];
     
     [self.managedObjectContext performBlock:^{
         // Save the context.
         NSError *error = nil;
-        if (![self.managedObjectContext save:&error]) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        if (self.managedObjectContext.hasChanges && ![self.managedObjectContext save:&error]) {
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
+        }else{
+            NSLog(@"Saved Main Context");
         }
         
         [self.writerManagedObjectContext performBlock:^{
             // Save the context.
             NSError *error = nil;
-            if (![self.writerManagedObjectContext save:&error]) {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+
+            if (self.writerManagedObjectContext.hasChanges && ![self.writerManagedObjectContext save:&error]) {
                 NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-                abort();
+            }else{
+                NSLog(@"Saved Writer Context");
             }
             
         }]; // writer

@@ -48,15 +48,14 @@ typedef enum {
 /** 创建事件完成*/
 typedef void(^FetchCenterGetRequestPlanCreationCompleted)(Plan *plan);
 /** 请求圈子列表完成*/
-typedef void(^FetchCenterGetRequestGetCircleListCompleted)(NSArray *circles);
+typedef void(^FetchCenterGetRequestGetCircleListCompleted)(NSArray *circleIds);
 /** 切换圈子完成*/
 typedef void(^FetchCenterGetRequestSwithCircleCompleted)(void);
 /** 填写邀请码完成*/
 typedef void(^FetchCenterGetRequestJoinCircleCompleted)(NSString *circleId);
 /** 发现页拉取列表完成*/
 typedef void(^FetchCenterGetRequestGetDiscoverListCompleted)(NSString *circleTitle);
-/** 拉取主人id的事件列表完成*/
-typedef void(^FetchCenterGetRequestGetPlanListCompleted)(NSArray *plans);
+
 /** 赞某条Feed完成*/
 typedef void(^FetchCenterGetRequestLikeFeedCompleted)(void);
 /** 不赞某条Feed完成*/
@@ -116,6 +115,43 @@ typedef void(^FetchCenterPostRequestUploadImagesCompleted)(NSArray *imageIds);
 
 #pragma mark - 圈子
 
+/** 获取圈子里的事件列表 **/
+typedef void(^FetchCenterGetRequestGetCirclePlanListCompleted)(NSArray *planIds);
+- (void)getPlanListInCircle:(NSString *)circleId
+               currentPlans:(NSMutableArray *)currentPlans
+         completion:(FetchCenterGetRequestGetCirclePlanListCompleted)completionBlock;
+
+/** 删除成员 **/
+typedef void(^FetchCenterGetRequestDeleteMemberCompleted)(void);
+- (void)deleteMember:(NSString *)memberID
+            inCircle:(NSString *)circleID
+          completion:(FetchCenterGetRequestDeleteMemberCompleted)completionBlock;
+
+/** 圈子成员列表 **/
+typedef void(^FetchCenterGetRequestGetMemberListCompleted)(NSArray *memberIDs);
+- (void)getMemberListForCircle:(Circle *)circle
+                       completion:(FetchCenterGetRequestGetMemberListCompleted)completionBlock;
+
+/** 设置圈子资料*/
+typedef void(^FetchCenterGetRequestUpdateCircleCompleted)(void);
+- (void)updateCircle:(NSString *)circleId
+                name:(NSString *)circleName
+         description:(NSString *)circleDescription
+     backgroundImage:(NSString *)imageId
+          completion:(FetchCenterGetRequestUpdateCircleCompleted)completionBlock;
+
+/** 创建圈子*/
+typedef void(^FetchCenterGetRequestCreateCircleCompleted)(Circle *circle);
+- (void)createCircle:(NSString *)circleName
+         description:(NSString *)circleDescription
+   backgroundImageId:(NSString *)imageId
+          completion:(FetchCenterGetRequestCreateCircleCompleted)completionBlock;
+
+
+/** 删除圈子*/
+typedef void(^FetchCenterGetRequestDeleteCircleCompleted)(void);
+- (void)deleteCircle:(NSString *)circleId completion:(FetchCenterGetRequestDeleteCircleCompleted)completionBlock;
+
 /**加入圈子*/
 - (void)joinCircle:(NSString *)invitationCode completion:(FetchCenterGetRequestJoinCircleCompleted)completionBlock;
 
@@ -171,6 +207,7 @@ typedef void(^FetchCenterPostRequestUploadImagesCompleted)(NSArray *imageIds);
 #pragma mark - 事件
 
 /**拉取主人id的事件列表*/
+typedef void(^FetchCenterGetRequestGetPlanListCompleted)(NSArray *planIds);
 - (void)getPlanListForOwnerId:(NSString *)ownerId
                    completion:(FetchCenterGetRequestGetPlanListCompleted)completionBlock;
 
@@ -209,6 +246,10 @@ typedef void(^FetchCenterPostRequestUploadImagesCompleted)(NSArray *imageIds);
 #pragma mark - 工具
 - (NSURL *)urlWithImageID:(NSString *)imageId size:(FetchCenterImageSize)size;
 
+typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId); //上传图像成功
+typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson); //请求成功
+- (void)postImageWithOperation:(UIImage *)image
+                      complete:(FetchCenterImageUploadCompletionBlock)completionBlock;
 #pragma mark - 登陆
 - (void)getUidandUkeyWithOpenId:(NSString *)openId
                     accessToken:(NSString *)token
