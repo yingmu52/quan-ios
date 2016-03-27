@@ -128,8 +128,6 @@
 		A0D1025B1B84EF3B006B0E4E /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D102581B84EF3B006B0E4E /* HeaderView.m */; };
 		A0D1025C1B84EF3B006B0E4E /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0D102591B84EF3B006B0E4E /* HeaderView.xib */; };
 		A0D1025D1B84EF3B006B0E4E /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0D102591B84EF3B006B0E4E /* HeaderView.xib */; };
-		A0D1025F1B84EF99006B0E4E /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D1025E1B84EF99006B0E4E /* Bugly.framework */; };
-		A0D102601B84EF99006B0E4E /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D1025E1B84EF99006B0E4E /* Bugly.framework */; };
 		A0D102681B84EFAD006B0E4E /* WebP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D102671B84EFAD006B0E4E /* WebP.framework */; };
 		A0D102691B84EFAD006B0E4E /* WebP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D102671B84EFAD006B0E4E /* WebP.framework */; };
 		A0D102701B84F6BA006B0E4E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D1026F1B84F6BA006B0E4E /* libz.dylib */; };
@@ -482,7 +480,6 @@
 		A0D102571B84EF3B006B0E4E /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeaderView.h; path = ../External/VGParallaxHeader/HeaderView.h; sourceTree = "<group>"; };
 		A0D102581B84EF3B006B0E4E /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HeaderView.m; path = ../External/VGParallaxHeader/HeaderView.m; sourceTree = "<group>"; };
 		A0D102591B84EF3B006B0E4E /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HeaderView.xib; path = ../External/VGParallaxHeader/HeaderView.xib; sourceTree = "<group>"; };
-		A0D1025E1B84EF99006B0E4E /* Bugly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bugly.framework; path = External/Bugly.framework; sourceTree = "<group>"; };
 		A0D102671B84EFAD006B0E4E /* WebP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebP.framework; path = External/WebP.framework; sourceTree = "<group>"; };
 		A0D1026F1B84F6BA006B0E4E /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		A0D37C5E1B8781D900581EDE /* NewsPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsPageViewController.h; sourceTree = "<group>"; };
@@ -713,7 +710,6 @@
 				A07C66C41BE070E400413D32 /* libWeChatSDK.a in Frameworks */,
 				A0EE65CA1BCC84DF002CC49B /* libTXYDownloader.a in Frameworks */,
 				A095D8351BCB884500ED3DFD /* PgyUpdate.framework in Frameworks */,
-				A0D1025F1B84EF99006B0E4E /* Bugly.framework in Frameworks */,
 				A07C66CC1BE078EE00413D32 /* TencentOpenAPI.framework in Frameworks */,
 				A0D102681B84EFAD006B0E4E /* WebP.framework in Frameworks */,
 				AEDD065A1AABF90400379C17 /* Security.framework in Frameworks */,
@@ -738,7 +734,6 @@
 				A0D102691B84EFAD006B0E4E /* WebP.framework in Frameworks */,
 				A07C66CD1BE078EE00413D32 /* TencentOpenAPI.framework in Frameworks */,
 				A07C66C51BE070E400413D32 /* libWeChatSDK.a in Frameworks */,
-				A0D102601B84EF99006B0E4E /* Bugly.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1414,7 +1409,6 @@
 				A0EDFCBA1B90C61900B10594 /* MobileCoreServices.framework */,
 				A0D1026F1B84F6BA006B0E4E /* libz.dylib */,
 				A0D102671B84EFAD006B0E4E /* WebP.framework */,
-				A0D1025E1B84EF99006B0E4E /* Bugly.framework */,
 				AEDD06611AABF94500379C17 /* libsqlite3.dylib */,
 				AEDD065F1AABF93E00379C17 /* libstdc++.dylib */,
 				AEDD065D1AABF93700379C17 /* libz.1.1.3.dylib */,

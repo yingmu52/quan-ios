@@ -2214,8 +2214,7 @@
                                         <exclude reference="dUT-te-g0E"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="-41" y="0.0" width="482" height="687"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="dUT-te-g0E"/>
                                     </mask>
@@ -3401,7 +3400,7 @@
                                 <rect key="frame" x="0.0" y="101.5" width="245.5" height="412"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="246" height="412"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="245.5" height="412"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Df1-3t-62p">
@@ -4330,9 +4329,6 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="74" width="400" height="726"/>
-                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="tqf-Ew-ds1" id="7RH-Zt-rSA"/>
                                     <outlet property="delegate" destination="tqf-Ew-ds1" id="9XZ-w3-0mO"/>

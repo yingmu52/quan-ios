@@ -24,9 +24,6 @@
     //向后台拉取优图签名
     [self.fetchCenter requestSignature:nil];
     
-    // 初始化SDK, 请使用在Bugly平台上注册应用的 AppId, 注意不要填写AppKey
-    [[CrashReporter sharedInstance] installWithAppId:BUGLY_APP_ID];
-    
     //向微信注册
     [WXApi registerApp:WECHATAppID];
     
@@ -38,17 +35,10 @@
 //    [pgYmanager setShakingThreshold:3.0]; //摇一摇触发反馈
 
 
-    if ([User isUserLogin]){
-        // 设置用户ID, 如果你的APP有登录态, 可以在用户登录后再次调用此接口
-        [[CrashReporter sharedInstance] setUserId:[NSString stringWithFormat:@"%@ - %@",[User uid],[User userDisplayName]]];
-        
-//        if (![User currentCircleId].length) { //没有归属的圈子,弹出邀请码填写页面
-//            self.window.rootViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"InvitationCodeViewController"];
-//        }
-        
-    }else{
+    if (![User isUserLogin]){
         self.window.rootViewController = self.loginVC;
     }
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
