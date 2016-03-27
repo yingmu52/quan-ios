@@ -55,8 +55,7 @@ typedef void(^FetchCenterGetRequestSwithCircleCompleted)(void);
 typedef void(^FetchCenterGetRequestJoinCircleCompleted)(NSString *circleId);
 /** 发现页拉取列表完成*/
 typedef void(^FetchCenterGetRequestGetDiscoverListCompleted)(NSString *circleTitle);
-/** 拉取主人id的事件列表完成*/
-typedef void(^FetchCenterGetRequestGetPlanListCompleted)(NSArray *plans);
+
 /** 赞某条Feed完成*/
 typedef void(^FetchCenterGetRequestLikeFeedCompleted)(void);
 /** 不赞某条Feed完成*/
@@ -208,6 +207,7 @@ typedef void(^FetchCenterGetRequestDeleteCircleCompleted)(void);
 #pragma mark - 事件
 
 /**拉取主人id的事件列表*/
+typedef void(^FetchCenterGetRequestGetPlanListCompleted)(NSArray *planIds);
 - (void)getPlanListForOwnerId:(NSString *)ownerId
                    completion:(FetchCenterGetRequestGetPlanListCompleted)completionBlock;
 

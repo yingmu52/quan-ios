@@ -1006,19 +1006,16 @@
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,GET_LIST];
     [self getRequest:rqtStr parameter:@{@"id":ownerId} includeArguments:YES completion:^(NSDictionary *responseJson) {
         
-        
-        NSMutableArray *planEntities;
-        
-        if ([responseJson[@"data"] isKindOfClass:[NSDictionary class]]) { //non empty array
+        NSArray *planIds = [NSArray array];
+        if ([responseJson[@"data"] isKindOfClass:[NSArray class]]) { //non empty array
             
             NSManagedObjectContext *workerContext = [self workerContext];
             NSArray *plans = responseJson[@"data"];
-            planEntities = [NSMutableArray arrayWithCapacity:plans.count];
+            planIds = [responseJson valueForKeyPath:@"data.id"];
             for (NSDictionary *planInfo in plans) {
-                Plan * plan = [Plan updatePlanFromServer:planInfo
-                                               ownerInfo:[Owner myWebInfo]
-                                    managedObjectContext:workerContext];
-                [planEntities addObject:plan];
+                [Plan updatePlanFromServer:planInfo
+                                 ownerInfo:[Owner myWebInfo]
+                      managedObjectContext:workerContext];
             }
             
             [self.appDelegate saveContext:workerContext];
@@ -1026,7 +1023,7 @@
         
         if (completionBlock) {
             dispatch_main_async_safe(^{
-                completionBlock(planEntities);
+                completionBlock(planIds);
             });
         }
     }];
