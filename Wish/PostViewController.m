@@ -64,6 +64,9 @@
     
     [self.textField addTarget:self action:@selector(textFieldDidUpdate) forControlEvents:UIControlEventEditingChanged];
     
+    if (self.circle) {
+        self.infoLabel.text = [NSString stringWithFormat:@"所属圈子：%@",self.circle.circleName];
+    }
 }
 
 - (void)textFieldDidUpdate{

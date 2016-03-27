@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "User.h"
 #import "WishDetailVCFollower.h"
+#import "PostViewController.h"
 //#import "LMDropdownView.h"
 //#import "CircleListCell.h"
 #import "CircleSettingViewController.h"
@@ -106,10 +107,10 @@
 //        csc.delegate = self;
         csc.circle = self.circle;
     }
-//    if ([segue.identifier isEqualToString:@"showCircleCreationView"]) {
-//        CircleCreationViewController *ccc = segue.destinationViewController;
-////        ccc.delegate = self;
-//    }
+    if ([segue.identifier isEqualToString:@"ShowPostFromDiscovery"]) {
+         PostViewController *pvc = segue.destinationViewController;
+        pvc.circle = self.circle;
+    }
 }
 
 //- (void)didFinishCreatingCircle{
