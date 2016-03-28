@@ -125,6 +125,8 @@ static NSUInteger distance = 10;
     PHImageManager *manager = [PHImageManager defaultManager];
     NSMutableArray *arrayOfUIImages = [NSMutableArray arrayWithCapacity:self.assets.count];
     for (id item in self.assets) {
+        
+        //this method is async
         if ([item isKindOfClass:[PHAsset class]]) {
             [manager requestImageDataForAsset:item
                                       options:nil
@@ -133,6 +135,7 @@ static NSUInteger distance = 10;
                                                 UIImageOrientation orientation,
                                                 NSDictionary * _Nullable info)
             {
+
                 [arrayOfUIImages addObject:[UIImage imageWithData:imageData scale:0.5]];
                 if (arrayOfUIImages.count == self.assets.count) {
                     [self.fetchCenter uploadImages:arrayOfUIImages
@@ -141,16 +144,17 @@ static NSUInteger distance = 10;
                     }];
                 }
             }];
-        }else if ([item isKindOfClass:[UIImage class]]){
-#warning 恶心的实现，要改啊！
-            [arrayOfUIImages addObject:item];
-            if (arrayOfUIImages.count == self.assets.count) {
-                [self.fetchCenter uploadImages:arrayOfUIImages
-                                    completion:^(NSArray *imageIds) {
-                    [self finishUploadingImages:imageIds];
-                }];
-            }
         }
+//        else if ([item isKindOfClass:[UIImage class]]){
+//#warning 恶心的实现，要改啊！
+//            [arrayOfUIImages addObject:item];
+//            if (arrayOfUIImages.count == self.assets.count) {
+//                [self.fetchCenter uploadImages:arrayOfUIImages
+//                                    completion:^(NSArray *imageIds) {
+//                    [self finishUploadingImages:imageIds];
+//                }];
+//            }
+//        }
     }
     
     self.progressBar.hidden = NO;
@@ -335,7 +339,7 @@ static NSUInteger distance = 10;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-#pragma mark - dismiss keyboard when tap on background
+
 - (IBAction)tapOnBackground:(UITapGestureRecognizer *)tap{
     if (self.textView.isFirstResponder) {
         [self.textView resignFirstResponder];
