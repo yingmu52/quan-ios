@@ -2197,8 +2197,7 @@
                                         <exclude reference="dUT-te-g0E"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="-41" y="0.0" width="482" height="687"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="dUT-te-g0E"/>
                                     </mask>
@@ -3372,7 +3371,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PostFeedImagePreviewCell" id="Rns-ch-qIO" customClass="ImagePreviewCell">
-                                <rect key="frame" x="0.0" y="101.5" width="245.5" height="412"/>
+                                <rect key="frame" x="0.0" y="94" width="245.5" height="412"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="246" height="412"/>
@@ -7805,13 +7804,13 @@
         <image name="tab_ic_message_pressed" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dFu-Bk-XhY"/>
-        <segue reference="0NR-qk-ahm"/>
-        <segue reference="4wk-xv-ETJ"/>
-        <segue reference="JG0-4S-mEz"/>
+        <segue reference="7ZJ-tG-Hnl"/>
         <segue reference="mFv-Li-7ge"/>
+        <segue reference="JG0-4S-mEz"/>
         <segue reference="JVq-VY-XxP"/>
         <segue reference="TvX-zc-I4j"/>
+        <segue reference="0NR-qk-ahm"/>
+        <segue reference="4wk-xv-ETJ"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
 </document>
