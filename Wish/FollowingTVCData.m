@@ -16,7 +16,6 @@
 #import "User.h"
 #import "SDWebImageCompat.h"
 #import "ProfileViewController.h"
-#import "WishDetailVCFollower.h"
 static NSUInteger numberOfPreloadedFeeds = 3;
 
 @interface FollowingTVCData () <NSFetchedResultsControllerDelegate,FetchCenterDelegate,FollowingCellDelegate,UIGestureRecognizerDelegate>
@@ -86,17 +85,18 @@ static NSUInteger numberOfPreloadedFeeds = 3;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"showFollowerWishDetail"]) {
-        if ([sender isKindOfClass:[NSArray class]]){
-            NSArray *array = (NSArray *)sender;
-            WishDetailVCFollower *wishDetailVC = segue.destinationViewController;
-            wishDetailVC.plan = array.firstObject; // refer: didPressCollectionCellAtIndex
-            [wishDetailVC.tableView scrollToRowAtIndexPath:array.lastObject
-                                          atScrollPosition:UITableViewScrollPositionMiddle
-                                                  animated:NO];
-
-        }else{
-            [segue.destinationViewController setPlan:sender];
-        }
+#warning TBD
+//        if ([sender isKindOfClass:[NSArray class]]){
+//            NSArray *array = (NSArray *)sender;
+//            WishDetailVCFollower *wishDetailVC = segue.destinationViewController;
+//            wishDetailVC.plan = array.firstObject; // refer: didPressCollectionCellAtIndex
+//            [wishDetailVC.tableView scrollToRowAtIndexPath:array.lastObject
+//                                          atScrollPosition:UITableViewScrollPositionMiddle
+//                                                  animated:NO];
+//
+//        }else{
+//            [segue.destinationViewController setPlan:sender];
+//        }
 
     }
     if ([segue.identifier isEqualToString:@"showPersonalInfo"]) {

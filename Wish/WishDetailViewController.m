@@ -144,8 +144,38 @@
                                       selector:@selector(goBack)
                                          frame:frame];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+    
+    if ([self.plan.owner.ownerId isEqualToString:[User uid]]) {
+        UIButton *deleteBtn = [Theme buttonWithImage:[Theme navButtonDeleted]
+                                              target:self
+                                            selector:@selector(deletePlan)
+                                               frame:frame];
+        
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:deleteBtn];
+    }
     [self setCurrenetBackgroundColor];
 }
+
+-(void)deletePlan{
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"删除的事件不恢复哦！"
+                                                                   message:nil
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定"
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action)
+                              {
+                                  //执行删除操作
+                                  [self.plan deleteSelf];
+                                  [self.navigationController popViewControllerAnimated:YES];
+                              }];
+    [alert addAction:confirm];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+    
+}
+
 
 - (void)setCurrenetBackgroundColor{
 
@@ -346,6 +376,9 @@ forRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     }
 }
 
+- (NSString *)segueForFeed{
+    return @"showFeedDetailView";
+}
 #pragma mark - like and unlike
 
 - (void)didPressedLikeOnCell:(WishDetailCell *)cell{
@@ -420,10 +453,6 @@ forRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
         }
 
     }
-}
-
-- (NSString *)segueForFeed{
-    return nil; //abstract
 }
 
 - (void)didPressedCommentOnCell:(WishDetailCell *)cell{

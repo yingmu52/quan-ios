@@ -8,11 +8,11 @@
 
 #import "DiscoveryVCData.h"
 #import "FetchCenter.h"
-#import "UIImageView+WebCache.h"
+#import "UIImageView+ImageCache.h"
+#import "Theme.h"
 #import "SDWebImageCompat.h"
 #import "AppDelegate.h"
 #import "User.h"
-#import "WishDetailVCFollower.h"
 #import "PostViewController.h"
 //#import "LMDropdownView.h"
 //#import "CircleListCell.h"
@@ -178,9 +178,7 @@
 - (void)showCircleSettingView{
     [self performSegueWithIdentifier:@"showCircleSettingView" sender:nil];
 }
-//- (void)showInvitationView{
-//    [self performSegueWithIdentifier:@"showInvitationView" sender:nil];
-//}
+
 
 #pragma mark - 长按事件可显示相关信息
 - (void)longPressed:(UILongPressGestureRecognizer *)longPress{

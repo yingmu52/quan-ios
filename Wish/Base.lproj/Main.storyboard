@@ -271,7 +271,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZS-Wx-5k2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4866" y="-4634.25"/>
+            <point key="canvasLocation" x="-1746" y="-5672.25"/>
         </scene>
         <!--Circle List View Controller-->
         <scene sceneID="z2m-uv-JnE">
@@ -310,8 +310,7 @@
                                                     <exclude reference="fUZ-8z-5Te"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="20" y="50" width="200" height="28"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
                                                     <include reference="2ai-q6-RJl"/>
                                                     <include reference="fUZ-8z-5Te"/>
@@ -380,18 +379,12 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <color key="textColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="76" y="15" width="144" height="16"/>
-                                                            </variation>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="中华田园汪，更新了事件" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XQA-da-KFY">
                                                             <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="76" y="35" width="144" height="12"/>
-                                                            </variation>
                                                         </label>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -436,8 +429,7 @@
                                                             <exclude reference="qHR-hW-Em1"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="65"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="subviews">
                                                             <include reference="K5m-ul-Xw1"/>
                                                             <include reference="C7G-pU-hlg"/>
@@ -788,7 +780,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-3871.5" y="-4705.5"/>
+            <point key="canvasLocation" x="-631.5" y="-5332.5"/>
         </scene>
         <!--Member List View Controller-->
         <scene sceneID="6Sd-xR-ckc">
@@ -839,9 +831,6 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="125" y="20" width="87" height="16"/>
-                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <constraints>
@@ -932,15 +921,9 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="79" y="20" width="93" height="16"/>
-                                                    </variation>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" image="more" translatesAutoresizingMaskIntoConstraints="NO" id="k6x-1P-zkY">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="187" y="16" width="25" height="25"/>
-                                                    </variation>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -1045,7 +1028,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="99q-MI-smV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3925.5" y="-5431.5"/>
+            <point key="canvasLocation" x="-3421.5" y="-5779.5"/>
         </scene>
         <!--Login Detail View Controller-->
         <scene sceneID="T5s-oJ-3VH">
@@ -1773,7 +1756,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RIa-Mp-Cry" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="357" y="-955.5"/>
+            <point key="canvasLocation" x="297" y="-1117.5"/>
         </scene>
         <!--Post Detail View Controller-->
         <scene sceneID="nyi-zn-yq6">
@@ -1913,7 +1896,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3151.5" y="-2355"/>
+            <point key="canvasLocation" x="3175.5" y="-2277"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="fpo-Ov-0kY">
@@ -2214,7 +2197,8 @@
                                         <exclude reference="dUT-te-g0E"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="-41" y="0.0" width="482" height="687"/>
                                     <mask key="constraints">
                                         <include reference="dUT-te-g0E"/>
                                     </mask>
@@ -2269,7 +2253,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d1T-ay-k77" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="432" y="-2319"/>
+            <point key="canvasLocation" x="-1104" y="-2451"/>
         </scene>
         <!--消息-->
         <scene sceneID="w0m-7Q-OqX">
@@ -2331,8 +2315,7 @@
                                                                     <exclude reference="L1c-Ev-ofw"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="0.0" y="39" width="35" height="35"/>
+                                                            <variation key="heightClass=regular-widthClass=compact">
                                                                 <mask key="constraints">
                                                                     <include reference="L1c-Ev-ofw"/>
                                                                 </mask>
@@ -2349,8 +2332,7 @@
                                                                     <exclude reference="kol-eS-BD9"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="179" y="33" width="45" height="46"/>
+                                                            <variation key="heightClass=regular-widthClass=compact">
                                                                 <mask key="constraints">
                                                                     <include reference="kol-eS-BD9"/>
                                                                 </mask>
@@ -2361,18 +2343,12 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="40" y="33" width="134" height="26"/>
-                                                            </variation>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2014-11-21 13:20" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tGL-QF-Snd">
                                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="40" y="64" width="99" height="15"/>
-                                                            </variation>
                                                         </label>
                                                     </subviews>
                                                     <constraints>
@@ -2429,8 +2405,7 @@
                                                             <exclude reference="vj4-9M-gwq"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="8" y="0.0" width="224" height="112"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="subviews">
                                                             <include reference="Vwr-tP-K5Z"/>
                                                             <include reference="yNm-Y2-OMm"/>
@@ -2545,7 +2520,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d3g-s2-X2E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-468" y="-46.5"/>
+            <point key="canvasLocation" x="264" y="-82.5"/>
         </scene>
         <!--关注-->
         <scene sceneID="lyA-XV-6dq">
@@ -3031,7 +3006,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="关注" id="Eyu-XI-q6r"/>
                     <connections>
-                        <segue destination="a6S-F3-WCk" kind="show" identifier="showFollowerWishDetail" id="dTf-Xy-FJp"/>
+                        <segue destination="rp9-lu-nOr" kind="show" identifier="showFollowerWishDetail" id="eiZ-5w-cZp"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jPt-JN-A9f" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3041,12 +3016,12 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1750.5" y="547.5"/>
+            <point key="canvasLocation" x="-1501.5" y="-7201.5"/>
         </scene>
         <!--Wish DetailVC Owner-->
         <scene sceneID="274-7i-jhG">
             <objects>
-                <tableViewController id="b5E-B5-8Ys" customClass="WishDetailVCOwner" sceneMemberID="viewController">
+                <tableViewController hidesBottomBarWhenPushed="YES" id="b5E-B5-8Ys" customClass="WishDetailVCOwner" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="326" sectionHeaderHeight="22" sectionFooterHeight="22" id="XKw-Eq-NrX">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3059,17 +3034,17 @@
                     <connections>
                         <segue destination="XiV-RA-INl" kind="show" identifier="showPostFeed" id="4wk-xv-ETJ"/>
                         <segue destination="rNz-bL-QyY" kind="show" identifier="showEditPage" id="Zdn-fs-IsB"/>
-                        <segue destination="sEO-AT-36b" kind="show" identifier="showFeedDetailFromOwner" id="evE-nl-2lN"/>
+                        <segue destination="egE-eW-ywB" kind="show" identifier="showFeedDetailFromOwner" id="dFu-Bk-XhY"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l82-2h-AxP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3756" y="-1343.25"/>
+            <point key="canvasLocation" x="3408" y="-1195.5"/>
         </scene>
         <!--Post Feed View Controller-->
         <scene sceneID="tU0-cc-nXE">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="XiV-RA-INl" customClass="PostFeedViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="XiV-RA-INl" customClass="PostFeedViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UDg-j7-ilp"/>
                         <viewControllerLayoutGuide type="bottom" id="f5a-dm-fTM"/>
@@ -3380,7 +3355,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4500" y="-3216"/>
+            <point key="canvasLocation" x="4512" y="-3252"/>
         </scene>
         <!--Image Preview Controller-->
         <scene sceneID="9D3-61-yQJ">
@@ -3400,7 +3375,7 @@
                                 <rect key="frame" x="0.0" y="101.5" width="245.5" height="412"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="245.5" height="412"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="246" height="412"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Df1-3t-62p">
@@ -3453,27 +3428,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a2k-lo-Gf0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5776.5" y="-3296.25"/>
-        </scene>
-        <!--Feed DetailVC Owner-->
-        <scene sceneID="XQH-HN-t6p">
-            <objects>
-                <tableViewController id="sEO-AT-36b" customClass="FeedDetailVCOwner" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fjd-0v-DA5">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <connections>
-                            <outlet property="dataSource" destination="sEO-AT-36b" id="kB9-wn-nge"/>
-                            <outlet property="delegate" destination="sEO-AT-36b" id="Xpo-YH-dsX"/>
-                        </connections>
-                    </tableView>
-                    <connections>
-                        <segue destination="1JX-oc-sKH" kind="presentation" identifier="showCommentViewController" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="6Ym-Xv-H7E"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="csu-nT-aEs" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6670.5" y="-2074.5"/>
         </scene>
         <!--Comment View Controller-->
         <scene sceneID="FDq-1e-wxQ">
@@ -3811,7 +3765,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="6808.5" y="-967.5"/>
+            <point key="canvasLocation" x="10840.5" y="-1657.5"/>
         </scene>
         <!--圈子-->
         <scene sceneID="FbS-uZ-glk">
@@ -4168,12 +4122,12 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="RyB-N7-FN7"/>
                     <connections>
-                        <segue destination="IYm-1R-fEI" kind="show" identifier="showPlanFromAchievement" id="lVg-2Z-V6e"/>
+                        <segue destination="rp9-lu-nOr" kind="show" identifier="showPlanFromAchievement" id="8uB-Dl-NWo"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pt8-1V-Z4d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3085.5" y="-4280.25"/>
+            <point key="canvasLocation" x="-4282.5" y="-6644.25"/>
         </scene>
         <!--Circle Picker View Controller-->
         <scene sceneID="7q5-7e-owA">
@@ -4377,10 +4331,10 @@
             </objects>
             <point key="canvasLocation" x="1597.5" y="-727.5"/>
         </scene>
-        <!--Wish DetailVC Discovery-->
+        <!--Wish Detail View Controller-->
         <scene sceneID="v9l-pC-NeM">
             <objects>
-                <tableViewController id="rp9-lu-nOr" customClass="WishDetailVCDiscovery" sceneMemberID="viewController">
+                <tableViewController id="rp9-lu-nOr" customClass="WishDetailViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fOK-yO-OcH">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4391,33 +4345,12 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <segue destination="egE-eW-ywB" kind="show" identifier="showDiscoverFeedDetail" id="Y2c-0U-Rmr"/>
+                        <segue destination="egE-eW-ywB" kind="show" identifier="showFeedDetailView" id="Y2c-0U-Rmr"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l1a-lB-oB1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2962.5" y="-727.5"/>
-        </scene>
-        <!--Wish DetailVC Follower-->
-        <scene sceneID="xeY-AK-5LK">
-            <objects>
-                <tableViewController id="a6S-F3-WCk" customClass="WishDetailVCFollower" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="nd5-yr-oxc">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <connections>
-                            <outlet property="dataSource" destination="a6S-F3-WCk" id="Oq9-de-VlL"/>
-                            <outlet property="delegate" destination="a6S-F3-WCk" id="JVD-15-mQI"/>
-                        </connections>
-                    </tableView>
-                    <connections>
-                        <segue destination="egE-eW-ywB" kind="show" identifier="showFollowingFeedDetail" id="rjz-Cv-C9H"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="H5Q-tl-bx3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3139.5" y="553.5"/>
+            <point key="canvasLocation" x="6202.5" y="-6289.5"/>
         </scene>
         <!--Invitation View Controller-->
         <scene sceneID="GSN-L7-hjR">
@@ -5039,14 +4972,13 @@
                         <outlet property="collectionView" destination="njr-NM-zJL" id="XBV-IW-SdH"/>
                         <segue destination="rp9-lu-nOr" kind="show" identifier="showDiscoveryWishDetail" id="JVq-VY-XxP"/>
                         <segue destination="b5E-B5-8Ys" kind="show" identifier="showWishDetailVCOwnerFromDiscovery" id="9iF-Ie-E5K"/>
-                        <segue destination="hHC-dm-tO3" kind="presentation" identifier="showInvitationView" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="aGn-B4-aDl"/>
                         <segue destination="AFd-gJ-u6i" kind="show" identifier="showCircleSettingView" id="Zzj-nw-EVi"/>
                         <segue destination="1Y1-uW-81U" kind="show" identifier="ShowPostFromDiscovery" id="TvX-zc-I4j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="szU-gC-KV4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1225.5" y="-2035.5"/>
+            <point key="canvasLocation" x="2749.5" y="-5392.5"/>
         </scene>
         <!--Shuffle View Controller-->
         <scene sceneID="Ahi-9g-gWw">
@@ -5693,7 +5625,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q0N-5Z-lB6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-367.5" y="-3984"/>
+            <point key="canvasLocation" x="-8548.5" y="-6855"/>
         </scene>
         <!--Circle Creation View Controller-->
         <scene sceneID="R5w-le-rbp">
@@ -6713,7 +6645,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1240.5" y="-3579.75"/>
+            <point key="canvasLocation" x="-6508.5" y="-6597.75"/>
         </scene>
         <!--Request Log View Controller-->
         <scene sceneID="QjG-Rl-EMA">
@@ -6781,7 +6713,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vgg-QJ-MlH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1095" y="-3225"/>
+            <point key="canvasLocation" x="-8661" y="-5961"/>
         </scene>
         <!--Station View Controller-->
         <scene sceneID="seZ-vv-0jl">
@@ -7375,7 +7307,7 @@
         <!--Feed Detail View Controller-->
         <scene sceneID="fMM-0b-dio">
             <objects>
-                <tableViewController id="egE-eW-ywB" customClass="FeedDetailViewController" sceneMemberID="viewController">
+                <tableViewController hidesBottomBarWhenPushed="YES" id="egE-eW-ywB" customClass="FeedDetailViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="116" sectionHeaderHeight="22" sectionFooterHeight="22" id="Ctj-9Z-Ydt">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -7391,28 +7323,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IVx-OC-EUA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4689" y="-316.5"/>
-        </scene>
-        <!--Wish DetailVC Owner Achieved-->
-        <scene sceneID="YyH-nI-6zS">
-            <objects>
-                <tableViewController id="IYm-1R-fEI" customClass="WishDetailVCOwnerAchieved" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="326" sectionHeaderHeight="22" sectionFooterHeight="22" id="jvS-PL-veJ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <connections>
-                            <outlet property="dataSource" destination="IYm-1R-fEI" id="cKq-OD-376"/>
-                            <outlet property="delegate" destination="IYm-1R-fEI" id="MxJ-8R-lBP"/>
-                        </connections>
-                    </tableView>
-                    <connections>
-                        <segue destination="sEO-AT-36b" kind="show" identifier="ShowFeedFromAchievementDetail" id="JFc-cO-xBu"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mAH-kH-P45" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4537.5" y="-4280.25"/>
+            <point key="canvasLocation" x="9597" y="-1618.5"/>
         </scene>
         <!--ProfileVC Owner-->
         <scene sceneID="j5f-84-ZIl">
@@ -7824,7 +7735,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="beG-lf-B7V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-301.5" y="-4743.75"/>
+            <point key="canvasLocation" x="-5965.5" y="-7533.75"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="w9V-Ma-zwL">
@@ -7894,14 +7805,13 @@
         <image name="tab_ic_message_pressed" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="dFu-Bk-XhY"/>
+        <segue reference="0NR-qk-ahm"/>
+        <segue reference="4wk-xv-ETJ"/>
         <segue reference="JG0-4S-mEz"/>
-        <segue reference="4ZT-53-1QA"/>
         <segue reference="mFv-Li-7ge"/>
-        <segue reference="9iF-Ie-E5K"/>
+        <segue reference="JVq-VY-XxP"/>
         <segue reference="TvX-zc-I4j"/>
-        <segue reference="evE-nl-2lN"/>
-        <segue reference="hrM-4j-5CW"/>
-        <segue reference="rjz-Cv-C9H"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
 </document>

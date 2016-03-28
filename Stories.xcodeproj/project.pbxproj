@@ -226,8 +226,6 @@
 		AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
 		AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
 		AE2A8DE51ACA700100029D52 /* WishDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE2A8DE41ACA700100029D52 /* WishDetailCell.xib */; };
-		AE2F28E71AD3937700FC3370 /* WishDetailVCDiscovery.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2F28E61AD3937700FC3370 /* WishDetailVCDiscovery.m */; };
-		AE2F28E81AD3937700FC3370 /* WishDetailVCDiscovery.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2F28E61AD3937700FC3370 /* WishDetailVCDiscovery.m */; };
 		AE30EE6D1A6E19D00044740D /* WishDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE30EE6C1A6E19D00044740D /* WishDetailCell.m */; };
 		AE47055D1AF9DC080028D7BC /* FeedDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE47055C1AF9DC080028D7BC /* FeedDetailCell.m */; };
 		AE479E9E1A6F775C00366A0A /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479E9D1A6F775C00366A0A /* PostViewController.m */; };
@@ -262,10 +260,6 @@
 		AEBFCA381A78614100686EFE /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA361A78614100686EFE /* PostDetailViewController.m */; };
 		AEC0688F1B2D309E007975D2 /* FeedDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC0688E1B2D309E007975D2 /* FeedDetailCell.xib */; };
 		AEC068901B2D309E007975D2 /* FeedDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC0688E1B2D309E007975D2 /* FeedDetailCell.xib */; };
-		AEC068931B2D3D55007975D2 /* FeedDetailVCOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC068921B2D3D55007975D2 /* FeedDetailVCOwner.m */; };
-		AEC068941B2D3D55007975D2 /* FeedDetailVCOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC068921B2D3D55007975D2 /* FeedDetailVCOwner.m */; };
-		AEC0E1C51AC64F9600563F7C /* WishDetailVCOwnerAchieved.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC0E1C41AC64F9600563F7C /* WishDetailVCOwnerAchieved.m */; };
-		AEC0E1C61AC64F9600563F7C /* WishDetailVCOwnerAchieved.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC0E1C41AC64F9600563F7C /* WishDetailVCOwnerAchieved.m */; };
 		AEC5B9AA1AB7EB40008ECB92 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC5B9A91AB7EB40008ECB92 /* User.m */; };
 		AED355F41B2285D3000427FF /* FeedDetailHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED355F31B2285D3000427FF /* FeedDetailHeader.xib */; };
 		AED355F51B2285D3000427FF /* FeedDetailHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED355F31B2285D3000427FF /* FeedDetailHeader.xib */; };
@@ -304,8 +298,6 @@
 		AEEC6C741A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C721A6DB11F0021B7E4 /* WishDetailViewController.m */; };
 		AEF3F87F1AA4CFA6008C2300 /* WishDetailVCOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF3F87E1AA4CFA6008C2300 /* WishDetailVCOwner.m */; };
 		AEF3F8801AA4CFA6008C2300 /* WishDetailVCOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF3F87E1AA4CFA6008C2300 /* WishDetailVCOwner.m */; };
-		AEF3F8831AA4E3C0008C2300 /* WishDetailVCFollower.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF3F8821AA4E3C0008C2300 /* WishDetailVCFollower.m */; };
-		AEF3F8841AA4E3C0008C2300 /* WishDetailVCFollower.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF3F8821AA4E3C0008C2300 /* WishDetailVCFollower.m */; };
 		AEF775441A8134FE000DB73B /* HomeCardFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF775431A8134FE000DB73B /* HomeCardFlowLayout.m */; };
 		AEF7F2931A686FA30022410B /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F2921A686FA30022410B /* Theme.m */; };
 		AEF7F2941A686FA30022410B /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = AEF7F2921A686FA30022410B /* Theme.m */; };
@@ -587,8 +579,6 @@
 		AE1B6E3A1A6D89FC0026F3CE /* HomeCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCardView.h; sourceTree = "<group>"; };
 		AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCardView.m; sourceTree = "<group>"; };
 		AE2A8DE41ACA700100029D52 /* WishDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WishDetailCell.xib; sourceTree = "<group>"; };
-		AE2F28E51AD3937700FC3370 /* WishDetailVCDiscovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishDetailVCDiscovery.h; sourceTree = "<group>"; };
-		AE2F28E61AD3937700FC3370 /* WishDetailVCDiscovery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailVCDiscovery.m; sourceTree = "<group>"; };
 		AE30EE6B1A6E19D00044740D /* WishDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishDetailCell.h; sourceTree = "<group>"; };
 		AE30EE6C1A6E19D00044740D /* WishDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailCell.m; sourceTree = "<group>"; };
 		AE4481AB1AB6B5A700A912CB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -631,10 +621,6 @@
 		AEBFCA351A78614100686EFE /* PostDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostDetailViewController.h; sourceTree = "<group>"; };
 		AEBFCA361A78614100686EFE /* PostDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostDetailViewController.m; sourceTree = "<group>"; };
 		AEC0688E1B2D309E007975D2 /* FeedDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedDetailCell.xib; sourceTree = "<group>"; };
-		AEC068911B2D3D55007975D2 /* FeedDetailVCOwner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedDetailVCOwner.h; sourceTree = "<group>"; };
-		AEC068921B2D3D55007975D2 /* FeedDetailVCOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedDetailVCOwner.m; sourceTree = "<group>"; };
-		AEC0E1C31AC64F9600563F7C /* WishDetailVCOwnerAchieved.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishDetailVCOwnerAchieved.h; sourceTree = "<group>"; };
-		AEC0E1C41AC64F9600563F7C /* WishDetailVCOwnerAchieved.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailVCOwnerAchieved.m; sourceTree = "<group>"; };
 		AEC5B9A81AB7EB40008ECB92 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		AEC5B9A91AB7EB40008ECB92 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		AED355F31B2285D3000427FF /* FeedDetailHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedDetailHeader.xib; sourceTree = "<group>"; };
@@ -676,8 +662,6 @@
 		AEEC6C721A6DB11F0021B7E4 /* WishDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailViewController.m; sourceTree = "<group>"; };
 		AEF3F87D1AA4CFA6008C2300 /* WishDetailVCOwner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishDetailVCOwner.h; sourceTree = "<group>"; };
 		AEF3F87E1AA4CFA6008C2300 /* WishDetailVCOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailVCOwner.m; sourceTree = "<group>"; };
-		AEF3F8811AA4E3C0008C2300 /* WishDetailVCFollower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishDetailVCFollower.h; sourceTree = "<group>"; };
-		AEF3F8821AA4E3C0008C2300 /* WishDetailVCFollower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailVCFollower.m; sourceTree = "<group>"; };
 		AEF775421A8134FE000DB73B /* HomeCardFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCardFlowLayout.h; sourceTree = "<group>"; };
 		AEF775431A8134FE000DB73B /* HomeCardFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCardFlowLayout.m; sourceTree = "<group>"; };
 		AEF7F2911A686FA30022410B /* Theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Theme.h; sourceTree = "<group>"; };
@@ -1238,8 +1222,6 @@
 				A04942981BBA3A67002A8A3A /* CommentViewController.m */,
 				A066C3831BB793DA003B51D5 /* MSLabel.h */,
 				A066C3841BB793DA003B51D5 /* MSLabel.m */,
-				AEC068911B2D3D55007975D2 /* FeedDetailVCOwner.h */,
-				AEC068921B2D3D55007975D2 /* FeedDetailVCOwner.m */,
 				AE52FA4E1A8D3D76003FF725 /* PostFeedViewController.h */,
 				AE52FA4F1A8D3D76003FF725 /* PostFeedViewController.m */,
 				A0EA21FF1BA53BF400A83A7A /* ImagePreviewController.h */,
@@ -1344,12 +1326,6 @@
 				AE2A8DE41ACA700100029D52 /* WishDetailCell.xib */,
 				AEEC6C711A6DB11F0021B7E4 /* WishDetailViewController.h */,
 				AEEC6C721A6DB11F0021B7E4 /* WishDetailViewController.m */,
-				AEF3F8811AA4E3C0008C2300 /* WishDetailVCFollower.h */,
-				AEF3F8821AA4E3C0008C2300 /* WishDetailVCFollower.m */,
-				AE2F28E51AD3937700FC3370 /* WishDetailVCDiscovery.h */,
-				AE2F28E61AD3937700FC3370 /* WishDetailVCDiscovery.m */,
-				AEC0E1C31AC64F9600563F7C /* WishDetailVCOwnerAchieved.h */,
-				AEC0E1C41AC64F9600563F7C /* WishDetailVCOwnerAchieved.m */,
 				AEF3F87D1AA4CFA6008C2300 /* WishDetailVCOwner.h */,
 				AEF3F87E1AA4CFA6008C2300 /* WishDetailVCOwner.m */,
 			);
@@ -1597,7 +1573,6 @@
 				A0F7D42F1B84E851003CCB34 /* AMBCircularButton.m in Sources */,
 				A0A083581BD5FF9E0057CD65 /* StationViewController.m in Sources */,
 				A0F513181BD98B9600279B9D /* Comment+CoreDataProperties.m in Sources */,
-				AEC068931B2D3D55007975D2 /* FeedDetailVCOwner.m in Sources */,
 				A03010541BABC6AA0041E2CF /* QBAlbumCell.m in Sources */,
 				A0994E6B1BC4D1FB00D45845 /* WYStoryboardPopoverSegue.m in Sources */,
 				A0994E631BC4CF9500D45845 /* SYEmojiCharacters.m in Sources */,
@@ -1639,7 +1614,6 @@
 				AEB003EF1B7FF7190056EA80 /* MainTabBarController.m in Sources */,
 				A0F7D4571B84E851003CCB34 /* NZCircularImageView.m in Sources */,
 				A03010561BABC6AA0041E2CF /* QBAssetCell.m in Sources */,
-				AEF3F8831AA4E3C0008C2300 /* WishDetailVCFollower.m in Sources */,
 				AED9A67A1B44BE6E00108729 /* RequestLogViewController.m in Sources */,
 				AEBECCF91AE8A16600EDF385 /* LoginDetailViewController.m in Sources */,
 				AEBFCA371A78614100686EFE /* PostDetailViewController.m in Sources */,
@@ -1688,10 +1662,8 @@
 				AED4CB431AC79F3A00EE2DA4 /* ModalLeftToRightSegue.m in Sources */,
 				A0342B8A1C816EA400803BD7 /* CircleListCell.m in Sources */,
 				AE30EE6D1A6E19D00044740D /* WishDetailCell.m in Sources */,
-				AEC0E1C51AC64F9600563F7C /* WishDetailVCOwnerAchieved.m in Sources */,
 				A0D102191B84EB6A006B0E4E /* NSData+ImageContentType.m in Sources */,
 				A0EDFCC11B90C75900B10594 /* Reachability.m in Sources */,
-				AE2F28E71AD3937700FC3370 /* WishDetailVCDiscovery.m in Sources */,
 				AE606A231AF46991003DF16E /* MessageCell.m in Sources */,
 				A05AB6D41BDF783800E79F36 /* LMDropdownView.m in Sources */,
 				AED4CB221AC75A0200EE2DA4 /* KeyWordCell.m in Sources */,
@@ -1707,7 +1679,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0D102181B84EB6A006B0E4E /* MKAnnotationView+WebCache.m in Sources */,
-				AEC068941B2D3D55007975D2 /* FeedDetailVCOwner.m in Sources */,
 				A0B9D76A1B9E4F1100EE382B /* DashedBorderView.m in Sources */,
 				A0F5131B1BD98B9600279B9D /* Comment.m in Sources */,
 				A0F7D44E1B84E851003CCB34 /* JTSSimpleImageDownloader.m in Sources */,
@@ -1741,7 +1712,6 @@
 				A0F7D4521B84E851003CCB34 /* UIImage+JTSImageEffects.m in Sources */,
 				A099CC501BE1B23600D38145 /* InvitationCodeViewController.m in Sources */,
 				AE01725C1A65CD8F0014266F /* WishTests.m in Sources */,
-				AE2F28E81AD3937700FC3370 /* WishDetailVCDiscovery.m in Sources */,
 				A0994E711BC6DF6200D45845 /* LocalDataTest.m in Sources */,
 				A0D1022A1B84EB6A006B0E4E /* UIButton+WebCache.m in Sources */,
 				A0F7D44A1B84E851003CCB34 /* JTSImageInfo.m in Sources */,
@@ -1775,7 +1745,6 @@
 				AE9A3AEC1A9B1DB000F0588F /* AchieveVCData.m in Sources */,
 				A0D1023F1B84ECDF006B0E4E /* NavigationBar.m in Sources */,
 				AED8D7CB1A9BE2490035EDE5 /* FollowingImageCell.m in Sources */,
-				AEC0E1C61AC64F9600563F7C /* WishDetailVCOwnerAchieved.m in Sources */,
 				AED9A67B1B44BE6E00108729 /* RequestLogViewController.m in Sources */,
 				A0F7D43E1B84E851003CCB34 /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				A0D1024F1B84EDCA006B0E4E /* UIImage+sdWebP.m in Sources */,
@@ -1791,7 +1760,6 @@
 				A0D102321B84EB6A006B0E4E /* UIImageView+HighlightedWebCache.m in Sources */,
 				A0A083591BD5FF9E0057CD65 /* StationViewController.m in Sources */,
 				A0D102261B84EB6A006B0E4E /* SDWebImageManager.m in Sources */,
-				AEF3F8841AA4E3C0008C2300 /* WishDetailVCFollower.m in Sources */,
 				A0D37C611B8781D900581EDE /* NewsPageViewController.m in Sources */,
 				AE479E9F1A6F775C00366A0A /* PostViewController.m in Sources */,
 				AEFEE4011A8EE0A7007E8234 /* FollowingCell.m in Sources */,

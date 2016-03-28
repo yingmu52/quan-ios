@@ -43,18 +43,18 @@
                                           selector:@selector(editPlan)
                                             frame:frame];
     
-    UIButton *shareBtn = [Theme buttonWithImage:[Theme navShareButtonDefault]
-                                         target:self
-                                       selector:nil
-                                          frame:frame];
+//    UIButton *shareBtn = [Theme buttonWithImage:[Theme navShareButtonDefault]
+//                                         target:self
+//                                       selector:nil
+//                                          frame:frame];
     
-    UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
-                                                                           target:nil action:nil];
-    space.width = 25.0f;
-    self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:shareBtn],
-                                                space,
-                                                [[UIBarButtonItem alloc] initWithCustomView:planEditBtn]];
-    
+//    UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+//                                                                           target:nil action:nil];
+//    space.width = 25.0f;
+//    self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:shareBtn],
+//                                                space,
+//                                                [[UIBarButtonItem alloc] initWithCustomView:planEditBtn]];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:planEditBtn];
 }
 - (void)editPlan{
     [self performSegueWithIdentifier:@"showEditPage" sender:self.plan];

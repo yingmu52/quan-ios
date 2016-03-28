@@ -11,7 +11,6 @@
 #import "AppDelegate.h"
 #import "Plan.h"
 #import "AchieveCell.h"
-#import "WishDetailVCOwnerAchieved.h"
 #import "User.h"
 #import "UIImageView+ImageCache.h"
 #import "FetchCenter.h"
