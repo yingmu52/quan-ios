@@ -38,8 +38,6 @@
 		A053CF7F1BA4EFF00007970A /* PostImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF7D1BA4EFF00007970A /* PostImageCell.m */; };
 		A055FB9F1BA6553A0013F91E /* ImagePreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A055FB9E1BA6553A0013F91E /* ImagePreviewCell.m */; };
 		A055FBA01BA6553A0013F91E /* ImagePreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A055FB9E1BA6553A0013F91E /* ImagePreviewCell.m */; };
-		A05AB6D41BDF783800E79F36 /* LMDropdownView.m in Sources */ = {isa = PBXBuildFile; fileRef = A05AB6D01BDF783800E79F36 /* LMDropdownView.m */; };
-		A05AB6D51BDF783800E79F36 /* UIImage+LMExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = A05AB6D31BDF783800E79F36 /* UIImage+LMExtension.m */; };
 		A066C3851BB793DA003B51D5 /* MSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A066C3841BB793DA003B51D5 /* MSLabel.m */; };
 		A066C3861BB793DA003B51D5 /* MSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A066C3841BB793DA003B51D5 /* MSLabel.m */; };
 		A066C3891BB7AE08003B51D5 /* MSSuperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A066C3881BB7AE08003B51D5 /* MSSuperViewController.m */; };
@@ -81,8 +79,6 @@
 		A0A083941BD765F00057CD65 /* Circle+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A0838F1BD765F00057CD65 /* Circle+CoreDataProperties.m */; };
 		A0A083951BD765F00057CD65 /* Circle+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A0838F1BD765F00057CD65 /* Circle+CoreDataProperties.m */; };
 		A0AD96981C8A899E00B0091D /* CircleSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0AD96971C8A899E00B0091D /* CircleSettingViewController.m */; };
-		A0B8C8021B857F22009C4572 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */; };
-		A0B8C8031B857F22009C4572 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */; };
 		A0B9D7691B9E4F1100EE382B /* DashedBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B9D7681B9E4F1100EE382B /* DashedBorderView.m */; };
 		A0B9D76A1B9E4F1100EE382B /* DashedBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B9D7681B9E4F1100EE382B /* DashedBorderView.m */; };
 		A0CBDCB51C8DF09800DA53FF /* EmptyCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CBDCB31C8DF09800DA53FF /* EmptyCircleView.m */; };
@@ -131,8 +127,7 @@
 		A0D102681B84EFAD006B0E4E /* WebP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D102671B84EFAD006B0E4E /* WebP.framework */; };
 		A0D102691B84EFAD006B0E4E /* WebP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D102671B84EFAD006B0E4E /* WebP.framework */; };
 		A0D102701B84F6BA006B0E4E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D1026F1B84F6BA006B0E4E /* libz.dylib */; };
-		A0D37C601B8781D900581EDE /* NewsPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D37C5F1B8781D900581EDE /* NewsPageViewController.m */; };
-		A0D37C611B8781D900581EDE /* NewsPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D37C5F1B8781D900581EDE /* NewsPageViewController.m */; };
+		A0DCF0D61CA9AE6A0052380E /* PlansViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0DCF0D51CA9AE6A0052380E /* PlansViewController.m */; };
 		A0EA22011BA53BF400A83A7A /* ImagePreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0EA22001BA53BF400A83A7A /* ImagePreviewController.m */; };
 		A0EA22021BA53BF400A83A7A /* ImagePreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0EA22001BA53BF400A83A7A /* ImagePreviewController.m */; };
 		A0EDFCBB1B90C61900B10594 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EDFCBA1B90C61900B10594 /* MobileCoreServices.framework */; };
@@ -370,10 +365,6 @@
 		A053CF7D1BA4EFF00007970A /* PostImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostImageCell.m; sourceTree = "<group>"; };
 		A055FB9D1BA6553A0013F91E /* ImagePreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePreviewCell.h; sourceTree = "<group>"; };
 		A055FB9E1BA6553A0013F91E /* ImagePreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePreviewCell.m; sourceTree = "<group>"; };
-		A05AB6CF1BDF783800E79F36 /* LMDropdownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMDropdownView.h; sourceTree = "<group>"; };
-		A05AB6D01BDF783800E79F36 /* LMDropdownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMDropdownView.m; sourceTree = "<group>"; };
-		A05AB6D21BDF783800E79F36 /* UIImage+LMExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+LMExtension.h"; sourceTree = "<group>"; };
-		A05AB6D31BDF783800E79F36 /* UIImage+LMExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+LMExtension.m"; sourceTree = "<group>"; };
 		A066C3831BB793DA003B51D5 /* MSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSLabel.h; sourceTree = "<group>"; };
 		A066C3841BB793DA003B51D5 /* MSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSLabel.m; sourceTree = "<group>"; };
 		A066C3871BB7AE08003B51D5 /* MSSuperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSSuperViewController.h; sourceTree = "<group>"; };
@@ -423,8 +414,6 @@
 		A0A0838F1BD765F00057CD65 /* Circle+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Circle+CoreDataProperties.m"; sourceTree = "<group>"; };
 		A0AD96961C8A899E00B0091D /* CircleSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleSettingViewController.h; sourceTree = "<group>"; };
 		A0AD96971C8A899E00B0091D /* CircleSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleSettingViewController.m; sourceTree = "<group>"; };
-		A0B8C8001B857F22009C4572 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
-		A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		A0B9D7671B9E4F1100EE382B /* DashedBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashedBorderView.h; sourceTree = "<group>"; };
 		A0B9D7681B9E4F1100EE382B /* DashedBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashedBorderView.m; sourceTree = "<group>"; };
 		A0CBDCB21C8DF09800DA53FF /* EmptyCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyCircleView.h; sourceTree = "<group>"; };
@@ -474,8 +463,8 @@
 		A0D102591B84EF3B006B0E4E /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HeaderView.xib; path = ../External/VGParallaxHeader/HeaderView.xib; sourceTree = "<group>"; };
 		A0D102671B84EFAD006B0E4E /* WebP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebP.framework; path = External/WebP.framework; sourceTree = "<group>"; };
 		A0D1026F1B84F6BA006B0E4E /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		A0D37C5E1B8781D900581EDE /* NewsPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsPageViewController.h; sourceTree = "<group>"; };
-		A0D37C5F1B8781D900581EDE /* NewsPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsPageViewController.m; sourceTree = "<group>"; };
+		A0DCF0D41CA9AE6A0052380E /* PlansViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlansViewController.h; sourceTree = "<group>"; };
+		A0DCF0D51CA9AE6A0052380E /* PlansViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlansViewController.m; sourceTree = "<group>"; };
 		A0EA21FF1BA53BF400A83A7A /* ImagePreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePreviewController.h; sourceTree = "<group>"; };
 		A0EA22001BA53BF400A83A7A /* ImagePreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePreviewController.m; sourceTree = "<group>"; };
 		A0EDFCBA1B90C61900B10594 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -769,25 +758,6 @@
 			path = WeChatSDK_1.5;
 			sourceTree = "<group>";
 		};
-		A05AB6CE1BDF783800E79F36 /* LMDropdownView */ = {
-			isa = PBXGroup;
-			children = (
-				A05AB6CF1BDF783800E79F36 /* LMDropdownView.h */,
-				A05AB6D01BDF783800E79F36 /* LMDropdownView.m */,
-				A05AB6D11BDF783800E79F36 /* Vender */,
-			);
-			path = LMDropdownView;
-			sourceTree = "<group>";
-		};
-		A05AB6D11BDF783800E79F36 /* Vender */ = {
-			isa = PBXGroup;
-			children = (
-				A05AB6D21BDF783800E79F36 /* UIImage+LMExtension.h */,
-				A05AB6D31BDF783800E79F36 /* UIImage+LMExtension.m */,
-			);
-			path = Vender;
-			sourceTree = "<group>";
-		};
 		A07115CE1BA6B109002C1270 /* SZTextView */ = {
 			isa = PBXGroup;
 			children = (
@@ -818,15 +788,6 @@
 				A0994E691BC4D1FB00D45845 /* WYStoryboardPopoverSegue.m */,
 			);
 			path = WYPopoverController;
-			sourceTree = "<group>";
-		};
-		A0B8C7FF1B857F22009C4572 /* HMSegmentedControl */ = {
-			isa = PBXGroup;
-			children = (
-				A0B8C8001B857F22009C4572 /* HMSegmentedControl.h */,
-				A0B8C8011B857F22009C4572 /* HMSegmentedControl.m */,
-			);
-			path = HMSegmentedControl;
 			sourceTree = "<group>";
 		};
 		A0D101F51B84EB6A006B0E4E /* SDWebImage */ = {
@@ -878,15 +839,6 @@
 			path = NavBar;
 			sourceTree = "<group>";
 		};
-		A0D37C5D1B8781C100581EDE /* News */ = {
-			isa = PBXGroup;
-			children = (
-				A0D37C5E1B8781D900581EDE /* NewsPageViewController.h */,
-				A0D37C5F1B8781D900581EDE /* NewsPageViewController.m */,
-			);
-			name = News;
-			sourceTree = "<group>";
-		};
 		A0EE65C31BCC84DF002CC49B /* QCloudDownloadSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -909,14 +861,12 @@
 		A0F7D3A51B84E851003CCB34 /* External */ = {
 			isa = PBXGroup;
 			children = (
-				A05AB6CE1BDF783800E79F36 /* LMDropdownView */,
 				A0EE65C31BCC84DF002CC49B /* QCloudDownloadSDK */,
 				A0EE65C61BCC84DF002CC49B /* QCloudUploadSDK */,
 				A0994E5E1BC4CF9500D45845 /* SYEmojiPopover */,
 				A03010361BABC6AA0041E2CF /* QBImagePicker */,
 				A07115CE1BA6B109002C1270 /* SZTextView */,
 				A04842EB1B9916980032E927 /* WeChatSDK_1.6 */,
-				A0B8C7FF1B857F22009C4572 /* HMSegmentedControl */,
 				A0D1023B1B84ECDF006B0E4E /* NavBar */,
 				A0D101F51B84EB6A006B0E4E /* SDWebImage */,
 				A0F7D4AF1B84E8A1003CCB34 /* CollectionLayout */,
@@ -1096,7 +1046,6 @@
 			isa = PBXGroup;
 			children = (
 				A0FEC1301C86167D004C48F1 /* Circles */,
-				A0D37C5D1B8781C100581EDE /* News */,
 				AE606A1D1AF4693F003DF16E /* Message */,
 				AEFB04781AD12437009EB0D3 /* Discovery */,
 				AED5BC601ABE3C9A00EFF398 /* Settings */,
@@ -1335,6 +1284,8 @@
 		AEFB04781AD12437009EB0D3 /* Discovery */ = {
 			isa = PBXGroup;
 			children = (
+				A0DCF0D41CA9AE6A0052380E /* PlansViewController.h */,
+				A0DCF0D51CA9AE6A0052380E /* PlansViewController.m */,
 				A07C66AD1BE01AB800413D32 /* InvitationViewController.h */,
 				A07C66AE1BE01AB800413D32 /* InvitationViewController.m */,
 				A016FDB41B8C4250006E7A09 /* ShuffleViewController.h */,
@@ -1534,7 +1485,6 @@
 				AEF775441A8134FE000DB73B /* HomeCardFlowLayout.m in Sources */,
 				AE479E9E1A6F775C00366A0A /* PostViewController.m in Sources */,
 				AE9A19881B02E3A100590784 /* FeedbackkAccessoryView.m in Sources */,
-				A0B8C8021B857F22009C4572 /* HMSegmentedControl.m in Sources */,
 				A030105A1BABC6AA0041E2CF /* QBImagePickerController.m in Sources */,
 				A016FDB61B8C4250006E7A09 /* ShuffleViewController.m in Sources */,
 				A0F7D49D1B84E851003CCB34 /* UIImagePickerController+DelegateBlocks.m in Sources */,
@@ -1570,6 +1520,7 @@
 				AED355F81B228696000427FF /* FeedDetailHeader.m in Sources */,
 				A0F7D4331B84E851003CCB34 /* BadgeStyle.m in Sources */,
 				A03010571BABC6AA0041E2CF /* QBAssetsViewController.m in Sources */,
+				A0DCF0D61CA9AE6A0052380E /* PlansViewController.m in Sources */,
 				A0F7D42F1B84E851003CCB34 /* AMBCircularButton.m in Sources */,
 				A0A083581BD5FF9E0057CD65 /* StationViewController.m in Sources */,
 				A0F513181BD98B9600279B9D /* Comment+CoreDataProperties.m in Sources */,
@@ -1585,7 +1536,6 @@
 				AEF7F2931A686FA30022410B /* Theme.m in Sources */,
 				AEF3F87F1AA4CFA6008C2300 /* WishDetailVCOwner.m in Sources */,
 				A0994E641BC4CF9500D45845 /* SYEmojiPopover.m in Sources */,
-				A05AB6D51BDF783800E79F36 /* UIImage+LMExtension.m in Sources */,
 				A0F7D4351B84E851003CCB34 /* CustomBadge.m in Sources */,
 				A0FEC1331C8616CC004C48F1 /* CircleCreationViewController.m in Sources */,
 				A066C3891BB7AE08003B51D5 /* MSSuperViewController.m in Sources */,
@@ -1618,7 +1568,6 @@
 				AEBECCF91AE8A16600EDF385 /* LoginDetailViewController.m in Sources */,
 				AEBFCA371A78614100686EFE /* PostDetailViewController.m in Sources */,
 				A03010551BABC6AA0041E2CF /* QBAlbumsViewController.m in Sources */,
-				A0D37C601B8781D900581EDE /* NewsPageViewController.m in Sources */,
 				AE52FA501A8D3D76003FF725 /* PostFeedViewController.m in Sources */,
 				A0F7D4B31B84EA46003CCB34 /* UIImage+WebP.m in Sources */,
 				A0F7D4551B84E851003CCB34 /* NHAlignmentFlowLayout.m in Sources */,
@@ -1665,7 +1614,6 @@
 				A0D102191B84EB6A006B0E4E /* NSData+ImageContentType.m in Sources */,
 				A0EDFCC11B90C75900B10594 /* Reachability.m in Sources */,
 				AE606A231AF46991003DF16E /* MessageCell.m in Sources */,
-				A05AB6D41BDF783800E79F36 /* LMDropdownView.m in Sources */,
 				AED4CB221AC75A0200EE2DA4 /* KeyWordCell.m in Sources */,
 				A07C66AF1BE01AB800413D32 /* InvitationViewController.m in Sources */,
 				A07C66BA1BE0707300413D32 /* WXApiManager.m in Sources */,
@@ -1706,7 +1654,6 @@
 				AEB003F01B7FF7190056EA80 /* MainTabBarController.m in Sources */,
 				A055FBA01BA6553A0013F91E /* ImagePreviewCell.m in Sources */,
 				A0F513271BD98B9600279B9D /* Owner.m in Sources */,
-				A0B8C8031B857F22009C4572 /* HMSegmentedControl.m in Sources */,
 				A04842EA1B98CF9E0032E927 /* UIImageView+ImageCache.m in Sources */,
 				A0D102201B84EB6A006B0E4E /* SDWebImageDecoder.m in Sources */,
 				A0F7D4521B84E851003CCB34 /* UIImage+JTSImageEffects.m in Sources */,
@@ -1760,7 +1707,6 @@
 				A0D102321B84EB6A006B0E4E /* UIImageView+HighlightedWebCache.m in Sources */,
 				A0A083591BD5FF9E0057CD65 /* StationViewController.m in Sources */,
 				A0D102261B84EB6A006B0E4E /* SDWebImageManager.m in Sources */,
-				A0D37C611B8781D900581EDE /* NewsPageViewController.m in Sources */,
 				AE479E9F1A6F775C00366A0A /* PostViewController.m in Sources */,
 				AEFEE4011A8EE0A7007E8234 /* FollowingCell.m in Sources */,
 				AE59B5F61B410437006CA4AB /* ViewForEmptyEvent.m in Sources */,

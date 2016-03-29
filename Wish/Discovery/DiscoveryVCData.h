@@ -7,7 +7,5 @@
 //
 
 #import "DiscoveryViewController.h"
-
 @interface DiscoveryVCData : DiscoveryViewController
-@property (nonatomic,strong) Circle *circle;
 @end

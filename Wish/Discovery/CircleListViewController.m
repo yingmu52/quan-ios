@@ -10,7 +10,7 @@
 #import "Theme.h"
 #import "CircleListCell.h"
 #import "UIImageView+ImageCache.h"
-#import "DiscoveryVCData.h"
+#import "PlansViewController.h"
 @interface CircleListViewController () <UITableViewDelegate>
 @end
 
@@ -79,8 +79,8 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"showPlansView"]) {
-        DiscoveryVCData *dvd = segue.destinationViewController;
-        dvd.circle = sender;
+        PlansViewController *pvc = segue.destinationViewController;
+        pvc.circle = sender;
     }
 }
 

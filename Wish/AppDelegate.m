@@ -213,7 +213,7 @@
         if (context.hasChanges && ![context save:&error]) {
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         }else{
-            NSLog(@"Saved Worker Context");
+//            NSLog(@"Saved Worker Context");
         }
     }];
     
@@ -223,7 +223,7 @@
         if (self.managedObjectContext.hasChanges && ![self.managedObjectContext save:&error]) {
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         }else{
-            NSLog(@"Saved Main Context");
+//            NSLog(@"Saved Main Context");
         }
         
         [self.writerManagedObjectContext performBlock:^{
@@ -233,7 +233,7 @@
             if (self.writerManagedObjectContext.hasChanges && ![self.writerManagedObjectContext save:&error]) {
                 NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             }else{
-                NSLog(@"Saved Writer Context");
+//                NSLog(@"Saved Writer Context");
             }
             
         }]; // writer

@@ -132,7 +132,9 @@
                     Plan *plan = [Plan updatePlanFromServer:planInfo
                                                   ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]
                                        managedObjectContext:workerContext];
-                    plan.circle = circle;
+                    if (![plan.circle.circleId isEqualToString:circle.circleId]) {
+                        plan.circle = circle;
+                    }
                     [plans addObject:plan];
                 }
             }
@@ -872,11 +874,13 @@
              NSArray *trashPlans = [currentPlans filteredArrayUsingPredicate:predicate];
              for (Plan *plan in trashPlans){
                  if (plan.isDeletable) {
-                     [plan.managedObjectContext deleteObject:plan];
+                     [plan.managedObjectContext performBlock:^{
+                         [plan.managedObjectContext deleteObject:plan];
+                     }];
                  }else{
                      plan.discoverIndex = nil;
                  }
-                 //             NSLog(@"Removing plan %@ : %@",plan.planId,plan.planTitle);
+                 //NSLog(@"Removing plan %@ : %@",plan.planId,plan.planTitle);
              }
          }
 

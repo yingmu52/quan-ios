@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "FetchCenter.h"
+#import "UIImageView+ImageCache.h"
+#import "Theme.h"
+
 @import CoreData;
 @interface MSSuperViewController : UIViewController <FetchCenterDelegate,NSFetchedResultsControllerDelegate>{
     @protected
