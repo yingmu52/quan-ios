@@ -20,8 +20,9 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     //don't call super here.
+    NSArray *localList = [self.collectionFetchedRC.fetchedObjects valueForKey:@"planId"];
     [self.fetchCenter getPlanListInCircle:self.circle.circleId
-                             currentPlans:self.collectionFetchedRC.fetchedObjects.mutableCopy
+                                localList:localList
                                completion:^(NSArray *planIds)
      {
          if (!planIds.count) [self setUpEmptyView];

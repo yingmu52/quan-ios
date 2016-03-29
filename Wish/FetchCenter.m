@@ -97,7 +97,7 @@
 #define TOOLCGIKEY @"123$%^abc"
 
 - (void)getPlanListInCircle:(NSString *)circleId
-               currentPlans:(NSMutableArray *)currentPlans
+                  localList:(NSArray *)localList
                  completion:(FetchCenterGetRequestGetCirclePlanListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,GET_CIRCLE_PLAN_LIST];
     NSDictionary *inputParams = @{@"id":circleId};
@@ -113,7 +113,6 @@
         if ([responseJson[@"data"] isKindOfClass:[NSDictionary class]]) { //无事件时 .data = ""
             NSManagedObjectContext *workerContext = [self workerContext];
             
-            NSMutableArray *plans = [NSMutableArray array];
             NSArray *planList = [responseJson valueForKeyPath:@"data.planList"];
             NSDictionary *manList = [responseJson valueForKeyPath:@"data.manList"];
             
@@ -135,21 +134,11 @@
                     if (![plan.circle.circleId isEqualToString:circle.circleId]) {
                         plan.circle = circle;
                     }
-                    [plans addObject:plan];
                 }
             }
             
-            //移除发现页的不存在于服务器上的事件，异线。
-            if (currentPlans.count > 0) {
-                NSArray *planIds = [plans valueForKey:@"planId"];
-                NSPredicate *predicate =[NSPredicate predicateWithFormat:@"NOT (planId IN %@)",planIds];
-                NSArray *trashPlans = [currentPlans filteredArrayUsingPredicate:predicate];
-                for (Plan *plan in trashPlans){
-                    if (plan.isDeletable) {
-                        [plan.managedObjectContext deleteObject:plan];
-                    }
-                }
-            }
+            //同步
+            [self syncEntity:@"Plan" idName:@"planId" localList:localList serverList:planIDList];
             
             [self.appDelegate saveContext:workerContext];
             
@@ -839,7 +828,7 @@
 
 #pragma mark - 发现事件
 
-- (void)getDiscoveryList:(NSMutableArray *)currentPlans
+- (void)getDiscoveryList:(NSArray *)localList
               completion:(FetchCenterGetRequestGetDiscoverListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,DISCOVER,GET_DISCOVER_LIST];
     [self getRequest:rqtStr
@@ -850,7 +839,6 @@
          
          NSManagedObjectContext *workerContext = [self workerContext];
          
-         NSMutableArray *plans = [NSMutableArray array];
          NSArray *planList = [responseJson valueForKeyPath:@"data.planList"];
          NSDictionary *manList = [responseJson valueForKeyPath:@"data.manList"];
          NSString *title = [responseJson valueForKeyPath:@"data.quanInfo.name"];
@@ -862,27 +850,16 @@
                  Plan *plan = [Plan updatePlanFromServer:planInfo
                                                ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]
                                     managedObjectContext:workerContext];
-                 plan.discoverIndex = @(idx); //记录索引方便显示服务器上的顺序
-                 [plans addObject:plan];
+                 plan.discoverIndex = @(idx + 1); //记录索引方便显示服务器上的顺序
              }];
          }
          
-         //移除发现页的不存在于服务器上的事件，异线。
-         if (currentPlans.count > 0) {
-             NSArray *planIds = [plans valueForKey:@"planId"];
-             NSPredicate *predicate =[NSPredicate predicateWithFormat:@"NOT (planId IN %@)",planIds];
-             NSArray *trashPlans = [currentPlans filteredArrayUsingPredicate:predicate];
-             for (Plan *plan in trashPlans){
-                 if (plan.isDeletable) {
-                     [plan.managedObjectContext performBlock:^{
-                         [plan.managedObjectContext deleteObject:plan];
-                     }];
-                 }else{
-                     plan.discoverIndex = nil;
-                 }
-                 //NSLog(@"Removing plan %@ : %@",plan.planId,plan.planTitle);
-             }
-         }
+        //同步
+         NSArray *serverList = [planList valueForKey:@"id"];
+         [self syncEntity:@"Plan"
+                   idName:@"planId"
+                localList:localList
+               serverList:serverList];
 
          [self.appDelegate saveContext:workerContext];
          
@@ -894,6 +871,7 @@
          
      }];
 }
+
 
 #pragma mark - 反馈，版本检测
 
@@ -1497,6 +1475,59 @@
     
 }
 
+- (void)syncEntity:(NSString *)entityName
+            idName:(NSString *)uniqueID
+         localList:(NSArray *)localList
+        serverList:(NSArray *)serverList{
+    //创建一个新线程，因为每个线程必须有自己的MOC
+    dispatch_queue_t queue = dispatch_queue_create([NSUUID UUID].UUIDString.UTF8String,NULL);
+    dispatch_async(queue, ^{
+        NSMutableArray *trashIDs = [NSMutableArray array];
+        for (NSString *uid in localList) {
+            if (![serverList containsObject:uid]) {
+                [trashIDs addObject:uid];
+            }
+        }
+        if (trashIDs.count > 0) {
+            NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:entityName];
+            request.predicate = [NSPredicate predicateWithFormat:@"%K IN %@",uniqueID,trashIDs];//user %K to have dynamic property name
+
+            request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:uniqueID ascending:NO]];
+            
+            NSManagedObjectContext *workerContext = [self workerContext];
+            
+            NSError *error;
+            NSArray *results = [workerContext executeFetchRequest:request error:&error];
+            if (results.count > 0) {
+                for (NSManagedObject *entity in results) {
+                    [workerContext deleteObject:entity];
+                }
+            }
+            
+            [self.appDelegate saveContext:workerContext];
+        }
+
+    });
+
+}
+
+//在数组随机选取N个，此法仅用于测试
+- (NSArray *)randomSelectionWithCount:(NSUInteger)count fromArray:(NSArray *)array{
+    if ([array count] < count) {
+        return nil;
+    } else if ([array count] == count) {
+        return array;
+    }
+    
+    NSMutableSet* selection = [[NSMutableSet alloc] init];
+    
+    while ([selection count] < count) {
+        id randomObject = [array objectAtIndex: arc4random() % [array count]];
+        [selection addObject:randomObject];
+    }
+    
+    return [selection allObjects];
+}
 
 @end
 

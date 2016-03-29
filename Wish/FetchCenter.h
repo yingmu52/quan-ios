@@ -118,7 +118,7 @@ typedef void(^FetchCenterPostRequestUploadImagesCompleted)(NSArray *imageIds);
 /** 获取圈子里的事件列表 **/
 typedef void(^FetchCenterGetRequestGetCirclePlanListCompleted)(NSArray *planIds);
 - (void)getPlanListInCircle:(NSString *)circleId
-               currentPlans:(NSMutableArray *)currentPlans
+                  localList:(NSArray *)localList
          completion:(FetchCenterGetRequestGetCirclePlanListCompleted)completionBlock;
 
 /** 删除成员 **/
@@ -222,7 +222,7 @@ typedef void(^FetchCenterGetRequestGetPlanListCompleted)(NSArray *planIds);
 - (void)unFollowPlan:(Plan *)plan completion:(FetchCenterGetRequestUnFollowPlanCompleted)completionBlock;;
 
 #pragma mark - 发现
-- (void)getDiscoveryList:(NSMutableArray *)currentPlans
+- (void)getDiscoveryList:(NSArray *)localList
               completion:(FetchCenterGetRequestGetDiscoverListCompleted)completionBlock;
 
 - (void)getFollowingPlanList:(FetchCenterGetRequestGetFollowingPlanListCompleted)completionBlock;

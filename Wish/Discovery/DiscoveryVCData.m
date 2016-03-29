@@ -33,7 +33,9 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.fetchCenter getDiscoveryList:self.collectionFetchedRC.fetchedObjects.mutableCopy
+    
+    NSArray *localList = [self.collectionFetchedRC.fetchedObjects valueForKey:@"planId"];
+    [self.fetchCenter getDiscoveryList:localList
                             completion:nil];
 }
 
@@ -45,7 +47,7 @@
     cell.discoveryTitleLabel.text = plan.planTitle;
     cell.discoveryByUserLabel.text = [NSString stringWithFormat:@"by %@",plan.owner.ownerName];
     cell.discoveryFollowerCountLabel.text = [NSString stringWithFormat:@"%@ 关注",plan.followCount];
-    cell.discoveryRecordsLabel.text = [NSString stringWithFormat:@"%@ 记录",plan.discoverIndex];
+    cell.discoveryRecordsLabel.text = [NSString stringWithFormat:@"%@ 记录",plan.tryTimes];
 
     //显示置顶的角标
     if ([plan.cornerMask isEqualToString:@"top"]){
@@ -81,7 +83,7 @@
     if (!_collectionFetchRequest) {
         _collectionFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
         //发现页
-        _collectionFetchRequest.predicate = [NSPredicate predicateWithFormat:@"discoverIndex != nil"];
+        _collectionFetchRequest.predicate = [NSPredicate predicateWithFormat:@"discoverIndex > 0"];
         _collectionFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"discoverIndex" ascending:YES]];        
     }
     return _collectionFetchRequest;
