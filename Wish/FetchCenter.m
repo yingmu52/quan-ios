@@ -713,8 +713,12 @@
 
                      }else{
                          if ([self.delegate respondsToSelector:@selector(didReceivedCurrentProgressForUploadingImage:)]) {
-                             CGFloat progress = (imageIdMaps.allKeys.count - 1e-3) / images.count;
-                             [self.delegate didReceivedCurrentProgressForUploadingImage:progress];
+                             
+                             dispatch_main_async_safe(^{
+                                 CGFloat progress = (imageIdMaps.allKeys.count - 1e-3) / images.count;
+                                 [self.delegate didReceivedCurrentProgressForUploadingImage:progress];
+                             });
+                             
                          }
                      }
                  }
