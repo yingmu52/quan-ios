@@ -13,7 +13,7 @@
 
 @protocol FollowingCellDelegate <NSObject>
 - (void)didPressMoreButtonForCell:(FollowingCell *)cell;
-- (void)didTapOnProfilePicture:(FollowingCell *)cell;
+//- (void)didTapOnProfilePicture:(FollowingCell *)cell;
 - (void)didPressCollectionCellAtIndex:(NSIndexPath *)indexPath forCell:(FollowingCell *)cell;
 @end
 @interface FollowingCell : UITableViewCell

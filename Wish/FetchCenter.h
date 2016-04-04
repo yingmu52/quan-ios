@@ -74,8 +74,6 @@ typedef void(^FetchCenterGetRequestDeleteFeedCompleted)(void);
 typedef void(^FetchCenterGetRequestFollowPlanCompleted)(void);
 /** 取消关注事件完成*/
 typedef void(^FetchCenterGetRequestUnFollowPlanCompleted)(void);
-/** 拉取关注事件列表完成*/
-typedef void(^FetchCenterGetRequestGetFollowingPlanListCompleted)(NSArray *planIds);
 /** 测试是否有新版本完成*/
 typedef void(^FetchCenterGetRequestCheckVersionCompleted)(BOOL hasNewVersion);
 /** 反馈完成*/
@@ -221,11 +219,15 @@ typedef void(^FetchCenterGetRequestGetPlanListCompleted)(NSArray *planIds);
 - (void)followPlan:(Plan *)plan completion:(FetchCenterGetRequestFollowPlanCompleted)completionBlock;
 - (void)unFollowPlan:(Plan *)plan completion:(FetchCenterGetRequestUnFollowPlanCompleted)completionBlock;;
 
+/** 拉取关注事件列表完成*/
+typedef void(^FetchCenterGetRequestGetFollowingPlanListCompleted)(void);
+- (void)getFollowingList:(NSArray *)localList completion:(FetchCenterGetRequestGetFollowingPlanListCompleted)completionBlock;
+
+
+
 #pragma mark - 发现
 - (void)getDiscoveryList:(NSArray *)localList
               completion:(FetchCenterGetRequestGetDiscoverListCompleted)completionBlock;
-
-- (void)getFollowingPlanList:(FetchCenterGetRequestGetFollowingPlanListCompleted)completionBlock;
 
 #pragma mark - 个人
 - (void)sendFeedback:(NSString *)content

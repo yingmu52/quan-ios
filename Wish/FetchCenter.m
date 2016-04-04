@@ -783,7 +783,7 @@
     }];
 }
 
-- (void)getFollowingPlanList:(FetchCenterGetRequestGetFollowingPlanListCompleted)completionBlock{
+- (void)getFollowingList:(NSArray *)localList completion:(FetchCenterGetRequestGetFollowingPlanListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FOLLOW,GET_FOLLOW_LIST];
     
     [self getRequest:rqtStr parameter:@{@"id":[User uid]} includeArguments:YES completion:^(NSDictionary *responseJson) {
@@ -814,12 +814,19 @@
             }
         }
         
+        //同步
+        NSArray *serverList = [responseJson valueForKeyPath:@"data.planList.id"];
+        [self syncEntity:@"Plan"
+                  idName:@"planId"
+               localList:localList
+              serverList:serverList];
+
+        
         [self.appDelegate saveContext:workerContext];
         
         if (completionBlock){
             dispatch_main_async_safe(^{
-                NSArray *planIds = [responseJson valueForKeyPath:@"data.planList.id"];
-                completionBlock(planIds);
+                completionBlock();
             });
         }
         
