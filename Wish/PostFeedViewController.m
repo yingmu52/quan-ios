@@ -266,14 +266,6 @@ static NSUInteger distance = 10;
     }
 }
 
-#pragma mark - ImagePickerDelegate
-
-
-- (void)didRemoveImageAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"%@",@(self.assets.count));
-    [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
-}
-
 #pragma mark - fetch center delegate
 
 - (void)finishUploadingImages:(NSArray *)imageIds{
@@ -415,6 +407,7 @@ static NSUInteger distance = 10;
     [self.assets addObjectsFromArray:assets];
     [self.collectionView reloadData];
 }
+
 @end
 
 

@@ -664,10 +664,17 @@
                                @"picurls":feed.picUrls,
                                @"feedsType":feed.type};
         
-        [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
+        [self getRequest:rqtStr
+               parameter:args
+        includeArguments:YES
+              completion:^(NSDictionary *responseJson) {
             NSString *fetchedFeedID = [responseJson valueForKeyPath:@"data.id"];
-            feed.feedId = fetchedFeedID;
-            [feed.plan updateTryTimesOfPlan:YES];
+            
+            [self.appDelegate.managedObjectContext performBlock:^{
+                feed.feedId = fetchedFeedID;
+                [feed.plan updateTryTimesOfPlan:YES];
+            }];
+            
             if (completionBlock) {
                 dispatch_main_async_safe(^{
                     completionBlock(feed);
@@ -679,6 +686,7 @@
 
 }
 
+
 - (void)uploadImages:(NSArray *)images completion:(FetchCenterPostRequestUploadImagesCompleted)completionBlock{
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
@@ -688,28 +696,28 @@
             [self postImageWithOperation:images[index]
                                 complete:^(NSString *fetchedId)
              {
-                 dispatch_main_async_safe(^{
-                     if (fetchedId){
-                         [imageIdMaps addEntriesFromDictionary:@{fetchedId:@(index)}];
-                         if (imageIdMaps.allKeys.count == images.count) {
-                             NSLog(@"%@",imageIdMaps);
-                             NSArray *sorted = [[imageIdMaps allKeys] sortedArrayUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
-                                 return [imageIdMaps[obj1] compare:imageIdMaps[obj2]];
-                             }];
-                             NSLog(@"\n%@\n",sorted);
-                             
+                 if (fetchedId){
+                     [imageIdMaps addEntriesFromDictionary:@{fetchedId:@(index)}];
+                     if (imageIdMaps.allKeys.count == images.count) {
+                         NSLog(@"%@",imageIdMaps);
+                         NSArray *sorted = [[imageIdMaps allKeys] sortedArrayUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
+                             return [imageIdMaps[obj1] compare:imageIdMaps[obj2]];
+                         }];
+                         NSLog(@"\n%@\n",sorted);
+                         
+                         dispatch_main_async_safe(^{
                              if (completionBlock) {
                                  completionBlock(sorted);
                              }
-//                             [self.delegate didFinishUploadingImage:sorted forFeed:feed];
-                         }else{
-                             if ([self.delegate respondsToSelector:@selector(didReceivedCurrentProgressForUploadingImage:)]) {
-                                 CGFloat progress = (imageIdMaps.allKeys.count - 1e-3) / images.count;
-                                 [self.delegate didReceivedCurrentProgressForUploadingImage:progress];
-                             }
+                         });
+
+                     }else{
+                         if ([self.delegate respondsToSelector:@selector(didReceivedCurrentProgressForUploadingImage:)]) {
+                             CGFloat progress = (imageIdMaps.allKeys.count - 1e-3) / images.count;
+                             [self.delegate didReceivedCurrentProgressForUploadingImage:progress];
                          }
                      }
-                 });
+                 }
              }];
         });
     });
@@ -1197,9 +1205,7 @@
                  //得到图片上传成功后的回包信息
                  TXYPhotoUploadTaskRsp *photoResp = (TXYPhotoUploadTaskRsp *)resp;
                  
-                 dispatch_main_async_safe(^{
-                     completionBlock(photoResp.photoFileId);
-                 });
+                 completionBlock(photoResp.photoFileId);
                  
                  //缓存图片
 //                 NSURL *url = [self urlWithImageID:photoResp.photoFileId size:FetchCenterImageSizeOriginal];
