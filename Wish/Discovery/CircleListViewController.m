@@ -30,14 +30,8 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [self.fetchCenter getCircleList:^(NSArray *circleIds) {
-        //同步列表
-        for (Circle *circle in self.tableFetchedRC.fetchedObjects) {
-            if (![circleIds containsObject:circle.circleId]) {
-                [circle.managedObjectContext deleteObject:circle];
-            }
-        }
-    }];
+    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKey:@"circleId"];
+    [self.fetchCenter getCircleList:localList completion:nil];
 }
 
 - (NSFetchRequest *)tableFetchRequest{

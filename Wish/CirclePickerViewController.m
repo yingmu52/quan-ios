@@ -21,14 +21,8 @@
     [self setUpNavigationItem];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero]; //Clear Empty Cell
     
-    [self.fetchCenter getCircleList:^(NSArray *circleIds) {
-        //同步列表
-        for (Circle *circle in self.tableFetchedRC.fetchedObjects) {
-            if (![circleIds containsObject:circle.circleId]) {
-                [circle.managedObjectContext deleteObject:circle];
-            }
-        }
-    }];
+    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKey:@"circleId"];
+    [self.fetchCenter getCircleList:localList completion:nil];
 }
 
 - (void)setUpNavigationItem

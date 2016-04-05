@@ -45,9 +45,6 @@ typedef enum {
 - (void)didFailSendingRequest;
 @end
 
-
-/** 请求圈子列表完成*/
-typedef void(^FetchCenterGetRequestGetCircleListCompleted)(NSArray *circleIds);
 /** 切换圈子完成*/
 typedef void(^FetchCenterGetRequestSwithCircleCompleted)(void);
 /** 填写邀请码完成*/
@@ -152,7 +149,8 @@ typedef void(^FetchCenterGetRequestDeleteCircleCompleted)(void);
 - (void)joinCircle:(NSString *)invitationCode completion:(FetchCenterGetRequestJoinCircleCompleted)completionBlock;
 
 /**获取圈子列表*/
-- (void)getCircleList:(FetchCenterGetRequestGetCircleListCompleted)completionBlock;
+typedef void(^FetchCenterGetRequestGetCircleListCompleted)(NSArray *circleIds);
+- (void)getCircleList:(NSArray *)localList completion:(FetchCenterGetRequestGetCircleListCompleted)completionBlock;
 
 /**切换圈子*/
 - (void)switchToCircle:(NSString *)circleId completion:(FetchCenterGetRequestSwithCircleCompleted)completionBlock;

@@ -340,7 +340,7 @@
     }
 }
 
-- (void)getCircleList:(FetchCenterGetRequestGetCircleListCompleted)completionBlock{
+- (void)getCircleList:(NSArray *)localList completion:(FetchCenterGetRequestGetCircleListCompleted)completionBlock{
 //    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,GET_CIRCLE_LIST];
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,GET_CIRCLE_LIST];
 
@@ -357,11 +357,14 @@
                   [circles addObject:[Circle updateCircleWithInfo:info managedObjectContext:workerContext]];
               }
               
+              NSArray *serverList = [responseJson valueForKeyPath:@"data.id"];
+              [self syncEntity:@"Circle" idName:@"circleId" localList:localList serverList:serverList];
+              
               [self.appDelegate saveContext:workerContext];
               
               if (completionBlock) {
                   dispatch_main_sync_safe(^{
-                      completionBlock([responseJson valueForKeyPath:@"data.id"]);
+                      completionBlock(serverList);
                   });
               }
 
