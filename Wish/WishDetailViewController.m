@@ -220,17 +220,15 @@
         
         //do fetchrequest
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Feed"];
-        request.predicate = [NSPredicate predicateWithFormat:@"plan = %@",self.plan];
+        request.predicate = [NSPredicate predicateWithFormat:@"plan.planId == %@",self.plan.planId];
         request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
-        [request setFetchBatchSize:3];
         
         //create FetchedResultsController with context, sectionNameKeyPath, and you can cache here, so the next work if the same you can use your cash file.
-        NSFetchedResultsController *newFRC =
-        [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                            managedObjectContext:self.plan.managedObjectContext
-                                              sectionNameKeyPath:nil
-                                                       cacheName:nil];
-        self.fetchedRC = newFRC;
+        
+        _fetchedRC = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                                         managedObjectContext:self.plan.managedObjectContext
+                                                           sectionNameKeyPath:nil
+                                                                    cacheName:nil];
         _fetchedRC.delegate = self;
         NSError *error;
         [_fetchedRC performFetch:&error];
@@ -255,14 +253,14 @@
                 
             case NSFetchedResultsChangeInsert:{
                 [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
-                                      withRowAnimation:UITableViewRowAnimationFade];
+                                      withRowAnimation:UITableViewRowAnimationAutomatic];
                 NSLog(@"Feed inserted");
             }
                 break;
                 
             case NSFetchedResultsChangeDelete:{
                 [self.tableView deleteRowsAtIndexPaths:@[indexPath]
-                                      withRowAnimation:UITableViewRowAnimationFade];
+                                      withRowAnimation:UITableViewRowAnimationAutomatic];
                 NSLog(@"Feed deleted");
             }
                 break;
@@ -278,8 +276,8 @@
             }
                 break;
             case NSFetchedResultsChangeMove:{
-                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             }
                 break;
         }

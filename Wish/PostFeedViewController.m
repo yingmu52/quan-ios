@@ -29,7 +29,7 @@ static NSUInteger distance = 10;
 @property (nonatomic,weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic,strong) ImagePicker *imagePicker;
 @property (weak, nonatomic) IBOutlet SZTextView *textView;
-@property (nonatomic,strong) Feed *feed;
+//@property (nonatomic,strong) Feed *feed;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *keyboardHeight;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressBar;
@@ -45,28 +45,26 @@ static NSUInteger distance = 10;
     return _fetchCenter;
 }
 
-- (Feed *)feed{
-    if (!_feed){
-        _feed = [Feed createFeedInPlan:self.plan feedTitle:self.textView.text];
-    }
-    return _feed;
-}
+//- (Feed *)feed{
+//    if (!_feed){
+//        _feed = [Feed createFeedInPlan:self.plan feedTitle:self.textView.text];
+//    }
+//    return _feed;
+//}
+//
+//- (Plan *)plan{
+//    if (!_plan) {
+//        if (self.circle) {
+//            _plan = [Plan createPlan:self.navigationItem.title inCircle:self.circle];
+//        }else{
+//            NSLog(@"No Circle Exists");
+//        }
+//        
+//    }
+//    return _plan;
+//}
 
-- (Plan *)plan{
-    if (!_plan) {
-        if (self.circle) {
-            _plan = [Plan createPlan:self.navigationItem.title inCircle:self.circle];
-        }else{
-            NSLog(@"No Circle Exists");
-        }
-        
-    }
-    return _plan;
-}
 
-- (NSString *)titleForFeed{
-    return self.textView.text;
-}
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self setupViews];
@@ -145,16 +143,6 @@ static NSUInteger distance = 10;
                 }
             }];
         }
-//        else if ([item isKindOfClass:[UIImage class]]){
-//#warning 恶心的实现，要改啊！
-//            [arrayOfUIImages addObject:item];
-//            if (arrayOfUIImages.count == self.assets.count) {
-//                [self.fetchCenter uploadImages:arrayOfUIImages
-//                                    completion:^(NSArray *imageIds) {
-//                    [self finishUploadingImages:imageIds];
-//                }];
-//            }
-//        }
     }
     
     self.progressBar.hidden = NO;
@@ -167,17 +155,9 @@ static NSUInteger distance = 10;
                                                     handler:^(UIAlertAction * _Nonnull action)
     {
         //取消所有上传任何
-        [self.fetchCenter.uploadManager clear];
-        
-        //删除已经缓存的feed或事件
-        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        if (!self.plan.planId) {
-            [self.plan.managedObjectContext deleteObject:self.plan];
+        if (self.fetchCenter.uploadManager.uploadTasks.count > 0) {
+            [self.fetchCenter.uploadManager clear];
         }
-        if (self.feed) {
-            [self.feed.managedObjectContext deleteObject:self.feed];
-        }
-        [delegate saveContext];
         
         //返回上一级
         [self.navigationController popViewControllerAnimated:YES];
@@ -269,18 +249,46 @@ static NSUInteger distance = 10;
 #pragma mark - fetch center delegate
 
 - (void)finishUploadingImages:(NSArray *)imageIds{
-    if (self.plan.planId) {
-        [self.fetchCenter uploadToCreateFeed:self.feed fetchedImageIds:imageIds completion:^(Feed *feed) {
+    if (self.plan) {
+        [self.fetchCenter createFeed:self.textView.text
+                              planId:self.plan.planId
+                     fetchedImageIds:imageIds
+                          completion:^(NSString *feedId) {
+            //create local feed
+            Feed *feed = [Feed createFeedInPlan:self.plan
+                                      feedTitle:self.textView.text
+                                         feedId:feedId
+                                       imageIds:imageIds];
             [self finishUploadingFeed:feed];
         }];
+
     }else{
-        [self.fetchCenter uploadToCreatePlan:self.plan completion:^(Plan *plan) {
-            [self.fetchCenter uploadToCreateFeed:self.feed fetchedImageIds:imageIds completion:^(Feed *feed) {
+        [self.fetchCenter createPlan:self.navigationItem.title
+                            circleId:self.circle.circleId
+                          completion:^(NSString *planId, NSString *backgroundID)
+        {
+            [self.fetchCenter createFeed:self.textView.text
+                                  planId:planId
+                         fetchedImageIds:imageIds
+                              completion:^(NSString *feedId)
+            {
+                Plan *plan = [Plan createPlan:self.navigationItem.title
+                                     inCircle:self.circle
+                                       planId:planId
+                                 backgroundID:imageIds.firstObject];
+                //create local feed
+                Feed *feed = [Feed createFeedInPlan:plan
+                                          feedTitle:self.textView.text
+                                             feedId:feedId
+                                           imageIds:imageIds];
                 [self finishUploadingFeed:feed];
             }];
+                              
+            
         }];
     }
 }
+
 
 - (void)finishUploadingFeed:(Feed *)feed
 {
@@ -288,17 +296,17 @@ static NSUInteger distance = 10;
     if (!self.seugeFromPlanCreation) {
         
         //选项卡加号入口进入时入时应该使用DimissModalView方法
-        if (self.navigationController.presentingViewController) {
-            //隐藏键盘
-            [self.textView resignFirstResponder];
-            //关闭当前视图
-            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-        }else{
+//        if (self.navigationController.presentingViewController) {
+//            //隐藏键盘
+//            [self.textView resignFirstResponder];
+//            //关闭当前视图
+//            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+//        }else{
             //返回上一级
             [self.navigationController popViewControllerAnimated:YES];
-        }
+//        }
     }else{
-        [self performSegueWithIdentifier:@"showWishDetailOnPlanCreation" sender:self.plan];
+        [self performSegueWithIdentifier:@"showWishDetailOnPlanCreation" sender:feed.plan];
     }
     self.progressBar.hidden = NO;
 }

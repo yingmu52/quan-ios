@@ -45,8 +45,7 @@ typedef enum {
 - (void)didFailSendingRequest;
 @end
 
-/** 创建事件完成*/
-typedef void(^FetchCenterGetRequestPlanCreationCompleted)(Plan *plan);
+
 /** 请求圈子列表完成*/
 typedef void(^FetchCenterGetRequestGetCircleListCompleted)(NSArray *circleIds);
 /** 切换圈子完成*/
@@ -66,8 +65,7 @@ typedef void(^FetchCenterGetRequestUpdatePlanCompleted)(void);
 typedef void(^FetchCenterGetRequestUpdatePlanStatusCompleted)(void);
 /** 更新事件状态完成*/
 typedef void(^FetchCenterGetRequestDeletePlanCompleted)(void);
-/** 上传Feed完成*/
-typedef void(^FetchCenterGetRequestUploadFeedCompleted)(Feed *feed);
+
 /** 删除Feed完成*/
 typedef void(^FetchCenterGetRequestDeleteFeedCompleted)(void);
 /** 关注事件完成*/
@@ -180,9 +178,12 @@ typedef void(^FetchCenterGetRequestDeleteCircleCompleted)(void);
 - (void)uploadImages:(NSArray *)images
           completion:(FetchCenterPostRequestUploadImagesCompleted)completionBlock;
 
-- (void)uploadToCreateFeed:(Feed *)feed
-           fetchedImageIds:(NSArray *)imageIds
-                completion:(FetchCenterGetRequestUploadFeedCompleted)completionBlock;
+/** 上传Feed完成*/
+typedef void(^FetchCenterGetRequestUploadFeedCompleted)(NSString *feedId);
+- (void)createFeed:(NSString *)feedTitle
+            planId:(NSString *)planId
+   fetchedImageIds:(NSArray *)imageIds
+        completion:(FetchCenterGetRequestUploadFeedCompleted)completionBlock;
 
 #pragma mark - 评论回复
 - (void)commentOnFeed:(Feed *)feed
@@ -209,8 +210,14 @@ typedef void(^FetchCenterGetRequestGetPlanListCompleted)(NSArray *planIds);
 - (void)getPlanListForOwnerId:(NSString *)ownerId
                    completion:(FetchCenterGetRequestGetPlanListCompleted)completionBlock;
 
-- (void)uploadToCreatePlan:(Plan *)plan
-                completion:(FetchCenterGetRequestPlanCreationCompleted)completionBlock;
+/** 创建事件完成*/
+typedef void(^FetchCenterGetRequestPlanCreationCompleted)(NSString *planId, NSString *backgroundID);
+- (void)createPlan:(NSString *)planTitle
+          circleId:(NSString *)circleId
+        completion:(FetchCenterGetRequestPlanCreationCompleted)completionBlock;
+
+
+
 - (void)updatePlan:(Plan *)plan completion:(FetchCenterGetRequestUpdatePlanCompleted)completionBlock;
 - (void)postToDeletePlan:(Plan *)plan completion:(FetchCenterGetRequestDeletePlanCompleted)completionBlock;
 - (void)updateStatus:(Plan *)plan completion:(FetchCenterGetRequestUpdatePlanStatusCompleted)completionBlock;

@@ -14,13 +14,20 @@
 
 @implementation Feed
 
-+ (Feed *)createFeedInPlan:(Plan *)plan feedTitle:(NSString *)feedTitle{
++ (Feed *)createFeedInPlan:(Plan *)plan feedTitle:(NSString *)feedTitle feedId:(NSString *)feedId imageIds:(NSArray *)imageIds{
+    //create feed
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-
+    
     Feed *feed = [NSEntityDescription insertNewObjectForEntityForName:@"Feed"
                                                inManagedObjectContext:delegate.managedObjectContext];
+    feed.feedId = feedId;
+    [plan updateTryTimesOfPlan:YES];
     feed.feedTitle = feedTitle;
     feed.createDate = [NSDate date];
+    feed.imageId = imageIds.firstObject;
+    feed.picUrls = [imageIds componentsJoinedByString:@","];
+    feed.type = @(imageIds.count > 1 ? FeedTypeMultiplePicture : FeedTypeSinglePicture);
+    plan.backgroundNum = imageIds.firstObject;
     feed.plan = plan;
     feed.selfLiked = @(NO);
     [delegate saveContext];

@@ -108,14 +108,17 @@
     return plan;
     
 }
-+ (Plan *)createPlan:(NSString *)title inCircle:(Circle *)circle{
+
++ (Plan *)createPlan:(NSString *)planTitle inCircle:(Circle *)circle planId:(NSString *)planId backgroundID:(NSString *)backGroundID{
     
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     Plan *plan = [NSEntityDescription insertNewObjectForEntityForName:@"Plan"
                                                inManagedObjectContext:delegate.managedObjectContext];
     
-    plan.planTitle = title;
+    plan.planId = planId;
+    plan.backgroundNum = backGroundID;
+    plan.planTitle = planTitle;
     plan.isPrivate = @(NO);
     plan.createDate = [NSDate date];
     plan.planStatus = @(PlanStatusOnGoing);

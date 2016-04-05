@@ -146,7 +146,7 @@
 
         
         if (completionBlock) {
-            dispatch_main_async_safe(^{
+            dispatch_main_sync_safe(^{
                 completionBlock(planIDList);
             });
         }
@@ -165,7 +165,7 @@
     includeArguments:YES
           completion:^(NSDictionary *responseJson){
               if (completionBlock) {
-                  dispatch_main_async_safe(^{
+                  dispatch_main_sync_safe(^{
                       completionBlock();
                   });
               }
@@ -206,7 +206,7 @@
               [self.appDelegate saveContext:workerContext];
               
               if (completionBlock) {
-                  dispatch_main_async_safe(^{
+                  dispatch_main_sync_safe(^{
                       completionBlock(manList);
                   });
               }
@@ -230,7 +230,7 @@
         includeArguments:YES
               completion:^(NSDictionary *responseJson){
                   if (completionBlock) {
-                      dispatch_main_async_safe(^{
+                      dispatch_main_sync_safe(^{
                           completionBlock();
                       });
                   }
@@ -265,7 +265,7 @@
                 
                 //完成
                 if (completionBlock) {
-                    dispatch_main_async_safe(^{
+                    dispatch_main_sync_safe(^{
                         completionBlock(circle);
                     })
                 }
@@ -285,7 +285,7 @@
           completion:^(NSDictionary *responseJson)
     {
         if (completionBlock) {
-            dispatch_main_async_safe(^{
+            dispatch_main_sync_safe(^{
                 completionBlock();
             });
         }
@@ -308,7 +308,7 @@
                   }
                   NSLog(@"成功加入圈子id %@",[User currentCircleId]);
                   if (completionBlock) {
-                      dispatch_main_async_safe(^{
+                      dispatch_main_sync_safe(^{
                           completionBlock(circleId);
                       });
                       
@@ -331,7 +331,7 @@
                   //缓存当前圈子id
                   [User updateAttributeFromDictionary:@{CURRENT_CIRCLE_ID:circleId}];
                   if (completionBlock) {
-                      dispatch_main_async_safe(^{
+                      dispatch_main_sync_safe(^{
                           completionBlock();
                       });
                       
@@ -360,7 +360,7 @@
               [self.appDelegate saveContext:workerContext];
               
               if (completionBlock) {
-                  dispatch_main_async_safe(^{
+                  dispatch_main_sync_safe(^{
                       completionBlock([responseJson valueForKeyPath:@"data.id"]);
                   });
               }
@@ -387,7 +387,7 @@
             [User storeSignature:signature];
         }
         if (completionBlock) {
-            dispatch_main_async_safe(^{
+            dispatch_main_sync_safe(^{
                 completionBlock(signature);
             });
         }
@@ -401,7 +401,7 @@
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,MESSAGE,CLEAR_ALL_MESSAGES];
     [self getRequest:rqtStr parameter:nil includeArguments:YES completion:^(NSDictionary *responseJson) {
         if (completionBlock) {
-            dispatch_main_async_safe(^{
+            dispatch_main_sync_safe(^{
                 completionBlock();
             });
         }
@@ -427,7 +427,7 @@
         //        NSLog(@"%@",responseJson);
         [self.appDelegate saveContext:workerContext];
         if (completionBlock) {
-            dispatch_main_async_safe(^{
+            dispatch_main_sync_safe(^{
                 NSArray *messageIds = [responseJson valueForKeyPath:@"data.messageList.messageId"];
                 completionBlock(messageIds);
             });
@@ -444,7 +444,7 @@
         NSNumber *unreadFollowCount = @([[responseJson valueForKeyPath:@"data.unreadCountFollow"] integerValue]);
         NSNumber *unreadMsgCount = @([[responseJson valueForKeyPath:@"data.unreadCountMsg"] integerValue]);
         if (completionBlock) {
-            dispatch_main_async_safe(^{
+            dispatch_main_sync_safe(^{
                 completionBlock(unreadMsgCount,unreadFollowCount);
             });
         }
@@ -460,7 +460,7 @@
     NSDictionary *args = @{@"id":comment.commentId,@"feedsId":comment.feed.feedId};
     [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
         if (completionBlock) {
-            dispatch_main_async_safe(^{
+            dispatch_main_sync_safe(^{
                 NSLog(@"评论删除成功 %@",comment.commentId);
                 completionBlock();
             });
@@ -519,7 +519,7 @@
         [self.appDelegate saveContext:workerContext];
 
         if (completionBlock) {
-            dispatch_main_async_safe(^{
+            dispatch_main_sync_safe(^{
                 completionBlock(pageInfo,hasNextPage,localComments,feed); 
             });
         }
@@ -555,7 +555,7 @@
         //update feed count
         feed.commentCount = @(feed.commentCount.integerValue + 1);
         if (completionBlock) {
-            dispatch_main_async_safe(^{
+            dispatch_main_sync_safe(^{
                 NSLog(@"评论完成%@",comment.commentId);
                 completionBlock(comment);
             });
@@ -574,7 +574,7 @@
     [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
         NSLog(@"delete feed successed, ID:%@",feed.feedId);
         if (completionBlock) {
-            dispatch_main_async_safe(^{
+            dispatch_main_sync_safe(^{
                 completionBlock();
             });
         }
@@ -619,7 +619,7 @@
         [self.appDelegate saveContext:workerContext];
         
         if (completionBlock) {
-            dispatch_main_async_safe(^{
+            dispatch_main_sync_safe(^{
                 completionBlock(pageInfo,hasNextPage,feedIds);
             });
         }
@@ -639,51 +639,35 @@
             stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
-- (void)uploadToCreateFeed:(Feed *)feed
-           fetchedImageIds:(NSArray *)imageIds
-                completion:(FetchCenterGetRequestUploadFeedCompleted)completionBlock{
-    if (feed.plan.planId && feed.feedTitle) {
-        
-        //设置Feed的封面
-        feed.imageId = imageIds.firstObject;
-        
-        //设置事件封面
-        feed.plan.backgroundNum = feed.imageId;
-        
-        //设置feed的类型
-        feed.type = @(imageIds.count > 1 ? FeedTypeMultiplePicture : FeedTypeSinglePicture);
-        
-        //设置多图id
-        feed.picUrls = [imageIds componentsJoinedByString:@","];
+- (void)createFeed:(NSString *)feedTitle
+            planId:(NSString *)planId
+   fetchedImageIds:(NSArray *)imageIds
+        completion:(FetchCenterGetRequestUploadFeedCompleted)completionBlock{
+    if (feedTitle && planId && imageIds.count > 0) {
         
         //设置请求参数
         NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,CREATE_FEED];
-        NSDictionary *args = @{@"picurl":feed.imageId, //兼容背影图
-                               @"content":[feed.feedTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                               @"planId":feed.plan.planId,
-                               @"picurls":feed.picUrls,
-                               @"feedsType":feed.type};
+        NSDictionary *args = @{@"picurl":imageIds.firstObject, //第一张为背影图
+                               @"content":[feedTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                               @"planId":planId,
+                               @"picurls":[imageIds componentsJoinedByString:@","],
+                               @"feedsType":@(imageIds.count > 1 ? FeedTypeMultiplePicture : FeedTypeSinglePicture)};
         
         [self getRequest:rqtStr
                parameter:args
         includeArguments:YES
               completion:^(NSDictionary *responseJson) {
-            NSString *fetchedFeedID = [responseJson valueForKeyPath:@"data.id"];
-            
-            [self.appDelegate.managedObjectContext performBlock:^{
-                feed.feedId = fetchedFeedID;
-                [feed.plan updateTryTimesOfPlan:YES];
-            }];
-            
-            if (completionBlock) {
-                dispatch_main_async_safe(^{
-                    completionBlock(feed);
-                    NSLog(@"upload feed successed, ID: %@",feed.feedId);
-                });
-            }
-        }];
-    }
+                  NSString *fetchedFeedID = [responseJson valueForKeyPath:@"data.id"];
+                  
+                  if (completionBlock) {
+                      dispatch_main_sync_safe(^{
+                          NSLog(@"upload feed successed, ID: %@",fetchedFeedID);
+                          completionBlock(fetchedFeedID);
+                      });
+                  }
+              }];
 
+    }
 }
 
 
@@ -705,7 +689,7 @@
                          }];
                          NSLog(@"\n%@\n",sorted);
                          
-                         dispatch_main_async_safe(^{
+                         dispatch_main_sync_safe(^{
                              if (completionBlock) {
                                  completionBlock(sorted);
                              }
@@ -714,7 +698,7 @@
                      }else{
                          if ([self.delegate respondsToSelector:@selector(didReceivedCurrentProgressForUploadingImage:)]) {
                              
-                             dispatch_main_async_safe(^{
+                             dispatch_main_sync_safe(^{
                                  CGFloat progress = (imageIdMaps.allKeys.count - 1e-3) / images.count;
                                  [self.delegate didReceivedCurrentProgressForUploadingImage:progress];
                              });
@@ -738,7 +722,7 @@
         NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,LIKE_FEED];
         [self getRequest:rqtStr parameter:@{@"id":feed.feedId} includeArguments:YES completion:^(NSDictionary *responseJson) {
             if (completionBlock) {
-                dispatch_main_async_safe(^{
+                dispatch_main_sync_safe(^{
                     completionBlock();
                 });
 
@@ -757,7 +741,7 @@
         NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,UNLIKE_FEED];
         [self getRequest:rqtStr parameter:@{@"id":feed.feedId} includeArguments:YES completion:^(NSDictionary *responseJson) {
             if (completionBlock) {
-                dispatch_main_async_safe(^{
+                dispatch_main_sync_safe(^{
                     completionBlock();
                 });
             }
@@ -774,7 +758,7 @@
         plan.isFollowed = @(YES);
         NSLog(@"followed plan ID %@",plan.planId);
         if (completionBlock) {
-            dispatch_main_async_safe(^{
+            dispatch_main_sync_safe(^{
                 completionBlock();
             });
         }
@@ -788,7 +772,7 @@
         plan.isFollowed = @(NO);
         NSLog(@"unfollowed plan ID %@",plan.planId);
         if (completionBlock) {
-            dispatch_main_async_safe(^{
+            dispatch_main_sync_safe(^{
                 completionBlock();
             });
         }
@@ -837,7 +821,7 @@
         [self.appDelegate saveContext:workerContext];
         
         if (completionBlock){
-            dispatch_main_async_safe(^{
+            dispatch_main_sync_safe(^{
                 completionBlock();
             });
         }
@@ -883,7 +867,7 @@
          [self.appDelegate saveContext:workerContext];
          
          if (completionBlock) {
-             dispatch_main_async_safe(^{
+             dispatch_main_sync_safe(^{
                  completionBlock(title);
              });
          }
@@ -904,7 +888,7 @@
     [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
         NSLog(@"反馈成功");
         if (completionBlock) {
-            dispatch_main_async_safe(^{
+            dispatch_main_sync_safe(^{
                 completionBlock();
             });
         }
@@ -914,7 +898,7 @@
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,OTHER,CHECK_NEW_VERSION];
     [self getRequest:rqtStr parameter:nil includeArguments:YES completion:^(NSDictionary *responseJson) {
         if (completionBlock) {
-            dispatch_main_async_safe(^{
+            dispatch_main_sync_safe(^{
                 BOOL hasNewVersion = [[responseJson valueForKeyPath:@"data.haveNew"] boolValue];
                 NSLog(@"%@",hasNewVersion ? @"有新版本" : @"无新版本");
                 completionBlock(hasNewVersion);
@@ -932,7 +916,7 @@
             [User updateAttributeFromDictionary:@{PROFILE_PICTURE_ID_CUSTOM:fetchedId}];
             NSLog(@"image uploaded %@",fetchedId);
             if (completionBlock) {
-                dispatch_main_async_safe(^{
+                dispatch_main_sync_safe(^{
                     completionBlock(@[fetchedId]);
                 });
             }
@@ -964,7 +948,7 @@
                                               PERSONALDETAIL:info}];
         NSLog(@"%@",[User getOwnerInfo]);
         if (completionBlock) {
-            dispatch_main_async_safe(^{
+            dispatch_main_sync_safe(^{
                 completionBlock();
             });
         }
@@ -983,7 +967,7 @@
                            @"description":plan.detailText ? [plan.detailText stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] : @""};
     [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
         if (completionBlock) {
-            dispatch_main_async_safe(^{
+            dispatch_main_sync_safe(^{
                 completionBlock();
             });
         }
@@ -997,7 +981,7 @@
     [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
         NSLog(@"%@",responseJson);
         if (completionBlock) {
-            dispatch_main_async_safe(^{
+            dispatch_main_sync_safe(^{
                 completionBlock();
             });
         }
@@ -1023,7 +1007,7 @@
         }
         
         if (completionBlock) {
-            dispatch_main_async_safe(^{
+            dispatch_main_sync_safe(^{
                 completionBlock(planIds);
             });
         }
@@ -1031,26 +1015,29 @@
 
 }
 
-- (void)uploadToCreatePlan:(Plan *)plan completion:(FetchCenterGetRequestPlanCreationCompleted)completionBlock{
+- (void)createPlan:(NSString *)planTitle
+          circleId:(NSString *)circleId
+        completion:(FetchCenterGetRequestPlanCreationCompleted)completionBlock{
+    
     NSString *baseUrl = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,CREATE_PLAN];
-    NSDictionary *args = @{@"title":[plan.planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                           @"private":plan.isPrivate,
-                           @"quanId":plan.circle.circleId};
+    NSDictionary *args = @{@"title":[planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                           @"private":@(0),
+                           @"quanId":circleId};
     [self getRequest:baseUrl parameter:args includeArguments:YES completion:^(NSDictionary *json) {
         NSString *fetchedPlanId = [json valueForKeyPath:@"data.id"];
         NSString *bgString = [json valueForKeyPath:@"data.backGroudPic"];
         if (fetchedPlanId && bgString) {
-            plan.planId = fetchedPlanId;
-            plan.backgroundNum = bgString;
-            NSLog(@"create plan succeed, ID: %@",fetchedPlanId);
+//            NSLog(@"create plan succeed, ID: %@",fetchedPlanId);
             if (completionBlock) {
-                dispatch_main_async_safe(^{
-                    completionBlock(plan);
+                dispatch_main_sync_safe(^{
+                    completionBlock(fetchedPlanId,bgString);
                 });
             }
         }
     }];
+    
 }
+
 
 
 - (void)postToDeletePlan:(Plan *)plan completion:(FetchCenterGetRequestDeletePlanCompleted)completionBlock{
@@ -1060,7 +1047,7 @@
         NSLog(@"delete plan succeed, ID: %@",plan.planId);
         [plan.managedObjectContext save:nil];
         if (completionBlock) {
-            dispatch_main_async_safe(^{
+            dispatch_main_sync_safe(^{
                 completionBlock();
             });
         }
@@ -1385,7 +1372,7 @@
                                               GENDER:gender}];
         NSLog(@"Fetched WeChat User Info \n%@",[User getOwnerInfo]);
         if (completionBlock) {
-            dispatch_main_async_safe(^{
+            dispatch_main_sync_safe(^{
                 completionBlock();
             });
 
@@ -1410,7 +1397,7 @@
         NSDictionary *localUserInfo = @{UID:uid,UKEY:ukey};
         [User updateAttributeFromDictionary:localUserInfo];
         if (completionBlock) {
-            dispatch_main_async_safe(^{
+            dispatch_main_sync_safe(^{
                 completionBlock(userInfo,isNewUser);
             });
         }
@@ -1435,7 +1422,7 @@
             
             [self getUidandUkeyWithOpenId:openId accessToken:accessToken completion:^(NSDictionary *userInfo, BOOL isNewUser) {
                 if (completionBlock) {
-                    dispatch_main_async_safe(^{
+                    dispatch_main_sync_safe(^{
                         completionBlock(userInfo,isNewUser);                        
                     });
                 }

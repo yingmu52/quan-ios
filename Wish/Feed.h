@@ -22,7 +22,10 @@ typedef enum {
     FeedTypeMultiplePicture
 }FeedType;
 
-+ (Feed *)createFeedInPlan:(Plan *)plan feedTitle:(NSString *)feedTitle;
++ (Feed *)createFeedInPlan:(Plan *)plan
+                 feedTitle:(NSString *)feedTitle
+                    feedId:(NSString *)feedId
+                  imageIds:(NSArray *)imageIds;
 
 + (Feed *)updateFeedWithInfo:(NSDictionary *)feedItem
                      forPlan:(nullable NSDictionary *)planInfo
