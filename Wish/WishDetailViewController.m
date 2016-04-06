@@ -11,6 +11,7 @@
 #import "UIScrollView+SVInfiniteScrolling.h"
 @interface WishDetailViewController () <HeaderViewDelegate,UIGestureRecognizerDelegate,UITextViewDelegate>
 @property (nonatomic,strong) NSDictionary *textAttributes;
+@property (nonatomic,strong) NSMutableArray *serverFeedIds;
 @end
 
 @implementation WishDetailViewController
@@ -24,14 +25,6 @@
     self.tableView.tableHeaderView = headerView;
 }
 
-- (FetchCenter *)fetchCenter{
-    if (!_fetchCenter){
-        _fetchCenter = [[FetchCenter alloc] init];
-        _fetchCenter.delegate = self;
-    }
-    return _fetchCenter;
-    
-}
 #pragma mark Header View
 
 - (void)initialHeaderView{
@@ -106,11 +99,29 @@
     [weakSelf.tableView addInfiniteScrollingWithActionHandler:^{
         if (weakSelf.hasNextPage) {
             NSLog(@"Loading More..");
-            [weakSelf.fetchCenter loadFeedsListForPlan:weakSelf.plan
-                                              pageInfo:weakSelf.pageInfo
-                                            completion:^(NSDictionary *pageInfo, BOOL hasNextPage, NSArray *feedIds) {
-                                                [weakSelf process:pageInfo hasNextPage:hasNextPage serverFeedIdList:feedIds];
-             }];
+            [weakSelf.fetchCenter getFeedsListForPlan:weakSelf.plan
+                                             pageInfo:weakSelf.pageInfo
+                                           completion:^(NSDictionary *pageInfo, BOOL hasNextPage, NSArray *pageList)
+            {
+                weakSelf.hasNextPage = hasNextPage;
+                weakSelf.pageInfo = pageInfo;
+                [weakSelf.headerView updateHeaderWithPlan:self.plan];
+                [weakSelf.tableView.infiniteScrollingView stopAnimating];
+                if (!weakSelf.hasNextPage){
+                    self.tableView.showsInfiniteScrolling = NO;
+                }
+                
+                //upload a local copy of server side feed list
+                [weakSelf.serverFeedIds addObjectsFromArray:pageList];
+                
+                //delete feed from local if it does not appear to be ien the server side feed list
+                for (Feed *feed in weakSelf.tableFetchedRC.fetchedObjects){
+                    if (![weakSelf.serverFeedIds containsObject:feed.feedId]) {
+                        [feed.managedObjectContext deleteObject:feed];
+                    }
+                }
+                
+            }];
         }
     }];
 
@@ -118,14 +129,21 @@
     [self.tableView triggerInfiniteScrolling];
 }
 
+- (NSMutableArray *)serverFeedIds{
+    if (!_serverFeedIds) {
+        _serverFeedIds = [NSMutableArray array];
+    }
+    return _serverFeedIds;
+}
+
 - (void)goBack{
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     [self.navigationController popViewControllerAnimated:YES];
     
-    self.fetchedRC.delegate = nil;
+    self.tableFetchedRC.delegate = nil;
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     NSUInteger numberOfPreservingFeeds = 20;
-    NSArray *allFeeds = self.fetchedRC.fetchedObjects;
+    NSArray *allFeeds = self.tableFetchedRC.fetchedObjects;
     if (allFeeds.count > numberOfPreservingFeeds) {
         for (NSUInteger i = numberOfPreservingFeeds; i < allFeeds.count; i++) {
             Feed *feed = allFeeds[i];
@@ -214,80 +232,21 @@
 
 #pragma mark - Fetched Results Controller delegate
 
-- (NSFetchedResultsController *)fetchedRC
-{
-    if (!_fetchedRC){
-        
-        //do fetchrequest
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Feed"];
-        request.predicate = [NSPredicate predicateWithFormat:@"plan.planId == %@",self.plan.planId];
-        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
-        
-        //create FetchedResultsController with context, sectionNameKeyPath, and you can cache here, so the next work if the same you can use your cash file.
-        
-        _fetchedRC = [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                                         managedObjectContext:self.plan.managedObjectContext
-                                                           sectionNameKeyPath:nil
-                                                                    cacheName:nil];
-        _fetchedRC.delegate = self;
-        NSError *error;
-        [_fetchedRC performFetch:&error];
-        
+- (NSFetchRequest *)tableFetchRequest{
+    if (!_tableFetchRequest) {
+        _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Feed"];
+        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"plan.planId == %@",self.plan.planId];
+        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
     }
-    return _fetchedRC;
+    return _tableFetchRequest;
 }
 
-- (void)controllerWillChangeContent:
-(NSFetchedResultsController *)controller
-{
-    [self.tableView beginUpdates];
-}
-
-- (void)controller:(NSFetchedResultsController *)controller
-   didChangeObject:(id)anObject
-       atIndexPath:(NSIndexPath *)indexPath
-     forChangeType:(NSFetchedResultsChangeType)type
-      newIndexPath:(NSIndexPath *)newIndexPath
-{
-        switch(type){
-                
-            case NSFetchedResultsChangeInsert:{
-                [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
-                                      withRowAnimation:UITableViewRowAnimationAutomatic];
-                NSLog(@"Feed inserted");
-            }
-                break;
-                
-            case NSFetchedResultsChangeDelete:{
-                [self.tableView deleteRowsAtIndexPaths:@[indexPath]
-                                      withRowAnimation:UITableViewRowAnimationAutomatic];
-                NSLog(@"Feed deleted");
-            }
-                break;
-                
-            case NSFetchedResultsChangeUpdate:{
-                //see https://developer.apple.com/library/ios/documentation/CoreData/Reference/NSFetchedResultsControllerDelegate_Protocol/index.html#//apple_ref/occ/intf/NSFetchedResultsControllerDelegate
-                //they don't use the 'reload' method anymore
-                if (indexPath) {
-                    [self configureCell:[self.tableView cellForRowAtIndexPath:indexPath]
-                            atIndexPath:indexPath];
-                    NSLog(@"Feed updated");
-                }
-            }
-                break;
-            case NSFetchedResultsChangeMove:{
-                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-                [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            }
-                break;
-        }
-}
 
 
 - (void)controllerDidChangeContent:
 (NSFetchedResultsController *)controller
 {
-    [self.tableView endUpdates];
+    [super controllerDidChangeContent:controller];
     [self.headerView updateHeaderWithPlan:self.plan];
 }
 
@@ -306,7 +265,7 @@
     return _textAttributes;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    Feed *feed = [self.fetchedRC objectAtIndexPath:indexPath];
+    Feed *feed = [self.tableFetchedRC objectAtIndexPath:indexPath];
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGRect bounds = [feed.feedTitle boundingRectWithSize:CGSizeMake(width - 16.0f,CGFLOAT_MAX) //label左右有8.0f的距离
                                        options:NSStringDrawingUsesLineFragmentOrigin
@@ -323,18 +282,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.fetchedRC.fetchedObjects.count;
+    return self.tableFetchedRC.fetchedObjects.count;
 }
 
 - (WishDetailCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     WishDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WishDetailCell" forIndexPath:indexPath];
-    [self configureCell:cell atIndexPath:indexPath];
+    [self configureTableViewCell:cell atIndexPath:indexPath];
     return cell;
 }
 
-- (void)configureCell:(WishDetailCell *)cell atIndexPath:(NSIndexPath *)indexPath{
+- (void)configureTableViewCell:(WishDetailCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     cell.delegate = self;
-    Feed *feed = [self.fetchedRC objectAtIndexPath:indexPath];
+    Feed *feed = [self.tableFetchedRC objectAtIndexPath:indexPath];
     cell.dateLabel.text = [SystemUtil stringFromDate:feed.createDate];
     
     [cell.likeButton setImage:feed.selfLiked.boolValue ? [Theme likeButtonLiked] : [Theme likeButtonUnLiked]
@@ -355,23 +314,21 @@
     [cell.photoView downloadImageWithImageId:feed.imageId size:FetchCenterImageSize800];
 }
 
-#warning - This should go to super view ~ 
-- (void)tableView:(UITableView *)tableView
-didEndDisplayingCell:(nonnull WishDetailCell *)cell
-forRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
-    cell.photoView.image = nil;
-    [cell.photoView sd_cancelCurrentImageLoad];
-}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     //enter feed detail only when plan description text view is not being edited
     if (!self.headerView.descriptionTextView.isFirstResponder){
-        Feed *feed = [self.fetchedRC objectAtIndexPath:indexPath];
+        Feed *feed = [self.tableFetchedRC objectAtIndexPath:indexPath];
         if (feed.feedId){ //prevent crash
             [self performSegueWithIdentifier:[self segueForFeed] sender:feed.feedId];
         }
     }
+}
+
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(WishDetailCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    cell.photoView.image = nil;
+    [cell.photoView sd_cancelCurrentImageLoad];
 }
 
 - (NSString *)segueForFeed{
@@ -382,7 +339,7 @@ forRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
 - (void)didPressedLikeOnCell:(WishDetailCell *)cell{
     //already increment/decrement like count locally,
     //the following request must respect the current cell.feed like/dislike status
-    Feed *feed = [self.fetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
+    Feed *feed = [self.tableFetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
     if (!feed.selfLiked.boolValue) {
         //send like request
         [self.fetchCenter likeFeed:feed completion:nil];
@@ -407,36 +364,6 @@ forRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
 
 }
 
-
-- (void)process:(NSDictionary *)pageInfo hasNextPage:(BOOL)hasNextPage serverFeedIdList:(NSArray *)serverFeedIds{
-    self.hasNextPage = hasNextPage;
-    self.pageInfo = pageInfo;
-    [self.headerView updateHeaderWithPlan:self.plan];
-    [self.tableView.infiniteScrollingView stopAnimating];
-    
-    if (!self.hasNextPage){
-        self.tableView.showsInfiniteScrolling = NO;
-    }
-    
-    //upload a local copy of server side feed list
-    [self.serverFeedIds addObjectsFromArray:serverFeedIds];
-    
-    //delete feed from local if it does not appear to be ien the server side feed list
-    for (Feed *feed in self.fetchedRC.fetchedObjects){
-        if (![self.serverFeedIds containsObject:feed.feedId]) {
-            [feed.managedObjectContext deleteObject:feed];
-        }
-    }
-}
-
-
-- (NSMutableArray *)serverFeedIds{
-    if (!_serverFeedIds){
-        _serverFeedIds = [NSMutableArray array];
-    }
-    return _serverFeedIds;
-}
-
 #pragma mark - segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -455,7 +382,7 @@ forRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
 
 - (void)didPressedCommentOnCell:(WishDetailCell *)cell{
     //进入动态详情并呼出键盘
-    Feed *feed = [self.fetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
+    Feed *feed = [self.tableFetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
     [self performSegueWithIdentifier:[self segueForFeed] sender:feed];
 }
 

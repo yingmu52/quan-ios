@@ -79,8 +79,7 @@ typedef void(^FetchCenterGetRequestGetYoutuSignatureCompleted)(NSString *signatu
 typedef void(^FetchCenterGetRequestGetUidAndUkeyCompleted)(NSDictionary *userInfo, BOOL isNewUser);
 /** 微信拉取用户信息完成*/
 typedef void(^FetchCenterGetRequestGetWechatUserInfoCompleted)(void);
-/** 微信拉取用户信息完成*/
-typedef void(^FetchCenterGetRequestGetFeedsListCompleted)(NSDictionary *pageInfo, BOOL hasNextPage, NSArray *feedIds);
+
 /** 消息提醒完成*/
 typedef void(^FetchCenterGetRequestGetMessageNotificationCompleted)(NSNumber *messageCount,NSNumber *followCount);
 /** 拉取消息列表完成*/
@@ -161,9 +160,11 @@ typedef void(^FetchCenterGetRequestGetCircleListCompleted)(NSArray *circleIds);
 - (void)getMessageNotificationInfo:(FetchCenterGetRequestGetMessageNotificationCompleted)completionBlock;
 
 #pragma mark - 事件动态，（Feed）
-- (void)loadFeedsListForPlan:(Plan *)plan
-                    pageInfo:(NSDictionary *)info
-                  completion:(FetchCenterGetRequestGetFeedsListCompleted)completionBlock;
+
+typedef void(^FetchCenterGetRequestGetFeedsListCompleted)(NSDictionary *pageInfo, BOOL hasNextPage, NSArray *pageList);
+- (void)getFeedsListForPlan:(Plan *)plan
+                   pageInfo:(NSDictionary *)info
+                 completion:(FetchCenterGetRequestGetFeedsListCompleted)completionBlock;
 
 /**赞*/
 - (void)likeFeed:(Feed *)feed completion:(FetchCenterGetRequestLikeFeedCompleted)completionBlock;
@@ -252,6 +253,12 @@ typedef void(^FetchCenterGetRequestGetFollowingPlanListCompleted)(void);
 
 #pragma mark - 工具
 - (NSURL *)urlWithImageID:(NSString *)imageId size:(FetchCenterImageSize)size;
+- (void)syncEntity:(NSString *)entityName
+            idName:(NSString *)uniqueID
+         localList:(NSArray *)localList
+        serverList:(NSArray *)serverList;
+
+
 
 typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId); //上传图像成功
 typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson); //请求成功

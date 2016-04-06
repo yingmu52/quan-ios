@@ -585,9 +585,9 @@
 }
 
 
-- (void)loadFeedsListForPlan:(Plan *)plan
-                    pageInfo:(NSDictionary *)info
-                  completion:(FetchCenterGetRequestGetFeedsListCompleted)completionBlock{
+- (void)getFeedsListForPlan:(Plan *)plan
+                   pageInfo:(NSDictionary *)info
+                 completion:(FetchCenterGetRequestGetFeedsListCompleted)completionBlock{
     
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,LOAD_FEED_LIST];
     NSString *infoStr = info ? [self convertDictionaryToString:info] : @"";
@@ -616,14 +616,14 @@
                 managedObjectContext:workerContext];
         }
         
-        NSArray *feedIds = [responseJson valueForKeyPath:@"data.feedsList.id"];
+        NSArray *serverList = [responseJson valueForKeyPath:@"data.feedsList.id"];
         BOOL hasNextPage = [[responseJson valueForKeyPath:@"data.isMore"] boolValue];
         
         [self.appDelegate saveContext:workerContext];
         
         if (completionBlock) {
             dispatch_main_sync_safe(^{
-                completionBlock(pageInfo,hasNextPage,feedIds);
+                completionBlock(pageInfo,hasNextPage,serverList);
             });
         }
 

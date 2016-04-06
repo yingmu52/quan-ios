@@ -18,10 +18,11 @@
 #import "HeaderView.h"
 #import "FeedDetailViewController.h"
 #import "UIImageView+ImageCache.h"
-@interface WishDetailViewController : UITableViewController <NSFetchedResultsControllerDelegate,WishDetailCellDelegate,FetchCenterDelegate>
-@property (nonatomic,strong) NSFetchedResultsController *fetchedRC; //fetching Feed
+#import "MSSuperViewController.h"
+@interface WishDetailViewController : MSSuperViewController <NSFetchedResultsControllerDelegate,WishDetailCellDelegate,FetchCenterDelegate>
+//@property (nonatomic,strong) NSFetchedResultsController *fetchedRC; //fetching Feed
 @property (nonatomic,weak) Plan *plan; //must set
-@property (nonatomic,strong) FetchCenter *fetchCenter;
+//@property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,strong) HeaderView *headerView;
 
 /*
@@ -31,7 +32,7 @@
 @property (nonatomic) BOOL hasNextPage;
 @property (nonatomic,strong) NSDictionary *pageInfo;
 
-@property (nonatomic,strong) NSMutableArray *serverFeedIds;
+//@property (nonatomic,strong) NSMutableArray *serverFeedIds;
 - (void)setUpNavigationItem;
 
 #pragma mark - abstract

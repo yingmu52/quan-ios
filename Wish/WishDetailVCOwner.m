@@ -185,7 +185,7 @@
                                                         handler:^(UIAlertAction * _Nonnull action)
         {
             //执行删除操作
-            Feed *feed = [self.fetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
+            Feed *feed = [self.tableFetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
             if (feed.feedId && feed.plan.planId && feed.imageId){
                 [self.fetchCenter deleteFeed:feed completion:^{
                     if ([self isDeletingTheLastFeed]) {
@@ -216,7 +216,7 @@
 
 
 - (BOOL)isDeletingTheLastFeed{
-    return self.fetchedRC.fetchedObjects.count == 1;
+    return self.tableFetchedRC.fetchedObjects.count == 1;
 }
 
 - (void)deletePlan{

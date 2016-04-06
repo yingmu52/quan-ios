@@ -10,9 +10,9 @@
 #import "FetchCenter.h"
 #import "UIImageView+ImageCache.h"
 #import "Theme.h"
-
+#import "WishDetailCell.h"
 @import CoreData;
-@interface MSSuperViewController : UIViewController <FetchCenterDelegate,NSFetchedResultsControllerDelegate>{
+@interface MSSuperViewController : UIViewController <FetchCenterDelegate,NSFetchedResultsControllerDelegate,UITableViewDelegate,UICollectionViewDelegate>{
     @protected
     NSFetchRequest *_tableFetchRequest; //让子类可以access实例变量
     NSFetchRequest *_collectionFetchRequest;
