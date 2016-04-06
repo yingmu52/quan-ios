@@ -13,48 +13,56 @@
 
 - (void)downloadImageWithImageId:(NSString *)imageId size:(FetchCenterImageSize)size{
     
-    
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
     FetchCenter *fetchCenter = [[FetchCenter alloc] init];
+    
+    //检查本地是否有更高分辨率的图片存在
+//    NSURL *searchURL = [fetchCenter urlWithImageID:imageId size:FetchCenterImageSize800];
+//    if ([manager diskImageExistsForURL:searchURL]) {
+//        NSString *searchKey = [manager cacheKeyForURL:searchURL];
+//        self.image = [manager.imageCache imageFromDiskCacheForKey:searchKey];
+//        return;
+//    }
+
     
     //图片地址拼接
     NSURL *url = [fetchCenter urlWithImageID:imageId size:size];
     
     //检测本地缓存
     NSString *localKey = [manager cacheKeyForURL:url];
-    BOOL isImageExist = [manager diskImageExistsForURL:url];
-    
-    //请求较大的图片时，如果原图存在时直接设置原图，（主人发图时，原图被缓存下来，可以直接使用）
-//    if (size >= FetchCenterImageSize400) {
-//        __block UIImage *image;
-//        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//            NSURL *urlOriginal = [fetchCenter urlWithImageID:imageId size:FetchCenterImageSizeOriginal];
-//            if ([manager diskImageExistsForURL:urlOriginal]) { //本地有原图的缓存
-//                NSLog(@"检测到原图");
-//                image = [manager.imageCache imageFromDiskCacheForKey:[manager cacheKeyForURL:urlOriginal]];
-//            }
-//            dispatch_async(dispatch_get_main_queue(), ^(void){
-//                self.image = image;
-//                return;
-//            });
-//        });
-//    }
+    BOOL isTargetImageExist = [manager diskImageExistsForURL:url];
     
     //下载图片
-    if (!isImageExist) {
-//        NSLog(@"正在下载：%@\n",url);
+    if (!isTargetImageExist) {
+        
+//        TXYDownloader *downloadManager = [[TXYDownloader alloc] initWithPersistenceId:nil
+//                                                                                 type:TXYDownloadTypePhoto];
+//        [downloadManager download:url.absoluteString
+//                           target:self
+//                        succBlock:^(NSString *url, NSData *data, NSDictionary *info) {
+//                            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//                                //Background Thread
+//                                UIImage *image = [UIImage imageWithData:data];
+//                                [manager.imageCache storeImage:image forKey:localKey];
+//                                dispatch_main_async_safe(^{
+//                                    self.image = image;
+//                                });
+//                            });
+//                        }failBlock:^(NSString *url, NSError *error){
+//                            NSLog(@"图片下载失败，code:%zd desc:%@", error.code, error.domain);
+//                        }progressBlock:^(NSString *url, NSNumber *value){
+//                        } param:nil];
         [self sd_setImageWithURL:url
                 placeholderImage:nil
-                         options:SDWebImageContinueInBackground
+                         options:SDWebImageRetryFailed
                        completed:^(UIImage *image,
                                    NSError *error,
                                    SDImageCacheType cacheType,
                                    NSURL *imageURL) {
                            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                               //Background Thread
                                [manager.imageCache storeImage:image forKey:localKey];
                            });
-                           
+
                        }];
     }else{
 //        NSLog(@"可从本地获取");
