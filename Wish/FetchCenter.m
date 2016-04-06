@@ -1171,13 +1171,15 @@
     NSString *filePath = [paths[0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg",uuidString]];
     
     //压缩图片
+    NSData *imageData = UIImageJPEGRepresentation(image,0.5);
+
+#ifdef DEBUG
     CGFloat originalSize = UIImagePNGRepresentation(image).length/1024.0f; //in KB
     NSLog(@"original size %@ KB", @(originalSize));
-    NSData *imageData = UIImageJPEGRepresentation(image,0.5);
     NSLog(@"compressed size %@ KB", @(imageData.length/1024.0f));
-
-    //缓存压缩图像
     NSAssert(imageData.length, @"0 size image");
+#endif
+    
     if ([imageData writeToFile:filePath atomically:YES]) {
         
         //构造TXYPhotoUploadTask上传任务,
@@ -1199,13 +1201,15 @@
                  //得到图片上传成功后的回包信息
                  TXYPhotoUploadTaskRsp *photoResp = (TXYPhotoUploadTaskRsp *)resp;
                  
-                 completionBlock(photoResp.photoFileId);
-                 
                  //缓存图片
-//                 NSURL *url = [self urlWithImageID:photoResp.photoFileId size:FetchCenterImageSizeOriginal];
-//                 SDWebImageManager *manager = [SDWebImageManager sharedManager];
-//                 NSLog(@"orientation :%@",@(image.imageOrientation));
-//                 [manager.imageCache storeImage:image forKey:[manager cacheKeyForURL:url]];
+                 NSURL *url = [self urlWithImageID:photoResp.photoFileId
+                                              size:FetchCenterImageSizeOriginal];
+                 SDWebImageManager *manager = [SDWebImageManager sharedManager];
+                 [manager.imageCache storeImage:image
+                                         forKey:[manager cacheKeyForURL:url]];
+
+
+                 completionBlock(photoResp.photoFileId);
                  
              }else{
                  NSLog(@"上传失败");
@@ -1215,6 +1219,7 @@
              }
              
              //NSLog(@"上传图片失败，code:%d desc:%@", resp.retCode, resp.descMsg);
+             
              //删除缓存
              [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
              NSAssert(![[NSFileManager defaultManager] fileExistsAtPath:filePath],@"没有成功删除压缩缓存");
