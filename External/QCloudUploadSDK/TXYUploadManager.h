@@ -167,7 +167,7 @@ typedef void (^TXYUpCommandCompletionHandler)(TXYTaskRsp *resp);
  * @param  taskId 上传任务id @see <TXYUploadTask> 里的taskId
  * @return 暂停成功返回YES，添加失败返回NO
  *
- * @note 任务已经上传完或者任务不存在，暂停会失败，暂停成功之后会通知TTXYUploadTaskStatePause变化
+ * @note 任务已经上传完或者任务不存在，暂停会失败，暂停成功之后会通知TXYUploadTaskStatePause变化
  */
 - (BOOL)pause:(int64_t)taskId;
 

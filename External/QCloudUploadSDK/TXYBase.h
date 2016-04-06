@@ -259,6 +259,7 @@ typedef NS_ENUM(NSInteger, TXYFileType)
 @property (nonatomic, strong)    NSString               *descMsg;
 @end
 
+@class TXYFileInfo;
 /**
  * 图片上传任务的回包
  */
@@ -267,6 +268,8 @@ typedef NS_ENUM(NSInteger, TXYFileType)
 @property (nonatomic, strong)    NSString               *photoURL;
 /** 成功后，后台返回图片文件的key*/
 @property (nonatomic, strong)    NSString               *photoFileId;
+/** 成功后，后台返回图片文件的信息*/
+@property (nonatomic, strong)    TXYFileInfo            *photoInfo;
 @end
 
 
@@ -323,7 +326,11 @@ typedef NS_ENUM(NSInteger, TXYFileType)
 /** 视频描述 */
 @property (nonatomic, strong)    NSString        *desc;
 /** 0:先发后审 1：先审后发 */
-@property (nonatomic, assign)    BOOL     isCheck;
+@property (nonatomic, assign)    BOOL            isCheck;
+/** 视频封面URL */
+@property (nonatomic, strong)    NSString        *coverUrl;
+///** 视频附加属性 */
+//@property (nonatomic, strong)    NSDictionary    *reserveAttr;
 
 @end
 
@@ -338,8 +345,10 @@ typedef NS_ENUM(NSInteger, TXYFileType)
 @property (nonatomic, strong)    NSString        *fileURL;
 /** 查询文件的类型 */
 @property (nonatomic, assign)    TXYFileType     fileType;
+/** 查询图片的底色 */
+@property (nonatomic, strong)    NSString        *photoRBG;
 /** 额外的文件信息，详情参见开发文档 */
-@property (nonatomic, strong)   NSDictionary     *extendInfo;
+@property (nonatomic, strong)    NSDictionary    *extendInfo;
 
 @end
 
@@ -451,7 +460,9 @@ typedef NS_ENUM(NSInteger, TXYListPattern)
 //用户自定义的属性
 @property(nonatomic,strong) NSString *attrs;
 //类型
-@property(nonatomic,assign)TXYObjectType objectType;
+@property(nonatomic,assign) TXYObjectType objectType;
+//视频信息
+@property(nonatomic,strong) TXYVideoFileInfo *videoFileInfo;
 
 /**
  *  初始化方法
@@ -467,6 +478,20 @@ typedef NS_ENUM(NSInteger, TXYListPattern)
                          sign:(NSString*)sign
                    objectType:(TXYObjectType)objectType
               customAttribute:(NSString*)attrs;
+
+/**
+ *  更新视频参数的方法（仅用于视频）
+ *
+ *  @param path         目录路径（相对于bucket的路径）
+ *  @param bucket       文件所在的空间
+ *  @param sign         签名
+ *  @param attrs        用户自定义的属性
+ */
+- (instancetype) initWithPath:(NSString *)path
+                       bucket:(NSString *)bucket
+                         sign:(NSString *)sign
+              customAttribute:(NSString *)attrs
+                videoFileInfo:(TXYVideoFileInfo *)videoFileInfo;
 @end
 
 

@@ -78,6 +78,8 @@
 		A0A083851BD75E3E0057CD65 /* Circle.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A083811BD75E3E0057CD65 /* Circle.m */; };
 		A0A083941BD765F00057CD65 /* Circle+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A0838F1BD765F00057CD65 /* Circle+CoreDataProperties.m */; };
 		A0A083951BD765F00057CD65 /* Circle+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A0838F1BD765F00057CD65 /* Circle+CoreDataProperties.m */; };
+		A0A10EA61CB586AA0004D5DE /* libTXYDownloader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A10EA01CB586AA0004D5DE /* libTXYDownloader.a */; };
+		A0A10EA71CB586AA0004D5DE /* libTXYUploader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A10EA31CB586AA0004D5DE /* libTXYUploader.a */; };
 		A0AD96981C8A899E00B0091D /* CircleSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0AD96971C8A899E00B0091D /* CircleSettingViewController.m */; };
 		A0B9D7691B9E4F1100EE382B /* DashedBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B9D7681B9E4F1100EE382B /* DashedBorderView.m */; };
 		A0B9D76A1B9E4F1100EE382B /* DashedBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B9D7681B9E4F1100EE382B /* DashedBorderView.m */; };
@@ -136,8 +138,6 @@
 		A0EDFCBF1B90C63400B10594 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EDFCBE1B90C63400B10594 /* libstdc++.6.dylib */; };
 		A0EDFCC01B90C64400B10594 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AEDD065F1AABF93E00379C17 /* libstdc++.dylib */; };
 		A0EDFCC11B90C75900B10594 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3DC1B84E851003CCB34 /* Reachability.m */; };
-		A0EE65CA1BCC84DF002CC49B /* libTXYDownloader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EE65C41BCC84DF002CC49B /* libTXYDownloader.a */; };
-		A0EE65CB1BCC84DF002CC49B /* libTXYUploader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EE65C71BCC84DF002CC49B /* libTXYUploader.a */; };
 		A0EE8C5A1BB3E89600C5DAC3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EE8C591BB3E89600C5DAC3 /* OpenGLES.framework */; };
 		A0EE8C5C1BB3E93300C5DAC3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EE8C5B1BB3E93300C5DAC3 /* AudioToolbox.framework */; };
 		A0EE8C5E1BB3E93D00C5DAC3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EE8C5D1BB3E93D00C5DAC3 /* AVFoundation.framework */; };
@@ -410,6 +410,11 @@
 		A0A0838E1BD765F00057CD65 /* Circle+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Circle+CoreDataProperties.h"; sourceTree = "<group>"; };
 		A0A0838F1BD765F00057CD65 /* Circle+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Circle+CoreDataProperties.m"; sourceTree = "<group>"; };
 		A0A10E9E1CB57DB70004D5DE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		A0A10EA01CB586AA0004D5DE /* libTXYDownloader.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTXYDownloader.a; sourceTree = "<group>"; };
+		A0A10EA11CB586AA0004D5DE /* TXYDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXYDownloader.h; sourceTree = "<group>"; };
+		A0A10EA31CB586AA0004D5DE /* libTXYUploader.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTXYUploader.a; sourceTree = "<group>"; };
+		A0A10EA41CB586AA0004D5DE /* TXYBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXYBase.h; sourceTree = "<group>"; };
+		A0A10EA51CB586AA0004D5DE /* TXYUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXYUploadManager.h; sourceTree = "<group>"; };
 		A0AD96961C8A899E00B0091D /* CircleSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleSettingViewController.h; sourceTree = "<group>"; };
 		A0AD96971C8A899E00B0091D /* CircleSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleSettingViewController.m; sourceTree = "<group>"; };
 		A0B9D7671B9E4F1100EE382B /* DashedBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashedBorderView.h; sourceTree = "<group>"; };
@@ -471,11 +476,6 @@
 		A0EDFCBA1B90C61900B10594 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		A0EDFCBC1B90C62100B10594 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		A0EDFCBE1B90C63400B10594 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
-		A0EE65C41BCC84DF002CC49B /* libTXYDownloader.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTXYDownloader.a; sourceTree = "<group>"; };
-		A0EE65C51BCC84DF002CC49B /* TXYDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXYDownloader.h; sourceTree = "<group>"; };
-		A0EE65C71BCC84DF002CC49B /* libTXYUploader.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTXYUploader.a; sourceTree = "<group>"; };
-		A0EE65C81BCC84DF002CC49B /* TXYBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXYBase.h; sourceTree = "<group>"; };
-		A0EE65C91BCC84DF002CC49B /* TXYUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXYUploadManager.h; sourceTree = "<group>"; };
 		A0EE8C591BB3E89600C5DAC3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		A0EE8C5B1BB3E93300C5DAC3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A0EE8C5D1BB3E93D00C5DAC3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -676,13 +676,14 @@
 				A0EE8C5E1BB3E93D00C5DAC3 /* AVFoundation.framework in Frameworks */,
 				A0EE8C5C1BB3E93300C5DAC3 /* AudioToolbox.framework in Frameworks */,
 				A0EE8C5A1BB3E89600C5DAC3 /* OpenGLES.framework in Frameworks */,
+				A0A10EA61CB586AA0004D5DE /* libTXYDownloader.a in Frameworks */,
 				A0EDFCBB1B90C61900B10594 /* MobileCoreServices.framework in Frameworks */,
 				A07C66C41BE070E400413D32 /* libWeChatSDK.a in Frameworks */,
-				A0EE65CA1BCC84DF002CC49B /* libTXYDownloader.a in Frameworks */,
 				A095D8351BCB884500ED3DFD /* PgyUpdate.framework in Frameworks */,
 				A07C66CC1BE078EE00413D32 /* TencentOpenAPI.framework in Frameworks */,
 				A0D102681B84EFAD006B0E4E /* WebP.framework in Frameworks */,
 				AEDD065A1AABF90400379C17 /* Security.framework in Frameworks */,
+				A0A10EA71CB586AA0004D5DE /* libTXYUploader.a in Frameworks */,
 				AEDD06581AABF8FB00379C17 /* CoreTelephony.framework in Frameworks */,
 				AEDD06561AABF8F600379C17 /* CoreGraphics.framework in Frameworks */,
 				AEDD06541AABF8F000379C17 /* SystemConfiguration.framework in Frameworks */,
@@ -693,7 +694,6 @@
 				A0EDFCBF1B90C63400B10594 /* libstdc++.6.dylib in Frameworks */,
 				A0EDFCBD1B90C62100B10594 /* libxml2.dylib in Frameworks */,
 				A0D102701B84F6BA006B0E4E /* libz.dylib in Frameworks */,
-				A0EE65CB1BCC84DF002CC49B /* libTXYUploader.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -787,6 +787,25 @@
 			path = WYPopoverController;
 			sourceTree = "<group>";
 		};
+		A0A10E9F1CB586AA0004D5DE /* QCloudDownloadSDK */ = {
+			isa = PBXGroup;
+			children = (
+				A0A10EA01CB586AA0004D5DE /* libTXYDownloader.a */,
+				A0A10EA11CB586AA0004D5DE /* TXYDownloader.h */,
+			);
+			path = QCloudDownloadSDK;
+			sourceTree = "<group>";
+		};
+		A0A10EA21CB586AA0004D5DE /* QCloudUploadSDK */ = {
+			isa = PBXGroup;
+			children = (
+				A0A10EA31CB586AA0004D5DE /* libTXYUploader.a */,
+				A0A10EA41CB586AA0004D5DE /* TXYBase.h */,
+				A0A10EA51CB586AA0004D5DE /* TXYUploadManager.h */,
+			);
+			path = QCloudUploadSDK;
+			sourceTree = "<group>";
+		};
 		A0D101F51B84EB6A006B0E4E /* SDWebImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -836,30 +855,11 @@
 			path = NavBar;
 			sourceTree = "<group>";
 		};
-		A0EE65C31BCC84DF002CC49B /* QCloudDownloadSDK */ = {
-			isa = PBXGroup;
-			children = (
-				A0EE65C41BCC84DF002CC49B /* libTXYDownloader.a */,
-				A0EE65C51BCC84DF002CC49B /* TXYDownloader.h */,
-			);
-			path = QCloudDownloadSDK;
-			sourceTree = "<group>";
-		};
-		A0EE65C61BCC84DF002CC49B /* QCloudUploadSDK */ = {
-			isa = PBXGroup;
-			children = (
-				A0EE65C71BCC84DF002CC49B /* libTXYUploader.a */,
-				A0EE65C81BCC84DF002CC49B /* TXYBase.h */,
-				A0EE65C91BCC84DF002CC49B /* TXYUploadManager.h */,
-			);
-			path = QCloudUploadSDK;
-			sourceTree = "<group>";
-		};
 		A0F7D3A51B84E851003CCB34 /* External */ = {
 			isa = PBXGroup;
 			children = (
-				A0EE65C31BCC84DF002CC49B /* QCloudDownloadSDK */,
-				A0EE65C61BCC84DF002CC49B /* QCloudUploadSDK */,
+				A0A10E9F1CB586AA0004D5DE /* QCloudDownloadSDK */,
+				A0A10EA21CB586AA0004D5DE /* QCloudUploadSDK */,
 				A0994E5E1BC4CF9500D45845 /* SYEmojiPopover */,
 				A03010361BABC6AA0041E2CF /* QBImagePicker */,
 				A07115CE1BA6B109002C1270 /* SZTextView */,
