@@ -93,24 +93,24 @@
       newIndexPath:(NSIndexPath *)newIndexPath
 {
     if (controller == self.tableFetchedRC) {
+
         switch(type)
         {
             case NSFetchedResultsChangeInsert:
                 [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
                 break;
-                
             case NSFetchedResultsChangeDelete:
                 [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
                 break;
-                
             case NSFetchedResultsChangeUpdate:
                 [self configureTableViewCell:[self.tableView cellForRowAtIndexPath:indexPath]
                                  atIndexPath:indexPath];
                 break;
-                
             case NSFetchedResultsChangeMove:
                 [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
                 [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                break;
+            default:
                 break;
         }
 

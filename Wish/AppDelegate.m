@@ -188,6 +188,16 @@
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         }
     }
+    
+    [self.writerManagedObjectContext performBlock:^{
+        // Save the context.
+        NSError *error = nil;
+        if (self.writerManagedObjectContext.hasChanges && ![self.writerManagedObjectContext save:&error]) {
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        }
+        
+    }]; // writer
+
 }
 
 - (void)resetDataStore{
@@ -212,32 +222,28 @@
         NSError *error = nil;
         if (context.hasChanges && ![context save:&error]) {
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        }else{
-//            NSLog(@"Saved Worker Context");
-        }
-    }];
-    
-    [self.managedObjectContext performBlock:^{
-        // Save the context.
-        NSError *error = nil;
-        if (self.managedObjectContext.hasChanges && ![self.managedObjectContext save:&error]) {
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        }else{
-//            NSLog(@"Saved Main Context");
         }
         
-        [self.writerManagedObjectContext performBlock:^{
+        [self.managedObjectContext performBlock:^{
             // Save the context.
             NSError *error = nil;
-
-            if (self.writerManagedObjectContext.hasChanges && ![self.writerManagedObjectContext save:&error]) {
+            if (self.managedObjectContext.hasChanges && ![self.managedObjectContext save:&error]) {
                 NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            }else{
-//                NSLog(@"Saved Writer Context");
             }
             
-        }]; // writer
-    }]; // main
+            [self.writerManagedObjectContext performBlock:^{
+                // Save the context.
+                NSError *error = nil;
+                
+                if (self.writerManagedObjectContext.hasChanges && ![self.writerManagedObjectContext save:&error]) {
+                    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+                }
+                
+            }]; // writer
+        }]; // main
+
+    }];
+    
 }
 
 + (NSManagedObjectContext *)getContext

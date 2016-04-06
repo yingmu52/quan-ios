@@ -46,23 +46,9 @@ ViewForEmptyEventDelegate>
         self.navigationItem.title = nil;
     }
 }
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self.fetchCenter getPlanListForOwnerId:[User uid] completion:^(NSArray *plans) {
-        if (!plans.count){
-            [self setUpEmptyView];
-        }
-        
-        //同步列表
-        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        for (Plan *plan in self.collectionFetchedRC.fetchedObjects) {
-            if (![plans containsObject:plan.planId]) {
-                [delegate.managedObjectContext deleteObject:plan];
-            }
-        }
-        [delegate saveContext];
-    }];
-}
+
+
+
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     [self updateNavigationTitle];
 }
@@ -82,6 +68,22 @@ ViewForEmptyEventDelegate>
     [super viewDidLoad];
     [self setUpNavigationItem];
     [self addLongPressGesture];
+    
+    [self.fetchCenter getPlanListForOwnerId:[User uid] completion:^(NSArray *plans) {
+        if (!plans.count){
+            [self setUpEmptyView];
+        }
+        
+        //同步列表
+        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        for (Plan *plan in self.collectionFetchedRC.fetchedObjects) {
+            if (![plans containsObject:plan.planId]) {
+                [delegate.managedObjectContext deleteObject:plan];
+            }
+        }
+        [delegate saveContext];
+    }];
+
 }
 - (void)addLongPressGesture{
     UILongPressGestureRecognizer *lp = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
