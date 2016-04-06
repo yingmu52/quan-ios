@@ -402,6 +402,10 @@ static NSUInteger distance = 10;
 
 }
 
+- (void)didRemoveImageAtIndexPath:(NSIndexPath *)indexPath{
+    [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
+}
+
 #pragma mark - Image Picker Delegate
 - (ImagePicker *)imagePicker{
     if (!_imagePicker) {
