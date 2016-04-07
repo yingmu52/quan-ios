@@ -326,11 +326,6 @@
     }
 }
 
-- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(WishDetailCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    cell.photoView.image = nil;
-    [cell.photoView sd_cancelCurrentImageLoad];
-}
-
 - (NSString *)segueForFeed{
     return @"showFeedDetailView";
 }

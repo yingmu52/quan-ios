@@ -33,13 +33,20 @@
         if (!isTargetImageExist) {
             [self sd_setImageWithURL:url
                     placeholderImage:nil
-                             options:SDWebImageRetryFailed
+                             options:SDWebImageAvoidAutoSetImage
                            completed:^(UIImage *image,
                                        NSError *error,
                                        SDImageCacheType cacheType,
                                        NSURL *imageURL) {
                                dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                                    [manager.imageCache storeImage:image forKey:localKey];
+                                   dispatch_main_async_safe(^{
+                                       //无图时才设置图，注意要配合SDWebImageAvoidAutoSetImage使用
+                                       if (!self.image) {
+                                           self.image = image;
+                                       }
+                                       
+                                   });
                                });
                                
                            }];
