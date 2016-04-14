@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MSSuperViewController.h"
 
-@interface InvitationViewController : UIViewController 
-
+@interface InvitationViewController : MSSuperViewController
+@property (nonatomic,strong) Circle *circle;
 @end

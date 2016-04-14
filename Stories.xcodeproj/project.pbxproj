@@ -373,8 +373,8 @@
 		A07115D01BA6B109002C1270 /* SZTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZTextView.m; sourceTree = "<group>"; };
 		A07C21211C8163BF0084976A /* ButtonWithPathedImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonWithPathedImage.h; sourceTree = "<group>"; };
 		A07C21221C8163BF0084976A /* ButtonWithPathedImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonWithPathedImage.m; sourceTree = "<group>"; };
-		A07C66AD1BE01AB800413D32 /* InvitationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationViewController.h; sourceTree = "<group>"; };
-		A07C66AE1BE01AB800413D32 /* InvitationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationViewController.m; sourceTree = "<group>"; };
+		A07C66AD1BE01AB800413D32 /* InvitationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InvitationViewController.h; path = Discovery/InvitationViewController.h; sourceTree = "<group>"; };
+		A07C66AE1BE01AB800413D32 /* InvitationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InvitationViewController.m; path = Discovery/InvitationViewController.m; sourceTree = "<group>"; };
 		A07C66B41BE0707300413D32 /* WXApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiManager.h; sourceTree = "<group>"; };
 		A07C66B51BE0707300413D32 /* WXApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXApiManager.m; sourceTree = "<group>"; };
 		A07C66C01BE070E400413D32 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
@@ -1015,6 +1015,8 @@
 				A0CBDCB41C8DF09800DA53FF /* EmptyCircleView.xib */,
 				A0CBDCB71C8E23F500DA53FF /* CircleEditViewController.h */,
 				A0CBDCB81C8E23F500DA53FF /* CircleEditViewController.m */,
+				A07C66AD1BE01AB800413D32 /* InvitationViewController.h */,
+				A07C66AE1BE01AB800413D32 /* InvitationViewController.m */,
 			);
 			name = Circles;
 			sourceTree = "<group>";
@@ -1284,8 +1286,6 @@
 			children = (
 				A0DCF0D41CA9AE6A0052380E /* PlansViewController.h */,
 				A0DCF0D51CA9AE6A0052380E /* PlansViewController.m */,
-				A07C66AD1BE01AB800413D32 /* InvitationViewController.h */,
-				A07C66AE1BE01AB800413D32 /* InvitationViewController.m */,
 				A016FDB41B8C4250006E7A09 /* ShuffleViewController.h */,
 				A016FDB51B8C4250006E7A09 /* ShuffleViewController.m */,
 				AEFB047B1AD12437009EB0D3 /* DiscoveryCell.h */,
