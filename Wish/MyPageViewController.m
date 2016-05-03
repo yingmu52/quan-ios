@@ -222,7 +222,7 @@
 // MARK: 检测到摇一摇
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event{
     
-    BOOL isUsingInnerNetwork = [[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_INNER_NETWORK];
+    BOOL isUsingInnerNetwork = [[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_TESTURL];
     //支持摇一摇的条件是 1. 外网的已知id 2. 用户在内网
     if ([User isSuperUser] || isUsingInnerNetwork) {
         
@@ -235,7 +235,7 @@
             //选择内网
             UIAlertAction *testEnv = [UIAlertAction actionWithTitle:testEnvTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 if (!isUsingInnerNetwork) {
-                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SHOULD_USE_INNER_NETWORK];
+                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SHOULD_USE_TESTURL];
                     [self logout];
                     [self clearCoreData];
                 }
@@ -244,7 +244,7 @@
             //选择外网
             UIAlertAction *proEnv = [UIAlertAction actionWithTitle:proEnvTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 if (isUsingInnerNetwork) {
-                    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:SHOULD_USE_INNER_NETWORK];
+                    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:SHOULD_USE_TESTURL];
                     [self logout];
                     [self clearCoreData];
                 }

@@ -8,8 +8,6 @@
 
 #import "FetchCenter.h"
 
-#define INNER_NETWORK_URL @"http://182.254.167.228"
-#define OUTTER_NETWORK_URL @"http://120.24.73.51"
 #define PROJECT @"/superplan/"
 
 #define PLAN @"plan/"
@@ -1102,10 +1100,10 @@
 #pragma mark - 核心请求函数
 
 - (NSString *)baseUrl{
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_INNER_NETWORK]) {
-        _baseUrl = [NSString stringWithFormat:@"%@%@",INNER_NETWORK_URL,PROJECT];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_TESTURL]) {
+        _baseUrl = [NSString stringWithFormat:@"%@%@",TEST_URL,PROJECT];
     }else{
-        _baseUrl = [NSString stringWithFormat:@"%@%@",OUTTER_NETWORK_URL,PROJECT];
+        _baseUrl = [NSString stringWithFormat:@"%@%@",PROD_URL,PROJECT];
     }
     //    NSLog(@"%@",_baseUrl);
     return _baseUrl;
@@ -1336,7 +1334,10 @@
 
 //return a new base url string with appened version argument
 - (NSString *)addGeneralArgumentsForBaseURL:(NSString *)baseURL{
-    NSMutableDictionary *dict = [@{@"version":self.buildVersion,@"loginType":[User loginType]} mutableCopy];
+    NSMutableDictionary *dict = [@{@"version":self.buildVersion,
+                                   @"loginType":[User loginType],
+                                   @"device":@"ios"}
+                                 mutableCopy];
     
     //add user info
     if ([User uid].length > 0 && [User uKey].length > 0) {
