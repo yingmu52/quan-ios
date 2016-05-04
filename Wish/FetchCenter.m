@@ -105,7 +105,7 @@
     includeArguments:YES
           completion:^(NSDictionary *responseJson)
      {
-         BOOL isSuperUser = responseJson[@"iswhite"];
+         BOOL isSuperUser = [responseJson[@"iswhite"] boolValue];
          if (![User isSuperUser] && isSuperUser) {
              [User updateAttributeFromDictionary:@{IS_SUPERUSER:@(isSuperUser)}];
          }
