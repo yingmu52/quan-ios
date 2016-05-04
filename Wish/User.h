@@ -24,6 +24,8 @@
 #define YOUTU_SIGNATURE @"tencent_Youtu_Signature"
 #define CURRENT_CIRCLE_ID @"current_circle_identifier"
 #define LOGIN_TYPE @"user_login_type"
+#define IS_SUPERUSER @"is_user_aSuperUser"
+
 @interface User : NSObject
 
 + (void)updateAttributeFromDictionary:(NSDictionary *)info;

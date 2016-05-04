@@ -27,7 +27,13 @@
     [self.collectionView addGestureRecognizer:longPress];
     
     //设置导航项目
-    self.navigationItem.title = @"圈里事";
+    BOOL isOnTestEnvironment = [[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_TESTURL];
+    if (isOnTestEnvironment) {
+        self.navigationItem.title = [NSString stringWithFormat:@"测试环境 %@",TEST_URL];
+    }else{
+        self.navigationItem.title = @"圈里事";
+    }
+    
 }
 
 

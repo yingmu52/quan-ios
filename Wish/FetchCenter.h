@@ -22,7 +22,7 @@
 #import "TXYUploadManager.h"
 #import "SDWebImageManager.h"
 #import "Circle.h"
-#define TEST_URL @"http://182.254.167.228"
+#define TEST_URL @"http://121.42.179.193"
 #define PROD_URL @"http://120.24.73.51"
 #define SHOULD_USE_TESTURL @"kShouldUSeInnerNetwork"
 
@@ -258,7 +258,8 @@ typedef void(^FetchCenterGetRequestGetFollowingPlanListCompleted)(void);
          localList:(NSArray *)localList
         serverList:(NSArray *)serverList;
 
-
+typedef void(^FetchCenterGetRequestCheckWhitelistCompleted)(BOOL isSuperUser);
+- (void)checkWhitelist:(FetchCenterGetRequestCheckWhitelistCompleted)completionBlock;
 
 typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId); //上传图像成功
 typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson); //请求成功

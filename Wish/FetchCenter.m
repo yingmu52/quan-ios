@@ -71,6 +71,11 @@
 #define TENCENTYOUTU @"tencentYoutu/"
 #define GET_SIGNATURE @"getsign.php"
 
+
+#define SYSTEM @"sys/"
+#define CHECK_WHITELIST @"whitelist.php"
+
+
 @interface FetchCenter ()
 @property (nonatomic,strong) NSString *baseUrl;
 @property (nonatomic,strong) Reachability *reachability;
@@ -90,6 +95,24 @@
     NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     context.parentContext = self.appDelegate.managedObjectContext;
     return context;
+}
+
+- (void)checkWhitelist:(FetchCenterGetRequestCheckWhitelistCompleted)completionBlock{
+    
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,SYSTEM,CHECK_WHITELIST];
+    [self getRequest:rqtStr
+           parameter:nil
+    includeArguments:YES
+          completion:^(NSDictionary *responseJson)
+     {
+         BOOL isSuperUser = responseJson[@"iswhite"];
+         if (![User isSuperUser] && isSuperUser) {
+             [User updateAttributeFromDictionary:@{IS_SUPERUSER:@(isSuperUser)}];
+         }
+         if (completionBlock) {
+             completionBlock(isSuperUser);
+         }
+     }];
 }
 #pragma mark - 圈子
 #define TOOLCGIKEY @"123$%^abc"

@@ -70,6 +70,10 @@
     
     //用于检测摇一摇
     [self becomeFirstResponder];
+
+    //检测自己是否在白名单
+    [self.fetchCenter checkWhitelist:nil];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
