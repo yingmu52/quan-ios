@@ -125,6 +125,13 @@
     }
     
     if (indexPath.section == 1){
+        if (indexPath.row == 0) {
+            NSURL *url = [NSURL URLWithString:@"https://www.pgyer.com/sAG9"];
+            UIApplication *app = [UIApplication sharedApplication];
+            if ([app canOpenURL:url]) {
+                [app openURL:url];
+            }
+        }
         if (indexPath.row == 2){ //用户反馈
             [self performSegueWithIdentifier:@"showFeedbackView" sender:nil];
         }
