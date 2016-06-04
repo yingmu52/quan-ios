@@ -23,7 +23,7 @@
 #import "SDWebImageManager.h"
 #import "Circle.h"
 #define TEST_URL @"http://121.42.179.193"
-#define PROD_URL @"http://120.24.73.51"
+#define PROD_URL @"http://120.24.157.16" // 120.24.73.51
 #define SHOULD_USE_TESTURL @"kShouldUSeInnerNetwork"
 
 typedef enum {
