@@ -36,7 +36,7 @@
     if (!_collectionFetchRequest) {
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
         request.predicate = [NSPredicate predicateWithFormat:@"owner.ownerId == %@ && planStatus == %d",[User uid],PlanStatusOnGoing];
-        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
+        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"updateDate" ascending:NO]];
         _collectionFetchRequest = request;
     }
     return _collectionFetchRequest;
@@ -86,18 +86,22 @@
 
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    //场景：1个事件，+号在最后面，此时事件数>0，+号的索引为1
     if (self.collectionFetchedRC.fetchedObjects.count > 0 &&
-        indexPath.row != self.collectionFetchedRC.fetchedObjects.count) { //场景：1个事件，+号在最后面，此时事件数>0，+号的索引为1
-            //将卡片滚到与三角号对齐
-            [collectionView scrollToItemAtIndexPath:indexPath
-                                   atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
-                                           animated:YES];
+        indexPath.row != self.collectionFetchedRC.fetchedObjects.count) {
             [self.imagePicker showPhotoLibrary:self];
     }else{
             [self performSegueWithIdentifier:@"showPostViewFromShuffleView" sender:nil];
     }
 }
 
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
+    [super controllerDidChangeContent:controller];
+    
+    //展示最左边第一项
+    [self.collectionView setContentOffset:CGPointZero];
+}
 
 #pragma mark - image picker
 - (ImagePicker *)imagePicker{

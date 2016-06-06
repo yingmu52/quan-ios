@@ -28,6 +28,7 @@
     feed.picUrls = [imageIds componentsJoinedByString:@","];
     feed.type = @(imageIds.count > 1 ? FeedTypeMultiplePicture : FeedTypeSinglePicture);
     plan.backgroundNum = imageIds.firstObject;
+    plan.updateDate = [NSDate date];
     feed.plan = plan;
     feed.selfLiked = @(NO);
     [delegate saveContext];
