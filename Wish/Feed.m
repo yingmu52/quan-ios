@@ -51,7 +51,7 @@
         feed = [NSEntityDescription insertNewObjectForEntityForName:@"Feed"
                                              inManagedObjectContext:context];
         feed.feedId = feedItem[@"id"];
-        feed.imageId = feedItem[@"picurl"];
+//        feed.imageId = feedItem[@"picurl"];
         feed.selfLiked = @(NO);
         feed.feedTitle = feedItem[@"content"];
         feed.createDate = [NSDate dateWithTimeIntervalSince1970:[feedItem[@"createTime"] integerValue]];
@@ -63,6 +63,10 @@
         //update
         feed = checks.lastObject;
         
+    }
+    
+    if (![feed.imageId isEqualToString:feedItem[@"picurl"]]) {
+        feed.imageId = feedItem[@"picurl"];
     }
     
     if (![feed.likeCount isEqualToNumber:@([feedItem[@"likeTimes"] integerValue])]){
