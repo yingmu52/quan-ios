@@ -14,25 +14,60 @@
 
 @implementation Feed
 
-+ (Feed *)createFeedInPlan:(Plan *)plan feedTitle:(NSString *)feedTitle feedId:(NSString *)feedId imageIds:(NSArray *)imageIds{
-    //create feed
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    Feed *feed = [NSEntityDescription insertNewObjectForEntityForName:@"Feed"
-                                               inManagedObjectContext:delegate.managedObjectContext];
-    feed.feedId = feedId;
-    [plan updateTryTimesOfPlan:YES];
-    feed.feedTitle = feedTitle;
-    feed.createDate = [NSDate date];
-    feed.imageId = imageIds.firstObject;
-    feed.picUrls = [imageIds componentsJoinedByString:@","];
-    feed.type = @(imageIds.count > 1 ? FeedTypeMultiplePicture : FeedTypeSinglePicture);
-    plan.backgroundNum = imageIds.firstObject;
-    plan.updateDate = [NSDate date];
-    feed.plan = plan;
-    feed.selfLiked = @(NO);
-    [delegate saveContext];
-    return feed;
+//+ (Feed *)createFeedInPlan:(Plan *)plan feedTitle:(NSString *)feedTitle feedId:(NSString *)feedId imageIds:(NSArray *)imageIds{
+//    //create feed
+//    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//    
+//    Feed *feed = [NSEntityDescription insertNewObjectForEntityForName:@"Feed"
+//                                               inManagedObjectContext:delegate.managedObjectContext];
+//    feed.feedId = feedId;
+//    [plan updateTryTimesOfPlan:YES];
+//    feed.feedTitle = feedTitle;
+//    feed.createDate = [NSDate date];
+//    feed.imageId = imageIds.firstObject;
+//    feed.picUrls = [imageIds componentsJoinedByString:@","];
+//    feed.type = @(imageIds.count > 1 ? FeedTypeMultiplePicture : FeedTypeSinglePicture);
+//    plan.backgroundNum = imageIds.firstObject;
+//    plan.updateDate = [NSDate date];
+//    feed.plan = plan;
+//    feed.selfLiked = @(NO);
+//    [delegate saveContext];
+//    return feed;
+//}
+
++ (void)createFeed:(NSString *)feedId
+             title:(NSString *)feedTitle
+            images:(NSArray *)imageIds
+            planID:(NSString *)planId{
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        NSManagedObjectContext *workerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        workerContext.parentContext = delegate.managedObjectContext;
+
+        Plan *plan = [Plan fetchWith:@"Plan"
+                           predicate:[NSPredicate predicateWithFormat:@"planId == %@",planId]
+                    keyForDescriptor:@"planId"
+                managedObjectContext:workerContext].lastObject;
+        
+        Feed *feed = [NSEntityDescription insertNewObjectForEntityForName:@"Feed"
+                                                   inManagedObjectContext:workerContext];
+        feed.feedId = feedId;
+        [plan updateTryTimesOfPlan:YES];
+        feed.feedTitle = feedTitle;
+        feed.createDate = [NSDate date];
+        feed.imageId = imageIds.firstObject;
+        feed.picUrls = [imageIds componentsJoinedByString:@","];
+        feed.type = @(imageIds.count > 1 ? FeedTypeMultiplePicture : FeedTypeSinglePicture);
+        plan.backgroundNum = imageIds.firstObject;
+        plan.updateDate = [NSDate date];
+        feed.plan = plan;
+        feed.selfLiked = @(NO);
+        [delegate saveContext:workerContext];
+        
+    });
+
+
 }
 
 + (Feed *)updateFeedWithInfo:(NSDictionary *)feedItem

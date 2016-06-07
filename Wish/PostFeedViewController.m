@@ -254,12 +254,11 @@ static NSUInteger distance = 10;
                               planId:self.plan.planId
                      fetchedImageIds:imageIds
                           completion:^(NSString *feedId) {
-            //create local feed
-            Feed *feed = [Feed createFeedInPlan:self.plan
-                                      feedTitle:self.textView.text
-                                         feedId:feedId
-                                       imageIds:imageIds];
-            [self finishUploadingFeed:feed];
+                              [Feed createFeed:feedId
+                                         title:self.textView.text
+                                        images:imageIds
+                                        planID:self.plan.planId];
+                              [self.navigationController popViewControllerAnimated:YES];
         }];
 
     }else{
@@ -277,11 +276,8 @@ static NSUInteger distance = 10;
                                        planId:planId
                                  backgroundID:imageIds.firstObject];
                 //create local feed
-                Feed *feed = [Feed createFeedInPlan:plan
-                                          feedTitle:self.textView.text
-                                             feedId:feedId
-                                           imageIds:imageIds];
-                [self finishUploadingFeed:feed];
+                [Feed createFeed:feedId title:self.textView.text images:imageIds planID:planId];
+                [self performSegueWithIdentifier:@"showWishDetailOnPlanCreation" sender:plan];
             }];
                               
             
@@ -290,26 +286,17 @@ static NSUInteger distance = 10;
 }
 
 
-- (void)finishUploadingFeed:(Feed *)feed
-{
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
-    if (!self.seugeFromPlanCreation) {
-        
-        //选项卡加号入口进入时入时应该使用DimissModalView方法
-//        if (self.navigationController.presentingViewController) {
-//            //隐藏键盘
-//            [self.textView resignFirstResponder];
-//            //关闭当前视图
-//            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-//        }else{
-            //返回上一级
-            [self.navigationController popViewControllerAnimated:YES];
-//        }
-    }else{
-        [self performSegueWithIdentifier:@"showWishDetailOnPlanCreation" sender:feed.plan];
-    }
-    self.progressBar.hidden = NO;
-}
+//- (void)finishUploadingFeed:(Feed *)feed
+//{
+//    [self.textView resignFirstResponder];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
+//    if (!self.seugeFromPlanCreation) {
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }else{
+//        [self performSegueWithIdentifier:@"showWishDetailOnPlanCreation" sender:feed.plan];
+//    }
+//    self.progressBar.hidden = NO;
+//}
 
 - (void)didReceivedCurrentProgressForUploadingImage:(CGFloat)percentage{
     [self.progressBar setProgress:percentage animated:YES];
