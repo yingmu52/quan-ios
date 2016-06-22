@@ -39,10 +39,41 @@
         self.window.rootViewController = self.loginVC;
     }
     
+    //register for push notification
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeAlert|UIUserNotificationTypeSound categories:nil];
+    [application registerUserNotificationSettings:settings];
+    
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
 
+
+#pragma mark - Push Notification
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(nonnull UIUserNotificationSettings *)notificationSettings{
+    
+    //only register remote notification when permission is granted
+    if (notificationSettings != UIUserNotificationTypeNone) {
+        [application registerForRemoteNotifications];
+    }
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
+    
+    //remote registration successed
+    NSString *strToken = [deviceToken.description stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    strToken = [strToken stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSLog(@"Device Token is %@",strToken);
+    
+#warning send device token to our server
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(nonnull NSError *)error{
+    //remote registration failed
+    NSLog(@"Failed To Register, error : %@",error);
+}
+
+#pragma mark - Other Application Events
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
