@@ -248,6 +248,43 @@ static NSUInteger distance = 10;
 
 #pragma mark - fetch center delegate
 
+- (void)didFailUploadingImage:(UIImage *)image{
+    //图片上传失败
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"错误"
+                                                                   message:@"上传失败"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"重试"
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action)
+    {
+        //重新上传
+        [self.progressBar setProgress:0.0f];
+        [self createFeed];
+    }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消"
+                                                     style:UIAlertActionStyleCancel
+                                                   handler:^(UIAlertAction * _Nonnull action)
+    {
+        //取掉进度条
+        [self.progressBar removeFromSuperview];
+        
+        //初始化上传button
+        self.tikButton = [Theme buttonWithImage:[Theme navTikButtonDefault]
+                                         target:self
+                                       selector:@selector(createFeed)
+                                          frame:CGRectMake(0, 0, 25, 25)];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
+
+    }];
+    
+    [alert addAction:confirm];
+    [alert addAction:cancel];
+    [self presentViewController:alert animated:YES completion:nil];
+
+}
+
 - (void)finishUploadingImages:(NSArray *)imageIds{
     if (self.plan) {
         [self.fetchCenter createFeed:self.textView.text

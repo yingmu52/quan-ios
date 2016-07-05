@@ -1222,13 +1222,16 @@
                  //得到图片上传成功后的回包信息
                  TXYPhotoUploadTaskRsp *photoResp = (TXYPhotoUploadTaskRsp *)resp;
                  
-                 //缓存图片
+                 //缓存图片,此法保存图像的方向
                  NSURL *url = [self urlWithImageID:photoResp.photoFileId
                                               size:FetchCenterImageSizeOriginal];
                  SDWebImageManager *manager = [SDWebImageManager sharedManager];
                  [manager.imageCache storeImage:image
-                                         forKey:[manager cacheKeyForURL:url]];
-
+                           recalculateFromImage:NO
+                                      imageData:UIImageJPEGRepresentation(image, 1.0f)
+                                         forKey:[manager cacheKeyForURL:url]
+                                         toDisk:NO];
+                 
 
                  completionBlock(photoResp.photoFileId);
                  
