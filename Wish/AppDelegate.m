@@ -63,9 +63,10 @@
     //remote registration successed
     NSString *strToken = [deviceToken.description stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     strToken = [strToken stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSLog(@"Device Token is %@",strToken);
+
+    //向后台发送Device Token
+    [self.fetchCenter sendDeviceToken:strToken completion:nil];
     
-#warning send device token to our server
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(nonnull NSError *)error{

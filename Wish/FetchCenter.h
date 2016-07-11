@@ -252,6 +252,11 @@ typedef void(^FetchCenterGetRequestGetFollowingPlanListCompleted)(void);
              completion:(FetchCenterGetRequestSetPersonalInfoCompleted)completionBlock;;
 
 #pragma mark - 工具
+
+typedef void(^FetchCenterPostRequestSendDeviceTokenCompleted)(void);
+- (void)sendDeviceToken:(NSString *)deviceToken completion:(FetchCenterPostRequestSendDeviceTokenCompleted)completionBlock;
+
+
 - (NSURL *)urlWithImageID:(NSString *)imageId size:(FetchCenterImageSize)size;
 - (void)syncEntity:(NSString *)entityName
             idName:(NSString *)uniqueID

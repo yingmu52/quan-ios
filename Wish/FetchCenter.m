@@ -10,6 +10,9 @@
 
 #define PROJECT @"/superplan/"
 
+#define PUSH @"push/"
+#define SEND_DEVICETOKEN @"splan_push_token.php"
+
 #define PLAN @"plan/"
 #define GET_LIST @"splan_plan_getlist.php"
 #define CREATE_PLAN @"splan_plan_create.php"
@@ -114,6 +117,18 @@
          }
      }];
 }
+
+- (void)sendDeviceToken:(NSString *)deviceToken
+             completion:(FetchCenterPostRequestSendDeviceTokenCompleted)completionBlock{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PUSH,SEND_DEVICETOKEN];
+    [self postRequest:rqtStr parameter:@{@"device_token":deviceToken} includeArguments:YES completion:^(NSDictionary *responseJson) {
+        NSLog(@"Uploaded Device Token: %@",deviceToken);
+        if (completionBlock) {
+            completionBlock();
+        }
+    }];
+}
+
 #pragma mark - 圈子
 #define TOOLCGIKEY @"123$%^abc"
 
@@ -1280,15 +1295,35 @@
     
 }
 
-/**
- * 新版请求函数（测试阶段）
- * 目前正在使用该函数的功能: [评论和回复]
- */
+
 - (void)getRequest:(NSString *)baseURL
          parameter:(NSDictionary *)dict
   includeArguments:(BOOL)shouldInclude //针对工具类的CGI不需要加统一参数
         completion:(FetchCenterGetRequestCompletionBlock)completionBlock{
-    
+    [self sendRequest:baseURL
+            parameter:dict
+     includeArguments:shouldInclude 
+           httpMethod:@"GET"
+           completion:completionBlock];
+}
+
+- (void)postRequest:(NSString *)baseURL
+          parameter:(NSDictionary *)dict
+   includeArguments:(BOOL)shouldInclude //针对工具类的CGI不需要加统一参数
+         completion:(FetchCenterGetRequestCompletionBlock)completionBlock{
+    [self sendRequest:baseURL
+            parameter:dict
+     includeArguments:shouldInclude
+           httpMethod:@"POST"
+           completion:completionBlock];
+}
+
+
+- (void)sendRequest:(NSString *)baseURL
+          parameter:(NSDictionary *)dict
+   includeArguments:(BOOL)shouldInclude //针对工具类的CGI不需要加统一参数
+         httpMethod:(NSString *)method
+         completion:(FetchCenterGetRequestCompletionBlock)completionBlock{
     @try {
         //检测网络
         if (![self hasActiveInternetConnection]) return;
@@ -1298,21 +1333,31 @@
         baseURL = shouldInclude ? [self addGeneralArgumentsForBaseURL:baseURL] : baseURL;
         
         //拼接参数
-        NSString *rqtStr = [baseURL stringByAppendingString:[self argumentStringWithDictionary:dict]];
+        NSString *rqtStr = baseURL;
+        if ([method isEqualToString:@"GET"]) {
+             rqtStr = [baseURL stringByAppendingString:[self argumentStringWithDictionary:dict]];
+        }
+        
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:rqtStr]
                                                                cachePolicy:NSURLRequestReloadIgnoringCacheData
                                                            timeoutInterval:30.0];
-        request.HTTPMethod = @"GET";
-//        NSLog(@"%@",rqtStr);
+        if ([method isEqualToString:@"POST"]) {
+            NSString *bodyString = [self argumentStringWithDictionary:dict];
+            NSData *bodyData = [[bodyString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] dataUsingEncoding:NSUTF8StringEncoding];
+            request.HTTPBody = bodyData;
+        }
+        
+        request.HTTPMethod = method;
+        //        NSLog(@"%@",rqtStr);
         NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
         NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
             if (data){
                 //递归过滤Json里含带的Null数据
                 NSDictionary *rawJson = [NSJSONSerialization JSONObjectWithData:data
-                                                                          options:NSJSONReadingAllowFragments
-                                                                            error:nil];
+                                                                        options:NSJSONReadingAllowFragments
+                                                                          error:nil];
                 NSDictionary *responseJson = [self recursiveNullRemove:rawJson];
-//                NSLog(@"%@",responseJson);
+                //                NSLog(@"%@",responseJson);
                 if (responseJson) {
                     if (!error && ![responseJson[@"ret"] integerValue]){ //成功
                         if (completionBlock) {
@@ -1322,16 +1367,16 @@
                             });
                         }
                     }else{ //失败
-                          
+                        
                         //在委托中跳出后台的提示
                         [self alertWithBackendErrorCode:@([responseJson[@"ret"] integerValue])];
-                          
+                        
                         //假失败写入请求日志
                         [self appendRequest:request andResponse:responseJson];
-                          
+                        
                         NSLog(@"Fail Get Request :%@\n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
                               ,rqtStr,baseURL,dict,responseJson,error);
-                          
+                        
                         if ([self.delegate respondsToSelector:@selector(didFailSendingRequest)]){
                             [self.delegate didFailSendingRequest];
                         }
