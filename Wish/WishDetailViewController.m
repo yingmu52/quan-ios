@@ -9,6 +9,7 @@
 #import "WishDetailViewController.h"
 #import "UIImageView+ImageCache.h"
 #import "UIScrollView+SVInfiniteScrolling.h"
+#import "InvitationViewController.h"
 @interface WishDetailViewController () <HeaderViewDelegate,UIGestureRecognizerDelegate,UITextViewDelegate>
 @property (nonatomic,strong) NSDictionary *textAttributes;
 @property (nonatomic,strong) NSMutableArray *serverFeedIds;
@@ -171,15 +172,6 @@
                                              frame:frame];
 
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:moreBtn];
-    
-//    if ([self.plan.owner.ownerId isEqualToString:[User uid]]) {
-//        UIButton *deleteBtn = [Theme buttonWithImage:[Theme navButtonDeleted]
-//                                              target:self
-//                                            selector:@selector(deletePlan)
-//                                               frame:frame];
-//        
-//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:deleteBtn];
-//    }
 }
 
 
@@ -387,6 +379,14 @@
             vc.feedId = feed.feedId;
         }
 
+    }
+    
+    if ([segue.identifier isEqualToString:@"showInvitationView"]) {
+        InvitationViewController *ivc = segue.destinationViewController;
+        ivc.imageUrl = [self.fetchCenter urlWithImageID:self.plan.backgroundNum size:FetchCenterImageSize50];
+        ivc.sharedContentTitle = self.plan.planTitle;
+        ivc.sharedContentDescription = self.plan.detailText ? self.plan.detailText : @"";
+        ivc.h5Url = [NSString stringWithFormat:@"http://shier.wexincloud.com/common/plandetail?planid=%@",self.plan.planId];
     }
 }
 

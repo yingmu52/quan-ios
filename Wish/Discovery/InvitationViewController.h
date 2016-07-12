@@ -10,5 +10,11 @@
 #import "MSSuperViewController.h"
 
 @interface InvitationViewController : MSSuperViewController
-@property (nonatomic,strong) Circle *circle;
+//@property (nonatomic,strong) Circle *circle;
+
+@property (nonatomic,strong) NSURL *imageUrl;
+@property (nonatomic,strong) NSString *h5Url;
+
+@property (nonatomic,strong) NSString *sharedContentTitle;
+@property (nonatomic,strong) NSString *sharedContentDescription;
 @end

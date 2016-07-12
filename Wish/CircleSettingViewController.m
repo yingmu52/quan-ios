@@ -93,7 +93,7 @@
     
     if ([segue.identifier isEqualToString:@"showInvitationView"]) {
         InvitationViewController *ivc = segue.destinationViewController;
-        ivc.circle = self.circle;
+#warning must set ivc properties !
     }
     
 }
