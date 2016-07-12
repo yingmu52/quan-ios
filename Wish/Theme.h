@@ -50,6 +50,8 @@
 + (UIImage *)navCircleIcon;
 + (UIImage *)navInviteDefault;
 + (UIImage *)navSettingIcon;
++ (UIImage *)navMoreButtonDefault;
+
 
 + (UIImage *)wishDetailCameraDefault;
 + (UIImage *)wishDetailBackgroundNonLogo;

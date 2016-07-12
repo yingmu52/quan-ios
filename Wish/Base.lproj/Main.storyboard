@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hi1-Qm-xqU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hi1-Qm-xqU">
     <dependencies>
         <deployment version="2048" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -221,7 +221,7 @@
                                                     <rect key="frame" x="15" y="0.0" width="570" height="53.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -813,7 +813,7 @@
                                                     <color key="textColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="125" y="20" width="86.5" height="16"/>
+                                                        <rect key="frame" x="125" y="20" width="86" height="16"/>
                                                     </variation>
                                                 </label>
                                             </subviews>
@@ -906,7 +906,7 @@
                                                     <color key="textColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="79" y="20" width="92.5" height="16"/>
+                                                        <rect key="frame" x="79" y="20" width="92" height="16"/>
                                                     </variation>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" image="more" translatesAutoresizingMaskIntoConstraints="NO" id="k6x-1P-zkY">
@@ -3079,6 +3079,7 @@
                         <segue destination="XiV-RA-INl" kind="show" identifier="showPostFeed" id="4wk-xv-ETJ"/>
                         <segue destination="rNz-bL-QyY" kind="show" identifier="showEditPage" id="Zdn-fs-IsB"/>
                         <segue destination="egE-eW-ywB" kind="show" identifier="showFeedDetailFromOwner" id="dFu-Bk-XhY"/>
+                        <segue destination="hHC-dm-tO3" kind="presentation" identifier="showInvitationView" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="6ze-LH-v54"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l82-2h-AxP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4398,6 +4399,7 @@
                     <connections>
                         <outlet property="tableView" destination="fOK-yO-OcH" id="684-qr-ZGS"/>
                         <segue destination="egE-eW-ywB" kind="show" identifier="showFeedDetailView" id="Y2c-0U-Rmr"/>
+                        <segue destination="hHC-dm-tO3" kind="presentation" identifier="showInvitationView" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="XMp-RI-rbx"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l1a-lB-oB1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4587,7 +4589,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1980" y="1512"/>
+            <point key="canvasLocation" x="7524" y="-204"/>
         </scene>
         <!--DiscoveryVC Data-->
         <scene sceneID="49l-Ho-Tjj">
@@ -8305,11 +8307,12 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="HDW-gM-fhf"/>
-        <segue reference="cel-0L-eNY"/>
-        <segue reference="dFu-Bk-XhY"/>
-        <segue reference="4wk-xv-ETJ"/>
         <segue reference="mFv-Li-7ge"/>
         <segue reference="8uB-Dl-NWo"/>
+        <segue reference="XMp-RI-rbx"/>
+        <segue reference="4wk-xv-ETJ"/>
+        <segue reference="0NR-qk-ahm"/>
+        <segue reference="dFu-Bk-XhY"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
 </document>

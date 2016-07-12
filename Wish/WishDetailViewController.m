@@ -156,42 +156,57 @@
 
 - (void)setUpNavigationItem
 {
+    [self setCurrenetBackgroundColor];
+
     CGRect frame = CGRectMake(0,0, 25,25);
     UIButton *backBtn = [Theme buttonWithImage:[Theme navBackButtonDefault]
                                         target:self
                                       selector:@selector(goBack)
                                          frame:frame];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+
+    UIButton *moreBtn = [Theme buttonWithImage:[Theme navMoreButtonDefault]
+                                            target:self
+                                          selector:@selector(showMoreOptions)
+                                             frame:frame];
+
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:moreBtn];
     
-    if ([self.plan.owner.ownerId isEqualToString:[User uid]]) {
-        UIButton *deleteBtn = [Theme buttonWithImage:[Theme navButtonDeleted]
-                                              target:self
-                                            selector:@selector(deletePlan)
-                                               frame:frame];
-        
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:deleteBtn];
-    }
-    [self setCurrenetBackgroundColor];
+//    if ([self.plan.owner.ownerId isEqualToString:[User uid]]) {
+//        UIButton *deleteBtn = [Theme buttonWithImage:[Theme navButtonDeleted]
+//                                              target:self
+//                                            selector:@selector(deletePlan)
+//                                               frame:frame];
+//        
+//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:deleteBtn];
+//    }
 }
 
--(void)deletePlan{
+
+- (void)showMoreOptions{
+    [self presentViewController:self.moreActionSheet
+                       animated:YES
+                     completion:nil];
+}
+
+- (UIAlertController *)moreActionSheet{
+    if (!_moreActionSheet) {
+        _moreActionSheet = [UIAlertController alertControllerWithTitle:nil
+                                                               message:nil
+                                                        preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        UIAlertAction *shareOption = [UIAlertAction actionWithTitle:@"分享"
+                                                              style:UIAlertActionStyleDefault
+                                                            handler:^(UIAlertAction * _Nonnull action)
+        {
+            //分享
+            [self performSegueWithIdentifier:@"showInvitationView" sender:nil];
+        }];
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"删除的事件不恢复哦！"
-                                                                   message:nil
-                                                            preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定"
-                                                      style:UIAlertActionStyleDefault
-                                                    handler:^(UIAlertAction * _Nonnull action)
-                              {
-                                  //执行删除操作
-                                  [self.plan deleteSelf];
-                                  [self.navigationController popViewControllerAnimated:YES];
-                              }];
-    [alert addAction:confirm];
-    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-    [self presentViewController:alert animated:YES completion:nil];
-    
-    
+        [_moreActionSheet addAction:shareOption];
+        [_moreActionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    }
+    return _moreActionSheet;
 }
 
 

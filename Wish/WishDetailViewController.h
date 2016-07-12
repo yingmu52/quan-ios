@@ -33,8 +33,10 @@
 @property (nonatomic,strong) NSDictionary *pageInfo;
 
 //@property (nonatomic,strong) NSMutableArray *serverFeedIds;
-- (void)setUpNavigationItem;
 
+@property (nonatomic,strong) UIAlertController *moreActionSheet;
+
+- (void)showMoreOptions;
 #pragma mark - abstract
 - (NSString *)segueForFeed; //must set to display feed detail
 

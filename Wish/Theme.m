@@ -139,6 +139,10 @@
     return [UIImage imageNamed:@"nav_ic_eidt_default"];
 }
 
++ (UIImage *)navMoreButtonDefault{
+    return [UIImage imageNamed:@"nav_ic_more"];
+}
+
 + (UIImage *)navButtonDeleted{
     return [UIImage imageNamed:@"nav_delete_ic"];
 }

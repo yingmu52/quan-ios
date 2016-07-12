@@ -23,72 +23,96 @@
 {
     self.headerView.descriptionTextView.userInteractionEnabled = YES; //enable text view to enable owner edit permission
     [super viewWillAppear:animated];
-    [self loadCornerCamera];
-    
+    self.cameraButton.hidden = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self.cameraButton removeFromSuperview];
-    
+    [self removeCameraButton];
 }
 
-- (void)setUpNavigationItem{
-    [super setUpNavigationItem];
+#pragma mark - 主人有权限的操作
+
+-(void)deletePlan{
     
-    CGRect frame = CGRectMake(0,0, 25,25);
-    UIButton *planEditBtn = [Theme buttonWithImage:[Theme navComposeButtonDefault]
-                                            target:self
-                                          selector:@selector(editPlan)
-                                            frame:frame];
-    
-//    UIButton *shareBtn = [Theme buttonWithImage:[Theme navShareButtonDefault]
-//                                         target:self
-//                                       selector:nil
-//                                          frame:frame];
-    
-//    UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
-//                                                                           target:nil action:nil];
-//    space.width = 25.0f;
-//    self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:shareBtn],
-//                                                space,
-//                                                [[UIBarButtonItem alloc] initWithCustomView:planEditBtn]];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:planEditBtn];
-}
-- (void)editPlan{
-    [self performSegueWithIdentifier:@"showEditPage" sender:self.plan];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"删除的事件不恢复哦！"
+                                                                   message:nil
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定"
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action)
+                              {
+                                  //执行删除操作
+                                  [self.plan deleteSelf];
+                                  [self.navigationController popViewControllerAnimated:YES];
+                              }];
+    [alert addAction:confirm];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    
+    
+    //添加主人有权限操作的选项
+    UIAlertAction *editOption = [UIAlertAction actionWithTitle:@"编辑"
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction * _Nonnull action)
+    {
+        //跳转到编辑页
+        [self performSegueWithIdentifier:@"showEditPage" sender:self.plan];        
+    }];
+    
+    UIAlertAction *deleteOption = [UIAlertAction actionWithTitle:@"删除"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * _Nonnull action)
+    {
+        //删除
+        [self deletePlan];
+    }];
 
+    [self.moreActionSheet addAction:deleteOption];
+    [self.moreActionSheet addAction:editOption];
+}
+
+- (void)showMoreOptions{
+    [self removeCameraButton];
+    [super showMoreOptions];
+}
 #pragma mark - setup views
 
-- (void)loadCornerCamera
-{
-    //load camera image
-    UIImage *cameraIcon = [Theme wishDetailCameraDefault];
-    UIButton *cameraButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [cameraButton setImage:cameraIcon forState:UIControlStateNormal];
-    cameraButton.hidden = NO;
-    
-    
-    UIWindow *topView = [[UIApplication sharedApplication] keyWindow];
-    
-    CGFloat trailing = 58.0/640 * self.view.frame.size.width;
-    CGFloat bottom = 32.0/1136 * self.view.frame.size.height;
-    
-    CGFloat width = cameraIcon.size.width/1.8;
-    CGFloat height = cameraIcon.size.height/1.8;
-    [cameraButton setFrame:CGRectMake(topView.frame.size.width - trailing - width,
-                                      topView.frame.size.height - bottom - height,
-                                      width,
-                                      height)];
-    [topView addSubview:cameraButton];
-    
-    [cameraButton addTarget:self action:@selector(showCamera)
-           forControlEvents:UIControlEventTouchUpInside];
-    self.cameraButton = cameraButton;
-    
+- (void)removeCameraButton{
+    [self.cameraButton removeFromSuperview];
+    self.cameraButton = nil;
+}
+- (UIButton *)cameraButton{
+    if (!_cameraButton) {
+        //load camera image
+        UIImage *cameraIcon = [Theme wishDetailCameraDefault];
+        _cameraButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_cameraButton setImage:cameraIcon forState:UIControlStateNormal];
+        _cameraButton.hidden = NO;
+        
+        
+        UIWindow *topView = [[UIApplication sharedApplication] keyWindow];
+        
+        CGFloat trailing = 58.0/640 * self.view.frame.size.width;
+        CGFloat bottom = 32.0/1136 * self.view.frame.size.height;
+        
+        CGFloat width = cameraIcon.size.width/1.8;
+        CGFloat height = cameraIcon.size.height/1.8;
+        [_cameraButton setFrame:CGRectMake(topView.frame.size.width - trailing - width,
+                                          topView.frame.size.height - bottom - height,
+                                          width,
+                                          height)];
+        [topView addSubview:_cameraButton];
+        
+        [_cameraButton addTarget:self action:@selector(showCamera)
+               forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _cameraButton;
 }
 
 
@@ -219,12 +243,13 @@
     return self.tableFetchedRC.fetchedObjects.count == 1;
 }
 
-- (void)deletePlan{
-    //delete plan and pop back. Notice place deletion is cascade
-    [self.plan deleteSelf];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+//- (void)deletePlan{
+//    //delete plan and pop back. Notice place deletion is cascade
+//    [self.plan deleteSelf];
+//    [self.navigationController popToRootViewControllerAnimated:YES];
+//
+//}
 
-}
 #pragma mark - fetch center delegate
 
 
