@@ -286,6 +286,9 @@ static NSUInteger distance = 10;
 }
 
 - (void)finishUploadingImages:(NSArray *)imageIds{
+    
+    [self.progressBar setProgress:1.0 animated:YES];
+    
     if (self.plan) {
         [self.fetchCenter createFeed:self.textView.text
                               planId:self.plan.planId
@@ -299,41 +302,26 @@ static NSUInteger distance = 10;
         }];
 
     }else{
+        
         [self.fetchCenter createPlan:self.navigationItem.title
-                            circleId:self.circle.circleId
-                          completion:^(NSString *planId, NSString *backgroundID)
+                     planDescription:@""
+                            circleID:self.circle.circleId
+                             picurls:imageIds
+                           feedTitle:self.textView.text
+                          completion:^(NSString *planId, NSString *feedId)
         {
-            [self.fetchCenter createFeed:self.textView.text
-                                  planId:planId
-                         fetchedImageIds:imageIds
-                              completion:^(NSString *feedId)
-            {
-                Plan *plan = [Plan createPlan:self.navigationItem.title
-                                     inCircle:self.circle
-                                       planId:planId
-                                 backgroundID:imageIds.firstObject];
-                //create local feed
-                [Feed createFeed:feedId title:self.textView.text images:imageIds planID:planId];
-                [self performSegueWithIdentifier:@"showWishDetailOnPlanCreation" sender:plan];
-            }];
-                              
-            
+            NSLog(@"plan ID: %@ \n feed ID: %@",planId,feedId);
+            Plan *plan = [Plan createPlan:self.navigationItem.title
+                                 inCircle:self.circle
+                                   planId:planId
+                             backgroundID:imageIds.firstObject];
+            //create local feed
+            [Feed createFeed:feedId title:self.textView.text images:imageIds planID:planId];
+            [self performSegueWithIdentifier:@"showWishDetailOnPlanCreation" sender:plan];
+
         }];
     }
 }
-
-
-//- (void)finishUploadingFeed:(Feed *)feed
-//{
-//    [self.textView resignFirstResponder];
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
-//    if (!self.seugeFromPlanCreation) {
-//        [self.navigationController popViewControllerAnimated:YES];
-//    }else{
-//        [self performSegueWithIdentifier:@"showWishDetailOnPlanCreation" sender:feed.plan];
-//    }
-//    self.progressBar.hidden = NO;
-//}
 
 - (void)didReceivedCurrentProgressForUploadingImage:(CGFloat)percentage{
     [self.progressBar setProgress:percentage animated:YES];

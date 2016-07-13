@@ -209,11 +209,19 @@ typedef void(^FetchCenterGetRequestGetPlanListCompleted)(NSArray *planIds);
 - (void)getPlanListForOwnerId:(NSString *)ownerId
                    completion:(FetchCenterGetRequestGetPlanListCompleted)completionBlock;
 
-/** 创建事件完成*/
-typedef void(^FetchCenterGetRequestPlanCreationCompleted)(NSString *planId, NSString *backgroundID);
+/** 创建事件*/
+//typedef void(^FetchCenterGetRequestPlanCreationCompleted)(NSString *planId, NSString *backgroundID);
+//- (void)createPlan:(NSString *)planTitle
+//          circleId:(NSString *)circleId
+//        completion:(FetchCenterGetRequestPlanCreationCompleted)completionBlock;
+
+typedef void(^FetchCenterPostRequestPlanAndFeedCreationCompleted)(NSString *planId,NSString *feedId);
 - (void)createPlan:(NSString *)planTitle
-          circleId:(NSString *)circleId
-        completion:(FetchCenterGetRequestPlanCreationCompleted)completionBlock;
+   planDescription:(NSString *)description
+          circleID:(NSString *)circleId
+           picurls:(NSArray *)picurls
+         feedTitle:(NSString *)feedTitle
+        completion:(FetchCenterPostRequestPlanAndFeedCreationCompleted)completionBlock;
 
 
 

@@ -16,6 +16,7 @@
 #define PLAN @"plan/"
 #define GET_LIST @"splan_plan_getlist.php"
 #define CREATE_PLAN @"splan_plan_create.php"
+#define CREATE_PLAN_FEED @"splan_plan_create_v2.php" //优化创建事件和创建动态：先上传图片，然后直接创建事件和动态
 #define DELETE_PLAN @"splan_plan_delete_id.php"
 #define UPDATE_PLAN_STATUS @"splan_plan_set_state.php"
 #define UPDATE_PLAN @"splan_plan_update.php"
@@ -1054,30 +1055,59 @@
 
 }
 
+//- (void)createPlan:(NSString *)planTitle
+//          circleId:(NSString *)circleId
+//        completion:(FetchCenterGetRequestPlanCreationCompleted)completionBlock{
+//    
+//    NSString *baseUrl = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,CREATE_PLAN];
+//    NSDictionary *args = @{@"title":[planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+//                           @"private":@(0),
+//                           @"quanId":circleId};
+//    [self getRequest:baseUrl parameter:args includeArguments:YES completion:^(NSDictionary *json) {
+//        NSString *fetchedPlanId = [json valueForKeyPath:@"data.id"];
+//        NSString *bgString = [json valueForKeyPath:@"data.backGroudPic"];
+//        if (fetchedPlanId && bgString) {
+////            NSLog(@"create plan succeed, ID: %@",fetchedPlanId);
+//            if (completionBlock) {
+//                dispatch_main_async_safe(^{
+//                    completionBlock(fetchedPlanId,bgString);
+//                });
+//            }
+//        }
+//    }];
+//    
+//}
+
+
 - (void)createPlan:(NSString *)planTitle
-          circleId:(NSString *)circleId
-        completion:(FetchCenterGetRequestPlanCreationCompleted)completionBlock{
-    
-    NSString *baseUrl = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,CREATE_PLAN];
-    NSDictionary *args = @{@"title":[planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+   planDescription:(NSString *)description
+          circleID:(NSString *)circleId
+           picurls:(NSArray *)picurls
+         feedTitle:(NSString *)feedTitle
+        completion:(FetchCenterPostRequestPlanAndFeedCreationCompleted)completionBlock{
+    NSString *baseUrl = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,CREATE_PLAN_FEED];
+    NSDictionary *args = @{@"title":planTitle,
+                           @"description":description,
+                           @"backGroudPic":picurls.firstObject,
                            @"private":@(0),
-                           @"quanId":circleId};
-    [self getRequest:baseUrl parameter:args includeArguments:YES completion:^(NSDictionary *json) {
-        NSString *fetchedPlanId = [json valueForKeyPath:@"data.id"];
-        NSString *bgString = [json valueForKeyPath:@"data.backGroudPic"];
-        if (fetchedPlanId && bgString) {
-//            NSLog(@"create plan succeed, ID: %@",fetchedPlanId);
-            if (completionBlock) {
-                dispatch_main_async_safe(^{
-                    completionBlock(fetchedPlanId,bgString);
-                });
-            }
+                           @"quanId":circleId,
+                           @"picurl":picurls.firstObject,
+                           @"picurls":[picurls componentsJoinedByString:@","],
+                           @"content":feedTitle};
+    [self postRequest:baseUrl
+            parameter:args
+     includeArguments:YES
+           completion:^(NSDictionary *responseJson) {
+        if (completionBlock) {
+            NSString *planID = [responseJson valueForKeyPath:@"data.planId"];
+            NSString *feedID = [responseJson valueForKeyPath:@"data.feedId"];
+            dispatch_main_async_safe(^{
+                completionBlock(planID,feedID);
+            });
         }
     }];
     
 }
-
-
 
 - (void)postToDeletePlan:(Plan *)plan completion:(FetchCenterGetRequestDeletePlanCompleted)completionBlock{
     NSString *baseUrl = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,DELETE_PLAN];
