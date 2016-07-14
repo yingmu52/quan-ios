@@ -386,7 +386,7 @@
         ivc.imageUrl = [self.fetchCenter urlWithImageID:self.plan.backgroundNum size:FetchCenterImageSize50];
         ivc.sharedContentTitle = self.plan.planTitle;
         ivc.sharedContentDescription = self.plan.detailText ? self.plan.detailText : @"";
-        ivc.h5Url = [NSString stringWithFormat:@"http://shier.wexincloud.com/common/plandetail?planid=%@",self.plan.planId];
+        ivc.h5Url = [NSString stringWithFormat:@"http://html.wexincloud.com/data/shier.all.html#/share/%@",self.plan.planId];
     }
 }
 
