@@ -42,11 +42,10 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     
     //Right Bar Button
-
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[Theme navInviteDefault]
-                                                                              style:UIBarButtonItemStylePlain
-                                                                             target:self
-                                                                             action:nil];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[Theme navInviteDefault]
+//                                                                              style:UIBarButtonItemStylePlain
+//                                                                             target:self
+//                                                                             action:nil];
     
     //Title
     self.navigationItem.title = @"管理成员";

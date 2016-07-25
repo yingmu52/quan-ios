@@ -353,6 +353,7 @@
 		A030105F1BACAFBC0041E2CF /* QBPreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBPreViewController.m; sourceTree = "<group>"; };
 		A0342B881C816EA400803BD7 /* CircleListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircleListCell.h; path = Discovery/CircleListCell.h; sourceTree = "<group>"; };
 		A0342B891C816EA400803BD7 /* CircleListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircleListCell.m; path = Discovery/CircleListCell.m; sourceTree = "<group>"; };
+		A03B4BB11D46098600A08962 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		A04842E71B98CF9E0032E927 /* UIImageView+ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+ImageCache.h"; sourceTree = "<group>"; };
 		A04842E81B98CF9E0032E927 /* UIImageView+ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+ImageCache.m"; sourceTree = "<group>"; };
 		A04842F41B99F29C0032E927 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
@@ -409,7 +410,6 @@
 		A0A083811BD75E3E0057CD65 /* Circle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Circle.m; sourceTree = "<group>"; };
 		A0A0838E1BD765F00057CD65 /* Circle+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Circle+CoreDataProperties.h"; sourceTree = "<group>"; };
 		A0A0838F1BD765F00057CD65 /* Circle+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Circle+CoreDataProperties.m"; sourceTree = "<group>"; };
-		A0A10E9E1CB57DB70004D5DE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		A0A10EA01CB586AA0004D5DE /* libTXYDownloader.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTXYDownloader.a; sourceTree = "<group>"; };
 		A0A10EA11CB586AA0004D5DE /* TXYDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXYDownloader.h; sourceTree = "<group>"; };
 		A0A10EA31CB586AA0004D5DE /* libTXYUploader.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTXYUploader.a; sourceTree = "<group>"; };
@@ -1773,7 +1773,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				AEF7F29F1A6875360022410B /* Base */,
-				A0A10E9E1CB57DB70004D5DE /* zh-Hans */,
+				A03B4BB11D46098600A08962 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

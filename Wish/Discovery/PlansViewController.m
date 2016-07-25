@@ -26,10 +26,7 @@
                                completion:^(NSArray *planIds)
      {
          if (!planIds.count) [self setUpEmptyView];
-     }];
-    
-    //this fix tabbar diappearing delay
-    self.tabBarController.tabBar.hidden = YES;
+     }];    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
