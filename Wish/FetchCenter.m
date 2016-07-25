@@ -1089,7 +1089,7 @@
     NSDictionary *args = @{@"title":planTitle,
                            @"description":description,
                            @"backGroudPic":picurls.firstObject,
-                           @"private":@(0),
+                           @"private":@(1), //事件默认私密
                            @"quanId":circleId,
                            @"picurl":picurls.firstObject,
                            @"picurls":[picurls componentsJoinedByString:@","],
