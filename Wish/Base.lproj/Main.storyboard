@@ -5024,17 +5024,12 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="Di7-Mk-Yay">
-                        <barButtonItem key="rightBarButtonItem" systemItem="organize" id="RzM-Eq-qYv">
-                            <connections>
-                                <segue destination="J6g-1R-MGw" kind="show" identifier="showFollowingView" id="qj7-6a-n7c"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="Di7-Mk-Yay"/>
                     <connections>
                         <outlet property="collectionView" destination="njr-NM-zJL" id="XBV-IW-SdH"/>
                         <segue destination="rp9-lu-nOr" kind="show" identifier="showDiscoveryWishDetail" id="JVq-VY-XxP"/>
                         <segue destination="b5E-B5-8Ys" kind="show" identifier="showWishDetailVCOwnerFromDiscovery" id="9iF-Ie-E5K"/>
+                        <segue destination="J6g-1R-MGw" kind="show" identifier="showFollowingView" id="F11-sw-vFE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="szU-gC-KV4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -8309,13 +8304,13 @@
         <image name="tab_ic_message_pressed" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="X79-Dh-n8s"/>
-        <segue reference="GkF-ge-YPg"/>
-        <segue reference="4yF-1j-VR3"/>
-        <segue reference="4wk-xv-ETJ"/>
-        <segue reference="f6c-hP-9TG"/>
         <segue reference="mFv-Li-7ge"/>
         <segue reference="7ZJ-tG-Hnl"/>
+        <segue reference="9iF-Ie-E5K"/>
+        <segue reference="JVq-VY-XxP"/>
+        <segue reference="4wk-xv-ETJ"/>
+        <segue reference="4yF-1j-VR3"/>
+        <segue reference="f6c-hP-9TG"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
 </document>

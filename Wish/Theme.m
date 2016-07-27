@@ -122,6 +122,10 @@
     return [UIImage imageNamed:@"nav_ic_back_default"];
 }
 
++ (UIImage *)navIconFollowDefault{
+    return [UIImage imageNamed:@"follow_icon"];
+}
+
 + (UIImage *)navWhiteButtonDefault{
     return [UIImage imageNamed:@"nav_ic_white_default"];
 }

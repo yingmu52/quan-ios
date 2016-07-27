@@ -34,6 +34,14 @@
         self.navigationItem.title = @"圈里事";
     }
     
+    //设置关注图标
+    UIButton *followButton = [Theme buttonWithImage:[Theme navIconFollowDefault] target:self selector:@selector(showFollowingView) frame:CGRectMake(0, 0, 25, 25)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:followButton];
+    
+}
+
+- (void)showFollowingView{
+    [self performSegueWithIdentifier:@"showFollowingView" sender:nil];
 }
 
 
