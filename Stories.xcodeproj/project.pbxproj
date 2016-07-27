@@ -38,6 +38,7 @@
 		A053CF7F1BA4EFF00007970A /* PostImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF7D1BA4EFF00007970A /* PostImageCell.m */; };
 		A055FB9F1BA6553A0013F91E /* ImagePreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A055FB9E1BA6553A0013F91E /* ImagePreviewCell.m */; };
 		A055FBA01BA6553A0013F91E /* ImagePreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A055FB9E1BA6553A0013F91E /* ImagePreviewCell.m */; };
+		A057D2F71D48CB02009AFE02 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A057D2F61D48CB02009AFE02 /* MBProgressHUD.m */; };
 		A066C3851BB793DA003B51D5 /* MSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A066C3841BB793DA003B51D5 /* MSLabel.m */; };
 		A066C3861BB793DA003B51D5 /* MSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A066C3841BB793DA003B51D5 /* MSLabel.m */; };
 		A066C3891BB7AE08003B51D5 /* MSSuperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A066C3881BB7AE08003B51D5 /* MSSuperViewController.m */; };
@@ -353,7 +354,6 @@
 		A030105F1BACAFBC0041E2CF /* QBPreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBPreViewController.m; sourceTree = "<group>"; };
 		A0342B881C816EA400803BD7 /* CircleListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircleListCell.h; path = Discovery/CircleListCell.h; sourceTree = "<group>"; };
 		A0342B891C816EA400803BD7 /* CircleListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircleListCell.m; path = Discovery/CircleListCell.m; sourceTree = "<group>"; };
-		A03B4BB11D46098600A08962 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		A04842E71B98CF9E0032E927 /* UIImageView+ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+ImageCache.h"; sourceTree = "<group>"; };
 		A04842E81B98CF9E0032E927 /* UIImageView+ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+ImageCache.m"; sourceTree = "<group>"; };
 		A04842F41B99F29C0032E927 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
@@ -364,6 +364,9 @@
 		A053CF7D1BA4EFF00007970A /* PostImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostImageCell.m; sourceTree = "<group>"; };
 		A055FB9D1BA6553A0013F91E /* ImagePreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePreviewCell.h; sourceTree = "<group>"; };
 		A055FB9E1BA6553A0013F91E /* ImagePreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePreviewCell.m; sourceTree = "<group>"; };
+		A057D2F31D48C825009AFE02 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		A057D2F51D48CB02009AFE02 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		A057D2F61D48CB02009AFE02 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		A066C3831BB793DA003B51D5 /* MSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSLabel.h; sourceTree = "<group>"; };
 		A066C3841BB793DA003B51D5 /* MSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSLabel.m; sourceTree = "<group>"; };
 		A066C3871BB7AE08003B51D5 /* MSSuperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSSuperViewController.h; sourceTree = "<group>"; };
@@ -755,6 +758,15 @@
 			path = WeChatSDK_1.5;
 			sourceTree = "<group>";
 		};
+		A057D2F41D48CAF2009AFE02 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				A057D2F51D48CB02009AFE02 /* MBProgressHUD.h */,
+				A057D2F61D48CB02009AFE02 /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
+			sourceTree = "<group>";
+		};
 		A07115CE1BA6B109002C1270 /* SZTextView */ = {
 			isa = PBXGroup;
 			children = (
@@ -858,6 +870,7 @@
 		A0F7D3A51B84E851003CCB34 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				A057D2F41D48CAF2009AFE02 /* MBProgressHUD */,
 				A0A10E9F1CB586AA0004D5DE /* QCloudDownloadSDK */,
 				A0A10EA21CB586AA0004D5DE /* QCloudUploadSDK */,
 				A0994E5E1BC4CF9500D45845 /* SYEmojiPopover */,
@@ -1598,6 +1611,7 @@
 				AE52FA531A8D55A7003FF725 /* KeyboardAcessoryView.m in Sources */,
 				A0994E6A1BC4D1FB00D45845 /* WYPopoverController.m in Sources */,
 				A0D1021D1B84EB6A006B0E4E /* SDWebImageCompat.m in Sources */,
+				A057D2F71D48CB02009AFE02 /* MBProgressHUD.m in Sources */,
 				AE17799A1AF585CB005F1BEB /* FeedDetailViewController.m in Sources */,
 				AEFB048C1AD12437009EB0D3 /* DiscoveryViewController.m in Sources */,
 				AEEC6C731A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,
@@ -1773,7 +1787,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				AEF7F29F1A6875360022410B /* Base */,
-				A03B4BB11D46098600A08962 /* zh-Hans */,
+				A057D2F31D48C825009AFE02 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

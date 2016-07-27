@@ -15,6 +15,9 @@
 #import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 #import "Theme.h"
 #import "NavigationBar.h"
+#import "SDImageCache.h"
+#import "MBProgressHUD.h"
+
 
 @interface MyPageViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,FetchCenterDelegate,ImagePickerDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic,weak) IBOutlet UIImageView *iconImageView;
@@ -130,6 +133,28 @@
             UIApplication *app = [UIApplication sharedApplication];
             if ([app canOpenURL:url]) {
                 [app openURL:url];
+            }
+        }
+        if (indexPath.row == 1) { //清楚缓存
+            SDImageCache *imageCache = [SDImageCache sharedImageCache];
+            NSLog(@"%@",@([imageCache getSize]));
+            NSNumber *fileSize = @([imageCache getSize] / 1024 / 1024);
+            
+            if (fileSize.integerValue > 0) {
+                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow]
+                                                          animated:YES];
+                hud.label.text = @"清除中...";
+                [imageCache clearDiskOnCompletion:^{
+                    hud.mode = MBProgressHUDModeText;
+                    hud.label.text = [NSString stringWithFormat:@"已清理临时文件 %@ MB",fileSize];
+                    [hud hideAnimated:YES afterDelay:1.0];
+                }];
+            }else{
+                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow]
+                                                          animated:YES];
+                hud.mode = MBProgressHUDModeText;
+                hud.label.text = [NSString stringWithFormat:@"暂无临时文件"];
+                [hud hideAnimated:YES afterDelay:1.0];
             }
         }
         if (indexPath.row == 2){ //用户反馈
