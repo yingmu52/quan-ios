@@ -93,6 +93,7 @@
     
     if ([segue.identifier isEqualToString:@"showInvitationView"]) {
         InvitationViewController *ivc = segue.destinationViewController;
+        ivc.titleText = @"邀请好友";
 #warning must set ivc properties !
     }
     

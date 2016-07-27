@@ -283,7 +283,8 @@
                                                     <exclude reference="fUZ-8z-5Te"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact">
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="20" y="50" width="200" height="28"/>
                                                 <mask key="constraints">
                                                     <include reference="2ai-q6-RJl"/>
                                                     <include reference="fUZ-8z-5Te"/>
@@ -905,7 +906,7 @@
                                                     <color key="textColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="79" y="20" width="92" height="16"/>
+                                                        <rect key="frame" x="79" y="20" width="92.5" height="16"/>
                                                     </variation>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" image="more" translatesAutoresizingMaskIntoConstraints="NO" id="k6x-1P-zkY">
@@ -3099,18 +3100,12 @@
                         <subviews>
                             <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BP3-eI-grs">
                                 <rect key="frame" x="0.0" y="-2" width="150" height="2"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="20" width="600" height="2"/>
-                                </variation>
                             </progressView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yEm-S5-5O6" customClass="SZTextView">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="40" width="560" height="466"/>
-                                </variation>
                                 <connections>
                                     <outlet property="delegate" destination="XiV-RA-INl" id="FA0-2G-jm5"/>
                                 </connections>
@@ -3302,8 +3297,7 @@
                                         <exclude reference="T4e-qh-570"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="514" width="600" height="86"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="T4e-qh-570"/>
                                     </mask>
@@ -3423,7 +3417,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PostFeedImagePreviewCell" id="Rns-ch-qIO" customClass="ImagePreviewCell">
-                                <rect key="frame" x="0.0" y="94" width="245.5" height="412"/>
+                                <rect key="frame" x="0.0" y="101.5" width="245.5" height="412"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="245.5" height="412"/>
@@ -4587,6 +4581,9 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="titleLabel" destination="aeC-bR-Cnc" id="WTA-uV-xWg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5FW-C2-9s3" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="rPi-DE-SeU">

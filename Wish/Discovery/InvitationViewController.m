@@ -13,14 +13,18 @@
 //#define placeholder @"http://7kttjt.com1.z0.glb.clouddn.com/image/view/app_icons/46df607f631689bfe4ed6839ad1a220b/120"
 
 @interface InvitationViewController() <WXApiDelegate>
+@property (nonatomic,weak) IBOutlet UILabel *titleLabel;
 @end
 @implementation InvitationViewController 
 
 
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    self.titleLabel.text = self.titleText;
+}
 - (IBAction)dismissViewcontroller{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
 
 - (IBAction)tapOnWechat{
     WXMediaMessage *message = [WXMediaMessage message];

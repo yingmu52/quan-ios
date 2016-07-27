@@ -383,6 +383,7 @@
     
     if ([segue.identifier isEqualToString:@"showInvitationView"]) {
         InvitationViewController *ivc = segue.destinationViewController;
+        ivc.titleText = @"分享事件给好友";
         ivc.imageUrl = [self.fetchCenter urlWithImageID:self.plan.backgroundNum size:FetchCenterImageSize50];
         ivc.sharedContentTitle = self.plan.planTitle;
         ivc.sharedContentDescription = self.plan.detailText ? self.plan.detailText : @"";
