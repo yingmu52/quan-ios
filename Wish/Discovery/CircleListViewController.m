@@ -25,6 +25,8 @@
     self.tableView.tableHeaderView.frame = frame;
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    self.navigationItem.title = @"圈子";
 }
 
 - (void)viewWillAppear:(BOOL)animated{
