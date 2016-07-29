@@ -35,11 +35,6 @@
     return _fetchCenter;
 }
 
-#pragma mark - login
-
-- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    [User updateOwnerInfo:nil];
-}
 
 #pragma mark - QQ Login
 

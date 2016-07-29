@@ -172,8 +172,9 @@ static NSTimeInterval expectationTimeout = 30.0f;
         self.testPlan.detailText = [NSUUID UUID].UUIDString; //修改事件描述
         self.testPlan.planStatus = i == numberOfCycles ? @(PlanStatusOnGoing) : @(PlanStatusFinished); //修改事件状态
         XCTestExpectation *expectation = [self expectationWithDescription:@"更新事件内容接口"];
-        [self.fetchCenter updatePlan:self.testPlan completion:^{
-            [expectation fulfill];
+        
+        [self.fetchCenter updatePlan:self.testPlan.planId title:self.testPlan.planTitle isPrivate:self.testPlan.isPrivate description:self.testPlan.detailText completion:^{
+             [expectation fulfill];
         }];
         
         [self waitForExpectationsWithTimeout:expectationTimeout handler:^(NSError * _Nullable error) {

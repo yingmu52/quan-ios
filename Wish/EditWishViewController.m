@@ -18,6 +18,8 @@
 @property (nonatomic,weak) IBOutlet UITextField *textField;
 @property (nonatomic,weak) IBOutlet GCPTextView *textView;
 @property (nonatomic,weak) IBOutlet UILabel *wordCountLabel;
+@property (nonatomic,weak) IBOutlet UISwitch *privacySwitch;
+@property (nonatomic,weak) IBOutlet UILabel *privacyLabel;
 @property (nonatomic,strong) UIButton *tikButton;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @end
@@ -53,13 +55,23 @@
 }
 
 
+#define text_privacy_on @"事件状态：公开"
+#define text_privacy_off @"事件状态：私密"
+
 - (void)setupContent{
     self.textView.delegate = self;
     self.textField.text = self.plan.planTitle;
     [self.textView setPlaceholder:@"添加描述能让别人更了解这件事儿哦~"];
     self.textView.text = self.plan.detailText;
     self.wordCountLabel.text = [NSString stringWithFormat:@"%@/75",@(self.plan.detailText.length)];
+    self.privacyLabel.text = self.plan.isPrivate.boolValue ? text_privacy_off : text_privacy_on;
+    [self.privacySwitch setOn:!self.plan.isPrivate.boolValue];
 }
+
+- (IBAction)togglePrivacySwitch:(UISwitch *)sender {
+    self.privacyLabel.text = sender.isOn ? text_privacy_on : text_privacy_off;
+}
+
 
 - (void)doneEditing{
     
@@ -68,19 +80,27 @@
     
     if (self.textField.hasText &&
         ![self.textField.text isEqualToString:self.plan.planTitle] |
-        ![self.textView.text isEqualToString:self.plan.detailText]){
-        //update Plan
-        self.plan.planTitle = self.textField.text;
-        self.plan.detailText = self.textView.text;
+        ![self.textView.text isEqualToString:self.plan.detailText] |
+        self.privacySwitch.isOn == self.plan.isPrivate.boolValue){ //开 = 公开 -> isPrivate = 0; 关 = 私密 -> isPrivate = 1
 
+        //开始跑菊花
         UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         [spinner startAnimating];
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
-        [self.fetchCenter updatePlan:self.plan completion:^{
+
+        
+        //向后台发送更请求
+        BOOL isPrivate = !self.privacySwitch.isOn;
+        [self.fetchCenter updatePlan:self.plan.planId
+                               title:self.textField.text
+                           isPrivate:isPrivate
+                         description:self.textView.text
+                          completion:^
+        {
+            //菊花关闭
             [spinner stopAnimating];
-            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
-            [self.navigationController popToRootViewControllerAnimated:YES];
-            [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];            
+            [self.navigationController popViewControllerAnimated:YES];
         }];
     }else{
         [self.navigationController popViewControllerAnimated:YES];
@@ -94,16 +114,6 @@
     }
     return _fetchCenter;
 }
-
-- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    //update navigation item
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
-    
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    [delegate.managedObjectContext rollback];
-    [delegate.managedObjectContext refreshObject:self.plan mergeChanges:NO];
-}
-
 
 
 - (IBAction)tapOnBackground:(UITapGestureRecognizer *)sender{

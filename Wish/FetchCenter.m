@@ -997,15 +997,33 @@
 }
 
 #pragma mark - 事件
-- (void)updatePlan:(Plan *)plan completion:(FetchCenterGetRequestUpdatePlanCompleted)completionBlock{
+
+- (void)updatePlan:(NSString *)planId
+             title:(NSString *)planTitle
+         isPrivate:(BOOL)isPrivate
+       description:(NSString *)planDescription
+        completion:(FetchCenterGetRequestUpdatePlanCompleted)completionBlock{
     //输入样例：id=hello_1421235901&title=hello_title2&finishDate=3&backGroudPic=bg3&private=1&state=1&finishPercent=20
     //—— 每一项都可以单独更新
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,UPDATE_PLAN];
-    NSDictionary *args = @{@"id":plan.planId,
-                           @"title":[plan.planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                           @"private":plan.isPrivate,
-                           @"description":plan.detailText ? [plan.detailText stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] : @""};
+    NSDictionary *args = @{@"id":planId,
+                           @"title":[planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                           @"private":@(isPrivate),
+                           @"description":planDescription ? [planDescription stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] : @""};
     [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
+
+        //更新本地事件
+        NSManagedObjectContext *workerContext = [self workerContext];
+        Plan *plan = [[Plan fetchWith:@"Plan"
+                           predicate:[NSPredicate predicateWithFormat:@"planId = %@",planId]
+                    keyForDescriptor:@"planId"
+                managedObjectContext:workerContext] lastObject];
+        plan.planTitle = planTitle;
+        plan.detailText = planDescription;
+        plan.isPrivate = @(isPrivate);
+        [self.appDelegate saveContext:workerContext];
+
+
         if (completionBlock) {
             dispatch_main_async_safe(^{
                 completionBlock();

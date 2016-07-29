@@ -50,7 +50,11 @@
         [textView resignFirstResponder];
         self.plan.detailText = textView.text;
 
-        [self.fetchCenter updatePlan:self.plan completion:^{
+        [self.fetchCenter updatePlan:self.plan.planId
+                               title:self.plan.planTitle
+                           isPrivate:self.plan.isPrivate.boolValue
+                         description:self.plan.detailText
+                          completion:^{
             [textView resignFirstResponder];
         }];
         return NO;
@@ -356,15 +360,6 @@
 - (void)didPressedMoreOnCell:(WishDetailCell *)cell{
 }
 
-
-#pragma mark - fetch center delegate 
-
-- (void)didFailSendingRequestWithInfo:(NSDictionary *)info entity:(NSManagedObject *)managedObject{
-    
-    self.headerView.followButton.hidden = NO; //show follow button on request failure.
-    [self.tableView.infiniteScrollingView stopAnimating];
-
-}
 
 #pragma mark - segue
 

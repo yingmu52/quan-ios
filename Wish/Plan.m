@@ -119,7 +119,7 @@
     plan.planId = planId;
     plan.backgroundNum = backGroundID;
     plan.planTitle = planTitle;
-    plan.isPrivate = @(NO);
+    plan.isPrivate = @(YES);
     plan.createDate = [NSDate date];
     plan.planStatus = @(PlanStatusOnGoing);
     [plan addMyselfAsOwner];

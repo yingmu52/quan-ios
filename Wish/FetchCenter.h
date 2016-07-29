@@ -56,8 +56,7 @@ typedef void(^FetchCenterGetRequestGetDiscoverListCompleted)(NSString *circleTit
 typedef void(^FetchCenterGetRequestLikeFeedCompleted)(void);
 /** 不赞某条Feed完成*/
 typedef void(^FetchCenterGetRequestUnLikeFeedCompleted)(void);
-/** 更新事件完成*/
-typedef void(^FetchCenterGetRequestUpdatePlanCompleted)(void);
+
 /** 更新事件状态完成*/
 typedef void(^FetchCenterGetRequestUpdatePlanStatusCompleted)(void);
 /** 更新事件状态完成*/
@@ -224,8 +223,14 @@ typedef void(^FetchCenterPostRequestPlanAndFeedCreationCompleted)(NSString *plan
         completion:(FetchCenterPostRequestPlanAndFeedCreationCompleted)completionBlock;
 
 
+/** 更新事件完成*/
+typedef void(^FetchCenterGetRequestUpdatePlanCompleted)(void);
+- (void)updatePlan:(NSString *)planId
+             title:(NSString *)planTitle
+         isPrivate:(BOOL)isPrivate
+       description:(NSString *)planDescription
+        completion:(FetchCenterGetRequestUpdatePlanCompleted)completionBlock;
 
-- (void)updatePlan:(Plan *)plan completion:(FetchCenterGetRequestUpdatePlanCompleted)completionBlock;
 - (void)postToDeletePlan:(Plan *)plan completion:(FetchCenterGetRequestDeletePlanCompleted)completionBlock;
 - (void)updateStatus:(Plan *)plan completion:(FetchCenterGetRequestUpdatePlanStatusCompleted)completionBlock;
 
