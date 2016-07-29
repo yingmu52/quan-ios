@@ -67,6 +67,9 @@
                                                                                   style:UIBarButtonItemStylePlain
                                                                                  target:self
                                                                                  action:@selector(showCircleSettingView)];
+    }else{
+        //避免非圈主时出现关注页入口
+        self.navigationItem.rightBarButtonItem = nil;
     }
     self.navigationItem.title = self.circle.circleName;
 }
