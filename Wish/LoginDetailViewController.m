@@ -95,8 +95,10 @@
                               imageId:[User updatedProfilePictureId]
                            occupation:self.occupationTextField.text
                          personalInfo:self.descriptionTextView.text completion:^{
-                             weakSelf.navigationController.navigationBar.hidden = YES;
-                             [weakSelf performSegueWithIdentifier:@"showInvitationCodeView" sender:nil];
+
+                             //切换到主页
+                             [[[UIApplication sharedApplication] keyWindow] setRootViewController:[weakSelf.storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"]];
+                                                                                                   
                          }];
     [self.nameTextField resignFirstResponder];
     [self.occupationTextField resignFirstResponder];
