@@ -98,7 +98,8 @@
         _collectionFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
         //发现页
         _collectionFetchRequest.predicate = [NSPredicate predicateWithFormat:@"discoverIndex > 0"];
-        _collectionFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"discoverIndex" ascending:YES]];        
+        _collectionFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"cornerMask" ascending:NO],
+                                                    [NSSortDescriptor sortDescriptorWithKey:@"updateDate" ascending:NO]];
     }
     return _collectionFetchRequest;
 }
