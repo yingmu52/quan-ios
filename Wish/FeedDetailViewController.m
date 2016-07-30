@@ -106,7 +106,6 @@
                                                                 }];
                                                             }else{
                                                                 [self.fetchCenter deleteFeed:self.feed completion:^{
-                                                                    [self.feed deleteSelf];
                                                                     [self.navigationController popViewControllerAnimated:YES];
                                                                 }];
                                                             }

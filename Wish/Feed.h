@@ -42,7 +42,7 @@ typedef void(^FeedCreationCompletion)(Feed *feed);
     
 + (Feed *)fetchFeedWithId:(NSString *)feedId;
 
-- (void)deleteSelf;
+//- (void)deleteSelf;
 
 - (NSNumber *)numberOfPictures;
 - (NSArray *)imageIdArray;

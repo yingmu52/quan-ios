@@ -83,7 +83,13 @@ ViewForEmptyEventDelegate,StationViewControllerDelegate>
         }
         [delegate saveContext];
     }];
+}
 
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if (!self.collectionFetchedRC.fetchedObjects.count) {
+        [self setUpEmptyView];
+    }
 }
 - (void)addLongPressGesture{
     UILongPressGestureRecognizer *lp = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];

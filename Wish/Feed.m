@@ -138,23 +138,23 @@
 }
 
 
-- (void)deleteSelf{
-    
-    NSArray *sortedArray = [self.plan.feeds sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]]];
-    Feed *firstFeed = [sortedArray firstObject];
-    Feed *second = [sortedArray objectAtIndex:1];
-    if ([self.feedId isEqualToString:firstFeed.feedId]){
-        //delete plan image
-        self.plan.backgroundNum = second.imageId;
-    }
-    
-    //delete Feed
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    [delegate.managedObjectContext deleteObject:self];
-    //tryTime - 1
-    self.plan.tryTimes = @(self.plan.tryTimes.integerValue - 1);
-    [delegate saveContext];
-}
+//- (void)deleteSelf{
+
+//    NSArray *sortedArray = [self.plan.feeds sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]]];
+//    Feed *firstFeed = [sortedArray firstObject];
+//    Feed *second = [sortedArray objectAtIndex:1];
+//    if ([self.feedId isEqualToString:firstFeed.feedId]){
+//        //delete plan image
+//        self.plan.backgroundNum = second.imageId;
+//    }
+//    
+//    //delete Feed
+//    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+//    [delegate.managedObjectContext deleteObject:self];
+//    //tryTime - 1
+//    self.plan.tryTimes = @(self.plan.tryTimes.integerValue - 1);
+//    [delegate saveContext];
+//}
 
 #pragma mark - picUrls
 

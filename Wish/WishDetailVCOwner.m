@@ -10,6 +10,7 @@
 #import "PostFeedViewController.h"
 #import "EditWishViewController.h"
 #import "ImagePicker.h"
+#import "AppDelegate.h"
 @interface WishDetailVCOwner () <UIImagePickerControllerDelegate,UIGestureRecognizerDelegate,UINavigationControllerDelegate,ImagePickerDelegate>
 
 @property (nonatomic,strong) UIButton *cameraButton;
@@ -66,15 +67,15 @@
         [self performSegueWithIdentifier:@"showEditPage" sender:self.plan];        
     }];
     
-    UIAlertAction *deleteOption = [UIAlertAction actionWithTitle:@"删除"
-                                                           style:UIAlertActionStyleDefault
-                                                         handler:^(UIAlertAction * _Nonnull action)
-    {
-        //删除
-        [self deletePlan];
-    }];
+//    UIAlertAction *deleteOption = [UIAlertAction actionWithTitle:@"删除"
+//                                                           style:UIAlertActionStyleDefault
+//                                                         handler:^(UIAlertAction * _Nonnull action)
+//    {
+//        //删除
+//        [self deletePlan];
+//    }];
 
-    [self.moreActionSheet addAction:deleteOption];
+//    [self.moreActionSheet addAction:deleteOption];
     [self.moreActionSheet addAction:editOption];
 }
 
@@ -195,7 +196,7 @@
                                                                          message:nil
                                                                   preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction *delete = [UIAlertAction actionWithTitle:@"删除"
+    UIAlertAction *delete = [UIAlertAction actionWithTitle:@"删除这条记录"
                                                      style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * _Nonnull action)
     {
@@ -211,21 +212,19 @@
         {
             //执行删除操作
             Feed *feed = [self.tableFetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
-            if (feed.feedId && feed.plan.planId && feed.imageId){
-                [self.fetchCenter deleteFeed:feed completion:^{
-                    if ([self isDeletingTheLastFeed]) {
-                        [self deletePlan];
-                    }else{
-                        [feed deleteSelf];
-                    }
-                }];
-            }else if (!feed.feedId){ //local feed
-                if ([self isDeletingTheLastFeed]){ // delete the last plan
-                    [self deletePlan];
-                }else{
-                    [feed deleteSelf];
+            
+            [self.fetchCenter deleteFeed:feed completion:^{
+                //后台删除动态时，相应该的事件也被删除，所以这里只需要删除本地的事件即可
+                if ([self isDeletingTheLastFeed]) {
+//                    //删除本地事件
+//                    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//                    [delegate.managedObjectContext deleteObject:self.plan];
+//                    [delegate saveContext];
+//                    
+                    //返回上一级
+                    [self.navigationController popViewControllerAnimated:YES];
                 }
-            }
+            }];
         }];
         [alert addAction:confirm];
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];

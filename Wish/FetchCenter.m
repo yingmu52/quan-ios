@@ -613,6 +613,39 @@
                            @"planId":feed.plan.planId};
     [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
         NSLog(@"delete feed successed, ID:%@",feed.feedId);
+        
+        NSManagedObjectContext *workerContext = [self workerContext];
+
+        //Get Plan
+        Plan *p = [Plan fetchWith:@"Plan"
+                           predicate:[NSPredicate predicateWithFormat:@"planId == %@",feed.plan.planId]
+                    keyForDescriptor:@"planId"
+                managedObjectContext:workerContext].lastObject;
+        //Get Feed
+        Feed *f = [Plan fetchWith:@"Feed"
+                           predicate:[NSPredicate predicateWithFormat:@"feedId == %@",feed.feedId]
+                    keyForDescriptor:@"feedId"
+                managedObjectContext:workerContext].lastObject;
+        
+        //Update Plan
+        if (p.feeds.count == 1) {
+            [workerContext deleteObject:p];
+        }else if (p.feeds.count > 1){
+            NSArray *sortedArray = [p.feeds sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]]];
+            Feed *first = [sortedArray firstObject];
+            Feed *second = [sortedArray objectAtIndex:1];
+            if ([f.feedId isEqualToString:first.feedId]){
+                //delete plan image
+                p.backgroundNum = second.imageId;
+            }
+            p.tryTimes = @(p.tryTimes.integerValue - 1);            
+        }
+        
+        //Delete Feed
+        [workerContext deleteObject:f];
+        [self.appDelegate saveContext:workerContext];
+
+        
         if (completionBlock) {
             dispatch_main_async_safe(^{
                 completionBlock();
