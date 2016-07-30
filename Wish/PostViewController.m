@@ -120,7 +120,12 @@
 }
 
 - (void)didFinishPickingCircle:(Circle *)circle{
+    
+    //设置圈子
     self.circle = circle;
+    
+    //打开照片选取器
+    [self.imagePicker showPhotoLibrary:self];
 }
 
 - (void)setCircle:(Circle *)circle{
