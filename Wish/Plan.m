@@ -121,6 +121,12 @@
     plan.planTitle = planTitle;
     plan.isPrivate = @(YES);
     plan.createDate = [NSDate date];
+    
+    //貌似数据不全会影响到FRC在列表上的展示？
+    plan.updateDate = [NSDate date];
+    plan.discoverIndex = @(1);
+    
+    
     plan.planStatus = @(PlanStatusOnGoing);
     [plan addMyselfAsOwner];
     plan.circle = circle;

@@ -100,7 +100,14 @@
     [super controllerDidChangeContent:controller];
     
     //展示最左边第一项
-    [self.collectionView setContentOffset:CGPointZero];
+    [UIView animateWithDuration:0.5 animations:^{
+        NSIndexPath *selectedPath = self.collectionView.indexPathsForSelectedItems.lastObject;
+        [self.collectionView deselectItemAtIndexPath:selectedPath
+                                            animated:YES];
+        [self.collectionView setContentOffset:CGPointZero
+                                     animated:YES];
+    }];
+    
 }
 
 #pragma mark - image picker
