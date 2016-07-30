@@ -38,20 +38,27 @@
     UIButton *followButton = [Theme buttonWithImage:[Theme navIconFollowDefault] target:self selector:@selector(showFollowingView) frame:CGRectMake(0, 0, 25, 25)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:followButton];
     
+    
+    //下拉刷新
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self
+                                                                     refreshingAction:@selector(loadNewData)];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    self.collectionView.mj_header = header;
+    [self.collectionView.mj_header beginRefreshing];
+    
+}
+
+- (void)loadNewData{
+    NSArray *localList = [self.collectionFetchedRC.fetchedObjects valueForKey:@"planId"];
+    [self.fetchCenter getDiscoveryList:localList completion:^(NSString *circleTitle) {
+        [self.collectionView.mj_header endRefreshing];
+    }];
 }
 
 - (void)showFollowingView{
     [self performSegueWithIdentifier:@"showFollowingView" sender:nil];
 }
 
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
-    NSArray *localList = [self.collectionFetchedRC.fetchedObjects valueForKey:@"planId"];
-    [self.fetchCenter getDiscoveryList:localList
-                            completion:nil];
-}
 
 #pragma mark - collection view delegate & data soucce
 

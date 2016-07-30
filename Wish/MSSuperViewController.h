@@ -12,6 +12,8 @@
 #import "Theme.h"
 #import "WishDetailCell.h"
 #import "UIImageView+WebCache.h"
+#import "MJRefresh.h"
+
 @import CoreData;
 @interface MSSuperViewController : UIViewController <FetchCenterDelegate,NSFetchedResultsControllerDelegate,UITableViewDelegate,UICollectionViewDelegate>{
     @protected
