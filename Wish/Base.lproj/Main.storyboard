@@ -813,7 +813,7 @@
                                                     <color key="textColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="125" y="20" width="86" height="16"/>
+                                                        <rect key="frame" x="125" y="20" width="86.5" height="16"/>
                                                     </variation>
                                                 </label>
                                             </subviews>
@@ -906,7 +906,7 @@
                                                     <color key="textColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="79" y="20" width="92" height="16"/>
+                                                        <rect key="frame" x="79" y="20" width="92.5" height="16"/>
                                                     </variation>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" image="more" translatesAutoresizingMaskIntoConstraints="NO" id="k6x-1P-zkY">
@@ -1553,152 +1553,12 @@
                     <connections>
                         <outlet property="infoLabel" destination="Wdt-qY-BUo" id="IYK-Pm-gFi"/>
                         <outlet property="textField" destination="bkR-Oi-ATm" id="IeB-YY-h7g"/>
-                        <segue destination="zJc-81-UtG" kind="show" identifier="showWritePostDetail" id="AiT-04-95T"/>
+                        <segue destination="XiV-RA-INl" kind="show" identifier="ShowPostFeedFromPostView" id="BaT-4X-Ixb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RIa-Mp-Cry" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="297" y="-1117.5"/>
-        </scene>
-        <!--Post Detail View Controller-->
-        <scene sceneID="nyi-zn-yq6">
-            <objects>
-                <viewController id="zJc-81-UtG" customClass="PostDetailViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="OL4-I1-0dx"/>
-                        <viewControllerLayoutGuide type="bottom" id="Ayb-YR-3Sj"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="UJL-v3-D1u">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BgG-Mb-aAj">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q0j-PE-Ggt">
-                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="Q0j-PE-Ggt" secondAttribute="height" multiplier="1:1" id="Yjv-F2-1Bp"/>
-                                            <constraint firstAttribute="width" secondItem="Q0j-PE-Ggt" secondAttribute="height" multiplier="89:88" id="nqj-zt-EkT"/>
-                                        </constraints>
-                                        <state key="normal" image="camera_ic">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="Yjv-F2-1Bp"/>
-                                                <exclude reference="nqj-zt-EkT"/>
-                                            </mask>
-                                        </variation>
-                                        <variation key="heightClass=regular-widthClass=compact">
-                                            <mask key="constraints">
-                                                <exclude reference="Yjv-F2-1Bp"/>
-                                                <include reference="nqj-zt-EkT"/>
-                                            </mask>
-                                        </variation>
-                                        <connections>
-                                            <action selector="toggleCamera:" destination="zJc-81-UtG" eventType="touchUpInside" id="aN1-Hq-g31"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="没图没真相！传张图嘛~" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="350" translatesAutoresizingMaskIntoConstraints="NO" id="tIY-vA-LTm">
-                                        <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.89411764705882357" green="0.96078431372549022" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="height" secondItem="BgG-Mb-aAj" secondAttribute="width" multiplier="1:1" id="92A-WP-JOo"/>
-                                    <constraint firstItem="tIY-vA-LTm" firstAttribute="top" secondItem="Q0j-PE-Ggt" secondAttribute="bottom" constant="20" id="QSG-P9-nF8"/>
-                                    <constraint firstItem="tIY-vA-LTm" firstAttribute="leading" secondItem="BgG-Mb-aAj" secondAttribute="leading" id="ZjO-c2-HWc"/>
-                                    <constraint firstAttribute="centerX" secondItem="Q0j-PE-Ggt" secondAttribute="centerX" constant="-0.5" id="hrb-Gg-pGe">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
-                                    </constraint>
-                                    <constraint firstItem="Q0j-PE-Ggt" firstAttribute="width" secondItem="BgG-Mb-aAj" secondAttribute="height" multiplier="141:560" id="k5g-Ju-rrv"/>
-                                    <constraint firstAttribute="trailing" secondItem="tIY-vA-LTm" secondAttribute="trailing" id="oCl-rY-hLI"/>
-                                    <constraint firstAttribute="centerY" secondItem="Q0j-PE-Ggt" secondAttribute="centerY" constant="39" id="oVA-Wm-aSG">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="40"/>
-                                    </constraint>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="subviews">
-                                        <exclude reference="Q0j-PE-Ggt"/>
-                                        <exclude reference="tIY-vA-LTm"/>
-                                    </mask>
-                                    <mask key="constraints">
-                                        <exclude reference="92A-WP-JOo"/>
-                                        <exclude reference="QSG-P9-nF8"/>
-                                        <exclude reference="ZjO-c2-HWc"/>
-                                        <exclude reference="oCl-rY-hLI"/>
-                                        <exclude reference="hrb-Gg-pGe"/>
-                                        <exclude reference="k5g-Ju-rrv"/>
-                                        <exclude reference="oVA-Wm-aSG"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <mask key="subviews">
-                                        <include reference="Q0j-PE-Ggt"/>
-                                        <include reference="tIY-vA-LTm"/>
-                                    </mask>
-                                    <mask key="constraints">
-                                        <include reference="92A-WP-JOo"/>
-                                        <include reference="QSG-P9-nF8"/>
-                                        <include reference="ZjO-c2-HWc"/>
-                                        <include reference="oCl-rY-hLI"/>
-                                        <include reference="hrb-Gg-pGe"/>
-                                        <include reference="k5g-Ju-rrv"/>
-                                        <include reference="oVA-Wm-aSG"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="tvk-82-dHa" appends="YES" id="Oy7-Q3-YP5"/>
-                                </connections>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" red="0.83529411764705885" green="0.87058823529411766" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="BgG-Mb-aAj" firstAttribute="top" secondItem="OL4-I1-0dx" secondAttribute="bottom" constant="-131" id="CGK-ca-oMB">
-                                <variation key="heightClass=regular-widthClass=compact" constant="50"/>
-                            </constraint>
-                            <constraint firstAttribute="centerX" secondItem="BgG-Mb-aAj" secondAttribute="centerX" id="uNA-EI-jER"/>
-                            <constraint firstItem="BgG-Mb-aAj" firstAttribute="height" secondItem="UJL-v3-D1u" secondAttribute="width" multiplier="560:640" id="yW7-92-yK2"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="BgG-Mb-aAj"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="CGK-ca-oMB"/>
-                                <exclude reference="uNA-EI-jER"/>
-                                <exclude reference="yW7-92-yK2"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="BgG-Mb-aAj"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="CGK-ca-oMB"/>
-                                <include reference="uNA-EI-jER"/>
-                                <include reference="yW7-92-yK2"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <connections>
-                        <outlet property="cameraBackground" destination="BgG-Mb-aAj" id="dJ1-8A-g7y"/>
-                        <segue destination="XiV-RA-INl" kind="show" identifier="showPostFeedFromPlanCreation" id="tsq-QX-XiL"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="68X-Ti-r1S" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="tvk-82-dHa">
-                    <connections>
-                        <action selector="tapOnCameraBackground:" destination="zJc-81-UtG" id="ZWC-W9-MMY"/>
-                    </connections>
-                </tapGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="3175.5" y="-2277"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="fpo-Ov-0kY">
@@ -8107,7 +7967,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="camera_ic" width="141" height="141"/>
         <image name="card_photo_shadow" width="76" height="88"/>
         <image name="create_avatar_bg" width="320" height="132"/>
         <image name="create_avatar_logo" width="100" height="100"/>
@@ -8152,13 +8011,13 @@
         <image name="tab_ic_message_pressed" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mFv-Li-7ge"/>
         <segue reference="7ZJ-tG-Hnl"/>
         <segue reference="9iF-Ie-E5K"/>
         <segue reference="JVq-VY-XxP"/>
-        <segue reference="4wk-xv-ETJ"/>
         <segue reference="4yF-1j-VR3"/>
         <segue reference="f6c-hP-9TG"/>
+        <segue reference="BaT-4X-Ixb"/>
+        <segue reference="mFv-Li-7ge"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
 </document>

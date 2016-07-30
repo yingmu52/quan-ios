@@ -251,8 +251,6 @@
 		AEB003F41B8056980056EA80 /* MyPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB003F21B8056980056EA80 /* MyPageViewController.m */; };
 		AEBECCF31AE7687900EDF385 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBECCF21AE7687900EDF385 /* LoginViewController.m */; };
 		AEBECCF91AE8A16600EDF385 /* LoginDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBECCF81AE8A16600EDF385 /* LoginDetailViewController.m */; };
-		AEBFCA371A78614100686EFE /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA361A78614100686EFE /* PostDetailViewController.m */; };
-		AEBFCA381A78614100686EFE /* PostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBFCA361A78614100686EFE /* PostDetailViewController.m */; };
 		AEC0688F1B2D309E007975D2 /* FeedDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC0688E1B2D309E007975D2 /* FeedDetailCell.xib */; };
 		AEC068901B2D309E007975D2 /* FeedDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC0688E1B2D309E007975D2 /* FeedDetailCell.xib */; };
 		AEC5B9AA1AB7EB40008ECB92 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC5B9A91AB7EB40008ECB92 /* User.m */; };
@@ -607,8 +605,6 @@
 		AEBECCF21AE7687900EDF385 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		AEBECCF71AE8A16600EDF385 /* LoginDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginDetailViewController.h; sourceTree = "<group>"; };
 		AEBECCF81AE8A16600EDF385 /* LoginDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginDetailViewController.m; sourceTree = "<group>"; };
-		AEBFCA351A78614100686EFE /* PostDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostDetailViewController.h; sourceTree = "<group>"; };
-		AEBFCA361A78614100686EFE /* PostDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostDetailViewController.m; sourceTree = "<group>"; };
 		AEC0688E1B2D309E007975D2 /* FeedDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedDetailCell.xib; sourceTree = "<group>"; };
 		AEC5B9A81AB7EB40008ECB92 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		AEC5B9A91AB7EB40008ECB92 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
@@ -1248,8 +1244,6 @@
 				AE59B5F41B410437006CA4AB /* ViewForEmptyEvent.m */,
 				AE0ADF171ABD78CC00692131 /* HomeCardViewController.h */,
 				AE0ADF181ABD78CC00692131 /* HomeCardViewController.m */,
-				AEBFCA351A78614100686EFE /* PostDetailViewController.h */,
-				AEBFCA361A78614100686EFE /* PostDetailViewController.m */,
 				AE479E9C1A6F775B00366A0A /* PostViewController.h */,
 				AE479E9D1A6F775C00366A0A /* PostViewController.m */,
 				AE1B6E3A1A6D89FC0026F3CE /* HomeCardView.h */,
@@ -1578,7 +1572,6 @@
 				A03010561BABC6AA0041E2CF /* QBAssetCell.m in Sources */,
 				AED9A67A1B44BE6E00108729 /* RequestLogViewController.m in Sources */,
 				AEBECCF91AE8A16600EDF385 /* LoginDetailViewController.m in Sources */,
-				AEBFCA371A78614100686EFE /* PostDetailViewController.m in Sources */,
 				A03010551BABC6AA0041E2CF /* QBAlbumsViewController.m in Sources */,
 				AE52FA501A8D3D76003FF725 /* PostFeedViewController.m in Sources */,
 				A0F7D4B31B84EA46003CCB34 /* UIImage+WebP.m in Sources */,
@@ -1705,7 +1698,6 @@
 				A0F7D43E1B84E851003CCB34 /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				A0D1024F1B84EDCA006B0E4E /* UIImage+sdWebP.m in Sources */,
 				AEB003F41B8056980056EA80 /* MyPageViewController.m in Sources */,
-				AEBFCA381A78614100686EFE /* PostDetailViewController.m in Sources */,
 				A0F7D4821B84E851003CCB34 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				A0F5132B1BD98B9600279B9D /* Message.m in Sources */,
 				A0A0835D1BD74F260057CD65 /* CircleListViewController.m in Sources */,

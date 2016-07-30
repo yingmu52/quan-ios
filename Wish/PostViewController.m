@@ -8,14 +8,16 @@
 
 #import "PostViewController.h"
 #import "Theme.h"
-#import "PostDetailViewController.h"
+#import "PostFeedViewController.h"
 #import "KeyWordCell.h"
 #import "NHAlignmentFlowLayout.h"
 #import "CirclePickerViewController.h"
-@interface PostViewController () <CirclePickerViewControllerDelegate>
+#import "ImagePicker.h"
+@interface PostViewController () <CirclePickerViewControllerDelegate,ImagePickerDelegate>
 @property (nonatomic,weak) IBOutlet UITextField *textField;
 @property (nonatomic,strong) UIButton *tikButton;
 @property (nonatomic,weak) IBOutlet UILabel *infoLabel;
+@property (nonatomic,strong) ImagePicker *imagePicker;
 @end
 
 @implementation PostViewController
@@ -93,19 +95,24 @@
         [self.textField resignFirstResponder];
         [self presentViewController:alert animated:YES completion:nil];
     }else{
-        [self performSegueWithIdentifier:@"showWritePostDetail" sender:nil];
+        //打开照片选取器
+        [self.imagePicker showPhotoLibrary:self];
     }
     
 }
 
 
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"showWritePostDetail"]) {
-        PostDetailViewController *pdvc = segue.destinationViewController;
-        pdvc.titleFromPostView = self.textField.text;
-        pdvc.circle = self.circle;
+    if ([segue.identifier isEqualToString:@"ShowPostFeedFromPostView"]) {
+        PostFeedViewController *pfvc = (PostFeedViewController *)segue.destinationViewController;
+        pfvc.circle = self.circle;
+        pfvc.assets = sender;
+        pfvc.seugeFromPlanCreation = YES; // important!
+        pfvc.navigationItem.title = self.textField.text;
     }
+    
     if ([segue.identifier isEqualToString:@"showCirclePickerFromPost"]) {
         CirclePickerViewController *cpc = segue.destinationViewController;
         cpc.delegate = self;
@@ -120,6 +127,22 @@
     _circle = circle;
     self.infoLabel.text = [NSString stringWithFormat:@"所属圈子：%@",circle.circleName];
 }
+
+
+#pragma mark - 选取照片
+
+- (void)didFinishPickingPhAssets:(NSMutableArray *)assets{
+    [self performSegueWithIdentifier:@"ShowPostFeedFromPostView" sender:[assets mutableCopy]];
+}
+
+- (ImagePicker *)imagePicker{
+    if (!_imagePicker) {
+        _imagePicker = [[ImagePicker alloc] init];
+        _imagePicker.imagePickerDelegate = self;
+    }
+    return _imagePicker;
+}
+
 
 @end
 
