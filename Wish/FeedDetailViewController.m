@@ -7,7 +7,6 @@
 //
 
 #import "FeedDetailViewController.h"
-#import "UIScrollView+SVInfiniteScrolling.h"
 #import "UITableView+FDTemplateLayoutCell.h"
 #import "JTSImageViewController.h"
 #import "CommentViewController.h"
@@ -29,21 +28,42 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self setUpNavigationItem];
-    [self.tableView registerNib:[UINib nibWithNibName:@"FeedDetailCell" bundle:nil] forCellReuseIdentifier:FEEDDETAILCELLID];
+    [self.tableView registerNib:[UINib nibWithNibName:@"FeedDetailCell" bundle:nil]
+         forCellReuseIdentifier:FEEDDETAILCELLID];
 
+    //上拉刷新
     self.hasNextPage = YES;
-    
-    __weak typeof(self) weakSelf = self;
-    [weakSelf.tableView addInfiniteScrollingWithActionHandler:^{
-        if (weakSelf.hasNextPage) {
-            [weakSelf loadComments];
-        }
-    }];
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), 44.0)]; // clear empty cell
-
-    [self.tableView triggerInfiniteScrolling];
-    
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self
+                                                                    refreshingAction:@selector(loadMoreComments)];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    [self.tableView.mj_footer beginRefreshing];
 }
+
+- (void)loadMoreComments{
+    NSString *feedId = self.feed.feedId ? self.feed.feedId : self.feedId;
+    if (feedId && self.hasNextPage) {
+        [self.fetchCenter getCommentListForFeed:feedId
+                                       pageInfo:self.pageInfo
+                                     completion:^(NSDictionary *pageInfo,
+                                                  BOOL hasNextPage,
+                                                  NSArray *commmentIds,
+                                                  Feed *feed)
+         {
+#warning 同步评论列表
+             self.hasNextPage = hasNextPage;
+             self.pageInfo = pageInfo;
+             
+             if (!self.feed) {
+                 self.feed = [self.tableFetchedRC.managedObjectContext objectWithID:feed.objectID];
+             }
+             [self.tableView.mj_footer endRefreshing];
+         }];
+
+    }else{
+        [self.tableView.mj_footer endRefreshingWithNoMoreData];
+    }
+}
+
 
 - (void)setFeed:(Feed *)feed{
     _feed = feed;
@@ -226,11 +246,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.fetchedRC.fetchedObjects.count;
+    return self.tableFetchedRC.fetchedObjects.count;
 }
 
 - (void)configureCell:(FeedDetailCell *)cell indexPath:(NSIndexPath *)indexPath{
-    Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
+    Comment *comment = [self.tableFetchedRC objectAtIndexPath:indexPath];
     [cell.profileImageView downloadImageWithImageId:comment.owner.headUrl size:FetchCenterImageSize100];
     cell.contentTextView.text = comment.content;
     
@@ -268,7 +288,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     //show comment view for replying
-    Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
+    Comment *comment = [self.tableFetchedRC objectAtIndexPath:indexPath];
     
     if (![comment.owner.ownerId isEqualToString:[User uid]]) { //the comment is from other user
         [self performSegueWithIdentifier:@"showCommentViewController" sender:comment];
@@ -279,7 +299,7 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
-    Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
+    Comment *comment = [self.tableFetchedRC objectAtIndexPath:indexPath];
     return [comment.owner.ownerId isEqualToString:[User uid]];
 }
 
@@ -318,7 +338,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 - (void)deleteActionAtIndexPath:(NSIndexPath *)indexPath{
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"是否删除该条评论？" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        Comment *comment = [self.fetchedRC objectAtIndexPath:indexPath];
+        Comment *comment = [self.tableFetchedRC objectAtIndexPath:indexPath];
         [self.fetchCenter deleteComment:comment completion:^{
             [comment.managedObjectContext  deleteObject:comment];
             self.feed.commentCount = @(self.feed.commentCount.integerValue - 1);
@@ -332,13 +352,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 }
 
 #pragma mark - like
-- (FetchCenter *)fetchCenter{
-    if (!_fetchCenter){
-        _fetchCenter = [[FetchCenter alloc] init];
-        _fetchCenter.delegate = self;
-    }
-    return _fetchCenter;
-}
 
 - (void)didPressedLikeButton:(FeedDetailHeader *)headerView{
     if (!self.feed.selfLiked.boolValue) {
@@ -352,7 +365,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 }
 
 - (void)didFailSendingRequest{
-    [self.tableView.infiniteScrollingView stopAnimating];
+    [self.tableView.mj_footer endRefreshing];
     if (!self.feed){
         self.title = @"该内容不存在";
     }
@@ -377,34 +390,17 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 
 #pragma mark - fetched results controller 
 
-- (NSFetchedResultsController *)fetchedRC
-{
-    if (!_fetchedRC){
-        
-        //do fetchrequest
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Comment"];
-        request.predicate = [NSPredicate predicateWithFormat:@"feed.feedId = %@",self.feedId ? self.feedId : self.feed.feedId];
-        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createTime" ascending:YES]];
-        [request setFetchBatchSize:3];
-        
-        NSFetchedResultsController *newFRC =
-        [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                            managedObjectContext:[AppDelegate getContext]
-                                              sectionNameKeyPath:nil
-                                                       cacheName:nil];
-        self.fetchedRC = newFRC;
-        _fetchedRC.delegate = self;
-        NSError *error;
-        [_fetchedRC performFetch:&error];
-        
+- (NSFetchRequest *)tableFetchRequest{
+    if (!_tableFetchRequest) {
+        _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Comment"];
+        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"feed.feedId = %@",self.feedId ? self.feedId : self.feed.feedId];
+        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createTime" ascending:YES]];
+        [_tableFetchRequest setFetchBatchSize:3];
+
     }
-    return _fetchedRC;
+    return _tableFetchRequest;
 }
 
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-{
-    [self.tableView beginUpdates];
-}
 
 - (void)controller:(NSFetchedResultsController *)controller
    didChangeObject:(id)anObject
@@ -412,80 +408,27 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
      forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath
 {
-    switch(type)
-    {
-        case NSFetchedResultsChangeInsert:{
-            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            NSLog(@"Comment inserted");
-        }
-            break;
-            
-        case NSFetchedResultsChangeDelete:{
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            NSLog(@"Comment deleted");
-        }
-            break;
-            
-        case NSFetchedResultsChangeUpdate:
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath]
-                                  withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeMove:{
-            [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
-                                  withRowAnimation:UITableViewRowAnimationFade];
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath]
-                                  withRowAnimation:UITableViewRowAnimationFade];
-        }
-            break;
-    }
+    [super controller:controller
+      didChangeObject:anObject
+          atIndexPath:indexPath
+        forChangeType:type
+         newIndexPath:newIndexPath];
     
     if ((type == NSFetchedResultsChangeInsert ||
-         type == NSFetchedResultsChangeDelete) && self.feed) {
+         type == NSFetchedResultsChangeDelete) &&
+        self.feed &&
+        controller == self.tableFetchedRC) {
         [self.headerView setCommentButtonText:self.feed.commentCount];
     }
 
 }
 
 
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    [self.tableView endUpdates];
-    
-}
-
-
-- (void)loadComments{
-    NSString *feedId = self.feed.feedId ? self.feed.feedId : self.feedId;
-    NSAssert(feedId, @"nil feedId");
-    [self.fetchCenter getCommentListForFeed:feedId
-                                   pageInfo:self.pageInfo
-                                 completion:^(NSDictionary *pageInfo,
-                                              BOOL hasNextPage,
-                                              NSArray *commmentIds,
-                                              Feed *feed)
-    {
-#warning 同步评论列表
-            self.hasNextPage = hasNextPage;
-            self.pageInfo = pageInfo;
-
-            if (!self.feed) {
-                self.feed = [self.fetchedRC.managedObjectContext objectWithID:feed.objectID];
-            }
-            
-            //stop animation
-            [self.tableView.infiniteScrollingView stopAnimating];
-            if (!self.hasNextPage){ //stop scroll to load more
-                self.tableView.showsInfiniteScrolling = NO;
-            }
-    }];
-}
-
 #pragma mark - delete local comments to insync with server
 
 - (void)dealloc{
     NSUInteger numberOfPreservingCommentss = 20;
-    NSArray *comments = self.fetchedRC.fetchedObjects;
+    NSArray *comments = self.tableFetchedRC.fetchedObjects;
     if (comments.count > numberOfPreservingCommentss) {
         AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
         

@@ -16,16 +16,16 @@
 #import "UIImageView+ImageCache.h"
 #import "SDWebImageCompat.h"
 #import "FeedDetailHeader.h"
+#import "MSSuperViewController.h"
 
-@interface FeedDetailViewController : UITableViewController <FetchCenterDelegate,NSFetchedResultsControllerDelegate,FeedDetailHeaderDelegate>
+@interface FeedDetailViewController : MSSuperViewController <FeedDetailHeaderDelegate>
 @property (nonatomic,strong) NSString *feedId; //for Message List View
-@property (strong, nonatomic) FetchCenter *fetchCenter;
-@property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
+
 @property (nonatomic,strong) Feed *feed;
 @property (nonatomic) BOOL hasNextPage;
 @property (nonatomic,strong) NSDictionary *pageInfo;
 @property (nonatomic,strong) FeedDetailHeader *headerView;
 
 - (void)setUpNavigationItem;
-- (void)loadComments;
+
 @end
