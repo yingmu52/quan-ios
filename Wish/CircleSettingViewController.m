@@ -12,7 +12,7 @@
 #import "CircleEditViewController.h"
 #import "MemberListViewController.h"
 #import "InvitationViewController.h"
-
+#import "MBProgressHUD.h"
 @interface CircleSettingViewController () <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @end
@@ -94,10 +94,37 @@
     if ([segue.identifier isEqualToString:@"showInvitationView"]) {
         InvitationViewController *ivc = segue.destinationViewController;
         ivc.titleText = @"邀请好友";
-#warning must set ivc properties !
+        ivc.sharedContentTitle = [NSString stringWithFormat:@"%@ 邀请你加入圈子",[User userDisplayName]];
+        ivc.sharedContentDescription = [NSString stringWithFormat:@"【%@】\n%@",self.circle.circleName,self.circle.circleDescription];
+        if (self.circle.imageId.length > 0) {
+            ivc.imageUrl = [self.fetchCenter urlWithImageID:self.circle.imageId
+                                                       size:FetchCenterImageSize400];
+        }
+        ivc.h5Url = sender;
     }
-    
 }
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 2 && indexPath.row == 0) {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+        hud.label.text = @"加载邀请链接...";
+        [self.fetchCenter getH5invitationUrlWithCircleId:self.circle.circleId
+                                              completion:^(NSString *urlString)
+        {
+            [hud hideAnimated:YES];
+            if (urlString.length > 0) {
+                [self performSegueWithIdentifier:@"showInvitationView" sender:urlString];
+            }
+            
+        }];
+    }
+}
+
+
+
+
 @end
 
 

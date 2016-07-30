@@ -101,6 +101,11 @@ typedef void(^FetchCenterPostRequestUploadImagesCompleted)(NSArray *imageIds);
 
 #pragma mark - 圈子
 
+/** 获取分享页URL **/
+typedef void(^FetchCenterGetRequestGetCircleInvitationURLCompleted)(NSString *urlString);
+- (void)getH5invitationUrlWithCircleId:(NSString *)circleId
+                            completion:(FetchCenterGetRequestGetCircleInvitationURLCompleted)completionBlock;
+
 /** 获取圈子里的事件列表 **/
 typedef void(^FetchCenterGetRequestGetCirclePlanListCompleted)(NSArray *planIds);
 - (void)getPlanListInCircle:(NSString *)circleId

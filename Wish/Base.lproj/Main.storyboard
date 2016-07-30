@@ -229,9 +229,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="hHC-dm-tO3" kind="presentation" identifier="showInvitationView" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="f6c-hP-9TG"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -241,6 +238,9 @@
                             <outlet property="delegate" destination="AFd-gJ-u6i" id="WfZ-W0-PmA"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="hHC-dm-tO3" kind="presentation" identifier="showInvitationView" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="JmD-0N-cGa"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZS-Wx-5k2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -8005,13 +8005,13 @@
         <image name="tab_ic_message_pressed" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XiB-xT-Plv"/>
         <segue reference="T3Y-fE-Qhc"/>
-        <segue reference="mFv-Li-7ge"/>
-        <segue reference="JVq-VY-XxP"/>
         <segue reference="9iF-Ie-E5K"/>
-        <segue reference="XMp-RI-rbx"/>
+        <segue reference="JVq-VY-XxP"/>
         <segue reference="Y2c-0U-Rmr"/>
+        <segue reference="mFv-Li-7ge"/>
+        <segue reference="JmD-0N-cGa"/>
+        <segue reference="XiB-xT-Plv"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
 </document>

@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 
 //#define invitationH5URL @"http://cos.jsonadmin.wexincloud.com/data/shier.invite.html"
-//#define placeholder @"http://7kttjt.com1.z0.glb.clouddn.com/image/view/app_icons/46df607f631689bfe4ed6839ad1a220b/120"
+#define placeholder @"http://o1wh05aeh.qnssl.com/image/view/app_icons/3112ec32be856c30e9e1cbc0127d99b5/120"
 
 @interface InvitationViewController() <WXApiDelegate>
 @property (nonatomic,weak) IBOutlet UILabel *titleLabel;
@@ -24,6 +24,14 @@
 }
 - (IBAction)dismissViewcontroller{
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+- (NSURL *)imageUrl{
+    if (!_imageUrl) {
+        _imageUrl = [NSURL URLWithString:placeholder];
+    }
+    return _imageUrl;
 }
 
 - (IBAction)tapOnWechat{

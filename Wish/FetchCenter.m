@@ -53,6 +53,7 @@
 #define GET_DISCOVER_LIST @"splan_find_planlist.php"
 
 #define CIRCLE @"quan/"
+#define GET_H5_INVITATION_URL @"splan_quan_invite.php"
 #define JOINT_CIRCLE @"splan_quan_join.php"
 #define GET_MEMBER_LIST @"splan_quan_get_manlist.php"
 #define TOOL @"tool/"
@@ -132,6 +133,23 @@
 
 #pragma mark - 圈子
 #define TOOLCGIKEY @"123$%^abc"
+
+
+- (void)getH5invitationUrlWithCircleId:(NSString *)circleId
+                            completion:(FetchCenterGetRequestGetCircleInvitationURLCompleted)completionBlock{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,GET_H5_INVITATION_URL];
+    NSDictionary *args = @{@"quanid":circleId};
+    [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
+        NSLog(@"%@",responseJson);
+        NSString *urlString = [responseJson objectForKey:@"inviteurl"];
+        
+        if (completionBlock) {
+            dispatch_main_async_safe(^{
+                completionBlock(urlString);
+            });
+        }
+    }];
+}
 
 - (void)getPlanListInCircle:(NSString *)circleId
                   localList:(NSArray *)localList
