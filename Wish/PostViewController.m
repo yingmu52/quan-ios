@@ -88,12 +88,8 @@
 - (void)goToNextView
 {
     if (!self.circle) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请选择一个圈子" message:nil preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"好" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [self performSegueWithIdentifier:@"showCirclePickerFromPost" sender:nil];
-        }]];
+        [self performSegueWithIdentifier:@"showCirclePickerFromPost" sender:nil];
         [self.textField resignFirstResponder];
-        [self presentViewController:alert animated:YES completion:nil];
     }else{
         //打开照片选取器
         [self.imagePicker showPhotoLibrary:self];
