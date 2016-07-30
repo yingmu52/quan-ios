@@ -27,14 +27,23 @@
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     self.navigationItem.title = @"圈子";
+    
+    
+
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self
+                                                                     refreshingAction:@selector(loadNewData)];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    self.tableView.mj_header = header;
+    [self.collectionView.mj_header endRefreshing];
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
+- (void)loadNewData{
     NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKey:@"circleId"];
-    [self.fetchCenter getCircleList:localList completion:nil];
+    [self.fetchCenter getCircleList:localList completion:^(NSArray *circleIds) {
+        [self.tableView.mj_header endRefreshing];
+    }];
 }
+
 
 - (NSFetchRequest *)tableFetchRequest{
     if (!_tableFetchRequest) {
