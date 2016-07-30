@@ -101,7 +101,9 @@
     self.hasNextPage = YES;
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self
                                                                     refreshingAction:@selector(loadMoreData)];
-//    [self.tableView.mj_footer beginRefreshing];
+    
+    //初次拉数据
+    [self loadMoreData];
 }
 
 - (void)loadMoreData{
