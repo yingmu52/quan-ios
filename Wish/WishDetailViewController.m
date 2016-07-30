@@ -8,7 +8,6 @@
 
 #import "WishDetailViewController.h"
 #import "UIImageView+ImageCache.h"
-#import "UIScrollView+SVInfiniteScrolling.h"
 #import "InvitationViewController.h"
 @interface WishDetailViewController () <HeaderViewDelegate,UIGestureRecognizerDelegate,UITextViewDelegate>
 @property (nonatomic,strong) NSDictionary *textAttributes;
@@ -98,40 +97,44 @@
     //hide follow button first and display later when the correct value is fetched from the server
     self.headerView.followButton.hidden = YES;
     
-    //add infinate scroll
+    //上拉刷新
     self.hasNextPage = YES;
-    __weak typeof(self) weakSelf = self;
-    [weakSelf.tableView addInfiniteScrollingWithActionHandler:^{
-        if (weakSelf.hasNextPage) {
-            NSLog(@"Loading More..");
-            [weakSelf.fetchCenter getFeedsListForPlan:weakSelf.plan
-                                             pageInfo:weakSelf.pageInfo
-                                           completion:^(NSDictionary *pageInfo, BOOL hasNextPage, NSArray *pageList)
-            {
-                weakSelf.hasNextPage = hasNextPage;
-                weakSelf.pageInfo = pageInfo;
-                [weakSelf.headerView updateHeaderWithPlan:self.plan];
-                [weakSelf.tableView.infiniteScrollingView stopAnimating];
-                if (!weakSelf.hasNextPage){
-                    self.tableView.showsInfiniteScrolling = NO;
-                }
-                
-                //upload a local copy of server side feed list
-                [weakSelf.serverFeedIds addObjectsFromArray:pageList];
-                
-                //delete feed from local if it does not appear to be ien the server side feed list
-                for (Feed *feed in weakSelf.tableFetchedRC.fetchedObjects){
-                    if (![weakSelf.serverFeedIds containsObject:feed.feedId]) {
-                        [feed.managedObjectContext deleteObject:feed];
-                    }
-                }
-                
-            }];
-        }
-    }];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self
+                                                                    refreshingAction:@selector(loadMoreData)];
+    [self.tableView.mj_footer beginRefreshing];
+}
 
-    //trigger inital loading
-    [self.tableView triggerInfiniteScrolling];
+- (void)loadMoreData{
+    if (self.hasNextPage) {
+        NSLog(@"Loading More..");
+        [self.fetchCenter getFeedsListForPlan:self.plan
+                                         pageInfo:self.pageInfo
+                                       completion:^(NSDictionary *pageInfo,
+                                                    BOOL hasNextPage,
+                                                    NSArray *pageList)
+         {
+             self.hasNextPage = hasNextPage;
+             self.pageInfo = pageInfo;
+             [self.headerView updateHeaderWithPlan:self.plan];
+             
+             //upload a local copy of server side feed list
+             [self.serverFeedIds addObjectsFromArray:pageList];
+             
+             //delete feed from local if it does not appear to be ien the server side feed list
+             for (Feed *feed in self.tableFetchedRC.fetchedObjects){
+                 if (![self.serverFeedIds containsObject:feed.feedId]) {
+                     [feed.managedObjectContext deleteObject:feed];
+                 }
+             }
+             
+             [self.tableView.mj_footer endRefreshing];
+         }];
+    }else{
+//        [self.tableView.mj_footer endRefreshing];
+        [self.tableView.mj_footer endRefreshingWithNoMoreData];
+
+    }
+
 }
 
 - (NSMutableArray *)serverFeedIds{

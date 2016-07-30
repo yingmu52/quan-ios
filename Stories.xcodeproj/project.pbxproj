@@ -211,10 +211,6 @@
 		A0F7D4571B84E851003CCB34 /* NZCircularImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3DA1B84E851003CCB34 /* NZCircularImageView.m */; };
 		A0F7D4581B84E851003CCB34 /* NZCircularImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3DA1B84E851003CCB34 /* NZCircularImageView.m */; };
 		A0F7D45A1B84E851003CCB34 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3DC1B84E851003CCB34 /* Reachability.m */; };
-		A0F7D47F1B84E851003CCB34 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D4061B84E851003CCB34 /* UIScrollView+SVInfiniteScrolling.m */; };
-		A0F7D4801B84E851003CCB34 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D4061B84E851003CCB34 /* UIScrollView+SVInfiniteScrolling.m */; };
-		A0F7D4811B84E851003CCB34 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D4081B84E851003CCB34 /* UIScrollView+SVPullToRefresh.m */; };
-		A0F7D4821B84E851003CCB34 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D4081B84E851003CCB34 /* UIScrollView+SVPullToRefresh.m */; };
 		A0F7D49B1B84E851003CCB34 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D41C1B84E851003CCB34 /* UIImage+ImageEffects.m */; };
 		A0F7D49C1B84E851003CCB34 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D41C1B84E851003CCB34 /* UIImage+ImageEffects.m */; };
 		A0F7D49D1B84E851003CCB34 /* UIImagePickerController+DelegateBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D41E1B84E851003CCB34 /* UIImagePickerController+DelegateBlocks.m */; };
@@ -589,11 +585,6 @@
 		A0F7D3DA1B84E851003CCB34 /* NZCircularImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NZCircularImageView.m; sourceTree = "<group>"; };
 		A0F7D3DB1B84E851003CCB34 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		A0F7D3DC1B84E851003CCB34 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		A0F7D4041B84E851003CCB34 /* SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPullToRefresh.h; sourceTree = "<group>"; };
-		A0F7D4051B84E851003CCB34 /* UIScrollView+SVInfiniteScrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVInfiniteScrolling.h"; sourceTree = "<group>"; };
-		A0F7D4061B84E851003CCB34 /* UIScrollView+SVInfiniteScrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVInfiniteScrolling.m"; sourceTree = "<group>"; };
-		A0F7D4071B84E851003CCB34 /* UIScrollView+SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVPullToRefresh.h"; sourceTree = "<group>"; };
-		A0F7D4081B84E851003CCB34 /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
 		A0F7D41B1B84E851003CCB34 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "../UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		A0F7D41C1B84E851003CCB34 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "../UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		A0F7D41D1B84E851003CCB34 /* UIImagePickerController+DelegateBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImagePickerController+DelegateBlocks.h"; path = "../UIImagePickerController+DelegateBlocks.h"; sourceTree = "<group>"; };
@@ -1036,7 +1027,6 @@
 				A0F7D3D81B84E851003CCB34 /* NZCircularImageView */,
 				A0F7D3DB1B84E851003CCB34 /* Reachability.h */,
 				A0F7D3DC1B84E851003CCB34 /* Reachability.m */,
-				A0F7D4031B84E851003CCB34 /* SVPullToRefresh */,
 				A0F7D41F1B84E851003CCB34 /* UIImageUtil */,
 			);
 			path = External;
@@ -1106,18 +1096,6 @@
 				A0F7D3DA1B84E851003CCB34 /* NZCircularImageView.m */,
 			);
 			path = NZCircularImageView;
-			sourceTree = "<group>";
-		};
-		A0F7D4031B84E851003CCB34 /* SVPullToRefresh */ = {
-			isa = PBXGroup;
-			children = (
-				A0F7D4041B84E851003CCB34 /* SVPullToRefresh.h */,
-				A0F7D4051B84E851003CCB34 /* UIScrollView+SVInfiniteScrolling.h */,
-				A0F7D4061B84E851003CCB34 /* UIScrollView+SVInfiniteScrolling.m */,
-				A0F7D4071B84E851003CCB34 /* UIScrollView+SVPullToRefresh.h */,
-				A0F7D4081B84E851003CCB34 /* UIScrollView+SVPullToRefresh.m */,
-			);
-			path = SVPullToRefresh;
 			sourceTree = "<group>";
 		};
 		A0F7D41F1B84E851003CCB34 /* UIImageUtil */ = {
@@ -1780,8 +1758,6 @@
 				AE47055D1AF9DC080028D7BC /* FeedDetailCell.m in Sources */,
 				A0C15CA01D4CB9350094BEF9 /* UIView+MJExtension.m in Sources */,
 				AED8D7CA1A9BE2490035EDE5 /* FollowingImageCell.m in Sources */,
-				A0F7D47F1B84E851003CCB34 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
-				A0F7D4811B84E851003CCB34 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				A0C15C9F1D4CB9350094BEF9 /* UIScrollView+MJRefresh.m in Sources */,
 				A0F7D4531B84E851003CCB34 /* KTCenterFlowLayout.m in Sources */,
 				A055FB9F1BA6553A0013F91E /* ImagePreviewCell.m in Sources */,
@@ -1874,11 +1850,9 @@
 				A0F7D43E1B84E851003CCB34 /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				A0D1024F1B84EDCA006B0E4E /* UIImage+sdWebP.m in Sources */,
 				AEB003F41B8056980056EA80 /* MyPageViewController.m in Sources */,
-				A0F7D4821B84E851003CCB34 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				A0F5132B1BD98B9600279B9D /* Message.m in Sources */,
 				A0A0835D1BD74F260057CD65 /* CircleListViewController.m in Sources */,
 				A07C66BB1BE0707300413D32 /* WXApiManager.m in Sources */,
-				A0F7D4801B84E851003CCB34 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				A0F7D4561B84E851003CCB34 /* NHAlignmentFlowLayout.m in Sources */,
 				A0D102321B84EB6A006B0E4E /* UIImageView+HighlightedWebCache.m in Sources */,
 				A0A083591BD5FF9E0057CD65 /* StationViewController.m in Sources */,
