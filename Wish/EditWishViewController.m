@@ -126,11 +126,14 @@
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"删除后的事件不能恢复哦！" message:nil preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定"
                                                       style:UIAlertActionStyleDefault
-                                                    handler:^(UIAlertAction * _Nonnull action) {
-                                                        //改变状态
-                                                        [self.plan deleteSelf];
-                                                        [self.navigationController popToRootViewControllerAnimated:YES];
-                                                    }];
+                                                    handler:^(UIAlertAction * _Nonnull action)
+    {
+        //改变状态
+        [self.fetchCenter deletePlanId:self.plan.planId completion:^{
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }];
+        
+    }];
     
     [alert addAction:confirm];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
@@ -141,28 +144,30 @@
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确定归档？" message:nil preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定"
                                                       style:UIAlertActionStyleDefault
-                                                    handler:^(UIAlertAction * _Nonnull action) {
-                                                        //改变状态
-                                                        
-                                                        UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-                                                        [spinner startAnimating];
-                                                        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+                                                    handler:^(UIAlertAction * _Nonnull action)
+    {
+        //改变状态
+        UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        [spinner startAnimating];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
 
-                                                        [self.plan updatePlanStatus:PlanStatusFinished];
-                                                        [self.fetchCenter updateStatus:self.plan completion:^{
-                                                            [spinner stopAnimating];
-                                                            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
-                                                            [self.navigationController popToRootViewControllerAnimated:YES];
-                                                            [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
-                                                        }];
-                                                    }];
+        [self.fetchCenter updatePlanId:self.plan.planId
+                            planStatus:PlanStatusFinished
+                            completion:^
+        {
+            [spinner stopAnimating];
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }];
+
+    }];
     
     [alert addAction:confirm];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-#pragma mark - text view delegate 
+#pragma mark - text view delegate
 
 - (void)textViewDidChange:(UITextView *)textView{
     NSInteger maxCount = 75;

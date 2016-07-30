@@ -44,8 +44,9 @@
                                                     handler:^(UIAlertAction * _Nonnull action)
                               {
                                   //执行删除操作
-                                  [self.plan deleteSelf];
-                                  [self.navigationController popViewControllerAnimated:YES];
+                                  [self.fetchCenter deletePlanId:self.plan.planId completion:^{
+                                      [self.navigationController popViewControllerAnimated:YES];
+                                  }];
                               }];
     [alert addAction:confirm];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];

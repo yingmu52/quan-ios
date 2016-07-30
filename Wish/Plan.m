@@ -20,17 +20,6 @@
 }
 
 
-- (void)updatePlanStatus:(PlanStatus)planStatus{
-    
-    //    [managedObjectContext rollback] will discard any changes made to the context since the last save. If you want finer grain control add an NSUndoManager to the context and break out the docs! :)
-    
-    NSAssert1(planStatus == PlanStatusOnGoing || planStatus == PlanStatusFinished,@"invalid plan status %d", planStatus);
-    self.planStatus = @(planStatus);
-    self.updateDate = [NSDate date];
-    NSAssert(self.planId, @"nil plan id");
-}
-
-
 - (void)updateTryTimesOfPlan:(BOOL)assending{
     NSInteger attempts = self.tryTimes.integerValue;
     if (assending) {
@@ -135,18 +124,6 @@
     return plan;
 }
 
-- (void)deleteSelf
-{
-    if (self.planId && [self.owner.ownerId isEqualToString:[User uid]]){
-        [[FetchCenter new] postToDeletePlan:self completion:^{
-            [self.managedObjectContext deleteObject:self];
-        }];
-    }else{
-        NSLog(@"delete from local");
-        [self.managedObjectContext deleteObject:self];
-    }
-    [self.managedObjectContext save:nil];
-}
 
 - (Feed *)fetchLastUpdatedFeed{
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Feed"];

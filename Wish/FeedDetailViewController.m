@@ -101,8 +101,9 @@
                                                           style:UIAlertActionStyleDefault
                                                         handler:^(UIAlertAction * _Nonnull action) {
                                                             if (self.feed.plan.feeds.count == 1){
-                                                                [self.feed.plan deleteSelf];
-                                                                [self.navigationController popToRootViewControllerAnimated:YES];
+                                                                [self.fetchCenter deletePlanId:self.feed.plan.planId completion:^{
+                                                                    [self.navigationController popToRootViewControllerAnimated:YES];
+                                                                }];
                                                             }else{
                                                                 [self.fetchCenter deleteFeed:self.feed completion:^{
                                                                     [self.feed deleteSelf];

@@ -57,11 +57,6 @@ typedef void(^FetchCenterGetRequestLikeFeedCompleted)(void);
 /** 不赞某条Feed完成*/
 typedef void(^FetchCenterGetRequestUnLikeFeedCompleted)(void);
 
-/** 更新事件状态完成*/
-typedef void(^FetchCenterGetRequestUpdatePlanStatusCompleted)(void);
-/** 更新事件状态完成*/
-typedef void(^FetchCenterGetRequestDeletePlanCompleted)(void);
-
 /** 删除Feed完成*/
 typedef void(^FetchCenterGetRequestDeleteFeedCompleted)(void);
 /** 关注事件完成*/
@@ -231,8 +226,15 @@ typedef void(^FetchCenterGetRequestUpdatePlanCompleted)(void);
        description:(NSString *)planDescription
         completion:(FetchCenterGetRequestUpdatePlanCompleted)completionBlock;
 
-- (void)postToDeletePlan:(Plan *)plan completion:(FetchCenterGetRequestDeletePlanCompleted)completionBlock;
-- (void)updateStatus:(Plan *)plan completion:(FetchCenterGetRequestUpdatePlanStatusCompleted)completionBlock;
+/** 删除事件状态完成*/
+typedef void(^FetchCenterGetRequestDeletePlanCompleted)(void);
+- (void)deletePlanId:(NSString *)planId completion:(FetchCenterGetRequestDeletePlanCompleted)completionBlock;
+
+/** 更新事件状态完成*/
+typedef void(^FetchCenterGetRequestUpdatePlanStatusCompleted)(void);
+- (void)updatePlanId:(NSString *)planId
+          planStatus:(PlanStatus)planStatus
+          completion:(FetchCenterGetRequestUpdatePlanStatusCompleted)completionBlock;
 
 #pragma mark - 关注
 - (void)followPlan:(Plan *)plan completion:(FetchCenterGetRequestFollowPlanCompleted)completionBlock;

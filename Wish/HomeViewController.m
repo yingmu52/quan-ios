@@ -31,7 +31,7 @@ UIGestureRecognizerDelegate,
 HomeCardViewDelegate,
 UIActionSheetDelegate,
 ImagePickerDelegate,
-ViewForEmptyEventDelegate>
+ViewForEmptyEventDelegate,StationViewControllerDelegate>
 @property (nonatomic,weak) Plan *currentPlan;
 @property (nonatomic,weak) ViewForEmptyEvent *guideView;
 @property (nonatomic,strong) ImagePicker *imagePicker;
@@ -144,14 +144,33 @@ ViewForEmptyEventDelegate>
     
     if ([segue.identifier isEqualToString:@"showStationView"]) {
         StationViewController *svc = segue.destinationViewController;
+        svc.delegate = self;
         NSArray *obj = (NSArray *)sender;
-        svc.plan = obj.firstObject;
+        svc.indexPath = obj.firstObject;
+        svc.cardImage = obj[1];
         svc.longPress = obj.lastObject;
     }
     segue.destinationViewController.hidesBottomBarWhenPushed = YES;
     
 }
 
+#pragma mark - Station View Delegate;
+
+- (void)didFinishAction:(StationViewSelection)selection forIndexPath:(NSIndexPath *)indexPath{
+    
+    Plan *plan = [self.collectionFetchedRC objectAtIndexPath:indexPath];
+    if (selection == StationViewSelectionDelete) {
+        //删除事件
+        [self.fetchCenter deletePlanId:plan.planId completion:nil];
+    }
+    if (selection == StationViewSelectionFinish) {
+        //完成归档
+        [self.fetchCenter updatePlanId:plan.planId
+                            planStatus:PlanStatusFinished
+                            completion:nil];
+    }
+    NSLog(@"%@",indexPath);
+}
 
 #pragma mark -  UICollectionView methods
 - (void)handleLongPress:(UILongPressGestureRecognizer *)longPress{
@@ -160,7 +179,8 @@ ViewForEmptyEventDelegate>
     Plan *plan = [self.collectionFetchedRC objectAtIndexPath:indexPath];
     if (plan) {
         if (longPress.state == UIGestureRecognizerStateBegan) {
-            [self performSegueWithIdentifier:@"showStationView" sender:@[plan,longPress]];
+            HomeCardView *cell = (HomeCardView *)[self.collectionView cellForItemAtIndexPath:indexPath];
+            [self performSegueWithIdentifier:@"showStationView" sender:@[indexPath,cell.imageView.image,longPress]];
         }
     }
 }

@@ -1032,12 +1032,25 @@
     }];
 }
 
-- (void)updateStatus:(Plan *)plan completion:(FetchCenterGetRequestUpdatePlanStatusCompleted)completionBlock{
+- (void)updatePlanId:(NSString *)planId
+          planStatus:(PlanStatus)planStatus
+          completion:(FetchCenterGetRequestUpdatePlanStatusCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,UPDATE_PLAN_STATUS];
-    NSDictionary *args = @{@"id":plan.planId,
-                           @"state":plan.planStatus};
-    [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
-        NSLog(@"%@",responseJson);
+    NSDictionary *args = @{@"id":planId,
+                           @"state":@(planStatus)};
+    [self getRequest:rqtStr
+           parameter:args
+    includeArguments:YES
+          completion:^(NSDictionary *responseJson) {
+              NSManagedObjectContext *workerContext = [self workerContext];
+              Plan *plan = [[Plan fetchWith:@"Plan"
+                                  predicate:[NSPredicate predicateWithFormat:@"planId == %@",planId]
+                           keyForDescriptor:@"planId"
+                       managedObjectContext:workerContext] lastObject];
+              plan.planStatus = @(planStatus);
+              plan.updateDate = [NSDate date];
+              [self.appDelegate saveContext:workerContext];
+//        NSLog(@"%@",responseJson);
         if (completionBlock) {
             dispatch_main_async_safe(^{
                 completionBlock();
@@ -1127,12 +1140,20 @@
     
 }
 
-- (void)postToDeletePlan:(Plan *)plan completion:(FetchCenterGetRequestDeletePlanCompleted)completionBlock{
+- (void)deletePlanId:(NSString *)planId completion:(FetchCenterGetRequestDeletePlanCompleted)completionBlock{
     NSString *baseUrl = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,DELETE_PLAN];
-    NSDictionary *args = @{@"id":plan.planId};
-    [self getRequest:baseUrl parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
-        NSLog(@"delete plan succeed, ID: %@",plan.planId);
-        [plan.managedObjectContext save:nil];
+    NSDictionary *args = @{@"id":planId};
+    [self getRequest:baseUrl
+           parameter:args 
+    includeArguments:YES 
+          completion:^(NSDictionary *responseJson) {
+              NSManagedObjectContext *workerContext = [self workerContext];
+              Plan *plan = [[Plan fetchWith:@"Plan"
+                                  predicate:[NSPredicate predicateWithFormat:@"planId = %@",planId]
+                           keyForDescriptor:@"planId"
+                       managedObjectContext:workerContext] lastObject];
+              [workerContext deleteObject:plan];
+              [self.appDelegate saveContext:workerContext];
         if (completionBlock) {
             dispatch_main_async_safe(^{
                 completionBlock();

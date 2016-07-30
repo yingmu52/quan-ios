@@ -22,15 +22,12 @@ typedef enum {
     PlanStatusFinished,
 }PlanStatus;
 
-- (void)updatePlanStatus:(PlanStatus)planStatus;
-
 + (Plan *)updatePlanFromServer:(NSDictionary *)dict
                      ownerInfo:(NSDictionary *)ownerInfo
           managedObjectContext:(NSManagedObjectContext *)context;
 
 + (Plan *)createPlan:(NSString *)planTitle inCircle:(Circle *)circle planId:(NSString *)planId backgroundID:(NSString *)backGroundID;
 
-- (void)deleteSelf;
 
 - (void)addMyselfAsOwner;
 
