@@ -34,7 +34,7 @@
                                                                      refreshingAction:@selector(loadNewData)];
     header.lastUpdatedTimeLabel.hidden = YES;
     self.tableView.mj_header = header;
-    [self.collectionView.mj_header endRefreshing];
+    [self.tableView.mj_header beginRefreshing];
 }
 
 - (void)loadNewData{

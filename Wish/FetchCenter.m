@@ -467,7 +467,37 @@
 }
 
 
-- (void)getMessageList:(FetchCenterGetRequestGetMessageListCompleted)completionBlock{
+//- (void)getMessageList:(FetchCenterGetRequestGetMessageListCompleted)completionBlock{
+//    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,MESSAGE,GET_MESSAGE_LIST];
+//    [self getRequest:rqtStr
+//           parameter:@{@"id":[User uid]}
+//    includeArguments:YES completion:^(NSDictionary *responseJson) {
+//        
+//        
+//        NSManagedObjectContext *workerContext = [self workerContext];
+//        
+//        NSArray *messagesArray = [responseJson valueForKeyPath:@"data.messageList"];
+//        NSDictionary *owners = [responseJson valueForKeyPath:@"data.manList"];
+//        for (NSDictionary *message in messagesArray){
+//            NSDictionary *ownerInfo = owners[message[@"operatorId"]];
+//            [Message updateMessageWithInfo:message ownerInfo:ownerInfo managedObjectContext:workerContext];
+//        }
+//        //        NSLog(@"%@",responseJson);
+//        [self.appDelegate saveContext:workerContext];
+//        if (completionBlock) {
+//            dispatch_main_async_safe(^{
+//                NSArray *messageIds = [responseJson valueForKeyPath:@"data.messageList.messageId"];
+////                completionBlock(messageIds);
+//            });
+//
+//        }
+//
+//        
+//    }];
+//}
+
+- (void)getMessageListWithLocalList:(NSArray *)localList
+                         completion:(FetchCenterGetRequestGetMessageListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,MESSAGE,GET_MESSAGE_LIST];
     [self getRequest:rqtStr
            parameter:@{@"id":[User uid]}
@@ -482,16 +512,19 @@
             NSDictionary *ownerInfo = owners[message[@"operatorId"]];
             [Message updateMessageWithInfo:message ownerInfo:ownerInfo managedObjectContext:workerContext];
         }
-        //        NSLog(@"%@",responseJson);
+
         [self.appDelegate saveContext:workerContext];
+        
+        NSArray *serverList = [responseJson valueForKeyPath:@"data.messageList.messageId"];
+        [self syncEntity:@"Message" idName:@"messageId" localList:localList serverList:serverList];
+        
         if (completionBlock) {
             dispatch_main_async_safe(^{
-                NSArray *messageIds = [responseJson valueForKeyPath:@"data.messageList.messageId"];
-                completionBlock(messageIds);
+                completionBlock();
             });
-
+            
         }
-
+        
         
     }];
 }

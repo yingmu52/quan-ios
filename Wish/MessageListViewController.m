@@ -24,29 +24,24 @@
     [self setUpNavigationItem];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero]; // clear empty cell
     self.tableView.backgroundColor = [Theme homeBackground];
+    
+    
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self
+                                                                     refreshingAction:@selector(loadNewData)];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    self.tableView.mj_header = header;
+    [self.tableView.mj_header beginRefreshing];
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self.fetchCenter getMessageList:^(NSArray *messages) {
-        //同步
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
-            NSMutableArray *currentCopy = [self.collectionFetchedRC.fetchedObjects mutableCopy];
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"NOT (messageId IN %@)",messages];
-            NSArray *trash = [currentCopy filteredArrayUsingPredicate:predicate]; //a copy of subset of 'currentCopy‘
-            
-            dispatch_main_sync_safe(^{
-                for (Message *message in trash){
-                    [message.managedObjectContext deleteObject:message];
-                    NSLog(@"Removing message %@",message.messageId);
-                }
-            });
-        });
 
-        
+- (void)loadNewData{
+    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKeyPath:@"messageId"];
+    [self.fetchCenter getMessageListWithLocalList:localList
+                                       completion:^{
+       [self.tableView.mj_header endRefreshing];
     }];
 }
+
 - (void)setUpNavigationItem
 {
     CGRect frame = CGRectMake(0,0, 25,25);

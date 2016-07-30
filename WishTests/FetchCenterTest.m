@@ -355,18 +355,18 @@ static NSTimeInterval expectationTimeout = 30.0f;
     }
 }
 
-- (void)testGetMessageList{
-    for (NSInteger i = 0 ; i < 10; i ++) {
-        XCTestExpectation *expectation = [self expectationWithDescription:@"拉取消息接口"];
-        [self.fetchCenter getMessageList:^(NSArray *messages) {
-            [expectation fulfill];
-        }];
-        [self waitForExpectationsWithTimeout:expectationTimeout
-                                     handler:^(NSError * _Nullable error) {
-                                         XCTAssertNil(error,@"拉取消息错误");
-                                     }];
-    }
-}
+//- (void)testGetMessageList{
+//    for (NSInteger i = 0 ; i < 10; i ++) {
+//        XCTestExpectation *expectation = [self expectationWithDescription:@"拉取消息接口"];
+//        [self.fetchCenter getMessageList:^(NSArray *messages) {
+//            [expectation fulfill];
+//        }];
+//        [self waitForExpectationsWithTimeout:expectationTimeout
+//                                     handler:^(NSError * _Nullable error) {
+//                                         XCTAssertNil(error,@"拉取消息错误");
+//                                     }];
+//    }
+//}
 
 - (void)testSetPersonalInfo{
     NSUInteger numberOfCycles = 10;
