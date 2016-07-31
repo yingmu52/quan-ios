@@ -1524,14 +1524,15 @@
 #pragma mark - 图片id转换成图片请求的函数
 
 - (NSURL *)urlWithImageID:(NSString *)imageId size:(FetchCenterImageSize)size{
-    NSString *url;
-    if (imageId.length > 30) { //优图id
-        NSString *base = [NSString stringWithFormat:@"http://shier-%@.image.myqcloud.com/%@",YOUTU_APP_ID,imageId];
-        url = (size == FetchCenterImageSizeOriginal) ? base : [base stringByAppendingFormat:@"/%@",@(size)];
-    }else{ //老id
-        NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@?",self.baseUrl,PIC,GET_IMAGE];
-        url = [NSString stringWithFormat:@"%@id=%@",[self addGeneralArgumentsForBaseURL:rqtStr],imageId];
-    }
+    
+    NSString *base = [NSString stringWithFormat:@"http://shier-%@.image.myqcloud.com/%@",YOUTU_APP_ID,imageId];
+    NSString *url = (size == FetchCenterImageSizeOriginal) ? base : [base stringByAppendingFormat:@"/%@",@(size)];
+//    if (imageId.length > 30) { //优图id
+//    
+//    }else{ //老id
+//        NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@?",self.baseUrl,PIC,GET_IMAGE];
+//        url = [NSString stringWithFormat:@"%@id=%@",[self addGeneralArgumentsForBaseURL:rqtStr],imageId];
+//    }
     return [NSURL URLWithString:url];
 }
 
