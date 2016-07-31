@@ -15,6 +15,7 @@
 #import "FeedDetailViewController.h"
 
 @interface MessageListViewController ()
+@property (nonatomic,strong) NSTimer *messageNotificationTimer;
 @end
 
 @implementation MessageListViewController
@@ -30,15 +31,23 @@
                                                                      refreshingAction:@selector(loadNewData)];
     header.lastUpdatedTimeLabel.hidden = YES;
     self.tableView.mj_header = header;
-    [self.tableView.mj_header beginRefreshing];
+    [self loadNewData];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    if (self.tabBarItem.badgeValue.integerValue > 0) {
+        [self loadNewData];
+    }
+}
 
 - (void)loadNewData{
     NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKeyPath:@"messageId"];
     [self.fetchCenter getMessageListWithLocalList:localList
                                        completion:^{
        [self.tableView.mj_header endRefreshing];
+       [self.tabBarController.tabBar.selectedItem setBadgeValue:nil]; //去掉好点计数
     }];
 }
 
@@ -54,6 +63,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:deleteBtn];
     self.navigationItem.rightBarButtonItem.enabled = self.tableFetchedRC.fetchedObjects.count > 0;
 }
+
 
 #pragma mark - clear all message 
 - (void)clearAllMessages{

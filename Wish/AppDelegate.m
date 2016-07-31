@@ -11,6 +11,7 @@
 #define QQ_URLSCHEME @"tencent1104337894"
 #define PGY_APPID @"7f1cd492fc0f48875650e0d1c702093b"
 #import "LoginViewController.h"
+#import "MessageListViewController.h"
 @interface AppDelegate () <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,weak) LoginViewController *loginVC;
@@ -67,6 +68,23 @@
     //向后台发送Device Token
     [self.fetchCenter sendDeviceToken:strToken completion:nil];
     
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo{
+    
+//    UIApplicationState currentState = [[UIApplication sharedApplication] applicationState];
+//    if (currentState == UIApplicationStateBackground | currentState == UIApplicationStateInactive) {
+//        //切换到主页
+//        UITabBarController *tbc = [self.loginVC.storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
+//        [[[UIApplication sharedApplication] keyWindow] setRootViewController:tbc];
+//        
+//        [tbc setSelectedIndex:3]; //选择消息页
+//        NSString *feedId = [userInfo valueForKeyPath:@"info.info_id"];
+//        UINavigationController *nv = tbc.selectedViewController;
+//        MessageListViewController *mlvc = nv.viewControllers.firstObject;
+//        [mlvc performSegueWithIdentifier:@"showFeedDetailFromMessage" sender:feedId];
+//    }
+
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(nonnull NSError *)error{
