@@ -30,6 +30,7 @@
     [super viewDidLoad];
     [self setupNavigationItem];
     [self setupTextField];
+    [self setupRadioButton];
     [self setupContent];
 }
 
@@ -54,6 +55,14 @@
     [self.textField addTarget:self action:@selector(textFieldDidUpdate) forControlEvents:UIControlEventEditingChanged];
 }
 
+- (void)setupRadioButton{
+    self.privacyRadioButton.layer.borderWidth = 1.0;
+    self.privacyRadioButton.layer.borderColor = [UIColor grayColor].CGColor;
+    [self.privacyRadioButton setImage:nil forState:UIControlStateNormal];
+    [self.privacyRadioButton setImage:[Theme EditPlanRadioButtonCheckMark] forState:UIControlStateSelected];
+    [self.privacyRadioButton setImage:[Theme EditPlanRadioButtonCheckMark] forState:UIControlStateHighlighted];
+}
+
 
 //#define text_privacy_on @"事件状态：公开"
 //#define text_privacy_off @"事件状态：私密"
@@ -71,11 +80,6 @@
     self.wordCountLabel.text = [NSString stringWithFormat:@"%@/75",@(self.plan.detailText.length)];
     
     //事件公开与私密
-    self.privacyRadioButton.layer.borderWidth = 1.0;
-    self.privacyRadioButton.layer.borderColor = [UIColor grayColor].CGColor;
-    [self.privacyRadioButton setImage:nil forState:UIControlStateNormal];
-    [self.privacyRadioButton setImage:[Theme EditPlanRadioButtonCheckMark] forState:UIControlStateSelected];
-    [self.privacyRadioButton setImage:[Theme EditPlanRadioButtonCheckMark] forState:UIControlStateHighlighted];
     self.isPrivate = self.plan.isPrivate.boolValue;
 }
 
