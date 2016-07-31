@@ -928,10 +928,11 @@
 #pragma mark - 发现事件
 
 - (void)getDiscoveryList:(NSArray *)localList
+                  onPage:(NSNumber *)page
               completion:(FetchCenterGetRequestGetDiscoverListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,DISCOVER,GET_DISCOVER_LIST];
     [self getRequest:rqtStr
-           parameter:nil
+           parameter:page ? @{@"page":page} : nil
     includeArguments:YES
           completion:^(NSDictionary *responseJson)
      {
@@ -940,34 +941,32 @@
          
          NSArray *planList = [responseJson valueForKeyPath:@"data.planList"];
          NSDictionary *manList = [responseJson valueForKeyPath:@"data.manList"];
-         NSString *title = [responseJson valueForKeyPath:@"data.quanInfo.name"];
+         NSNumber *currentPage = [responseJson valueForKeyPath:@"data.page"];
+         NSNumber *totalPage = [responseJson valueForKeyPath:@"data.totalpage"];
          
+         if (completionBlock) {
+             dispatch_main_async_safe(^{
+                 completionBlock(currentPage,totalPage);
+             });
+         }
          
          //缓存并更新本地事件
          if (planList && manList){
              [planList enumerateObjectsUsingBlock:^(NSDictionary * planInfo, NSUInteger idx, BOOL * _Nonnull stop) {
-                 Plan *plan = [Plan updatePlanFromServer:planInfo
-                                               ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]
-                                    managedObjectContext:workerContext];
-                 plan.discoverIndex = @(idx + 1); //记录索引方便显示服务器上的顺序
+                 [Plan updatePlanFromServer:planInfo
+                                  ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]
+                       managedObjectContext:workerContext];
+//                 plan.discoverIndex = @(idx + 1); //记录索引方便显示服务器上的顺序
              }];
          }
          
         //同步
-         NSArray *serverList = [planList valueForKey:@"id"];
-         [self syncEntity:@"Plan"
-                   idName:@"planId"
-                localList:localList
-               serverList:serverList];
+         if (currentPage.integerValue == 1) { //同步服务器与本地第一页的数据
+             NSArray *serverList = [planList valueForKey:@"id"];
+              [self syncEntity:@"Plan" idName:@"planId" localList:localList serverList:serverList];
+         }
 
          [self.appDelegate saveContext:workerContext];
-         
-         if (completionBlock) {
-             dispatch_main_async_safe(^{
-                 completionBlock(title);
-             });
-         }
-         
      }];
 }
 

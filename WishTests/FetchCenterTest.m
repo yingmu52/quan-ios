@@ -52,7 +52,10 @@ static NSTimeInterval expectationTimeout = 30.0f;
 
 - (void)testGetDiscoveryList{
     XCTestExpectation *expectation = [self expectationWithDescription:@"发现页事件列表拉取接口"];
-    [self.fetchCenter getDiscoveryList:nil completion:^(NSString *circleTitle) {
+    [self.fetchCenter getDiscoveryList:nil
+                                onPage:@(1)
+                            completion:^(NSNumber *currentPage, NSNumber *totalPage)
+    {
         [expectation fulfill];
     }];
 

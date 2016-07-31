@@ -49,9 +49,6 @@ typedef enum {
 typedef void(^FetchCenterGetRequestSwithCircleCompleted)(void);
 /** 填写邀请码完成*/
 typedef void(^FetchCenterGetRequestJoinCircleCompleted)(NSString *circleId);
-/** 发现页拉取列表完成*/
-typedef void(^FetchCenterGetRequestGetDiscoverListCompleted)(NSString *circleTitle);
-
 /** 赞某条Feed完成*/
 typedef void(^FetchCenterGetRequestLikeFeedCompleted)(void);
 /** 不赞某条Feed完成*/
@@ -255,7 +252,10 @@ typedef void(^FetchCenterGetRequestGetFollowingPlanListCompleted)(void);
 
 
 #pragma mark - 发现
+/** 发现页拉取列表完成*/
+typedef void(^FetchCenterGetRequestGetDiscoverListCompleted)(NSNumber *currentPage, NSNumber *totalPage);
 - (void)getDiscoveryList:(NSArray *)localList
+                  onPage:(NSNumber *)page
               completion:(FetchCenterGetRequestGetDiscoverListCompleted)completionBlock;
 
 #pragma mark - 个人
