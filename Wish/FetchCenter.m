@@ -467,34 +467,6 @@
 }
 
 
-//- (void)getMessageList:(FetchCenterGetRequestGetMessageListCompleted)completionBlock{
-//    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,MESSAGE,GET_MESSAGE_LIST];
-//    [self getRequest:rqtStr
-//           parameter:@{@"id":[User uid]}
-//    includeArguments:YES completion:^(NSDictionary *responseJson) {
-//        
-//        
-//        NSManagedObjectContext *workerContext = [self workerContext];
-//        
-//        NSArray *messagesArray = [responseJson valueForKeyPath:@"data.messageList"];
-//        NSDictionary *owners = [responseJson valueForKeyPath:@"data.manList"];
-//        for (NSDictionary *message in messagesArray){
-//            NSDictionary *ownerInfo = owners[message[@"operatorId"]];
-//            [Message updateMessageWithInfo:message ownerInfo:ownerInfo managedObjectContext:workerContext];
-//        }
-//        //        NSLog(@"%@",responseJson);
-//        [self.appDelegate saveContext:workerContext];
-//        if (completionBlock) {
-//            dispatch_main_async_safe(^{
-//                NSArray *messageIds = [responseJson valueForKeyPath:@"data.messageList.messageId"];
-////                completionBlock(messageIds);
-//            });
-//
-//        }
-//
-//        
-//    }];
-//}
 
 - (void)getMessageListWithLocalList:(NSArray *)localList
                          completion:(FetchCenterGetRequestGetMessageListCompleted)completionBlock{
@@ -1169,29 +1141,6 @@
     }];
 
 }
-
-//- (void)createPlan:(NSString *)planTitle
-//          circleId:(NSString *)circleId
-//        completion:(FetchCenterGetRequestPlanCreationCompleted)completionBlock{
-//    
-//    NSString *baseUrl = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,CREATE_PLAN];
-//    NSDictionary *args = @{@"title":[planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-//                           @"private":@(0),
-//                           @"quanId":circleId};
-//    [self getRequest:baseUrl parameter:args includeArguments:YES completion:^(NSDictionary *json) {
-//        NSString *fetchedPlanId = [json valueForKeyPath:@"data.id"];
-//        NSString *bgString = [json valueForKeyPath:@"data.backGroudPic"];
-//        if (fetchedPlanId && bgString) {
-////            NSLog(@"create plan succeed, ID: %@",fetchedPlanId);
-//            if (completionBlock) {
-//                dispatch_main_async_safe(^{
-//                    completionBlock(fetchedPlanId,bgString);
-//                });
-//            }
-//        }
-//    }];
-//    
-//}
 
 
 - (void)createPlan:(NSString *)planTitle
