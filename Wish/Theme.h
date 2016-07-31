@@ -56,7 +56,7 @@
 + (UIColor *)wishDetailBackgroundNone:(UIView *)referenceView;
 + (UIColor *)homeBackground;
 + (UIImage *)tipsBackgroundImage;
-
++ (UIImage *)EditPlanRadioButtonCheckMark;
 
 + (UIImage *)achievementFail;
 + (UIImage *)achievementFinish;

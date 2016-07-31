@@ -74,6 +74,10 @@
     return [UIImage imageNamed:@"tips_bg"];
 }
 
++ (UIImage *)EditPlanRadioButtonCheckMark{
+    return [UIImage imageNamed:@"check_icon"];
+}
+
 + (UIImage *)menuWishListDefault
 {
     return [UIImage imageNamed:@"tab_ic_home_default"];
