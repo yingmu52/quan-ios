@@ -24,7 +24,11 @@
   forControlEvents:UIControlEventTouchUpInside];
     [btn setImage:image
          forState:UIControlStateNormal];
-    if (!CGRectIsEmpty(frame)) btn.frame = frame;
+    if (CGRectIsNull(frame)) {
+        btn.frame = CGRectMake(0, 0, image.size.width, image.size.height);
+    }else{
+        btn.frame = frame;
+    }
     return btn;
 }
 

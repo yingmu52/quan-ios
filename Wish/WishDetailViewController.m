@@ -174,43 +174,7 @@
                                       selector:@selector(goBack)
                                          frame:frame];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
-
-    UIButton *moreBtn = [Theme buttonWithImage:[Theme navMoreButtonDefault]
-                                            target:self
-                                          selector:@selector(showMoreOptions)
-                                             frame:frame];
-
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:moreBtn];
 }
-
-
-- (void)showMoreOptions{
-    [self presentViewController:self.moreActionSheet
-                       animated:YES
-                     completion:nil];
-}
-
-- (UIAlertController *)moreActionSheet{
-    if (!_moreActionSheet) {
-        _moreActionSheet = [UIAlertController alertControllerWithTitle:nil
-                                                               message:nil
-                                                        preferredStyle:UIAlertControllerStyleActionSheet];
-        
-        UIAlertAction *shareOption = [UIAlertAction actionWithTitle:@"分享"
-                                                              style:UIAlertActionStyleDefault
-                                                            handler:^(UIAlertAction * _Nonnull action)
-        {
-            //分享
-            [self performSegueWithIdentifier:@"showInvitationView" sender:nil];
-        }];
-    
-        [_moreActionSheet addAction:shareOption];
-        [_moreActionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-    }
-    return _moreActionSheet;
-}
-
-
 - (void)setCurrenetBackgroundColor{
 
     if (![self.tableView.backgroundView isKindOfClass:[UIImageView class]]) {

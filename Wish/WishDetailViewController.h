@@ -34,9 +34,8 @@
 
 //@property (nonatomic,strong) NSMutableArray *serverFeedIds;
 
-@property (nonatomic,strong) UIAlertController *moreActionSheet;
+- (void)setUpNavigationItem;
 
-- (void)showMoreOptions;
 #pragma mark - abstract
 - (NSString *)segueForFeed; //must set to display feed detail
 
