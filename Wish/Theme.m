@@ -142,11 +142,6 @@
     return [UIImage imageNamed:@"nav_ic_finish_default"];
 }
 
-+ (UIImage *)navComposeButtonDefault
-{
-    return [UIImage imageNamed:@"nav_ic_eidt_default"];
-}
-
 + (UIImage *)navMoreButtonDefault{
     return [UIImage imageNamed:@"nav_ic_more"];
 }
@@ -158,9 +153,6 @@
 + (UIImage *)navShareButtonDefault
 {
     return [UIImage imageNamed:@"nav_ic_share_default"];
-}
-+ (UIImage *)navAddDefault{
-    return [UIImage imageNamed:@"navbar_ic_add"];
 }
 
 + (UIImage *)navInviteDefault{

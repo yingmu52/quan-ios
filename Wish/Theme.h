@@ -38,12 +38,10 @@
 + (UIColor *)menuBackground;
 
 + (UIImage *)navBackButtonDefault;
-+ (UIImage *)navComposeButtonDefault;
 + (UIImage *)navShareButtonDefault;
 + (UIColor *)naviBackground;
 + (UIImage *)navWhiteButtonDefault;
 + (UIImage *)navMenuDefault;
-+ (UIImage *)navAddDefault;
 + (UIImage *)navTikButtonDefault;
 + (UIImage *)navTikButtonDisable;
 + (UIImage *)navButtonDeleted;
