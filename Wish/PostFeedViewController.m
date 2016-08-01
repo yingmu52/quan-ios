@@ -45,25 +45,6 @@ static NSUInteger distance = 10;
     return _fetchCenter;
 }
 
-//- (Feed *)feed{
-//    if (!_feed){
-//        _feed = [Feed createFeedInPlan:self.plan feedTitle:self.textView.text];
-//    }
-//    return _feed;
-//}
-//
-//- (Plan *)plan{
-//    if (!_plan) {
-//        if (self.circle) {
-//            _plan = [Plan createPlan:self.navigationItem.title inCircle:self.circle];
-//        }else{
-//            NSLog(@"No Circle Exists");
-//        }
-//        
-//    }
-//    return _plan;
-//}
-
 
 - (void)viewDidLoad{
     [super viewDidLoad];
@@ -114,38 +95,48 @@ static NSUInteger distance = 10;
 
 
 - (void)createFeed{
-    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithFrame:self.tikButton.frame];
-    spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
-    [spinner startAnimating];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
-    
-    //处理用户选取的图片 array of PHAsset/UIImage
-    PHImageManager *manager = [PHImageManager defaultManager];
-    NSMutableArray *arrayOfUIImages = [NSMutableArray arrayWithCapacity:self.assets.count];
-    for (id item in self.assets) {
+    if (self.assets.count > 0) {
+        [self tapOnBackground:nil]; //关闭键盘
+        UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithFrame:self.tikButton.frame];
+        spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+        [spinner startAnimating];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
         
-        //this method is async
-        if ([item isKindOfClass:[PHAsset class]]) {
-            [manager requestImageDataForAsset:item
-                                      options:nil
-                                resultHandler:^(NSData * _Nullable imageData,
-                                                NSString * _Nullable dataUTI,
-                                                UIImageOrientation orientation,
-                                                NSDictionary * _Nullable info)
-            {
-
-                [arrayOfUIImages addObject:[UIImage imageWithData:imageData scale:0.5]];
-                if (arrayOfUIImages.count == self.assets.count) {
-                    [self.fetchCenter uploadImages:arrayOfUIImages
-                                        completion:^(NSArray *imageIds) {
-                        [self finishUploadingImages:imageIds];
-                    }];
-                }
-            }];
+        //处理用户选取的图片 array of PHAsset/UIImage
+        PHImageManager *manager = [PHImageManager defaultManager];
+        NSMutableArray *arrayOfUIImages = [NSMutableArray arrayWithCapacity:self.assets.count];
+        for (id item in self.assets) {
+            
+            //this method is async
+            if ([item isKindOfClass:[PHAsset class]]) {
+                [manager requestImageDataForAsset:item
+                                          options:nil
+                                    resultHandler:^(NSData * _Nullable imageData,
+                                                    NSString * _Nullable dataUTI,
+                                                    UIImageOrientation orientation,
+                                                    NSDictionary * _Nullable info)
+                 {
+                     
+                     [arrayOfUIImages addObject:[UIImage imageWithData:imageData scale:0.5]];
+                     if (arrayOfUIImages.count == self.assets.count) {
+                         [self.fetchCenter uploadImages:arrayOfUIImages
+                                             completion:^(NSArray *imageIds) {
+                                                 [self finishUploadingImages:imageIds];
+                                             }];
+                     }
+                 }];
+            }
         }
+        
+        self.progressBar.hidden = NO;
+    }else{
+        UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@"至少选一张图"
+                                                                             message:nil
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+        [alertView addAction:[UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alertView animated:YES completion:nil];
+
     }
-    
-    self.progressBar.hidden = NO;
 }
 
 - (void)goBack{
@@ -171,10 +162,9 @@ static NSUInteger distance = 10;
 }
 #pragma mark - text view delegate
 
-
 - (void)textViewDidChange:(UITextView *)textView{
     if (textView.isFirstResponder){
-        BOOL flag = textView.text.length*[textView.text stringByReplacingOccurrencesOfString:@" " withString:@""].length > 0 && self.assets.count > 0;
+        BOOL flag = textView.text.length*[textView.text stringByReplacingOccurrencesOfString:@" " withString:@""].length > 0;
         self.navigationItem.rightBarButtonItem.enabled = flag;
         UIImage *bg = flag ? [Theme navTikButtonDefault] : [Theme navTikButtonDisable];
         [self.tikButton setImage:bg forState:UIControlStateNormal];
