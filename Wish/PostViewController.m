@@ -94,7 +94,6 @@
         //打开照片选取器
         [self.imagePicker showPhotoLibrary:self];
     }
-    
 }
 
 
@@ -116,14 +115,8 @@
 }
 
 - (void)didFinishPickingCircle:(Circle *)circle{
-    
     //设置圈子
     self.circle = circle;
-    
-    //有标题才打开照片选取器
-    if (self.textField.hasText) {
-        [self.imagePicker showPhotoLibrary:self];
-    }
 }
 
 - (void)setCircle:(Circle *)circle{
