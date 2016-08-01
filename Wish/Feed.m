@@ -79,12 +79,12 @@
     
     Feed *feed;
     NSAssert(checks.count <= 1, @"non unique feed found");
-    if (!checks.count) {
-        //create
+    
+    BOOL isNew = !checks.count;
+    if (isNew) {
         feed = [NSEntityDescription insertNewObjectForEntityForName:@"Feed"
                                              inManagedObjectContext:context];
         feed.feedId = feedItem[@"id"];
-//        feed.imageId = feedItem[@"picurl"];
         feed.selfLiked = @(NO);
         feed.feedTitle = feedItem[@"content"];
         feed.createDate = [NSDate dateWithTimeIntervalSince1970:[feedItem[@"createTime"] integerValue]];
@@ -118,7 +118,9 @@
         feed.type = @([feedItem[@"feedsType"] integerValue]);
     }
     
-    
+    if (isNew) {
+        [context save:nil];
+    }
     
     return feed;
 }

@@ -13,7 +13,7 @@
 @interface FeedDetailViewController ()
 @property (nonatomic,strong) NSDateFormatter *dateFormatter;
 @property (nonatomic,strong) NSDictionary *textAttributes;
-//@property (nonatomic,strong) NSString *testtext;
+@property (nonatomic,strong) NSNumber *currentPage;
 @end
 
 @implementation FeedDetailViewController 
@@ -32,7 +32,6 @@
          forCellReuseIdentifier:FEEDDETAILCELLID];
 
     //上拉刷新
-    self.hasNextPage = YES;
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self
                                                                     refreshingAction:@selector(loadMoreComments)];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -41,35 +40,38 @@
 
 - (void)loadMoreComments{
     NSString *feedId = self.feed.feedId ? self.feed.feedId : self.feedId;
-    if (feedId && self.hasNextPage) {
-        [self.fetchCenter getCommentListForFeed:feedId
-                                       pageInfo:self.pageInfo
-                                     completion:^(NSDictionary *pageInfo,
-                                                  BOOL hasNextPage,
-                                                  NSArray *commmentIds,
-                                                  Feed *feed)
-         {
-#warning 同步评论列表
-             self.hasNextPage = hasNextPage;
-             self.pageInfo = pageInfo;
-             
-             if (!self.feed) {
-                 self.feed = [self.tableFetchedRC.managedObjectContext objectWithID:feed.objectID];
-             }
+    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKey:@"commentId"];
+    //        NSLog(@"%@",self.currentPage);
+    [self.fetchCenter getCommentListForFeed:feedId
+                                  localList:localList
+                                currentPage:self.currentPage
+                                 completion:^(NSNumber *currentPage,
+                                              NSNumber *totalPage,
+                                              BOOL hasComments)
+     {
+         //            NSLog(@"%@ %@",currentPage,totalPage);
+         if ([currentPage isEqualToNumber:totalPage] || !hasComments) {
+             [self.tableView.mj_footer endRefreshingWithNoMoreData];
+         }else{
+             self.currentPage = @(currentPage.integerValue + 1);
              [self.tableView.mj_footer endRefreshing];
-         }];
-
-    }else{
-        [self.tableView.mj_footer endRefreshingWithNoMoreData];
-    }
+         }
+         if (!self.feed) {
+             self.feed = [Feed fetchFeedWithId:feedId];
+         }
+          
+     }];
 }
 
 
 - (void)setFeed:(Feed *)feed{
     _feed = feed;
-    if (_feed.feedId) {
-        [self updateHeaderInfoForFeed:_feed];
-    }
+    [self updateHeaderInfoForFeed:feed];
+}
+
+- (void)setFeedId:(NSString *)feedId{
+    _feedId = feedId;
+    self.feed = [Feed fetchFeedWithId:feedId];
 }
 
 - (void)setUpNavigationItem
@@ -217,12 +219,6 @@
     return _headerView;
 }
 
-//- (NSString *)testtext{
-//    if (!_testtext) {
-//        _testtext = [SystemUtil randomLorumIpsum];
-//    }
-//    return _testtext;
-//}
 
 - (void)updateHeaderInfoForFeed:(Feed *)feed{
     if (feed) {
@@ -393,10 +389,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 - (NSFetchRequest *)tableFetchRequest{
     if (!_tableFetchRequest) {
         _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Comment"];
-        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"feed.feedId = %@",self.feedId ? self.feedId : self.feed.feedId];
+        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"feed.feedId == %@",self.feedId];
         _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createTime" ascending:YES]];
-        [_tableFetchRequest setFetchBatchSize:3];
-
     }
     return _tableFetchRequest;
 }
@@ -421,31 +415,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
         [self.headerView setCommentButtonText:self.feed.commentCount];
     }
 
-}
-
-
-#pragma mark - delete local comments to insync with server
-
-- (void)dealloc{
-    NSUInteger numberOfPreservingCommentss = 20;
-    NSArray *comments = self.tableFetchedRC.fetchedObjects;
-    if (comments.count > numberOfPreservingCommentss) {
-        AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-        
-        //order of delete is depending on how the comments are displayed (by older comments are at the top
-        for (NSUInteger i = comments.count -1; i >= numberOfPreservingCommentss; i--) {
-            Comment *comment = comments[i];
-            [delegate.managedObjectContext deleteObject:comment];
-        }
-        [delegate saveContext];
-    }
-}
-
-#pragma mark - set up for message view
-
-- (void)setFeedId:(NSString *)feedId{
-    _feedId = feedId;
-    self.feed = [Feed fetchFeedWithId:_feedId];
 }
 
 @end

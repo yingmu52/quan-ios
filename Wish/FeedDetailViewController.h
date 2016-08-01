@@ -20,12 +20,8 @@
 
 @interface FeedDetailViewController : MSSuperViewController <FeedDetailHeaderDelegate>
 @property (nonatomic,strong) NSString *feedId; //for Message List View
-
 @property (nonatomic,strong) Feed *feed;
-@property (nonatomic) BOOL hasNextPage;
-@property (nonatomic,strong) NSDictionary *pageInfo;
 @property (nonatomic,strong) FeedDetailHeader *headerView;
-
 - (void)setUpNavigationItem;
 
 @end

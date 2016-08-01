@@ -533,57 +533,68 @@
 
 
 - (void)getCommentListForFeed:(NSString *)feedId
-                     pageInfo:(NSDictionary *)info
+                    localList:(NSArray *)localList
+                  currentPage:(NSNumber *)localCurrentPage
                    completion:(FetchCenterGetRequestGetCommentListCompleted)completionBlock{
+
+
     
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,GET_FEED_COMMENTS];
-    NSString *infoStr = info ? [self convertDictionaryToString:info] : @"";
     
-    NSDictionary *args = @{@"feedsId":feedId,
-                           @"attachInfo":infoStr};
-    [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
+    
+    NSDictionary *args = localCurrentPage ? @{@"feedsId":feedId,@"page":localCurrentPage} : @{@"feedsId":feedId};
+    [self getRequest:rqtStr
+           parameter:args
+    includeArguments:YES
+          completion:^(NSDictionary *responseJson)
+    {
         
-        
+        //读json数据
+        NSArray *comments = [responseJson valueForKeyPath:@"data.commentList"];
+        NSDictionary *feedInfo = [responseJson valueForKeyPath:@"data.feeds"];
+
         NSManagedObjectContext *workerContext = [self workerContext];
         
-        NSDictionary *ownerInfo = [responseJson valueForKeyPath:@"data.manList"];
-        BOOL hasNextPage = [[responseJson valueForKeyPath:@"data.isMore"] boolValue];
-        NSDictionary *pageInfo = [responseJson valueForKeyPath:@"data.attachInfo"];
-        NSDictionary *feedInfo = [responseJson valueForKeyPath:@"data.feeds"];
-        
-        Feed *feed = [Feed updateFeedWithInfo:feedInfo forPlan:nil ownerInfo:nil managedObjectContext:workerContext];
-        NSArray *comments = [responseJson valueForKeyPath:@"data.commentList"];
-        
-        NSMutableArray *localComments = [NSMutableArray arrayWithCapacity:comments.count];
-        for (NSDictionary *commentInfo in comments){
-            //读取评论信息
-            Comment *comment = [Comment updateCommentWithInfo:commentInfo managedObjectContext:workerContext];
-            //读取用户信息
-            NSDictionary *userInfo = comment.isMyComment.boolValue ? [Owner myWebInfo] : ownerInfo[commentInfo[@"ownerId"]];
-            Owner *owner = [Owner updateOwnerWithInfo:userInfo managedObjectContext:workerContext];
+        Feed *feed = [Feed updateFeedWithInfo:feedInfo
+                                      forPlan:nil
+                                    ownerInfo:nil
+                         managedObjectContext:workerContext];
+
+        BOOL hasComments = comments.count > 0;
+        NSNumber *currentPage = @(0);
+        NSNumber *totalPage = @(0);
+
+        if (hasComments && feed) {
             
-            //防止更新相同的评论数据
-            if (!comment.owner) {
-                comment.owner = owner;
-            }
-            if (!comment.feed) {
-                comment.feed = feed;
-            }
-            if (comment.idForReply) {
-                NSString *nameForReply = [ownerInfo[comment.idForReply] objectForKey:@"name"];
-                if (![comment.nameForReply isEqualToString:nameForReply]) {
-                    comment.nameForReply = nameForReply;
-                }
-            }
-            [localComments addObject:comment];
+            NSDictionary *ownerInfo = [responseJson valueForKeyPath:@"data.manList"];
+
+            currentPage = [responseJson valueForKeyPath:@"data.page"];
+            totalPage = [responseJson valueForKeyPath:@"data.totalpage"];
+
             
+            
+            for (NSDictionary *commentInfo in comments){
+                //读取用户信息取评论信息
+                NSDictionary *userInfo = ownerInfo[commentInfo[@"ownerId"]];
+                [Comment updateCommentWithInfo:commentInfo
+                                     ownerInfo:userInfo
+                                        inFeed:feed
+                          managedObjectContext:workerContext];
+            }
+        }
+        
+        //同步第一页数据
+        if (currentPage.integerValue == 1) {
+            NSArray *serverList = [comments valueForKey:@"id"];
+            [self syncEntity:@"Comment" idName:@"commentId" localList:localList serverList:serverList];
         }
 
         [self.appDelegate saveContext:workerContext];
 
+
         if (completionBlock) {
             dispatch_main_async_safe(^{
-                completionBlock(pageInfo,hasNextPage,localComments,feed); 
+                completionBlock(currentPage,totalPage,hasComments);
             });
         }
         
@@ -1079,7 +1090,7 @@
         //更新本地事件
         NSManagedObjectContext *workerContext = [self workerContext];
         Plan *plan = [[Plan fetchWith:@"Plan"
-                           predicate:[NSPredicate predicateWithFormat:@"planId = %@",planId]
+                           predicate:[NSPredicate predicateWithFormat:@"planId == %@",planId]
                     keyForDescriptor:@"planId"
                 managedObjectContext:workerContext] lastObject];
         plan.planTitle = planTitle;

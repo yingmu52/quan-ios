@@ -81,8 +81,6 @@ typedef void(^FetchCenterGetRequestClearMessageListCompleted)(void);
 typedef void(^FetchCenterGetRequestSetPersonalInfoCompleted)(void);
 /** 评论或回复完成*/
 typedef void(^FetchCenterGetRequestCommentCompleted)(Comment *comment);
-/** 摘取评论列表完成*/
-typedef void(^FetchCenterGetRequestGetCommentListCompleted)(NSDictionary *pageInfo, BOOL hasNextPage, NSArray *comments, Feed *feed);
 /** 删除评论完成*/
 typedef void(^FetchCenterGetRequestDeleteCommentCompleted)(void);
 /** 上传图片完成*/
@@ -193,9 +191,13 @@ typedef void(^FetchCenterGetRequestUploadFeedCompleted)(NSString *feedId);
             toOwner:(Owner *)owner
          completion:(FetchCenterGetRequestCommentCompleted)completionBlock;
 
-
+/** 摘取评论列表完成*/
+typedef void(^FetchCenterGetRequestGetCommentListCompleted)(NSNumber *currentPage,
+                                                            NSNumber *totalPage,
+                                                            BOOL hasComments);
 - (void)getCommentListForFeed:(NSString *)feedId
-                     pageInfo:(NSDictionary *)info
+                    localList:(NSArray *)localList
+                  currentPage:(NSNumber *)localCurrentPage
                    completion:(FetchCenterGetRequestGetCommentListCompleted)completionBlock;
 
 - (void)deleteComment:(Comment *)comment
