@@ -7,20 +7,17 @@
 //
 
 #import "EditWishViewController.h"
-#import "Theme.h"
 #import "SystemUtil.h"
 #import "Plan.h"
 #import "AppDelegate.h"
 #import "SDWebImageCompat.h"
 #import "GCPTextView.h"
-#import "FetchCenter.h"
-@interface EditWishViewController () <FetchCenterDelegate,UITextViewDelegate>
+@interface EditWishViewController () <UITextViewDelegate>
 @property (nonatomic,weak) IBOutlet UITextField *textField;
 @property (nonatomic,weak) IBOutlet GCPTextView *textView;
 @property (nonatomic,weak) IBOutlet UILabel *wordCountLabel;
 @property (nonatomic,weak) IBOutlet UIButton *privacyRadioButton;
 @property (nonatomic,strong) UIButton *tikButton;
-@property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic) BOOL isPrivate; //当前用户选择是否公开事件
 @end
 @implementation EditWishViewController
@@ -81,6 +78,7 @@
     
     //事件公开与私密
     self.isPrivate = self.plan.isPrivate.boolValue;
+    NSLog(@"plan is %@",self.plan.isPrivate.boolValue ? @"private": @"public");
 }
 
 - (IBAction)tapOnPrivacyRadioButton:(UIButton *)button{
@@ -89,7 +87,7 @@
 
 - (void)setIsPrivate:(BOOL)isPrivate{
     _isPrivate = isPrivate;
-    [self.privacyRadioButton setSelected:isPrivate];
+    [self.privacyRadioButton setSelected:!isPrivate];
 }
 
 - (void)doneEditing{
@@ -123,14 +121,6 @@
     }else{
         [self.navigationController popViewControllerAnimated:YES];
     }
-}
-
-- (FetchCenter *)fetchCenter{
-    if (!_fetchCenter){
-        _fetchCenter = [[FetchCenter alloc] init];
-        _fetchCenter.delegate = self;
-    }
-    return _fetchCenter;
 }
 
 
