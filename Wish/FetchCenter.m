@@ -754,6 +754,15 @@
         includeArguments:YES
               completion:^(NSDictionary *responseJson) {
                   NSString *fetchedFeedID = [responseJson valueForKeyPath:@"data.id"];
+                  NSManagedObjectContext *workerContext = [self workerContext];
+                  
+                  [Feed createFeed:fetchedFeedID
+                             title:feedTitle
+                            images:imageIds
+                            planID:planId
+            inManagedObjectContext:workerContext];
+
+                  [self.appDelegate saveContext:workerContext];
                   
                   if (completionBlock) {
                       dispatch_main_async_safe(^{
@@ -1161,12 +1170,30 @@
             parameter:args
      includeArguments:YES
            completion:^(NSDictionary *responseJson) {
+               NSString *planID = [responseJson valueForKeyPath:@"data.planId"];
+               NSString *feedID = [responseJson valueForKeyPath:@"data.feedId"];
+               
+               NSManagedObjectContext *workerContext = [self workerContext];
+               
+               [Plan createPlan:planTitle
+                         planId:planID
+                   backgroundID:picurls.firstObject
+                       inCircle:circleId
+         inManagedObjectContext:workerContext];
+               
+               
+               [Feed createFeed:feedID
+                          title:feedTitle
+                         images:picurls
+                         planID:planID
+         inManagedObjectContext:workerContext];
+               
+               [self.appDelegate saveContext:workerContext];
+               
         if (completionBlock) {
-            NSString *planID = [responseJson valueForKeyPath:@"data.planId"];
-            NSString *feedID = [responseJson valueForKeyPath:@"data.feedId"];
-            dispatch_main_async_safe(^{
-                completionBlock(planID,feedID);
-            });
+            dispatch_main_async_safe((^{
+                completionBlock(planID);
+            }));
         }
     }];
     

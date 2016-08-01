@@ -214,7 +214,7 @@ typedef void(^FetchCenterGetRequestGetPlanListCompleted)(NSArray *planIds);
 //          circleId:(NSString *)circleId
 //        completion:(FetchCenterGetRequestPlanCreationCompleted)completionBlock;
 
-typedef void(^FetchCenterPostRequestPlanAndFeedCreationCompleted)(NSString *planId,NSString *feedId);
+typedef void(^FetchCenterPostRequestPlanAndFeedCreationCompleted)(NSString *planId);
 - (void)createPlan:(NSString *)planTitle
    planDescription:(NSString *)description
           circleID:(NSString *)circleId

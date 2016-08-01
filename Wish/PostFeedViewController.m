@@ -294,10 +294,6 @@ static NSUInteger distance = 10;
                               planId:self.plan.planId
                      fetchedImageIds:imageIds
                           completion:^(NSString *feedId) {
-                              [Feed createFeed:feedId
-                                         title:self.textView.text
-                                        images:imageIds
-                                        planID:self.plan.planId];
                               [self.navigationController popViewControllerAnimated:YES];
         }];
 
@@ -308,16 +304,10 @@ static NSUInteger distance = 10;
                             circleID:self.circle.circleId
                              picurls:imageIds
                            feedTitle:self.textView.text
-                          completion:^(NSString *planId, NSString *feedId)
+                          completion:^(NSString *planId)
         {
-            NSLog(@"plan ID: %@ \n feed ID: %@",planId,feedId);
-            Plan *plan = [Plan createPlan:self.navigationItem.title
-                                 inCircle:self.circle
-                                   planId:planId
-                             backgroundID:imageIds.firstObject];
-            //create local feed
-            [Feed createFeed:feedId title:self.textView.text images:imageIds planID:planId];
-            [self performSegueWithIdentifier:@"showWishDetailOnPlanCreation" sender:plan];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+//            [self performSegueWithIdentifier:@"showWishDetailOnPlanCreation" sender:plan];
 
         }];
     }

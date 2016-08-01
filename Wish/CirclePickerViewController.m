@@ -70,9 +70,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     Circle *circle = [self.tableFetchedRC objectAtIndexPath:indexPath];
-    [self.delegate didFinishPickingCircle:circle];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.navigationController popViewControllerAnimated:YES];
+    [self.delegate didFinishPickingCircle:circle];
 }
 
 @end
