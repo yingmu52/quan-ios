@@ -689,13 +689,15 @@
 }
 
 
-- (void)getFeedsListForPlan:(Plan *)plan
-                   pageInfo:(NSDictionary *)info
+- (void)getFeedsListForPlan:(NSString *)planId
+                  localList:(NSArray *)localList
+                     onPage:(NSNumber *)localPage
                  completion:(FetchCenterGetRequestGetFeedsListCompleted)completionBlock{
-    
+
+
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,LOAD_FEED_LIST];
-    NSString *infoStr = info ? [self convertDictionaryToString:info] : @"";
-    NSDictionary *args = @{@"id":plan.planId,@"attachInfo":infoStr};
+    NSDictionary *args = localPage ? @{@"id":planId,@"page":localPage} : @{@"id":planId};
+
     [self getRequest:rqtStr
            parameter:args
     includeArguments:YES
@@ -704,15 +706,16 @@
         
         NSManagedObjectContext *workerContext = [self workerContext];
 
-        NSArray *feeds = [responseJson valueForKeyPath:@"data.feedsList"];
-        NSDictionary *pageInfo = [responseJson valueForKeyPath:@"data.attachInfo"];
         NSNumber *isFollowed  = @([[responseJson valueForKeyPath:@"data.isFollowed"] boolValue]);
+        
         NSDictionary *planInfo = [responseJson valueForKeyPath:@"data.plan"];
         NSDictionary *ownerInfo = [responseJson valueForKeyPath:@"data.man"];
-        if (![plan.isFollowed isEqualToNumber:isFollowed]){
-            plan.isFollowed = isFollowed;
-        }
         
+        NSArray *feeds = [responseJson valueForKeyPath:@"data.feedsList"];
+        
+        NSNumber *currentPage = [responseJson valueForKeyPath:@"data.page"];
+        NSNumber *totalPage = [responseJson valueForKeyPath:@"data.totalpage"];
+
         for (NSDictionary *feedInfo in feeds){
             [Feed updateFeedWithInfo:feedInfo
                              forPlan:planInfo
@@ -720,14 +723,17 @@
                 managedObjectContext:workerContext];
         }
         
-        NSArray *serverList = [responseJson valueForKeyPath:@"data.feedsList.id"];
-        BOOL hasNextPage = [[responseJson valueForKeyPath:@"data.isMore"] boolValue];
+        
+        if (currentPage.integerValue == 1) {
+            NSArray *serverList = [feeds valueForKey:@"id"];
+            [self syncEntity:@"Feed" idName:@"feedId" localList:localList serverList:serverList];
+        }
         
         [self.appDelegate saveContext:workerContext];
         
         if (completionBlock) {
             dispatch_main_async_safe(^{
-                completionBlock(pageInfo,hasNextPage,serverList);
+                completionBlock(currentPage,totalPage,isFollowed);
             });
         }
 

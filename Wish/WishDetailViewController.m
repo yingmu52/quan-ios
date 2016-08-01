@@ -11,7 +11,7 @@
 #import "InvitationViewController.h"
 @interface WishDetailViewController () <HeaderViewDelegate,UIGestureRecognizerDelegate,UITextViewDelegate>
 @property (nonatomic,strong) NSDictionary *textAttributes;
-@property (nonatomic,strong) NSMutableArray *serverFeedIds;
+@property (nonatomic,strong) NSNumber *currentPage;
 @end
 
 @implementation WishDetailViewController
@@ -98,7 +98,6 @@
     self.headerView.followButton.hidden = YES;
     
     //上拉刷新
-    self.hasNextPage = YES;
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self
                                                                     refreshingAction:@selector(loadMoreData)];
     
@@ -107,43 +106,24 @@
 }
 
 - (void)loadMoreData{
-    if (self.hasNextPage) {
-        NSLog(@"Loading More..");
-        [self.fetchCenter getFeedsListForPlan:self.plan
-                                         pageInfo:self.pageInfo
-                                       completion:^(NSDictionary *pageInfo,
-                                                    BOOL hasNextPage,
-                                                    NSArray *pageList)
-         {
-             self.hasNextPage = hasNextPage;
-             self.pageInfo = pageInfo;
-             [self.headerView updateHeaderWithPlan:self.plan];
-             
-             //upload a local copy of server side feed list
-             [self.serverFeedIds addObjectsFromArray:pageList];
-             
-             //delete feed from local if it does not appear to be ien the server side feed list
-             for (Feed *feed in self.tableFetchedRC.fetchedObjects){
-                 if (![self.serverFeedIds containsObject:feed.feedId]) {
-                     [feed.managedObjectContext deleteObject:feed];
-                 }
-             }
-             
-             [self.tableView.mj_footer endRefreshing];
-         }];
-    }else{
-//        [self.tableView.mj_footer endRefreshing];
-        [self.tableView.mj_footer endRefreshingWithNoMoreData];
-
-    }
-
-}
-
-- (NSMutableArray *)serverFeedIds{
-    if (!_serverFeedIds) {
-        _serverFeedIds = [NSMutableArray array];
-    }
-    return _serverFeedIds;
+    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKey:@"feedId"];
+    [self.fetchCenter getFeedsListForPlan:self.plan.planId
+                                localList:localList
+                                   onPage:self.currentPage
+                               completion:^(NSNumber *currentPage, NSNumber *totalPage, BOOL isFollow)
+    {
+        if ([currentPage isEqualToNumber:totalPage]) {
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        }else{
+            self.currentPage = @(currentPage.integerValue + 1);
+            [self.tableView.mj_footer endRefreshing];
+        }
+        
+        if (self.plan.isFollowed.boolValue != isFollow) {
+            self.plan.isFollowed = @(isFollow);
+            [self.plan.managedObjectContext save:nil];
+        }
+    }];
 }
 
 - (void)goBack{

@@ -158,9 +158,10 @@ typedef void(^FetchCenterGetRequestGetCircleListCompleted)(NSArray *circleIds);
 
 #pragma mark - 事件动态，（Feed）
 
-typedef void(^FetchCenterGetRequestGetFeedsListCompleted)(NSDictionary *pageInfo, BOOL hasNextPage, NSArray *pageList);
-- (void)getFeedsListForPlan:(Plan *)plan
-                   pageInfo:(NSDictionary *)info
+typedef void(^FetchCenterGetRequestGetFeedsListCompleted)(NSNumber *currentPage, NSNumber *totalPage, BOOL isFollow);
+- (void)getFeedsListForPlan:(NSString *)planId
+                  localList:(NSArray *)localList
+                     onPage:(NSNumber *)localPage
                  completion:(FetchCenterGetRequestGetFeedsListCompleted)completionBlock;
 
 /**赞*/
