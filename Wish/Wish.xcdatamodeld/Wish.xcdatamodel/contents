@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15B42" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15F34" minimumToolsVersion="Automatic">
     <entity name="Circle" representedClassName="Circle" syncable="YES">
         <attribute name="circleDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="circleId" optional="YES" attributeType="String" syncable="YES"/>
@@ -15,7 +15,6 @@
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="idForReply" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="isMyComment" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="nameForReply" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="feed" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Feed" inverseName="comments" inverseEntity="Feed" syncable="YES"/>
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="comments" inverseEntity="Owner" syncable="YES"/>
@@ -72,7 +71,7 @@
     </entity>
     <elements>
         <element name="Circle" positionX="-8507" positionY="-250" width="128" height="163"/>
-        <element name="Comment" positionX="-9009" positionY="95" width="128" height="163"/>
+        <element name="Comment" positionX="-9009" positionY="95" width="128" height="150"/>
         <element name="Feed" positionX="-9288" positionY="-30" width="128" height="210"/>
         <element name="Message" positionX="-8892" positionY="-346" width="128" height="178"/>
         <element name="Owner" positionX="-8696" positionY="-43" width="128" height="133"/>
