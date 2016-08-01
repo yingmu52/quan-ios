@@ -120,8 +120,10 @@
     //设置圈子
     self.circle = circle;
     
-    //打开照片选取器
-    [self.imagePicker showPhotoLibrary:self];
+    //有标题才打开照片选取器
+    if (self.textField.hasText) {
+        [self.imagePicker showPhotoLibrary:self];
+    }
 }
 
 - (void)setCircle:(Circle *)circle{
