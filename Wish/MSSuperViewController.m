@@ -169,6 +169,8 @@
             }
         } completion:^(BOOL finished) {
             self.itemChanges = nil;;
+            AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+            [delegate saveContext];
         }];
 
     }
