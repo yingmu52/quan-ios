@@ -76,11 +76,10 @@
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
+    [UIView setAnimationsEnabled:NO];
     if (controller == self.tableFetchedRC) {
         [self.tableView beginUpdates];
-    }
-    
-    if (controller == self.collectionFetchedRC) {
+    }else if (controller == self.collectionFetchedRC) {
         self.itemChanges = [[NSMutableArray alloc] init];
     }
     
@@ -93,7 +92,7 @@
       newIndexPath:(NSIndexPath *)newIndexPath
 {
     if (controller == self.tableFetchedRC) {
-
+        
         switch(type)
         {
             case NSFetchedResultsChangeInsert:
@@ -113,10 +112,8 @@
             default:
                 break;
         }
-
-    }
-    
-    if (controller == self.collectionFetchedRC) {
+        
+    }else if (controller == self.collectionFetchedRC) {
         NSMutableDictionary *change = [[NSMutableDictionary alloc] init];
         switch(type) {
             case NSFetchedResultsChangeInsert:
@@ -142,9 +139,8 @@
 {
     if (controller == self.tableFetchedRC) {
         [self.tableView endUpdates];
-    }
-    
-    if (controller == self.collectionFetchedRC) {
+    }else if (controller == self.collectionFetchedRC) {
+        
         [self.collectionView performBatchUpdates: ^{
             for (NSDictionary *change in self.itemChanges) {
                 [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
@@ -160,7 +156,9 @@
                             [self.collectionView reloadItemsAtIndexPaths:@[obj]];
                             break;
                         case NSFetchedResultsChangeMove:
-                            [self.collectionView moveItemAtIndexPath:obj[0] toIndexPath:obj[1]];
+                            //don't use move, it doesn't reload properly
+                            [self.collectionView deleteItemsAtIndexPaths:@[obj[0]]];
+                            [self.collectionView insertItemsAtIndexPaths:@[obj[1]]];
                             break;
                         default:
                             break;
@@ -168,12 +166,11 @@
                 }];
             }
         } completion:^(BOOL finished) {
-            self.itemChanges = nil;;
-            AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            [delegate saveContext];
+            self.itemChanges = nil;
         }];
-
     }
+    
+    [UIView setAnimationsEnabled:YES];
 }
 
 - (void)configureTableViewCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{

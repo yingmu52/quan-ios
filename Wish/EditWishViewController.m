@@ -116,7 +116,7 @@
             //菊花关闭
             [spinner stopAnimating];
             self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tikButton];            
-            [self.navigationController popViewControllerAnimated:YES];
+            [self.navigationController popToRootViewControllerAnimated:YES];
         }];
     }else{
         [self.navigationController popViewControllerAnimated:YES];
