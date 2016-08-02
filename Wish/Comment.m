@@ -15,6 +15,8 @@
 @implementation Comment
 
 + (Comment *)updateCommentWithInfo:(NSDictionary *)dict
+                         ownerInfo:(NSDictionary *)ownerInfo
+                            inFeed:(nonnull Feed *)feed 
               managedObjectContext:(nonnull NSManagedObjectContext *)context{
     
     Comment *comment;
@@ -29,16 +31,27 @@
         comment.commentId = dict[@"id"];
         comment.content = dict[@"content"];
         comment.createTime = [NSDate dateWithTimeIntervalSince1970:[dict[@"createTime"] integerValue]];
-        comment.isMyComment = @([dict[@"ownerId"] isEqualToString:[User uid]]);
         NSString *commentTo = dict[@"commentTo"]; //this is what differential reply and comment
         
         if (![commentTo isKindOfClass:[NSNull class]] && ![commentTo isEqualToString:@""]) { //for cases where commentTo = "<null>";
             comment.idForReply = commentTo;
         }
         
+        comment.owner = [Owner updateOwnerWithInfo:ownerInfo managedObjectContext:context];
+        comment.feed = feed;
+        
     }else{
         comment = results.lastObject;
     }
+    
+  
+    if (comment.idForReply) {
+        NSString *nameForReply = [ownerInfo[comment.idForReply] objectForKey:@"name"];
+        if (![comment.nameForReply isEqualToString:nameForReply]) {
+            comment.nameForReply = nameForReply;
+        }
+    }
+
     
     return comment;
 }

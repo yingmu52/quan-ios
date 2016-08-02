@@ -13,6 +13,7 @@
 #import "User.h"
 
 @interface DiscoveryVCData () <FetchCenterDelegate>
+@property (nonatomic,strong) NSNumber *currentPage;
 @end
 
 @implementation DiscoveryVCData
@@ -38,22 +39,31 @@
     UIButton *followButton = [Theme buttonWithImage:[Theme navIconFollowDefault] target:self selector:@selector(showFollowingView) frame:CGRectMake(0, 0, 25, 25)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:followButton];
     
+    //上拉刷新
+    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self
+                                                                         refreshingAction:@selector(loadMoreData)];
     
-    //下拉刷新
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self
-                                                                     refreshingAction:@selector(loadNewData)];
-    header.lastUpdatedTimeLabel.hidden = YES;
-    self.collectionView.mj_header = header;
-    [self.collectionView.mj_header beginRefreshing];
-    
+    //初次拉数据
+    [self loadMoreData];
+
 }
 
-- (void)loadNewData{
+- (void)loadMoreData{
     NSArray *localList = [self.collectionFetchedRC.fetchedObjects valueForKey:@"planId"];
-    [self.fetchCenter getDiscoveryList:localList completion:^(NSString *circleTitle) {
-        [self.collectionView.mj_header endRefreshing];
-    }];
+    [self.fetchCenter getDiscoveryList:localList
+                                onPage:self.currentPage
+                            completion:^(NSNumber *currentPage, NSNumber *totalPage)
+     {
+         if ([currentPage isEqualToNumber:totalPage]) {
+             [self.collectionView.mj_footer endRefreshingWithNoMoreData];
+         }else{
+             self.currentPage = @(currentPage.integerValue + 1);
+             [self.collectionView.mj_footer endRefreshing];
+         }
+         
+     }];
 }
+
 
 - (void)showFollowingView{
     [self performSegueWithIdentifier:@"showFollowingView" sender:nil];
@@ -104,7 +114,7 @@
     if (!_collectionFetchRequest) {
         _collectionFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
         //发现页
-        _collectionFetchRequest.predicate = [NSPredicate predicateWithFormat:@"discoverIndex > 0"];
+        _collectionFetchRequest.predicate = [NSPredicate predicateWithFormat:@"isPrivate == NO"];
         _collectionFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"cornerMask" ascending:NO],
                                                     [NSSortDescriptor sortDescriptorWithKey:@"updateDate" ascending:NO]];
     }

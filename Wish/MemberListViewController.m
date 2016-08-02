@@ -10,6 +10,7 @@
 #import "Theme.h"
 #import "MemberListCell.h"
 #import "UIImageView+ImageCache.h"
+#import "MJRefresh.h"
 @interface MemberListViewController ()
 
 @end
@@ -19,17 +20,31 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
-    [self.fetchCenter getMemberListForCircle:self.circle completion:^(NSArray *memberIDs) {
-        
-        self.tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Owner"];
-        self.tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"ownerId IN %@",memberIDs];
-        self.tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"ownerId" ascending:NO]];
-        [self.tableView reloadData];
-    }];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero]; // clear empty cell
-    
+
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self
+                                                                     refreshingAction:@selector(loadNewData)];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    self.tableView.mj_header = header;
+    [self.tableView.mj_header beginRefreshing];
 }
 
+
+- (void)loadNewData{
+    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKey:@"ownerId"];
+    [self.fetchCenter getMemberListForCircleId:self.circle.circleId
+                                     localList:localList
+                                    completion:^(NSArray *memberIDs)
+    {
+#warning 建议改成多对多的关系
+        //成圆与圈子是多对多的关系，数据模型里面没有这部分的关系。因此直接从服务器撮信息
+        self.tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Owner"];
+        self.tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"ownerId IN %@",memberIDs];
+        self.tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"ownerName" ascending:NO]];
+        [self.tableView reloadData];
+        [self.tableView.mj_header endRefreshing];
+    }];
+}
 - (void)setUpNavigationItem
 {
     
@@ -96,8 +111,7 @@
             UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 [self.fetchCenter deleteMember:owner.ownerId inCircle:self.circle.circleId completion:^{
                     [owner.managedObjectContext deleteObject:owner];
-                    AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-                    [appdelegate saveContext];
+                    [owner.managedObjectContext save:nil];
                 }];
             }];
             [alert addAction:confirm];

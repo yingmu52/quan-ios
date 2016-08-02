@@ -26,7 +26,10 @@ typedef enum {
                      ownerInfo:(NSDictionary *)ownerInfo
           managedObjectContext:(NSManagedObjectContext *)context;
 
-+ (Plan *)createPlan:(NSString *)planTitle inCircle:(Circle *)circle planId:(NSString *)planId backgroundID:(NSString *)backGroundID;
++ (Plan *)createPlan:(NSString *)planTitle
+              planId:(NSString *)planId
+        backgroundID:(NSString *)backGroundID
+            inCircle:(NSString *)circleId inManagedObjectContext:(NSManagedObjectContext *)context;
 
 
 - (void)addMyselfAsOwner;

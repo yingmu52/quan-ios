@@ -14,6 +14,7 @@
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,strong) NSTimer *messageNotificationTimer;
 @property (nonatomic) NSInteger numberOfMessages;
+@property (nonatomic) BOOL shouldBark;
 @end
 
 @implementation MainTabBarController
@@ -94,13 +95,17 @@
     //设置项右上角的数字提示
     if (messageTab) {
         _numberOfMessages = numberOfMessages;
-        if (numberOfMessages > 0) { //显示记数
+        if (numberOfMessages > 0) {
+            
+            //显示记数
             [messageTab setBadgeValue:[NSString stringWithFormat:@"%@",@(numberOfMessages)]];
+            
         }else{ //隐蔽记数
             [messageTab setBadgeValue:nil];
         }
     }
 }
+
 
 - (void)requestMessageCount{
     if ([User isUserLogin]) {

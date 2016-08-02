@@ -24,11 +24,10 @@ typedef enum {
 
 typedef void(^FeedCreationCompletion)(Feed *feed);
 
-+ (void)createFeed:(NSString *)feedId
-             title:(NSString *)feedTitle
-            images:(NSArray *)imageIds
-            planID:(NSString *)planId;
-
++ (Feed *)createFeed:(NSString *)feedId
+               title:(NSString *)feedTitle
+              images:(NSArray *)imageIds
+              planID:(NSString *)planId inManagedObjectContext:(NSManagedObjectContext *)context;
 //+ (Feed *)createFeedInPlan:(Plan *)plan
 //                 feedTitle:(NSString *)feedTitle
 //                    feedId:(NSString *)feedId

@@ -98,12 +98,14 @@
     
 }
 
-+ (Plan *)createPlan:(NSString *)planTitle inCircle:(Circle *)circle planId:(NSString *)planId backgroundID:(NSString *)backGroundID{
++ (Plan *)createPlan:(NSString *)planTitle
+              planId:(NSString *)planId
+        backgroundID:(NSString *)backGroundID
+            inCircle:(NSString *)circleId inManagedObjectContext:(NSManagedObjectContext *)context{
     
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     Plan *plan = [NSEntityDescription insertNewObjectForEntityForName:@"Plan"
-                                               inManagedObjectContext:delegate.managedObjectContext];
+                                               inManagedObjectContext:context];
     
     plan.planId = planId;
     plan.backgroundNum = backGroundID;
@@ -117,10 +119,14 @@
     
     
     plan.planStatus = @(PlanStatusOnGoing);
-    [plan addMyselfAsOwner];
-    plan.circle = circle;
+    plan.owner = [Owner updateOwnerWithInfo:[Owner myWebInfo] managedObjectContext:context];
     
-    [delegate saveContext];
+    Circle *circle = [Plan fetchWith:@"Circle" predicate:[NSPredicate predicateWithFormat:@"circleId == %@",circleId]
+                    keyForDescriptor:@"circleId"
+                managedObjectContext:context].lastObject;
+    plan.circle = circle;
+
+    
     return plan;
 }
 

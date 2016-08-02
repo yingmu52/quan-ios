@@ -47,10 +47,6 @@ typedef enum {
 
 /** 切换圈子完成*/
 typedef void(^FetchCenterGetRequestSwithCircleCompleted)(void);
-/** 填写邀请码完成*/
-typedef void(^FetchCenterGetRequestJoinCircleCompleted)(NSString *circleId);
-/** 发现页拉取列表完成*/
-typedef void(^FetchCenterGetRequestGetDiscoverListCompleted)(NSString *circleTitle);
 
 /** 赞某条Feed完成*/
 typedef void(^FetchCenterGetRequestLikeFeedCompleted)(void);
@@ -84,8 +80,6 @@ typedef void(^FetchCenterGetRequestClearMessageListCompleted)(void);
 typedef void(^FetchCenterGetRequestSetPersonalInfoCompleted)(void);
 /** 评论或回复完成*/
 typedef void(^FetchCenterGetRequestCommentCompleted)(Comment *comment);
-/** 摘取评论列表完成*/
-typedef void(^FetchCenterGetRequestGetCommentListCompleted)(NSDictionary *pageInfo, BOOL hasNextPage, NSArray *comments, Feed *feed);
 /** 删除评论完成*/
 typedef void(^FetchCenterGetRequestDeleteCommentCompleted)(void);
 /** 上传图片完成*/
@@ -119,9 +113,11 @@ typedef void(^FetchCenterGetRequestDeleteMemberCompleted)(void);
           completion:(FetchCenterGetRequestDeleteMemberCompleted)completionBlock;
 
 /** 圈子成员列表 **/
+
 typedef void(^FetchCenterGetRequestGetMemberListCompleted)(NSArray *memberIDs);
-- (void)getMemberListForCircle:(Circle *)circle
-                       completion:(FetchCenterGetRequestGetMemberListCompleted)completionBlock;
+- (void)getMemberListForCircleId:(NSString *)circleId
+                       localList:(NSArray *)localList
+                      completion:(FetchCenterGetRequestGetMemberListCompleted)completionBlock;
 
 /** 设置圈子资料*/
 typedef void(^FetchCenterGetRequestUpdateCircleCompleted)(void);
@@ -143,8 +139,15 @@ typedef void(^FetchCenterGetRequestCreateCircleCompleted)(Circle *circle);
 typedef void(^FetchCenterGetRequestDeleteCircleCompleted)(void);
 - (void)deleteCircle:(NSString *)circleId completion:(FetchCenterGetRequestDeleteCircleCompleted)completionBlock;
 
+/** 填写邀请码完成*/
+typedef void(^FetchCenterGetRequestJoinCircleCompleted)(NSString *circleName);
 /**加入圈子*/
-- (void)joinCircle:(NSString *)invitationCode completion:(FetchCenterGetRequestJoinCircleCompleted)completionBlock;
+- (void)joinCircleId:(NSString *)circleId
+         nonceString:(NSString *)noncestr
+           signature:(NSString *)signature
+          expireTime:(NSString *)expireTime
+          inviteCode:(NSString *)code
+          completion:(FetchCenterGetRequestJoinCircleCompleted)completionBlock;
 
 /**获取圈子列表*/
 typedef void(^FetchCenterGetRequestGetCircleListCompleted)(NSArray *circleIds);
@@ -163,9 +166,10 @@ typedef void(^FetchCenterGetRequestGetCircleListCompleted)(NSArray *circleIds);
 
 #pragma mark - 事件动态，（Feed）
 
-typedef void(^FetchCenterGetRequestGetFeedsListCompleted)(NSDictionary *pageInfo, BOOL hasNextPage, NSArray *pageList);
-- (void)getFeedsListForPlan:(Plan *)plan
-                   pageInfo:(NSDictionary *)info
+typedef void(^FetchCenterGetRequestGetFeedsListCompleted)(NSNumber *currentPage, NSNumber *totalPage, BOOL isFollow);
+- (void)getFeedsListForPlan:(NSString *)planId
+                  localList:(NSArray *)localList
+                     onPage:(NSNumber *)localPage
                  completion:(FetchCenterGetRequestGetFeedsListCompleted)completionBlock;
 
 /**赞*/
@@ -196,9 +200,13 @@ typedef void(^FetchCenterGetRequestUploadFeedCompleted)(NSString *feedId);
             toOwner:(Owner *)owner
          completion:(FetchCenterGetRequestCommentCompleted)completionBlock;
 
-
+/** 摘取评论列表完成*/
+typedef void(^FetchCenterGetRequestGetCommentListCompleted)(NSNumber *currentPage,
+                                                            NSNumber *totalPage,
+                                                            BOOL hasComments);
 - (void)getCommentListForFeed:(NSString *)feedId
-                     pageInfo:(NSDictionary *)info
+                    localList:(NSArray *)localList
+                  currentPage:(NSNumber *)localCurrentPage
                    completion:(FetchCenterGetRequestGetCommentListCompleted)completionBlock;
 
 - (void)deleteComment:(Comment *)comment
@@ -217,7 +225,7 @@ typedef void(^FetchCenterGetRequestGetPlanListCompleted)(NSArray *planIds);
 //          circleId:(NSString *)circleId
 //        completion:(FetchCenterGetRequestPlanCreationCompleted)completionBlock;
 
-typedef void(^FetchCenterPostRequestPlanAndFeedCreationCompleted)(NSString *planId,NSString *feedId);
+typedef void(^FetchCenterPostRequestPlanAndFeedCreationCompleted)(NSString *planId);
 - (void)createPlan:(NSString *)planTitle
    planDescription:(NSString *)description
           circleID:(NSString *)circleId
@@ -255,7 +263,10 @@ typedef void(^FetchCenterGetRequestGetFollowingPlanListCompleted)(void);
 
 
 #pragma mark - 发现
+/** 发现页拉取列表完成*/
+typedef void(^FetchCenterGetRequestGetDiscoverListCompleted)(NSNumber *currentPage, NSNumber *totalPage);
 - (void)getDiscoveryList:(NSArray *)localList
+                  onPage:(NSNumber *)page
               completion:(FetchCenterGetRequestGetDiscoverListCompleted)completionBlock;
 
 #pragma mark - 个人

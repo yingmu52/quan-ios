@@ -19,21 +19,9 @@
 #import "FeedDetailViewController.h"
 #import "UIImageView+ImageCache.h"
 #import "MSSuperViewController.h"
-@interface WishDetailViewController : MSSuperViewController <NSFetchedResultsControllerDelegate,WishDetailCellDelegate,FetchCenterDelegate>
-//@property (nonatomic,strong) NSFetchedResultsController *fetchedRC; //fetching Feed
+@interface WishDetailViewController : MSSuperViewController <NSFetchedResultsControllerDelegate,WishDetailCellDelegate>
 @property (nonatomic,weak) Plan *plan; //must set
-//@property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,strong) HeaderView *headerView;
-
-/*
- these two properties are for paging feature
- */
-
-@property (nonatomic) BOOL hasNextPage;
-@property (nonatomic,strong) NSDictionary *pageInfo;
-
-//@property (nonatomic,strong) NSMutableArray *serverFeedIds;
-
 - (void)setUpNavigationItem;
 
 #pragma mark - abstract

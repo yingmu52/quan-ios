@@ -227,38 +227,33 @@
           }
      ];
 }
-- (void)getMemberListForCircle:(Circle *)circle
-                    completion:(FetchCenterGetRequestGetMemberListCompleted)completionBlock{
+
+//目前只有圈主才可以看到成员
+- (void)getMemberListForCircleId:(NSString *)circleId
+                       localList:(NSArray *)localList
+                      completion:(FetchCenterGetRequestGetMemberListCompleted)completionBlock{
+    
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,GET_MEMBER_LIST];
-    NSDictionary *inputParams = @{@"id":circle.circleId};
+    NSDictionary *inputParams = @{@"id":circleId};
     [self getRequest:rqtStr
            parameter:inputParams
     includeArguments:YES
           completion:^(NSDictionary *responseJson){
               
               //后台在成员列表里没有返回主人ID，需要特别处理
-              NSMutableArray *manList = [NSMutableArray array];
-
-              NSManagedObjectContext *workerContext = [self workerContext];
-              
-              if ([responseJson[@"data"] isKindOfClass:[NSDictionary class]]) { //非空列表
-                  manList = [responseJson valueForKeyPath:@"data.manList"];
-                  NSDictionary *manData = [responseJson valueForKeyPath:@"data.manData"];
-                  
-                  for (NSString *userID in manList) {
-                      [Owner updateOwnerWithInfo:manData[userID] managedObjectContext:workerContext];
+              NSArray *manList = [responseJson valueForKeyPath:@"data.manList"];
+              NSDictionary *manInfo = [responseJson valueForKeyPath:@"data.manData"];
+              if (manList.count > 0) {
+                  NSManagedObjectContext *workerContext = [self workerContext];
+                  for (NSString *uid in manList) {
+                      NSDictionary *ownerInfo = [manInfo valueForKey:uid];
+                      [Owner updateOwnerWithInfo:ownerInfo managedObjectContext:workerContext];
                   }
-
-              }
-
-              if ([circle.ownerId isEqualToString:[User uid]] && !manList.count) {
-                  [manList addObject:[User uid]];
-                  
-                  //防止主人的owner实例不在本地
-                  [Owner updateOwnerWithInfo:[Owner myWebInfo] managedObjectContext:workerContext];
+                  //改成多对多的关系后对会用到同步
+//                  [self syncEntity:@"Owner" idName:@"ownerId" localList:localList serverList:manList];
+                  [self.appDelegate saveContext:workerContext];
               }
               
-              [self.appDelegate saveContext:workerContext];
               
               if (completionBlock) {
                   dispatch_main_async_safe(^{
@@ -349,27 +344,47 @@
     
 }
 
-- (void)joinCircle:(NSString *)invitationCode completion:(FetchCenterGetRequestJoinCircleCompleted)completionBlock{
-    if (invitationCode) {
-        NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,JOINT_CIRCLE];
-        [self getRequest:rqtStr
-               parameter:@{@"addCode":invitationCode}
-        includeArguments:YES
-              completion:^(NSDictionary *responseJson) {
-                  NSLog(@"%@",responseJson);
-                  NSString *circleId = [responseJson valueForKeyPath:@"quanInfo.id"];
-                  if (circleId){
-                      [User updateAttributeFromDictionary:@{CURRENT_CIRCLE_ID:circleId}];
-                  }
-                  NSLog(@"成功加入圈子id %@",[User currentCircleId]);
-                  if (completionBlock) {
-                      dispatch_main_async_safe(^{
-                          completionBlock(circleId);
-                      });
-                      
-                  }
-              }];
-    }
+- (void)joinCircleId:(NSString *)circleId
+         nonceString:(NSString *)noncestr
+           signature:(NSString *)signature
+          expireTime:(NSString *)expireTime
+          inviteCode:(NSString *)code
+          completion:(FetchCenterGetRequestJoinCircleCompleted)completionBlock
+{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,JOINT_CIRCLE];
+    NSDictionary *args = @{@"quanid":circleId,
+                           @"noncestr":noncestr,
+                           @"signature":signature,
+                           @"expiretime":expireTime,
+                           @"invitecode":code};
+    [self getRequest:rqtStr
+           parameter:args
+    includeArguments:YES
+          completion:^(NSDictionary *responseJson) {
+              NSLog(@"%@",responseJson);
+              NSDictionary *quanInfo = responseJson[@"quanInfo"];
+              /*
+              quanInfo =     {
+                  backGroudPic = "";
+                  createTime = 1469809666;
+                  description = "the only one that";
+                  id = quan579b8402f0fd2;
+                  name = "I am a bit";
+                  ownerId = 100045;
+                  private = 1;
+              };
+              */
+              NSManagedObjectContext *workerContext = [self workerContext];
+              [Circle updateCircleWithInfo:quanInfo managedObjectContext:workerContext];
+              [self.appDelegate saveContext:workerContext];
+              if (completionBlock) {
+                  dispatch_main_async_safe(^{
+                      completionBlock(quanInfo[@"name"]);
+                  });
+                  
+              }
+          }];
+
 }
 
 - (void)switchToCircle:(NSString *)circleId completion:(FetchCenterGetRequestSwithCircleCompleted)completionBlock{
@@ -467,34 +482,6 @@
 }
 
 
-//- (void)getMessageList:(FetchCenterGetRequestGetMessageListCompleted)completionBlock{
-//    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,MESSAGE,GET_MESSAGE_LIST];
-//    [self getRequest:rqtStr
-//           parameter:@{@"id":[User uid]}
-//    includeArguments:YES completion:^(NSDictionary *responseJson) {
-//        
-//        
-//        NSManagedObjectContext *workerContext = [self workerContext];
-//        
-//        NSArray *messagesArray = [responseJson valueForKeyPath:@"data.messageList"];
-//        NSDictionary *owners = [responseJson valueForKeyPath:@"data.manList"];
-//        for (NSDictionary *message in messagesArray){
-//            NSDictionary *ownerInfo = owners[message[@"operatorId"]];
-//            [Message updateMessageWithInfo:message ownerInfo:ownerInfo managedObjectContext:workerContext];
-//        }
-//        //        NSLog(@"%@",responseJson);
-//        [self.appDelegate saveContext:workerContext];
-//        if (completionBlock) {
-//            dispatch_main_async_safe(^{
-//                NSArray *messageIds = [responseJson valueForKeyPath:@"data.messageList.messageId"];
-////                completionBlock(messageIds);
-//            });
-//
-//        }
-//
-//        
-//    }];
-//}
 
 - (void)getMessageListWithLocalList:(NSArray *)localList
                          completion:(FetchCenterGetRequestGetMessageListCompleted)completionBlock{
@@ -561,57 +548,68 @@
 
 
 - (void)getCommentListForFeed:(NSString *)feedId
-                     pageInfo:(NSDictionary *)info
+                    localList:(NSArray *)localList
+                  currentPage:(NSNumber *)localCurrentPage
                    completion:(FetchCenterGetRequestGetCommentListCompleted)completionBlock{
+
+
     
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,GET_FEED_COMMENTS];
-    NSString *infoStr = info ? [self convertDictionaryToString:info] : @"";
     
-    NSDictionary *args = @{@"feedsId":feedId,
-                           @"attachInfo":infoStr};
-    [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
+    
+    NSDictionary *args = localCurrentPage ? @{@"feedsId":feedId,@"page":localCurrentPage} : @{@"feedsId":feedId};
+    [self getRequest:rqtStr
+           parameter:args
+    includeArguments:YES
+          completion:^(NSDictionary *responseJson)
+    {
         
-        
+        //读json数据
+        NSArray *comments = [responseJson valueForKeyPath:@"data.commentList"];
+        NSDictionary *feedInfo = [responseJson valueForKeyPath:@"data.feeds"];
+
         NSManagedObjectContext *workerContext = [self workerContext];
         
-        NSDictionary *ownerInfo = [responseJson valueForKeyPath:@"data.manList"];
-        BOOL hasNextPage = [[responseJson valueForKeyPath:@"data.isMore"] boolValue];
-        NSDictionary *pageInfo = [responseJson valueForKeyPath:@"data.attachInfo"];
-        NSDictionary *feedInfo = [responseJson valueForKeyPath:@"data.feeds"];
-        
-        Feed *feed = [Feed updateFeedWithInfo:feedInfo forPlan:nil ownerInfo:nil managedObjectContext:workerContext];
-        NSArray *comments = [responseJson valueForKeyPath:@"data.commentList"];
-        
-        NSMutableArray *localComments = [NSMutableArray arrayWithCapacity:comments.count];
-        for (NSDictionary *commentInfo in comments){
-            //读取评论信息
-            Comment *comment = [Comment updateCommentWithInfo:commentInfo managedObjectContext:workerContext];
-            //读取用户信息
-            NSDictionary *userInfo = comment.isMyComment.boolValue ? [Owner myWebInfo] : ownerInfo[commentInfo[@"ownerId"]];
-            Owner *owner = [Owner updateOwnerWithInfo:userInfo managedObjectContext:workerContext];
+        Feed *feed = [Feed updateFeedWithInfo:feedInfo
+                                      forPlan:nil
+                                    ownerInfo:nil
+                         managedObjectContext:workerContext];
+
+        BOOL hasComments = comments.count > 0;
+        NSNumber *currentPage = @(0);
+        NSNumber *totalPage = @(0);
+
+        if (hasComments && feed) {
             
-            //防止更新相同的评论数据
-            if (!comment.owner) {
-                comment.owner = owner;
-            }
-            if (!comment.feed) {
-                comment.feed = feed;
-            }
-            if (comment.idForReply) {
-                NSString *nameForReply = [ownerInfo[comment.idForReply] objectForKey:@"name"];
-                if (![comment.nameForReply isEqualToString:nameForReply]) {
-                    comment.nameForReply = nameForReply;
-                }
-            }
-            [localComments addObject:comment];
+            NSDictionary *ownerInfo = [responseJson valueForKeyPath:@"data.manList"];
+
+            currentPage = [responseJson valueForKeyPath:@"data.page"];
+            totalPage = [responseJson valueForKeyPath:@"data.totalpage"];
+
             
+            
+            for (NSDictionary *commentInfo in comments){
+                //读取用户信息取评论信息
+                NSDictionary *userInfo = ownerInfo[commentInfo[@"ownerId"]];
+                [Comment updateCommentWithInfo:commentInfo
+                                     ownerInfo:userInfo
+                                        inFeed:feed
+                          managedObjectContext:workerContext];
+            }
+        }
+        
+        //同步第一页数据
+        if (currentPage.integerValue == 1) {
+            NSArray *serverList = [comments valueForKey:@"id"];
+            [self syncEntity:@"Comment" idName:@"commentId" localList:localList serverList:serverList];
         }
 
         [self.appDelegate saveContext:workerContext];
 
+
         if (completionBlock) {
             dispatch_main_async_safe(^{
-                completionBlock(pageInfo,hasNextPage,localComments,feed); 
+                completionBlock(currentPage,totalPage,hasComments);
             });
         }
         
@@ -706,13 +704,15 @@
 }
 
 
-- (void)getFeedsListForPlan:(Plan *)plan
-                   pageInfo:(NSDictionary *)info
+- (void)getFeedsListForPlan:(NSString *)planId
+                  localList:(NSArray *)localList
+                     onPage:(NSNumber *)localPage
                  completion:(FetchCenterGetRequestGetFeedsListCompleted)completionBlock{
-    
+
+
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,LOAD_FEED_LIST];
-    NSString *infoStr = info ? [self convertDictionaryToString:info] : @"";
-    NSDictionary *args = @{@"id":plan.planId,@"attachInfo":infoStr};
+    NSDictionary *args = localPage ? @{@"id":planId,@"page":localPage} : @{@"id":planId};
+
     [self getRequest:rqtStr
            parameter:args
     includeArguments:YES
@@ -721,15 +721,16 @@
         
         NSManagedObjectContext *workerContext = [self workerContext];
 
-        NSArray *feeds = [responseJson valueForKeyPath:@"data.feedsList"];
-        NSDictionary *pageInfo = [responseJson valueForKeyPath:@"data.attachInfo"];
         NSNumber *isFollowed  = @([[responseJson valueForKeyPath:@"data.isFollowed"] boolValue]);
+        
         NSDictionary *planInfo = [responseJson valueForKeyPath:@"data.plan"];
         NSDictionary *ownerInfo = [responseJson valueForKeyPath:@"data.man"];
-        if (![plan.isFollowed isEqualToNumber:isFollowed]){
-            plan.isFollowed = isFollowed;
-        }
         
+        NSArray *feeds = [responseJson valueForKeyPath:@"data.feedsList"];
+        
+        NSNumber *currentPage = [responseJson valueForKeyPath:@"data.page"];
+        NSNumber *totalPage = [responseJson valueForKeyPath:@"data.totalpage"];
+
         for (NSDictionary *feedInfo in feeds){
             [Feed updateFeedWithInfo:feedInfo
                              forPlan:planInfo
@@ -737,14 +738,17 @@
                 managedObjectContext:workerContext];
         }
         
-        NSArray *serverList = [responseJson valueForKeyPath:@"data.feedsList.id"];
-        BOOL hasNextPage = [[responseJson valueForKeyPath:@"data.isMore"] boolValue];
+        
+        if (currentPage.integerValue == 1) {
+            NSArray *serverList = [feeds valueForKey:@"id"];
+            [self syncEntity:@"Feed" idName:@"feedId" localList:localList serverList:serverList];
+        }
         
         [self.appDelegate saveContext:workerContext];
         
         if (completionBlock) {
             dispatch_main_async_safe(^{
-                completionBlock(pageInfo,hasNextPage,serverList);
+                completionBlock(currentPage,totalPage,isFollowed);
             });
         }
 
@@ -782,6 +786,15 @@
         includeArguments:YES
               completion:^(NSDictionary *responseJson) {
                   NSString *fetchedFeedID = [responseJson valueForKeyPath:@"data.id"];
+                  NSManagedObjectContext *workerContext = [self workerContext];
+                  
+                  [Feed createFeed:fetchedFeedID
+                             title:feedTitle
+                            images:imageIds
+                            planID:planId
+            inManagedObjectContext:workerContext];
+
+                  [self.appDelegate saveContext:workerContext];
                   
                   if (completionBlock) {
                       dispatch_main_async_safe(^{
@@ -956,10 +969,11 @@
 #pragma mark - 发现事件
 
 - (void)getDiscoveryList:(NSArray *)localList
+                  onPage:(NSNumber *)page
               completion:(FetchCenterGetRequestGetDiscoverListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,DISCOVER,GET_DISCOVER_LIST];
     [self getRequest:rqtStr
-           parameter:nil
+           parameter:page ? @{@"page":page} : nil
     includeArguments:YES
           completion:^(NSDictionary *responseJson)
      {
@@ -968,34 +982,32 @@
          
          NSArray *planList = [responseJson valueForKeyPath:@"data.planList"];
          NSDictionary *manList = [responseJson valueForKeyPath:@"data.manList"];
-         NSString *title = [responseJson valueForKeyPath:@"data.quanInfo.name"];
+         NSNumber *currentPage = [responseJson valueForKeyPath:@"data.page"];
+         NSNumber *totalPage = [responseJson valueForKeyPath:@"data.totalpage"];
          
+         if (completionBlock) {
+             dispatch_main_async_safe(^{
+                 completionBlock(currentPage,totalPage);
+             });
+         }
          
          //缓存并更新本地事件
          if (planList && manList){
              [planList enumerateObjectsUsingBlock:^(NSDictionary * planInfo, NSUInteger idx, BOOL * _Nonnull stop) {
-                 Plan *plan = [Plan updatePlanFromServer:planInfo
-                                               ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]
-                                    managedObjectContext:workerContext];
-                 plan.discoverIndex = @(idx + 1); //记录索引方便显示服务器上的顺序
+                 [Plan updatePlanFromServer:planInfo
+                                  ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]
+                       managedObjectContext:workerContext];
+//                 plan.discoverIndex = @(idx + 1); //记录索引方便显示服务器上的顺序
              }];
          }
          
         //同步
-         NSArray *serverList = [planList valueForKey:@"id"];
-         [self syncEntity:@"Plan"
-                   idName:@"planId"
-                localList:localList
-               serverList:serverList];
+         if (currentPage.integerValue == 1) { //同步服务器与本地第一页的数据
+             NSArray *serverList = [planList valueForKey:@"id"];
+              [self syncEntity:@"Plan" idName:@"planId" localList:localList serverList:serverList];
+         }
 
          [self.appDelegate saveContext:workerContext];
-         
-         if (completionBlock) {
-             dispatch_main_async_safe(^{
-                 completionBlock(title);
-             });
-         }
-         
      }];
 }
 
@@ -1099,7 +1111,7 @@
         //更新本地事件
         NSManagedObjectContext *workerContext = [self workerContext];
         Plan *plan = [[Plan fetchWith:@"Plan"
-                           predicate:[NSPredicate predicateWithFormat:@"planId = %@",planId]
+                           predicate:[NSPredicate predicateWithFormat:@"planId == %@",planId]
                     keyForDescriptor:@"planId"
                 managedObjectContext:workerContext] lastObject];
         plan.planTitle = planTitle;
@@ -1170,29 +1182,6 @@
 
 }
 
-//- (void)createPlan:(NSString *)planTitle
-//          circleId:(NSString *)circleId
-//        completion:(FetchCenterGetRequestPlanCreationCompleted)completionBlock{
-//    
-//    NSString *baseUrl = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,CREATE_PLAN];
-//    NSDictionary *args = @{@"title":[planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-//                           @"private":@(0),
-//                           @"quanId":circleId};
-//    [self getRequest:baseUrl parameter:args includeArguments:YES completion:^(NSDictionary *json) {
-//        NSString *fetchedPlanId = [json valueForKeyPath:@"data.id"];
-//        NSString *bgString = [json valueForKeyPath:@"data.backGroudPic"];
-//        if (fetchedPlanId && bgString) {
-////            NSLog(@"create plan succeed, ID: %@",fetchedPlanId);
-//            if (completionBlock) {
-//                dispatch_main_async_safe(^{
-//                    completionBlock(fetchedPlanId,bgString);
-//                });
-//            }
-//        }
-//    }];
-//    
-//}
-
 
 - (void)createPlan:(NSString *)planTitle
    planDescription:(NSString *)description
@@ -1213,12 +1202,30 @@
             parameter:args
      includeArguments:YES
            completion:^(NSDictionary *responseJson) {
+               NSString *planID = [responseJson valueForKeyPath:@"data.planId"];
+               NSString *feedID = [responseJson valueForKeyPath:@"data.feedId"];
+               
+               NSManagedObjectContext *workerContext = [self workerContext];
+               
+               [Plan createPlan:planTitle
+                         planId:planID
+                   backgroundID:picurls.firstObject
+                       inCircle:circleId
+         inManagedObjectContext:workerContext];
+               
+               
+               [Feed createFeed:feedID
+                          title:feedTitle
+                         images:picurls
+                         planID:planID
+         inManagedObjectContext:workerContext];
+               
+               [self.appDelegate saveContext:workerContext];
+               
         if (completionBlock) {
-            NSString *planID = [responseJson valueForKeyPath:@"data.planId"];
-            NSString *feedID = [responseJson valueForKeyPath:@"data.feedId"];
-            dispatch_main_async_safe(^{
-                completionBlock(planID,feedID);
-            });
+            dispatch_main_async_safe((^{
+                completionBlock(planID);
+            }));
         }
     }];
     
@@ -1262,16 +1269,14 @@
     NSString *logPath = [self.class requestLogFilePath];
     NSFileHandle *fileHandler = [NSFileHandle fileHandleForUpdatingAtPath:logPath];
 
-    NSString *content = [NSString stringWithFormat:@"[Date]: %@\n\n[Request]: %@\n\n[Response]: %@\n\n\n\n",[NSDate date],request,response];
+    NSString *content = [NSString stringWithFormat:@"[Date]: %@\n\n[Request]: %@\n\n[Response]: %@\n\n\n\n",[NSDate date],request,[self decodedOBject:response]];
     
-    NSString *decodedContent = [NSString stringWithCString:[content cStringUsingEncoding:NSUTF8StringEncoding]
-                                                  encoding:NSNonLossyASCIIStringEncoding];
     if (fileHandler){
         [fileHandler seekToEndOfFile];
-        [fileHandler writeData:[decodedContent dataUsingEncoding:NSUTF8StringEncoding]];
+        [fileHandler writeData:[content dataUsingEncoding:NSUTF8StringEncoding]];
         [fileHandler closeFile];
     }else{
-        [decodedContent writeToFile:logPath atomically:NO encoding:NSUTF8StringEncoding error:nil];
+        [content writeToFile:logPath atomically:NO encoding:NSUTF8StringEncoding error:nil];
     }
 }
 
@@ -1526,10 +1531,11 @@
                         
                         //假失败写入请求日志
                         [self appendRequest:request andResponse:responseJson];
-                        
-                        NSLog(@"Fail Get Request :%@\n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
-                              ,rqtStr,baseURL,dict,responseJson,error);
-                        
+
+#ifdef DEBUG
+                        NSLog(@"\n\n** 失败 ** \n baseUrl: %@ \n parameter: %@ \n responseJSON: %@ \n error:%@"
+                              ,baseURL,dict,[self decodedOBject:responseJson],error);
+#endif
                         if ([self.delegate respondsToSelector:@selector(didFailSendingRequest)]){
                             [self.delegate didFailSendingRequest];
                         }
@@ -1544,6 +1550,12 @@
     }
 }
 
+- (NSString *)decodedOBject:(id)obj{
+    const char *content = [[NSString stringWithFormat:@"%@",obj]
+                           cStringUsingEncoding:NSUTF8StringEncoding];
+    return [NSString stringWithCString:content
+                              encoding:NSNonLossyASCIIStringEncoding];
+}
 #pragma mark - 请求统一参数
 
 - (NSString *)buildVersion{
@@ -1575,14 +1587,15 @@
 #pragma mark - 图片id转换成图片请求的函数
 
 - (NSURL *)urlWithImageID:(NSString *)imageId size:(FetchCenterImageSize)size{
-    NSString *url;
-    if (imageId.length > 30) { //优图id
-        NSString *base = [NSString stringWithFormat:@"http://shier-%@.image.myqcloud.com/%@",YOUTU_APP_ID,imageId];
-        url = (size == FetchCenterImageSizeOriginal) ? base : [base stringByAppendingFormat:@"/%@",@(size)];
-    }else{ //老id
-        NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@?",self.baseUrl,PIC,GET_IMAGE];
-        url = [NSString stringWithFormat:@"%@id=%@",[self addGeneralArgumentsForBaseURL:rqtStr],imageId];
-    }
+    
+    NSString *base = [NSString stringWithFormat:@"http://shier-%@.image.myqcloud.com/%@",YOUTU_APP_ID,imageId];
+    NSString *url = (size == FetchCenterImageSizeOriginal) ? base : [base stringByAppendingFormat:@"/%@",@(size)];
+//    if (imageId.length > 30) { //优图id
+//    
+//    }else{ //老id
+//        NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@?",self.baseUrl,PIC,GET_IMAGE];
+//        url = [NSString stringWithFormat:@"%@id=%@",[self addGeneralArgumentsForBaseURL:rqtStr],imageId];
+//    }
     return [NSURL URLWithString:url];
 }
 

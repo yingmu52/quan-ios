@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Plan.h"
-@interface EditWishViewController : UIViewController
+#import "MSSuperViewController.h"
+@interface EditWishViewController : MSSuperViewController
 @property (nonatomic,strong) Plan *plan;
 @end

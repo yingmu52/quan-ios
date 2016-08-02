@@ -52,7 +52,10 @@ static NSTimeInterval expectationTimeout = 30.0f;
 
 - (void)testGetDiscoveryList{
     XCTestExpectation *expectation = [self expectationWithDescription:@"发现页事件列表拉取接口"];
-    [self.fetchCenter getDiscoveryList:nil completion:^(NSString *circleTitle) {
+    [self.fetchCenter getDiscoveryList:nil
+                                onPage:@(1)
+                            completion:^(NSNumber *currentPage, NSNumber *totalPage)
+    {
         [expectation fulfill];
     }];
 
@@ -103,18 +106,18 @@ static NSTimeInterval expectationTimeout = 30.0f;
 //    }];
 //}
 
-- (void)testJointCircle{
-    NSArray *codes = @[@"1001",@"1002",@"2001",@"2002"]; //诗歌，旅游，灌水，极品
-    for (NSString *code in codes){
-        XCTestExpectation *expectation = [self expectationWithDescription:@"加入圈子接口"];
-        [self.fetchCenter joinCircle:code completion:^(NSString *circleId) {
-            [expectation fulfill];
-        }];
-        [self waitForExpectationsWithTimeout:expectationTimeout handler:^(NSError * _Nullable error) {
-            XCTAssertNil(error,@"加入圈子接口错误");
-        }];
-    }
-}
+//- (void)testJointCircle{
+//    NSArray *codes = @[@"1001",@"1002",@"2001",@"2002"]; //诗歌，旅游，灌水，极品
+//    for (NSString *code in codes){
+//        XCTestExpectation *expectation = [self expectationWithDescription:@"加入圈子接口"];
+//        [self.fetchCenter joinCircle:code completion:^(NSString *circleId) {
+//            [expectation fulfill];
+//        }];
+//        [self waitForExpectationsWithTimeout:expectationTimeout handler:^(NSError * _Nullable error) {
+//            XCTAssertNil(error,@"加入圈子接口错误");
+//        }];
+//    }
+//}
 
 - (void)testGetPlanList{
     XCTestExpectation *expectation = [self expectationWithDescription:@"事件列表拉取接口"];
@@ -167,25 +170,33 @@ static NSTimeInterval expectationTimeout = 30.0f;
 
 - (void)testUpdatePlan{
 
-    NSUInteger numberOfCycles = 30;
+    NSArray *myPlans = [Plan fetchWith:@"Plan"
+                             predicate:[NSPredicate predicateWithFormat:@"owner.ownerId == %@",[User uid]] keyForDescriptor:@"planId"
+                  managedObjectContext:[AppDelegate getContext]];
+    
+    NSUInteger numberOfCycles = 10;
     for (NSInteger i = 0; i <= numberOfCycles; i++) {
-        self.testPlan.detailText = [NSUUID UUID].UUIDString; //修改事件描述
-        self.testPlan.planStatus = i == numberOfCycles ? @(PlanStatusOnGoing) : @(PlanStatusFinished); //修改事件状态
-        XCTestExpectation *expectation = [self expectationWithDescription:@"更新事件内容接口"];
+        for (Plan *p in myPlans) {
+            //        self.testPlan.detailText = [NSUUID UUID].UUIDString; //修改事件描述
+            //        self.testPlan.planStatus = i == numberOfCycles ? @(PlanStatusOnGoing) : @(PlanStatusFinished); //修改事件状态
+            XCTestExpectation *expectation = [self expectationWithDescription:@"更新事件内容接口"];
+            
+            [self.fetchCenter updatePlan:p.planId
+                                   title:p.planTitle
+                               isPrivate:!p.isPrivate.boolValue
+                             description:p.detailText completion:^{
+                [expectation fulfill];
+            }];
+            
+            [self waitForExpectationsWithTimeout:expectationTimeout handler:^(NSError * _Nullable error) {
+                XCTAssertNil(error,@"更新事件内容接口错误");
+                if (error) {
+                    NSLog(@"%@",self.testPlan);
+                }
+            }];
+        }
         
-        [self.fetchCenter updatePlan:self.testPlan.planId title:self.testPlan.planTitle isPrivate:self.testPlan.isPrivate description:self.testPlan.detailText completion:^{
-             [expectation fulfill];
-        }];
-        
-        [self waitForExpectationsWithTimeout:expectationTimeout handler:^(NSError * _Nullable error) {
-            XCTAssertNil(error,@"更新事件内容接口错误");
-            if (error) {
-                NSLog(@"%@",self.testPlan);
-            }
-        }];
     }
-    [self.testPlan.managedObjectContext save:nil];
-
 }
 
 
@@ -194,8 +205,8 @@ static NSTimeInterval expectationTimeout = 30.0f;
 - (Plan *)testPlan{
     if (!_testPlan) {
         NSArray *array = [Plan fetchWith:@"Plan"
-                               predicate:[NSPredicate predicateWithFormat:@"planTitle = %@",testPlanTitle]
-                        keyForDescriptor:@"planTitle"
+                               predicate:[NSPredicate predicateWithFormat:@"owner.ownerId == %@",[User uid]]
+                        keyForDescriptor:@"planId"
                     managedObjectContext:[AppDelegate getContext]];
         XCTAssertFalse(array.count == 0,@"找不到测试事件");
         _testPlan = array.lastObject;

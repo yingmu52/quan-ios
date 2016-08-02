@@ -7,21 +7,18 @@
 //
 
 #import "EditWishViewController.h"
-#import "Theme.h"
 #import "SystemUtil.h"
 #import "Plan.h"
 #import "AppDelegate.h"
 #import "SDWebImageCompat.h"
 #import "GCPTextView.h"
-#import "FetchCenter.h"
-@interface EditWishViewController () <FetchCenterDelegate,UITextViewDelegate>
+@interface EditWishViewController () <UITextViewDelegate>
 @property (nonatomic,weak) IBOutlet UITextField *textField;
 @property (nonatomic,weak) IBOutlet GCPTextView *textView;
 @property (nonatomic,weak) IBOutlet UILabel *wordCountLabel;
-@property (nonatomic,weak) IBOutlet UISwitch *privacySwitch;
-@property (nonatomic,weak) IBOutlet UILabel *privacyLabel;
+@property (nonatomic,weak) IBOutlet UIButton *privacyRadioButton;
 @property (nonatomic,strong) UIButton *tikButton;
-@property (nonatomic,strong) FetchCenter *fetchCenter;
+@property (nonatomic) BOOL isPrivate; //当前用户选择是否公开事件
 @end
 @implementation EditWishViewController
 
@@ -30,6 +27,7 @@
     [super viewDidLoad];
     [self setupNavigationItem];
     [self setupTextField];
+    [self setupRadioButton];
     [self setupContent];
 }
 
@@ -54,24 +52,43 @@
     [self.textField addTarget:self action:@selector(textFieldDidUpdate) forControlEvents:UIControlEventEditingChanged];
 }
 
+- (void)setupRadioButton{
+    self.privacyRadioButton.layer.borderWidth = 1.0;
+    self.privacyRadioButton.layer.borderColor = [UIColor grayColor].CGColor;
+    [self.privacyRadioButton setImage:nil forState:UIControlStateNormal];
+    [self.privacyRadioButton setImage:[Theme EditPlanRadioButtonCheckMark] forState:UIControlStateSelected];
+    [self.privacyRadioButton setImage:[Theme EditPlanRadioButtonCheckMark] forState:UIControlStateHighlighted];
+}
 
-#define text_privacy_on @"事件状态：公开"
-#define text_privacy_off @"事件状态：私密"
+
+//#define text_privacy_on @"事件状态：公开"
+//#define text_privacy_off @"事件状态：私密"
 
 - (void)setupContent{
-    self.textView.delegate = self;
+    
+    //事件标题
     self.textField.text = self.plan.planTitle;
+
+    //事件描述
+    self.textView.delegate = self;
+    self.textView.textContainerInset = UIEdgeInsetsZero; //去掉textview四周的空白
     [self.textView setPlaceholder:@"添加描述能让别人更了解这件事儿哦~"];
     self.textView.text = self.plan.detailText;
     self.wordCountLabel.text = [NSString stringWithFormat:@"%@/75",@(self.plan.detailText.length)];
-    self.privacyLabel.text = self.plan.isPrivate.boolValue ? text_privacy_off : text_privacy_on;
-    [self.privacySwitch setOn:!self.plan.isPrivate.boolValue];
+    
+    //事件公开与私密
+    self.isPrivate = self.plan.isPrivate.boolValue;
+    NSLog(@"plan is %@",self.plan.isPrivate.boolValue ? @"private": @"public");
 }
 
-- (IBAction)togglePrivacySwitch:(UISwitch *)sender {
-    self.privacyLabel.text = sender.isOn ? text_privacy_on : text_privacy_off;
+- (IBAction)tapOnPrivacyRadioButton:(UIButton *)button{
+    self.isPrivate = !self.isPrivate;
 }
 
+- (void)setIsPrivate:(BOOL)isPrivate{
+    _isPrivate = isPrivate;
+    [self.privacyRadioButton setSelected:!isPrivate];
+}
 
 - (void)doneEditing{
     
@@ -81,7 +98,7 @@
     if (self.textField.hasText &&
         ![self.textField.text isEqualToString:self.plan.planTitle] |
         ![self.textView.text isEqualToString:self.plan.detailText] |
-        self.privacySwitch.isOn == self.plan.isPrivate.boolValue){ //开 = 公开 -> isPrivate = 0; 关 = 私密 -> isPrivate = 1
+        self.isPrivate != self.plan.isPrivate.boolValue){ //开 = 公开 -> isPrivate = 0; 关 = 私密 -> isPrivate = 1
 
         //开始跑菊花
         UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -90,10 +107,9 @@
 
         
         //向后台发送更请求
-        BOOL isPrivate = !self.privacySwitch.isOn;
         [self.fetchCenter updatePlan:self.plan.planId
                                title:self.textField.text
-                           isPrivate:isPrivate
+                           isPrivate:self.isPrivate
                          description:self.textView.text
                           completion:^
         {
@@ -105,14 +121,6 @@
     }else{
         [self.navigationController popViewControllerAnimated:YES];
     }
-}
-
-- (FetchCenter *)fetchCenter{
-    if (!_fetchCenter){
-        _fetchCenter = [[FetchCenter alloc] init];
-        _fetchCenter.delegate = self;
-    }
-    return _fetchCenter;
 }
 
 

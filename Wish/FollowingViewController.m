@@ -20,6 +20,7 @@ static NSUInteger numberOfPreloadedFeeds = 3;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 - (void)setUpNavigationItem
