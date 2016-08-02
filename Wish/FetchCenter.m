@@ -227,38 +227,33 @@
           }
      ];
 }
-- (void)getMemberListForCircle:(Circle *)circle
-                    completion:(FetchCenterGetRequestGetMemberListCompleted)completionBlock{
+
+//目前只有圈主才可以看到成员
+- (void)getMemberListForCircleId:(NSString *)circleId
+                       localList:(NSArray *)localList
+                      completion:(FetchCenterGetRequestGetMemberListCompleted)completionBlock{
+    
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,GET_MEMBER_LIST];
-    NSDictionary *inputParams = @{@"id":circle.circleId};
+    NSDictionary *inputParams = @{@"id":circleId};
     [self getRequest:rqtStr
            parameter:inputParams
     includeArguments:YES
           completion:^(NSDictionary *responseJson){
               
               //后台在成员列表里没有返回主人ID，需要特别处理
-              NSMutableArray *manList = [NSMutableArray array];
-
-              NSManagedObjectContext *workerContext = [self workerContext];
-              
-              if ([responseJson[@"data"] isKindOfClass:[NSDictionary class]]) { //非空列表
-                  manList = [responseJson valueForKeyPath:@"data.manList"];
-                  NSDictionary *manData = [responseJson valueForKeyPath:@"data.manData"];
-                  
-                  for (NSString *userID in manList) {
-                      [Owner updateOwnerWithInfo:manData[userID] managedObjectContext:workerContext];
+              NSArray *manList = [responseJson valueForKeyPath:@"data.manList"];
+              NSDictionary *manInfo = [responseJson valueForKeyPath:@"data.manData"];
+              if (manList.count > 0) {
+                  NSManagedObjectContext *workerContext = [self workerContext];
+                  for (NSString *uid in manList) {
+                      NSDictionary *ownerInfo = [manInfo valueForKey:uid];
+                      [Owner updateOwnerWithInfo:ownerInfo managedObjectContext:workerContext];
                   }
-
-              }
-
-              if ([circle.ownerId isEqualToString:[User uid]] && !manList.count) {
-                  [manList addObject:[User uid]];
-                  
-                  //防止主人的owner实例不在本地
-                  [Owner updateOwnerWithInfo:[Owner myWebInfo] managedObjectContext:workerContext];
+                  //改成多对多的关系后对会用到同步
+//                  [self syncEntity:@"Owner" idName:@"ownerId" localList:localList serverList:manList];
+                  [self.appDelegate saveContext:workerContext];
               }
               
-              [self.appDelegate saveContext:workerContext];
               
               if (completionBlock) {
                   dispatch_main_async_safe(^{

@@ -113,9 +113,11 @@ typedef void(^FetchCenterGetRequestDeleteMemberCompleted)(void);
           completion:(FetchCenterGetRequestDeleteMemberCompleted)completionBlock;
 
 /** 圈子成员列表 **/
+
 typedef void(^FetchCenterGetRequestGetMemberListCompleted)(NSArray *memberIDs);
-- (void)getMemberListForCircle:(Circle *)circle
-                       completion:(FetchCenterGetRequestGetMemberListCompleted)completionBlock;
+- (void)getMemberListForCircleId:(NSString *)circleId
+                       localList:(NSArray *)localList
+                      completion:(FetchCenterGetRequestGetMemberListCompleted)completionBlock;
 
 /** 设置圈子资料*/
 typedef void(^FetchCenterGetRequestUpdateCircleCompleted)(void);
