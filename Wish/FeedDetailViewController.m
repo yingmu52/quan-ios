@@ -35,7 +35,9 @@
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self
                                                                     refreshingAction:@selector(loadMoreComments)];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    [self.tableView.mj_footer beginRefreshing];
+
+    //不要用beginRefreshing 因为会很淫荡地跳到页面下方
+    [self loadMoreComments];
 }
 
 - (void)loadMoreComments{
