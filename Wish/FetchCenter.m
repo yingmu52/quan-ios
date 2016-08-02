@@ -349,27 +349,47 @@
     
 }
 
-- (void)joinCircle:(NSString *)invitationCode completion:(FetchCenterGetRequestJoinCircleCompleted)completionBlock{
-    if (invitationCode) {
-        NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,JOINT_CIRCLE];
-        [self getRequest:rqtStr
-               parameter:@{@"addCode":invitationCode}
-        includeArguments:YES
-              completion:^(NSDictionary *responseJson) {
-                  NSLog(@"%@",responseJson);
-                  NSString *circleId = [responseJson valueForKeyPath:@"quanInfo.id"];
-                  if (circleId){
-                      [User updateAttributeFromDictionary:@{CURRENT_CIRCLE_ID:circleId}];
-                  }
-                  NSLog(@"成功加入圈子id %@",[User currentCircleId]);
-                  if (completionBlock) {
-                      dispatch_main_async_safe(^{
-                          completionBlock(circleId);
-                      });
-                      
-                  }
-              }];
-    }
+- (void)joinCircleId:(NSString *)circleId
+         nonceString:(NSString *)noncestr
+           signature:(NSString *)signature
+          expireTime:(NSString *)expireTime
+          inviteCode:(NSString *)code
+          completion:(FetchCenterGetRequestJoinCircleCompleted)completionBlock
+{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,JOINT_CIRCLE];
+    NSDictionary *args = @{@"quanid":circleId,
+                           @"noncestr":noncestr,
+                           @"signature":signature,
+                           @"expiretime":expireTime,
+                           @"invitecode":code};
+    [self getRequest:rqtStr
+           parameter:args
+    includeArguments:YES
+          completion:^(NSDictionary *responseJson) {
+              NSLog(@"%@",responseJson);
+              NSDictionary *quanInfo = responseJson[@"quanInfo"];
+              /*
+              quanInfo =     {
+                  backGroudPic = "";
+                  createTime = 1469809666;
+                  description = "the only one that";
+                  id = quan579b8402f0fd2;
+                  name = "I am a bit";
+                  ownerId = 100045;
+                  private = 1;
+              };
+              */
+              NSManagedObjectContext *workerContext = [self workerContext];
+              [Circle updateCircleWithInfo:quanInfo managedObjectContext:workerContext];
+              [self.appDelegate saveContext:workerContext];
+              if (completionBlock) {
+                  dispatch_main_async_safe(^{
+                      completionBlock(quanInfo[@"name"]);
+                  });
+                  
+              }
+          }];
+
 }
 
 - (void)switchToCircle:(NSString *)circleId completion:(FetchCenterGetRequestSwithCircleCompleted)completionBlock{
@@ -1254,16 +1274,14 @@
     NSString *logPath = [self.class requestLogFilePath];
     NSFileHandle *fileHandler = [NSFileHandle fileHandleForUpdatingAtPath:logPath];
 
-    NSString *content = [NSString stringWithFormat:@"[Date]: %@\n\n[Request]: %@\n\n[Response]: %@\n\n\n\n",[NSDate date],request,response];
+    NSString *content = [NSString stringWithFormat:@"[Date]: %@\n\n[Request]: %@\n\n[Response]: %@\n\n\n\n",[NSDate date],request,[self decodedOBject:response]];
     
-    NSString *decodedContent = [NSString stringWithCString:[content cStringUsingEncoding:NSUTF8StringEncoding]
-                                                  encoding:NSNonLossyASCIIStringEncoding];
     if (fileHandler){
         [fileHandler seekToEndOfFile];
-        [fileHandler writeData:[decodedContent dataUsingEncoding:NSUTF8StringEncoding]];
+        [fileHandler writeData:[content dataUsingEncoding:NSUTF8StringEncoding]];
         [fileHandler closeFile];
     }else{
-        [decodedContent writeToFile:logPath atomically:NO encoding:NSUTF8StringEncoding error:nil];
+        [content writeToFile:logPath atomically:NO encoding:NSUTF8StringEncoding error:nil];
     }
 }
 
@@ -1518,10 +1536,11 @@
                         
                         //假失败写入请求日志
                         [self appendRequest:request andResponse:responseJson];
-                        
-                        NSLog(@"Fail Get Request :%@\n baseUrl: %@ \n parameter: %@ \n response: %@ \n error:%@"
-                              ,rqtStr,baseURL,dict,responseJson,error);
-                        
+
+#ifdef DEBUG
+                        NSLog(@"\n\n** 失败 ** \n baseUrl: %@ \n parameter: %@ \n responseJSON: %@ \n error:%@"
+                              ,baseURL,dict,[self decodedOBject:responseJson],error);
+#endif
                         if ([self.delegate respondsToSelector:@selector(didFailSendingRequest)]){
                             [self.delegate didFailSendingRequest];
                         }
@@ -1536,6 +1555,12 @@
     }
 }
 
+- (NSString *)decodedOBject:(id)obj{
+    const char *content = [[NSString stringWithFormat:@"%@",obj]
+                           cStringUsingEncoding:NSUTF8StringEncoding];
+    return [NSString stringWithCString:content
+                              encoding:NSNonLossyASCIIStringEncoding];
+}
 #pragma mark - 请求统一参数
 
 - (NSString *)buildVersion{

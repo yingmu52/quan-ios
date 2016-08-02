@@ -12,6 +12,7 @@
 #define PGY_APPID @"7f1cd492fc0f48875650e0d1c702093b"
 #import "LoginViewController.h"
 #import "MessageListViewController.h"
+#import "MBProgressHUD.h"
 @interface AppDelegate () <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,weak) LoginViewController *loginVC;
@@ -127,11 +128,16 @@
     return _loginVC;
 }
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication 
+         annotation:(id)annotation{
+    
     return
-    [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]] ||
-    [TencentOAuth HandleOpenURL:url] ||
-    [QQApiInterface handleOpenURL:url delegate:nil];
+    [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]] |
+    [TencentOAuth HandleOpenURL:url] |
+    [QQApiInterface handleOpenURL:url delegate:nil] |
+    [self handleJoingCircleURL:url];
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
@@ -141,6 +147,46 @@
     [QQApiInterface handleOpenURL:url delegate:nil];
 }
 
+
+- (BOOL)handleJoingCircleURL:(NSURL *)url{
+    
+    //读取邀请圈子H5带进来的参数
+    NSMutableDictionary *args = [[NSMutableDictionary alloc] init];
+    NSArray *urlComponents = [[url query] componentsSeparatedByString:@"&"];
+    for (NSString *keyValuePair in urlComponents)
+    {
+        NSArray *pairComponents = [keyValuePair componentsSeparatedByString:@"="];
+        NSString *key = [[pairComponents firstObject] stringByRemovingPercentEncoding];
+        NSString *value = [[pairComponents lastObject] stringByRemovingPercentEncoding];
+        
+        [args setObject:value forKey:key];
+    }
+    
+    BOOL handleSucceed = NO;
+    NSArray *validArgs = @[@"quanid",@"noncestr",@"signature",@"expiretime",@"invitecode"];
+    for (NSString *str in args.allKeys) {
+        handleSucceed = [validArgs containsObject:str];
+    }
+    if (handleSucceed) {
+        NSLog(@"邀请加入操作成功");
+        //102的错误码是时间过期，103的错误码是签名失败
+        [self.fetchCenter joinCircleId:args[@"quanid"]
+                           nonceString:args[@"noncestr"]
+                             signature:args[@"signature"]
+                            expireTime:args[@"expiretime"]
+                            inviteCode:args[@"invitecode"]
+                            completion:^(NSString *circleName)
+        {
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow]
+                                                      animated:YES];
+            hud.mode = MBProgressHUDModeText;
+            hud.label.text = [NSString stringWithFormat:@"成功加入圈子【%@】",circleName];
+            [hud hideAnimated:YES afterDelay:2.0];
+        }];
+    }
+    
+    return handleSucceed;
+}
 
 #pragma mark - Core Data stack
 

@@ -106,18 +106,18 @@ static NSTimeInterval expectationTimeout = 30.0f;
 //    }];
 //}
 
-- (void)testJointCircle{
-    NSArray *codes = @[@"1001",@"1002",@"2001",@"2002"]; //诗歌，旅游，灌水，极品
-    for (NSString *code in codes){
-        XCTestExpectation *expectation = [self expectationWithDescription:@"加入圈子接口"];
-        [self.fetchCenter joinCircle:code completion:^(NSString *circleId) {
-            [expectation fulfill];
-        }];
-        [self waitForExpectationsWithTimeout:expectationTimeout handler:^(NSError * _Nullable error) {
-            XCTAssertNil(error,@"加入圈子接口错误");
-        }];
-    }
-}
+//- (void)testJointCircle{
+//    NSArray *codes = @[@"1001",@"1002",@"2001",@"2002"]; //诗歌，旅游，灌水，极品
+//    for (NSString *code in codes){
+//        XCTestExpectation *expectation = [self expectationWithDescription:@"加入圈子接口"];
+//        [self.fetchCenter joinCircle:code completion:^(NSString *circleId) {
+//            [expectation fulfill];
+//        }];
+//        [self waitForExpectationsWithTimeout:expectationTimeout handler:^(NSError * _Nullable error) {
+//            XCTAssertNil(error,@"加入圈子接口错误");
+//        }];
+//    }
+//}
 
 - (void)testGetPlanList{
     XCTestExpectation *expectation = [self expectationWithDescription:@"事件列表拉取接口"];
