@@ -7104,6 +7104,7 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="archiveButton" destination="Q5h-js-KUK" id="pZm-2k-9ak"/>
                         <outlet property="privacyRadioButton" destination="fjN-eH-cSI" id="hCp-8r-oml"/>
                         <outlet property="textField" destination="xEq-TA-PZ3" id="ypF-V1-orW"/>
                         <outlet property="textView" destination="r6f-zr-0TZ" id="mI0-7w-QXh"/>

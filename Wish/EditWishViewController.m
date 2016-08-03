@@ -18,6 +18,7 @@
 @property (nonatomic,weak) IBOutlet UILabel *wordCountLabel;
 @property (nonatomic,weak) IBOutlet UIButton *privacyRadioButton;
 @property (nonatomic,strong) UIButton *tikButton;
+@property (nonatomic,weak) IBOutlet UIButton *archiveButton;
 @property (nonatomic) BOOL isPrivate; //当前用户选择是否公开事件
 @end
 @implementation EditWishViewController
@@ -79,6 +80,10 @@
     //事件公开与私密
     self.isPrivate = self.plan.isPrivate.boolValue;
     NSLog(@"plan is %@",self.plan.isPrivate.boolValue ? @"private": @"public");
+    
+    if (self.plan.planStatus.integerValue == PlanStatusFinished) {
+        [self.archiveButton setTitle:@"恢复" forState:UIControlStateNormal];
+    }
 }
 
 - (IBAction)tapOnPrivacyRadioButton:(UIButton *)button{
@@ -149,7 +154,20 @@
 }
 
 - (IBAction)finish:(UIButton *)sender{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确定归档？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    
+    NSString *title;
+    PlanStatus statusToChagne = -1; //-1为不支持的状态
+    if (self.plan.planStatus.integerValue == PlanStatusOnGoing) {
+        title = @"确定归档？";
+        statusToChagne = PlanStatusFinished;
+    }
+    if (self.plan.planStatus.integerValue == PlanStatusFinished) {
+        title = @"确定恢复？";
+        statusToChagne = PlanStatusOnGoing;
+    }
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
+                                                                   message:nil
+                                                            preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定"
                                                       style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * _Nonnull action)
@@ -160,7 +178,7 @@
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
 
         [self.fetchCenter updatePlanId:self.plan.planId
-                            planStatus:PlanStatusFinished
+                            planStatus:statusToChagne
                             completion:^
         {
             [spinner stopAnimating];
