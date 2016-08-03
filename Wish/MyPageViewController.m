@@ -129,7 +129,7 @@
     
     if (indexPath.section == 1){
         if (indexPath.row == 0) {
-            NSURL *url = [NSURL URLWithString:@"https://www.pgyer.com/sAG9"];
+            NSURL *url = [NSURL URLWithString:@"https://www.pgyer.com/8u4F"];
             UIApplication *app = [UIApplication sharedApplication];
             if ([app canOpenURL:url]) {
                 [app openURL:url];
