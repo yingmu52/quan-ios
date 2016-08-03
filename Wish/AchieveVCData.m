@@ -13,9 +13,7 @@
 #import "AchieveCell.h"
 #import "User.h"
 #import "UIImageView+ImageCache.h"
-#import "FetchCenter.h"
 @interface AchieveVCData () <NSFetchedResultsControllerDelegate>
-@property (nonatomic,strong) NSFetchedResultsController *fetchedRC;
 @property (nonatomic,strong) UIImageView *emptySignImageView;
 @property (nonatomic,strong) UIView *timeLine;
 @property (nonatomic,strong) NSDateFormatter *formatter;
@@ -27,7 +25,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"showPlanFromAchievement"]) {
+    if ([segue.identifier isEqualToString:@"showWishDetailFromAchievement"]) {
         [segue.destinationViewController setPlan:sender];
     }
 }
@@ -42,14 +40,14 @@
 #pragma mark - UITableViewController Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.fetchedRC.fetchedObjects.count;
+    return self.tableFetchedRC.fetchedObjects.count;
 }
 
 - (AchieveCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     AchieveCell *cell = [tableView dequeueReusableCellWithIdentifier:ACHIEVECELLID
                                                         forIndexPath:indexPath];
 
-    Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
+    Plan *plan = [self.tableFetchedRC objectAtIndexPath:indexPath];
     
     cell.dateLabel.text = [NSString stringWithFormat:@"%@ - ",[self.formatter stringFromDate:plan.updateDate]];
 
@@ -67,48 +65,27 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Plan *plan = [self.fetchedRC objectAtIndexPath:indexPath];
-    [self performSegueWithIdentifier:@"showPlanFromAchievement" sender:plan];
+    Plan *plan = [self.tableFetchedRC objectAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:@"showWishDetailFromAchievement" sender:plan];
     
 }
 
-#pragma mark - NSFetchedResultsController
-- (NSFetchedResultsController *)fetchedRC
-{
-    NSManagedObjectContext *context = [AppDelegate getContext];
-    if (_fetchedRC != nil) {
-        return _fetchedRC;
+- (NSFetchRequest *)tableFetchRequest{
+    if (!_tableFetchRequest) {
+        _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
+        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"owner.ownerId == %@ && planStatus != %d",[User uid],PlanStatusOnGoing];
+        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"updateDate" ascending:NO]];
     }
-    //do fetchrequest
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
-    request.predicate = [NSPredicate predicateWithFormat:@"owner.ownerId == %@ && planStatus != %d",[User uid],PlanStatusOnGoing];
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"updateDate" ascending:NO]];
-    
-    NSFetchedResultsController *newFRC =
-    [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                        managedObjectContext:context sectionNameKeyPath:nil
-                                                   cacheName:nil];
-    self.fetchedRC = newFRC;
-    _fetchedRC.delegate = self;
-    
-    // Perform Fetch
-    NSError *error = nil;
-    [_fetchedRC performFetch:&error];
-    
-    if (error) {
-        NSLog(@"Unable to perform fetch.");
-        NSLog(@"%@, %@", error, error.localizedDescription);
-    }
-    return _fetchedRC;
-    
-    
+    return _tableFetchRequest;
 }
+
 
 - (void)controllerDidChangeContent:
 (NSFetchedResultsController *)controller
 {
-    [self setupEmptySign];
-    [self.tableView reloadData];
+    if (self.tableFetchedRC.fetchedObjects.count == 0) {
+        [self setupEmptySign];
+    }
 }
 
 #pragma mark - application life cycle
@@ -119,7 +96,7 @@
 }
 
 - (void)setupEmptySign{
-    if (!self.fetchedRC.fetchedObjects.count){ //empty data
+    if (!self.tableFetchedRC.fetchedObjects.count){ //empty data
         self.tableView.scrollEnabled = NO;
         if (!self.emptySignImageView){
             

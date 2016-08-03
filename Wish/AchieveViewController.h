@@ -7,9 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Theme.h"
 #import "SystemUtil.h"
-
-@interface AchieveViewController : UITableViewController
-
+#import "MSSuperViewController.h"
+@interface AchieveViewController : MSSuperViewController
 @end
