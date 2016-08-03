@@ -12,6 +12,7 @@
 #import "UIImageView+ImageCache.h"
 #import "PlansViewController.h"
 @interface CircleListViewController () <UITableViewDelegate>
+@property (nonatomic,strong) NSNumber *currentPage;
 @end
 
 @implementation CircleListViewController
@@ -30,17 +31,24 @@
     
     
 
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self
-                                                                     refreshingAction:@selector(loadNewData)];
-    header.lastUpdatedTimeLabel.hidden = YES;
-    self.tableView.mj_header = header;
-    [self.tableView.mj_header beginRefreshing];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self
+                                                                    refreshingAction:@selector(loadMoreData)];
+
+    [self loadMoreData];
 }
 
-- (void)loadNewData{
+- (void)loadMoreData{
     NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKey:@"circleId"];
-    [self.fetchCenter getCircleList:localList completion:^(NSArray *circleIds) {
-        [self.tableView.mj_header endRefreshing];
+    [self.fetchCenter getCircleList:localList
+                             onPage:self.currentPage
+                         completion:^(NSNumber *currentPage, NSNumber *totalPage)
+    {
+        if ([currentPage isEqualToNumber:totalPage]) {
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        }else{
+            self.currentPage = @(currentPage.integerValue + 1);
+            [self.tableView.mj_footer endRefreshing];
+        }
     }];
 }
 

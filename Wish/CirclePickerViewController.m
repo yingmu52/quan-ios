@@ -18,11 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setUpNavigationItem];
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero]; //Clear Empty Cell
-    
-    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKey:@"circleId"];
-    [self.fetchCenter getCircleList:localList completion:nil];
+    [self setUpNavigationItem];    
 }
 
 - (void)setUpNavigationItem
@@ -40,13 +36,13 @@
     self.navigationItem.title = @"选择圈子";
 }
 
-- (NSFetchRequest *)tableFetchRequest{
-    if (!_tableFetchRequest) {
-        _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Circle"];
-        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
-    }
-    return _tableFetchRequest;
-}
+//- (NSFetchRequest *)tableFetchRequest{
+//    if (!_tableFetchRequest) {
+//        _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Circle"];
+//        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
+//    }
+//    return _tableFetchRequest;
+//}
 
 
 - (CircleListCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -70,9 +66,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     Circle *circle = [self.tableFetchedRC objectAtIndexPath:indexPath];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self.navigationController popViewControllerAnimated:YES];
     [self.delegate didFinishPickingCircle:circle];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

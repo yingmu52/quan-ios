@@ -410,10 +410,10 @@
     }
 }
 
-- (void)getCircleList:(NSArray *)localList completion:(FetchCenterGetRequestGetCircleListCompleted)completionBlock{
-//    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,GET_CIRCLE_LIST];
+- (void)getCircleList:(NSArray *)localList
+               onPage:(NSNumber *)currentPage
+           completion:(FetchCenterGetRequestGetCircleListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,GET_CIRCLE_LIST];
-
     [self getRequest:rqtStr
            parameter:@{@"id":[User uid]}
          includeArguments:YES
@@ -421,20 +421,27 @@
               
               NSManagedObjectContext *workerContext = [self workerContext];
               
-              NSArray *circleInfo = [responseJson valueForKey:@"data"];
-              NSMutableArray *circles = [NSMutableArray arrayWithCapacity:circleInfo.count];
-              for (NSDictionary *info in circleInfo) {
-                  [circles addObject:[Circle updateCircleWithInfo:info managedObjectContext:workerContext]];
+              NSArray *circleList = [responseJson valueForKeyPath:@"data.quanlist"];
+              NSNumber *currentPage = [responseJson valueForKeyPath:@"data.page"];
+              NSNumber *totalPage = [responseJson valueForKeyPath:@"data.totalpage"];
+              
+              
+              for (NSDictionary *info in circleList) {
+                  [Circle updateCircleWithInfo:info managedObjectContext:workerContext];
               }
               
-              NSArray *serverList = [responseJson valueForKeyPath:@"data.id"];
-              [self syncEntity:@"Circle" idName:@"circleId" localList:localList serverList:serverList];
+              
+              if (currentPage.integerValue == 1) {
+                  NSArray *serverList = [responseJson valueForKeyPath:@"data.quanlist.id"];
+                  [self syncEntity:@"Circle" idName:@"circleId" localList:localList serverList:serverList];
+              }
+              
               
               [self.appDelegate saveContext:workerContext];
               
               if (completionBlock) {
                   dispatch_main_async_safe(^{
-                      completionBlock(serverList);
+                      completionBlock(currentPage,totalPage);
                   });
               }
 

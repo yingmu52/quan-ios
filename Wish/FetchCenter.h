@@ -150,8 +150,10 @@ typedef void(^FetchCenterGetRequestJoinCircleCompleted)(NSString *circleName);
           completion:(FetchCenterGetRequestJoinCircleCompleted)completionBlock;
 
 /**获取圈子列表*/
-typedef void(^FetchCenterGetRequestGetCircleListCompleted)(NSArray *circleIds);
-- (void)getCircleList:(NSArray *)localList completion:(FetchCenterGetRequestGetCircleListCompleted)completionBlock;
+typedef void(^FetchCenterGetRequestGetCircleListCompleted)(NSNumber *currentPage, NSNumber *totalPage);
+- (void)getCircleList:(NSArray *)localList
+               onPage:(NSNumber *)currentPage
+           completion:(FetchCenterGetRequestGetCircleListCompleted)completionBlock;
 
 /**切换圈子*/
 - (void)switchToCircle:(NSString *)circleId completion:(FetchCenterGetRequestSwithCircleCompleted)completionBlock;
