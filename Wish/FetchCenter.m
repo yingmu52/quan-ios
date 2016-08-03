@@ -151,62 +151,72 @@
     }];
 }
 
-- (void)getPlanListInCircle:(NSString *)circleId
-                  localList:(NSArray *)localList
-                 completion:(FetchCenterGetRequestGetCirclePlanListCompleted)completionBlock{
+- (void)getPlanListInCircleId:(NSString *)circleId
+                    localList:(NSArray *)localList 
+                       onPage:(NSNumber *)page
+                   completion:(FetchCenterGetRequestGetCirclePlanListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,GET_CIRCLE_PLAN_LIST];
     NSDictionary *inputParams = @{@"id":circleId};
     [self getRequest:rqtStr
            parameter:inputParams
     includeArguments:YES
           completion:^(NSDictionary *responseJson)
-    {
-        
-        NSArray *planIDList = @[];
-        
-        
-        if ([responseJson[@"data"] isKindOfClass:[NSDictionary class]]) { //无事件时 .data = ""
-            NSManagedObjectContext *workerContext = [self workerContext];
-            
-            NSArray *planList = [responseJson valueForKeyPath:@"data.planList"];
-            NSDictionary *manList = [responseJson valueForKeyPath:@"data.manList"];
-            
-            planIDList = [planList valueForKeyPath:@"id"];
-            //设置圈子信息
-            NSDictionary *circleInfo = [responseJson valueForKeyPath:@"data.quanInfo"];
-            Circle *circle;
-            if (circleInfo) {
-                circle = [Circle updateCircleWithInfo:circleInfo
-                                 managedObjectContext:workerContext];
-            }
-            
-            //缓存并更新本地事件
-            if (planList && manList){
-                for (NSDictionary *planInfo in planList) {
-                    Plan *plan = [Plan updatePlanFromServer:planInfo
-                                                  ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]
-                                       managedObjectContext:workerContext];
-                    if (![plan.circle.circleId isEqualToString:circle.circleId]) {
-                        plan.circle = circle;
-                    }
-                }
-            }
-            
-            //同步
-            [self syncEntity:@"Plan" idName:@"planId" localList:localList serverList:planIDList];
-            
-            [self.appDelegate saveContext:workerContext];
-            
-        }
+     {
+         
+         NSManagedObjectContext *workerContext = [self workerContext];
+         
+         NSArray *planList = [responseJson valueForKeyPath:@"data.planList"];
+         NSDictionary *manList = [responseJson valueForKeyPath:@"data.manList"];
+         
+         NSNumber *currentPage = @(1);
+         NSNumber *totalPage = @(1);
 
-        
-        if (completionBlock) {
-            dispatch_main_async_safe(^{
-                completionBlock(planIDList);
-            });
-        }
+         //设置圈子信息
+         NSDictionary *circleInfo = [responseJson valueForKeyPath:@"data.quanInfo"];
+         
+         if (planList.count > 0 && manList.count > 0) {
+             
+             currentPage = [responseJson valueForKeyPath:@"data.page"];
+             totalPage = [responseJson valueForKeyPath:@"data.totalpage"];
+             Circle *circle;
+             if (circleInfo) {
+                 circle = [Circle updateCircleWithInfo:circleInfo
+                                  managedObjectContext:workerContext];
+             }
+             
+             //缓存并更新本地事件
+             if (planList && manList){
+                 for (NSDictionary *planInfo in planList) {
+                     Plan *plan = [Plan updatePlanFromServer:planInfo
+                                                   ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]
+                                        managedObjectContext:workerContext];
+                     if (![plan.circle.circleId isEqualToString:circle.circleId]) {
+                         plan.circle = circle;
+                     }
+                 }
+             }
+             
+             //同步
+             if (currentPage.integerValue == 1){
+                 NSArray *serverList = [planList valueForKeyPath:@"id"];
+                 [self syncEntity:@"Plan" idName:@"planId" localList:localList serverList:serverList];
+             }
+             
+             
+             [self.appDelegate saveContext:workerContext];
+             
+         }
+         
+         if (completionBlock) {
+             dispatch_main_async_safe(^{
+                 completionBlock(currentPage,totalPage);
+             });
+         }
 
-    }];
+         
+     }];
+    
+    
 }
 
 - (void)deleteMember:(NSString *)memberID

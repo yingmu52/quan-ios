@@ -13,20 +13,16 @@
 
 @interface PlansViewController () <EmptyCircleViewDelegate>
 @property (nonatomic,strong) EmptyCircleView *emptyView;
-
+@property (nonatomic,strong) NSNumber *currentPage;
 @end
 
 @implementation PlansViewController
 
 - (void)viewWillAppear:(BOOL)animated{
     //don't call super here.
-    NSArray *localList = [self.collectionFetchedRC.fetchedObjects valueForKey:@"planId"];
-    [self.fetchCenter getPlanListInCircle:self.circle.circleId
-                                localList:localList
-                               completion:^(NSArray *planIds)
-     {
-         if (!planIds.count) [self setUpEmptyView];
-     }];    
+    if (!self.collectionFetchedRC.fetchedObjects.count) {
+        [self setUpEmptyView];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -72,6 +68,28 @@
         self.navigationItem.rightBarButtonItem = nil;
     }
     self.navigationItem.title = self.circle.circleName;
+    
+    
+    
+    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self
+                                                                    refreshingAction:@selector(loadMoreData)];
+    [self loadMoreData];
+
+}
+
+- (void)loadMoreData{
+    NSArray *localList = [self.collectionFetchedRC.fetchedObjects valueForKey:@"planId"];
+    [self.fetchCenter getPlanListInCircleId:self.circle.circleId 
+                                  localList:localList
+                                     onPage:self.currentPage
+                                 completion:^(NSNumber *currentPage, NSNumber *totalPage) {
+        if ([currentPage isEqualToNumber:totalPage]) {
+            [self.collectionView.mj_footer endRefreshingWithNoMoreData];
+        }else{
+            self.currentPage = @(currentPage.integerValue + 1);
+            [self.collectionView.mj_footer endRefreshing];
+        }
+    }];
 }
 
 - (void)showCircleSettingView{
