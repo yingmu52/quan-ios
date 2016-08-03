@@ -46,7 +46,6 @@ static CGFloat horizontalInset = 10.0f;
 
 - (DiscoveryCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     DiscoveryCell *cell = (DiscoveryCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NORMALCELLID forIndexPath:indexPath];
-    [cell removeFromSuperview]; //修复卡片排版重叠
     [self configureCell:cell atIndexPath:indexPath];
     // Configure the cell
     return cell;
