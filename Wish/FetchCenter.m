@@ -491,6 +491,7 @@
 
 
 - (void)getMessageListWithLocalList:(NSArray *)localList
+                             onPage:(NSNumber *)currentPage
                          completion:(FetchCenterGetRequestGetMessageListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,MESSAGE,GET_MESSAGE_LIST];
     [self getRequest:rqtStr
@@ -502,19 +503,26 @@
         
         NSArray *messagesArray = [responseJson valueForKeyPath:@"data.messageList"];
         NSDictionary *owners = [responseJson valueForKeyPath:@"data.manList"];
+        
+        NSNumber *currentPage = [responseJson valueForKeyPath:@"data.page"];
+        NSNumber *totalPage = [responseJson valueForKeyPath:@"data.totalpage"];
+
         for (NSDictionary *message in messagesArray){
             NSDictionary *ownerInfo = owners[message[@"operatorId"]];
             [Message updateMessageWithInfo:message ownerInfo:ownerInfo managedObjectContext:workerContext];
         }
 
-        [self.appDelegate saveContext:workerContext];
         
-        NSArray *serverList = [responseJson valueForKeyPath:@"data.messageList.messageId"];
-        [self syncEntity:@"Message" idName:@"messageId" localList:localList serverList:serverList];
+        if (currentPage.integerValue == 1) {
+            NSArray *serverList = [responseJson valueForKeyPath:@"data.messageList.messageId"];
+            [self syncEntity:@"Message" idName:@"messageId" localList:localList serverList:serverList];
+        }
+        
+        [self.appDelegate saveContext:workerContext];
         
         if (completionBlock) {
             dispatch_main_async_safe(^{
-                completionBlock();
+                completionBlock(currentPage,totalPage);
             });
             
         }

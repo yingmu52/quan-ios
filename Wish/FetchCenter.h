@@ -72,8 +72,6 @@ typedef void(^FetchCenterGetRequestGetWechatUserInfoCompleted)(void);
 
 /** 消息提醒完成*/
 typedef void(^FetchCenterGetRequestGetMessageNotificationCompleted)(NSNumber *messageCount,NSNumber *followCount);
-/** 拉取消息列表完成*/
-typedef void(^FetchCenterGetRequestGetMessageListCompleted)(void);
 /** 清空消息列表完成*/
 typedef void(^FetchCenterGetRequestClearMessageListCompleted)(void);
 /** 设置用户信息完成*/
@@ -161,9 +159,14 @@ typedef void(^FetchCenterGetRequestGetCircleListCompleted)(NSNumber *currentPage
 #pragma mark - 消息
 - (void)clearAllMessages:(FetchCenterGetRequestClearMessageListCompleted)completionBlock;
 
+
+/** 拉取消息列表完成*/
+typedef void(^FetchCenterGetRequestGetMessageListCompleted)(NSNumber *currentPage, NSNumber *totalPage);
 - (void)getMessageListWithLocalList:(NSArray *)localList
+                             onPage:(NSNumber *)currentPage
                          completion:(FetchCenterGetRequestGetMessageListCompleted)completionBlock;
-//- (void)getMessageList:(FetchCenterGetRequestGetMessageListCompleted)completionBlock;
+
+
 - (void)getMessageNotificationInfo:(FetchCenterGetRequestGetMessageNotificationCompleted)completionBlock;
 
 #pragma mark - 事件动态，（Feed）
