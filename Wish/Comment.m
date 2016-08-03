@@ -25,7 +25,6 @@
                       keyForDescriptor:@"commentId"
                   managedObjectContext:context]; //utility method from Plan+PlanCRUD.h
     
-    NSAssert(results.count <= 1, @"ownerId must be a unique!");
     if (!results.count) {
         comment = [NSEntityDescription insertNewObjectForEntityForName:@"Comment" inManagedObjectContext:context];
         comment.commentId = dict[@"id"];

@@ -43,7 +43,6 @@
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:FOLLOWINGIMAGECELLID
                                                                              forIndexPath:indexPath];
         Feed *feed = self.feedsArray[indexPath.row];
-        NSAssert(feed.imageId, @"null feed image id");
         [cell.feedImageView downloadImageWithImageId:feed.imageId size:FetchCenterImageSize400];
     }
     return cell;

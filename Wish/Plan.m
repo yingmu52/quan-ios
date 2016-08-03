@@ -38,7 +38,7 @@
     NSArray *checks = [Plan fetchWith:@"Plan"
                             predicate:[NSPredicate predicateWithFormat:@"planId == %@",dict[@"id"]]
                      keyForDescriptor:@"createDate" managedObjectContext:context];
-    NSAssert(checks.count <= 1, @"planId must be a unique!");
+
     if (!checks.count) {
         //insert new fetched plan
         plan = [NSEntityDescription insertNewObjectForEntityForName:@"Plan"

@@ -178,21 +178,16 @@
              
              currentPage = [responseJson valueForKeyPath:@"data.page"];
              totalPage = [responseJson valueForKeyPath:@"data.totalpage"];
-             Circle *circle;
-             if (circleInfo) {
-                 circle = [Circle updateCircleWithInfo:circleInfo
-                                  managedObjectContext:workerContext];
-             }
+             Circle *circle = [Circle updateCircleWithInfo:circleInfo
+                                      managedObjectContext:workerContext];
              
              //缓存并更新本地事件
-             if (planList && manList){
-                 for (NSDictionary *planInfo in planList) {
-                     Plan *plan = [Plan updatePlanFromServer:planInfo
-                                                   ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]
-                                        managedObjectContext:workerContext];
-                     if (![plan.circle.circleId isEqualToString:circle.circleId]) {
-                         plan.circle = circle;
-                     }
+             for (NSDictionary *planInfo in planList) {
+                 Plan *plan = [Plan updatePlanFromServer:planInfo
+                                               ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]
+                                    managedObjectContext:workerContext];
+                 if (![plan.circle.circleId isEqualToString:circle.circleId]) {
+                     plan.circle = circle;
                  }
              }
              

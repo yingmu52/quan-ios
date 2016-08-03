@@ -24,7 +24,6 @@
                      keyForDescriptor:@"ownerId"
                  managedObjectContext:context];
     
-    NSAssert(checks.count <= 1, @"ownerId must be a unique!");
     if (!checks.count) {
         //insert new fetched Owner
         owner = [NSEntityDescription insertNewObjectForEntityForName:@"Owner"

@@ -26,7 +26,6 @@
         circle.circleId = info[@"id"];
         circle.createDate = [NSDate dateWithTimeIntervalSince1970:[info[@"createTime"] integerValue]];
     }else{
-        NSAssert(results.count <= 1, @"Circle id must be a unique!");
         circle = results.lastObject;
     }
     

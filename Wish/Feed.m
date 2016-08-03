@@ -78,7 +78,6 @@
                  managedObjectContext:context];
     
     Feed *feed;
-    NSAssert(checks.count <= 1, @"non unique feed found");
     
     BOOL isNew = !checks.count;
     if (isNew) {
@@ -130,9 +129,7 @@
     NSArray *results = [Plan fetchWith:@"Feed"
                              predicate:[NSPredicate predicateWithFormat:@"feedId = %@",feedId]
                       keyForDescriptor:@"createDate"
-                  managedObjectContext:[AppDelegate getContext]];
-    
-    NSAssert(results.count <= 1, @"feed id is not unique");
+                  managedObjectContext:[AppDelegate getContext]];    
     return results.lastObject;
 }
 

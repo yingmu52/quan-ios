@@ -24,7 +24,6 @@
                       keyForDescriptor:@"createTime"
                   managedObjectContext:context]; //utility method from Plan+PlanCRUD.h
     
-    NSAssert(results.count <= 1, @"messageId must be a unique!");
     if (!results.count) {
         message = [NSEntityDescription insertNewObjectForEntityForName:@"Message"
                                                 inManagedObjectContext:context];
