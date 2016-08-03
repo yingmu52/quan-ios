@@ -69,20 +69,13 @@ ViewForEmptyEventDelegate,StationViewControllerDelegate>
     [self setUpNavigationItem];
     [self addLongPressGesture];
     
-    [self.fetchCenter getPlanListForOwnerId:[User uid] completion:^(NSArray *plans) {
-        if (!plans.count){
-            [self setUpEmptyView];
-        }
-        
-        //同步列表
-        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        for (Plan *plan in self.collectionFetchedRC.fetchedObjects) {
-            if (![plans containsObject:plan.planId]) {
-                [delegate.managedObjectContext deleteObject:plan];
-            }
-        }
-        [delegate saveContext];
-    }];
+}
+
+- (void)loadNewData{
+    NSArray *localList = [self.collectionFetchedRC.fetchedObjects valueForKey:@"planId"];
+    [self.fetchCenter getPlanListForOwnerId:[User uid]
+                                  localList:localList
+                                 completion:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated{

@@ -1174,28 +1174,35 @@
         }
     }];
 }
-- (void)getPlanListForOwnerId:(NSString *)ownerId completion:(FetchCenterGetRequestGetPlanListCompleted)completionBlock{
+
+- (void)getPlanListForOwnerId:(NSString *)ownerId
+                    localList:(NSArray *)localList
+                   completion:(FetchCenterGetRequestGetPlanListCompleted)completionBlock
+{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,GET_LIST];
-    [self getRequest:rqtStr parameter:@{@"id":ownerId} includeArguments:YES completion:^(NSDictionary *responseJson) {
+    [self getRequest:rqtStr
+           parameter:@{@"id":ownerId}
+    includeArguments:YES
+          completion:^(NSDictionary *responseJson)
+    {
+
         
-        NSArray *planIds = [NSArray array];
-        if ([responseJson[@"data"] isKindOfClass:[NSArray class]]) { //non empty array
-            
-            NSManagedObjectContext *workerContext = [self workerContext];
-            NSArray *plans = responseJson[@"data"];
-            planIds = [responseJson valueForKeyPath:@"data.id"];
-            for (NSDictionary *planInfo in plans) {
-                [Plan updatePlanFromServer:planInfo
-                                 ownerInfo:[Owner myWebInfo]
-                      managedObjectContext:workerContext];
-            }
-            
-            [self.appDelegate saveContext:workerContext];
+        NSManagedObjectContext *workerContext = [self workerContext];
+        NSArray *plansList = responseJson[@"data"];
+        for (NSDictionary *planInfo in plansList) {
+            [Plan updatePlanFromServer:planInfo
+                             ownerInfo:[Owner myWebInfo]
+                  managedObjectContext:workerContext];
         }
+        
+        NSArray *serverList = [responseJson valueForKeyPath:@"data.id"];
+        [self syncEntity:@"Plan" idName:@"planId" localList:localList serverList:serverList];
+        
+        [self.appDelegate saveContext:workerContext];
         
         if (completionBlock) {
             dispatch_main_async_safe(^{
-                completionBlock(planIds);
+                completionBlock();
             });
         }
     }];

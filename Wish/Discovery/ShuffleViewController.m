@@ -24,8 +24,22 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
-    [self.fetchCenter getPlanListForOwnerId:[User uid] completion:nil];
 }
+
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    [self loadNewData];
+}
+
+
+- (void)loadNewData{
+    NSArray *localList = [self.collectionFetchedRC.fetchedObjects valueForKey:@"planId"];
+    [self.fetchCenter getPlanListForOwnerId:[User uid]
+                                  localList:localList
+                                 completion:nil];
+}
+
+
 
 - (IBAction)tapOnBackground:(UITapGestureRecognizer *)tap{
     //支持点击背影关闭退出浮层

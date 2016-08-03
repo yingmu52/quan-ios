@@ -119,20 +119,20 @@ static NSTimeInterval expectationTimeout = 30.0f;
 //    }
 //}
 
-- (void)testGetPlanList{
-    XCTestExpectation *expectation = [self expectationWithDescription:@"事件列表拉取接口"];
-
-    [self.fetchCenter getPlanListForOwnerId:[User uid] completion:^(NSArray *plans) {
-        if (plans.count > 0) {
-            [expectation fulfill];
-        }
-    }];
-    [self waitForExpectationsWithTimeout:expectationTimeout
-                                 handler:^(NSError * _Nullable error) {
-                                     XCTAssertNil(error,@"事件列表拉取接口错误");
-                                 }];
-
-}
+//- (void)testGetPlanList{
+//    XCTestExpectation *expectation = [self expectationWithDescription:@"事件列表拉取接口"];
+//
+//    [self.fetchCenter getPlanListForOwnerId:[User uid] completion:^(NSArray *plans) {
+//        if (plans.count > 0) {
+//            [expectation fulfill];
+//        }
+//    }];
+//    [self waitForExpectationsWithTimeout:expectationTimeout
+//                                 handler:^(NSError * _Nullable error) {
+//                                     XCTAssertNil(error,@"事件列表拉取接口错误");
+//                                 }];
+//
+//}
 
 - (void)testLikeAndUnLikeFeed{
     NSArray *array = [Plan fetchWith:@"Feed"

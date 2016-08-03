@@ -221,8 +221,9 @@ typedef void(^FetchCenterGetRequestGetCommentListCompleted)(NSNumber *currentPag
 #pragma mark - 事件
 
 /**拉取主人id的事件列表*/
-typedef void(^FetchCenterGetRequestGetPlanListCompleted)(NSArray *planIds);
+typedef void(^FetchCenterGetRequestGetPlanListCompleted)(void);
 - (void)getPlanListForOwnerId:(NSString *)ownerId
+                    localList:(NSArray *)localList
                    completion:(FetchCenterGetRequestGetPlanListCompleted)completionBlock;
 
 /** 创建事件*/
