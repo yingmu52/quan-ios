@@ -1189,21 +1189,25 @@
         
         NSManagedObjectContext *workerContext = [self workerContext];
         NSArray *plansList = responseJson[@"data"];
-        for (NSDictionary *planInfo in plansList) {
-            [Plan updatePlanFromServer:planInfo
-                             ownerInfo:[Owner myWebInfo]
-                  managedObjectContext:workerContext];
-        }
         
-        NSArray *serverList = [responseJson valueForKeyPath:@"data.id"];
-        [self syncEntity:@"Plan" idName:@"planId" localList:localList serverList:serverList];
-        
-        [self.appDelegate saveContext:workerContext];
-        
-        if (completionBlock) {
-            dispatch_main_async_safe(^{
-                completionBlock();
-            });
+#warning data should return array even when it is empty
+        if ([responseJson[@"data"] isKindOfClass:[NSArray class]]) { //non empty array
+            for (NSDictionary *planInfo in plansList) {
+                [Plan updatePlanFromServer:planInfo
+                                 ownerInfo:[Owner myWebInfo]
+                      managedObjectContext:workerContext];
+            }
+            
+            NSArray *serverList = [responseJson valueForKeyPath:@"data.id"];
+            [self syncEntity:@"Plan" idName:@"planId" localList:localList serverList:serverList];
+            
+            [self.appDelegate saveContext:workerContext];
+            
+            if (completionBlock) {
+                dispatch_main_async_safe(^{
+                    completionBlock();
+                });
+            }
         }
     }];
 
