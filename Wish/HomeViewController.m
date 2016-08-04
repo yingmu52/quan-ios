@@ -68,7 +68,7 @@ ViewForEmptyEventDelegate,StationViewControllerDelegate>
     [super viewDidLoad];
     [self setUpNavigationItem];
     [self addLongPressGesture];
-    
+    [self loadNewData];
 }
 
 - (void)loadNewData{
