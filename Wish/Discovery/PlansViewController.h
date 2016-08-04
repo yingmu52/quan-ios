@@ -9,5 +9,4 @@
 #import "DiscoveryVCData.h"
 
 @interface PlansViewController : DiscoveryVCData
-@property (nonatomic,strong) Circle *circle;
 @end

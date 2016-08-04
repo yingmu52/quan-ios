@@ -18,7 +18,6 @@
     [super viewDidLoad];
     [self setupWaterFallCollectionView];
     self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    self.navigationItem.title = @"发现";
 }
 
 static CGFloat horizontalInset = 10.0f;

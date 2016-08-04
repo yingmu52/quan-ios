@@ -27,24 +27,26 @@
                                                action:@selector(longPressed:)];
     [self.collectionView addGestureRecognizer:longPress];
     
-    //设置导航项目
-    BOOL isOnTestEnvironment = [[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_TESTURL];
-    if (isOnTestEnvironment) {
-        self.navigationItem.title = [NSString stringWithFormat:@"测试环境 %@",TEST_URL];
-    }else{
-        self.navigationItem.title = @"圈里事";
+    if (!self.circle) { //发现页，self.circle == nil 是圈子事件页
+        //设置导航项目
+        BOOL isOnTestEnvironment = [[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_TESTURL];
+        if (isOnTestEnvironment) {
+            self.navigationItem.title = [NSString stringWithFormat:@"测试环境 %@",TEST_URL];
+        }else{
+            self.navigationItem.title = @"圈里事";
+        }
+        
+        //设置关注图标
+        UIButton *followButton = [Theme buttonWithImage:[Theme navIconFollowDefault] target:self selector:@selector(showFollowingView) frame:CGRectMake(0, 0, 25, 25)];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:followButton];
+        
+        //上拉刷新
+        self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self
+                                                                             refreshingAction:@selector(loadMoreData)];
+        
+        //初次拉数据
+        [self loadMoreData];
     }
-    
-    //设置关注图标
-    UIButton *followButton = [Theme buttonWithImage:[Theme navIconFollowDefault] target:self selector:@selector(showFollowingView) frame:CGRectMake(0, 0, 25, 25)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:followButton];
-    
-    //上拉刷新
-    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self
-                                                                         refreshingAction:@selector(loadMoreData)];
-    
-    //初次拉数据
-    [self loadMoreData];
 
 }
 

@@ -18,8 +18,8 @@
 
 @implementation PlansViewController
 
-- (void)viewWillAppear:(BOOL)animated{
-    //don't call super here.
+- (void)viewWillAppear:(BOOL)animated{    
+    [super viewWillAppear:animated];
     if (!self.collectionFetchedRC.fetchedObjects.count) {
         [self setUpEmptyView];
     }
@@ -49,31 +49,32 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    CGRect frame = CGRectMake(0,0, 25,25);
-    UIButton *backBtn = [Theme buttonWithImage:[Theme navBackButtonDefault]
-                                        target:self.navigationController
-                                      selector:@selector(popViewControllerAnimated:)
-                                         frame:frame];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
-    self.navigationItem.title = self.circle.circleName;
     
-    //只有主人才能设置圈子
-    if ([self.circle.ownerId isEqualToString:[User uid]]) {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[Theme navSettingIcon]
-                                                                                  style:UIBarButtonItemStylePlain
-                                                                                 target:self
-                                                                                 action:@selector(showCircleSettingView)];
-    }else{
-        //避免非圈主时出现关注页入口
-        self.navigationItem.rightBarButtonItem = nil;
+    
+    if (self.circle) { //圈子事件页
+        CGRect frame = CGRectMake(0,0, 25,25);
+        UIButton *backBtn = [Theme buttonWithImage:[Theme navBackButtonDefault]
+                                            target:self.navigationController
+                                          selector:@selector(popViewControllerAnimated:)
+                                             frame:frame];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+        self.navigationItem.title = self.circle.circleName;
+        
+        //只有主人才能设置圈子
+        if ([self.circle.ownerId isEqualToString:[User uid]]) {
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[Theme navSettingIcon]
+                                                                                      style:UIBarButtonItemStylePlain
+                                                                                     target:self
+                                                                                     action:@selector(showCircleSettingView)];
+        }
+        self.navigationItem.title = self.circle.circleName;
+        
+        
+        
+        self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self
+                                                                             refreshingAction:@selector(loadMoreData)];
+        [self loadMoreData];
     }
-    self.navigationItem.title = self.circle.circleName;
-    
-    
-    
-    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self
-                                                                    refreshingAction:@selector(loadMoreData)];
-    [self loadMoreData];
 
 }
 
