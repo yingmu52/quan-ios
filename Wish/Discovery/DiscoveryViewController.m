@@ -11,7 +11,6 @@
 #import "MainTabBarController.h"
 #import "UIImageView+WebCache.h"
 @interface DiscoveryViewController () <CHTCollectionViewDelegateWaterfallLayout>
-//@property (nonatomic,strong) UIColor *navigationSeparatorColor;
 @end
 @implementation DiscoveryViewController
 
@@ -40,9 +39,6 @@ static CGFloat horizontalInset = 10.0f;
 }
 #pragma mark <UICollectionViewDataSource>
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1; //or the number of sections you want
-}
 
 - (DiscoveryCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     DiscoveryCell *cell = (DiscoveryCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NORMALCELLID forIndexPath:indexPath];

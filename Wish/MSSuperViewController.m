@@ -9,7 +9,7 @@
 #import "MSSuperViewController.h"
 
 @interface MSSuperViewController ()
-@property (nonatomic,strong) NSMutableArray *itemChanges;
+@property (nonatomic,strong) NSBlockOperation *blockOperation;
 @end
 
 @implementation MSSuperViewController
@@ -27,13 +27,7 @@
     return _fetchCenter;
 }
 
-#pragma mark - Table View
-
-// MARK: Table View Delegate and Data Source
-
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-//    return self.tableFetchedRC.sections.count;
-//}
+#pragma mark - Delegates and Data Sources
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.tableFetchedRC.fetchedObjects.count;
@@ -80,10 +74,11 @@
     if (controller == self.tableFetchedRC) {
         [self.tableView beginUpdates];
     }else if (controller == self.collectionFetchedRC) {
-        self.itemChanges = [[NSMutableArray alloc] init];
+        self.blockOperation = [[NSBlockOperation alloc] init];
     }
     
 }
+
 
 - (void)controller:(NSFetchedResultsController *)controller
    didChangeObject:(id)anObject
@@ -96,42 +91,58 @@
         switch(type)
         {
             case NSFetchedResultsChangeInsert:
-                [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
+                                      withRowAnimation:UITableViewRowAnimationNone];
                 break;
             case NSFetchedResultsChangeDelete:
-                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                [self.tableView deleteRowsAtIndexPaths:@[indexPath]
+                                      withRowAnimation:UITableViewRowAnimationNone];
                 break;
             case NSFetchedResultsChangeUpdate:
-                [self configureTableViewCell:[self.tableView cellForRowAtIndexPath:indexPath]
-                                 atIndexPath:indexPath];
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath]
+                                      withRowAnimation:UITableViewRowAnimationNone];
                 break;
             case NSFetchedResultsChangeMove:
-                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-                [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                [self.tableView moveRowAtIndexPath:indexPath toIndexPath:indexPath];
                 break;
             default:
                 break;
         }
         
     }else if (controller == self.collectionFetchedRC) {
-        NSMutableDictionary *change = [[NSMutableDictionary alloc] init];
-        switch(type) {
-            case NSFetchedResultsChangeInsert:
-                change[@(type)] = newIndexPath;
+        __weak UICollectionView *collectionView = self.collectionView;
+        switch (type) {
+            case NSFetchedResultsChangeInsert: {
+                [self.blockOperation addExecutionBlock:^{
+                    [collectionView insertItemsAtIndexPaths:@[newIndexPath]];
+                }];
                 break;
-            case NSFetchedResultsChangeDelete:
-                change[@(type)] = indexPath;
+            }
+                
+            case NSFetchedResultsChangeDelete: {
+                [self.blockOperation addExecutionBlock:^{
+                    [collectionView deleteItemsAtIndexPaths:@[indexPath]];
+                }];
                 break;
-            case NSFetchedResultsChangeUpdate:
-                change[@(type)] = indexPath;
+            }
+                
+            case NSFetchedResultsChangeUpdate: {
+                [self.blockOperation addExecutionBlock:^{
+                    [collectionView reloadItemsAtIndexPaths:@[indexPath]];
+                }];
                 break;
-            case NSFetchedResultsChangeMove:
-                change[@(type)] = @[indexPath, newIndexPath];
+            }
+                
+            case NSFetchedResultsChangeMove: {
+                [self.blockOperation addExecutionBlock:^{
+                    [collectionView moveItemAtIndexPath:indexPath toIndexPath:newIndexPath];
+                }];
                 break;
+            }
+                
             default:
                 break;
         }
-        [self.itemChanges addObject:change];
     }
 }
 
@@ -140,34 +151,9 @@
     if (controller == self.tableFetchedRC) {
         [self.tableView endUpdates];
     }else if (controller == self.collectionFetchedRC) {
-        
-        [self.collectionView performBatchUpdates: ^{
-            for (NSDictionary *change in self.itemChanges) {
-                [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-                    NSFetchedResultsChangeType type = [key unsignedIntegerValue];
-                    switch(type) {
-                        case NSFetchedResultsChangeInsert:
-                            [self.collectionView insertItemsAtIndexPaths:@[obj]];
-                            break;
-                        case NSFetchedResultsChangeDelete:
-                            [self.collectionView deleteItemsAtIndexPaths:@[obj]];
-                            break;
-                        case NSFetchedResultsChangeUpdate:
-                            [self.collectionView reloadItemsAtIndexPaths:@[obj]];
-                            break;
-                        case NSFetchedResultsChangeMove:
-                            //don't use move, it doesn't reload properly
-                            [self.collectionView deleteItemsAtIndexPaths:@[obj[0]]];
-                            [self.collectionView insertItemsAtIndexPaths:@[obj[1]]];
-                            break;
-                        default:
-                            break;
-                    }
-                }];
-            }
-        } completion:^(BOOL finished) {
-            self.itemChanges = nil;
-        }];
+        [self.collectionView performBatchUpdates:^{
+            [self.blockOperation start];
+        } completion:nil];
     }
     
     [UIView setAnimationsEnabled:YES];
