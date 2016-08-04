@@ -259,14 +259,12 @@
 
 // Parent context
 - (NSManagedObjectContext *)writerManagedObjectContext{
-    if (_writerManagedObjectContext != nil) {
-        return _writerManagedObjectContext;
-    }
-    
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (coordinator != nil) {
-        _writerManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        [_writerManagedObjectContext setPersistentStoreCoordinator:coordinator];
+    if (!_writerManagedObjectContext) {
+        NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+        if (coordinator != nil) {
+            _writerManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+            [_writerManagedObjectContext setPersistentStoreCoordinator:coordinator];
+        }
     }
     return _writerManagedObjectContext;
 }
@@ -275,26 +273,43 @@
 #pragma mark - Core Data Saving support
 
 - (void)saveContext {
-    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    if (managedObjectContext != nil) {
-        NSError *error = nil;
-        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        }
-    }
     
-    [self.writerManagedObjectContext performBlock:^{
-        // Save the context.
+    if (!self.managedObjectContext) {
         NSError *error = nil;
-        if (self.writerManagedObjectContext.hasChanges && ![self.writerManagedObjectContext save:&error]) {
+        if ([self.managedObjectContext hasChanges] &&
+            ![self.managedObjectContext save:&error]) {
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        }else{
+            [self.writerManagedObjectContext performBlockAndWait:^{
+                // Save the context.
+                NSError *error = nil;
+                if (self.writerManagedObjectContext.hasChanges &&
+                    ![self.writerManagedObjectContext save:&error]) {
+                    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+                }
+            }]; // writer
         }
         
-    }]; // writer
-
+    }
 }
+
+- (void)saveContext:(NSManagedObjectContext *)context{
+    // Save the context.
+    [context performBlockAndWait:^{
+        NSError *error = nil;
+        if (context.hasChanges &&
+            ![context save:&error]) {
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        }else{
+            [self.managedObjectContext performBlockAndWait:^{
+                [self saveContext];
+            }]; // main
+            
+        }
+    }];
+    
+}
+
 
 - (void)resetDataStore{
     //data model 有变化，删除重建以避免闪退。如果有保留用户数据的需求，应该使用data migration
@@ -312,35 +327,6 @@
     }
 }
 
-- (void)saveContext:(NSManagedObjectContext *)context{
-    // Save the context.
-    [context performBlock:^{
-        NSError *error = nil;
-        if (context.hasChanges && ![context save:&error]) {
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        }
-        
-        [self.managedObjectContext performBlock:^{
-            // Save the context.
-            NSError *error = nil;
-            if (self.managedObjectContext.hasChanges && ![self.managedObjectContext save:&error]) {
-                NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            }
-            
-            [self.writerManagedObjectContext performBlock:^{
-                // Save the context.
-                NSError *error = nil;
-                
-                if (self.writerManagedObjectContext.hasChanges && ![self.writerManagedObjectContext save:&error]) {
-                    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-                }
-                
-            }]; // writer
-        }]; // main
-
-    }];
-    
-}
 
 + (NSManagedObjectContext *)getContext
 {

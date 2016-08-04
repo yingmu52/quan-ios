@@ -151,9 +151,10 @@
     if (controller == self.tableFetchedRC) {
         [self.tableView endUpdates];
     }else if (controller == self.collectionFetchedRC) {
-        [self.collectionView performBatchUpdates:^{
-            [self.blockOperation start];
-        } completion:nil];
+        [self.collectionView reloadData];
+//        [self.collectionView performBatchUpdates:^{
+//            [self.blockOperation start];
+//        } completion:nil];
     }
     
     [UIView setAnimationsEnabled:YES];
