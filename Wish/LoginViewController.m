@@ -77,22 +77,24 @@
     //保存accessToken和openId
     NSDictionary *fetchedUserInfo = [response jsonResponse];
     
-    NSDictionary *localUserInfo = @{ACCESS_TOKEN:self.tencentOAuth.accessToken,
-                                    OPENID:self.tencentOAuth.openId,
-                                    EXPIRATION_DATE:self.tencentOAuth.expirationDate,
-                                    PROFILE_PICTURE_ID:fetchedUserInfo[@"figureurl_qq_2"],
-                                    GENDER:fetchedUserInfo[@"gender"],
-                                    USER_DISPLAY_NAME:fetchedUserInfo[@"nickname"]};
-    [User updateAttributeFromDictionary:localUserInfo];
-    NSLog(@"Fetched QQ User Info \n%@",[User getOwnerInfo]);
-    //use openId and access_token to get uid+ukey
-
-    [self.fetchCenter getUidandUkeyWithOpenId:self.tencentOAuth.openId
-                                  accessToken:self.tencentOAuth.accessToken
-                                   completion:^(NSDictionary *userInfo, BOOL isNewUser)
-    {
-        [self processLoginWithUserInfo:userInfo isUser:isNewUser];
-    }];
+    if (fetchedUserInfo) {
+        NSDictionary *localUserInfo = @{ACCESS_TOKEN:self.tencentOAuth.accessToken,
+                                        OPENID:self.tencentOAuth.openId,
+                                        EXPIRATION_DATE:self.tencentOAuth.expirationDate,
+                                        PROFILE_PICTURE_ID:fetchedUserInfo[@"figureurl_qq_2"],
+                                        GENDER:fetchedUserInfo[@"gender"],
+                                        USER_DISPLAY_NAME:fetchedUserInfo[@"nickname"]};
+        [User updateAttributeFromDictionary:localUserInfo];
+        NSLog(@"Fetched QQ User Info \n%@",[User getOwnerInfo]);
+        //use openId and access_token to get uid+ukey
+        
+        [self.fetchCenter getUidandUkeyWithOpenId:self.tencentOAuth.openId
+                                      accessToken:self.tencentOAuth.accessToken
+                                       completion:^(NSDictionary *userInfo, BOOL isNewUser)
+         {
+             [self processLoginWithUserInfo:userInfo isUser:isNewUser];
+         }];
+    }
 }
 
 - (void)processLoginWithUserInfo:(NSDictionary *)userInfo isUser:(BOOL)isNewUser{
