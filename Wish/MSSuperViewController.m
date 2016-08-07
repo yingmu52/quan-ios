@@ -70,10 +70,10 @@
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
-    [UIView setAnimationsEnabled:NO];
     if (controller == self.tableFetchedRC) {
         [self.tableView beginUpdates];
     }else if (controller == self.collectionFetchedRC) {
+        [UIView setAnimationsEnabled:NO];
         self.blockOperation = [[NSBlockOperation alloc] init];
     }
     
@@ -87,24 +87,41 @@
       newIndexPath:(NSIndexPath *)newIndexPath
 {
     if (controller == self.tableFetchedRC) {
-        
         switch(type)
         {
-            case NSFetchedResultsChangeInsert:
+            case NSFetchedResultsChangeInsert:{
+//                NSLog(@"%@ INSERT",self.class);
                 [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
-                                      withRowAnimation:UITableViewRowAnimationNone];
+                                      withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
                 break;
-            case NSFetchedResultsChangeDelete:
+                
+            case NSFetchedResultsChangeDelete:{
+//                NSLog(@"%@ DELETE",self.class);
                 [self.tableView deleteRowsAtIndexPaths:@[indexPath]
-                                      withRowAnimation:UITableViewRowAnimationNone];
+                                      withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
                 break;
-            case NSFetchedResultsChangeUpdate:
-                [self.tableView reloadRowsAtIndexPaths:@[indexPath]
-                                      withRowAnimation:UITableViewRowAnimationNone];
+                
+            case NSFetchedResultsChangeUpdate:{
+//                NSLog(@"%@ UPDATE",self.class);
+//                [self.tableView reloadRowsAtIndexPaths:@[indexPath]
+//                                      withRowAnimation:UITableViewRowAnimationAutomatic];
+                UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+                [self configureTableViewCell:cell atIndexPath:indexPath];
+            }
                 break;
-            case NSFetchedResultsChangeMove:
-                [self.tableView moveRowAtIndexPath:indexPath toIndexPath:indexPath];
+                
+            case NSFetchedResultsChangeMove:{
+//                NSLog(@"%@ MOVE",self.class);
+                [self.tableView deleteRowsAtIndexPaths:@[indexPath]
+                                      withRowAnimation:UITableViewRowAnimationAutomatic];
+                [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
+                                      withRowAnimation:UITableViewRowAnimationAutomatic];
+//                [self.tableView moveRowAtIndexPath:indexPath toIndexPath:newIndexPath];
+            }
                 break;
+                
             default:
                 break;
         }
@@ -113,33 +130,40 @@
         __weak UICollectionView *collectionView = self.collectionView;
         switch (type) {
             case NSFetchedResultsChangeInsert: {
+//                NSLog(@"%@ INSERT",self.class);
                 [self.blockOperation addExecutionBlock:^{
                     [collectionView insertItemsAtIndexPaths:@[newIndexPath]];
                 }];
-                break;
             }
+                break;
+            
                 
             case NSFetchedResultsChangeDelete: {
+//                NSLog(@"%@ DELETE",self.class);
                 [self.blockOperation addExecutionBlock:^{
                     [collectionView deleteItemsAtIndexPaths:@[indexPath]];
                 }];
-                break;
             }
+                break;
                 
             case NSFetchedResultsChangeUpdate: {
-                [self.blockOperation addExecutionBlock:^{
+//                NSLog(@"%@ UPDATE",self.class);
+                [self.blockOperation addExecutionBlock:^{                    
                     [collectionView reloadItemsAtIndexPaths:@[indexPath]];
                 }];
-                break;
             }
+                break;
                 
             case NSFetchedResultsChangeMove: {
+//                NSLog(@"%@ MOVE",self.class);
                 [self.blockOperation addExecutionBlock:^{
-                    [collectionView moveItemAtIndexPath:indexPath toIndexPath:newIndexPath];
+                    [collectionView deleteItemsAtIndexPaths:@[indexPath]];
+                    [collectionView insertItemsAtIndexPaths:@[newIndexPath]];
+//                    [collectionView moveItemAtIndexPath:indexPath toIndexPath:newIndexPath];
                 }];
-                break;
             }
-                
+                break;
+
             default:
                 break;
         }
@@ -151,18 +175,16 @@
     if (controller == self.tableFetchedRC) {
         [self.tableView endUpdates];
     }else if (controller == self.collectionFetchedRC) {
-        [self.collectionView reloadData];
-//        [self.collectionView performBatchUpdates:^{
-//            [self.blockOperation start];
-//        } completion:nil];
+        [self.collectionView performBatchUpdates:^{
+            [self.blockOperation start];
+        } completion:^(BOOL finished) {
+            [UIView setAnimationsEnabled:YES];
+            self.blockOperation = nil;
+        }];
     }
-    
-    [UIView setAnimationsEnabled:YES];
 }
 
-- (void)configureTableViewCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
-    //Abstract!
-}
+- (void)configureTableViewCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{}
 
 @end
 
