@@ -178,8 +178,8 @@
 - (void)logout{    
     //delete user info, this lines must be below [self clearCoreData];
     [User updateOwnerInfo:[NSDictionary dictionary]];
-    NSLog(@"%@",[User getOwnerInfo]);
-    [self performSegueWithIdentifier:@"showLoginViewFromMyPage" sender:nil];
+    
+    [[[UIApplication sharedApplication] keyWindow] setRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"LoginNavigationViewController"]];
 }
 
 - (void)clearCoreData{

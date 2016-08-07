@@ -138,12 +138,12 @@
                     <connections>
                         <outlet property="QQLoginButton" destination="pDI-Je-6Pa" id="cPH-FU-IO8"/>
                         <outlet property="WechatLoginButton" destination="lHh-Zh-DDA" id="oYf-Dk-vec"/>
-                        <segue destination="UWC-h0-VTZ" kind="show" identifier="showLoginDetail" id="OAY-5y-BEp"/>
+                        <segue destination="ssU-9T-OTt" kind="show" identifier="showLoginDetail" id="Sn4-Gg-v9j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l2d-7Y-UWq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-8215.5" y="-2848.5"/>
+            <point key="canvasLocation" x="-7510.5" y="-2868"/>
         </scene>
         <!--Circle Setting View Controller-->
         <scene sceneID="Z6I-0W-69x">
@@ -813,7 +813,7 @@
                                                     <color key="textColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="125" y="20" width="86" height="16"/>
+                                                        <rect key="frame" x="125" y="20" width="86.5" height="16"/>
                                                     </variation>
                                                 </label>
                                             </subviews>
@@ -1380,7 +1380,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P6o-3g-Kou" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5820" y="-2800.5"/>
+            <point key="canvasLocation" x="-6528" y="-2868"/>
         </scene>
         <!--Post View Controller-->
         <scene sceneID="ZVZ-0X-CQC">
@@ -3896,7 +3896,7 @@
                                                             <color key="textColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                             <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="75.5" y="15" width="144.5" height="16"/>
+                                                                <rect key="frame" x="75" y="15" width="144.5" height="16"/>
                                                             </variation>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="中华田园汪，更新了事件" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cbU-QT-3yy">
@@ -3905,7 +3905,7 @@
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                             <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="75.5" y="35" width="144.5" height="12"/>
+                                                                <rect key="frame" x="75" y="35" width="144.5" height="12"/>
                                                             </variation>
                                                         </label>
                                                     </subviews>
@@ -6366,7 +6366,6 @@
                         <segue destination="IHE-Tk-1qk" kind="show" identifier="ShowAcheivementList" id="Hwy-tI-XM3"/>
                         <segue destination="kcp-Id-Hzn" kind="show" identifier="showFeedbackView" id="ZFl-9a-0Dk"/>
                         <segue destination="3DT-IO-Q6x" kind="show" identifier="showProfileView" id="UIp-B3-B82"/>
-                        <segue destination="Pro-KE-lhb" kind="presentation" identifier="showLoginViewFromMyPage" id="mFv-Li-7ge"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bDw-Cl-yWH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -7557,7 +7556,7 @@
         <!--Navigation Controller-->
         <scene sceneID="w9V-Ma-zwL">
             <objects>
-                <navigationController storyboardIdentifier="LoginDetailNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="UWC-h0-VTZ" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="LoginNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="UWC-h0-VTZ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="mEe-4a-G9D" customClass="NavigationBar">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -7565,13 +7564,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="ssU-9T-OTt" kind="relationship" relationship="rootViewController" id="EyV-ZH-MFZ"/>
-                        <segue destination="Pro-KE-lhb" kind="show" identifier="LoginDetailToLoginView" id="If2-2V-uRQ"/>
+                        <segue destination="Pro-KE-lhb" kind="relationship" relationship="rootViewController" id="aQ9-zh-UZq"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xX1-fa-1O1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-6829.5" y="-2818.5"/>
+            <point key="canvasLocation" x="-8455.5" y="-2868"/>
         </scene>
         <!--Plans View Controller-->
         <scene sceneID="HU5-lg-fDI">
@@ -8063,13 +8061,12 @@
         <image name="tab_ic_quanzi_pressed" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dFu-Bk-XhY"/>
-        <segue reference="o9o-CD-wNK"/>
         <segue reference="JVq-VY-XxP"/>
         <segue reference="HDW-gM-fhf"/>
-        <segue reference="mFv-Li-7ge"/>
-        <segue reference="4wk-xv-ETJ"/>
+        <segue reference="o9o-CD-wNK"/>
+        <segue reference="dFu-Bk-XhY"/>
         <segue reference="6ze-LH-v54"/>
+        <segue reference="4wk-xv-ETJ"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
 </document>

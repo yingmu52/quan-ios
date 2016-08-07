@@ -41,9 +41,9 @@
 - (void)tencentDidLogin
 {
     //获取用户信息
-    if (self.tencentOAuth.accessToken.length > 0){
-        [self.tencentOAuth getUserInfo];
-    }
+//    if (self.tencentOAuth.accessToken.length > 0){
+//        [self.tencentOAuth getUserInfo];
+//    }
     
     //保持授权数据
     NSDictionary *localUserInfo = @{ACCESS_TOKEN:self.tencentOAuth.accessToken,
@@ -85,20 +85,20 @@
  4. 建议应用在用户登录后，即调用getUserInfo接口获得该用户的头像、昵称并显示在界面上，使用户体验统一。
  */
 
-- (void)getUserInfoResponse:(APIResponse *)response{
-    //保存accessToken和openId
-    @try {
-        NSDictionary *fetchedUserInfo = [response jsonResponse];
-        if (fetchedUserInfo) { //处理QQ Api用户信息返回失败引起闪退
-            NSDictionary *fetchedUserInfo = @{PROFILE_PICTURE_ID:fetchedUserInfo[@"figureurl_qq_2"],
-                                              GENDER:fetchedUserInfo[@"gender"],
-                                              USER_DISPLAY_NAME:fetchedUserInfo[@"nickname"]};
-            [User updateAttributeFromDictionary:fetchedUserInfo];
-        }
-    } @catch (NSException *exception) {
-        NSLog(@"%@",exception);
-    }
-}
+//- (void)getUserInfoResponse:(APIResponse *)response{
+//    //保存accessToken和openId
+//    @try {
+//        NSDictionary *fetchedUserInfo = [response jsonResponse];
+//        if (fetchedUserInfo) { //处理QQ Api用户信息返回失败引起闪退
+//            NSDictionary *fetchedUserInfo = @{PROFILE_PICTURE_ID:fetchedUserInfo[@"figureurl_qq_2"],
+//                                              GENDER:fetchedUserInfo[@"gender"],
+//                                              USER_DISPLAY_NAME:fetchedUserInfo[@"nickname"]};
+//            [User updateAttributeFromDictionary:fetchedUserInfo];
+//        }
+//    } @catch (NSException *exception) {
+//        NSLog(@"%@",exception);
+//    }
+//}
 
 - (void)processLoginWithUserInfo:(NSDictionary *)userInfo isUser:(BOOL)isNewUser{
     if (!isNewUser) {
@@ -117,9 +117,12 @@
             [self performSegueWithIdentifier:@"showLoginDetail" sender:nil];
         }
         if ([[User loginType] isEqualToString:@"wx"]) {
-            [self.fetchCenter getWechatUserInfoWithOpenID:[User openID] token:[User accessToken] completion:^{
+            [self.fetchCenter getWechatUserInfoWithOpenID:[User openID]
+                                                    token:[User accessToken]
+                                               completion:^
+            {
+                [self performSegueWithIdentifier:@"showLoginDetail" sender:nil];
                 //微信的登陆方式很奇怪，performsegue无法解法，故以此解法。
-                [[[UIApplication sharedApplication] keyWindow] setRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"LoginDetailNavigationViewController"]];
             }];
         }
         

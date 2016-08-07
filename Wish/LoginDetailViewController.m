@@ -51,8 +51,7 @@
 }
 
 - (void)goBackToLogin{
-    [self.navigationController performSegueWithIdentifier:@"LoginDetailToLoginView" sender:nil];
-    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidLoad
