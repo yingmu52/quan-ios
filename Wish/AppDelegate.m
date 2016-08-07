@@ -66,9 +66,13 @@
     NSString *strToken = [deviceToken.description stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     strToken = [strToken stringByReplacingOccurrencesOfString:@" " withString:@""];
 
-    //向后台发送Device Token
-    [self.fetchCenter sendDeviceToken:strToken completion:nil];
+    //Save Device Token
+    [User updateAttributeFromDictionary:@{DEVICE_TOKEN:strToken}];
     
+    //向后台发送Device Token
+    if ([User isUserLogin]) {
+        [self.fetchCenter sendDeviceToken:strToken completion:nil];
+    } // else go to login 
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo{

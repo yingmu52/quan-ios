@@ -25,7 +25,7 @@
 #define CURRENT_CIRCLE_ID @"current_circle_identifier"
 #define LOGIN_TYPE @"user_login_type"
 #define IS_SUPERUSER @"is_user_aSuperUser"
-
+#define DEVICE_TOKEN @"current_device_token"
 @interface User : NSObject
 
 + (void)updateAttributeFromDictionary:(NSDictionary *)info;
@@ -47,6 +47,6 @@
 + (NSString *)loginType;
 + (void)storeSignature:(NSString *)sign;
 + (NSString *)currentCircleId;
-
++ (NSString *)deviceToken;
 + (BOOL)isSuperUser;
 @end

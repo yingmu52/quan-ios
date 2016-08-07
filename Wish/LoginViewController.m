@@ -35,18 +35,30 @@
     return _fetchCenter;
 }
 
-
 #pragma mark - QQ Login
 
 //login successed
 - (void)tencentDidLogin
 {
-    NSLog(@"login successed");
-    if (self.tencentOAuth.accessToken && [self.tencentOAuth.accessToken length]){
+    //获取用户信息
+    if (self.tencentOAuth.accessToken.length > 0){
         [self.tencentOAuth getUserInfo];
-    }else{
-        NSLog(@"login fail, no accesstoken");
     }
+    
+    //保持授权数据
+    NSDictionary *localUserInfo = @{ACCESS_TOKEN:self.tencentOAuth.accessToken,
+                                    OPENID:self.tencentOAuth.openId,
+                                    EXPIRATION_DATE:self.tencentOAuth.expirationDate};
+    [User updateAttributeFromDictionary:localUserInfo];
+
+    //use openId and access_token to get uid+ukey
+    [self.fetchCenter getUidandUkeyWithOpenId:self.tencentOAuth.openId
+                                  accessToken:self.tencentOAuth.accessToken
+                                   completion:^(NSDictionary *userInfo, BOOL isNewUser)
+     {
+         [self processLoginWithUserInfo:userInfo isUser:isNewUser];
+     }];
+    
 }
 //login fail
 -(void)tencentDidNotLogin:(BOOL)cancelled
@@ -75,25 +87,16 @@
 
 - (void)getUserInfoResponse:(APIResponse *)response{
     //保存accessToken和openId
-    NSDictionary *fetchedUserInfo = [response jsonResponse];
-    
-    if (fetchedUserInfo) {
-        NSDictionary *localUserInfo = @{ACCESS_TOKEN:self.tencentOAuth.accessToken,
-                                        OPENID:self.tencentOAuth.openId,
-                                        EXPIRATION_DATE:self.tencentOAuth.expirationDate,
-                                        PROFILE_PICTURE_ID:fetchedUserInfo[@"figureurl_qq_2"],
-                                        GENDER:fetchedUserInfo[@"gender"],
-                                        USER_DISPLAY_NAME:fetchedUserInfo[@"nickname"]};
-        [User updateAttributeFromDictionary:localUserInfo];
-        NSLog(@"Fetched QQ User Info \n%@",[User getOwnerInfo]);
-        //use openId and access_token to get uid+ukey
-        
-        [self.fetchCenter getUidandUkeyWithOpenId:self.tencentOAuth.openId
-                                      accessToken:self.tencentOAuth.accessToken
-                                       completion:^(NSDictionary *userInfo, BOOL isNewUser)
-         {
-             [self processLoginWithUserInfo:userInfo isUser:isNewUser];
-         }];
+    @try {
+        NSDictionary *fetchedUserInfo = [response jsonResponse];
+        if (fetchedUserInfo) { //处理QQ Api用户信息返回失败引起闪退
+            NSDictionary *fetchedUserInfo = @{PROFILE_PICTURE_ID:fetchedUserInfo[@"figureurl_qq_2"],
+                                              GENDER:fetchedUserInfo[@"gender"],
+                                              USER_DISPLAY_NAME:fetchedUserInfo[@"nickname"]};
+            [User updateAttributeFromDictionary:fetchedUserInfo];
+        }
+    } @catch (NSException *exception) {
+        NSLog(@"%@",exception);
     }
 }
 
@@ -121,6 +124,12 @@
         }
         
     }
+    
+    //Send Device Token
+    if ([User deviceToken].length > 0) {
+        [self.fetchCenter sendDeviceToken:[User deviceToken] completion:nil];
+    }
+    
 }
 
 - (TencentOAuth *)tencentOAuth{
@@ -132,6 +141,7 @@
 }
 
 - (IBAction)qqlogin{
+
     NSArray *permissions = @[kOPEN_PERMISSION_GET_USER_INFO,
                              kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
                              kOPEN_PERMISSION_GET_INFO,
@@ -143,6 +153,7 @@
 #pragma mark - wechat 
 
 - (IBAction)wechatLogin{
+
     SendAuthReq *req = [[SendAuthReq alloc] init];
     req.scope = @"snsapi_userinfo,snsapi_base"; // @"post_timeline,sns"
     req.openID = WECHATAppID;

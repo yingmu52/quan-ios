@@ -97,6 +97,11 @@
     return info[OCCUPATION] ? info[OCCUPATION] : @"";
 }
 
++ (NSString *)deviceToken{
+    NSDictionary *info = [self.class getOwnerInfo];
+    return info[DEVICE_TOKEN] ? info[DEVICE_TOKEN] : @"";
+}
+
 + (NSString *)personalDetailInfo{
     NSDictionary *info = [self.class getOwnerInfo];
     return info[PERSONALDETAIL] ? info[PERSONALDETAIL] : @"";
@@ -122,6 +127,7 @@
     NSDictionary *info = [self.class getOwnerInfo];
     return [info[IS_SUPERUSER] boolValue];
 }
+
 
 
 #pragma mark - simulator implementation (need to uncomment )
