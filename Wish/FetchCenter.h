@@ -76,8 +76,7 @@ typedef void(^FetchCenterGetRequestGetMessageNotificationCompleted)(NSNumber *me
 typedef void(^FetchCenterGetRequestClearMessageListCompleted)(void);
 /** 设置用户信息完成*/
 typedef void(^FetchCenterGetRequestSetPersonalInfoCompleted)(void);
-/** 评论或回复完成*/
-typedef void(^FetchCenterGetRequestCommentCompleted)(Comment *comment);
+
 /** 删除评论完成*/
 typedef void(^FetchCenterGetRequestDeleteCommentCompleted)(void);
 /** 上传图片完成*/
@@ -196,15 +195,17 @@ typedef void(^FetchCenterGetRequestUploadFeedCompleted)(NSString *feedId);
    fetchedImageIds:(NSArray *)imageIds
         completion:(FetchCenterGetRequestUploadFeedCompleted)completionBlock;
 
-#pragma mark - 评论回复
-- (void)commentOnFeed:(Feed *)feed
-              content:(NSString *)text
-           completion:(FetchCenterGetRequestCommentCompleted)completionBlock;
 
-- (void)replyAtFeed:(Feed *)feed
-            content:(NSString *)text
-            toOwner:(Owner *)owner
-         completion:(FetchCenterGetRequestCommentCompleted)completionBlock;
+
+#pragma mark - 评论回复
+/** 评论或回复完成*/
+typedef void(^FetchCenterGetRequestCommentCompleted)(void);
+
+- (void)replyToFeedID:(NSString *)feedID
+              content:(NSString *)text
+            toOwnerID:(NSString *)ownerID
+            ownerName:(NSString *)ownerName
+           completion:(FetchCenterGetRequestCommentCompleted)completionBlock;
 
 /** 摘取评论列表完成*/
 typedef void(^FetchCenterGetRequestGetCommentListCompleted)(NSNumber *currentPage,

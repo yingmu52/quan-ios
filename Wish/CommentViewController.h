@@ -10,6 +10,6 @@
 #import "Comment.h"
 #import "FeedDetailViewController.h"
 @interface CommentViewController : MSSuperViewController
-@property (nonatomic,weak) Comment *comment;
-@property (nonatomic,weak) FeedDetailViewController *feedDetailViewController;
+@property (nonatomic,strong) Comment *comment;
+@property (nonatomic,strong) Feed *feed;
 @end

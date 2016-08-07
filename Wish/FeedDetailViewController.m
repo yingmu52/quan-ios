@@ -377,7 +377,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
         if (sender) {
             cvc.comment = sender;
         }
-        cvc.feedDetailViewController = self;
+        cvc.feed = self.feed;
     }
 }
 #pragma mark - comment

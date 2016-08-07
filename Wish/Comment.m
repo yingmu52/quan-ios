@@ -16,7 +16,7 @@
 
 + (Comment *)updateCommentWithInfo:(NSDictionary *)dict
                          ownerInfo:(NSDictionary *)ownerInfo
-                            inFeed:(nonnull Feed *)feed 
+                            inFeed:(nonnull Feed *)feed
               managedObjectContext:(nonnull NSManagedObjectContext *)context{
     
     Comment *comment;
@@ -43,41 +43,54 @@
         comment = results.lastObject;
     }
     
-  
+    
     if (comment.idForReply) {
         NSString *nameForReply = [ownerInfo[comment.idForReply] objectForKey:@"name"];
         if (![comment.nameForReply isEqualToString:nameForReply]) {
             comment.nameForReply = nameForReply;
         }
     }
-
+    
     
     return comment;
 }
 
-+ (Comment *)createComment:(NSString *)content commentId:(NSString *)commendId forFeed:(Feed *)feed{
+
+
++ (Comment *)createComment:(NSString *)content
+                 commentId:(NSString *)commendId
+                 forFeedID:(NSString *)feedID
+    inManagedObjectContext:(NSManagedObjectContext *)context{
     
-    NSManagedObjectContext *context = [AppDelegate getContext];
     Comment *comment = [NSEntityDescription insertNewObjectForEntityForName:@"Comment"
                                                      inManagedObjectContext:context];
     comment.commentId = commendId;
     comment.content = content;
     comment.createTime = [NSDate date];
-    comment.feed = feed;
     comment.owner = [Owner updateOwnerWithInfo:[Owner myWebInfo] managedObjectContext:context];
-    return comment;
+    Feed *feed = [Plan fetchWith:@"Feed"
+                       predicate:[NSPredicate predicateWithFormat:@"feedId == %@",feedID]
+                keyForDescriptor:@"feedId"
+            managedObjectContext:context].lastObject;
+    feed.commentCount = @(feed.commentCount.integerValue + 1);
+    comment.feed = feed;
     
-}
-
-
-+ (Comment *)replyToOwner:(Owner *)owner content:(NSString *)text commentId:(NSString *)commentId forFeed:(Feed *)feed{
-    if (!owner.ownerId) {
-        NSLog(@"invalid owner %@",owner);
-    }
-    Comment *comment = [self.class createComment:text commentId:commentId forFeed:feed];
-    comment.idForReply = owner.ownerId;
-    comment.nameForReply = owner.ownerName;
     return comment;
 }
 
+
++ (Comment *)replyToOwner:(NSString *)ownerID
+                ownerName:(NSString *)ownerName
+                  content:(NSString *)content
+                commentId:(NSString *)commentId
+                forFeedID:(NSString *)feedID
+   inManagedObjectContext:(NSManagedObjectContext *)context{
+    Comment *comment = [Comment createComment:content
+                                    commentId:commentId
+                                    forFeedID:feedID
+                       inManagedObjectContext:context];
+    comment.idForReply = ownerID;
+    comment.nameForReply = ownerName;
+    return comment;
+}
 @end

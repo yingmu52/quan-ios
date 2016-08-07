@@ -19,8 +19,20 @@ NS_ASSUME_NONNULL_BEGIN
                          ownerInfo:(NSDictionary *)ownerInfo
                             inFeed:(Feed *)feed
               managedObjectContext:(NSManagedObjectContext *)context;
-+ (Comment *)createComment:(NSString *)content commentId:(NSString *)commendId forFeed:(Feed *)feed;
-+ (Comment *)replyToOwner:(Owner *)owner content:(NSString *)text commentId:(NSString *)commentId forFeed:(Feed *)feed;
+
+
+
++ (Comment *)createComment:(NSString *)content
+                 commentId:(NSString *)commendId
+                 forFeedID:(NSString *)feedID
+    inManagedObjectContext:(NSManagedObjectContext *)context;
+
++ (Comment *)replyToOwner:(NSString *)ownerID
+                ownerName:(NSString *)ownerName
+                  content:(NSString *)content
+                commentId:(NSString *)commentId
+                forFeedID:(NSString *)feedID
+   inManagedObjectContext:(NSManagedObjectContext *)context;
 
 @end
 

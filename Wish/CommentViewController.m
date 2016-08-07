@@ -128,14 +128,17 @@
 
 #pragma mark - 与后台调联
 - (IBAction)sendComment:(id)sender{
-    if (self.comment) { //有回复的对象
-        [self.fetchCenter replyAtFeed:self.comment.feed
-                              content:self.textView.text
-                              toOwner:self.comment.owner
-                           completion:nil];
-    }else{
-        [self.fetchCenter commentOnFeed:self.feedDetailViewController.feed
+    if (self.comment) { //回复
+        [self.fetchCenter replyToFeedID:self.feed.feedId
                                 content:self.textView.text
+                              toOwnerID:self.comment.owner.ownerId
+                              ownerName:self.comment.owner.ownerName
+                             completion:nil];
+    }else{ //评论
+        [self.fetchCenter replyToFeedID:self.feed.feedId
+                                content:self.textView.text
+                              toOwnerID:nil
+                              ownerName:nil
                              completion:nil];
     }
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:CURRENT_TEXT];
