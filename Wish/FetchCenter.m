@@ -339,6 +339,14 @@
     includeArguments:YES
           completion:^(NSDictionary *responseJson)
     {
+        NSManagedObjectContext *workerContext = [self workerContext];
+        Circle *circle = [Plan fetchWith:@"Circle"
+                               predicate:[NSPredicate predicateWithFormat:@"circleId == %@",circleId]
+                        keyForDescriptor:@"circleId"
+                    managedObjectContext:workerContext].lastObject;
+        [workerContext deleteObject:circle];
+        [self.appDelegate saveContext:workerContext];
+        
         if (completionBlock) {
             dispatch_main_async_safe(^{
                 completionBlock();

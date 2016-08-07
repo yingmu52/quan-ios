@@ -55,21 +55,35 @@
 }
 
 - (void)deleteCircle:(UIButton *)sender{
-    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [spinner startAnimating];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
-    [self.fetchCenter deleteCircle:self.circle.circleId
-                        completion:^
-     {
-         [spinner stopAnimating];
-         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:sender];
-//         [self.delegate didFinishDeletingCircle];
-         [self.circle.managedObjectContext deleteObject:self.circle];
-         AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-         [delegate saveContext];
-         
-         [self.navigationController popToRootViewControllerAnimated:YES];
-     }];
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确认删除圈子?"
+                                                                   message:self.circle.circleName
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定"
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action)
+    {
+        UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        [spinner startAnimating];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+        [self.fetchCenter deleteCircle:self.circle.circleId
+                            completion:^
+         {
+             [spinner stopAnimating];
+             self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:sender];
+             [self.navigationController popToRootViewControllerAnimated:YES];
+         }];
+    }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消"
+                                                     style:UIAlertActionStyleCancel
+                                                   handler:nil];
+    
+    [alert addAction:confirm];
+    [alert addAction:cancel];
+    [self presentViewController:alert animated:YES completion:nil];
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
