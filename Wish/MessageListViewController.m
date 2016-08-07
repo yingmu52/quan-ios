@@ -93,12 +93,7 @@
 - (void)clearAllMessages{
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"确定要清空所有消息吗？" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self.fetchCenter clearAllMessages:^{
-            for (Message *message in self.tableFetchedRC.fetchedObjects) {
-                [message.managedObjectContext deleteObject:message];
-            }
-            [((AppDelegate *)[[UIApplication sharedApplication] delegate]) saveContext];
-        }];
+        [self.fetchCenter clearAllMessages:nil];
     }];
     [actionSheet addAction:confirm];
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];

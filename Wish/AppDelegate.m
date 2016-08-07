@@ -120,7 +120,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
-    [self saveContext];
+//    [self saveContext];
 }
 
 #pragma mark - Tencent & Wechat
@@ -283,39 +283,30 @@
 
 #pragma mark - Core Data Saving support
 
-- (void)saveContext {
-    
-    if (!self.managedObjectContext) {
-        NSError *error = nil;
-        if ([self.managedObjectContext hasChanges] &&
-            ![self.managedObjectContext save:&error]) {
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        }else{
-            [self.writerManagedObjectContext performBlockAndWait:^{
-                // Save the context.
-                NSError *error = nil;
-                if (self.writerManagedObjectContext.hasChanges &&
-                    ![self.writerManagedObjectContext save:&error]) {
-                    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-                }
-            }]; // writer
-        }
-        
-    }
-}
-
 - (void)saveContext:(NSManagedObjectContext *)context{
     // Save the context.
-    [context performBlockAndWait:^{
+    [context performBlock:^{
         NSError *error = nil;
         if (context.hasChanges &&
             ![context save:&error]) {
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         }else{
-            [self.managedObjectContext performBlockAndWait:^{
-                [self saveContext];
+            [self.managedObjectContext performBlock:^{
+                NSError *error = nil;
+                if ([self.managedObjectContext hasChanges] &&
+                    ![self.managedObjectContext save:&error]) {
+                    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+                }else{
+                    [self.writerManagedObjectContext performBlock:^{
+                        // Save the context.
+                        NSError *error = nil;
+                        if (self.writerManagedObjectContext.hasChanges &&
+                            ![self.writerManagedObjectContext save:&error]) {
+                            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+                        }
+                    }]; // writer
+                }
             }]; // main
-            
         }
     }];
     

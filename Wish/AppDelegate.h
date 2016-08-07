@@ -34,7 +34,6 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-- (void)saveContext;
 /** 保存异线的MOC */
 - (void)saveContext:(NSManagedObjectContext *)context;
 - (NSURL *)applicationDocumentsDirectory;

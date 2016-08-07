@@ -492,7 +492,23 @@
 
 - (void)clearAllMessages:(FetchCenterGetRequestClearMessageListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,MESSAGE,CLEAR_ALL_MESSAGES];
-    [self getRequest:rqtStr parameter:nil includeArguments:YES completion:^(NSDictionary *responseJson) {
+    [self getRequest:rqtStr 
+           parameter:nil
+    includeArguments:YES
+          completion:^(NSDictionary *responseJson)
+    {
+        NSManagedObjectContext *workerContext = [self workerContext];
+        NSArray *messages = [Plan fetchWith:@"Message"
+                                  predicate:nil
+                           keyForDescriptor:@"messageId"
+                       managedObjectContext:workerContext];
+        
+        for (Message *m in messages) {
+            [workerContext deleteObject:m];
+        }
+        [self.appDelegate saveContext:workerContext];
+        
+        
         if (completionBlock) {
             dispatch_main_async_safe(^{
                 completionBlock();

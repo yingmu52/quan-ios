@@ -129,18 +129,6 @@
 - (void)goBack{
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     [self.navigationController popViewControllerAnimated:YES];
-    
-    self.tableFetchedRC.delegate = nil;
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    NSUInteger numberOfPreservingFeeds = 20;
-    NSArray *allFeeds = self.tableFetchedRC.fetchedObjects;
-    if (allFeeds.count > numberOfPreservingFeeds) {
-        for (NSUInteger i = numberOfPreservingFeeds; i < allFeeds.count; i++) {
-            Feed *feed = allFeeds[i];
-            [delegate.managedObjectContext deleteObject:feed];
-        }
-    }
-    [delegate saveContext];
 }
 
 
