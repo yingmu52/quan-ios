@@ -82,7 +82,7 @@
 //        //切换到主页
 //        UITabBarController *tbc = [self.loginVC.storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
 //        [[[UIApplication sharedApplication] keyWindow] setRootViewController:tbc];
-//        
+//
 //        [tbc setSelectedIndex:3]; //选择消息页
 //        NSString *feedId = [userInfo valueForKeyPath:@"info.info_id"];
 //        UINavigationController *nv = tbc.selectedViewController;
@@ -181,6 +181,13 @@
                             inviteCode:args[@"invitecode"]
                             completion:^(NSString *circleName)
         {
+            //切换到圈子页
+            UITabBarController *tbc = [self.loginVC.storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
+            [[[UIApplication sharedApplication] keyWindow] setRootViewController:tbc];
+            [tbc setSelectedIndex:1];
+
+            
+            //提示加入成功
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow]
                                                       animated:YES];
             hud.mode = MBProgressHUDModeText;
