@@ -20,37 +20,35 @@
               managedObjectContext:(nonnull NSManagedObjectContext *)context{
     
     Comment *comment;
+    
     NSArray *results = [Plan fetchWith:@"Comment"
                              predicate:[NSPredicate predicateWithFormat:@"commentId == %@",dict[@"id"]]
                       keyForDescriptor:@"commentId"
                   managedObjectContext:context]; //utility method from Plan+PlanCRUD.h
-    
+//    NSLog(@"%@",dict);
     if (!results.count) {
         comment = [NSEntityDescription insertNewObjectForEntityForName:@"Comment" inManagedObjectContext:context];
         comment.commentId = dict[@"id"];
         comment.content = dict[@"content"];
         comment.createTime = [NSDate dateWithTimeIntervalSince1970:[dict[@"createTime"] integerValue]];
-        NSString *commentTo = dict[@"commentTo"]; //this is what differential reply and comment
         
-        if (![commentTo isKindOfClass:[NSNull class]] && ![commentTo isEqualToString:@""]) { //for cases where commentTo = "<null>";
-            comment.idForReply = commentTo;
-        }
         
-        comment.owner = [Owner updateOwnerWithInfo:ownerInfo managedObjectContext:context];
+        NSString *ownerId = dict[@"ownerId"];
+        comment.owner = [Owner updateOwnerWithInfo:ownerInfo[ownerId]
+                              managedObjectContext:context];
         comment.feed = feed;
         
     }else{
         comment = results.lastObject;
     }
     
-    
-    if (comment.idForReply) {
-        NSString *nameForReply = [ownerInfo[comment.idForReply] objectForKey:@"name"];
-        if (![comment.nameForReply isEqualToString:nameForReply]) {
-            comment.nameForReply = nameForReply;
-        }
+    NSString *commentTo = dict[@"commentTo"]; //this is what differential reply and comment
+    if (commentTo.length > 0 && ![comment.idForReply isEqualToString:commentTo]) {
+        comment.idForReply = commentTo;
+        NSString *nameForReply = [ownerInfo[commentTo] objectForKey:@"name"];
+        comment.nameForReply = nameForReply;
+//        NSLog(@"comment to %@, %@",commentTo,nameForReply);
     }
-    
     
     return comment;
 }

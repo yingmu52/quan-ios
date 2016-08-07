@@ -610,9 +610,8 @@
             
             for (NSDictionary *commentInfo in comments){
                 //读取用户信息取评论信息
-                NSDictionary *userInfo = ownerInfo[commentInfo[@"ownerId"]];
                 [Comment updateCommentWithInfo:commentInfo
-                                     ownerInfo:userInfo
+                                     ownerInfo:ownerInfo
                                         inFeed:feed
                           managedObjectContext:workerContext];
             }
