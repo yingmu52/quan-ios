@@ -68,8 +68,7 @@
 }
 
 + (Feed *)updateFeedWithInfo:(NSDictionary *)feedItem
-                     forPlan:(nullable NSDictionary *)planInfo
-                   ownerInfo:(nullable NSDictionary *)ownerInfo
+                     forPlan:(nullable Plan *)plan
         managedObjectContext:(nonnull NSManagedObjectContext *)context{
     
     NSArray *checks = [Plan fetchWith:@"Feed"
@@ -87,8 +86,8 @@
         feed.selfLiked = @(NO);
         feed.feedTitle = feedItem[@"content"];
         feed.createDate = [NSDate dateWithTimeIntervalSince1970:[feedItem[@"createTime"] integerValue]];
-        if (planInfo && ownerInfo) {
-            feed.plan = [Plan updatePlanFromServer:planInfo ownerInfo:ownerInfo managedObjectContext:context];
+        if (plan) {
+            feed.plan = plan;
         }
         
     }else{

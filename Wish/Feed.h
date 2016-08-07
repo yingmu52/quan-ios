@@ -34,8 +34,7 @@ typedef void(^FeedCreationCompletion)(Feed *feed);
 //                  imageIds:(NSArray *)imageIds;
 //
 + (Feed *)updateFeedWithInfo:(NSDictionary *)feedItem
-                     forPlan:(nullable NSDictionary *)planInfo
-                   ownerInfo:(nullable NSDictionary *)ownerInfo
+                     forPlan:(nullable Plan *)plan
         managedObjectContext:(nonnull NSManagedObjectContext *)context;
 
     

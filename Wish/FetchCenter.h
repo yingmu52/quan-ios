@@ -37,7 +37,6 @@ typedef enum {
 
 @protocol FetchCenterDelegate <NSObject>
 @optional
-- (void)didFinishUploadingImage:(NSArray *)imageIds forFeed:(Feed *)feed;
 - (void)didReceivedCurrentProgressForUploadingImage:(CGFloat)percentage;
 - (void)didFailUploadingImage:(UIImage *)image;
 
@@ -171,7 +170,7 @@ typedef void(^FetchCenterGetRequestGetMessageListCompleted)(NSNumber *currentPag
 
 #pragma mark - 事件动态，（Feed）
 
-typedef void(^FetchCenterGetRequestGetFeedsListCompleted)(NSNumber *currentPage, NSNumber *totalPage, BOOL isFollow);
+typedef void(^FetchCenterGetRequestGetFeedsListCompleted)(NSNumber *currentPage, NSNumber *totalPage);
 - (void)getFeedsListForPlan:(NSString *)planId
                   localList:(NSArray *)localList
                      onPage:(NSNumber *)localPage

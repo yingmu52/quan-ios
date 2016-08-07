@@ -95,7 +95,7 @@
          forCellReuseIdentifier:@"WishDetailCell"];
     self.tableView.separatorColor = [UIColor clearColor]; //remove separation line
     //hide follow button first and display later when the correct value is fetched from the server
-    self.headerView.followButton.hidden = YES;
+    self.headerView.followButton.hidden = [self.plan.owner.ownerId isEqualToString:[User uid]];
     
     //上拉刷新
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self
@@ -110,18 +110,13 @@
     [self.fetchCenter getFeedsListForPlan:self.plan.planId
                                 localList:localList
                                    onPage:self.currentPage
-                               completion:^(NSNumber *currentPage, NSNumber *totalPage, BOOL isFollow)
+                               completion:^(NSNumber *currentPage, NSNumber *totalPage)
     {
         if ([currentPage isEqualToNumber:totalPage]) {
             [self.tableView.mj_footer endRefreshingWithNoMoreData];
         }else{
             self.currentPage = @(currentPage.integerValue + 1);
             [self.tableView.mj_footer endRefreshing];
-        }
-        
-        if (self.plan.isFollowed.boolValue != isFollow) {
-            self.plan.isFollowed = @(isFollow);
-            [self.plan.managedObjectContext save:nil];
         }
     }];
 }

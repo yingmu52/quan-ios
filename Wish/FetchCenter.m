@@ -616,7 +616,6 @@
         
         Feed *feed = [Feed updateFeedWithInfo:feedInfo
                                       forPlan:nil
-                                    ownerInfo:nil
                          managedObjectContext:workerContext];
 
         BOOL hasComments = comments.count > 0;
@@ -780,16 +779,21 @@
         
         NSDictionary *planInfo = [responseJson valueForKeyPath:@"data.plan"];
         NSDictionary *ownerInfo = [responseJson valueForKeyPath:@"data.man"];
+        Plan *plan = [Plan updatePlanFromServer:planInfo
+                                      ownerInfo:ownerInfo
+                           managedObjectContext:workerContext];
+        plan.isFollowed = isFollowed;
         
         NSArray *feeds = [responseJson valueForKeyPath:@"data.feedsList"];
         
         NSNumber *currentPage = [responseJson valueForKeyPath:@"data.page"];
         NSNumber *totalPage = [responseJson valueForKeyPath:@"data.totalpage"];
 
+        
+        
         for (NSDictionary *feedInfo in feeds){
             [Feed updateFeedWithInfo:feedInfo
-                             forPlan:planInfo
-                           ownerInfo:ownerInfo
+                             forPlan:plan
                 managedObjectContext:workerContext];
         }
         
@@ -803,7 +807,7 @@
         
         if (completionBlock) {
             dispatch_main_async_safe(^{
-                completionBlock(currentPage,totalPage,isFollowed);
+                completionBlock(currentPage,totalPage);
             });
         }
 
@@ -945,9 +949,21 @@
 
 - (void)followPlan:(Plan *)plan completion:(FetchCenterGetRequestFollowPlanCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FOLLOW,FOLLOW_PLAN];
-    [self getRequest:rqtStr parameter:@{@"planId":plan.planId} includeArguments:YES completion:^(NSDictionary *responseJson) {
-        plan.followCount = @(plan.followCount.integerValue + 1);
-        plan.isFollowed = @(YES);
+    [self getRequest:rqtStr
+           parameter:@{@"planId":plan.planId}
+    includeArguments:YES
+          completion:^(NSDictionary *responseJson)
+    {
+        NSManagedObjectContext *workerContext = [self workerContext];
+        Plan *p = [Plan fetchWith:@"Plan"
+                        predicate:[NSPredicate predicateWithFormat:@"planId == %@",plan.planId]
+                 keyForDescriptor:@"planId"
+             managedObjectContext:workerContext].lastObject;
+        
+        p.followCount = @(p.followCount.integerValue + 1);
+        p.isFollowed = @(YES);
+        [self.appDelegate saveContext:workerContext];
+        
         NSLog(@"followed plan ID %@",plan.planId);
         if (completionBlock) {
             dispatch_main_async_safe(^{
@@ -959,9 +975,22 @@
 
 - (void)unFollowPlan:(Plan *)plan completion:(FetchCenterGetRequestUnFollowPlanCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FOLLOW,UNFOLLOW_PLAN];
-    [self getRequest:rqtStr parameter:@{@"planId":plan.planId} includeArguments:YES completion:^(NSDictionary *responseJson) {
-        plan.followCount = @(plan.followCount.integerValue - 1);
-        plan.isFollowed = @(NO);
+    [self getRequest:rqtStr
+           parameter:@{@"planId":plan.planId}
+    includeArguments:YES
+          completion:^(NSDictionary *responseJson)
+    {
+        NSManagedObjectContext *workerContext = [self workerContext];
+        Plan *p = [Plan fetchWith:@"Plan"
+                        predicate:[NSPredicate predicateWithFormat:@"planId == %@",plan.planId]
+                 keyForDescriptor:@"planId"
+             managedObjectContext:workerContext].lastObject;
+
+        p.followCount = @(p.followCount.integerValue - 1);
+        p.isFollowed = @(NO);
+        
+        [self.appDelegate saveContext:workerContext];
+        
         NSLog(@"unfollowed plan ID %@",plan.planId);
         if (completionBlock) {
             dispatch_main_async_safe(^{
@@ -983,21 +1012,15 @@
             Plan *plan = [Plan updatePlanFromServer:planInfo
                                           ownerInfo:userInfo
                                managedObjectContext:workerContext];
-            
-            if (![plan.isFollowed isEqualToNumber:@(YES)]){
-                plan.isFollowed = @(YES);
-            }
+            plan.isFollowed = @(YES);
             
             NSArray *feedsList = planInfo[@"feedsList"];
             if (feedsList.count) {
                 //create all feeds
                 for (NSDictionary *feedInfo in feedsList) {
                     [Feed updateFeedWithInfo:feedInfo
-                                     forPlan:planInfo
-                                   ownerInfo:userInfo
+                                     forPlan:plan
                         managedObjectContext:workerContext];
-                    
-                    //use alternative way to load and cache image
                 }
             }
         }
