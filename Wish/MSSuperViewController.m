@@ -127,12 +127,12 @@
         }
         
     }else if (controller == self.collectionFetchedRC) {
-        __weak UICollectionView *collectionView = self.collectionView;
+        typeof(self) __weak weakSelf = self;
         switch (type) {
             case NSFetchedResultsChangeInsert: {
 //                NSLog(@"%@ INSERT",self.class);
                 [self.blockOperation addExecutionBlock:^{
-                    [collectionView insertItemsAtIndexPaths:@[newIndexPath]];
+                    [weakSelf.collectionView insertItemsAtIndexPaths:@[newIndexPath]];
                 }];
             }
                 break;
@@ -141,7 +141,7 @@
             case NSFetchedResultsChangeDelete: {
 //                NSLog(@"%@ DELETE",self.class);
                 [self.blockOperation addExecutionBlock:^{
-                    [collectionView deleteItemsAtIndexPaths:@[indexPath]];
+                    [weakSelf.collectionView deleteItemsAtIndexPaths:@[indexPath]];
                 }];
             }
                 break;
@@ -149,7 +149,7 @@
             case NSFetchedResultsChangeUpdate: {
 //                NSLog(@"%@ UPDATE",self.class);
                 [self.blockOperation addExecutionBlock:^{                    
-                    [collectionView reloadItemsAtIndexPaths:@[indexPath]];
+                    [weakSelf.collectionView reloadItemsAtIndexPaths:@[indexPath]];
                 }];
             }
                 break;
@@ -157,8 +157,8 @@
             case NSFetchedResultsChangeMove: {
 //                NSLog(@"%@ MOVE",self.class);
                 [self.blockOperation addExecutionBlock:^{
-                    [collectionView deleteItemsAtIndexPaths:@[indexPath]];
-                    [collectionView insertItemsAtIndexPaths:@[newIndexPath]];
+                    [weakSelf.collectionView deleteItemsAtIndexPaths:@[indexPath]];
+                    [weakSelf.collectionView insertItemsAtIndexPaths:@[newIndexPath]];
 //                    [collectionView moveItemAtIndexPath:indexPath toIndexPath:newIndexPath];
                 }];
             }
