@@ -31,10 +31,6 @@ typedef enum {
         backgroundID:(NSString *)backGroundID
             inCircle:(NSString *)circleId inManagedObjectContext:(NSManagedObjectContext *)context;
 
-
-- (void)addMyselfAsOwner;
-
-
 - (Feed *)fetchLastUpdatedFeed;
 
 - (void)updateTryTimesOfPlan:(BOOL)assending;

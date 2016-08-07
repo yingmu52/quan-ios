@@ -164,13 +164,6 @@
     
 }
 
-- (void)addMyselfAsOwner{
-    self.owner = [Owner updateOwnerWithInfo:@{@"headUrl":[User updatedProfilePictureId],
-                                              @"id":[User uid],
-                                              @"name":[User userDisplayName]}
-                       managedObjectContext:[AppDelegate getContext]];
-}
-
 - (BOOL)isDeletable{
     return ![self.owner.ownerId isEqualToString:[User uid]] && !self.isFollowed.boolValue;
 }
