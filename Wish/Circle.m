@@ -33,13 +33,7 @@
     if (![circle.circleName isEqualToString:info[@"name"]]) {
         circle.circleName = info[@"name"];
     }
-    
-    //邀请码
-    NSString *invitationCode = [NSString stringWithFormat:@"%@",info[@"addCode"]];
-    if (![circle.invitationCode isEqualToString:invitationCode]) {
-        circle.invitationCode = invitationCode;
-    }
-    
+        
     //圈子描述
     if (![circle.circleDescription isEqualToString:info[@"description"]]) {
         circle.circleDescription = info[@"description"];

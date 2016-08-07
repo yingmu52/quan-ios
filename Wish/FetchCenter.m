@@ -311,17 +311,17 @@
             if (circleId) {
                 //在本地数据库创建圈子实例
                 NSManagedObjectContext *workerContext = [self workerContext];
-                Circle *circle = [Circle createCircle:circleId
-                                                 name:circleName
-                                                 desc:circleDescription
-                                              imageId:imageId
-                                              context:workerContext];
+                [Circle createCircle:circleId
+                                name:circleName
+                                desc:circleDescription
+                             imageId:imageId
+                             context:workerContext];
                 [self.appDelegate saveContext:workerContext];
                 
                 //完成
                 if (completionBlock) {
                     dispatch_main_async_safe(^{
-                        completionBlock(circle);
+                        completionBlock();
                     })
                 }
             }

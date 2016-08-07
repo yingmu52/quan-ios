@@ -126,7 +126,7 @@ typedef void(^FetchCenterGetRequestUpdateCircleCompleted)(void);
           completion:(FetchCenterGetRequestUpdateCircleCompleted)completionBlock;
 
 /** 创建圈子*/
-typedef void(^FetchCenterGetRequestCreateCircleCompleted)(Circle *circle);
+typedef void(^FetchCenterGetRequestCreateCircleCompleted)(void);
 - (void)createCircle:(NSString *)circleName
          description:(NSString *)circleDescription
    backgroundImageId:(NSString *)imageId

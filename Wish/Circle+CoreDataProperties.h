@@ -2,7 +2,7 @@
 //  Circle+CoreDataProperties.h
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2016-03-12.
+//  Created by Xinyi Zhuang on 8/8/16.
 //  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -20,7 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *circleName;
 @property (nullable, nonatomic, retain) NSDate *createDate;
 @property (nullable, nonatomic, retain) NSString *imageId;
-@property (nullable, nonatomic, retain) NSString *invitationCode;
 @property (nullable, nonatomic, retain) NSString *ownerId;
 @property (nullable, nonatomic, retain) NSSet<Plan *> *plans;
 

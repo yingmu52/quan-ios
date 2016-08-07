@@ -2,7 +2,7 @@
 //  Circle+CoreDataProperties.m
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2016-03-12.
+//  Created by Xinyi Zhuang on 8/8/16.
 //  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -18,7 +18,6 @@
 @dynamic circleName;
 @dynamic createDate;
 @dynamic imageId;
-@dynamic invitationCode;
 @dynamic ownerId;
 @dynamic plans;
 
