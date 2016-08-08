@@ -68,8 +68,7 @@
 
 // MARK: tableFetchedRC Delegate
 
-//- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-//{
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller{
 //    if (controller == self.tableFetchedRC) {
 //        [self.tableView beginUpdates];
 //    }else if (controller == self.collectionFetchedRC) {
@@ -77,15 +76,15 @@
 //        self.blockOperation = [[NSBlockOperation alloc] init];
 //    }
 //    
-//}
+}
 //
 //
-//- (void)controller:(NSFetchedResultsController *)controller
-//   didChangeObject:(id)anObject
-//       atIndexPath:(NSIndexPath *)indexPath
-//     forChangeType:(NSFetchedResultsChangeType)type
-//      newIndexPath:(NSIndexPath *)newIndexPath
-//{
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath
+{
 //    if (controller == self.tableFetchedRC) {
 //        switch(type)
 //        {
@@ -168,7 +167,7 @@
 //                break;
 //        }
 //    }
-//}
+}
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
