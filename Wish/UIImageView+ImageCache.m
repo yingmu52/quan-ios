@@ -43,11 +43,7 @@
                                        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                                            [manager.imageCache storeImage:image forKey:localKey];
                                            dispatch_main_async_safe(^{
-                                               //无图时才设置图，注意要配合SDWebImageAvoidAutoSetImage使用
-                                               if (!self.image) {
-                                                   self.image = image;
-                                               }
-                                               
+                                               self.image = image;
                                            });
                                        });
                                    }
