@@ -13,6 +13,7 @@
 #import "NHAlignmentFlowLayout.h"
 #import "CirclePickerViewController.h"
 #import "ImagePicker.h"
+#import "PlansViewController.h"
 @interface PostViewController () <CirclePickerViewControllerDelegate,ImagePickerDelegate>
 @property (nonatomic,weak) IBOutlet UITextField *textField;
 @property (nonatomic,strong) UIButton *tikButton;
@@ -26,6 +27,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupViews];
+    
+    //为快速创建事件推荐一个圈子
+    NSString *circleId = [User currentCircleId];
+    if (circleId.length > 0 && !self.circle) {
+        Circle *circle = [Plan fetchWith:@"Circle"
+                               predicate:[NSPredicate predicateWithFormat:@"circleId == %@",circleId]
+                        keyForDescriptor:@"circleId" managedObjectContext:[AppDelegate getContext]].lastObject;
+        self.circle = circle;
+    }
 }
 
 

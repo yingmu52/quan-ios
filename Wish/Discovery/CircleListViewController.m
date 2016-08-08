@@ -85,6 +85,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     Circle *circle = [self.tableFetchedRC objectAtIndexPath:indexPath];
     [self performSegueWithIdentifier:@"showPlansView" sender:circle];
+    [User updateAttributeFromDictionary:@{CURRENT_CIRCLE_ID:circle.circleId}];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
