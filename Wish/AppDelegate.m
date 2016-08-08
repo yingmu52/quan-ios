@@ -285,19 +285,19 @@
 
 - (void)saveContext:(NSManagedObjectContext *)context{
     // Save the context.
-    [context performBlock:^{
+    [context performBlockAndWait:^{
         NSError *error = nil;
         if (context.hasChanges &&
             ![context save:&error]) {
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         }else{
-            [self.managedObjectContext performBlock:^{
+            [self.managedObjectContext performBlockAndWait:^{
                 NSError *error = nil;
                 if ([self.managedObjectContext hasChanges] &&
                     ![self.managedObjectContext save:&error]) {
                     NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
                 }else{
-                    [self.writerManagedObjectContext performBlock:^{
+                    [self.writerManagedObjectContext performBlockAndWait:^{
                         // Save the context.
                         NSError *error = nil;
                         if (self.writerManagedObjectContext.hasChanges &&
