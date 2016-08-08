@@ -302,7 +302,8 @@ typedef void(^FetchCenterPostRequestSendDeviceTokenCompleted)(void);
 - (void)syncEntity:(NSString *)entityName
             idName:(NSString *)uniqueID
          localList:(NSArray *)localList
-        serverList:(NSArray *)serverList;
+        serverList:(NSArray *)serverList
+         inContext:(NSManagedObjectContext *)workerContext;
 
 typedef void(^FetchCenterGetRequestCheckWhitelistCompleted)(BOOL isSuperUser);
 - (void)checkWhitelist:(FetchCenterGetRequestCheckWhitelistCompleted)completionBlock;

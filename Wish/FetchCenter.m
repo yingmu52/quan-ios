@@ -194,7 +194,11 @@
              //同步
              if (currentPage.integerValue == 1){
                  NSArray *serverList = [planList valueForKeyPath:@"id"];
-                 [self syncEntity:@"Plan" idName:@"planId" localList:localList serverList:serverList];
+                 [self syncEntity:@"Plan"
+                           idName:@"planId"
+                        localList:localList
+                       serverList:serverList
+                        inContext:workerContext];
              }
              
              
@@ -469,7 +473,7 @@
               
               if (currentPage.integerValue == 1) {
                   NSArray *serverList = [responseJson valueForKeyPath:@"data.quanlist.id"];
-                  [self syncEntity:@"Circle" idName:@"circleId" localList:localList serverList:serverList];
+                  [self syncEntity:@"Circle" idName:@"circleId" localList:localList serverList:serverList inContext:workerContext];
               }
               
               
@@ -567,7 +571,7 @@
         
         if (currentPage.integerValue == 1) {
             NSArray *serverList = [responseJson valueForKeyPath:@"data.messageList.messageId"];
-            [self syncEntity:@"Message" idName:@"messageId" localList:localList serverList:serverList];
+            [self syncEntity:@"Message" idName:@"messageId" localList:localList serverList:serverList inContext:workerContext];
         }
         
         [self.appDelegate saveContext:workerContext];
@@ -666,7 +670,7 @@
         //同步第一页数据
         if (currentPage.integerValue == 1) {
             NSArray *serverList = [comments valueForKey:@"id"];
-            [self syncEntity:@"Comment" idName:@"commentId" localList:localList serverList:serverList];
+            [self syncEntity:@"Comment" idName:@"commentId" localList:localList serverList:serverList inContext:workerContext];
         }
 
         [self.appDelegate saveContext:workerContext];
@@ -823,7 +827,7 @@
         
         if (currentPage.integerValue == 1) {
             NSArray *serverList = [feeds valueForKey:@"id"];
-            [self syncEntity:@"Feed" idName:@"feedId" localList:localList serverList:serverList];
+            [self syncEntity:@"Feed" idName:@"feedId" localList:localList serverList:serverList inContext:workerContext];
         }
         
         [self.appDelegate saveContext:workerContext];
@@ -1053,7 +1057,8 @@
         [self syncEntity:@"Plan"
                   idName:@"planId"
                localList:localList
-              serverList:serverList];
+              serverList:serverList
+               inContext:workerContext];
 
         
         [self.appDelegate saveContext:workerContext];
@@ -1105,7 +1110,7 @@
         //同步
          if (currentPage.integerValue == 1) { //同步服务器与本地第一页的数据
              NSArray *serverList = [planList valueForKey:@"id"];
-              [self syncEntity:@"Plan" idName:@"planId" localList:localList serverList:serverList];
+              [self syncEntity:@"Plan" idName:@"planId" localList:localList serverList:serverList inContext:workerContext];
          }
 
          [self.appDelegate saveContext:workerContext];
@@ -1280,7 +1285,7 @@
             }
             
             NSArray *serverList = [responseJson valueForKeyPath:@"data.id"];
-            [self syncEntity:@"Plan" idName:@"planId" localList:localList serverList:serverList];
+            [self syncEntity:@"Plan" idName:@"planId" localList:localList serverList:serverList inContext:workerContext];
             
             [self.appDelegate saveContext:workerContext];
             
@@ -1839,37 +1844,29 @@
 - (void)syncEntity:(NSString *)entityName
             idName:(NSString *)uniqueID
          localList:(NSArray *)localList
-        serverList:(NSArray *)serverList{
-    //创建一个新线程，因为每个线程必须有自己的MOC
-    dispatch_queue_t queue = dispatch_queue_create([NSUUID UUID].UUIDString.UTF8String,NULL);
-    dispatch_async(queue, ^{
-        NSMutableArray *trashIDs = [NSMutableArray array];
-        for (NSString *uid in localList) {
-            if (![serverList containsObject:uid]) {
-                [trashIDs addObject:uid];
+        serverList:(NSArray *)serverList
+         inContext:(NSManagedObjectContext *)workerContext{
+    
+    NSMutableArray *trashIDs = [NSMutableArray array];
+    for (NSString *uid in localList) {
+        if (![serverList containsObject:uid]) {
+            [trashIDs addObject:uid];
+        }
+    }
+    if (trashIDs.count > 0) {
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:entityName];
+        request.predicate = [NSPredicate predicateWithFormat:@"%K IN %@",uniqueID,trashIDs];//user %K to have dynamic property name
+        
+        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:uniqueID ascending:NO]];
+        
+        NSError *error;
+        NSArray *results = [workerContext executeFetchRequest:request error:&error];
+        if (results.count > 0) {
+            for (NSManagedObject *entity in results) {
+                [workerContext deleteObject:entity];
             }
         }
-        if (trashIDs.count > 0) {
-            NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:entityName];
-            request.predicate = [NSPredicate predicateWithFormat:@"%K IN %@",uniqueID,trashIDs];//user %K to have dynamic property name
-
-            request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:uniqueID ascending:NO]];
-            
-            NSManagedObjectContext *workerContext = [self workerContext];
-            
-            NSError *error;
-            NSArray *results = [workerContext executeFetchRequest:request error:&error];
-            if (results.count > 0) {
-                for (NSManagedObject *entity in results) {
-                    [workerContext deleteObject:entity];
-                }
-            }
-            
-            [self.appDelegate saveContext:workerContext];
-        }
-
-    });
-
+    }
 }
 
 //在数组随机选取N个，此法仅用于测试
