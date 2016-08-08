@@ -50,29 +50,30 @@ static NSUInteger numberOfPreloadedFeeds = 3;
     return cell;
 }
 
-- (void)configureTableViewCell:(FollowingCell *)cell atIndexPath:(NSIndexPath *)indexPath{
+- (void)configureTableViewCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     Plan *plan = [self.tableFetchedRC objectAtIndexPath:indexPath];
-    
+    FollowingCell *c = (FollowingCell *)cell;
     //update Plan Info
-    cell.headTitleLabel.text = plan.planTitle;
-    cell.headDateLabel.text = [NSString stringWithFormat:@"更新于 %@",[SystemUtil stringFromDate:plan.updateDate]];
-    cell.delegate = self;
+    c.headTitleLabel.text = plan.planTitle;
+    c.headDateLabel.text = [NSString stringWithFormat:@"更新于 %@",[SystemUtil stringFromDate:plan.updateDate]];
+    c.delegate = self;
     
     //fetch feeds array
     NSArray *sortedArray = [plan.feeds sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]]];
     
     if (sortedArray.count <= numberOfPreloadedFeeds){
-        cell.feedsArray = sortedArray;
+        c.feedsArray = sortedArray;
     }else{
-        cell.feedsArray =  [sortedArray subarrayWithRange:NSMakeRange(0, numberOfPreloadedFeeds)];
+        c.feedsArray =  [sortedArray subarrayWithRange:NSMakeRange(0, numberOfPreloadedFeeds)];
     }
     
     
     //update User Info
-    cell.headUserNameLabel.text = plan.owner.ownerName;
+    c.headUserNameLabel.text = plan.owner.ownerName;
     
-    [cell.headProfilePic setCircularImageWithURL:[self.fetchCenter urlWithImageID:plan.owner.headUrl size:FetchCenterImageSize100]
-                                        forState:UIControlStateNormal];
+    
+    NSURL *url = [self.fetchCenter urlWithImageID:plan.owner.headUrl size:FetchCenterImageSize100];
+    [c.headProfilePic setCircularImageWithURL:url forState:UIControlStateNormal];
 }
 
 
