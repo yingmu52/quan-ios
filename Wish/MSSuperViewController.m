@@ -68,119 +68,121 @@
 
 // MARK: tableFetchedRC Delegate
 
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-{
-    if (controller == self.tableFetchedRC) {
-        [self.tableView beginUpdates];
-    }else if (controller == self.collectionFetchedRC) {
-        [UIView setAnimationsEnabled:NO];
-        self.blockOperation = [[NSBlockOperation alloc] init];
-    }
-    
-}
-
-
-- (void)controller:(NSFetchedResultsController *)controller
-   didChangeObject:(id)anObject
-       atIndexPath:(NSIndexPath *)indexPath
-     forChangeType:(NSFetchedResultsChangeType)type
-      newIndexPath:(NSIndexPath *)newIndexPath
-{
-    if (controller == self.tableFetchedRC) {
-        switch(type)
-        {
-            case NSFetchedResultsChangeInsert:{
-//                NSLog(@"%@ INSERT",self.class);
-                [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
-                                      withRowAnimation:UITableViewRowAnimationAutomatic];
-            }
-                break;
-                
-            case NSFetchedResultsChangeDelete:{
-//                NSLog(@"%@ DELETE",self.class);
-                [self.tableView deleteRowsAtIndexPaths:@[indexPath]
-                                      withRowAnimation:UITableViewRowAnimationAutomatic];
-            }
-                break;
-                
-            case NSFetchedResultsChangeUpdate:{
-//                NSLog(@"%@ UPDATE",self.class);
-//                [self.tableView reloadRowsAtIndexPaths:@[indexPath]
+//- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+//{
+//    if (controller == self.tableFetchedRC) {
+//        [self.tableView beginUpdates];
+//    }else if (controller == self.collectionFetchedRC) {
+//        [UIView setAnimationsEnabled:NO];
+//        self.blockOperation = [[NSBlockOperation alloc] init];
+//    }
+//    
+//}
+//
+//
+//- (void)controller:(NSFetchedResultsController *)controller
+//   didChangeObject:(id)anObject
+//       atIndexPath:(NSIndexPath *)indexPath
+//     forChangeType:(NSFetchedResultsChangeType)type
+//      newIndexPath:(NSIndexPath *)newIndexPath
+//{
+//    if (controller == self.tableFetchedRC) {
+//        switch(type)
+//        {
+//            case NSFetchedResultsChangeInsert:{
+////                NSLog(@"%@ INSERT",self.class);
+//                [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
 //                                      withRowAnimation:UITableViewRowAnimationAutomatic];
-                UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-                [self configureTableViewCell:cell atIndexPath:indexPath];
-            }
-                break;
-                
-            case NSFetchedResultsChangeMove:{
-//                NSLog(@"%@ MOVE",self.class);
-                [self.tableView deleteRowsAtIndexPaths:@[indexPath]
-                                      withRowAnimation:UITableViewRowAnimationAutomatic];
-                [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
-                                      withRowAnimation:UITableViewRowAnimationAutomatic];
-//                [self.tableView moveRowAtIndexPath:indexPath toIndexPath:newIndexPath];
-            }
-                break;
-                
-            default:
-                break;
-        }
-        
-    }else if (controller == self.collectionFetchedRC) {
-        typeof(self) __weak weakSelf = self;
-        switch (type) {
-            case NSFetchedResultsChangeInsert: {
-//                NSLog(@"%@ INSERT",self.class);
-                [self.blockOperation addExecutionBlock:^{
-                    [weakSelf.collectionView insertItemsAtIndexPaths:@[newIndexPath]];
-                }];
-            }
-                break;
-            
-                
-            case NSFetchedResultsChangeDelete: {
-//                NSLog(@"%@ DELETE",self.class);
-                [self.blockOperation addExecutionBlock:^{
-                    [weakSelf.collectionView deleteItemsAtIndexPaths:@[indexPath]];
-                }];
-            }
-                break;
-                
-            case NSFetchedResultsChangeUpdate: {
-//                NSLog(@"%@ UPDATE",self.class);
-                [self.blockOperation addExecutionBlock:^{                    
-                    [weakSelf.collectionView reloadItemsAtIndexPaths:@[indexPath]];
-                }];
-            }
-                break;
-                
-            case NSFetchedResultsChangeMove: {
-//                NSLog(@"%@ MOVE",self.class);
-                [self.blockOperation addExecutionBlock:^{
-                    [weakSelf.collectionView deleteItemsAtIndexPaths:@[indexPath]];
-                    [weakSelf.collectionView insertItemsAtIndexPaths:@[newIndexPath]];
-//                    [collectionView moveItemAtIndexPath:indexPath toIndexPath:newIndexPath];
-                }];
-            }
-                break;
-
-            default:
-                break;
-        }
-    }
-}
+//            }
+//                break;
+//                
+//            case NSFetchedResultsChangeDelete:{
+////                NSLog(@"%@ DELETE",self.class);
+//                [self.tableView deleteRowsAtIndexPaths:@[indexPath]
+//                                      withRowAnimation:UITableViewRowAnimationAutomatic];
+//            }
+//                break;
+//                
+//            case NSFetchedResultsChangeUpdate:{
+////                NSLog(@"%@ UPDATE",self.class);
+////                [self.tableView reloadRowsAtIndexPaths:@[indexPath]
+////                                      withRowAnimation:UITableViewRowAnimationAutomatic];
+//                UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+//                [self configureTableViewCell:cell atIndexPath:indexPath];
+//            }
+//                break;
+//                
+//            case NSFetchedResultsChangeMove:{
+////                NSLog(@"%@ MOVE",self.class);
+//                [self.tableView deleteRowsAtIndexPaths:@[indexPath]
+//                                      withRowAnimation:UITableViewRowAnimationAutomatic];
+//                [self.tableView insertRowsAtIndexPaths:@[newIndexPath]
+//                                      withRowAnimation:UITableViewRowAnimationAutomatic];
+////                [self.tableView moveRowAtIndexPath:indexPath toIndexPath:newIndexPath];
+//            }
+//                break;
+//                
+//            default:
+//                break;
+//        }
+//        
+//    }else if (controller == self.collectionFetchedRC) {
+//        typeof(self) __weak weakSelf = self;
+//        switch (type) {
+//            case NSFetchedResultsChangeInsert: {
+////                NSLog(@"%@ INSERT",self.class);
+//                [self.blockOperation addExecutionBlock:^{
+//                    [weakSelf.collectionView insertItemsAtIndexPaths:@[newIndexPath]];
+//                }];
+//            }
+//                break;
+//            
+//                
+//            case NSFetchedResultsChangeDelete: {
+////                NSLog(@"%@ DELETE",self.class);
+//                [self.blockOperation addExecutionBlock:^{
+//                    [weakSelf.collectionView deleteItemsAtIndexPaths:@[indexPath]];
+//                }];
+//            }
+//                break;
+//                
+//            case NSFetchedResultsChangeUpdate: {
+////                NSLog(@"%@ UPDATE",self.class);
+//                [self.blockOperation addExecutionBlock:^{                    
+//                    [weakSelf.collectionView reloadItemsAtIndexPaths:@[indexPath]];
+//                }];
+//            }
+//                break;
+//                
+//            case NSFetchedResultsChangeMove: {
+////                NSLog(@"%@ MOVE",self.class);
+//                [self.blockOperation addExecutionBlock:^{
+//                    [weakSelf.collectionView deleteItemsAtIndexPaths:@[indexPath]];
+//                    [weakSelf.collectionView insertItemsAtIndexPaths:@[newIndexPath]];
+////                    [collectionView moveItemAtIndexPath:indexPath toIndexPath:newIndexPath];
+//                }];
+//            }
+//                break;
+//
+//            default:
+//                break;
+//        }
+//    }
+//}
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     if (controller == self.tableFetchedRC) {
-        [self.tableView endUpdates];
+//        [self.tableView endUpdates];
+        [self.tableView reloadData];
     }else if (controller == self.collectionFetchedRC) {
-        [self.collectionView performBatchUpdates:^{
-            [self.blockOperation start];
-        } completion:^(BOOL finished) {
-            [UIView setAnimationsEnabled:YES];
-            self.blockOperation = nil;
-        }];
+        [self.collectionView reloadData];
+//        [self.collectionView performBatchUpdates:^{
+//            [self.blockOperation start];
+//        } completion:^(BOOL finished) {
+//            [UIView setAnimationsEnabled:YES];
+//            self.blockOperation = nil;
+//        }];
     }
 }
 
