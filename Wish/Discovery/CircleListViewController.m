@@ -71,12 +71,14 @@
     return cell;
 }
 
-- (void)configureTableViewCell:(CircleListCell *)cell atIndexPath:(NSIndexPath *)indexPath{
+
+- (void)configureTableViewCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     Circle *circle = [self.tableFetchedRC objectAtIndexPath:indexPath];
-    cell.circleListTitle.text = circle.circleName;
-    cell.circleListSubtitle.text = circle.circleDescription;
-    [cell.circleListImageView downloadImageWithImageId:circle.imageId
-                                                  size:FetchCenterImageSize100];
+    CircleListCell *c = (CircleListCell *)cell;
+    c.circleListTitle.text = circle.circleName;
+    c.circleListSubtitle.text = circle.circleDescription;
+    [c.circleListImageView downloadImageWithImageId:circle.imageId
+                                               size:FetchCenterImageSize100];
 
 }
 
