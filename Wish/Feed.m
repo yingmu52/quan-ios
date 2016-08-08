@@ -77,9 +77,8 @@
                  managedObjectContext:context];
     
     Feed *feed;
-    
-    BOOL isNew = !checks.count;
-    if (isNew) {
+
+    if (!checks.count) {
         feed = [NSEntityDescription insertNewObjectForEntityForName:@"Feed"
                                              inManagedObjectContext:context];
         feed.feedId = feedItem[@"id"];
@@ -114,10 +113,6 @@
     
     if (![feed.type isEqualToNumber:@([feedItem[@"feedsType"] integerValue])]){
         feed.type = @([feedItem[@"feedsType"] integerValue]);
-    }
-    
-    if (isNew) {
-        [context save:nil];
     }
     
     return feed;

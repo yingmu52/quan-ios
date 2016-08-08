@@ -107,12 +107,6 @@
                    backgroundImage:imageId
                         completion:^
     {
-        self.circle.circleName = self.titleTextField.text;
-        self.circle.circleDescription = self.detailTextView.text;
-        if (imageId) {
-            self.circle.imageId = imageId;
-        }
-        [self.circle.managedObjectContext save:nil]; 
          [self goBackWithSender:sender];
     }];
 }

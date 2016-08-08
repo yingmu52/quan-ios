@@ -224,6 +224,15 @@
            parameter:inputParams
     includeArguments:YES
           completion:^(NSDictionary *responseJson){
+              
+              NSManagedObjectContext *workerContext = [self workerContext];
+              Owner *owner = [Plan fetchWith:@"Owner"
+                                   predicate:[NSPredicate predicateWithFormat:@"ownerId == %@",memberID]
+                            keyForDescriptor:@"ownerId"
+                        managedObjectContext:workerContext].lastObject;
+              [workerContext deleteObject:owner];
+              [self.appDelegate saveContext:workerContext];
+              
               if (completionBlock) {
                   dispatch_main_async_safe(^{
                       completionBlock();
@@ -284,6 +293,20 @@
                parameter:inputParams
         includeArguments:YES
               completion:^(NSDictionary *responseJson){
+                  
+                  NSManagedObjectContext *workerContext = [self workerContext];
+                  Circle *circle = [Plan fetchWith:@"Circle"
+                                         predicate:[NSPredicate predicateWithFormat:@"circleId == %@",circleId]
+                                  keyForDescriptor:@"circleId" managedObjectContext:workerContext].lastObject;
+                  
+                  circle.circleName = circleName;
+                  circle.circleDescription = circleDescription;
+                  if (imageId) {
+                      circle.imageId = imageId;
+                  }
+                  
+                  [self.appDelegate saveContext:workerContext];
+
                   if (completionBlock) {
                       dispatch_main_async_safe(^{
                           completionBlock();

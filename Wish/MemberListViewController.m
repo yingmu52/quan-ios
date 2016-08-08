@@ -109,10 +109,7 @@
                                                                     preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
             UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [self.fetchCenter deleteMember:owner.ownerId inCircle:self.circle.circleId completion:^{
-                    [owner.managedObjectContext deleteObject:owner];
-                    [owner.managedObjectContext save:nil];
-                }];
+                [self.fetchCenter deleteMember:owner.ownerId inCircle:self.circle.circleId completion:nil];
             }];
             [alert addAction:confirm];
             [self presentViewController:alert animated:YES completion:nil];
