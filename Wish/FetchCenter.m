@@ -1088,32 +1088,37 @@
          
          NSArray *planList = [responseJson valueForKeyPath:@"data.planList"];
          NSDictionary *manList = [responseJson valueForKeyPath:@"data.manList"];
-         NSNumber *currentPage = [responseJson valueForKeyPath:@"data.page"];
-         NSNumber *totalPage = [responseJson valueForKeyPath:@"data.totalpage"];
-         
-         if (completionBlock) {
-             dispatch_main_async_safe(^{
-                 completionBlock(currentPage,totalPage);
-             });
-         }
+         NSNumber *currentPage = @(1);
+         NSNumber *totalPage = @(1);
          
          //缓存并更新本地事件
-         if (planList && manList){
+         if (planList.count > 0 && manList.count > 0){
+             
+             currentPage = [responseJson valueForKeyPath:@"data.page"];
+             totalPage = [responseJson valueForKeyPath:@"data.totalpage"];
+             
              [planList enumerateObjectsUsingBlock:^(NSDictionary * planInfo, NSUInteger idx, BOOL * _Nonnull stop) {
                  [Plan updatePlanFromServer:planInfo
                                   ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]
                        managedObjectContext:workerContext];
 //                 plan.discoverIndex = @(idx + 1); //记录索引方便显示服务器上的顺序
              }];
+             
+             //同步
+             if (currentPage.integerValue == 1) { //同步服务器与本地第一页的数据
+                 NSArray *serverList = [planList valueForKey:@"id"];
+                 [self syncEntity:@"Plan" idName:@"planId" localList:localList serverList:serverList inContext:workerContext];
+             }
+             
+             [self.appDelegate saveContext:workerContext];
          }
          
-        //同步
-         if (currentPage.integerValue == 1) { //同步服务器与本地第一页的数据
-             NSArray *serverList = [planList valueForKey:@"id"];
-              [self syncEntity:@"Plan" idName:@"planId" localList:localList serverList:serverList inContext:workerContext];
+         if (completionBlock) {
+             dispatch_main_async_safe(^{
+                 completionBlock(currentPage,totalPage);
+             });
          }
 
-         [self.appDelegate saveContext:workerContext];
      }];
 }
 
