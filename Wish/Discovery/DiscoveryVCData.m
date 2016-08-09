@@ -116,9 +116,8 @@
     if (!_collectionFetchRequest) {
         _collectionFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
         //发现页
-        _collectionFetchRequest.predicate = [NSPredicate predicateWithFormat:@"isPrivate == NO"];
-        _collectionFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"cornerMask" ascending:NO],
-                                                    [NSSortDescriptor sortDescriptorWithKey:@"updateDate" ascending:NO]];
+        _collectionFetchRequest.predicate = [NSPredicate predicateWithFormat:@"discoverIndex >= 888"];
+        _collectionFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"discoverIndex" ascending:YES]];
     }
     return _collectionFetchRequest;
 }

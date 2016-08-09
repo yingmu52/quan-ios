@@ -1098,10 +1098,10 @@
              totalPage = [responseJson valueForKeyPath:@"data.totalpage"];
              
              [planList enumerateObjectsUsingBlock:^(NSDictionary * planInfo, NSUInteger idx, BOOL * _Nonnull stop) {
-                 [Plan updatePlanFromServer:planInfo
-                                  ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]
-                       managedObjectContext:workerContext];
-//                 plan.discoverIndex = @(idx + 1); //记录索引方便显示服务器上的顺序
+                 Plan *plan = [Plan updatePlanFromServer:planInfo
+                                               ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]
+                                    managedObjectContext:workerContext];
+                 plan.discoverIndex = @(888 + (currentPage.integerValue - 1)*20 + idx); //记录索引方便显示服务器上的顺序
              }];
              
              //同步
@@ -1870,7 +1870,15 @@
         NSArray *results = [workerContext executeFetchRequest:request error:&error];
         if (results.count > 0) {
             for (NSManagedObject *entity in results) {
-                [workerContext deleteObject:entity];
+                //同步发现页事件时，如果是自己的事件或自己关注的事件，不需要把事件从本地删除，只需要把discoveryIndex设置成nil就可以移除发现页
+                if ([entity isKindOfClass:[Plan class]]) {
+                    Plan *p = (Plan *)entity;
+                    if ([p isDeletable]) {
+                        p.discoverIndex = nil;
+                    }
+                }else{
+                    [workerContext deleteObject:entity];
+                }
             }
         }
     }
