@@ -28,19 +28,13 @@ typedef void(^FeedCreationCompletion)(Feed *feed);
                title:(NSString *)feedTitle
               images:(NSArray *)imageIds
               planID:(NSString *)planId inManagedObjectContext:(NSManagedObjectContext *)context;
-//+ (Feed *)createFeedInPlan:(Plan *)plan
-//                 feedTitle:(NSString *)feedTitle
-//                    feedId:(NSString *)feedId
-//                  imageIds:(NSArray *)imageIds;
-//
+
 + (Feed *)updateFeedWithInfo:(NSDictionary *)feedItem
                      forPlan:(nullable Plan *)plan
         managedObjectContext:(nonnull NSManagedObjectContext *)context;
 
     
 + (Feed *)fetchFeedWithId:(NSString *)feedId;
-
-//- (void)deleteSelf;
 
 - (NSNumber *)numberOfPictures;
 - (NSArray *)imageIdArray;

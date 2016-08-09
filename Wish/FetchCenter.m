@@ -1325,30 +1325,32 @@
      includeArguments:YES
            completion:^(NSDictionary *responseJson) {
                NSString *planID = [responseJson valueForKeyPath:@"data.planId"];
-               NSString *feedID = [responseJson valueForKeyPath:@"data.feedId"];
+               NSString *feedID = [responseJson valueForKeyPath:@"data.feedsId"];
                
                NSManagedObjectContext *workerContext = [self workerContext];
                
-               [Plan createPlan:planTitle
-                         planId:planID
-                   backgroundID:picurls.firstObject
-                       inCircle:circleId
-         inManagedObjectContext:workerContext];
-               
-               
-               [Feed createFeed:feedID
-                          title:feedTitle
-                         images:picurls
-                         planID:planID
-         inManagedObjectContext:workerContext];
-               
-               [self.appDelegate saveContext:workerContext];
-               
-        if (completionBlock) {
-            dispatch_main_async_safe((^{
-                completionBlock(planID);
-            }));
-        }
+               if (planID.length > 0 && feedID.length > 0) {
+                   [Plan createPlan:planTitle
+                             planId:planID
+                       backgroundID:picurls.firstObject
+                           inCircle:circleId
+             inManagedObjectContext:workerContext];
+                   
+                   
+                   [Feed createFeed:feedID
+                              title:feedTitle
+                             images:picurls
+                             planID:planID
+             inManagedObjectContext:workerContext];
+                   
+                   [self.appDelegate saveContext:workerContext];
+                   
+                   if (completionBlock) {
+                       dispatch_main_async_safe((^{
+                           completionBlock(planID);
+                       }));
+                   }
+               }
     }];
     
 }
