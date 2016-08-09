@@ -220,7 +220,7 @@
                                                      style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * _Nonnull action)
     {
-        NSString *popupViewTitle = [self isDeletingTheLastFeed] ?
+        NSString *popupViewTitle = self.tableFetchedRC.fetchedObjects.count == 1 ?
         @"这是最后一条记录啦！\n这件事儿也会被删除哦~" : @"真的要删除这条记录吗？";
         
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:popupViewTitle
@@ -234,16 +234,7 @@
             Feed *feed = [self.tableFetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
             
             [self.fetchCenter deleteFeed:feed completion:^{
-                //后台删除动态时，相应该的事件也被删除，所以这里只需要删除本地的事件即可
-                if ([self isDeletingTheLastFeed]) {
-//                    //删除本地事件
-//                    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-//                    [delegate.managedObjectContext deleteObject:self.plan];
-//                    [delegate saveContext];
-//                    
-                    //返回上一级
-                    [self.navigationController popViewControllerAnimated:YES];
-                }
+                [self.navigationController popViewControllerAnimated:YES];
             }];
         }];
         [alert addAction:confirm];
@@ -255,20 +246,6 @@
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:actionSheet animated:YES completion:nil];
 }
-
-#pragma mark - delete feed
-
-
-- (BOOL)isDeletingTheLastFeed{
-    return self.tableFetchedRC.fetchedObjects.count == 1;
-}
-
-//- (void)deletePlan{
-//    //delete plan and pop back. Notice place deletion is cascade
-//    [self.plan deleteSelf];
-//    [self.navigationController popToRootViewControllerAnimated:YES];
-//
-//}
 
 #pragma mark - fetch center delegate
 
