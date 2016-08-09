@@ -135,7 +135,9 @@
                 [app openURL:url];
             }
         }
-        if (indexPath.row == 1) { //清楚缓存
+        if (indexPath.row == 1) {
+            
+            //清除本地所以图片
             SDImageCache *imageCache = [SDImageCache sharedImageCache];
             NSLog(@"%@",@([imageCache getSize]));
             NSNumber *fileSize = @([imageCache getSize] / 1024 / 1024);
@@ -156,6 +158,10 @@
                 hud.label.text = [NSString stringWithFormat:@"暂无临时文件"];
                 [hud hideAnimated:YES afterDelay:1.0];
             }
+            
+            
+            //Garbage fucking collection
+            [self clearCoreData];
         }
         if (indexPath.row == 2){ //用户反馈
             [self performSegueWithIdentifier:@"showFeedbackView" sender:nil];
@@ -195,24 +201,32 @@
         AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         
         //Each thread needs to have its own moc
-        NSManagedObjectContext *backgroundMoc = [[NSManagedObjectContext alloc] init];
-        [backgroundMoc setPersistentStoreCoordinator:delegate.managedObjectContext.persistentStoreCoordinator];
+        NSManagedObjectContext *backgroundMoc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        backgroundMoc.parentContext = delegate.managedObjectContext;
 
         for (NSEntityDescription *entity in delegate.managedObjectModel.entities) {
-            NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:entity.name];
-            [request setIncludesPropertyValues:NO]; //only fetch the managedObjectID
-            NSArray * objects = [backgroundMoc executeFetchRequest:request error:nil];
-            for (NSManagedObject *entity in objects) {
-                [backgroundMoc deleteObject:entity];
+            NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:entity.name];
+            [fetchRequest setIncludesPropertyValues:NO]; //only fetch the managedObjectID
+            
+            NSError *error;
+            NSArray *fetchedObjects = [backgroundMoc executeFetchRequest:fetchRequest error:&error];
+            for (NSManagedObject *object in fetchedObjects)
+            {
+                [backgroundMoc deleteObject:object];
             }
         }
         
         //3
-        [backgroundMoc save:nil];
+        [delegate saveContext:backgroundMoc];
+        
+        dispatch_main_async_safe(^{
+            //切换到主页
+            UITabBarController *tbc = [self.storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
+            [[[UIApplication sharedApplication] keyWindow] setRootViewController:tbc];
+        });
     });
 
 }
-
 
 #pragma mark - 上传头像
 
