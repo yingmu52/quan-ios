@@ -139,7 +139,7 @@
             
             //清除本地所以图片
             SDImageCache *imageCache = [SDImageCache sharedImageCache];
-            NSLog(@"%@",@([imageCache getSize]));
+
             NSNumber *fileSize = @([imageCache getSize] / 1024 / 1024);
             
             if (fileSize.integerValue > 0) {
@@ -161,7 +161,7 @@
             
             
             //Garbage fucking collection
-            [self clearCoreData];
+            [self clearCoreData:YES];
         }
         if (indexPath.row == 2){ //用户反馈
             [self performSegueWithIdentifier:@"showFeedbackView" sender:nil];
@@ -186,9 +186,10 @@
     [User updateOwnerInfo:[NSDictionary dictionary]];
     
     [[[UIApplication sharedApplication] keyWindow] setRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"LoginNavigationViewController"]];
+    
 }
 
-- (void)clearCoreData{
+- (void)clearCoreData:(BOOL)shouldGoBackToTabBar{
     //see Updated Solution for iOS 9+ in http://stackoverflow.com/questions/1077810/delete-reset-all-entries-in-core-data
     //删除本地数据库
     
@@ -218,12 +219,13 @@
         
         //3
         [delegate saveContext:backgroundMoc];
-        
-        dispatch_main_async_safe(^{
-            //切换到主页
-            UITabBarController *tbc = [self.storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
-            [[[UIApplication sharedApplication] keyWindow] setRootViewController:tbc];
-        });
+        if (shouldGoBackToTabBar) {
+            dispatch_main_async_safe(^{
+                //切换到主页
+                UITabBarController *tbc = [self.storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
+                [[[UIApplication sharedApplication] keyWindow] setRootViewController:tbc];
+            });
+        }
     });
 
 }
@@ -287,7 +289,7 @@
                 if (!isUsingInnerNetwork) {
                     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SHOULD_USE_TESTURL];
                     [self logout];
-                    [self clearCoreData];
+                    [self clearCoreData:NO];
                 }
             }];
             
@@ -296,7 +298,7 @@
                 if (isUsingInnerNetwork) {
                     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:SHOULD_USE_TESTURL];
                     [self logout];
-                    [self clearCoreData];
+                    [self clearCoreData:NO];
                 }
             }];
             
