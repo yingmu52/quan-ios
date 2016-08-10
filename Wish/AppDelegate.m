@@ -33,15 +33,13 @@
     PgyManager *pgYmanager = [PgyManager sharedPgyManager];
     [pgYmanager startManagerWithAppId:PGY_APPID];
     [pgYmanager setEnableFeedback:NO];
-//    [pgYmanager setFeedbackActiveType:kPGYFeedbackActiveTypeShake];
-//    [pgYmanager setShakingThreshold:3.0]; //摇一摇触发反馈
 
-
+    //如果用户未登陆，跳转到登陆页
     if (![User isUserLogin]){
         self.window.rootViewController = self.loginVC;
     }
     
-    //register for push notification
+    //Register for push notification
     UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeAlert|UIUserNotificationTypeSound categories:nil];
     [application registerUserNotificationSettings:settings];
     
@@ -127,7 +125,7 @@
 
 - (LoginViewController *)loginVC{
     if (!_loginVC) {
-        _loginVC = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        _loginVC = [LoginViewController initLoginViewController];
     }
     return _loginVC;
 }

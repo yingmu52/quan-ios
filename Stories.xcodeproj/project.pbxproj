@@ -11,6 +11,7 @@
 		A016FDB71B8C4250006E7A09 /* ShuffleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A016FDB51B8C4250006E7A09 /* ShuffleViewController.m */; };
 		A016FDBB1B8D14BA006E7A09 /* PreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A016FDBA1B8D14BA006E7A09 /* PreviewCell.m */; };
 		A016FDBC1B8D14BA006E7A09 /* PreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A016FDBA1B8D14BA006E7A09 /* PreviewCell.m */; };
+		A01D417D1D5B17AD007B3177 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A01D417C1D5B17AD007B3177 /* Login.storyboard */; };
 		A02E852C1BEC80A10093EDE8 /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A02E852B1BEC80A10093EDE8 /* test.jpg */; };
 		A02E852D1BEC80A10093EDE8 /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A02E852B1BEC80A10093EDE8 /* test.jpg */; };
 		A03010521BABC6AA0041E2CF /* QBImagePicker.strings in Resources */ = {isa = PBXBuildFile; fileRef = A03010371BABC6AA0041E2CF /* QBImagePicker.strings */; };
@@ -338,6 +339,7 @@
 		A016FDB51B8C4250006E7A09 /* ShuffleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShuffleViewController.m; sourceTree = "<group>"; };
 		A016FDB91B8D14BA006E7A09 /* PreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewCell.h; sourceTree = "<group>"; };
 		A016FDBA1B8D14BA006E7A09 /* PreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewCell.m; sourceTree = "<group>"; };
+		A01D417C1D5B17AD007B3177 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		A02853ED1D4E2FEC00EBA5B7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		A02E852B1BEC80A10093EDE8 /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpg; sourceTree = "<group>"; };
 		A03010391BABC6AA0041E2CF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/QBImagePicker.strings; sourceTree = "<group>"; };
@@ -1196,6 +1198,7 @@
 				AEEC6C771A6DB6220021B7E4 /* Home */,
 				AEEC6C751A6DB5EE0021B7E4 /* Login */,
 				AEF7F29E1A6875360022410B /* Main.storyboard */,
+				A01D417C1D5B17AD007B3177 /* Login.storyboard */,
 				AE01724C1A65CD8E0014266F /* Images.xcassets */,
 				AE01724E1A65CD8E0014266F /* LaunchScreen.xib */,
 				AE01723C1A65CD8E0014266F /* Supporting Files */,
@@ -1578,6 +1581,7 @@
 				AEC0688F1B2D309E007975D2 /* FeedDetailCell.xib in Resources */,
 				AEF7F2A01A6875360022410B /* Main.storyboard in Resources */,
 				A03010521BABC6AA0041E2CF /* QBImagePicker.strings in Resources */,
+				A01D417D1D5B17AD007B3177 /* Login.storyboard in Resources */,
 				AE2A8DE51ACA700100029D52 /* WishDetailCell.xib in Resources */,
 				A07C66C61BE070E400413D32 /* read_me.txt in Resources */,
 				A02E852C1BEC80A10093EDE8 /* test.jpg in Resources */,

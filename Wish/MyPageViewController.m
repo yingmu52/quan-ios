@@ -185,8 +185,7 @@
     //delete user info, this lines must be below [self clearCoreData];
     [User updateOwnerInfo:[NSDictionary dictionary]];
     
-    [[[UIApplication sharedApplication] keyWindow] setRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"LoginNavigationViewController"]];
-    
+    [[[UIApplication sharedApplication] keyWindow] setRootViewController:[LoginViewController initLoginViewController]];
 }
 
 - (void)clearCoreData:(BOOL)shouldGoBackToTabBar{

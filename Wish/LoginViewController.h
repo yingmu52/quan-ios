@@ -11,4 +11,5 @@
 
 @interface LoginViewController : UIViewController <WXApiDelegate>
 
++ (LoginViewController *)initLoginViewController;
 @end

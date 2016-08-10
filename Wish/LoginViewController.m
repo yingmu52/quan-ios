@@ -22,9 +22,10 @@
 @implementation LoginViewController
 
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    self.navigationController.navigationBar.hidden = YES;
++ (LoginViewController *)initLoginViewController{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+    LoginViewController *lvc = [storyboard instantiateViewControllerWithIdentifier:@"LoginNavigationViewController"];
+    return lvc;
 }
 
 - (FetchCenter *)fetchCenter{
@@ -110,7 +111,8 @@
         [User updateAttributeFromDictionary:additionalUserInfo];
         
         //show Main View
-        [[[UIApplication sharedApplication] keyWindow] setRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"]];
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        [[[UIApplication sharedApplication] keyWindow] setRootViewController:[storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"]];
         
     }else{
         if ([[User loginType] isEqualToString:@"qq"]) {
