@@ -20,12 +20,15 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
+
     
-    //长按显示事件信息，方便开发调试
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]
-                                               initWithTarget:self
-                                               action:@selector(longPressed:)];
-    [self.collectionView addGestureRecognizer:longPress];
+    //长按显示事件信息，方便开发调试, 目前只支持内网
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_TESTURL]) {
+        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]
+                                                   initWithTarget:self
+                                                   action:@selector(longPressed:)];
+        [self.collectionView addGestureRecognizer:longPress];
+    }
     
     if (!self.circle) { //发现页，self.circle == nil 是圈子事件页
         //设置导航项目
