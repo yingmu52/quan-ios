@@ -115,7 +115,7 @@
     
     //貌似数据不全会影响到FRC在列表上的展示？
     plan.updateDate = [NSDate date];
-    plan.discoverIndex = @(1);
+    plan.discoverIndex = @(888);
     
     
     plan.planStatus = @(PlanStatusOnGoing);
