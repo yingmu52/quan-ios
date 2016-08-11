@@ -12,8 +12,6 @@
 		A016FDBB1B8D14BA006E7A09 /* PreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A016FDBA1B8D14BA006E7A09 /* PreviewCell.m */; };
 		A016FDBC1B8D14BA006E7A09 /* PreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A016FDBA1B8D14BA006E7A09 /* PreviewCell.m */; };
 		A01D417D1D5B17AD007B3177 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A01D417C1D5B17AD007B3177 /* Login.storyboard */; };
-		A02E852C1BEC80A10093EDE8 /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A02E852B1BEC80A10093EDE8 /* test.jpg */; };
-		A02E852D1BEC80A10093EDE8 /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A02E852B1BEC80A10093EDE8 /* test.jpg */; };
 		A03010521BABC6AA0041E2CF /* QBImagePicker.strings in Resources */ = {isa = PBXBuildFile; fileRef = A03010371BABC6AA0041E2CF /* QBImagePicker.strings */; };
 		A03010531BABC6AA0041E2CF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A030103B1BABC6AA0041E2CF /* Info.plist */; };
 		A03010541BABC6AA0041E2CF /* QBAlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A030103E1BABC6AA0041E2CF /* QBAlbumCell.m */; };
@@ -34,6 +32,7 @@
 		A04842F71B99F5360032E927 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A04842F61B99F5360032E927 /* libc++.dylib */; };
 		A04842F81B99F54B0032E927 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A04842F41B99F29C0032E927 /* libsqlite3.0.dylib */; };
 		A0493EC01D5CC26C00B2C0F9 /* CWStatusBarNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = A0493EBF1D5CC26C00B2C0F9 /* CWStatusBarNotification.m */; };
+		A0493EC41D5CF5CE00B2C0F9 /* spider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0493EC31D5CF5CE00B2C0F9 /* spider.framework */; };
 		A04942991BBA3A67002A8A3A /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A04942981BBA3A67002A8A3A /* CommentViewController.m */; };
 		A049429A1BBA3A67002A8A3A /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A04942981BBA3A67002A8A3A /* CommentViewController.m */; };
 		A053CF7E1BA4EFF00007970A /* PostImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF7D1BA4EFF00007970A /* PostImageCell.m */; };
@@ -342,7 +341,6 @@
 		A016FDBA1B8D14BA006E7A09 /* PreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewCell.m; sourceTree = "<group>"; };
 		A01D417C1D5B17AD007B3177 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		A02853ED1D4E2FEC00EBA5B7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
-		A02E852B1BEC80A10093EDE8 /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpg; sourceTree = "<group>"; };
 		A03010391BABC6AA0041E2CF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/QBImagePicker.strings; sourceTree = "<group>"; };
 		A030103B1BABC6AA0041E2CF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A030103D1BABC6AA0041E2CF /* QBAlbumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBAlbumCell.h; sourceTree = "<group>"; };
@@ -376,6 +374,7 @@
 		A04842F61B99F5360032E927 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		A0493EBE1D5CC26C00B2C0F9 /* CWStatusBarNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWStatusBarNotification.h; sourceTree = "<group>"; };
 		A0493EBF1D5CC26C00B2C0F9 /* CWStatusBarNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWStatusBarNotification.m; sourceTree = "<group>"; };
+		A0493EC31D5CF5CE00B2C0F9 /* spider.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = spider.framework; sourceTree = "<group>"; };
 		A04942971BBA3A67002A8A3A /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
 		A04942981BBA3A67002A8A3A /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
 		A053CF7C1BA4EFF00007970A /* PostImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostImageCell.h; sourceTree = "<group>"; };
@@ -745,6 +744,7 @@
 				A0EDFCBF1B90C63400B10594 /* libstdc++.6.dylib in Frameworks */,
 				A0EDFCBD1B90C62100B10594 /* libxml2.dylib in Frameworks */,
 				A0D102701B84F6BA006B0E4E /* libz.dylib in Frameworks */,
+				A0493EC41D5CF5CE00B2C0F9 /* spider.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1222,7 +1222,6 @@
 		AE01723C1A65CD8E0014266F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A02E852B1BEC80A10093EDE8 /* test.jpg */,
 				A04842E71B98CF9E0032E927 /* UIImageView+ImageCache.h */,
 				A04842E81B98CF9E0032E927 /* UIImageView+ImageCache.m */,
 				A066C3871BB7AE08003B51D5 /* MSSuperViewController.h */,
@@ -1469,6 +1468,7 @@
 		F3D9C90B14CD662C469ECA13 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A0493EC31D5CF5CE00B2C0F9 /* spider.framework */,
 				A07C66C81BE078EE00413D32 /* TencentOpenApi_IOS_Bundle.bundle */,
 				A07C66C91BE078EE00413D32 /* TencentOpenAPI.framework */,
 				A095D8321BCB884500ED3DFD /* PgySDk.framework */,
@@ -1597,7 +1597,6 @@
 				A01D417D1D5B17AD007B3177 /* Login.storyboard in Resources */,
 				AE2A8DE51ACA700100029D52 /* WishDetailCell.xib in Resources */,
 				A07C66C61BE070E400413D32 /* read_me.txt in Resources */,
-				A02E852C1BEC80A10093EDE8 /* test.jpg in Resources */,
 				AE59B5F11B40FB55006CA4AB /* ViewForEmptyEvent.xib in Resources */,
 				A0D1025C1B84EF3B006B0E4E /* HeaderView.xib in Resources */,
 				A03010591BABC6AA0041E2CF /* QBImagePicker.storyboard in Resources */,
@@ -1623,7 +1622,6 @@
 				A0D1025D1B84EF3B006B0E4E /* HeaderView.xib in Resources */,
 				A07C66CB1BE078EE00413D32 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				AED355F51B2285D3000427FF /* FeedDetailHeader.xib in Resources */,
-				A02E852D1BEC80A10093EDE8 /* test.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
