@@ -88,7 +88,6 @@
 
 - (void)uploadUserInfo{
     //upload user info
-    __weak typeof(self) weakSelf = self;
     [self.fetchCenter setPersonalInfo:self.nameTextField.text
                                gender:self.genderLabel.text
                               imageId:[User updatedProfilePictureId]
@@ -96,8 +95,9 @@
                          personalInfo:self.descriptionTextView.text completion:^{
 
                              //切换到主页
-                             [[[UIApplication sharedApplication] keyWindow] setRootViewController:[weakSelf.storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"]];
-                                                                                                   
+                             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                             [[[UIApplication sharedApplication] keyWindow] setRootViewController:[storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"]];
+                             
                          }];
     [self.nameTextField resignFirstResponder];
     [self.occupationTextField resignFirstResponder];
