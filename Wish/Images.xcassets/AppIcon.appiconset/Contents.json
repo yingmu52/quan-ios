@@ -1,8 +1,9 @@
 {
   "images" : [
     {
-      "idiom" : "iphone",
       "size" : "29x29",
+      "idiom" : "iphone",
+      "filename" : "29pt_@1x.png",
       "scale" : "1x"
     },
     {
@@ -11,9 +12,8 @@
       "scale" : "2x"
     },
     {
-      "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "29pt_@3x.png",
+      "size" : "29x29",
       "scale" : "3x"
     },
     {
@@ -40,26 +40,25 @@
       "scale" : "2x"
     },
     {
-      "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "60pt_@2x.png",
+      "size" : "60x60",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "60pt_@3x-1.png",
+      "filename" : "60pt_@3x.png",
       "scale" : "3x"
     },
     {
-      "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "29pt_@1x.png",
+      "size" : "29x29",
       "scale" : "1x"
     },
     {
-      "idiom" : "ipad",
       "size" : "29x29",
+      "idiom" : "ipad",
+      "filename" : "29pt_@2x.png",
       "scale" : "2x"
     },
     {
@@ -122,9 +121,8 @@
       "scale" : "2x"
     },
     {
-      "size" : "60x60",
       "idiom" : "car",
-      "filename" : "60pt_@3x.png",
+      "size" : "60x60",
       "scale" : "3x"
     },
     {
@@ -144,13 +142,13 @@
     {
       "size" : "29x29",
       "idiom" : "watch",
-      "filename" : "29pt_@2x.png",
       "role" : "companionSettings",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "watch",
+      "filename" : "29pt_@3x.png",
       "role" : "companionSettings",
       "scale" : "3x"
     },
@@ -184,6 +182,13 @@
       "size" : "512x512",
       "idiom" : "mac",
       "filename" : "512pt_@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "60x60",
+      "idiom" : "car",
+      "filename" : "60pt_@2x.png",
+      "unassigned" : true,
       "scale" : "2x"
     }
   ],
