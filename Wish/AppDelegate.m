@@ -42,7 +42,7 @@
     //Register for push notification
     UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeAlert|UIUserNotificationTypeSound categories:nil];
     [application registerUserNotificationSettings:settings];
-    
+    [application registerForRemoteNotifications];
     
     [self.window makeKeyAndVisible];
     return YES;
@@ -50,13 +50,6 @@
 
 
 #pragma mark - Push Notification
-- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(nonnull UIUserNotificationSettings *)notificationSettings{
-    
-    //only register remote notification when permission is granted
-    if (notificationSettings != UIUserNotificationTypeNone) {
-        [application registerForRemoteNotifications];
-    }
-}
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     
@@ -74,20 +67,26 @@
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo{
-    
-//    UIApplicationState currentState = [[UIApplication sharedApplication] applicationState];
-//    if (currentState == UIApplicationStateBackground | currentState == UIApplicationStateInactive) {
-//        //切换到主页
-//        UITabBarController *tbc = [self.loginVC.storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
-//        [[[UIApplication sharedApplication] keyWindow] setRootViewController:tbc];
-//
-//        [tbc setSelectedIndex:3]; //选择消息页
-//        NSString *feedId = [userInfo valueForKeyPath:@"info.info_id"];
-//        UINavigationController *nv = tbc.selectedViewController;
-//        MessageListViewController *mlvc = nv.viewControllers.firstObject;
-//        [mlvc performSegueWithIdentifier:@"showFeedDetailFromMessage" sender:feedId];
-//    }
+        UIApplicationState currentState = [[UIApplication sharedApplication] applicationState];
+        if (currentState == UIApplicationStateActive) {
+            NSString *message = [NSString stringWithFormat:@"%@",[userInfo valueForKeyPath:@"aps.alert"]];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"消息"
+                                                                           message:message
+                                                                    preferredStyle:UIAlertControllerStyleActionSheet];
+            [alert addAction:[UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:nil]];
+            [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+        }else{
+            //切换到消息
+            [self selectMainTabbarAtIndex:3];
+        }
+}
 
+
+-(void)selectMainTabbarAtIndex:(NSUInteger)index{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UITabBarController *tbc = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
+    [[[UIApplication sharedApplication] keyWindow] setRootViewController:tbc];
+    [tbc setSelectedIndex:index];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(nonnull NSError *)error{
@@ -180,11 +179,7 @@
                             completion:^(NSString *circleName)
         {
             //切换到圈子页
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            UITabBarController *tbc = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
-            [[[UIApplication sharedApplication] keyWindow] setRootViewController:tbc];
-            [tbc setSelectedIndex:1];
-
+            [self selectMainTabbarAtIndex:1];
             
             //提示加入成功
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow]
