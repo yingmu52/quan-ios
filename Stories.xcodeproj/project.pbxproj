@@ -33,6 +33,7 @@
 		A04842EA1B98CF9E0032E927 /* UIImageView+ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A04842E81B98CF9E0032E927 /* UIImageView+ImageCache.m */; };
 		A04842F71B99F5360032E927 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A04842F61B99F5360032E927 /* libc++.dylib */; };
 		A04842F81B99F54B0032E927 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A04842F41B99F29C0032E927 /* libsqlite3.0.dylib */; };
+		A0493EC01D5CC26C00B2C0F9 /* CWStatusBarNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = A0493EBF1D5CC26C00B2C0F9 /* CWStatusBarNotification.m */; };
 		A04942991BBA3A67002A8A3A /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A04942981BBA3A67002A8A3A /* CommentViewController.m */; };
 		A049429A1BBA3A67002A8A3A /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A04942981BBA3A67002A8A3A /* CommentViewController.m */; };
 		A053CF7E1BA4EFF00007970A /* PostImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF7D1BA4EFF00007970A /* PostImageCell.m */; };
@@ -373,6 +374,8 @@
 		A04842E81B98CF9E0032E927 /* UIImageView+ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+ImageCache.m"; sourceTree = "<group>"; };
 		A04842F41B99F29C0032E927 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		A04842F61B99F5360032E927 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		A0493EBE1D5CC26C00B2C0F9 /* CWStatusBarNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWStatusBarNotification.h; sourceTree = "<group>"; };
+		A0493EBF1D5CC26C00B2C0F9 /* CWStatusBarNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWStatusBarNotification.m; sourceTree = "<group>"; };
 		A04942971BBA3A67002A8A3A /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
 		A04942981BBA3A67002A8A3A /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
 		A053CF7C1BA4EFF00007970A /* PostImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostImageCell.h; sourceTree = "<group>"; };
@@ -803,6 +806,15 @@
 			path = WeChatSDK_1.5;
 			sourceTree = "<group>";
 		};
+		A0493EBD1D5CC26C00B2C0F9 /* CWStatusBarNotification */ = {
+			isa = PBXGroup;
+			children = (
+				A0493EBE1D5CC26C00B2C0F9 /* CWStatusBarNotification.h */,
+				A0493EBF1D5CC26C00B2C0F9 /* CWStatusBarNotification.m */,
+			);
+			path = CWStatusBarNotification;
+			sourceTree = "<group>";
+		};
 		A057D2F41D48CAF2009AFE02 /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -1010,6 +1022,7 @@
 		A0F7D3A51B84E851003CCB34 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				A0493EBD1D5CC26C00B2C0F9 /* CWStatusBarNotification */,
 				A0C15C5E1D4CB9350094BEF9 /* MJRefresh */,
 				A057D2F41D48CAF2009AFE02 /* MBProgressHUD */,
 				A0A10E9F1CB586AA0004D5DE /* QCloudDownloadSDK */,
@@ -1697,6 +1710,7 @@
 				A0CCA0261CB2DD5D006CEA72 /* FollowingViewController.m in Sources */,
 				A0F513221BD98B9600279B9D /* Feed.m in Sources */,
 				A03010581BABC6AA0041E2CF /* QBCheckmarkView.m in Sources */,
+				A0493EC01D5CC26C00B2C0F9 /* CWStatusBarNotification.m in Sources */,
 				A030105B1BABC6AA0041E2CF /* QBSlomoIconView.m in Sources */,
 				A0F513201BD98B9600279B9D /* Feed+CoreDataProperties.m in Sources */,
 				A0D1023E1B84ECDF006B0E4E /* NavigationBar.m in Sources */,

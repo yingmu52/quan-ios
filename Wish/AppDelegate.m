@@ -13,6 +13,7 @@
 #import "LoginViewController.h"
 #import "MessageListViewController.h"
 #import "MBProgressHUD.h"
+#import "CWStatusBarNotification.h"
 @interface AppDelegate () <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,weak) LoginViewController *loginVC;
@@ -69,12 +70,14 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo{
         UIApplicationState currentState = [[UIApplication sharedApplication] applicationState];
         if (currentState == UIApplicationStateActive) {
-            NSString *message = [NSString stringWithFormat:@"%@",[userInfo valueForKeyPath:@"aps.alert"]];
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"消息"
-                                                                           message:message
-                                                                    preferredStyle:UIAlertControllerStyleActionSheet];
-            [alert addAction:[UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:nil]];
-            [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+            NSString *message = [NSString stringWithFormat:@"%@",[userInfo valueForKeyPath:@"aps.alert"]];            
+            CWStatusBarNotification *cbn = [CWStatusBarNotification new];
+            cbn.notificationLabelBackgroundColor = [Theme globleColor];
+            cbn.notificationAnimationInStyle = CWNotificationAnimationStyleLeft;
+            cbn.notificationAnimationOutStyle = CWNotificationAnimationStyleRight;
+            cbn.notificationStyle = CWNotificationStyleStatusBarNotification;
+            [cbn displayNotificationWithMessage:message
+                                    forDuration:2.0];
         }else{
             //切换到消息
             [self selectMainTabbarAtIndex:3];
