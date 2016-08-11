@@ -180,7 +180,8 @@
                             completion:^(NSString *circleName)
         {
             //切换到圈子页
-            UITabBarController *tbc = [self.loginVC.storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            UITabBarController *tbc = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
             [[[UIApplication sharedApplication] keyWindow] setRootViewController:tbc];
             [tbc setSelectedIndex:1];
 
