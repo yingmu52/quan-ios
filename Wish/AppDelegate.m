@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #define BUGLY_APP_ID @"900007998"
 #define QQ_URLSCHEME @"tencent1104337894"
-#define PGY_APPID @"7f1cd492fc0f48875650e0d1c702093b"
+#define PGY_APPID @"66e5b274501bae9aed70ab7aeea5a7a6"
 #import "LoginViewController.h"
 #import "MessageListViewController.h"
 #import "MBProgressHUD.h"
