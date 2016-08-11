@@ -302,9 +302,17 @@
             
             //获取用户信息
             UIAlertAction *getUserInfo = [UIAlertAction actionWithTitle:@"获取个人信息" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                NSString *userInfo = [NSString stringWithFormat:@"uid:%@\nukey:%@\npicUrl:%@",[User uid],[User uKey],[User updatedProfilePictureId]];
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:userInfo preferredStyle:UIAlertControllerStyleAlert];
-                [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+                NSString *userInfo = [NSString stringWithFormat:@"uid:%@\n ukey:%@\n deviceToken:%@",[User uid],[User uKey],[User deviceToken]];
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                               message:userInfo
+                                                                        preferredStyle:UIAlertControllerStyleAlert];
+                
+                [alert addAction:[UIAlertAction actionWithTitle:@"点击复制到粘帖板"
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction * _Nonnull action)
+                {
+                    [[UIPasteboard generalPasteboard] setString:userInfo];
+                }]];
                 [self presentViewController:alert animated:YES completion:nil];
             }];
             
