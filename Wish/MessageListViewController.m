@@ -54,7 +54,9 @@
                                            onPage:nil
                                        completion:^(NSNumber *currentPage, NSNumber *totalPage)
     {
-        [self.tableView.mj_header endRefreshing];
+        self.currentPage = @(2); //这个currentPage其实是下一页的意思
+        [self.collectionView.mj_header endRefreshing];
+        [self.collectionView.mj_footer endRefreshing];
         [self.tabBarController.tabBar.selectedItem setBadgeValue:nil]; //去掉好点计数
     }];
 }

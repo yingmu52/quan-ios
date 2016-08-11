@@ -43,16 +43,32 @@
         UIButton *followButton = [Theme buttonWithImage:[Theme navIconFollowDefault] target:self selector:@selector(showFollowingView) frame:CGRectMake(0, 0, 25, 25)];
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:followButton];
         
+        //下拉刷新
+        MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self
+                                                                         refreshingAction:@selector(loadNewData)];
+        header.lastUpdatedTimeLabel.hidden = YES;
+        self.collectionView.mj_header = header;
+        [self.collectionView.mj_header beginRefreshing];
+
+        
         //上拉刷新
         self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self
                                                                              refreshingAction:@selector(loadMoreData)];
-        
-        //初次拉数据
-        [self loadMoreData];
     }
 
 }
 
+- (void)loadNewData{
+    NSArray *localList = [self.collectionFetchedRC.fetchedObjects valueForKey:@"planId"];
+    [self.fetchCenter getDiscoveryList:localList
+                                onPage:nil
+                            completion:^(NSNumber *currentPage, NSNumber *totalPage)
+     {
+         self.currentPage = @(2); //这个currentPage其实是下一页的意思
+         [self.collectionView.mj_header endRefreshing];
+         [self.collectionView.mj_footer endRefreshing];
+     }];
+}
 - (void)loadMoreData{
     NSArray *localList = [self.collectionFetchedRC.fetchedObjects valueForKey:@"planId"];
     [self.fetchCenter getDiscoveryList:localList
