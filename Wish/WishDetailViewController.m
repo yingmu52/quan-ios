@@ -93,9 +93,9 @@
     [self initialHeaderView];
     [self.tableView registerNib:[UINib nibWithNibName:@"WishDetailCell" bundle:nil]
          forCellReuseIdentifier:@"WishDetailCell"];
-    self.tableView.separatorColor = [UIColor clearColor]; //remove separation line
+    self.tableView.separatorColor = [UIColor clearColor]; //remove separation linecell
     //hide follow button first and display later when the correct value is fetched from the server
-    self.headerView.followButton.hidden = [self.plan.owner.ownerId isEqualToString:[User uid]];
+    self.headerView.followButton.hidden = [self.plan.owner.ownerId isEqualToString:[User uid]] | [User isVisitor];
     
     //上拉刷新
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self

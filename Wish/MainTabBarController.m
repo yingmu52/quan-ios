@@ -10,7 +10,7 @@
 #import "SystemUtil.h"
 #import "FetchCenter.h"
 #import "Theme.h"
-@interface MainTabBarController () <FetchCenterDelegate>
+@interface MainTabBarController () <FetchCenterDelegate,UITabBarControllerDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,strong) NSTimer *messageNotificationTimer;
 @property (nonatomic) NSInteger numberOfMessages;
@@ -48,7 +48,11 @@
 }
 
 - (void)showShuffleView{
-    [self performSegueWithIdentifier:@"showShuffleViewFromTabbar" sender:nil];
+    if ([User isVisitor]) {
+        [self showVisitorLoginAlert];
+    }else{
+        [self performSegueWithIdentifier:@"showShuffleViewFromTabbar" sender:nil];
+    }
 }
 
 
@@ -65,6 +69,9 @@
 
     //触发消息读取的时钟
     [self.messageNotificationTimer fire];
+    
+    //设置delegate，游客登陆态回调要用到
+    self.delegate = self;
 }
 #pragma mark - observe message notification
 
@@ -128,4 +135,32 @@
     }
 }
 
+
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
+    if (viewController != tabBarController.viewControllers.firstObject && [User isVisitor]) {
+        [self showVisitorLoginAlert];
+        return NO;
+    }
+    return YES;
+}
+
+
+- (void)showVisitorLoginAlert{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"登录后才能使用更多的功能哦！"
+                                                                   message:nil
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"立即登录"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * _Nonnull action)
+                      {
+                          [AppDelegate logout];
+                      }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"稍等片刻" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
 @end
+
+
+
+
+

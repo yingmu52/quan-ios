@@ -129,6 +129,11 @@
 }
 
 
++ (BOOL)isVisitor{
+    NSDictionary *info = [self.class getOwnerInfo];
+    return [info[LOGIN_TYPE] isEqualToString:@"visitor"];
+}
+
 
 #pragma mark - simulator implementation (need to uncomment )
 /*

@@ -48,7 +48,7 @@
                                     </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <state key="normal" title="游客登陆">
+                                <state key="normal" title="游客登录">
                                     <color key="titleColor" red="0.6705882352941176" green="0.6705882352941176" blue="0.6705882352941176" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <variation key="default">
@@ -61,6 +61,9 @@
                                         <include reference="9R0-gE-KiT"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="visitorLogin" destination="2KO-l2-Hsp" eventType="touchUpInside" id="2e4-NU-n8H"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sxb-Er-WI0">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>

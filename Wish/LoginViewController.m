@@ -175,4 +175,13 @@
     }];
 }
 
+#pragma mark - visitor login 
+
+- (IBAction)visitorLogin{
+    [User updateOwnerInfo:@{LOGIN_TYPE:@"visitor"}];
+    [AppDelegate showMainTabbar];
+}
+
 @end
+
+
