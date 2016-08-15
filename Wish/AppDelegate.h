@@ -40,5 +40,11 @@
 - (void)saveContext:(NSManagedObjectContext *)context;
 - (NSURL *)applicationDocumentsDirectory;
 + (NSManagedObjectContext *)getContext;
+
+
++ (void)showMainTabbar;
++ (void)clearCoreData:(BOOL)shouldGoBackToTabBar;
++ (void)logout;
+
 @end
 

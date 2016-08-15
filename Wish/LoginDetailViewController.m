@@ -93,11 +93,7 @@
                               imageId:[User updatedProfilePictureId]
                            occupation:self.occupationTextField.text
                          personalInfo:self.descriptionTextView.text completion:^{
-
-                             //切换到主页
-                             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                             [[[UIApplication sharedApplication] keyWindow] setRootViewController:[storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"]];
-                             
+                             [AppDelegate showMainTabbar];
                          }];
     [self.nameTextField resignFirstResponder];
     [self.occupationTextField resignFirstResponder];

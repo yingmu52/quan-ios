@@ -334,6 +334,64 @@
     }
     return _fetchCenter;
 }
+
+
+
+#pragma mark - 登出操作
+
++ (void)logout{
+    //delete user info, this lines must be below [self clearCoreData];
+    [User updateOwnerInfo:[NSDictionary dictionary]];
+    
+    [[[UIApplication sharedApplication] keyWindow] setRootViewController:[LoginViewController initLoginViewController]];
+}
+
++ (void)clearCoreData:(BOOL)shouldGoBackToTabBar{
+    //see Updated Solution for iOS 9+ in http://stackoverflow.com/questions/1077810/delete-reset-all-entries-in-core-data
+    //删除本地数据库
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        
+        //1
+        [NSUserDefaults resetStandardUserDefaults];
+        
+        //2. 删除所有Core Data数据
+        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        
+        //Each thread needs to have its own moc
+        NSManagedObjectContext *backgroundMoc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        backgroundMoc.parentContext = delegate.managedObjectContext;
+        
+        for (NSEntityDescription *entity in delegate.managedObjectModel.entities) {
+            NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:entity.name];
+            [fetchRequest setIncludesPropertyValues:NO]; //only fetch the managedObjectID
+            
+            NSError *error;
+            NSArray *fetchedObjects = [backgroundMoc executeFetchRequest:fetchRequest error:&error];
+            for (NSManagedObject *object in fetchedObjects)
+            {
+                [backgroundMoc deleteObject:object];
+            }
+        }
+        
+        //3
+        [delegate saveContext:backgroundMoc];
+        if (shouldGoBackToTabBar) {
+            dispatch_main_async_safe(^{
+                //切换到主页
+                [AppDelegate showMainTabbar];
+            });
+        }
+    });
+    
+}
+
+
++ (void)showMainTabbar{
+    //show Main View
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    [[[UIApplication sharedApplication] keyWindow] setRootViewController:[storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"]];
+}
 @end
 
 

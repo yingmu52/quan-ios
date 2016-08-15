@@ -110,10 +110,8 @@
                                              PERSONALDETAIL:userInfo[@"description"]};
         [User updateAttributeFromDictionary:additionalUserInfo];
         
-        //show Main View
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        [[[UIApplication sharedApplication] keyWindow] setRootViewController:[storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"]];
-        
+        [AppDelegate showMainTabbar];
+
     }else{
         if ([[User loginType] isEqualToString:@"qq"]) {
             [self performSegueWithIdentifier:@"showLoginDetail" sender:nil];
