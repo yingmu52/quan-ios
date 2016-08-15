@@ -128,7 +128,7 @@
     
     if (indexPath.section == 1){
         if (indexPath.row == 0) {
-            NSURL *url = [NSURL URLWithString:@"http://www.pgyer.com/Quan"];
+            NSURL *url = [NSURL URLWithString:@"https://itunes.apple.com/us/app/quan-li-shi/id1140426882?ls=1&mt=8"];
             UIApplication *app = [UIApplication sharedApplication];
             if ([app canOpenURL:url]) {
                 [app openURL:url];
