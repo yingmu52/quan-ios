@@ -38,12 +38,10 @@
     //如果用户未登陆，跳转到登陆页
     if (![User isUserLogin]){
         self.window.rootViewController = self.loginVC;
+    }else{
+        [AppDelegate registerForDeviceToken];
     }
     
-    //Register for push notification
-    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeAlert|UIUserNotificationTypeSound categories:nil];
-    [application registerUserNotificationSettings:settings];
-    [application registerForRemoteNotifications];
     
     [self.window makeKeyAndVisible];
     return YES;
@@ -51,6 +49,13 @@
 
 
 #pragma mark - Push Notification
+
++ (void)registerForDeviceToken{
+    UIApplication *application = [UIApplication sharedApplication];
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeAlert|UIUserNotificationTypeSound categories:nil];
+    [application registerUserNotificationSettings:settings];
+    [application registerForRemoteNotifications];
+}
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     
@@ -391,6 +396,8 @@
     //show Main View
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     [[[UIApplication sharedApplication] keyWindow] setRootViewController:[storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"]];
+    
+    [AppDelegate registerForDeviceToken];
 }
 @end
 

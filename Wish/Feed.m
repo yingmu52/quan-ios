@@ -54,7 +54,7 @@
 
     if (checks.count == 0) {
         
-        NSLog(@"%@",feedItem[@"id"]);
+//        NSLog(@"%@",feedItem[@"id"]);
         feed = [NSEntityDescription insertNewObjectForEntityForName:@"Feed"
                                              inManagedObjectContext:context];
         feed.feedId = feedItem[@"id"];
