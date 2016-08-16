@@ -99,28 +99,30 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Owner *owner = [self.tableFetchedRC objectAtIndexPath:indexPath];
-    if (![owner.ownerId isEqualToString:[User uid]]) {
-        UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil
-                                                                      preferredStyle:UIAlertControllerStyleActionSheet];
-        UIAlertAction *delMember = [UIAlertAction actionWithTitle:@"删除该成员" style:UIAlertActionStyleDestructive
-                                                          handler:^(UIAlertAction * _Nonnull action)
-        {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"删除该成员？"
-                                                                           message:owner.ownerName
-                                                                    preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-            UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [self.fetchCenter deleteMember:owner.ownerId inCircle:self.circle.circleId completion:nil];
-            }];
-            [alert addAction:confirm];
-            [self presentViewController:alert animated:YES completion:nil];
-
-        }];
-        [actionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-        [actionSheet addAction:delMember];
-        [self presentViewController:actionSheet animated:YES completion:nil];
-
+    if ([self.circle.ownerId isEqualToString:[User uid]]) { //只有圈主才有删除权限
+        Owner *owner = [self.tableFetchedRC objectAtIndexPath:indexPath];
+        if (![owner.ownerId isEqualToString:[User uid]]) {
+            UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil
+                                                                          preferredStyle:UIAlertControllerStyleActionSheet];
+            UIAlertAction *delMember = [UIAlertAction actionWithTitle:@"删除该成员" style:UIAlertActionStyleDestructive
+                                                              handler:^(UIAlertAction * _Nonnull action)
+                                        {
+                                            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"删除该成员？"
+                                                                                                           message:owner.ownerName
+                                                                                                    preferredStyle:UIAlertControllerStyleAlert];
+                                            [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+                                            UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                                                [self.fetchCenter deleteMember:owner.ownerId inCircle:self.circle.circleId completion:nil];
+                                            }];
+                                            [alert addAction:confirm];
+                                            [self presentViewController:alert animated:YES completion:nil];
+                                            
+                                        }];
+            [actionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+            [actionSheet addAction:delMember];
+            [self presentViewController:actionSheet animated:YES completion:nil];
+    
+        }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
