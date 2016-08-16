@@ -80,7 +80,6 @@
 		A0A083951BD765F00057CD65 /* Circle+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A0838F1BD765F00057CD65 /* Circle+CoreDataProperties.m */; };
 		A0A10EA61CB586AA0004D5DE /* libTXYDownloader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A10EA01CB586AA0004D5DE /* libTXYDownloader.a */; };
 		A0A10EA71CB586AA0004D5DE /* libTXYUploader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A10EA31CB586AA0004D5DE /* libTXYUploader.a */; };
-		A0AD96981C8A899E00B0091D /* CircleSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0AD96971C8A899E00B0091D /* CircleSettingViewController.m */; };
 		A0B9D7691B9E4F1100EE382B /* DashedBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B9D7681B9E4F1100EE382B /* DashedBorderView.m */; };
 		A0B9D76A1B9E4F1100EE382B /* DashedBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B9D7681B9E4F1100EE382B /* DashedBorderView.m */; };
 		A0C15C8D1D4CB9350094BEF9 /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = A0C15C611D4CB9350094BEF9 /* MJRefreshAutoFooter.m */; };
@@ -432,8 +431,6 @@
 		A0A10EA31CB586AA0004D5DE /* libTXYUploader.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTXYUploader.a; sourceTree = "<group>"; };
 		A0A10EA41CB586AA0004D5DE /* TXYBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXYBase.h; sourceTree = "<group>"; };
 		A0A10EA51CB586AA0004D5DE /* TXYUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXYUploadManager.h; sourceTree = "<group>"; };
-		A0AD96961C8A899E00B0091D /* CircleSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleSettingViewController.h; sourceTree = "<group>"; };
-		A0AD96971C8A899E00B0091D /* CircleSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleSettingViewController.m; sourceTree = "<group>"; };
 		A0B9D7671B9E4F1100EE382B /* DashedBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashedBorderView.h; sourceTree = "<group>"; };
 		A0B9D7681B9E4F1100EE382B /* DashedBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashedBorderView.m; sourceTree = "<group>"; };
 		A0C15C601D4CB9350094BEF9 /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
@@ -1162,8 +1159,6 @@
 				A0A0835B1BD74F260057CD65 /* CircleListViewController.m */,
 				A0342B881C816EA400803BD7 /* CircleListCell.h */,
 				A0342B891C816EA400803BD7 /* CircleListCell.m */,
-				A0AD96961C8A899E00B0091D /* CircleSettingViewController.h */,
-				A0AD96971C8A899E00B0091D /* CircleSettingViewController.m */,
 				A0CBDCB21C8DF09800DA53FF /* EmptyCircleView.h */,
 				A0CBDCB31C8DF09800DA53FF /* EmptyCircleView.m */,
 				A0CBDCB41C8DF09800DA53FF /* EmptyCircleView.xib */,
@@ -1715,7 +1710,6 @@
 				A0D102231B84EB6A006B0E4E /* SDWebImageDownloaderOperation.m in Sources */,
 				A0C15C971D4CB9350094BEF9 /* MJRefreshBackStateFooter.m in Sources */,
 				A0F7D4451B84E851003CCB34 /* GCPTextView.m in Sources */,
-				A0AD96981C8A899E00B0091D /* CircleSettingViewController.m in Sources */,
 				A0F5131C1BD98B9600279B9D /* Plan+CoreDataProperties.m in Sources */,
 				A0B9D7691B9E4F1100EE382B /* DashedBorderView.m in Sources */,
 				A0C15C921D4CB9350094BEF9 /* MJRefreshAutoGifFooter.m in Sources */,

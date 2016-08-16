@@ -10,10 +10,13 @@
 #import "CircleSettingViewController.h"
 #import "PostViewController.h"
 #import "EmptyCircleView.h"
-
+#import "CircleEditViewController.h"
+#import "MemberListViewController.h"
+#import "InvitationViewController.h"
 @interface PlansViewController () <EmptyCircleViewDelegate>
 @property (nonatomic,strong) EmptyCircleView *emptyView;
 @property (nonatomic,strong) NSNumber *currentPage;
+@property (nonatomic,strong) UIAlertController *moreActionSheet;
 @end
 
 @implementation PlansViewController
@@ -25,18 +28,6 @@
     }
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    [super prepareForSegue:segue sender:sender];
-    if ([segue.identifier isEqualToString:@"showCircleSettingView"]) {
-        CircleSettingViewController *csc = segue.destinationViewController;
-        //        csc.delegate = self;
-        csc.circle = self.circle;
-    }
-    if ([segue.identifier isEqualToString:@"showPostFromPlansView"]) {
-        PostViewController *pvc = segue.destinationViewController;
-        pvc.circle = self.circle;
-    }
-}
 
 - (NSFetchRequest *)collectionFetchRequest{
     if (!_collectionFetchRequest) {
@@ -60,15 +51,13 @@
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
         self.navigationItem.title = self.circle.circleName;
         
-        //只有主人才能设置圈子
-        if ([self.circle.ownerId isEqualToString:[User uid]]) {
-            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[Theme navSettingIcon]
-                                                                                      style:UIBarButtonItemStylePlain
-                                                                                     target:self
-                                                                                     action:@selector(showCircleSettingView)];
-        }
-        self.navigationItem.title = self.circle.circleName;
         
+        //点点点入口
+        UIButton *moreBtn = [Theme buttonWithImage:[Theme navMoreButtonDefault]
+                                            target:self
+                                          selector:@selector(showMoreOptions)
+                                             frame:CGRectNull]; //使用真实大小
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:moreBtn];
         
         
         self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self
@@ -138,5 +127,130 @@
         [self setUpEmptyView];
     }
 }
+
+#pragma mark - 点点点入口
+
+- (UIAlertController *)moreActionSheet{
+    if (!_moreActionSheet) {
+        _moreActionSheet = [UIAlertController alertControllerWithTitle:nil
+                                                               message:nil
+                                                        preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        UIAlertAction *memberListOption =
+        [UIAlertAction actionWithTitle:@"圈子成员列表"
+                                 style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * _Nonnull action)
+         {
+             [self performSegueWithIdentifier:@"showMemberListView" sender:nil];
+         }];
+        [_moreActionSheet addAction:memberListOption];
+        
+        if ([self.circle.ownerId isEqualToString:[User uid]]) {
+            UIAlertAction *editOption =
+            [UIAlertAction actionWithTitle:@"编辑圈子资料"
+                                     style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * _Nonnull action)
+             {
+                 [self performSegueWithIdentifier:@"showCircleEditingView" sender:nil];
+             }];
+            
+            UIAlertAction *inviteOption =
+            [UIAlertAction actionWithTitle:@"邀请成员加入"
+                                     style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * _Nonnull action)
+             {
+                 [self.fetchCenter getH5invitationUrlWithCircleId:self.circle.circleId
+                                                       completion:^(NSString *urlString)
+                  {
+                      if (urlString.length > 0) {
+                          [self performSegueWithIdentifier:@"showInvitationView" sender:urlString];
+                      }
+                      
+                  }];
+             }];
+            
+            UIAlertAction *deleteOption =
+            [UIAlertAction actionWithTitle:@"删除这个圈子"
+                                     style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * _Nonnull action)
+             {
+                 [self deleteCircle];
+             }];
+            [_moreActionSheet addAction:editOption];
+            [_moreActionSheet addAction:inviteOption];
+            [_moreActionSheet addAction:deleteOption];
+        }
+        
+        [_moreActionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    }
+    return _moreActionSheet;
+}
+
+- (void)showMoreOptions{
+    [self presentViewController:self.moreActionSheet animated:YES completion:nil];
+}
+
+- (void)deleteCircle{
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确认删除圈子?"
+                                                                   message:self.circle.circleName
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定"
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action)
+                              {
+                                  UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+                                  [spinner startAnimating];
+                                  self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+                                  [self.fetchCenter deleteCircle:self.circle.circleId
+                                                      completion:^
+                                   {
+                                       [spinner stopAnimating];
+                                       [self.navigationController popToRootViewControllerAnimated:YES];
+                                   }];
+                              }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消"
+                                                     style:UIAlertActionStyleCancel
+                                                   handler:nil];
+    
+    [alert addAction:confirm];
+    [alert addAction:cancel];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    [super prepareForSegue:segue sender:sender];
+    
+    if ([segue.identifier isEqualToString:@"showPostFromPlansView"]) {
+        PostViewController *pvc = segue.destinationViewController;
+        pvc.circle = self.circle;
+    }
+
+    if ([segue.identifier isEqualToString:@"showCircleEditingView"]) {
+        CircleEditViewController *cec = segue.destinationViewController;
+        cec.circle = self.circle;
+    }
+    if ([segue.identifier isEqualToString:@"showMemberListView"]) {
+        MemberListViewController *mlc = segue.destinationViewController;
+        mlc.circle = self.circle;
+    }
+    
+    if ([segue.identifier isEqualToString:@"showInvitationView"]) {
+        InvitationViewController *ivc = segue.destinationViewController;
+        ivc.titleText = @"邀请好友";
+        ivc.sharedContentTitle = [NSString stringWithFormat:@"%@ 邀请你加入圈子",[User userDisplayName]];
+        ivc.sharedContentDescription = [NSString stringWithFormat:@"【%@】\n%@",self.circle.circleName,self.circle.circleDescription];
+        if (self.circle.imageId.length > 0) {
+            ivc.imageUrl = [self.fetchCenter urlWithImageID:self.circle.imageId
+                                                       size:FetchCenterImageSize400];
+        }
+        ivc.h5Url = sender;
+    }
+}
+
 
 @end
