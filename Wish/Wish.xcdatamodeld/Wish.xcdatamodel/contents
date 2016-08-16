@@ -62,6 +62,7 @@
         <attribute name="planId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="planStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="planTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="shareUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tryTimes" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="updateDate" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="circle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Circle" inverseName="plans" inverseEntity="Circle" syncable="YES"/>
@@ -74,6 +75,6 @@
         <element name="Feed" positionX="-9288" positionY="-30" width="128" height="210"/>
         <element name="Message" positionX="-8892" positionY="-346" width="128" height="178"/>
         <element name="Owner" positionX="-8696" positionY="-43" width="128" height="133"/>
-        <element name="Plan" positionX="-9110" positionY="-324" width="128" height="283"/>
+        <element name="Plan" positionX="-9110" positionY="-324" width="128" height="300"/>
     </elements>
 </model>

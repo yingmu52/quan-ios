@@ -66,7 +66,11 @@
     if (![plan.backgroundNum isEqualToString:dict[@"backGroudPic"]]) {
         plan.backgroundNum = dict[@"backGroudPic"];
     }
-    
+
+    if (![plan.shareUrl isEqualToString:dict[@"share_url"]]) {
+        plan.shareUrl = dict[@"share_url"];
+    }
+
     if (![plan.updateDate isEqualToDate:[NSDate dateWithTimeIntervalSince1970:[dict[@"updateTime"] integerValue]]]) {
         plan.updateDate = [NSDate dateWithTimeIntervalSince1970:[dict[@"updateTime"] integerValue]];
     }

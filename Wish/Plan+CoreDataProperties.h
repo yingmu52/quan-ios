@@ -2,7 +2,7 @@
 //  Plan+CoreDataProperties.h
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2016-03-16.
+//  Created by Xinyi Zhuang on 8/16/16.
 //  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *planTitle;
 @property (nullable, nonatomic, retain) NSNumber *tryTimes;
 @property (nullable, nonatomic, retain) NSDate *updateDate;
+@property (nullable, nonatomic, retain) NSString *shareUrl;
 @property (nullable, nonatomic, retain) Circle *circle;
 @property (nullable, nonatomic, retain) NSSet<Feed *> *feeds;
 @property (nullable, nonatomic, retain) Owner *owner;
