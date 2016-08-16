@@ -7,7 +7,6 @@
 //
 
 #import "PlansViewController.h"
-#import "CircleSettingViewController.h"
 #import "PostViewController.h"
 #import "EmptyCircleView.h"
 #import "CircleEditViewController.h"
