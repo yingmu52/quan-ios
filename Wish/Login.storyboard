@@ -40,31 +40,6 @@
                                     <outletCollection property="gestureRecognizers" destination="vwr-EO-JEP" appends="YES" id="kt0-L0-D6H"/>
                                 </connections>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KJb-4P-16l">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="27" id="9R0-gE-KiT">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="12"/>
-                                    </constraint>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <state key="normal" title="游客登录">
-                                    <color key="titleColor" red="0.6705882352941176" green="0.6705882352941176" blue="0.6705882352941176" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="9R0-gE-KiT"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="9R0-gE-KiT"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="visitorLogin" destination="2KO-l2-Hsp" eventType="touchUpInside" id="2e4-NU-n8H"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sxb-Er-WI0">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -81,20 +56,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="KJb-4P-16l" firstAttribute="width" secondItem="sxb-Er-WI0" secondAttribute="width" id="5zc-dm-DbV"/>
-                            <constraint firstItem="aFP-eb-UeG" firstAttribute="top" secondItem="KJb-4P-16l" secondAttribute="bottom" constant="42" id="AEL-GV-Fcf">
-                                <variation key="heightClass=regular-widthClass=compact" constant="30"/>
-                            </constraint>
                             <constraint firstItem="62r-Mo-QOs" firstAttribute="height" secondItem="Pwk-jZ-8nr" secondAttribute="width" multiplier="296:640" id="B9e-rY-r9U"/>
-                            <constraint firstItem="KJb-4P-16l" firstAttribute="centerX" secondItem="sxb-Er-WI0" secondAttribute="centerX" id="Duh-Sl-qgk"/>
-                            <constraint firstItem="KJb-4P-16l" firstAttribute="top" secondItem="sxb-Er-WI0" secondAttribute="bottom" constant="8" id="USs-yO-Q4q">
-                                <variation key="heightClass=regular-widthClass=compact" constant="18"/>
-                            </constraint>
                             <constraint firstAttribute="centerX" secondItem="62r-Mo-QOs" secondAttribute="centerX" constant="-30.5" id="Uyu-yB-77a">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
+                            <constraint firstItem="aFP-eb-UeG" firstAttribute="top" secondItem="sxb-Er-WI0" secondAttribute="bottom" constant="60" id="eil-6O-O92">
+                                <variation key="heightClass=regular-widthClass=compact" constant="60"/>
+                            </constraint>
                             <constraint firstItem="62r-Mo-QOs" firstAttribute="top" secondItem="jTJ-gW-C6i" secondAttribute="bottom" constant="102" id="ipA-09-rCb">
-                                <variation key="heightClass=regular-widthClass=compact" constant="80"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="60"/>
                             </constraint>
                             <constraint firstAttribute="centerX" secondItem="sxb-Er-WI0" secondAttribute="centerX" constant="-12" id="vWb-sa-VAI">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
@@ -106,7 +76,6 @@
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="62r-Mo-QOs"/>
-                                <exclude reference="KJb-4P-16l"/>
                                 <exclude reference="sxb-Er-WI0"/>
                             </mask>
                             <mask key="constraints">
@@ -114,17 +83,13 @@
                                 <exclude reference="Uyu-yB-77a"/>
                                 <exclude reference="ipA-09-rCb"/>
                                 <exclude reference="vWb-sa-VAI"/>
-                                <exclude reference="5zc-dm-DbV"/>
-                                <exclude reference="Duh-Sl-qgk"/>
-                                <exclude reference="USs-yO-Q4q"/>
-                                <exclude reference="AEL-GV-Fcf"/>
+                                <exclude reference="eil-6O-O92"/>
                                 <exclude reference="yaW-fN-ctV"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="62r-Mo-QOs"/>
-                                <include reference="KJb-4P-16l"/>
                                 <include reference="sxb-Er-WI0"/>
                             </mask>
                             <mask key="constraints">
@@ -132,10 +97,7 @@
                                 <include reference="Uyu-yB-77a"/>
                                 <include reference="ipA-09-rCb"/>
                                 <include reference="vWb-sa-VAI"/>
-                                <include reference="5zc-dm-DbV"/>
-                                <include reference="Duh-Sl-qgk"/>
-                                <include reference="USs-yO-Q4q"/>
-                                <include reference="AEL-GV-Fcf"/>
+                                <include reference="eil-6O-O92"/>
                                 <exclude reference="yaW-fN-ctV"/>
                             </mask>
                         </variation>
