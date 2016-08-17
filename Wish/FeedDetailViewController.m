@@ -369,7 +369,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 }
 
 - (void)didFailSendingRequest{
-    [self.tableView.mj_footer endRefreshing];
+    [super didFailSendingRequest];
     if (!self.feed){
         self.title = @"该内容不存在";
     }

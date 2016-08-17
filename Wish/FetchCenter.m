@@ -1608,7 +1608,10 @@
          completion:(FetchCenterGetRequestCompletionBlock)completionBlock{
     @try {
         //检测网络
-        if (![self hasActiveInternetConnection]) return;
+        if (![self hasActiveInternetConnection]){
+            [self.delegate didFailToReachInternet];
+            return;
+        }
         
         //设置请求统一参数
         baseURL = [baseURL stringByAppendingString:@"?"];

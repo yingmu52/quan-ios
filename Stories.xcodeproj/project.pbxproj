@@ -758,6 +758,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A02D8B371D64155D00B0740D /* BaseViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A066C3871BB7AE08003B51D5 /* MSSuperViewController.h */,
+				A066C3881BB7AE08003B51D5 /* MSSuperViewController.m */,
+			);
+			name = BaseViewControllers;
+			sourceTree = "<group>";
+		};
 		A03010361BABC6AA0041E2CF /* QBImagePicker */ = {
 			isa = PBXGroup;
 			children = (
@@ -1194,6 +1203,7 @@
 		AE01723B1A65CD8E0014266F /* Wish */ = {
 			isa = PBXGroup;
 			children = (
+				A02D8B371D64155D00B0740D /* BaseViewControllers */,
 				A0FEC1301C86167D004C48F1 /* Circles */,
 				AE606A1D1AF4693F003DF16E /* Message */,
 				AEFB04781AD12437009EB0D3 /* Discovery */,
@@ -1219,8 +1229,6 @@
 			children = (
 				A04842E71B98CF9E0032E927 /* UIImageView+ImageCache.h */,
 				A04842E81B98CF9E0032E927 /* UIImageView+ImageCache.m */,
-				A066C3871BB7AE08003B51D5 /* MSSuperViewController.h */,
-				A066C3881BB7AE08003B51D5 /* MSSuperViewController.m */,
 				AE95A9FA1ACFC26A007465D5 /* ImagePicker.h */,
 				AE95A9FB1ACFC26A007465D5 /* ImagePicker.m */,
 				AEC5B9A81AB7EB40008ECB92 /* User.h */,

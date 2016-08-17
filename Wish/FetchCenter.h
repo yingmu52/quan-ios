@@ -39,7 +39,7 @@ typedef enum {
 @optional
 - (void)didReceivedCurrentProgressForUploadingImage:(CGFloat)percentage;
 - (void)didFailUploadingImage:(UIImage *)image;
-
+- (void)didFailToReachInternet;
 /** GET请求的失败回调函数*/
 - (void)didFailSendingRequest;
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "MSSuperViewController.h"
-
+#import "MBProgressHUD.h"
 @interface MSSuperViewController ()
 @property (nonatomic,strong) NSBlockOperation *blockOperation;
 @end
@@ -25,6 +25,36 @@
         _fetchCenter.delegate = self;
     }
     return _fetchCenter;
+}
+
+
+#pragma mark - 网络失败情况的处理
+
+- (void)didFailToReachInternet{
+    [self stopRefreshingWidget];
+}
+
+- (void)didFailSendingRequest{
+    [self stopRefreshingWidget];
+}
+
+- (void)stopRefreshingWidget{
+    if (self.tableView) {
+        if ([self.tableView.mj_header isRefreshing]) {
+            [self.tableView.mj_header endRefreshing];
+        }
+        if ([self.tableView.mj_footer isRefreshing]) {
+            [self.tableView.mj_footer endRefreshing];
+        }
+    }
+    if (self.collectionView) {
+        if ([self.collectionView.mj_header isRefreshing]) {
+            [self.collectionView.mj_header endRefreshing];
+        }
+        if ([self.collectionView.mj_footer isRefreshing]) {
+            [self.collectionView.mj_footer endRefreshing];
+        }
+    }
 }
 
 #pragma mark - Delegates and Data Sources
