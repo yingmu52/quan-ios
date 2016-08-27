@@ -9,7 +9,13 @@
 #import "MSSuperViewController.h"
 #import "Comment.h"
 #import "FeedDetailViewController.h"
+
+@class CommentViewController;
+@protocol CommentViewControllerDelegate <NSObject>
+- (void)commentViewDidFinishInsertingComment;
+@end
 @interface CommentViewController : MSSuperViewController
 @property (nonatomic,strong) Comment *comment;
 @property (nonatomic,strong) Feed *feed;
+@property (nonatomic,weak) id <CommentViewControllerDelegate> delegate;
 @end

@@ -11,7 +11,7 @@
 #import "JTSImageViewController.h"
 #import "CommentViewController.h"
 #import "MainTabBarController.h"
-@interface FeedDetailViewController ()
+@interface FeedDetailViewController () <CommentViewControllerDelegate>
 @property (nonatomic,strong) NSDateFormatter *dateFormatter;
 @property (nonatomic,strong) NSDictionary *textAttributes;
 @property (nonatomic,strong) NSNumber *currentPage;
@@ -384,6 +384,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
             cvc.comment = sender;
         }
         cvc.feed = self.feed;
+        cvc.delegate = self;
     }
 }
 #pragma mark - comment
@@ -429,6 +430,13 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
         [self.headerView setCommentButtonText:self.feed.commentCount];
     }
 
+}
+
+- (void)commentViewDidFinishInsertingComment{
+    NSIndexPath *buttomIndex = [NSIndexPath indexPathForRow:self.tableFetchedRC.fetchedObjects.count - 1 inSection:0];
+    [self.tableView scrollToRowAtIndexPath:buttomIndex
+                          atScrollPosition:UITableViewScrollPositionBottom
+                                  animated:YES];
 }
 
 @end
