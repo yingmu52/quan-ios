@@ -49,7 +49,7 @@
     [self setUpNavigationItem];
     
     //设置描述框UI
-    [self.detailTextView setPlaceholder:@"给圈子添加描述能让别人更快了解哦。"];
+    [self.detailTextView setPlaceholder:@"添加描述可以让你的朋友更了解这个圈子哦！"];
     self.detailTextView.layer.borderColor = [UIColor lightTextColor].CGColor;
     self.detailTextView.layer.borderWidth = 1.0f;
     
