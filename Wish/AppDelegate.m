@@ -14,6 +14,7 @@
 #import "MessageListViewController.h"
 #import "MBProgressHUD.h"
 #import "CWStatusBarNotification.h"
+#import "MainTabBarController.h"
 @interface AppDelegate () <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,weak) LoginViewController *loginVC;
@@ -83,16 +84,20 @@
             cbn.notificationStyle = CWNotificationStyleStatusBarNotification;
             [cbn displayNotificationWithMessage:message
                                     forDuration:2.0];
-        }else{
+         }else{
             //切换到消息
             [self selectMainTabbarAtIndex:3];
         }
 }
 
++ (MainTabBarController *)getMainTabbarController{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    MainTabBarController *mtbc = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
+    return mtbc;
+}
 
 -(void)selectMainTabbarAtIndex:(NSUInteger)index{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UITabBarController *tbc = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
+    MainTabBarController *tbc = [AppDelegate getMainTabbarController];
     [[[UIApplication sharedApplication] keyWindow] setRootViewController:tbc];
     [tbc setSelectedIndex:index];
 }
@@ -394,9 +399,7 @@
 
 + (void)showMainTabbar{
     //show Main View
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    [[[UIApplication sharedApplication] keyWindow] setRootViewController:[storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"]];
-    
+    [[[UIApplication sharedApplication] keyWindow] setRootViewController:[AppDelegate getMainTabbarController]];
     [AppDelegate registerForDeviceToken];
 }
 @end
