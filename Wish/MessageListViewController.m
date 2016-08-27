@@ -40,13 +40,6 @@
                                                                     refreshingAction:@selector(loadMoreData)];
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
-    if (self.tabBarItem.badgeValue.length > 0) {
-        [self loadNewData];
-    }
-}
 
 - (void)loadNewData{
     NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKeyPath:@"messageId"];

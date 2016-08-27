@@ -12,9 +12,6 @@
 #import "Theme.h"
 @interface MainTabBarController () <FetchCenterDelegate,UITabBarControllerDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
-@property (nonatomic,strong) NSTimer *messageNotificationTimer;
-@property (nonatomic) NSInteger numberOfMessages;
-@property (nonatomic) BOOL shouldBark;
 @end
 
 @implementation MainTabBarController
@@ -62,9 +59,6 @@
     //设置选中项的颜色
     UIColor *color = [SystemUtil colorFromHexString:@"#32C9A9"];
     [[UITabBar appearance] setTintColor:color];
-
-    //触发消息读取的时钟
-    [self.messageNotificationTimer fire];
     
     //设置delegate，游客登陆态回调要用到
     self.delegate = self;
@@ -79,71 +73,11 @@
     return _fetchCenter;
 }
 
-- (NSTimer *)messageNotificationTimer{
-    if (!_messageNotificationTimer) {
-        _messageNotificationTimer  = [NSTimer scheduledTimerWithTimeInterval:30.0f target:self selector:@selector(requestMessageCount) userInfo:nil repeats:YES];
-    }
-    return _messageNotificationTimer;
-}
-
-- (void)setNumberOfMessages:(NSInteger)numberOfMessages{
-    UITabBarItem *messageTab;
-    //找到消息项
-    for (UITabBarItem *item in self.tabBar.items) {
-        if ([item.title isEqualToString:@"消息"]) {
-            messageTab = item;
-        }
-    }
-    
-    //设置项右上角的数字提示
-    if (messageTab) {
-        _numberOfMessages = numberOfMessages;
-        if (numberOfMessages > 0) {
-            
-            //显示记数
-            [messageTab setBadgeValue:[NSString stringWithFormat:@"%@",@(numberOfMessages)]];
-            
-        }else{ //隐蔽记数
-            [messageTab setBadgeValue:nil];
-        }
-    }
-}
-
-
-- (void)requestMessageCount{
-    if ([User isUserLogin]) {
-        [self.fetchCenter getMessageNotificationInfo:^(NSNumber *messageCount, NSNumber *followCount) {
-            self.numberOfMessages = messageCount.integerValue;
-        }];
-    }else{
-        self.messageNotificationTimer = nil;
-    }
-}
-
-- (void)dealloc{
-    [self.messageNotificationTimer invalidate];
-    self.messageNotificationTimer = nil;
-}
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item{
-    if (tabBar.selectedItem == item) {
-        [item setBadgeValue:nil];
-    }
+    [item setBadgeValue:nil];
 }
 
-- (void)showVisitorLoginAlert{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"登录后才能使用更多的功能哦！"
-                                                                   message:nil
-                                                            preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"立即登录"
-                                              style:UIAlertActionStyleDefault
-                                            handler:^(UIAlertAction * _Nonnull action)
-                      {
-                          [AppDelegate logout];
-                      }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"稍等片刻" style:UIAlertActionStyleDefault handler:nil]];
-    [self presentViewController:alert animated:YES completion:nil];
-}
 @end
 
 

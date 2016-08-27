@@ -15,6 +15,7 @@
 #import "MBProgressHUD.h"
 #import "CWStatusBarNotification.h"
 #import "MainTabBarController.h"
+#import "MessageListViewController.h"
 @interface AppDelegate () <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,weak) LoginViewController *loginVC;
@@ -74,20 +75,32 @@
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo{
-        UIApplicationState currentState = [[UIApplication sharedApplication] applicationState];
-        if (currentState == UIApplicationStateActive) {
-            NSString *message = [NSString stringWithFormat:@"%@",[userInfo valueForKeyPath:@"aps.alert"]];            
-            CWStatusBarNotification *cbn = [CWStatusBarNotification new];
-            cbn.notificationLabelBackgroundColor = [Theme globleColor];
-            cbn.notificationAnimationInStyle = CWNotificationAnimationStyleLeft;
-            cbn.notificationAnimationOutStyle = CWNotificationAnimationStyleRight;
-            cbn.notificationStyle = CWNotificationStyleStatusBarNotification;
-            [cbn displayNotificationWithMessage:message
-                                    forDuration:2.0];
-         }else{
-            //切换到消息
-            [self selectMainTabbarAtIndex:3];
-        }
+    UIApplicationState currentState = [[UIApplication sharedApplication] applicationState];
+    if (currentState == UIApplicationStateActive) {
+        NSString *message = [NSString stringWithFormat:@"%@",[userInfo valueForKeyPath:@"aps.alert"]];            
+        CWStatusBarNotification *cbn = [CWStatusBarNotification new];
+        cbn.notificationLabelBackgroundColor = [Theme globleColor];
+        cbn.notificationAnimationInStyle = CWNotificationAnimationStyleLeft;
+        cbn.notificationAnimationOutStyle = CWNotificationAnimationStyleRight;
+        cbn.notificationStyle = CWNotificationStyleStatusBarNotification;
+        [cbn displayNotificationWithMessage:message
+                                forDuration:2.0];
+     }else{
+        //切换到消息
+        [self selectMainTabbarAtIndex:3];
+    }
+
+    [self.fetchCenter getMessageNotificationInfo:^(NSNumber *messageCount, NSNumber *followCount) {
+        NSUInteger msgIndex = 3;
+        MainTabBarController *mtbc = (MainTabBarController *)self.window.rootViewController;
+        UITabBarItem *messageTab = [mtbc.tabBar.items objectAtIndex:msgIndex];
+        messageTab.badgeValue = messageCount.integerValue > 0 ? [NSString stringWithFormat:@"%@",messageCount] : nil;
+        
+        UINavigationController *nc = [mtbc.viewControllers objectAtIndex:msgIndex];
+        MessageListViewController *mlvc = nc.viewControllers.firstObject;
+        [mlvc loadNewData];
+        
+    }];
 }
 
 + (MainTabBarController *)getMainTabbarController{
