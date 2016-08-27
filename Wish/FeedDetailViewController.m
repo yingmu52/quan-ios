@@ -41,6 +41,23 @@
     [self loadMoreComments];
 }
 
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    //如果从消息页进来时，尝试定位到评论
+    if (self.message){
+        Comment *comment = [Plan fetchWith:@"Comment"
+                                 predicate:[NSPredicate predicateWithFormat:@"commentId == %@",self.message.commentId]
+                          keyForDescriptor:@"commentId"
+                      managedObjectContext:self.message.managedObjectContext].lastObject;
+        if (comment) {
+            NSIndexPath *indexPath = [self.tableFetchedRC indexPathForObject:comment];
+            [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+        }
+    }
+}
+
+
 - (void)loadMoreComments{
     NSString *feedId = self.feed ? self.feed.feedId : self.message.feedsId;
     NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKey:@"commentId"];
@@ -270,6 +287,13 @@
                                                                             attributes:userNameAttribute];
     }
     cell.dateLabel.text = [self.dateFormatter stringFromDate:comment.createTime];
+    
+    //从消息页进来时，highligh对应评论的cell
+    if ([self.message.commentId isEqualToString:comment.commentId]) {
+        cell.backgroundColor = [SystemUtil colorFromHexString:@"#E7F0ED"];
+    }else{
+        cell.backgroundColor = [UIColor whiteColor];
+    }
 }
 
 - (FeedDetailCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
