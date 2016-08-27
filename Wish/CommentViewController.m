@@ -128,16 +128,18 @@
 
 #pragma mark - 与后台调联
 - (IBAction)sendComment:(id)sender{
-    [self.fetchCenter replyToFeedID:self.feed.feedId
-                            content:self.textView.text
-                          toOwnerID:self.comment.owner.ownerId
-                          ownerName:self.comment.owner.ownerName
-                         completion:^
-    {
-         [self.delegate commentViewDidFinishInsertingComment];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:CURRENT_TEXT];
-        [self dismissView];
-     }];
+    if ([self.textView.text stringByReplacingOccurrencesOfString:@" " withString:@""].length > 0) {
+        [self.fetchCenter replyToFeedID:self.feed.feedId
+                                content:self.textView.text
+                              toOwnerID:self.comment.owner.ownerId
+                              ownerName:self.comment.owner.ownerName
+                             completion:^
+         {
+             [self.delegate commentViewDidFinishInsertingComment];
+             [[NSUserDefaults standardUserDefaults] removeObjectForKey:CURRENT_TEXT];
+             [self dismissView];
+         }];
+    }
 }
 
 - (void)dismissView{
