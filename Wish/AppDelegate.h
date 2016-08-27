@@ -14,11 +14,8 @@
 #import "MainTabBarController.h"
 #import "LoginViewController.h"
 #import "FetchCenter.h"
-#import "TXYUploadManager.h"
-#import "TXYDownloader.h"
 #import "WXApiManager.h"
 #import <PgySDK/PgyManager.h>
-#import <PgyUpdate/PgyUpdateManager.h>
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <spider/SPIntrospect.h>
 
