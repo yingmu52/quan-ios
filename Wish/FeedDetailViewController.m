@@ -9,6 +9,7 @@
 #import "FeedDetailViewController.h"
 #import "UITableView+FDTemplateLayoutCell.h"
 #import "JTSImageViewController.h"
+#import "BFRImageViewController.h"
 #import "CommentViewController.h"
 #import "MainTabBarController.h"
 @interface FeedDetailViewController () <CommentViewControllerDelegate>
@@ -157,23 +158,15 @@
 
 #pragma mark - Feed Detail View Header Delegate 
 
-- (void)didTapOnImageView:(UIImageView *)imageView{
-    if (imageView.image) {
-        // Create image info
-        JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
-        imageInfo.image = imageView.image;
-        imageInfo.referenceRect = imageView.frame;
-        imageInfo.referenceView = imageView.superview;
-        
-        // Setup view controller
-        JTSImageViewController *imageViewer = [[JTSImageViewController alloc]
-                                               initWithImageInfo:imageInfo
-                                               mode:JTSImageViewControllerMode_Image
-                                               backgroundStyle:JTSImageViewControllerBackgroundOption_Scaled];
-        
-        // Present the view controller.
-        [imageViewer showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
+- (void)didTapOnImageViewAtIndex:(NSInteger)index{
+    NSMutableArray *imageURLs = [NSMutableArray array];
+    for (NSString *imageId in self.feed.imageIdArray) {
+        NSURL *imgUrl = [self.fetchCenter urlWithImageID:imageId size:FetchCenterImageSize800];
+        [imageURLs addObject:imgUrl];
     }
+    BFRImageViewController *imageVC = [[BFRImageViewController alloc] initForPeekWithImageSource:imageURLs];
+    imageVC.initialIndex = index;
+    [self presentViewController:imageVC animated:YES completion:nil];
 }
 
 #pragma mark - dynamic feed title height

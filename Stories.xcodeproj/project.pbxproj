@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A01431B41D715E870099258C /* DACircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A01431B11D715E870099258C /* DACircularProgressView.m */; };
+		A01431B51D715E870099258C /* DALabeledCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A01431B31D715E870099258C /* DALabeledCircularProgressView.m */; };
+		A01431BF1D7166930099258C /* BFRImageContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A01431B81D7166930099258C /* BFRImageContainerViewController.m */; };
+		A01431C01D7166930099258C /* BFRImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A01431BA1D7166930099258C /* BFRImageViewController.m */; };
+		A01431C11D7166930099258C /* cross.png in Resources */ = {isa = PBXBuildFile; fileRef = A01431BC1D7166930099258C /* cross.png */; };
+		A01431C21D7166930099258C /* cross@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A01431BD1D7166930099258C /* cross@2x.png */; };
+		A01431C31D7166930099258C /* cross@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A01431BE1D7166930099258C /* cross@3x.png */; };
 		A016FDB61B8C4250006E7A09 /* ShuffleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A016FDB51B8C4250006E7A09 /* ShuffleViewController.m */; };
 		A016FDB71B8C4250006E7A09 /* ShuffleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A016FDB51B8C4250006E7A09 /* ShuffleViewController.m */; };
 		A016FDBB1B8D14BA006E7A09 /* PreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A016FDBA1B8D14BA006E7A09 /* PreviewCell.m */; };
@@ -334,6 +341,17 @@
 
 /* Begin PBXFileReference section */
 		A01431A01D713B530099258C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		A01431B01D715E870099258C /* DACircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DACircularProgressView.h; sourceTree = "<group>"; };
+		A01431B11D715E870099258C /* DACircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DACircularProgressView.m; sourceTree = "<group>"; };
+		A01431B21D715E870099258C /* DALabeledCircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DALabeledCircularProgressView.h; sourceTree = "<group>"; };
+		A01431B31D715E870099258C /* DALabeledCircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DALabeledCircularProgressView.m; sourceTree = "<group>"; };
+		A01431B71D7166930099258C /* BFRImageContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFRImageContainerViewController.h; sourceTree = "<group>"; };
+		A01431B81D7166930099258C /* BFRImageContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFRImageContainerViewController.m; sourceTree = "<group>"; };
+		A01431B91D7166930099258C /* BFRImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFRImageViewController.h; sourceTree = "<group>"; };
+		A01431BA1D7166930099258C /* BFRImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFRImageViewController.m; sourceTree = "<group>"; };
+		A01431BC1D7166930099258C /* cross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cross.png; sourceTree = "<group>"; };
+		A01431BD1D7166930099258C /* cross@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross@2x.png"; sourceTree = "<group>"; };
+		A01431BE1D7166930099258C /* cross@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross@3x.png"; sourceTree = "<group>"; };
 		A016FDB41B8C4250006E7A09 /* ShuffleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShuffleViewController.h; sourceTree = "<group>"; };
 		A016FDB51B8C4250006E7A09 /* ShuffleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShuffleViewController.m; sourceTree = "<group>"; };
 		A016FDB91B8D14BA006E7A09 /* PreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewCell.h; sourceTree = "<group>"; };
@@ -755,6 +773,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A01431AF1D715E870099258C /* DACircularProgress */ = {
+			isa = PBXGroup;
+			children = (
+				A01431B01D715E870099258C /* DACircularProgressView.h */,
+				A01431B11D715E870099258C /* DACircularProgressView.m */,
+				A01431B21D715E870099258C /* DALabeledCircularProgressView.h */,
+				A01431B31D715E870099258C /* DALabeledCircularProgressView.m */,
+			);
+			path = DACircularProgress;
+			sourceTree = "<group>";
+		};
+		A01431B61D7166930099258C /* BFRImageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A01431B71D7166930099258C /* BFRImageContainerViewController.h */,
+				A01431B81D7166930099258C /* BFRImageContainerViewController.m */,
+				A01431B91D7166930099258C /* BFRImageViewController.h */,
+				A01431BA1D7166930099258C /* BFRImageViewController.m */,
+				A01431BB1D7166930099258C /* Resources */,
+			);
+			path = BFRImageViewController;
+			sourceTree = "<group>";
+		};
+		A01431BB1D7166930099258C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A01431BC1D7166930099258C /* cross.png */,
+				A01431BD1D7166930099258C /* cross@2x.png */,
+				A01431BE1D7166930099258C /* cross@3x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		A02D8B371D64155D00B0740D /* BaseViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1025,6 +1076,8 @@
 		A0F7D3A51B84E851003CCB34 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				A01431B61D7166930099258C /* BFRImageViewController */,
+				A01431AF1D715E870099258C /* DACircularProgress */,
 				A0493EBD1D5CC26C00B2C0F9 /* CWStatusBarNotification */,
 				A0C15C5E1D4CB9350094BEF9 /* MJRefresh */,
 				A057D2F41D48CAF2009AFE02 /* MBProgressHUD */,
@@ -1587,6 +1640,7 @@
 			files = (
 				A07C66CA1BE078EE00413D32 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				AE01724D1A65CD8E0014266F /* Images.xcassets in Resources */,
+				A01431C31D7166930099258C /* cross@3x.png in Resources */,
 				A0CBDCB61C8DF09800DA53FF /* EmptyCircleView.xib in Resources */,
 				A0F7D4A91B84E851003CCB34 /* UIImage-Categories.podspec in Resources */,
 				A0C15C9B1D4CB9350094BEF9 /* MJRefresh.bundle in Resources */,
@@ -1595,6 +1649,8 @@
 				A03010521BABC6AA0041E2CF /* QBImagePicker.strings in Resources */,
 				A01D417D1D5B17AD007B3177 /* Login.storyboard in Resources */,
 				AE2A8DE51ACA700100029D52 /* WishDetailCell.xib in Resources */,
+				A01431C11D7166930099258C /* cross.png in Resources */,
+				A01431C21D7166930099258C /* cross@2x.png in Resources */,
 				A07C66C61BE070E400413D32 /* read_me.txt in Resources */,
 				AE59B5F11B40FB55006CA4AB /* ViewForEmptyEvent.xib in Resources */,
 				A0D1025C1B84EF3B006B0E4E /* HeaderView.xib in Resources */,
@@ -1636,6 +1692,7 @@
 				A0F8C4601B88444C00A8B120 /* Wish.xcdatamodeld in Sources */,
 				A0F7D4311B84E851003CCB34 /* CHTCollectionViewWaterfallLayout.m in Sources */,
 				A0CBDCB51C8DF09800DA53FF /* EmptyCircleView.m in Sources */,
+				A01431C01D7166930099258C /* BFRImageViewController.m in Sources */,
 				AEF775441A8134FE000DB73B /* HomeCardFlowLayout.m in Sources */,
 				AE479E9E1A6F775C00366A0A /* PostViewController.m in Sources */,
 				AE9A19881B02E3A100590784 /* FeedbackkAccessoryView.m in Sources */,
@@ -1648,6 +1705,7 @@
 				AE606A201AF4697B003DF16E /* MessageListViewController.m in Sources */,
 				A0F7D44B1B84E851003CCB34 /* JTSImageViewController.m in Sources */,
 				AEB003F31B8056980056EA80 /* MyPageViewController.m in Sources */,
+				A01431BF1D7166930099258C /* BFRImageContainerViewController.m in Sources */,
 				A0F7D44D1B84E851003CCB34 /* JTSSimpleImageDownloader.m in Sources */,
 				AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */,
 				A0C15C9C1D4CB9350094BEF9 /* MJRefreshConst.m in Sources */,
@@ -1752,8 +1810,10 @@
 				AE95A9FC1ACFC26A007465D5 /* ImagePicker.m in Sources */,
 				A0C15C931D4CB9350094BEF9 /* MJRefreshAutoNormalFooter.m in Sources */,
 				A07115D11BA6B109002C1270 /* SZTextView.m in Sources */,
+				A01431B51D715E870099258C /* DALabeledCircularProgressView.m in Sources */,
 				AED355FE1B23BBB8000427FF /* ProfileVCOwner.m in Sources */,
 				A066C3851BB793DA003B51D5 /* MSLabel.m in Sources */,
+				A01431B41D715E870099258C /* DACircularProgressView.m in Sources */,
 				A0CBDCB91C8E23F500DA53FF /* CircleEditViewController.m in Sources */,
 				A0C15C9A1D4CB9350094BEF9 /* MJRefreshStateHeader.m in Sources */,
 				A0F513281BD98B9600279B9D /* Message+CoreDataProperties.m in Sources */,

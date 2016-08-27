@@ -38,8 +38,7 @@
 }
 
 - (IBAction)didTapOnScrollView:(UITapGestureRecognizer *)tap{
-    UIImageView *imageView = [self.scrollView.subviews objectAtIndex:self.pageControl.currentPage];
-    [self.delegate didTapOnImageView:imageView];
+    [self.delegate didTapOnImageViewAtIndex:self.pageControl.currentPage];
 }
 
 

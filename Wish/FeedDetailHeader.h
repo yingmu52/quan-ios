@@ -13,7 +13,7 @@
 @protocol FeedDetailHeaderDelegate
 - (void)didPressedLikeButton:(FeedDetailHeader *)headerView;
 - (void)didPressedCommentButton:(FeedDetailHeader *)headerView;
-- (void)didTapOnImageView:(UIImageView *)imageView;
+- (void)didTapOnImageViewAtIndex:(NSInteger)index;
 @end
 @interface FeedDetailHeader : UIView <UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
