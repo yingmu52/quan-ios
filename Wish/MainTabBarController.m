@@ -48,11 +48,7 @@
 }
 
 - (void)showShuffleView{
-    if ([User isVisitor]) {
-        [self showVisitorLoginAlert];
-    }else{
-        [self performSegueWithIdentifier:@"showShuffleViewFromTabbar" sender:nil];
-    }
+    [self performSegueWithIdentifier:@"showShuffleViewFromTabbar" sender:nil];
 }
 
 
@@ -134,16 +130,6 @@
         [item setBadgeValue:nil];
     }
 }
-
-
-- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
-    if (viewController != tabBarController.viewControllers.firstObject && [User isVisitor]) {
-        [self showVisitorLoginAlert];
-        return NO;
-    }
-    return YES;
-}
-
 
 - (void)showVisitorLoginAlert{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"登录后才能使用更多的功能哦！"

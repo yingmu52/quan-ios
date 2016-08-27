@@ -95,7 +95,7 @@
          forCellReuseIdentifier:@"WishDetailCell"];
     self.tableView.separatorColor = [UIColor clearColor]; //remove separation linecell
     //hide follow button first and display later when the correct value is fetched from the server
-    self.headerView.followButton.hidden = [self.plan.owner.ownerId isEqualToString:[User uid]] | [User isVisitor];
+    self.headerView.followButton.hidden = [self.plan.owner.ownerId isEqualToString:[User uid]];
     
     //上拉刷新
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self
