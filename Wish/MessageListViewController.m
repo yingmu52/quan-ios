@@ -161,12 +161,13 @@
 
     Message *message = [self.tableFetchedRC objectAtIndexPath:indexPath];
     message.isRead = @(YES);
-    [self performSegueWithIdentifier:@"showFeedDetailFromMessage" sender:message.feedsId];
+    [self performSegueWithIdentifier:@"showFeedDetailFromMessage" sender:message];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"showFeedDetailFromMessage"]) {
-        [segue.destinationViewController setFeedId:sender];
+        FeedDetailViewController *fdvc = segue.destinationViewController;
+        fdvc.message = sender;
     }
     segue.destinationViewController.hidesBottomBarWhenPushed = YES;
 }

@@ -8,7 +8,6 @@
 
 #import "MSSuperViewController.h"
 #import "Comment.h"
-#import "FeedDetailViewController.h"
 
 @class CommentViewController;
 @protocol CommentViewControllerDelegate <NSObject>

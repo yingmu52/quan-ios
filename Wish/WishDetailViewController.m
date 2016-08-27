@@ -263,9 +263,7 @@
     //enter feed detail only when plan description text view is not being edited
     if (!self.headerView.descriptionTextView.isFirstResponder){
         Feed *feed = [self.tableFetchedRC objectAtIndexPath:indexPath];
-        if (feed.feedId){ //prevent crash
-            [self performSegueWithIdentifier:[self segueForFeed] sender:feed.feedId];
-        }
+        [self performSegueWithIdentifier:[self segueForFeed] sender:feed];
     }
 }
 
@@ -297,15 +295,9 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:[self segueForFeed]]){
-        
-        if ([sender isKindOfClass:[NSString class]]){
-            [segue.destinationViewController setFeedId:sender];
-        }else if ([sender isKindOfClass:[Feed class]]){ //see didPressedCommentOnCell method
-            Feed *feed = (Feed *)sender;
-            FeedDetailViewController *vc = segue.destinationViewController;
-            vc.feedId = feed.feedId;
-        }
-
+        Feed *feed = (Feed *)sender;
+        FeedDetailViewController *vc = segue.destinationViewController;
+        vc.feed = feed;
     }
     
     if ([segue.identifier isEqualToString:@"showInvitationView"]) {
@@ -318,11 +310,11 @@
     }
 }
 
-- (void)didPressedCommentOnCell:(WishDetailCell *)cell{
-    //进入动态详情并呼出键盘
-    Feed *feed = [self.tableFetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
-    [self performSegueWithIdentifier:[self segueForFeed] sender:feed];
-}
+//- (void)didPressedCommentOnCell:(WishDetailCell *)cell{
+//    //进入动态详情并呼出键盘
+//    Feed *feed = [self.tableFetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
+//    [self performSegueWithIdentifier:[self segueForFeed] sender:feed];
+//}
 
 #pragma mark - follow
 

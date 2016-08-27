@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Feed.h"
+#import "Message.h"
 #import "Theme.h"
 #import "FeedDetailCell.h"
 #import "FetchCenter.h"
@@ -19,7 +20,8 @@
 #import "MSSuperViewController.h"
 
 @interface FeedDetailViewController : MSSuperViewController <FeedDetailHeaderDelegate>
-@property (nonatomic,strong) NSString *feedId; //for Message List View
+
+@property (nonatomic,strong) Message *message;
 @property (nonatomic,strong) Feed *feed;
 @property (nonatomic,strong) FeedDetailHeader *headerView;
 - (void)setUpNavigationItem;

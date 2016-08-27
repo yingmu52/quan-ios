@@ -42,7 +42,7 @@
 }
 
 - (void)loadMoreComments{
-    NSString *feedId = self.feed.feedId ? self.feed.feedId : self.feedId;
+    NSString *feedId = self.feed ? self.feed.feedId : self.message.feedsId;
     NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKey:@"commentId"];
     //        NSLog(@"%@",self.currentPage);
     [self.fetchCenter getCommentListForFeed:feedId
@@ -70,11 +70,6 @@
 - (void)setFeed:(Feed *)feed{
     _feed = feed;
     [self updateHeaderInfoForFeed:feed];
-}
-
-- (void)setFeedId:(NSString *)feedId{
-    _feedId = feedId;
-    self.feed = [Feed fetchFeedWithId:feedId];
 }
 
 - (void)setUpNavigationItem
@@ -404,7 +399,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 - (NSFetchRequest *)tableFetchRequest{
     if (!_tableFetchRequest) {
         _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Comment"];
-        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"feed.feedId == %@",self.feedId];
+        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"feed.feedId == %@",self.feed ? self.feed.feedId : self.message.feedsId];
         _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createTime" ascending:YES]];
     }
     return _tableFetchRequest;
