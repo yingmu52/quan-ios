@@ -61,6 +61,12 @@
     [backButton setImage:[Theme navWhiteButtonDefault] forState:UIControlStateNormal];
     [backButton addTarget:self.navigationController action:@selector(popViewControllerAnimated:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    
+    
+    //手势开启菜单
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSecretMenu)];
+    [tap setNumberOfTapsRequired:3];
+    [self.view addGestureRecognizer:tap];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -70,8 +76,8 @@
     NavigationBar *nav = (NavigationBar *)self.navigationController.navigationBar;
     [nav showClearBackground];
     
-    //用于检测摇一摇
-    [self becomeFirstResponder];
+//    //用于检测摇一摇
+//    [self becomeFirstResponder];
 
     //检测自己是否在白名单
     [self.fetchCenter checkWhitelist:nil];
@@ -85,7 +91,7 @@
     NavigationBar *nav = (NavigationBar *)self.navigationController.navigationBar;
     [nav showDefaultBackground];
     
-    [self resignFirstResponder];
+//    [self resignFirstResponder];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -218,105 +224,102 @@
     segue.destinationViewController.hidesBottomBarWhenPushed = YES;
 }
 
-#pragma mark - 摇一摇
+#pragma mark - 内网菜单
 
-// MARK: 检测到摇一摇
-- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event{
-    
+- (void)showSecretMenu{
     BOOL isUsingInnerNetwork = [[NSUserDefaults standardUserDefaults] boolForKey:SHOULD_USE_TESTURL];
     //支持摇一摇的条件是 1. 外网的已知id 2. 用户在内网
     if ([User isSuperUser] || isUsingInnerNetwork) {
         
         NSString *testEnvTitle = isUsingInnerNetwork ? @"内网✔️" : @"内网";
         NSString *proEnvTitle = isUsingInnerNetwork ? @"外网" : @"外网✔️";
-        if (motion == UIEventSubtypeMotionShake) {
-            
-            UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"此功能只对内部公开" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-            
-            //选择内网
-            UIAlertAction *testEnv = [UIAlertAction actionWithTitle:testEnvTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                if (!isUsingInnerNetwork) {
-                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SHOULD_USE_TESTURL];
-                    [AppDelegate logout];
-                    [AppDelegate clearCoreData:NO];
-                }
-            }];
-            
-            //选择外网
-            UIAlertAction *proEnv = [UIAlertAction actionWithTitle:proEnvTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                if (isUsingInnerNetwork) {
-                    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:SHOULD_USE_TESTURL];
-                    [AppDelegate logout];
-                    [AppDelegate clearCoreData:NO];
-                }
-            }];
-            
-            //获取用户信息
-            UIAlertAction *getUserInfo = [UIAlertAction actionWithTitle:@"获取个人信息" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                NSString *userInfo = [NSString stringWithFormat:@"uid:%@\n ukey:%@\n deviceToken:%@",[User uid],[User uKey],[User deviceToken]];
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
-                                                                               message:userInfo
-                                                                        preferredStyle:UIAlertControllerStyleAlert];
-                
-                [alert addAction:[UIAlertAction actionWithTitle:@"点击复制到粘帖板"
-                                                          style:UIAlertActionStyleDefault
-                                                        handler:^(UIAlertAction * _Nonnull action)
-                {
-                    [[UIPasteboard generalPasteboard] setString:userInfo];
-                }]];
-                [self presentViewController:alert animated:YES completion:nil];
-            }];
-            
-            //获取请求日志
-            UIAlertAction *getRequestLog = [UIAlertAction actionWithTitle:@"获取请求日志" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [self performSegueWithIdentifier:@"showLocalRequestLog" sender:nil];
-            }];
-            
-            
-            //远程控制
-            UIAlertAction *callSpider;
-            
-            if ([[SPIntrospect sharedIntrospector] isOpen]) {
-                callSpider = [UIAlertAction actionWithTitle:@"马上停止可怕的通灵之术"
-                                                      style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
-                {
-                    [[SPIntrospect sharedIntrospector] closeSpider];
-                }];
 
-            }else{
-                callSpider = [UIAlertAction actionWithTitle:@"通灵之术：召唤阎罗溢"
-                                                      style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
-                {
-                    //启动Spider
-                    [self startSpider];
-                    
-                    //让用户复制Device Token
-                    NSString *deviceToken = [User deviceToken];
-                    NSString *message = [NSString stringWithFormat:@"把这串咒语念给阎罗溢听：%@",deviceToken];
-                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"阎罗溢【🦁】已从天而降"
-                                                                                   message:message
-                                                                            preferredStyle:UIAlertControllerStyleAlert];
-                    [alert addAction:[UIAlertAction actionWithTitle:@"点击复制到粘帖板"
-                                                              style:UIAlertActionStyleDefault
-                                                            handler:^(UIAlertAction * _Nonnull action)
-                                      {
-                                          [[UIPasteboard generalPasteboard] setString:deviceToken];
-                                      }]];
-                    [self presentViewController:alert animated:YES completion:nil];
-                }];
+        
+        
+        UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"此功能只对内部公开" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        //选择内网
+        UIAlertAction *testEnv = [UIAlertAction actionWithTitle:testEnvTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            if (!isUsingInnerNetwork) {
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:SHOULD_USE_TESTURL];
+                [AppDelegate logout];
+                [AppDelegate clearCoreData:NO];
             }
+        }];
+        
+        //选择外网
+        UIAlertAction *proEnv = [UIAlertAction actionWithTitle:proEnvTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            if (isUsingInnerNetwork) {
+                [[NSUserDefaults standardUserDefaults] setBool:NO forKey:SHOULD_USE_TESTURL];
+                [AppDelegate logout];
+                [AppDelegate clearCoreData:NO];
+            }
+        }];
+        
+        //获取用户信息
+        UIAlertAction *getUserInfo = [UIAlertAction actionWithTitle:@"获取个人信息" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSString *userInfo = [NSString stringWithFormat:@"uid:%@\n ukey:%@\n deviceToken:%@",[User uid],[User uKey],[User deviceToken]];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                           message:userInfo
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
             
+            [alert addAction:[UIAlertAction actionWithTitle:@"点击复制到粘帖板"
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action)
+                              {
+                                  [[UIPasteboard generalPasteboard] setString:userInfo];
+                              }]];
+            [self presentViewController:alert animated:YES completion:nil];
+        }];
+        
+        //获取请求日志
+        UIAlertAction *getRequestLog = [UIAlertAction actionWithTitle:@"获取请求日志" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self performSegueWithIdentifier:@"showLocalRequestLog" sender:nil];
+        }];
+        
+        
+        //远程控制
+        UIAlertAction *callSpider;
+        
+        if ([[SPIntrospect sharedIntrospector] isOpen]) {
+            callSpider = [UIAlertAction actionWithTitle:@"马上停止可怕的通灵之术"
+                                                  style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+                          {
+                              [[SPIntrospect sharedIntrospector] closeSpider];
+                          }];
             
-            [actionSheet addAction:testEnv];
-            [actionSheet addAction:proEnv];
-            [actionSheet addAction:getUserInfo];
-            [actionSheet addAction:getRequestLog];
-            [actionSheet addAction:callSpider];
-            
-            [actionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-            [self presentViewController:actionSheet animated:YES completion:nil];
-            
+        }else{
+            callSpider = [UIAlertAction actionWithTitle:@"通灵之术：召唤阎罗溢"
+                                                  style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+                          {
+                              //启动Spider
+                              [self startSpider];
+                              
+                              //让用户复制Device Token
+                              NSString *deviceToken = [User deviceToken];
+                              NSString *message = [NSString stringWithFormat:@"把这串咒语念给阎罗溢听：%@",deviceToken];
+                              UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"阎罗溢【🦁】已从天而降"
+                                                                                             message:message
+                                                                                      preferredStyle:UIAlertControllerStyleAlert];
+                              [alert addAction:[UIAlertAction actionWithTitle:@"点击复制到粘帖板"
+                                                                        style:UIAlertActionStyleDefault
+                                                                      handler:^(UIAlertAction * _Nonnull action)
+                                                {
+                                                    [[UIPasteboard generalPasteboard] setString:deviceToken];
+                                                }]];
+                              [self presentViewController:alert animated:YES completion:nil];
+                          }];
         }
+        
+        
+        [actionSheet addAction:testEnv];
+        [actionSheet addAction:proEnv];
+        [actionSheet addAction:getUserInfo];
+        [actionSheet addAction:getRequestLog];
+        [actionSheet addAction:callSpider];
+        
+        [actionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:actionSheet animated:YES completion:nil];
     }
 }
 
