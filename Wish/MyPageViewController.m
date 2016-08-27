@@ -54,7 +54,7 @@
     }
     
     //设置标题
-    self.versionLabel.text = [NSString stringWithFormat:@"版本号: v%@",self.fetchCenter.buildVersion];
+    self.versionLabel.text = [NSString stringWithFormat:@"用户ID: %@  版本号: v%@",[User uid],self.fetchCenter.buildVersion];
     
     //左返回图标
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
