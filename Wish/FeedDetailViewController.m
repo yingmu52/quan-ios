@@ -260,11 +260,11 @@
     
     NSDictionary *userNameAttribute = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00B9C0"]};
     
-    NSString *userAstring = comment.owner.ownerName ? comment.owner.ownerName : @"无用户名";
+    NSString *userAstring = comment.owner.ownerName.length > 0 ? comment.owner.ownerName : [NSString stringWithFormat:@"用户%@",comment.owner.ownerId];
     
     if (comment.idForReply && comment.nameForReply) { //this is a reply. format: 回复<color_userName>:content
         
-        NSString *userBstring = comment.nameForReply ? comment.nameForReply : @"无用户名";
+        NSString *userBstring = comment.nameForReply.length > 0 ? comment.nameForReply : [NSString stringWithFormat:@"用户%@",comment.idForReply];
         NSMutableAttributedString *userA = [[NSMutableAttributedString alloc] initWithString:userAstring
                                                                                   attributes:userNameAttribute];
         NSMutableAttributedString *reply = [[NSMutableAttributedString alloc] initWithString:@"回复"];
