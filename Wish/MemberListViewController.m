@@ -90,7 +90,7 @@
     if (owner.ownerName.length > 0) {
         c.nameLabel.text = owner.ownerName;
     }else{
-        c.nameLabel.text = @"该用户还没有设置名字";
+        c.nameLabel.text = [NSString stringWithFormat:@"用户%@",owner.ownerId];
     }
     [c.headImageView downloadImageWithImageId:owner.headUrl
                                          size:FetchCenterImageSize100];
