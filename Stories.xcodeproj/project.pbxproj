@@ -67,7 +67,6 @@
 		A07C66CC1BE078EE00413D32 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A07C66C91BE078EE00413D32 /* TencentOpenAPI.framework */; };
 		A07C66CD1BE078EE00413D32 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A07C66C91BE078EE00413D32 /* TencentOpenAPI.framework */; };
 		A081FCED1C90A3260025ABD5 /* MemberListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A081FCEC1C90A3260025ABD5 /* MemberListViewController.m */; };
-		A081FCF01C90A3D10025ABD5 /* MemberListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A081FCEF1C90A3D10025ABD5 /* MemberListCell.m */; };
 		A095D8341BCB884500ED3DFD /* PgySDk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A095D8321BCB884500ED3DFD /* PgySDk.framework */; };
 		A0994E631BC4CF9500D45845 /* SYEmojiCharacters.m in Sources */ = {isa = PBXBuildFile; fileRef = A0994E601BC4CF9500D45845 /* SYEmojiCharacters.m */; };
 		A0994E641BC4CF9500D45845 /* SYEmojiPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = A0994E621BC4CF9500D45845 /* SYEmojiPopover.m */; };
@@ -416,8 +415,6 @@
 		A07C66C91BE078EE00413D32 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
 		A081FCEB1C90A3260025ABD5 /* MemberListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberListViewController.h; sourceTree = "<group>"; };
 		A081FCEC1C90A3260025ABD5 /* MemberListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberListViewController.m; sourceTree = "<group>"; };
-		A081FCEE1C90A3D10025ABD5 /* MemberListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberListCell.h; sourceTree = "<group>"; };
-		A081FCEF1C90A3D10025ABD5 /* MemberListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberListCell.m; sourceTree = "<group>"; };
 		A095D8321BCB884500ED3DFD /* PgySDk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PgySDk.framework; sourceTree = "<group>"; };
 		A0994E5F1BC4CF9500D45845 /* SYEmojiCharacters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYEmojiCharacters.h; sourceTree = "<group>"; };
 		A0994E601BC4CF9500D45845 /* SYEmojiCharacters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYEmojiCharacters.m; sourceTree = "<group>"; };
@@ -1205,8 +1202,6 @@
 				A06CA10C1CA5BA92005D6171 /* CirclePickerViewController.m */,
 				A081FCEB1C90A3260025ABD5 /* MemberListViewController.h */,
 				A081FCEC1C90A3260025ABD5 /* MemberListViewController.m */,
-				A081FCEE1C90A3D10025ABD5 /* MemberListCell.h */,
-				A081FCEF1C90A3D10025ABD5 /* MemberListCell.m */,
 				A0FEC1311C8616CC004C48F1 /* CircleCreationViewController.h */,
 				A0FEC1321C8616CC004C48F1 /* CircleCreationViewController.m */,
 				A0A0835A1BD74F260057CD65 /* CircleListViewController.h */,
@@ -1817,7 +1812,6 @@
 				AE17799A1AF585CB005F1BEB /* FeedDetailViewController.m in Sources */,
 				AEFB048C1AD12437009EB0D3 /* DiscoveryViewController.m in Sources */,
 				AEEC6C731A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,
-				A081FCF01C90A3D10025ABD5 /* MemberListCell.m in Sources */,
 				A07C21231C8163BF0084976A /* ButtonWithPathedImage.m in Sources */,
 				AE47055D1AF9DC080028D7BC /* FeedDetailCell.m in Sources */,
 				A0C15CA01D4CB9350094BEF9 /* UIView+MJExtension.m in Sources */,

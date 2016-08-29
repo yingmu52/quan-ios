@@ -536,7 +536,7 @@
                                 <color key="backgroundColor" red="0.91372549020000005" green="0.91372549020000005" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemberListCellAdmin" rowHeight="57" id="kRm-L8-2xZ" customClass="MemberListCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemberListCellAdmin" rowHeight="57" id="kRm-L8-2xZ" customClass="MSTableViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalCompressionResistancePriority="751" tableViewCell="kRm-L8-2xZ" id="r0z-F5-F7i">
@@ -568,9 +568,6 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="125" y="20" width="86" height="16"/>
-                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <constraints>
@@ -627,12 +624,11 @@
                                             </variation>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="headImageView" destination="vAZ-r9-lN2" id="dgs-PE-t0d"/>
-                                            <outlet property="iconImageView" destination="51w-gI-HUq" id="ccf-MX-YCc"/>
-                                            <outlet property="nameLabel" destination="LSv-jU-BSc" id="N7l-21-hWG"/>
+                                            <outlet property="ms_imageView1" destination="vAZ-r9-lN2" id="eSj-Nl-MP5"/>
+                                            <outlet property="ms_title" destination="LSv-jU-BSc" id="5ln-ak-htw"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemberListCellNormal" rowHeight="57" id="YHl-Ap-jBu" customClass="MemberListCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemberListCellNormal" rowHeight="57" id="YHl-Ap-jBu" customClass="MSTableViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalCompressionResistancePriority="751" tableViewCell="YHl-Ap-jBu" id="KzY-MS-0z3">
@@ -661,15 +657,9 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="79" y="20" width="92.5" height="16"/>
-                                                    </variation>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" image="more" translatesAutoresizingMaskIntoConstraints="NO" id="k6x-1P-zkY">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="187" y="16" width="25" height="25"/>
-                                                    </variation>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -726,9 +716,8 @@
                                             </variation>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="headImageView" destination="oMy-KX-JJs" id="5nH-BW-Wv9"/>
-                                            <outlet property="moreIcon" destination="k6x-1P-zkY" id="lTp-cq-CM2"/>
-                                            <outlet property="nameLabel" destination="Izd-uV-9b8" id="zWa-cI-tSD"/>
+                                            <outlet property="ms_imageView1" destination="oMy-KX-JJs" id="ETV-jw-6M8"/>
+                                            <outlet property="ms_title" destination="Izd-uV-9b8" id="Zny-2f-QfA"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

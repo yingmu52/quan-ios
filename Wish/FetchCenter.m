@@ -263,8 +263,8 @@
               NSDictionary *manInfo = [responseJson valueForKeyPath:@"data.manData"];
               if (manList.count > 0) {
                   NSManagedObjectContext *workerContext = [self workerContext];
-                  for (NSString *uid in manList) {
-                      NSDictionary *ownerInfo = [manInfo valueForKey:uid];
+                  for (id uid in manList) {
+                      NSDictionary *ownerInfo = [manInfo valueForKey:[NSString stringWithFormat:@"%@",uid]];
                       [Owner updateOwnerWithInfo:ownerInfo managedObjectContext:workerContext];
                   }
                   //改成多对多的关系后对会用到同步

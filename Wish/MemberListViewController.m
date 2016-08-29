@@ -8,7 +8,6 @@
 
 #import "MemberListViewController.h"
 #import "Theme.h"
-#import "MemberListCell.h"
 #import "UIImageView+ImageCache.h"
 @interface MemberListViewController ()
 
@@ -69,25 +68,24 @@
 //    return _tableFetchRequest;
 //}
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (MSTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     Owner *owner = [self.tableFetchedRC objectAtIndexPath:indexPath];
     NSString *identifier = [owner.ownerId isEqualToString:self.circle.ownerId] ? @"MemberListCellAdmin" : @"MemberListCellNormal";
-    MemberListCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    MSTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     [self configureTableViewCell:cell atIndexPath:indexPath];
     return cell;
 }
 
-- (void)configureTableViewCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
+- (void)configureTableViewCell:(MSTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     Owner *owner = [self.tableFetchedRC objectAtIndexPath:indexPath];
     
-    MemberListCell *c = (MemberListCell *)cell;
     if (owner.ownerName.length > 0) {
-        c.nameLabel.text = owner.ownerName;
+        cell.ms_title.text = owner.ownerName;
     }else{
-        c.nameLabel.text = [NSString stringWithFormat:@"用户%@",owner.ownerId];
+        cell.ms_subTitle.text = [NSString stringWithFormat:@"用户%@",owner.ownerId];
     }
-    [c.headImageView downloadImageWithImageId:owner.headUrl
-                                         size:FetchCenterImageSize100];
+    [cell.ms_imageView1 downloadImageWithImageId:owner.headUrl
+                                            size:FetchCenterImageSize100];
 }
 
 
