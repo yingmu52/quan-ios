@@ -8,7 +8,7 @@
 
 #import "CirclePickerViewController.h"
 #import "Theme.h"
-#import "CircleListCell.h"
+#import "MSTableViewCell.h"
 #import "UIImageView+ImageCache.h"
 @interface CirclePickerViewController ()
 
@@ -45,19 +45,18 @@
 //}
 
 
-- (CircleListCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    CircleListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CirclePickerCell"];
+- (MSTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    MSTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CirclePickerCell"];
     [self configureTableViewCell:cell atIndexPath:indexPath];
     return cell;
 }
 
-- (void)configureTableViewCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
-    CircleListCell *c = (CircleListCell *)cell;
+- (void)configureTableViewCell:(MSTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     Circle *circle = [self.tableFetchedRC objectAtIndexPath:indexPath];
-    c.circleListTitle.text = circle.circleName;
-    c.circleListSubtitle.text = circle.circleDescription;
-    [c.circleListImageView downloadImageWithImageId:circle.imageId
-                                               size:FetchCenterImageSize100];
+    cell.ms_title.text = circle.circleName;
+    cell.ms_subTitle.text = circle.circleDescription;
+    [cell.ms_imageView1 downloadImageWithImageId:circle.imageId
+                                            size:FetchCenterImageSize100];
 
 }
 

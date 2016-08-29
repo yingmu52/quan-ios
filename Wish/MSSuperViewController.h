@@ -13,6 +13,7 @@
 #import "WishDetailCell.h"
 #import "UIImageView+WebCache.h"
 #import "MJRefresh.h"
+#import "MSTableViewCell.h"
 
 #define NSLog if(DEBUG) NSLog
 

@@ -33,7 +33,6 @@
 		A030105D1BABC6AA0041E2CF /* QBVideoIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = A03010501BABC6AA0041E2CF /* QBVideoIndicatorView.m */; };
 		A03010601BACAFBC0041E2CF /* QBPreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A030105F1BACAFBC0041E2CF /* QBPreViewController.m */; };
 		A03010611BACAFBC0041E2CF /* QBPreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A030105F1BACAFBC0041E2CF /* QBPreViewController.m */; };
-		A0342B8A1C816EA400803BD7 /* CircleListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A0342B891C816EA400803BD7 /* CircleListCell.m */; };
 		A04842E91B98CF9E0032E927 /* UIImageView+ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A04842E81B98CF9E0032E927 /* UIImageView+ImageCache.m */; };
 		A04842EA1B98CF9E0032E927 /* UIImageView+ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A04842E81B98CF9E0032E927 /* UIImageView+ImageCache.m */; };
 		A04842F71B99F5360032E927 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A04842F61B99F5360032E927 /* libc++.dylib */; };
@@ -156,6 +155,7 @@
 		A0D102691B84EFAD006B0E4E /* WebP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D102671B84EFAD006B0E4E /* WebP.framework */; };
 		A0D102701B84F6BA006B0E4E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D1026F1B84F6BA006B0E4E /* libz.dylib */; };
 		A0DCF0D61CA9AE6A0052380E /* PlansViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0DCF0D51CA9AE6A0052380E /* PlansViewController.m */; };
+		A0E52E7E1D73F44100BB9DDC /* MSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A0E52E7D1D73F44100BB9DDC /* MSTableViewCell.m */; };
 		A0EA22011BA53BF400A83A7A /* ImagePreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0EA22001BA53BF400A83A7A /* ImagePreviewController.m */; };
 		A0EA22021BA53BF400A83A7A /* ImagePreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0EA22001BA53BF400A83A7A /* ImagePreviewController.m */; };
 		A0EDFCBB1B90C61900B10594 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EDFCBA1B90C61900B10594 /* MobileCoreServices.framework */; };
@@ -380,8 +380,6 @@
 		A03010511BABC6AA0041E2CF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/QBImagePicker.strings"; sourceTree = "<group>"; };
 		A030105E1BACAFBC0041E2CF /* QBPreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBPreViewController.h; sourceTree = "<group>"; };
 		A030105F1BACAFBC0041E2CF /* QBPreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBPreViewController.m; sourceTree = "<group>"; };
-		A0342B881C816EA400803BD7 /* CircleListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircleListCell.h; path = Discovery/CircleListCell.h; sourceTree = "<group>"; };
-		A0342B891C816EA400803BD7 /* CircleListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircleListCell.m; path = Discovery/CircleListCell.m; sourceTree = "<group>"; };
 		A04842E71B98CF9E0032E927 /* UIImageView+ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+ImageCache.h"; sourceTree = "<group>"; };
 		A04842E81B98CF9E0032E927 /* UIImageView+ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+ImageCache.m"; sourceTree = "<group>"; };
 		A04842F41B99F29C0032E927 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
@@ -539,6 +537,8 @@
 		A0D1026F1B84F6BA006B0E4E /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		A0DCF0D41CA9AE6A0052380E /* PlansViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlansViewController.h; sourceTree = "<group>"; };
 		A0DCF0D51CA9AE6A0052380E /* PlansViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlansViewController.m; sourceTree = "<group>"; };
+		A0E52E7C1D73F44100BB9DDC /* MSTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MSTableViewCell.h; path = ../MSTableViewCell.h; sourceTree = "<group>"; };
+		A0E52E7D1D73F44100BB9DDC /* MSTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MSTableViewCell.m; path = ../MSTableViewCell.m; sourceTree = "<group>"; };
 		A0EA21FF1BA53BF400A83A7A /* ImagePreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePreviewController.h; sourceTree = "<group>"; };
 		A0EA22001BA53BF400A83A7A /* ImagePreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePreviewController.m; sourceTree = "<group>"; };
 		A0EDFCBA1B90C61900B10594 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -802,13 +802,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		A02D8B371D64155D00B0740D /* BaseViewControllers */ = {
+		A02D8B371D64155D00B0740D /* Miao Stone Base Object */ = {
 			isa = PBXGroup;
 			children = (
 				A066C3871BB7AE08003B51D5 /* MSSuperViewController.h */,
 				A066C3881BB7AE08003B51D5 /* MSSuperViewController.m */,
+				A0E52E7C1D73F44100BB9DDC /* MSTableViewCell.h */,
+				A0E52E7D1D73F44100BB9DDC /* MSTableViewCell.m */,
 			);
-			name = BaseViewControllers;
+			name = "Miao Stone Base Object";
 			sourceTree = "<group>";
 		};
 		A03010361BABC6AA0041E2CF /* QBImagePicker */ = {
@@ -1212,8 +1214,6 @@
 				A0FEC1321C8616CC004C48F1 /* CircleCreationViewController.m */,
 				A0A0835A1BD74F260057CD65 /* CircleListViewController.h */,
 				A0A0835B1BD74F260057CD65 /* CircleListViewController.m */,
-				A0342B881C816EA400803BD7 /* CircleListCell.h */,
-				A0342B891C816EA400803BD7 /* CircleListCell.m */,
 				A0CBDCB21C8DF09800DA53FF /* EmptyCircleView.h */,
 				A0CBDCB31C8DF09800DA53FF /* EmptyCircleView.m */,
 				A0CBDCB41C8DF09800DA53FF /* EmptyCircleView.xib */,
@@ -1249,7 +1249,7 @@
 		AE01723B1A65CD8E0014266F /* Wish */ = {
 			isa = PBXGroup;
 			children = (
-				A02D8B371D64155D00B0740D /* BaseViewControllers */,
+				A02D8B371D64155D00B0740D /* Miao Stone Base Object */,
 				A0FEC1301C86167D004C48F1 /* Circles */,
 				AE606A1D1AF4693F003DF16E /* Message */,
 				AEFB04781AD12437009EB0D3 /* Discovery */,
@@ -1769,6 +1769,7 @@
 				A0F5131C1BD98B9600279B9D /* Plan+CoreDataProperties.m in Sources */,
 				A0B9D7691B9E4F1100EE382B /* DashedBorderView.m in Sources */,
 				A0C15C921D4CB9350094BEF9 /* MJRefreshAutoGifFooter.m in Sources */,
+				A0E52E7E1D73F44100BB9DDC /* MSTableViewCell.m in Sources */,
 				A0C15C8E1D4CB9350094BEF9 /* MJRefreshBackFooter.m in Sources */,
 				A0F7D4471B84E851003CCB34 /* JTSAnimatedGIFUtility.m in Sources */,
 				A04942991BBA3A67002A8A3A /* CommentViewController.m in Sources */,
@@ -1831,7 +1832,6 @@
 				A055FB9F1BA6553A0013F91E /* ImagePreviewCell.m in Sources */,
 				A0D1021F1B84EB6A006B0E4E /* SDWebImageDecoder.m in Sources */,
 				AED4CB431AC79F3A00EE2DA4 /* ModalLeftToRightSegue.m in Sources */,
-				A0342B8A1C816EA400803BD7 /* CircleListCell.m in Sources */,
 				AE30EE6D1A6E19D00044740D /* WishDetailCell.m in Sources */,
 				A0D102191B84EB6A006B0E4E /* NSData+ImageContentType.m in Sources */,
 				A0EDFCC11B90C75900B10594 /* Reachability.m in Sources */,
