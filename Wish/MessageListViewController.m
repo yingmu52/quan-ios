@@ -7,11 +7,7 @@
 //
 
 #import "MessageListViewController.h"
-#import "Theme.h"
-#import "FetchCenter.h"
-#import "MessageCell.h"
 #import "Owner.h"
-#import "UIImageView+WebCache.h"
 #import "FeedDetailViewController.h"
 
 @interface MessageListViewController ()
@@ -91,28 +87,28 @@
     return 75.0f;
 }
 
-- (MessageCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MessageCell" forIndexPath:indexPath];
+- (MSTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    MSTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MessageCell" forIndexPath:indexPath];
     [self configureTableViewCell:cell atIndexPath:indexPath];
     return cell;
 }
 
-- (void)configureTableViewCell:(MessageCell *)cell atIndexPath:(NSIndexPath *)indexPath{
+- (void)configureTableViewCell:(MSTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     Message *message = [self.tableFetchedRC objectAtIndexPath:indexPath];
     
-    [cell.profilePictureImageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:message.owner.headUrl size:FetchCenterImageSize100]];
-    [cell.feedImageView sd_setImageWithURL:[self.fetchCenter urlWithImageID:message.picurl size:FetchCenterImageSize100]];
+    [cell.ms_imageView1 downloadImageWithImageId:message.owner.headUrl size:FetchCenterImageSize100];
+    [cell.ms_imageView2 downloadImageWithImageId:message.picurl size:FetchCenterImageSize100];
     
     NSMutableAttributedString *content = [[NSMutableAttributedString alloc] initWithString:message.owner.ownerName
                                                                                 attributes:@{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00B8C2"]}];
     [content appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"发表了一条评论：%@",message.content]]];
-    cell.contentLabel.attributedText = content;
+    cell.ms_title.attributedText = content;
     
     
     //displaying date
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"yyyy-MM-dd HH:mm";
-    cell.dateLabel.text = [formatter stringFromDate:message.createTime];
+    cell.ms_dateLabel.text = [formatter stringFromDate:message.createTime];
     
     //    cell.backgroundColor = message.isRead.boolValue ? [self normalColor] : [self highlightColor];
 }

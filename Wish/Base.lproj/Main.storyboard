@@ -1350,7 +1350,7 @@
                                 <color key="separatorColor" red="0.75686274509999996" green="0.7843137255" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.85098039219999999" green="0.87450980389999999" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MessageCell" rowHeight="112" id="ng5-6z-04s" customClass="MessageCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MessageCell" rowHeight="112" id="ng5-6z-04s" customClass="MSTableViewCell">
                                         <rect key="frame" x="0.0" y="86" width="600" height="112"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ng5-6z-04s" id="Hhm-43-t0v">
@@ -1397,8 +1397,7 @@
                                                                     <exclude reference="kol-eS-BD9"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="165" y="23" width="65" height="65"/>
+                                                            <variation key="heightClass=regular-widthClass=compact">
                                                                 <mask key="constraints">
                                                                     <include reference="E4J-U9-Hre"/>
                                                                     <include reference="kol-eS-BD9"/>
@@ -1410,9 +1409,6 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="75" y="23" width="85" height="45.5"/>
-                                                            </variation>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2014-11-21 13:20" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tGL-QF-Snd">
                                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -1471,8 +1467,7 @@
                                                             <exclude reference="vj4-9M-gwq"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="111.5"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="subviews">
                                                             <include reference="Vwr-tP-K5Z"/>
                                                             <include reference="yNm-Y2-OMm"/>
@@ -1526,10 +1521,10 @@
                                         <color key="backgroundColor" red="0.95686274510000002" green="0.97647058819999999" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <inset key="separatorInset" minX="60" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
-                                            <outlet property="contentLabel" destination="LIQ-Dq-NYS" id="JW4-kL-rJ5"/>
-                                            <outlet property="dateLabel" destination="tGL-QF-Snd" id="0wW-a6-DFi"/>
-                                            <outlet property="feedImageView" destination="yNm-Y2-OMm" id="60s-nR-e7U"/>
-                                            <outlet property="profilePictureImageView" destination="Vwr-tP-K5Z" id="MQ5-84-H3x"/>
+                                            <outlet property="ms_dateLabel" destination="tGL-QF-Snd" id="D44-wj-63n"/>
+                                            <outlet property="ms_imageView1" destination="Vwr-tP-K5Z" id="hzO-yd-slL"/>
+                                            <outlet property="ms_imageView2" destination="yNm-Y2-OMm" id="8tF-io-QKi"/>
+                                            <outlet property="ms_title" destination="LIQ-Dq-NYS" id="kDy-iu-xof"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

@@ -255,7 +255,6 @@
 		AE59B5F51B410437006CA4AB /* ViewForEmptyEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = AE59B5F41B410437006CA4AB /* ViewForEmptyEvent.m */; };
 		AE59B5F61B410437006CA4AB /* ViewForEmptyEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = AE59B5F41B410437006CA4AB /* ViewForEmptyEvent.m */; };
 		AE606A201AF4697B003DF16E /* MessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE606A1F1AF4697B003DF16E /* MessageListViewController.m */; };
-		AE606A231AF46991003DF16E /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE606A221AF46991003DF16E /* MessageCell.m */; };
 		AE767E7F1ACE35A600F35137 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE767E7E1ACE35A600F35137 /* FeedbackViewController.m */; };
 		AE767E801ACE35A600F35137 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE767E7E1ACE35A600F35137 /* FeedbackViewController.m */; };
 		AE95A9FC1ACFC26A007465D5 /* ImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = AE95A9FB1ACFC26A007465D5 /* ImagePicker.m */; };
@@ -650,8 +649,6 @@
 		AE59B5F41B410437006CA4AB /* ViewForEmptyEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewForEmptyEvent.m; sourceTree = "<group>"; };
 		AE606A1E1AF4697B003DF16E /* MessageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageListViewController.h; sourceTree = "<group>"; };
 		AE606A1F1AF4697B003DF16E /* MessageListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageListViewController.m; sourceTree = "<group>"; };
-		AE606A211AF46991003DF16E /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
-		AE606A221AF46991003DF16E /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
 		AE767E7D1ACE35A600F35137 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
 		AE767E7E1ACE35A600F35137 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
 		AE95A9FA1ACFC26A007465D5 /* ImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePicker.h; sourceTree = "<group>"; };
@@ -1351,8 +1348,6 @@
 			children = (
 				AE606A1E1AF4697B003DF16E /* MessageListViewController.h */,
 				AE606A1F1AF4697B003DF16E /* MessageListViewController.m */,
-				AE606A211AF46991003DF16E /* MessageCell.h */,
-				AE606A221AF46991003DF16E /* MessageCell.m */,
 			);
 			name = Message;
 			sourceTree = "<group>";
@@ -1835,7 +1830,6 @@
 				AE30EE6D1A6E19D00044740D /* WishDetailCell.m in Sources */,
 				A0D102191B84EB6A006B0E4E /* NSData+ImageContentType.m in Sources */,
 				A0EDFCC11B90C75900B10594 /* Reachability.m in Sources */,
-				AE606A231AF46991003DF16E /* MessageCell.m in Sources */,
 				A0C15C8F1D4CB9350094BEF9 /* MJRefreshComponent.m in Sources */,
 				A07C66AF1BE01AB800413D32 /* InvitationViewController.m in Sources */,
 				A07C66BA1BE0707300413D32 /* WXApiManager.m in Sources */,
