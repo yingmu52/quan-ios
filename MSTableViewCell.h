@@ -15,5 +15,5 @@
 @property (nonatomic,weak) IBOutlet UILabel *ms_title;
 @property (nonatomic,weak) IBOutlet UILabel *ms_subTitle;
 @property (nonatomic,weak) IBOutlet UILabel *ms_dateLabel;
-
+@property (nonatomic,weak) IBOutlet UITextView *ms_textView;
 @end

@@ -8,10 +8,11 @@
 
 #import "FeedDetailViewController.h"
 #import "UITableView+FDTemplateLayoutCell.h"
-#import "JTSImageViewController.h"
 #import "BFRImageViewController.h"
 #import "CommentViewController.h"
 #import "MainTabBarController.h"
+
+#define FEEDDETAILCELLID @"FeedDetailCell"
 @interface FeedDetailViewController () <CommentViewControllerDelegate>
 @property (nonatomic,strong) NSDateFormatter *dateFormatter;
 @property (nonatomic,strong) NSDictionary *textAttributes;
@@ -249,10 +250,10 @@
     return self.tableFetchedRC.fetchedObjects.count;
 }
 
-- (void)configureCell:(FeedDetailCell *)cell indexPath:(NSIndexPath *)indexPath{
+- (void)configureCell:(MSTableViewCell *)cell indexPath:(NSIndexPath *)indexPath{
     Comment *comment = [self.tableFetchedRC objectAtIndexPath:indexPath];
-    [cell.profileImageView downloadImageWithImageId:comment.owner.headUrl size:FetchCenterImageSize100];
-    cell.contentTextView.text = comment.content;
+    [cell.ms_imageView1 downloadImageWithImageId:comment.owner.headUrl size:FetchCenterImageSize100];
+    cell.ms_textView.text = comment.content;
     
     NSDictionary *userNameAttribute = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00B9C0"]};
     
@@ -269,13 +270,13 @@
         
         [userA appendAttributedString:reply];
         [userA appendAttributedString:userB];
-        cell.userNameLabel.attributedText = userA;
+        cell.ms_title.attributedText = userA;
     }else{
         
-        cell.userNameLabel.attributedText = [[NSAttributedString alloc] initWithString:userAstring
+        cell.ms_title.attributedText = [[NSAttributedString alloc] initWithString:userAstring
                                                                             attributes:userNameAttribute];
     }
-    cell.dateLabel.text = [self.dateFormatter stringFromDate:comment.createTime];
+    cell.ms_dateLabel.text = [self.dateFormatter stringFromDate:comment.createTime];
     
     //从消息页进来时，highligh对应评论的cell
     if ([self.message.commentId isEqualToString:comment.commentId]) {
@@ -285,8 +286,8 @@
     }
 }
 
-- (FeedDetailCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    FeedDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:FEEDDETAILCELLID forIndexPath:indexPath];
+- (MSTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    MSTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:FEEDDETAILCELLID forIndexPath:indexPath];
     [self configureCell:cell indexPath:indexPath];
     return cell;
 }

@@ -243,7 +243,6 @@
 		AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B6E3B1A6D89FC0026F3CE /* HomeCardView.m */; };
 		AE2A8DE51ACA700100029D52 /* WishDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE2A8DE41ACA700100029D52 /* WishDetailCell.xib */; };
 		AE30EE6D1A6E19D00044740D /* WishDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE30EE6C1A6E19D00044740D /* WishDetailCell.m */; };
-		AE47055D1AF9DC080028D7BC /* FeedDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE47055C1AF9DC080028D7BC /* FeedDetailCell.m */; };
 		AE479E9E1A6F775C00366A0A /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479E9D1A6F775C00366A0A /* PostViewController.m */; };
 		AE479E9F1A6F775C00366A0A /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE479E9D1A6F775C00366A0A /* PostViewController.m */; };
 		AE52FA501A8D3D76003FF725 /* PostFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE52FA4F1A8D3D76003FF725 /* PostFeedViewController.m */; };
@@ -632,8 +631,6 @@
 		AE30EE6C1A6E19D00044740D /* WishDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDetailCell.m; sourceTree = "<group>"; };
 		AE4481AB1AB6B5A700A912CB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		AE4481AD1AB6B65A00A912CB /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		AE47055B1AF9DC080028D7BC /* FeedDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedDetailCell.h; sourceTree = "<group>"; };
-		AE47055C1AF9DC080028D7BC /* FeedDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedDetailCell.m; sourceTree = "<group>"; };
 		AE479E9C1A6F775B00366A0A /* PostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostViewController.h; sourceTree = "<group>"; };
 		AE479E9D1A6F775C00366A0A /* PostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostViewController.m; sourceTree = "<group>"; };
 		AE52FA4E1A8D3D76003FF725 /* PostFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostFeedViewController.h; sourceTree = "<group>"; };
@@ -1356,8 +1353,6 @@
 				AED355F31B2285D3000427FF /* FeedDetailHeader.xib */,
 				AED355F61B228696000427FF /* FeedDetailHeader.h */,
 				AED355F71B228696000427FF /* FeedDetailHeader.m */,
-				AE47055B1AF9DC080028D7BC /* FeedDetailCell.h */,
-				AE47055C1AF9DC080028D7BC /* FeedDetailCell.m */,
 				AE1779981AF585CB005F1BEB /* FeedDetailViewController.h */,
 				AE1779991AF585CB005F1BEB /* FeedDetailViewController.m */,
 				A04942971BBA3A67002A8A3A /* CommentViewController.h */,
@@ -1813,7 +1808,6 @@
 				AEFB048C1AD12437009EB0D3 /* DiscoveryViewController.m in Sources */,
 				AEEC6C731A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,
 				A07C21231C8163BF0084976A /* ButtonWithPathedImage.m in Sources */,
-				AE47055D1AF9DC080028D7BC /* FeedDetailCell.m in Sources */,
 				A0C15CA01D4CB9350094BEF9 /* UIView+MJExtension.m in Sources */,
 				AED8D7CA1A9BE2490035EDE5 /* FollowingImageCell.m in Sources */,
 				A0C15C9F1D4CB9350094BEF9 /* UIScrollView+MJRefresh.m in Sources */,
