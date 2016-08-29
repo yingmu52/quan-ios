@@ -13,6 +13,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.ms_textView.textContainerInset = UIEdgeInsetsZero;
+    self.ms_cardBackgroundView.referenceBadgeView = self.ms_imageView2;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -20,5 +21,4 @@
 
     // Configure the view for the selected state
 }
-
 @end

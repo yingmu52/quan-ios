@@ -9,9 +9,8 @@
 #import "AchieveVCData.h"
 @import CoreData;
 #import "Plan.h"
-#import "AchieveCell.h"
 #import "User.h"
-#import "UIImageView+ImageCache.h"
+#define ACHIEVECELLID @"AchievementCell"
 @interface AchieveVCData () <NSFetchedResultsControllerDelegate>
 @property (nonatomic,strong) UIImageView *emptySignImageView;
 @property (nonatomic,strong) UIView *timeLine;
@@ -42,22 +41,22 @@
     return self.tableFetchedRC.fetchedObjects.count;
 }
 
-- (AchieveCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    AchieveCell *cell = [tableView dequeueReusableCellWithIdentifier:ACHIEVECELLID
+- (MSTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    MSTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ACHIEVECELLID
                                                         forIndexPath:indexPath];
 
     Plan *plan = [self.tableFetchedRC objectAtIndexPath:indexPath];
     
-    cell.dateLabel.text = [NSString stringWithFormat:@"%@ - ",[self.formatter stringFromDate:plan.updateDate]];
+    cell.ms_dateLabel.text = [NSString stringWithFormat:@"%@ - ",[self.formatter stringFromDate:plan.updateDate]];
 
-    cell.planStatusLabel.text = plan.planStatusTags[plan.planStatus.integerValue];
-    cell.planTitleLabel.text = plan.planTitle;
-    cell.planSubtitleLabel.text = [NSString stringWithFormat:@"%@个记录\t%@人关注",plan.tryTimes,plan.followCount];
+    cell.ms_statusLabel.text = plan.planStatusTags[plan.planStatus.integerValue];
+    cell.ms_title.text = plan.planTitle;
+    cell.ms_subTitle.text = [NSString stringWithFormat:@"%@个记录\t%@人关注",plan.tryTimes,plan.followCount];
     
     UIImage *badge;
     if (plan.planStatus.integerValue == PlanStatusFinished) badge = [Theme achievementFinish];
-    cell.badgeImageView.image = badge;
-    [cell.planImageView downloadImageWithImageId:plan.backgroundNum size:FetchCenterImageSize200];
+    cell.ms_imageView2.image = badge;
+    [cell.ms_imageView1 downloadImageWithImageId:plan.backgroundNum size:FetchCenterImageSize200];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }

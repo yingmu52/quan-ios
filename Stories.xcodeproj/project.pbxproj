@@ -298,8 +298,6 @@
 		AEE075391A744A770015155B /* SystemUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE075371A744A770015155B /* SystemUtil.m */; };
 		AEE4A6CC1A9684D500ABF946 /* AchieveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6CB1A9684D500ABF946 /* AchieveViewController.m */; };
 		AEE4A6CD1A9684D500ABF946 /* AchieveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6CB1A9684D500ABF946 /* AchieveViewController.m */; };
-		AEE4A6D01A96A5D500ABF946 /* AchieveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6CF1A96A5D500ABF946 /* AchieveCell.m */; };
-		AEE4A6D11A96A5D500ABF946 /* AchieveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6CF1A96A5D500ABF946 /* AchieveCell.m */; };
 		AEE4A6D41A96AFCF00ABF946 /* TriangleCutoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6D31A96AFCF00ABF946 /* TriangleCutoutView.m */; };
 		AEE4A6D51A96AFCF00ABF946 /* TriangleCutoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE4A6D31A96AFCF00ABF946 /* TriangleCutoutView.m */; };
 		AEEC6C731A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEC6C721A6DB11F0021B7E4 /* WishDetailViewController.m */; };
@@ -692,8 +690,6 @@
 		AEE075371A744A770015155B /* SystemUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUtil.m; sourceTree = "<group>"; };
 		AEE4A6CA1A9684D500ABF946 /* AchieveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchieveViewController.h; sourceTree = "<group>"; };
 		AEE4A6CB1A9684D500ABF946 /* AchieveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AchieveViewController.m; sourceTree = "<group>"; };
-		AEE4A6CE1A96A5D500ABF946 /* AchieveCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchieveCell.h; sourceTree = "<group>"; };
-		AEE4A6CF1A96A5D500ABF946 /* AchieveCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AchieveCell.m; sourceTree = "<group>"; };
 		AEE4A6D21A96AFCF00ABF946 /* TriangleCutoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriangleCutoutView.h; sourceTree = "<group>"; };
 		AEE4A6D31A96AFCF00ABF946 /* TriangleCutoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TriangleCutoutView.m; sourceTree = "<group>"; };
 		AEEC6C711A6DB11F0021B7E4 /* WishDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishDetailViewController.h; sourceTree = "<group>"; };
@@ -1396,8 +1392,6 @@
 			children = (
 				AE9A3AE91A9B1DB000F0588F /* AchieveVCData.h */,
 				AE9A3AEA1A9B1DB000F0588F /* AchieveVCData.m */,
-				AEE4A6CE1A96A5D500ABF946 /* AchieveCell.h */,
-				AEE4A6CF1A96A5D500ABF946 /* AchieveCell.m */,
 				AEE4A6CA1A9684D500ABF946 /* AchieveViewController.h */,
 				AEE4A6CB1A9684D500ABF946 /* AchieveViewController.m */,
 				AEE4A6D21A96AFCF00ABF946 /* TriangleCutoutView.h */,
@@ -1822,7 +1816,6 @@
 				A07C66AF1BE01AB800413D32 /* InvitationViewController.m in Sources */,
 				A07C66BA1BE0707300413D32 /* WXApiManager.m in Sources */,
 				A0D1022D1B84EB6A006B0E4E /* UIImage+MultiFormat.m in Sources */,
-				AEE4A6D01A96A5D500ABF946 /* AchieveCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1878,7 +1871,6 @@
 				A066C3861BB793DA003B51D5 /* MSLabel.m in Sources */,
 				A0D1022E1B84EB6A006B0E4E /* UIImage+MultiFormat.m in Sources */,
 				AEE075391A744A770015155B /* SystemUtil.m in Sources */,
-				AEE4A6D11A96A5D500ABF946 /* AchieveCell.m in Sources */,
 				A0F7D44C1B84E851003CCB34 /* JTSImageViewController.m in Sources */,
 				AE9A198A1B02E9E700590784 /* FeedbackkAccessoryView.m in Sources */,
 				A0F513231BD98B9600279B9D /* Feed.m in Sources */,

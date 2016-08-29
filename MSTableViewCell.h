@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TriangleCutoutView.h"
 
 @interface MSTableViewCell : UITableViewCell
 
@@ -16,4 +17,8 @@
 @property (nonatomic,weak) IBOutlet UILabel *ms_subTitle;
 @property (nonatomic,weak) IBOutlet UILabel *ms_dateLabel;
 @property (nonatomic,weak) IBOutlet UITextView *ms_textView;
+
+
+@property (nonatomic,weak) IBOutlet TriangleCutoutView *ms_cardBackgroundView;
+@property (nonatomic,weak) IBOutlet UILabel *ms_statusLabel;
 @end
