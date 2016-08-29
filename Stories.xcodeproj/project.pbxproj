@@ -197,18 +197,6 @@
 		A0F7D43E1B84E851003CCB34 /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3BC1B84E851003CCB34 /* UITableView+FDTemplateLayoutCell.m */; };
 		A0F7D4451B84E851003CCB34 /* GCPTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3C61B84E851003CCB34 /* GCPTextView.m */; };
 		A0F7D4461B84E851003CCB34 /* GCPTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3C61B84E851003CCB34 /* GCPTextView.m */; };
-		A0F7D4471B84E851003CCB34 /* JTSAnimatedGIFUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3C91B84E851003CCB34 /* JTSAnimatedGIFUtility.m */; };
-		A0F7D4481B84E851003CCB34 /* JTSAnimatedGIFUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3C91B84E851003CCB34 /* JTSAnimatedGIFUtility.m */; };
-		A0F7D4491B84E851003CCB34 /* JTSImageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3CB1B84E851003CCB34 /* JTSImageInfo.m */; };
-		A0F7D44A1B84E851003CCB34 /* JTSImageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3CB1B84E851003CCB34 /* JTSImageInfo.m */; };
-		A0F7D44B1B84E851003CCB34 /* JTSImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3CD1B84E851003CCB34 /* JTSImageViewController.m */; };
-		A0F7D44C1B84E851003CCB34 /* JTSImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3CD1B84E851003CCB34 /* JTSImageViewController.m */; };
-		A0F7D44D1B84E851003CCB34 /* JTSSimpleImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3CF1B84E851003CCB34 /* JTSSimpleImageDownloader.m */; };
-		A0F7D44E1B84E851003CCB34 /* JTSSimpleImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3CF1B84E851003CCB34 /* JTSSimpleImageDownloader.m */; };
-		A0F7D44F1B84E851003CCB34 /* UIApplication+JTSImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3D11B84E851003CCB34 /* UIApplication+JTSImageViewController.m */; };
-		A0F7D4501B84E851003CCB34 /* UIApplication+JTSImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3D11B84E851003CCB34 /* UIApplication+JTSImageViewController.m */; };
-		A0F7D4511B84E851003CCB34 /* UIImage+JTSImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3D31B84E851003CCB34 /* UIImage+JTSImageEffects.m */; };
-		A0F7D4521B84E851003CCB34 /* UIImage+JTSImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3D31B84E851003CCB34 /* UIImage+JTSImageEffects.m */; };
 		A0F7D4531B84E851003CCB34 /* KTCenterFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3D51B84E851003CCB34 /* KTCenterFlowLayout.m */; };
 		A0F7D4541B84E851003CCB34 /* KTCenterFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3D51B84E851003CCB34 /* KTCenterFlowLayout.m */; };
 		A0F7D4551B84E851003CCB34 /* NHAlignmentFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3D71B84E851003CCB34 /* NHAlignmentFlowLayout.m */; };
@@ -573,18 +561,6 @@
 		A0F7D3BC1B84E851003CCB34 /* UITableView+FDTemplateLayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCell.m"; sourceTree = "<group>"; };
 		A0F7D3C51B84E851003CCB34 /* GCPTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCPTextView.h; sourceTree = "<group>"; };
 		A0F7D3C61B84E851003CCB34 /* GCPTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCPTextView.m; sourceTree = "<group>"; };
-		A0F7D3C81B84E851003CCB34 /* JTSAnimatedGIFUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTSAnimatedGIFUtility.h; sourceTree = "<group>"; };
-		A0F7D3C91B84E851003CCB34 /* JTSAnimatedGIFUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTSAnimatedGIFUtility.m; sourceTree = "<group>"; };
-		A0F7D3CA1B84E851003CCB34 /* JTSImageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTSImageInfo.h; sourceTree = "<group>"; };
-		A0F7D3CB1B84E851003CCB34 /* JTSImageInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTSImageInfo.m; sourceTree = "<group>"; };
-		A0F7D3CC1B84E851003CCB34 /* JTSImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTSImageViewController.h; sourceTree = "<group>"; };
-		A0F7D3CD1B84E851003CCB34 /* JTSImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTSImageViewController.m; sourceTree = "<group>"; };
-		A0F7D3CE1B84E851003CCB34 /* JTSSimpleImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JTSSimpleImageDownloader.h; sourceTree = "<group>"; };
-		A0F7D3CF1B84E851003CCB34 /* JTSSimpleImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTSSimpleImageDownloader.m; sourceTree = "<group>"; };
-		A0F7D3D01B84E851003CCB34 /* UIApplication+JTSImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+JTSImageViewController.h"; sourceTree = "<group>"; };
-		A0F7D3D11B84E851003CCB34 /* UIApplication+JTSImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+JTSImageViewController.m"; sourceTree = "<group>"; };
-		A0F7D3D21B84E851003CCB34 /* UIImage+JTSImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+JTSImageEffects.h"; sourceTree = "<group>"; };
-		A0F7D3D31B84E851003CCB34 /* UIImage+JTSImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+JTSImageEffects.m"; sourceTree = "<group>"; };
 		A0F7D3D41B84E851003CCB34 /* KTCenterFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCenterFlowLayout.h; sourceTree = "<group>"; };
 		A0F7D3D51B84E851003CCB34 /* KTCenterFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCenterFlowLayout.m; sourceTree = "<group>"; };
 		A0F7D3D61B84E851003CCB34 /* NHAlignmentFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHAlignmentFlowLayout.h; sourceTree = "<group>"; };
@@ -1079,7 +1055,6 @@
 				A0F7D3AE1B84E851003CCB34 /* CustomBadge */,
 				A0F7D3BA1B84E851003CCB34 /* Dynamic Cell Height */,
 				A0F7D3C41B84E851003CCB34 /* GCPTextView */,
-				A0F7D3C71B84E851003CCB34 /* JTS Image View */,
 				A0F7D3D81B84E851003CCB34 /* NZCircularImageView */,
 				A0F7D3DB1B84E851003CCB34 /* Reachability.h */,
 				A0F7D3DC1B84E851003CCB34 /* Reachability.m */,
@@ -1124,25 +1099,6 @@
 				A0F7D3C61B84E851003CCB34 /* GCPTextView.m */,
 			);
 			path = GCPTextView;
-			sourceTree = "<group>";
-		};
-		A0F7D3C71B84E851003CCB34 /* JTS Image View */ = {
-			isa = PBXGroup;
-			children = (
-				A0F7D3C81B84E851003CCB34 /* JTSAnimatedGIFUtility.h */,
-				A0F7D3C91B84E851003CCB34 /* JTSAnimatedGIFUtility.m */,
-				A0F7D3CA1B84E851003CCB34 /* JTSImageInfo.h */,
-				A0F7D3CB1B84E851003CCB34 /* JTSImageInfo.m */,
-				A0F7D3CC1B84E851003CCB34 /* JTSImageViewController.h */,
-				A0F7D3CD1B84E851003CCB34 /* JTSImageViewController.m */,
-				A0F7D3CE1B84E851003CCB34 /* JTSSimpleImageDownloader.h */,
-				A0F7D3CF1B84E851003CCB34 /* JTSSimpleImageDownloader.m */,
-				A0F7D3D01B84E851003CCB34 /* UIApplication+JTSImageViewController.h */,
-				A0F7D3D11B84E851003CCB34 /* UIApplication+JTSImageViewController.m */,
-				A0F7D3D21B84E851003CCB34 /* UIImage+JTSImageEffects.h */,
-				A0F7D3D31B84E851003CCB34 /* UIImage+JTSImageEffects.m */,
-			);
-			path = "JTS Image View";
 			sourceTree = "<group>";
 		};
 		A0F7D3D81B84E851003CCB34 /* NZCircularImageView */ = {
@@ -1676,13 +1632,10 @@
 				A0A083841BD75E3E0057CD65 /* Circle.m in Sources */,
 				A0EA22011BA53BF400A83A7A /* ImagePreviewController.m in Sources */,
 				AE606A201AF4697B003DF16E /* MessageListViewController.m in Sources */,
-				A0F7D44B1B84E851003CCB34 /* JTSImageViewController.m in Sources */,
 				AEB003F31B8056980056EA80 /* MyPageViewController.m in Sources */,
 				A01431BF1D7166930099258C /* BFRImageContainerViewController.m in Sources */,
-				A0F7D44D1B84E851003CCB34 /* JTSSimpleImageDownloader.m in Sources */,
 				AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */,
 				A0C15C9C1D4CB9350094BEF9 /* MJRefreshConst.m in Sources */,
-				A0F7D44F1B84E851003CCB34 /* UIApplication+JTSImageViewController.m in Sources */,
 				AE0172421A65CD8E0014266F /* AppDelegate.m in Sources */,
 				AEE4A6CC1A9684D500ABF946 /* AchieveViewController.m in Sources */,
 				AE9861FA1AC33C04005544B9 /* EditWishViewController.m in Sources */,
@@ -1750,7 +1703,6 @@
 				A0C15C921D4CB9350094BEF9 /* MJRefreshAutoGifFooter.m in Sources */,
 				A0E52E7E1D73F44100BB9DDC /* MSTableViewCell.m in Sources */,
 				A0C15C8E1D4CB9350094BEF9 /* MJRefreshBackFooter.m in Sources */,
-				A0F7D4471B84E851003CCB34 /* JTSAnimatedGIFUtility.m in Sources */,
 				A04942991BBA3A67002A8A3A /* CommentViewController.m in Sources */,
 				AEF7F2971A686FDB0022410B /* HomeViewController.m in Sources */,
 				AE9A3AEB1A9B1DB000F0588F /* AchieveVCData.m in Sources */,
@@ -1770,7 +1722,6 @@
 				A0F7D4B31B84EA46003CCB34 /* UIImage+WebP.m in Sources */,
 				A0F7D4551B84E851003CCB34 /* NHAlignmentFlowLayout.m in Sources */,
 				A030105C1BABC6AA0041E2CF /* QBVideoIconView.m in Sources */,
-				A0F7D4491B84E851003CCB34 /* JTSImageInfo.m in Sources */,
 				AED68EE41A70399A00CDC0DF /* FetchCenter.m in Sources */,
 				AEBECCF31AE7687900EDF385 /* LoginViewController.m in Sources */,
 				A0D102171B84EB6A006B0E4E /* MKAnnotationView+WebCache.m in Sources */,
@@ -1792,7 +1743,6 @@
 				A0C15C9A1D4CB9350094BEF9 /* MJRefreshStateHeader.m in Sources */,
 				A0F513281BD98B9600279B9D /* Message+CoreDataProperties.m in Sources */,
 				A0C15C901D4CB9350094BEF9 /* MJRefreshFooter.m in Sources */,
-				A0F7D4511B84E851003CCB34 /* UIImage+JTSImageEffects.m in Sources */,
 				AEFB04861AD12437009EB0D3 /* DiscoveryCell.m in Sources */,
 				AE52FA531A8D55A7003FF725 /* KeyboardAcessoryView.m in Sources */,
 				A0994E6A1BC4D1FB00D45845 /* WYPopoverController.m in Sources */,
@@ -1826,9 +1776,7 @@
 				A0D102181B84EB6A006B0E4E /* MKAnnotationView+WebCache.m in Sources */,
 				A0B9D76A1B9E4F1100EE382B /* DashedBorderView.m in Sources */,
 				A0F5131B1BD98B9600279B9D /* Comment.m in Sources */,
-				A0F7D44E1B84E851003CCB34 /* JTSSimpleImageDownloader.m in Sources */,
 				A053CF7F1BA4EFF00007970A /* PostImageCell.m in Sources */,
-				A0F7D4481B84E851003CCB34 /* JTSAnimatedGIFUtility.m in Sources */,
 				A0F7D4461B84E851003CCB34 /* GCPTextView.m in Sources */,
 				A066C38A1BB7AE08003B51D5 /* MSSuperViewController.m in Sources */,
 				A0F513251BD98B9600279B9D /* Owner+CoreDataProperties.m in Sources */,
@@ -1852,11 +1800,9 @@
 				A0F513271BD98B9600279B9D /* Owner.m in Sources */,
 				A04842EA1B98CF9E0032E927 /* UIImageView+ImageCache.m in Sources */,
 				A0D102201B84EB6A006B0E4E /* SDWebImageDecoder.m in Sources */,
-				A0F7D4521B84E851003CCB34 /* UIImage+JTSImageEffects.m in Sources */,
 				AE01725C1A65CD8F0014266F /* WishTests.m in Sources */,
 				A0994E711BC6DF6200D45845 /* LocalDataTest.m in Sources */,
 				A0D1022A1B84EB6A006B0E4E /* UIButton+WebCache.m in Sources */,
-				A0F7D44A1B84E851003CCB34 /* JTSImageInfo.m in Sources */,
 				A0D102361B84EB6A006B0E4E /* UIView+WebCacheOperation.m in Sources */,
 				A0D1021A1B84EB6A006B0E4E /* NSData+ImageContentType.m in Sources */,
 				A0D102341B84EB6A006B0E4E /* UIImageView+WebCache.m in Sources */,
@@ -1871,7 +1817,6 @@
 				A066C3861BB793DA003B51D5 /* MSLabel.m in Sources */,
 				A0D1022E1B84EB6A006B0E4E /* UIImage+MultiFormat.m in Sources */,
 				AEE075391A744A770015155B /* SystemUtil.m in Sources */,
-				A0F7D44C1B84E851003CCB34 /* JTSImageViewController.m in Sources */,
 				AE9A198A1B02E9E700590784 /* FeedbackkAccessoryView.m in Sources */,
 				A0F513231BD98B9600279B9D /* Feed.m in Sources */,
 				AE767E801ACE35A600F35137 /* FeedbackViewController.m in Sources */,
@@ -1908,7 +1853,6 @@
 				A0D1025B1B84EF3B006B0E4E /* HeaderView.m in Sources */,
 				A0D1021E1B84EB6A006B0E4E /* SDWebImageCompat.m in Sources */,
 				AED355FF1B23BBB8000427FF /* ProfileVCOwner.m in Sources */,
-				A0F7D4501B84E851003CCB34 /* UIApplication+JTSImageViewController.m in Sources */,
 				A0F7D49E1B84E851003CCB34 /* UIImagePickerController+DelegateBlocks.m in Sources */,
 				A016FDBC1B8D14BA006E7A09 /* PreviewCell.m in Sources */,
 				A0A083851BD75E3E0057CD65 /* Circle.m in Sources */,
