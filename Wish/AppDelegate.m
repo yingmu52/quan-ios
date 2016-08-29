@@ -268,9 +268,8 @@
 // Parent context
 - (NSManagedObjectContext *)writerManagedObjectContext{
     if (!_writerManagedObjectContext) {
-        _writerManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        [_writerManagedObjectContext setPersistentStoreCoordinator:[self persistentStoreCoordinator]];
-
+        _writerManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+        [_writerManagedObjectContext setPersistentStoreCoordinator:self.persistentStoreCoordinator];
     }
     return _writerManagedObjectContext;
 }
@@ -280,31 +279,31 @@
 
 - (void)saveContext:(NSManagedObjectContext *)context{
     // Save the context.
-    [context performBlockAndWait:^{
-        NSError *error = nil;
-        if (context.hasChanges &&
-            ![context save:&error]) {
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        }else{
-            [self.managedObjectContext performBlockAndWait:^{
-                NSError *error = nil;
-                if ([self.managedObjectContext hasChanges] &&
-                    ![self.managedObjectContext save:&error]) {
-                    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-                }else{
-                    [self.writerManagedObjectContext performBlockAndWait:^{
-                        // Save the context.
-                        NSError *error = nil;
-                        if (self.writerManagedObjectContext.hasChanges &&
-                            ![self.writerManagedObjectContext save:&error]) {
-                            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-                        }
-                    }]; // writer
-                }
-            }]; // main
-        }
-    }];
-    
+    NSAssert(![NSThread isMainThread], @"This method should always be called on background thread");
+    NSError *error = nil;
+    if (context.hasChanges &&
+        ![context save:&error]) {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+    }else{
+        [self.managedObjectContext performBlock:^{
+            NSError *error = nil;
+            if ([self.managedObjectContext hasChanges] &&
+                ![self.managedObjectContext save:&error]) {
+                NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            }else{
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                    // Save the context.
+                    NSError *error = nil;
+                    if (self.writerManagedObjectContext.hasChanges &&
+                        ![self.writerManagedObjectContext save:&error]) {
+                        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+                    }else{
+                        NSLog(@"Stored Data on %@ Thread",[NSThread isMainThread] ? @"Main" : @"Background");
+                    }
+                });
+            }
+        }]; // main
+    }
 }
 
 

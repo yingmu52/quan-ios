@@ -13,6 +13,8 @@
 
 - (void)downloadImageWithImageId:(NSString *)imageId size:(FetchCenterImageSize)size{
     
+    self.image = nil; //重复使用cell时，需要清空图像
+    
     if (imageId) {
         SDWebImageManager *manager = [SDWebImageManager sharedManager];
         FetchCenter *fetchCenter = [[FetchCenter alloc] init];

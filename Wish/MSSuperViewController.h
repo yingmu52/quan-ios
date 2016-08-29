@@ -14,14 +14,20 @@
 #import "UIImageView+WebCache.h"
 #import "MJRefresh.h"
 
+#define NSLog if(DEBUG) NSLog
+
 @import CoreData;
-@interface MSSuperViewController : UIViewController <FetchCenterDelegate,NSFetchedResultsControllerDelegate,UITableViewDelegate,UICollectionViewDelegate>{
+@interface MSSuperViewController : UIViewController
+<FetchCenterDelegate
+,NSFetchedResultsControllerDelegate
+,UITableViewDelegate
+,UICollectionViewDelegate>{
     @protected
     NSFetchRequest *_tableFetchRequest; //让子类可以access实例变量
     NSFetchRequest *_collectionFetchRequest;
 }
 @property (nonatomic,strong) FetchCenter *fetchCenter;
-
+@property (nonatomic,weak) AppDelegate *appDelegate;
 
 #pragma mark - Collection View 
 @property (nonatomic,strong) NSFetchedResultsController *collectionFetchedRC;

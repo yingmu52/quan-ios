@@ -8,7 +8,6 @@
 
 #import "AchieveVCData.h"
 @import CoreData;
-#import "AppDelegate.h"
 #import "Plan.h"
 #import "AchieveCell.h"
 #import "User.h"
