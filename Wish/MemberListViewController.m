@@ -10,7 +10,6 @@
 #import "Theme.h"
 #import "MemberListCell.h"
 #import "UIImageView+ImageCache.h"
-#import "MJRefresh.h"
 @interface MemberListViewController ()
 
 @end
@@ -22,11 +21,6 @@
     [self setUpNavigationItem];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero]; // clear empty cell
 
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self
-                                                                     refreshingAction:@selector(loadNewData)];
-    header.lastUpdatedTimeLabel.hidden = YES;
-    self.tableView.mj_header = header;
-    [self.tableView.mj_header beginRefreshing];
 }
 
 

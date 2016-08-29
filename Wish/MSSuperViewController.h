@@ -29,6 +29,8 @@
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,weak) AppDelegate *appDelegate;
 
+- (void)loadNewData;
+- (void)loadMoreData;
 #pragma mark - Collection View 
 @property (nonatomic,strong) NSFetchedResultsController *collectionFetchedRC;
 @property (nonatomic,weak) IBOutlet UICollectionView *collectionView;

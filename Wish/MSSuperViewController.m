@@ -17,6 +17,46 @@
 
 #pragma mark - 控制器生活周期 Application Life Cycle
 
+
+#pragma mark - 上拉和下拉控件
+
+- (void)setTableView:(UITableView *)tableView{
+    _tableView = tableView;
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self
+                                                                     refreshingAction:@selector(loadNewData)];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    self.tableView.mj_header = header;
+    [self.tableView.mj_header beginRefreshing];
+    
+    
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self
+                                                                    refreshingAction:@selector(loadMoreData)];
+
+}
+
+- (void)setCollectionView:(UICollectionView *)collectionView{
+    _collectionView = collectionView;
+    //下拉刷新
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self
+                                                                     refreshingAction:@selector(loadNewData)];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    self.collectionView.mj_header = header;
+    [self.collectionView.mj_header beginRefreshing];
+    
+    
+    //上拉刷新
+    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self
+                                                                         refreshingAction:@selector(loadMoreData)];
+
+}
+
+- (void)loadNewData{
+    [self stopRefreshingWidget];
+}
+- (void)loadMoreData{
+    [self stopRefreshingWidget];
+}
+
 #pragma mark - 网络通讯&后台调联 Fetch Center
 
 -(FetchCenter *)fetchCenter{
@@ -113,9 +153,9 @@
 
 // MARK: tableFetchedRC Delegate
 
-/*
+
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller{
-    NSLog(@"controllerWillChangeContent");
+
     if (controller == self.tableFetchedRC) {
         [self.tableView beginUpdates];
     }
@@ -126,32 +166,44 @@
 
 }
 
+
 - (void)controller:(NSFetchedResultsController *)controller
    didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath
      forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath
 {
-    NSLog(@"didChangeObject");
+
+
     if (controller == self.tableFetchedRC) {
         UITableView *tableView = self.tableView;
         switch(type)
         {
             case NSFetchedResultsChangeInsert:{
+                NSLog(@"Table Inserted");
                 [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             }
                 break;
                 
-            case NSFetchedResultsChangeDelete:
+            case NSFetchedResultsChangeDelete:{
+                NSLog(@"Table Deleted");
                 [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            }
                 break;
                 
-            case NSFetchedResultsChangeUpdate:
-                [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            case NSFetchedResultsChangeUpdate:{
+                NSLog(@"Table Updated");
+                [self configureTableViewCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            }
                 break;
                 
-            case NSFetchedResultsChangeMove:
-                [tableView moveRowAtIndexPath:indexPath toIndexPath:newIndexPath];
+            case NSFetchedResultsChangeMove:{
+                NSLog(@"Table Moved");
+                [tableView deleteRowsAtIndexPaths:@[indexPath]
+                                 withRowAnimation:UITableViewRowAnimationFade];
+                [tableView insertRowsAtIndexPaths:@[indexPath]
+                                 withRowAnimation:UITableViewRowAnimationFade];
+            }
                 break;
                 
             default:
@@ -161,69 +213,68 @@
     }
     
     
-    if (controller == self.collectionFetchedRC) {
-        NSMutableDictionary *change = [[NSMutableDictionary alloc] init];
-        switch(type) {
-            case NSFetchedResultsChangeInsert:
-                change[@(type)] = newIndexPath;
-                break;
-            case NSFetchedResultsChangeDelete:
-                change[@(type)] = indexPath;
-                break;
-            case NSFetchedResultsChangeMove:
-                change[@(type)] = @[indexPath, newIndexPath];
-                break;
-            case NSFetchedResultsChangeUpdate:
-                change[@(type)] = indexPath;
-                break;
-            default:
-                break;
-        }
-        [self.itemChanges addObject:change];
-    }
+//    if (controller == self.collectionFetchedRC) {
+//        NSMutableDictionary *change = [[NSMutableDictionary alloc] init];
+//        switch(type) {
+//            case NSFetchedResultsChangeInsert:
+//                change[@(type)] = newIndexPath;
+//                break;
+//            case NSFetchedResultsChangeDelete:
+//                change[@(type)] = indexPath;
+//                break;
+//            case NSFetchedResultsChangeMove:
+//                change[@(type)] = @[indexPath, newIndexPath];
+//                break;
+//            case NSFetchedResultsChangeUpdate:
+//                change[@(type)] = indexPath;
+//                break;
+//            default:
+//                break;
+//        }
+//        [self.itemChanges addObject:change];
+//    }
     
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    NSLog(@"controllerDidChangeContent");
     if (controller == self.tableFetchedRC) {
         [self.tableView endUpdates];
     }
     
     if (controller == self.collectionFetchedRC) {
-        [self.collectionView performBatchUpdates: ^{
-            UICollectionView *collectionView = self.collectionView;
-            for (NSDictionary *change in self.itemChanges) {
-                [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-                    NSFetchedResultsChangeType type = [key unsignedIntegerValue];
-                    switch(type) {
-                        case NSFetchedResultsChangeInsert:
-                            [collectionView insertItemsAtIndexPaths:@[obj]];
-                            break;
-                        case NSFetchedResultsChangeDelete:
-                            [collectionView deleteItemsAtIndexPaths:@[obj]];
-                            break;
-                        case NSFetchedResultsChangeMove:
-                            [collectionView moveItemAtIndexPath:obj[0] toIndexPath:obj[1]];
-                            break;
-                        case NSFetchedResultsChangeUpdate:
-                            [collectionView reloadItemsAtIndexPaths:@[obj]];
-                            break;
-                        default:
-                            break;
-                    }
-                }];
-            }
-        } completion:^(BOOL finished) {
-            self.itemChanges = nil;;
-        }];
+        [self.collectionView reloadData];
+//        [self.collectionView performBatchUpdates: ^{
+//            UICollectionView *collectionView = self.collectionView;
+//            for (NSDictionary *change in self.itemChanges) {
+//                [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+//                    NSFetchedResultsChangeType type = [key unsignedIntegerValue];
+//                    switch(type) {
+//                        case NSFetchedResultsChangeInsert:
+//                            [collectionView insertItemsAtIndexPaths:@[obj]];
+//                            break;
+//                        case NSFetchedResultsChangeDelete:
+//                            [collectionView deleteItemsAtIndexPaths:@[obj]];
+//                            break;
+//                        case NSFetchedResultsChangeMove:
+//                            [collectionView moveItemAtIndexPath:obj[0] toIndexPath:obj[1]];
+//                            break;
+//                        case NSFetchedResultsChangeUpdate:
+//                            [collectionView reloadItemsAtIndexPaths:@[obj]];
+//                            break;
+//                        default:
+//                            break;
+//                    }
+//                }];
+//            }
+//        } completion:^(BOOL finished) {
+//            self.itemChanges = nil;;
+//        }];
         
     }
 }
- 
- */
 
+/*
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
     if (controller == self.tableFetchedRC) {
         [self.tableView reloadData];
@@ -233,6 +284,8 @@
         [self.collectionView reloadData];
     }
 }
+ 
+ */
 
 
 - (void)configureTableViewCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{}

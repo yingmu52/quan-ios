@@ -28,15 +28,6 @@
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     self.navigationItem.title = @"圈子";
-    
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self
-                                                                     refreshingAction:@selector(loadNewData)];
-    header.lastUpdatedTimeLabel.hidden = YES;
-    self.tableView.mj_header = header;
-    [self.tableView.mj_header beginRefreshing];
-
-    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self
-                                                                    refreshingAction:@selector(loadMoreData)];
 }
 
 - (void)loadNewData{

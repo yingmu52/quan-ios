@@ -32,14 +32,10 @@
     [self setUpNavigationItem];
     [self.tableView registerNib:[UINib nibWithNibName:@"FeedDetailCell" bundle:nil]
          forCellReuseIdentifier:FEEDDETAILCELLID];
-
-    //上拉刷新
-    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self
-                                                                    refreshingAction:@selector(loadMoreComments)];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-
+    
     //不要用beginRefreshing 因为会很淫荡地跳到页面下方
-    [self loadMoreComments];
+    [self loadMoreData];
 }
 
 
@@ -59,7 +55,7 @@
 }
 
 
-- (void)loadMoreComments{
+- (void)loadMoreData{
     NSString *feedId = self.feed ? self.feed.feedId : self.message.feedsId;
     NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKey:@"commentId"];
     //        NSLog(@"%@",self.currentPage);

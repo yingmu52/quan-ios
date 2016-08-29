@@ -43,17 +43,6 @@
         UIButton *followButton = [Theme buttonWithImage:[Theme navIconFollowDefault] target:self selector:@selector(showFollowingView) frame:CGRectMake(0, 0, 25, 25)];
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:followButton];
         
-        //下拉刷新
-        MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self
-                                                                         refreshingAction:@selector(loadNewData)];
-        header.lastUpdatedTimeLabel.hidden = YES;
-        self.collectionView.mj_header = header;
-        [self.collectionView.mj_header beginRefreshing];
-
-        
-        //上拉刷新
-        self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self
-                                                                             refreshingAction:@selector(loadMoreData)];
     }
     
 }
