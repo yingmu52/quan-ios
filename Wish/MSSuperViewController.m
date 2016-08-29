@@ -153,7 +153,7 @@
 
 // MARK: tableFetchedRC Delegate
 
-
+/*
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller{
 
     if (controller == self.tableFetchedRC) {
@@ -274,7 +274,9 @@
     }
 }
 
-/*
+*/
+
+// /*
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
     if (controller == self.tableFetchedRC) {
         [self.tableView reloadData];
@@ -285,7 +287,7 @@
     }
 }
  
- */
+// */
 
 
 - (void)configureTableViewCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{}
