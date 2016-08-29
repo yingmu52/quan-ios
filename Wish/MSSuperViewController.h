@@ -14,9 +14,6 @@
 #import "UIImageView+WebCache.h"
 #import "MJRefresh.h"
 #import "MSTableViewCell.h"
-
-#define NSLog if(0) NSLog
-
 @import CoreData;
 @interface MSSuperViewController : UIViewController
 <FetchCenterDelegate

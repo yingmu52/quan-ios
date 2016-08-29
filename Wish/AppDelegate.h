@@ -18,7 +18,7 @@
 #import <PgySDK/PgyManager.h>
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <spider/SPIntrospect.h>
-
+#define NSLog if(1) NSLog
 
 #define YOUTU_APP_ID @"10003267"
 #define WECHATAppID @"wxf4957fc61a006431"

@@ -1491,12 +1491,10 @@
     //压缩图片
     NSData *imageData = UIImageJPEGRepresentation(image,0.5);
 
-#ifdef DEBUG
     CGFloat originalSize = UIImagePNGRepresentation(image).length/1024.0f; //in KB
     NSLog(@"original size %@ KB", @(originalSize));
     NSLog(@"compressed size %@ KB", @(imageData.length/1024.0f));
     NSAssert(imageData.length, @"0 size image");
-#endif
     
     if ([imageData writeToFile:filePath atomically:YES]) {
         
@@ -1658,11 +1656,9 @@
                         
                         //假失败写入请求日志
                         [self appendRequest:request andResponse:responseJson];
-
-#ifdef DEBUG
                         NSLog(@"\n\n** 失败 ** \n baseUrl: %@ \n parameter: %@ \n responseJSON: %@ \n error:%@"
                               ,baseURL,dict,[self decodedOBject:responseJson],error);
-#endif
+                        
                         if ([self.delegate respondsToSelector:@selector(didFailSendingRequest)]){
                             [self.delegate didFailSendingRequest];
                         }
