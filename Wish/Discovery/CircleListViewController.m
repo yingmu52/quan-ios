@@ -29,12 +29,27 @@
     
     self.navigationItem.title = @"圈子";
     
-    
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self
+                                                                     refreshingAction:@selector(loadNewData)];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    self.tableView.mj_header = header;
+    [self.tableView.mj_header beginRefreshing];
 
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self
                                                                     refreshingAction:@selector(loadMoreData)];
+}
 
-    [self loadMoreData];
+- (void)loadNewData{
+    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKey:@"circleId"];
+    [self.fetchCenter getCircleList:localList
+                             onPage:nil
+                         completion:^(NSNumber *currentPage, NSNumber *totalPage)
+     {
+         self.currentPage = @(2); //这个currentPage其实是下一页的意思
+         [self.tableView.mj_header endRefreshing];
+         [self.tableView.mj_footer endRefreshing];
+     }];
+    
 }
 
 - (void)loadMoreData{
