@@ -406,28 +406,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 }
 
 
-- (void)controller:(NSFetchedResultsController *)controller
-   didChangeObject:(id)anObject
-       atIndexPath:(NSIndexPath *)indexPath
-     forChangeType:(NSFetchedResultsChangeType)type
-      newIndexPath:(NSIndexPath *)newIndexPath
-{
-    [super controller:controller
-      didChangeObject:anObject
-          atIndexPath:indexPath
-        forChangeType:type
-         newIndexPath:newIndexPath];
-    
-    if ((type == NSFetchedResultsChangeInsert ||
-         type == NSFetchedResultsChangeDelete) &&
-        self.feed &&
-        controller == self.tableFetchedRC) {
-        [self.headerView setCommentButtonText:self.feed.commentCount];
-    }
-
-}
-
 - (void)commentViewDidFinishInsertingComment{
+    [self.headerView setCommentButtonText:self.feed.commentCount];
     NSIndexPath *buttomIndex = [NSIndexPath indexPathForRow:self.tableFetchedRC.fetchedObjects.count - 1 inSection:0];
     [self.tableView scrollToRowAtIndexPath:buttomIndex
                           atScrollPosition:UITableViewScrollPositionBottom

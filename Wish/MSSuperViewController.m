@@ -127,7 +127,7 @@
 - (NSFetchedResultsController *)tableFetchedRC{
     if (!_tableFetchedRC && self.tableFetchRequest){
         _tableFetchedRC = [[NSFetchedResultsController alloc] initWithFetchRequest:self.tableFetchRequest
-                                                              managedObjectContext:[AppDelegate getContext]
+                                                              managedObjectContext:self.appDelegate.managedObjectContext
                                                                 sectionNameKeyPath:nil
                                                                          cacheName:nil];
         _tableFetchedRC.delegate = self;
@@ -141,7 +141,7 @@
 - (NSFetchedResultsController *)collectionFetchedRC{
     if (!_collectionFetchedRC && self.collectionFetchRequest) {
         _collectionFetchedRC = [[NSFetchedResultsController alloc] initWithFetchRequest:self.collectionFetchRequest
-                                                                   managedObjectContext:[AppDelegate getContext]
+                                                                   managedObjectContext:self.appDelegate.managedObjectContext
                                                                      sectionNameKeyPath:nil
                                                                               cacheName:nil];
         _collectionFetchedRC.delegate = self;

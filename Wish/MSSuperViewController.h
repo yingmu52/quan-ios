@@ -15,7 +15,7 @@
 #import "MJRefresh.h"
 #import "MSTableViewCell.h"
 
-#define NSLog if(DEBUG) NSLog
+#define NSLog if(0) NSLog
 
 @import CoreData;
 @interface MSSuperViewController : UIViewController
