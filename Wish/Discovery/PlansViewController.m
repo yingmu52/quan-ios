@@ -58,6 +58,7 @@
                                              frame:CGRectNull]; //使用真实大小
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:moreBtn];
         
+        [self loadMoreData];
     }
 
 }
