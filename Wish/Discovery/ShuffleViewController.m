@@ -29,6 +29,8 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self loadNewData];
+    self.collectionView.mj_header = nil;
+    self.collectionView.mj_footer = nil;
 }
 
 

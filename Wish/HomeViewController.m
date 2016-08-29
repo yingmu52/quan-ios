@@ -68,6 +68,9 @@ ViewForEmptyEventDelegate,StationViewControllerDelegate>
     [super viewDidLoad];
     [self setUpNavigationItem];
     [self addLongPressGesture];
+    
+    self.collectionView.mj_header = nil;
+    self.collectionView.mj_footer = nil;
     [self loadNewData];
 }
 
