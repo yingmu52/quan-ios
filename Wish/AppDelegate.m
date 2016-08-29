@@ -298,7 +298,7 @@
                         ![self.writerManagedObjectContext save:&error]) {
                         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
                     }else{
-                        NSLog(@"Stored Data on %@ Thread",[NSThread isMainThread] ? @"Main" : @"Background");
+                        NSLog(@"Stored Data on %@ Thread \n\n\n",[NSThread isMainThread] ? @"Main" : @"Background");
                     }
                 });
             }

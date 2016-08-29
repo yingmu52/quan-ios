@@ -1404,7 +1404,8 @@
                                                                     <exclude reference="kol-eS-BD9"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact">
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="165" y="23.5" width="65" height="65"/>
                                                                 <mask key="constraints">
                                                                     <include reference="E4J-U9-Hre"/>
                                                                     <include reference="kol-eS-BD9"/>
@@ -1416,6 +1417,9 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="75" y="23.5" width="85" height="45.5"/>
+                                                            </variation>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2014-11-21 13:20" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tGL-QF-Snd">
                                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -1474,7 +1478,8 @@
                                                             <exclude reference="vj4-9M-gwq"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="111.5"/>
                                                         <mask key="subviews">
                                                             <include reference="Vwr-tP-K5Z"/>
                                                             <include reference="yNm-Y2-OMm"/>
