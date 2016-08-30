@@ -35,7 +35,7 @@
     //薄公英启动基本SDK
     PgyManager *pgYmanager = [PgyManager sharedPgyManager];
     [pgYmanager startManagerWithAppId:PGY_APPID];
-    [pgYmanager setShakingThreshold:3.0];
+    [pgYmanager setShakingThreshold:4.0];
 
     //如果用户未登陆，跳转到登陆页
     if (![User isUserLogin]){
