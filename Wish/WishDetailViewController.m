@@ -167,6 +167,7 @@
     
     //初次拉数据
     [self loadMoreData];
+    
 }
 
 - (void)loadMoreData{
@@ -379,7 +380,8 @@
         ivc.imageUrl = [self.fetchCenter urlWithImageID:self.plan.backgroundNum size:FetchCenterImageSize50];
         ivc.sharedContentTitle = self.plan.planTitle;
         ivc.sharedContentDescription = self.plan.detailText ? self.plan.detailText : @"";
-        ivc.h5Url = [NSString stringWithFormat:@"http://html.wexincloud.com/data/shier.all.html#/share/%@",self.plan.planId];
+        ivc.h5Url = self.plan.shareUrl;
+        NSAssert(self.plan.isPrivate.boolValue != (self.plan.shareUrl.length > 0), @"私密事件不能有url，反之亦然");
     }
 }
 

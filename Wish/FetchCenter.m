@@ -1225,6 +1225,9 @@
                            predicate:[NSPredicate predicateWithFormat:@"planId == %@",planId]
                     keyForDescriptor:@"planId"
                 managedObjectContext:workerContext] lastObject];
+        
+        plan.shareUrl = isPrivate ? nil : responseJson[@"share_url"];
+        
         plan.planTitle = planTitle;
         plan.detailText = planDescription;
         plan.isPrivate = @(isPrivate);
