@@ -22,9 +22,11 @@
 @interface WishDetailViewController : MSSuperViewController <NSFetchedResultsControllerDelegate,WishDetailCellDelegate>
 @property (nonatomic,weak) Plan *plan; //must set
 @property (nonatomic,strong) HeaderView *headerView;
+@property (nonatomic,strong) UIAlertController *moreActionSheet;
+
 - (void)setUpNavigationItem;
 
 #pragma mark - abstract
 - (NSString *)segueForFeed; //must set to display feed detail
-
+- (void)showMoreOptions;
 @end

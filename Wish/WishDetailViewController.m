@@ -17,6 +17,74 @@
 @implementation WishDetailViewController
 
 
+- (UIAlertController *)moreActionSheet{
+    if (!_moreActionSheet) {
+        _moreActionSheet = [UIAlertController alertControllerWithTitle:nil
+                                                               message:nil
+                                                        preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        BOOL isOwnerState = [self.plan.owner.ownerId isEqualToString:[User uid]];
+
+        if (isOwnerState) { //主人态，可编辑，分享公、私事件
+            UIAlertAction *editOption =
+            [UIAlertAction actionWithTitle:@"编辑" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
+                [self performSegueWithIdentifier:@"showEditPage" sender:self.plan]; //跳转到编辑页
+            }];
+            [_moreActionSheet addAction:editOption];
+
+            UIAlertAction *shareOption =
+            [UIAlertAction actionWithTitle:@"分享"
+                                     style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * _Nonnull action)
+            {
+                if (self.plan.isPrivate.boolValue) {
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"私密的事件要公开才能分享哦"
+                                                                                   message:@"是否确定修改为公开事件"
+                                                                            preferredStyle:UIAlertControllerStyleAlert];
+                    [alert addAction:[UIAlertAction actionWithTitle:@"确定"
+                                                              style:UIAlertActionStyleDefault
+                                                            handler:^(UIAlertAction * _Nonnull action)
+                    {
+                        [self.fetchCenter updatePlan:self.plan.planId
+                                               title:self.plan.planTitle
+                                           isPrivate:NO
+                                         description:self.plan.detailText
+                                          completion:^
+                         {
+                             [self performSegueWithIdentifier:@"showInvitationView" sender:nil];
+                         }];
+                    }]];
+                    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+                    [self presentViewController:alert animated:YES completion:nil];
+                }else{
+                    [self performSegueWithIdentifier:@"showInvitationView" sender:nil];
+                }
+            }];
+            [_moreActionSheet addAction:shareOption];
+        }else if (!self.plan.isPrivate){ //非人主态只可以分享公开的事件
+            UIAlertAction *shareOption =
+            [UIAlertAction actionWithTitle:@"分享"
+                                     style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * _Nonnull action)
+            {
+                [self performSegueWithIdentifier:@"showInvitationView" sender:nil];
+            }];
+            [_moreActionSheet addAction:shareOption];
+        }
+        [_moreActionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    }
+    return _moreActionSheet;
+}
+
+
+- (void)showMoreOptions{
+    [self presentViewController:self.moreActionSheet
+                       animated:YES
+                     completion:nil];
+}
+
+
+
 #pragma mark setter and getters
 - (void)setHeaderView:(HeaderView *)headerView{
     _headerView = headerView;
@@ -133,6 +201,15 @@
                                       selector:@selector(goBack)
                                          frame:frame];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+    
+    if ([self.plan.owner.ownerId isEqualToString:[User uid]] || !self.plan.isPrivate.boolValue) {
+        UIButton *moreBtn = [Theme buttonWithImage:[Theme navMoreButtonDefault]
+                                            target:self
+                                          selector:@selector(showMoreOptions)
+                                             frame:CGRectNull]; //使用真实大小
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:moreBtn];
+    }
+
 }
 - (void)setCurrenetBackgroundColor{
 

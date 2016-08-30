@@ -55,55 +55,9 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-- (void)setUpNavigationItem{
-    [super setUpNavigationItem];
-    
-    UIButton *moreBtn = [Theme buttonWithImage:[Theme navMoreButtonDefault]
-                                        target:self
-                                      selector:@selector(showMoreOptions)
-                                         frame:CGRectNull]; //使用真实大小
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:moreBtn];
-}
-
-
 - (void)showMoreOptions{
     [self removeCameraButton];
-    [self presentViewController:self.moreActionSheet
-                       animated:YES
-                     completion:nil];
-}
-
-- (UIAlertController *)moreActionSheet{
-    if (!_moreActionSheet) {
-        _moreActionSheet = [UIAlertController alertControllerWithTitle:nil
-                                                               message:nil
-                                                        preferredStyle:UIAlertControllerStyleActionSheet];
-        
-        UIAlertAction *editOption =
-        [UIAlertAction actionWithTitle:@"编辑"
-                                 style:UIAlertActionStyleDefault
-                               handler:^(UIAlertAction * _Nonnull action)
-        {
-            //跳转到编辑页
-            [self performSegueWithIdentifier:@"showEditPage" sender:self.plan];
-        }];
-        [_moreActionSheet addAction:editOption];
-
-        
-        if (self.plan.shareUrl.length > 0) {
-            UIAlertAction *shareOption =
-            [UIAlertAction actionWithTitle:@"分享"
-                                     style:UIAlertActionStyleDefault
-                                   handler:^(UIAlertAction * _Nonnull action)
-             {
-                 [self performSegueWithIdentifier:@"showInvitationView" sender:nil];
-             }];
-            [_moreActionSheet addAction:shareOption];
-        }
-        
-        [_moreActionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-    }
-    return _moreActionSheet;
+    [super showMoreOptions];
 }
 
 
