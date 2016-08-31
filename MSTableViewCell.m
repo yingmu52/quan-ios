@@ -15,6 +15,7 @@
     
     self.ms_textView.textContainerInset = UIEdgeInsetsZero;
     self.ms_imageView1.contentMode = UIViewContentModeScaleAspectFill;
+    self.ms_imageView1.clipsToBounds = YES;
     self.ms_imageView2.contentMode = UIViewContentModeScaleAspectFill;
     self.ms_cardBackgroundView.referenceBadgeView = self.ms_imageView2;
 }
