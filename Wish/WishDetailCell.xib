@@ -69,9 +69,6 @@
                                         <include reference="dYf-hn-XCp"/>
                                     </mask>
                                 </variation>
-                                <connections>
-                                    <action selector="commentPressed:" destination="pxc-Ad-lPE" eventType="touchUpInside" id="n3g-gD-2Vr"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NN万" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sg0-AV-EZM">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>

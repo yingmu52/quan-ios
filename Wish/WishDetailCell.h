@@ -16,8 +16,6 @@
 @optional
 - (void)didPressedLikeOnCell:(WishDetailCell *)cell;
 - (void)didPressedMoreOnCell:(WishDetailCell *)cell;
-- (void)didPressedCommentOnCell:(WishDetailCell *)cell;
-
 @end
 
 @interface WishDetailCell : UITableViewCell
