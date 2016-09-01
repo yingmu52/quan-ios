@@ -39,10 +39,13 @@
         
         message.targetOwnerId = [User uid]; //this message is requested by the current user ~
         
-        message.isRead = @(NO); // every newly created message is initially not read.
-        
     }else{
         message = results.lastObject;
+    }
+    
+    BOOL userDeleted = [messageInfo[@"isdelete"] boolValue];
+    if (message.userDeleted.boolValue != userDeleted) {
+        message.userDeleted = @(userDeleted);
     }
     
     return message;
