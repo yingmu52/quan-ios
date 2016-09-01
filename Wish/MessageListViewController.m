@@ -113,6 +113,7 @@
         [n1 appendAttributedString:n2];
         cell.ms_textView.attributedText = n1;
     }
+    [cell.ms_textView setUserInteractionEnabled:NO]; //防点到弹出小菜单
     
     
     //displaying date
