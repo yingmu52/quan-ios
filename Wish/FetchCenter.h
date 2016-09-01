@@ -100,7 +100,7 @@ typedef void(^FetchCenterGetRequestGetCircleInvitationURLCompleted)(NSString *ur
 typedef void(^FetchCenterGetRequestGetCirclePlanListCompleted)(NSNumber *currentPage, NSNumber *totalPage);
 - (void)getPlanListInCircleId:(NSString *)circleId
                     localList:(NSArray *)localList
-                       onPage:(NSNumber *)page
+                       onPage:(NSNumber *)localPage
          completion:(FetchCenterGetRequestGetCirclePlanListCompleted)completionBlock;
 
 /** 删除成员 **/
@@ -149,7 +149,7 @@ typedef void(^FetchCenterGetRequestJoinCircleCompleted)(NSString *circleName);
 /**获取圈子列表*/
 typedef void(^FetchCenterGetRequestGetCircleListCompleted)(NSNumber *currentPage, NSNumber *totalPage);
 - (void)getCircleList:(NSArray *)localList
-               onPage:(NSNumber *)currentPage
+               onPage:(NSNumber *)localPage
            completion:(FetchCenterGetRequestGetCircleListCompleted)completionBlock;
 
 /**切换圈子*/
@@ -162,7 +162,7 @@ typedef void(^FetchCenterGetRequestGetCircleListCompleted)(NSNumber *currentPage
 /** 拉取消息列表完成*/
 typedef void(^FetchCenterGetRequestGetMessageListCompleted)(NSNumber *currentPage, NSNumber *totalPage);
 - (void)getMessageListWithLocalList:(NSArray *)localList
-                             onPage:(NSNumber *)currentPage
+                             onPage:(NSNumber *)localPage
                          completion:(FetchCenterGetRequestGetMessageListCompleted)completionBlock;
 
 
@@ -273,7 +273,7 @@ typedef void(^FetchCenterGetRequestGetFollowingPlanListCompleted)(void);
 /** 发现页拉取列表完成*/
 typedef void(^FetchCenterGetRequestGetDiscoverListCompleted)(NSNumber *currentPage, NSNumber *totalPage);
 - (void)getDiscoveryList:(NSArray *)localList
-                  onPage:(NSNumber *)page
+                  onPage:(NSNumber *)localPage
               completion:(FetchCenterGetRequestGetDiscoverListCompleted)completionBlock;
 
 #pragma mark - 个人

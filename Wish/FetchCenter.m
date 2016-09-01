@@ -153,12 +153,12 @@
 
 - (void)getPlanListInCircleId:(NSString *)circleId
                     localList:(NSArray *)localList 
-                       onPage:(NSNumber *)page
+                       onPage:(NSNumber *)localPage
                    completion:(FetchCenterGetRequestGetCirclePlanListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,GET_CIRCLE_PLAN_LIST];
-    NSDictionary *inputParams = @{@"id":circleId};
+    NSDictionary *args = localPage ? @{@"id":circleId,@"page":localPage} : @{@"id":circleId};
     [self getRequest:rqtStr
-           parameter:inputParams
+           parameter:args
     includeArguments:YES
           completion:^(NSDictionary *responseJson)
      {
@@ -451,11 +451,12 @@
 }
 
 - (void)getCircleList:(NSArray *)localList
-               onPage:(NSNumber *)currentPage
+               onPage:(NSNumber *)localPage
            completion:(FetchCenterGetRequestGetCircleListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,GET_CIRCLE_LIST];
+    NSDictionary *args = localPage ? @{@"id":[User uid],@"page":localPage} : @{@"id":[User uid]};
     [self getRequest:rqtStr
-           parameter:@{@"id":[User uid]}
+           parameter:args
          includeArguments:YES
           completion:^(NSDictionary *responseJson) {
               
@@ -547,11 +548,12 @@
 
 
 - (void)getMessageListWithLocalList:(NSArray *)localList
-                             onPage:(NSNumber *)currentPage
+                             onPage:(NSNumber *)localPage
                          completion:(FetchCenterGetRequestGetMessageListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,MESSAGE,GET_MESSAGE_LIST];
+    NSDictionary *args = localPage ? @{@"id":[User uid],@"page":localPage} : @{@"id":[User uid]};
     [self getRequest:rqtStr
-           parameter:@{@"id":[User uid]}
+           parameter:args
     includeArguments:YES completion:^(NSDictionary *responseJson) {
         
         
@@ -1075,11 +1077,11 @@
 #pragma mark - 发现事件
 
 - (void)getDiscoveryList:(NSArray *)localList
-                  onPage:(NSNumber *)page
+                  onPage:(NSNumber *)localPage
               completion:(FetchCenterGetRequestGetDiscoverListCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,DISCOVER,GET_DISCOVER_LIST];
     [self getRequest:rqtStr
-           parameter:page ? @{@"page":page} : nil
+           parameter:localPage ? @{@"page":localPage} : nil
     includeArguments:YES
           completion:^(NSDictionary *responseJson)
      {
