@@ -14,6 +14,10 @@
     [super awakeFromNib];
     
     self.ms_textView.textContainerInset = UIEdgeInsetsZero;
+    self.ms_textView.editable = NO;
+    self.ms_textView.scrollEnabled = NO;
+    
+    
     self.ms_imageView1.contentMode = UIViewContentModeScaleAspectFill;
     self.ms_imageView1.clipsToBounds = YES;
     self.ms_imageView2.contentMode = UIViewContentModeScaleAspectFill;

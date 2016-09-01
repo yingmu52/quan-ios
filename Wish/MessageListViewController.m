@@ -103,7 +103,7 @@
         NSMutableAttributedString *content = [[NSMutableAttributedString alloc] initWithString:message.owner.ownerName
                                                                                     attributes:attr];
         [content appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"发表了一条评论：%@",message.content]]];
-        cell.ms_title.attributedText = content;
+        cell.ms_textView.attributedText = content;
     }else{
         NSMutableAttributedString *n1 = [[NSMutableAttributedString alloc] initWithString:message.owner.ownerName
                                                                                attributes:attr];
@@ -111,7 +111,7 @@
         NSDictionary *attr2 = @{NSForegroundColorAttributeName:[UIColor lightGrayColor]};
         NSAttributedString *n2 = [[NSAttributedString alloc] initWithString:@"已删除了这条评论" attributes:attr2];
         [n1 appendAttributedString:n2];
-        cell.ms_title.attributedText = n1;
+        cell.ms_textView.attributedText = n1;
     }
     
     

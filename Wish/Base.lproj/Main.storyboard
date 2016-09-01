@@ -117,7 +117,7 @@
                                                             <color key="textColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                             <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="75.5" y="15" width="144.5" height="16"/>
+                                                                <rect key="frame" x="75" y="15" width="144.5" height="16"/>
                                                             </variation>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="中华田园汪，更新了事件" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XQA-da-KFY">
@@ -126,7 +126,7 @@
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                             <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="75.5" y="35" width="144.5" height="12"/>
+                                                                <rect key="frame" x="75" y="35" width="144.5" height="12"/>
                                                             </variation>
                                                         </label>
                                                     </subviews>
@@ -576,7 +576,7 @@
                                                     <color key="textColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="125.5" y="20.5" width="86.5" height="16"/>
+                                                        <rect key="frame" x="125" y="20" width="86.5" height="16"/>
                                                     </variation>
                                                 </label>
                                             </subviews>
@@ -668,7 +668,7 @@
                                                     <color key="textColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="79.5" y="20.5" width="92.5" height="16"/>
+                                                        <rect key="frame" x="79" y="20" width="92.5" height="16"/>
                                                     </variation>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" image="more" translatesAutoresizingMaskIntoConstraints="NO" id="k6x-1P-zkY">
@@ -1402,52 +1402,48 @@
                                                                     <exclude reference="kol-eS-BD9"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="165" y="23.5" width="65" height="65"/>
+                                                            <variation key="heightClass=regular-widthClass=compact">
                                                                 <mask key="constraints">
                                                                     <include reference="E4J-U9-Hre"/>
                                                                     <include reference="kol-eS-BD9"/>
                                                                 </mask>
                                                             </variation>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="中华田园汪评论了你一条记录：哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LIQ-Dq-NYS">
-                                                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                            <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="75" y="23.5" width="85" height="45.5"/>
-                                                            </variation>
-                                                        </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2014-11-21 13:20" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tGL-QF-Snd">
                                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9is-8s-H2j">
+                                                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        </textView>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="yNm-Y2-OMm" firstAttribute="leading" secondItem="LIQ-Dq-NYS" secondAttribute="trailing" constant="8" id="KgS-hS-lby">
-                                                            <variation key="heightClass=regular-widthClass=compact" constant="5"/>
-                                                        </constraint>
                                                         <constraint firstAttribute="centerY" secondItem="yNm-Y2-OMm" secondAttribute="centerY" constant="-1.5" id="KlD-gn-hhT">
                                                             <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                                         </constraint>
                                                         <constraint firstAttribute="centerY" secondItem="Vwr-tP-K5Z" secondAttribute="centerY" constant="19.5" id="Qom-zE-dOR">
                                                             <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                                         </constraint>
-                                                        <constraint firstItem="LIQ-Dq-NYS" firstAttribute="leading" secondItem="tGL-QF-Snd" secondAttribute="leading" constant="-3" id="T51-yb-Rct">
+                                                        <constraint firstItem="yNm-Y2-OMm" firstAttribute="leading" secondItem="9is-8s-H2j" secondAttribute="trailing" constant="20" id="TNI-uJ-Asi">
+                                                            <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                                                        </constraint>
+                                                        <constraint firstItem="tGL-QF-Snd" firstAttribute="top" secondItem="9is-8s-H2j" secondAttribute="bottom" constant="-46" id="a9c-pW-Jae">
                                                             <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                                         </constraint>
-                                                        <constraint firstItem="LIQ-Dq-NYS" firstAttribute="leading" secondItem="Vwr-tP-K5Z" secondAttribute="trailing" constant="8" id="WYU-RF-03C">
+                                                        <constraint firstItem="9is-8s-H2j" firstAttribute="top" secondItem="Vwr-tP-K5Z" secondAttribute="top" id="ftb-sy-3PG">
                                                             <variation key="heightClass=regular-widthClass=compact" constant="5"/>
                                                         </constraint>
-                                                        <constraint firstItem="tGL-QF-Snd" firstAttribute="top" secondItem="LIQ-Dq-NYS" secondAttribute="bottom" constant="-9" id="gqx-DL-oaT">
-                                                            <variation key="heightClass=regular-widthClass=compact" constant="5"/>
-                                                        </constraint>
-                                                        <constraint firstItem="LIQ-Dq-NYS" firstAttribute="top" secondItem="yNm-Y2-OMm" secondAttribute="top" id="hlX-0h-HHK"/>
                                                         <constraint firstItem="Vwr-tP-K5Z" firstAttribute="leading" secondItem="hAg-MK-02Y" secondAttribute="leading" constant="8" id="rkF-80-9a7">
                                                             <variation key="heightClass=regular-widthClass=compact" constant="10"/>
+                                                        </constraint>
+                                                        <constraint firstItem="tGL-QF-Snd" firstAttribute="leading" secondItem="9is-8s-H2j" secondAttribute="leading" id="rwG-lC-XGq"/>
+                                                        <constraint firstItem="9is-8s-H2j" firstAttribute="leading" secondItem="Vwr-tP-K5Z" secondAttribute="trailing" constant="-5" id="tkq-sF-6zW">
+                                                            <variation key="heightClass=regular-widthClass=compact" constant="5"/>
                                                         </constraint>
                                                         <constraint firstAttribute="trailing" secondItem="yNm-Y2-OMm" secondAttribute="trailing" constant="8" id="vj4-9M-gwq">
                                                             <variation key="heightClass=regular-widthClass=compact" constant="10"/>
@@ -1460,40 +1456,39 @@
                                                         <mask key="subviews">
                                                             <exclude reference="Vwr-tP-K5Z"/>
                                                             <exclude reference="yNm-Y2-OMm"/>
-                                                            <exclude reference="LIQ-Dq-NYS"/>
                                                             <exclude reference="tGL-QF-Snd"/>
+                                                            <exclude reference="9is-8s-H2j"/>
                                                         </mask>
                                                         <mask key="constraints">
-                                                            <exclude reference="T51-yb-Rct"/>
-                                                            <exclude reference="WYU-RF-03C"/>
-                                                            <exclude reference="hlX-0h-HHK"/>
-                                                            <exclude reference="gqx-DL-oaT"/>
-                                                            <exclude reference="xkz-5X-OUU"/>
                                                             <exclude reference="Qom-zE-dOR"/>
                                                             <exclude reference="rkF-80-9a7"/>
-                                                            <exclude reference="KgS-hS-lby"/>
+                                                            <exclude reference="ftb-sy-3PG"/>
+                                                            <exclude reference="tkq-sF-6zW"/>
+                                                            <exclude reference="a9c-pW-Jae"/>
+                                                            <exclude reference="rwG-lC-XGq"/>
+                                                            <exclude reference="xkz-5X-OUU"/>
                                                             <exclude reference="KlD-gn-hhT"/>
+                                                            <exclude reference="TNI-uJ-Asi"/>
                                                             <exclude reference="vj4-9M-gwq"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="111.5"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="subviews">
                                                             <include reference="Vwr-tP-K5Z"/>
                                                             <include reference="yNm-Y2-OMm"/>
-                                                            <include reference="LIQ-Dq-NYS"/>
                                                             <include reference="tGL-QF-Snd"/>
+                                                            <include reference="9is-8s-H2j"/>
                                                         </mask>
                                                         <mask key="constraints">
-                                                            <include reference="T51-yb-Rct"/>
-                                                            <include reference="WYU-RF-03C"/>
-                                                            <include reference="hlX-0h-HHK"/>
-                                                            <include reference="gqx-DL-oaT"/>
-                                                            <include reference="xkz-5X-OUU"/>
                                                             <include reference="Qom-zE-dOR"/>
                                                             <include reference="rkF-80-9a7"/>
-                                                            <include reference="KgS-hS-lby"/>
+                                                            <include reference="ftb-sy-3PG"/>
+                                                            <include reference="tkq-sF-6zW"/>
+                                                            <include reference="a9c-pW-Jae"/>
+                                                            <include reference="rwG-lC-XGq"/>
+                                                            <include reference="xkz-5X-OUU"/>
                                                             <include reference="KlD-gn-hhT"/>
+                                                            <include reference="TNI-uJ-Asi"/>
                                                             <include reference="vj4-9M-gwq"/>
                                                         </mask>
                                                     </variation>
@@ -1534,7 +1529,7 @@
                                             <outlet property="ms_dateLabel" destination="tGL-QF-Snd" id="D44-wj-63n"/>
                                             <outlet property="ms_imageView1" destination="Vwr-tP-K5Z" id="hzO-yd-slL"/>
                                             <outlet property="ms_imageView2" destination="yNm-Y2-OMm" id="8tF-io-QKi"/>
-                                            <outlet property="ms_title" destination="LIQ-Dq-NYS" id="kDy-iu-xof"/>
+                                            <outlet property="ms_textView" destination="9is-8s-H2j" id="WeY-9r-YLn"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -3296,7 +3291,7 @@
                                                             <color key="textColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                             <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="75" y="15" width="144.5" height="16"/>
+                                                                <rect key="frame" x="75" y="15" width="144" height="16"/>
                                                             </variation>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="中华田园汪，更新了事件" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cbU-QT-3yy">
@@ -3305,7 +3300,7 @@
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                             <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="75" y="35" width="144.5" height="12"/>
+                                                                <rect key="frame" x="75" y="35" width="144" height="12"/>
                                                             </variation>
                                                         </label>
                                                     </subviews>
@@ -7440,12 +7435,12 @@
         <image name="tab_ic_quanzi_pressed" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="X79-Dh-n8s"/>
+        <segue reference="7ZJ-tG-Hnl"/>
         <segue reference="4yF-1j-VR3"/>
+        <segue reference="X79-Dh-n8s"/>
         <segue reference="o9o-CD-wNK"/>
         <segue reference="6ze-LH-v54"/>
         <segue reference="4wk-xv-ETJ"/>
-        <segue reference="dFu-Bk-XhY"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
 </document>
