@@ -77,18 +77,20 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo{
     UIApplicationState currentState = [[UIApplication sharedApplication] applicationState];
     if (currentState == UIApplicationStateActive) {
-        NSString *message = [NSString stringWithFormat:@"%@",[userInfo valueForKeyPath:@"aps.alert"]];            
-        CWStatusBarNotification *cbn = [CWStatusBarNotification new];
-        cbn.notificationLabelBackgroundColor = [Theme globleColor];
-        cbn.notificationAnimationInStyle = CWNotificationAnimationStyleLeft;
-        cbn.notificationAnimationOutStyle = CWNotificationAnimationStyleRight;
-        cbn.notificationStyle = CWNotificationStyleStatusBarNotification;
-        [cbn displayNotificationWithMessage:message
-                                forDuration:2.0];
+        NSString *message = [userInfo valueForKeyPath:@"aps.alert"];
+        if (message) { //不为null的情况才作提示，
+            CWStatusBarNotification *cbn = [CWStatusBarNotification new];
+            cbn.notificationLabelBackgroundColor = [Theme globleColor];
+            cbn.notificationAnimationInStyle = CWNotificationAnimationStyleLeft;
+            cbn.notificationAnimationOutStyle = CWNotificationAnimationStyleRight;
+            cbn.notificationStyle = CWNotificationStyleStatusBarNotification;
+            [cbn displayNotificationWithMessage:message
+                                    forDuration:2.0];
+        }
      }else{
         //切换到消息
         [self selectMainTabbarAtIndex:3];
-    }
+     }
 
     [self.fetchCenter getMessageNotificationInfo:^(NSNumber *messageCount, NSNumber *followCount) {
         NSUInteger msgIndex = 3;
