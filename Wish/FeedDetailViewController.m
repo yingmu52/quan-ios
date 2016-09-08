@@ -35,6 +35,7 @@
          forCellReuseIdentifier:FEEDDETAILCELLID];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
+    self.tableView.mj_header = nil;
     //不要用beginRefreshing 因为会很淫荡地跳到页面下方
     [self loadMoreData];
 }
