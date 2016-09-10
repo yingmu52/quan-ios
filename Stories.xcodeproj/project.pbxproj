@@ -67,7 +67,6 @@
 		A07C66CC1BE078EE00413D32 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A07C66C91BE078EE00413D32 /* TencentOpenAPI.framework */; };
 		A07C66CD1BE078EE00413D32 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A07C66C91BE078EE00413D32 /* TencentOpenAPI.framework */; };
 		A081FCED1C90A3260025ABD5 /* MemberListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A081FCEC1C90A3260025ABD5 /* MemberListViewController.m */; };
-		A095D8341BCB884500ED3DFD /* PgySDk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A095D8321BCB884500ED3DFD /* PgySDk.framework */; };
 		A0994E631BC4CF9500D45845 /* SYEmojiCharacters.m in Sources */ = {isa = PBXBuildFile; fileRef = A0994E601BC4CF9500D45845 /* SYEmojiCharacters.m */; };
 		A0994E641BC4CF9500D45845 /* SYEmojiPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = A0994E621BC4CF9500D45845 /* SYEmojiPopover.m */; };
 		A0994E6A1BC4D1FB00D45845 /* WYPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0994E671BC4D1FB00D45845 /* WYPopoverController.m */; };
@@ -400,7 +399,6 @@
 		A07C66C91BE078EE00413D32 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
 		A081FCEB1C90A3260025ABD5 /* MemberListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberListViewController.h; sourceTree = "<group>"; };
 		A081FCEC1C90A3260025ABD5 /* MemberListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberListViewController.m; sourceTree = "<group>"; };
-		A095D8321BCB884500ED3DFD /* PgySDk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PgySDk.framework; sourceTree = "<group>"; };
 		A0994E5F1BC4CF9500D45845 /* SYEmojiCharacters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYEmojiCharacters.h; sourceTree = "<group>"; };
 		A0994E601BC4CF9500D45845 /* SYEmojiCharacters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYEmojiCharacters.m; sourceTree = "<group>"; };
 		A0994E611BC4CF9500D45845 /* SYEmojiPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYEmojiPopover.h; sourceTree = "<group>"; };
@@ -694,7 +692,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A095D8341BCB884500ED3DFD /* PgySDk.framework in Frameworks */,
 				A0EE8C5E1BB3E93D00C5DAC3 /* AVFoundation.framework in Frameworks */,
 				A0EE8C5C1BB3E93300C5DAC3 /* AudioToolbox.framework in Frameworks */,
 				A0EE8C5A1BB3E89600C5DAC3 /* OpenGLES.framework in Frameworks */,
@@ -1453,7 +1450,6 @@
 				A0493EC31D5CF5CE00B2C0F9 /* spider.framework */,
 				A07C66C81BE078EE00413D32 /* TencentOpenApi_IOS_Bundle.bundle */,
 				A07C66C91BE078EE00413D32 /* TencentOpenAPI.framework */,
-				A095D8321BCB884500ED3DFD /* PgySDk.framework */,
 				A0EE8C5D1BB3E93D00C5DAC3 /* AVFoundation.framework */,
 				A0EE8C5B1BB3E93300C5DAC3 /* AudioToolbox.framework */,
 				A0EE8C591BB3E89600C5DAC3 /* OpenGLES.framework */,

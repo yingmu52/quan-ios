@@ -15,7 +15,7 @@
 #import "LoginViewController.h"
 #import "FetchCenter.h"
 #import "WXApiManager.h"
-#import <PgySDK/PgyManager.h>
+//#import <PgySDK/PgyManager.h>
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <spider/SPIntrospect.h>
 #define NSLog if(1) NSLog
