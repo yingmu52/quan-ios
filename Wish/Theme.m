@@ -262,7 +262,7 @@
 + (UIColor *)getRandomShortRangeHSBColorWithAlpha:(CGFloat)alpha{
     CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
     CGFloat saturation = (arc4random_uniform(25) + 25) * 0.01;  //  0.25 to 0.5
-    CGFloat brightness = (arc4random_uniform(25) + 25) * 0.01;  //  0.25 to 0.5;
+    CGFloat brightness = (arc4random_uniform(10) + 70) * 0.01;  //  0.7 to 0.8;
     UIColor *color = [UIColor colorWithHue:hue
                                 saturation:saturation
                                 brightness:brightness
