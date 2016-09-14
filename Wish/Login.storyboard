@@ -79,12 +79,12 @@
                                 <exclude reference="sxb-Er-WI0"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="eil-6O-O92"/>
+                                <exclude reference="yaW-fN-ctV"/>
+                                <exclude reference="vWb-sa-VAI"/>
                                 <exclude reference="B9e-rY-r9U"/>
                                 <exclude reference="Uyu-yB-77a"/>
                                 <exclude reference="ipA-09-rCb"/>
-                                <exclude reference="vWb-sa-VAI"/>
-                                <exclude reference="eil-6O-O92"/>
-                                <exclude reference="yaW-fN-ctV"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -93,12 +93,12 @@
                                 <include reference="sxb-Er-WI0"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="eil-6O-O92"/>
+                                <exclude reference="yaW-fN-ctV"/>
+                                <include reference="vWb-sa-VAI"/>
                                 <exclude reference="B9e-rY-r9U"/>
                                 <include reference="Uyu-yB-77a"/>
                                 <include reference="ipA-09-rCb"/>
-                                <include reference="vWb-sa-VAI"/>
-                                <include reference="eil-6O-O92"/>
-                                <exclude reference="yaW-fN-ctV"/>
                             </mask>
                         </variation>
                     </view>

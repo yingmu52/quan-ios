@@ -19,6 +19,8 @@
 		A016FDBB1B8D14BA006E7A09 /* PreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A016FDBA1B8D14BA006E7A09 /* PreviewCell.m */; };
 		A016FDBC1B8D14BA006E7A09 /* PreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A016FDBA1B8D14BA006E7A09 /* PreviewCell.m */; };
 		A01D417D1D5B17AD007B3177 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A01D417C1D5B17AD007B3177 /* Login.storyboard */; };
+		A027715C1D880BB700442996 /* MSFeatherImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A027715B1D880BB700442996 /* MSFeatherImageView.m */; };
+		A02771621D8852BF00442996 /* MSCircularGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A02771611D8852BF00442996 /* MSCircularGradientLayer.m */; };
 		A03010521BABC6AA0041E2CF /* QBImagePicker.strings in Resources */ = {isa = PBXBuildFile; fileRef = A03010371BABC6AA0041E2CF /* QBImagePicker.strings */; };
 		A03010531BABC6AA0041E2CF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A030103B1BABC6AA0041E2CF /* Info.plist */; };
 		A03010541BABC6AA0041E2CF /* QBAlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A030103E1BABC6AA0041E2CF /* QBAlbumCell.m */; };
@@ -337,6 +339,10 @@
 		A016FDB91B8D14BA006E7A09 /* PreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewCell.h; sourceTree = "<group>"; };
 		A016FDBA1B8D14BA006E7A09 /* PreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewCell.m; sourceTree = "<group>"; };
 		A01D417C1D5B17AD007B3177 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		A027715A1D880BB700442996 /* MSFeatherImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSFeatherImageView.h; sourceTree = "<group>"; };
+		A027715B1D880BB700442996 /* MSFeatherImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSFeatherImageView.m; sourceTree = "<group>"; };
+		A02771601D8852BF00442996 /* MSCircularGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSCircularGradientLayer.h; sourceTree = "<group>"; };
+		A02771611D8852BF00442996 /* MSCircularGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSCircularGradientLayer.m; sourceTree = "<group>"; };
 		A03010391BABC6AA0041E2CF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/QBImagePicker.strings; sourceTree = "<group>"; };
 		A030103B1BABC6AA0041E2CF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A030103D1BABC6AA0041E2CF /* QBAlbumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBAlbumCell.h; sourceTree = "<group>"; };
@@ -765,6 +771,10 @@
 		A02D8B371D64155D00B0740D /* Miao Stone Base Object */ = {
 			isa = PBXGroup;
 			children = (
+				A027715A1D880BB700442996 /* MSFeatherImageView.h */,
+				A027715B1D880BB700442996 /* MSFeatherImageView.m */,
+				A02771601D8852BF00442996 /* MSCircularGradientLayer.h */,
+				A02771611D8852BF00442996 /* MSCircularGradientLayer.m */,
 				A066C3871BB7AE08003B51D5 /* MSSuperViewController.h */,
 				A066C3881BB7AE08003B51D5 /* MSSuperViewController.m */,
 				A0E52E7C1D73F44100BB9DDC /* MSTableViewCell.h */,
@@ -1630,7 +1640,9 @@
 				AE606A201AF4697B003DF16E /* MessageListViewController.m in Sources */,
 				AEB003F31B8056980056EA80 /* MyPageViewController.m in Sources */,
 				A01431BF1D7166930099258C /* BFRImageContainerViewController.m in Sources */,
+				A027715C1D880BB700442996 /* MSFeatherImageView.m in Sources */,
 				AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */,
+				A02771621D8852BF00442996 /* MSCircularGradientLayer.m in Sources */,
 				A0C15C9C1D4CB9350094BEF9 /* MJRefreshConst.m in Sources */,
 				AE0172421A65CD8E0014266F /* AppDelegate.m in Sources */,
 				AEE4A6CC1A9684D500ABF946 /* AchieveViewController.m in Sources */,

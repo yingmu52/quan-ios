@@ -67,7 +67,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 65.0;
+    return 78.0;
 }
 
 - (MSTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -82,7 +82,9 @@
     cell.ms_title.text = circle.circleName;
     cell.ms_subTitle.text = circle.circleDescription;
     [cell.ms_imageView1 downloadImageWithImageId:circle.imageId
-                                            size:FetchCenterImageSize100];
+                                            size:FetchCenterImageSize200];
+    [cell.ms_FeatherImage downloadImageWithImageId:circle.imageId size:FetchCenterImageSize200];
+    cell.ms_featherBackgroundView.backgroundColor = [Theme getRandomColorWithAlpha:0.1];
 
 }
 

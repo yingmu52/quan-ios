@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TriangleCutoutView.h"
-
+#import "MSFeatherImageView.h"
 @interface MSTableViewCell : UITableViewCell
 
 @property (nonatomic,weak) IBOutlet UIImageView *ms_imageView1;
@@ -18,6 +18,8 @@
 @property (nonatomic,weak) IBOutlet UILabel *ms_dateLabel;
 @property (nonatomic,weak) IBOutlet UITextView *ms_textView;
 
+@property (nonatomic,weak) IBOutlet MSFeatherImageView *ms_FeatherImage;
+@property (nonatomic,weak) IBOutlet UIView *ms_featherBackgroundView;
 
 @property (nonatomic,weak) IBOutlet TriangleCutoutView *ms_cardBackgroundView;
 @property (nonatomic,weak) IBOutlet UILabel *ms_statusLabel;
