@@ -11,7 +11,7 @@
 @interface Theme : UIColor
 
 + (UIColor *)globleColor;
-+ (UIColor *)getRandomColorWithAlpha:(CGFloat)alpha;
++ (UIColor *)getRandomShortRangeHSBColorWithAlpha:(CGFloat)alpha;
 
 + (UIButton *)buttonWithImage:(UIImage *)image
                        target:(id)target

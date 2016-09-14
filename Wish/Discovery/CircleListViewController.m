@@ -84,7 +84,7 @@
     [cell.ms_imageView1 downloadImageWithImageId:circle.imageId
                                             size:FetchCenterImageSize200];
     [cell.ms_FeatherImage downloadImageWithImageId:circle.imageId size:FetchCenterImageSize200];
-    cell.ms_featherBackgroundView.backgroundColor = [Theme getRandomColorWithAlpha:0.1];
+    cell.ms_featherBackgroundView.backgroundColor = [Theme getRandomShortRangeHSBColorWithAlpha:0.1];
 
 }
 
