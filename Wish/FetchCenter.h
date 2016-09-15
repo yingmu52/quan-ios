@@ -224,6 +224,12 @@ typedef void(^FetchCenterGetRequestGetCommentListCompleted)(NSNumber *currentPag
 
 #pragma mark - 事件
 
+/** 设置事件圈子归属 **/
+typedef void(^FetchCenterGetRequestGetSetPlanInCircleCompleted)(void);
+- (void)updatePlanId:(NSString *)planId
+          inCircleId:(NSString *)circleId
+          completion:(FetchCenterGetRequestGetSetPlanInCircleCompleted)completionBlock;
+
 /**拉取主人id的事件列表*/
 typedef void(^FetchCenterGetRequestGetPlanListCompleted)(void);
 - (void)getPlanListForOwnerId:(NSString *)ownerId

@@ -5850,6 +5850,9 @@
                                         <include reference="1Oe-Z3-I8i"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="donePressed" destination="xij-sC-s3q" eventType="touchUpInside" id="ZH9-A6-H56"/>
+                                </connections>
                             </button>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CWI-2u-GxE">
                                 <rect key="frame" x="0.0" y="-216" width="320" height="216"/>

@@ -20,6 +20,7 @@
 #define DELETE_PLAN @"splan_plan_delete_id.php"
 #define UPDATE_PLAN_STATUS @"splan_plan_set_state.php"
 #define UPDATE_PLAN @"splan_plan_update.php"
+#define UPDATE_PLAN_IN_CIRCLE @"splan_plan_update_quanid.php"
 
 #define FEED @"feeds/"
 #define PIC @"pic/"
@@ -1226,6 +1227,35 @@
 }
 
 #pragma mark - 事件
+
+- (void)updatePlanId:(NSString *)planId inCircleId:(NSString *)circleId completion:(FetchCenterGetRequestGetSetPlanInCircleCompleted)completionBlock{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,UPDATE_PLAN_IN_CIRCLE];
+    NSDictionary *args = @{@"planid":planId,
+                           @"quanid":circleId};
+    [self getRequest:rqtStr
+           parameter:args
+    includeArguments:YES
+          completion:^(NSDictionary *responseJson) {
+              NSManagedObjectContext *workerContext = [self workerContext];
+              Plan *plan = [Plan fetchWith:@"Plan"
+                                 predicate:[NSPredicate predicateWithFormat:@"planId == %@",planId]
+                          keyForDescriptor:@"planId"
+                      managedObjectContext:workerContext].lastObject;
+              Circle *circle = [Plan fetchWith:@"Circle"
+                                     predicate:[NSPredicate predicateWithFormat:@"circleId == %@",planId]
+                              keyForDescriptor:@"circleId"
+                          managedObjectContext:workerContext].lastObject;
+              plan.circle = circle;
+              [self.appDelegate saveContext:workerContext];
+              if (completionBlock) {
+                  dispatch_main_async_safe(^{
+                      completionBlock();
+                  });
+              }
+              
+    }];
+}
+
 
 - (void)updatePlan:(NSString *)planId
              title:(NSString *)planTitle

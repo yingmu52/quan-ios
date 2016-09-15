@@ -7,7 +7,7 @@
 //
 
 #import "PlanManagementViewController.h"
-
+#import "MBProgressHUD.h"
 @interface PlanManagementViewController () <UIPickerViewDelegate,UIPickerViewDataSource>
 @property (nonatomic,weak) IBOutlet UIPickerView *pickerView;
 @property (nonatomic,weak) IBOutlet UITextView *textView;
@@ -17,6 +17,10 @@
 
 @implementation PlanManagementViewController
 
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    [self updateTextView];
+}
 
 - (NSFetchRequest *)collectionFetchRequest{ //事件列表，放在collectionFRC
     if (!_collectionFetchRequest) {
@@ -93,6 +97,36 @@
         if (!self.selectedCircle) {
             self.textView.text = @"请选择归属的圈子";
         }
+    }
+}
+
+- (Circle *)selectedCircle{
+    if (!_selectedCircle) {
+        _selectedCircle = self.tableFetchedRC.fetchedObjects.firstObject;
+    }
+    return _selectedCircle;
+}
+
+-(Plan *)selectedPlan{
+    if (!_selectedPlan) {
+        _selectedPlan = self.collectionFetchedRC.fetchedObjects.firstObject;
+    }
+    return _selectedPlan;
+}
+
+- (IBAction)donePressed{
+    if (self.selectedCircle && self.selectedPlan) {
+        [self.fetchCenter updatePlanId:self.selectedPlan.planId
+                            inCircleId:self.selectedCircle.circleId
+                            completion:^
+        {
+            //提示加入成功
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow]
+                                                      animated:YES];
+            hud.mode = MBProgressHUDModeText;
+            hud.label.text = @"设置成功";
+            [hud hideAnimated:YES afterDelay:1.0];
+        }];
     }
 }
 
