@@ -91,6 +91,10 @@ typedef void(^FetchCenterPostRequestUploadImagesCompleted)(NSArray *imageIds);
 
 #pragma mark - 圈子
 
+/** 退出圈子 **/
+typedef void(^FetchCenterGetRequestGetQuitCircleCompleted)(void);
+- (void)quitCircle:(NSString *)circleId completion:(FetchCenterGetRequestGetQuitCircleCompleted)completionBlock;
+
 /** 获取分享页URL **/
 typedef void(^FetchCenterGetRequestGetCircleInvitationURLCompleted)(NSString *urlString);
 - (void)getH5invitationUrlWithCircleId:(NSString *)circleId

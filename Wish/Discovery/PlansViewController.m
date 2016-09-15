@@ -175,6 +175,16 @@
             [_moreActionSheet addAction:editOption];
             [_moreActionSheet addAction:inviteOption];
             [_moreActionSheet addAction:deleteOption];
+        }else{
+            UIAlertAction *quitOption =
+            [UIAlertAction actionWithTitle:@"退出这个圈子"
+                                     style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * _Nonnull action)
+             {
+                 [self showQuitCircleAlert];
+             }];
+            [_moreActionSheet addAction:quitOption];
+   
         }
         
         [_moreActionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
@@ -186,6 +196,33 @@
     [self presentViewController:self.moreActionSheet animated:YES completion:nil];
 }
 
+- (void)showQuitCircleAlert{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确认退出这个圈子?"
+                                                                   message:self.circle.circleName
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定"
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action)
+                              {
+                                  UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+                                  [spinner startAnimating];
+                                  self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+                                  [self.fetchCenter quitCircle:self.circle.circleId completion:^{
+                                      [spinner stopAnimating];
+                                      [self.navigationController popToRootViewControllerAnimated:YES];
+                                  }];
+                              }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消"
+                                                     style:UIAlertActionStyleCancel
+                                                   handler:nil];
+    
+    [alert addAction:confirm];
+    [alert addAction:cancel];
+    [self presentViewController:alert animated:YES completion:nil];
+
+}
 - (void)deleteCircle{
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确认删除圈子?"

@@ -66,7 +66,7 @@
 #define CREATE_CIRCLE @"splan_quan_create.php"
 #define DELETE_CIRCLE @"splan_quan_delete_id.php"
 #define UPDATE_CIRCLE @"splan_quan_update.php"
-
+#define QUIT_CIRCLE @"splan_quan_man_quit.php"
 
 #define MESSAGE @"message/"
 #define GET_MESSAGE_LIST @"splan_message_getlist.php"
@@ -133,6 +133,26 @@
 
 #pragma mark - 圈子
 #define TOOLCGIKEY @"123$%^abc"
+
+- (void)quitCircle:(NSString *)circleId
+        completion:(FetchCenterGetRequestGetQuitCircleCompleted)completionBlock{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,QUIT_CIRCLE];
+    NSDictionary *args = @{@"quanId":circleId};
+    [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
+        NSManagedObjectContext *workerContext = [self workerContext];
+        Circle *circle = [Plan fetchWith:@"Circle"
+                               predicate:[NSPredicate predicateWithFormat:@"circleId == %@",circleId]
+                        keyForDescriptor:@"circleId"
+                    managedObjectContext:workerContext].lastObject;
+        [workerContext deleteObject:circle];
+        [self.appDelegate saveContext:workerContext];
+        if (completionBlock) {
+            dispatch_main_async_safe(^{
+                completionBlock();
+            });
+        }
+    }];
+}
 
 
 - (void)getH5invitationUrlWithCircleId:(NSString *)circleId
