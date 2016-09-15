@@ -278,6 +278,14 @@
         }];
         
         
+        //设置圈子归属
+        UIAlertAction *managePlan = [UIAlertAction actionWithTitle:@"设置事件归属"
+                                                             style:UIAlertActionStyleDefault
+                                                           handler:^(UIAlertAction * _Nonnull action) {
+            [self performSegueWithIdentifier:@"showPlanManagementView" sender:nil];
+        }];
+        
+        
         //远程控制
         UIAlertAction *callSpider;
         
@@ -316,12 +324,15 @@
         [actionSheet addAction:proEnv];
         [actionSheet addAction:getUserInfo];
         [actionSheet addAction:getRequestLog];
+        [actionSheet addAction:managePlan];
         [actionSheet addAction:callSpider];
         
         [actionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
         [self presentViewController:actionSheet animated:YES completion:nil];
     }
 }
+
+
 
 - (void)startSpider{
     [[SPIntrospect sharedIntrospector] setSpiderId:[User deviceToken]];
