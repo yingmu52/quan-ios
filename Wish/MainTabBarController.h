@@ -9,4 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface MainTabBarController : UITabBarController
+- (void)showVisitorLoginAlert;
 @end

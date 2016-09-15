@@ -49,4 +49,7 @@
 + (NSString *)currentCircleId;
 + (NSString *)deviceToken;
 + (BOOL)isSuperUser;
+
++ (BOOL)isVisitor;
+
 @end

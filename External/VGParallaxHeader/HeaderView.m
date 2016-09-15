@@ -32,6 +32,7 @@
         [self showFollowButtonWithTitle:(plan.isFollowed.boolValue ? @"已关注" :@"关注")];
     }
     self.descriptionTextView.text = plan.detailText;
+    self.followButton.hidden = [plan.owner.ownerId isEqualToString:[User uid]] | [User isVisitor];
 }
 
 - (void)showFollowButtonWithTitle:(NSString *)title{

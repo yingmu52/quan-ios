@@ -45,6 +45,12 @@
         
     }
     
+    //登陆态无关注入口
+    if ([User isVisitor]) {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+
+    
 }
 
 - (void)loadNewData{

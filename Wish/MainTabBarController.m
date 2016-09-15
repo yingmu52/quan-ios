@@ -45,7 +45,11 @@
 }
 
 - (void)showShuffleView{
-    [self performSegueWithIdentifier:@"showShuffleViewFromTabbar" sender:nil];
+    if ([User isVisitor]) {
+        [self showVisitorLoginAlert];
+    }else{
+        [self performSegueWithIdentifier:@"showShuffleViewFromTabbar" sender:nil];
+    }
 }
 
 
@@ -78,6 +82,29 @@
     [item setBadgeValue:nil];
 }
 
+#pragma mark - visitor 
+
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
+    if (viewController != tabBarController.viewControllers.firstObject && [User isVisitor]) {
+        [self showVisitorLoginAlert];
+        return NO;
+    }
+    return YES;
+}
+
+- (void)showVisitorLoginAlert{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"登录后才能使用更多的功能哦！"
+                                                                   message:nil
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"立即登录"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * _Nonnull action)
+                      {
+                          [AppDelegate logout];
+                      }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"稍等片刻" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
 @end
 
 

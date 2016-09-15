@@ -295,13 +295,19 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    Comment *comment = [self.tableFetchedRC objectAtIndexPath:indexPath];
     
-    if (![comment.owner.ownerId isEqualToString:[User uid]]) { //the comment is from other user
-        [self performSegueWithIdentifier:@"showCommentViewController" sender:comment];
+    if ([User isVisitor]) {
+        MainTabBarController *mvc = (MainTabBarController *)self.tabBarController;
+        [mvc showVisitorLoginAlert];
     }else{
-        [self deleteActionAtIndexPath:indexPath];
+        Comment *comment = [self.tableFetchedRC objectAtIndexPath:indexPath];
+        if (![comment.owner.ownerId isEqualToString:[User uid]]) { //the comment is from other user
+            [self performSegueWithIdentifier:@"showCommentViewController" sender:comment];
+        }else{
+            [self deleteActionAtIndexPath:indexPath];
+        }
     }
+    
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -392,7 +398,12 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 #pragma mark - comment
 
 -(void)didPressedCommentButton:(FeedDetailHeader *)headerView{
-    [self performSegueWithIdentifier:@"showCommentViewController" sender:nil];
+    if ([User isVisitor]) {
+        MainTabBarController *mvc = (MainTabBarController *)self.tabBarController;
+        [mvc showVisitorLoginAlert];
+    }else{
+        [self performSegueWithIdentifier:@"showCommentViewController" sender:nil];
+    }
 }
 
 #pragma mark - fetched results controller

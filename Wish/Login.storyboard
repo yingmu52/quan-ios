@@ -53,15 +53,43 @@
                                     <action selector="wechatLogin" destination="2KO-l2-Hsp" eventType="touchUpInside" id="HdU-WD-JnY"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IOX-xs-ZQC">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="EvJ-3V-5c9">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="100"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="游客登陆">
+                                    <color key="titleColor" red="0.6705882352941176" green="0.6705882352941176" blue="0.6705882352941176" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="EvJ-3V-5c9"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="EvJ-3V-5c9"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="visitorLogin" destination="2KO-l2-Hsp" eventType="touchUpInside" id="EwC-cu-bNc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="62r-Mo-QOs" firstAttribute="height" secondItem="Pwk-jZ-8nr" secondAttribute="width" multiplier="296:640" id="B9e-rY-r9U"/>
+                            <constraint firstItem="IOX-xs-ZQC" firstAttribute="centerX" secondItem="sxb-Er-WI0" secondAttribute="centerX" id="94C-Am-8bt"/>
+                            <constraint firstItem="IOX-xs-ZQC" firstAttribute="top" secondItem="sxb-Er-WI0" secondAttribute="bottom" constant="10" id="Lg6-cK-lH3">
+                                <variation key="heightClass=regular-widthClass=compact" constant="8"/>
+                            </constraint>
+                            <constraint firstItem="aFP-eb-UeG" firstAttribute="top" secondItem="IOX-xs-ZQC" secondAttribute="bottom" constant="20" id="O9j-Z9-j7L">
+                                <variation key="heightClass=regular-widthClass=compact" constant="25"/>
+                            </constraint>
                             <constraint firstAttribute="centerX" secondItem="62r-Mo-QOs" secondAttribute="centerX" constant="-30.5" id="Uyu-yB-77a">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
-                            </constraint>
-                            <constraint firstItem="aFP-eb-UeG" firstAttribute="top" secondItem="sxb-Er-WI0" secondAttribute="bottom" constant="60" id="eil-6O-O92">
-                                <variation key="heightClass=regular-widthClass=compact" constant="60"/>
                             </constraint>
                             <constraint firstItem="62r-Mo-QOs" firstAttribute="top" secondItem="jTJ-gW-C6i" secondAttribute="bottom" constant="102" id="ipA-09-rCb">
                                 <variation key="heightClass=regular-widthClass=compact" constant="60"/>
@@ -69,36 +97,35 @@
                             <constraint firstAttribute="centerX" secondItem="sxb-Er-WI0" secondAttribute="centerX" constant="-12" id="vWb-sa-VAI">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
-                            <constraint firstItem="aFP-eb-UeG" firstAttribute="top" secondItem="sxb-Er-WI0" secondAttribute="bottom" constant="31" id="yaW-fN-ctV">
-                                <variation key="heightClass=regular-widthClass=compact" constant="80"/>
-                            </constraint>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="62r-Mo-QOs"/>
                                 <exclude reference="sxb-Er-WI0"/>
+                                <exclude reference="IOX-xs-ZQC"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="eil-6O-O92"/>
-                                <exclude reference="yaW-fN-ctV"/>
-                                <exclude reference="vWb-sa-VAI"/>
-                                <exclude reference="B9e-rY-r9U"/>
                                 <exclude reference="Uyu-yB-77a"/>
                                 <exclude reference="ipA-09-rCb"/>
+                                <exclude reference="vWb-sa-VAI"/>
+                                <exclude reference="94C-Am-8bt"/>
+                                <exclude reference="Lg6-cK-lH3"/>
+                                <exclude reference="O9j-Z9-j7L"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="62r-Mo-QOs"/>
                                 <include reference="sxb-Er-WI0"/>
+                                <include reference="IOX-xs-ZQC"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="eil-6O-O92"/>
-                                <exclude reference="yaW-fN-ctV"/>
-                                <include reference="vWb-sa-VAI"/>
-                                <exclude reference="B9e-rY-r9U"/>
                                 <include reference="Uyu-yB-77a"/>
                                 <include reference="ipA-09-rCb"/>
+                                <include reference="vWb-sa-VAI"/>
+                                <include reference="94C-Am-8bt"/>
+                                <include reference="Lg6-cK-lH3"/>
+                                <include reference="O9j-Z9-j7L"/>
                             </mask>
                         </variation>
                     </view>
