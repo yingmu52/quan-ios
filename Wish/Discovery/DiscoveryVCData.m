@@ -11,7 +11,7 @@
 #import "SDWebImageCompat.h"
 #import "AppDelegate.h"
 #import "User.h"
-
+#import "WishDetailVCOwner.h"
 @interface DiscoveryVCData () <FetchCenterDelegate>
 @property (nonatomic,strong) NSNumber *currentPage;
 @end

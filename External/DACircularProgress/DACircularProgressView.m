@@ -10,7 +10,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-@interface DACircularProgressLayer : CALayer
+@interface DACircularProgressLayer : CALayer <CAAnimationDelegate>
 
 @property(nonatomic, strong) UIColor *trackTintColor;
 @property(nonatomic, strong) UIColor *progressTintColor;

@@ -19,6 +19,8 @@
 */
 
 - (void)awakeFromNib{
+    
+    [super awakeFromNib];
     //拉伸背影图，注意这个做法需要背影图保持自己的真实高度
     UIImage *backgroundImage = [self backgroundImageForState:UIControlStateNormal];
     if (backgroundImage) {

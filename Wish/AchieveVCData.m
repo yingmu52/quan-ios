@@ -11,6 +11,7 @@
 #import "Plan.h"
 #import "User.h"
 #define ACHIEVECELLID @"AchievementCell"
+#import "WishDetailVCOwner.h"
 @interface AchieveVCData () <NSFetchedResultsControllerDelegate>
 @property (nonatomic,strong) UIImageView *emptySignImageView;
 @property (nonatomic,strong) UIView *timeLine;

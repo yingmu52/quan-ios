@@ -16,7 +16,6 @@
 @property (nonatomic,strong) UIButton *cameraButton;
 @property (nonatomic) CGFloat lastContentOffSet; // for camera animation
 @property (nonatomic,strong) ImagePicker *imagePicker;
-@property (nonatomic,strong) UIAlertController *moreActionSheet;
 @end
 @implementation WishDetailVCOwner
 
