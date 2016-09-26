@@ -20,5 +20,7 @@
 @dynamic imageId;
 @dynamic ownerId;
 @dynamic plans;
+@dynamic nFans;
+@dynamic nFansToday;
 
 @end

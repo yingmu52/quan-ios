@@ -49,6 +49,16 @@
         circle.ownerId = info[@"ownerId"];
     }
 
+    NSNumber *nFans = @([info[@"watch"] integerValue]);
+    if (![circle.nFans isEqualToNumber:nFans]) {
+        circle.nFans = nFans;
+    }
+    
+    NSNumber *nFansToday = @([info[@"new_watch"] integerValue]);
+    if (![circle.nFansToday isEqualToNumber:nFansToday]) {
+        circle.nFansToday = nFansToday;
+    }
+    
     return circle;
     
 }

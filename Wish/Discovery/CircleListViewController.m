@@ -101,12 +101,23 @@
         Plan *plan = [self.tableFetchedRC objectAtIndexPath:indexPath];
         Circle *circle = plan.circle;
         cell.ms_title.text = circle.circleName;
-        cell.ms_subTitle.text = [NSString stringWithFormat:@"粉丝数：111 +186"];
         [cell.ms_imageView1 downloadImageWithImageId:circle.imageId
                                                 size:FetchCenterImageSize200];
         [cell.ms_FeatherImage downloadImageWithImageId:circle.imageId
                                                   size:FetchCenterImageSize200];
         cell.ms_featherBackgroundView.backgroundColor = [Theme getRandomShortRangeHSBColorWithAlpha:0.1];
+        
+
+        NSString *s1 = [NSString stringWithFormat:@"粉丝数：%@",circle.nFans];
+        NSMutableAttributedString *as1 = [[NSMutableAttributedString alloc] initWithString:s1];
+        if (circle.nFansToday.integerValue > 0) {
+            NSString *s2 = [NSString stringWithFormat:@" +%@",circle.nFansToday];
+            NSDictionary *attr = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#32c9a9"]};
+            NSAttributedString *as2 = [[NSAttributedString alloc] initWithString:s2 attributes:attr];
+            [as1 appendAttributedString:as2];
+        }
+        cell.ms_subTitle.attributedText = as1;
+
     }else{
         NSIndexPath *inp = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section];
         Plan *plan = [self.tableFetchedRC objectAtIndexPath:inp];

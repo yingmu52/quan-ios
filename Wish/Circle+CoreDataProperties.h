@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSDate *createDate;
 @property (nullable, nonatomic, retain) NSString *imageId;
 @property (nullable, nonatomic, retain) NSString *ownerId;
+@property (nullable, nonatomic, retain) NSNumber *nFans;
+@property (nullable, nonatomic, retain) NSNumber *nFansToday;
 @property (nullable, nonatomic, retain) NSSet<Plan *> *plans;
 
 @end
