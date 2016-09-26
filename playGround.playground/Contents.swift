@@ -4,5 +4,3 @@ import UIKit
 
 var a = ["haha"]
 var s = "adfa,adfa,adfadffad,fada,"
-s.componentsSeparatedByString(",")
-a.joinWithSeparator(",")

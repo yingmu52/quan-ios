@@ -267,7 +267,7 @@
                                 saturation:saturation
                                 brightness:brightness
                                      alpha:alpha];
-    NSLog(@"h:%@ s:%@ b:%@",@(hue),@(saturation),@(brightness));
+//    NSLog(@"h:%@ s:%@ b:%@",@(hue),@(saturation),@(brightness));
     return color;
 }
 @end

@@ -41,5 +41,7 @@
 @property (nonatomic,strong) NSFetchRequest *tableFetchRequest;
 @property (nonatomic,strong) NSFetchRequest *collectionFetchRequest;
 
+- (NSString *)tableSectionKeyPath;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 - (void)configureTableViewCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 @end

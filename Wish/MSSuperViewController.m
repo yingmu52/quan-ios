@@ -105,30 +105,31 @@
 
 #pragma mark - Delegates and Data Sources
 
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.tableFetchedRC.fetchedObjects.count;
-}
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return self.collectionFetchedRC.fetchedObjects.count;
 }
-
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
 }
 
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return self.tableFetchedRC.sections.count;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    id <NSFetchedResultsSectionInfo> sectionInfo = self.tableFetchedRC.sections[section];
+    return [sectionInfo numberOfObjects];
 }
 
 // MARK: Table View Fetched Results Controller
+- (NSString *)tableSectionKeyPath{ return nil; }
 
 - (NSFetchedResultsController *)tableFetchedRC{
     if (!_tableFetchedRC && self.tableFetchRequest){
         _tableFetchedRC = [[NSFetchedResultsController alloc] initWithFetchRequest:self.tableFetchRequest
                                                               managedObjectContext:self.appDelegate.managedObjectContext
-                                                                sectionNameKeyPath:nil
+                                                                sectionNameKeyPath:[self tableSectionKeyPath]
                                                                          cacheName:nil];
         _tableFetchedRC.delegate = self;
         NSError *error;

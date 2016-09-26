@@ -486,10 +486,38 @@
               NSArray *circleList = [responseJson valueForKeyPath:@"data.quanlist"];
               NSNumber *currentPage = [responseJson valueForKeyPath:@"data.page"];
               NSNumber *totalPage = [responseJson valueForKeyPath:@"data.totalpage"];
+              NSDictionary *manList = [responseJson valueForKeyPath:@"data.manlist"];
               
-              
-              for (NSDictionary *info in circleList) {
-                  [Circle updateCircleWithInfo:info managedObjectContext:workerContext];
+              for (NSDictionary *circleInfo in circleList) {
+                  Circle *circle = [Circle updateCircleWithInfo:circleInfo 
+                                           managedObjectContext:workerContext];
+                  NSArray *planList = circleInfo[@"planlist"];
+                  for (NSUInteger i = 0; i < planList.count; i ++) {
+                      NSDictionary *planInfo = planList[i];
+                      NSString *ownerId = planInfo[@"ownerId"];
+                      NSDictionary *ownerInfo = manList[ownerId];
+                      Plan *plan = [Plan updatePlanFromServer:planInfo
+                                                    ownerInfo:ownerInfo
+                                         managedObjectContext:workerContext];
+                      
+                      NSString *rk = [NSString stringWithFormat:@"top%@",@(i+1)];
+                      
+                      if (![plan.rank isEqualToString:rk]) {
+                          //重置其他事件的top值
+                          NSArray *topPlans = [Plan fetchWith:@"Plan"
+                                                    predicate:[NSPredicate predicateWithFormat:@"rank == %@ AND circle.circleId == %@",rk,circle.circleId]
+                                             keyForDescriptor:@"rank"
+                                         managedObjectContext:workerContext];
+                          for (Plan *p in topPlans) {
+                              NSLog(@"Reset plan: %@",p.planId);
+                              p.rank = nil;
+                          }
+                          
+                          plan.rank = rk;
+                      }
+
+                      plan.circle = circle;
+                  }
               }
               
               
