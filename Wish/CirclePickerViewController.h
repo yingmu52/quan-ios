@@ -7,13 +7,13 @@
 //
 
 #import "MSSuperViewController.h"
-#import "CircleListViewController.h"
+#import "MSSuperViewController.h"
 
 @protocol CirclePickerViewControllerDelegate <NSObject>
 - (void)didFinishPickingCircle:(Circle *)circle;
 @end
 
 
-@interface CirclePickerViewController : CircleListViewController
+@interface CirclePickerViewController : MSSuperViewController
 @property (nonatomic,weak) id <CirclePickerViewControllerDelegate> delegate;
 @end

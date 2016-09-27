@@ -36,13 +36,13 @@
     self.navigationItem.title = @"选择圈子";
 }
 
-//- (NSFetchRequest *)tableFetchRequest{
-//    if (!_tableFetchRequest) {
-//        _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Circle"];
-//        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
-//    }
-//    return _tableFetchRequest;
-//}
+- (NSFetchRequest *)tableFetchRequest{
+    if (!_tableFetchRequest) {
+        _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Circle"];
+        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
+    }
+    return _tableFetchRequest;
+}
 
 
 - (MSTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
