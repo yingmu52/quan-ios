@@ -401,6 +401,12 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                         </textView>
+                                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dot_bg" translatesAutoresizingMaskIntoConstraints="NO" id="ybp-Ul-Bdf"/>
+                                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waa-M4-Ycj">
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="9"/>
+                                                            <color key="textColor" red="0.95686274510000002" green="0.97254901959999995" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -411,10 +417,14 @@
                                                         <constraint firstAttribute="bottom" secondItem="0wN-Pp-l52" secondAttribute="bottom" constant="10" id="PEx-J5-l5A"/>
                                                         <constraint firstAttribute="trailing" secondItem="0wN-Pp-l52" secondAttribute="trailing" id="QGh-tV-5LI"/>
                                                         <constraint firstItem="0wN-Pp-l52" firstAttribute="leading" secondItem="PWJ-1T-jUZ" secondAttribute="trailing" constant="-20" id="bbB-9J-iNd"/>
+                                                        <constraint firstItem="waa-M4-Ycj" firstAttribute="centerY" secondItem="ybp-Ul-Bdf" secondAttribute="centerY" id="cnM-49-YU4"/>
                                                         <constraint firstItem="bZF-Yn-9Xm" firstAttribute="top" secondItem="hvh-kb-hSh" secondAttribute="top" id="fUc-sO-Wnq"/>
                                                         <constraint firstItem="PWJ-1T-jUZ" firstAttribute="top" secondItem="bZF-Yn-9Xm" secondAttribute="bottom" constant="5" id="h39-sT-8Er"/>
+                                                        <constraint firstItem="ybp-Ul-Bdf" firstAttribute="leading" secondItem="n0Q-JA-UHj" secondAttribute="leading" id="iyT-On-xFA"/>
+                                                        <constraint firstItem="waa-M4-Ycj" firstAttribute="centerX" secondItem="ybp-Ul-Bdf" secondAttribute="centerX" id="jnG-Wx-ODC"/>
                                                         <constraint firstItem="PWJ-1T-jUZ" firstAttribute="bottom" secondItem="0wN-Pp-l52" secondAttribute="bottom" id="kOH-DZ-kcu"/>
                                                         <constraint firstItem="PWJ-1T-jUZ" firstAttribute="leading" secondItem="bZF-Yn-9Xm" secondAttribute="leading" id="xS5-JM-Rdz"/>
+                                                        <constraint firstItem="ybp-Ul-Bdf" firstAttribute="top" secondItem="n0Q-JA-UHj" secondAttribute="top" id="xxb-ny-rff"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -468,6 +478,7 @@
     </scenes>
     <resources>
         <image name="create_avatar_logo" width="100" height="100"/>
+        <image name="dot_bg" width="18" height="18"/>
         <image name="group_button" width="51" height="28"/>
         <image name="top1_icon" width="36" height="15"/>
     </resources>
