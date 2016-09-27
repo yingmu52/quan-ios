@@ -59,6 +59,7 @@
 		A07AD4F21D9A704B0039093F /* CirclePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A07AD4F11D9A704B0039093F /* CirclePageViewController.m */; };
 		A07AD4F41D9A718C0039093F /* Circle.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A07AD4F31D9A718C0039093F /* Circle.storyboard */; };
 		A07AD4F71D9A72C10039093F /* FollowingCirclesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A07AD4F61D9A72C10039093F /* FollowingCirclesViewController.m */; };
+		A07AD4FA1D9AFB0B0039093F /* MSCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A07AD4F91D9AFB0B0039093F /* MSCollectionCell.m */; };
 		A07C21231C8163BF0084976A /* ButtonWithPathedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A07C21221C8163BF0084976A /* ButtonWithPathedImage.m */; };
 		A07C66AF1BE01AB800413D32 /* InvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A07C66AE1BE01AB800413D32 /* InvitationViewController.m */; };
 		A07C66B01BE01AB800413D32 /* InvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A07C66AE1BE01AB800413D32 /* InvitationViewController.m */; };
@@ -306,8 +307,6 @@
 		AEF7F29D1A6871F00022410B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE01724C1A65CD8E0014266F /* Images.xcassets */; };
 		AEF7F2A01A6875360022410B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEF7F29E1A6875360022410B /* Main.storyboard */; };
 		AEF7F2A11A6875360022410B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEF7F29E1A6875360022410B /* Main.storyboard */; };
-		AEFB04861AD12437009EB0D3 /* DiscoveryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFB047C1AD12437009EB0D3 /* DiscoveryCell.m */; };
-		AEFB04871AD12437009EB0D3 /* DiscoveryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFB047C1AD12437009EB0D3 /* DiscoveryCell.m */; };
 		AEFB048A1AD12437009EB0D3 /* DiscoveryVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFB047F1AD12437009EB0D3 /* DiscoveryVCData.m */; };
 		AEFB048B1AD12437009EB0D3 /* DiscoveryVCData.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFB047F1AD12437009EB0D3 /* DiscoveryVCData.m */; };
 		AEFB048C1AD12437009EB0D3 /* DiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFB04811AD12437009EB0D3 /* DiscoveryViewController.m */; };
@@ -403,6 +402,8 @@
 		A07AD4F31D9A718C0039093F /* Circle.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Circle.storyboard; sourceTree = "<group>"; };
 		A07AD4F51D9A72C10039093F /* FollowingCirclesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowingCirclesViewController.h; sourceTree = "<group>"; };
 		A07AD4F61D9A72C10039093F /* FollowingCirclesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowingCirclesViewController.m; sourceTree = "<group>"; };
+		A07AD4F81D9AFB0B0039093F /* MSCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSCollectionCell.h; sourceTree = "<group>"; };
+		A07AD4F91D9AFB0B0039093F /* MSCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSCollectionCell.m; sourceTree = "<group>"; };
 		A07C21211C8163BF0084976A /* ButtonWithPathedImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonWithPathedImage.h; sourceTree = "<group>"; };
 		A07C21221C8163BF0084976A /* ButtonWithPathedImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonWithPathedImage.m; sourceTree = "<group>"; };
 		A07C66AD1BE01AB800413D32 /* InvitationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InvitationViewController.h; path = Discovery/InvitationViewController.h; sourceTree = "<group>"; };
@@ -697,8 +698,6 @@
 		AEF7F2951A686FDB0022410B /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		AEF7F2961A686FDB0022410B /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		AEF7F29F1A6875360022410B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		AEFB047B1AD12437009EB0D3 /* DiscoveryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryCell.h; sourceTree = "<group>"; };
-		AEFB047C1AD12437009EB0D3 /* DiscoveryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryCell.m; sourceTree = "<group>"; };
 		AEFB047E1AD12437009EB0D3 /* DiscoveryVCData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryVCData.h; sourceTree = "<group>"; };
 		AEFB047F1AD12437009EB0D3 /* DiscoveryVCData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryVCData.m; sourceTree = "<group>"; };
 		AEFB04801AD12437009EB0D3 /* DiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryViewController.h; sourceTree = "<group>"; };
@@ -785,6 +784,8 @@
 		A02D8B371D64155D00B0740D /* Miao Stone Base Object */ = {
 			isa = PBXGroup;
 			children = (
+				A07AD4F81D9AFB0B0039093F /* MSCollectionCell.h */,
+				A07AD4F91D9AFB0B0039093F /* MSCollectionCell.m */,
 				A027715A1D880BB700442996 /* MSFeatherImageView.h */,
 				A027715B1D880BB700442996 /* MSFeatherImageView.m */,
 				A02771601D8852BF00442996 /* MSCircularGradientLayer.h */,
@@ -1458,8 +1459,6 @@
 				A0DCF0D51CA9AE6A0052380E /* PlansViewController.m */,
 				A016FDB41B8C4250006E7A09 /* ShuffleViewController.h */,
 				A016FDB51B8C4250006E7A09 /* ShuffleViewController.m */,
-				AEFB047B1AD12437009EB0D3 /* DiscoveryCell.h */,
-				AEFB047C1AD12437009EB0D3 /* DiscoveryCell.m */,
 				AEFB047E1AD12437009EB0D3 /* DiscoveryVCData.h */,
 				AEFB047F1AD12437009EB0D3 /* DiscoveryVCData.m */,
 				AEFB04801AD12437009EB0D3 /* DiscoveryViewController.h */,
@@ -1675,6 +1674,7 @@
 				A01431BF1D7166930099258C /* BFRImageContainerViewController.m in Sources */,
 				A027715C1D880BB700442996 /* MSFeatherImageView.m in Sources */,
 				AE1B6E3C1A6D89FC0026F3CE /* HomeCardView.m in Sources */,
+				A07AD4FA1D9AFB0B0039093F /* MSCollectionCell.m in Sources */,
 				A02771621D8852BF00442996 /* MSCircularGradientLayer.m in Sources */,
 				A0C15C9C1D4CB9350094BEF9 /* MJRefreshConst.m in Sources */,
 				AE0172421A65CD8E0014266F /* AppDelegate.m in Sources */,
@@ -1787,7 +1787,6 @@
 				A0C15C9A1D4CB9350094BEF9 /* MJRefreshStateHeader.m in Sources */,
 				A0F513281BD98B9600279B9D /* Message+CoreDataProperties.m in Sources */,
 				A0C15C901D4CB9350094BEF9 /* MJRefreshFooter.m in Sources */,
-				AEFB04861AD12437009EB0D3 /* DiscoveryCell.m in Sources */,
 				AE52FA531A8D55A7003FF725 /* KeyboardAcessoryView.m in Sources */,
 				A0994E6A1BC4D1FB00D45845 /* WYPopoverController.m in Sources */,
 				A0D1021D1B84EB6A006B0E4E /* SDWebImageCompat.m in Sources */,
@@ -1856,7 +1855,6 @@
 				AEE4A6CD1A9684D500ABF946 /* AchieveViewController.m in Sources */,
 				A0F513291BD98B9600279B9D /* Message+CoreDataProperties.m in Sources */,
 				A0EA22021BA53BF400A83A7A /* ImagePreviewController.m in Sources */,
-				AEFB04871AD12437009EB0D3 /* DiscoveryCell.m in Sources */,
 				AE1B6E3D1A6D89FC0026F3CE /* HomeCardView.m in Sources */,
 				A066C3861BB793DA003B51D5 /* MSLabel.m in Sources */,
 				A0D1022E1B84EB6A006B0E4E /* UIImage+MultiFormat.m in Sources */,

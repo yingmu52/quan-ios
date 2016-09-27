@@ -14,6 +14,7 @@
 @implementation Plan (CoreDataProperties)
 
 @dynamic rank;
+@dynamic readCount;
 @dynamic backgroundNum;
 @dynamic cornerMask;
 @dynamic createDate;

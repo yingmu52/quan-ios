@@ -88,20 +88,24 @@
 
 #pragma mark - collection view delegate & data soucce
 
-- (void)configureCell:(DiscoveryCell *)cell atIndexPath:(NSIndexPath *)indexPath{
-    Plan *plan = [self.collectionFetchedRC objectAtIndexPath:indexPath];
-    [cell.discoveryImageView downloadImageWithImageId:plan.backgroundNum size:FetchCenterImageSize400];
-    cell.discoveryTitleLabel.text = plan.planTitle;
-    cell.discoveryByUserLabel.text = [NSString stringWithFormat:@"by %@",plan.owner.ownerName];
-    cell.discoveryFollowerCountLabel.text = [NSString stringWithFormat:@"%@ 关注",plan.followCount];
-    cell.discoveryRecordsLabel.text = [NSString stringWithFormat:@"%@ 记录",plan.tryTimes];
 
+- (MSCollectionCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    MSCollectionCell *cell = (MSCollectionCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"DiscoveryCell" forIndexPath:indexPath];
+    cell.ms_shouldHaveBorder = YES;
+    
+    Plan *plan = [self.collectionFetchedRC objectAtIndexPath:indexPath];
+    [cell.ms_imageView1 downloadImageWithImageId:plan.backgroundNum size:FetchCenterImageSize400];
+    [cell.ms_imageView2 downloadImageWithImageId:plan.owner.headUrl size:FetchCenterImageSize50];
+    cell.ms_titleLabel.text = plan.planTitle;
+    cell.ms_subTitleLabel.text = [NSString stringWithFormat:@"%@",plan.owner.ownerName];
+    cell.ms_infoLabel1.text = [NSString stringWithFormat:@"%@阅读",plan.readCount];
+    
+    cell.ms_infoLabel2.text = [NSString stringWithFormat:@"圈子：%@",plan.circle.circleName ? plan.circle.circleName : @""];
+    
     //显示置顶的角标
-    if ([plan.cornerMask isEqualToString:@"top"]){
-        cell.cornerMask.image = [Theme topImageMask];
-    }else{
-        cell.cornerMask.image = nil;
-    }
+    cell.ms_imageView3.image = [plan.cornerMask isEqualToString:@"top"] ? [Theme topImageMask] : nil;
+    
+    return cell;
 }
 
 

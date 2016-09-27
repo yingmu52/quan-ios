@@ -1188,6 +1188,7 @@
          NSManagedObjectContext *workerContext = [self workerContext];
          
          NSArray *planList = [responseJson valueForKeyPath:@"data.planList"];
+
          NSDictionary *manList = [responseJson valueForKeyPath:@"data.manList"];
          NSNumber *currentPage = @(1);
          NSNumber *totalPage = @(1);
@@ -1202,6 +1203,10 @@
                  Plan *plan = [Plan updatePlanFromServer:planInfo
                                                ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]
                                     managedObjectContext:workerContext];
+                 
+                 NSString *keyPath = [NSString stringWithFormat:@"data.quanlist.%@",planInfo[@"quanId"]];
+                 NSDictionary *quanInfo = [responseJson valueForKeyPath:keyPath];
+                 plan.circle = [Circle updateCircleWithInfo:quanInfo managedObjectContext:workerContext];
                  plan.discoverIndex = @(888 + (currentPage.integerValue - 1)*20 + idx); //记录索引方便显示服务器上的顺序
              }];
              

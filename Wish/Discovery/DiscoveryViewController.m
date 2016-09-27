@@ -39,16 +39,6 @@ static CGFloat horizontalInset = 10.0f;
 #pragma mark <UICollectionViewDataSource>
 
 
-- (DiscoveryCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    DiscoveryCell *cell = (DiscoveryCell *)[collectionView dequeueReusableCellWithReuseIdentifier:NORMALCELLID forIndexPath:indexPath];
-    [self configureCell:cell atIndexPath:indexPath];
-    // Configure the cell
-    return cell;
-}
-- (void)configureCell:(DiscoveryCell *)cell atIndexPath:(NSIndexPath *)indexPath{
-    //abstract
-}
-
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGSize cellSize = CGSizeZero;
     CGFloat width = 290 * 0.5;

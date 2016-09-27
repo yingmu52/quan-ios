@@ -98,6 +98,11 @@
         plan.cornerMask = cornerMask;
     }
     
+    NSNumber *readCount = @([dict[@"readnums"] integerValue]);
+    if (![plan.readCount isEqualToNumber:readCount]) {
+        plan.readCount = readCount;
+    }
+    
     return plan;
     
 }

@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DiscoveryCell.h"
+#import "MSCollectionCell.h"
 #import "MSSuperViewController.h"
 @interface DiscoveryViewController : MSSuperViewController
-- (void)configureCell:(DiscoveryCell *)cell atIndexPath:(NSIndexPath *)indexPath; //abstract
 @end

@@ -25,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *isPrivate;
 @property (nullable, nonatomic, retain) NSString *planId;
 @property (nullable, nonatomic, retain) NSNumber *planStatus;
+@property (nullable, nonatomic, retain) NSNumber *readCount;
 @property (nullable, nonatomic, retain) NSString *planTitle;
 @property (nullable, nonatomic, retain) NSString *rank;
 @property (nullable, nonatomic, retain) NSNumber *tryTimes;
