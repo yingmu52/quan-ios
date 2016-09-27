@@ -22,5 +22,6 @@
 @dynamic plans;
 @dynamic nFans;
 @dynamic nFansToday;
+@dynamic isFollow;
 
 @end

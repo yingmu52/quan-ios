@@ -60,6 +60,7 @@
 #define TOOL @"tool/"
 #define GET_CIRCLE_LIST @"splan_quan_get_quanlist.php"
 //#define GET_CIRCLE_LIST @"tool_quan_get.php"
+#define GET_FOLLOWING_CIRCLE_LIST @"splan_quan_watchlist.php"
 #define DELETE_MEMBER @"splan_quan_man_del.php"
 #define GET_CIRCLE_PLAN_LIST @"splan_quan_get_planlist.php"
 
@@ -135,6 +136,55 @@
 #pragma mark - 圈子
 #define TOOLCGIKEY @"123$%^abc"
 
+- (void)getFollowingCircleList:(NSArray *)localList
+                        onPage:(NSNumber *)localPage
+                    completion:(FetchCenterGetRequestGetFollowingCircleCompleted)completionBlock{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,GET_FOLLOWING_CIRCLE_LIST];
+    NSDictionary *args = localPage ? @{@"id":[User uid],@"page":localPage} : @{@"id":[User uid]};
+
+    [self postRequest:rqtStr
+            parameter:args
+     includeArguments:YES
+           completion:^(NSDictionary *responseJson) {
+               
+               NSManagedObjectContext *workerContext = [self workerContext];
+               
+               NSArray *circleList = [responseJson valueForKeyPath:@"data.quanlist"];
+               NSNumber *currentPage = [responseJson valueForKeyPath:@"data.page"];
+               NSNumber *totalPage = [responseJson valueForKeyPath:@"data.totalpage"];
+//               NSDictionary *manList = [responseJson valueForKeyPath:@"data.manlist"];
+               
+               
+               for (NSDictionary *circleInfo in circleList) {
+                   Circle *circle = [Circle updateCircleWithInfo:circleInfo
+                                            managedObjectContext:workerContext];
+                   circle.isFollow = @(YES);
+               }
+               
+               
+               if (currentPage.integerValue == 1) {
+                   NSArray *serverList = [responseJson valueForKeyPath:@"data.quanlist.id"];
+                   [self syncEntity:@"Circle"
+                             idName:@"circleId"
+                          localList:localList
+                         serverList:serverList
+                          inContext:workerContext];
+               }
+               
+               
+               [self.appDelegate saveContext:workerContext];
+               
+               if (completionBlock) {
+                   dispatch_main_async_safe(^{
+                       completionBlock(currentPage,totalPage);
+                   });
+               }
+
+               
+    }];
+
+    
+}
 - (void)quitCircle:(NSString *)circleId
         completion:(FetchCenterGetRequestGetQuitCircleCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,QUIT_CIRCLE];
