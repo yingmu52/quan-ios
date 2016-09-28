@@ -108,7 +108,7 @@ typedef void(^FetchCenterGetRequestGetCircleInvitationURLCompleted)(NSString *ur
                             completion:(FetchCenterGetRequestGetCircleInvitationURLCompleted)completionBlock;
 
 /** 获取圈子里的事件列表 **/
-typedef void(^FetchCenterGetRequestGetCirclePlanListCompleted)(NSNumber *currentPage, NSNumber *totalPage);
+typedef void(^FetchCenterGetRequestGetCirclePlanListCompleted)(NSNumber *currentPage, NSNumber *totalPage, NSArray *topMemberList);
 - (void)getPlanListInCircleId:(NSString *)circleId
                     localList:(NSArray *)localList
                        onPage:(NSNumber *)localPage

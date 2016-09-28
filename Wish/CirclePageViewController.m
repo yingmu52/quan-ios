@@ -80,6 +80,14 @@
     return _segmentedControl;
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.segmentedControl.hidden = YES;
+}
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.segmentedControl.hidden = NO;
+}
 
 @end

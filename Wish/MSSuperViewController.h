@@ -44,4 +44,7 @@
 - (NSString *)tableSectionKeyPath;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 - (void)configureTableViewCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+
+- (void)setUpBackButton:(BOOL)useWhiteButton;
+- (void)msPopViewController;
 @end

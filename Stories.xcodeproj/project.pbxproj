@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A00055501D9B108600658E6B /* CircleDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A000554F1D9B108600658E6B /* CircleDetailViewController.m */; };
 		A01431B41D715E870099258C /* DACircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A01431B11D715E870099258C /* DACircularProgressView.m */; };
 		A01431B51D715E870099258C /* DALabeledCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A01431B31D715E870099258C /* DALabeledCircularProgressView.m */; };
 		A01431BF1D7166930099258C /* BFRImageContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A01431B81D7166930099258C /* BFRImageContainerViewController.m */; };
@@ -326,6 +327,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A000554E1D9B108600658E6B /* CircleDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleDetailViewController.h; sourceTree = "<group>"; };
+		A000554F1D9B108600658E6B /* CircleDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleDetailViewController.m; sourceTree = "<group>"; };
 		A01431A01D713B530099258C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		A01431B01D715E870099258C /* DACircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DACircularProgressView.h; sourceTree = "<group>"; };
 		A01431B11D715E870099258C /* DACircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DACircularProgressView.m; sourceTree = "<group>"; };
@@ -1179,6 +1182,8 @@
 		A0FEC1301C86167D004C48F1 /* Circles */ = {
 			isa = PBXGroup;
 			children = (
+				A000554E1D9B108600658E6B /* CircleDetailViewController.h */,
+				A000554F1D9B108600658E6B /* CircleDetailViewController.m */,
 				A07AD4F51D9A72C10039093F /* FollowingCirclesViewController.h */,
 				A07AD4F61D9A72C10039093F /* FollowingCirclesViewController.m */,
 				A07AD4F01D9A704B0039093F /* CirclePageViewController.h */,
@@ -1703,6 +1708,7 @@
 				AE0ADF191ABD78CC00692131 /* HomeCardViewController.m in Sources */,
 				AED355F81B228696000427FF /* FeedDetailHeader.m in Sources */,
 				A0F7D4331B84E851003CCB34 /* BadgeStyle.m in Sources */,
+				A00055501D9B108600658E6B /* CircleDetailViewController.m in Sources */,
 				A03010571BABC6AA0041E2CF /* QBAssetsViewController.m in Sources */,
 				A0C15C961D4CB9350094BEF9 /* MJRefreshBackNormalFooter.m in Sources */,
 				A0DCF0D61CA9AE6A0052380E /* PlansViewController.m in Sources */,

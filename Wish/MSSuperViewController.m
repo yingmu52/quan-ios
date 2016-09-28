@@ -16,7 +16,22 @@
 
 
 #pragma mark - 控制器生活周期 Application Life Cycle
+- (void)setUpBackButton:(BOOL)useWhiteButton{
+    if (self.navigationController && self.navigationController.viewControllers.firstObject != self) {
+        CGRect frame = CGRectMake(0,0, 25,25);
+        UIImage *img = useWhiteButton ? [Theme navWhiteButtonDefault] : [Theme navBackButtonDefault];
+        UIButton *backBtn = [Theme buttonWithImage:img
+                                            target:self
+                                          selector:@selector(msPopViewController)
+                                             frame:frame];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+    }
+}
 
+
+- (void)msPopViewController{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 #pragma mark - 上拉和下拉控件
 

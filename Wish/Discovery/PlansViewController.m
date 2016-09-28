@@ -65,17 +65,17 @@
 
 - (void)loadMoreData{
     NSArray *localList = [self.collectionFetchedRC.fetchedObjects valueForKey:@"planId"];
-    [self.fetchCenter getPlanListInCircleId:self.circle.circleId 
-                                  localList:localList
-                                     onPage:self.currentPage
-                                 completion:^(NSNumber *currentPage, NSNumber *totalPage) {
-        if ([currentPage isEqualToNumber:totalPage]) {
-            [self.collectionView.mj_footer endRefreshingWithNoMoreData];
-        }else{
-            self.currentPage = @(currentPage.integerValue + 1);
-            [self.collectionView.mj_footer endRefreshing];
-        }
-    }];
+//    [self.fetchCenter getPlanListInCircleId:self.circle.circleId 
+//                                  localList:localList
+//                                     onPage:self.currentPage
+//                                 completion:^(NSNumber *currentPage, NSNumber *totalPage) {
+//        if ([currentPage isEqualToNumber:totalPage]) {
+//            [self.collectionView.mj_footer endRefreshingWithNoMoreData];
+//        }else{
+//            self.currentPage = @(currentPage.integerValue + 1);
+//            [self.collectionView.mj_footer endRefreshing];
+//        }
+//    }];
 }
 
 - (void)showCircleSettingView{

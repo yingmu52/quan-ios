@@ -245,6 +245,14 @@
          //设置圈子信息
          NSDictionary *circleInfo = [responseJson valueForKeyPath:@"data.quanInfo"];
          
+         //设置活跃成员信息
+         NSArray *topMemberIDs = [responseJson valueForKeyPath:@"data.memberlist"];
+         for (NSString *mId in topMemberIDs) {
+             NSString *k = [NSString stringWithFormat:@"data.manList.%@",mId];
+             NSDictionary *ownerInfo = [responseJson valueForKeyPath:k];
+             [Owner updateOwnerWithInfo:ownerInfo managedObjectContext:workerContext];
+         }
+         
          if (planList.count > 0 && manList.count > 0) {
              
              currentPage = [responseJson valueForKeyPath:@"data.page"];
@@ -261,6 +269,7 @@
                      plan.circle = circle;
                  }
              }
+             
              
              //同步
              if (currentPage.integerValue == 1){
@@ -279,11 +288,9 @@
          
          if (completionBlock) {
              dispatch_main_async_safe(^{
-                 completionBlock(currentPage,totalPage);
+                 completionBlock(currentPage,totalPage,topMemberIDs);
              });
          }
-
-         
      }];
     
     

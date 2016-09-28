@@ -132,7 +132,7 @@
     if (indexPath.row == 0) {
         Plan *plan = [self.tableFetchedRC objectAtIndexPath:indexPath];
         Circle *circle = plan.circle;
-        [self performSegueWithIdentifier:@"showPlansView" sender:circle];
+        [self performSegueWithIdentifier:@"showCircleDetailFromMyJoining" sender:circle];
         [User updateAttributeFromDictionary:@{CURRENT_CIRCLE_ID:circle.circleId}];
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
@@ -143,9 +143,8 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if ([segue.identifier isEqualToString:@"showPlansView"]) {
-        PlansViewController *pvc = segue.destinationViewController;
-        pvc.circle = sender;
+    if ([segue.identifier isEqualToString:@"showCircleDetailFromMyJoining"]) {
+        [segue.destinationViewController setCircle:sender];
     }
 }
 
