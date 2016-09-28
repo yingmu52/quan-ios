@@ -17,9 +17,19 @@
 @property (nonatomic,weak) IBOutlet UITextView *circleDescriptionTextView;
 
 @property (nonatomic,strong) NSNumber *currentPage;
+
+@property (nonatomic,strong) NSDateFormatter *dateFormatter;
 @end
 
 @implementation CircleDetailViewController
+
+- (NSDateFormatter *)dateFormatter{
+    if (!_dateFormatter) {
+        _dateFormatter = [[NSDateFormatter alloc] init];
+        _dateFormatter.dateFormat = @"yyyy\\MM\\dd";
+    }
+    return _dateFormatter;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -74,21 +84,28 @@
 - (NSFetchRequest *)tableFetchRequest{
     if (!_tableFetchRequest) {
         _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
-        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"circle == %@",self.circle];
+        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"circle.circleId == %@",self.circle.circleId];
         _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"updateDate" ascending:NO]];
     }
     return _tableFetchRequest;
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (MSTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     Plan *plan = [self.tableFetchedRC objectAtIndexPath:indexPath];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CircleDetailCell"];
-    cell.textLabel.text = plan.planTitle;
-    cell.detailTextLabel.text = plan.detailText;
+    MSTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CircleDetailCell"];
+    [cell.ms_imageView1 downloadImageWithImageId:plan.backgroundNum size:FetchCenterImageSize400];
+    cell.ms_title.text = plan.planTitle;
+    [cell.ms_imageView2 downloadImageWithImageId:plan.owner.headUrl size:FetchCenterImageSize100];
+    cell.ms_subTitle.text = plan.owner.ownerName;
+    cell.ms_dateLabel.text = [[self.dateFormatter stringFromDate:plan.updateDate] stringByAppendingString:@"更新"];
+    cell.ms_textView.text = plan.detailText;
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 155.0f;
+}
 
 - (MSCollectionCell *)collectionView:(UICollectionView *)collectionView
               cellForItemAtIndexPath:(NSIndexPath *)indexPath {
