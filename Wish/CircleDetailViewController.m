@@ -9,6 +9,7 @@
 #import "CircleDetailViewController.h"
 #import "NavigationBar.h"
 #import "MSCollectionCell.h"
+#import "WishDetailVCOwner.h"
 @interface CircleDetailViewController () <UICollectionViewDelegateFlowLayout>
 @property (nonatomic,weak) IBOutlet UIImageView *circleImageView;
 @property (nonatomic,weak) IBOutlet UILabel *circleTitleLabel;
@@ -89,6 +90,18 @@
     }
     return _tableFetchRequest;
 }
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"showWishDetailViewController"]) {
+        [segue.destinationViewController setPlan:sender];
+    }
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    Plan *plan = [self.tableFetchedRC objectAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:@"showWishDetailViewController" sender:plan];
+}
+
 
 
 - (MSTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -537,7 +537,7 @@
                                             </collectionViewFlowLayout>
                                             <cells>
                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CircleDetailTopMemberCell" id="5JF-v9-ihj" customClass="MSCollectionCell">
-                                                    <rect key="frame" x="14" y="7" width="80" height="54"/>
+                                                    <rect key="frame" x="14" y="0.0" width="80" height="54"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                         <rect key="frame" x="0.0" y="0.0" width="80" height="54"/>
@@ -716,11 +716,20 @@
                         <outlet property="followButton" destination="fUg-Jm-0bg" id="t3H-Sa-FSa"/>
                         <outlet property="followCountLabel" destination="8MS-mz-nYO" id="Ma5-Ki-feF"/>
                         <outlet property="tableView" destination="aGh-zW-DtJ" id="p7Y-4W-QXL"/>
+                        <segue destination="osf-YN-b0x" kind="show" identifier="showWishDetailViewController" id="PAO-LD-bVT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FaI-6D-MaC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="240.80000000000001" y="2113.4932533733136"/>
+        </scene>
+        <!--WishDetailViewController-->
+        <scene sceneID="9ml-rB-Jwp">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="WishDetailViewController" id="osf-YN-b0x" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4nk-cx-77G" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="906" y="2001"/>
         </scene>
     </scenes>
     <resources>

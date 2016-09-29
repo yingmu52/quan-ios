@@ -1282,10 +1282,10 @@
                                 <color key="backgroundColor" red="0.92941176470588238" green="0.93725490196078431" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FollowingCell" rowHeight="396" id="i4n-Ex-8Qc" customClass="FollowingCell">
-                                        <rect key="frame" x="0.0" y="28" width="1000" height="396"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="396"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="i4n-Ex-8Qc" id="Fas-0p-76S">
-                                            <frame key="frameInset" width="1000" height="395"/>
+                                            <frame key="frameInset" width="375" height="395"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G96-6M-nNc" userLabel="backgroundview">
@@ -1427,7 +1427,7 @@
                                                             </collectionViewFlowLayout>
                                                             <cells>
                                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FeedInFollowingCell" id="sy9-nU-Yb9" customClass="FollowingImageCell">
-                                                                    <rect key="frame" x="0.0" y="8" width="291" height="274"/>
+                                                                    <rect key="frame" x="0.0" y="7" width="291" height="274"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                         <rect key="frame" x="0.0" y="0.0" width="291" height="274"/>
@@ -1504,7 +1504,7 @@
                                                                     </connections>
                                                                 </collectionViewCell>
                                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FollowingCellLast" id="fvs-Rc-hnu" customClass="FollowingImageCell">
-                                                                    <rect key="frame" x="301" y="8" width="139" height="274"/>
+                                                                    <rect key="frame" x="301" y="7" width="139" height="274"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                         <rect key="frame" x="0.0" y="0.0" width="139" height="274"/>
@@ -1843,7 +1843,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PostDetailImageCell" id="HDn-vl-S4r" customClass="PostImageCell">
-                                        <rect key="frame" x="5" y="0.0" width="76" height="76"/>
+                                        <rect key="frame" x="5" y="5" width="76" height="76"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="76" height="76"/>
@@ -1885,7 +1885,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PostDetailAddCell" id="eBF-h8-0mZ">
-                                        <rect key="frame" x="5" y="77" width="76" height="76"/>
+                                        <rect key="frame" x="86" y="5" width="76" height="76"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="76" height="76"/>
@@ -2125,7 +2125,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PostFeedImagePreviewCell" id="Rns-ch-qIO" customClass="ImagePreviewCell">
-                                <rect key="frame" x="0.0" y="128" width="245.5" height="412"/>
+                                <rect key="frame" x="0.0" y="71" width="245.5" height="412"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="245.5" height="412"/>
@@ -2877,10 +2877,10 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CirclePickerCell" rowHeight="65" id="RBz-H7-E4a" customClass="MSTableViewCell">
-                                        <rect key="frame" x="0.0" y="28" width="1000" height="65"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RBz-H7-E4a" id="7j8-Ia-E33">
-                                            <frame key="frameInset" width="1000" height="64"/>
+                                            <frame key="frameInset" width="375" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gnI-8W-MZg">
@@ -3061,7 +3061,7 @@
         <!--Wish Detail View Controller-->
         <scene sceneID="v9l-pC-NeM">
             <objects>
-                <tableViewController automaticallyAdjustsScrollViewInsets="NO" id="rp9-lu-nOr" customClass="WishDetailViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="WishDetailViewController" automaticallyAdjustsScrollViewInsets="NO" id="rp9-lu-nOr" customClass="WishDetailViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fOK-yO-OcH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3307,7 +3307,7 @@
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nfW-dl-EiV" userLabel="headpic" customClass="NZCircularImageView">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nfW-dl-EiV" userLabel="headpic" customClass="NZCircularImageView">
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="20" id="Fy9-jY-WNx"/>
                                                                         <constraint firstAttribute="width" constant="20" id="dx0-rp-mIR"/>
@@ -6976,12 +6976,12 @@
         <image name="tab_ic_quanzi_pressed" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4yF-1j-VR3"/>
-        <segue reference="X79-Dh-n8s"/>
-        <segue reference="GkF-ge-YPg"/>
-        <segue reference="LzI-vD-dFb"/>
+        <segue reference="JVq-VY-XxP"/>
+        <segue reference="9iF-Ie-E5K"/>
         <segue reference="Y2c-0U-Rmr"/>
+        <segue reference="XMp-RI-rbx"/>
         <segue reference="4wk-xv-ETJ"/>
+        <segue reference="4yF-1j-VR3"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
