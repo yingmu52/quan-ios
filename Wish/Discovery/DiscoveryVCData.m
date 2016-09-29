@@ -98,7 +98,7 @@
     [cell.ms_imageView2 downloadImageWithImageId:plan.owner.headUrl size:FetchCenterImageSize50];
     cell.ms_titleLabel.text = plan.planTitle;
     cell.ms_subTitleLabel.text = [NSString stringWithFormat:@"%@",plan.owner.ownerName];
-    cell.ms_infoLabel1.text = [NSString stringWithFormat:@"%@阅读",plan.readCount];
+    cell.ms_infoLabel1.text = [NSString stringWithFormat:@"%@人阅读",plan.readCount];
     
     cell.ms_infoLabel2.text = [NSString stringWithFormat:@"圈子：%@",plan.circle.circleName ? plan.circle.circleName : @""];
     

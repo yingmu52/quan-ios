@@ -22,7 +22,7 @@
 - (void)updateHeaderWithPlan:(Plan *)plan{
     self.headerTitleLabel.text = plan.planTitle;
     self.headerFeedCountLabel.text = [NSString stringWithFormat:@"%@条记录",plan.tryTimes];
-    self.headerFollowLabel.text = [NSString stringWithFormat:@"%@人关注",plan.followCount];
+    self.headerFollowLabel.text = [NSString stringWithFormat:@"%@人阅读",plan.readCount];
     self.badgeImageView.hidden = (plan.planStatus.integerValue != PlanStatusFinished);
     
     UIImage *lockImg =
