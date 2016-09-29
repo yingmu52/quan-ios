@@ -34,9 +34,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self setUpBackButton:YES];
+    [self setupHeaderView];
+    [self loadMoreData];
+}
 
+- (void)setupHeaderView{
     self.circleImageView.layer.cornerRadius = 3.0f;
     [self.circleImageView downloadImageWithImageId:self.circle.imageId
                                               size:FetchCenterImageSize400];
@@ -49,10 +52,19 @@
     self.collectionView.mj_header = nil;
     self.collectionView.mj_footer = nil;
     self.tableView.mj_header = nil;
+
+    self.followButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.followButton.layer.borderWidth = 1.0f;
+    self.followButton.layer.cornerRadius = 11.0f; // 高的一半
     
-    [self loadMoreData];
 }
 
+
+- (IBAction)followButtonPressed{
+    [self.fetchCenter followCircleId:self.circle.circleId completion:^{
+        [self.followButton setTitle:@"已关注" forState:UIControlStateNormal];
+    }];
+}
 
 #pragma mark - Data Source
 

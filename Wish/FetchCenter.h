@@ -91,7 +91,14 @@ typedef void(^FetchCenterPostRequestUploadImagesCompleted)(NSArray *imageIds);
 
 #pragma mark - 圈子
 
-/** 退出圈子 **/
+
+/** 关注圈子 **/
+typedef void(^FetchCenterGetRequestGetFollowCircleCompleted)(void);
+- (void)followCircleId:(NSString *)circleId
+            completion:(FetchCenterGetRequestGetFollowCircleCompleted)completionBlock;
+
+
+/** 我关注圈子列表 **/
 typedef void(^FetchCenterGetRequestGetFollowingCircleCompleted)(NSNumber *currentPage, NSNumber *totalPage);
 - (void)getFollowingCircleList:(NSArray *)localList
                         onPage:(NSNumber *)localPage

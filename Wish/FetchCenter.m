@@ -63,6 +63,8 @@
 #define GET_FOLLOWING_CIRCLE_LIST @"splan_quan_watchlist.php"
 #define DELETE_MEMBER @"splan_quan_man_del.php"
 #define GET_CIRCLE_PLAN_LIST @"splan_quan_get_planlist.php"
+#define FOLLOW_CIRCLE @"splan_quan_watch.php"
+
 
 #define SWITCH_CIRCLE @"tool_quan_man.php"
 #define CREATE_CIRCLE @"splan_quan_create.php"
@@ -136,6 +138,21 @@
 #pragma mark - 圈子
 #define TOOLCGIKEY @"123$%^abc"
 
+- (void)followCircleId:(NSString *)circleId
+            completion:(FetchCenterGetRequestGetFollowCircleCompleted)completionBlock{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,FOLLOW_CIRCLE];
+    [self postRequest:rqtStr
+            parameter:@{@"quanid":circleId}
+     includeArguments:YES
+           completion:^(NSDictionary *responseJson) {
+               if (completionBlock) {
+                   dispatch_main_async_safe(^{
+                       completionBlock();
+                   });
+               }
+           }];
+}
+     
 - (void)getFollowingCircleList:(NSArray *)localList
                         onPage:(NSNumber *)localPage
                     completion:(FetchCenterGetRequestGetFollowingCircleCompleted)completionBlock{
