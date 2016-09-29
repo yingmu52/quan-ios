@@ -172,10 +172,12 @@
 //               NSDictionary *manList = [responseJson valueForKeyPath:@"data.manlist"];
                
                
-               for (NSDictionary *circleInfo in circleList) {
-                   Circle *circle = [Circle updateCircleWithInfo:circleInfo
-                                            managedObjectContext:workerContext];
-                   circle.circleType = @(CircleTypeJoined);
+               if (circleList.count > 0) {
+                   for (NSDictionary *circleInfo in circleList) {
+                       Circle *circle = [Circle updateCircleWithInfo:circleInfo
+                                                managedObjectContext:workerContext];
+                       circle.circleType = @(CircleTypeFollowed);
+                   }
                }
                
                
@@ -565,6 +567,8 @@
               for (NSDictionary *circleInfo in circleList) {
                   Circle *circle = [Circle updateCircleWithInfo:circleInfo 
                                            managedObjectContext:workerContext];
+                  circle.circleType = @(CircleTypeJoined);
+                  
                   NSArray *planList = circleInfo[@"planlist"];
                   for (NSUInteger i = 0; i < planList.count; i ++) {
                       NSDictionary *planInfo = planList[i];
