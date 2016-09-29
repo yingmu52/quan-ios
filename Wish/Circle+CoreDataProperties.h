@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *ownerId;
 @property (nullable, nonatomic, retain) NSNumber *nFans;
 @property (nullable, nonatomic, retain) NSNumber *nFansToday;
-@property (nullable, nonatomic, retain) NSNumber *isFollow;
+@property (nullable, nonatomic, retain) NSNumber *circleType;
 @property (nullable, nonatomic, retain) NSSet<Plan *> *plans;
 
 @end

@@ -59,6 +59,11 @@
         circle.nFansToday = nFansToday;
     }
     
+    NSNumber *isWatch = @([info[@"iswatch"] boolValue]);
+    if (isWatch) {
+        circle.circleType = @(CircleTypeFollowed);
+    }
+    
     return circle;
     
 }

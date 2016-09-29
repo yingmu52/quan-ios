@@ -175,7 +175,7 @@
                for (NSDictionary *circleInfo in circleList) {
                    Circle *circle = [Circle updateCircleWithInfo:circleInfo
                                             managedObjectContext:workerContext];
-                   circle.isFollow = @(YES);
+                   circle.circleType = @(CircleTypeJoined);
                }
                
                

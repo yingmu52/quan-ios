@@ -52,7 +52,7 @@
 - (NSFetchRequest *)tableFetchRequest{
     if (!_tableFetchRequest) {
         _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Circle"];
-        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"isFollow == %@",@(YES)];
+        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"circleType == %@",@(CircleTypeFollowed)];
         _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
     }
     return _tableFetchRequest;

@@ -11,6 +11,11 @@
 #import "Plan.h"
 #import "AppDelegate.h"
 
+typedef NS_ENUM(NSInteger, CircleType) {
+    CircleTypeUndefine,
+    CircleTypeJoined,
+    CircleTypeFollowed
+};
 
 NS_ASSUME_NONNULL_BEGIN
 

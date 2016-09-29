@@ -53,9 +53,15 @@
     self.collectionView.mj_footer = nil;
     self.tableView.mj_header = nil;
 
-    self.followButton.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.followButton.layer.borderWidth = 1.0f;
-    self.followButton.layer.cornerRadius = 11.0f; // 高的一半
+    
+    if ([self.circle.circleType isEqualToNumber:@(CircleTypeUndefine)]) {
+        self.followButton.layer.borderColor = [UIColor whiteColor].CGColor;
+        self.followButton.layer.borderWidth = 1.0f;
+        self.followButton.layer.cornerRadius = 11.0f; // 高的一半
+    }else{
+        self.followButton.hidden = YES;
+    }
+    
     
 }
 
