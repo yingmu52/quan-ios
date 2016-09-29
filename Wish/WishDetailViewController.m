@@ -17,6 +17,23 @@
 
 @implementation WishDetailViewController
 
+- (void)didPressedLockButton{
+    if ([self.plan.owner.ownerId isEqualToString:[User uid]]){
+        BOOL currentPrivacy = self.plan.isPrivate.boolValue;
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否将该事件设置为"
+                                                                       message:currentPrivacy ? @"公开" : @"私密"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleCancel handler:nil]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.fetchCenter updatePlan:self.plan.planId
+                                   title:self.plan.planTitle
+                               isPrivate:!currentPrivacy
+                             description:self.plan.detailText completion:^{
+                             }];
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+}
 
 - (UIAlertController *)moreActionSheet{
     if (!_moreActionSheet) {

@@ -270,6 +270,15 @@
 //    NSLog(@"h:%@ s:%@ b:%@",@(hue),@(saturation),@(brightness));
     return color;
 }
+
++ (UIImage *)wishDetailcircleLockButtonLocked{
+    return [UIImage imageNamed:@"lock_ic"];
+}
+
++ (UIImage *)wishDetailcircleLockButtonUnLocked{
+    return [UIImage imageNamed:@"unlock_ic"];
+}
+
 @end
 
 

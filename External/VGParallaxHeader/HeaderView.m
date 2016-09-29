@@ -11,6 +11,7 @@
 #import "Plan.h"
 #import "Owner.h"
 #import "User.h"
+#import "Theme.h"
 @interface HeaderView()
 
 @end
@@ -21,7 +22,11 @@
     self.headerFeedCountLabel.text = [NSString stringWithFormat:@"%@条记录",plan.tryTimes];
     self.headerFollowLabel.text = [NSString stringWithFormat:@"%@人关注",plan.followCount];
     self.badgeImageView.hidden = (plan.planStatus.integerValue != PlanStatusFinished);
-    self.userNameLabel.text = [NSString stringWithFormat:@"by %@",plan.owner.ownerName];
+    
+    UIImage *lockImg =
+    plan.isPrivate.boolValue ? [Theme wishDetailcircleLockButtonLocked] : [Theme wishDetailcircleLockButtonUnLocked];
+    [self.lockButton setImage:lockImg forState:UIControlStateNormal];
+//    self.userNameLabel.text = [NSString stringWithFormat:@"by %@",plan.owner.ownerName];
     if ([plan.owner.ownerId isEqualToString:[User uid]]) { //owner don't get to follow its plan
 //        [self.followButton removeFromSuperview];
 //        [self.descriptionTextView setPlaceholder:EMPTY_PLACEHOLDER_OWNER];
@@ -78,6 +83,16 @@
 //    }
 //    
 //}
+
+- (IBAction)lockButtonPressed{
+    [self.delegate didPressedLockButton];
+}
+
+
+- (IBAction)circleButtonPressed{
+    [self.delegate didPressedCircleButton];
+}
+
 
 @end
 

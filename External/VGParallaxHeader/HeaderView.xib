@@ -72,6 +72,9 @@
                             <state key="normal" title="所属圈子：毛孩子日常">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <connections>
+                                <action selector="circleButtonPressed" destination="iN0-l3-epB" eventType="touchUpInside" id="RmB-nF-shd"/>
+                            </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="right_arrow_ic" translatesAutoresizingMaskIntoConstraints="NO" id="8YH-jg-dae"/>
                     </subviews>
@@ -86,21 +89,27 @@
                         <constraint firstItem="kMz-Dh-kVl" firstAttribute="leading" secondItem="zGN-6I-1yz" secondAttribute="leading" constant="10" id="mAZ-ie-Qdf"/>
                     </constraints>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock_ic" translatesAutoresizingMaskIntoConstraints="NO" id="ncL-ZV-qJu"/>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="毛孩子的世界 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M3K-Qv-Jdi">
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1TZ-F7-QLX" userLabel="lock">
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <state key="normal" image="lock_ic"/>
+                    <connections>
+                        <action selector="lockButtonPressed" destination="iN0-l3-epB" eventType="touchUpInside" id="OYj-9j-AAE"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="V85-XQ-ydf" firstAttribute="top" secondItem="M3K-Qv-Jdi" secondAttribute="bottom" constant="10" id="0LP-um-QfM"/>
                 <constraint firstItem="ZC8-da-L6D" firstAttribute="bottom" secondItem="V85-XQ-ydf" secondAttribute="bottom" id="49L-35-yc5"/>
+                <constraint firstItem="1TZ-F7-QLX" firstAttribute="top" secondItem="M3K-Qv-Jdi" secondAttribute="top" id="6DD-tW-r6a"/>
                 <constraint firstItem="aNa-gN-ud6" firstAttribute="leading" secondItem="ZC8-da-L6D" secondAttribute="trailing" constant="16" id="6yC-SA-VgX"/>
                 <constraint firstItem="juR-fT-B5l" firstAttribute="leading" secondItem="aNa-gN-ud6" secondAttribute="trailing" constant="8" id="CGC-Sx-x4a"/>
-                <constraint firstItem="ncL-ZV-qJu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="G0K-ah-nT0"/>
                 <constraint firstItem="ZC8-da-L6D" firstAttribute="leading" secondItem="V85-XQ-ydf" secondAttribute="trailing" constant="8" id="Pz3-BO-Sxg"/>
                 <constraint firstItem="M3K-Qv-Jdi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="28" id="Q6k-25-ebX"/>
                 <constraint firstAttribute="trailing" secondItem="zGN-6I-1yz" secondAttribute="trailing" id="R7g-zp-2FL"/>
@@ -108,12 +117,12 @@
                 <constraint firstItem="bDV-Hj-Vb7" firstAttribute="top" secondItem="V85-XQ-ydf" secondAttribute="bottom" constant="10" id="Vhh-Xp-rw2"/>
                 <constraint firstItem="zGN-6I-1yz" firstAttribute="top" secondItem="bDV-Hj-Vb7" secondAttribute="bottom" constant="8" id="VpE-MJ-gau"/>
                 <constraint firstItem="juR-fT-B5l" firstAttribute="bottom" secondItem="aNa-gN-ud6" secondAttribute="bottom" id="XbJ-1c-7d9"/>
+                <constraint firstItem="1TZ-F7-QLX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ayj-W2-RPw"/>
                 <constraint firstAttribute="trailing" secondItem="M3K-Qv-Jdi" secondAttribute="trailing" constant="20" id="bgH-WV-2tu"/>
                 <constraint firstItem="zGN-6I-1yz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="mZE-yY-ybj"/>
                 <constraint firstItem="aNa-gN-ud6" firstAttribute="centerY" secondItem="V85-XQ-ydf" secondAttribute="centerY" id="oyq-EK-dYI"/>
                 <constraint firstAttribute="bottom" secondItem="zGN-6I-1yz" secondAttribute="bottom" id="pMk-NN-aYS"/>
                 <constraint firstItem="V85-XQ-ydf" firstAttribute="leading" secondItem="M3K-Qv-Jdi" secondAttribute="leading" id="qpO-Iq-J0A"/>
-                <constraint firstItem="M3K-Qv-Jdi" firstAttribute="top" secondItem="ncL-ZV-qJu" secondAttribute="top" id="rLy-1v-Fwv"/>
                 <constraint firstItem="bDV-Hj-Vb7" firstAttribute="trailing" secondItem="M3K-Qv-Jdi" secondAttribute="trailing" id="xIC-Cd-Rqg"/>
                 <constraint firstItem="bDV-Hj-Vb7" firstAttribute="leading" secondItem="M3K-Qv-Jdi" secondAttribute="leading" id="yML-NP-kRQ"/>
             </constraints>
@@ -152,19 +161,15 @@
                 </mask>
             </variation>
             <connections>
+                <outlet property="circleButton" destination="kMz-Dh-kVl" id="yj1-aQ-IYE"/>
                 <outlet property="descriptionTextView" destination="bDV-Hj-Vb7" id="kl2-cN-39X"/>
                 <outlet property="headerFeedCountLabel" destination="ZC8-da-L6D" id="pPO-GI-Fqg"/>
                 <outlet property="headerFollowLabel" destination="juR-fT-B5l" id="CpO-gx-MLT"/>
                 <outlet property="headerTitleLabel" destination="M3K-Qv-Jdi" id="kUV-0w-OiD"/>
-                <outletCollection property="gestureRecognizers" destination="L1P-VO-g8f" appends="YES" id="frd-EB-DDd"/>
+                <outlet property="lockButton" destination="1TZ-F7-QLX" id="IqP-MU-rFx"/>
             </connections>
             <point key="canvasLocation" x="337.5" y="202.5"/>
         </view>
-        <tapGestureRecognizer id="L1P-VO-g8f">
-            <connections>
-                <action selector="backgroundTapped:" destination="iN0-l3-epB" id="B56-xi-kqT"/>
-            </connections>
-        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="header_ic_record" width="32" height="32"/>

@@ -28,6 +28,8 @@
 + (UIImage *)privacyIconSelected;
 + (UIColor *)privacyBackgroundSelected;
 + (UIColor *)privacyBackgroundDefault;
++ (UIImage *)wishDetailcircleLockButtonLocked;
++ (UIImage *)wishDetailcircleLockButtonUnLocked;
 
 + (UIImage *)menuWishListDefault;
 + (UIImage *)menuWishListSelected;
