@@ -12,6 +12,8 @@
 #import "Owner.h"
 #import "User.h"
 #import "Theme.h"
+#import "Circle.h"
+@import QuartzCore;
 @interface HeaderView()
 
 @end
@@ -26,6 +28,14 @@
     UIImage *lockImg =
     plan.isPrivate.boolValue ? [Theme wishDetailcircleLockButtonLocked] : [Theme wishDetailcircleLockButtonUnLocked];
     [self.lockButton setImage:lockImg forState:UIControlStateNormal];
+    
+    if (plan.circle.circleId.length > 0) {
+        [self.circleButton setTitle:[NSString stringWithFormat:@"所属圈子：%@",plan.circle.circleName]
+                           forState:UIControlStateNormal];
+    }else{
+        [self.circleButton setTitle:@"** 该事件暂时没有所属圈子 **"
+                           forState:UIControlStateNormal];
+    }
 //    self.userNameLabel.text = [NSString stringWithFormat:@"by %@",plan.owner.ownerName];
     if ([plan.owner.ownerId isEqualToString:[User uid]]) { //owner don't get to follow its plan
 //        [self.followButton removeFromSuperview];
@@ -64,6 +74,7 @@
     self.backgroundColor = [UIColor clearColor];
     self.descriptionTextView.userInteractionEnabled = NO;
     self.descriptionTextView.textContainerInset = UIEdgeInsetsZero;
+    self.circleButton.layer.cornerRadius = 17.0f;
 }
 
 //- (IBAction)followButtonPressed:(UIButton *)sender{

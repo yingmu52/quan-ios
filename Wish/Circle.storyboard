@@ -479,7 +479,7 @@
         <!--Circle Detail View Controller-->
         <scene sceneID="v5g-7L-4YU">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="Yxs-9i-1RW" customClass="CircleDetailViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CircleDetailViewController" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="Yxs-9i-1RW" customClass="CircleDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Uow-4U-gSA"/>
                         <viewControllerLayoutGuide type="bottom" id="rpP-Xj-bnd"/>
@@ -537,7 +537,7 @@
                                             </collectionViewFlowLayout>
                                             <cells>
                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CircleDetailTopMemberCell" id="5JF-v9-ihj" customClass="MSCollectionCell">
-                                                    <rect key="frame" x="14" y="0.0" width="80" height="54"/>
+                                                    <rect key="frame" x="14" y="7" width="80" height="54"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                         <rect key="frame" x="0.0" y="0.0" width="80" height="54"/>

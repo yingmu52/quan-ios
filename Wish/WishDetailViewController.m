@@ -10,12 +10,24 @@
 #import "UIImageView+ImageCache.h"
 #import "InvitationViewController.h"
 #import "NavigationBar.h"
+#import "CircleDetailViewController.h"
 @interface WishDetailViewController () <HeaderViewDelegate,UIGestureRecognizerDelegate,UITextViewDelegate>
 @property (nonatomic,strong) NSDictionary *textAttributes;
 @property (nonatomic,strong) NSNumber *currentPage;
 @end
 
 @implementation WishDetailViewController
+
+
+- (void)didPressedCircleButton{
+    if (self.plan.circle.circleId.length > 0) {
+        UIStoryboard *circleStory = [UIStoryboard storyboardWithName:@"Circle" bundle:nil];
+        CircleDetailViewController *cdvc = [circleStory instantiateViewControllerWithIdentifier:@"CircleDetailViewController"];
+        cdvc.circle = self.plan.circle;
+        [self showViewController:cdvc sender:nil];
+    }
+}
+
 
 - (void)didPressedLockButton{
     if ([self.plan.owner.ownerId isEqualToString:[User uid]]){
@@ -42,51 +54,51 @@
                                                         preferredStyle:UIAlertControllerStyleActionSheet];
         
         BOOL isOwnerState = [self.plan.owner.ownerId isEqualToString:[User uid]];
-
+        
         if (isOwnerState) { //主人态，可编辑，分享公、私事件
             UIAlertAction *editOption =
             [UIAlertAction actionWithTitle:@"编辑" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
                 [self performSegueWithIdentifier:@"showEditPage" sender:self.plan]; //跳转到编辑页
             }];
             [_moreActionSheet addAction:editOption];
-
+            
             UIAlertAction *shareOption =
             [UIAlertAction actionWithTitle:@"分享"
                                      style:UIAlertActionStyleDefault
                                    handler:^(UIAlertAction * _Nonnull action)
-            {
-                if (self.plan.isPrivate.boolValue) {
-                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"私密的事件要公开才能分享哦"
-                                                                                   message:@"是否确定修改为公开事件"
-                                                                            preferredStyle:UIAlertControllerStyleAlert];
-                    [alert addAction:[UIAlertAction actionWithTitle:@"确定"
-                                                              style:UIAlertActionStyleDefault
-                                                            handler:^(UIAlertAction * _Nonnull action)
-                    {
-                        [self.fetchCenter updatePlan:self.plan.planId
-                                               title:self.plan.planTitle
-                                           isPrivate:NO
-                                         description:self.plan.detailText
-                                          completion:^
-                         {
-                             [self performSegueWithIdentifier:@"showInvitationView" sender:nil];
-                         }];
-                    }]];
-                    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-                    [self presentViewController:alert animated:YES completion:nil];
-                }else{
-                    [self performSegueWithIdentifier:@"showInvitationView" sender:nil];
-                }
-            }];
+             {
+                 if (self.plan.isPrivate.boolValue) {
+                     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"私密的事件要公开才能分享哦"
+                                                                                    message:@"是否确定修改为公开事件"
+                                                                             preferredStyle:UIAlertControllerStyleAlert];
+                     [alert addAction:[UIAlertAction actionWithTitle:@"确定"
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction * _Nonnull action)
+                                       {
+                                           [self.fetchCenter updatePlan:self.plan.planId
+                                                                  title:self.plan.planTitle
+                                                              isPrivate:NO
+                                                            description:self.plan.detailText
+                                                             completion:^
+                                            {
+                                                [self performSegueWithIdentifier:@"showInvitationView" sender:nil];
+                                            }];
+                                       }]];
+                     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+                     [self presentViewController:alert animated:YES completion:nil];
+                 }else{
+                     [self performSegueWithIdentifier:@"showInvitationView" sender:nil];
+                 }
+             }];
             [_moreActionSheet addAction:shareOption];
         }else if (!self.plan.isPrivate){ //非人主态只可以分享公开的事件
             UIAlertAction *shareOption =
             [UIAlertAction actionWithTitle:@"分享"
                                      style:UIAlertActionStyleDefault
                                    handler:^(UIAlertAction * _Nonnull action)
-            {
-                [self performSegueWithIdentifier:@"showInvitationView" sender:nil];
-            }];
+             {
+                 [self performSegueWithIdentifier:@"showInvitationView" sender:nil];
+             }];
             [_moreActionSheet addAction:shareOption];
         }
         [_moreActionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
@@ -119,9 +131,9 @@
     if (self.plan.hasDetailText) {
         planDescriptionHeight = [SystemUtil heightForText:self.plan.detailText withFontSize:fontSize];
     }
-//    else if ([self.plan.owner.ownerId isEqualToString:[User uid]]){ //只记算自己的事件描述高度，客人态描述隐藏
-//        planDescriptionHeight = [SystemUtil heightForText:EMPTY_PLACEHOLDER_OWNER withFontSize:fontSize];
-//    }
+    //    else if ([self.plan.owner.ownerId isEqualToString:[User uid]]){ //只记算自己的事件描述高度，客人态描述隐藏
+    //        planDescriptionHeight = [SystemUtil heightForText:EMPTY_PLACEHOLDER_OWNER withFontSize:fontSize];
+    //    }
     
     CGRect mainFrame = [UIScreen mainScreen].bounds;
     CGRect frame = CGRectMake(0, 0, CGRectGetWidth(mainFrame), 210.0f + planDescriptionHeight);
@@ -135,14 +147,14 @@
     if ([text length] == 1 && resultRange.location != NSNotFound) {
         [textView resignFirstResponder];
         self.plan.detailText = textView.text;
-
+        
         [self.fetchCenter updatePlan:self.plan.planId
                                title:self.plan.planTitle
                            isPrivate:self.plan.isPrivate.boolValue
                          description:self.plan.detailText
                           completion:^{
-            [textView resignFirstResponder];
-        }];
+                              [textView resignFirstResponder];
+                          }];
         return NO;
     }
     return YES;
@@ -198,7 +210,7 @@
          forCellReuseIdentifier:@"WishDetailCell"];
     self.tableView.separatorColor = [UIColor clearColor]; //remove separation linecell
     //hide follow button first and display later when the correct value is fetched from the server
-//    self.headerView.followButton.hidden = [self.plan.owner.ownerId isEqualToString:[User uid]];
+    //    self.headerView.followButton.hidden = [self.plan.owner.ownerId isEqualToString:[User uid]];
     
     self.tableView.mj_header = nil;
     //初次拉数据
@@ -212,14 +224,14 @@
                                 localList:localList
                                    onPage:self.currentPage
                                completion:^(NSNumber *currentPage, NSNumber *totalPage)
-    {
-        if ([currentPage isEqualToNumber:totalPage]) {
-            [self.tableView.mj_footer endRefreshingWithNoMoreData];
-        }else{
-            self.currentPage = @(currentPage.integerValue + 1);
-            [self.tableView.mj_footer endRefreshing];
-        }
-    }];
+     {
+         if ([currentPage isEqualToNumber:totalPage]) {
+             [self.tableView.mj_footer endRefreshingWithNoMoreData];
+         }else{
+             self.currentPage = @(currentPage.integerValue + 1);
+             [self.tableView.mj_footer endRefreshing];
+         }
+     }];
 }
 
 - (void)goBack{
@@ -231,7 +243,7 @@
 - (void)setUpNavigationItem
 {
     [self setCurrenetBackgroundColor];
-
+    
     CGRect frame = CGRectMake(0,0, 25,25);
     UIButton *backBtn = [Theme buttonWithImage:[Theme navBackButtonDefault]
                                         target:self
@@ -246,10 +258,10 @@
                                              frame:CGRectNull]; //使用真实大小
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:moreBtn];
     }
-
+    
 }
 - (void)setCurrenetBackgroundColor{
-
+    
     if (![self.tableView.backgroundView isKindOfClass:[UIImageView class]]) {
         UIImageView *imgView = [[UIImageView alloc] initWithFrame:self.tableView.frame];
         imgView.contentMode = UIViewContentModeScaleAspectFill;
@@ -259,17 +271,17 @@
         UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
         visualEffectView.frame = imgView.frame;
         [imgView addSubview:visualEffectView];
-
+        
         //设置背影
         self.tableView.backgroundView = imgView;
         
         
         //下载图片
         NSURL *imageUrl = [self.fetchCenter urlWithImageID:self.plan.backgroundNum size:FetchCenterImageSize400];
-     
+        
         SDWebImageManager *manager = [SDWebImageManager sharedManager];
         NSString *localKey = [manager cacheKeyForURL:imageUrl];
-
+        
         if ([manager diskImageExistsForURL:imageUrl]) {
             imgView.image = [manager.imageCache imageFromDiskCacheForKey:localKey];
             
@@ -278,9 +290,9 @@
             self.tableView.backgroundView = nil;
         }
     }else{
-        self.tableView.backgroundColor = [UIColor blackColor];        
+        self.tableView.backgroundColor = [UIColor blackColor];
     }
-
+    
 }
 
 #pragma mark - Fetched Results Controller delegate
@@ -321,16 +333,16 @@
     Feed *feed = [self.tableFetchedRC objectAtIndexPath:indexPath];
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGRect bounds = [feed.feedTitle boundingRectWithSize:CGSizeMake(width - 16.0f,CGFLOAT_MAX) //label左右有8.0f的距离
-                                       options:NSStringDrawingUsesLineFragmentOrigin
-                                    attributes:self.textAttributes
-                                       context:nil];
+                                                 options:NSStringDrawingUsesLineFragmentOrigin
+                                              attributes:self.textAttributes
+                                                 context:nil];
     
     CGFloat limit = 80.0f;
     CGFloat height = CGRectGetHeight(bounds);
     if (height > limit) height = limit;
     return  height + width + 33.0f; // 剩余的padding约33.0f;
-
-//    return 430.0f;
+    
+    //    return 430.0f;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -419,6 +431,7 @@
         ivc.h5Url = self.plan.shareUrl;
         NSAssert(self.plan.isPrivate.boolValue != (self.plan.shareUrl.length > 0), @"私密事件不能有url，反之亦然");
     }
+    
 }
 
 //- (void)didPressedCommentOnCell:(WishDetailCell *)cell{
