@@ -96,6 +96,9 @@
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1TZ-F7-QLX" userLabel="lock">
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="25" id="t7k-n7-XVc"/>
+                    </constraints>
                     <state key="normal" image="lock_ic"/>
                     <connections>
                         <action selector="lockButtonPressed" destination="iN0-l3-epB" eventType="touchUpInside" id="OYj-9j-AAE"/>
@@ -117,7 +120,7 @@
                 <constraint firstItem="bDV-Hj-Vb7" firstAttribute="top" secondItem="V85-XQ-ydf" secondAttribute="bottom" constant="10" id="Vhh-Xp-rw2"/>
                 <constraint firstItem="zGN-6I-1yz" firstAttribute="top" secondItem="bDV-Hj-Vb7" secondAttribute="bottom" constant="8" id="VpE-MJ-gau"/>
                 <constraint firstItem="juR-fT-B5l" firstAttribute="bottom" secondItem="aNa-gN-ud6" secondAttribute="bottom" id="XbJ-1c-7d9"/>
-                <constraint firstItem="1TZ-F7-QLX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ayj-W2-RPw"/>
+                <constraint firstItem="1TZ-F7-QLX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="-5" id="ayj-W2-RPw"/>
                 <constraint firstAttribute="trailing" secondItem="M3K-Qv-Jdi" secondAttribute="trailing" constant="20" id="bgH-WV-2tu"/>
                 <constraint firstItem="zGN-6I-1yz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="mZE-yY-ybj"/>
                 <constraint firstItem="aNa-gN-ud6" firstAttribute="centerY" secondItem="V85-XQ-ydf" secondAttribute="centerY" id="oyq-EK-dYI"/>

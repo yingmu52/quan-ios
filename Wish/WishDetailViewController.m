@@ -40,8 +40,12 @@
             [self.fetchCenter updatePlan:self.plan.planId
                                    title:self.plan.planTitle
                                isPrivate:!currentPrivacy
-                             description:self.plan.detailText completion:^{
-                             }];
+                             description:self.plan.detailText
+                              completion:^
+            {
+                UIImage *img = !currentPrivacy ? [Theme wishDetailcircleLockButtonLocked] : [Theme wishDetailcircleLockButtonUnLocked];
+                [self.headerView.lockButton setImage:img forState:UIControlStateNormal];
+             }];
         }]];
         [self presentViewController:alert animated:YES completion:nil];
     }

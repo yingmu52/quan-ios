@@ -75,6 +75,7 @@
     self.descriptionTextView.userInteractionEnabled = NO;
     self.descriptionTextView.textContainerInset = UIEdgeInsetsZero;
     self.circleButton.layer.cornerRadius = 17.0f;
+    self.lockButton.layer.cornerRadius = 11.0f;
 }
 
 //- (IBAction)followButtonPressed:(UIButton *)sender{
