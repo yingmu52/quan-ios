@@ -141,18 +141,18 @@
 - (void)followCircleId:(NSString *)circleId
             completion:(FetchCenterGetRequestGetFollowCircleCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,FOLLOW_CIRCLE];
-    [self postRequest:rqtStr
-            parameter:@{@"quanid":circleId}
-     includeArguments:YES
-           completion:^(NSDictionary *responseJson) {
-               if (completionBlock) {
-                   dispatch_main_async_safe(^{
-                       completionBlock();
-                   });
-               }
-           }];
+    [self getRequest:rqtStr
+           parameter:@{@"quanid":circleId}
+    includeArguments:YES
+          completion:^(NSDictionary *responseJson) {
+        if (completionBlock) {
+            dispatch_main_async_safe(^{
+                completionBlock();
+            });
+        }
+    }];
 }
-     
+
 - (void)getFollowingCircleList:(NSArray *)localList
                         onPage:(NSNumber *)localPage
                     completion:(FetchCenterGetRequestGetFollowingCircleCompleted)completionBlock{
