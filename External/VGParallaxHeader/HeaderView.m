@@ -23,25 +23,25 @@
     self.badgeImageView.hidden = (plan.planStatus.integerValue != PlanStatusFinished);
     self.userNameLabel.text = [NSString stringWithFormat:@"by %@",plan.owner.ownerName];
     if ([plan.owner.ownerId isEqualToString:[User uid]]) { //owner don't get to follow its plan
-        [self.followButton removeFromSuperview];
-        [self.descriptionTextView setPlaceholder:EMPTY_PLACEHOLDER_OWNER];
+//        [self.followButton removeFromSuperview];
+//        [self.descriptionTextView setPlaceholder:EMPTY_PLACEHOLDER_OWNER];
         [self.descriptionTextView setReturnKeyType:UIReturnKeyDone];
     }else{
         //描述为空的时候，隐藏事件描述
         self.descriptionTextView.hidden = !plan.hasDetailText;
-        [self showFollowButtonWithTitle:(plan.isFollowed.boolValue ? @"已关注" :@"关注")];
+//        [self showFollowButtonWithTitle:(plan.isFollowed.boolValue ? @"已关注" :@"关注")];
     }
     self.descriptionTextView.text = plan.detailText;
-    self.followButton.hidden = [plan.owner.ownerId isEqualToString:[User uid]] | [User isVisitor];
+//    self.followButton.hidden = [plan.owner.ownerId isEqualToString:[User uid]] | [User isVisitor];
 }
 
-- (void)showFollowButtonWithTitle:(NSString *)title{
-    [UIView setAnimationsEnabled:NO]; // avoid set title animation for behave correctly
-    [self.followButton setTitle:title forState:UIControlStateNormal];
-    self.followButton.hidden = NO;
-    [self.followButton layoutIfNeeded];
-    [UIView setAnimationsEnabled:YES];
-}
+//- (void)showFollowButtonWithTitle:(NSString *)title{
+//    [UIView setAnimationsEnabled:NO]; // avoid set title animation for behave correctly
+//    [self.followButton setTitle:title forState:UIControlStateNormal];
+//    self.followButton.hidden = NO;
+//    [self.followButton layoutIfNeeded];
+//    [UIView setAnimationsEnabled:YES];
+//}
 
 
 + (instancetype)instantiateFromNib:(CGRect)frame
@@ -61,23 +61,23 @@
     self.descriptionTextView.textContainerInset = UIEdgeInsetsZero;
 }
 
-- (IBAction)followButtonPressed:(UIButton *)sender{
-    if ([sender.titleLabel.text isEqual:@"关注"]) {
-        //send follow request
-        [self.delegate didPressedFollow:sender];
-    }else if ([sender.titleLabel.text isEqual:@"已关注"]){
-        //send unfollow request
-        [self.delegate didPressedUnFollow:sender];
-    }
-    sender.hidden = YES;
-}
+//- (IBAction)followButtonPressed:(UIButton *)sender{
+//    if ([sender.titleLabel.text isEqual:@"关注"]) {
+//        //send follow request
+//        [self.delegate didPressedFollow:sender];
+//    }else if ([sender.titleLabel.text isEqual:@"已关注"]){
+//        //send unfollow request
+//        [self.delegate didPressedUnFollow:sender];
+//    }
+//    sender.hidden = YES;
+//}
 
-- (IBAction)backgroundTapped:(UITapGestureRecognizer *)tap{
-    if (self.descriptionTextView.isFirstResponder) {
-        [self.descriptionTextView resignFirstResponder];
-    }
-    
-}
+//- (IBAction)backgroundTapped:(UITapGestureRecognizer *)tap{
+//    if (self.descriptionTextView.isFirstResponder) {
+//        [self.descriptionTextView resignFirstResponder];
+//    }
+//    
+//}
 
 @end
 

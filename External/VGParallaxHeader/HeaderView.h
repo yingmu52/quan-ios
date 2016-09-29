@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "Plan.h"
 #import "GCPTextView.h"
-#define EMPTY_PLACEHOLDER_OWNER @"+添加描述能让别人更了解这件事儿哦~"
+//#define EMPTY_PLACEHOLDER_OWNER @"+添加描述能让别人更了解这件事儿哦~"
 @protocol HeaderViewDelegate <NSObject>
 @optional
-- (void)didPressedFollow:(UIButton *)sender;
-- (void)didPressedUnFollow:(UIButton *)sender;
+//- (void)didPressedFollow:(UIButton *)sender;
+//- (void)didPressedUnFollow:(UIButton *)sender;
 @end
 @interface HeaderView : UIView
 @property (nonatomic,weak) IBOutlet UILabel *userNameLabel;
@@ -21,7 +21,7 @@
 @property (nonatomic,weak) IBOutlet UILabel *headerFeedCountLabel;
 @property (nonatomic,weak) IBOutlet UILabel *headerFollowLabel;
 @property (nonatomic,weak) IBOutlet UIImageView *badgeImageView;
-@property (nonatomic,weak) IBOutlet UIButton *followButton;
+//@property (nonatomic,weak) IBOutlet UIButton *followButton;
 @property (nonatomic,weak) IBOutlet GCPTextView *descriptionTextView;
 
 @property (weak,nonatomic) id <HeaderViewDelegate> delegate;
