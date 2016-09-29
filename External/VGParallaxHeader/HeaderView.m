@@ -58,6 +58,7 @@
     [super awakeFromNib];
     self.backgroundColor = [UIColor clearColor];
     self.descriptionTextView.userInteractionEnabled = NO;
+    self.descriptionTextView.textContainerInset = UIEdgeInsetsZero;
 }
 
 - (IBAction)followButtonPressed:(UIButton *)sender{

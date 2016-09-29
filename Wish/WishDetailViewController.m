@@ -9,6 +9,7 @@
 #import "WishDetailViewController.h"
 #import "UIImageView+ImageCache.h"
 #import "InvitationViewController.h"
+#import "NavigationBar.h"
 @interface WishDetailViewController () <HeaderViewDelegate,UIGestureRecognizerDelegate,UITextViewDelegate>
 @property (nonatomic,strong) NSDictionary *textAttributes;
 @property (nonatomic,strong) NSNumber *currentPage;
@@ -105,7 +106,7 @@
     }
     
     CGRect mainFrame = [UIScreen mainScreen].bounds;
-    CGRect frame = CGRectMake(0, 0, CGRectGetWidth(mainFrame), 130.0f + planDescriptionHeight);
+    CGRect frame = CGRectMake(0, 0, CGRectGetWidth(mainFrame), 210.0f + planDescriptionHeight);
     self.headerView = [HeaderView instantiateFromNib:frame];
     self.headerView.descriptionTextView.delegate = self;
 }
@@ -148,11 +149,27 @@
 
 #pragma mark - set up view
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self polishNavigationBar:YES];
+}
+
+- (void)polishNavigationBar:(BOOL)isClear{
+    NavigationBar *nav = (NavigationBar *)self.navigationController.navigationBar;
+    if (isClear) {
+        [nav showClearBackground];
+    }else{
+        [nav showDefaultBackground];
+    }
+}
+
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     //pan to pop gesture
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    
+    [self polishNavigationBar:NO];
 }
 
 - (void)viewDidLoad {
@@ -165,6 +182,7 @@
     //hide follow button first and display later when the correct value is fetched from the server
     self.headerView.followButton.hidden = [self.plan.owner.ownerId isEqualToString:[User uid]];
     
+    self.tableView.mj_header = nil;
     //初次拉数据
     [self loadMoreData];
     
@@ -391,19 +409,19 @@
 //    [self performSegueWithIdentifier:[self segueForFeed] sender:feed];
 //}
 
-#pragma mark - follow
-
-- (void)didPressedUnFollow:(UIButton *)sender{
-    [self.fetchCenter unFollowPlan:self.plan completion:^{
-        [self.headerView updateHeaderWithPlan:self.plan];
-    }];
-}
-
-- (void)didPressedFollow:(UIButton *)sender{
-    [self.fetchCenter followPlan:self.plan completion:^{
-        [self.headerView updateHeaderWithPlan:self.plan];
-    }];
-}
+//#pragma mark - follow
+//
+//- (void)didPressedUnFollow:(UIButton *)sender{
+//    [self.fetchCenter unFollowPlan:self.plan completion:^{
+//        [self.headerView updateHeaderWithPlan:self.plan];
+//    }];
+//}
+//
+//- (void)didPressedFollow:(UIButton *)sender{
+//    [self.fetchCenter followPlan:self.plan completion:^{
+//        [self.headerView updateHeaderWithPlan:self.plan];
+//    }];
+//}
 
 
 @end

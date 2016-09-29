@@ -1785,7 +1785,7 @@
         <!--Wish DetailVC Owner-->
         <scene sceneID="274-7i-jhG">
             <objects>
-                <tableViewController hidesBottomBarWhenPushed="YES" id="b5E-B5-8Ys" customClass="WishDetailVCOwner" sceneMemberID="viewController">
+                <tableViewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="b5E-B5-8Ys" customClass="WishDetailVCOwner" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="326" sectionHeaderHeight="22" sectionFooterHeight="22" id="XKw-Eq-NrX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2114,7 +2114,7 @@
         <scene sceneID="9D3-61-yQJ">
             <objects>
                 <collectionViewController id="opb-v5-cWV" customClass="ImagePreviewController" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="e7Y-Uo-5tB">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="e7Y-Uo-5tB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="8dK-NS-3CY">
@@ -2125,7 +2125,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PostFeedImagePreviewCell" id="Rns-ch-qIO" customClass="ImagePreviewCell">
-                                <rect key="frame" x="0.0" y="128" width="245.5" height="412"/>
+                                <rect key="frame" x="0.0" y="71" width="245.5" height="412"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="245.5" height="412"/>
@@ -3061,7 +3061,7 @@
         <!--Wish Detail View Controller-->
         <scene sceneID="v9l-pC-NeM">
             <objects>
-                <tableViewController id="rp9-lu-nOr" customClass="WishDetailViewController" sceneMemberID="viewController">
+                <tableViewController automaticallyAdjustsScrollViewInsets="NO" id="rp9-lu-nOr" customClass="WishDetailViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fOK-yO-OcH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -6976,12 +6976,12 @@
         <image name="tab_ic_quanzi_pressed" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="6ze-LH-v54"/>
-        <segue reference="9iF-Ie-E5K"/>
-        <segue reference="7ZJ-tG-Hnl"/>
-        <segue reference="4yF-1j-VR3"/>
-        <segue reference="BaT-4X-Ixb"/>
         <segue reference="JVq-VY-XxP"/>
+        <segue reference="9iF-Ie-E5K"/>
+        <segue reference="Y2c-0U-Rmr"/>
+        <segue reference="XMp-RI-rbx"/>
+        <segue reference="4wk-xv-ETJ"/>
+        <segue reference="4yF-1j-VR3"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
