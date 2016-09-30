@@ -54,11 +54,14 @@
     self.tableView.mj_header = nil;
 
     
-    if ([self.circle.circleType isEqualToNumber:@(CircleTypeUndefine)]) {
-        self.followButton.layer.borderColor = [UIColor whiteColor].CGColor;
-        self.followButton.layer.borderWidth = 1.0f;
-        self.followButton.layer.cornerRadius = 11.0f; // 高的一半
-    }else{
+    self.followButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.followButton.layer.borderWidth = 1.0f;
+    self.followButton.layer.cornerRadius = 11.0f; // 高的一半
+    
+    
+    if (self.circle.circleType.integerValue == CircleTypeFollowed) {
+        [self.followButton setTitle:@"已关注" forState:UIControlStateNormal];
+    }else if (self.circle.circleType.integerValue == CircleTypeJoined){
         self.followButton.hidden = YES;
     }
     
