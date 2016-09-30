@@ -302,6 +302,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.95686274510000002" green="0.97254901959999995" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
+                                            <outlet property="ms_featherBackgroundView" destination="7wg-7L-ZyW" id="JEo-7O-Jpz"/>
                                             <outlet property="ms_imageView1" destination="f2Y-Mu-QdQ" id="H9v-ln-7qe"/>
                                             <outlet property="ms_imageView2" destination="n1U-iy-tfd" id="aWR-6C-MoV"/>
                                             <outlet property="ms_subTitle" destination="bvz-1C-9qi" id="Z6g-cb-zSy"/>
