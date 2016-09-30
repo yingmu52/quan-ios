@@ -149,76 +149,59 @@
 }
 
 
-#pragma mark - Section Border Util
+#pragma mark - Section Border
+
+#define LAYERNAME @"MOTHERFUCKINGBORDER"
 
 - (void)tableView:(UITableView *)tableView
   willDisplayCell:(MSTableViewCell *)cell
 forRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self addBorderToCell:cell atIndexPath:indexPath];
-}
 
-- (void)addBorderToCell:(MSTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
+    //清空之前画上的描边
+    id l = cell.ms_featherBackgroundView.layer.sublayers.firstObject;
+    if ([l isKindOfClass:[CAShapeLayer class]]){
+        CAShapeLayer *ly = (CAShapeLayer *)l;
+        if ([ly.name isEqualToString:LAYERNAME]) {
+            [ly removeFromSuperlayer];
+        }
+    }
+    
+    CAShapeLayer *layer = [[CAShapeLayer alloc] init];
+    CGMutablePathRef pathRef = CGPathCreateMutable();
+    
     [cell.ms_featherBackgroundView layoutIfNeeded];
+    CGRect bounds = cell.ms_featherBackgroundView.bounds;
     
-    CGRect frame = cell.ms_featherBackgroundView.bounds;
     
-    CGPoint tl = frame.origin;
-    CGPoint bl = CGPointMake(frame.origin.x, frame.origin.y + frame.size.height);
+    CGPoint tl = bounds.origin;
+    CGPoint bl = CGPointMake(bounds.origin.x, bounds.origin.y + bounds.size.height);
     
-    CGPoint tr = CGPointMake(frame.origin.x + frame.size.width, frame.origin.y);
-    CGPoint br = CGPointMake(frame.origin.x + frame.size.width, frame.origin.y + frame.size.height);
+    CGPoint tr = CGPointMake(bounds.origin.x + bounds.size.width, bounds.origin.y);
+    CGPoint br = CGPointMake(bounds.origin.x + bounds.size.width, bounds.origin.y + bounds.size.height);
 
-    CAShapeLayer *left = [self drawLineFromPoint:tl toPoint:bl]; //左
-//    left.name = @"left";
-    [cell.ms_featherBackgroundView.layer addSublayer:left];
-    
-    CAShapeLayer *right = [self drawLineFromPoint:tr toPoint:br]; //右
-//    right.name = @"right";
-    [cell.ms_featherBackgroundView.layer addSublayer:right];
-    
-    
     if (indexPath.row == 0) {
-        CAShapeLayer *top = [self drawLineFromPoint:tl toPoint:tr]; //上
-//        top.name = @"top";
-        [cell.ms_featherBackgroundView.layer addSublayer:top];
+        CGPoint points[] = {bl,tl,tr,br};
+        CGPathAddLines(pathRef, nil, points, 4);
+    } else if (indexPath.row == [tableView numberOfRowsInSection:indexPath.section]-1) {
+        CGPoint points[] = {tl,bl,br,tr};
+        CGPathAddLines(pathRef, nil, points, 4);
+    } else {
+        CGPoint p1[] = {tl,bl};
+        CGPathAddLines(pathRef, nil, p1, 2);
+        
+        CGPoint p2[] = {tr,br};
+        CGPathAddLines(pathRef, nil, p2, 2);
     }
-
-    if (indexPath.row == [self.tableView numberOfRowsInSection:indexPath.section] - 1){
-        CAShapeLayer *bottom = [self drawLineFromPoint:bl toPoint:br]; //下
-//        bottom.name = @"bottom";
-        [cell.ms_featherBackgroundView.layer addSublayer:bottom];
-    }
     
-}
-
-
-- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(MSTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"%@",cell.ms_featherBackgroundView.layer.sublayers);
-}
--(CAShapeLayer*)drawLineFromPoint:(CGPoint)fromPoint
-                          toPoint:(CGPoint)toPoint{
+    layer.path = pathRef;
+    layer.name = LAYERNAME;
+    CFRelease(pathRef);
+    layer.strokeColor = [SystemUtil colorFromHexString:@"#e2e2e2"].CGColor;
+    layer.lineWidth = 1.0f;
+    layer.fillColor = [UIColor clearColor].CGColor;
     
-    CAShapeLayer *lineShape = nil;
-    CGMutablePathRef linePath = nil;
     
-    linePath = CGPathCreateMutable();
-    lineShape = [CAShapeLayer layer];
-    
-    lineShape.lineWidth = 1.0;
-    lineShape.strokeColor = [SystemUtil colorFromHexString:@"#e2e2e2"].CGColor;
-    
-    NSUInteger x = fromPoint.x;
-    NSUInteger y = fromPoint.y;
-    
-    NSUInteger toX = toPoint.x;
-    NSUInteger toY = toPoint.y;
-    
-    CGPathMoveToPoint(linePath, nil, x, y);
-    CGPathAddLineToPoint(linePath, nil, toX, toY);
-    
-    lineShape.path = linePath;
-    CGPathRelease(linePath);
-    return lineShape;
+    [cell.ms_featherBackgroundView.layer insertSublayer:layer atIndex:0];
 }
 
 
