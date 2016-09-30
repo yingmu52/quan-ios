@@ -351,11 +351,12 @@
                     <connections>
                         <outlet property="tableView" destination="vlf-xI-Jaf" id="OFn-4e-RHI"/>
                         <segue destination="Yxs-9i-1RW" kind="show" identifier="showCircleDetailFromMyJoining" id="iB1-Bf-PKR"/>
+                        <segue destination="h2k-2t-9Un" kind="show" identifier="showCircleCreationView" id="qWz-rh-ZFY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rxN-sF-ZMH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-300" y="1236"/>
+            <point key="canvasLocation" x="-374" y="1218"/>
         </scene>
         <!--Following Circles View Controller-->
         <scene sceneID="fut-03-Mfh">
@@ -734,8 +735,179 @@
             </objects>
             <point key="canvasLocation" x="906" y="2001"/>
         </scene>
+        <!--Circle Creation View Controller-->
+        <scene sceneID="fhA-d1-4iv">
+            <objects>
+                <viewController storyboardIdentifier="CircleCreationViewController" hidesBottomBarWhenPushed="YES" id="h2k-2t-9Un" customClass="CircleCreationViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5wX-JT-MCz"/>
+                        <viewControllerLayoutGuide type="bottom" id="OuW-2h-lEY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="en8-Wj-OOs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="create_avatar_bg" translatesAutoresizingMaskIntoConstraints="NO" id="gcG-YW-m2B">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="9em-EN-nJE">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="130"/>
+                                    </constraint>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="9em-EN-nJE"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="9em-EN-nJE"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="给圈子取个名字吧！" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ai8-XC-6si">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="MO1-zf-dBE">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="35"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="MO1-zf-dBE"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="MO1-zf-dBE"/>
+                                    </mask>
+                                </variation>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xAL-h2-K4l" customClass="GCPTextView">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="pqm-ES-MDU">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="150"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="pqm-ES-MDU"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="pqm-ES-MDU"/>
+                                    </mask>
+                                </variation>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zbs-9z-hSQ">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="hiX-9b-YIm"/>
+                                    <constraint firstAttribute="width" constant="100" id="r3M-pR-1FZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" backgroundImage="create_avatar_logo">
+                                    <color key="titleColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="hiX-9b-YIm"/>
+                                        <exclude reference="r3M-pR-1FZ"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="hiX-9b-YIm"/>
+                                        <include reference="r3M-pR-1FZ"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="imageButtonPressed:" destination="h2k-2t-9Un" eventType="touchUpInside" id="U6s-sd-XYD"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.92941176469999998" green="0.93725490199999995" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ai8-XC-6si" firstAttribute="top" secondItem="gcG-YW-m2B" secondAttribute="bottom" id="9ud-10-Nts">
+                                <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                            </constraint>
+                            <constraint firstItem="zbs-9z-hSQ" firstAttribute="centerX" secondItem="gcG-YW-m2B" secondAttribute="centerX" id="FMZ-bS-2Ps"/>
+                            <constraint firstItem="gcG-YW-m2B" firstAttribute="centerX" secondItem="en8-Wj-OOs" secondAttribute="centerX" id="HjB-Ef-su6"/>
+                            <constraint firstItem="xAL-h2-K4l" firstAttribute="trailing" secondItem="ai8-XC-6si" secondAttribute="trailing" id="SJH-m5-CJS"/>
+                            <constraint firstItem="xAL-h2-K4l" firstAttribute="top" secondItem="ai8-XC-6si" secondAttribute="bottom" constant="8" id="UNa-Wd-aKH">
+                                <variation key="heightClass=regular-widthClass=compact" constant="10"/>
+                            </constraint>
+                            <constraint firstAttribute="trailingMargin" secondItem="ai8-XC-6si" secondAttribute="trailing" id="azW-xx-Bqf">
+                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                            </constraint>
+                            <constraint firstItem="ai8-XC-6si" firstAttribute="leading" secondItem="en8-Wj-OOs" secondAttribute="leadingMargin" constant="46" id="fSh-GJ-HXk">
+                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                            </constraint>
+                            <constraint firstItem="gcG-YW-m2B" firstAttribute="width" secondItem="en8-Wj-OOs" secondAttribute="width" id="fth-56-TUO"/>
+                            <constraint firstItem="xAL-h2-K4l" firstAttribute="leading" secondItem="ai8-XC-6si" secondAttribute="leading" id="jLn-Ia-aXU"/>
+                            <constraint firstItem="zbs-9z-hSQ" firstAttribute="centerY" secondItem="gcG-YW-m2B" secondAttribute="centerY" id="lDS-sL-Mgg"/>
+                            <constraint firstItem="gcG-YW-m2B" firstAttribute="top" secondItem="5wX-JT-MCz" secondAttribute="bottom" id="rXF-xy-LEb"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="gcG-YW-m2B"/>
+                                <exclude reference="ai8-XC-6si"/>
+                                <exclude reference="xAL-h2-K4l"/>
+                                <exclude reference="zbs-9z-hSQ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="9ud-10-Nts"/>
+                                <exclude reference="azW-xx-Bqf"/>
+                                <exclude reference="fSh-GJ-HXk"/>
+                                <exclude reference="fth-56-TUO"/>
+                                <exclude reference="HjB-Ef-su6"/>
+                                <exclude reference="rXF-xy-LEb"/>
+                                <exclude reference="UNa-Wd-aKH"/>
+                                <exclude reference="SJH-m5-CJS"/>
+                                <exclude reference="jLn-Ia-aXU"/>
+                                <exclude reference="FMZ-bS-2Ps"/>
+                                <exclude reference="lDS-sL-Mgg"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="gcG-YW-m2B"/>
+                                <include reference="ai8-XC-6si"/>
+                                <include reference="xAL-h2-K4l"/>
+                                <include reference="zbs-9z-hSQ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="9ud-10-Nts"/>
+                                <include reference="azW-xx-Bqf"/>
+                                <include reference="fSh-GJ-HXk"/>
+                                <include reference="fth-56-TUO"/>
+                                <include reference="HjB-Ef-su6"/>
+                                <include reference="rXF-xy-LEb"/>
+                                <include reference="UNa-Wd-aKH"/>
+                                <include reference="SJH-m5-CJS"/>
+                                <include reference="jLn-Ia-aXU"/>
+                                <include reference="FMZ-bS-2Ps"/>
+                                <include reference="lDS-sL-Mgg"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="detailTextView" destination="xAL-h2-K4l" id="9Uk-Me-DVu"/>
+                        <outlet property="imageButton" destination="zbs-9z-hSQ" id="c0J-O6-Vlb"/>
+                        <outlet property="titleTextField" destination="ai8-XC-6si" id="DiM-TR-KOW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aov-uz-6At" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-674" y="2113"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="create_avatar_bg" width="320" height="132"/>
         <image name="create_avatar_logo" width="100" height="100"/>
         <image name="creator_head_icon" width="56" height="32"/>
         <image name="dot_bg" width="18" height="18"/>

@@ -2125,7 +2125,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PostFeedImagePreviewCell" id="Rns-ch-qIO" customClass="ImagePreviewCell">
-                                <rect key="frame" x="0.0" y="71" width="245.5" height="412"/>
+                                <rect key="frame" x="0.0" y="128" width="245.5" height="412"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="245.5" height="412"/>
@@ -4227,176 +4227,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q0N-5Z-lB6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-6844.5" y="-4911"/>
-        </scene>
-        <!--Circle Creation View Controller-->
-        <scene sceneID="R5w-le-rbp">
-            <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="axp-Mk-gVG" customClass="CircleCreationViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="7ZI-ul-7Jj"/>
-                        <viewControllerLayoutGuide type="bottom" id="lfa-3g-JDs"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="rjX-g3-esO">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="create_avatar_bg" translatesAutoresizingMaskIntoConstraints="NO" id="SIm-2F-phT">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="L0p-bz-K57">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="130"/>
-                                    </constraint>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="L0p-bz-K57"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="L0p-bz-K57"/>
-                                    </mask>
-                                </variation>
-                            </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="给圈子取个名字吧！" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Kj-Zh-H36">
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="a3c-tP-Qui">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="35"/>
-                                    </constraint>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="a3c-tP-Qui"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="a3c-tP-Qui"/>
-                                    </mask>
-                                </variation>
-                            </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="WXi-mB-RJc" customClass="GCPTextView">
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="Tvm-5Z-deB">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="150"/>
-                                    </constraint>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="Tvm-5Z-deB"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="Tvm-5Z-deB"/>
-                                    </mask>
-                                </variation>
-                            </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r8N-ji-oHk">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="dO4-ch-Pyz"/>
-                                    <constraint firstAttribute="width" constant="100" id="eRn-3A-n4H"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <state key="normal" backgroundImage="create_avatar_logo">
-                                    <color key="titleColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="dO4-ch-Pyz"/>
-                                        <exclude reference="eRn-3A-n4H"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="dO4-ch-Pyz"/>
-                                        <include reference="eRn-3A-n4H"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="imageButtonPressed:" destination="axp-Mk-gVG" eventType="touchUpInside" id="YPA-pz-HFw"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.92941176470588238" green="0.93725490196078431" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="SIm-2F-phT" firstAttribute="width" secondItem="rjX-g3-esO" secondAttribute="width" id="6e5-a8-cbw"/>
-                            <constraint firstItem="r8N-ji-oHk" firstAttribute="centerX" secondItem="SIm-2F-phT" secondAttribute="centerX" id="6ql-ef-3UE"/>
-                            <constraint firstItem="SIm-2F-phT" firstAttribute="centerX" secondItem="rjX-g3-esO" secondAttribute="centerX" id="Qfw-wV-ax8"/>
-                            <constraint firstItem="3Kj-Zh-H36" firstAttribute="top" secondItem="SIm-2F-phT" secondAttribute="bottom" id="QvR-6Y-AHM">
-                                <variation key="heightClass=regular-widthClass=compact" constant="5"/>
-                            </constraint>
-                            <constraint firstItem="r8N-ji-oHk" firstAttribute="centerY" secondItem="SIm-2F-phT" secondAttribute="centerY" id="Tqp-92-79k"/>
-                            <constraint firstItem="WXi-mB-RJc" firstAttribute="top" secondItem="3Kj-Zh-H36" secondAttribute="bottom" constant="8" id="Zkv-Ke-uqQ">
-                                <variation key="heightClass=regular-widthClass=compact" constant="10"/>
-                            </constraint>
-                            <constraint firstItem="SIm-2F-phT" firstAttribute="top" secondItem="7ZI-ul-7Jj" secondAttribute="bottom" id="Zo6-GR-TPy"/>
-                            <constraint firstItem="WXi-mB-RJc" firstAttribute="trailing" secondItem="3Kj-Zh-H36" secondAttribute="trailing" id="k6A-fS-rKI"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="3Kj-Zh-H36" secondAttribute="trailing" id="uNu-0l-cWd">
-                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
-                            </constraint>
-                            <constraint firstItem="3Kj-Zh-H36" firstAttribute="leading" secondItem="rjX-g3-esO" secondAttribute="leadingMargin" constant="46" id="w5y-xA-aaK">
-                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
-                            </constraint>
-                            <constraint firstItem="WXi-mB-RJc" firstAttribute="leading" secondItem="3Kj-Zh-H36" secondAttribute="leading" id="wMB-z7-iSq"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="SIm-2F-phT"/>
-                                <exclude reference="3Kj-Zh-H36"/>
-                                <exclude reference="WXi-mB-RJc"/>
-                                <exclude reference="r8N-ji-oHk"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="QvR-6Y-AHM"/>
-                                <exclude reference="uNu-0l-cWd"/>
-                                <exclude reference="w5y-xA-aaK"/>
-                                <exclude reference="6e5-a8-cbw"/>
-                                <exclude reference="Qfw-wV-ax8"/>
-                                <exclude reference="Zo6-GR-TPy"/>
-                                <exclude reference="Zkv-Ke-uqQ"/>
-                                <exclude reference="k6A-fS-rKI"/>
-                                <exclude reference="wMB-z7-iSq"/>
-                                <exclude reference="6ql-ef-3UE"/>
-                                <exclude reference="Tqp-92-79k"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="SIm-2F-phT"/>
-                                <include reference="3Kj-Zh-H36"/>
-                                <include reference="WXi-mB-RJc"/>
-                                <include reference="r8N-ji-oHk"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="QvR-6Y-AHM"/>
-                                <include reference="uNu-0l-cWd"/>
-                                <include reference="w5y-xA-aaK"/>
-                                <include reference="6e5-a8-cbw"/>
-                                <include reference="Qfw-wV-ax8"/>
-                                <include reference="Zo6-GR-TPy"/>
-                                <include reference="Zkv-Ke-uqQ"/>
-                                <include reference="k6A-fS-rKI"/>
-                                <include reference="wMB-z7-iSq"/>
-                                <include reference="6ql-ef-3UE"/>
-                                <include reference="Tqp-92-79k"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <connections>
-                        <outlet property="detailTextView" destination="WXi-mB-RJc" id="oA8-Y4-j2A"/>
-                        <outlet property="imageButton" destination="r8N-ji-oHk" id="LpG-Bf-N0o"/>
-                        <outlet property="titleTextField" destination="3Kj-Zh-H36" id="N8o-xd-ZkI"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WhV-NH-2SK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2683.5" y="-3643.5"/>
         </scene>
         <!--My Page View Controller-->
         <scene sceneID="p9F-bV-MOz">
@@ -6923,7 +6753,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GeG-5n-mI3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3204" y="235.5"/>
+            <point key="canvasLocation" x="2874" y="41"/>
         </scene>
         <!--Circle Page View Controller-->
         <scene sceneID="AMC-xH-3nc">
@@ -6976,12 +6806,12 @@
         <image name="tab_ic_quanzi_pressed" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JVq-VY-XxP"/>
-        <segue reference="9iF-Ie-E5K"/>
-        <segue reference="Y2c-0U-Rmr"/>
-        <segue reference="XMp-RI-rbx"/>
-        <segue reference="4wk-xv-ETJ"/>
         <segue reference="4yF-1j-VR3"/>
+        <segue reference="X79-Dh-n8s"/>
+        <segue reference="GkF-ge-YPg"/>
+        <segue reference="LzI-vD-dFb"/>
+        <segue reference="Y2c-0U-Rmr"/>
+        <segue reference="4wk-xv-ETJ"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
