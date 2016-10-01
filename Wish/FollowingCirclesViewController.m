@@ -7,7 +7,7 @@
 //
 
 #import "FollowingCirclesViewController.h"
-
+#import "CircleDetailViewController.h"
 @interface FollowingCirclesViewController ()
 @property (nonatomic,strong) NSNumber *currentPage;
 @end
@@ -74,7 +74,17 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    Circle *circle = [self.tableFetchedRC objectAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:@"showCircleDetailFromFollowingCircleList" sender:circle];
+}
 
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"showCircleDetailFromFollowingCircleList"]) {
+        [segue.destinationViewController setCircle:sender];
+    }
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 88.0f;
 }

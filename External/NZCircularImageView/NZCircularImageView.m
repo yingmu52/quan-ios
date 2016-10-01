@@ -7,7 +7,7 @@
 //
 
 #import "NZCircularImageView.h"
-
+#import "SystemUtil.h"
 @interface NZCircularImageView ()
 
 - (void)setImageWithResizeURL:(NSString *)stringUrl
@@ -160,6 +160,7 @@
 	maskLayer.path = maskPath;
     maskLayer.fillColor = [UIColor blackColor].CGColor;
     
+    
     CGPoint point = CGPointMake(maskBounds.origin.x + maskBounds.size.width/2,
                                 maskBounds.origin.y + maskBounds.size.height/2);
     maskLayer.position = point;
@@ -174,7 +175,7 @@
         CAShapeLayer*   shape   = [CAShapeLayer layer];
         shape.bounds            = maskBounds;
         shape.path              = maskPath;
-        shape.lineWidth         = [self.borderWidth doubleValue] * 2.0f;
+        shape.lineWidth         = [self.borderWidth doubleValue] * 1.0f;
         shape.strokeColor       = self.borderColor.CGColor;
         shape.fillColor         = [UIColor clearColor].CGColor;
         shape.position          = point;
@@ -190,8 +191,9 @@
     self.contentMode = UIViewContentModeScaleAspectFill;
     self.clipsToBounds = YES;
 
-    self.borderWidth    = @0.0f;
-    self.borderColor    = [UIColor whiteColor];
+    self.borderWidth = @1.0f;
+    self.borderColor = [SystemUtil colorFromHexString:@"#e2e2e2"];
+;
 }
 
 @end

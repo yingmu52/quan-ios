@@ -371,10 +371,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YC7-fH-0dv">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YC7-fH-0dv">
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.97254901959999995" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FollowingCirclesCell" rowHeight="84" id="YMb-Uh-5xk" customClass="MSTableViewCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="FollowingCirclesCell" rowHeight="84" id="YMb-Uh-5xk" customClass="MSTableViewCell">
                                         <rect key="frame" x="0.0" y="28" width="375" height="84"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YMb-Uh-5xk" id="wOq-8r-DXV">
@@ -399,7 +399,7 @@
                                                                 <constraint firstAttribute="width" constant="68" id="rZu-c9-SdB"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="测试测试" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="PWJ-1T-jUZ">
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="测试测试" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="PWJ-1T-jUZ">
                                                             <color key="textColor" red="0.6705882352941176" green="0.6705882352941176" blue="0.6705882352941176" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -472,11 +472,12 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="YC7-fH-0dv" id="4Sm-cL-m9R"/>
+                        <segue destination="Yxs-9i-1RW" kind="show" identifier="showCircleDetailFromFollowingCircleList" id="Uea-Xk-caM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0vW-7I-D4e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="633" y="1236"/>
+            <point key="canvasLocation" x="612" y="1218"/>
         </scene>
         <!--Circle Detail View Controller-->
         <scene sceneID="v5g-7L-4YU">
@@ -864,11 +865,11 @@
                                 <exclude reference="9ud-10-Nts"/>
                                 <exclude reference="azW-xx-Bqf"/>
                                 <exclude reference="fSh-GJ-HXk"/>
-                                <exclude reference="fth-56-TUO"/>
                                 <exclude reference="HjB-Ef-su6"/>
+                                <exclude reference="fth-56-TUO"/>
                                 <exclude reference="rXF-xy-LEb"/>
-                                <exclude reference="UNa-Wd-aKH"/>
                                 <exclude reference="SJH-m5-CJS"/>
+                                <exclude reference="UNa-Wd-aKH"/>
                                 <exclude reference="jLn-Ia-aXU"/>
                                 <exclude reference="FMZ-bS-2Ps"/>
                                 <exclude reference="lDS-sL-Mgg"/>
@@ -885,11 +886,11 @@
                                 <include reference="9ud-10-Nts"/>
                                 <include reference="azW-xx-Bqf"/>
                                 <include reference="fSh-GJ-HXk"/>
-                                <include reference="fth-56-TUO"/>
                                 <include reference="HjB-Ef-su6"/>
+                                <include reference="fth-56-TUO"/>
                                 <include reference="rXF-xy-LEb"/>
-                                <include reference="UNa-Wd-aKH"/>
                                 <include reference="SJH-m5-CJS"/>
+                                <include reference="UNa-Wd-aKH"/>
                                 <include reference="jLn-Ia-aXU"/>
                                 <include reference="FMZ-bS-2Ps"/>
                                 <include reference="lDS-sL-Mgg"/>
@@ -916,4 +917,7 @@
         <image name="group_head_bg" width="320" height="160"/>
         <image name="top1_icon" width="36" height="15"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Uea-Xk-caM"/>
+    </inferredMetricsTieBreakers>
 </document>
