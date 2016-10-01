@@ -46,7 +46,10 @@
         <attribute name="userDeleted" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="messages" inverseEntity="Owner" syncable="YES"/>
     </entity>
-    <entity name="Owner" representedClassName="Owner" syncable="YES">
+    <entity name="MSBase" representedClassName="MSBase" isAbstract="YES" syncable="YES">
+        <attribute name="lastReadTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+    </entity>
+    <entity name="Owner" representedClassName="Owner" parentEntity="MSBase" syncable="YES">
         <attribute name="headUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="ownerId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="ownerName" optional="YES" attributeType="String" syncable="YES"/>
@@ -82,5 +85,6 @@
         <element name="Message" positionX="-8892" positionY="-346" width="128" height="178"/>
         <element name="Owner" positionX="-8696" positionY="-43" width="128" height="133"/>
         <element name="Plan" positionX="-9110" positionY="-324" width="128" height="328"/>
+        <element name="MSBase" positionX="-8685" positionY="-297" width="128" height="58"/>
     </elements>
 </model>

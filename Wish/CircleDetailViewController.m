@@ -108,10 +108,10 @@
             [self.tableView.mj_footer endRefreshing];
         }
         
-#warning 以后可以用lastReadTime来排列
+        
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Owner"];
         request.predicate = [NSPredicate predicateWithFormat:@"ownerId IN %@",topMemberList];
-        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"ownerId" ascending:NO]];
+        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"lastReadTime" ascending:YES]];
         self.collectionFetchRequest = request;
         [self.collectionView reloadData];
     }];

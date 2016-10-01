@@ -33,7 +33,7 @@
         //成圆与圈子是多对多的关系，数据模型里面没有这部分的关系。因此直接从服务器撮信息
         self.tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Owner"];
         self.tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"ownerId IN %@",memberIDs];
-        self.tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"ownerName" ascending:NO]];
+        self.tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"lastReadTime" ascending:YES]];
         [self.tableView reloadData];
         [self.tableView.mj_header endRefreshing];
     }];
@@ -69,8 +69,7 @@
 //}
 
 - (MSTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    Owner *owner = [self.tableFetchedRC objectAtIndexPath:indexPath];
-    NSString *identifier = [owner.ownerId isEqualToString:self.circle.ownerId] ? @"MemberListCellAdmin" : @"MemberListCellNormal";
+    NSString *identifier = indexPath.row == 0 ? @"MemberListCellAdmin" : @"MemberListCellNormal";
     MSTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     [self configureTableViewCell:cell atIndexPath:indexPath];
     return cell;

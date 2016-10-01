@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "MSBase+CoreDataProperties.h"
 
 @class Comment, Message, Plan;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Owner : NSManagedObject
+@interface Owner : MSBase
 
 + (Owner *)updateOwnerWithInfo:(NSDictionary *)dict
           managedObjectContext:(NSManagedObjectContext *)context;

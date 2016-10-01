@@ -43,6 +43,7 @@
         owner.ownerName = dict[@"name"];
     }
     
+    owner.lastReadTime = [NSDate date];
     
     return owner;
 }
