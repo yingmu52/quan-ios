@@ -20,8 +20,13 @@
     
     self.ms_imageView1.contentMode = UIViewContentModeScaleAspectFill;
     self.ms_imageView1.clipsToBounds = YES;
+    self.ms_imageView1.layer.cornerRadius = 3.0f;
+    
     self.ms_imageView2.contentMode = UIViewContentModeScaleAspectFill;
+    self.ms_imageView2.clipsToBounds = YES;
+    self.ms_imageView2.layer.cornerRadius = 3.0f;
     self.ms_cardBackgroundView.referenceBadgeView = self.ms_imageView2;
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

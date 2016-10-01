@@ -23,5 +23,6 @@
 @dynamic nFans;
 @dynamic nFansToday;
 @dynamic circleType;
+@dynamic isFollowable;
 
 @end

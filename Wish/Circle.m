@@ -64,6 +64,12 @@
         circle.circleType = @(CircleTypeFollowed);
     }
     
+    if ([info[@"iscanwatch"] boolValue]) {
+        circle.isFollowable = @YES;
+    }else{
+        circle.isFollowable = @NO;
+    }
+    
     return circle;
     
 }

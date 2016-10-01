@@ -7,6 +7,7 @@
         <attribute name="circleType" optional="YES" attributeType="Integer 16" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="createDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="imageId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isFollowable" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="nFans" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="nFansToday" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="ownerId" optional="YES" attributeType="String" syncable="YES"/>
@@ -75,7 +76,7 @@
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="plans" inverseEntity="Owner" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Circle" positionX="-8507" positionY="-250" width="128" height="30"/>
+        <element name="Circle" positionX="-8507" positionY="-250" width="128" height="210"/>
         <element name="Comment" positionX="-9009" positionY="95" width="128" height="150"/>
         <element name="Feed" positionX="-9288" positionY="-30" width="128" height="210"/>
         <element name="Message" positionX="-8892" positionY="-346" width="128" height="178"/>
