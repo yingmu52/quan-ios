@@ -30,7 +30,7 @@
 }
 
 - (void)loadNewData{
-    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKeyPath:@"circle.mUID"];
+    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKeyPath:@"mUID"];
     [self.fetchCenter getCircleList:localList
                              onPage:nil
                          completion:^(NSNumber *currentPage, NSNumber *totalPage)
@@ -43,7 +43,7 @@
 }
 
 - (void)loadMoreData{
-    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKeyPath:@"circle.mUID"];
+    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKeyPath:@"mUID"];
     [self.fetchCenter getCircleList:localList
                              onPage:self.currentPage
                          completion:^(NSNumber *currentPage, NSNumber *totalPage)
@@ -69,27 +69,25 @@
 
 - (NSFetchRequest *)tableFetchRequest{
     if (!_tableFetchRequest) {
-        _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
-        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"rank != nil"];
-        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mCreateTime" ascending:NO]];
+        _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"MSBase"];
+        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"mTypeID != nil"];
+        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mSpecialTimestamp" ascending:YES]];
     }
     return _tableFetchRequest;
 }
 
 - (NSString *)tableSectionKeyPath{
-    return @"circle.mUID";
+    return @"mTypeID";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 68.0;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [super tableView:tableView numberOfRowsInSection:section] + 1; //第一个是圈子，后k个是事件
-}
 
 - (MSTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *identifier = indexPath.row == 0 ? @"CircleListCell" : @"CircleListTopPlansCell";
+    MSBase *entity = [self.tableFetchedRC objectAtIndexPath:indexPath];
+    NSString *identifier = [entity isKindOfClass:[Circle class]] ? @"CircleListCell" : @"CircleListTopPlansCell";
     MSTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     [self configureTableViewCell:cell atIndexPath:indexPath];
     return cell;
@@ -97,9 +95,11 @@
 
 
 - (void)configureTableViewCell:(MSTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0) {
-        Plan *plan = [self.tableFetchedRC objectAtIndexPath:indexPath];
-        Circle *circle = plan.circle;
+    MSBase *entity = [self.tableFetchedRC objectAtIndexPath:indexPath];
+
+    if ([entity isKindOfClass:[Circle class]]) {
+        Circle *circle = (Circle *)entity;
+        
         cell.ms_title.text = circle.mTitle;
         [cell.ms_imageView1 downloadImageWithImageId:circle.mCoverImageId
                                                 size:FetchCenterImageSize200];
@@ -107,7 +107,7 @@
                                                   size:FetchCenterImageSize200];
         cell.ms_featherBackgroundView.backgroundColor = [Theme getRandomShortRangeHSBColorWithAlpha:0.1];
         
-
+        
         NSString *s1 = [NSString stringWithFormat:@"粉丝数：%@",circle.nFans];
         NSMutableAttributedString *as1 = [[NSMutableAttributedString alloc] initWithString:s1];
         if (circle.nFansToday.integerValue > 0) {
@@ -117,23 +117,25 @@
             [as1 appendAttributedString:as2];
         }
         cell.ms_subTitle.attributedText = as1;
-
-    }else{
-        NSIndexPath *inp = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section];
-        Plan *plan = [self.tableFetchedRC objectAtIndexPath:inp];
+    }
+    
+    if ([entity isKindOfClass:[Plan class]]) {
+        
+        Plan *plan = (Plan *)entity;
         cell.ms_imageView2.image = [UIImage imageNamed:[NSString stringWithFormat:@"top%@_icon",@(indexPath.row)]];
         [cell.ms_imageView1 downloadImageWithImageId:plan.owner.mCoverImageId size:FetchCenterImageSize200];
         cell.ms_title.text = plan.owner.mTitle;
         cell.ms_subTitle.text = [NSString stringWithFormat:@"《%@》",plan.mTitle];
+
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0) {
-        Plan *plan = [self.tableFetchedRC objectAtIndexPath:indexPath];
-        Circle *circle = plan.circle;
-        [self performSegueWithIdentifier:@"showCircleDetailFromMyJoining" sender:circle];
-        [User updateAttributeFromDictionary:@{CURRENT_CIRCLE_ID:circle.mUID}];
+    
+    MSBase *entity = [self.tableFetchedRC objectAtIndexPath:indexPath];
+    if ([entity isKindOfClass:[Circle class]]) {
+        [self performSegueWithIdentifier:@"showCircleDetailFromMyJoining" sender:entity];
+        [User updateAttributeFromDictionary:@{CURRENT_CIRCLE_ID:entity.mUID}];
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
 }

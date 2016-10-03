@@ -47,7 +47,9 @@
         <attribute name="mCreateTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="mDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mLastReadTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="mSpecialTimestamp" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="mTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mTypeID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mUID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mUpdateTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
     </entity>
@@ -76,7 +78,7 @@
         <element name="Comment" positionX="-9009" positionY="95" width="128" height="150"/>
         <element name="Feed" positionX="-9288" positionY="-30" width="128" height="210"/>
         <element name="Message" positionX="-8892" positionY="-346" width="128" height="178"/>
-        <element name="MSBase" positionX="-8838" positionY="-589" width="128" height="148"/>
+        <element name="MSBase" positionX="-8838" positionY="-589" width="128" height="178"/>
         <element name="Owner" positionX="-8696" positionY="-7" width="128" height="88"/>
         <element name="Plan" positionX="-9110" positionY="-324" width="128" height="238"/>
     </elements>

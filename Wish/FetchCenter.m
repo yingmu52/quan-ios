@@ -558,10 +558,18 @@
               NSNumber *totalPage = [responseJson valueForKeyPath:@"data.totalpage"];
               NSDictionary *manList = [responseJson valueForKeyPath:@"data.manlist"];
               
+              NSMutableArray *serverList = [NSMutableArray array];
+              
               for (NSDictionary *circleInfo in circleList) {
                   Circle *circle = [Circle updateCircleWithInfo:circleInfo 
                                            managedObjectContext:workerContext];
+                  
                   circle.circleType = @(CircleTypeJoined);
+                  NSString *typeIdentifier = [NSString stringWithFormat:@"%@_%@",circle.mUID,@(CircleTypeJoined)];
+                  circle.mTypeID = typeIdentifier;
+                  circle.mSpecialTimestamp = [NSDate date];
+              
+                  [serverList addObject:circle.mUID];
                   
                   NSArray *planList = circleInfo[@"planlist"];
                   for (NSUInteger i = 0; i < planList.count; i ++) {
@@ -572,30 +580,32 @@
                                                     ownerInfo:ownerInfo
                                          managedObjectContext:workerContext];
                       
-                      NSString *rk = [NSString stringWithFormat:@"top%@",@(i+1)];
-                      
-                      if (![plan.rank isEqualToString:rk]) {
-                          //重置其他事件的top值
-                          NSArray *topPlans = [Plan fetchWith:@"Plan"
-                                                    predicate:[NSPredicate predicateWithFormat:@"rank == %@ AND circle.mUID == %@",rk,circle.mUID]
-                                             keyForDescriptor:@"rank"
-                                         managedObjectContext:workerContext];
-                          for (Plan *p in topPlans) {
-                              NSLog(@"Reset plan: %@",p.mUID);
-                              p.rank = nil;
-                          }
-                          
-                          plan.rank = rk;
+                      plan.mTypeID = typeIdentifier;
+                      plan.mSpecialTimestamp = [NSDate date];
+                      if (![plan.circle.mUID isEqualToString:circle.mUID]) {
+                          plan.circle = circle;
                       }
-
-                      plan.circle = circle;
+                      
+                      [serverList addObject:plan.mUID];
                   }
+                  
               }
               
-              
+              //同步第一页数据
               if (currentPage.integerValue == 1) {
-                  NSArray *serverList = [responseJson valueForKeyPath:@"data.quanlist.id"];
-                  [self syncEntity:@"Circle" idName:@"mUID" localList:localList serverList:serverList inContext:workerContext];
+                  for (NSString *uid in localList) {
+                      if (![serverList containsObject:uid]) {
+                          MSBase *entity = [MSBase fetchID:uid inManagedObjectContext:workerContext];
+                          if ([entity isKindOfClass:[Circle class]]) {
+                              [workerContext deleteObject:entity];
+                          }
+                          if ([entity isKindOfClass:[Plan class]]) {
+                              Plan *p = (Plan *)entity;
+                              p.mTypeID = nil;
+                          }
+                      }
+                      
+                  }
               }
               
               

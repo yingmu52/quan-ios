@@ -20,8 +20,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *mDescription;
 @property (nullable, nonatomic, copy) NSString *mCoverImageId;
 @property (nullable, nonatomic, copy) NSString *mUID;
+@property (nullable, nonatomic, copy) NSString *mTypeID;
 @property (nullable, nonatomic, copy) NSDate *mCreateTime;
 @property (nullable, nonatomic, copy) NSDate *mUpdateTime;
+@property (nullable, nonatomic, copy) NSDate *mSpecialTimestamp;
 
 @end
 
