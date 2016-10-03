@@ -96,6 +96,12 @@
     circle.mCoverImageId = imageId;
     circle.mCreateTime = [NSDate date];
     circle.ownerId = [User uid];
+    
+    //以下参数的设置影响到是否能在“我加入的”tab展示
+    NSNumber *t = @(CircleTypeJoined);
+    circle.circleType = t;
+    circle.mTypeID = [NSString stringWithFormat:@"%@_%@",circleId,t];
+
     return circle;
 }
 
