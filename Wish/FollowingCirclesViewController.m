@@ -62,6 +62,17 @@
     Circle *circle = [self.tableFetchedRC objectAtIndexPath:indexPath];
     cell.ms_title.text = circle.circleName;
     cell.ms_textView.text = circle.circleDescription;
+    
+    NSNumber *newPlanCount = circle.newPlanCount;
+    if (newPlanCount.integerValue > 0) {
+        cell.ms_statusLabel.text = [NSString stringWithFormat:@"%@",newPlanCount];
+        cell.ms_statusLabel.hidden = NO;
+        cell.ms_imageView2.hidden = NO;
+    }else{
+        cell.ms_statusLabel.hidden = YES;
+        cell.ms_imageView2.hidden = YES;
+    }
+    
     [cell.ms_imageView1 downloadImageWithImageId:circle.imageId size:FetchCenterImageSize200];
     [cell.ms_FeatherImage downloadImageWithImageId:circle.imageId size:FetchCenterImageSize200];
 }

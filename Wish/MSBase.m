@@ -10,4 +10,13 @@
 
 @implementation MSBase
 
++ (NSArray *)fetchWithPredicate:(NSPredicate *)predicate
+         inManagedObjectContext:(NSManagedObjectContext *)context{
+    NSString *entityName = [NSString stringWithFormat:@"%@",[[self new] class]];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:entityName];
+    request.predicate = predicate;
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"lastReadTime" ascending:YES]];
+    NSError *error = nil;
+    return [context executeFetchRequest:request error:&error];
+}
 @end

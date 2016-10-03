@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MSBase : NSManagedObject
-
++ (NSArray *)fetchWithPredicate:(NSPredicate *)predicate
+         inManagedObjectContext:(NSManagedObjectContext *)context;
 @end
 
 NS_ASSUME_NONNULL_END

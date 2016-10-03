@@ -70,6 +70,11 @@
         circle.isFollowable = @NO;
     }
     
+    NSNumber *planCounts = @([info[@"plancount"] integerValue]);
+    if (![circle.newPlanCount isEqualToNumber:planCounts]) {
+        circle.newPlanCount = planCounts;
+    }
+    
     return circle;
     
 }

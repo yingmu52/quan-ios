@@ -451,6 +451,8 @@
                                             <outlet property="ms_FeatherImage" destination="0wN-Pp-l52" id="m0R-HJ-ztW"/>
                                             <outlet property="ms_featherBackgroundView" destination="n0Q-JA-UHj" id="mWb-i6-3mV"/>
                                             <outlet property="ms_imageView1" destination="hvh-kb-hSh" id="gJJ-qb-N1U"/>
+                                            <outlet property="ms_imageView2" destination="ybp-Ul-Bdf" id="ffz-tt-OFE"/>
+                                            <outlet property="ms_statusLabel" destination="waa-M4-Ycj" id="RyP-05-JtS"/>
                                             <outlet property="ms_textView" destination="PWJ-1T-jUZ" id="Vgm-f2-vHR"/>
                                             <outlet property="ms_title" destination="bZF-Yn-9Xm" id="DK8-Y7-jb6"/>
                                         </connections>
@@ -477,7 +479,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0vW-7I-D4e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="612" y="1218"/>
+            <point key="canvasLocation" x="612" y="1217.5412293853074"/>
         </scene>
         <!--Circle Detail View Controller-->
         <scene sceneID="v5g-7L-4YU">
@@ -543,7 +545,7 @@
                                             </collectionViewFlowLayout>
                                             <cells>
                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CircleDetailTopMemberCell" id="5JF-v9-ihj" customClass="MSCollectionCell">
-                                                    <rect key="frame" x="14" y="0.0" width="80" height="54"/>
+                                                    <rect key="frame" x="14" y="7.5" width="80" height="54"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                         <rect key="frame" x="0.0" y="0.0" width="80" height="54"/>
@@ -938,7 +940,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="57"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalCompressionResistancePriority="751" tableViewCell="gw9-6d-24e" id="iqD-He-byZ">
-                                            <frame key="frameInset" width="375" height="56"/>
+                                            <frame key="frameInset" width="375" height="56.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nof-Fv-MXi" customClass="NZCircularImageView">
@@ -989,13 +991,13 @@
                                                     <exclude reference="3Df-qC-2oY"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="ASj-pZ-KSw"/>
-                                                    <exclude reference="pvG-PY-FkK"/>
+                                                    <exclude reference="Kcs-JY-pY0"/>
                                                     <exclude reference="bUr-VG-5k0"/>
                                                     <exclude reference="hPu-uJ-Fgi"/>
-                                                    <exclude reference="Kcs-JY-pY0"/>
-                                                    <exclude reference="oUR-Yc-odp"/>
+                                                    <exclude reference="ASj-pZ-KSw"/>
+                                                    <exclude reference="pvG-PY-FkK"/>
                                                     <exclude reference="S0J-eF-HMm"/>
+                                                    <exclude reference="oUR-Yc-odp"/>
                                                     <exclude reference="yFH-mE-MZz"/>
                                                 </mask>
                                             </variation>
@@ -1006,13 +1008,13 @@
                                                     <include reference="3Df-qC-2oY"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="ASj-pZ-KSw"/>
-                                                    <include reference="pvG-PY-FkK"/>
+                                                    <include reference="Kcs-JY-pY0"/>
                                                     <include reference="bUr-VG-5k0"/>
                                                     <include reference="hPu-uJ-Fgi"/>
-                                                    <include reference="Kcs-JY-pY0"/>
-                                                    <include reference="oUR-Yc-odp"/>
+                                                    <include reference="ASj-pZ-KSw"/>
+                                                    <include reference="pvG-PY-FkK"/>
                                                     <include reference="S0J-eF-HMm"/>
+                                                    <include reference="oUR-Yc-odp"/>
                                                     <include reference="yFH-mE-MZz"/>
                                                 </mask>
                                             </variation>
@@ -1026,7 +1028,7 @@
                                         <rect key="frame" x="0.0" y="85" width="375" height="57"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalCompressionResistancePriority="751" tableViewCell="2o3-5M-rZh" id="Q4o-GY-SnP">
-                                            <frame key="frameInset" width="375" height="56"/>
+                                            <frame key="frameInset" width="375" height="56.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ipr-Oj-Uxk" customClass="NZCircularImageView">
@@ -1077,14 +1079,14 @@
                                                     <exclude reference="3og-ON-Vn4"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="gKc-Wx-qYu"/>
-                                                    <exclude reference="MVJ-GK-gUc"/>
                                                     <exclude reference="6P0-p8-lsW"/>
-                                                    <exclude reference="TOX-pp-ONf"/>
                                                     <exclude reference="AgJ-CZ-cDG"/>
-                                                    <exclude reference="zzs-A0-wzn"/>
+                                                    <exclude reference="TOX-pp-ONf"/>
                                                     <exclude reference="BOG-0p-UYO"/>
                                                     <exclude reference="qey-I7-igm"/>
+                                                    <exclude reference="zzs-A0-wzn"/>
+                                                    <exclude reference="MVJ-GK-gUc"/>
+                                                    <exclude reference="gKc-Wx-qYu"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -1094,14 +1096,14 @@
                                                     <include reference="3og-ON-Vn4"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="gKc-Wx-qYu"/>
-                                                    <include reference="MVJ-GK-gUc"/>
                                                     <include reference="6P0-p8-lsW"/>
-                                                    <include reference="TOX-pp-ONf"/>
                                                     <include reference="AgJ-CZ-cDG"/>
-                                                    <include reference="zzs-A0-wzn"/>
+                                                    <include reference="TOX-pp-ONf"/>
                                                     <include reference="BOG-0p-UYO"/>
                                                     <include reference="qey-I7-igm"/>
+                                                    <include reference="zzs-A0-wzn"/>
+                                                    <include reference="MVJ-GK-gUc"/>
+                                                    <include reference="gKc-Wx-qYu"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -1131,8 +1133,8 @@
                             <mask key="constraints">
                                 <exclude reference="Vr7-Do-JXC"/>
                                 <exclude reference="E8e-nS-gJH"/>
-                                <exclude reference="s6R-CF-UtT"/>
                                 <exclude reference="UVw-N7-4bb"/>
+                                <exclude reference="s6R-CF-UtT"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -1142,8 +1144,8 @@
                             <mask key="constraints">
                                 <include reference="Vr7-Do-JXC"/>
                                 <include reference="E8e-nS-gJH"/>
-                                <include reference="s6R-CF-UtT"/>
                                 <include reference="UVw-N7-4bb"/>
+                                <include reference="s6R-CF-UtT"/>
                             </mask>
                         </variation>
                     </view>
@@ -1180,14 +1182,14 @@
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
-                                            <exclude reference="u9c-vt-M9D"/>
                                             <exclude reference="89C-ld-PNI"/>
+                                            <exclude reference="u9c-vt-M9D"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=compact">
                                         <mask key="constraints">
-                                            <include reference="u9c-vt-M9D"/>
                                             <include reference="89C-ld-PNI"/>
+                                            <include reference="u9c-vt-M9D"/>
                                         </mask>
                                     </variation>
                                     <connections>
@@ -1210,12 +1212,12 @@
                                     <exclude reference="M6b-zb-pOl"/>
                                 </mask>
                                 <mask key="constraints">
-                                    <exclude reference="C8V-1W-7Vf"/>
-                                    <exclude reference="8te-mB-rhW"/>
-                                    <exclude reference="noA-F6-had"/>
-                                    <exclude reference="V1G-7M-2Mu"/>
                                     <exclude reference="33X-Zl-vlm"/>
                                     <exclude reference="PE1-0m-i3v"/>
+                                    <exclude reference="8te-mB-rhW"/>
+                                    <exclude reference="C8V-1W-7Vf"/>
+                                    <exclude reference="V1G-7M-2Mu"/>
+                                    <exclude reference="noA-F6-had"/>
                                 </mask>
                             </variation>
                             <variation key="heightClass=regular-widthClass=compact">
@@ -1224,12 +1226,12 @@
                                     <include reference="M6b-zb-pOl"/>
                                 </mask>
                                 <mask key="constraints">
-                                    <include reference="C8V-1W-7Vf"/>
-                                    <include reference="8te-mB-rhW"/>
-                                    <include reference="noA-F6-had"/>
-                                    <include reference="V1G-7M-2Mu"/>
                                     <include reference="33X-Zl-vlm"/>
                                     <include reference="PE1-0m-i3v"/>
+                                    <include reference="8te-mB-rhW"/>
+                                    <include reference="C8V-1W-7Vf"/>
+                                    <include reference="V1G-7M-2Mu"/>
+                                    <include reference="noA-F6-had"/>
                                 </mask>
                             </variation>
                         </view>
@@ -1240,7 +1242,7 @@
                                         <rect key="frame" x="0.0" y="128" width="375" height="54"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E48-zj-oQm" id="Qa6-QO-zE8">
-                                            <frame key="frameInset" width="375" height="53"/>
+                                            <frame key="frameInset" width="375" height="53.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="圈子名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kbS-u6-Pm6">
@@ -1273,11 +1275,11 @@
                                                     <exclude reference="Bcj-sS-5f8"/>
                                                 </mask>
                                                 <mask key="constraints">
+                                                    <exclude reference="8Dh-kS-PmW"/>
                                                     <exclude reference="Lgo-mr-Cch"/>
                                                     <exclude reference="TPO-Kt-JKd"/>
-                                                    <exclude reference="8Dh-kS-PmW"/>
-                                                    <exclude reference="4ca-QH-pb6"/>
                                                     <exclude reference="0rU-ad-3fR"/>
+                                                    <exclude reference="4ca-QH-pb6"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -1286,11 +1288,11 @@
                                                     <include reference="Bcj-sS-5f8"/>
                                                 </mask>
                                                 <mask key="constraints">
+                                                    <include reference="8Dh-kS-PmW"/>
                                                     <include reference="Lgo-mr-Cch"/>
                                                     <include reference="TPO-Kt-JKd"/>
-                                                    <include reference="8Dh-kS-PmW"/>
-                                                    <include reference="4ca-QH-pb6"/>
                                                     <include reference="0rU-ad-3fR"/>
+                                                    <include reference="4ca-QH-pb6"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -1299,7 +1301,7 @@
                                         <rect key="frame" x="0.0" y="182" width="375" height="147"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EVR-oZ-gou" id="0n8-1i-cxs">
-                                            <frame key="frameInset" width="375" height="146"/>
+                                            <frame key="frameInset" width="375" height="146.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="圈子描述" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbf-3x-KKm">
@@ -1344,14 +1346,14 @@
                                                     <exclude reference="qd3-gS-qic"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="gHk-Ix-oCP"/>
-                                                    <exclude reference="yDw-Ju-4iD"/>
+                                                    <exclude reference="O7y-t7-zFF"/>
+                                                    <exclude reference="Ou3-1x-iLa"/>
+                                                    <exclude reference="WQK-3D-sr6"/>
                                                     <exclude reference="1Ar-Of-f0h"/>
                                                     <exclude reference="XAI-Lx-4AU"/>
+                                                    <exclude reference="gHk-Ix-oCP"/>
+                                                    <exclude reference="yDw-Ju-4iD"/>
                                                     <exclude reference="zHl-To-Uuv"/>
-                                                    <exclude reference="Ou3-1x-iLa"/>
-                                                    <exclude reference="O7y-t7-zFF"/>
-                                                    <exclude reference="WQK-3D-sr6"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -1360,14 +1362,14 @@
                                                     <include reference="qd3-gS-qic"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="gHk-Ix-oCP"/>
-                                                    <include reference="yDw-Ju-4iD"/>
+                                                    <include reference="O7y-t7-zFF"/>
+                                                    <exclude reference="Ou3-1x-iLa"/>
+                                                    <include reference="WQK-3D-sr6"/>
                                                     <include reference="1Ar-Of-f0h"/>
                                                     <include reference="XAI-Lx-4AU"/>
+                                                    <exclude reference="gHk-Ix-oCP"/>
+                                                    <include reference="yDw-Ju-4iD"/>
                                                     <include reference="zHl-To-Uuv"/>
-                                                    <exclude reference="Ou3-1x-iLa"/>
-                                                    <include reference="O7y-t7-zFF"/>
-                                                    <include reference="WQK-3D-sr6"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
