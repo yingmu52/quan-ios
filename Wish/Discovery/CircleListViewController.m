@@ -9,7 +9,8 @@
 #import "CircleListViewController.h"
 #import "Theme.h"
 #import "UIImageView+ImageCache.h"
-#import "PlansViewController.h"
+#import "CircleDetailViewController.h"
+#import "WishDetailViewController.h"
 @interface CircleListViewController () <UITableViewDelegate>
 @property (nonatomic,strong) NSNumber *currentPage;
 @end
@@ -138,6 +139,14 @@
         [User updateAttributeFromDictionary:@{CURRENT_CIRCLE_ID:entity.mUID}];
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
+    
+    if ([entity isKindOfClass:[Plan class]]) {
+        Plan *p = (Plan *)entity;
+        NSString *segue =
+        [p.owner.mUID isEqualToString:[User uid]] ?
+        @"showOwnerWishDetailViewFromCircleList" : @"showNormalWishDetailViewFromCircleList";
+        [self performSegueWithIdentifier:segue sender:p];
+    }
 }
 
 - (IBAction)buttonPressedForCreatingCircle{
@@ -147,6 +156,12 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"showCircleDetailFromMyJoining"]) {
         [segue.destinationViewController setCircle:sender];
+    }
+    
+    NSArray *wishdetails = @[@"showNormalWishDetailViewFromCircleList",@"showOwnerWishDetailViewFromCircleList"];
+    if ([wishdetails containsObject:segue.identifier]) {
+        segue.destinationViewController.hidesBottomBarWhenPushed = YES;
+        [segue.destinationViewController setPlan:sender];
     }
 }
 

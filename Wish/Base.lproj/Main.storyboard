@@ -1308,7 +1308,7 @@
         <!--Wish DetailVC Owner-->
         <scene sceneID="274-7i-jhG">
             <objects>
-                <tableViewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="b5E-B5-8Ys" customClass="WishDetailVCOwner" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="WishDetailVCOwner" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="b5E-B5-8Ys" customClass="WishDetailVCOwner" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="326" sectionHeaderHeight="22" sectionFooterHeight="22" id="XKw-Eq-NrX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -6324,11 +6324,11 @@
         <image name="tab_ic_quanzi_pressed" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="GkF-ge-YPg"/>
         <segue reference="4yF-1j-VR3"/>
         <segue reference="X79-Dh-n8s"/>
-        <segue reference="GkF-ge-YPg"/>
-        <segue reference="LzI-vD-dFb"/>
-        <segue reference="Y2c-0U-Rmr"/>
+        <segue reference="dFu-Bk-XhY"/>
+        <segue reference="6ze-LH-v54"/>
         <segue reference="4wk-xv-ETJ"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

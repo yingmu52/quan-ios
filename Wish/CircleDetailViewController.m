@@ -129,7 +129,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     Plan *plan = [self.tableFetchedRC objectAtIndexPath:indexPath];
-    [self performSegueWithIdentifier:@"showWishDetailViewController" sender:plan];
+    NSString *segue =
+    [plan.owner.mUID isEqualToString:[User uid]] ?
+    @"showWishDetailOwnerFromCircleDetail" : @"showWishDetailFromCircleDetail";
+    [self performSegueWithIdentifier:segue sender:plan];
 }
 
 
@@ -326,7 +329,8 @@
     [super prepareForSegue:segue sender:sender];
     
     
-    if ([segue.identifier isEqualToString:@"showWishDetailViewController"]) {
+    NSArray *wishdetails = @[@"showWishDetailOwnerFromCircleDetail",@"showWishDetailFromCircleDetail"];
+    if ([wishdetails containsObject:segue.identifier]) {
         [segue.destinationViewController setPlan:sender];
     }
 

@@ -74,12 +74,12 @@
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="plans" inverseEntity="Owner" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Circle" positionX="-8615" positionY="-279" width="128" height="148"/>
-        <element name="Comment" positionX="-9009" positionY="95" width="128" height="150"/>
-        <element name="Feed" positionX="-9288" positionY="-30" width="128" height="210"/>
-        <element name="Message" positionX="-8892" positionY="-346" width="128" height="178"/>
-        <element name="MSBase" positionX="-8838" positionY="-589" width="128" height="178"/>
+        <element name="Circle" positionX="-8622" positionY="-517" width="128" height="148"/>
+        <element name="Comment" positionX="-9002" positionY="-69" width="128" height="150"/>
+        <element name="Feed" positionX="-9288" positionY="-468" width="128" height="210"/>
+        <element name="Message" positionX="-8471" positionY="-513" width="128" height="178"/>
+        <element name="MSBase" positionX="-8766" positionY="-394" width="128" height="178"/>
         <element name="Owner" positionX="-8696" positionY="-7" width="128" height="88"/>
-        <element name="Plan" positionX="-9110" positionY="-324" width="128" height="238"/>
+        <element name="Plan" positionX="-9110" positionY="-567" width="128" height="238"/>
     </elements>
 </model>

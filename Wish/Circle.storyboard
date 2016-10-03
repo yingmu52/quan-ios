@@ -353,6 +353,8 @@
                         <outlet property="tableView" destination="vlf-xI-Jaf" id="OFn-4e-RHI"/>
                         <segue destination="Yxs-9i-1RW" kind="show" identifier="showCircleDetailFromMyJoining" id="iB1-Bf-PKR"/>
                         <segue destination="h2k-2t-9Un" kind="show" identifier="showCircleCreationView" id="qWz-rh-ZFY"/>
+                        <segue destination="osf-YN-b0x" kind="show" identifier="showNormalWishDetailViewFromCircleList" id="xQQ-ct-gCy"/>
+                        <segue destination="pBM-K4-ByB" kind="show" identifier="showOwnerWishDetailViewFromCircleList" id="6XJ-S2-04S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rxN-sF-ZMH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -545,7 +547,7 @@
                                             </collectionViewFlowLayout>
                                             <cells>
                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CircleDetailTopMemberCell" id="5JF-v9-ihj" customClass="MSCollectionCell">
-                                                    <rect key="frame" x="14" y="7.5" width="80" height="54"/>
+                                                    <rect key="frame" x="14" y="0.0" width="80" height="54"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                         <rect key="frame" x="0.0" y="0.0" width="80" height="54"/>
@@ -724,10 +726,11 @@
                         <outlet property="followButton" destination="fUg-Jm-0bg" id="t3H-Sa-FSa"/>
                         <outlet property="followCountLabel" destination="8MS-mz-nYO" id="Ma5-Ki-feF"/>
                         <outlet property="tableView" destination="aGh-zW-DtJ" id="p7Y-4W-QXL"/>
-                        <segue destination="osf-YN-b0x" kind="show" identifier="showWishDetailViewController" id="PAO-LD-bVT"/>
+                        <segue destination="osf-YN-b0x" kind="show" identifier="showWishDetailFromCircleDetail" id="PAO-LD-bVT"/>
                         <segue destination="941-dO-sNg" kind="show" identifier="showMemberListView" id="Ae6-Gy-fje"/>
                         <segue destination="Wmy-5a-1Od" kind="show" identifier="showCircleEditingView" id="AsQ-0u-7VD"/>
                         <segue destination="tTl-tm-3zq" kind="show" identifier="showInvitationView" id="RxY-Cy-oM0"/>
+                        <segue destination="pBM-K4-ByB" kind="show" identifier="showWishDetailOwnerFromCircleDetail" id="1eg-Bo-dIv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FaI-6D-MaC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -748,7 +751,15 @@
                 <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="WishDetailViewController" id="osf-YN-b0x" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4nk-cx-77G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1160" y="1744"/>
+            <point key="canvasLocation" x="1283" y="1578"/>
+        </scene>
+        <!--WishDetailVCOwner-->
+        <scene sceneID="sSv-Qs-Jwi">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="WishDetailVCOwner" id="pBM-K4-ByB" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K5y-X5-Xyg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1713" y="1767"/>
         </scene>
         <!--Circle Creation View Controller-->
         <scene sceneID="fhA-d1-4iv">
@@ -940,7 +951,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="57"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalCompressionResistancePriority="751" tableViewCell="gw9-6d-24e" id="iqD-He-byZ">
-                                            <frame key="frameInset" width="375" height="56.5"/>
+                                            <frame key="frameInset" width="375" height="56"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nof-Fv-MXi" customClass="NZCircularImageView">
@@ -1028,7 +1039,7 @@
                                         <rect key="frame" x="0.0" y="85" width="375" height="57"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalCompressionResistancePriority="751" tableViewCell="2o3-5M-rZh" id="Q4o-GY-SnP">
-                                            <frame key="frameInset" width="375" height="56.5"/>
+                                            <frame key="frameInset" width="375" height="56"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ipr-Oj-Uxk" customClass="NZCircularImageView">
@@ -1242,7 +1253,7 @@
                                         <rect key="frame" x="0.0" y="128" width="375" height="54"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E48-zj-oQm" id="Qa6-QO-zE8">
-                                            <frame key="frameInset" width="375" height="53.5"/>
+                                            <frame key="frameInset" width="375" height="53"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="圈子名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kbS-u6-Pm6">
@@ -1301,7 +1312,7 @@
                                         <rect key="frame" x="0.0" y="182" width="375" height="147"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EVR-oZ-gou" id="0n8-1i-cxs">
-                                            <frame key="frameInset" width="375" height="146.5"/>
+                                            <frame key="frameInset" width="375" height="146"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="圈子描述" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbf-3x-KKm">
@@ -1410,6 +1421,8 @@
         <image name="top1_icon" width="36" height="15"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Uea-Xk-caM"/>
+        <segue reference="iB1-Bf-PKR"/>
+        <segue reference="1eg-Bo-dIv"/>
+        <segue reference="PAO-LD-bVT"/>
     </inferredMetricsTieBreakers>
 </document>
