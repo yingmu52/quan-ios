@@ -2,28 +2,29 @@
 //  Circle+CoreDataProperties.m
 //  Stories
 //
-//  Created by Xinyi Zhuang on 8/8/16.
+//  Created by Xinyi Zhuang on 10/3/16.
 //  Copyright © 2016 Xinyi Zhuang. All rights reserved.
-//
-//  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
-//  to delete and recreate this implementation file for your updated model.
 //
 
 #import "Circle+CoreDataProperties.h"
 
 @implementation Circle (CoreDataProperties)
 
++ (NSFetchRequest<Circle *> *)fetchRequest {
+	return [[NSFetchRequest alloc] initWithEntityName:@"Circle"];
+}
+
 @dynamic circleDescription;
 @dynamic circleId;
 @dynamic circleName;
+@dynamic circleType;
 @dynamic createDate;
 @dynamic imageId;
-@dynamic ownerId;
-@dynamic plans;
+@dynamic isFollowable;
+@dynamic newPlanCount;
 @dynamic nFans;
 @dynamic nFansToday;
-@dynamic newPlanCount;
-@dynamic circleType;
-@dynamic isFollowable;
+@dynamic ownerId;
+@dynamic plans;
 
 @end

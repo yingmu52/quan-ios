@@ -233,8 +233,9 @@
         NSError *error = nil;
         NSString *failureReason = @"There was an error creating or loading the application's saved data.";
         
-        NSDictionary *options = @{NSInferMappingModelAutomaticallyOption:@(YES),
-                                  NSIgnorePersistentStoreVersioningOption:@(YES)};
+        NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption:@(YES),
+                                  NSInferMappingModelAutomaticallyOption:@(YES)};
+//                                  NSIgnorePersistentStoreVersioningOption:@(YES)};
         
         if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
                                                        configuration:nil

@@ -96,16 +96,16 @@
 - (void)configureTableViewCell:(MSTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     Message *message = [self.tableFetchedRC objectAtIndexPath:indexPath];
     
-    [cell.ms_imageView1 downloadImageWithImageId:message.owner.headUrl size:FetchCenterImageSize100];
+    [cell.ms_imageView1 downloadImageWithImageId:message.owner.mCoverImageId size:FetchCenterImageSize100];
     [cell.ms_imageView2 downloadImageWithImageId:message.picurl size:FetchCenterImageSize100];
     NSDictionary *attr = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00B8C2"]};
     if (!message.userDeleted.boolValue) {
-        NSMutableAttributedString *content = [[NSMutableAttributedString alloc] initWithString:message.owner.ownerName
+        NSMutableAttributedString *content = [[NSMutableAttributedString alloc] initWithString:message.owner.mTitle
                                                                                     attributes:attr];
         [content appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"发表了一条评论：%@",message.content]]];
         cell.ms_textView.attributedText = content;
     }else{
-        NSMutableAttributedString *n1 = [[NSMutableAttributedString alloc] initWithString:message.owner.ownerName
+        NSMutableAttributedString *n1 = [[NSMutableAttributedString alloc] initWithString:message.owner.mTitle
                                                                                attributes:attr];
         
         NSDictionary *attr2 = @{NSForegroundColorAttributeName:[UIColor lightGrayColor]};

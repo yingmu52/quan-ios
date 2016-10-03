@@ -69,10 +69,10 @@ static NSUInteger numberOfPreloadedFeeds = 3;
     
     
     //update User Info
-    c.headUserNameLabel.text = plan.owner.ownerName;
+    c.headUserNameLabel.text = plan.owner.mTitle;
     
     
-    NSURL *url = [self.fetchCenter urlWithImageID:plan.owner.headUrl size:FetchCenterImageSize100];
+    NSURL *url = [self.fetchCenter urlWithImageID:plan.owner.mCoverImageId size:FetchCenterImageSize100];
     [c.headProfilePic setCircularImageWithURL:url forState:UIControlStateNormal];
 }
 
@@ -121,7 +121,7 @@ static NSUInteger numberOfPreloadedFeeds = 3;
 - (NSFetchRequest *)tableFetchRequest{
     if (!_tableFetchRequest) {
         _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
-        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"owner.ownerId != %@ && isFollowed == %@",[User uid],@(YES)];
+        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"owner.mUID != %@ && isFollowed == %@",[User uid],@(YES)];
         _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"updateDate" ascending:NO]];
     }
     return _tableFetchRequest;    

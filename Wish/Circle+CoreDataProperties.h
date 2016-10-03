@@ -2,30 +2,30 @@
 //  Circle+CoreDataProperties.h
 //  Stories
 //
-//  Created by Xinyi Zhuang on 8/8/16.
+//  Created by Xinyi Zhuang on 10/3/16.
 //  Copyright © 2016 Xinyi Zhuang. All rights reserved.
-//
-//  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
-//  to delete and recreate this implementation file for your updated model.
 //
 
 #import "Circle.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Circle (CoreDataProperties)
 
-@property (nullable, nonatomic, retain) NSString *circleDescription;
-@property (nullable, nonatomic, retain) NSString *circleId;
-@property (nullable, nonatomic, retain) NSString *circleName;
-@property (nullable, nonatomic, retain) NSDate *createDate;
-@property (nullable, nonatomic, retain) NSString *imageId;
-@property (nullable, nonatomic, retain) NSString *ownerId;
-@property (nullable, nonatomic, retain) NSNumber *nFans;
-@property (nullable, nonatomic, retain) NSNumber *nFansToday;
-@property (nullable, nonatomic, retain) NSNumber *circleType;
-@property (nullable, nonatomic, retain) NSNumber *newPlanCount;
-@property (nullable, nonatomic, retain) NSNumber *isFollowable;
++ (NSFetchRequest<Circle *> *)fetchRequest;
+
+@property (nullable, nonatomic, copy) NSString *circleDescription;
+@property (nullable, nonatomic, copy) NSString *circleId;
+@property (nullable, nonatomic, copy) NSString *circleName;
+@property (nullable, nonatomic, copy) NSNumber *circleType;
+@property (nullable, nonatomic, copy) NSDate *createDate;
+@property (nullable, nonatomic, copy) NSString *imageId;
+@property (nullable, nonatomic, copy) NSNumber *isFollowable;
+@property (nullable, nonatomic, copy) NSNumber *newPlanCount;
+@property (nullable, nonatomic, copy) NSNumber *nFans;
+@property (nullable, nonatomic, copy) NSNumber *nFansToday;
+@property (nullable, nonatomic, copy) NSString *ownerId;
 @property (nullable, nonatomic, retain) NSSet<Plan *> *plans;
 
 @end

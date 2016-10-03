@@ -106,7 +106,7 @@
         plan.readCount = @([readCount integerValue]);
     }
     
-    plan.lastReadTime = [NSDate date];
+    plan.mLastReadTime = [NSDate date];
     return plan;
     
 }
@@ -178,7 +178,7 @@
 }
 
 - (BOOL)isDeletable{
-    return ![self.owner.ownerId isEqualToString:[User uid]] && !self.isFollowed.boolValue;
+    return ![self.owner.mUID isEqualToString:[User uid]] && !self.isFollowed.boolValue;
 }
 
 - (BOOL)hasDetailText{

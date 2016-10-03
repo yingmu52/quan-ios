@@ -110,8 +110,8 @@
         
         
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Owner"];
-        request.predicate = [NSPredicate predicateWithFormat:@"ownerId IN %@",topMemberList];
-        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"lastReadTime" ascending:YES]];
+        request.predicate = [NSPredicate predicateWithFormat:@"mUID IN %@",topMemberList];
+        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mLastReadTime" ascending:YES]];
         self.collectionFetchRequest = request;
         [self.collectionView reloadData];
     }];
@@ -139,8 +139,8 @@
     MSTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CircleDetailCell"];
     [cell.ms_imageView1 downloadImageWithImageId:plan.backgroundNum size:FetchCenterImageSize400];
     cell.ms_title.text = plan.planTitle;
-    [cell.ms_imageView2 downloadImageWithImageId:plan.owner.headUrl size:FetchCenterImageSize100];
-    cell.ms_subTitle.text = plan.owner.ownerName;
+    [cell.ms_imageView2 downloadImageWithImageId:plan.owner.mCoverImageId size:FetchCenterImageSize100];
+    cell.ms_subTitle.text = plan.owner.mTitle;
     cell.ms_dateLabel.text = [[self.dateFormatter stringFromDate:plan.updateDate] stringByAppendingString:@"更新"];
     cell.ms_textView.text = plan.detailText;
     return cell;
@@ -160,8 +160,8 @@
         [UIImage imageNamed:[NSString stringWithFormat:@"top%@_head_icon",@(indexPath.row)]];
     }
     Owner *owner = [self.collectionFetchedRC objectAtIndexPath:indexPath];
-    [cell.ms_imageView1 downloadImageWithImageId:owner.headUrl size:FetchCenterImageSize100];
-    cell.ms_titleLabel.text = owner.ownerName;
+    [cell.ms_imageView1 downloadImageWithImageId:owner.mCoverImageId size:FetchCenterImageSize100];
+    cell.ms_titleLabel.text = owner.mTitle;
     return cell;
 }
 

@@ -72,7 +72,7 @@
 - (NSFetchRequest *)tableFetchRequest{
     if (!_tableFetchRequest) {
         _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
-        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"owner.ownerId == %@ && planStatus != %d",[User uid],PlanStatusOnGoing];
+        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"owner.mUID == %@ && planStatus != %d",[User uid],PlanStatusOnGoing];
         _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"updateDate" ascending:NO]];
     }
     return _tableFetchRequest;

@@ -57,7 +57,7 @@ ViewForEmptyEventDelegate,StationViewControllerDelegate>
     if (!_collectionFetchRequest) {
         _collectionFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
         
-        _collectionFetchRequest.predicate = [NSPredicate predicateWithFormat:@"owner.ownerId == %@ && planStatus == %d",[User uid],PlanStatusOnGoing];
+        _collectionFetchRequest.predicate = [NSPredicate predicateWithFormat:@"owner.mUID == %@ && planStatus == %d",[User uid],PlanStatusOnGoing];
         
         _collectionFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
     }

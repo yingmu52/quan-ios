@@ -171,7 +171,7 @@ static NSTimeInterval expectationTimeout = 30.0f;
 - (void)testUpdatePlan{
 
     NSArray *myPlans = [Plan fetchWith:@"Plan"
-                             predicate:[NSPredicate predicateWithFormat:@"owner.ownerId == %@",[User uid]] keyForDescriptor:@"planId"
+                             predicate:[NSPredicate predicateWithFormat:@"owner.mUID == %@",[User uid]] keyForDescriptor:@"planId"
                   managedObjectContext:[AppDelegate getContext]];
     
     NSUInteger numberOfCycles = 10;
@@ -205,7 +205,7 @@ static NSTimeInterval expectationTimeout = 30.0f;
 - (Plan *)testPlan{
     if (!_testPlan) {
         NSArray *array = [Plan fetchWith:@"Plan"
-                               predicate:[NSPredicate predicateWithFormat:@"owner.ownerId == %@",[User uid]]
+                               predicate:[NSPredicate predicateWithFormat:@"owner.mUID == %@",[User uid]]
                         keyForDescriptor:@"planId"
                     managedObjectContext:[AppDelegate getContext]];
         XCTAssertFalse(array.count == 0,@"找不到测试事件");

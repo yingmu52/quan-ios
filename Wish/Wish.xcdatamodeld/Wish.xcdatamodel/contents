@@ -48,12 +48,13 @@
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="messages" inverseEntity="Owner" syncable="YES"/>
     </entity>
     <entity name="MSBase" representedClassName="MSBase" isAbstract="YES" syncable="YES">
-        <attribute name="lastReadTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="mCoverImageId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mLastReadTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="mTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mUID" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Owner" representedClassName="Owner" parentEntity="MSBase" syncable="YES">
-        <attribute name="headUrl" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="ownerId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="ownerName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="owner" inverseEntity="Comment" syncable="YES"/>
         <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="owner" inverseEntity="Message" syncable="YES"/>
         <relationship name="plans" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Plan" inverseName="owner" inverseEntity="Plan" syncable="YES"/>
@@ -84,8 +85,8 @@
         <element name="Comment" positionX="-9009" positionY="95" width="128" height="150"/>
         <element name="Feed" positionX="-9288" positionY="-30" width="128" height="210"/>
         <element name="Message" positionX="-8892" positionY="-346" width="128" height="178"/>
-        <element name="MSBase" positionX="-8685" positionY="-297" width="128" height="58"/>
-        <element name="Owner" positionX="-8696" positionY="-43" width="128" height="133"/>
+        <element name="MSBase" positionX="-8703" positionY="-522" width="128" height="118"/>
+        <element name="Owner" positionX="-8696" positionY="-43" width="128" height="88"/>
         <element name="Plan" positionX="-9110" positionY="-324" width="128" height="328"/>
     </elements>
 </model>

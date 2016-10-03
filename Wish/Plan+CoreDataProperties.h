@@ -2,35 +2,36 @@
 //  Plan+CoreDataProperties.h
 //  Stories
 //
-//  Created by Xinyi Zhuang on 8/16/16.
+//  Created by Xinyi Zhuang on 10/3/16.
 //  Copyright © 2016 Xinyi Zhuang. All rights reserved.
-//
-//  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
-//  to delete and recreate this implementation file for your updated model.
+//  This file was automatically generated and should not be edited.
 //
 
 #import "Plan.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Plan (CoreDataProperties)
 
-@property (nullable, nonatomic, retain) NSString *backgroundNum;
-@property (nullable, nonatomic, retain) NSString *cornerMask;
-@property (nullable, nonatomic, retain) NSDate *createDate;
-@property (nullable, nonatomic, retain) NSString *detailText;
-@property (nullable, nonatomic, retain) NSNumber *discoverIndex;
-@property (nullable, nonatomic, retain) NSNumber *followCount;
-@property (nullable, nonatomic, retain) NSNumber *isFollowed;
-@property (nullable, nonatomic, retain) NSNumber *isPrivate;
-@property (nullable, nonatomic, retain) NSString *planId;
-@property (nullable, nonatomic, retain) NSNumber *planStatus;
-@property (nullable, nonatomic, retain) NSNumber *readCount;
-@property (nullable, nonatomic, retain) NSString *planTitle;
-@property (nullable, nonatomic, retain) NSString *rank;
-@property (nullable, nonatomic, retain) NSNumber *tryTimes;
-@property (nullable, nonatomic, retain) NSDate *updateDate;
-@property (nullable, nonatomic, retain) NSString *shareUrl;
++ (NSFetchRequest<Plan *> *)fetchRequest;
+
+@property (nullable, nonatomic, copy) NSString *backgroundNum;
+@property (nullable, nonatomic, copy) NSString *cornerMask;
+@property (nullable, nonatomic, copy) NSDate *createDate;
+@property (nullable, nonatomic, copy) NSString *detailText;
+@property (nullable, nonatomic, copy) NSNumber *discoverIndex;
+@property (nullable, nonatomic, copy) NSNumber *followCount;
+@property (nullable, nonatomic, copy) NSNumber *isFollowed;
+@property (nullable, nonatomic, copy) NSNumber *isPrivate;
+@property (nullable, nonatomic, copy) NSString *planId;
+@property (nullable, nonatomic, copy) NSNumber *planStatus;
+@property (nullable, nonatomic, copy) NSString *planTitle;
+@property (nullable, nonatomic, copy) NSString *rank;
+@property (nullable, nonatomic, copy) NSNumber *readCount;
+@property (nullable, nonatomic, copy) NSString *shareUrl;
+@property (nullable, nonatomic, copy) NSNumber *tryTimes;
+@property (nullable, nonatomic, copy) NSDate *updateDate;
 @property (nullable, nonatomic, retain) Circle *circle;
 @property (nullable, nonatomic, retain) NSSet<Feed *> *feeds;
 @property (nullable, nonatomic, retain) Owner *owner;

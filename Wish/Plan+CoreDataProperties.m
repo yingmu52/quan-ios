@@ -2,19 +2,19 @@
 //  Plan+CoreDataProperties.m
 //  Stories
 //
-//  Created by Xinyi Zhuang on 8/16/16.
+//  Created by Xinyi Zhuang on 10/3/16.
 //  Copyright © 2016 Xinyi Zhuang. All rights reserved.
-//
-//  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
-//  to delete and recreate this implementation file for your updated model.
+//  This file was automatically generated and should not be edited.
 //
 
 #import "Plan+CoreDataProperties.h"
 
 @implementation Plan (CoreDataProperties)
 
-@dynamic rank;
-@dynamic readCount;
++ (NSFetchRequest<Plan *> *)fetchRequest {
+	return [[NSFetchRequest alloc] initWithEntityName:@"Plan"];
+}
+
 @dynamic backgroundNum;
 @dynamic cornerMask;
 @dynamic createDate;
@@ -26,9 +26,11 @@
 @dynamic planId;
 @dynamic planStatus;
 @dynamic planTitle;
+@dynamic rank;
+@dynamic readCount;
+@dynamic shareUrl;
 @dynamic tryTimes;
 @dynamic updateDate;
-@dynamic shareUrl;
 @dynamic circle;
 @dynamic feeds;
 @dynamic owner;

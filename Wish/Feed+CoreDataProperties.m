@@ -2,16 +2,17 @@
 //  Feed+CoreDataProperties.m
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2015-10-22.
-//  Copyright © 2015 Xinyi Zhuang. All rights reserved.
-//
-//  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
-//  to delete and recreate this implementation file for your updated model.
+//  Created by Xinyi Zhuang on 10/3/16.
+//  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //
 
 #import "Feed+CoreDataProperties.h"
 
 @implementation Feed (CoreDataProperties)
+
++ (NSFetchRequest<Feed *> *)fetchRequest {
+	return [[NSFetchRequest alloc] initWithEntityName:@"Feed"];
+}
 
 @dynamic commentCount;
 @dynamic createDate;

@@ -46,7 +46,7 @@
     [self.textView becomeFirstResponder];
     
     //设置输入框
-    self.textView.placeholder = self.comment ? [NSString stringWithFormat:@"回复%@：",self.comment.owner.ownerName] : @"说点什么吧...";
+    self.textView.placeholder = self.comment ? [NSString stringWithFormat:@"回复%@：",self.comment.owner.mTitle] : @"说点什么吧...";
     
     //设置输入框UI
     self.textView.layer.cornerRadius = 4.0f;
@@ -59,8 +59,8 @@
     
     self.userBackgroundView.hidden = !self.comment;
     if (self.comment) {
-        self.userNameLabel.text = self.comment.owner.ownerName;
-        [self.userProfileImageView downloadImageWithImageId:self.comment.owner.headUrl size:FetchCenterImageSize100];
+        self.userNameLabel.text = self.comment.owner.mTitle;
+        [self.userProfileImageView downloadImageWithImageId:self.comment.owner.mCoverImageId size:FetchCenterImageSize100];
         self.commentContentLabel.text = self.comment.content;
         self.timeLabel.text = [SystemUtil timeStringFromDate:self.comment.createTime];
     }
@@ -131,8 +131,8 @@
     if ([self.textView.text stringByReplacingOccurrencesOfString:@" " withString:@""].length > 0) {
         [self.fetchCenter replyToFeedID:self.feed.feedId
                                 content:self.textView.text
-                              toOwnerID:self.comment.owner.ownerId
-                              ownerName:self.comment.owner.ownerName
+                              toOwnerID:self.comment.owner.mUID
+                              ownerName:self.comment.owner.mTitle
                              completion:^
          {
              [self.delegate commentViewDidFinishInsertingComment];

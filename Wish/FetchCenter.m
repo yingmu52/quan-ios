@@ -328,8 +328,8 @@
               
               NSManagedObjectContext *workerContext = [self workerContext];
               Owner *owner = [Plan fetchWith:@"Owner"
-                                   predicate:[NSPredicate predicateWithFormat:@"ownerId == %@",memberID]
-                            keyForDescriptor:@"ownerId"
+                                   predicate:[NSPredicate predicateWithFormat:@"mUID == %@",memberID]
+                            keyForDescriptor:@"mUID"
                         managedObjectContext:workerContext].lastObject;
               [workerContext deleteObject:owner];
               [self.appDelegate saveContext:workerContext];

@@ -115,7 +115,7 @@
     
     
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
-    if ([self.feed.plan.owner.ownerId isEqualToString:[User uid]]) {
+    if ([self.feed.plan.owner.mUID isEqualToString:[User uid]]) {
         UIButton *deleteButton = [Theme buttonWithImage:[Theme navButtonDeleted]
                                                  target:self
                                                selector:@selector(showPopupView)
@@ -253,12 +253,12 @@
 
 - (void)configureCell:(MSTableViewCell *)cell indexPath:(NSIndexPath *)indexPath{
     Comment *comment = [self.tableFetchedRC objectAtIndexPath:indexPath];
-    [cell.ms_imageView1 downloadImageWithImageId:comment.owner.headUrl size:FetchCenterImageSize100];
+    [cell.ms_imageView1 downloadImageWithImageId:comment.owner.mCoverImageId size:FetchCenterImageSize100];
     cell.ms_textView.text = comment.content;
     
     NSDictionary *userNameAttribute = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00B9C0"]};
     
-    NSString *userAstring = comment.owner.ownerName.length > 0 ? comment.owner.ownerName : [NSString stringWithFormat:@"用户%@",comment.owner.ownerId];
+    NSString *userAstring = comment.owner.mTitle.length > 0 ? comment.owner.mTitle : [NSString stringWithFormat:@"用户%@",comment.owner.mUID];
     
     if (comment.idForReply && comment.nameForReply) { //this is a reply. format: 回复<color_userName>:content
         
@@ -301,7 +301,7 @@
         [mvc showVisitorLoginAlert];
     }else{
         Comment *comment = [self.tableFetchedRC objectAtIndexPath:indexPath];
-        if (![comment.owner.ownerId isEqualToString:[User uid]]) { //the comment is from other user
+        if (![comment.owner.mUID isEqualToString:[User uid]]) { //the comment is from other user
             [self performSegueWithIdentifier:@"showCommentViewController" sender:comment];
         }else{
             [self deleteActionAtIndexPath:indexPath];
@@ -312,7 +312,7 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
     Comment *comment = [self.tableFetchedRC objectAtIndexPath:indexPath];
-    return [comment.owner.ownerId isEqualToString:[User uid]];
+    return [comment.owner.mUID isEqualToString:[User uid]];
 }
 
 #pragma mark - highlight

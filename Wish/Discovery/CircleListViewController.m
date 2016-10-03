@@ -122,8 +122,8 @@
         NSIndexPath *inp = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section];
         Plan *plan = [self.tableFetchedRC objectAtIndexPath:inp];
         cell.ms_imageView2.image = [UIImage imageNamed:[NSString stringWithFormat:@"top%@_icon",@(indexPath.row)]];
-        [cell.ms_imageView1 downloadImageWithImageId:plan.owner.headUrl size:FetchCenterImageSize200];
-        cell.ms_title.text = plan.owner.ownerName;
+        [cell.ms_imageView1 downloadImageWithImageId:plan.owner.mCoverImageId size:FetchCenterImageSize200];
+        cell.ms_title.text = plan.owner.mTitle;
         cell.ms_subTitle.text = [NSString stringWithFormat:@"《%@》",plan.planTitle];
     }
 }

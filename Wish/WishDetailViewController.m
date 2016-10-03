@@ -30,7 +30,7 @@
 
 
 - (void)didPressedLockButton{
-    if ([self.plan.owner.ownerId isEqualToString:[User uid]]){
+    if ([self.plan.owner.mUID isEqualToString:[User uid]]){
         BOOL currentPrivacy = self.plan.isPrivate.boolValue;
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否将该事件设置为"
                                                                        message:currentPrivacy ? @"公开" : @"私密"
@@ -57,7 +57,7 @@
                                                                message:nil
                                                         preferredStyle:UIAlertControllerStyleActionSheet];
         
-        BOOL isOwnerState = [self.plan.owner.ownerId isEqualToString:[User uid]];
+        BOOL isOwnerState = [self.plan.owner.mUID isEqualToString:[User uid]];
         
         if (isOwnerState) { //主人态，可编辑，分享公、私事件
             UIAlertAction *editOption =
@@ -255,7 +255,7 @@
                                          frame:frame];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     
-    if ([self.plan.owner.ownerId isEqualToString:[User uid]] || !self.plan.isPrivate.boolValue) {
+    if ([self.plan.owner.mUID isEqualToString:[User uid]] || !self.plan.isPrivate.boolValue) {
         UIButton *moreBtn = [Theme buttonWithImage:[Theme navMoreButtonDefault]
                                             target:self
                                           selector:@selector(showMoreOptions)

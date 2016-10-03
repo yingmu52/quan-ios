@@ -25,7 +25,7 @@
 - (NSFetchRequest *)collectionFetchRequest{ //事件列表，放在collectionFRC
     if (!_collectionFetchRequest) {
         _collectionFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
-        _collectionFetchRequest.predicate = [NSPredicate predicateWithFormat:@"owner.ownerId == %@",[User uid]];
+        _collectionFetchRequest.predicate = [NSPredicate predicateWithFormat:@"owner.mUID == %@",[User uid]];
         _collectionFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
     }
     return _collectionFetchRequest;

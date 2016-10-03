@@ -20,30 +20,32 @@
     Owner *owner;
     //check existance
     NSArray *checks = [Plan fetchWith:@"Owner"
-                            predicate:[NSPredicate predicateWithFormat:@"ownerId == %@",dict[@"id"]]
-                     keyForDescriptor:@"ownerId"
+                            predicate:[NSPredicate predicateWithFormat:@"mUID == %@",dict[@"id"]]
+                     keyForDescriptor:@"mUID"
                  managedObjectContext:context];
     
     if (!checks.count) {
         //insert new fetched Owner
         owner = [NSEntityDescription insertNewObjectForEntityForName:@"Owner"
                                               inManagedObjectContext:context];
-        owner.ownerId = dict[@"id"];
+        owner.mUID = dict[@"id"];
         
     }else{
         //update existing plan
         owner = checks.lastObject;
     }
     
-    if (![owner.headUrl isEqualToString:dict[@"headUrl"]]){
-        owner.headUrl = dict[@"headUrl"];
+    NSString *headUrl = dict[@"headUrl"];
+    if (headUrl && ![owner.mCoverImageId isEqualToString:headUrl]){
+        owner.mCoverImageId = headUrl;
     }
     
-    if (![owner.ownerName isEqualToString:dict[@"name"]]){
-        owner.ownerName = dict[@"name"];
+    NSString *ownerName = dict[@"name"];
+    if (ownerName && ![owner.mTitle isEqualToString:ownerName]){
+        owner.mTitle = ownerName;
     }
     
-    owner.lastReadTime = [NSDate date];
+    owner.mLastReadTime = [NSDate date];
     
     return owner;
 }

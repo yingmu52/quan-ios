@@ -16,7 +16,7 @@
 
 - (void)setInfoForOwner{
     if (self.owner) {
-        self.nickNameTextField.text = self.owner.ownerName;
+        self.nickNameTextField.text = self.owner.mTitle;
     }
 }
 

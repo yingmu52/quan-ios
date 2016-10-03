@@ -37,7 +37,7 @@
                            forState:UIControlStateNormal];
     }
 //    self.userNameLabel.text = [NSString stringWithFormat:@"by %@",plan.owner.ownerName];
-    if ([plan.owner.ownerId isEqualToString:[User uid]]) { //owner don't get to follow its plan
+    if ([plan.owner.mUID isEqualToString:[User uid]]) { //owner don't get to follow its plan
 //        [self.followButton removeFromSuperview];
 //        [self.descriptionTextView setPlaceholder:EMPTY_PLACEHOLDER_OWNER];
         [self.descriptionTextView setReturnKeyType:UIReturnKeyDone];
