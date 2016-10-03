@@ -52,7 +52,7 @@
     if (!_collectionFetchRequest) {
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
         request.predicate = [NSPredicate predicateWithFormat:@"owner.mUID == %@ && planStatus == %d",[User uid],PlanStatusOnGoing];
-        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"updateDate" ascending:NO]];
+        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mUpdateTime" ascending:NO]];
         _collectionFetchRequest = request;
     }
     return _collectionFetchRequest;

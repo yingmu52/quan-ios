@@ -876,10 +876,8 @@
         NSManagedObjectContext *workerContext = [self workerContext];
 
         //Get Plan
-        Plan *p = [Plan fetchWith:@"Plan"
-                           predicate:[NSPredicate predicateWithFormat:@"mUID == %@",feed.plan.mUID]
-                    keyForDescriptor:@"mUID"
-                managedObjectContext:workerContext].lastObject;
+        Plan *p = [Plan fetchID:feed.plan.mUID inManagedObjectContext:workerContext];
+        
         //Get Feed
         Feed *f = [Plan fetchWith:@"Feed"
                            predicate:[NSPredicate predicateWithFormat:@"feedId == %@",feed.feedId]
@@ -1111,10 +1109,7 @@
           completion:^(NSDictionary *responseJson)
     {
         NSManagedObjectContext *workerContext = [self workerContext];
-        Plan *p = [Plan fetchWith:@"Plan"
-                        predicate:[NSPredicate predicateWithFormat:@"mUID == %@",plan.mUID]
-                 keyForDescriptor:@"mUID"
-             managedObjectContext:workerContext].lastObject;
+        Plan *p = [Plan fetchID:plan.mUID inManagedObjectContext:workerContext];
         
         p.followCount = @(p.followCount.integerValue + 1);
         p.isFollowed = @(YES);
@@ -1137,10 +1132,7 @@
           completion:^(NSDictionary *responseJson)
     {
         NSManagedObjectContext *workerContext = [self workerContext];
-        Plan *p = [Plan fetchWith:@"Plan"
-                        predicate:[NSPredicate predicateWithFormat:@"mUID == %@",plan.mUID]
-                 keyForDescriptor:@"mUID"
-             managedObjectContext:workerContext].lastObject;
+        Plan *p = [Plan fetchID:plan.mUID inManagedObjectContext:workerContext];
 
         p.followCount = @(p.followCount.integerValue - 1);
         p.isFollowed = @(NO);
@@ -1348,10 +1340,8 @@
     includeArguments:YES
           completion:^(NSDictionary *responseJson) {
               NSManagedObjectContext *workerContext = [self workerContext];
-              Plan *plan = [Plan fetchWith:@"Plan"
-                                 predicate:[NSPredicate predicateWithFormat:@"mUID == %@",planId]
-                          keyForDescriptor:@"mUID"
-                      managedObjectContext:workerContext].lastObject;
+              Plan *plan = [Plan fetchID:planId inManagedObjectContext:workerContext];
+
               Circle *circle = [Plan fetchWith:@"Circle"
                                      predicate:[NSPredicate predicateWithFormat:@"circleId == %@",planId]
                               keyForDescriptor:@"circleId"
@@ -1384,10 +1374,7 @@
 
         //更新本地事件
         NSManagedObjectContext *workerContext = [self workerContext];
-        Plan *plan = [[Plan fetchWith:@"Plan"
-                           predicate:[NSPredicate predicateWithFormat:@"mUID == %@",planId]
-                    keyForDescriptor:@"mUID"
-                managedObjectContext:workerContext] lastObject];
+        Plan *plan = [Plan fetchID:planId inManagedObjectContext:workerContext];
         
         plan.shareUrl = isPrivate ? nil : responseJson[@"share_url"];
         
@@ -1416,10 +1403,9 @@
     includeArguments:YES
           completion:^(NSDictionary *responseJson) {
               NSManagedObjectContext *workerContext = [self workerContext];
-              Plan *plan = [[Plan fetchWith:@"Plan"
-                                  predicate:[NSPredicate predicateWithFormat:@"mUID == %@",planId]
-                           keyForDescriptor:@"mUID"
-                       managedObjectContext:workerContext] lastObject];
+
+              Plan *plan = [Plan fetchID:planId inManagedObjectContext:workerContext];
+
               plan.planStatus = @(planStatus);
               plan.mUpdateTime = [NSDate date];
               [self.appDelegate saveContext:workerContext];
@@ -1529,11 +1515,10 @@
     includeArguments:YES 
           completion:^(NSDictionary *responseJson) {
               NSManagedObjectContext *workerContext = [self workerContext];
-              Plan *plan = [[Plan fetchWith:@"Plan"
-                                  predicate:[NSPredicate predicateWithFormat:@"mUID = %@",planId]
-                           keyForDescriptor:@"mUID"
-                       managedObjectContext:workerContext] lastObject];
+
+              Plan *plan = [Plan fetchID:planId inManagedObjectContext:workerContext];
               [workerContext deleteObject:plan];
+              
               [self.appDelegate saveContext:workerContext];
         if (completionBlock) {
             dispatch_main_async_safe(^{

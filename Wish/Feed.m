@@ -19,10 +19,7 @@
               images:(NSArray *)imageIds
               planID:(NSString *)planId inManagedObjectContext:(NSManagedObjectContext *)context
 {
-    Plan *plan = [Plan fetchWith:@"Plan"
-                       predicate:[NSPredicate predicateWithFormat:@"mUID == %@",planId]
-                keyForDescriptor:@"mUID"
-            managedObjectContext:context].lastObject;
+    Plan *plan = [Plan fetchID:planId inManagedObjectContext:context];
     
     Feed *feed = [NSEntityDescription insertNewObjectForEntityForName:@"Feed"
                                                inManagedObjectContext:context];

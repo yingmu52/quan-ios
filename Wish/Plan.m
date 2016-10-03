@@ -33,22 +33,15 @@
                      ownerInfo:(NSDictionary *)ownerInfo
           managedObjectContext:(nonnull NSManagedObjectContext *)context{ //owner may be different !
     
-    Plan *plan;
-    //check existance
-    NSArray *checks = [Plan fetchWith:@"Plan"
-                            predicate:[NSPredicate predicateWithFormat:@"mUID == %@",dict[@"id"]]
-                     keyForDescriptor:@"mUID" managedObjectContext:context];
-    
-    if (!checks.count) {
+    Plan *plan = [Plan fetchID:dict[@"id"] inManagedObjectContext:context];
+
+    if (!plan) {
         //insert new fetched plan
         plan = [NSEntityDescription insertNewObjectForEntityForName:@"Plan"
                                              inManagedObjectContext:context];
         plan.mCreateTime = [NSDate dateWithTimeIntervalSince1970:[dict[@"createTime"] integerValue]];
         plan.mUID = dict[@"id"];
         plan.owner = [Owner updateOwnerWithInfo:ownerInfo managedObjectContext:context];
-    }else{
-        //update existing plan
-        plan = checks.lastObject;
     }
     
     NSString *ptitle = dict[@"title"];
