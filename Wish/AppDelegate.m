@@ -16,6 +16,8 @@
 #import "CWStatusBarNotification.h"
 #import "MainTabBarController.h"
 #import "MessageListViewController.h"
+#import <PgySDK/PgyManager.h>
+
 @interface AppDelegate () <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,weak) LoginViewController *loginVC;
@@ -32,12 +34,12 @@
     //向微信注册
     [WXApi registerApp:WECHATAppID];
     
-    /*
+    
     //薄公英启动基本SDK
     PgyManager *pgYmanager = [PgyManager sharedPgyManager];
     [pgYmanager startManagerWithAppId:PGY_APPID];
-    [pgYmanager setShakingThreshold:4.0];
-     */
+//    [pgYmanager setShakingThreshold:4.0];
+
     
     //如果用户未登陆，跳转到登陆页
     if (![User isUserLogin]){

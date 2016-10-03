@@ -228,6 +228,7 @@
 		A0F8C4601B88444C00A8B120 /* Wish.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AE0172431A65CD8E0014266F /* Wish.xcdatamodeld */; };
 		A0FB1ED51D9F7C2E00954F4E /* MSBase.m in Sources */ = {isa = PBXBuildFile; fileRef = A0FB1ED41D9F7C2E00954F4E /* MSBase.m */; };
 		A0FB1EDB1D9F7C9600954F4E /* MSBase+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A0FB1ED91D9F7C9600954F4E /* MSBase+CoreDataProperties.m */; };
+		A0FB1F2E1DA2EE4E00954F4E /* PgySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FB1F2D1DA2EE4E00954F4E /* PgySDK.framework */; };
 		A0FC1EED1D8A8073005A4A17 /* PlanManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0FC1EEC1D8A8073005A4A17 /* PlanManagementViewController.m */; };
 		A0FEC1331C8616CC004C48F1 /* CircleCreationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0FEC1321C8616CC004C48F1 /* CircleCreationViewController.m */; };
 		AE01723F1A65CD8E0014266F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE01723E1A65CD8E0014266F /* main.m */; };
@@ -607,6 +608,7 @@
 		A0FB1ED41D9F7C2E00954F4E /* MSBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSBase.m; sourceTree = "<group>"; };
 		A0FB1ED81D9F7C9600954F4E /* MSBase+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MSBase+CoreDataProperties.h"; sourceTree = "<group>"; };
 		A0FB1ED91D9F7C9600954F4E /* MSBase+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MSBase+CoreDataProperties.m"; sourceTree = "<group>"; };
+		A0FB1F2D1DA2EE4E00954F4E /* PgySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PgySDK.framework; sourceTree = "<group>"; };
 		A0FC1EEB1D8A8073005A4A17 /* PlanManagementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanManagementViewController.h; sourceTree = "<group>"; };
 		A0FC1EEC1D8A8073005A4A17 /* PlanManagementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanManagementViewController.m; sourceTree = "<group>"; };
 		A0FEC1311C8616CC004C48F1 /* CircleCreationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleCreationViewController.h; sourceTree = "<group>"; };
@@ -732,6 +734,7 @@
 				A0A10EA71CB586AA0004D5DE /* libTXYUploader.a in Frameworks */,
 				AEDD06581AABF8FB00379C17 /* CoreTelephony.framework in Frameworks */,
 				AEDD06561AABF8F600379C17 /* CoreGraphics.framework in Frameworks */,
+				A0FB1F2E1DA2EE4E00954F4E /* PgySDK.framework in Frameworks */,
 				AEDD06541AABF8F000379C17 /* SystemConfiguration.framework in Frameworks */,
 				A04842F81B99F54B0032E927 /* libsqlite3.0.dylib in Frameworks */,
 				AEDD065C1AABF90B00379C17 /* libiconv.dylib in Frameworks */,
@@ -1502,6 +1505,7 @@
 		F3D9C90B14CD662C469ECA13 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A0FB1F2D1DA2EE4E00954F4E /* PgySDK.framework */,
 				A0493EC31D5CF5CE00B2C0F9 /* spider.framework */,
 				A07C66C81BE078EE00413D32 /* TencentOpenApi_IOS_Bundle.bundle */,
 				A07C66C91BE078EE00413D32 /* TencentOpenAPI.framework */,
