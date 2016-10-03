@@ -58,7 +58,7 @@
         <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="owner" inverseEntity="Message" syncable="YES"/>
         <relationship name="plans" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Plan" inverseName="owner" inverseEntity="Plan" syncable="YES"/>
     </entity>
-    <entity name="Plan" representedClassName="Plan" syncable="YES" codeGenerationType="category">
+    <entity name="Plan" representedClassName="Plan" parentEntity="MSBase" syncable="YES" codeGenerationType="category">
         <attribute name="backgroundNum" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cornerMask" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>

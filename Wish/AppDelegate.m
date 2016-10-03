@@ -233,8 +233,8 @@
         NSError *error = nil;
         NSString *failureReason = @"There was an error creating or loading the application's saved data.";
         
-        NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption:@(YES),
-                                  NSInferMappingModelAutomaticallyOption:@(YES)};
+        NSDictionary *options = @{NSInferMappingModelAutomaticallyOption:@(YES),
+                                  NSIgnorePersistentStoreVersioningOption:@(YES)};
         
         if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
                                                        configuration:nil
@@ -296,13 +296,17 @@
                 NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             }else{
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                    // Save the context.
-                    NSError *error = nil;
-                    if (self.writerManagedObjectContext.hasChanges &&
-                        ![self.writerManagedObjectContext save:&error]) {
-                        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-                    }else{
-                        NSLog(@"Stored Data on %@ Thread \n\n\n",[NSThread isMainThread] ? @"Main" : @"Background");
+                    @try {
+                        // Save the context.
+                        NSError *error = nil;
+                        if (self.writerManagedObjectContext.hasChanges &&
+                            ![self.writerManagedObjectContext save:&error]) {
+                            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+                        }else{
+                            NSLog(@"Stored Data on %@ Thread \n\n\n",[NSThread isMainThread] ? @"Main" : @"Background");
+                        }
+                    } @catch (NSException *exception) {
+                        [self resetDataStore];
                     }
                 });
             }
@@ -325,6 +329,10 @@
         NSLog(@"Deleting Store URL ...");
         [fileManager removeItemAtURL:storeURL error:nil];
     }
+    
+    _persistentStoreCoordinator = nil;
+    _managedObjectContext = nil;
+    _writerManagedObjectContext = nil;
 }
 
 

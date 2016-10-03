@@ -38,7 +38,7 @@
     NSArray *checks = [Plan fetchWith:@"Plan"
                             predicate:[NSPredicate predicateWithFormat:@"planId == %@",dict[@"id"]]
                      keyForDescriptor:@"createDate" managedObjectContext:context];
-
+    
     if (!checks.count) {
         //insert new fetched plan
         plan = [NSEntityDescription insertNewObjectForEntityForName:@"Plan"
@@ -51,58 +51,62 @@
         plan = checks.lastObject;
     }
     
-    if (![plan.owner.ownerName isEqualToString:ownerInfo[@"name"]]){
-        plan.owner.ownerName = ownerInfo[@"name"];
+    NSString *ptitle = dict[@"title"];
+    if (ptitle && ![plan.planTitle isEqualToString:ptitle]) {
+        plan.planTitle = ptitle;
     }
     
-    if (![plan.planTitle isEqualToString:dict[@"title"]]){
-        plan.planTitle = dict[@"title"];
+    NSString *pDetail = dict[@"description"];
+    if (pDetail && ![plan.detailText isEqualToString:pDetail]) {
+        plan.detailText = pDetail;
     }
     
-    if (![plan.detailText isEqualToString:dict[@"description"]] && ![dict[@"description"] isKindOfClass:[NSNull class]] ){
-        plan.detailText = dict[@"description"];
+    NSString *pBackground = dict[@"backGroudPic"];
+    if (pBackground && ![plan.backgroundNum isEqualToString:pBackground]) {
+        plan.backgroundNum = pBackground;
     }
     
-    if (![plan.backgroundNum isEqualToString:dict[@"backGroudPic"]]) {
-        plan.backgroundNum = dict[@"backGroudPic"];
-    }
-
-    if (![plan.shareUrl isEqualToString:dict[@"share_url"]]) {
-        plan.shareUrl = dict[@"share_url"];
-    }
-
-    if (![plan.updateDate isEqualToDate:[NSDate dateWithTimeIntervalSince1970:[dict[@"updateTime"] integerValue]]]) {
-        plan.updateDate = [NSDate dateWithTimeIntervalSince1970:[dict[@"updateTime"] integerValue]];
+    NSString *pShareUrl = dict[@"share_url"];
+    if (pShareUrl && ![plan.shareUrl isEqualToString:pShareUrl]) {
+        plan.shareUrl = pShareUrl;
     }
     
-    if (![plan.followCount isEqualToNumber:@([dict[@"followNums"] integerValue])]){
-        plan.followCount = @([dict[@"followNums"] integerValue]);
+    NSDate *pUpdateDate = [NSDate dateWithTimeIntervalSince1970:[dict[@"updateTime"] integerValue]];
+    if (pUpdateDate && ![plan.updateDate isEqualToDate:pUpdateDate]) {
+        plan.updateDate = pUpdateDate;
     }
     
-    if (![plan.planStatus isEqualToNumber:@([dict[@"state"] integerValue])]){
-        plan.planStatus = @([dict[@"state"] integerValue]);
+    NSNumber *pFollowCount = @([dict[@"followNums"] integerValue]);
+    if (pFollowCount && ![plan.followCount isEqualToNumber:pFollowCount]){
+        plan.followCount = pFollowCount;
     }
     
-    
-    if (![plan.isPrivate isEqualToNumber:@([dict[@"private"] boolValue])]){
-        plan.isPrivate = @([dict[@"private"] boolValue]);
+    NSNumber *pStatus = @([dict[@"state"] integerValue]);
+    if (pStatus && ![plan.planStatus isEqualToNumber:pStatus]){
+        plan.planStatus = pStatus;
     }
     
-    if (![plan.tryTimes isEqualToNumber:@([dict[@"tryTimes"] integerValue])]){
-        plan.tryTimes = @([dict[@"tryTimes"] integerValue]);
+    NSNumber *pIsPrivate = @([dict[@"private"] boolValue]);
+    if (pIsPrivate && ![plan.isPrivate isEqualToNumber:pIsPrivate]){
+        plan.isPrivate = pIsPrivate;
+    }
+    
+    NSNumber *pTryTime = @([dict[@"tryTimes"] integerValue]);
+    if (pTryTime && ![plan.tryTimes isEqualToNumber:pTryTime]){
+        plan.tryTimes = pTryTime;
     }
     
     NSString *cornerMask = dict[@"cornerMark"];
-    if (![plan.cornerMask isEqualToString:cornerMask] &&
-        [cornerMask isEqualToString:@"top"]){
+    if (cornerMask && ![plan.cornerMask isEqualToString:cornerMask]){
         plan.cornerMask = cornerMask;
     }
     
-    NSNumber *readCount = @([dict[@"readnums"] integerValue]);
-    if (![plan.readCount isEqualToNumber:readCount]) {
-        plan.readCount = readCount;
+    id readCount = dict[@"readnums"];
+    if (readCount && ![plan.readCount isEqualToNumber:@([readCount integerValue])]) {
+        plan.readCount = @([readCount integerValue]);
     }
     
+    plan.lastReadTime = [NSDate date];
     return plan;
     
 }
@@ -134,7 +138,7 @@
                     keyForDescriptor:@"circleId"
                 managedObjectContext:context].lastObject;
     plan.circle = circle;
-
+    
     
     return plan;
 }
@@ -154,7 +158,7 @@
              predicate:(NSPredicate  * _Nullable)predicate
       keyForDescriptor:(NSString *)key
   managedObjectContext:(nonnull NSManagedObjectContext *)context{
-        
+    
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName
                                               inManagedObjectContext:context];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
