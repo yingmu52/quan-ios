@@ -288,7 +288,7 @@ static NSUInteger distance = 10;
         
         [self.fetchCenter createPlan:self.navigationItem.title
                      planDescription:@""
-                            circleID:self.circle.circleId
+                            circleID:self.circle.mUID
                              picurls:imageIds
                            feedTitle:self.textView.text
                           completion:^(NSString *planId)

@@ -30,7 +30,7 @@
 }
 
 - (void)loadNewData{
-    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKeyPath:@"circle.circleId"];
+    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKeyPath:@"circle.mUID"];
     [self.fetchCenter getCircleList:localList
                              onPage:nil
                          completion:^(NSNumber *currentPage, NSNumber *totalPage)
@@ -43,7 +43,7 @@
 }
 
 - (void)loadMoreData{
-    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKeyPath:@"circle.circleId"];
+    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKeyPath:@"circle.mUID"];
     [self.fetchCenter getCircleList:localList
                              onPage:self.currentPage
                          completion:^(NSNumber *currentPage, NSNumber *totalPage)
@@ -77,7 +77,7 @@
 }
 
 - (NSString *)tableSectionKeyPath{
-    return @"circle.circleId";
+    return @"circle.mUID";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -100,10 +100,10 @@
     if (indexPath.row == 0) {
         Plan *plan = [self.tableFetchedRC objectAtIndexPath:indexPath];
         Circle *circle = plan.circle;
-        cell.ms_title.text = circle.circleName;
-        [cell.ms_imageView1 downloadImageWithImageId:circle.imageId
+        cell.ms_title.text = circle.mTitle;
+        [cell.ms_imageView1 downloadImageWithImageId:circle.mCoverImageId
                                                 size:FetchCenterImageSize200];
-        [cell.ms_FeatherImage downloadImageWithImageId:circle.imageId
+        [cell.ms_FeatherImage downloadImageWithImageId:circle.mCoverImageId
                                                   size:FetchCenterImageSize200];
         cell.ms_featherBackgroundView.backgroundColor = [Theme getRandomShortRangeHSBColorWithAlpha:0.1];
         
@@ -133,7 +133,7 @@
         Plan *plan = [self.tableFetchedRC objectAtIndexPath:indexPath];
         Circle *circle = plan.circle;
         [self performSegueWithIdentifier:@"showCircleDetailFromMyJoining" sender:circle];
-        [User updateAttributeFromDictionary:@{CURRENT_CIRCLE_ID:circle.circleId}];
+        [User updateAttributeFromDictionary:@{CURRENT_CIRCLE_ID:circle.mUID}];
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
 }

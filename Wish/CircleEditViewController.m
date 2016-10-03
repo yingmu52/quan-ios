@@ -55,12 +55,12 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self setUpNavigationItem];
-    if (self.circle.imageId.length > 0) {
-        [self.coverImageView downloadImageWithImageId:self.circle.imageId
+    if (self.circle.mCoverImageId.length > 0) {
+        [self.coverImageView downloadImageWithImageId:self.circle.mCoverImageId
                                                  size:FetchCenterImageSize100];
     }
-    self.titleTextField.text = self.circle.circleName;
-    self.detailTextView.text = self.circle.circleDescription;
+    self.titleTextField.text = self.circle.mTitle;
+    self.detailTextView.text = self.circle.mDescription;
 }
 
 - (void)donePressed:(UIButton *)sender{
@@ -84,8 +84,8 @@
                 [self updateCircle:fetchedId sender:sender];
             }];
         }else{
-            if ([self.titleTextField.text isEqualToString:self.circle.circleName] &&
-                [self.detailTextView.text isEqualToString:self.circle.circleDescription]) {
+            if ([self.titleTextField.text isEqualToString:self.circle.mTitle] &&
+                [self.detailTextView.text isEqualToString:self.circle.mDescription]) {
                 [self goBackWithSender:sender];
             }else{
                 [self updateCircle:nil sender:sender];
@@ -101,7 +101,7 @@
 }
 
 - (void)updateCircle:(NSString *)imageId sender:(UIButton *)sender{
-    [self.fetchCenter updateCircle:self.circle.circleId
+    [self.fetchCenter updateCircle:self.circle.mUID
                               name:self.titleTextField.text
                        description:self.detailTextView.text
                    backgroundImage:imageId

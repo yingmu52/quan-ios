@@ -15,64 +15,68 @@
     Circle *circle;
     
     NSArray *results = [Plan fetchWith:@"Circle"
-                             predicate:[NSPredicate predicateWithFormat:@"circleId == %@",info[@"id"]]
-                      keyForDescriptor:@"createDate"
+                             predicate:[NSPredicate predicateWithFormat:@"mUID == %@",info[@"id"]]
+                      keyForDescriptor:@"mCreateTime"
                   managedObjectContext:context]; //utility method from Plan+PlanCRUD.h
     
     if (!results.count) {
         circle = [NSEntityDescription insertNewObjectForEntityForName:@"Circle"
                                                inManagedObjectContext:context];
         
-        circle.circleId = info[@"id"];
-        circle.createDate = [NSDate dateWithTimeIntervalSince1970:[info[@"createTime"] integerValue]];
+        circle.mUID = info[@"id"];
+        circle.mCreateTime = [NSDate dateWithTimeIntervalSince1970:[info[@"createTime"] integerValue]];
     }else{
         circle = results.lastObject;
     }
     
     //圈名
-    if (![circle.circleName isEqualToString:info[@"name"]]) {
-        circle.circleName = info[@"name"];
+    NSString *cTitle = info[@"name"];
+    if (cTitle && ![circle.mTitle isEqualToString:cTitle]) {
+        circle.mTitle = cTitle;
     }
         
     //圈子描述
-    if (![circle.circleDescription isEqualToString:info[@"description"]]) {
-        circle.circleDescription = info[@"description"];
+    NSString *cDesc = info[@"description"];
+    if (cDesc && ![circle.mDescription isEqualToString:cDesc]) {
+        circle.mDescription = cDesc;
     }
     
     //背影图
-    if (![circle.imageId isEqualToString:info[@"backGroudPic"]]) {
-        circle.imageId = info[@"backGroudPic"];
+    NSString *bg = info[@"backGroudPic"];
+    if (bg && ![circle.mCoverImageId isEqualToString:bg]) {
+        circle.mCoverImageId = bg;
     }
     
     //主人
-    if (![circle.ownerId isEqualToString:info[@"ownerId"]]) {
-        circle.ownerId = info[@"ownerId"];
+    NSString *ownerId = info[@"ownerId"];
+    if (ownerId && ![circle.ownerId isEqualToString:ownerId]) {
+        circle.ownerId = ownerId;
     }
 
-    NSNumber *nFans = @([info[@"watch"] integerValue]);
-    if (![circle.nFans isEqualToNumber:nFans]) {
-        circle.nFans = nFans;
+    id nFans = info[@"watch"];
+    if (nFans && ![circle.nFans isEqualToNumber:@([nFans integerValue])]) {
+        circle.nFans = @([nFans integerValue]);
     }
     
-    NSNumber *nFansToday = @([info[@"new_watch"] integerValue]);
-    if (![circle.nFansToday isEqualToNumber:nFansToday]) {
-        circle.nFansToday = nFansToday;
+    id nFansToday = info[@"new_watch"];
+    if (nFansToday && ![circle.nFansToday isEqualToNumber:@([nFansToday integerValue])]) {
+        circle.nFansToday = @([nFansToday integerValue]);
     }
     
 
-    if ([info[@"iswatch"] boolValue]) {
-        circle.circleType = @(CircleTypeFollowed);
+    id iswatch = info[@"iswatch"];
+    if (iswatch) {
+        circle.circleType = [iswatch boolValue] ? @(CircleTypeFollowed) : @(CircleTypeUndefine);
     }
     
-    if ([info[@"iscanwatch"] boolValue]) {
-        circle.isFollowable = @YES;
-    }else{
-        circle.isFollowable = @NO;
+    id iscanwatch = info[@"iscanwatch"];
+    if (iscanwatch) {
+        circle.isFollowable = [iscanwatch boolValue] ? @YES : @NO;
     }
     
-    NSNumber *planCounts = @([info[@"plancount"] integerValue]);
-    if (![circle.newPlanCount isEqualToNumber:planCounts]) {
-        circle.newPlanCount = planCounts;
+    id planCounts = info[@"plancount"];
+    if (planCounts && ![circle.newPlanCount isEqualToNumber:@([planCounts integerValue])]) {
+        circle.newPlanCount = @([planCounts integerValue]);
     }
     
     return circle;
@@ -86,11 +90,11 @@
              context:(NSManagedObjectContext *)context{
     Circle *circle = [NSEntityDescription insertNewObjectForEntityForName:@"Circle"
                                                    inManagedObjectContext:context];
-    circle.circleId = circleId;
-    circle.circleName = circleName;
-    circle.circleDescription = desc;
-    circle.imageId = imageId;
-    circle.createDate = [NSDate date];
+    circle.mUID = circleId;
+    circle.mTitle = circleName;
+    circle.mDescription = desc;
+    circle.mCoverImageId = imageId;
+    circle.mCreateTime = [NSDate date];
     circle.ownerId = [User uid];
     return circle;
 }

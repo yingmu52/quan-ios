@@ -2,7 +2,7 @@
 //  Circle+CoreDataProperties.h
 //  Stories
 //
-//  Created by Xinyi Zhuang on 10/3/16.
+//  Created by Xinyi Zhuang on 10/4/16.
 //  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //
 
@@ -15,12 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<Circle *> *)fetchRequest;
 
-@property (nullable, nonatomic, copy) NSString *circleDescription;
-@property (nullable, nonatomic, copy) NSString *circleId;
-@property (nullable, nonatomic, copy) NSString *circleName;
 @property (nullable, nonatomic, copy) NSNumber *circleType;
-@property (nullable, nonatomic, copy) NSDate *createDate;
-@property (nullable, nonatomic, copy) NSString *imageId;
 @property (nullable, nonatomic, copy) NSNumber *isFollowable;
 @property (nullable, nonatomic, copy) NSNumber *newPlanCount;
 @property (nullable, nonatomic, copy) NSNumber *nFans;

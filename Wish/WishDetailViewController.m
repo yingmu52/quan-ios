@@ -20,7 +20,7 @@
 
 
 - (void)didPressedCircleButton{
-    if (self.plan.circle.circleId.length > 0) {
+    if (self.plan.circle.mUID.length > 0) {
         UIStoryboard *circleStory = [UIStoryboard storyboardWithName:@"Circle" bundle:nil];
         CircleDetailViewController *cdvc = [circleStory instantiateViewControllerWithIdentifier:@"CircleDetailViewController"];
         cdvc.circle = self.plan.circle;

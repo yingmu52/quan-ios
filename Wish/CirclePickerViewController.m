@@ -53,9 +53,9 @@
 
 - (void)configureTableViewCell:(MSTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     Circle *circle = [self.tableFetchedRC objectAtIndexPath:indexPath];
-    cell.ms_title.text = circle.circleName;
-    cell.ms_subTitle.text = circle.circleDescription;
-    [cell.ms_imageView1 downloadImageWithImageId:circle.imageId
+    cell.ms_title.text = circle.mTitle;
+    cell.ms_subTitle.text = circle.mDescription;
+    [cell.ms_imageView1 downloadImageWithImageId:circle.mCoverImageId
                                             size:FetchCenterImageSize100];
 
 }

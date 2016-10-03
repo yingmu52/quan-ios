@@ -20,7 +20,7 @@
 }
 
 - (void)loadNewData{
-    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKey:@"circleId"];
+    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKey:@"mUID"];
     [self.fetchCenter getFollowingCircleList:localList
                                       onPage:nil
                                   completion:^(NSNumber *currentPage, NSNumber *totalPage)
@@ -33,7 +33,7 @@
 }
 
 - (void)loadMoreData{
-    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKey:@"circleId"];
+    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKey:@"mUID"];
     
     [self.fetchCenter getFollowingCircleList:localList
                                       onPage:self.currentPage
@@ -60,8 +60,8 @@
 
 - (void)configureTableViewCell:(MSTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     Circle *circle = [self.tableFetchedRC objectAtIndexPath:indexPath];
-    cell.ms_title.text = circle.circleName;
-    cell.ms_textView.text = circle.circleDescription;
+    cell.ms_title.text = circle.mTitle;
+    cell.ms_textView.text = circle.mDescription;
     
     NSNumber *newPlanCount = circle.newPlanCount;
     if (newPlanCount.integerValue > 0) {
@@ -73,8 +73,8 @@
         cell.ms_imageView2.hidden = YES;
     }
     
-    [cell.ms_imageView1 downloadImageWithImageId:circle.imageId size:FetchCenterImageSize200];
-    [cell.ms_FeatherImage downloadImageWithImageId:circle.imageId size:FetchCenterImageSize200];
+    [cell.ms_imageView1 downloadImageWithImageId:circle.mCoverImageId size:FetchCenterImageSize200];
+    [cell.ms_FeatherImage downloadImageWithImageId:circle.mCoverImageId size:FetchCenterImageSize200];
 }
 
 

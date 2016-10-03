@@ -29,8 +29,8 @@
     plan.isPrivate.boolValue ? [Theme wishDetailcircleLockButtonLocked] : [Theme wishDetailcircleLockButtonUnLocked];
     [self.lockButton setImage:lockImg forState:UIControlStateNormal];
     
-    if (plan.circle.circleId.length > 0) {
-        [self.circleButton setTitle:[NSString stringWithFormat:@"所属圈子：%@",plan.circle.circleName]
+    if (plan.circle.mUID.length > 0) {
+        [self.circleButton setTitle:[NSString stringWithFormat:@"所属圈子：%@",plan.circle.mTitle]
                            forState:UIControlStateNormal];
     }else{
         [self.circleButton setTitle:@"** 该事件暂时没有所属圈子 **"

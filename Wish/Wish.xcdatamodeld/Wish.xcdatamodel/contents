@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="15G1004" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
-    <entity name="Circle" representedClassName="Circle" syncable="YES">
-        <attribute name="circleDescription" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="circleId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="circleName" optional="YES" attributeType="String" syncable="YES"/>
+    <entity name="Circle" representedClassName="Circle" parentEntity="MSBase" syncable="YES">
         <attribute name="circleType" optional="YES" attributeType="Integer 16" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="createDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="imageId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isFollowable" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="newPlanCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="nFans" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -77,12 +72,12 @@
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="plans" inverseEntity="Owner" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Circle" positionX="-8507" positionY="-250" width="128" height="223"/>
+        <element name="Circle" positionX="-8615" positionY="-279" width="128" height="148"/>
         <element name="Comment" positionX="-9009" positionY="95" width="128" height="150"/>
         <element name="Feed" positionX="-9288" positionY="-30" width="128" height="210"/>
         <element name="Message" positionX="-8892" positionY="-346" width="128" height="178"/>
-        <element name="MSBase" positionX="-8703" positionY="-522" width="128" height="148"/>
-        <element name="Owner" positionX="-8696" positionY="-43" width="128" height="88"/>
+        <element name="MSBase" positionX="-8838" positionY="-589" width="128" height="148"/>
+        <element name="Owner" positionX="-8696" positionY="-7" width="128" height="88"/>
         <element name="Plan" positionX="-9110" positionY="-324" width="128" height="238"/>
     </elements>
 </model>

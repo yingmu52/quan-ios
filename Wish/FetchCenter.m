@@ -184,7 +184,7 @@
                if (currentPage.integerValue == 1) {
                    NSArray *serverList = [responseJson valueForKeyPath:@"data.quanlist.id"];
                    [self syncEntity:@"Circle"
-                             idName:@"circleId"
+                             idName:@"mUID"
                           localList:localList
                          serverList:serverList
                           inContext:workerContext];
@@ -210,10 +210,7 @@
     NSDictionary *args = @{@"quanId":circleId};
     [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
         NSManagedObjectContext *workerContext = [self workerContext];
-        Circle *circle = [Plan fetchWith:@"Circle"
-                               predicate:[NSPredicate predicateWithFormat:@"circleId == %@",circleId]
-                        keyForDescriptor:@"circleId"
-                    managedObjectContext:workerContext].lastObject;
+        Circle *circle = [Circle fetchID:circleId inManagedObjectContext:workerContext];
         [workerContext deleteObject:circle];
         [self.appDelegate saveContext:workerContext];
         if (completionBlock) {
@@ -284,7 +281,7 @@
                  Plan *plan = [Plan updatePlanFromServer:planInfo
                                                ownerInfo:[manList valueForKey:planInfo[@"ownerId"]]
                                     managedObjectContext:workerContext];
-                 if (![plan.circle.circleId isEqualToString:circle.circleId]) {
+                 if (![plan.circle.mUID isEqualToString:circle.mUID]) {
                      plan.circle = circle;
                  }
              }
@@ -396,14 +393,13 @@
               completion:^(NSDictionary *responseJson){
                   
                   NSManagedObjectContext *workerContext = [self workerContext];
-                  Circle *circle = [Plan fetchWith:@"Circle"
-                                         predicate:[NSPredicate predicateWithFormat:@"circleId == %@",circleId]
-                                  keyForDescriptor:@"circleId" managedObjectContext:workerContext].lastObject;
                   
-                  circle.circleName = circleName;
-                  circle.circleDescription = circleDescription;
+                  Circle *circle = [Circle fetchID:circleId inManagedObjectContext:workerContext];
+                  
+                  circle.mTitle = circleName;
+                  circle.mDescription = circleDescription;
                   if (imageId) {
-                      circle.imageId = imageId;
+                      circle.mCoverImageId = imageId;
                   }
                   
                   [self.appDelegate saveContext:workerContext];
@@ -464,10 +460,8 @@
           completion:^(NSDictionary *responseJson)
     {
         NSManagedObjectContext *workerContext = [self workerContext];
-        Circle *circle = [Plan fetchWith:@"Circle"
-                               predicate:[NSPredicate predicateWithFormat:@"circleId == %@",circleId]
-                        keyForDescriptor:@"circleId"
-                    managedObjectContext:workerContext].lastObject;
+        
+        Circle *circle = [Circle fetchID:circleId inManagedObjectContext:workerContext];
         [workerContext deleteObject:circle];
         [self.appDelegate saveContext:workerContext];
         
@@ -583,7 +577,7 @@
                       if (![plan.rank isEqualToString:rk]) {
                           //重置其他事件的top值
                           NSArray *topPlans = [Plan fetchWith:@"Plan"
-                                                    predicate:[NSPredicate predicateWithFormat:@"rank == %@ AND circle.circleId == %@",rk,circle.circleId]
+                                                    predicate:[NSPredicate predicateWithFormat:@"rank == %@ AND circle.mUID == %@",rk,circle.mUID]
                                              keyForDescriptor:@"rank"
                                          managedObjectContext:workerContext];
                           for (Plan *p in topPlans) {
@@ -601,7 +595,7 @@
               
               if (currentPage.integerValue == 1) {
                   NSArray *serverList = [responseJson valueForKeyPath:@"data.quanlist.id"];
-                  [self syncEntity:@"Circle" idName:@"circleId" localList:localList serverList:serverList inContext:workerContext];
+                  [self syncEntity:@"Circle" idName:@"mUID" localList:localList serverList:serverList inContext:workerContext];
               }
               
               
@@ -1341,11 +1335,8 @@
           completion:^(NSDictionary *responseJson) {
               NSManagedObjectContext *workerContext = [self workerContext];
               Plan *plan = [Plan fetchID:planId inManagedObjectContext:workerContext];
-
-              Circle *circle = [Plan fetchWith:@"Circle"
-                                     predicate:[NSPredicate predicateWithFormat:@"circleId == %@",planId]
-                              keyForDescriptor:@"circleId"
-                          managedObjectContext:workerContext].lastObject;
+              Circle *circle = [Circle fetchID:circleId inManagedObjectContext:workerContext];
+              
               plan.circle = circle;
               [self.appDelegate saveContext:workerContext];
               if (completionBlock) {

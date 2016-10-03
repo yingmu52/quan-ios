@@ -2,7 +2,7 @@
 //  Circle+CoreDataProperties.m
 //  Stories
 //
-//  Created by Xinyi Zhuang on 10/3/16.
+//  Created by Xinyi Zhuang on 10/4/16.
 //  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //
 
@@ -14,12 +14,7 @@
 	return [[NSFetchRequest alloc] initWithEntityName:@"Circle"];
 }
 
-@dynamic circleDescription;
-@dynamic circleId;
-@dynamic circleName;
 @dynamic circleType;
-@dynamic createDate;
-@dynamic imageId;
 @dynamic isFollowable;
 @dynamic newPlanCount;
 @dynamic nFans;

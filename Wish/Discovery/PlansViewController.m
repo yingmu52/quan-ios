@@ -32,7 +32,7 @@
     if (!_collectionFetchRequest) {
         _collectionFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
         _collectionFetchRequest.predicate = [NSPredicate predicateWithFormat:@"circle == %@",self.circle];
-        _collectionFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"updateDate" ascending:NO]];
+        _collectionFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mLastReadTime" ascending:NO]];
     }
     return _collectionFetchRequest;
 }
@@ -48,7 +48,7 @@
                                           selector:@selector(popViewControllerAnimated:)
                                              frame:frame];
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
-        self.navigationItem.title = self.circle.circleName;
+        self.navigationItem.title = self.circle.mTitle;
         
         
         //点点点入口
@@ -89,9 +89,9 @@
     if (!self.collectionFetchedRC.fetchedObjects.count){
         self.collectionView.hidden = YES;
         if (self.circle) {
-            [self.emptyView.circleImageView downloadImageWithImageId:self.circle.imageId size:FetchCenterImageSize200];
-            self.emptyView.circleTitleLabel.text = self.circle.circleName;
-            self.emptyView.circleDescriptionLabel.text = self.circle.circleDescription;
+            [self.emptyView.circleImageView downloadImageWithImageId:self.circle.mCoverImageId size:FetchCenterImageSize200];
+            self.emptyView.circleTitleLabel.text = self.circle.mTitle;
+            self.emptyView.circleDescriptionLabel.text = self.circle.mDescription;
             [self.view addSubview:self.emptyView];
         }
     }else{
@@ -155,7 +155,7 @@
                                      style:UIAlertActionStyleDefault
                                    handler:^(UIAlertAction * _Nonnull action)
              {
-                 [self.fetchCenter getH5invitationUrlWithCircleId:self.circle.circleId
+                 [self.fetchCenter getH5invitationUrlWithCircleId:self.circle.mUID
                                                        completion:^(NSString *urlString)
                   {
                       if (urlString.length > 0) {
@@ -198,7 +198,7 @@
 
 - (void)showQuitCircleAlert{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确认退出这个圈子?"
-                                                                   message:self.circle.circleName
+                                                                   message:self.circle.mTitle
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定"
@@ -208,7 +208,7 @@
                                   UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
                                   [spinner startAnimating];
                                   self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
-                                  [self.fetchCenter quitCircle:self.circle.circleId completion:^{
+                                  [self.fetchCenter quitCircle:self.circle.mUID completion:^{
                                       [spinner stopAnimating];
                                       [self.navigationController popToRootViewControllerAnimated:YES];
                                   }];
@@ -226,7 +226,7 @@
 - (void)deleteCircle{
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确认删除圈子?"
-                                                                   message:self.circle.circleName
+                                                                   message:self.circle.mTitle
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定"
@@ -236,7 +236,7 @@
                                   UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
                                   [spinner startAnimating];
                                   self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
-                                  [self.fetchCenter deleteCircle:self.circle.circleId
+                                  [self.fetchCenter deleteCircle:self.circle.mUID
                                                       completion:^
                                    {
                                        [spinner stopAnimating];
@@ -276,9 +276,9 @@
         InvitationViewController *ivc = segue.destinationViewController;
         ivc.titleText = @"邀请好友";
         ivc.sharedContentTitle = [NSString stringWithFormat:@"%@ 邀请你加入圈子",[User userDisplayName]];
-        ivc.sharedContentDescription = [NSString stringWithFormat:@"【%@】\n%@",self.circle.circleName,self.circle.circleDescription];
-        if (self.circle.imageId.length > 0) {
-            ivc.imageUrl = [self.fetchCenter urlWithImageID:self.circle.imageId
+        ivc.sharedContentDescription = [NSString stringWithFormat:@"【%@】\n%@",self.circle.mTitle,self.circle.mDescription];
+        if (self.circle.mCoverImageId.length > 0) {
+            ivc.imageUrl = [self.fetchCenter urlWithImageID:self.circle.mCoverImageId
                                                        size:FetchCenterImageSize400];
         }
         ivc.h5Url = sender;

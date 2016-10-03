@@ -126,10 +126,8 @@
     
     plan.planStatus = @(PlanStatusOnGoing);
     plan.owner = [Owner updateOwnerWithInfo:[Owner myWebInfo] managedObjectContext:context];
+    Circle *circle = [Circle fetchID:circleId inManagedObjectContext:context];
     
-    Circle *circle = [Plan fetchWith:@"Circle" predicate:[NSPredicate predicateWithFormat:@"circleId == %@",circleId]
-                    keyForDescriptor:@"circleId"
-                managedObjectContext:context].lastObject;
     plan.circle = circle;
     
     

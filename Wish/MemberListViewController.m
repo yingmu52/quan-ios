@@ -25,7 +25,7 @@
 
 - (void)loadNewData{
     NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKey:@"mUID"];
-    [self.fetchCenter getMemberListForCircleId:self.circle.circleId
+    [self.fetchCenter getMemberListForCircleId:self.circle.mUID
                                      localList:localList
                                     completion:^(NSArray *memberIDs)
     {
@@ -103,7 +103,7 @@
                                                                                                     preferredStyle:UIAlertControllerStyleAlert];
                                             [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
                                             UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                                                [self.fetchCenter deleteMember:owner.mUID inCircle:self.circle.circleId completion:nil];
+                                                [self.fetchCenter deleteMember:owner.mUID inCircle:self.circle.mUID completion:nil];
                                             }];
                                             [alert addAction:confirm];
                                             [self presentViewController:alert animated:YES completion:nil];

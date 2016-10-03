@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "Plan.h"
 #import "AppDelegate.h"
+#import "MSBase.h"
 
 typedef NS_ENUM(NSInteger, CircleType) {
     CircleTypeUndefine,
@@ -19,7 +20,7 @@ typedef NS_ENUM(NSInteger, CircleType) {
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Circle : NSManagedObject
+@interface Circle : MSBase
 
 // Insert code here to declare functionality of your managed object subclass
 + (Circle *)updateCircleWithInfo:(NSDictionary *)info managedObjectContext:(NSManagedObjectContext *)context;

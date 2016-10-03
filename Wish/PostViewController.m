@@ -30,9 +30,7 @@
     //为快速创建事件推荐一个圈子
     NSString *circleId = [User currentCircleId];
     if (circleId.length > 0 && !self.circle) {
-        Circle *circle = [Plan fetchWith:@"Circle"
-                               predicate:[NSPredicate predicateWithFormat:@"circleId == %@",circleId]
-                        keyForDescriptor:@"circleId" managedObjectContext:[AppDelegate getContext]].lastObject;
+        Circle *circle = [Circle fetchID:circleId inManagedObjectContext:[AppDelegate getContext]];
         self.circle = circle;
     }
 }
@@ -76,7 +74,7 @@
     [self.textField addTarget:self action:@selector(textFieldDidUpdate) forControlEvents:UIControlEventEditingChanged];
     
     if (self.circle) {
-        self.infoLabel.text = [NSString stringWithFormat:@"所属圈子：%@",self.circle.circleName];
+        self.infoLabel.text = [NSString stringWithFormat:@"所属圈子：%@",self.circle.mTitle];
     }
 }
 
@@ -130,7 +128,7 @@
 
 - (void)setCircle:(Circle *)circle{
     _circle = circle;
-    self.infoLabel.text = [NSString stringWithFormat:@"所属圈子：%@",circle.circleName];
+    self.infoLabel.text = [NSString stringWithFormat:@"所属圈子：%@",circle.mTitle];
 }
 
 

@@ -53,11 +53,11 @@
 
 - (void)setupHeaderView{
     self.circleImageView.layer.cornerRadius = 3.0f;
-    [self.circleImageView downloadImageWithImageId:self.circle.imageId
+    [self.circleImageView downloadImageWithImageId:self.circle.mCoverImageId
                                               size:FetchCenterImageSize400];
-    self.circleTitleLabel.text = self.circle.circleName;
+    self.circleTitleLabel.text = self.circle.mTitle;
     self.followCountLabel.text = [NSString stringWithFormat:@"%@人关注",self.circle.nFans];
-    self.circleDescriptionTextView.text = self.circle.circleDescription;
+    self.circleDescriptionTextView.text = self.circle.mDescription;
     self.circleDescriptionTextView.textContainerInset = UIEdgeInsetsZero;
     self.circleDescriptionTextView.textColor = [UIColor whiteColor];
     
@@ -85,7 +85,7 @@
 
 
 - (IBAction)followButtonPressed{
-    [self.fetchCenter followCircleId:self.circle.circleId completion:^{
+    [self.fetchCenter followCircleId:self.circle.mUID completion:^{
         [self.followButton setTitle:@"已关注" forState:UIControlStateNormal];
     }];
 }
@@ -94,7 +94,7 @@
 
 - (void)loadMoreData{
     NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKey:@"mUID"];
-    [self.fetchCenter getPlanListInCircleId:self.circle.circleId
+    [self.fetchCenter getPlanListInCircleId:self.circle.mUID
                                   localList:localList
                                      onPage:self.currentPage
                                  completion:^(NSNumber *currentPage,
@@ -121,7 +121,7 @@
 - (NSFetchRequest *)tableFetchRequest{
     if (!_tableFetchRequest) {
         _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
-        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"circle.circleId == %@",self.circle.circleId];
+        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"circle.mUID == %@",self.circle.mUID];
         _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mLastReadTime" ascending:NO]];
     }
     return _tableFetchRequest;
@@ -222,7 +222,7 @@
                                      style:UIAlertActionStyleDefault
                                    handler:^(UIAlertAction * _Nonnull action)
              {
-                 [self.fetchCenter getH5invitationUrlWithCircleId:self.circle.circleId
+                 [self.fetchCenter getH5invitationUrlWithCircleId:self.circle.mUID
                                                        completion:^(NSString *urlString)
                   {
                       if (urlString.length > 0) {
@@ -265,7 +265,7 @@
 
 - (void)showQuitCircleAlert{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确认退出这个圈子?"
-                                                                   message:self.circle.circleName
+                                                                   message:self.circle.mTitle
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定"
@@ -275,7 +275,7 @@
                                   UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
                                   [spinner startAnimating];
                                   self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
-                                  [self.fetchCenter quitCircle:self.circle.circleId completion:^{
+                                  [self.fetchCenter quitCircle:self.circle.mUID completion:^{
                                       [spinner stopAnimating];
                                       [self.navigationController popToRootViewControllerAnimated:YES];
                                   }];
@@ -293,7 +293,7 @@
 - (void)deleteCircle{
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确认删除圈子?"
-                                                                   message:self.circle.circleName
+                                                                   message:self.circle.mTitle
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定"
@@ -303,7 +303,7 @@
                                   UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
                                   [spinner startAnimating];
                                   self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
-                                  [self.fetchCenter deleteCircle:self.circle.circleId
+                                  [self.fetchCenter deleteCircle:self.circle.mUID
                                                       completion:^
                                    {
                                        [spinner stopAnimating];
@@ -348,9 +348,9 @@
         InvitationViewController *ivc = segue.destinationViewController;
         ivc.titleText = @"邀请好友";
         ivc.sharedContentTitle = [NSString stringWithFormat:@"%@ 邀请你加入圈子",[User userDisplayName]];
-        ivc.sharedContentDescription = [NSString stringWithFormat:@"【%@】\n%@",self.circle.circleName,self.circle.circleDescription];
-        if (self.circle.imageId.length > 0) {
-            ivc.imageUrl = [self.fetchCenter urlWithImageID:self.circle.imageId
+        ivc.sharedContentDescription = [NSString stringWithFormat:@"【%@】\n%@",self.circle.mTitle,self.circle.mDescription];
+        if (self.circle.mCoverImageId.length > 0) {
+            ivc.imageUrl = [self.fetchCenter urlWithImageID:self.circle.mCoverImageId
                                                        size:FetchCenterImageSize400];
         }
         ivc.h5Url = sender;

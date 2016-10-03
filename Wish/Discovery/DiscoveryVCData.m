@@ -100,7 +100,7 @@
     cell.ms_subTitleLabel.text = [NSString stringWithFormat:@"%@",plan.owner.mTitle];
     cell.ms_infoLabel1.text = [NSString stringWithFormat:@"%@人阅读",plan.readCount];
     
-    cell.ms_infoLabel2.text = [NSString stringWithFormat:@"圈子：%@",plan.circle.circleName ? plan.circle.circleName : @""];
+    cell.ms_infoLabel2.text = [NSString stringWithFormat:@"圈子：%@",plan.circle.mTitle ? plan.circle.mTitle : @""];
     
     //显示置顶的角标
     cell.ms_imageView3.image = [plan.cornerMask isEqualToString:@"top"] ? [Theme topImageMask] : nil;
@@ -147,7 +147,7 @@
         CGPoint point = [longPress locationInView:self.collectionView];
         NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:point];
         Plan *plan = [self.collectionFetchedRC objectAtIndexPath:indexPath];
-        NSString *msg = [NSString stringWithFormat:@"用户id:%@\n事件id:%@\n事件名:%@\n圈名:%@\n圈ID:%@",plan.owner.mUID,plan.mUID,plan.mTitle,plan.circle.circleName,plan.circle.circleId];
+        NSString *msg = [NSString stringWithFormat:@"用户id:%@\n事件id:%@\n事件名:%@\n圈名:%@\n圈ID:%@",plan.owner.mUID,plan.mUID,plan.mTitle,plan.circle.mTitle,plan.circle.mUID];
         
         //显示弹出提示窗口
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:msg preferredStyle:UIAlertControllerStyleAlert];
