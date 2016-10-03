@@ -19,5 +19,7 @@
 @dynamic mDescription;
 @dynamic mCoverImageId;
 @dynamic mUID;
+@dynamic mCreateTime;
+@dynamic mUpdateTime;
 
 @end

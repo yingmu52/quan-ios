@@ -16,22 +16,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<Plan *> *)fetchRequest;
 
-@property (nullable, nonatomic, copy) NSString *backgroundNum;
 @property (nullable, nonatomic, copy) NSString *cornerMask;
-@property (nullable, nonatomic, copy) NSDate *createDate;
-@property (nullable, nonatomic, copy) NSString *detailText;
 @property (nullable, nonatomic, copy) NSNumber *discoverIndex;
 @property (nullable, nonatomic, copy) NSNumber *followCount;
 @property (nullable, nonatomic, copy) NSNumber *isFollowed;
 @property (nullable, nonatomic, copy) NSNumber *isPrivate;
-@property (nullable, nonatomic, copy) NSString *planId;
 @property (nullable, nonatomic, copy) NSNumber *planStatus;
-@property (nullable, nonatomic, copy) NSString *planTitle;
 @property (nullable, nonatomic, copy) NSString *rank;
 @property (nullable, nonatomic, copy) NSNumber *readCount;
 @property (nullable, nonatomic, copy) NSString *shareUrl;
 @property (nullable, nonatomic, copy) NSNumber *tryTimes;
-@property (nullable, nonatomic, copy) NSDate *updateDate;
 @property (nullable, nonatomic, retain) Circle *circle;
 @property (nullable, nonatomic, retain) NSSet<Feed *> *feeds;
 @property (nullable, nonatomic, retain) Owner *owner;

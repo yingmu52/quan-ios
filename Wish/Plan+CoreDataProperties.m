@@ -15,22 +15,16 @@
 	return [[NSFetchRequest alloc] initWithEntityName:@"Plan"];
 }
 
-@dynamic backgroundNum;
 @dynamic cornerMask;
-@dynamic createDate;
-@dynamic detailText;
 @dynamic discoverIndex;
 @dynamic followCount;
 @dynamic isFollowed;
 @dynamic isPrivate;
-@dynamic planId;
 @dynamic planStatus;
-@dynamic planTitle;
 @dynamic rank;
 @dynamic readCount;
 @dynamic shareUrl;
 @dynamic tryTimes;
-@dynamic updateDate;
 @dynamic circle;
 @dynamic feeds;
 @dynamic owner;

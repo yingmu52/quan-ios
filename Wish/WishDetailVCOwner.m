@@ -45,7 +45,7 @@
                                                     handler:^(UIAlertAction * _Nonnull action)
                               {
                                   //执行删除操作
-                                  [self.fetchCenter deletePlanId:self.plan.planId completion:^{
+                                  [self.fetchCenter deletePlanId:self.plan.mUID completion:^{
                                       [self.navigationController popViewControllerAnimated:YES];
                                   }];
                               }];

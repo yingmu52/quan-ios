@@ -35,7 +35,7 @@
 
 
 - (void)loadNewData{
-    NSArray *localList = [self.collectionFetchedRC.fetchedObjects valueForKey:@"planId"];
+    NSArray *localList = [self.collectionFetchedRC.fetchedObjects valueForKey:@"mUID"];
     [self.fetchCenter getPlanListForOwnerId:[User uid]
                                   localList:localList
                                  completion:nil];
@@ -67,9 +67,9 @@
         cell = [aCollectionView dequeueReusableCellWithReuseIdentifier:PREVIEWCELLNORMAL forIndexPath:indexPath];
         Plan *plan = [self.collectionFetchedRC objectAtIndexPath:indexPath];
         
-        [cell.planImageView downloadImageWithImageId:plan.backgroundNum size:FetchCenterImageSize400];
+        [cell.planImageView downloadImageWithImageId:plan.mCoverImageId size:FetchCenterImageSize400];
         
-        cell.titleLabel.text = plan.planTitle;
+        cell.titleLabel.text = plan.mTitle;
         cell.recordCountLabel.text = [NSString stringWithFormat:@"%@个记录",plan.tryTimes];
         [cell layoutIfNeeded]; //fixed auto layout error on iphone 5s or above
     }else{

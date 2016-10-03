@@ -54,8 +54,8 @@ static NSUInteger numberOfPreloadedFeeds = 3;
     Plan *plan = [self.tableFetchedRC objectAtIndexPath:indexPath];
     FollowingCell *c = (FollowingCell *)cell;
     //update Plan Info
-    c.headTitleLabel.text = plan.planTitle;
-    c.headDateLabel.text = [NSString stringWithFormat:@"更新于 %@",[SystemUtil stringFromDate:plan.updateDate]];
+    c.headTitleLabel.text = plan.mTitle;
+    c.headDateLabel.text = [NSString stringWithFormat:@"更新于 %@",[SystemUtil stringFromDate:plan.mUpdateTime]];
     c.delegate = self;
     
     //fetch feeds array

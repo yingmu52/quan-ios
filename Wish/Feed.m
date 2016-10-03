@@ -20,8 +20,8 @@
               planID:(NSString *)planId inManagedObjectContext:(NSManagedObjectContext *)context
 {
     Plan *plan = [Plan fetchWith:@"Plan"
-                       predicate:[NSPredicate predicateWithFormat:@"planId == %@",planId]
-                keyForDescriptor:@"planId"
+                       predicate:[NSPredicate predicateWithFormat:@"mUID == %@",planId]
+                keyForDescriptor:@"mUID"
             managedObjectContext:context].lastObject;
     
     Feed *feed = [NSEntityDescription insertNewObjectForEntityForName:@"Feed"
@@ -34,8 +34,8 @@
     feed.imageId = imageIds.firstObject;
     feed.picUrls = [imageIds componentsJoinedByString:@","];
     feed.type = @(imageIds.count > 1 ? FeedTypeMultiplePicture : FeedTypeSinglePicture);
-    plan.backgroundNum = imageIds.firstObject;
-    plan.updateDate = [NSDate date];
+    plan.mCoverImageId = imageIds.firstObject;
+    plan.mUpdateTime = [NSDate date];
     feed.plan = plan;
     feed.selfLiked = @(NO);
     return feed;

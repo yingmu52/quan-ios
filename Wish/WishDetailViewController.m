@@ -37,10 +37,10 @@
                                                                 preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleCancel handler:nil]];
         [alert addAction:[UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [self.fetchCenter updatePlan:self.plan.planId
-                                   title:self.plan.planTitle
+            [self.fetchCenter updatePlan:self.plan.mUID
+                                   title:self.plan.mTitle
                                isPrivate:!currentPrivacy
-                             description:self.plan.detailText
+                             description:self.plan.mDescription
                               completion:^
             {
                 UIImage *img = !currentPrivacy ? [Theme wishDetailcircleLockButtonLocked] : [Theme wishDetailcircleLockButtonUnLocked];
@@ -79,10 +79,10 @@
                                                                style:UIAlertActionStyleDefault
                                                              handler:^(UIAlertAction * _Nonnull action)
                                        {
-                                           [self.fetchCenter updatePlan:self.plan.planId
-                                                                  title:self.plan.planTitle
+                                           [self.fetchCenter updatePlan:self.plan.mUID
+                                                                  title:self.plan.mTitle
                                                               isPrivate:NO
-                                                            description:self.plan.detailText
+                                                            description:self.plan.mDescription
                                                              completion:^
                                             {
                                                 [self performSegueWithIdentifier:@"showInvitationView" sender:nil];
@@ -133,7 +133,7 @@
     CGFloat planDescriptionHeight = 0.0f;
     CGFloat fontSize = 12.0f;
     if (self.plan.hasDetailText) {
-        planDescriptionHeight = [SystemUtil heightForText:self.plan.detailText withFontSize:fontSize];
+        planDescriptionHeight = [SystemUtil heightForText:self.plan.mDescription withFontSize:fontSize];
     }
     //    else if ([self.plan.owner.ownerId isEqualToString:[User uid]]){ //只记算自己的事件描述高度，客人态描述隐藏
     //        planDescriptionHeight = [SystemUtil heightForText:EMPTY_PLACEHOLDER_OWNER withFontSize:fontSize];
@@ -150,12 +150,12 @@
     NSRange resultRange = [text rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet] options:NSBackwardsSearch];
     if ([text length] == 1 && resultRange.location != NSNotFound) {
         [textView resignFirstResponder];
-        self.plan.detailText = textView.text;
+        self.plan.mDescription = textView.text;
         
-        [self.fetchCenter updatePlan:self.plan.planId
-                               title:self.plan.planTitle
+        [self.fetchCenter updatePlan:self.plan.mUID
+                               title:self.plan.mTitle
                            isPrivate:self.plan.isPrivate.boolValue
-                         description:self.plan.detailText
+                         description:self.plan.mDescription
                           completion:^{
                               [textView resignFirstResponder];
                           }];
@@ -224,7 +224,7 @@
 
 - (void)loadMoreData{
     NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKey:@"feedId"];
-    [self.fetchCenter getFeedsListForPlan:self.plan.planId
+    [self.fetchCenter getFeedsListForPlan:self.plan.mUID
                                 localList:localList
                                    onPage:self.currentPage
                                completion:^(NSNumber *currentPage, NSNumber *totalPage)
@@ -281,7 +281,7 @@
         
         
         //下载图片
-        NSURL *imageUrl = [self.fetchCenter urlWithImageID:self.plan.backgroundNum size:FetchCenterImageSize400];
+        NSURL *imageUrl = [self.fetchCenter urlWithImageID:self.plan.mCoverImageId size:FetchCenterImageSize400];
         
         SDWebImageManager *manager = [SDWebImageManager sharedManager];
         NSString *localKey = [manager cacheKeyForURL:imageUrl];
@@ -304,7 +304,7 @@
 - (NSFetchRequest *)tableFetchRequest{
     if (!_tableFetchRequest) {
         _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Feed"];
-        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"plan.planId == %@",self.plan.planId];
+        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"plan.mUID == %@",self.plan.mUID];
         _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
     }
     return _tableFetchRequest;
@@ -429,9 +429,9 @@
     if ([segue.identifier isEqualToString:@"showInvitationView"]) {
         InvitationViewController *ivc = segue.destinationViewController;
         ivc.titleText = @"分享事件给好友";
-        ivc.imageUrl = [self.fetchCenter urlWithImageID:self.plan.backgroundNum size:FetchCenterImageSize50];
-        ivc.sharedContentTitle = self.plan.planTitle;
-        ivc.sharedContentDescription = self.plan.detailText ? self.plan.detailText : @"";
+        ivc.imageUrl = [self.fetchCenter urlWithImageID:self.plan.mCoverImageId size:FetchCenterImageSize50];
+        ivc.sharedContentTitle = self.plan.mTitle;
+        ivc.sharedContentDescription = self.plan.mDescription ? self.plan.mDescription : @"";
         ivc.h5Url = self.plan.shareUrl;
         NSAssert(self.plan.isPrivate.boolValue != (self.plan.shareUrl.length > 0), @"私密事件不能有url，反之亦然");
     }

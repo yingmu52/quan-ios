@@ -20,7 +20,7 @@
 @implementation HeaderView
 
 - (void)updateHeaderWithPlan:(Plan *)plan{
-    self.headerTitleLabel.text = plan.planTitle;
+    self.headerTitleLabel.text = plan.mTitle;
     self.headerFeedCountLabel.text = [NSString stringWithFormat:@"%@条记录",plan.tryTimes];
     self.headerFollowLabel.text = [NSString stringWithFormat:@"%@人阅读",plan.readCount];
     self.badgeImageView.hidden = (plan.planStatus.integerValue != PlanStatusFinished);
@@ -46,7 +46,7 @@
         self.descriptionTextView.hidden = !plan.hasDetailText;
 //        [self showFollowButtonWithTitle:(plan.isFollowed.boolValue ? @"已关注" :@"关注")];
     }
-    self.descriptionTextView.text = plan.detailText;
+    self.descriptionTextView.text = plan.mDescription;
 //    self.followButton.hidden = [plan.owner.ownerId isEqualToString:[User uid]] | [User isVisitor];
 }
 

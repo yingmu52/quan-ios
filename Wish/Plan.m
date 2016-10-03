@@ -36,15 +36,15 @@
     Plan *plan;
     //check existance
     NSArray *checks = [Plan fetchWith:@"Plan"
-                            predicate:[NSPredicate predicateWithFormat:@"planId == %@",dict[@"id"]]
-                     keyForDescriptor:@"createDate" managedObjectContext:context];
+                            predicate:[NSPredicate predicateWithFormat:@"mUID == %@",dict[@"id"]]
+                     keyForDescriptor:@"mUID" managedObjectContext:context];
     
     if (!checks.count) {
         //insert new fetched plan
         plan = [NSEntityDescription insertNewObjectForEntityForName:@"Plan"
                                              inManagedObjectContext:context];
-        plan.createDate = [NSDate dateWithTimeIntervalSince1970:[dict[@"createTime"] integerValue]];
-        plan.planId = dict[@"id"];
+        plan.mCreateTime = [NSDate dateWithTimeIntervalSince1970:[dict[@"createTime"] integerValue]];
+        plan.mUID = dict[@"id"];
         plan.owner = [Owner updateOwnerWithInfo:ownerInfo managedObjectContext:context];
     }else{
         //update existing plan
@@ -52,18 +52,18 @@
     }
     
     NSString *ptitle = dict[@"title"];
-    if (ptitle && ![plan.planTitle isEqualToString:ptitle]) {
-        plan.planTitle = ptitle;
+    if (ptitle && ![plan.mTitle isEqualToString:ptitle]) {
+        plan.mTitle = ptitle;
     }
     
     NSString *pDetail = dict[@"description"];
-    if (pDetail && ![plan.detailText isEqualToString:pDetail]) {
-        plan.detailText = pDetail;
+    if (pDetail && ![plan.mDescription isEqualToString:pDetail]) {
+        plan.mDescription = pDetail;
     }
     
     NSString *pBackground = dict[@"backGroudPic"];
-    if (pBackground && ![plan.backgroundNum isEqualToString:pBackground]) {
-        plan.backgroundNum = pBackground;
+    if (pBackground && ![plan.mCoverImageId isEqualToString:pBackground]) {
+        plan.mCoverImageId = pBackground;
     }
     
     NSString *pShareUrl = dict[@"share_url"];
@@ -72,8 +72,8 @@
     }
     
     NSDate *pUpdateDate = [NSDate dateWithTimeIntervalSince1970:[dict[@"updateTime"] integerValue]];
-    if (pUpdateDate && ![plan.updateDate isEqualToDate:pUpdateDate]) {
-        plan.updateDate = pUpdateDate;
+    if (pUpdateDate && ![plan.mUpdateTime isEqualToDate:pUpdateDate]) {
+        plan.mUpdateTime = pUpdateDate;
     }
     
     NSNumber *pFollowCount = @([dict[@"followNums"] integerValue]);
@@ -120,14 +120,14 @@
     Plan *plan = [NSEntityDescription insertNewObjectForEntityForName:@"Plan"
                                                inManagedObjectContext:context];
     
-    plan.planId = planId;
-    plan.backgroundNum = backGroundID;
-    plan.planTitle = planTitle;
+    plan.mUID = planId;
+    plan.mCoverImageId = backGroundID;
+    plan.mTitle = planTitle;
     plan.isPrivate = @(YES);
-    plan.createDate = [NSDate date];
+    plan.mCreateTime = [NSDate date];
     
     //貌似数据不全会影响到FRC在列表上的展示？
-    plan.updateDate = [NSDate date];
+    plan.mUpdateTime = [NSDate date];
     plan.discoverIndex = @(888);
     
     
@@ -182,7 +182,7 @@
 }
 
 - (BOOL)hasDetailText{
-    return self.detailText && ![self.detailText isEqualToString:@""];
+    return self.mDescription && ![self.mDescription isEqualToString:@""];
 }
 
 @end

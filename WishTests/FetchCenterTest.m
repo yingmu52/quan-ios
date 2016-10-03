@@ -171,7 +171,7 @@ static NSTimeInterval expectationTimeout = 30.0f;
 - (void)testUpdatePlan{
 
     NSArray *myPlans = [Plan fetchWith:@"Plan"
-                             predicate:[NSPredicate predicateWithFormat:@"owner.mUID == %@",[User uid]] keyForDescriptor:@"planId"
+                             predicate:[NSPredicate predicateWithFormat:@"owner.mUID == %@",[User uid]] keyForDescriptor:@"mUID"
                   managedObjectContext:[AppDelegate getContext]];
     
     NSUInteger numberOfCycles = 10;
@@ -181,10 +181,10 @@ static NSTimeInterval expectationTimeout = 30.0f;
             //        self.testPlan.planStatus = i == numberOfCycles ? @(PlanStatusOnGoing) : @(PlanStatusFinished); //修改事件状态
             XCTestExpectation *expectation = [self expectationWithDescription:@"更新事件内容接口"];
             
-            [self.fetchCenter updatePlan:p.planId
-                                   title:p.planTitle
+            [self.fetchCenter updatePlan:p.mUID
+                                   title:p.mTitle
                                isPrivate:!p.isPrivate.boolValue
-                             description:p.detailText completion:^{
+                             description:p.mDescription completion:^{
                 [expectation fulfill];
             }];
             

@@ -64,7 +64,7 @@
 }
 
 - (void)loadMoreData{
-    NSArray *localList = [self.collectionFetchedRC.fetchedObjects valueForKey:@"planId"];
+    NSArray *localList = [self.collectionFetchedRC.fetchedObjects valueForKey:@"mUID"];
 //    [self.fetchCenter getPlanListInCircleId:self.circle.circleId 
 //                                  localList:localList
 //                                     onPage:self.currentPage

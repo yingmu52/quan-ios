@@ -85,7 +85,7 @@ static NSUInteger distance = 10;
     self.navigationItem.rightBarButtonItem.enabled = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#2A2A2A"]};
     if (self.plan) {
-        self.navigationItem.title = self.plan.planTitle;
+        self.navigationItem.title = self.plan.mTitle;
     }
     self.wordCountLabel.text = [NSString stringWithFormat:@"0/%@ 字",@(maxWordCount)];
 }
@@ -278,7 +278,7 @@ static NSUInteger distance = 10;
     
     if (self.plan) {
         [self.fetchCenter createFeed:self.textView.text
-                              planId:self.plan.planId
+                              planId:self.plan.mUID
                      fetchedImageIds:imageIds
                           completion:^(NSString *feedId) {
                               [self.navigationController popViewControllerAnimated:YES];

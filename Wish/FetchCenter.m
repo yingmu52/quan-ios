@@ -294,7 +294,7 @@
              if (currentPage.integerValue == 1){
                  NSArray *serverList = [planList valueForKeyPath:@"id"];
                  [self syncEntity:@"Plan"
-                           idName:@"planId"
+                           idName:@"mUID"
                         localList:localList
                        serverList:serverList
                         inContext:workerContext];
@@ -587,7 +587,7 @@
                                              keyForDescriptor:@"rank"
                                          managedObjectContext:workerContext];
                           for (Plan *p in topPlans) {
-                              NSLog(@"Reset plan: %@",p.planId);
+                              NSLog(@"Reset plan: %@",p.mUID);
                               p.rank = nil;
                           }
                           
@@ -869,7 +869,7 @@
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,DELETE_FEED];
     NSDictionary *args = @{@"id":feed.feedId,
                            @"picId":feed.imageId,
-                           @"planId":feed.plan.planId};
+                           @"planId":feed.plan.mUID};
     [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
         NSLog(@"delete feed successed, ID:%@",feed.feedId);
         
@@ -877,8 +877,8 @@
 
         //Get Plan
         Plan *p = [Plan fetchWith:@"Plan"
-                           predicate:[NSPredicate predicateWithFormat:@"planId == %@",feed.plan.planId]
-                    keyForDescriptor:@"planId"
+                           predicate:[NSPredicate predicateWithFormat:@"mUID == %@",feed.plan.mUID]
+                    keyForDescriptor:@"mUID"
                 managedObjectContext:workerContext].lastObject;
         //Get Feed
         Feed *f = [Plan fetchWith:@"Feed"
@@ -895,7 +895,7 @@
             Feed *second = [sortedArray objectAtIndex:1];
             if ([f.feedId isEqualToString:first.feedId]){
                 //delete plan image
-                p.backgroundNum = second.imageId;
+                p.mCoverImageId = second.imageId;
             }
             p.tryTimes = @(p.tryTimes.integerValue - 1);            
         }
@@ -1106,21 +1106,21 @@
 - (void)followPlan:(Plan *)plan completion:(FetchCenterGetRequestFollowPlanCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FOLLOW,FOLLOW_PLAN];
     [self getRequest:rqtStr
-           parameter:@{@"planId":plan.planId}
+           parameter:@{@"planId":plan.mUID}
     includeArguments:YES
           completion:^(NSDictionary *responseJson)
     {
         NSManagedObjectContext *workerContext = [self workerContext];
         Plan *p = [Plan fetchWith:@"Plan"
-                        predicate:[NSPredicate predicateWithFormat:@"planId == %@",plan.planId]
-                 keyForDescriptor:@"planId"
+                        predicate:[NSPredicate predicateWithFormat:@"mUID == %@",plan.mUID]
+                 keyForDescriptor:@"mUID"
              managedObjectContext:workerContext].lastObject;
         
         p.followCount = @(p.followCount.integerValue + 1);
         p.isFollowed = @(YES);
         [self.appDelegate saveContext:workerContext];
         
-        NSLog(@"followed plan ID %@",plan.planId);
+        NSLog(@"followed plan ID %@",plan.mUID);
         if (completionBlock) {
             dispatch_main_async_safe(^{
                 completionBlock();
@@ -1132,14 +1132,14 @@
 - (void)unFollowPlan:(Plan *)plan completion:(FetchCenterGetRequestUnFollowPlanCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FOLLOW,UNFOLLOW_PLAN];
     [self getRequest:rqtStr
-           parameter:@{@"planId":plan.planId}
+           parameter:@{@"planId":plan.mUID}
     includeArguments:YES
           completion:^(NSDictionary *responseJson)
     {
         NSManagedObjectContext *workerContext = [self workerContext];
         Plan *p = [Plan fetchWith:@"Plan"
-                        predicate:[NSPredicate predicateWithFormat:@"planId == %@",plan.planId]
-                 keyForDescriptor:@"planId"
+                        predicate:[NSPredicate predicateWithFormat:@"mUID == %@",plan.mUID]
+                 keyForDescriptor:@"mUID"
              managedObjectContext:workerContext].lastObject;
 
         p.followCount = @(p.followCount.integerValue - 1);
@@ -1147,7 +1147,7 @@
         
         [self.appDelegate saveContext:workerContext];
         
-        NSLog(@"unfollowed plan ID %@",plan.planId);
+        NSLog(@"unfollowed plan ID %@",plan.mUID);
         if (completionBlock) {
             dispatch_main_async_safe(^{
                 completionBlock();
@@ -1184,7 +1184,7 @@
         //同步
         NSArray *serverList = [responseJson valueForKeyPath:@"data.planList.id"];
         [self syncEntity:@"Plan"
-                  idName:@"planId"
+                  idName:@"mUID"
                localList:localList
               serverList:serverList
                inContext:workerContext];
@@ -1241,7 +1241,7 @@
              //同步
              if (currentPage.integerValue == 1) { //同步服务器与本地第一页的数据
                  NSArray *serverList = [planList valueForKey:@"id"];
-                 [self syncEntity:@"Plan" idName:@"planId" localList:localList serverList:serverList inContext:workerContext];
+                 [self syncEntity:@"Plan" idName:@"mUID" localList:localList serverList:serverList inContext:workerContext];
              }
              
              [self.appDelegate saveContext:workerContext];
@@ -1349,8 +1349,8 @@
           completion:^(NSDictionary *responseJson) {
               NSManagedObjectContext *workerContext = [self workerContext];
               Plan *plan = [Plan fetchWith:@"Plan"
-                                 predicate:[NSPredicate predicateWithFormat:@"planId == %@",planId]
-                          keyForDescriptor:@"planId"
+                                 predicate:[NSPredicate predicateWithFormat:@"mUID == %@",planId]
+                          keyForDescriptor:@"mUID"
                       managedObjectContext:workerContext].lastObject;
               Circle *circle = [Plan fetchWith:@"Circle"
                                      predicate:[NSPredicate predicateWithFormat:@"circleId == %@",planId]
@@ -1385,14 +1385,14 @@
         //更新本地事件
         NSManagedObjectContext *workerContext = [self workerContext];
         Plan *plan = [[Plan fetchWith:@"Plan"
-                           predicate:[NSPredicate predicateWithFormat:@"planId == %@",planId]
-                    keyForDescriptor:@"planId"
+                           predicate:[NSPredicate predicateWithFormat:@"mUID == %@",planId]
+                    keyForDescriptor:@"mUID"
                 managedObjectContext:workerContext] lastObject];
         
         plan.shareUrl = isPrivate ? nil : responseJson[@"share_url"];
         
-        plan.planTitle = planTitle;
-        plan.detailText = planDescription;
+        plan.mTitle = planTitle;
+        plan.mDescription = planDescription;
         plan.isPrivate = @(isPrivate);
         [self.appDelegate saveContext:workerContext];
 
@@ -1417,11 +1417,11 @@
           completion:^(NSDictionary *responseJson) {
               NSManagedObjectContext *workerContext = [self workerContext];
               Plan *plan = [[Plan fetchWith:@"Plan"
-                                  predicate:[NSPredicate predicateWithFormat:@"planId == %@",planId]
-                           keyForDescriptor:@"planId"
+                                  predicate:[NSPredicate predicateWithFormat:@"mUID == %@",planId]
+                           keyForDescriptor:@"mUID"
                        managedObjectContext:workerContext] lastObject];
               plan.planStatus = @(planStatus);
-              plan.updateDate = [NSDate date];
+              plan.mUpdateTime = [NSDate date];
               [self.appDelegate saveContext:workerContext];
 //        NSLog(@"%@",responseJson);
         if (completionBlock) {
@@ -1456,7 +1456,7 @@
             }
             
             NSArray *serverList = [responseJson valueForKeyPath:@"data.id"];
-            [self syncEntity:@"Plan" idName:@"planId" localList:localList serverList:serverList inContext:workerContext];
+            [self syncEntity:@"Plan" idName:@"mUID" localList:localList serverList:serverList inContext:workerContext];
             
             [self.appDelegate saveContext:workerContext];
             
@@ -1530,8 +1530,8 @@
           completion:^(NSDictionary *responseJson) {
               NSManagedObjectContext *workerContext = [self workerContext];
               Plan *plan = [[Plan fetchWith:@"Plan"
-                                  predicate:[NSPredicate predicateWithFormat:@"planId = %@",planId]
-                           keyForDescriptor:@"planId"
+                                  predicate:[NSPredicate predicateWithFormat:@"mUID = %@",planId]
+                           keyForDescriptor:@"mUID"
                        managedObjectContext:workerContext] lastObject];
               [workerContext deleteObject:plan];
               [self.appDelegate saveContext:workerContext];

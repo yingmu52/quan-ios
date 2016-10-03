@@ -54,7 +54,7 @@
 }
 
 - (void)loadNewData{
-    NSArray *localList = [self.collectionFetchedRC.fetchedObjects valueForKey:@"planId"];
+    NSArray *localList = [self.collectionFetchedRC.fetchedObjects valueForKey:@"mUID"];
     [self.fetchCenter getDiscoveryList:localList
                                 onPage:nil
                             completion:^(NSNumber *currentPage, NSNumber *totalPage)
@@ -65,7 +65,7 @@
      }];
 }
 - (void)loadMoreData{
-    NSArray *localList = [self.collectionFetchedRC.fetchedObjects valueForKey:@"planId"];
+    NSArray *localList = [self.collectionFetchedRC.fetchedObjects valueForKey:@"mUID"];
     [self.fetchCenter getDiscoveryList:localList
                                 onPage:self.currentPage
                             completion:^(NSNumber *currentPage, NSNumber *totalPage)
@@ -94,9 +94,9 @@
     cell.ms_shouldHaveBorder = YES;
     
     Plan *plan = [self.collectionFetchedRC objectAtIndexPath:indexPath];
-    [cell.ms_imageView1 downloadImageWithImageId:plan.backgroundNum size:FetchCenterImageSize400];
+    [cell.ms_imageView1 downloadImageWithImageId:plan.mCoverImageId size:FetchCenterImageSize400];
     [cell.ms_imageView2 downloadImageWithImageId:plan.owner.mCoverImageId size:FetchCenterImageSize50];
-    cell.ms_titleLabel.text = plan.planTitle;
+    cell.ms_titleLabel.text = plan.mTitle;
     cell.ms_subTitleLabel.text = [NSString stringWithFormat:@"%@",plan.owner.mTitle];
     cell.ms_infoLabel1.text = [NSString stringWithFormat:@"%@人阅读",plan.readCount];
     
@@ -147,7 +147,7 @@
         CGPoint point = [longPress locationInView:self.collectionView];
         NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:point];
         Plan *plan = [self.collectionFetchedRC objectAtIndexPath:indexPath];
-        NSString *msg = [NSString stringWithFormat:@"用户id:%@\n事件id:%@\n事件名:%@\n圈名:%@\n圈ID:%@",plan.owner.mUID,plan.planId,plan.planTitle,plan.circle.circleName,plan.circle.circleId];
+        NSString *msg = [NSString stringWithFormat:@"用户id:%@\n事件id:%@\n事件名:%@\n圈名:%@\n圈ID:%@",plan.owner.mUID,plan.mUID,plan.mTitle,plan.circle.circleName,plan.circle.circleId];
         
         //显示弹出提示窗口
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:msg preferredStyle:UIAlertControllerStyleAlert];

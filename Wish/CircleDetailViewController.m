@@ -93,7 +93,7 @@
 #pragma mark - Data Source
 
 - (void)loadMoreData{
-    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKey:@"planId"];
+    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKey:@"mUID"];
     [self.fetchCenter getPlanListInCircleId:self.circle.circleId
                                   localList:localList
                                      onPage:self.currentPage
@@ -122,7 +122,7 @@
     if (!_tableFetchRequest) {
         _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
         _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"circle.circleId == %@",self.circle.circleId];
-        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"updateDate" ascending:NO]];
+        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mLastReadTime" ascending:NO]];
     }
     return _tableFetchRequest;
 }
@@ -137,12 +137,12 @@
 - (MSTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     Plan *plan = [self.tableFetchedRC objectAtIndexPath:indexPath];
     MSTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CircleDetailCell"];
-    [cell.ms_imageView1 downloadImageWithImageId:plan.backgroundNum size:FetchCenterImageSize400];
-    cell.ms_title.text = plan.planTitle;
+    [cell.ms_imageView1 downloadImageWithImageId:plan.mCoverImageId size:FetchCenterImageSize400];
+    cell.ms_title.text = plan.mTitle;
     [cell.ms_imageView2 downloadImageWithImageId:plan.owner.mCoverImageId size:FetchCenterImageSize100];
     cell.ms_subTitle.text = plan.owner.mTitle;
-    cell.ms_dateLabel.text = [[self.dateFormatter stringFromDate:plan.updateDate] stringByAppendingString:@"更新"];
-    cell.ms_textView.text = plan.detailText;
+    cell.ms_dateLabel.text = [[self.dateFormatter stringFromDate:plan.mUpdateTime] stringByAppendingString:@"更新"];
+    cell.ms_textView.text = plan.mDescription;
     return cell;
 }
 

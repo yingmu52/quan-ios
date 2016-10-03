@@ -26,7 +26,7 @@
     if (!_collectionFetchRequest) {
         _collectionFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
         _collectionFetchRequest.predicate = [NSPredicate predicateWithFormat:@"owner.mUID == %@",[User uid]];
-        _collectionFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
+        _collectionFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mCreateTime" ascending:NO]];
     }
     return _collectionFetchRequest;
 }
@@ -60,7 +60,7 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
     if(component == 0){
         Plan *plan = [self.collectionFetchedRC objectAtIndexPath:indexPath];
-        return plan.planTitle;
+        return plan.mTitle;
     }
     if (component == 1) {
         Circle *circle = [self.tableFetchedRC objectAtIndexPath:indexPath];
@@ -89,7 +89,7 @@
 
 - (void)updateTextView{
     if (self.selectedCircle && self.selectedPlan) {
-        self.textView.text = [NSString stringWithFormat:@"点击完成\n将\n事件：《%@》\n放到\n圈子：%@",self.selectedPlan.planTitle,self.selectedCircle.circleName];
+        self.textView.text = [NSString stringWithFormat:@"点击完成\n将\n事件：《%@》\n放到\n圈子：%@",self.selectedPlan.mTitle,self.selectedCircle.circleName];
     }else{
         if (!self.selectedPlan) {
             self.textView.text = @"请选择事件";
@@ -116,7 +116,7 @@
 
 - (IBAction)donePressed{
     if (self.selectedCircle && self.selectedPlan) {
-        [self.fetchCenter updatePlanId:self.selectedPlan.planId
+        [self.fetchCenter updatePlanId:self.selectedPlan.mUID
                             inCircleId:self.selectedCircle.circleId
                             completion:^
         {

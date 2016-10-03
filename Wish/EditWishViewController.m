@@ -68,14 +68,14 @@
 - (void)setupContent{
     
     //事件标题
-    self.textField.text = self.plan.planTitle;
+    self.textField.text = self.plan.mTitle;
 
     //事件描述
     self.textView.delegate = self;
     self.textView.textContainerInset = UIEdgeInsetsZero; //去掉textview四周的空白
     [self.textView setPlaceholder:@"添加描述能让别人更了解这件事儿哦~"];
-    self.textView.text = self.plan.detailText;
-    self.wordCountLabel.text = [NSString stringWithFormat:@"%@/75",@(self.plan.detailText.length)];
+    self.textView.text = self.plan.mDescription;
+    self.wordCountLabel.text = [NSString stringWithFormat:@"%@/75",@(self.plan.mDescription.length)];
     
     //事件公开与私密
     self.isPrivate = self.plan.isPrivate.boolValue;
@@ -101,8 +101,8 @@
     [self.textView resignFirstResponder];
     
     if (self.textField.hasText &&
-        ![self.textField.text isEqualToString:self.plan.planTitle] |
-        ![self.textView.text isEqualToString:self.plan.detailText] |
+        ![self.textField.text isEqualToString:self.plan.mTitle] |
+        ![self.textView.text isEqualToString:self.plan.mDescription] |
         self.isPrivate != self.plan.isPrivate.boolValue){ //开 = 公开 -> isPrivate = 0; 关 = 私密 -> isPrivate = 1
 
         //开始跑菊花
@@ -112,7 +112,7 @@
 
         
         //向后台发送更请求
-        [self.fetchCenter updatePlan:self.plan.planId
+        [self.fetchCenter updatePlan:self.plan.mUID
                                title:self.textField.text
                            isPrivate:self.isPrivate
                          description:self.textView.text
@@ -142,7 +142,7 @@
                                                     handler:^(UIAlertAction * _Nonnull action)
     {
         //改变状态
-        [self.fetchCenter deletePlanId:self.plan.planId completion:^{
+        [self.fetchCenter deletePlanId:self.plan.mUID completion:^{
             [self.navigationController popToRootViewControllerAnimated:YES];
         }];
         
@@ -177,7 +177,7 @@
         [spinner startAnimating];
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
 
-        [self.fetchCenter updatePlanId:self.plan.planId
+        [self.fetchCenter updatePlanId:self.plan.mUID
                             planStatus:statusToChagne
                             completion:^
         {

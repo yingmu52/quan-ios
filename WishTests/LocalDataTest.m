@@ -56,12 +56,12 @@
         
         //图片id不能为空
         XCTAssertTrue(feed.imageId,@"Null imageid in feed id %@",feed.feedId);
-        XCTAssertTrue(plan.backgroundNum,@"Null backgroundNum in plan id %@",plan.backgroundNum);
+        XCTAssertTrue(plan.mCoverImageId,@"Null backgroundNum in plan id %@",plan.mCoverImageId);
         
         //匹配
-        if (![plan.backgroundNum isEqualToString:feed.imageId]) {
+        if (![plan.mCoverImageId isEqualToString:feed.imageId]) {
             NSLog(@"Feed Cover : %@",feed.imageId);
-            NSLog(@"Plan Cover : %@",feed.plan.backgroundNum);
+            NSLog(@"Plan Cover : %@",feed.plan.mCoverImageId);
             XCTAssertTrue(NO,@"Mismatched Post Cover");
         }
     }

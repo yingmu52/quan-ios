@@ -59,7 +59,7 @@ ViewForEmptyEventDelegate,StationViewControllerDelegate>
         
         _collectionFetchRequest.predicate = [NSPredicate predicateWithFormat:@"owner.mUID == %@ && planStatus == %d",[User uid],PlanStatusOnGoing];
         
-        _collectionFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
+        _collectionFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mCreateTime" ascending:NO]];
     }
     return _collectionFetchRequest;
 }
@@ -75,7 +75,7 @@ ViewForEmptyEventDelegate,StationViewControllerDelegate>
 }
 
 - (void)loadNewData{
-    NSArray *localList = [self.collectionFetchedRC.fetchedObjects valueForKey:@"planId"];
+    NSArray *localList = [self.collectionFetchedRC.fetchedObjects valueForKey:@"mUID"];
     [self.fetchCenter getPlanListForOwnerId:[User uid]
                                   localList:localList
                                  completion:nil];
@@ -163,11 +163,11 @@ ViewForEmptyEventDelegate,StationViewControllerDelegate>
     Plan *plan = [self.collectionFetchedRC objectAtIndexPath:indexPath];
     if (selection == StationViewSelectionDelete) {
         //删除事件
-        [self.fetchCenter deletePlanId:plan.planId completion:nil];
+        [self.fetchCenter deletePlanId:plan.mUID completion:nil];
     }
     if (selection == StationViewSelectionFinish) {
         //完成归档
-        [self.fetchCenter updatePlanId:plan.planId
+        [self.fetchCenter updatePlanId:plan.mUID
                             planStatus:PlanStatusFinished
                             completion:nil];
     }
@@ -209,8 +209,8 @@ ViewForEmptyEventDelegate,StationViewControllerDelegate>
 #pragma mark - implement parent class abstract methods
 - (void)configureCollectionViewCell:(HomeCardView *)cell atIndexPath:(NSIndexPath *)indexPath{
     Plan *plan = [self.collectionFetchedRC objectAtIndexPath:indexPath];
-    [cell.imageView downloadImageWithImageId:plan.backgroundNum size:FetchCenterImageSize800];
-    cell.titleLabel.text = plan.planTitle;
+    [cell.imageView downloadImageWithImageId:plan.mCoverImageId size:FetchCenterImageSize800];
+    cell.titleLabel.text = plan.mTitle;
     cell.subtitleLabel.text = [NSString stringWithFormat:@"%@条记录  %@人关注",plan.tryTimes,plan.followCount];
     cell.delegate = self;
     [cell layoutIfNeeded]; //fixed auto layout error on iphone 5s or above

@@ -49,10 +49,12 @@
     </entity>
     <entity name="MSBase" representedClassName="MSBase" isAbstract="YES" syncable="YES">
         <attribute name="mCoverImageId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mCreateTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="mDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mLastReadTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="mTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mUID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mUpdateTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
     </entity>
     <entity name="Owner" representedClassName="Owner" parentEntity="MSBase" syncable="YES">
         <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="owner" inverseEntity="Comment" syncable="YES"/>
@@ -60,22 +62,16 @@
         <relationship name="plans" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Plan" inverseName="owner" inverseEntity="Plan" syncable="YES"/>
     </entity>
     <entity name="Plan" representedClassName="Plan" parentEntity="MSBase" syncable="YES" codeGenerationType="category">
-        <attribute name="backgroundNum" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cornerMask" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="createDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="detailText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="discoverIndex" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="followCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="isFollowed" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="isPrivate" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="planId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="planStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="planTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rank" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="readCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="shareUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tryTimes" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="updateDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="circle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Circle" inverseName="plans" inverseEntity="Circle" syncable="YES"/>
         <relationship name="feeds" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Feed" inverseName="plan" inverseEntity="Feed" syncable="YES"/>
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="plans" inverseEntity="Owner" syncable="YES"/>
@@ -85,8 +81,8 @@
         <element name="Comment" positionX="-9009" positionY="95" width="128" height="150"/>
         <element name="Feed" positionX="-9288" positionY="-30" width="128" height="210"/>
         <element name="Message" positionX="-8892" positionY="-346" width="128" height="178"/>
-        <element name="MSBase" positionX="-8703" positionY="-522" width="128" height="118"/>
+        <element name="MSBase" positionX="-8703" positionY="-522" width="128" height="148"/>
         <element name="Owner" positionX="-8696" positionY="-43" width="128" height="88"/>
-        <element name="Plan" positionX="-9110" positionY="-324" width="128" height="328"/>
+        <element name="Plan" positionX="-9110" positionY="-324" width="128" height="238"/>
     </elements>
 </model>

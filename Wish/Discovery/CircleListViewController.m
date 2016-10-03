@@ -71,7 +71,7 @@
     if (!_tableFetchRequest) {
         _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
         _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"rank != nil"];
-        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
+        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mCreateTime" ascending:NO]];
     }
     return _tableFetchRequest;
 }
@@ -124,7 +124,7 @@
         cell.ms_imageView2.image = [UIImage imageNamed:[NSString stringWithFormat:@"top%@_icon",@(indexPath.row)]];
         [cell.ms_imageView1 downloadImageWithImageId:plan.owner.mCoverImageId size:FetchCenterImageSize200];
         cell.ms_title.text = plan.owner.mTitle;
-        cell.ms_subTitle.text = [NSString stringWithFormat:@"《%@》",plan.planTitle];
+        cell.ms_subTitle.text = [NSString stringWithFormat:@"《%@》",plan.mTitle];
     }
 }
 

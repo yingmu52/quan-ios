@@ -48,16 +48,16 @@
 
     Plan *plan = [self.tableFetchedRC objectAtIndexPath:indexPath];
     
-    cell.ms_dateLabel.text = [NSString stringWithFormat:@"%@ - ",[self.formatter stringFromDate:plan.updateDate]];
+    cell.ms_dateLabel.text = [NSString stringWithFormat:@"%@ - ",[self.formatter stringFromDate:plan.mUpdateTime]];
 
     cell.ms_statusLabel.text = plan.planStatusTags[plan.planStatus.integerValue];
-    cell.ms_title.text = plan.planTitle;
+    cell.ms_title.text = plan.mTitle;
     cell.ms_subTitle.text = [NSString stringWithFormat:@"%@个记录\t%@人关注",plan.tryTimes,plan.followCount];
     
     UIImage *badge;
     if (plan.planStatus.integerValue == PlanStatusFinished) badge = [Theme achievementFinish];
     cell.ms_imageView2.image = badge;
-    [cell.ms_imageView1 downloadImageWithImageId:plan.backgroundNum size:FetchCenterImageSize200];
+    [cell.ms_imageView1 downloadImageWithImageId:plan.mCoverImageId size:FetchCenterImageSize200];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
