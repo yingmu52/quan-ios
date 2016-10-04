@@ -74,27 +74,27 @@
     return self;
 }
 
-- (void)setBorderWidth:(NSNumber *)borderWidth
-{
-    _borderWidth    = borderWidth;
-
-    [self setNeedsLayout];
-    [self layoutIfNeeded];
-}
-
-- (void)setBorderColor:(UIColor *)borderColor
-{
-    _borderColor    = borderColor;
-
-    [self setNeedsLayout];
-    [self layoutIfNeeded];
-}
+//- (void)setBorderWidth:(NSNumber *)borderWidth
+//{
+//    _borderWidth    = borderWidth;
+//
+//    [self setNeedsLayout];
+//    [self layoutIfNeeded];
+//}
+//
+//- (void)setBorderColor:(UIColor *)borderColor
+//{
+//    _borderColor    = borderColor;
+//
+//    [self setNeedsLayout];
+//    [self layoutIfNeeded];
+//}
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     
-    CGFloat offset = 2.0f;
+    CGFloat offset = 1.0f;
     CGRect frame = CGRectMake(self.bounds.origin.x + offset,
                               self.bounds.origin.y + offset,
                               self.bounds.size.width - offset*2,
@@ -190,7 +190,6 @@
 {
     self.contentMode = UIViewContentModeScaleAspectFill;
     self.clipsToBounds = YES;
-
     self.borderWidth = @1.0f;
     self.borderColor = [SystemUtil colorFromHexString:@"#e2e2e2"];
 ;

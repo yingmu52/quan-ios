@@ -950,7 +950,7 @@
                                                             </collectionViewFlowLayout>
                                                             <cells>
                                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FeedInFollowingCell" id="sy9-nU-Yb9" customClass="FollowingImageCell">
-                                                                    <rect key="frame" x="0.0" y="7" width="291" height="274"/>
+                                                                    <rect key="frame" x="10" y="0.0" width="291" height="274"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                         <rect key="frame" x="0.0" y="0.0" width="291" height="274"/>
@@ -1027,7 +1027,7 @@
                                                                     </connections>
                                                                 </collectionViewCell>
                                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FollowingCellLast" id="fvs-Rc-hnu" customClass="FollowingImageCell">
-                                                                    <rect key="frame" x="301" y="7" width="139" height="274"/>
+                                                                    <rect key="frame" x="311" y="0.0" width="139" height="274"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                         <rect key="frame" x="0.0" y="0.0" width="139" height="274"/>
@@ -1637,7 +1637,7 @@
         <scene sceneID="9D3-61-yQJ">
             <objects>
                 <collectionViewController id="opb-v5-cWV" customClass="ImagePreviewController" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="e7Y-Uo-5tB">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="e7Y-Uo-5tB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="8dK-NS-3CY">
@@ -1648,7 +1648,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PostFeedImagePreviewCell" id="Rns-ch-qIO" customClass="ImagePreviewCell">
-                                <rect key="frame" x="0.0" y="128" width="245.5" height="412"/>
+                                <rect key="frame" x="0.0" y="71" width="245.5" height="412"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="245.5" height="412"/>
@@ -3322,7 +3322,7 @@
                                                 </connections>
                                             </collectionViewCell>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PreviewCell_Add" id="h5K-iR-Pv1">
-                                                <rect key="frame" x="113" y="0.0" width="103" height="103"/>
+                                                <rect key="frame" x="0.0" y="128" width="103" height="103"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                     <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
@@ -6324,12 +6324,12 @@
         <image name="tab_ic_quanzi_pressed" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GkF-ge-YPg"/>
-        <segue reference="4yF-1j-VR3"/>
-        <segue reference="X79-Dh-n8s"/>
+        <segue reference="9iF-Ie-E5K"/>
+        <segue reference="JVq-VY-XxP"/>
         <segue reference="dFu-Bk-XhY"/>
         <segue reference="6ze-LH-v54"/>
         <segue reference="4wk-xv-ETJ"/>
+        <segue reference="4yF-1j-VR3"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

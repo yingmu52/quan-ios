@@ -262,7 +262,8 @@
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="top1_icon" translatesAutoresizingMaskIntoConstraints="NO" id="n1U-iy-tfd"/>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f2Y-Mu-QdQ" customClass="NZCircularImageView">
                                                             <constraints>
-                                                                <constraint firstAttribute="width" secondItem="f2Y-Mu-QdQ" secondAttribute="height" multiplier="1:1" id="4h7-NX-GLQ"/>
+                                                                <constraint firstAttribute="width" constant="30" id="0qd-mO-i5X"/>
+                                                                <constraint firstAttribute="height" constant="30" id="DxB-g2-B8S"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用户名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zzx-M4-DRp">
@@ -280,10 +281,8 @@
                                                     <constraints>
                                                         <constraint firstItem="bvz-1C-9qi" firstAttribute="leading" secondItem="Zzx-M4-DRp" secondAttribute="leading" id="1gU-3i-g2m"/>
                                                         <constraint firstItem="n1U-iy-tfd" firstAttribute="leading" secondItem="7wg-7L-ZyW" secondAttribute="leading" id="GFh-jv-MtY"/>
-                                                        <constraint firstItem="f2Y-Mu-QdQ" firstAttribute="top" secondItem="7wg-7L-ZyW" secondAttribute="top" constant="15" id="HZ4-Qw-7GA"/>
                                                         <constraint firstItem="f2Y-Mu-QdQ" firstAttribute="centerY" secondItem="7wg-7L-ZyW" secondAttribute="centerY" id="bJR-zc-wnb"/>
-                                                        <constraint firstItem="Zzx-M4-DRp" firstAttribute="top" secondItem="f2Y-Mu-QdQ" secondAttribute="top" id="bkF-uv-lKq"/>
-                                                        <constraint firstAttribute="bottom" secondItem="f2Y-Mu-QdQ" secondAttribute="bottom" constant="15" id="gSE-Bx-ecX"/>
+                                                        <constraint firstItem="Zzx-M4-DRp" firstAttribute="top" secondItem="f2Y-Mu-QdQ" secondAttribute="top" constant="2" id="bkF-uv-lKq"/>
                                                         <constraint firstItem="n1U-iy-tfd" firstAttribute="centerY" secondItem="7wg-7L-ZyW" secondAttribute="centerY" id="itE-W3-h68"/>
                                                         <constraint firstItem="Zzx-M4-DRp" firstAttribute="leading" secondItem="f2Y-Mu-QdQ" secondAttribute="trailing" constant="6" id="jVI-SC-Cpr"/>
                                                         <constraint firstItem="bvz-1C-9qi" firstAttribute="top" secondItem="Zzx-M4-DRp" secondAttribute="bottom" constant="4" id="o7Q-5c-l6n"/>
@@ -644,8 +643,8 @@
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TAU-4o-Poi" userLabel="headpic" customClass="NZCircularImageView">
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="30" id="ba3-d1-kf9"/>
-                                                                <constraint firstAttribute="width" constant="30" id="ks1-n1-mxb"/>
+                                                                <constraint firstAttribute="height" constant="25" id="ba3-d1-kf9"/>
+                                                                <constraint firstAttribute="width" constant="25" id="ks1-n1-mxb"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="姓名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oYa-8U-cNR">
@@ -1422,7 +1421,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="iB1-Bf-PKR"/>
-        <segue reference="1eg-Bo-dIv"/>
-        <segue reference="PAO-LD-bVT"/>
+        <segue reference="xQQ-ct-gCy"/>
+        <segue reference="6XJ-S2-04S"/>
     </inferredMetricsTieBreakers>
 </document>
