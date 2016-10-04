@@ -109,11 +109,18 @@
         }
         
         
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Owner"];
-        request.predicate = [NSPredicate predicateWithFormat:@"mUID IN %@",topMemberList];
-        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mLastReadTime" ascending:YES]];
-        self.collectionFetchRequest = request;
-        [self.collectionView reloadData];
+        if (!self.collectionFetchedRC.fetchedObjects.count) {
+            NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Owner"];
+            request.predicate = [NSPredicate predicateWithFormat:@"mUID IN %@",topMemberList];
+            request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mLastReadTime" ascending:YES]];
+            self.collectionFetchRequest = request;
+            
+            NSError *error;
+            [self.collectionFetchedRC performFetch:&error];
+            if (!error) {
+                [self.collectionView reloadData];
+            }
+        }
     }];
 }
 
