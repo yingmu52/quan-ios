@@ -497,7 +497,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aGh-zW-DtJ">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="5Xh-vb-4LI">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="246"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1000" height="246"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="group_head_bg" translatesAutoresizingMaskIntoConstraints="NO" id="g5F-NG-meq"/>
@@ -546,7 +546,7 @@
                                             </collectionViewFlowLayout>
                                             <cells>
                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CircleDetailTopMemberCell" id="5JF-v9-ihj" customClass="MSCollectionCell">
-                                                    <rect key="frame" x="14" y="0.0" width="80" height="54"/>
+                                                    <rect key="frame" x="14" y="7" width="80" height="54"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                         <rect key="frame" x="0.0" y="0.0" width="80" height="54"/>
@@ -624,10 +624,10 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CircleDetailCell" rowHeight="155" id="g44-Um-gFr" customClass="MSTableViewCell">
-                                        <rect key="frame" x="0.0" y="274" width="375" height="155"/>
+                                        <rect key="frame" x="0.0" y="274" width="1000" height="155"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g44-Um-gFr" id="wzw-PC-F3K">
-                                            <frame key="frameInset" width="375" height="155"/>
+                                            <frame key="frameInset" width="1000" height="155"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lhw-4y-zeQ">
