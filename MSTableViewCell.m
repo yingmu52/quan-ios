@@ -15,7 +15,9 @@
     
     self.ms_textView.textContainerInset = UIEdgeInsetsZero;
     self.ms_textView.editable = NO;
+    self.ms_textView.selectable = NO;
     self.ms_textView.scrollEnabled = NO;
+    self.ms_textView.userInteractionEnabled = NO;
     
     
     self.ms_imageView1.contentMode = UIViewContentModeScaleAspectFill;
