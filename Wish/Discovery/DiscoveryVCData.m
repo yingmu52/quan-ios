@@ -113,13 +113,8 @@
     // save the plan image background only when user select a certain plan!
     Plan *plan = [self.collectionFetchedRC objectAtIndexPath:indexPath];
     
-    if ([plan.owner.mUID isEqualToString:[User uid]] &&
-        ![plan.planStatus isEqualToNumber:@(PlanStatusFinished)]){ //已完成的事件不支持编辑
-        [self performSegueWithIdentifier:@"showWishDetailVCOwnerFromDiscovery" sender:plan];
-    }else{
-        [self performSegueWithIdentifier:@"showDiscoveryWishDetail" sender:plan];
-    }
-
+    NSString *iden = [plan.owner.mUID isEqualToString:[User uid]] ? @"showWishDetailVCOwnerFromDiscovery" : @"showDiscoveryWishDetail";
+    [self performSegueWithIdentifier:iden sender:plan];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
