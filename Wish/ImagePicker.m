@@ -15,6 +15,17 @@
 
 #pragma mark - new method
 
+- (BOOL)hasPermissionAccess{
+    if ([PHPhotoLibrary authorizationStatus] == (PHAuthorizationStatusDenied | PHAuthorizationStatusNotDetermined)) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"无法访问" message:@"请在iPhone的“设置-隐私-照片”中选择允许圈里事访问你的手机相册" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleDefault handler:nil]];
+        UIViewController *vc = (UIViewController *)self.imagePickerDelegate;
+        [vc presentViewController:alert animated:YES completion:nil];
+        return NO;
+    }
+    return YES;
+}
+
 - (void)showCamera:(UIViewController *)controller{
     UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
     ipc.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -24,37 +35,41 @@
 }
 
 - (void)showImagePickerForUploadProfileImage:(UIViewController *)controller type:(UIImagePickerControllerSourceType)type{
-    UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
-    ipc.sourceType = type;
-    ipc.delegate = self;
-    ipc.allowsEditing = YES;
-    [controller presentViewController:ipc animated:YES completion:nil];
+    if ([self hasPermissionAccess]) {
+        UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
+        ipc.sourceType = type;
+        ipc.delegate = self;
+        ipc.allowsEditing = YES;
+        [controller presentViewController:ipc animated:YES completion:nil];
+    }
 }
 - (void)showPhotoLibrary:(UIViewController *)controller maxImageCount:(NSInteger )count{
-    QBImagePickerController *imagePickerController = [QBImagePickerController new];
-    imagePickerController.delegate = self;
-    imagePickerController.allowsMultipleSelection = YES;
-    imagePickerController.maximumNumberOfSelection = count;
-    imagePickerController.showsNumberOfSelectedAssets = YES;
-    imagePickerController.mediaType = QBImagePickerMediaTypeImage;
-    imagePickerController.numberOfColumnsInPortrait = 4;
-    
-    imagePickerController.assetCollectionSubtypes = @[@(PHAssetCollectionSubtypeSmartAlbumRecentlyAdded), //最近添加
-                                                      @(PHAssetCollectionSubtypeSmartAlbumUserLibrary), // Camera Roll
-                                                      @(PHAssetCollectionSubtypeSmartAlbumPanoramas), // Panoramas
-                                                      @(PHAssetCollectionSubtypeSmartAlbumBursts),
-                                                      @(PHAssetCollectionSubtypeSmartAlbumGeneric),
-                                                      @(PHAssetCollectionSubtypeSmartAlbumScreenshots),
-                                                      @(PHAssetCollectionSubtypeSmartAlbumSelfPortraits),
-                                                      @(PHAssetCollectionSubtypeAlbumMyPhotoStream),
-                                                      @(PHAssetCollectionSubtypeAlbumCloudShared),
-                                                      @(PHAssetCollectionSubtypeAlbumSyncedAlbum),
-                                                      @(PHAssetCollectionSubtypeAlbumSyncedEvent),
-                                                      @(PHAssetCollectionSubtypeAlbumSyncedFaces),
-                                                      @(PHAssetCollectionSubtypeAlbumImported),
-                                                      @(PHAssetCollectionSubtypeSmartAlbumAllHidden)];
-
-    [controller presentViewController:imagePickerController animated:YES completion:NULL];
+    if ([self hasPermissionAccess]) {
+        QBImagePickerController *imagePickerController = [QBImagePickerController new];
+        imagePickerController.delegate = self;
+        imagePickerController.allowsMultipleSelection = YES;
+        imagePickerController.maximumNumberOfSelection = count;
+        imagePickerController.showsNumberOfSelectedAssets = YES;
+        imagePickerController.mediaType = QBImagePickerMediaTypeImage;
+        imagePickerController.numberOfColumnsInPortrait = 4;
+        
+        imagePickerController.assetCollectionSubtypes = @[@(PHAssetCollectionSubtypeSmartAlbumRecentlyAdded), //最近添加
+                                                          @(PHAssetCollectionSubtypeSmartAlbumUserLibrary), // Camera Roll
+                                                          @(PHAssetCollectionSubtypeSmartAlbumPanoramas), // Panoramas
+                                                          @(PHAssetCollectionSubtypeSmartAlbumBursts),
+                                                          @(PHAssetCollectionSubtypeSmartAlbumGeneric),
+                                                          @(PHAssetCollectionSubtypeSmartAlbumScreenshots),
+                                                          @(PHAssetCollectionSubtypeSmartAlbumSelfPortraits),
+                                                          @(PHAssetCollectionSubtypeAlbumMyPhotoStream),
+                                                          @(PHAssetCollectionSubtypeAlbumCloudShared),
+                                                          @(PHAssetCollectionSubtypeAlbumSyncedAlbum),
+                                                          @(PHAssetCollectionSubtypeAlbumSyncedEvent),
+                                                          @(PHAssetCollectionSubtypeAlbumSyncedFaces),
+                                                          @(PHAssetCollectionSubtypeAlbumImported),
+                                                          @(PHAssetCollectionSubtypeSmartAlbumAllHidden)];
+        
+        [controller presentViewController:imagePickerController animated:YES completion:NULL];
+    }
 }
 
 - (void)showPhotoLibrary:(UIViewController *)controller{
