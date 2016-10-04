@@ -7,8 +7,7 @@
 //
 
 #import "MSSuperViewController.h"
-#import "MBProgressHUD.h"
-@interface MSSuperViewController ()
+@interface MSSuperViewController () <UIGestureRecognizerDelegate>
 @property (nonatomic,strong) NSMutableArray *itemChanges;
 @end
 
@@ -16,6 +15,31 @@
 
 
 #pragma mark - 控制器生活周期 Application Life Cycle
+
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self polishNavigationBar:YES];
+}
+
+- (void)polishNavigationBar:(BOOL)isClear{
+    if (self.allowTransparentNavigationBar) {
+        NavigationBar *nav = (NavigationBar *)self.navigationController.navigationBar;
+        isClear ? [nav showClearBackground] : [nav showDefaultBackground];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self polishNavigationBar:NO];
+}
+
 - (void)setUpBackButton:(BOOL)useWhiteButton{
     if (self.navigationController && self.navigationController.viewControllers.firstObject != self) {
         CGRect frame = CGRectMake(0,0, 25,25);
@@ -28,6 +52,23 @@
     }
 }
 
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (self.tableView.tableHeaderView && self.allowTransparentNavigationBar) {
+        CGRect headFrame = self.tableView.tableHeaderView.frame;
+        CGFloat animationOffset = CGRectGetMaxY(headFrame) - scrollView.contentOffset.y;
+        NavigationBar *navbar = (NavigationBar *)self.navigationController.navigationBar;
+        CGFloat threshold = CGRectGetHeight(headFrame);
+        if (animationOffset >= 0 && animationOffset <= threshold){
+            CGFloat alpha = 1 - animationOffset / threshold;
+            alpha = alpha >= 0.9 ? 1.0 : alpha;
+            alpha = alpha <= 0.2 ? 0.0 : alpha;
+            [UIView animateWithDuration:0.05 animations:^{
+                [navbar setNavigationBarWithColor:[UIColor colorWithWhite:1.0 alpha:alpha]];
+            }];
+        }
+    }
+}
 
 - (void)msPopViewController{
     [self.navigationController popViewControllerAnimated:YES];

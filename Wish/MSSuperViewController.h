@@ -10,10 +10,12 @@
 #import "FetchCenter.h"
 #import "UIImageView+ImageCache.h"
 #import "Theme.h"
-#import "WishDetailCell.h"
 #import "UIImageView+WebCache.h"
 #import "MJRefresh.h"
 #import "MSTableViewCell.h"
+#import "NavigationBar.h"
+#import "MBProgressHUD.h"
+
 @import CoreData;
 @interface MSSuperViewController : UIViewController
 <FetchCenterDelegate
@@ -26,6 +28,7 @@
 }
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,weak) AppDelegate *appDelegate;
+@property (nonatomic) BOOL allowTransparentNavigationBar;
 
 - (void)loadNewData;
 - (void)loadMoreData;

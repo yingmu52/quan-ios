@@ -7,7 +7,6 @@
 //
 
 #import "CircleDetailViewController.h"
-#import "NavigationBar.h"
 #import "MSCollectionCell.h"
 #import "WishDetailVCOwner.h"
 #import "PostViewController.h"
@@ -39,6 +38,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.allowTransparentNavigationBar = YES;
     [self setUpBackButton:YES];
     [self setupHeaderView];
     [self loadMoreData];
@@ -180,26 +181,6 @@
     return CGSizeMake((CGRectGetWidth(collectionView.frame) - 28 - 18) * 0.25,54.0f);
 }
 
-#pragma mark - Navigation Bar Transparency
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self polishNavigationBar:YES];
-}
-
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [self polishNavigationBar:NO];
-}
-
-- (void)polishNavigationBar:(BOOL)isClear{
-    NavigationBar *nav = (NavigationBar *)self.navigationController.navigationBar;
-    if (isClear) {
-        [nav showClearBackground];
-    }else{
-        [nav showDefaultBackground];
-    }
-}
 
 #pragma mark - 点点点入口 
 

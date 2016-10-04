@@ -9,7 +9,6 @@
 #import "WishDetailViewController.h"
 #import "UIImageView+ImageCache.h"
 #import "InvitationViewController.h"
-#import "NavigationBar.h"
 #import "CircleDetailViewController.h"
 @interface WishDetailViewController () <HeaderViewDelegate,UIGestureRecognizerDelegate,UITextViewDelegate>
 @property (nonatomic,strong) NSDictionary *textAttributes;
@@ -183,33 +182,12 @@
 
 #pragma mark - set up view
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self polishNavigationBar:YES];
-}
-
-- (void)polishNavigationBar:(BOOL)isClear{
-    NavigationBar *nav = (NavigationBar *)self.navigationController.navigationBar;
-    if (isClear) {
-        [nav showClearBackground];
-    }else{
-        [nav showDefaultBackground];
-    }
-}
-
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    //pan to pop gesture
-    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-    self.navigationController.interactivePopGestureRecognizer.delegate = self;
-    
-    [self polishNavigationBar:NO];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpNavigationItem];
     [self initialHeaderView];
+    self.allowTransparentNavigationBar = YES;
+    
     [self.tableView registerNib:[UINib nibWithNibName:@"WishDetailCell" bundle:nil]
          forCellReuseIdentifier:@"WishDetailCell"];
     self.tableView.separatorColor = [UIColor clearColor]; //remove separation linecell
