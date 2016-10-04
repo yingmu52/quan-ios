@@ -10,7 +10,7 @@
 #import "HMSegmentedControl.h"
 #import "Theme.h"
 
-@interface CirclePageViewController () <UIPageViewControllerDataSource>
+@interface CirclePageViewController () <UIPageViewControllerDataSource,UIPageViewControllerDelegate>
 @property (nonatomic,strong) HMSegmentedControl *segmentedControl;
 @property (nonatomic,strong) NSArray *circleControllers;
 @end
@@ -24,20 +24,10 @@
                    direction:UIPageViewControllerNavigationDirectionForward
                     animated:YES
                   completion:nil];
-//    self.delegate = self;
-//    self.dataSource = self;
-    
+    self.delegate = self;
+    self.dataSource = self;
+    self.view.backgroundColor = [SystemUtil colorFromHexString:@"#F4F8F7"];
 }
-
-- (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController
-               viewControllerBeforeViewController:(UIViewController *)viewController{
-    return self.segmentedControl.selectedSegmentIndex == 0 ? nil : self.circleControllers.firstObject;
-}
-- (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController
-                viewControllerAfterViewController:(UIViewController *)viewController{
-    return self.segmentedControl.selectedSegmentIndex == 1 ? nil : self.circleControllers.lastObject;
-}
-
 
 - (NSArray *)circleControllers{
     if (!_circleControllers) {
@@ -88,6 +78,31 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.segmentedControl.hidden = NO;
+}
+
+#pragma mark - page view controller delegate and data source 
+
+- (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController
+               viewControllerBeforeViewController:(UIViewController *)viewController{
+    if (viewController == self.circleControllers.lastObject) {
+        return self.circleControllers.firstObject;
+    }else{
+        return nil;
+    }
+    
+}
+
+- (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController
+                viewControllerAfterViewController:(UIViewController *)viewController{
+    if (viewController == self.circleControllers.firstObject) {
+        return self.circleControllers.lastObject;
+    }
+    return nil;
+}
+
+- (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray<UIViewController *> *)pendingViewControllers{
+    NSUInteger index = [self.circleControllers indexOfObject:pendingViewControllers.lastObject];
+    [self.segmentedControl setSelectedSegmentIndex:index animated:YES];
 }
 
 @end
