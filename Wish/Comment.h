@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-
+#import "MSBase.h"
 @class Feed, Owner;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Comment : NSManagedObject
+@interface Comment : MSBase
 
 + (Comment *)updateCommentWithInfo:(NSDictionary *)dict
                          ownerInfo:(NSDictionary *)ownerInfo

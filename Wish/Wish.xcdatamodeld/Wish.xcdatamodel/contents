@@ -9,10 +9,7 @@
         <attribute name="ownerId" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="plans" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Plan" inverseName="circle" inverseEntity="Plan" syncable="YES"/>
     </entity>
-    <entity name="Comment" representedClassName="Comment" syncable="YES">
-        <attribute name="commentId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="createTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+    <entity name="Comment" representedClassName="Comment" parentEntity="MSBase" syncable="YES">
         <attribute name="idForReply" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="nameForReply" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="feed" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Feed" inverseName="comments" inverseEntity="Feed" syncable="YES"/>
@@ -71,7 +68,7 @@
     </entity>
     <elements>
         <element name="Circle" positionX="-8631" positionY="-409" width="128" height="148"/>
-        <element name="Comment" positionX="-9108" positionY="-63" width="128" height="150"/>
+        <element name="Comment" positionX="-9108" positionY="-63" width="128" height="103"/>
         <element name="Feed" positionX="-9108" positionY="-306" width="128" height="210"/>
         <element name="Message" positionX="-8642" positionY="-223" width="128" height="118"/>
         <element name="MSBase" positionX="-8847" positionY="-295" width="128" height="178"/>

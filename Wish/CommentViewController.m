@@ -61,8 +61,8 @@
     if (self.comment) {
         self.userNameLabel.text = self.comment.owner.mTitle;
         [self.userProfileImageView downloadImageWithImageId:self.comment.owner.mCoverImageId size:FetchCenterImageSize100];
-        self.commentContentLabel.text = self.comment.content;
-        self.timeLabel.text = [SystemUtil timeStringFromDate:self.comment.createTime];
+        self.commentContentLabel.text = self.comment.mTitle;
+        self.timeLabel.text = [SystemUtil timeStringFromDate:self.comment.mCreateTime];
     }
     
     [self.textView addObserver:self

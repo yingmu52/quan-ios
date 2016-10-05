@@ -736,11 +736,11 @@
            completion:(FetchCenterGetRequestDeleteCommentCompleted)completionBlock{
     
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,DELETE_COMMENT];
-    NSDictionary *args = @{@"id":comment.commentId,@"feedsId":comment.feed.feedId};
+    NSDictionary *args = @{@"id":comment.mUID,@"feedsId":comment.feed.feedId};
     [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
         if (completionBlock) {
             dispatch_main_async_safe(^{
-                NSLog(@"评论删除成功 %@",comment.commentId);
+                NSLog(@"评论删除成功 %@",comment.mUID);
                 completionBlock();
             });
         }
@@ -856,7 +856,7 @@
         
         if (completionBlock) {
             dispatch_main_async_safe(^{
-                NSLog(@"评论完成%@",comment.commentId);
+                NSLog(@"评论完成%@",comment.mUID);
                 completionBlock();
             });
         }

@@ -19,18 +19,13 @@
                             inFeed:(nonnull Feed *)feed
               managedObjectContext:(nonnull NSManagedObjectContext *)context{
     
-    Comment *comment;
+    Comment *comment = [Comment fetchID:dict[@"id"] inManagedObjectContext:context];
     
-    NSArray *results = [Plan fetchWith:@"Comment"
-                             predicate:[NSPredicate predicateWithFormat:@"commentId == %@",dict[@"id"]]
-                      keyForDescriptor:@"commentId"
-                  managedObjectContext:context]; //utility method from Plan+PlanCRUD.h
-//    NSLog(@"%@",dict);
-    if (!results.count) {
+    if (!comment) {
         comment = [NSEntityDescription insertNewObjectForEntityForName:@"Comment" inManagedObjectContext:context];
-        comment.commentId = dict[@"id"];
-        comment.content = dict[@"content"];
-        comment.createTime = [NSDate dateWithTimeIntervalSince1970:[dict[@"createTime"] integerValue]];
+        comment.mUID = dict[@"id"];
+        comment.mTitle = dict[@"content"];
+        comment.mCreateTime = [NSDate dateWithTimeIntervalSince1970:[dict[@"createTime"] integerValue]];
         
         
         NSString *ownerId = dict[@"ownerId"];
@@ -38,10 +33,7 @@
                               managedObjectContext:context];
         comment.feed = feed;
         
-    }else{
-        comment = results.lastObject;
     }
-    
     NSString *commentTo = dict[@"commentTo"]; //this is what differential reply and comment
     if (commentTo.length > 0 && ![comment.idForReply isEqualToString:commentTo]) {
         comment.idForReply = commentTo;
@@ -49,6 +41,9 @@
         comment.nameForReply = nameForReply;
 //        NSLog(@"comment to %@, %@",commentTo,nameForReply);
     }
+    
+    
+    comment.mLastReadTime = [NSDate date];
     
     return comment;
 }
@@ -62,10 +57,11 @@
     
     Comment *comment = [NSEntityDescription insertNewObjectForEntityForName:@"Comment"
                                                      inManagedObjectContext:context];
-    comment.commentId = commendId;
-    comment.content = content;
-    comment.createTime = [NSDate date];
+    comment.mUID = commendId;
+    comment.mTitle = content;
+    comment.mCreateTime = [NSDate date];
     comment.owner = [Owner updateOwnerWithInfo:[Owner myWebInfo] managedObjectContext:context];
+
     Feed *feed = [Plan fetchWith:@"Feed"
                        predicate:[NSPredicate predicateWithFormat:@"feedId == %@",feedID]
                 keyForDescriptor:@"feedId"

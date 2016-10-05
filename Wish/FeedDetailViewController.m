@@ -45,10 +45,8 @@
     [super viewDidAppear:animated];
     //如果从消息页进来时，尝试定位到评论
     if (self.message){
-        Comment *comment = [Plan fetchWith:@"Comment"
-                                 predicate:[NSPredicate predicateWithFormat:@"commentId == %@",self.message.commentId]
-                          keyForDescriptor:@"commentId"
-                      managedObjectContext:self.message.managedObjectContext].lastObject;
+        Comment *comment = [Comment fetchID:self.message.commentId
+                     inManagedObjectContext:self.message.managedObjectContext];
         if (comment) {
             NSIndexPath *indexPath = [self.tableFetchedRC indexPathForObject:comment];
             [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
@@ -59,7 +57,7 @@
 
 - (void)loadMoreData{
     NSString *feedId = self.feed ? self.feed.feedId : self.message.feedsId;
-    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKey:@"commentId"];
+    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKey:@"mUID"];
     //        NSLog(@"%@",self.currentPage);
     [self.fetchCenter getCommentListForFeed:feedId
                                   localList:localList
@@ -254,7 +252,7 @@
 - (void)configureCell:(MSTableViewCell *)cell indexPath:(NSIndexPath *)indexPath{
     Comment *comment = [self.tableFetchedRC objectAtIndexPath:indexPath];
     [cell.ms_imageView1 downloadImageWithImageId:comment.owner.mCoverImageId size:FetchCenterImageSize100];
-    cell.ms_textView.text = comment.content;
+    cell.ms_textView.text = comment.mTitle;
     
     NSDictionary *userNameAttribute = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00B9C0"]};
     
@@ -277,10 +275,10 @@
         cell.ms_title.attributedText = [[NSAttributedString alloc] initWithString:userAstring
                                                                             attributes:userNameAttribute];
     }
-    cell.ms_dateLabel.text = [self.dateFormatter stringFromDate:comment.createTime];
+    cell.ms_dateLabel.text = [self.dateFormatter stringFromDate:comment.mCreateTime];
     
     //从消息页进来时，highligh对应评论的cell
-    if ([self.message.commentId isEqualToString:comment.commentId]) {
+    if ([self.message.commentId isEqualToString:comment.mUID]) {
         cell.backgroundColor = [SystemUtil colorFromHexString:@"#E7F0ED"];
     }else{
         cell.backgroundColor = [UIColor whiteColor];
@@ -412,7 +410,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (!_tableFetchRequest) {
         _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Comment"];
         _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"feed.feedId == %@",self.feed ? self.feed.feedId : self.message.feedsId];
-        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createTime" ascending:YES]];
+        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mCreateTime" ascending:YES]];
     }
     return _tableFetchRequest;
 }
