@@ -25,7 +25,7 @@
 - (void)setFeedsArray:(NSArray *)feedsArray{
     _feedsArray = feedsArray;
     Feed *feed = _feedsArray.firstObject;
-    self.bottomLabel.text = feed.feedTitle;
+    self.bottomLabel.text = feed.mTitle;
     [self.collectionView reloadData];
 }
 
@@ -43,7 +43,7 @@
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:FOLLOWINGIMAGECELLID
                                                                              forIndexPath:indexPath];
         Feed *feed = self.feedsArray[indexPath.row];
-        [cell.feedImageView downloadImageWithImageId:feed.imageId size:FetchCenterImageSize400];
+        [cell.feedImageView downloadImageWithImageId:feed.mCoverImageId size:FetchCenterImageSize400];
     }
     return cell;
     

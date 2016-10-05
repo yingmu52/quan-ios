@@ -56,7 +56,7 @@
 
 
 - (void)loadMoreData{
-    NSString *feedId = self.feed ? self.feed.feedId : self.message.feedsId;
+    NSString *feedId = self.feed ? self.feed.mUID : self.message.mUID;
     NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKey:@"mUID"];
     //        NSLog(@"%@",self.currentPage);
     [self.fetchCenter getCommentListForFeed:feedId
@@ -74,7 +74,7 @@
              [self.tableView.mj_footer endRefreshing];
          }
          if (!self.feed) {
-             self.feed = [Feed fetchFeedWithId:feedId];
+             self.feed = [Feed fetchID:feedId inManagedObjectContext:self.appDelegate.managedObjectContext];
          }
           
      }];
@@ -195,7 +195,7 @@
         //计算高度
         CGFloat width = CGRectGetWidth(self.view.frame);
         CGFloat height = width + 10.0f + 48.0f + //referece FeedDetailHeader.xib
-        [self heightForText:self.feed.feedTitle withFontSize:FONTSIZE referenceWidth:width];
+        [self heightForText:self.feed.mTitle withFontSize:FONTSIZE referenceWidth:width];
         
         CGRect frame = CGRectMake(0,0, CGRectGetHeight(self.view.frame), height);
         _headerView = [FeedDetailHeader instantiateFromNib:frame];
@@ -203,7 +203,7 @@
         self.tableView.tableHeaderView = _headerView;
         
         
-        NSArray *images = [self.feed imageIdArray].count > 1 ? [self.feed imageIdArray] : @[self.feed.imageId];
+        NSArray *images = [self.feed imageIdArray].count > 1 ? [self.feed imageIdArray] : @[self.feed.mCoverImageId];
         
         CGFloat w = CGRectGetWidth(_headerView.frame);
         _headerView.scrollView.contentSize = CGSizeMake(w * images.count, w);
@@ -226,9 +226,9 @@
 
 - (void)updateHeaderInfoForFeed:(Feed *)feed{
     if (feed) {
-        self.headerView.titleTextLabel.attributedText = [[NSAttributedString alloc] initWithString:feed.feedTitle
+        self.headerView.titleTextLabel.attributedText = [[NSAttributedString alloc] initWithString:feed.mTitle
                                                                                         attributes:self.textAttributes];
-        self.headerView.dateLabel.text = [SystemUtil stringFromDate:feed.createDate];
+        self.headerView.dateLabel.text = [SystemUtil stringFromDate:feed.mCreateTime];
         [self.headerView setLikeButtonText:feed.likeCount];
         [self.headerView setCommentButtonText:feed.commentCount];
         [self.headerView.likeButton setSelected:feed.selfLiked.boolValue];
@@ -409,7 +409,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath{
 - (NSFetchRequest *)tableFetchRequest{
     if (!_tableFetchRequest) {
         _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Comment"];
-        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"feed.feedId == %@",self.feed ? self.feed.feedId : self.message.feedsId];
+        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"feed.mUID == %@",self.feed ? self.feed.mUID : self.message.feedsId];
         _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mCreateTime" ascending:YES]];
     }
     return _tableFetchRequest;

@@ -2,7 +2,7 @@
 //  Feed+CoreDataProperties.h
 //  Stories
 //
-//  Created by Xinyi Zhuang on 10/3/16.
+//  Created by Xinyi Zhuang on 10/5/16.
 //  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //
 
@@ -16,10 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSFetchRequest<Feed *> *)fetchRequest;
 
 @property (nullable, nonatomic, copy) NSNumber *commentCount;
-@property (nullable, nonatomic, copy) NSDate *createDate;
-@property (nullable, nonatomic, copy) NSString *feedId;
-@property (nullable, nonatomic, copy) NSString *feedTitle;
-@property (nullable, nonatomic, copy) NSString *imageId;
 @property (nullable, nonatomic, copy) NSNumber *likeCount;
 @property (nullable, nonatomic, copy) NSString *picUrls;
 @property (nullable, nonatomic, copy) NSNumber *selfLiked;

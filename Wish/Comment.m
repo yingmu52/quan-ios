@@ -62,10 +62,7 @@
     comment.mCreateTime = [NSDate date];
     comment.owner = [Owner updateOwnerWithInfo:[Owner myWebInfo] managedObjectContext:context];
 
-    Feed *feed = [Plan fetchWith:@"Feed"
-                       predicate:[NSPredicate predicateWithFormat:@"feedId == %@",feedID]
-                keyForDescriptor:@"feedId"
-            managedObjectContext:context].lastObject;
+    Feed *feed = [Feed fetchID:feedID inManagedObjectContext:context];
     feed.commentCount = @(feed.commentCount.integerValue + 1);
     comment.feed = feed;
     

@@ -129,7 +129,7 @@
 #pragma mark - 与后台调联
 - (IBAction)sendComment:(id)sender{
     if ([self.textView.text stringByReplacingOccurrencesOfString:@" " withString:@""].length > 0) {
-        [self.fetchCenter replyToFeedID:self.feed.feedId
+        [self.fetchCenter replyToFeedID:self.feed.mUID
                                 content:self.textView.text
                               toOwnerID:self.comment.owner.mUID
                               ownerName:self.comment.owner.mTitle

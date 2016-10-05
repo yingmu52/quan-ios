@@ -201,7 +201,7 @@
 }
 
 - (void)loadMoreData{
-    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKey:@"feedId"];
+    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKey:@"mUID"];
     [self.fetchCenter getFeedsListForPlan:self.plan.mUID
                                 localList:localList
                                    onPage:self.currentPage
@@ -283,7 +283,7 @@
     if (!_tableFetchRequest) {
         _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Feed"];
         _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"plan.mUID == %@",self.plan.mUID];
-        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
+        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mCreateTime" ascending:NO]];
     }
     return _tableFetchRequest;
 }
@@ -314,7 +314,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     Feed *feed = [self.tableFetchedRC objectAtIndexPath:indexPath];
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    CGRect bounds = [feed.feedTitle boundingRectWithSize:CGSizeMake(width - 16.0f,CGFLOAT_MAX) //label左右有8.0f的距离
+    CGRect bounds = [feed.mTitle boundingRectWithSize:CGSizeMake(width - 16.0f,CGFLOAT_MAX) //label左右有8.0f的距离
                                                  options:NSStringDrawingUsesLineFragmentOrigin
                                               attributes:self.textAttributes
                                                  context:nil];
@@ -341,12 +341,12 @@
 - (void)configureTableViewCell:(WishDetailCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     cell.delegate = self;
     Feed *feed = [self.tableFetchedRC objectAtIndexPath:indexPath];
-    cell.dateLabel.text = [SystemUtil stringFromDate:feed.createDate];
+    cell.dateLabel.text = [SystemUtil stringFromDate:feed.mCreateTime];
     
     [cell.likeButton setImage:feed.selfLiked.boolValue ? [Theme likeButtonLiked] : [Theme likeButtonUnLiked]
                      forState:UIControlStateNormal];
     
-    cell.titleLabel.text = feed.feedTitle;
+    cell.titleLabel.text = feed.mTitle;
     
     cell.likeCountLabel.text = feed.likeCount.integerValue ? [NSString stringWithFormat:@"%@",feed.likeCount] : @"赞";
     cell.commentCountLabel.text = feed.commentCount.integerValue ? [NSString stringWithFormat:@"%@",feed.commentCount] : @"评论";
@@ -358,7 +358,7 @@
     }else{
         cell.pictureCountLabel.hidden = YES;
     }
-    [cell.photoView downloadImageWithImageId:feed.imageId size:FetchCenterImageSize800];
+    [cell.photoView downloadImageWithImageId:feed.mCoverImageId size:FetchCenterImageSize800];
 }
 
 

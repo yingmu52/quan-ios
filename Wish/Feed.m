@@ -24,11 +24,11 @@
     Feed *feed = [NSEntityDescription insertNewObjectForEntityForName:@"Feed"
                                                inManagedObjectContext:context];
     NSLog(@"create feed locally %@",feedId);
-    feed.feedId = feedId;
+    feed.mUID = feedId;
     [plan updateTryTimesOfPlan:YES];
-    feed.feedTitle = feedTitle;
-    feed.createDate = [NSDate date];
-    feed.imageId = imageIds.firstObject;
+    feed.mTitle = feedTitle;
+    feed.mCreateTime = [NSDate date];
+    feed.mCoverImageId = imageIds.firstObject;
     feed.picUrls = [imageIds componentsJoinedByString:@","];
     feed.type = @(imageIds.count > 1 ? FeedTypeMultiplePicture : FeedTypeSinglePicture);
     plan.mCoverImageId = imageIds.firstObject;
@@ -42,34 +42,23 @@
                      forPlan:(nullable Plan *)plan
         managedObjectContext:(nonnull NSManagedObjectContext *)context{
     
-    NSArray *checks = [Plan fetchWith:@"Feed"
-                            predicate:[NSPredicate predicateWithFormat:@"feedId == %@",feedItem[@"id"]]
-                     keyForDescriptor:@"createDate"
-                 managedObjectContext:context];
-    
-    Feed *feed;
+    Feed *feed = [Feed fetchID:feedItem[@"id"] inManagedObjectContext:context];
 
-    if (checks.count == 0) {
+    if (!feed) {
         
-//        NSLog(@"%@",feedItem[@"id"]);
         feed = [NSEntityDescription insertNewObjectForEntityForName:@"Feed"
                                              inManagedObjectContext:context];
-        feed.feedId = feedItem[@"id"];
+        feed.mUID = feedItem[@"id"];
         feed.selfLiked = @(NO);
-        feed.feedTitle = feedItem[@"content"];
-        feed.createDate = [NSDate dateWithTimeIntervalSince1970:[feedItem[@"createTime"] integerValue]];
+        feed.mTitle = feedItem[@"content"];
+        feed.mCreateTime = [NSDate dateWithTimeIntervalSince1970:[feedItem[@"createTime"] integerValue]];
         if (plan) {
             feed.plan = plan;
-        }
-        
-    }else{
-        //update
-        feed = checks.lastObject;
-        
+        }   
     }
     
-    if (![feed.imageId isEqualToString:feedItem[@"picurl"]]) {
-        feed.imageId = feedItem[@"picurl"];
+    if (![feed.mCoverImageId isEqualToString:feedItem[@"picurl"]]) {
+        feed.mCoverImageId = feedItem[@"picurl"];
     }
     
     if (![feed.likeCount isEqualToNumber:@([feedItem[@"likeTimes"] integerValue])]){
@@ -90,16 +79,6 @@
     
     return feed;
 }
-
-
-+ (Feed *)fetchFeedWithId:(NSString *)feedId{
-    NSArray *results = [Plan fetchWith:@"Feed"
-                             predicate:[NSPredicate predicateWithFormat:@"feedId = %@",feedId]
-                      keyForDescriptor:@"createDate"
-                  managedObjectContext:[AppDelegate getContext]];    
-    return results.lastObject;
-}
-
 
 #pragma mark - picUrls
 

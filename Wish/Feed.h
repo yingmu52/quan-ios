@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "MSBase.h"
 
 @class Comment, Plan;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Feed : NSManagedObject
+@interface Feed : MSBase
 
 typedef enum {
     FeedTypeLegacy = 0, //单图
@@ -34,8 +35,6 @@ typedef void(^FeedCreationCompletion)(Feed *feed);
         managedObjectContext:(nonnull NSManagedObjectContext *)context;
 
     
-+ (Feed *)fetchFeedWithId:(NSString *)feedId;
-
 - (NSNumber *)numberOfPictures;
 - (NSArray *)imageIdArray;
 

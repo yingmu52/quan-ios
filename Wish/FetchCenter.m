@@ -736,7 +736,7 @@
            completion:(FetchCenterGetRequestDeleteCommentCompleted)completionBlock{
     
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,DELETE_COMMENT];
-    NSDictionary *args = @{@"id":comment.mUID,@"feedsId":comment.feed.feedId};
+    NSDictionary *args = @{@"id":comment.mUID,@"feedsId":comment.feed.mUID};
     [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
         if (completionBlock) {
             dispatch_main_async_safe(^{
@@ -868,11 +868,11 @@
 //superplan/feeds/splan_feeds_delete_id.php
 - (void)deleteFeed:(Feed *)feed completion:(FetchCenterGetRequestDeleteFeedCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,DELETE_FEED];
-    NSDictionary *args = @{@"id":feed.feedId,
-                           @"picId":feed.imageId,
+    NSDictionary *args = @{@"id":feed.mUID,
+                           @"picId":feed.mCoverImageId,
                            @"planId":feed.plan.mUID};
     [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
-        NSLog(@"delete feed successed, ID:%@",feed.feedId);
+        NSLog(@"delete feed successed, ID:%@",feed.mUID);
         
         NSManagedObjectContext *workerContext = [self workerContext];
 
@@ -880,10 +880,7 @@
         Plan *p = [Plan fetchID:feed.plan.mUID inManagedObjectContext:workerContext];
         
         //Get Feed
-        Feed *f = [Plan fetchWith:@"Feed"
-                           predicate:[NSPredicate predicateWithFormat:@"feedId == %@",feed.feedId]
-                    keyForDescriptor:@"feedId"
-                managedObjectContext:workerContext].lastObject;
+        Feed *f = [Feed fetchID:feed.mUID inManagedObjectContext:workerContext];
         
         //Update Plan
         if (p.feeds.count == 1) {
@@ -892,9 +889,9 @@
             NSArray *sortedArray = [p.feeds sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]]];
             Feed *first = [sortedArray firstObject];
             Feed *second = [sortedArray objectAtIndex:1];
-            if ([f.feedId isEqualToString:first.feedId]){
+            if ([f.mUID isEqualToString:first.mUID]){
                 //delete plan image
-                p.mCoverImageId = second.imageId;
+                p.mCoverImageId = second.mCoverImageId;
             }
             p.tryTimes = @(p.tryTimes.integerValue - 1);            
         }
@@ -955,7 +952,7 @@
         
         if (currentPage.integerValue == 1) {
             NSArray *serverList = [feeds valueForKey:@"id"];
-            [self syncEntity:@"Feed" idName:@"feedId" localList:localList serverList:serverList inContext:workerContext];
+            [self syncEntity:@"Feed" idName:@"mUID" localList:localList serverList:serverList inContext:workerContext];
         }
         
         [self.appDelegate saveContext:workerContext];
@@ -1064,14 +1061,17 @@
 }
 
 - (void)likeFeed:(Feed *)feed completion:(FetchCenterGetRequestLikeFeedCompleted)completionBlock{
-    if (feed.feedId){
+    if (feed.mUID){
         
         //increase feed like count
         feed.likeCount = @(feed.likeCount.integerValue + 1);
         feed.selfLiked = @(YES);
 
         NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,LIKE_FEED];
-        [self getRequest:rqtStr parameter:@{@"id":feed.feedId} includeArguments:YES completion:^(NSDictionary *responseJson) {
+        [self getRequest:rqtStr
+               parameter:@{@"id":feed.mUID}
+        includeArguments:YES
+              completion:^(NSDictionary *responseJson) {
             if (completionBlock) {
                 dispatch_main_async_safe(^{
                     completionBlock();
@@ -1083,14 +1083,14 @@
 }
 
 - (void)unLikeFeed:(Feed *)feed completion:(FetchCenterGetRequestUnLikeFeedCompleted)completionBlock{
-    if (feed.feedId){
+    if (feed.mUID){
         
         //decrease feed like count
         feed.likeCount = @(feed.likeCount.integerValue - 1);
         feed.selfLiked = @(NO);
 
         NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,UNLIKE_FEED];
-        [self getRequest:rqtStr parameter:@{@"id":feed.feedId} includeArguments:YES completion:^(NSDictionary *responseJson) {
+        [self getRequest:rqtStr parameter:@{@"id":feed.mUID} includeArguments:YES completion:^(NSDictionary *responseJson) {
             if (completionBlock) {
                 dispatch_main_async_safe(^{
                     completionBlock();

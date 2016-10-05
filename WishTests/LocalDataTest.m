@@ -55,12 +55,12 @@
         Feed *feed = feeds.firstObject;
         
         //图片id不能为空
-        XCTAssertTrue(feed.imageId,@"Null imageid in feed id %@",feed.feedId);
+        XCTAssertTrue(feed.mCoverImageId,@"Null imageid in feed id %@",feed.mUID);
         XCTAssertTrue(plan.mCoverImageId,@"Null backgroundNum in plan id %@",plan.mCoverImageId);
         
         //匹配
-        if (![plan.mCoverImageId isEqualToString:feed.imageId]) {
-            NSLog(@"Feed Cover : %@",feed.imageId);
+        if (![plan.mCoverImageId isEqualToString:feed.mCoverImageId]) {
+            NSLog(@"Feed Cover : %@",feed.mCoverImageId);
             NSLog(@"Plan Cover : %@",feed.plan.mCoverImageId);
             XCTAssertTrue(NO,@"Mismatched Post Cover");
         }
