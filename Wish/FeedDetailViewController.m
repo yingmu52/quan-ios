@@ -84,7 +84,6 @@
 
 - (void)setFeed:(Feed *)feed{
     _feed = feed;
-    _message = nil;
     if (!feed) {
         self.title = @"该内容不存在";
     }else{
