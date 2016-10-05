@@ -775,6 +775,7 @@
                                       forPlan:nil
                          managedObjectContext:workerContext];
 
+        
         BOOL hasComments = comments.count > 0;
         NSNumber *currentPage = @(0);
         NSNumber *totalPage = @(0);

@@ -14,6 +14,7 @@
 
 #define FEEDDETAILCELLID @"FeedDetailCell"
 @interface FeedDetailViewController () <CommentViewControllerDelegate>
+@property (nonatomic,strong) FeedDetailHeader *headerView;
 @property (nonatomic,strong) NSDateFormatter *dateFormatter;
 @property (nonatomic,strong) NSDictionary *textAttributes;
 @property (nonatomic,strong) NSNumber *currentPage;
@@ -56,7 +57,7 @@
 
 
 - (void)loadMoreData{
-    NSString *feedId = self.feed ? self.feed.mUID : self.message.mUID;
+    NSString *feedId = self.feed ? self.feed.mUID : self.message.feedsId;
     NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKey:@"mUID"];
     //        NSLog(@"%@",self.currentPage);
     [self.fetchCenter getCommentListForFeed:feedId
@@ -83,7 +84,13 @@
 
 - (void)setFeed:(Feed *)feed{
     _feed = feed;
-    [self updateHeaderInfoForFeed:feed];
+    _message = nil;
+    if (!feed) {
+        self.title = @"该内容不存在";
+    }else{
+        [self updateHeaderInfoForFeed:feed];
+    }
+    
 }
 
 - (void)setUpNavigationItem
@@ -225,14 +232,12 @@
 
 
 - (void)updateHeaderInfoForFeed:(Feed *)feed{
-    if (feed) {
-        self.headerView.titleTextLabel.attributedText = [[NSAttributedString alloc] initWithString:feed.mTitle
-                                                                                        attributes:self.textAttributes];
-        self.headerView.dateLabel.text = [SystemUtil stringFromDate:feed.mCreateTime];
-        [self.headerView setLikeButtonText:feed.likeCount];
-        [self.headerView setCommentButtonText:feed.commentCount];
-        [self.headerView.likeButton setSelected:feed.selfLiked.boolValue];
-    }
+    self.headerView.titleTextLabel.attributedText = [[NSAttributedString alloc] initWithString:feed.mTitle
+                                                                                    attributes:self.textAttributes];
+    self.headerView.dateLabel.text = [SystemUtil stringFromDate:feed.mCreateTime];
+    [self.headerView setLikeButtonText:feed.likeCount];
+    [self.headerView setCommentButtonText:feed.commentCount];
+    [self.headerView.likeButton setSelected:feed.selfLiked.boolValue];
 }
 
 #pragma mark - table view

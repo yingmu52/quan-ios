@@ -19,7 +19,5 @@
 
 @property (nonatomic,strong) Message *message;
 @property (nonatomic,strong) Feed *feed;
-@property (nonatomic,strong) FeedDetailHeader *headerView;
-- (void)setUpNavigationItem;
 
 @end

@@ -164,7 +164,7 @@
 - (NSFetchRequest *)tableFetchRequest{
     if (!_tableFetchRequest) {
         _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Message"];
-        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"targetOwnerId = %@",[User uid]];
+        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"targetOwnerId == %@",[User uid]];
         _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mLastReadTime" ascending:YES]];
         [_tableFetchRequest setFetchBatchSize:3];
     }

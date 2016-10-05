@@ -42,7 +42,8 @@
                      forPlan:(nullable Plan *)plan
         managedObjectContext:(nonnull NSManagedObjectContext *)context{
     
-    Feed *feed = [Feed fetchID:feedItem[@"id"] inManagedObjectContext:context];
+    NSString *feedId = feedItem[@"id"];
+    Feed *feed = [Feed fetchID:feedId inManagedObjectContext:context];
 
     if (!feed) {
         
