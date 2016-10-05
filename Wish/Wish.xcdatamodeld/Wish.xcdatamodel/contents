@@ -31,13 +31,9 @@
         <relationship name="comments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Comment" inverseName="feed" inverseEntity="Comment" syncable="YES"/>
         <relationship name="plan" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Plan" inverseName="feeds" inverseEntity="Plan" syncable="YES"/>
     </entity>
-    <entity name="Message" representedClassName="Message" syncable="YES">
+    <entity name="Message" representedClassName="Message" parentEntity="MSBase" syncable="YES">
         <attribute name="commentId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="createTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="feedsId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="messageId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="picurl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="targetOwnerId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userDeleted" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="messages" inverseEntity="Owner" syncable="YES"/>
@@ -74,12 +70,12 @@
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="plans" inverseEntity="Owner" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Circle" positionX="-8622" positionY="-517" width="128" height="148"/>
-        <element name="Comment" positionX="-9002" positionY="-69" width="128" height="150"/>
-        <element name="Feed" positionX="-9288" positionY="-468" width="128" height="210"/>
-        <element name="Message" positionX="-8471" positionY="-513" width="128" height="178"/>
-        <element name="MSBase" positionX="-8766" positionY="-394" width="128" height="178"/>
-        <element name="Owner" positionX="-8696" positionY="-7" width="128" height="88"/>
+        <element name="Circle" positionX="-8631" positionY="-409" width="128" height="148"/>
+        <element name="Comment" positionX="-9108" positionY="-63" width="128" height="150"/>
+        <element name="Feed" positionX="-9108" positionY="-306" width="128" height="210"/>
+        <element name="Message" positionX="-8642" positionY="-223" width="128" height="118"/>
+        <element name="MSBase" positionX="-8847" positionY="-295" width="128" height="178"/>
+        <element name="Owner" positionX="-8883" positionY="11" width="128" height="88"/>
         <element name="Plan" positionX="-9110" positionY="-567" width="128" height="238"/>
     </elements>
 </model>

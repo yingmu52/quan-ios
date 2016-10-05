@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-
+#import "MSBase.h"
 @class Owner;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Message : NSManagedObject
+@interface Message : MSBase
 + (Message *)updateMessageWithInfo:(NSDictionary *)messageInfo
                          ownerInfo:(NSDictionary *)ownerInfo
               managedObjectContext:(NSManagedObjectContext *)context;

@@ -2,7 +2,7 @@
 //  MSBase+CoreDataProperties.m
 //  Stories
 //
-//  Created by Xinyi Zhuang on 10/4/16.
+//  Created by Xinyi Zhuang on 10/5/16.
 //  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //
 
@@ -14,13 +14,14 @@
 	return [[NSFetchRequest alloc] initWithEntityName:@"MSBase"];
 }
 
-@dynamic mLastReadTime;
-@dynamic mTitle;
-@dynamic mDescription;
 @dynamic mCoverImageId;
-@dynamic mUID;
-@dynamic mTypeID;
 @dynamic mCreateTime;
-@dynamic mUpdateTime;
+@dynamic mDescription;
+@dynamic mLastReadTime;
 @dynamic mSpecialTimestamp;
+@dynamic mTitle;
+@dynamic mTypeID;
+@dynamic mUID;
+@dynamic mUpdateTime;
+
 @end

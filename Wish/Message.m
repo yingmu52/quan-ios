@@ -18,29 +18,23 @@
                          ownerInfo:(NSDictionary *)ownerInfo
               managedObjectContext:(nonnull NSManagedObjectContext *)context{
     
-    Message *message;
-    NSArray *results = [Plan fetchWith:@"Message"
-                             predicate:[NSPredicate predicateWithFormat:@"messageId == %@",messageInfo[@"messageId"]]
-                      keyForDescriptor:@"createTime"
-                  managedObjectContext:context]; //utility method from Plan+PlanCRUD.h
+    Message *message = [Message fetchID:messageInfo[@"messageId"] inManagedObjectContext:context];
     
-    if (!results.count) {
+    if (!message) {
         message = [NSEntityDescription insertNewObjectForEntityForName:@"Message"
                                                 inManagedObjectContext:context];
         message.commentId = messageInfo[@"commentId"];
-        message.content = messageInfo[@"content"];
+        message.mTitle = messageInfo[@"content"];
         message.feedsId = messageInfo[@"feedsId"];
-        message.messageId = messageInfo[@"messageId"];
-        message.picurl = messageInfo[@"picurl"];
+        message.mUID = messageInfo[@"messageId"];
+        message.mCoverImageId = messageInfo[@"picurl"];
         
-        message.createTime = [NSDate dateWithTimeIntervalSince1970:[messageInfo[@"createTime"] integerValue]];
+        message.mCreateTime = [NSDate dateWithTimeIntervalSince1970:[messageInfo[@"createTime"] integerValue]];
         
         message.owner = [Owner updateOwnerWithInfo:ownerInfo managedObjectContext:context];
         
         message.targetOwnerId = [User uid]; //this message is requested by the current user ~
         
-    }else{
-        message = results.lastObject;
     }
     
     BOOL userDeleted = [messageInfo[@"isdelete"] boolValue];
@@ -48,6 +42,7 @@
         message.userDeleted = @(userDeleted);
     }
     
+    message.mLastReadTime = [NSDate date];
     return message;
 }
 

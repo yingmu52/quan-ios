@@ -2,7 +2,7 @@
 //  Message+CoreDataProperties.m
 //  Stories
 //
-//  Created by Xinyi Zhuang on 10/3/16.
+//  Created by Xinyi Zhuang on 10/5/16.
 //  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //
 
@@ -14,14 +14,10 @@
 	return [[NSFetchRequest alloc] initWithEntityName:@"Message"];
 }
 
-@dynamic commentId;
-@dynamic content;
-@dynamic createTime;
 @dynamic feedsId;
-@dynamic messageId;
-@dynamic picurl;
 @dynamic targetOwnerId;
 @dynamic userDeleted;
 @dynamic owner;
+@dynamic commentId;
 
 @end

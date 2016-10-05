@@ -2,7 +2,7 @@
 //  MSBase+CoreDataProperties.h
 //  Stories
 //
-//  Created by Xinyi Zhuang on 10/4/16.
+//  Created by Xinyi Zhuang on 10/5/16.
 //  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //
 
@@ -15,15 +15,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<MSBase *> *)fetchRequest;
 
-@property (nullable, nonatomic, copy) NSDate *mLastReadTime;
-@property (nullable, nonatomic, copy) NSString *mTitle;
-@property (nullable, nonatomic, copy) NSString *mDescription;
 @property (nullable, nonatomic, copy) NSString *mCoverImageId;
-@property (nullable, nonatomic, copy) NSString *mUID;
-@property (nullable, nonatomic, copy) NSString *mTypeID;
 @property (nullable, nonatomic, copy) NSDate *mCreateTime;
-@property (nullable, nonatomic, copy) NSDate *mUpdateTime;
+@property (nullable, nonatomic, copy) NSString *mDescription;
+@property (nullable, nonatomic, copy) NSDate *mLastReadTime;
 @property (nullable, nonatomic, copy) NSDate *mSpecialTimestamp;
+@property (nullable, nonatomic, copy) NSString *mTitle;
+@property (nullable, nonatomic, copy) NSString *mTypeID;
+@property (nullable, nonatomic, copy) NSString *mUID;
+@property (nullable, nonatomic, copy) NSDate *mUpdateTime;
 
 @end
 

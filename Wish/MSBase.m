@@ -10,20 +10,21 @@
 
 @implementation MSBase
 
++ (NSString *)ms_GetClassName{
+    return NSStringFromClass([self class]);
+}
+
 + (NSArray *)fetchWithPredicate:(NSPredicate *)predicate
          inManagedObjectContext:(NSManagedObjectContext *)context{
-    NSString *entityName = [NSString stringWithFormat:@"%@",[[self new] class]];
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:entityName];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[MSBase ms_GetClassName]];
     request.predicate = predicate;
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"lastReadTime" ascending:YES]];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mLastReadTime" ascending:YES]];
     NSError *error = nil;
     return [context executeFetchRequest:request error:&error];
 }
 
 + (id)fetchID:(NSString *)entityID inManagedObjectContext:(NSManagedObjectContext *)context{
-    
-    NSString *entityName = NSStringFromClass([self class]);
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:entityName];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[MSBase ms_GetClassName]];
     request.predicate = [NSPredicate predicateWithFormat:@"mUID == %@",entityID];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mUID" ascending:YES]];
     NSError *error = nil;

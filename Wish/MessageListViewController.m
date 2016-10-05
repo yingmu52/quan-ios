@@ -26,7 +26,7 @@
 
 
 - (void)loadNewData{
-    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKeyPath:@"messageId"];
+    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKeyPath:@"mUID"];
     [self.fetchCenter getMessageListWithLocalList:localList
                                            onPage:nil
                                        completion:^(NSNumber *currentPage, NSNumber *totalPage)
@@ -40,7 +40,7 @@
 
 - (void)loadMoreData{
     
-    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKeyPath:@"messageId"];
+    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKeyPath:@"mUID"];
     [self.fetchCenter getMessageListWithLocalList:localList
                                            onPage:self.currentPage
                                        completion:^(NSNumber *currentPage, NSNumber *totalPage)
@@ -97,12 +97,12 @@
     Message *message = [self.tableFetchedRC objectAtIndexPath:indexPath];
     
     [cell.ms_imageView1 downloadImageWithImageId:message.owner.mCoverImageId size:FetchCenterImageSize100];
-    [cell.ms_imageView2 downloadImageWithImageId:message.picurl size:FetchCenterImageSize100];
+    [cell.ms_imageView2 downloadImageWithImageId:message.mCoverImageId size:FetchCenterImageSize100];
     NSDictionary *attr = @{NSForegroundColorAttributeName:[SystemUtil colorFromHexString:@"#00B8C2"]};
     if (!message.userDeleted.boolValue) {
         NSMutableAttributedString *content = [[NSMutableAttributedString alloc] initWithString:message.owner.mTitle
                                                                                     attributes:attr];
-        [content appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"发表了一条评论：%@",message.content]]];
+        [content appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"发表了一条评论：%@",message.mTitle]]];
         cell.ms_textView.attributedText = content;
     }else{
         NSMutableAttributedString *n1 = [[NSMutableAttributedString alloc] initWithString:message.owner.mTitle
@@ -119,7 +119,7 @@
     //displaying date
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"yyyy-MM-dd HH:mm";
-    cell.ms_dateLabel.text = [formatter stringFromDate:message.createTime];
+    cell.ms_dateLabel.text = [formatter stringFromDate:message.mCreateTime];
     
     //    cell.backgroundColor = message.isRead.boolValue ? [self normalColor] : [self highlightColor];
 }
@@ -165,7 +165,7 @@
     if (!_tableFetchRequest) {
         _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Message"];
         _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"targetOwnerId = %@",[User uid]];
-        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createTime" ascending:NO]];
+        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mLastReadTime" ascending:YES]];
         [_tableFetchRequest setFetchBatchSize:3];
     }
     return _tableFetchRequest;

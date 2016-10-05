@@ -657,10 +657,7 @@
           completion:^(NSDictionary *responseJson)
     {
         NSManagedObjectContext *workerContext = [self workerContext];
-        NSArray *messages = [Plan fetchWith:@"Message"
-                                  predicate:nil
-                           keyForDescriptor:@"messageId"
-                       managedObjectContext:workerContext];
+        NSArray *messages = [Message fetchWithPredicate:nil inManagedObjectContext:workerContext];
         
         for (Message *m in messages) {
             [workerContext deleteObject:m];
@@ -704,7 +701,7 @@
         
         if (currentPage.integerValue == 1) {
             NSArray *serverList = [responseJson valueForKeyPath:@"data.messageList.messageId"];
-            [self syncEntity:@"Message" idName:@"messageId" localList:localList serverList:serverList inContext:workerContext];
+            [self syncEntity:@"Message" idName:@"mUID" localList:localList serverList:serverList inContext:workerContext];
         }
         
         [self.appDelegate saveContext:workerContext];
