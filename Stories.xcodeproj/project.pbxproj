@@ -29,6 +29,7 @@
 		A01F887D1DA6225400056FD8 /* Plan+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A01F88751DA6225400056FD8 /* Plan+CoreDataClass.m */; };
 		A01F887E1DA6225400056FD8 /* Owner+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A01F88771DA6225400056FD8 /* Owner+CoreDataClass.m */; };
 		A01F887F1DA6225400056FD8 /* Feed+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A01F88791DA6225400056FD8 /* Feed+CoreDataClass.m */; };
+		A01F88811DA6386400056FD8 /* Me.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A01F88801DA6386400056FD8 /* Me.storyboard */; };
 		A027715C1D880BB700442996 /* MSFeatherImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A027715B1D880BB700442996 /* MSFeatherImageView.m */; };
 		A02771621D8852BF00442996 /* MSCircularGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A02771611D8852BF00442996 /* MSCircularGradientLayer.m */; };
 		A03010521BABC6AA0041E2CF /* QBImagePicker.strings in Resources */ = {isa = PBXBuildFile; fileRef = A03010371BABC6AA0041E2CF /* QBImagePicker.strings */; };
@@ -362,6 +363,7 @@
 		A01F88771DA6225400056FD8 /* Owner+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Owner+CoreDataClass.m"; sourceTree = "<group>"; };
 		A01F88781DA6225400056FD8 /* Feed+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Feed+CoreDataClass.h"; sourceTree = "<group>"; };
 		A01F88791DA6225400056FD8 /* Feed+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Feed+CoreDataClass.m"; sourceTree = "<group>"; };
+		A01F88801DA6386400056FD8 /* Me.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Me.storyboard; sourceTree = "<group>"; };
 		A027715A1D880BB700442996 /* MSFeatherImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSFeatherImageView.h; sourceTree = "<group>"; };
 		A027715B1D880BB700442996 /* MSFeatherImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSFeatherImageView.m; sourceTree = "<group>"; };
 		A02771601D8852BF00442996 /* MSCircularGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSCircularGradientLayer.h; sourceTree = "<group>"; };
@@ -1265,6 +1267,7 @@
 				AEF7F29E1A6875360022410B /* Main.storyboard */,
 				A07AD4F31D9A718C0039093F /* Circle.storyboard */,
 				A01D417C1D5B17AD007B3177 /* Login.storyboard */,
+				A01F88801DA6386400056FD8 /* Me.storyboard */,
 				AE01724C1A65CD8E0014266F /* Images.xcassets */,
 				AE01724E1A65CD8E0014266F /* LaunchScreen.xib */,
 				AE01723C1A65CD8E0014266F /* Supporting Files */,
@@ -1645,6 +1648,7 @@
 				AE2A8DE51ACA700100029D52 /* WishDetailCell.xib in Resources */,
 				A01431C11D7166930099258C /* cross.png in Resources */,
 				A01431C21D7166930099258C /* cross@2x.png in Resources */,
+				A01F88811DA6386400056FD8 /* Me.storyboard in Resources */,
 				A07C66C61BE070E400413D32 /* read_me.txt in Resources */,
 				AE59B5F11B40FB55006CA4AB /* ViewForEmptyEvent.xib in Resources */,
 				A0D1025C1B84EF3B006B0E4E /* HeaderView.xib in Resources */,

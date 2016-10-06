@@ -22,6 +22,7 @@
 #import "NZCircularImageView.h"
 #import "UIImageView+ImageCache.h"
 #import "StationViewController.h"
+#import "MyPageViewController.h"
 
 const NSUInteger maxCardNum = 10;
 @interface HomeViewController ()
@@ -109,7 +110,9 @@ ViewForEmptyEventDelegate,StationViewControllerDelegate>
 }
 
 - (void)showProfileView{
-    [self performSegueWithIdentifier:@"showMyPageFromHome" sender:nil];
+    UIStoryboard *me = [UIStoryboard storyboardWithName:@"Me" bundle:nil];
+    MyPageViewController *mpvc = [me instantiateViewControllerWithIdentifier:@"MyPageViewController"];
+    [self showViewController:mpvc sender:nil];
 }
 
 #pragma mark - image picker
