@@ -16,6 +16,8 @@
 #import "PostImageCell.h"
 #import "ImagePicker.h"
 #import "ImagePreviewController.h"
+#import "Task+CoreDataClass.h"
+#import "MSRocketStation.h"
 
 static NSUInteger maxWordCount = 1000;
 static NSUInteger distance = 10;
@@ -92,6 +94,14 @@ static NSUInteger distance = 10;
 
 
 - (void)createFeed{
+    [self postFeed:NO];
+}
+
+- (IBAction)createFeedOffline{
+    [self postFeed:YES];
+}
+
+- (void)postFeed:(BOOL)shouldUseOfflinePosting{
     if (self.assets.count > 0) {
         [self tapOnBackground:nil]; //关闭键盘
         UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithFrame:self.tikButton.frame];
@@ -102,10 +112,24 @@ static NSUInteger distance = 10;
         //处理用户选取的图片 array of PHAsset/UIImage
         PHImageManager *manager = [PHImageManager defaultManager];
         NSMutableArray *arrayOfUIImages = [NSMutableArray arrayWithCapacity:self.assets.count];
-        for (id item in self.assets) {
+        
+        if (shouldUseOfflinePosting) {
+            NSLog(@"选择离线发送！");
+            NSMutableArray *imagelocalIDs = [NSMutableArray array];
+            for (PHAsset *item in self.assets) {
+                [imagelocalIDs addObject:[item localIdentifier]];
+            }
+            [Task insertTaskWithFeedTitle:self.textView.text
+                                   planID:self.plan.mUID
+                             locaImageIDs:imagelocalIDs
+                   inManagedObjectContext:[AppDelegate getContext]];
+            [[MSRocketStation sharedStation] startDigestingTasks];
+            [self.navigationController popViewControllerAnimated:YES];
             
-            //this method is async
-            if ([item isKindOfClass:[PHAsset class]]) {
+        }else{
+            NSLog(@"选择开始常规发送！");
+            for (PHAsset *item in self.assets) {
+                //this method is async
                 [manager requestImageDataForAsset:item
                                           options:nil
                                     resultHandler:^(NSData * _Nullable imageData,
@@ -128,11 +152,11 @@ static NSUInteger distance = 10;
         self.progressBar.hidden = NO;
     }else{
         UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@"至少选一张图"
-                                                                             message:nil
-                                                                      preferredStyle:UIAlertControllerStyleAlert];
+                                                                           message:nil
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
         [alertView addAction:[UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleCancel handler:nil]];
         [self presentViewController:alertView animated:YES completion:nil];
-
+        
     }
 }
 

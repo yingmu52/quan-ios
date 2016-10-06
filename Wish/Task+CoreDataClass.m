@@ -23,9 +23,11 @@
     Task *task = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:context];
     
     task.mUID = [NSUUID UUID].UUIDString;
-    task.mCreateTime = [NSDate date];
+    task.mCreateTime = [NSDate date]; //must set
     task.mTitle = feedTitle;
+    
     task.planID = planId;
+    task.isFinished = @(NO);
     task.imageLocalIdentifiers = [localImageIdentifiers componentsJoinedByString:@","];
     
     

@@ -17,8 +17,13 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSArray *)fetchWithPredicate:(nullable NSPredicate *)predicate
          inManagedObjectContext:(NSManagedObjectContext *)context;
 
-+ (id)fetchID:(NSString *)entityID inManagedObjectContext:(NSManagedObjectContext *)context;
 
++ (NSArray *)fetchWithPredicate:(nullable NSPredicate *)predicate
+                        WithKey:(NSString *)key
+         inManagedObjectContext:(NSManagedObjectContext *)context;
+
+
++ (instancetype)fetchID:(NSString *)entityID inManagedObjectContext:(NSManagedObjectContext *)context;
 
 @end
 

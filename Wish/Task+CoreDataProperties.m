@@ -16,5 +16,6 @@
 
 @dynamic imageLocalIdentifiers;
 @dynamic planID;
+@dynamic isFinished;
 
 @end

@@ -571,10 +571,10 @@
                                 <color key="sectionIndexBackgroundColor" red="0.81699562072753906" green="0.84549605846405029" blue="0.8351210355758667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MessageCell" rowHeight="112" id="ng5-6z-04s" customClass="MSTableViewCell">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="112"/>
+                                        <rect key="frame" x="0.0" y="28" width="1000" height="112"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ng5-6z-04s" id="Hhm-43-t0v">
-                                            <frame key="frameInset" width="375" height="111.5"/>
+                                            <frame key="frameInset" width="1000" height="111.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hAg-MK-02Y" userLabel="BackgroundView">
@@ -1613,6 +1613,7 @@
                         </variation>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="ITR-5T-GlT" appends="YES" id="teg-Wf-tiL"/>
+                            <outletCollection property="gestureRecognizers" destination="Jjd-ZU-jXD" appends="YES" id="a6a-pA-Mps"/>
                         </connections>
                     </view>
                     <connections>
@@ -1625,9 +1626,14 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x2Z-Fs-fXM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer numberOfTapsRequired="2" id="ITR-5T-GlT">
+                <tapGestureRecognizer numberOfTapsRequired="2" id="ITR-5T-GlT" userLabel="Tap On Background">
                     <connections>
                         <action selector="tapOnBackground:" destination="XiV-RA-INl" id="MFb-MI-yaM"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer numberOfTapsRequired="5" id="Jjd-ZU-jXD" userLabel="Tap For Offline Posting">
+                    <connections>
+                        <action selector="createFeedOffline" destination="XiV-RA-INl" id="nNY-Ji-Mc6"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -2400,10 +2406,10 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CirclePickerCell" rowHeight="65" id="RBz-H7-E4a" customClass="MSTableViewCell">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="65"/>
+                                        <rect key="frame" x="0.0" y="28" width="1000" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RBz-H7-E4a" id="7j8-Ia-E33">
-                                            <frame key="frameInset" width="375" height="64.5"/>
+                                            <frame key="frameInset" width="1000" height="64.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gnI-8W-MZg">
@@ -3322,7 +3328,7 @@
                                                 </connections>
                                             </collectionViewCell>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PreviewCell_Add" id="h5K-iR-Pv1">
-                                                <rect key="frame" x="113" y="0.0" width="103" height="103"/>
+                                                <rect key="frame" x="0.0" y="128" width="103" height="103"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                     <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
@@ -6324,11 +6330,11 @@
         <image name="tab_ic_quanzi_pressed" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9iF-Ie-E5K"/>
-        <segue reference="JVq-VY-XxP"/>
+        <segue reference="4wk-xv-ETJ"/>
+        <segue reference="0NR-qk-ahm"/>
         <segue reference="dFu-Bk-XhY"/>
         <segue reference="6ze-LH-v54"/>
-        <segue reference="4wk-xv-ETJ"/>
+        <segue reference="JVq-VY-XxP"/>
         <segue reference="4yF-1j-VR3"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0039215686269999999" green="0.75686274509999996" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -64,6 +64,7 @@
     </entity>
     <entity name="Task" representedClassName="Task" parentEntity="MSBase" syncable="YES">
         <attribute name="imageLocalIdentifiers" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isFinished" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="planID" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
@@ -74,6 +75,6 @@
         <element name="MSBase" positionX="-8847" positionY="-295" width="128" height="178"/>
         <element name="Owner" positionX="-8831" positionY="-54" width="128" height="88"/>
         <element name="Plan" positionX="-9110" positionY="-567" width="128" height="238"/>
-        <element name="Task" positionX="-8948" positionY="-486" width="128" height="73"/>
+        <element name="Task" positionX="-8948" positionY="-486" width="128" height="88"/>
     </elements>
 </model>
