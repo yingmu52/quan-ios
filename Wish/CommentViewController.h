@@ -7,7 +7,7 @@
 //
 
 #import "MSSuperViewController.h"
-#import "Comment.h"
+#import "Comment+CoreDataClass.h"
 
 @class CommentViewController;
 @protocol CommentViewControllerDelegate <NSObject>

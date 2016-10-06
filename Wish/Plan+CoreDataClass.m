@@ -1,19 +1,18 @@
 //
-//  Plan.m
+//  Plan+CoreDataClass.m
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2015-10-22.
-//  Copyright © 2015 Xinyi Zhuang. All rights reserved.
+//  Created by Xinyi Zhuang on 10/6/16.
+//  Copyright © 2016 Xinyi Zhuang. All rights reserved.
+//  This file was automatically generated and should not be edited.
 //
 
-#import "Plan.h"
-#import "Feed.h"
-#import "Owner.h"
-#import "FetchCenter.h"
-#import "AppDelegate.h"
-#import "User.h"
-
+#import "Plan+CoreDataClass.h"
+#import "Circle+CoreDataClass.h"
+#import "Feed+CoreDataClass.h"
+#import "Owner+CoreDataClass.h"
 @implementation Plan
+
 
 - (NSArray *)planStatusTags{
     return @[@"进行中",@"达成",@"放弃"];
@@ -34,7 +33,7 @@
           managedObjectContext:(nonnull NSManagedObjectContext *)context{ //owner may be different !
     
     Plan *plan = [Plan fetchID:dict[@"id"] inManagedObjectContext:context];
-
+    
     if (!plan) {
         //insert new fetched plan
         plan = [NSEntityDescription insertNewObjectForEntityForName:@"Plan"
@@ -175,5 +174,6 @@
 - (BOOL)hasDetailText{
     return self.mDescription && ![self.mDescription isEqualToString:@""];
 }
+
 
 @end

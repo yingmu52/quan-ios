@@ -10,7 +10,7 @@
 #import "SystemUtil.h"
 #import "AppDelegate.h"
 #import "FollowingImageCell.h"
-#import "Feed.h"
+#import "Feed+CoreDataClass.h"
 #import "UIImageView+ImageCache.h"
 #import "FetchCenter.h"
 @import CoreData;

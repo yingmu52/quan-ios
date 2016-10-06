@@ -1,14 +1,13 @@
 //
-//  Feed.h
+//  Feed+CoreDataClass.h
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2015-10-22.
-//  Copyright © 2015 Xinyi Zhuang. All rights reserved.
+//  Created by Xinyi Zhuang on 10/6/16.
+//  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
-#import "MSBase.h"
+#import "MSBase+CoreDataClass.h"
 
 @class Comment, Plan;
 
@@ -34,9 +33,10 @@ typedef void(^FeedCreationCompletion)(Feed *feed);
                      forPlan:(nullable Plan *)plan
         managedObjectContext:(nonnull NSManagedObjectContext *)context;
 
-    
+
 - (NSNumber *)numberOfPictures;
 - (NSArray *)imageIdArray;
+
 
 @end
 

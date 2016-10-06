@@ -7,7 +7,7 @@
 //
 
 #import "MessageListViewController.h"
-#import "Owner.h"
+#import "Owner+CoreDataClass.h"
 #import "FeedDetailViewController.h"
 
 @interface MessageListViewController ()

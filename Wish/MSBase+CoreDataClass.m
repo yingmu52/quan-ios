@@ -1,20 +1,21 @@
 //
-//  MSBase.m
+//  MSBase+CoreDataClass.m
 //  Stories
 //
-//  Created by Xinyi Zhuang on 10/1/16.
+//  Created by Xinyi Zhuang on 10/6/16.
 //  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //
 
-#import "MSBase.h"
+#import "MSBase+CoreDataClass.h"
 
 @implementation MSBase
+
 
 + (NSString *)ms_GetClassName{
     return NSStringFromClass([self class]);
 }
 
-+ (NSArray *)fetchWithPredicate:(NSPredicate *)predicate
++ (NSArray *)fetchWithPredicate:(nullable NSPredicate *)predicate
          inManagedObjectContext:(NSManagedObjectContext *)context{
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[MSBase ms_GetClassName]];
     request.predicate = predicate;
@@ -32,5 +33,7 @@
     NSAssert(results.count <= 1, @"Fetching Duplicated Entity");
     return results.lastObject;
 }
+
+
 
 @end

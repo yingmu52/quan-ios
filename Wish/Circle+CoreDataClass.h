@@ -1,16 +1,18 @@
 //
-//  Circle.h
+//  Circle+CoreDataClass.h
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2015-10-20.
-//  Copyright © 2015 Xinyi Zhuang. All rights reserved.
+//  Created by Xinyi Zhuang on 10/6/16.
+//  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
-#import "Plan.h"
-#import "AppDelegate.h"
-#import "MSBase.h"
+#import "MSBase+CoreDataClass.h"
+
+@class Plan;
+
+NS_ASSUME_NONNULL_BEGIN
+
 
 typedef NS_ENUM(NSInteger, CircleType) {
     CircleTypeUndefine,
@@ -18,7 +20,6 @@ typedef NS_ENUM(NSInteger, CircleType) {
     CircleTypeFollowed
 };
 
-NS_ASSUME_NONNULL_BEGIN
 
 @interface Circle : MSBase
 
@@ -26,10 +27,12 @@ NS_ASSUME_NONNULL_BEGIN
 + (Circle *)updateCircleWithInfo:(NSDictionary *)info managedObjectContext:(NSManagedObjectContext *)context;
 
 + (Circle *)createCircle:(NSString *)circleId
-                name:(NSString *)circleName
-                desc:(NSString *)desc
-             imageId:(NSString *)imageId
-             context:(NSManagedObjectContext *)context;
+                    name:(NSString *)circleName
+                    desc:(NSString *)desc
+                 imageId:(NSString *)imageId
+                 context:(NSManagedObjectContext *)context;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

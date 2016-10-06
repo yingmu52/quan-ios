@@ -20,6 +20,15 @@
 		A016FDBB1B8D14BA006E7A09 /* PreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A016FDBA1B8D14BA006E7A09 /* PreviewCell.m */; };
 		A016FDBC1B8D14BA006E7A09 /* PreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A016FDBA1B8D14BA006E7A09 /* PreviewCell.m */; };
 		A01D417D1D5B17AD007B3177 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A01D417C1D5B17AD007B3177 /* Login.storyboard */; };
+		A01F88691DA620BE00056FD8 /* Task+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A01F88661DA620BE00056FD8 /* Task+CoreDataClass.m */; };
+		A01F886A1DA620BE00056FD8 /* Task+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A01F88681DA620BE00056FD8 /* Task+CoreDataProperties.m */; };
+		A01F886D1DA621C500056FD8 /* MSBase+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A01F886C1DA621C500056FD8 /* MSBase+CoreDataClass.m */; };
+		A01F887A1DA6225400056FD8 /* Circle+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A01F886F1DA6225400056FD8 /* Circle+CoreDataClass.m */; };
+		A01F887B1DA6225400056FD8 /* Comment+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A01F88711DA6225400056FD8 /* Comment+CoreDataClass.m */; };
+		A01F887C1DA6225400056FD8 /* Message+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A01F88731DA6225400056FD8 /* Message+CoreDataClass.m */; };
+		A01F887D1DA6225400056FD8 /* Plan+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A01F88751DA6225400056FD8 /* Plan+CoreDataClass.m */; };
+		A01F887E1DA6225400056FD8 /* Owner+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A01F88771DA6225400056FD8 /* Owner+CoreDataClass.m */; };
+		A01F887F1DA6225400056FD8 /* Feed+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A01F88791DA6225400056FD8 /* Feed+CoreDataClass.m */; };
 		A027715C1D880BB700442996 /* MSFeatherImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A027715B1D880BB700442996 /* MSFeatherImageView.m */; };
 		A02771621D8852BF00442996 /* MSCircularGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A02771611D8852BF00442996 /* MSCircularGradientLayer.m */; };
 		A03010521BABC6AA0041E2CF /* QBImagePicker.strings in Resources */ = {isa = PBXBuildFile; fileRef = A03010371BABC6AA0041E2CF /* QBImagePicker.strings */; };
@@ -90,8 +99,6 @@
 		A0A083591BD5FF9E0057CD65 /* StationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A083571BD5FF9E0057CD65 /* StationViewController.m */; };
 		A0A0835C1BD74F260057CD65 /* CircleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A0835B1BD74F260057CD65 /* CircleListViewController.m */; };
 		A0A0835D1BD74F260057CD65 /* CircleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A0835B1BD74F260057CD65 /* CircleListViewController.m */; };
-		A0A083841BD75E3E0057CD65 /* Circle.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A083811BD75E3E0057CD65 /* Circle.m */; };
-		A0A083851BD75E3E0057CD65 /* Circle.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A083811BD75E3E0057CD65 /* Circle.m */; };
 		A0A083941BD765F00057CD65 /* Circle+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A0838F1BD765F00057CD65 /* Circle+CoreDataProperties.m */; };
 		A0A083951BD765F00057CD65 /* Circle+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A0838F1BD765F00057CD65 /* Circle+CoreDataProperties.m */; };
 		A0A10EA61CB586AA0004D5DE /* libTXYDownloader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A10EA01CB586AA0004D5DE /* libTXYDownloader.a */; };
@@ -166,6 +173,7 @@
 		A0E52E7E1D73F44100BB9DDC /* MSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A0E52E7D1D73F44100BB9DDC /* MSTableViewCell.m */; };
 		A0EA22011BA53BF400A83A7A /* ImagePreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0EA22001BA53BF400A83A7A /* ImagePreviewController.m */; };
 		A0EA22021BA53BF400A83A7A /* ImagePreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0EA22001BA53BF400A83A7A /* ImagePreviewController.m */; };
+		A0EC3EE71DA4F934000ED0BE /* MSRocketStation.m in Sources */ = {isa = PBXBuildFile; fileRef = A0EC3EE61DA4F934000ED0BE /* MSRocketStation.m */; };
 		A0EDFCBB1B90C61900B10594 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EDFCBA1B90C61900B10594 /* MobileCoreServices.framework */; };
 		A0EDFCC11B90C75900B10594 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3DC1B84E851003CCB34 /* Reachability.m */; };
 		A0EE8C5A1BB3E89600C5DAC3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EE8C591BB3E89600C5DAC3 /* OpenGLES.framework */; };
@@ -173,24 +181,14 @@
 		A0EE8C5E1BB3E93D00C5DAC3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EE8C5D1BB3E93D00C5DAC3 /* AVFoundation.framework */; };
 		A0F513181BD98B9600279B9D /* Comment+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F513051BD98B9600279B9D /* Comment+CoreDataProperties.m */; };
 		A0F513191BD98B9600279B9D /* Comment+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F513051BD98B9600279B9D /* Comment+CoreDataProperties.m */; };
-		A0F5131A1BD98B9600279B9D /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F513071BD98B9600279B9D /* Comment.m */; };
-		A0F5131B1BD98B9600279B9D /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F513071BD98B9600279B9D /* Comment.m */; };
 		A0F5131C1BD98B9600279B9D /* Plan+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F513091BD98B9600279B9D /* Plan+CoreDataProperties.m */; };
 		A0F5131D1BD98B9600279B9D /* Plan+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F513091BD98B9600279B9D /* Plan+CoreDataProperties.m */; };
-		A0F5131E1BD98B9600279B9D /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F5130B1BD98B9600279B9D /* Plan.m */; };
-		A0F5131F1BD98B9600279B9D /* Plan.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F5130B1BD98B9600279B9D /* Plan.m */; };
 		A0F513201BD98B9600279B9D /* Feed+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F5130D1BD98B9600279B9D /* Feed+CoreDataProperties.m */; };
 		A0F513211BD98B9600279B9D /* Feed+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F5130D1BD98B9600279B9D /* Feed+CoreDataProperties.m */; };
-		A0F513221BD98B9600279B9D /* Feed.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F5130F1BD98B9600279B9D /* Feed.m */; };
-		A0F513231BD98B9600279B9D /* Feed.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F5130F1BD98B9600279B9D /* Feed.m */; };
 		A0F513241BD98B9600279B9D /* Owner+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F513111BD98B9600279B9D /* Owner+CoreDataProperties.m */; };
 		A0F513251BD98B9600279B9D /* Owner+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F513111BD98B9600279B9D /* Owner+CoreDataProperties.m */; };
-		A0F513261BD98B9600279B9D /* Owner.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F513131BD98B9600279B9D /* Owner.m */; };
-		A0F513271BD98B9600279B9D /* Owner.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F513131BD98B9600279B9D /* Owner.m */; };
 		A0F513281BD98B9600279B9D /* Message+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F513151BD98B9600279B9D /* Message+CoreDataProperties.m */; };
 		A0F513291BD98B9600279B9D /* Message+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F513151BD98B9600279B9D /* Message+CoreDataProperties.m */; };
-		A0F5132A1BD98B9600279B9D /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F513171BD98B9600279B9D /* Message.m */; };
-		A0F5132B1BD98B9600279B9D /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F513171BD98B9600279B9D /* Message.m */; };
 		A0F7D42F1B84E851003CCB34 /* AMBCircularButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3AB1B84E851003CCB34 /* AMBCircularButton.m */; };
 		A0F7D4301B84E851003CCB34 /* AMBCircularButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3AB1B84E851003CCB34 /* AMBCircularButton.m */; };
 		A0F7D4311B84E851003CCB34 /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D3AD1B84E851003CCB34 /* CHTCollectionViewWaterfallLayout.m */; };
@@ -225,7 +223,6 @@
 		A0F7D4B31B84EA46003CCB34 /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D4B21B84EA46003CCB34 /* UIImage+WebP.m */; };
 		A0F7D4B41B84EA46003CCB34 /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = A0F7D4B21B84EA46003CCB34 /* UIImage+WebP.m */; };
 		A0F8C4601B88444C00A8B120 /* Wish.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AE0172431A65CD8E0014266F /* Wish.xcdatamodeld */; };
-		A0FB1ED51D9F7C2E00954F4E /* MSBase.m in Sources */ = {isa = PBXBuildFile; fileRef = A0FB1ED41D9F7C2E00954F4E /* MSBase.m */; };
 		A0FB1EDB1D9F7C9600954F4E /* MSBase+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A0FB1ED91D9F7C9600954F4E /* MSBase+CoreDataProperties.m */; };
 		A0FB1F2E1DA2EE4E00954F4E /* PgySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FB1F2D1DA2EE4E00954F4E /* PgySDK.framework */; };
 		A0FC1EED1D8A8073005A4A17 /* PlanManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0FC1EEC1D8A8073005A4A17 /* PlanManagementViewController.m */; };
@@ -347,6 +344,24 @@
 		A016FDB91B8D14BA006E7A09 /* PreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewCell.h; sourceTree = "<group>"; };
 		A016FDBA1B8D14BA006E7A09 /* PreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewCell.m; sourceTree = "<group>"; };
 		A01D417C1D5B17AD007B3177 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		A01F88651DA620BE00056FD8 /* Task+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Task+CoreDataClass.h"; sourceTree = "<group>"; };
+		A01F88661DA620BE00056FD8 /* Task+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Task+CoreDataClass.m"; sourceTree = "<group>"; };
+		A01F88671DA620BE00056FD8 /* Task+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Task+CoreDataProperties.h"; sourceTree = "<group>"; };
+		A01F88681DA620BE00056FD8 /* Task+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Task+CoreDataProperties.m"; sourceTree = "<group>"; };
+		A01F886B1DA621C500056FD8 /* MSBase+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MSBase+CoreDataClass.h"; sourceTree = "<group>"; };
+		A01F886C1DA621C500056FD8 /* MSBase+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MSBase+CoreDataClass.m"; sourceTree = "<group>"; };
+		A01F886E1DA6225400056FD8 /* Circle+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Circle+CoreDataClass.h"; sourceTree = "<group>"; };
+		A01F886F1DA6225400056FD8 /* Circle+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Circle+CoreDataClass.m"; sourceTree = "<group>"; };
+		A01F88701DA6225400056FD8 /* Comment+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Comment+CoreDataClass.h"; sourceTree = "<group>"; };
+		A01F88711DA6225400056FD8 /* Comment+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Comment+CoreDataClass.m"; sourceTree = "<group>"; };
+		A01F88721DA6225400056FD8 /* Message+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Message+CoreDataClass.h"; sourceTree = "<group>"; };
+		A01F88731DA6225400056FD8 /* Message+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Message+CoreDataClass.m"; sourceTree = "<group>"; };
+		A01F88741DA6225400056FD8 /* Plan+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Plan+CoreDataClass.h"; sourceTree = "<group>"; };
+		A01F88751DA6225400056FD8 /* Plan+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Plan+CoreDataClass.m"; sourceTree = "<group>"; };
+		A01F88761DA6225400056FD8 /* Owner+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Owner+CoreDataClass.h"; sourceTree = "<group>"; };
+		A01F88771DA6225400056FD8 /* Owner+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Owner+CoreDataClass.m"; sourceTree = "<group>"; };
+		A01F88781DA6225400056FD8 /* Feed+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Feed+CoreDataClass.h"; sourceTree = "<group>"; };
+		A01F88791DA6225400056FD8 /* Feed+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Feed+CoreDataClass.m"; sourceTree = "<group>"; };
 		A027715A1D880BB700442996 /* MSFeatherImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSFeatherImageView.h; sourceTree = "<group>"; };
 		A027715B1D880BB700442996 /* MSFeatherImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSFeatherImageView.m; sourceTree = "<group>"; };
 		A02771601D8852BF00442996 /* MSCircularGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSCircularGradientLayer.h; sourceTree = "<group>"; };
@@ -442,8 +457,6 @@
 		A0A083571BD5FF9E0057CD65 /* StationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationViewController.m; sourceTree = "<group>"; };
 		A0A0835A1BD74F260057CD65 /* CircleListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircleListViewController.h; path = Discovery/CircleListViewController.h; sourceTree = "<group>"; };
 		A0A0835B1BD74F260057CD65 /* CircleListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircleListViewController.m; path = Discovery/CircleListViewController.m; sourceTree = "<group>"; };
-		A0A083801BD75E3E0057CD65 /* Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Circle.h; sourceTree = "<group>"; };
-		A0A083811BD75E3E0057CD65 /* Circle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Circle.m; sourceTree = "<group>"; };
 		A0A0838E1BD765F00057CD65 /* Circle+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Circle+CoreDataProperties.h"; sourceTree = "<group>"; };
 		A0A0838F1BD765F00057CD65 /* Circle+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Circle+CoreDataProperties.m"; sourceTree = "<group>"; };
 		A0A10EA01CB586AA0004D5DE /* libTXYDownloader.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTXYDownloader.a; sourceTree = "<group>"; };
@@ -547,6 +560,8 @@
 		A0E52E7D1D73F44100BB9DDC /* MSTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MSTableViewCell.m; path = ../MSTableViewCell.m; sourceTree = "<group>"; };
 		A0EA21FF1BA53BF400A83A7A /* ImagePreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePreviewController.h; sourceTree = "<group>"; };
 		A0EA22001BA53BF400A83A7A /* ImagePreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePreviewController.m; sourceTree = "<group>"; };
+		A0EC3EE51DA4F934000ED0BE /* MSRocketStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSRocketStation.h; sourceTree = "<group>"; };
+		A0EC3EE61DA4F934000ED0BE /* MSRocketStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSRocketStation.m; sourceTree = "<group>"; };
 		A0EDFCBA1B90C61900B10594 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		A0EE8C591BB3E89600C5DAC3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		A0EE8C5B1BB3E93300C5DAC3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -554,24 +569,14 @@
 		A0EE8C601BB4CD2500C5DAC3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		A0F513041BD98B9600279B9D /* Comment+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Comment+CoreDataProperties.h"; sourceTree = "<group>"; };
 		A0F513051BD98B9600279B9D /* Comment+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Comment+CoreDataProperties.m"; sourceTree = "<group>"; };
-		A0F513061BD98B9600279B9D /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
-		A0F513071BD98B9600279B9D /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		A0F513081BD98B9600279B9D /* Plan+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Plan+CoreDataProperties.h"; sourceTree = "<group>"; };
 		A0F513091BD98B9600279B9D /* Plan+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Plan+CoreDataProperties.m"; sourceTree = "<group>"; };
-		A0F5130A1BD98B9600279B9D /* Plan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plan.h; sourceTree = "<group>"; };
-		A0F5130B1BD98B9600279B9D /* Plan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plan.m; sourceTree = "<group>"; };
 		A0F5130C1BD98B9600279B9D /* Feed+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Feed+CoreDataProperties.h"; sourceTree = "<group>"; };
 		A0F5130D1BD98B9600279B9D /* Feed+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Feed+CoreDataProperties.m"; sourceTree = "<group>"; };
-		A0F5130E1BD98B9600279B9D /* Feed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feed.h; sourceTree = "<group>"; };
-		A0F5130F1BD98B9600279B9D /* Feed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feed.m; sourceTree = "<group>"; };
 		A0F513101BD98B9600279B9D /* Owner+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Owner+CoreDataProperties.h"; sourceTree = "<group>"; };
 		A0F513111BD98B9600279B9D /* Owner+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Owner+CoreDataProperties.m"; sourceTree = "<group>"; };
-		A0F513121BD98B9600279B9D /* Owner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Owner.h; sourceTree = "<group>"; };
-		A0F513131BD98B9600279B9D /* Owner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Owner.m; sourceTree = "<group>"; };
 		A0F513141BD98B9600279B9D /* Message+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Message+CoreDataProperties.h"; sourceTree = "<group>"; };
 		A0F513151BD98B9600279B9D /* Message+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Message+CoreDataProperties.m"; sourceTree = "<group>"; };
-		A0F513161BD98B9600279B9D /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
-		A0F513171BD98B9600279B9D /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		A0F7D3AA1B84E851003CCB34 /* AMBCircularButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBCircularButton.h; sourceTree = "<group>"; };
 		A0F7D3AB1B84E851003CCB34 /* AMBCircularButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBCircularButton.m; sourceTree = "<group>"; };
 		A0F7D3AC1B84E851003CCB34 /* CHTCollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTCollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
@@ -604,8 +609,6 @@
 		A0F7D4281B84E851003CCB34 /* UIImage-Categories.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "UIImage-Categories.podspec"; sourceTree = "<group>"; };
 		A0F7D4B11B84EA46003CCB34 /* UIImage+WebP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WebP.h"; sourceTree = "<group>"; };
 		A0F7D4B21B84EA46003CCB34 /* UIImage+WebP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WebP.m"; sourceTree = "<group>"; };
-		A0FB1ED31D9F7C2E00954F4E /* MSBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSBase.h; sourceTree = "<group>"; };
-		A0FB1ED41D9F7C2E00954F4E /* MSBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSBase.m; sourceTree = "<group>"; };
 		A0FB1ED81D9F7C9600954F4E /* MSBase+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MSBase+CoreDataProperties.h"; sourceTree = "<group>"; };
 		A0FB1ED91D9F7C9600954F4E /* MSBase+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MSBase+CoreDataProperties.m"; sourceTree = "<group>"; };
 		A0FB1F2D1DA2EE4E00954F4E /* PgySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PgySDK.framework; sourceTree = "<group>"; };
@@ -800,6 +803,8 @@
 				A066C3881BB7AE08003B51D5 /* MSSuperViewController.m */,
 				A0E52E7C1D73F44100BB9DDC /* MSTableViewCell.h */,
 				A0E52E7D1D73F44100BB9DDC /* MSTableViewCell.m */,
+				A0EC3EE51DA4F934000ED0BE /* MSRocketStation.h */,
+				A0EC3EE61DA4F934000ED0BE /* MSRocketStation.m */,
 			);
 			name = "Miao Stone Base Object";
 			sourceTree = "<group>";
@@ -1071,6 +1076,15 @@
 			path = NavBar;
 			sourceTree = "<group>";
 		};
+		A0EC3EE41DA4F8D7000ED0BE /* FetchCenter */ = {
+			isa = PBXGroup;
+			children = (
+				AED68EE21A70399A00CDC0DF /* FetchCenter.h */,
+				AED68EE31A70399A00CDC0DF /* FetchCenter.m */,
+			);
+			name = FetchCenter;
+			sourceTree = "<group>";
+		};
 		A0F7D3A51B84E851003CCB34 /* External */ = {
 			isa = PBXGroup;
 			children = (
@@ -1242,7 +1256,8 @@
 				AED5BC601ABE3C9A00EFF398 /* Settings */,
 				AEE4A6C91A9684BC00ABF946 /* Achievement */,
 				AEFEE3FD1A8ED9FC007E8234 /* Following */,
-				AE30EE711A6F0A8C0044740D /* Database&Networking */,
+				AE30EE711A6F0A8C0044740D /* Database */,
+				A0EC3EE41DA4F8D7000ED0BE /* FetchCenter */,
 				AED355FB1B22889B000427FF /* FeedDetail */,
 				AEEC6C781A6DB6340021B7E4 /* WishDetail */,
 				AEEC6C771A6DB6220021B7E4 /* Home */,
@@ -1299,42 +1314,44 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		AE30EE711A6F0A8C0044740D /* Database&Networking */ = {
+		AE30EE711A6F0A8C0044740D /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				A0F513041BD98B9600279B9D /* Comment+CoreDataProperties.h */,
-				A0F513051BD98B9600279B9D /* Comment+CoreDataProperties.m */,
-				A0F513061BD98B9600279B9D /* Comment.h */,
-				A0F513071BD98B9600279B9D /* Comment.m */,
-				A0F513081BD98B9600279B9D /* Plan+CoreDataProperties.h */,
-				A0F513091BD98B9600279B9D /* Plan+CoreDataProperties.m */,
-				A0F5130A1BD98B9600279B9D /* Plan.h */,
-				A0F5130B1BD98B9600279B9D /* Plan.m */,
-				A0F5130C1BD98B9600279B9D /* Feed+CoreDataProperties.h */,
-				A0F5130D1BD98B9600279B9D /* Feed+CoreDataProperties.m */,
-				A0F5130E1BD98B9600279B9D /* Feed.h */,
-				A0F5130F1BD98B9600279B9D /* Feed.m */,
-				A0F513101BD98B9600279B9D /* Owner+CoreDataProperties.h */,
-				A0F513111BD98B9600279B9D /* Owner+CoreDataProperties.m */,
-				A0F513121BD98B9600279B9D /* Owner.h */,
-				A0F513131BD98B9600279B9D /* Owner.m */,
-				A0F513141BD98B9600279B9D /* Message+CoreDataProperties.h */,
-				A0F513151BD98B9600279B9D /* Message+CoreDataProperties.m */,
-				A0F513161BD98B9600279B9D /* Message.h */,
-				A0F513171BD98B9600279B9D /* Message.m */,
+				A01F886E1DA6225400056FD8 /* Circle+CoreDataClass.h */,
+				A01F886F1DA6225400056FD8 /* Circle+CoreDataClass.m */,
 				A0A0838E1BD765F00057CD65 /* Circle+CoreDataProperties.h */,
 				A0A0838F1BD765F00057CD65 /* Circle+CoreDataProperties.m */,
-				A0A083801BD75E3E0057CD65 /* Circle.h */,
-				A0A083811BD75E3E0057CD65 /* Circle.m */,
-				AE0172431A65CD8E0014266F /* Wish.xcdatamodeld */,
-				A0FB1ED31D9F7C2E00954F4E /* MSBase.h */,
-				A0FB1ED41D9F7C2E00954F4E /* MSBase.m */,
+				A01F88701DA6225400056FD8 /* Comment+CoreDataClass.h */,
+				A01F88711DA6225400056FD8 /* Comment+CoreDataClass.m */,
+				A0F513041BD98B9600279B9D /* Comment+CoreDataProperties.h */,
+				A0F513051BD98B9600279B9D /* Comment+CoreDataProperties.m */,
+				A01F88781DA6225400056FD8 /* Feed+CoreDataClass.h */,
+				A01F88791DA6225400056FD8 /* Feed+CoreDataClass.m */,
+				A0F5130C1BD98B9600279B9D /* Feed+CoreDataProperties.h */,
+				A0F5130D1BD98B9600279B9D /* Feed+CoreDataProperties.m */,
+				A01F88721DA6225400056FD8 /* Message+CoreDataClass.h */,
+				A01F88731DA6225400056FD8 /* Message+CoreDataClass.m */,
+				A0F513141BD98B9600279B9D /* Message+CoreDataProperties.h */,
+				A0F513151BD98B9600279B9D /* Message+CoreDataProperties.m */,
+				A01F886B1DA621C500056FD8 /* MSBase+CoreDataClass.h */,
+				A01F886C1DA621C500056FD8 /* MSBase+CoreDataClass.m */,
 				A0FB1ED81D9F7C9600954F4E /* MSBase+CoreDataProperties.h */,
 				A0FB1ED91D9F7C9600954F4E /* MSBase+CoreDataProperties.m */,
-				AED68EE21A70399A00CDC0DF /* FetchCenter.h */,
-				AED68EE31A70399A00CDC0DF /* FetchCenter.m */,
+				A01F88761DA6225400056FD8 /* Owner+CoreDataClass.h */,
+				A01F88771DA6225400056FD8 /* Owner+CoreDataClass.m */,
+				A0F513101BD98B9600279B9D /* Owner+CoreDataProperties.h */,
+				A0F513111BD98B9600279B9D /* Owner+CoreDataProperties.m */,
+				A01F88741DA6225400056FD8 /* Plan+CoreDataClass.h */,
+				A01F88751DA6225400056FD8 /* Plan+CoreDataClass.m */,
+				A0F513081BD98B9600279B9D /* Plan+CoreDataProperties.h */,
+				A0F513091BD98B9600279B9D /* Plan+CoreDataProperties.m */,
+				A01F88651DA620BE00056FD8 /* Task+CoreDataClass.h */,
+				A01F88661DA620BE00056FD8 /* Task+CoreDataClass.m */,
+				A01F88671DA620BE00056FD8 /* Task+CoreDataProperties.h */,
+				A01F88681DA620BE00056FD8 /* Task+CoreDataProperties.m */,
+				AE0172431A65CD8E0014266F /* Wish.xcdatamodeld */,
 			);
-			name = "Database&Networking";
+			name = Database;
 			sourceTree = "<group>";
 		};
 		AE606A1D1AF4693F003DF16E /* Message */ = {
@@ -1664,11 +1681,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A01F887D1DA6225400056FD8 /* Plan+CoreDataClass.m in Sources */,
 				A0F7D4A71B84E851003CCB34 /* UIImage+RoundedCorner.m in Sources */,
 				A0F7D49B1B84E851003CCB34 /* UIImage+ImageEffects.m in Sources */,
 				A0F8C4601B88444C00A8B120 /* Wish.xcdatamodeld in Sources */,
 				A07AD4F21D9A704B0039093F /* CirclePageViewController.m in Sources */,
 				A0F7D4311B84E851003CCB34 /* CHTCollectionViewWaterfallLayout.m in Sources */,
+				A01F886A1DA620BE00056FD8 /* Task+CoreDataProperties.m in Sources */,
 				A0CBDCB51C8DF09800DA53FF /* EmptyCircleView.m in Sources */,
 				A01431C01D7166930099258C /* BFRImageViewController.m in Sources */,
 				AEF775441A8134FE000DB73B /* HomeCardFlowLayout.m in Sources */,
@@ -1678,7 +1697,6 @@
 				A030105A1BABC6AA0041E2CF /* QBImagePickerController.m in Sources */,
 				A016FDB61B8C4250006E7A09 /* ShuffleViewController.m in Sources */,
 				A0F7D49D1B84E851003CCB34 /* UIImagePickerController+DelegateBlocks.m in Sources */,
-				A0A083841BD75E3E0057CD65 /* Circle.m in Sources */,
 				A0EA22011BA53BF400A83A7A /* ImagePreviewController.m in Sources */,
 				AE606A201AF4697B003DF16E /* MessageListViewController.m in Sources */,
 				AEB003F31B8056980056EA80 /* MyPageViewController.m in Sources */,
@@ -1688,11 +1706,11 @@
 				A07AD4FA1D9AFB0B0039093F /* MSCollectionCell.m in Sources */,
 				A02771621D8852BF00442996 /* MSCircularGradientLayer.m in Sources */,
 				A0C15C9C1D4CB9350094BEF9 /* MJRefreshConst.m in Sources */,
+				A01F887C1DA6225400056FD8 /* Message+CoreDataClass.m in Sources */,
 				AE0172421A65CD8E0014266F /* AppDelegate.m in Sources */,
 				AEE4A6CC1A9684D500ABF946 /* AchieveViewController.m in Sources */,
 				AE9861FA1AC33C04005544B9 /* EditWishViewController.m in Sources */,
 				A053CF7E1BA4EFF00007970A /* PostImageCell.m in Sources */,
-				A0F5132A1BD98B9600279B9D /* Message.m in Sources */,
 				AE01723F1A65CD8E0014266F /* main.m in Sources */,
 				AE767E7F1ACE35A600F35137 /* FeedbackViewController.m in Sources */,
 				A0D1024E1B84EDCA006B0E4E /* UIImage+sdWebP.m in Sources */,
@@ -1709,6 +1727,7 @@
 				A0C15C911D4CB9350094BEF9 /* MJRefreshHeader.m in Sources */,
 				A06CA10D1CA5BA92005D6171 /* CirclePickerViewController.m in Sources */,
 				A0F513241BD98B9600279B9D /* Owner+CoreDataProperties.m in Sources */,
+				A01F88691DA620BE00056FD8 /* Task+CoreDataClass.m in Sources */,
 				A0A083941BD765F00057CD65 /* Circle+CoreDataProperties.m in Sources */,
 				A0D1022B1B84EB6A006B0E4E /* UIImage+GIF.m in Sources */,
 				AE0ADF191ABD78CC00692131 /* HomeCardViewController.m in Sources */,
@@ -1718,22 +1737,23 @@
 				A03010571BABC6AA0041E2CF /* QBAssetsViewController.m in Sources */,
 				A0C15C961D4CB9350094BEF9 /* MJRefreshBackNormalFooter.m in Sources */,
 				A0DCF0D61CA9AE6A0052380E /* PlansViewController.m in Sources */,
+				A0EC3EE71DA4F934000ED0BE /* MSRocketStation.m in Sources */,
 				A0F7D42F1B84E851003CCB34 /* AMBCircularButton.m in Sources */,
 				A0A083581BD5FF9E0057CD65 /* StationViewController.m in Sources */,
 				A0F513181BD98B9600279B9D /* Comment+CoreDataProperties.m in Sources */,
 				A03010541BABC6AA0041E2CF /* QBAlbumCell.m in Sources */,
 				A0994E6B1BC4D1FB00D45845 /* WYStoryboardPopoverSegue.m in Sources */,
 				A0994E631BC4CF9500D45845 /* SYEmojiCharacters.m in Sources */,
+				A01F886D1DA621C500056FD8 /* MSBase+CoreDataClass.m in Sources */,
 				A0D102251B84EB6A006B0E4E /* SDWebImageManager.m in Sources */,
-				A0F5131E1BD98B9600279B9D /* Plan.m in Sources */,
 				A0D1025A1B84EF3B006B0E4E /* HeaderView.m in Sources */,
 				A0F7D4A31B84E851003CCB34 /* UIImage+Alpha.m in Sources */,
-				A0FB1ED51D9F7C2E00954F4E /* MSBase.m in Sources */,
+				A01F887E1DA6225400056FD8 /* Owner+CoreDataClass.m in Sources */,
 				AE59B5F51B410437006CA4AB /* ViewForEmptyEvent.m in Sources */,
-				A0F5131A1BD98B9600279B9D /* Comment.m in Sources */,
 				AEF7F2931A686FA30022410B /* Theme.m in Sources */,
 				AEF3F87F1AA4CFA6008C2300 /* WishDetailVCOwner.m in Sources */,
 				A0994E641BC4CF9500D45845 /* SYEmojiPopover.m in Sources */,
+				A01F887B1DA6225400056FD8 /* Comment+CoreDataClass.m in Sources */,
 				A0F7D4351B84E851003CCB34 /* CustomBadge.m in Sources */,
 				A0C15C991D4CB9350094BEF9 /* MJRefreshNormalHeader.m in Sources */,
 				A0FEC1331C8616CC004C48F1 /* CircleCreationViewController.m in Sources */,
@@ -1746,7 +1766,6 @@
 				A07AD4EC1D9A67160039093F /* HMSegmentedControl.m in Sources */,
 				A0C15C981D4CB9350094BEF9 /* MJRefreshGifHeader.m in Sources */,
 				A0CCA0261CB2DD5D006CEA72 /* FollowingViewController.m in Sources */,
-				A0F513221BD98B9600279B9D /* Feed.m in Sources */,
 				A03010581BABC6AA0041E2CF /* QBCheckmarkView.m in Sources */,
 				A0493EC01D5CC26C00B2C0F9 /* CWStatusBarNotification.m in Sources */,
 				A030105B1BABC6AA0041E2CF /* QBSlomoIconView.m in Sources */,
@@ -1754,6 +1773,7 @@
 				A0D1023E1B84ECDF006B0E4E /* NavigationBar.m in Sources */,
 				A0D102231B84EB6A006B0E4E /* SDWebImageDownloaderOperation.m in Sources */,
 				A0C15C971D4CB9350094BEF9 /* MJRefreshBackStateFooter.m in Sources */,
+				A01F887F1DA6225400056FD8 /* Feed+CoreDataClass.m in Sources */,
 				A0F7D4451B84E851003CCB34 /* GCPTextView.m in Sources */,
 				A0F5131C1BD98B9600279B9D /* Plan+CoreDataProperties.m in Sources */,
 				A0B9D7691B9E4F1100EE382B /* DashedBorderView.m in Sources */,
@@ -1766,11 +1786,11 @@
 				AEE4A6D41A96AFCF00ABF946 /* TriangleCutoutView.m in Sources */,
 				AED5BC671ABEA7EB00EFF398 /* ProfileViewController.m in Sources */,
 				A0D102291B84EB6A006B0E4E /* UIButton+WebCache.m in Sources */,
-				A0F513261BD98B9600279B9D /* Owner.m in Sources */,
 				A0FC1EED1D8A8073005A4A17 /* PlanManagementViewController.m in Sources */,
 				AEFEE4001A8EE0A7007E8234 /* FollowingCell.m in Sources */,
 				AEB003EF1B7FF7190056EA80 /* MainTabBarController.m in Sources */,
 				A0F7D4571B84E851003CCB34 /* NZCircularImageView.m in Sources */,
+				A01F887A1DA6225400056FD8 /* Circle+CoreDataClass.m in Sources */,
 				A03010561BABC6AA0041E2CF /* QBAssetCell.m in Sources */,
 				AED9A67A1B44BE6E00108729 /* RequestLogViewController.m in Sources */,
 				AEBECCF91AE8A16600EDF385 /* LoginDetailViewController.m in Sources */,
@@ -1832,7 +1852,6 @@
 			files = (
 				A0D102181B84EB6A006B0E4E /* MKAnnotationView+WebCache.m in Sources */,
 				A0B9D76A1B9E4F1100EE382B /* DashedBorderView.m in Sources */,
-				A0F5131B1BD98B9600279B9D /* Comment.m in Sources */,
 				A053CF7F1BA4EFF00007970A /* PostImageCell.m in Sources */,
 				A0F7D4461B84E851003CCB34 /* GCPTextView.m in Sources */,
 				A066C38A1BB7AE08003B51D5 /* MSSuperViewController.m in Sources */,
@@ -1854,7 +1873,6 @@
 				A0F7D4B41B84EA46003CCB34 /* UIImage+WebP.m in Sources */,
 				AEB003F01B7FF7190056EA80 /* MainTabBarController.m in Sources */,
 				A055FBA01BA6553A0013F91E /* ImagePreviewCell.m in Sources */,
-				A0F513271BD98B9600279B9D /* Owner.m in Sources */,
 				A04842EA1B98CF9E0032E927 /* UIImageView+ImageCache.m in Sources */,
 				A0D102201B84EB6A006B0E4E /* SDWebImageDecoder.m in Sources */,
 				AE01725C1A65CD8F0014266F /* WishTests.m in Sources */,
@@ -1874,7 +1892,6 @@
 				A0D1022E1B84EB6A006B0E4E /* UIImage+MultiFormat.m in Sources */,
 				AEE075391A744A770015155B /* SystemUtil.m in Sources */,
 				AE9A198A1B02E9E700590784 /* FeedbackkAccessoryView.m in Sources */,
-				A0F513231BD98B9600279B9D /* Feed.m in Sources */,
 				AE767E801ACE35A600F35137 /* FeedbackViewController.m in Sources */,
 				A0F513211BD98B9600279B9D /* Feed+CoreDataProperties.m in Sources */,
 				AEE4A6D51A96AFCF00ABF946 /* TriangleCutoutView.m in Sources */,
@@ -1891,7 +1908,6 @@
 				A0F7D43E1B84E851003CCB34 /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				A0D1024F1B84EDCA006B0E4E /* UIImage+sdWebP.m in Sources */,
 				AEB003F41B8056980056EA80 /* MyPageViewController.m in Sources */,
-				A0F5132B1BD98B9600279B9D /* Message.m in Sources */,
 				A0A0835D1BD74F260057CD65 /* CircleListViewController.m in Sources */,
 				A07C66BB1BE0707300413D32 /* WXApiManager.m in Sources */,
 				A0F7D4561B84E851003CCB34 /* NHAlignmentFlowLayout.m in Sources */,
@@ -1911,7 +1927,6 @@
 				AED355FF1B23BBB8000427FF /* ProfileVCOwner.m in Sources */,
 				A0F7D49E1B84E851003CCB34 /* UIImagePickerController+DelegateBlocks.m in Sources */,
 				A016FDBC1B8D14BA006E7A09 /* PreviewCell.m in Sources */,
-				A0A083851BD75E3E0057CD65 /* Circle.m in Sources */,
 				A0D102221B84EB6A006B0E4E /* SDWebImageDownloader.m in Sources */,
 				A0F7D4361B84E851003CCB34 /* CustomBadge.m in Sources */,
 				A03010611BACAFBC0041E2CF /* QBPreViewController.m in Sources */,
@@ -1920,7 +1935,6 @@
 				A07C66B01BE01AB800413D32 /* InvitationViewController.m in Sources */,
 				AEF7F2981A686FDB0022410B /* HomeViewController.m in Sources */,
 				A07115D21BA6B109002C1270 /* SZTextView.m in Sources */,
-				A0F5131F1BD98B9600279B9D /* Plan.m in Sources */,
 				AEEC6C741A6DB11F0021B7E4 /* WishDetailViewController.m in Sources */,
 				A0D1023A1B84EC03006B0E4E /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */,
 			);

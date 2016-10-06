@@ -9,7 +9,7 @@
 #import "HomeCardView.h"
 #import "Theme.h"
 #import "SystemUtil.h"
-#import "Feed.h"
+#import "Feed+CoreDataClass.h"
 #import "UIImageView+WebCache.h"
 #import "FetchCenter.h"
 #import "UIImageView+WebCache.h"

@@ -62,13 +62,18 @@
         <relationship name="feeds" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Feed" inverseName="plan" inverseEntity="Feed" syncable="YES"/>
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="plans" inverseEntity="Owner" syncable="YES"/>
     </entity>
+    <entity name="Task" representedClassName="Task" parentEntity="MSBase" syncable="YES">
+        <attribute name="imageLocalIdentifiers" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="planID" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Circle" positionX="-8631" positionY="-409" width="128" height="148"/>
         <element name="Comment" positionX="-9108" positionY="-63" width="128" height="103"/>
         <element name="Feed" positionX="-9108" positionY="-306" width="128" height="148"/>
         <element name="Message" positionX="-8642" positionY="-223" width="128" height="118"/>
         <element name="MSBase" positionX="-8847" positionY="-295" width="128" height="178"/>
-        <element name="Owner" positionX="-8883" positionY="11" width="128" height="88"/>
+        <element name="Owner" positionX="-8831" positionY="-54" width="128" height="88"/>
         <element name="Plan" positionX="-9110" positionY="-567" width="128" height="238"/>
+        <element name="Task" positionX="-8948" positionY="-486" width="128" height="73"/>
     </elements>
 </model>

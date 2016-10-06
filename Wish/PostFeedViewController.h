@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Feed.h"
-#import "Plan.h"
-#import "Circle.h"
+#import "Feed+CoreDataClass.h"
+#import "Plan+CoreDataClass.h"
+#import "Circle+CoreDataClass.h"
 @interface PostFeedViewController : UIViewController
 @property (nonatomic,strong) Circle *circle;
 @property (nonatomic,strong) Plan *plan;

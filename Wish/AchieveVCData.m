@@ -8,7 +8,7 @@
 
 #import "AchieveVCData.h"
 @import CoreData;
-#import "Plan.h"
+#import "Plan+CoreDataClass.h"
 #import "User.h"
 #define ACHIEVECELLID @"AchievementCell"
 #import "WishDetailVCOwner.h"

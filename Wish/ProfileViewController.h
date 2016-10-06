@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Theme.h"
 #import "SystemUtil.h"
-#import "Owner.h"
+#import "Owner+CoreDataClass.h"
 #import "FetchCenter.h"
 #import "UIImageView+ImageCache.h"
 @interface ProfileViewController : UITableViewController

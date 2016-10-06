@@ -1,22 +1,21 @@
 //
-//  Owner.m
+//  Owner+CoreDataClass.m
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2015-10-22.
-//  Copyright © 2015 Xinyi Zhuang. All rights reserved.
+//  Created by Xinyi Zhuang on 10/6/16.
+//  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //
 
-#import "Owner.h"
-#import "Comment.h"
-#import "Message.h"
-#import "Plan.h"
-#import "AppDelegate.h"
-
+#import "Owner+CoreDataClass.h"
+#import "Comment+CoreDataClass.h"
+#import "Message+CoreDataClass.h"
+#import "Plan+CoreDataClass.h"
 @implementation Owner
+
 
 + (Owner *)updateOwnerWithInfo:(NSDictionary *)dict
           managedObjectContext:(nonnull NSManagedObjectContext *)context{
-
+    
     Owner *owner;
     //check existance
     NSArray *checks = [Plan fetchWith:@"Owner"
@@ -55,6 +54,6 @@
              @"id":[User uid],
              @"name":[User userDisplayName]};
 }
+
+
 @end
-
-

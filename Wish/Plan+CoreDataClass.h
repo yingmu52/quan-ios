@@ -1,20 +1,21 @@
 //
-//  Plan.h
+//  Plan+CoreDataClass.h
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2015-10-22.
-//  Copyright © 2015 Xinyi Zhuang. All rights reserved.
+//  Created by Xinyi Zhuang on 10/6/16.
+//  Copyright © 2016 Xinyi Zhuang. All rights reserved.
+//  This file was automatically generated and should not be edited.
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
-#import "MSBase+CoreDataProperties.h"
+#import "MSBase+CoreDataClass.h"
 
-@class Feed, Owner, Circle;
+@class Circle, Feed, Owner;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Plan : MSBase
+
 
 @property (nonatomic,strong,readonly) NSArray *planStatusTags; //array of strings
 @property (nonatomic,readonly) BOOL hasDetailText;
@@ -47,6 +48,7 @@ typedef enum {
  * 2：不受关注的事件（从而不影响关注页）
  */
 - (BOOL)isDeletable;
+
 
 @end
 

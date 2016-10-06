@@ -7,21 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Plan.h"
-#import "Feed.h"
+#import "Plan+CoreDataClass.h"
+#import "Feed+CoreDataClass.h"
 #import "SystemUtil.h"
-#import "Owner.h"
-#import "Comment.h"
+#import "Owner+CoreDataClass.h"
+#import "Comment+CoreDataClass.h"
 #import "FetchCenter.h"
 #import "AppDelegate.h"
 #import "User.h"
 #import "SDWebImageCompat.h"
 #import "AppDelegate.h"
 #import "User.h"
-#import "Message.h"
+#import "Message+CoreDataClass.h"
 #import "TXYUploadManager.h"
 #import "SDWebImageManager.h"
-#import "Circle.h"
+#import "Circle+CoreDataClass.h"
 #define TEST_URL @"http://121.42.179.193"
 #define PROD_URL @"http://120.24.157.16" // 120.24.73.51
 #define SHOULD_USE_TESTURL @"kShouldUSeInnerNetwork"

@@ -1,13 +1,13 @@
 //
-//  Circle.m
+//  Circle+CoreDataClass.m
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2015-10-20.
-//  Copyright © 2015 Xinyi Zhuang. All rights reserved.
+//  Created by Xinyi Zhuang on 10/6/16.
+//  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //
 
-#import "Circle.h"
-
+#import "Circle+CoreDataClass.h"
+#import "Plan+CoreDataClass.h"
 @implementation Circle
 
 // Insert code here to add functionality to your managed object subclass
@@ -34,7 +34,7 @@
     if (cTitle && ![circle.mTitle isEqualToString:cTitle]) {
         circle.mTitle = cTitle;
     }
-        
+    
     //圈子描述
     NSString *cDesc = info[@"description"];
     if (cDesc && ![circle.mDescription isEqualToString:cDesc]) {
@@ -52,7 +52,7 @@
     if (ownerId && ![circle.ownerId isEqualToString:ownerId]) {
         circle.ownerId = ownerId;
     }
-
+    
     id nFans = info[@"watch"];
     if (nFans && ![circle.nFans isEqualToNumber:@([nFans integerValue])]) {
         circle.nFans = @([nFans integerValue]);
@@ -63,7 +63,7 @@
         circle.nFansToday = @([nFansToday integerValue]);
     }
     
-
+    
     id iswatch = info[@"iswatch"];
     if (iswatch) {
         circle.circleType = [iswatch boolValue] ? @(CircleTypeFollowed) : @(CircleTypeUndefine);
@@ -84,10 +84,10 @@
 }
 
 + (Circle *)createCircle:(NSString *)circleId
-                name:(NSString *)circleName
-                desc:(NSString *)desc
-             imageId:(NSString *)imageId
-             context:(NSManagedObjectContext *)context{
+                    name:(NSString *)circleName
+                    desc:(NSString *)desc
+                 imageId:(NSString *)imageId
+                 context:(NSManagedObjectContext *)context{
     Circle *circle = [NSEntityDescription insertNewObjectForEntityForName:@"Circle"
                                                    inManagedObjectContext:context];
     circle.mUID = circleId;
@@ -101,13 +101,9 @@
     NSNumber *t = @(CircleTypeJoined);
     circle.circleType = t;
     circle.mTypeID = [NSString stringWithFormat:@"%@_%@",circleId,t];
-
+    
     return circle;
 }
 
 
 @end
-
-
-
-

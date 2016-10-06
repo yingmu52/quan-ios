@@ -2,11 +2,11 @@
 //  Circle+CoreDataProperties.h
 //  Stories
 //
-//  Created by Xinyi Zhuang on 10/4/16.
+//  Created by Xinyi Zhuang on 10/6/16.
 //  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //
 
-#import "Circle.h"
+#import "Circle+CoreDataClass.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

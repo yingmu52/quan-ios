@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Plan.h"
+#import "Plan+CoreDataClass.h"
 
 @class HomeCardView;
 

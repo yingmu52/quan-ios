@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Feed.h"
-#import "Message.h"
+#import "Feed+CoreDataClass.h"
+#import "Message+CoreDataClass.h"
 #import "Theme.h"
 #import "UIImageView+ImageCache.h"
 #import "SDWebImageCompat.h"

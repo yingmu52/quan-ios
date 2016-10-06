@@ -6,11 +6,11 @@
 //  Copyright (c) 2015 Xinyi Zhuang. All rights reserved.
 //
 
-#import "Plan.h"
+#import "Plan+CoreDataClass.h"
 #import "Theme.h"
 #import "WishDetailCell.h"
 #import "SystemUtil.h"
-#import "Feed.h"
+#import "Feed+CoreDataClass.h"
 #import "UIImage+ImageEffects.h"
 #import "AppDelegate.h"
 #import "FetchCenter.h"

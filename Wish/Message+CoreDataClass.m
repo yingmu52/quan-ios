@@ -1,16 +1,13 @@
 //
-//  Message.m
+//  Message+CoreDataClass.m
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2015-10-22.
-//  Copyright © 2015 Xinyi Zhuang. All rights reserved.
+//  Created by Xinyi Zhuang on 10/6/16.
+//  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //
 
-#import "Message.h"
-#import "Owner.h"
-#import "Plan.h"
-#import "AppDelegate.h"
-#import "User.h"
+#import "Message+CoreDataClass.h"
+#import "Owner+CoreDataClass.h"
 @implementation Message
 
 
@@ -46,17 +43,5 @@
     return message;
 }
 
-/* example
- 
- {
- commentId = "comment555797d6493945.92169026";
- content = u4f60u5728u54c7u4ec0u4e48uff1f;
- createTime = 1431803862;
- feedsId = "feeds55570d571a14a4.21421165";
- messageId = "msg555797d64c9ad3.42196323";
- operatorId = 100008;
- picurl = "pic55570d5709bb86.99847365";
- },
- 
- */
+
 @end

@@ -2,11 +2,11 @@
 //  Message+CoreDataProperties.h
 //  Stories
 //
-//  Created by Xinyi Zhuang on 10/5/16.
+//  Created by Xinyi Zhuang on 10/6/16.
 //  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //
 
-#import "Message.h"
+#import "Message+CoreDataClass.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -15,10 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<Message *> *)fetchRequest;
 
+@property (nullable, nonatomic, copy) NSString *commentId;
 @property (nullable, nonatomic, copy) NSString *feedsId;
 @property (nullable, nonatomic, copy) NSString *targetOwnerId;
 @property (nullable, nonatomic, copy) NSNumber *userDeleted;
-@property (nullable, nonatomic, copy) NSString *commentId;
 @property (nullable, nonatomic, retain) Owner *owner;
 
 @end

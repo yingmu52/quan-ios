@@ -8,8 +8,8 @@
 
 #import <XCTest/XCTest.h>
 @import CoreData;
-#import "Plan.h"
-#import "Feed.h"
+#import "Plan+CoreDataClass.h"
+#import "Feed+CoreDataClass.h"
 #import "AppDelegate.h"
 @interface LocalDataTest : XCTestCase
 

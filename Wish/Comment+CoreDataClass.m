@@ -1,17 +1,14 @@
 //
-//  Comment.m
+//  Comment+CoreDataClass.m
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2015-10-22.
-//  Copyright © 2015 Xinyi Zhuang. All rights reserved.
+//  Created by Xinyi Zhuang on 10/6/16.
+//  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //
 
-#import "Comment.h"
-#import "Feed.h"
-#import "Owner.h"
-#import "Plan.h"
-#import "AppDelegate.h"
-#import "User.h"
+#import "Comment+CoreDataClass.h"
+#import "Feed+CoreDataClass.h"
+#import "Owner+CoreDataClass.h"
 @implementation Comment
 
 + (Comment *)updateCommentWithInfo:(NSDictionary *)dict
@@ -39,7 +36,7 @@
         comment.idForReply = commentTo;
         NSString *nameForReply = [ownerInfo[commentTo] objectForKey:@"name"];
         comment.nameForReply = nameForReply;
-//        NSLog(@"comment to %@, %@",commentTo,nameForReply);
+        //        NSLog(@"comment to %@, %@",commentTo,nameForReply);
     }
     
     
@@ -61,7 +58,7 @@
     comment.mTitle = content;
     comment.mCreateTime = [NSDate date];
     comment.owner = [Owner updateOwnerWithInfo:[Owner myWebInfo] managedObjectContext:context];
-
+    
     Feed *feed = [Feed fetchID:feedID inManagedObjectContext:context];
     feed.commentCount = @(feed.commentCount.integerValue + 1);
     comment.feed = feed;
@@ -84,4 +81,6 @@
     comment.nameForReply = ownerName;
     return comment;
 }
+
+
 @end

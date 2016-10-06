@@ -8,11 +8,11 @@
 
 #import "HeaderView.h"
 #import "SystemUtil.h"
-#import "Plan.h"
-#import "Owner.h"
+#import "Plan+CoreDataClass.h"
+#import "Owner+CoreDataClass.h"
 #import "User.h"
 #import "Theme.h"
-#import "Circle.h"
+#import "Circle+CoreDataClass.h"
 @import QuartzCore;
 @interface HeaderView()
 

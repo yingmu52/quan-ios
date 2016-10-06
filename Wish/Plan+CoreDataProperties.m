@@ -2,7 +2,7 @@
 //  Plan+CoreDataProperties.m
 //  Stories
 //
-//  Created by Xinyi Zhuang on 10/3/16.
+//  Created by Xinyi Zhuang on 10/6/16.
 //  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //  This file was automatically generated and should not be edited.
 //

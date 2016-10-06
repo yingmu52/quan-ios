@@ -1,18 +1,17 @@
 //
-//  Feed.m
+//  Feed+CoreDataClass.m
 //  Stories
 //
-//  Created by Xinyi Zhuang on 2015-10-22.
-//  Copyright © 2015 Xinyi Zhuang. All rights reserved.
+//  Created by Xinyi Zhuang on 10/6/16.
+//  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //
 
-#import "Feed.h"
-#import "Comment.h"
-#import "Plan.h"
-#import "FetchCenter.h"
-#import "AppDelegate.h"
-
+#import "Feed+CoreDataClass.h"
+#import "Comment+CoreDataClass.h"
+#import "Plan+CoreDataClass.h"
 @implementation Feed
+
+
 
 + (Feed *)createFeed:(NSString *)feedId
                title:(NSString *)feedTitle
@@ -44,7 +43,7 @@
     
     NSString *feedId = feedItem[@"id"];
     Feed *feed = [Feed fetchID:feedId inManagedObjectContext:context];
-
+    
     if (!feed) {
         
         feed = [NSEntityDescription insertNewObjectForEntityForName:@"Feed"
@@ -55,7 +54,7 @@
         feed.mCreateTime = [NSDate dateWithTimeIntervalSince1970:[feedItem[@"createTime"] integerValue]];
         if (plan) {
             feed.plan = plan;
-        }   
+        }
     }
     
     if (![feed.mCoverImageId isEqualToString:feedItem[@"picurl"]]) {
