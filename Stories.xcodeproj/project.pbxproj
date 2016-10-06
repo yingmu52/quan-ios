@@ -30,6 +30,7 @@
 		A01F887E1DA6225400056FD8 /* Owner+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A01F88771DA6225400056FD8 /* Owner+CoreDataClass.m */; };
 		A01F887F1DA6225400056FD8 /* Feed+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A01F88791DA6225400056FD8 /* Feed+CoreDataClass.m */; };
 		A01F88811DA6386400056FD8 /* Me.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A01F88801DA6386400056FD8 /* Me.storyboard */; };
+		A01F88841DA63D8400056FD8 /* TaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A01F88831DA63D8400056FD8 /* TaskViewController.m */; };
 		A027715C1D880BB700442996 /* MSFeatherImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A027715B1D880BB700442996 /* MSFeatherImageView.m */; };
 		A02771621D8852BF00442996 /* MSCircularGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A02771611D8852BF00442996 /* MSCircularGradientLayer.m */; };
 		A03010521BABC6AA0041E2CF /* QBImagePicker.strings in Resources */ = {isa = PBXBuildFile; fileRef = A03010371BABC6AA0041E2CF /* QBImagePicker.strings */; };
@@ -364,6 +365,8 @@
 		A01F88781DA6225400056FD8 /* Feed+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Feed+CoreDataClass.h"; sourceTree = "<group>"; };
 		A01F88791DA6225400056FD8 /* Feed+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Feed+CoreDataClass.m"; sourceTree = "<group>"; };
 		A01F88801DA6386400056FD8 /* Me.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Me.storyboard; sourceTree = "<group>"; };
+		A01F88821DA63D8400056FD8 /* TaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskViewController.h; sourceTree = "<group>"; };
+		A01F88831DA63D8400056FD8 /* TaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskViewController.m; sourceTree = "<group>"; };
 		A027715A1D880BB700442996 /* MSFeatherImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSFeatherImageView.h; sourceTree = "<group>"; };
 		A027715B1D880BB700442996 /* MSFeatherImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSFeatherImageView.m; sourceTree = "<group>"; };
 		A02771601D8852BF00442996 /* MSCircularGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSCircularGradientLayer.h; sourceTree = "<group>"; };
@@ -1394,6 +1397,8 @@
 		AED5BC601ABE3C9A00EFF398 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				A01F88821DA63D8400056FD8 /* TaskViewController.h */,
+				A01F88831DA63D8400056FD8 /* TaskViewController.m */,
 				AEB003F11B8056980056EA80 /* MyPageViewController.h */,
 				AEB003F21B8056980056EA80 /* MyPageViewController.m */,
 				AED9A6781B44BE6E00108729 /* RequestLogViewController.h */,
@@ -1737,6 +1742,7 @@
 				AE0ADF191ABD78CC00692131 /* HomeCardViewController.m in Sources */,
 				AED355F81B228696000427FF /* FeedDetailHeader.m in Sources */,
 				A0F7D4331B84E851003CCB34 /* BadgeStyle.m in Sources */,
+				A01F88841DA63D8400056FD8 /* TaskViewController.m in Sources */,
 				A00055501D9B108600658E6B /* CircleDetailViewController.m in Sources */,
 				A03010571BABC6AA0041E2CF /* QBAssetsViewController.m in Sources */,
 				A0C15C961D4CB9350094BEF9 /* MJRefreshBackNormalFooter.m in Sources */,

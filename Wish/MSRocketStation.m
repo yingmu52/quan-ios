@@ -113,6 +113,7 @@
                                  [workContext performBlock:^{
                                      //6. delete task
                                      task.isFinished = @(YES);
+                                     [delegate saveContext:workContext];
                                      NSLog(@"已完成任务%@",task.mUID);
                                  }];
                                  
@@ -127,10 +128,26 @@
     
     
     });
-
+    
+    [self removeAllFinishedTasks];
 }
 
-
+- (void)removeAllFinishedTasks{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0);
+    dispatch_async(queue, ^{
+        //1. fetch all tasks
+        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        NSManagedObjectContext *workContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        workContext.parentContext = delegate.managedObjectContext;
+        
+        NSArray *tasks = [Task fetchWithPredicate:[NSPredicate predicateWithFormat:@"isFinished == %@",@(YES)] inManagedObjectContext:workContext];
+        
+        for (Task *task in tasks) {
+            [workContext deleteObject:task];
+        }
+        [delegate saveContext:workContext];
+    });
+}
 
 
 @end

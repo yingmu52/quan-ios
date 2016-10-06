@@ -256,6 +256,10 @@
             }
         }];
         
+        UIAlertAction *tasks = [UIAlertAction actionWithTitle:@"离线任务" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self performSegueWithIdentifier:@"showTaskViewController" sender:nil];
+        }];
+        
         //获取用户信息
         UIAlertAction *getUserInfo = [UIAlertAction actionWithTitle:@"获取个人信息" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             NSString *userInfo = [NSString stringWithFormat:@"uid:%@\n ukey:%@\n deviceToken:%@",[User uid],[User uKey],[User deviceToken]];
@@ -322,6 +326,7 @@
         
         [actionSheet addAction:testEnv];
         [actionSheet addAction:proEnv];
+        [actionSheet addAction:tasks];
         [actionSheet addAction:getUserInfo];
         [actionSheet addAction:getRequestLog];
         [actionSheet addAction:managePlan];

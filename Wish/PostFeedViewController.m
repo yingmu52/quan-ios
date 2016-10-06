@@ -123,7 +123,7 @@ static NSUInteger distance = 10;
                                    planID:self.plan.mUID
                              locaImageIDs:imagelocalIDs
                    inManagedObjectContext:[AppDelegate getContext]];
-            [[MSRocketStation sharedStation] startDigestingTasks];
+//            [[MSRocketStation sharedStation] startDigestingTasks];
             [self.navigationController popViewControllerAnimated:YES];
             
         }else{
