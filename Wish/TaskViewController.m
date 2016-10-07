@@ -20,12 +20,12 @@
     [super viewDidLoad];
     self.navigationItem.title = @"任何列表";
 
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"开始发送" style:UIBarButtonItemStylePlain target:self action:@selector(start)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"清空" style:UIBarButtonItemStylePlain target:self action:@selector(start)];
     
 }
 
 - (void)start{
-    [[MSRocketStation sharedStation] startDigestingTasks];
+    [[MSRocketStation sharedStation] removeAllFinishedTasks];
 }
 
 - (NSFetchRequest *)tableFetchRequest{

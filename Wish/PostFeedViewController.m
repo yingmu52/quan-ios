@@ -119,11 +119,7 @@ static NSUInteger distance = 10;
             for (PHAsset *item in self.assets) {
                 [imagelocalIDs addObject:[item localIdentifier]];
             }
-            [Task insertTaskWithFeedTitle:self.textView.text
-                                   planID:self.plan.mUID
-                             locaImageIDs:imagelocalIDs
-                   inManagedObjectContext:[AppDelegate getContext]];
-//            [[MSRocketStation sharedStation] startDigestingTasks];
+            [[MSRocketStation sharedStation] addNewTaskWithFeedTitle:self.textView.text planId:self.plan.mUID localImageIDs:imagelocalIDs];
             [self.navigationController popViewControllerAnimated:YES];
             
         }else{

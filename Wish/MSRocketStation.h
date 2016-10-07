@@ -11,5 +11,8 @@
 @interface MSRocketStation : NSObject
 
 + (instancetype)sharedStation;
-- (void)startDigestingTasks;
+- (void)addNewTaskWithFeedTitle:(NSString *)title
+                         planId:(NSString *)planId
+                  localImageIDs:(NSArray *)localImageIds;
+- (void)removeAllFinishedTasks;
 @end

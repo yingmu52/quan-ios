@@ -17,7 +17,7 @@
 #import "MainTabBarController.h"
 #import "MessageListViewController.h"
 #import <PgySDK/PgyManager.h>
-
+#import "MSRocketStation.h"
 @interface AppDelegate () <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,weak) LoginViewController *loginVC;
@@ -46,6 +46,7 @@
         self.window.rootViewController = self.loginVC;
     }else{
         [AppDelegate registerForDeviceToken];
+        
     }
     
     
@@ -53,6 +54,9 @@
     return YES;
 }
 
+- (void)applicationWillEnterForeground:(UIApplication *)application{
+//    [[MSRocketStation sharedStation] launchRocket];
+}
 
 #pragma mark - Push Notification
 
@@ -292,31 +296,34 @@
         ![context save:&error]) {
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
     }else{
-        [self.managedObjectContext performBlock:^{
-            NSError *error = nil;
-            if ([self.managedObjectContext hasChanges] &&
-                ![self.managedObjectContext save:&error]) {
-                NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            }else{
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                    @try {
-                        // Save the context.
-                        NSError *error = nil;
-                        if (self.writerManagedObjectContext.hasChanges &&
-                            ![self.writerManagedObjectContext save:&error]) {
-                            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-                        }else{
-                            NSLog(@"Stored Data on %@ Thread \n\n\n",[NSThread isMainThread] ? @"Main" : @"Background");
-                        }
-                    } @catch (NSException *exception) {
-                        [self resetDataStore];
-                    }
-                });
-            }
-        }]; // main
+        [self saveMainContext];
     }
 }
 
+- (void)saveMainContext{
+    [self.managedObjectContext performBlock:^{
+        NSError *error = nil;
+        if ([self.managedObjectContext hasChanges] &&
+            ![self.managedObjectContext save:&error]) {
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        }else{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                @try {
+                    // Save the context.
+                    NSError *error = nil;
+                    if (self.writerManagedObjectContext.hasChanges &&
+                        ![self.writerManagedObjectContext save:&error]) {
+                        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+                    }else{
+                        NSLog(@"Stored Data on %@ Thread \n\n\n",[NSThread isMainThread] ? @"Main" : @"Background");
+                    }
+                } @catch (NSException *exception) {
+                    [self resetDataStore];
+                }
+            });
+        }
+    }]; // main
+}
 
 - (void)resetDataStore{
     //data model 有变化，删除重建以避免闪退。如果有保留用户数据的需求，应该使用data migration

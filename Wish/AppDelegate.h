@@ -35,6 +35,7 @@
 
 /** 保存异线的MOC */
 - (void)saveContext:(NSManagedObjectContext *)context;
+- (void)saveMainContext;
 - (NSURL *)applicationDocumentsDirectory;
 + (NSManagedObjectContext *)getContext;
 
