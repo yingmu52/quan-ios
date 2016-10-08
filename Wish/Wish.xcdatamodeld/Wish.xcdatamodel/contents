@@ -47,7 +47,7 @@
         <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="owner" inverseEntity="Message" syncable="YES"/>
         <relationship name="plans" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Plan" inverseName="owner" inverseEntity="Plan" syncable="YES"/>
     </entity>
-    <entity name="Plan" representedClassName="Plan" parentEntity="MSBase" syncable="YES" codeGenerationType="category">
+    <entity name="Plan" representedClassName="Plan" parentEntity="MSBase" syncable="YES">
         <attribute name="cornerMask" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="discoverIndex" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="followCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>

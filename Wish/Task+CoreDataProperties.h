@@ -2,7 +2,7 @@
 //  Task+CoreDataProperties.h
 //  Stories
 //
-//  Created by Xinyi Zhuang on 10/6/16.
+//  Created by Xinyi Zhuang on 10/8/16.
 //  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //
 
@@ -16,8 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSFetchRequest<Task *> *)fetchRequest;
 
 @property (nullable, nonatomic, copy) NSString *imageLocalIdentifiers;
-@property (nullable, nonatomic, copy) NSString *planID;
 @property (nullable, nonatomic, copy) NSNumber *isFinished;
+@property (nullable, nonatomic, copy) NSString *planID;
 
 @end
 

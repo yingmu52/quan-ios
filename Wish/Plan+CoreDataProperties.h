@@ -2,9 +2,8 @@
 //  Plan+CoreDataProperties.h
 //  Stories
 //
-//  Created by Xinyi Zhuang on 10/6/16.
+//  Created by Xinyi Zhuang on 10/8/16.
 //  Copyright © 2016 Xinyi Zhuang. All rights reserved.
-//  This file was automatically generated and should not be edited.
 //
 
 #import "Plan+CoreDataClass.h"
