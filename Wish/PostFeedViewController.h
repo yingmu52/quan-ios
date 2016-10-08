@@ -10,7 +10,9 @@
 #import "Feed+CoreDataClass.h"
 #import "Plan+CoreDataClass.h"
 #import "Circle+CoreDataClass.h"
-@interface PostFeedViewController : UIViewController
+#import "MSSuperViewController.h"
+
+@interface PostFeedViewController : MSSuperViewController
 @property (nonatomic,strong) Circle *circle;
 @property (nonatomic,strong) Plan *plan;
 @property (nonatomic,strong) NSMutableArray *assets;

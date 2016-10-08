@@ -7,42 +7,31 @@
 //
 
 #import "PostFeedViewController.h"
-#import "Theme.h"
 #import "KeyboardAcessoryView.h"
-#import "SystemUtil.h"
-#import "SZTextView.h"
-#import "SDWebImageCompat.h"
 #import "WishDetailVCOwner.h"
 #import "PostImageCell.h"
 #import "ImagePicker.h"
 #import "ImagePreviewController.h"
 #import "Task+CoreDataClass.h"
 #import "MSRocketStation.h"
+#import "MBProgressHUD.h"
+#import "SZTextView.h"
+
 
 static NSUInteger maxWordCount = 1000;
 static NSUInteger distance = 10;
 
-@interface PostFeedViewController () <FetchCenterDelegate,UICollectionViewDataSource,UICollectionViewDelegate,ImagePickerDelegate,ImagePreviewControllerDelegate,UINavigationControllerDelegate>
+@interface PostFeedViewController () <UICollectionViewDataSource,UICollectionViewDelegate,ImagePickerDelegate,ImagePreviewControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic,strong) UIButton *tikButton;
 @property (nonatomic,weak) IBOutlet UILabel *wordCountLabel;
-@property (nonatomic,weak) IBOutlet UICollectionView *collectionView;
+
 @property (nonatomic,strong) ImagePicker *imagePicker;
 @property (weak, nonatomic) IBOutlet SZTextView *textView;
-//@property (nonatomic,strong) Feed *feed;
-@property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *keyboardHeight;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressBar;
 @end
 
 @implementation PostFeedViewController
-
-- (FetchCenter *)fetchCenter{
-    if (!_fetchCenter){
-        _fetchCenter = [[FetchCenter alloc] init];
-        _fetchCenter.delegate = self;
-    }
-    return _fetchCenter;
-}
 
 
 - (void)viewDidLoad{
@@ -90,6 +79,11 @@ static NSUInteger distance = 10;
         self.navigationItem.title = self.plan.mTitle;
     }
     self.wordCountLabel.text = [NSString stringWithFormat:@"0/%@ 字",@(maxWordCount)];
+    
+    
+    self.collectionView.layer.borderColor = [SystemUtil colorFromHexString:@"#DFE1E0"].CGColor;
+    self.collectionView.layer.borderWidth = 1.0f;
+
 }
 
 
@@ -120,7 +114,15 @@ static NSUInteger distance = 10;
                 [imagelocalIDs addObject:[item localIdentifier]];
             }
             [[MSRocketStation sharedStation] addNewTaskWithFeedTitle:self.textView.text planId:self.plan.mUID localImageIDs:imagelocalIDs];
-            [self.navigationController popViewControllerAnimated:YES];
+            
+            //提示已加入列队
+            __weak typeof(self) weakSelf = self;
+            self.hud.label.text = @"已经加入发件箱列队";
+            [self.hud hideAnimated:YES afterDelay:1.0];
+            self.hud.completionBlock = ^{
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+            };
+
             
         }else{
             NSLog(@"选择开始常规发送！");
@@ -389,12 +391,6 @@ static NSUInteger distance = 10;
     numberOfItemsInSection:(NSInteger)section {
 //    return self.imagesForFeed.count + 1; //including the last button
     return self.assets.count + 1; //including the last button
-}
-
-- (void)setCollectionView:(UICollectionView *)collectionView{
-    _collectionView = collectionView;
-    _collectionView.layer.borderColor = [SystemUtil colorFromHexString:@"#DFE1E0"].CGColor;
-    _collectionView.layer.borderWidth = 1.0f;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{

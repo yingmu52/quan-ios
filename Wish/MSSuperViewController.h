@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "FetchCenter.h"
+#import "SystemUtil.h"
 #import "UIImageView+ImageCache.h"
 #import "Theme.h"
 #import "UIImageView+WebCache.h"
@@ -16,12 +17,14 @@
 #import "NavigationBar.h"
 #import "MBProgressHUD.h"
 
+
 @import CoreData;
 @interface MSSuperViewController : UIViewController
 <FetchCenterDelegate
 ,NSFetchedResultsControllerDelegate
 ,UITableViewDelegate
-,UICollectionViewDelegate>{
+,UICollectionViewDelegate
+,MBProgressHUDDelegate>{
     @protected
     NSFetchRequest *_tableFetchRequest; //让子类可以access实例变量
     NSFetchRequest *_collectionFetchRequest;
@@ -29,6 +32,7 @@
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,weak) AppDelegate *appDelegate;
 @property (nonatomic) BOOL allowTransparentNavigationBar;
+@property (nonatomic,strong) MBProgressHUD *hud;
 
 - (void)loadNewData;
 - (void)loadMoreData;

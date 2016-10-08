@@ -14,6 +14,15 @@
 @implementation MSSuperViewController
 
 
+- (MBProgressHUD *)hud{
+    if (!_hud) {
+        _hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
+        _hud.mode = MBProgressHUDModeText;
+        _hud.delegate = self;
+    }
+    return _hud;
+}
+
 #pragma mark - 控制器生活周期 Application Life Cycle
 
 - (void)viewDidLoad{
