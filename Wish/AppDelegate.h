@@ -38,7 +38,7 @@
 - (void)saveMainContext;
 - (NSURL *)applicationDocumentsDirectory;
 + (NSManagedObjectContext *)getContext;
-
++ (void)postStatusBarAlert:(NSString *)message;
 
 + (void)showMainTabbar;
 + (void)clearCoreData:(BOOL)shouldGoBackToTabBar;

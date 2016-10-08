@@ -87,13 +87,7 @@
     if (currentState == UIApplicationStateActive) {
         NSString *message = [userInfo valueForKeyPath:@"aps.alert"];
         if (message) { //不为null的情况才作提示，
-            CWStatusBarNotification *cbn = [CWStatusBarNotification new];
-            cbn.notificationLabelBackgroundColor = [Theme globleColor];
-            cbn.notificationAnimationInStyle = CWNotificationAnimationStyleLeft;
-            cbn.notificationAnimationOutStyle = CWNotificationAnimationStyleRight;
-            cbn.notificationStyle = CWNotificationStyleStatusBarNotification;
-            [cbn displayNotificationWithMessage:message
-                                    forDuration:2.0];
+            [AppDelegate postStatusBarAlert:message];
         }
      }else{
         //切换到消息
@@ -112,6 +106,18 @@
         
     }];
 }
+
++ (void)postStatusBarAlert:(NSString *)message{
+    CWStatusBarNotification *cbn = [CWStatusBarNotification new];
+    cbn.notificationLabelBackgroundColor = [Theme globleColor];
+    cbn.notificationAnimationInStyle = CWNotificationAnimationStyleLeft;
+    cbn.notificationAnimationOutStyle = CWNotificationAnimationStyleRight;
+    cbn.notificationStyle = CWNotificationStyleStatusBarNotification;
+    [cbn displayNotificationWithMessage:message
+                            forDuration:2.0];
+
+}
+
 
 + (MainTabBarController *)getMainTabbarController{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

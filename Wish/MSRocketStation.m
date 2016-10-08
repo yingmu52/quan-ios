@@ -100,10 +100,12 @@
                       [self.fetchCenter createFeed:task.mTitle
                                             planId:task.planID
                                    fetchedImageIds:imageIds
-                                        completion:^(NSString *feedId){
-                           //delete task
-                           task.isFinished = @(YES);
-                           [self.appDelegate saveMainContext];
+                                        completion:^(NSString *feedId)
+                      {
+                          //delete task
+                          task.isFinished = @(YES);
+                          [self.appDelegate saveMainContext];
+                          [AppDelegate postStatusBarAlert:@"发送成功！"];
                            NSLog(@"已完成任务 %@",feedId);
                        }];
                   }];
