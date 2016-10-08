@@ -43,7 +43,11 @@
     if (task.isFinished.boolValue) {
         cell.textLabel.text = [NSString stringWithFormat:@"【已完成】标题：%@",task.mTitle];
     }else{
-        cell.textLabel.text = [NSString stringWithFormat:@"标题：%@",task.mTitle];
+        if (task.progress.floatValue > 0) {
+            cell.textLabel.text = [NSString stringWithFormat:@"【%@%%】标题：%@",@(task.progress.floatValue * 100),task.mTitle];
+        }else{
+            cell.textLabel.text = [NSString stringWithFormat:@"【排队中】标题：%@",task.mTitle];
+        }
     }
     cell.detailTextLabel.text = [NSString stringWithFormat:@"创建于：%@，事件ID：%@",[SystemUtil stringFromDate:task.mCreateTime],task.planID];
     

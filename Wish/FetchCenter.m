@@ -1020,7 +1020,10 @@
 }
 
 
-- (void)uploadImages:(NSArray *)images completion:(FetchCenterPostRequestUploadImagesCompleted)completionBlock{
+
+- (void)uploadImages:(NSArray *)images
+            progress:(FetchCenterPostRequestUploadImagesReceivedPercentage)progressBlock
+          completion:(FetchCenterPostRequestUploadImagesCompleted)completionBlock{
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
     dispatch_async(queue, ^{
@@ -1045,14 +1048,10 @@
                          });
 
                      }else{
-                         if ([self.delegate respondsToSelector:@selector(didReceivedCurrentProgressForUploadingImage:)]) {
-                             
-                             dispatch_main_async_safe(^{
-                                 CGFloat progress = (imageIdMaps.allKeys.count - 1e-3) / images.count;
-                                 [self.delegate didReceivedCurrentProgressForUploadingImage:progress];
-                             });
-                             
-                         }
+                         dispatch_main_async_safe(^{
+                             CGFloat progress = (imageIdMaps.allKeys.count - 1e-3) / images.count;
+                             progressBlock(progress);
+                         });
                      }
                  }
              }];

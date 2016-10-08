@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *imageLocalIdentifiers;
 @property (nullable, nonatomic, copy) NSNumber *isFinished;
 @property (nullable, nonatomic, copy) NSString *planID;
+@property (nullable, nonatomic, copy) NSNumber *progress;
 
 @end
 

@@ -482,7 +482,7 @@ static NSTimeInterval expectationTimeout = 30.0f;
     XCTAssertTrue(testImages,@"testImages 不能为空");
     XCTestExpectation *expectation = [self expectationWithDescription:@"测试优图上传接口"];
     
-    [self.fetchCenter uploadImages:testImages completion:^(NSArray *imageIds) {
+    [self.fetchCenter uploadImages:testImages progress:nil completion:^(NSArray *imageIds) {
         [expectation fulfill];
     }];
     

@@ -139,9 +139,14 @@ static NSUInteger distance = 10;
                      [arrayOfUIImages addObject:[UIImage imageWithData:imageData scale:0.5]];
                      if (arrayOfUIImages.count == self.assets.count) {
                          [self.fetchCenter uploadImages:arrayOfUIImages
-                                             completion:^(NSArray *imageIds) {
-                                                 [self finishUploadingImages:imageIds];
-                                             }];
+                                               progress:^(CGFloat progress)
+                         {
+                             [self.progressBar setProgress:progress animated:YES];
+                         }
+                                             completion:^(NSArray *imageIds)
+                         {
+                             [self finishUploadingImages:imageIds];
+                         }];
                      }
                  }];
             }
@@ -320,10 +325,6 @@ static NSUInteger distance = 10;
 
         }];
     }
-}
-
-- (void)didReceivedCurrentProgressForUploadingImage:(CGFloat)percentage{
-    [self.progressBar setProgress:percentage animated:YES];
 }
 
 #pragma mark - keyboard interaction notification

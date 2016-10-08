@@ -92,25 +92,21 @@
           {
               [arrayOfUIImages addObject:[UIImage imageWithData:imageData scale:0.5]];
               if (arrayOfUIImages.count == localImageIDs.count){
-                  
                   //Upload image
-                  [self.fetchCenter uploadImages:arrayOfUIImages completion:^(NSArray *imageIds)
-                   {
-                       //create feed
-                       [self.fetchCenter createFeed:task.mTitle
-                                             planId:task.planID
-                                    fetchedImageIds:imageIds
-                                         completion:^(NSString *feedId)
-                        {
-
-                            //delete task
-                            task.isFinished = @(YES);
-                            [self.appDelegate saveMainContext];
-                            NSLog(@"已完成任务 %@",feedId);
-                            
-                        }];
-                       
-                   }];
+                  [self.fetchCenter uploadImages:arrayOfUIImages progress:^(CGFloat progress) {
+                      task.progress = @(progress);
+                  } completion:^(NSArray *imageIds) {
+                      //create feed
+                      [self.fetchCenter createFeed:task.mTitle
+                                            planId:task.planID
+                                   fetchedImageIds:imageIds
+                                        completion:^(NSString *feedId){
+                           //delete task
+                           task.isFinished = @(YES);
+                           [self.appDelegate saveMainContext];
+                           NSLog(@"已完成任务 %@",feedId);
+                       }];
+                  }];
               }
           }];
          

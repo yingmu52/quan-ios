@@ -37,7 +37,6 @@ typedef enum {
 
 @protocol FetchCenterDelegate <NSObject>
 @optional
-- (void)didReceivedCurrentProgressForUploadingImage:(CGFloat)percentage;
 - (void)didFailUploadingImage:(UIImage *)image;
 - (void)didFailToReachInternet;
 /** GET请求的失败回调函数*/
@@ -78,8 +77,6 @@ typedef void(^FetchCenterGetRequestSetPersonalInfoCompleted)(void);
 
 /** 删除评论完成*/
 typedef void(^FetchCenterGetRequestDeleteCommentCompleted)(void);
-/** 上传图片完成*/
-typedef void(^FetchCenterPostRequestUploadImagesCompleted)(NSArray *imageIds);
 
 
 @interface FetchCenter : NSObject
@@ -202,7 +199,13 @@ typedef void(^FetchCenterGetRequestGetFeedsListCompleted)(NSNumber *currentPage,
 
 - (void)deleteFeed:(Feed *)feed completion:(FetchCenterGetRequestDeleteFeedCompleted)completionBlock;
 
+
+
+/** 上传图片完成*/
+typedef void(^FetchCenterPostRequestUploadImagesCompleted)(NSArray *imageIds);
+typedef void(^FetchCenterPostRequestUploadImagesReceivedPercentage)(CGFloat progress);
 - (void)uploadImages:(NSArray *)images
+            progress:(FetchCenterPostRequestUploadImagesReceivedPercentage)progressBlock
           completion:(FetchCenterPostRequestUploadImagesCompleted)completionBlock;
 
 /** 上传Feed完成*/
