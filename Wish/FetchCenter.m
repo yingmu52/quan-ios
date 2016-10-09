@@ -887,7 +887,7 @@
         if (p.feeds.count == 1) {
             [workerContext deleteObject:p];
         }else if (p.feeds.count > 1){
-            NSArray *sortedArray = [p.feeds sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]]];
+            NSArray *sortedArray = [p.feeds sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"mCreateTime" ascending:NO]]];
             Feed *first = [sortedArray firstObject];
             Feed *second = [sortedArray objectAtIndex:1];
             if ([f.mUID isEqualToString:first.mUID]){
