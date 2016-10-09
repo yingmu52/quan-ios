@@ -17,6 +17,7 @@
 @import CoreData;
 @interface ShuffleViewController () <UICollectionViewDelegateFlowLayout,ImagePickerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic,strong) ImagePicker *imagePicker;
+@property (nonatomic,weak) Plan *selectedPlan;
 @end
 
 @implementation ShuffleViewController
@@ -106,7 +107,9 @@
     //场景：1个事件，+号在最后面，此时事件数>0，+号的索引为1
     if (self.collectionFetchedRC.fetchedObjects.count > 0 &&
         indexPath.row != self.collectionFetchedRC.fetchedObjects.count) {
-            [self.imagePicker showPhotoLibrary:self];
+        Plan *plan = [self.collectionFetchedRC objectAtIndexPath:indexPath];
+        self.selectedPlan = plan;
+        [self.imagePicker showPhotoLibrary:self];
     }else{
             [self performSegueWithIdentifier:@"showPostViewFromShuffleView" sender:nil];
     }
@@ -137,8 +140,7 @@
 
 - (void)didFinishPickingPhAssets:(NSMutableArray *)assets{
     //get select plan
-    Plan *plan = [self.collectionFetchedRC objectAtIndexPath:[self.collectionView indexPathsForSelectedItems].lastObject];
-    [self performSegueWithIdentifier:@"showPostFeedViewFromShuffleView" sender:@[assets,plan]];
+    [self performSegueWithIdentifier:@"showPostFeedViewFromShuffleView" sender:@[assets,self.selectedPlan]];
 }
 
 #pragma mark - Segue
