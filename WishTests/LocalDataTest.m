@@ -51,7 +51,7 @@
     //2.匹配事件封面与第一条feed的封面
     for (Plan *plan in frc.fetchedObjects) {
         //读取最新一条feed
-        NSArray *feeds = [plan.feeds sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]]];
+        NSArray *feeds = [plan.feeds sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"mCreateDate" ascending:NO]]];
         Feed *feed = feeds.firstObject;
         
         //图片id不能为空

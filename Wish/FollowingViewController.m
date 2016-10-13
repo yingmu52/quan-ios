@@ -59,7 +59,7 @@ static NSUInteger numberOfPreloadedFeeds = 3;
     c.delegate = self;
     
     //fetch feeds array
-    NSArray *sortedArray = [plan.feeds sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]]];
+    NSArray *sortedArray = [plan.feeds sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"mCreateDate" ascending:NO]]];
     
     if (sortedArray.count <= numberOfPreloadedFeeds){
         c.feedsArray = sortedArray;
