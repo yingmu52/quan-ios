@@ -137,7 +137,7 @@
 - (Feed *)fetchLastUpdatedFeed{
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Feed"];
     request.predicate = [NSPredicate predicateWithFormat:@"plan = %@",self];
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:YES]];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mCreateDate" ascending:YES]];
     request.fetchLimit = 1;
     
     NSArray *feeds = [self.managedObjectContext executeFetchRequest:request error:nil];

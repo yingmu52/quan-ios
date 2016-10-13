@@ -39,7 +39,7 @@
 - (NSFetchRequest *)tableFetchRequest{
     if (!_tableFetchRequest) {
         _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Circle"];
-        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createDate" ascending:NO]];
+        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mCreateDate" ascending:NO]];
     }
     return _tableFetchRequest;
 }
