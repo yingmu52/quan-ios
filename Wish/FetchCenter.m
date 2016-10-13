@@ -801,7 +801,7 @@
         //同步第一页数据
         if (currentPage.integerValue == 1) {
             NSArray *serverList = [comments valueForKey:@"id"];
-            [self syncEntity:@"Comment" idName:@"commentId" localList:localList serverList:serverList inContext:workerContext];
+            [self syncEntity:@"Comment" idName:@"mUID" localList:localList serverList:serverList inContext:workerContext];
         }
 
         [self.appDelegate saveContext:workerContext];
