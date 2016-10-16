@@ -150,6 +150,12 @@
     return [UIImage imageNamed:@"nav_ic_more"];
 }
 
+
++ (UIImage *)navMoreButtonWhite{
+    return [UIImage imageNamed:@"more_icon_white"];
+}
+
+
 + (UIImage *)navButtonDeleted{
     return [UIImage imageNamed:@"nav_delete_ic"];
 }

@@ -14,7 +14,7 @@
 #import "MemberListViewController.h"
 #import "InvitationViewController.h"
 
-@interface CircleDetailViewController () <UICollectionViewDelegateFlowLayout>
+@interface CircleDetailViewController () <UICollectionViewDelegateFlowLayout,MSSuperViewControllerDelegate>
 @property (nonatomic,weak) IBOutlet UIImageView *circleImageView;
 @property (nonatomic,weak) IBOutlet UILabel *circleTitleLabel;
 @property (nonatomic,weak) IBOutlet UILabel *followCountLabel;
@@ -39,18 +39,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.superVCDelegate = self;
     self.allowTransparentNavigationBar = YES;
     [self setUpBackButton:YES];
+    [self setupRightBarButtonItem:YES selector:@selector(showMoreOptions)];
+    
     [self setupHeaderView];
     [self loadMoreData];
     
-    //点点点入口
-    UIButton *moreBtn = [Theme buttonWithImage:[Theme navMoreButtonDefault]
-                                        target:self
-                                      selector:@selector(showMoreOptions)
-                                         frame:CGRectNull]; //使用真实大小
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:moreBtn];
 }
+
+
+- (void)didScrollWithNavigationBar:(BOOL)isTransparent{
+    [self setUpBackButton:isTransparent];
+    [self setupRightBarButtonItem:isTransparent selector:@selector(showMoreOptions)];
+}
+
 
 - (void)setupHeaderView{
     self.circleImageView.layer.cornerRadius = 3.0f;

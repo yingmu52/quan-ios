@@ -29,7 +29,6 @@
     [super viewDidLoad];
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
-
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -61,6 +60,15 @@
     }
 }
 
+- (void)setupRightBarButtonItem:(BOOL)useWhiteIcon selector:(SEL)method{
+    //点点点入口
+    UIImage *img = useWhiteIcon ? [Theme navMoreButtonWhite] : [Theme navMoreButtonDefault];
+    UIButton *moreBtn = [Theme buttonWithImage:img
+                                        target:self
+                                      selector:method
+                                         frame:CGRectNull]; //使用真实大小
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:moreBtn];
+}
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if (self.tableView.tableHeaderView && self.allowTransparentNavigationBar) {
@@ -72,6 +80,13 @@
             CGFloat alpha = 1 - animationOffset / threshold;
             alpha = alpha >= 0.9 ? 1.0 : alpha;
             alpha = alpha <= 0.2 ? 0.0 : alpha;
+            
+            
+            if ([self.superVCDelegate respondsToSelector:@selector(didScrollWithNavigationBar:)]) {
+                BOOL isTransparent = alpha <= 0.5;
+                [self.superVCDelegate didScrollWithNavigationBar:isTransparent];
+            }
+            
             [UIView animateWithDuration:0.05 animations:^{
                 [navbar setNavigationBarWithColor:[UIColor colorWithWhite:1.0 alpha:alpha]];
             }];

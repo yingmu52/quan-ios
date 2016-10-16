@@ -19,6 +19,12 @@
 
 
 @import CoreData;
+
+@protocol MSSuperViewControllerDelegate <NSObject>
+@optional
+- (void)didScrollWithNavigationBar:(BOOL)isTransparent;
+@end
+
 @interface MSSuperViewController : UIViewController
 <FetchCenterDelegate
 ,NSFetchedResultsControllerDelegate
@@ -33,7 +39,7 @@
 @property (nonatomic,weak) AppDelegate *appDelegate;
 @property (nonatomic) BOOL allowTransparentNavigationBar;
 @property (nonatomic,strong) MBProgressHUD *hud;
-
+@property (nonatomic,weak) id <MSSuperViewControllerDelegate> superVCDelegate;
 - (void)loadNewData;
 - (void)loadMoreData;
 #pragma mark - Collection View 
@@ -53,5 +59,6 @@
 - (void)configureTableViewCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 
 - (void)setUpBackButton:(BOOL)useWhiteButton;
+- (void)setupRightBarButtonItem:(BOOL)useWhiteIcon selector:(SEL)method;
 - (void)msPopViewController;
 @end

@@ -53,6 +53,7 @@
 + (UIImage *)navInviteDefault;
 + (UIImage *)navSettingIcon;
 + (UIImage *)navMoreButtonDefault;
++ (UIImage *)navMoreButtonWhite;
 + (UIImage *)navIconFollowDefault;
 
 + (UIImage *)wishDetailCameraDefault;
