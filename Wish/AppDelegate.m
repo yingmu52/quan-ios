@@ -16,7 +16,7 @@
 #import "CWStatusBarNotification.h"
 #import "MainTabBarController.h"
 #import "MessageListViewController.h"
-#import <PgySDK/PgyManager.h>
+//#import <PgySDK/PgyManager.h>
 #import "MSRocketStation.h"
 @interface AppDelegate () <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
@@ -36,8 +36,8 @@
     
     
     //薄公英启动基本SDK
-    PgyManager *pgYmanager = [PgyManager sharedPgyManager];
-    [pgYmanager startManagerWithAppId:PGY_APPID];
+//    PgyManager *pgYmanager = [PgyManager sharedPgyManager];
+//    [pgYmanager startManagerWithAppId:PGY_APPID];
 //    [pgYmanager setShakingThreshold:4.0];
 
     
