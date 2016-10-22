@@ -12,7 +12,7 @@
 #import "User.h"
 #import "LoginDetailViewController.h"
 #define QQAppKey @"ByYhJYTkXu0721fH"
-
+#import "SMSSDKUI.h"
 @interface LoginViewController () <TencentSessionDelegate,FetchCenterDelegate,WXApiManagerDelegate>
 @property (nonatomic,strong) TencentOAuth *tencentOAuth;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
@@ -178,8 +178,10 @@
 #pragma mark - visitor login 
 
 - (IBAction)visitorLogin{
-    [User updateOwnerInfo:@{LOGIN_TYPE:@"visitor"}];
-    [AppDelegate showMainTabbar];
+    //展示获取验证码界面，SMSGetCodeMethodSMS:表示通过文本短信方式获取验证码
+    [SMSSDKUI showVerificationCodeViewWithMetohd:SMSGetCodeMethodSMS result:^(enum SMSUIResponseState state,NSString *phoneNumber,NSString *zone, NSError *error) {
+        
+    }];
 }
 
 @end

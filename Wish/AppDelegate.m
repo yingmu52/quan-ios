@@ -18,6 +18,7 @@
 #import "MessageListViewController.h"
 //#import <PgySDK/PgyManager.h>
 #import "MSRocketStation.h"
+#import <SMS_SDK/SMSSDK.h>
 @interface AppDelegate () <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,weak) LoginViewController *loginVC;
@@ -33,6 +34,11 @@
     
     //向微信注册
     [WXApi registerApp:WECHATAppID];
+    
+    
+    //MOB: 短信注册初始化
+    [SMSSDK registerApp:@"183570d6452d2"
+             withSecret:@"64d18395bf0d60d0b20c88cc47b1b618"];
     
     
     //薄公英启动基本SDK
