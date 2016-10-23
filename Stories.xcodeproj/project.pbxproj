@@ -72,6 +72,8 @@
 		A06CA10D1CA5BA92005D6171 /* CirclePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A06CA10C1CA5BA92005D6171 /* CirclePickerViewController.m */; };
 		A07115D11BA6B109002C1270 /* SZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A07115D01BA6B109002C1270 /* SZTextView.m */; };
 		A07115D21BA6B109002C1270 /* SZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A07115D01BA6B109002C1270 /* SZTextView.m */; };
+		A07544BF1DBD4589005FA908 /* OtherLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A07544BE1DBD4589005FA908 /* OtherLoginViewController.m */; };
+		A07544C21DBD4BC5005FA908 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A07544C11DBD4BC5005FA908 /* RegisterViewController.m */; };
 		A07AD4EC1D9A67160039093F /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A07AD4EB1D9A67160039093F /* HMSegmentedControl.m */; };
 		A07AD4F21D9A704B0039093F /* CirclePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A07AD4F11D9A704B0039093F /* CirclePageViewController.m */; };
 		A07AD4F41D9A718C0039093F /* Circle.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A07AD4F31D9A718C0039093F /* Circle.storyboard */; };
@@ -449,6 +451,10 @@
 		A06CA10C1CA5BA92005D6171 /* CirclePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CirclePickerViewController.m; sourceTree = "<group>"; };
 		A07115CF1BA6B109002C1270 /* SZTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZTextView.h; sourceTree = "<group>"; };
 		A07115D01BA6B109002C1270 /* SZTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZTextView.m; sourceTree = "<group>"; };
+		A07544BD1DBD4589005FA908 /* OtherLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherLoginViewController.h; sourceTree = "<group>"; };
+		A07544BE1DBD4589005FA908 /* OtherLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherLoginViewController.m; sourceTree = "<group>"; };
+		A07544C01DBD4BC5005FA908 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		A07544C11DBD4BC5005FA908 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		A07AD4EA1D9A67160039093F /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		A07AD4EB1D9A67160039093F /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		A07AD4F01D9A704B0039093F /* CirclePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CirclePageViewController.h; sourceTree = "<group>"; };
@@ -1592,6 +1598,10 @@
 				AEBECCF81AE8A16600EDF385 /* LoginDetailViewController.m */,
 				AEBECCF11AE7687800EDF385 /* LoginViewController.h */,
 				AEBECCF21AE7687900EDF385 /* LoginViewController.m */,
+				A07544BD1DBD4589005FA908 /* OtherLoginViewController.h */,
+				A07544BE1DBD4589005FA908 /* OtherLoginViewController.m */,
+				A07544C01DBD4BC5005FA908 /* RegisterViewController.h */,
+				A07544C11DBD4BC5005FA908 /* RegisterViewController.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -1752,6 +1762,7 @@
 					AE0172381A65CD8E0014266F = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = 2J243WQ2HR;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1908,10 +1919,12 @@
 				AEE075381A744A770015155B /* SystemUtil.m in Sources */,
 				A07AD4F71D9A72C10039093F /* FollowingCirclesViewController.m in Sources */,
 				A0C15C911D4CB9350094BEF9 /* MJRefreshHeader.m in Sources */,
+				A07544BF1DBD4589005FA908 /* OtherLoginViewController.m in Sources */,
 				A06CA10D1CA5BA92005D6171 /* CirclePickerViewController.m in Sources */,
 				A0F513241BD98B9600279B9D /* Owner+CoreDataProperties.m in Sources */,
 				A01F88691DA620BE00056FD8 /* Task+CoreDataClass.m in Sources */,
 				A0A083941BD765F00057CD65 /* Circle+CoreDataProperties.m in Sources */,
+				A07544C21DBD4BC5005FA908 /* RegisterViewController.m in Sources */,
 				A0EF6A471DBB463C00FB01A5 /* SMS_MBProgressHUD.m in Sources */,
 				A0D1022B1B84EB6A006B0E4E /* UIImage+GIF.m in Sources */,
 				AE0ADF191ABD78CC00692131 /* HomeCardViewController.m in Sources */,
@@ -2268,6 +2281,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Stories.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2301,6 +2315,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.miaostone.quanlishi;
 				PRODUCT_NAME = Stories;
 				PROVISIONING_PROFILE = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2310,6 +2326,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Stories.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2343,6 +2360,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.miaostone.quanlishi;
 				PRODUCT_NAME = Stories;
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

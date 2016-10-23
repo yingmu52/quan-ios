@@ -37,8 +37,8 @@
     
     
     //MOB: 短信注册初始化
-    [SMSSDK registerApp:@"183570d6452d2"
-             withSecret:@"64d18395bf0d60d0b20c88cc47b1b618"];
+//    [SMSSDK registerApp:@"183570d6452d2"
+//             withSecret:@"64d18395bf0d60d0b20c88cc47b1b618"];
     
     
     //薄公英启动基本SDK

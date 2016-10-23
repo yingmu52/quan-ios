@@ -179,9 +179,9 @@
 
 - (IBAction)visitorLogin{
     //展示获取验证码界面，SMSGetCodeMethodSMS:表示通过文本短信方式获取验证码
-    [SMSSDKUI showVerificationCodeViewWithMetohd:SMSGetCodeMethodSMS result:^(enum SMSUIResponseState state,NSString *phoneNumber,NSString *zone, NSError *error) {
-        
-    }];
+//    [SMSSDKUI showVerificationCodeViewWithMetohd:SMSGetCodeMethodSMS result:^(enum SMSUIResponseState state,NSString *phoneNumber,NSString *zone, NSError *error) {
+//        
+//    }];
 }
 
 @end
