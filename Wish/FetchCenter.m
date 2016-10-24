@@ -128,7 +128,7 @@
 }
 
 - (void)sendDeviceToken:(NSString *)deviceToken
-             completion:(FetchCenterPostRequestSendDeviceTokenCompleted)completionBlock{
+             completion:(FetchCenterPostRequestCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PUSH,SEND_DEVICETOKEN];
     [self postRequest:rqtStr parameter:@{@"device_token":deviceToken} includeArguments:YES completion:^(NSDictionary *responseJson) {
         NSLog(@"Uploaded Device Token: %@",deviceToken);
@@ -142,7 +142,7 @@
 #define TOOLCGIKEY @"123$%^abc"
 
 - (void)followCircleId:(NSString *)circleId
-            completion:(FetchCenterGetRequestGetFollowCircleCompleted)completionBlock{
+            completion:(FetchCenterGetRequestCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,FOLLOW_CIRCLE];
     [self getRequest:rqtStr
            parameter:@{@"quanid":circleId}
@@ -208,7 +208,7 @@
     
 }
 - (void)quitCircle:(NSString *)circleId
-        completion:(FetchCenterGetRequestGetQuitCircleCompleted)completionBlock{
+        completion:(FetchCenterGetRequestCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,QUIT_CIRCLE];
     NSDictionary *args = @{@"quanId":circleId};
     [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
@@ -317,7 +317,7 @@
 
 - (void)deleteMember:(NSString *)memberID
             inCircle:(NSString *)circleID
-          completion:(FetchCenterGetRequestDeleteMemberCompleted)completionBlock{
+          completion:(FetchCenterGetRequestCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,DELETE_MEMBER];
     NSDictionary *inputParams = @{@"manId":memberID,
                                   @"quanId":circleID};
@@ -382,7 +382,7 @@
                 name:(NSString *)circleName
          description:(NSString *)circleDescription
      backgroundImage:(NSString *)imageId
-          completion:(FetchCenterGetRequestUpdateCircleCompleted)completionBlock{
+          completion:(FetchCenterGetRequestCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,UPDATE_CIRCLE];
     
     if (circleId) {
@@ -420,7 +420,7 @@
 - (void)createCircle:(NSString *)circleName
          description:(NSString *)circleDescription
    backgroundImageId:(NSString *)imageId
-          completion:(FetchCenterGetRequestCreateCircleCompleted)completionBlock{
+          completion:(FetchCenterGetRequestCompleted)completionBlock{
     if (circleName) {
         NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,CREATE_CIRCLE];
         [self getRequest:rqtStr
@@ -454,7 +454,7 @@
 
 
 - (void)deleteCircle:(NSString *)circleId
-          completion:(FetchCenterGetRequestDeleteCircleCompleted)completionBlock{
+          completion:(FetchCenterGetRequestCompleted)completionBlock{
     //TODO: 判断当前用户是否有删除圈子的权限
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,DELETE_CIRCLE];
     [self getRequest:rqtStr
@@ -521,7 +521,7 @@
 
 }
 
-- (void)switchToCircle:(NSString *)circleId completion:(FetchCenterGetRequestSwithCircleCompleted)completionBlock{
+- (void)switchToCircle:(NSString *)circleId completion:(FetchCenterGetRequestCompleted)completionBlock{
     if (circleId) {
         NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,TOOL,SWITCH_CIRCLE];
         [self getRequest:rqtStr
@@ -652,7 +652,7 @@
 
 #pragma mark - 消息
 
-- (void)clearAllMessages:(FetchCenterGetRequestClearMessageListCompleted)completionBlock{
+- (void)clearAllMessages:(FetchCenterGetRequestCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,MESSAGE,CLEAR_ALL_MESSAGES];
     [self getRequest:rqtStr 
            parameter:nil
@@ -736,7 +736,7 @@
 #pragma mark - 评论和回复
 
 - (void)deleteComment:(Comment *)comment
-           completion:(FetchCenterGetRequestDeleteCommentCompleted)completionBlock{
+           completion:(FetchCenterGetRequestCompleted)completionBlock{
     
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,DELETE_COMMENT];
     NSDictionary *args = @{@"id":comment.mUID,@"feedsId":comment.feed.mUID};
@@ -823,7 +823,7 @@
             content:(NSString *)text
             toOwnerID:(NSString *)ownerID
             ownerName:(NSString *)ownerName
-         completion:(FetchCenterGetRequestCommentCompleted)completionBlock{
+         completion:(FetchCenterGetRequestCompleted)completionBlock{
     
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,COMMENT_FEED];
     NSDictionary *args = @{@"feedsId":feedID,
@@ -870,7 +870,7 @@
 
 #pragma mark - 事件动态，又称事件片段，Feed
 //superplan/feeds/splan_feeds_delete_id.php
-- (void)deleteFeed:(Feed *)feed completion:(FetchCenterGetRequestDeleteFeedCompleted)completionBlock{
+- (void)deleteFeed:(Feed *)feed completion:(FetchCenterGetRequestCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,DELETE_FEED];
     NSDictionary *args = @{@"id":feed.mUID,
                            @"picId":feed.mCoverImageId,
@@ -1063,7 +1063,7 @@
     
 }
 
-- (void)likeFeed:(Feed *)feed completion:(FetchCenterGetRequestLikeFeedCompleted)completionBlock{
+- (void)likeFeed:(Feed *)feed completion:(FetchCenterGetRequestCompleted)completionBlock{
     if (feed.mUID){
         
         //increase feed like count
@@ -1085,7 +1085,7 @@
     }
 }
 
-- (void)unLikeFeed:(Feed *)feed completion:(FetchCenterGetRequestUnLikeFeedCompleted)completionBlock{
+- (void)unLikeFeed:(Feed *)feed completion:(FetchCenterGetRequestCompleted)completionBlock{
     if (feed.mUID){
         
         //decrease feed like count
@@ -1105,7 +1105,7 @@
 
 #pragma mark - 事件关注
 
-- (void)followPlan:(Plan *)plan completion:(FetchCenterGetRequestFollowPlanCompleted)completionBlock{
+- (void)followPlan:(Plan *)plan completion:(FetchCenterGetRequestCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FOLLOW,FOLLOW_PLAN];
     [self getRequest:rqtStr
            parameter:@{@"planId":plan.mUID}
@@ -1128,7 +1128,7 @@
     }];
 }
 
-- (void)unFollowPlan:(Plan *)plan completion:(FetchCenterGetRequestUnFollowPlanCompleted)completionBlock{
+- (void)unFollowPlan:(Plan *)plan completion:(FetchCenterGetRequestCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FOLLOW,UNFOLLOW_PLAN];
     [self getRequest:rqtStr
            parameter:@{@"planId":plan.mUID}
@@ -1152,7 +1152,7 @@
     }];
 }
 
-- (void)getFollowingList:(NSArray *)localList completion:(FetchCenterGetRequestGetFollowingPlanListCompleted)completionBlock{
+- (void)getFollowingList:(NSArray *)localList completion:(FetchCenterGetRequestCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FOLLOW,GET_FOLLOW_LIST];
     
     [self getRequest:rqtStr parameter:@{@"id":[User uid]} includeArguments:YES completion:^(NSDictionary *responseJson) {
@@ -1257,7 +1257,7 @@
 
 - (void)sendFeedback:(NSString *)content
              content:(NSString *)email
-          completion:(FetchCenterGetRequestSendFeedbackCompleted)completionBlock{
+          completion:(FetchCenterGetRequestCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,OTHER,FEED_BACK];
     NSDictionary *args = @{@"title":[@"Feedback From iOS Client Application" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                            @"content":[content stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
@@ -1306,7 +1306,7 @@
                 imageId:(NSString *)imageId
              occupation:(NSString *)occupation
            personalInfo:(NSString *)info
-             completion:(FetchCenterGetRequestSetPersonalInfoCompleted)completionBlock{
+             completion:(FetchCenterGetRequestCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,USER,SET_USER_INFO];
     
     NSString *ocpStr = occupation ? occupation : @"";
@@ -1335,7 +1335,7 @@
 
 #pragma mark - 事件
 
-- (void)updatePlanId:(NSString *)planId inCircleId:(NSString *)circleId completion:(FetchCenterGetRequestGetSetPlanInCircleCompleted)completionBlock{
+- (void)updatePlanId:(NSString *)planId inCircleId:(NSString *)circleId completion:(FetchCenterGetRequestCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,UPDATE_PLAN_IN_CIRCLE];
     NSDictionary *args = @{@"planid":planId,
                            @"quanid":circleId};
@@ -1363,7 +1363,7 @@
              title:(NSString *)planTitle
          isPrivate:(BOOL)isPrivate
        description:(NSString *)planDescription
-        completion:(FetchCenterGetRequestUpdatePlanCompleted)completionBlock{
+        completion:(FetchCenterGetRequestCompleted)completionBlock{
     //输入样例：id=hello_1421235901&title=hello_title2&finishDate=3&backGroudPic=bg3&private=1&state=1&finishPercent=20
     //—— 每一项都可以单独更新
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,UPDATE_PLAN];
@@ -1395,7 +1395,7 @@
 
 - (void)updatePlanId:(NSString *)planId
           planStatus:(PlanStatus)planStatus
-          completion:(FetchCenterGetRequestUpdatePlanStatusCompleted)completionBlock{
+          completion:(FetchCenterGetRequestCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,UPDATE_PLAN_STATUS];
     NSDictionary *args = @{@"id":planId,
                            @"state":@(planStatus)};
@@ -1421,7 +1421,7 @@
 
 - (void)getPlanListForOwnerId:(NSString *)ownerId
                     localList:(NSArray *)localList
-                   completion:(FetchCenterGetRequestGetPlanListCompleted)completionBlock
+                   completion:(FetchCenterGetRequestCompleted)completionBlock
 {
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,GET_LIST];
     [self getRequest:rqtStr
@@ -1508,7 +1508,7 @@
     
 }
 
-- (void)deletePlanId:(NSString *)planId completion:(FetchCenterGetRequestDeletePlanCompleted)completionBlock{
+- (void)deletePlanId:(NSString *)planId completion:(FetchCenterGetRequestCompleted)completionBlock{
     NSString *baseUrl = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,DELETE_PLAN];
     NSDictionary *args = @{@"id":planId};
     [self getRequest:baseUrl
@@ -1933,7 +1933,7 @@
 
 - (void)getWechatUserInfoWithOpenID:(NSString *)openID
                               token:(NSString *)accessToken
-                         completion:(FetchCenterGetRequestGetWechatUserInfoCompleted)completionBlock{
+                         completion:(FetchCenterGetRequestCompleted)completionBlock{
     
     NSString *rqtStr = [NSString stringWithFormat:@"https://api.weixin.qq.com/sns/userinfo"];
     NSDictionary *args = @{@"access_token":accessToken,

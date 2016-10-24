@@ -44,42 +44,21 @@ typedef enum {
 - (void)didFailSendingRequestWithMessage:(NSString *)message;
 @end
 
+
+//General Get Post completion block
 typedef void(^FetchCenterPostRequestCompleted)(void);
+typedef void(^FetchCenterGetRequestCompleted)(void);
 
-/** 切换圈子完成*/
-typedef void(^FetchCenterGetRequestSwithCircleCompleted)(void);
-
-/** 赞某条Feed完成*/
-typedef void(^FetchCenterGetRequestLikeFeedCompleted)(void);
-/** 不赞某条Feed完成*/
-typedef void(^FetchCenterGetRequestUnLikeFeedCompleted)(void);
-
-/** 删除Feed完成*/
-typedef void(^FetchCenterGetRequestDeleteFeedCompleted)(void);
-/** 关注事件完成*/
-typedef void(^FetchCenterGetRequestFollowPlanCompleted)(void);
-/** 取消关注事件完成*/
-typedef void(^FetchCenterGetRequestUnFollowPlanCompleted)(void);
-/** 测试是否有新版本完成*/
 typedef void(^FetchCenterGetRequestCheckVersionCompleted)(BOOL hasNewVersion);
-/** 反馈完成*/
-typedef void(^FetchCenterGetRequestSendFeedbackCompleted)(void);
-/** 优图签名完成*/
+
 typedef void(^FetchCenterGetRequestGetYoutuSignatureCompleted)(NSString *signature);
+
 /** 登陆并获取uid和ukey完成*/
 typedef void(^FetchCenterGetRequestGetUidAndUkeyCompleted)(NSDictionary *userInfo, BOOL isNewUser);
-/** 微信拉取用户信息完成*/
-typedef void(^FetchCenterGetRequestGetWechatUserInfoCompleted)(void);
+
 
 /** 消息提醒完成*/
 typedef void(^FetchCenterGetRequestGetMessageNotificationCompleted)(NSNumber *messageCount,NSNumber *followCount);
-/** 清空消息列表完成*/
-typedef void(^FetchCenterGetRequestClearMessageListCompleted)(void);
-/** 设置用户信息完成*/
-typedef void(^FetchCenterGetRequestSetPersonalInfoCompleted)(void);
-
-/** 删除评论完成*/
-typedef void(^FetchCenterGetRequestDeleteCommentCompleted)(void);
 
 
 @interface FetchCenter : NSObject
@@ -93,9 +72,9 @@ typedef void(^FetchCenterGetRequestDeleteCommentCompleted)(void);
 
 
 /** 关注圈子 **/
-typedef void(^FetchCenterGetRequestGetFollowCircleCompleted)(void);
+
 - (void)followCircleId:(NSString *)circleId
-            completion:(FetchCenterGetRequestGetFollowCircleCompleted)completionBlock;
+            completion:(FetchCenterGetRequestCompleted)completionBlock;
 
 
 /** 我关注圈子列表 **/
@@ -106,8 +85,7 @@ typedef void(^FetchCenterGetRequestGetFollowingCircleCompleted)(NSNumber *curren
 
 
 /** 退出圈子 **/
-typedef void(^FetchCenterGetRequestGetQuitCircleCompleted)(void);
-- (void)quitCircle:(NSString *)circleId completion:(FetchCenterGetRequestGetQuitCircleCompleted)completionBlock;
+- (void)quitCircle:(NSString *)circleId completion:(FetchCenterGetRequestCompleted)completionBlock;
 
 /** 获取分享页URL **/
 typedef void(^FetchCenterGetRequestGetCircleInvitationURLCompleted)(NSString *urlString);
@@ -122,10 +100,9 @@ typedef void(^FetchCenterGetRequestGetCirclePlanListCompleted)(NSNumber *current
          completion:(FetchCenterGetRequestGetCirclePlanListCompleted)completionBlock;
 
 /** 删除成员 **/
-typedef void(^FetchCenterGetRequestDeleteMemberCompleted)(void);
 - (void)deleteMember:(NSString *)memberID
             inCircle:(NSString *)circleID
-          completion:(FetchCenterGetRequestDeleteMemberCompleted)completionBlock;
+          completion:(FetchCenterGetRequestCompleted)completionBlock;
 
 /** 圈子成员列表 **/
 
@@ -135,24 +112,21 @@ typedef void(^FetchCenterGetRequestGetMemberListCompleted)(NSArray *memberIDs);
                       completion:(FetchCenterGetRequestGetMemberListCompleted)completionBlock;
 
 /** 设置圈子资料*/
-typedef void(^FetchCenterGetRequestUpdateCircleCompleted)(void);
 - (void)updateCircle:(NSString *)circleId
                 name:(NSString *)circleName
          description:(NSString *)circleDescription
      backgroundImage:(NSString *)imageId
-          completion:(FetchCenterGetRequestUpdateCircleCompleted)completionBlock;
+          completion:(FetchCenterGetRequestCompleted)completionBlock;
 
 /** 创建圈子*/
-typedef void(^FetchCenterGetRequestCreateCircleCompleted)(void);
 - (void)createCircle:(NSString *)circleName
          description:(NSString *)circleDescription
    backgroundImageId:(NSString *)imageId
-          completion:(FetchCenterGetRequestCreateCircleCompleted)completionBlock;
+          completion:(FetchCenterGetRequestCompleted)completionBlock;
 
 
 /** 删除圈子*/
-typedef void(^FetchCenterGetRequestDeleteCircleCompleted)(void);
-- (void)deleteCircle:(NSString *)circleId completion:(FetchCenterGetRequestDeleteCircleCompleted)completionBlock;
+- (void)deleteCircle:(NSString *)circleId completion:(FetchCenterGetRequestCompleted)completionBlock;
 
 /** 填写邀请码完成*/
 typedef void(^FetchCenterGetRequestJoinCircleCompleted)(NSString *circleName);
@@ -171,10 +145,10 @@ typedef void(^FetchCenterGetRequestGetCircleListCompleted)(NSNumber *currentPage
            completion:(FetchCenterGetRequestGetCircleListCompleted)completionBlock;
 
 /**切换圈子*/
-- (void)switchToCircle:(NSString *)circleId completion:(FetchCenterGetRequestSwithCircleCompleted)completionBlock;
+- (void)switchToCircle:(NSString *)circleId completion:(FetchCenterGetRequestCompleted)completionBlock;
 
 #pragma mark - 消息
-- (void)clearAllMessages:(FetchCenterGetRequestClearMessageListCompleted)completionBlock;
+- (void)clearAllMessages:(FetchCenterGetRequestCompleted)completionBlock;
 
 
 /** 拉取消息列表完成*/
@@ -195,12 +169,12 @@ typedef void(^FetchCenterGetRequestGetFeedsListCompleted)(NSNumber *currentPage,
                  completion:(FetchCenterGetRequestGetFeedsListCompleted)completionBlock;
 
 /**赞*/
-- (void)likeFeed:(Feed *)feed completion:(FetchCenterGetRequestLikeFeedCompleted)completionBlock;
+- (void)likeFeed:(Feed *)feed completion:(FetchCenterGetRequestCompleted)completionBlock;
 
 /**取消赞*/
-- (void)unLikeFeed:(Feed *)feed completion:(FetchCenterGetRequestUnLikeFeedCompleted)completionBlock;
+- (void)unLikeFeed:(Feed *)feed completion:(FetchCenterGetRequestCompleted)completionBlock;
 
-- (void)deleteFeed:(Feed *)feed completion:(FetchCenterGetRequestDeleteFeedCompleted)completionBlock;
+- (void)deleteFeed:(Feed *)feed completion:(FetchCenterGetRequestCompleted)completionBlock;
 
 
 
@@ -222,13 +196,11 @@ typedef void(^FetchCenterGetRequestUploadFeedCompleted)(NSString *feedId);
 
 #pragma mark - 评论回复
 /** 评论或回复完成*/
-typedef void(^FetchCenterGetRequestCommentCompleted)(void);
-
 - (void)replyToFeedID:(NSString *)feedID
               content:(NSString *)text
             toOwnerID:(NSString *)ownerID
             ownerName:(NSString *)ownerName
-           completion:(FetchCenterGetRequestCommentCompleted)completionBlock;
+           completion:(FetchCenterGetRequestCompleted)completionBlock;
 
 /** 摘取评论列表完成*/
 typedef void(^FetchCenterGetRequestGetCommentListCompleted)(NSNumber *currentPage,
@@ -240,21 +212,19 @@ typedef void(^FetchCenterGetRequestGetCommentListCompleted)(NSNumber *currentPag
                    completion:(FetchCenterGetRequestGetCommentListCompleted)completionBlock;
 
 - (void)deleteComment:(Comment *)comment
-           completion:(FetchCenterGetRequestDeleteCommentCompleted)completionBlock;;
+           completion:(FetchCenterGetRequestCompleted)completionBlock;;
 
 #pragma mark - 事件
 
 /** 设置事件圈子归属 **/
-typedef void(^FetchCenterGetRequestGetSetPlanInCircleCompleted)(void);
 - (void)updatePlanId:(NSString *)planId
           inCircleId:(NSString *)circleId
-          completion:(FetchCenterGetRequestGetSetPlanInCircleCompleted)completionBlock;
+          completion:(FetchCenterGetRequestCompleted)completionBlock;
 
 /**拉取主人id的事件列表*/
-typedef void(^FetchCenterGetRequestGetPlanListCompleted)(void);
 - (void)getPlanListForOwnerId:(NSString *)ownerId
                     localList:(NSArray *)localList
-                   completion:(FetchCenterGetRequestGetPlanListCompleted)completionBlock;
+                   completion:(FetchCenterGetRequestCompleted)completionBlock;
 
 /** 创建事件*/
 //typedef void(^FetchCenterGetRequestPlanCreationCompleted)(NSString *planId, NSString *backgroundID);
@@ -272,30 +242,26 @@ typedef void(^FetchCenterPostRequestPlanAndFeedCreationCompleted)(NSString *plan
 
 
 /** 更新事件完成*/
-typedef void(^FetchCenterGetRequestUpdatePlanCompleted)(void);
 - (void)updatePlan:(NSString *)planId
              title:(NSString *)planTitle
          isPrivate:(BOOL)isPrivate
        description:(NSString *)planDescription
-        completion:(FetchCenterGetRequestUpdatePlanCompleted)completionBlock;
+        completion:(FetchCenterGetRequestCompleted)completionBlock;
 
 /** 删除事件状态完成*/
-typedef void(^FetchCenterGetRequestDeletePlanCompleted)(void);
-- (void)deletePlanId:(NSString *)planId completion:(FetchCenterGetRequestDeletePlanCompleted)completionBlock;
+- (void)deletePlanId:(NSString *)planId completion:(FetchCenterGetRequestCompleted)completionBlock;
 
 /** 更新事件状态完成*/
-typedef void(^FetchCenterGetRequestUpdatePlanStatusCompleted)(void);
 - (void)updatePlanId:(NSString *)planId
           planStatus:(PlanStatus)planStatus
-          completion:(FetchCenterGetRequestUpdatePlanStatusCompleted)completionBlock;
+          completion:(FetchCenterGetRequestCompleted)completionBlock;
 
 #pragma mark - 关注
-- (void)followPlan:(Plan *)plan completion:(FetchCenterGetRequestFollowPlanCompleted)completionBlock;
-- (void)unFollowPlan:(Plan *)plan completion:(FetchCenterGetRequestUnFollowPlanCompleted)completionBlock;;
+- (void)followPlan:(Plan *)plan completion:(FetchCenterGetRequestCompleted)completionBlock;
+- (void)unFollowPlan:(Plan *)plan completion:(FetchCenterGetRequestCompleted)completionBlock;;
 
 /** 拉取关注事件列表完成*/
-typedef void(^FetchCenterGetRequestGetFollowingPlanListCompleted)(void);
-- (void)getFollowingList:(NSArray *)localList completion:(FetchCenterGetRequestGetFollowingPlanListCompleted)completionBlock;
+- (void)getFollowingList:(NSArray *)localList completion:(FetchCenterGetRequestCompleted)completionBlock;
 
 
 
@@ -309,7 +275,7 @@ typedef void(^FetchCenterGetRequestGetDiscoverListCompleted)(NSNumber *currentPa
 #pragma mark - 个人
 - (void)sendFeedback:(NSString *)content
              content:(NSString *)email
-          completion:(FetchCenterGetRequestSendFeedbackCompleted)completionBlock;
+          completion:(FetchCenterGetRequestCompleted)completionBlock;
 
 - (void)checkVersion:(FetchCenterGetRequestCheckVersionCompleted)completionBlock;
 - (void)uploadNewProfilePicture:(UIImage *)picture
@@ -320,12 +286,11 @@ typedef void(^FetchCenterGetRequestGetDiscoverListCompleted)(NSNumber *currentPa
                 imageId:(NSString *)imageId 
              occupation:(NSString *)occupation
            personalInfo:(NSString *)info
-             completion:(FetchCenterGetRequestSetPersonalInfoCompleted)completionBlock;;
+             completion:(FetchCenterGetRequestCompleted)completionBlock;;
 
 #pragma mark - 工具
 
-typedef void(^FetchCenterPostRequestSendDeviceTokenCompleted)(void);
-- (void)sendDeviceToken:(NSString *)deviceToken completion:(FetchCenterPostRequestSendDeviceTokenCompleted)completionBlock;
+- (void)sendDeviceToken:(NSString *)deviceToken completion:(FetchCenterPostRequestCompleted)completionBlock;
 
 
 - (NSURL *)urlWithImageID:(NSString *)imageId size:(FetchCenterImageSize)size;
@@ -361,7 +326,7 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 
 - (void)getWechatUserInfoWithOpenID:(NSString *)openID
                               token:(NSString *)accessToken
-                         completion:(FetchCenterGetRequestGetWechatUserInfoCompleted)completionBlock;
+                         completion:(FetchCenterGetRequestCompleted)completionBlock;
 
 #pragma mark - 优图
 - (void)requestSignature:(FetchCenterGetRequestGetYoutuSignatureCompleted)completionBlock;
