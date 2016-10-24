@@ -1884,9 +1884,35 @@
 
 #pragma mark - 登陆相关
 
+- (void)loginWithUsername:(NSString *)username
+                 password:(NSString *)password
+               completion:(FetchCenterPostRequestCompleted)completionBlock{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PASSPORT,OTHERLOGIN];
+    NSDictionary *args = @{@"acc":username,
+                           @"pass":password};
+    [self postRequest:rqtStr
+            parameter:args
+     includeArguments:YES
+           completion:^(NSDictionary *responseJson) {
+
+               NSString *picUrl = [responseJson valueForKeyPath:@"data.headUrl"];
+               NSString *nickname = [responseJson valueForKeyPath:@"data.name"];
+               NSString *gender = [responseJson[@"sex"] integerValue] ? @"男" : @"女";
+               [User updateAttributeFromDictionary:@{PROFILE_PICTURE_ID:picUrl,
+                                                     USER_DISPLAY_NAME:nickname,
+                                                     GENDER:gender}];
+
+               if (completionBlock) {
+                   dispatch_main_async_safe(^{
+                       completionBlock();
+                   });
+               }
+           }];
+}
+
 - (void)registerWithUsername:(NSString *)userName
                     password:(NSString *)password
-                  completion:(FetchCenterPostRequestRegistrationCompleted)completionBlock{
+                  completion:(FetchCenterPostRequestCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PASSPORT,REGISTRATION];
     NSDictionary *args = @{@"acc":userName,
                            @"pass":password};

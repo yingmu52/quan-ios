@@ -10,8 +10,8 @@
 
 @interface OtherLoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextfield;
-
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextfield;
+@property (nonatomic,strong) UIButton *tickButton;
 @end
 
 @implementation OtherLoginViewController
@@ -31,12 +31,11 @@
     
     [self setUpBackButton:NO];
     //tick button
-    UIButton *tickButton = [Theme buttonWithImage:[Theme navTikButtonDefault]
-                                           target:self
-                                         selector:@selector(done)
-                                            frame:CGRectMake(0, 0, 25, 25)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:tickButton];
-    self.navigationItem.rightBarButtonItem.enabled = NO;
+    self.tickButton = [Theme buttonWithImage:[Theme navTikButtonDefault]
+                                      target:self
+                                    selector:@selector(done)
+                                       frame:CGRectMake(0, 0, 25, 25)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tickButton];
     
     //navigation title
     self.title = @"登陆";
@@ -44,6 +43,24 @@
 
 - (void)done{
     //login show main view when finish
+    if (!self.usernameTextfield.hasText || !self.passwordTextfield.hasText) {
+        return;
+    }else{
+        UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithFrame:self.tickButton.frame];
+        spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+        [spinner startAnimating];
+        [self.fetchCenter loginWithUsername:self.usernameTextfield.text password:self.passwordTextfield.text completion:^{
+            [AppDelegate showMainTabbar];
+        }];
+    }
+}
+
+- (void)didFailSendingRequestWithMessage:(NSString *)message{
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tickButton];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"失败" message:message preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end

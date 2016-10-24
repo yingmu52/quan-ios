@@ -44,6 +44,8 @@ typedef enum {
 - (void)didFailSendingRequestWithMessage:(NSString *)message;
 @end
 
+typedef void(^FetchCenterPostRequestCompleted)(void);
+
 /** 切换圈子完成*/
 typedef void(^FetchCenterGetRequestSwithCircleCompleted)(void);
 
@@ -342,10 +344,13 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
                       complete:(FetchCenterImageUploadCompletionBlock)completionBlock;
 #pragma mark - 登陆
 
-typedef void(^FetchCenterPostRequestRegistrationCompleted)(void);
+- (void)loginWithUsername:(NSString *)username
+                 password:(NSString *)password
+               completion:(FetchCenterPostRequestCompleted)completionBlock;
+
 - (void)registerWithUsername:(NSString *)userName
                     password:(NSString *)password
-                  completion:(FetchCenterPostRequestRegistrationCompleted)completionBlock;
+                  completion:(FetchCenterPostRequestCompleted)completionBlock;
 
 - (void)getUidandUkeyWithOpenId:(NSString *)openId
                     accessToken:(NSString *)token
