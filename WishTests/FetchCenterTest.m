@@ -291,34 +291,34 @@ static NSTimeInterval expectationTimeout = 30.0f;
 //    }
 //}
 
-- (void)testFollowAndUnfollowPlan{
-    NSUInteger numberOfCycles = 10;
-    for (NSInteger i = 0; i <= numberOfCycles; i++) {
-        XCTestExpectation *expectation = [self expectationWithDescription:@"关注与取消关注事件接口"];
-        [self.fetchCenter followPlan:self.testPlan completion:^{
-            [self.fetchCenter unFollowPlan:self.testPlan completion:^{
-                [expectation fulfill];
-            }];
-        }];
-        [self waitForExpectationsWithTimeout:expectationTimeout handler:^(NSError * _Nullable error) {
-            XCTAssertNil(error,@"关注与取消关注事件接口错误");
-        }];
-    }
-}
-
-- (void)testGetFollowingPlanList{
-    XCTestExpectation *expectation = [self expectationWithDescription:@"关注事件列表拉取接口"];
-
-    [self.fetchCenter getFollowingList:nil completion:^{
-        [expectation fulfill];
-    }];
-    [self waitForExpectationsWithTimeout:expectationTimeout
-                                 handler:^(NSError * _Nullable error) {
-                                     XCTAssertNil(error,@"关注事件列表拉取接口错误");
-                                 }];
-    
-}
-
+//- (void)testFollowAndUnfollowPlan{
+//    NSUInteger numberOfCycles = 10;
+//    for (NSInteger i = 0; i <= numberOfCycles; i++) {
+//        XCTestExpectation *expectation = [self expectationWithDescription:@"关注与取消关注事件接口"];
+//        [self.fetchCenter followPlan:self.testPlan completion:^{
+//            [self.fetchCenter unFollowPlan:self.testPlan completion:^{
+//                [expectation fulfill];
+//            }];
+//        }];
+//        [self waitForExpectationsWithTimeout:expectationTimeout handler:^(NSError * _Nullable error) {
+//            XCTAssertNil(error,@"关注与取消关注事件接口错误");
+//        }];
+//    }
+//}
+//
+//- (void)testGetFollowingPlanList{
+//    XCTestExpectation *expectation = [self expectationWithDescription:@"关注事件列表拉取接口"];
+//
+//    [self.fetchCenter getFollowingList:nil completion:^{
+//        [expectation fulfill];
+//    }];
+//    [self waitForExpectationsWithTimeout:expectationTimeout
+//                                 handler:^(NSError * _Nullable error) {
+//                                     XCTAssertNil(error,@"关注事件列表拉取接口错误");
+//                                 }];
+//    
+//}
+//
 - (void)testCheckNewVersion{
     
     for (NSInteger i = 0 ; i < 10; i ++) {
