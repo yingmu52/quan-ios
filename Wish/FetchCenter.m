@@ -36,10 +36,10 @@
 #define GET_FEED_COMMENTS @"splan_comment_getlist.php"
 #define DELETE_COMMENT @"splan_comment_delete.php"
 
-#define FOLLOW @"follow/"
-#define GET_FOLLOW_LIST @"splan_follow_get_feedslist.php"
-#define FOLLOW_PLAN @"splan_follow_do.php"
-#define UNFOLLOW_PLAN @"splan_follow_undo.php"
+//#define FOLLOW @"follow/"
+//#define GET_FOLLOW_LIST @"splan_follow_get_feedslist.php"
+//#define FOLLOW_PLAN @"splan_follow_do.php"
+//#define UNFOLLOW_PLAN @"splan_follow_undo.php"
 
 #define USER @"man/"
 #define GETUID @"splan_get_uid.php"
@@ -1101,100 +1101,6 @@
             }
         }];
     }
-}
-
-#pragma mark - 事件关注
-
-- (void)followPlan:(Plan *)plan completion:(FetchCenterGetRequestCompleted)completionBlock{
-    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FOLLOW,FOLLOW_PLAN];
-    [self getRequest:rqtStr
-           parameter:@{@"planId":plan.mUID}
-    includeArguments:YES
-          completion:^(NSDictionary *responseJson)
-    {
-        NSManagedObjectContext *workerContext = [self workerContext];
-        Plan *p = [Plan fetchID:plan.mUID inManagedObjectContext:workerContext];
-        
-        p.followCount = @(p.followCount.integerValue + 1);
-        p.isFollowed = @(YES);
-        [self.appDelegate saveContext:workerContext];
-        
-        NSLog(@"followed plan ID %@",plan.mUID);
-        if (completionBlock) {
-            dispatch_main_async_safe(^{
-                completionBlock();
-            });
-        }
-    }];
-}
-
-- (void)unFollowPlan:(Plan *)plan completion:(FetchCenterGetRequestCompleted)completionBlock{
-    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FOLLOW,UNFOLLOW_PLAN];
-    [self getRequest:rqtStr
-           parameter:@{@"planId":plan.mUID}
-    includeArguments:YES
-          completion:^(NSDictionary *responseJson)
-    {
-        NSManagedObjectContext *workerContext = [self workerContext];
-        Plan *p = [Plan fetchID:plan.mUID inManagedObjectContext:workerContext];
-
-        p.followCount = @(p.followCount.integerValue - 1);
-        p.isFollowed = @(NO);
-        
-        [self.appDelegate saveContext:workerContext];
-        
-        NSLog(@"unfollowed plan ID %@",plan.mUID);
-        if (completionBlock) {
-            dispatch_main_async_safe(^{
-                completionBlock();
-            });
-        }
-    }];
-}
-
-- (void)getFollowingList:(NSArray *)localList completion:(FetchCenterGetRequestCompleted)completionBlock{
-    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FOLLOW,GET_FOLLOW_LIST];
-    
-    [self getRequest:rqtStr parameter:@{@"id":[User uid]} includeArguments:YES completion:^(NSDictionary *responseJson) {
-        
-        NSManagedObjectContext *workerContext = [self workerContext];
-        
-        for (NSDictionary *planInfo in [responseJson valueForKeyPath:@"data.planList"]) {
-            NSDictionary *userInfo = [responseJson valueForKeyPath:[NSString stringWithFormat:@"data.manList.%@",planInfo[@"ownerId"]]];
-            Plan *plan = [Plan updatePlanFromServer:planInfo
-                                          ownerInfo:userInfo
-                               managedObjectContext:workerContext];
-            plan.isFollowed = @(YES);
-            
-            NSArray *feedsList = planInfo[@"feedsList"];
-            if (feedsList.count) {
-                //create all feeds
-                for (NSDictionary *feedInfo in feedsList) {
-                    [Feed updateFeedWithInfo:feedInfo
-                                     forPlan:plan
-                        managedObjectContext:workerContext];
-                }
-            }
-        }
-        
-        //同步
-        NSArray *serverList = [responseJson valueForKeyPath:@"data.planList.id"];
-        [self syncEntity:@"Plan"
-                  idName:@"mUID"
-               localList:localList
-              serverList:serverList
-               inContext:workerContext];
-
-        
-        [self.appDelegate saveContext:workerContext];
-        
-        if (completionBlock){
-            dispatch_main_async_safe(^{
-                completionBlock();
-            });
-        }
-        
-    }];
 }
 
 #pragma mark - 发现事件

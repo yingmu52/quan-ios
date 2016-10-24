@@ -12,7 +12,6 @@
 #import "NHAlignmentFlowLayout.h"
 #import "CirclePickerViewController.h"
 #import "ImagePicker.h"
-#import "PlansViewController.h"
 @interface PostViewController () <CirclePickerViewControllerDelegate,ImagePickerDelegate>
 @property (nonatomic,weak) IBOutlet UITextField *textField;
 @property (nonatomic,strong) UIButton *tikButton;

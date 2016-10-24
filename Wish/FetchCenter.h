@@ -256,14 +256,6 @@ typedef void(^FetchCenterPostRequestPlanAndFeedCreationCompleted)(NSString *plan
           planStatus:(PlanStatus)planStatus
           completion:(FetchCenterGetRequestCompleted)completionBlock;
 
-#pragma mark - 关注
-- (void)followPlan:(Plan *)plan completion:(FetchCenterGetRequestCompleted)completionBlock;
-- (void)unFollowPlan:(Plan *)plan completion:(FetchCenterGetRequestCompleted)completionBlock;;
-
-/** 拉取关注事件列表完成*/
-- (void)getFollowingList:(NSArray *)localList completion:(FetchCenterGetRequestCompleted)completionBlock;
-
-
 
 #pragma mark - 发现
 /** 发现页拉取列表完成*/
