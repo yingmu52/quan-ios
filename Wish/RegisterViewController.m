@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *indicationLabel;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextfield;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextfield1;
+@property (nonatomic,strong) UIButton *tickButton;
 @end
 
 @implementation RegisterViewController
@@ -33,26 +34,45 @@
     self.indicationLabel.hidden = YES;
     
     [self setUpBackButton:NO];
-    UIButton *tickButton = [Theme buttonWithImage:[Theme navTikButtonDefault]
-                                           target:self
-                                         selector:@selector(done)
-                                            frame:CGRectMake(0, 0, 25, 25)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:tickButton];
-    self.navigationItem.rightBarButtonItem.enabled = NO;
+    self.tickButton = [Theme buttonWithImage:[Theme navTikButtonDefault] target:self selector:@selector(done) frame:CGRectMake(0, 0, 25, 25)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tickButton];
 
     self.title = @"注册";
 }
 
 - (void)done{
+    [self.usernameTextfield resignFirstResponder];
+    [self.passwordTextfield resignFirstResponder];
+    [self.passwordTextfield1 resignFirstResponder];
+    
     if (![self.passwordTextfield.text isEqualToString:self.passwordTextfield1.text]) {
         self.indicationLabel.hidden = NO;
         return;
     }else{
         self.indicationLabel.hidden = YES;
         
+        UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithFrame:self.tickButton.frame];
+        spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+        [spinner startAnimating];
+        
         //register, show main view when finish
+        [self.fetchCenter registerWithUsername:self.usernameTextfield.text
+                                      password:self.passwordTextfield.text
+                                    completion:^
+        {
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tickButton];
+            [AppDelegate showMainTabbar];
+        }];
     }
     
+}
+
+- (void)didFailSendingRequestWithMessage:(NSString *)message{
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.tickButton];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"失败" message:message preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end

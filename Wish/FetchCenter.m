@@ -84,6 +84,9 @@
 #define SYSTEM @"sys/"
 #define CHECK_WHITELIST @"whitelist.php"
 
+#define PASSPORT @"passport/"
+#define REGISTRATION @"reg.php"
+#define OTHERLOGIN @"login.php"
 
 @interface FetchCenter ()
 @property (nonatomic,strong) NSString *baseUrl;
@@ -1811,6 +1814,14 @@
                         if ([self.delegate respondsToSelector:@selector(didFailSendingRequest)]){
                             [self.delegate didFailSendingRequest];
                         }
+                        
+                        dispatch_main_async_safe(^{
+                            if ([self.delegate respondsToSelector:@selector(didFailSendingRequestWithMessage:)]) {
+                                NSString *message = [responseJson valueForKeyPath:@"msg"];
+                                [self.delegate didFailSendingRequestWithMessage:message];
+                            }
+                        });
+                        
                     }
                 }
             }
@@ -1872,6 +1883,27 @@
 }
 
 #pragma mark - 登陆相关
+
+- (void)registerWithUsername:(NSString *)userName
+                    password:(NSString *)password
+                  completion:(FetchCenterPostRequestRegistrationCompleted)completionBlock{
+    NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PASSPORT,REGISTRATION];
+    NSDictionary *args = @{@"acc":userName,
+                           @"pass":password};
+    [self postRequest:rqtStr
+            parameter:args
+     includeArguments:YES
+           completion:^(NSDictionary *responseJson) {
+        NSString *uid = [responseJson valueForKeyPath:@"data.uid"];
+        NSString *ukey = [responseJson valueForKeyPath:@"data.ukey"];
+        [User updateAttributeFromDictionary:@{UID:uid,UKEY:ukey}];
+        if (completionBlock) {
+            dispatch_main_async_safe(^{
+                completionBlock();
+            });
+        }
+    }];
+}
 
 - (void)getWechatUserInfoWithOpenID:(NSString *)openID
                               token:(NSString *)accessToken

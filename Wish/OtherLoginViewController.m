@@ -26,7 +26,7 @@
     NSDictionary *attr = @{NSForegroundColorAttributeName:[UIColor lightGrayColor]};
     self.usernameTextfield.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"输入用户名" attributes:attr];
     self.passwordTextfield.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"登陆密码" attributes:attr];
-
+    
     
     
     [self setUpBackButton:NO];

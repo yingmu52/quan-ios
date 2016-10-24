@@ -41,6 +41,7 @@ typedef enum {
 - (void)didFailToReachInternet;
 /** GET请求的失败回调函数*/
 - (void)didFailSendingRequest;
+- (void)didFailSendingRequestWithMessage:(NSString *)message;
 @end
 
 /** 切换圈子完成*/
@@ -340,6 +341,12 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 - (void)postImageWithOperation:(UIImage *)image
                       complete:(FetchCenterImageUploadCompletionBlock)completionBlock;
 #pragma mark - 登陆
+
+typedef void(^FetchCenterPostRequestRegistrationCompleted)(void);
+- (void)registerWithUsername:(NSString *)userName
+                    password:(NSString *)password
+                  completion:(FetchCenterPostRequestRegistrationCompleted)completionBlock;
+
 - (void)getUidandUkeyWithOpenId:(NSString *)openId
                     accessToken:(NSString *)token
                      completion:(FetchCenterGetRequestGetUidAndUkeyCompleted)completionBlock;
