@@ -73,7 +73,6 @@
 		A066C3891BB7AE08003B51D5 /* MSSuperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A066C3881BB7AE08003B51D5 /* MSSuperViewController.m */; };
 		A066C38A1BB7AE08003B51D5 /* MSSuperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A066C3881BB7AE08003B51D5 /* MSSuperViewController.m */; };
 		A06CA10D1CA5BA92005D6171 /* CirclePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A06CA10C1CA5BA92005D6171 /* CirclePickerViewController.m */; };
-		A070FD731DBF45B500B99F69 /* PgySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A070FD721DBF45B500B99F69 /* PgySDK.framework */; };
 		A07115D11BA6B109002C1270 /* SZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A07115D01BA6B109002C1270 /* SZTextView.m */; };
 		A07115D21BA6B109002C1270 /* SZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A07115D01BA6B109002C1270 /* SZTextView.m */; };
 		A07544BF1DBD4589005FA908 /* OtherLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A07544BE1DBD4589005FA908 /* OtherLoginViewController.m */; };
@@ -427,7 +426,6 @@
 		A066C3881BB7AE08003B51D5 /* MSSuperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSSuperViewController.m; sourceTree = "<group>"; };
 		A06CA10B1CA5BA92005D6171 /* CirclePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CirclePickerViewController.h; sourceTree = "<group>"; };
 		A06CA10C1CA5BA92005D6171 /* CirclePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CirclePickerViewController.m; sourceTree = "<group>"; };
-		A070FD721DBF45B500B99F69 /* PgySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PgySDK.framework; sourceTree = "<group>"; };
 		A07115CF1BA6B109002C1270 /* SZTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZTextView.h; sourceTree = "<group>"; };
 		A07115D01BA6B109002C1270 /* SZTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZTextView.m; sourceTree = "<group>"; };
 		A07544BD1DBD4589005FA908 /* OtherLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherLoginViewController.h; sourceTree = "<group>"; };
@@ -727,7 +725,6 @@
 				A03579201DBEFE60006DBAAB /* libWeChatSDK.a in Frameworks */,
 				A0EF6A5B1DBB46A600FB01A5 /* JavaScriptCore.framework in Frameworks */,
 				A0EF6A591DBB46A000FB01A5 /* MessageUI.framework in Frameworks */,
-				A070FD731DBF45B500B99F69 /* PgySDK.framework in Frameworks */,
 				A0EF6A571DBB469B00FB01A5 /* libicucore.tbd in Frameworks */,
 				A03F2D031DA45C2300876373 /* libz.tbd in Frameworks */,
 				A03F2D011DA45C1D00876373 /* libxml2.tbd in Frameworks */,
@@ -1513,7 +1510,6 @@
 		F3D9C90B14CD662C469ECA13 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A070FD721DBF45B500B99F69 /* PgySDK.framework */,
 				A0EF6A5A1DBB46A600FB01A5 /* JavaScriptCore.framework */,
 				A0EF6A581DBB46A000FB01A5 /* MessageUI.framework */,
 				A0EF6A561DBB469B00FB01A5 /* libicucore.tbd */,

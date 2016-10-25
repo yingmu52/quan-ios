@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -537,12 +537,6 @@
                                     <constraint firstAttribute="height" constant="1" id="6d2-se-HB9"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eTN-13-YRh">
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <state key="normal" title="忘记密码">
-                                    <color key="titleColor" red="0.0" green="0.75686274509803919" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KRT-Mx-4yq">
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" title="注册">
@@ -561,15 +555,12 @@
                             <constraint firstItem="ARv-Wg-8Dr" firstAttribute="top" secondItem="F8d-4B-kI7" secondAttribute="bottom" id="7LH-CQ-m7N"/>
                             <constraint firstItem="F8d-4B-kI7" firstAttribute="height" secondItem="aWb-c5-enf" secondAttribute="height" id="B1E-OG-nX3"/>
                             <constraint firstItem="aWb-c5-enf" firstAttribute="leading" secondItem="kk7-bC-1A5" secondAttribute="leadingMargin" constant="16" id="F9H-rw-xqN"/>
-                            <constraint firstItem="KRT-Mx-4yq" firstAttribute="centerY" secondItem="eTN-13-YRh" secondAttribute="centerY" id="FAf-Rv-2Y7"/>
                             <constraint firstItem="ARv-Wg-8Dr" firstAttribute="leading" secondItem="F8d-4B-kI7" secondAttribute="leading" id="FiU-3a-cU2"/>
-                            <constraint firstItem="eTN-13-YRh" firstAttribute="leading" secondItem="KRT-Mx-4yq" secondAttribute="trailing" constant="8" id="PFS-9N-kLS"/>
-                            <constraint firstItem="eTN-13-YRh" firstAttribute="top" secondItem="F8d-4B-kI7" secondAttribute="bottom" constant="10" id="QVX-R1-rCM"/>
-                            <constraint firstItem="eTN-13-YRh" firstAttribute="trailing" secondItem="F8d-4B-kI7" secondAttribute="trailing" id="dlh-Ow-jlr"/>
+                            <constraint firstItem="KRT-Mx-4yq" firstAttribute="trailing" secondItem="ARv-Wg-8Dr" secondAttribute="trailing" id="Osz-ac-GaQ"/>
                             <constraint firstItem="ARv-Wg-8Dr" firstAttribute="trailing" secondItem="F8d-4B-kI7" secondAttribute="trailing" id="fTE-3K-vt3"/>
-                            <constraint firstItem="KRT-Mx-4yq" firstAttribute="top" secondItem="eTN-13-YRh" secondAttribute="top" id="iIK-Lb-jco"/>
                             <constraint firstItem="uZB-qD-pYT" firstAttribute="top" secondItem="aWb-c5-enf" secondAttribute="bottom" id="imk-xz-WqT"/>
                             <constraint firstItem="F8d-4B-kI7" firstAttribute="width" secondItem="aWb-c5-enf" secondAttribute="width" id="kQX-zK-Drf"/>
+                            <constraint firstItem="KRT-Mx-4yq" firstAttribute="top" secondItem="ARv-Wg-8Dr" secondAttribute="bottom" constant="9" id="rHR-2P-EPl"/>
                             <constraint firstItem="F8d-4B-kI7" firstAttribute="top" secondItem="aWb-c5-enf" secondAttribute="bottom" constant="30" id="sgd-W3-sLD"/>
                             <constraint firstItem="uZB-qD-pYT" firstAttribute="leading" secondItem="aWb-c5-enf" secondAttribute="leading" id="zPb-NL-CGd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="aWb-c5-enf" secondAttribute="trailing" constant="16" id="zvR-Cd-9MZ"/>
