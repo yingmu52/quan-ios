@@ -1798,18 +1798,24 @@
                completion:(FetchCenterPostRequestCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PASSPORT,OTHERLOGIN];
     NSDictionary *args = @{@"acc":username,
-                           @"pass":password};
+                           @"pass":password,
+                           @"version":[self buildVersion]};
     [self postRequest:rqtStr
             parameter:args
-     includeArguments:YES
+     includeArguments:NO
            completion:^(NSDictionary *responseJson) {
 
-               NSString *picUrl = [responseJson valueForKeyPath:@"data.headUrl"];
-               NSString *nickname = [responseJson valueForKeyPath:@"data.name"];
-               NSString *gender = [responseJson[@"sex"] integerValue] ? @"男" : @"女";
+               NSString *picUrl = [responseJson valueForKeyPath:@"data.maninfo.headUrl"];
+               NSString *nickname = [responseJson valueForKeyPath:@"data.maninfo.name"];
+               NSString *gender = [[responseJson valueForKeyPath:@"data.maninfo.gender"] integerValue] ? @"男" : @"女";
+               NSString *uid = [responseJson valueForKeyPath:@"data.uid"];
+               NSString *ukey = [responseJson valueForKeyPath:@"data.ukey"];
+
                [User updateAttributeFromDictionary:@{PROFILE_PICTURE_ID:picUrl,
                                                      USER_DISPLAY_NAME:nickname,
-                                                     GENDER:gender}];
+                                                     GENDER:gender,
+                                                     UKEY:ukey,
+                                                     UID:uid}];
 
                if (completionBlock) {
                    dispatch_main_async_safe(^{
@@ -1824,10 +1830,11 @@
                   completion:(FetchCenterPostRequestCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PASSPORT,REGISTRATION];
     NSDictionary *args = @{@"acc":userName,
-                           @"pass":password};
+                           @"pass":password,
+                           @"version":[self buildVersion]};
     [self postRequest:rqtStr
             parameter:args
-     includeArguments:YES
+     includeArguments:NO
            completion:^(NSDictionary *responseJson) {
         NSString *uid = [responseJson valueForKeyPath:@"data.uid"];
         NSString *ukey = [responseJson valueForKeyPath:@"data.ukey"];
