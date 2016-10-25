@@ -291,37 +291,37 @@
         
         
         //远程控制
-        UIAlertAction *callSpider;
-        
-        if ([[SPIntrospect sharedIntrospector] isOpen]) {
-            callSpider = [UIAlertAction actionWithTitle:@"马上停止可怕的通灵之术"
-                                                  style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
-                          {
-                              [[SPIntrospect sharedIntrospector] closeSpider];
-                          }];
-            
-        }else{
-            callSpider = [UIAlertAction actionWithTitle:@"通灵之术：召唤阎罗溢"
-                                                  style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
-                          {
-                              //启动Spider
-                              [self startSpider];
-                              
-                              //让用户复制Device Token
-                              NSString *deviceToken = [User deviceToken];
-                              NSString *message = [NSString stringWithFormat:@"把这串咒语念给阎罗溢听：%@",deviceToken];
-                              UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"阎罗溢【🦁】已从天而降"
-                                                                                             message:message
-                                                                                      preferredStyle:UIAlertControllerStyleAlert];
-                              [alert addAction:[UIAlertAction actionWithTitle:@"点击复制到粘帖板"
-                                                                        style:UIAlertActionStyleDefault
-                                                                      handler:^(UIAlertAction * _Nonnull action)
-                                                {
-                                                    [[UIPasteboard generalPasteboard] setString:deviceToken];
-                                                }]];
-                              [self presentViewController:alert animated:YES completion:nil];
-                          }];
-        }
+//        UIAlertAction *callSpider;
+//        
+//        if ([[SPIntrospect sharedIntrospector] isOpen]) {
+//            callSpider = [UIAlertAction actionWithTitle:@"马上停止可怕的通灵之术"
+//                                                  style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+//                          {
+//                              [[SPIntrospect sharedIntrospector] closeSpider];
+//                          }];
+//            
+//        }else{
+//            callSpider = [UIAlertAction actionWithTitle:@"通灵之术：召唤阎罗溢"
+//                                                  style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+//                          {
+//                              //启动Spider
+//                              [self startSpider];
+//                              
+//                              //让用户复制Device Token
+//                              NSString *deviceToken = [User deviceToken];
+//                              NSString *message = [NSString stringWithFormat:@"把这串咒语念给阎罗溢听：%@",deviceToken];
+//                              UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"阎罗溢【🦁】已从天而降"
+//                                                                                             message:message
+//                                                                                      preferredStyle:UIAlertControllerStyleAlert];
+//                              [alert addAction:[UIAlertAction actionWithTitle:@"点击复制到粘帖板"
+//                                                                        style:UIAlertActionStyleDefault
+//                                                                      handler:^(UIAlertAction * _Nonnull action)
+//                                                {
+//                                                    [[UIPasteboard generalPasteboard] setString:deviceToken];
+//                                                }]];
+//                              [self presentViewController:alert animated:YES completion:nil];
+//                          }];
+//        }
         
         
         [actionSheet addAction:testEnv];
@@ -330,7 +330,7 @@
         [actionSheet addAction:getUserInfo];
         [actionSheet addAction:getRequestLog];
         [actionSheet addAction:managePlan];
-        [actionSheet addAction:callSpider];
+//        [actionSheet addAction:callSpider];
         
         [actionSheet addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
         [self presentViewController:actionSheet animated:YES completion:nil];
@@ -338,11 +338,11 @@
 }
 
 
-
-- (void)startSpider{
-    [[SPIntrospect sharedIntrospector] setSpiderId:[User deviceToken]];
-    [[SPIntrospect sharedIntrospector] openSpider];
-}
+//
+//- (void)startSpider{
+//    [[SPIntrospect sharedIntrospector] setSpiderId:[User deviceToken]];
+//    [[SPIntrospect sharedIntrospector] openSpider];
+//}
 
 @end
 

@@ -17,7 +17,7 @@
 #import "WXApiManager.h"
 //#import <PgySDK/PgyManager.h>
 #import <TencentOpenAPI/QQApiInterface.h>
-#import <spider/SPIntrospect.h>
+//#import <spider/SPIntrospect.h>
 #define NSLog if(1) NSLog
 
 #define YOUTU_APP_ID @"10003267"

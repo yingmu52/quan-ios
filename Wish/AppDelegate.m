@@ -146,9 +146,9 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     //Close Spider If Necessary
-    if ([[SPIntrospect sharedIntrospector] isOpen]) {
-        [[SPIntrospect sharedIntrospector] closeSpider];
-    }
+//    if ([[SPIntrospect sharedIntrospector] isOpen]) {
+//        [[SPIntrospect sharedIntrospector] closeSpider];
+//    }
 }
 
 #pragma mark - Tencent & Wechat
