@@ -12,7 +12,7 @@
 #import "User.h"
 #import "LoginDetailViewController.h"
 #define QQAppKey @"ByYhJYTkXu0721fH"
-#import "SMSSDKUI.h"
+//#import "SMSSDKUI.h"
 @interface LoginViewController () <TencentSessionDelegate,FetchCenterDelegate,WXApiManagerDelegate>
 @property (nonatomic,strong) TencentOAuth *tencentOAuth;
 @property (nonatomic,strong) FetchCenter *fetchCenter;

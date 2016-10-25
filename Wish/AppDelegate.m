@@ -18,7 +18,7 @@
 #import "MessageListViewController.h"
 //#import <PgySDK/PgyManager.h>
 #import "MSRocketStation.h"
-#import <SMS_SDK/SMSSDK.h>
+//#import <SMS_SDK/SMSSDK.h>
 @interface AppDelegate () <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,weak) LoginViewController *loginVC;

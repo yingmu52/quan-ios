@@ -238,7 +238,6 @@ static NSTimeInterval expectationTimeout = 30.0f;
 //}
 //
 //- (void)testCreateAndDeletePlan{
-#warning TBD
 //    NSUInteger numberOfCycles = 10;
 //    Plan *plan;
 //    for (NSInteger i = 0; i <= numberOfCycles; i++) {
@@ -264,7 +263,6 @@ static NSTimeInterval expectationTimeout = 30.0f;
 
 
 //- (void)testCreateAndDeleteFeed{
-#warning TBD
 
 //
 //    NSUInteger numberOfCycles = 10;
