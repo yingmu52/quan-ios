@@ -56,6 +56,9 @@
 
 - (void)setupViews
 {
+    NSDictionary *attr = @{NSForegroundColorAttributeName:[UIColor lightGrayColor]};
+    self.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@" 你想说件什么事儿？" attributes:attr];
+
     CGRect frame = CGRectMake(0,0, 25,25);
     UIButton *backBtn = [Theme buttonWithImage:[Theme navBackButtonDefault]
                                         target:self.navigationController
@@ -84,9 +87,9 @@
         UIImage *bg = flag ? [Theme navTikButtonDefault] : [Theme navTikButtonDisable];
         [self.tikButton setImage:bg forState:UIControlStateNormal];
         
-        //keep maximum 50 characters
-        NSInteger maxCount = 50;
-        if (self.textField.text.length > maxCount) [self.textField setText:[self.textField.text substringToIndex:maxCount]];
+//        //keep maximum 50 characters
+//        NSInteger maxCount = 50;
+//        if (self.textField.text.length > maxCount) [self.textField setText:[self.textField.text substringToIndex:maxCount]];
     }
 }
 

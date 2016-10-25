@@ -18,12 +18,10 @@
 #import "SZTextView.h"
 
 
-static NSUInteger maxWordCount = 1000;
 static NSUInteger distance = 10;
 
 @interface PostFeedViewController () <UICollectionViewDataSource,UICollectionViewDelegate,ImagePickerDelegate,ImagePreviewControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic,strong) UIButton *tikButton;
-@property (nonatomic,weak) IBOutlet UILabel *wordCountLabel;
 
 @property (nonatomic,strong) ImagePicker *imagePicker;
 @property (weak, nonatomic) IBOutlet SZTextView *textView;
@@ -78,7 +76,6 @@ static NSUInteger distance = 10;
     if (self.plan) {
         self.navigationItem.title = self.plan.mTitle;
     }
-    self.wordCountLabel.text = [NSString stringWithFormat:@"0/%@ 字",@(maxWordCount)];
     
     
     self.collectionView.layer.borderColor = [SystemUtil colorFromHexString:@"#DFE1E0"].CGColor;
@@ -193,33 +190,33 @@ static NSUInteger distance = 10;
         UIImage *bg = flag ? [Theme navTikButtonDefault] : [Theme navTikButtonDisable];
         [self.tikButton setImage:bg forState:UIControlStateNormal];
         
-        //limit text length
-        if (textView.text.length > maxWordCount - distance ) { //快到时字数限制的时候显示提示
-            
-            if (textView.text.length > maxWordCount) {
-                
-                //correct Range location
-                NSUInteger curserLocation = textView.selectedRange.location;
-                
-                //删除超出的字数, 光标位置会改变
-                NSUInteger exceedCount = textView.text.length - maxWordCount;
-                NSRange range = NSMakeRange(textView.selectedRange.location - exceedCount, exceedCount);
-                textView.text = [textView.text stringByReplacingCharactersInRange:range withString:@""];
-                
-                //恢复光标正确的位置
-                textView.selectedRange = NSMakeRange(curserLocation - exceedCount, 0);;
-                
-            }
-            
-            //en-visible wordCountLabel
-            self.wordCountLabel.hidden = NO;
-        }
-        
-        if (!self.wordCountLabel.isHidden){
-            //update word count label
-            self.wordCountLabel.text = [NSString stringWithFormat:@"%@/%@",@(textView.text.length),@(maxWordCount)];
-
-        }
+//        //limit text length
+//        if (textView.text.length > maxWordCount - distance ) { //快到时字数限制的时候显示提示
+//            
+//            if (textView.text.length > maxWordCount) {
+//                
+//                //correct Range location
+//                NSUInteger curserLocation = textView.selectedRange.location;
+//                
+//                //删除超出的字数, 光标位置会改变
+//                NSUInteger exceedCount = textView.text.length - maxWordCount;
+//                NSRange range = NSMakeRange(textView.selectedRange.location - exceedCount, exceedCount);
+//                textView.text = [textView.text stringByReplacingCharactersInRange:range withString:@""];
+//                
+//                //恢复光标正确的位置
+//                textView.selectedRange = NSMakeRange(curserLocation - exceedCount, 0);;
+//                
+//            }
+//            
+//            //en-visible wordCountLabel
+//            self.wordCountLabel.hidden = NO;
+//        }
+//        
+//        if (!self.wordCountLabel.isHidden){
+//            //update word count label
+//            self.wordCountLabel.text = [NSString stringWithFormat:@"%@/%@",@(textView.text.length),@(maxWordCount)];
+//
+//        }
         
         //追着光标的位置展示
         [textView scrollRangeToVisible:textView.selectedRange];
@@ -227,11 +224,11 @@ static NSUInteger distance = 10;
     
 }
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
-{
-    return textView.text.length + (text.length - range.length) <= maxWordCount;
-}
-
+//- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+//{
+//    return textView.text.length + (text.length - range.length) <= maxWordCount;
+//}
+//
 
 - (void)backspaceDidOccurInEmptyField{
     //this method prevents crash when user keep hitting back space
