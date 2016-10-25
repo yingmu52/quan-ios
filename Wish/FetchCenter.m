@@ -261,16 +261,11 @@
          NSNumber *currentPage = @(1);
          NSNumber *totalPage = @(1);
 
+         NSArray *topMemberIDs = [responseJson valueForKeyPath:@"data.memberlist"];
+
          //设置圈子信息
          NSDictionary *circleInfo = [responseJson valueForKeyPath:@"data.quanInfo"];
          
-         //设置活跃成员信息
-         NSArray *topMemberIDs = [responseJson valueForKeyPath:@"data.memberlist"];
-         for (NSString *mId in topMemberIDs) {
-             NSString *k = [NSString stringWithFormat:@"data.manList.%@",mId];
-             NSDictionary *ownerInfo = [responseJson valueForKeyPath:k];
-             [Owner updateOwnerWithInfo:ownerInfo managedObjectContext:workerContext];
-         }
          
          if (planList.count > 0 && manList.count > 0) {
              
@@ -298,6 +293,14 @@
                         localList:localList
                        serverList:serverList
                         inContext:workerContext];
+                 
+                 
+                 //设置活跃成员信息, 这里最后处理可以确保top成员的顺序
+                 for (NSString *mId in topMemberIDs) {
+                     NSString *k = [NSString stringWithFormat:@"data.manList.%@",mId];
+                     NSDictionary *ownerInfo = [responseJson valueForKeyPath:k];
+                     [Owner updateOwnerWithInfo:ownerInfo managedObjectContext:workerContext];
+                 }
              }
              
              
