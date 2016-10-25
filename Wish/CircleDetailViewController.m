@@ -12,7 +12,8 @@
 #import "PostViewController.h"
 #import "CircleEditViewController.h"
 #import "MemberListViewController.h"
-#import "InvitationViewController.h"
+//#import "InvitationViewController.h"
+#import "MSWXShareManager.h"
 
 @interface CircleDetailViewController () <UICollectionViewDelegateFlowLayout,MSSuperViewControllerDelegate>
 @property (nonatomic,weak) IBOutlet UIImageView *circleImageView;
@@ -221,7 +222,12 @@
                                                        completion:^(NSString *urlString)
                   {
                       if (urlString.length > 0) {
-                          [self performSegueWithIdentifier:@"showInvitationView" sender:urlString];
+                          [MSWXShareManager share:@"邀请好友"
+                                      description:[NSString stringWithFormat:@"%@ 邀请你加入圈子",[User userDisplayName]]
+                                         imageURL:[self.fetchCenter urlWithImageID:self.circle.mCoverImageId
+                                                                              size:FetchCenterImageSize400]
+                                            h5url:urlString];
+//                          [self performSegueWithIdentifier:@"showInvitationView" sender:urlString];
                       }
                       
                   }];
@@ -340,16 +346,29 @@
         mlc.circle = self.circle;
     }
     
-    if ([segue.identifier isEqualToString:@"showInvitationView"]) {
-        InvitationViewController *ivc = segue.destinationViewController;
-        ivc.titleText = @"邀请好友";
-        ivc.sharedContentTitle = [NSString stringWithFormat:@"%@ 邀请你加入圈子",[User userDisplayName]];
-        ivc.sharedContentDescription = [NSString stringWithFormat:@"【%@】\n%@",self.circle.mTitle,self.circle.mDescription];
-        if (self.circle.mCoverImageId.length > 0) {
-            ivc.imageUrl = [self.fetchCenter urlWithImageID:self.circle.mCoverImageId
-                                                       size:FetchCenterImageSize400];
-        }
-        ivc.h5Url = sender;
-    }
+//    if ([segue.identifier isEqualToString:@"showInvitationView"]) {
+//        InvitationViewController *ivc = segue.destinationViewController;
+//        ivc.titleText = @"邀请好友";
+//        ivc.sharedContentTitle = [NSString stringWithFormat:@"%@ 邀请你加入圈子",[User userDisplayName]];
+//        ivc.sharedContentDescription = [NSString stringWithFormat:@"【%@】\n%@",self.circle.mTitle,self.circle.mDescription];
+//        if (self.circle.mCoverImageId.length > 0) {
+//            ivc.imageUrl = [self.fetchCenter urlWithImageID:self.circle.mCoverImageId
+//                                                       size:FetchCenterImageSize400];
+//        }
+//        ivc.h5Url = sender;
+//    }
 }
+
 @end
+
+
+
+
+
+
+
+
+
+
+
+

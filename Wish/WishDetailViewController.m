@@ -8,8 +8,9 @@
 
 #import "WishDetailViewController.h"
 #import "UIImageView+ImageCache.h"
-#import "InvitationViewController.h"
+//#import "InvitationViewController.h"
 #import "CircleDetailViewController.h"
+#import "MSWXShareManager.h"
 @interface WishDetailViewController () <HeaderViewDelegate,UIGestureRecognizerDelegate,UITextViewDelegate>
 @property (nonatomic,strong) NSDictionary *textAttributes;
 @property (nonatomic,strong) NSNumber *currentPage;
@@ -84,13 +85,14 @@
                                                             description:self.plan.mDescription
                                                              completion:^
                                             {
-                                                [self performSegueWithIdentifier:@"showInvitationView" sender:nil];
+                                                [self sharePlan];
                                             }];
                                        }]];
                      [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
                      [self presentViewController:alert animated:YES completion:nil];
                  }else{
-                     [self performSegueWithIdentifier:@"showInvitationView" sender:nil];
+                     [self sharePlan];
+//                     [self performSegueWithIdentifier:@"showInvitationView" sender:nil];
                  }
              }];
             [_moreActionSheet addAction:shareOption];
@@ -116,6 +118,13 @@
                      completion:nil];
 }
 
+- (void)sharePlan{
+    [MSWXShareManager share:self.plan.mTitle
+                description:self.plan.mDescription ? self.plan.mDescription : @""
+                   imageURL:[self.fetchCenter urlWithImageID:self.plan.mCoverImageId
+                                                        size:FetchCenterImageSize50]
+                      h5url:self.plan.shareUrl];
+}
 
 
 #pragma mark setter and getters
@@ -404,15 +413,16 @@
         vc.feed = feed;
     }
     
-    if ([segue.identifier isEqualToString:@"showInvitationView"]) {
-        InvitationViewController *ivc = segue.destinationViewController;
-        ivc.titleText = @"分享事件给好友";
-        ivc.imageUrl = [self.fetchCenter urlWithImageID:self.plan.mCoverImageId size:FetchCenterImageSize50];
-        ivc.sharedContentTitle = self.plan.mTitle;
-        ivc.sharedContentDescription = self.plan.mDescription ? self.plan.mDescription : @"";
-        ivc.h5Url = self.plan.shareUrl;
-        NSAssert(self.plan.isPrivate.boolValue != (self.plan.shareUrl.length > 0), @"私密事件不能有url，反之亦然");
-    }
+//    
+//    if ([segue.identifier isEqualToString:@"showInvitationView"]) {
+//        InvitationViewController *ivc = segue.destinationViewController;
+//        ivc.titleText = @"分享事件给好友";
+//        ivc.imageUrl = [self.fetchCenter urlWithImageID:self.plan.mCoverImageId size:FetchCenterImageSize50];
+//        ivc.sharedContentTitle = self.plan.mTitle;
+//        ivc.sharedContentDescription = self.plan.mDescription ? self.plan.mDescription : @"";
+//        ivc.h5Url = self.plan.shareUrl;
+//        NSAssert(self.plan.isPrivate.boolValue != (self.plan.shareUrl.length > 0), @"私密事件不能有url，反之亦然");
+//    }
     
 }
 

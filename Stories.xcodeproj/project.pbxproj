@@ -33,6 +33,7 @@
 		A01F88841DA63D8400056FD8 /* TaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A01F88831DA63D8400056FD8 /* TaskViewController.m */; };
 		A027715C1D880BB700442996 /* MSFeatherImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A027715B1D880BB700442996 /* MSFeatherImageView.m */; };
 		A02771621D8852BF00442996 /* MSCircularGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A02771611D8852BF00442996 /* MSCircularGradientLayer.m */; };
+		A02E3B281DBF07BF00BEB297 /* MSWXShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A02E3B271DBF07BF00BEB297 /* MSWXShareManager.m */; };
 		A03010521BABC6AA0041E2CF /* QBImagePicker.strings in Resources */ = {isa = PBXBuildFile; fileRef = A03010371BABC6AA0041E2CF /* QBImagePicker.strings */; };
 		A03010531BABC6AA0041E2CF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A030103B1BABC6AA0041E2CF /* Info.plist */; };
 		A03010541BABC6AA0041E2CF /* QBAlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A030103E1BABC6AA0041E2CF /* QBAlbumCell.m */; };
@@ -365,6 +366,8 @@
 		A027715B1D880BB700442996 /* MSFeatherImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSFeatherImageView.m; sourceTree = "<group>"; };
 		A02771601D8852BF00442996 /* MSCircularGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSCircularGradientLayer.h; sourceTree = "<group>"; };
 		A02771611D8852BF00442996 /* MSCircularGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSCircularGradientLayer.m; sourceTree = "<group>"; };
+		A02E3B261DBF07BF00BEB297 /* MSWXShareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSWXShareManager.h; sourceTree = "<group>"; };
+		A02E3B271DBF07BF00BEB297 /* MSWXShareManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSWXShareManager.m; sourceTree = "<group>"; };
 		A03010391BABC6AA0041E2CF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/QBImagePicker.strings; sourceTree = "<group>"; };
 		A030103B1BABC6AA0041E2CF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A030103D1BABC6AA0041E2CF /* QBAlbumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBAlbumCell.h; sourceTree = "<group>"; };
@@ -1288,6 +1291,8 @@
 				AE01723E1A65CD8E0014266F /* main.m */,
 				A07C21211C8163BF0084976A /* ButtonWithPathedImage.h */,
 				A07C21221C8163BF0084976A /* ButtonWithPathedImage.m */,
+				A02E3B261DBF07BF00BEB297 /* MSWXShareManager.h */,
+				A02E3B271DBF07BF00BEB297 /* MSWXShareManager.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1777,6 +1782,7 @@
 				AE9A3AEB1A9B1DB000F0588F /* AchieveVCData.m in Sources */,
 				AEE4A6D41A96AFCF00ABF946 /* TriangleCutoutView.m in Sources */,
 				AED5BC671ABEA7EB00EFF398 /* ProfileViewController.m in Sources */,
+				A02E3B281DBF07BF00BEB297 /* MSWXShareManager.m in Sources */,
 				A0D102291B84EB6A006B0E4E /* UIButton+WebCache.m in Sources */,
 				A0FC1EED1D8A8073005A4A17 /* PlanManagementViewController.m in Sources */,
 				AEB003EF1B7FF7190056EA80 /* MainTabBarController.m in Sources */,
