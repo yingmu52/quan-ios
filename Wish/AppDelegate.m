@@ -16,7 +16,7 @@
 #import "CWStatusBarNotification.h"
 #import "MainTabBarController.h"
 #import "MessageListViewController.h"
-//#import <PgySDK/PgyManager.h>
+#import <PgySDK/PgyManager.h>
 #import "MSRocketStation.h"
 //#import <SMS_SDK/SMSSDK.h>
 @interface AppDelegate () <FetchCenterDelegate>
@@ -42,9 +42,9 @@
     
     
     //薄公英启动基本SDK
-//    PgyManager *pgYmanager = [PgyManager sharedPgyManager];
-//    [pgYmanager startManagerWithAppId:PGY_APPID];
-//    [pgYmanager setShakingThreshold:4.0];
+    PgyManager *pgYmanager = [PgyManager sharedPgyManager];
+    [pgYmanager startManagerWithAppId:PGY_APPID];
+    [pgYmanager setShakingThreshold:10.0];
 
     
     //如果用户未登陆，跳转到登陆页
