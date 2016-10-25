@@ -72,6 +72,7 @@
                                    handler:^(UIAlertAction * _Nonnull action)
              {
                  if (self.plan.isPrivate.boolValue) {
+                     self.hud = nil;
                      UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"私密的事件要公开才能分享哦"
                                                                                     message:@"是否确定修改为公开事件"
                                                                              preferredStyle:UIAlertControllerStyleAlert];
@@ -85,6 +86,9 @@
                                                             description:self.plan.mDescription
                                                              completion:^
                                             {
+
+                                                [self.headerView.lockButton setImage:[Theme wishDetailcircleLockButtonUnLocked]
+                                                                            forState:UIControlStateNormal];
                                                 [self sharePlan];
                                             }];
                                        }]];

@@ -218,6 +218,8 @@
                                      style:UIAlertActionStyleDefault
                                    handler:^(UIAlertAction * _Nonnull action)
              {
+                 self.hud.label.text = @"正在获取邀请链接...";
+                 [self.hud showAnimated:YES];
                  [self.fetchCenter getH5invitationUrlWithCircleId:self.circle.mUID
                                                        completion:^(NSString *urlString)
                   {
@@ -229,7 +231,8 @@
                                             h5url:urlString];
 //                          [self performSegueWithIdentifier:@"showInvitationView" sender:urlString];
                       }
-                      
+                      [self.hud hideAnimated:YES];
+                      self.hud = nil;
                   }];
              }];
             
