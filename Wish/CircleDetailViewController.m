@@ -135,7 +135,7 @@
     if (!_tableFetchRequest) {
         _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
         _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"circle.mUID == %@",self.circle.mUID];
-        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mLastReadTime" ascending:NO]];
+        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mLastReadTime" ascending:YES]];
     }
     return _tableFetchRequest;
 }
