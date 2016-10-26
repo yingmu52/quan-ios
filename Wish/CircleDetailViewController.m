@@ -125,6 +125,7 @@
             [self.collectionFetchedRC performFetch:&error];
             if (!error) {
                 [self.collectionView reloadData];
+                self.collectionFetchedRC.delegate = nil;
             }
         }
     }];
