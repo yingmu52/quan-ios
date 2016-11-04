@@ -989,7 +989,7 @@
 - (void)createFeed:(NSString *)feedTitle
             planId:(NSString *)planId
    fetchedImageIds:(NSArray *)imageIds
-        completion:(FetchCenterGetRequestUploadFeedCompleted)completionBlock{
+        completion:(FetchCenterPostRequestUploadFeedCompleted)completionBlock{
     if (feedTitle && planId && imageIds.count > 0) {
         
         //设置请求参数
@@ -1000,29 +1000,29 @@
                                @"picurls":[imageIds componentsJoinedByString:@","],
                                @"feedsType":@(imageIds.count > 1 ? FeedTypeMultiplePicture : FeedTypeSinglePicture)};
         
-        [self getRequest:rqtStr
-               parameter:args
-        includeArguments:YES
-              completion:^(NSDictionary *responseJson) {
-                  NSString *fetchedFeedID = [responseJson valueForKeyPath:@"data.id"];
-                  NSManagedObjectContext *workerContext = [self workerContext];
-                  
-                  [Feed createFeed:fetchedFeedID
-                             title:feedTitle
-                            images:imageIds
-                            planID:planId
-            inManagedObjectContext:workerContext];
-
-                  [self.appDelegate saveContext:workerContext];
-                  
-                  if (completionBlock) {
-                      dispatch_main_async_safe(^{
-                          NSLog(@"upload feed successed, ID: %@",fetchedFeedID);
-                          completionBlock(fetchedFeedID);
-                      });
-                  }
-              }];
-
+        [self postRequest:rqtStr
+                parameter:args
+         includeArguments:YES
+               completion:^(NSDictionary *responseJson) {
+                   NSString *fetchedFeedID = [responseJson valueForKeyPath:@"data.id"];
+                   NSManagedObjectContext *workerContext = [self workerContext];
+                   
+                   [Feed createFeed:fetchedFeedID
+                              title:feedTitle
+                             images:imageIds
+                             planID:planId
+             inManagedObjectContext:workerContext];
+                   
+                   [self.appDelegate saveContext:workerContext];
+                   
+                   if (completionBlock) {
+                       dispatch_main_async_safe(^{
+                           NSLog(@"upload feed successed, ID: %@",fetchedFeedID);
+                           completionBlock(fetchedFeedID);
+                       });
+                   }    
+        }];
+        
     }
 }
 

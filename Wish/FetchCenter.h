@@ -186,11 +186,11 @@ typedef void(^FetchCenterPostRequestUploadImagesReceivedPercentage)(CGFloat prog
           completion:(FetchCenterPostRequestUploadImagesCompleted)completionBlock;
 
 /** 上传Feed完成*/
-typedef void(^FetchCenterGetRequestUploadFeedCompleted)(NSString *feedId);
+typedef void(^FetchCenterPostRequestUploadFeedCompleted)(NSString *feedId);
 - (void)createFeed:(NSString *)feedTitle
             planId:(NSString *)planId
    fetchedImageIds:(NSArray *)imageIds
-        completion:(FetchCenterGetRequestUploadFeedCompleted)completionBlock;
+        completion:(FetchCenterPostRequestUploadFeedCompleted)completionBlock;
 
 
 
