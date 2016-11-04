@@ -83,6 +83,7 @@
 
 #define SYSTEM @"sys/"
 #define CHECK_WHITELIST @"whitelist.php"
+#define ERROR_LOG_REPORT @"err_logs.php"
 
 #define PASSPORT @"passport/"
 #define REGISTRATION @"reg.php"
@@ -1440,13 +1441,8 @@
 
 #pragma mark - 缓存请求日志
 
-+ (NSString *)requestLogFilePath{ //this file gets remove in applicationWillTerminate Appdelegate
++ (NSString *)requestLogFilePath{
     NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingString:@"httpRequestLog.txt"];
-    
-    NSData *data = [NSData dataWithContentsOfFile:path]; //remove from path if file is too big
-    if (data.length > 1024*1024 ){ //delete the file when is over 1MB
-        [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
-    }
     return path;
 }
 
@@ -1966,6 +1962,34 @@
             UIViewController *vc = (UIViewController *)self.delegate;
             [vc presentViewController:alert animated:YES completion:nil];
         }
+    }
+    
+}
+
+- (void)reportErrorLogWithCompletion:(FetchCenterPostRequestCompleted)completionBlock{
+    
+    NSString *logPath = [FetchCenter requestLogFilePath];
+    NSString *log = [NSString stringWithContentsOfFile:logPath
+                                              encoding:NSUTF8StringEncoding
+                                                 error:nil];
+    if (log.length > 0) {
+        NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,SYSTEM,ERROR_LOG_REPORT];
+        [self postRequest:rqtStr
+                parameter:@{@"log_info":log}
+         includeArguments:YES
+               completion:^(NSDictionary *responseJson)
+         {
+             NSLog(@"Upload ERROR Log Succeed");
+             if ([[NSFileManager defaultManager] removeItemAtPath:logPath error:nil]){
+                 NSLog(@"Removed ERROR Log!");
+             }
+             
+             if (completionBlock) {
+                 dispatch_main_async_safe(^{
+                     completionBlock();
+                 });
+             }
+         }];
     }
     
 }

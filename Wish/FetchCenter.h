@@ -281,6 +281,8 @@ typedef void(^FetchCenterGetRequestGetDiscoverListCompleted)(NSNumber *currentPa
              completion:(FetchCenterGetRequestCompleted)completionBlock;;
 
 #pragma mark - 工具
+- (void)reportErrorLogWithCompletion:(FetchCenterPostRequestCompleted)completionBlock;
+
 
 - (void)sendDeviceToken:(NSString *)deviceToken completion:(FetchCenterPostRequestCompleted)completionBlock;
 

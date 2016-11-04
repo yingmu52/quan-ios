@@ -568,6 +568,19 @@ static NSTimeInterval expectationTimeout = 30.0f;
 //                                 }];
 //
 //}
+
+- (void)testUploadLog{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"上传log"];
+    [self.fetchCenter reportErrorLogWithCompletion:^{
+        [expectation fulfill];
+
+    }];
+    [self waitForExpectationsWithTimeout:expectationTimeout
+                                 handler:^(NSError * _Nullable error) {
+                                     XCTAssertNil(error,@"上传log失败");
+                                 }];
+
+}
 @end
 
 
