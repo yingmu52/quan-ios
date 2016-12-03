@@ -136,7 +136,7 @@
     if (!_tableFetchRequest) {
         _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
         _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"circle.mUID == %@",self.circle.mUID];
-        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mLastReadTime" ascending:YES]];
+        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mUpdateTime" ascending:YES]];
     }
     return _tableFetchRequest;
 }
@@ -162,7 +162,7 @@
     cell.ms_textView.text = plan.mDescription;
     return cell;
 }
-
+ 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 155.0f;
 }
