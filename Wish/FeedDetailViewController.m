@@ -132,7 +132,7 @@
 - (void)showPopupView{
     if (self.feed){
         NSString *title = self.feed.plan.feeds.count == 1 ?
-        @"这是最后一条记录啦！\n这件事儿也会被删除哦~" : @"真的要删除这条记录吗？";
+        @"这是最后一条记录啦！\n这件话题夹也会被删除哦~" : @"真的要删除这条记录吗？";
         
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
                                                                        message:nil

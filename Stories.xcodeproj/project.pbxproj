@@ -327,7 +327,6 @@
 /* Begin PBXFileReference section */
 		A000554E1D9B108600658E6B /* CircleDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleDetailViewController.h; sourceTree = "<group>"; };
 		A000554F1D9B108600658E6B /* CircleDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleDetailViewController.m; sourceTree = "<group>"; };
-		A01431A01D713B530099258C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		A01431B01D715E870099258C /* DACircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DACircularProgressView.h; sourceTree = "<group>"; };
 		A01431B11D715E870099258C /* DACircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DACircularProgressView.m; sourceTree = "<group>"; };
 		A01431B21D715E870099258C /* DALabeledCircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DALabeledCircularProgressView.h; sourceTree = "<group>"; };
@@ -1989,7 +1988,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				AEF7F29F1A6875360022410B /* Base */,
-				A01431A01D713B530099258C /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

@@ -73,7 +73,7 @@
     //事件描述
     self.textView.delegate = self;
     self.textView.textContainerInset = UIEdgeInsetsZero; //去掉textview四周的空白
-    [self.textView setPlaceholder:@"添加描述能让别人更了解这件事儿哦~"];
+    [self.textView setPlaceholder:@"添加描述能让别人更了解这件话题夹哦~"];
     self.textView.text = self.plan.mDescription;
     self.wordCountLabel.text = [NSString stringWithFormat:@"%@/75",@(self.plan.mDescription.length)];
     
@@ -136,7 +136,7 @@
 
 - (IBAction)giveUp:(UIButton *)sender{
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"删除后的事件不能恢复哦！" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"删除后的话题夹不能恢复哦！" message:nil preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定"
                                                       style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * _Nonnull action)

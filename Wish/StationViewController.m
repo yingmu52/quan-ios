@@ -80,7 +80,7 @@
             if (self.selection == StationViewSelectionFinish){
                 title = @"确定归档？";
             }else if (self.selection == StationViewSelectionDelete){
-                title = @"删除的事件不恢复哦！";
+                title = @"删除的话题夹不恢复哦！";
             }
             
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:title

@@ -33,7 +33,7 @@
         [self.circleButton setTitle:[NSString stringWithFormat:@"所属圈子：%@",plan.circle.mTitle]
                            forState:UIControlStateNormal];
     }else{
-        [self.circleButton setTitle:@"** 该事件暂时没有所属圈子 **"
+        [self.circleButton setTitle:@"** 该话题夹暂时没有所属圈子 **"
                            forState:UIControlStateNormal];
     }
 //    self.userNameLabel.text = [NSString stringWithFormat:@"by %@",plan.owner.ownerName];

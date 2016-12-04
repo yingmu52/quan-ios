@@ -37,7 +37,7 @@
 
 -(void)deletePlan{
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"删除的事件不恢复哦！"
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"删除的话题夹不恢复哦！"
                                                                    message:nil
                                                             preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定"
@@ -178,7 +178,7 @@
                                                    handler:^(UIAlertAction * _Nonnull action)
     {
         NSString *popupViewTitle = self.tableFetchedRC.fetchedObjects.count == 1 ?
-        @"这是最后一条记录啦！\n这件事儿也会被删除哦~" : @"真的要删除这条记录吗？";
+        @"这是最后一条记录啦！\n这件话题夹也会被删除哦~" : @"真的要删除这条记录吗？";
         
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:popupViewTitle
                                                                        message:nil

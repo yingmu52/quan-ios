@@ -57,7 +57,7 @@
 - (void)setupViews
 {
     NSDictionary *attr = @{NSForegroundColorAttributeName:[UIColor lightGrayColor]};
-    self.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@" 你想说件什么事儿？" attributes:attr];
+    self.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@" 给这个话题夹取个名字吧！" attributes:attr];
 
     CGRect frame = CGRectMake(0,0, 25,25);
     UIButton *backBtn = [Theme buttonWithImage:[Theme navBackButtonDefault]

@@ -32,7 +32,7 @@
 - (void)didPressedLockButton{
     if ([self.plan.owner.mUID isEqualToString:[User uid]]){
         BOOL currentPrivacy = self.plan.isPrivate.boolValue;
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否将该事件设置为"
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否将该话题夹设置为"
                                                                        message:currentPrivacy ? @"公开" : @"私密"
                                                                 preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleCancel handler:nil]];
@@ -73,8 +73,8 @@
              {
                  if (self.plan.isPrivate.boolValue) {
                      self.hud = nil;
-                     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"私密的事件要公开才能分享哦"
-                                                                                    message:@"是否确定修改为公开事件"
+                     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"私密的话题夹要公开才能分享哦"
+                                                                                    message:@"是否确定修改为公开话题夹"
                                                                              preferredStyle:UIAlertControllerStyleAlert];
                      [alert addAction:[UIAlertAction actionWithTitle:@"确定"
                                                                style:UIAlertActionStyleDefault
