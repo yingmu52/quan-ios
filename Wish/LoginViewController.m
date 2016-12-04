@@ -11,15 +11,28 @@
 #import "SDWebImageCompat.h"
 #import "User.h"
 #import "LoginDetailViewController.h"
+#import "MBProgressHUD.h"
 #define QQAppKey @"ByYhJYTkXu0721fH"
 //#import "SMSSDKUI.h"
-@interface LoginViewController () <TencentSessionDelegate,FetchCenterDelegate,WXApiManagerDelegate>
+@interface LoginViewController () <TencentSessionDelegate,FetchCenterDelegate,WXApiManagerDelegate,MBProgressHUDDelegate>
 @property (nonatomic,strong) TencentOAuth *tencentOAuth;
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,weak) IBOutlet UIButton *QQLoginButton;
 @property (nonatomic,weak) IBOutlet UIButton *WechatLoginButton;
+@property (nonatomic,strong) MBProgressHUD *hud;
+
 @end
 @implementation LoginViewController
+
+
+- (MBProgressHUD *)hud{
+    if (!_hud) {
+        _hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
+        _hud.mode = MBProgressHUDModeIndeterminate;
+        _hud.delegate = self;
+    }
+    return _hud;
+}
 
 
 + (LoginViewController *)initLoginViewController{
@@ -156,22 +169,35 @@
 #pragma mark - wechat 
 
 - (IBAction)wechatLogin{
-
-    SendAuthReq *req = [[SendAuthReq alloc] init];
-    req.scope = @"snsapi_userinfo,snsapi_base"; // @"post_timeline,sns"
-    req.openID = WECHATAppID;
     
-    WXApiManager *manager = [WXApiManager sharedManager];
-    manager.delegate = self;
-    [WXApi sendAuthReq:req viewController:self delegate:manager];
-
-    [User updateOwnerInfo:@{LOGIN_TYPE:@"wx"}];
+    //检查网络
+    Reachability *rech = [Reachability reachabilityForInternetConnection];
+    if (rech.currentReachabilityStatus != NotReachable){
+        SendAuthReq *req = [[SendAuthReq alloc] init];
+        req.scope = @"snsapi_userinfo,snsapi_base"; // @"post_timeline,sns"
+        req.openID = WECHATAppID;
+        
+        WXApiManager *manager = [WXApiManager sharedManager];
+        manager.delegate = self;
+        [WXApi sendAuthReq:req viewController:self delegate:manager];
+        
+        [User updateOwnerInfo:@{LOGIN_TYPE:@"wx"}];
+    }else{
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"手机无网络"
+                                                                       message:@"请确保手机有正常的网络连接"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 - (void)managerDidRecvAuthResponse:(SendAuthResp *)response{
+    self.hud.label.text = @"登陆中...";
     [self.fetchCenter getAccessTokenWithWechatCode:response.code
-                                        completion:^(NSDictionary *userInfo, BOOL isNewUser) {
+                                        completion:^(NSDictionary *userInfo, BOOL isNewUser)
+    {
         [self processLoginWithUserInfo:userInfo isUser:isNewUser];
+        [self.hud hideAnimated:YES];
     }];
 }
 
