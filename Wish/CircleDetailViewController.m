@@ -108,7 +108,7 @@
     if (!_tableFetchRequest) {
         _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
         _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"circle.mUID == %@",self.circle.mUID];
-        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mUpdateTime" ascending:YES]];
+        _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mUpdateTime" ascending:NO]];
     }
     return _tableFetchRequest;
 }
