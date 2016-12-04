@@ -65,6 +65,7 @@
 - (IBAction)followButtonPressed{
     [self.fetchCenter followCircleId:self.circle.mUID completion:^{
         [self.headerView.followButton setTitle:@"已关注" forState:UIControlStateNormal];
+        self.headerView.followCountLabel.text = [NSString stringWithFormat:@"%@人关注",@(self.circle.nFans.integerValue + 1)];
     }];
 }
 
