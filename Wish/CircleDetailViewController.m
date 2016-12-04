@@ -14,14 +14,10 @@
 #import "MemberListViewController.h"
 //#import "InvitationViewController.h"
 #import "MSWXShareManager.h"
+#import "CircleDetailHeader.h"
 
 @interface CircleDetailViewController () <UICollectionViewDelegateFlowLayout,MSSuperViewControllerDelegate>
-@property (nonatomic,weak) IBOutlet UIImageView *circleImageView;
-@property (nonatomic,weak) IBOutlet UILabel *circleTitleLabel;
-@property (nonatomic,weak) IBOutlet UILabel *followCountLabel;
-@property (nonatomic,weak) IBOutlet UIButton *followButton;
-@property (nonatomic,weak) IBOutlet UITextView *circleDescriptionTextView;
-
+@property (nonatomic,weak) IBOutlet CircleDetailHeader *headerView;
 @property (nonatomic,strong) NSNumber *currentPage;
 @property (nonatomic,strong) UIAlertController *moreActionSheet;
 @property (nonatomic,strong) NSDateFormatter *dateFormatter;
@@ -58,41 +54,17 @@
 
 
 - (void)setupHeaderView{
-    self.circleImageView.layer.cornerRadius = 3.0f;
-    [self.circleImageView downloadImageWithImageId:self.circle.mCoverImageId
-                                              size:FetchCenterImageSize400];
-    self.circleTitleLabel.text = self.circle.mTitle;
-    self.followCountLabel.text = [NSString stringWithFormat:@"%@人关注",self.circle.nFans];
-    self.circleDescriptionTextView.text = self.circle.mDescription;
-    self.circleDescriptionTextView.textContainerInset = UIEdgeInsetsZero;
-    self.circleDescriptionTextView.textColor = [UIColor whiteColor];
+    [self.headerView setupHeaderView:self.circle];
     
-    self.collectionView.mj_header = nil;
+    self.headerView.collectionView.mj_header = nil;
     self.collectionView.mj_footer = nil;
     self.tableView.mj_header = nil;
-
-    
-    
-    if (self.circle.isFollowable.boolValue) {
-        self.followButton.layer.borderColor = [UIColor whiteColor].CGColor;
-        self.followButton.layer.borderWidth = 1.0f;
-        self.followButton.layer.cornerRadius = 11.0f; // 高的一半
-        
-        if (self.circle.circleType.integerValue == CircleTypeFollowed) {
-            [self.followButton setTitle:@"已关注" forState:UIControlStateNormal];
-            self.followButton.enabled = NO;
-            NSLog(@"圈子已经关注");
-        }
-    }else{
-        NSLog(@"圈子不允许被关注");
-        self.followButton.hidden = YES;
-    }
 }
 
 
 - (IBAction)followButtonPressed{
     [self.fetchCenter followCircleId:self.circle.mUID completion:^{
-        [self.followButton setTitle:@"已关注" forState:UIControlStateNormal];
+        [self.headerView.followButton setTitle:@"已关注" forState:UIControlStateNormal];
     }];
 }
 
@@ -162,7 +134,7 @@
     cell.ms_textView.text = plan.mDescription;
     return cell;
 }
- 
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 155.0f;
 }
@@ -184,7 +156,7 @@
 
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return CGSizeMake((CGRectGetWidth(collectionView.frame) - 28 - 18) * 0.25,54.0f);
+    return CGSizeMake((CGRectGetWidth(collectionView.frame) - 28 - 18) * 0.25,collectionView.frame.size.height);
 }
 
 

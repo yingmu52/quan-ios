@@ -67,6 +67,7 @@
 		A053CF7F1BA4EFF00007970A /* PostImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A053CF7D1BA4EFF00007970A /* PostImageCell.m */; };
 		A055FB9F1BA6553A0013F91E /* ImagePreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A055FB9E1BA6553A0013F91E /* ImagePreviewCell.m */; };
 		A055FBA01BA6553A0013F91E /* ImagePreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A055FB9E1BA6553A0013F91E /* ImagePreviewCell.m */; };
+		A055FE321DF24A5300F92C67 /* CircleDetailHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = A055FE311DF24A5300F92C67 /* CircleDetailHeader.m */; };
 		A057D2F71D48CB02009AFE02 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A057D2F61D48CB02009AFE02 /* MBProgressHUD.m */; };
 		A066C3851BB793DA003B51D5 /* MSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A066C3841BB793DA003B51D5 /* MSLabel.m */; };
 		A066C3861BB793DA003B51D5 /* MSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A066C3841BB793DA003B51D5 /* MSLabel.m */; };
@@ -420,6 +421,8 @@
 		A053CF7D1BA4EFF00007970A /* PostImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostImageCell.m; sourceTree = "<group>"; };
 		A055FB9D1BA6553A0013F91E /* ImagePreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePreviewCell.h; sourceTree = "<group>"; };
 		A055FB9E1BA6553A0013F91E /* ImagePreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePreviewCell.m; sourceTree = "<group>"; };
+		A055FE301DF24A5300F92C67 /* CircleDetailHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleDetailHeader.h; sourceTree = "<group>"; };
+		A055FE311DF24A5300F92C67 /* CircleDetailHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleDetailHeader.m; sourceTree = "<group>"; };
 		A057D2F51D48CB02009AFE02 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		A057D2F61D48CB02009AFE02 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		A066C3831BB793DA003B51D5 /* MSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSLabel.h; sourceTree = "<group>"; };
@@ -1236,6 +1239,8 @@
 				A0CBDCB81C8E23F500DA53FF /* CircleEditViewController.m */,
 				A07C66AD1BE01AB800413D32 /* InvitationViewController.h */,
 				A07C66AE1BE01AB800413D32 /* InvitationViewController.m */,
+				A055FE301DF24A5300F92C67 /* CircleDetailHeader.h */,
+				A055FE311DF24A5300F92C67 /* CircleDetailHeader.m */,
 			);
 			name = Circles;
 			sourceTree = "<group>";
@@ -1773,6 +1778,7 @@
 				A066C3891BB7AE08003B51D5 /* MSSuperViewController.m in Sources */,
 				A0C15C9D1D4CB9350094BEF9 /* NSBundle+MJRefresh.m in Sources */,
 				A03010601BACAFBC0041E2CF /* QBPreViewController.m in Sources */,
+				A055FE321DF24A5300F92C67 /* CircleDetailHeader.m in Sources */,
 				A0FB1EDB1D9F7C9600954F4E /* MSBase+CoreDataProperties.m in Sources */,
 				A0A0835C1BD74F260057CD65 /* CircleListViewController.m in Sources */,
 				A0D102271B84EB6A006B0E4E /* SDWebImagePrefetcher.m in Sources */,
