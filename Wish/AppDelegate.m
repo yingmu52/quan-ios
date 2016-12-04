@@ -13,7 +13,6 @@
 #import "LoginViewController.h"
 #import "MessageListViewController.h"
 #import "MBProgressHUD.h"
-#import "CWStatusBarNotification.h"
 #import "MainTabBarController.h"
 #import "MessageListViewController.h"
 #import <PgySDK/PgyManager.h>
@@ -22,6 +21,7 @@
 @interface AppDelegate () <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,weak) LoginViewController *loginVC;
+@property (nonatomic,strong) Reachability *reachability;
 @end
 
 @implementation AppDelegate
@@ -56,8 +56,44 @@
     }
     
     
+    // check for internet connection
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(checkNetworkStatus:)
+                                                 name:kReachabilityChangedNotificationKey object:self.reachability];
+    
+    // Set up Reachability
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+
+#pragma mark - Reachability
+
+- (CWStatusBarNotification *)statusBarNotification{
+    if (!_statusBarNotification) {
+        _statusBarNotification = [[CWStatusBarNotification alloc] init];
+        _statusBarNotification.notificationLabelBackgroundColor = [Theme globleColor];
+        _statusBarNotification.notificationAnimationInStyle = CWNotificationAnimationStyleLeft;
+        _statusBarNotification.notificationAnimationOutStyle = CWNotificationAnimationStyleRight;
+        _statusBarNotification.notificationStyle = CWNotificationStyleStatusBarNotification;
+    }
+    return _statusBarNotification;
+}
+
+- (Reachability *)reachability{
+    if (!_reachability){
+        _reachability = [Reachability reachabilityForInternetConnection];
+        [_reachability startNotifier];
+    }
+    return _reachability;
+}
+
+- (void)checkNetworkStatus:(NSNotification *)notice{
+    if (self.reachability.currentReachabilityStatus == NotReachable) {
+        [self.statusBarNotification displayNotificationWithMessage:@"没有网络连接！" completion:nil];
+    }else{
+        [self.statusBarNotification dismissNotification];
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application{
@@ -114,14 +150,8 @@
 }
 
 + (void)postStatusBarAlert:(NSString *)message{
-    CWStatusBarNotification *cbn = [CWStatusBarNotification new];
-    cbn.notificationLabelBackgroundColor = [Theme globleColor];
-    cbn.notificationAnimationInStyle = CWNotificationAnimationStyleLeft;
-    cbn.notificationAnimationOutStyle = CWNotificationAnimationStyleRight;
-    cbn.notificationStyle = CWNotificationStyleStatusBarNotification;
-    [cbn displayNotificationWithMessage:message
-                            forDuration:2.0];
-
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [app.statusBarNotification displayNotificationWithMessage:message forDuration:2.0];
 }
 
 
@@ -149,6 +179,7 @@
 //    if ([[SPIntrospect sharedIntrospector] isOpen]) {
 //        [[SPIntrospect sharedIntrospector] closeSpider];
 //    }
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotificationKey object:self.reachability];
 }
 
 #pragma mark - Tencent & Wechat

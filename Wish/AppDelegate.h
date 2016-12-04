@@ -15,6 +15,8 @@
 #import "LoginViewController.h"
 #import "FetchCenter.h"
 #import "WXApiManager.h"
+#import "CWStatusBarNotification.h"
+
 //#import <PgySDK/PgyManager.h>
 #import <TencentOpenAPI/QQApiInterface.h>
 //#import <spider/SPIntrospect.h>
@@ -27,7 +29,7 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
+@property (nonatomic,strong) CWStatusBarNotification *statusBarNotification;
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectContext *writerManagedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
