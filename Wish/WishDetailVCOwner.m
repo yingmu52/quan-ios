@@ -105,8 +105,8 @@
     if (self.lastContentOffSet < scrollView.contentOffset.y) {
         //hide camera
         if (self.cameraButton.isUserInteractionEnabled) [self animateCameraIcon:YES];
-        
-    }else if (self.lastContentOffSet > scrollView.contentOffset.y) {
+
+    }else{
         //show camera
         if (!self.cameraButton.isUserInteractionEnabled) [self animateCameraIcon:NO];
     }
@@ -116,13 +116,13 @@
 - (void)animateCameraIcon:(BOOL)shouldHideCamera{
     CGFloat movingDistance = CGRectGetHeight(self.view.frame) * 0.5f;
     if (shouldHideCamera){
-        [UIView animateWithDuration:1.0 animations:^{
+        [UIView animateWithDuration:0.3 animations:^{
             self.cameraButton.center = CGPointMake(self.cameraButton.center.x,
                                                    self.cameraButton.center.y + movingDistance);
             self.cameraButton.userInteractionEnabled = NO;
         }];
     }else{
-        [UIView animateWithDuration:0.7 animations:^{
+        [UIView animateWithDuration:0.3 animations:^{
             self.cameraButton.center = CGPointMake(self.cameraButton.center.x,
                                                    self.cameraButton.center.y - movingDistance);
         }];

@@ -16,7 +16,7 @@
         <!--Post View Controller-->
         <scene sceneID="ZVZ-0X-CQC">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="1Y1-uW-81U" customClass="PostViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PostViewController" hidesBottomBarWhenPushed="YES" id="1Y1-uW-81U" customClass="PostViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FOQ-fN-tNK"/>
                         <viewControllerLayoutGuide type="bottom" id="ISy-CK-psH"/>
@@ -189,7 +189,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RIa-Mp-Cry" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="297" y="-1117.5"/>
+            <point key="canvasLocation" x="197" y="-1199"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="fpo-Ov-0kY">
@@ -253,7 +253,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jI4-VJ-WUa">
-                                                                    <rect key="frame" x="27" y="436.66666666666674" width="224" height="48.333333333333314"/>
+                                                                    <rect key="frame" x="26.666666666666671" y="436.33333333333326" width="224.66666666666663" height="48.666666666666686"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="jI4-VJ-WUa" secondAttribute="height" multiplier="236:51" id="T2L-26-lQn"/>
                                                                     </constraints>
@@ -590,7 +590,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="112"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ng5-6z-04s" id="Hhm-43-t0v">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="111.66666666666667"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="112"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hAg-MK-02Y" userLabel="BackgroundView">
@@ -1170,10 +1170,10 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PostFeedImagePreviewCell" id="Rns-ch-qIO" customClass="ImagePreviewCell">
-                                <rect key="frame" x="0.0" y="130" width="245.5" height="412"/>
+                                <rect key="frame" x="0.0" y="130" width="245" height="412"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="245.5" height="412"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="245" height="412"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Df1-3t-62p">
@@ -1608,7 +1608,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RBz-H7-E4a" id="7j8-Ia-E33">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="64.666666666666671"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gnI-8W-MZg">
@@ -3550,6 +3550,8 @@
                                 <exclude reference="tT6-bx-pXE"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="oDg-lC-emN"/>
+                                <exclude reference="qqD-MV-Oec"/>
                                 <exclude reference="1zF-lP-Muj"/>
                                 <exclude reference="I6z-cB-Ub3"/>
                                 <exclude reference="gpc-Hl-dEl"/>
@@ -3562,8 +3564,6 @@
                                 <exclude reference="PXH-ta-2YY"/>
                                 <exclude reference="cKQ-JU-ibh"/>
                                 <exclude reference="gMi-i4-Aw5"/>
-                                <exclude reference="oDg-lC-emN"/>
-                                <exclude reference="qqD-MV-Oec"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -3574,6 +3574,8 @@
                                 <include reference="tT6-bx-pXE"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="oDg-lC-emN"/>
+                                <include reference="qqD-MV-Oec"/>
                                 <include reference="1zF-lP-Muj"/>
                                 <include reference="I6z-cB-Ub3"/>
                                 <include reference="gpc-Hl-dEl"/>
@@ -3586,8 +3588,6 @@
                                 <include reference="PXH-ta-2YY"/>
                                 <exclude reference="cKQ-JU-ibh"/>
                                 <exclude reference="gMi-i4-Aw5"/>
-                                <include reference="oDg-lC-emN"/>
-                                <include reference="qqD-MV-Oec"/>
                             </mask>
                         </variation>
                         <connections>
@@ -3673,7 +3673,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="Y2c-0U-Rmr"/>
         <segue reference="T3Y-fE-Qhc"/>
-        <segue reference="XiB-xT-Plv"/>
+        <segue reference="BaT-4X-Ixb"/>
         <segue reference="0NR-qk-ahm"/>
         <segue reference="6ze-LH-v54"/>
     </inferredMetricsTieBreakers>

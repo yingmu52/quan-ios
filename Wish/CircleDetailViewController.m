@@ -21,6 +21,10 @@
 @property (nonatomic,strong) NSNumber *currentPage;
 @property (nonatomic,strong) UIAlertController *moreActionSheet;
 @property (nonatomic,strong) NSDateFormatter *dateFormatter;
+
+@property (nonatomic,strong) UIButton *cameraButton;
+@property (nonatomic) CGFloat lastContentOffSet; // for camera animation
+
 @end
 
 @implementation CircleDetailViewController
@@ -43,6 +47,12 @@
     
     [self setupHeaderView];
     [self loadMoreData];
+    
+    
+    //主人态有创建事件入口
+    if ([self.circle.ownerId isEqualToString:[User uid]]){
+        [self setupPostViewEntry];
+    }
     
 }
 
@@ -238,6 +248,9 @@
 }
 
 - (void)showMoreOptions{
+    //hide camera if needed
+    if (self.cameraButton.isUserInteractionEnabled) [self animateCameraIcon:YES];
+    
     [self presentViewController:self.moreActionSheet animated:YES completion:nil];
 }
 
@@ -309,10 +322,10 @@
         [segue.destinationViewController setPlan:sender];
     }
 
-//    if ([segue.identifier isEqualToString:@"showPostFromPlansView"]) {
-//        PostViewController *pvc = segue.destinationViewController;
-//        pvc.circle = self.circle;
-//    }
+    if ([segue.identifier isEqualToString:@"showPostViewFromCircleDetail"]) {
+        PostViewController *pvc = segue.destinationViewController;
+        pvc.circle = self.circle;
+    }
     
     if ([segue.identifier isEqualToString:@"showCircleEditingView"]) {
         CircleEditViewController *cec = segue.destinationViewController;
@@ -336,6 +349,86 @@
 //    }
 }
 
+
+#pragma mark - Camera 
+
+- (void)showPostView{
+    [self performSegueWithIdentifier:@"showPostViewFromCircleDetail" sender:nil];
+}
+
+- (void)setupPostViewEntry{
+    
+    UIImage *cameraIcon = [UIImage imageNamed:@"tab_ic_plus"];
+    UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [addButton setImage:cameraIcon forState:UIControlStateNormal];
+    addButton.hidden = NO;
+    
+    
+    UIWindow *topView = [[UIApplication sharedApplication] keyWindow];
+    
+    CGFloat trailing = 58.0/640 * self.view.frame.size.width;
+    CGFloat bottom = 32.0/1136 * self.view.frame.size.height;
+    
+    CGFloat width = cameraIcon.size.width;
+    CGFloat height = cameraIcon.size.height;
+    [addButton setFrame:CGRectMake(topView.frame.size.width - trailing - width,
+                                       topView.frame.size.height - bottom - height,
+                                       width,
+                                       height)];
+    [topView addSubview:addButton];
+    
+    [addButton addTarget:self action:@selector(showPostView)
+            forControlEvents:UIControlEventTouchUpInside];
+    self.cameraButton = addButton;
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    self.lastContentOffSet = scrollView.contentOffset.y;
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    if (self.lastContentOffSet < scrollView.contentOffset.y) {
+        //hide camera
+        if (self.cameraButton.isUserInteractionEnabled) [self animateCameraIcon:YES];
+        
+    }else{
+        //show camera
+        if (!self.cameraButton.isUserInteractionEnabled) [self animateCameraIcon:NO];
+    }
+    
+}
+
+- (void)animateCameraIcon:(BOOL)shouldHideCamera{
+    CGFloat movingDistance = CGRectGetHeight(self.view.frame) * 0.5f;
+    if (shouldHideCamera){
+        [UIView animateWithDuration:0.3 animations:^{
+            self.cameraButton.center = CGPointMake(self.cameraButton.center.x,
+                                                   self.cameraButton.center.y + movingDistance);
+            self.cameraButton.userInteractionEnabled = NO;
+        }];
+    }else{
+        [UIView animateWithDuration:0.3 animations:^{
+            self.cameraButton.center = CGPointMake(self.cameraButton.center.x,
+                                                   self.cameraButton.center.y - movingDistance);
+        }];
+        self.cameraButton.userInteractionEnabled = YES;
+    }
+}
+
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (self.cameraButton) {
+        self.cameraButton.hidden = NO;
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    if (self.cameraButton){
+        self.cameraButton.hidden = YES;
+    }
+}
 @end
 
 
