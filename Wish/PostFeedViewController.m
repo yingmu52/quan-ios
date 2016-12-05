@@ -317,8 +317,8 @@ static NSUInteger distance = 10;
                            feedTitle:self.textView.text
                           completion:^(NSString *planId)
         {
-            [self.navigationController popToRootViewControllerAnimated:YES];
-//            [self performSegueWithIdentifier:@"showWishDetailOnPlanCreation" sender:plan];
+            Plan *plan = [Plan fetchID:planId inManagedObjectContext:self.appDelegate.managedObjectContext];
+            [self performSegueWithIdentifier:@"showWishDetailOnPlanCreation" sender:plan];
 
         }];
     }
