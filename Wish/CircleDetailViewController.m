@@ -358,9 +358,11 @@
 
 - (void)setupPostViewEntry{
     
-    UIImage *cameraIcon = [UIImage imageNamed:@"tab_ic_plus"];
+    UIImage *cameraIcon = [Theme circleDetailPlanCreateDefault];
     UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [addButton setImage:cameraIcon forState:UIControlStateNormal];
+    [addButton setImage:[Theme circleDetailPlanCreatePressed]
+               forState:UIControlStateHighlighted];
     addButton.hidden = NO;
     
     

@@ -82,6 +82,8 @@
 + (UIImage *)circleListCheckBoxDefault;
 + (UIImage *)circleListCheckBoxSelected;
 + (UIImage *)circleCreationImageBackground;
++ (UIImage *)circleDetailPlanCreateDefault;
++ (UIImage *)circleDetailPlanCreatePressed;
 
 + (UIImage *)circleOwnerIcon;
 + (UIImage *)circleAdminIcon;
