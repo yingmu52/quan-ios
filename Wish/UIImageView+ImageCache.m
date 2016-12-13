@@ -45,7 +45,9 @@
                                        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                                            [manager.imageCache storeImage:image forKey:localKey];
                                            dispatch_main_async_safe(^{
-                                               self.image = image;
+                                               if (!self.image) {
+                                                   self.image = image;
+                                               }
                                            });
                                        });
                                    }
