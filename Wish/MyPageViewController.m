@@ -133,14 +133,8 @@
     }
     
     if (indexPath.section == 1){
+
         if (indexPath.row == 0) {
-            NSURL *url = [NSURL URLWithString:@"https://itunes.apple.com/us/app/quan-li-shi/id1140426882?ls=1&mt=8"];
-            UIApplication *app = [UIApplication sharedApplication];
-            if ([app canOpenURL:url]) {
-                [app openURL:url];
-            }
-        }
-        if (indexPath.row == 1) {
             
             //清除本地所以图片
             SDImageCache *imageCache = [SDImageCache sharedImageCache];
@@ -168,7 +162,7 @@
             //Garbage fucking collection
             [AppDelegate clearCoreData:YES];
         }
-        if (indexPath.row == 2){ //用户反馈
+        if (indexPath.row == 1){ //用户反馈
             [self performSegueWithIdentifier:@"showFeedbackView" sender:nil];
         }
     }
