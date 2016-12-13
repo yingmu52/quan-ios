@@ -120,7 +120,7 @@
     
     //貌似数据不全会影响到FRC在列表上的展示？
     plan.mUpdateTime = [NSDate date];
-    plan.discoverIndex = @(888);
+    
     
     
     plan.planStatus = @(PlanStatusOnGoing);
@@ -167,9 +167,6 @@
     
 }
 
-- (BOOL)isDeletable{
-    return ![self.owner.mUID isEqualToString:[User uid]] && !self.isFollowed.boolValue;
-}
 
 - (BOOL)hasDetailText{
     return self.mDescription && ![self.mDescription isEqualToString:@""];

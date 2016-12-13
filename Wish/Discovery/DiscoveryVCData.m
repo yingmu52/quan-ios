@@ -129,8 +129,8 @@
     if (!_collectionFetchRequest) {
         _collectionFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Plan"];
         //发现页
-        _collectionFetchRequest.predicate = [NSPredicate predicateWithFormat:@"discoverIndex >= 888"];
-        _collectionFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"discoverIndex" ascending:YES]];
+        _collectionFetchRequest.predicate = [NSPredicate predicateWithFormat:@"lastDiscoverTime != nil"];
+        _collectionFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"lastDiscoverTime" ascending:YES]];
     }
     return _collectionFetchRequest;
 }

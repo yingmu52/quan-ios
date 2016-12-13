@@ -2,7 +2,7 @@
 //  Plan+CoreDataProperties.m
 //  Stories
 //
-//  Created by Xinyi Zhuang on 10/8/16.
+//  Created by Xinyi Zhuang on 13/12/2016.
 //  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //
 
@@ -15,15 +15,14 @@
 }
 
 @dynamic cornerMask;
-@dynamic discoverIndex;
 @dynamic followCount;
-@dynamic isFollowed;
 @dynamic isPrivate;
 @dynamic planStatus;
 @dynamic rank;
 @dynamic readCount;
 @dynamic shareUrl;
 @dynamic tryTimes;
+@dynamic lastDiscoverTime;
 @dynamic circle;
 @dynamic feeds;
 @dynamic owner;

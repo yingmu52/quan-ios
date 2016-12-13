@@ -42,14 +42,6 @@ typedef enum {
       keyForDescriptor:(NSString *)key
   managedObjectContext:(NSManagedObjectContext *)context;
 
-/**
- * 能被删除的事件要符合2个条件：
- * 1：不属于自己的事件（从而不影响事儿页）
- * 2：不受关注的事件（从而不影响关注页）
- */
-- (BOOL)isDeletable;
-
-
 @end
 
 NS_ASSUME_NONNULL_END

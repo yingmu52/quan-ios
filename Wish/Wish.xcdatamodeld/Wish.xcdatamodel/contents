@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="15G1004" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16B2555" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Circle" representedClassName="Circle" parentEntity="MSBase" syncable="YES">
         <attribute name="circleType" optional="YES" attributeType="Integer 16" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="isFollowable" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
@@ -49,10 +49,9 @@
     </entity>
     <entity name="Plan" representedClassName="Plan" parentEntity="MSBase" syncable="YES">
         <attribute name="cornerMask" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="discoverIndex" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="followCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="isFollowed" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="isPrivate" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="lastDiscoverTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="planStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="rank" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="readCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -75,7 +74,7 @@
         <element name="Message" positionX="-8642" positionY="-223" width="128" height="118"/>
         <element name="MSBase" positionX="-8847" positionY="-295" width="128" height="178"/>
         <element name="Owner" positionX="-8831" positionY="-54" width="128" height="88"/>
-        <element name="Plan" positionX="-9110" positionY="-567" width="128" height="238"/>
+        <element name="Plan" positionX="-9110" positionY="-594" width="128" height="223"/>
         <element name="Task" positionX="-8948" positionY="-486" width="128" height="103"/>
     </elements>
 </model>

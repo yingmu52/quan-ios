@@ -934,15 +934,12 @@
     {
         
         NSManagedObjectContext *workerContext = [self workerContext];
-
-        NSNumber *isFollowed  = @([[responseJson valueForKeyPath:@"data.isFollowed"] boolValue]);
         
         NSDictionary *planInfo = [responseJson valueForKeyPath:@"data.plan"];
         NSDictionary *ownerInfo = [responseJson valueForKeyPath:@"data.man"];
         Plan *plan = [Plan updatePlanFromServer:planInfo
                                       ownerInfo:ownerInfo
                            managedObjectContext:workerContext];
-        plan.isFollowed = isFollowed;
         
         NSArray *feeds = [responseJson valueForKeyPath:@"data.feedsList"];
         
@@ -1141,7 +1138,7 @@
                  NSString *keyPath = [NSString stringWithFormat:@"data.quanlist.%@",planInfo[@"quanId"]];
                  NSDictionary *quanInfo = [responseJson valueForKeyPath:keyPath];
                  plan.circle = [Circle updateCircleWithInfo:quanInfo managedObjectContext:workerContext];
-                 plan.discoverIndex = @(888 + (currentPage.integerValue - 1)*20 + idx); //记录索引方便显示服务器上的顺序
+                 plan.lastDiscoverTime = [NSDate date];
              }];
              
              //同步
@@ -2019,8 +2016,10 @@
                 //同步发现页事件时，如果是自己的事件或自己关注的事件，不需要把事件从本地删除，只需要把discoveryIndex设置成nil就可以移除发现页
                 if ([entity isKindOfClass:[Plan class]]) {
                     Plan *p = (Plan *)entity;
-                    if ([p isDeletable]) {
-                        p.discoverIndex = nil;
+                    if (![p.owner.mUID isEqualToString:[User uid]]) {
+                        [workerContext deleteObject:p];
+                    }else{
+                        p.lastDiscoverTime = nil;
                     }
                 }else{
                     [workerContext deleteObject:entity];
