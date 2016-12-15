@@ -11,7 +11,7 @@
 #import "MSTableViewCell.h"
 #import "UIImageView+ImageCache.h"
 @interface CirclePickerViewController ()
-
+@property (nonatomic,strong) NSNumber *currentPage;
 @end
 
 @implementation CirclePickerViewController
@@ -36,10 +36,40 @@
     self.navigationItem.title = @"选择圈子";
 }
 
+
+- (void)loadNewData{
+    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKeyPath:@"mUID"];
+    [self.fetchCenter getCircleList:localList
+                             onPage:nil
+                         completion:^(NSNumber *currentPage, NSNumber *totalPage)
+     {
+         self.currentPage = @(2); //这个currentPage其实是下一页的意思
+         [self.tableView.mj_header endRefreshing];
+         [self.tableView.mj_footer endRefreshing];
+     }];
+    
+}
+
+- (void)loadMoreData{
+    NSArray *localList = [self.tableFetchedRC.fetchedObjects valueForKeyPath:@"mUID"];
+    [self.fetchCenter getCircleList:localList
+                             onPage:self.currentPage
+                         completion:^(NSNumber *currentPage, NSNumber *totalPage)
+     {
+         if ([currentPage isEqualToNumber:totalPage]) {
+             [self.tableView.mj_footer endRefreshingWithNoMoreData];
+         }else{
+             self.currentPage = @(currentPage.integerValue + 1);
+             [self.tableView.mj_footer endRefreshing];
+         }
+     }];
+}
+
+
 - (NSFetchRequest *)tableFetchRequest{
     if (!_tableFetchRequest) {
         _tableFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Circle"];
-        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"circleType != %@",@(CircleTypeFollowed)];
+        _tableFetchRequest.predicate = [NSPredicate predicateWithFormat:@"mTypeID != nil"];
         _tableFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mCreateTime" ascending:NO]];
     }
     return _tableFetchRequest;
