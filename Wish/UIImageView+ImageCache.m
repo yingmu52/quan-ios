@@ -42,14 +42,9 @@
                                            SDImageCacheType cacheType,
                                            NSURL *imageURL) {
                                    if (image && !error) {
-                                       dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                                           [manager.imageCache storeImage:image forKey:localKey];
-                                           dispatch_main_async_safe(^{
-                                               if (!self.image) {
-                                                   self.image = image;
-                                               }
-                                           });
-                                       });
+                                       self.image = image;
+                                   }else{
+                                       [FetchCenter reportToIssueLog:[NSString stringWithFormat:@"图片下载失败\n %@ \n %@ \n",error,imageURL]];
                                    }
                                }];
             }else{

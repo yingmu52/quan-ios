@@ -1443,12 +1443,9 @@
     return path;
 }
 
-- (void)appendRequest:(NSURLRequest *)request andResponse:(NSDictionary *)response{
++ (void)reportToIssueLog:(NSString *)content{
     NSString *logPath = [self.class requestLogFilePath];
     NSFileHandle *fileHandler = [NSFileHandle fileHandleForUpdatingAtPath:logPath];
-
-    NSString *content = [NSString stringWithFormat:@"[Date]: %@\n\n[Request]: %@\n\n[Response]: %@\n\n\n\n",[NSDate date],request,[self decodedOBject:response]];
-    
     if (fileHandler){
         [fileHandler seekToEndOfFile];
         [fileHandler writeData:[content dataUsingEncoding:NSUTF8StringEncoding]];
@@ -1457,7 +1454,6 @@
         [content writeToFile:logPath atomically:NO encoding:NSUTF8StringEncoding error:nil];
     }
 }
-
 #pragma mark - 网络检测
 
 - (BOOL)hasActiveInternetConnection{
@@ -1709,9 +1705,12 @@
                         [self alertWithBackendErrorCode:@([responseJson[@"ret"] integerValue])];
                         
                         //假失败写入请求日志
-                        [self appendRequest:request andResponse:responseJson];
-                        NSLog(@"\n\n** 失败 ** \n baseUrl: %@ \n parameter: %@ \n responseJSON: %@ \n error:%@"
-                              ,baseURL,dict,[self decodedOBject:responseJson],error);
+                        NSString *issue = [NSString stringWithFormat:@"[Date]: %@\n\n[Request]: %@\n\n[Response]: %@\n\n\n\n",
+                                           [NSDate date],
+                                           request,
+                                           [self decodedOBject:response]];
+                        [self.class reportToIssueLog:issue];
+                        NSLog(@"%@",issue);
                         
                         if ([self.delegate respondsToSelector:@selector(didFailSendingRequest)]){
                             [self.delegate didFailSendingRequest];

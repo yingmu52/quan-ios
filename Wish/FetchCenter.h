@@ -301,6 +301,8 @@ typedef void(^FetchCenterImageUploadCompletionBlock)(NSString *fetchedId); //上
 typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson); //请求成功
 - (void)postImageWithOperation:(UIImage *)image
                       complete:(FetchCenterImageUploadCompletionBlock)completionBlock;
++ (void)reportToIssueLog:(NSString *)content;
+
 #pragma mark - 登陆
 
 - (void)loginWithUsername:(NSString *)username
@@ -324,5 +326,6 @@ typedef void(^FetchCenterGetRequestCompletionBlock)(NSDictionary *responseJson);
 
 #pragma mark - 优图
 - (void)requestSignature:(FetchCenterGetRequestGetYoutuSignatureCompleted)completionBlock;
+
 @end
 
