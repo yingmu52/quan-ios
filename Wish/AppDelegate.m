@@ -255,6 +255,10 @@
         }];
     }
     
+    [FIRAnalytics logEventWithName:@"Join-in Circle" parameters:@{@"received url":url,
+                                                                  @"args":args,
+                                                                  @"if-successed":handleSucceed ? @"Yes" : @"No"}];
+
     return handleSucceed;
 }
 
