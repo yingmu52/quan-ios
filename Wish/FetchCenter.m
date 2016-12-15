@@ -215,7 +215,7 @@
     [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
         NSManagedObjectContext *workerContext = [self workerContext];
         Circle *circle = [Circle fetchID:circleId inManagedObjectContext:workerContext];
-        [workerContext deleteObject:circle];
+        circle.mTypeID = nil; //赋nil值，可在不删除圈子情况下将圈子移除“我加入列表”
         [self.appDelegate saveContext:workerContext];
         if (completionBlock) {
             dispatch_main_async_safe(^{
