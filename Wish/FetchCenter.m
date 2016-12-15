@@ -1710,6 +1710,11 @@
                                            request,
                                            [self decodedOBject:response]];
                         [self.class reportToIssueLog:issue];
+                        [FIRAnalytics logEventWithName:@"Fetchcenter Failure"
+                                            parameters:@{@"request":request,
+                                                         @"response":[self decodedOBject:response],
+                                                         @"date":[NSDate date]}];
+                        
                         NSLog(@"%@",issue);
                         
                         if ([self.delegate respondsToSelector:@selector(didFailSendingRequest)]){

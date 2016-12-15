@@ -45,6 +45,10 @@
                                        self.image = image;
                                    }else{
                                        [FetchCenter reportToIssueLog:[NSString stringWithFormat:@"图片下载失败\n %@ \n %@ \n",error,imageURL]];
+                                       [FIRAnalytics logEventWithName:@"Image Download Failure"
+                                                           parameters:@{@"error":error,
+                                                                        @"url":url,
+                                                                        @"imageURL":imageURL}];
                                    }
                                }];
             }else{

@@ -16,6 +16,7 @@
 #import "FetchCenter.h"
 #import "WXApiManager.h"
 #import "CWStatusBarNotification.h"
+#import "Firebase.h"
 
 //#import <PgySDK/PgyManager.h>
 #import <TencentOpenAPI/QQApiInterface.h>

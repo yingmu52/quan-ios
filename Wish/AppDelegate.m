@@ -18,6 +18,7 @@
 //#import <PgySDK/PgyManager.h>
 #import "MSRocketStation.h"
 //#import <SMS_SDK/SMSSDK.h>
+
 @interface AppDelegate () <FetchCenterDelegate>
 @property (nonatomic,strong) FetchCenter *fetchCenter;
 @property (nonatomic,weak) LoginViewController *loginVC;
@@ -45,6 +46,8 @@
 //    [pgYmanager startManagerWithAppId:PGY_APPID];
 //    [pgYmanager setShakingThreshold:10.0];
 
+    //启动Firebase
+    [FIRApp configure];
     
     //如果用户未登陆，跳转到登陆页
     if (![User isUserLogin]){
