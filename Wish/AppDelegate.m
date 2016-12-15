@@ -9,13 +9,13 @@
 #import "AppDelegate.h"
 #define BUGLY_APP_ID @"900007998"
 #define QQ_URLSCHEME @"tencent1104337894"
-#define PGY_APPID @"66e5b274501bae9aed70ab7aeea5a7a6"
+//#define PGY_APPID @"66e5b274501bae9aed70ab7aeea5a7a6"
 #import "LoginViewController.h"
 #import "MessageListViewController.h"
 #import "MBProgressHUD.h"
 #import "MainTabBarController.h"
 #import "MessageListViewController.h"
-#import <PgySDK/PgyManager.h>
+//#import <PgySDK/PgyManager.h>
 #import "MSRocketStation.h"
 //#import <SMS_SDK/SMSSDK.h>
 @interface AppDelegate () <FetchCenterDelegate>
@@ -41,9 +41,9 @@
     
     
     //薄公英启动基本SDK
-    PgyManager *pgYmanager = [PgyManager sharedPgyManager];
-    [pgYmanager startManagerWithAppId:PGY_APPID];
-    [pgYmanager setShakingThreshold:10.0];
+//    PgyManager *pgYmanager = [PgyManager sharedPgyManager];
+//    [pgYmanager startManagerWithAppId:PGY_APPID];
+//    [pgYmanager setShakingThreshold:10.0];
 
     
     //如果用户未登陆，跳转到登陆页
