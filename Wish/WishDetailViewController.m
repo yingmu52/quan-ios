@@ -100,13 +100,13 @@
                  }
              }];
             [_moreActionSheet addAction:shareOption];
-        }else if (!self.plan.isPrivate){ //非人主态只可以分享公开的事件
+        }else{
             UIAlertAction *shareOption =
             [UIAlertAction actionWithTitle:@"分享"
                                      style:UIAlertActionStyleDefault
                                    handler:^(UIAlertAction * _Nonnull action)
              {
-                 [self performSegueWithIdentifier:@"showInvitationView" sender:nil];
+                 [self sharePlan];
              }];
             [_moreActionSheet addAction:shareOption];
         }
@@ -123,11 +123,13 @@
 }
 
 - (void)sharePlan{
-    [MSWXShareManager share:self.plan.mTitle
-                description:self.plan.mDescription ? self.plan.mDescription : @""
-                   imageURL:[self.fetchCenter urlWithImageID:self.plan.mCoverImageId
-                                                        size:FetchCenterImageSize50]
-                      h5url:self.plan.shareUrl];
+    if (self.plan.shareUrl.length > 0) {
+        [MSWXShareManager share:self.plan.mTitle
+                    description:self.plan.mDescription ? self.plan.mDescription : @""
+                       imageURL:[self.fetchCenter urlWithImageID:self.plan.mCoverImageId
+                                                            size:FetchCenterImageSize50]
+                          h5url:self.plan.shareUrl];
+    }
 }
 
 
