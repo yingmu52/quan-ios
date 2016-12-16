@@ -13,6 +13,27 @@
 
 - (void)downloadImageWithImageId:(NSString *)imageId size:(FetchCenterImageSize)size{
     
+    //图片地址拼接
+    NSURL *url = [[FetchCenter new] urlWithImageID:imageId size:size];
+
+    [self sd_setImageWithURL:url
+                   completed:^(UIImage *image,
+                               NSError *error,
+                               SDImageCacheType cacheType,
+                               NSURL *imageURL)
+     {
+         if (image && !error) {
+             self.image = image;
+         }else{
+             [FetchCenter reportToIssueLog:[NSString stringWithFormat:@"图片下载失败\n %@ \n %@ \n",error,imageURL]];
+             [FIRAnalytics logEventWithName:@"Image Download Failure"
+                                 parameters:@{@"error":error,
+                                              @"url":url,
+                                              @"imageURL":imageURL}];
+         }
+     }];
+
+    /*
     self.image = nil; //重复使用cell时，需要清空图像
     
     if (imageId) {
@@ -57,6 +78,7 @@
             }
         }
     }
+     */
 }
 
 

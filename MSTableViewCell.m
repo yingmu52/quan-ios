@@ -36,18 +36,12 @@
     // Configure the view for the selected state
 }
 
-//
-//- (void)prepareForReuse{
-//    [super prepareForReuse];
-//    self.ms_title.hidden = NO;
-//    self.ms_subTitle.hidden = NO;
-//    self.ms_statusLabel.hidden = NO;
-//    self.ms_dateLabel.hidden = NO;
-//    self.ms_textView.hidden = NO;
-//    
-//    self.ms_imageView1.hidden = NO;
-//    self.ms_imageView2.hidden = NO;
-//    self.ms_cardBackgroundView.hidden = NO;
-//
-//}
+
+- (void)prepareForReuse{
+    [super prepareForReuse];
+    self.ms_imageView1.image = nil;
+    self.ms_imageView2.image = nil;
+    self.ms_FeatherImage.image = nil;
+    
+}
 @end

@@ -21,4 +21,12 @@
     self.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
 }
 
+- (void)prepareForReuse{
+    [super prepareForReuse];
+    self.ms_imageView1.image = nil;
+    self.ms_imageView2.image = nil;
+    self.ms_imageView3.image = nil;
+}
+
+
 @end
