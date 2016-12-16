@@ -1585,10 +1585,10 @@
                  if ([self.delegate respondsToSelector:@selector(didFailUploadingImage:)]) {
                      [self.delegate didFailUploadingImage:image];
                  }
-                 [FIRAnalytics logEventWithName:@"上传图片失败" parameters:@{@"resp":resp,
-                                                                       @"context":context,
-                                                                       @"local file id":fileId,
-                                                                       @"size":@(imageData.length/1024.0f)}];
+                 [FIRAnalytics logEventWithName:@"Image Upload Failure" parameters:@{@"resp":resp,
+                                                                                     @"context":context,
+                                                                                     @"local file id":fileId,
+                                                                                     @"size":@(imageData.length/1024.0f)}];
              }
              
              //NSLog(@"上传图片失败，code:%d desc:%@", resp.retCode, resp.descMsg);
