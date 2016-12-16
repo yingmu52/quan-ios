@@ -216,10 +216,10 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="600" id="0d2-gl-oiD"/>
-                                    <constraint firstAttribute="width" secondItem="jdd-pV-Xz4" secondAttribute="height" multiplier="3" id="NSz-kQ-1HL"/>
-                                    <constraint firstItem="vJ8-TE-JP1" firstAttribute="height" secondItem="jdd-pV-Xz4" secondAttribute="height" id="fMT-4m-EtE"/>
-                                    <constraint firstAttribute="width" secondItem="7OD-fX-btm" secondAttribute="width" multiplier="3" id="mZq-FG-5T3"/>
+                                    <constraint firstAttribute="height" priority="999" constant="600" id="0d2-gl-oiD"/>
+                                    <constraint firstAttribute="width" secondItem="jdd-pV-Xz4" secondAttribute="height" multiplier="3" priority="999" id="NSz-kQ-1HL"/>
+                                    <constraint firstItem="vJ8-TE-JP1" firstAttribute="height" secondItem="jdd-pV-Xz4" secondAttribute="height" priority="999" id="fMT-4m-EtE"/>
+                                    <constraint firstAttribute="width" secondItem="7OD-fX-btm" secondAttribute="width" multiplier="3" priority="999" id="mZq-FG-5T3"/>
                                 </constraints>
                             </stackView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gWg-mW-hSi">

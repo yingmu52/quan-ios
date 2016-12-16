@@ -1177,7 +1177,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Df1-3t-62p">
-                                            <rect key="frame" x="11" y="0.0" width="223" height="412"/>
+                                            <rect key="frame" x="11" y="0.0" width="223.33333333333334" height="412"/>
                                         </imageView>
                                     </subviews>
                                 </view>
@@ -3393,7 +3393,7 @@
                                 </variation>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hCb-4G-wLB" userLabel="giveup">
-                                <rect key="frame" x="40" y="658.66666666666652" width="145.66666666666666" height="54.333333333333371"/>
+                                <rect key="frame" x="40" y="609.66666666666652" width="145.66666666666666" height="54.333333333333371"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="hCb-4G-wLB" secondAttribute="height" multiplier="132:49" id="2y3-Qa-vs8"/>
                                 </constraints>
@@ -3406,7 +3406,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q5h-js-KUK">
-                                <rect key="frame" x="228.33333333333337" y="658.66666666666652" width="145.66666666666663" height="54.333333333333371"/>
+                                <rect key="frame" x="228.33333333333337" y="609.66666666666652" width="145.66666666666663" height="54.333333333333371"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Q5h-js-KUK" secondAttribute="height" multiplier="132:49" id="J3n-Ze-fiZ"/>
                                     <constraint firstAttribute="width" secondItem="Q5h-js-KUK" secondAttribute="height" multiplier="1:1" id="qY8-BC-JdJ"/>

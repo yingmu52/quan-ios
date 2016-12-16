@@ -128,7 +128,6 @@
             break;
     }
     [self.contentView layoutIfNeeded];
-    NSLog(@"%@",@(_mainStackHeight.constant));
     return _mainStackHeight.constant;
 }
 
