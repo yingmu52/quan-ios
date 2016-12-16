@@ -254,10 +254,9 @@
             [hud hideAnimated:YES afterDelay:2.0];
         }];
     }
-    
-    [FIRAnalytics logEventWithName:@"Join-in Circle" parameters:@{@"received url":url,
-                                                                  @"args":args,
-                                                                  @"if-successed":handleSucceed ? @"Yes" : @"No"}];
+    NSString *value = [NSString stringWithFormat:@"received url:%@",url];
+    [FIRAnalytics logEventWithName:@"JoinedCircle" parameters:@{@"value":value,
+                                                                @"if-successed":handleSucceed ? @"Yes" : @"No"}];
 
     return handleSucceed;
 }

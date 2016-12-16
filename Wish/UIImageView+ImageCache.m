@@ -21,9 +21,10 @@
      {
          if (error) {
              [FetchCenter reportToIssueLog:[NSString stringWithFormat:@"图片下载失败\n %@ \n %@ \n",error,imageURL]];
-             [FIRAnalytics logEventWithName:@"ImageView Download Failure"
-                                 parameters:@{@"error":error,
-                                              @"url":url,
+             
+             [FIRAnalytics logEventWithName:@"ImageViewDownloadFailure"
+                                 parameters:@{@"error":error.description,
+                                              @"url":url.absoluteString,
                                               @"imageURL":imageURL}];
          }
      }];
@@ -91,10 +92,10 @@
     [self sd_setImageWithURL:url forState:UIControlStateNormal completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if (error) {
             [FetchCenter reportToIssueLog:[NSString stringWithFormat:@"图片下载失败\n %@ \n %@ \n",error,imageURL]];
-            [FIRAnalytics logEventWithName:@"Button ImageView Download Failure"
-                                parameters:@{@"error":error,
-                                             @"url":url,
-                                             @"imageURL":imageURL}];
+            [FIRAnalytics logEventWithName:@"ButtonImageViewDownloadFailure"
+                                parameters:@{@"error":error.description,
+                                             @"url":url.absoluteString}];
+            NSLog(@"%@",url);
         }
     }];
 }

@@ -1585,10 +1585,10 @@
                  if ([self.delegate respondsToSelector:@selector(didFailUploadingImage:)]) {
                      [self.delegate didFailUploadingImage:image];
                  }
-                 [FIRAnalytics logEventWithName:@"Image Upload Failure" parameters:@{@"resp":resp,
-                                                                                     @"context":context,
-                                                                                     @"local file id":fileId,
-                                                                                     @"size":@(imageData.length/1024.0f)}];
+                 
+                 [FIRAnalytics logEventWithName:@"ImageUploadFailure" parameters:@{@"resp": resp.descMsg? resp.descMsg : @"no message",
+                                                                                   @"local file id":fileId,
+                                                                                   @"size":@(imageData.length/1024.0f)}];
              }
              
              //NSLog(@"上传图片失败，code:%d desc:%@", resp.retCode, resp.descMsg);
@@ -1678,8 +1678,9 @@
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:rqtStr]
                                                                cachePolicy:NSURLRequestReloadIgnoringCacheData
                                                            timeoutInterval:30.0];
+        NSString *bodyString;
         if ([method isEqualToString:@"POST"]) {
-            NSString *bodyString = [self argumentStringWithDictionary:dict];
+            bodyString = [self argumentStringWithDictionary:dict];
             NSData *bodyData = [[bodyString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]] dataUsingEncoding:NSUTF8StringEncoding];
             request.HTTPBody = bodyData;
         }
@@ -1714,10 +1715,11 @@
                                            request,
                                            [self decodedOBject:response]];
                         [self.class reportToIssueLog:issue];
-                        [FIRAnalytics logEventWithName:@"Fetchcenter Failure"
-                                            parameters:@{@"request":request,
-                                                         @"response":[self decodedOBject:response],
-                                                         @"date":[NSDate date]}];
+                        [FIRAnalytics logEventWithName:@"FetchcenterRequestFailure"
+                                            parameters:@{@"request":request.URL.absoluteString,
+                                                         @"method":method,
+                                                         @"body": bodyString ? bodyString : @"no body string",
+                                                         @"response":[self decodedOBject:response]}];
                         
                         NSLog(@"%@",issue);
                         

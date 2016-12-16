@@ -393,6 +393,12 @@
     
     Feed *feed = [self.tableFetchedRC objectAtIndexPath:indexPath];
     [cell setupForImageCount:feed.imageIdArray];
+    if (feed.picUrls.length == 0) {
+        [FIRAnalytics logEventWithName:@"WishDetailViewInvalidFeed"
+                            parameters:@{@"feedId":feed.mUID,
+                                         @"title":feed.mTitle}];
+    }
+    
     cell.textView.text = feed.mTitle;
     cell.dateLabel.text = [SystemUtil stringFromDate:feed.mCreateTime];
     [cell.likeButton setImage:feed.selfLiked.boolValue ? [Theme likeButtonLiked] : [Theme likeButtonUnLiked]
