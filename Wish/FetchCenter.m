@@ -1764,7 +1764,8 @@
 - (NSString *)addGeneralArgumentsForBaseURL:(NSString *)baseURL{
     NSMutableDictionary *dict = [@{@"version":self.buildVersion,
                                    @"loginType":[User loginType],
-                                   @"device":@"ios"}
+                                   @"device":@"ios",
+                                   @"osVersion":[UIDevice currentDevice].systemVersion}
                                  mutableCopy];
     
     //add user info
