@@ -129,6 +129,9 @@
     }
     [self.contentView layoutIfNeeded];
     return _mainStackHeight.constant;
+    
+    //to hide sub stack view will cause constrain conflicts, see following for resolution
+    //http://stackoverflow.com/questions/32428210/uistackview-unable-to-simultaneously-satisfy-constraints-on-squished-hidden
 }
 
 - (IBAction)buttonPressed:(UIButton *)sender{
