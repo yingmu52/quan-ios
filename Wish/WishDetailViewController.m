@@ -8,7 +8,7 @@
 
 #import "WishDetailViewController.h"
 #import "UIImageView+ImageCache.h"
-//#import "InvitationViewController.h"
+#import "BFRImageViewController.h"
 #import "CircleDetailViewController.h"
 #import "MSWXShareManager.h"
 @interface WishDetailViewController () <HeaderViewDelegate,UIGestureRecognizerDelegate,UITextViewDelegate>
@@ -440,6 +440,18 @@
 - (void)didPressedMoreOnCell:(WishDetailCell *)cell{
 }
 
+- (void)didPressedImagesAtIndex:(NSUInteger)index onCell:(WishDetailCell *)cell{
+    Feed *feed = [self.tableFetchedRC objectAtIndexPath:[self.tableView indexPathForCell:cell]];
+    NSMutableArray *imageURLs = [NSMutableArray array];
+    for (NSString *imageId in feed.imageIdArray) {
+        NSURL *imgUrl = [self.fetchCenter urlWithImageID:imageId size:FetchCenterImageSize800];
+        [imageURLs addObject:imgUrl];
+    }
+    BFRImageViewController *imageVC = [[BFRImageViewController alloc] initForPeekWithImageSource:imageURLs];
+    imageVC.initialIndex = index;
+    [self presentViewController:imageVC animated:YES completion:nil];
+
+}
 
 #pragma mark - segue
 

@@ -12,6 +12,7 @@
 
 @interface WishDetailCell()
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *mainStackHeight;
+@property (nonatomic) NSUInteger numberofimages;
 @end
 @implementation WishDetailCell
 
@@ -37,7 +38,8 @@
 
 - (CGFloat)setupForImageCount:(NSArray *)imageIds{
     CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
-    switch (imageIds.count) {
+    _numberofimages = imageIds.count;
+    switch (_numberofimages) {
         case 1: //imageView 1
             self.imageView7.superview.hidden = YES; //hide upper stack 3
             self.imageView10.superview.hidden = YES; //hide bottom stack 3
@@ -124,7 +126,7 @@
             [self.imageView11 downloadImageWithImageId:imageIds[6] size:FetchCenterImageSize200];
             [self.imageView12 downloadImageWithImageId:imageIds[7] size:FetchCenterImageSize200];
         default:
-            NSAssert(imageIds.count >= 1 && imageIds.count <= 8, @"Invalid Count Range");
+            NSAssert(_numberofimages >= 1 && _numberofimages <= 8, @"Invalid Count Range");
             break;
     }
     [self.contentView layoutIfNeeded];
@@ -135,7 +137,73 @@
 }
 
 - (IBAction)buttonPressed:(UIButton *)sender{
-    NSLog(@"%@",@(sender.tag));
+    NSUInteger index;
+    switch (sender.tag) {
+        case 1:
+            index = 0;
+            break;
+        case 2:
+            index = 1;
+            break;
+        case 3:
+            index = 2;
+            break;
+        case 4:
+            index = 3;
+            break;
+        case 5:
+            index = 1;
+            break;
+        case 6:
+            index = 2;
+            break;
+        case 7:
+            if (_numberofimages == 5 || _numberofimages == 8) {
+                index = 2;
+            }else if (_numberofimages == 6 ){
+                index = 3;
+            }else if (_numberofimages == 7){
+                index = 4;
+            }else{
+                NSAssert(false, @"WishDetail Cell: error on case 7");
+            }
+            break;
+        case 8:
+            if (_numberofimages == 5 || _numberofimages == 8) {
+                index = 3;
+            }else if (_numberofimages == 6 ){
+                index = 4;
+            }else if (_numberofimages == 7){
+                index = 5;
+            }else{
+                NSAssert(false, @"WishDetail Cell: error on case 8");
+            }
+            break;
+        case 9:
+            if (_numberofimages == 5 || _numberofimages == 8) {
+                index = 4;
+            }else if (_numberofimages == 6 ){
+                index = 5;
+            }else if (_numberofimages == 7){
+                index = 6;
+            }else{
+                NSAssert(false, @"WishDetail Cell: error on case 9");
+            }
+            break;
+        case 10:
+            index = 5;
+            break;
+        case 11:
+            index = 6;
+            break;
+        case 12:
+            index = 7;
+            break;
+        default:
+            index = 0;
+            break;
+    }
+    [self.delegate didPressedImagesAtIndex:index onCell:self];
 }
 
 

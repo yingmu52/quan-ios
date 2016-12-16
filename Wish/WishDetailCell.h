@@ -16,6 +16,7 @@
 @optional
 - (void)didPressedLikeOnCell:(WishDetailCell *)cell;
 - (void)didPressedMoreOnCell:(WishDetailCell *)cell;
+- (void)didPressedImagesAtIndex:(NSUInteger)index onCell:(WishDetailCell *)cell;
 @end
 
 @interface WishDetailCell : UITableViewCell
