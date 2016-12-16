@@ -35,7 +35,7 @@
 {
     for(NSArray *panel in self->_characters)
         for(NSString *emoji in panel)
-            if([emoji isEqualToString:[string stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]])
+            if([emoji isEqualToString:[string stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]]])
                 return YES;
     
     return NO;
@@ -63,7 +63,7 @@
         return nil;
     
     NSString *emojiEscaped = [(NSArray*)[self->_characters objectAtIndex:section] objectAtIndex:row];
-    return [emojiEscaped stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    return [emojiEscaped stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
 }
 
 #pragma mark - Private Methods

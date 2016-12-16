@@ -391,8 +391,8 @@
     
     if (circleId) {
         NSDictionary *inputParams = @{@"id":circleId,
-                                      @"name":circleName ? [circleName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] : @"",
-                                      @"description":circleDescription ? [circleDescription stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] : @"",
+                                      @"name":circleName ? [circleName stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]] : @"",
+                                      @"description":circleDescription ? [circleDescription stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]] : @"",
                                       @"backGroudPic":imageId ? imageId : @""};
         [self getRequest:rqtStr
                parameter:inputParams
@@ -428,8 +428,8 @@
     if (circleName) {
         NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,CIRCLE,CREATE_CIRCLE];
         [self getRequest:rqtStr
-               parameter:@{@"name":[circleName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                           @"description":circleDescription ? [circleDescription stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] : @"",
+               parameter:@{@"name":[circleName stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]],
+                           @"description":circleDescription ? [circleDescription stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]] : @"",
                            @"backGroudPic":imageId ? imageId : @""}
         includeArguments:YES
               completion:^(NSDictionary *responseJson)
@@ -529,10 +529,10 @@
     if (circleId) {
         NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,TOOL,SWITCH_CIRCLE];
         [self getRequest:rqtStr
-               parameter:@{@"key":[TOOLCGIKEY stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+               parameter:@{@"key":[TOOLCGIKEY stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]],
                            @"id":circleId,
                            @"manId":[User uid],
-                           @"operate":[@"add" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]}
+                           @"operate":[@"add" stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]]}
         includeArguments:NO
               completion:^(NSDictionary *responseJson) {
                   NSLog(@"%@",responseJson);
@@ -831,7 +831,7 @@
     
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,COMMENT_FEED];
     NSDictionary *args = @{@"feedsId":feedID,
-                           @"content":[text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                           @"content":[text stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]],
                            @"commentTo": (ownerID ? ownerID : @"")};
     
     [self getRequest:rqtStr
@@ -980,7 +980,7 @@
     
     return [[[NSString alloc] initWithData:jsonData
                                   encoding:NSUTF8StringEncoding]
-            stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
 }
 
 - (void)createFeed:(NSString *)feedTitle
@@ -992,7 +992,7 @@
         //设置请求参数
         NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,FEED,CREATE_FEED];
         NSDictionary *args = @{@"picurl":imageIds.firstObject, //第一张为背影图
-                               @"content":[feedTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                               @"content":[feedTitle stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]],
                                @"planId":planId,
                                @"picurls":[imageIds componentsJoinedByString:@","],
                                @"feedsType":@(imageIds.count > 1 ? FeedTypeMultiplePicture : FeedTypeSinglePicture)};
@@ -1166,9 +1166,9 @@
              content:(NSString *)email
           completion:(FetchCenterGetRequestCompleted)completionBlock{
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,OTHER,FEED_BACK];
-    NSDictionary *args = @{@"title":[@"Feedback From iOS Client Application" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                           @"content":[content stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                           @"moreInfo":[email ? email : @"User did not specify contact info" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]};
+    NSDictionary *args = @{@"title":[@"Feedback From iOS Client Application" stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]],
+                           @"content":[content stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]],
+                           @"moreInfo":[email ? email : @"User did not specify contact info" stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]]};
     [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
         NSLog(@"反馈成功");
         if (completionBlock) {
@@ -1218,11 +1218,11 @@
     
     NSString *ocpStr = occupation ? occupation : @"";
     NSString *infoStr = info ? info : @"";
-    NSDictionary *args = @{@"name":[nickName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+    NSDictionary *args = @{@"name":[nickName stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]],
                            @"gender":[gender isEqualToString:@"男"] ? @(1):@(0),
                            @"headUrl":imageId,
-                           @"profession":[ocpStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                           @"description":[infoStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]};
+                           @"profession":[ocpStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]],
+                           @"description":[infoStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]]};
     
     [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
         [User updateAttributeFromDictionary:@{USER_DISPLAY_NAME:nickName,
@@ -1275,9 +1275,9 @@
     //—— 每一项都可以单独更新
     NSString *rqtStr = [NSString stringWithFormat:@"%@%@%@",self.baseUrl,PLAN,UPDATE_PLAN];
     NSDictionary *args = @{@"id":planId,
-                           @"title":[planTitle stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                           @"title":[planTitle stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]],
                            @"private":@(isPrivate),
-                           @"description":planDescription ? [planDescription stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] : @""};
+                           @"description":planDescription ? [planDescription stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]] : @""};
     [self getRequest:rqtStr parameter:args includeArguments:YES completion:^(NSDictionary *responseJson) {
 
         //更新本地事件
@@ -1680,7 +1680,7 @@
                                                            timeoutInterval:30.0];
         if ([method isEqualToString:@"POST"]) {
             NSString *bodyString = [self argumentStringWithDictionary:dict];
-            NSData *bodyData = [[bodyString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] dataUsingEncoding:NSUTF8StringEncoding];
+            NSData *bodyData = [[bodyString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]] dataUsingEncoding:NSUTF8StringEncoding];
             request.HTTPBody = bodyData;
         }
         
