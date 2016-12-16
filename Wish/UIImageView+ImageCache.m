@@ -9,10 +9,7 @@
 #import "UIImageView+ImageCache.h"
 
 @implementation UIImageView (ImageCache)
-
-
 - (void)downloadImageWithImageId:(NSString *)imageId size:(FetchCenterImageSize)size{
-    
     //图片地址拼接
     NSURL *url = [[FetchCenter new] urlWithImageID:imageId size:size];
 
@@ -22,11 +19,9 @@
                                SDImageCacheType cacheType,
                                NSURL *imageURL)
      {
-         if (image && !error) {
-             self.image = image;
-         }else{
+         if (error) {
              [FetchCenter reportToIssueLog:[NSString stringWithFormat:@"图片下载失败\n %@ \n %@ \n",error,imageURL]];
-             [FIRAnalytics logEventWithName:@"Image Download Failure"
+             [FIRAnalytics logEventWithName:@"ImageView Download Failure"
                                  parameters:@{@"error":error,
                                               @"url":url,
                                               @"imageURL":imageURL}];
@@ -81,24 +76,29 @@
      */
 }
 
-
-// **** use txydownloader ****
-//        TXYDownloader *downloadManager = [[TXYDownloader alloc] initWithPersistenceId:nil
-//                                                                                 type:TXYDownloadTypePhoto];
-//        [downloadManager download:url.absoluteString
-//                           target:self
-//                        succBlock:^(NSString *url, NSData *data, NSDictionary *info) {
-//                            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//                                //Background Thread
-//                                UIImage *image = [UIImage imageWithData:data];
-//                                [manager.imageCache storeImage:image forKey:localKey];
-//                                dispatch_main_async_safe(^{
-//                                    self.image = image;
-//                                });
-//                            });
-//                        }failBlock:^(NSString *url, NSError *error){
-//                            NSLog(@"图片下载失败，code:%zd desc:%@", error.code, error.domain);
-//                        }progressBlock:^(NSString *url, NSNumber *value){
-//                        } param:nil];
 @end
+
+
+@implementation UIButton (ImageCache)
+
+- (void)downloadImageWithImageId:(NSString *)imageId size:(FetchCenterImageSize)size{
+    [self.imageView setContentMode:UIViewContentModeScaleAspectFill];
+    self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
+    self.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
+    //图片地址拼接
+    NSURL *url = [[FetchCenter new] urlWithImageID:imageId size:size];
+    
+    [self sd_setImageWithURL:url forState:UIControlStateNormal completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (error) {
+            [FetchCenter reportToIssueLog:[NSString stringWithFormat:@"图片下载失败\n %@ \n %@ \n",error,imageURL]];
+            [FIRAnalytics logEventWithName:@"Button ImageView Download Failure"
+                                parameters:@{@"error":error,
+                                             @"url":url,
+                                             @"imageURL":imageURL}];
+        }
+    }];
+}
+
+@end
+
 

@@ -329,17 +329,52 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     Feed *feed = [self.tableFetchedRC objectAtIndexPath:indexPath];
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    
+    
+    //calculate text view height
     CGRect bounds = [feed.mTitle boundingRectWithSize:CGSizeMake(width - 16.0f,CGFLOAT_MAX) //label左右有8.0f的距离
                                                  options:NSStringDrawingUsesLineFragmentOrigin
                                               attributes:self.textAttributes
                                                  context:nil];
     
     CGFloat limit = 80.0f;
-    CGFloat height = CGRectGetHeight(bounds);
-    if (height > limit) height = limit;
-    return  height + width + 33.0f; // 剩余的padding约33.0f;
+    CGFloat textViewHeight = CGRectGetHeight(bounds);
+    if (textViewHeight > limit) textViewHeight = limit;
     
-    //    return 430.0f;
+    
+    
+    //calculate image section height
+    CGFloat imagesHeight;
+    switch (feed.imageIdArray.count) {
+        case 1:
+            imagesHeight = width;
+            break;
+        case 2:
+            imagesHeight = width / 2;
+            break;
+        case 3:
+            imagesHeight = width * 2 / 3;
+            break;
+        case 4:
+            imagesHeight = width;
+            break;
+        case 5:
+            imagesHeight = width * 5 / 6;
+            break;
+        case 6:
+            imagesHeight = width;
+            break;
+        case 7:
+            imagesHeight = width * 4 / 3;
+            break;
+        case 8:
+            imagesHeight = width * 7 / 6;
+            break;
+        default:
+            imagesHeight = width;
+            break;
+    }
+    return  imagesHeight + textViewHeight + 60.0f; // 剩余的padding约60.0f;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -355,25 +390,15 @@
 
 - (void)configureTableViewCell:(WishDetailCell *)cell atIndexPath:(NSIndexPath *)indexPath{
     cell.delegate = self;
-    Feed *feed = [self.tableFetchedRC objectAtIndexPath:indexPath];
-    cell.dateLabel.text = [SystemUtil stringFromDate:feed.mCreateTime];
     
+    Feed *feed = [self.tableFetchedRC objectAtIndexPath:indexPath];
+    [cell setupForImageCount:feed.imageIdArray];
+    cell.textView.text = feed.mTitle;
+    cell.dateLabel.text = [SystemUtil stringFromDate:feed.mCreateTime];
     [cell.likeButton setImage:feed.selfLiked.boolValue ? [Theme likeButtonLiked] : [Theme likeButtonUnLiked]
                      forState:UIControlStateNormal];
-    
-    cell.titleLabel.text = feed.mTitle;
-    
     cell.likeCountLabel.text = feed.likeCount.integerValue ? [NSString stringWithFormat:@"%@",feed.likeCount] : @"赞";
     cell.commentCountLabel.text = feed.commentCount.integerValue ? [NSString stringWithFormat:@"%@",feed.commentCount] : @"评论";
-    
-    NSNumber *numberOfPictures = [feed numberOfPictures];
-    if (numberOfPictures.integerValue > 1) {
-        cell.pictureCountLabel.hidden = NO;
-        [cell setPictureLabelText:[NSString stringWithFormat:@"共%@张",[feed numberOfPictures]]];
-    }else{
-        cell.pictureCountLabel.hidden = YES;
-    }
-    [cell.photoView downloadImageWithImageId:feed.mCoverImageId size:FetchCenterImageSize800];
 }
 
 

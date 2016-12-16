@@ -10,9 +10,11 @@
 #import "FetchCenter.h"
 #import "UIImageView+WebCache.h"
 #import "SDWebImageManager.h"
-
+#import "UIButton+WebCache.h"
 @interface UIImageView (ImageCache)
-
 - (void)downloadImageWithImageId:(NSString *)imageId size:(FetchCenterImageSize)size;
+@end
 
+@interface UIButton (ImageCache)
+- (void)downloadImageWithImageId:(NSString *)imageId size:(FetchCenterImageSize)size;
 @end

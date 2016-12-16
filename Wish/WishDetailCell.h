@@ -19,19 +19,33 @@
 @end
 
 @interface WishDetailCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *photoView;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
+
+@property (weak, nonatomic) IBOutlet UIButton *imageView1;
+@property (weak, nonatomic) IBOutlet UIButton *imageView2;
+@property (weak, nonatomic) IBOutlet UIButton *imageView3;
+@property (weak, nonatomic) IBOutlet UIButton *imageView4;
+@property (weak, nonatomic) IBOutlet UIButton *imageView5;
+@property (weak, nonatomic) IBOutlet UIButton *imageView6;
+@property (weak, nonatomic) IBOutlet UIButton *imageView7;
+@property (weak, nonatomic) IBOutlet UIButton *imageView8;
+@property (weak, nonatomic) IBOutlet UIButton *imageView9;
+@property (weak, nonatomic) IBOutlet UIButton *imageView10;
+@property (weak, nonatomic) IBOutlet UIButton *imageView11;
+@property (weak, nonatomic) IBOutlet UIButton *imageView12;
+
+
+
+@property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UIButton *commentButton;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet UILabel *likeCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *pictureCountLabel;
 
 
 @property (weak,nonatomic) id <WishDetailCellDelegate> delegate;
 
-- (void)setPictureLabelText:(NSString *)text;
-
 - (IBAction)like:(UIButton *)sender;
+- (CGFloat)setupForImageCount:(NSArray *)imageIds;
 @end
