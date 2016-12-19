@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="400" height="800"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pxc-Ad-lPE" id="eoV-9B-OOG">
-                <rect key="frame" x="0.0" y="0.0" width="400" height="799"/>
+                <rect key="frame" x="0.0" y="0.0" width="400" height="799.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EE8-Zb-7dr">
@@ -111,19 +111,19 @@
                                         <rect key="frame" x="0.0" y="0.0" width="384" height="334"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="kLX-4J-cqB" userLabel="Left">
-                                                <rect key="frame" x="0.0" y="0.0" width="251" height="334"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="254.5" height="334"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="QBM-xx-iDs" userLabel="Left-Up">
-                                                        <rect key="frame" x="0.0" y="0.0" width="251" height="164.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="254.5" height="164.5"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="1" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bEf-HS-lZg" userLabel="Button1">
-                                                                <rect key="frame" x="0.0" y="0.0" width="123" height="164.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="124.5" height="164.5"/>
                                                                 <connections>
                                                                     <action selector="buttonPressed:" destination="pxc-Ad-lPE" eventType="touchUpInside" id="jYw-Wa-XZq"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" tag="2" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zF6-z2-vDk" userLabel="Button2">
-                                                                <rect key="frame" x="128" y="0.0" width="123" height="164.5"/>
+                                                                <rect key="frame" x="129.5" y="0.0" width="125" height="164.5"/>
                                                                 <connections>
                                                                     <action selector="buttonPressed:" destination="pxc-Ad-lPE" eventType="touchUpInside" id="efu-CP-75g"/>
                                                                 </connections>
@@ -131,16 +131,16 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="b9O-Su-x7q" userLabel="Left-Down">
-                                                        <rect key="frame" x="0.0" y="169.5" width="251" height="164.5"/>
+                                                        <rect key="frame" x="0.0" y="169.5" width="254.5" height="164.5"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="3" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3bR-V3-kHT" userLabel="Button3">
-                                                                <rect key="frame" x="0.0" y="0.0" width="123" height="164.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="124.5" height="164.5"/>
                                                                 <connections>
                                                                     <action selector="buttonPressed:" destination="pxc-Ad-lPE" eventType="touchUpInside" id="4JE-OT-ilm"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" tag="4" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rHm-45-Um4" userLabel="Button4">
-                                                                <rect key="frame" x="128" y="0.0" width="123" height="164.5"/>
+                                                                <rect key="frame" x="129.5" y="0.0" width="125" height="164.5"/>
                                                                 <connections>
                                                                     <action selector="buttonPressed:" destination="pxc-Ad-lPE" eventType="touchUpInside" id="05z-Wv-wtT"/>
                                                                 </connections>
@@ -150,16 +150,16 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="7OD-fX-btm" userLabel="Right">
-                                                <rect key="frame" x="256" y="0.0" width="128" height="334"/>
+                                                <rect key="frame" x="259.5" y="0.0" width="124.5" height="334"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="5" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6sL-c7-OQe" userLabel="Button5">
-                                                        <rect key="frame" x="0.0" y="0.0" width="128" height="164.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="124.5" height="164.5"/>
                                                         <connections>
                                                             <action selector="buttonPressed:" destination="pxc-Ad-lPE" eventType="touchUpInside" id="6fO-PW-B3h"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="6" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LL0-Pk-HAD" userLabel="Button6">
-                                                        <rect key="frame" x="0.0" y="169.5" width="128" height="164.5"/>
+                                                        <rect key="frame" x="0.0" y="169.5" width="124.5" height="164.5"/>
                                                         <connections>
                                                             <action selector="buttonPressed:" destination="pxc-Ad-lPE" eventType="touchUpInside" id="IhZ-Ef-1Ri"/>
                                                         </connections>
@@ -219,7 +219,7 @@
                                     <constraint firstAttribute="height" priority="999" constant="600" id="0d2-gl-oiD"/>
                                     <constraint firstAttribute="width" secondItem="jdd-pV-Xz4" secondAttribute="height" multiplier="3" priority="999" id="NSz-kQ-1HL"/>
                                     <constraint firstItem="vJ8-TE-JP1" firstAttribute="height" secondItem="jdd-pV-Xz4" secondAttribute="height" priority="999" id="fMT-4m-EtE"/>
-                                    <constraint firstAttribute="width" secondItem="7OD-fX-btm" secondAttribute="width" multiplier="3" priority="999" id="mZq-FG-5T3"/>
+                                    <constraint firstAttribute="width" secondItem="7OD-fX-btm" secondAttribute="width" multiplier="3" priority="999" constant="10" id="mZq-FG-5T3"/>
                                 </constraints>
                             </stackView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gWg-mW-hSi">
