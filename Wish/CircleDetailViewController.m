@@ -90,6 +90,8 @@
                                               NSNumber *totalPage,
                                               NSArray *topMemberList)
     {
+        [self.headerView updateFollowButton:self.circle];
+        
         if ([currentPage isEqualToNumber:totalPage]) {
             [self.tableView.mj_footer endRefreshingWithNoMoreData];
         }else{

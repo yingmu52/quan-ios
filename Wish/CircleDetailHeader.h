@@ -20,5 +20,5 @@
 
 
 - (void)setupHeaderView:(Circle *)circle;
-
+- (void)updateFollowButton:(Circle *)circle;
 @end

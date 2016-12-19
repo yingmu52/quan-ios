@@ -30,20 +30,23 @@
     }
     self.frame = frame;
 
-    
-    if (circle.isFollowable.boolValue) {
-        if (circle.circleType.integerValue == CircleTypeFollowed) {
-            [self.followButton setTitle:@"已关注" forState:UIControlStateNormal];
-            self.followButton.enabled = NO;
-            NSLog(@"圈子已经关注");
-        }
+}
+
+- (void)updateFollowButton:(Circle *)circle{
+    if (circle.circleType.integerValue == CircleTypeFollowed) {
+        [self.followButton setTitle:@"已关注" forState:UIControlStateNormal];
+        self.followButton.hidden = NO;
+        self.followButton.enabled = NO;
+        NSLog(@"圈子已经关注");
+    }else if (circle.isFollowable.boolValue){
+        [self.followButton setTitle:@"关注" forState:UIControlStateNormal];
+        self.followButton.hidden = NO;
+        self.followButton.enabled = YES;
     }else{
         NSLog(@"圈子不允许被关注");
         self.followButton.hidden = YES;
     }
-    
 }
-
 
 - (void)awakeFromNib{
     [super awakeFromNib];

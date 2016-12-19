@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -555,14 +554,14 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUg-Jm-0bg">
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUg-Jm-0bg">
                                             <rect key="frame" x="324" y="90" width="70" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="22" id="H0X-JG-qYQ"/>
                                                 <constraint firstAttribute="width" constant="70" id="ye6-sf-lEU"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                            <state key="normal" title="关注 ">
+                                            <state key="normal">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
@@ -955,11 +954,11 @@
                                 <exclude reference="HjB-Ef-su6"/>
                                 <exclude reference="fth-56-TUO"/>
                                 <exclude reference="rXF-xy-LEb"/>
-                                <exclude reference="FMZ-bS-2Ps"/>
-                                <exclude reference="lDS-sL-Mgg"/>
                                 <exclude reference="9ud-10-Nts"/>
                                 <exclude reference="azW-xx-Bqf"/>
                                 <exclude reference="fSh-GJ-HXk"/>
+                                <exclude reference="FMZ-bS-2Ps"/>
+                                <exclude reference="lDS-sL-Mgg"/>
                                 <exclude reference="SJH-m5-CJS"/>
                                 <exclude reference="UNa-Wd-aKH"/>
                                 <exclude reference="jLn-Ia-aXU"/>
@@ -976,11 +975,11 @@
                                 <include reference="HjB-Ef-su6"/>
                                 <include reference="fth-56-TUO"/>
                                 <include reference="rXF-xy-LEb"/>
-                                <include reference="FMZ-bS-2Ps"/>
-                                <include reference="lDS-sL-Mgg"/>
                                 <include reference="9ud-10-Nts"/>
                                 <include reference="azW-xx-Bqf"/>
                                 <include reference="fSh-GJ-HXk"/>
+                                <include reference="FMZ-bS-2Ps"/>
+                                <include reference="lDS-sL-Mgg"/>
                                 <include reference="SJH-m5-CJS"/>
                                 <include reference="UNa-Wd-aKH"/>
                                 <include reference="jLn-Ia-aXU"/>
@@ -1018,7 +1017,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="57"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalCompressionResistancePriority="751" tableViewCell="gw9-6d-24e" id="iqD-He-byZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="56.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="56.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nof-Fv-MXi" customClass="NZCircularImageView">
@@ -1110,7 +1109,7 @@
                                         <rect key="frame" x="0.0" y="85" width="414" height="57"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalCompressionResistancePriority="751" tableViewCell="2o3-5M-rZh" id="Q4o-GY-SnP">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="56.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="56.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ipr-Oj-Uxk" customClass="NZCircularImageView">
@@ -1331,7 +1330,7 @@
                                         <rect key="frame" x="0.0" y="128" width="414" height="54"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E48-zj-oQm" id="Qa6-QO-zE8">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="53.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="53.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="圈子名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kbS-u6-Pm6">
@@ -1392,7 +1391,7 @@
                                         <rect key="frame" x="0.0" y="182" width="414" height="147"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EVR-oZ-gou" id="0n8-1i-cxs">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="146.66666666666666"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="146.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="圈子描述" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbf-3x-KKm">
