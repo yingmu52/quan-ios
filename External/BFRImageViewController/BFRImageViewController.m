@@ -63,15 +63,17 @@
     return self;
 }
 
+
+- (BOOL)prefersStatusBarHidden{
+    return self.shouldHideStatusBar;
+}
+
 #pragma mark - View Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     //View setup
     self.view.backgroundColor = self.isUsingTransparentBackground ? [UIColor clearColor] : [UIColor blackColor];
-    if (self.shouldHideStatusBar) {
-        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
-    }
     
     //Setup image view controllers
     self.imageViewControllers = [NSMutableArray new];
@@ -181,13 +183,11 @@
 - (void)dismiss {
     self.pagerVC.dataSource = nil;
     self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)handlePop {
     self.view.backgroundColor = [UIColor blackColor];
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     [self addChromeToUI];
 }
 

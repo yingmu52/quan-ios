@@ -18,8 +18,6 @@
 #import "SZTextView.h"
 
 
-static NSUInteger distance = 10;
-
 @interface PostFeedViewController () <UICollectionViewDataSource,UICollectionViewDelegate,ImagePickerDelegate,ImagePreviewControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic,strong) UIButton *tikButton;
 

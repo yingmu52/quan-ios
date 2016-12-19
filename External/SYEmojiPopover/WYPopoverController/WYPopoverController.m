@@ -830,7 +830,7 @@ static float edgeSizeFromCornerRadius(float cornerRadius) {
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
     if (testHits) {
-        return NO;
+        return nil;
     }
     
     UIView *view = [super hitTest:point withEvent:event];
@@ -2142,8 +2142,6 @@ static WYPopoverTheme *defaultTheme_ = nil;
 {
     CGAffineTransform transform = backgroundView.transform;
     
-    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-
     CGSize containerViewSize = backgroundView.frame.size;
     
     if (backgroundView.arrowHeight > 0)
@@ -2934,31 +2932,30 @@ static WYPopoverTheme *defaultTheme_ = nil;
 
 #pragma mark Inline functions
 
-static NSString* WYStringFromOrientation(NSInteger orientation) {
-    NSString *result = @"Unknown";
-    
-    switch (orientation) {
-        case UIInterfaceOrientationPortrait:
-            result = @"Portrait";
-            break;
-        case UIInterfaceOrientationPortraitUpsideDown:
-            result = @"Portrait UpsideDown";
-            break;
-        case UIInterfaceOrientationLandscapeLeft:
-            result = @"Landscape Left";
-            break;
-        case UIInterfaceOrientationLandscapeRight:
-            result = @"Landscape Right";
-            break;
-        default:
-            break;
-    }
-    
-    return result;
-}
-
+//static NSString* WYStringFromOrientation(NSInteger orientation) {
+//    NSString *result = @"Unknown";
+//    
+//    switch (orientation) {
+//        case UIInterfaceOrientationPortrait:
+//            result = @"Portrait";
+//            break;
+//        case UIInterfaceOrientationPortraitUpsideDown:
+//            result = @"Portrait UpsideDown";
+//            break;
+//        case UIInterfaceOrientationLandscapeLeft:
+//            result = @"Landscape Left";
+//            break;
+//        case UIInterfaceOrientationLandscapeRight:
+//            result = @"Landscape Right";
+//            break;
+//        default:
+//            break;
+//    }
+//    
+//    return result;
+//}
+//
 static float WYStatusBarHeight() {
-    UIInterfaceOrientation orienation = [[UIApplication sharedApplication] statusBarOrientation];
     
     float statusBarHeight = 0;
     {
@@ -3092,17 +3089,11 @@ static CGPoint WYPointRelativeToOrientation(CGPoint origin, CGSize size, UIInter
         CGRect anotherRect;
         UIView *anotherInView;
         
-        [delegate popoverController:self willRepositionPopoverToRect:&anotherRect inView:&anotherInView];
-        
-        if (&anotherRect != NULL)
-        {
-            rect = anotherRect;
-        }
-        
-        if (&anotherInView != NULL)
-        {
-            inView = anotherInView;
-        }
+        [delegate popoverController:self
+        willRepositionPopoverToRect:&anotherRect
+                             inView:&anotherInView];
+        rect = anotherRect;
+        inView = anotherInView;
     }
     
     [self positionPopover:NO];

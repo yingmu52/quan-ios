@@ -405,8 +405,8 @@
     if([sender isKindOfClass:[UIButton class]])
         character = [(UIButton*)sender titleForState:UIControlStateNormal];
     
-    if(![[SYEmojiCharacters sharedCharacters] isCharacterEmoji:character])
-        return;
+//    if(![[SYEmojiCharacters sharedCharacters] isCharacterEmoji:character])
+//        return;
     
     if(self.clickedCharacter)
         self.clickedCharacter(character);

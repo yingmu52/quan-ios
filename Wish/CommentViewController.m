@@ -166,7 +166,8 @@
 - (IBAction)clickOnEmojiButton:(UIButton *)sender{
     CGPoint point = CGPointMake(sender.center.x, CGRectGetHeight(self.view.frame) - self.keyboardHeight.constant - 22.0); //表情图标高度为44.0f
     [self.emojiView showFromPoint:point
-                           inView:self.view withTitle:@"点击插入表情"];
+                           inView:self.view
+                        withTitle:@"点击插入表情"];
 }
 
 @end
