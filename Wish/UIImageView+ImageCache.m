@@ -25,7 +25,7 @@
              [FIRAnalytics logEventWithName:@"ImageViewDownloadFailure"
                                  parameters:@{@"error":error.description,
                                               @"url":url.absoluteString,
-                                              @"imageURL":imageURL}];
+                                              @"imageURL":imageURL.absoluteString}];
          }
      }];
 
