@@ -264,9 +264,9 @@
                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:sectionIndex]
                               withRowAnimation:UITableViewRowAnimationNone];
                 break;
-            case NSFetchedResultsChangeMove:
-                [self.tableView moveSection:sectionIndex toSection:sectionIndex];
-                break;
+//            case NSFetchedResultsChangeMove:
+//                [self.tableView moveSection:sectionIndex toSection:sectionIndex];
+//                break;
             default:
                 break;
         }
@@ -299,9 +299,9 @@
                 [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
             }
                 break;
-             case NSFetchedResultsChangeMove:
-                [self.tableView moveRowAtIndexPath:indexPath toIndexPath:newIndexPath];
-                break;
+//             case NSFetchedResultsChangeMove:
+//                [self.tableView moveRowAtIndexPath:indexPath toIndexPath:newIndexPath];
+//                break;
                 
             default:
                 break;

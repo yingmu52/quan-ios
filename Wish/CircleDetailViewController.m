@@ -99,12 +99,12 @@
             request.predicate = [NSPredicate predicateWithFormat:@"mUID IN %@",topMemberList];
             request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"mLastReadTime" ascending:YES]];
             self.collectionFetchRequest = request;
-            
+            self.collectionFetchedRC.delegate = nil;
+
             NSError *error;
             [self.collectionFetchedRC performFetch:&error];
             if (!error) {
                 [self.collectionView reloadData];
-                self.collectionFetchedRC.delegate = nil;
             }
         }
         
