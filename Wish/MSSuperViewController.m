@@ -254,15 +254,11 @@
         switch(type) {
             case NSFetchedResultsChangeInsert:
                 [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]
-                              withRowAnimation:UITableViewRowAnimationFade];
+                              withRowAnimation:UITableViewRowAnimationNone];
                 break;
             case NSFetchedResultsChangeDelete:
                 [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]
-                              withRowAnimation:UITableViewRowAnimationFade];
-                break;
-            case NSFetchedResultsChangeUpdate:
-                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:sectionIndex]
-                              withRowAnimation:UITableViewRowAnimationFade];
+                              withRowAnimation:UITableViewRowAnimationNone];
                 break;
             default:
                 break;
@@ -283,18 +279,21 @@
         switch(type)
         {
             case NSFetchedResultsChangeInsert:{
-                [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+                [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationNone];
             }
                 break;
                 
             case NSFetchedResultsChangeDelete:{
-                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
             }
                 break;
                 
             case NSFetchedResultsChangeUpdate:{
-                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
             }
+                break;
+             case NSFetchedResultsChangeMove:
+                [self.tableView moveRowAtIndexPath:indexPath toIndexPath:newIndexPath];
                 break;
                 
             default:
