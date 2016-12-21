@@ -356,16 +356,18 @@
             ![self.managedObjectContext save:&error]) {
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         }else{
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 @try {
-                    // Save the context.
-                    NSError *error = nil;
-                    if (self.writerManagedObjectContext.hasChanges &&
-                        ![self.writerManagedObjectContext save:&error]) {
-                        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-                    }else{
-                        NSLog(@"Stored Data on %@ Thread \n\n\n",[NSThread isMainThread] ? @"Main" : @"Background");
-                    }
+                    [self.writerManagedObjectContext performBlock:^{
+                        // Save the context.
+                        NSError *error = nil;
+                        if (self.writerManagedObjectContext.hasChanges &&
+                            ![self.writerManagedObjectContext save:&error]) {
+                            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+                        }else{
+                            NSLog(@"Stored Data on %@ Thread \n\n\n",[NSThread isMainThread] ? @"Main" : @"Background");
+                        }
+                    }];
                 } @catch (NSException *exception) {
                     [self resetDataStore];
                 }

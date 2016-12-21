@@ -234,56 +234,66 @@
 
 // MARK: tableFetchedRC Delegate
 
-/*
+
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller{
 
     if (controller == self.tableFetchedRC) {
         [self.tableView beginUpdates];
-    }
-    
-    if (controller == self.collectionFetchedRC) {
+    }else if (controller == self.collectionFetchedRC) {
         self.itemChanges = [[NSMutableArray alloc] init];
+    }else{
+        NSAssert(false, @"Unkown Error in 'controllerWillChangeContent' ");
     }
 
 }
 
 
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
+           atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+    if (controller == self.tableFetchedRC) {
+        switch(type) {
+            case NSFetchedResultsChangeInsert:
+                [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+                              withRowAnimation:UITableViewRowAnimationFade];
+                break;
+            case NSFetchedResultsChangeDelete:
+                [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+                              withRowAnimation:UITableViewRowAnimationFade];
+                break;
+            case NSFetchedResultsChangeUpdate:
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+                              withRowAnimation:UITableViewRowAnimationFade];
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+
 - (void)controller:(NSFetchedResultsController *)controller
    didChangeObject:(id)anObject
-       atIndexPath:(NSIndexPath *)indexPath
+       atIndexPath:(nullable NSIndexPath *)indexPath
      forChangeType:(NSFetchedResultsChangeType)type
-      newIndexPath:(NSIndexPath *)newIndexPath
+      newIndexPath:(nullable NSIndexPath *)newIndexPath
 {
 
 
     if (controller == self.tableFetchedRC) {
-        UITableView *tableView = self.tableView;
         switch(type)
         {
             case NSFetchedResultsChangeInsert:{
-                NSLog(@"Table Inserted");
-                [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+                [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             }
                 break;
                 
             case NSFetchedResultsChangeDelete:{
-                NSLog(@"Table Deleted");
-                [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             }
                 break;
                 
             case NSFetchedResultsChangeUpdate:{
-                NSLog(@"Table Updated");
-                [self configureTableViewCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
-            }
-                break;
-                
-            case NSFetchedResultsChangeMove:{
-                NSLog(@"Table Moved");
-                [tableView deleteRowsAtIndexPaths:@[indexPath]
-                                 withRowAnimation:UITableViewRowAnimationFade];
-                [tableView insertRowsAtIndexPaths:@[indexPath]
-                                 withRowAnimation:UITableViewRowAnimationFade];
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             }
                 break;
                 
@@ -291,29 +301,28 @@
                 break;
         }
         
+    }else if (controller == self.collectionFetchedRC) {
+        NSMutableDictionary *change = [[NSMutableDictionary alloc] init];
+        switch(type) {
+            case NSFetchedResultsChangeInsert:
+                change[@(type)] = newIndexPath;
+                break;
+            case NSFetchedResultsChangeDelete:
+                change[@(type)] = indexPath;
+                break;
+            case NSFetchedResultsChangeMove:
+                change[@(type)] = @[indexPath, newIndexPath];
+                break;
+            case NSFetchedResultsChangeUpdate:
+                change[@(type)] = indexPath;
+                break;
+            default:
+                break;
+        }
+        [self.itemChanges addObject:change];
+    }else{
+        NSAssert(false, @"Unkown Error in 'didChangeObject:atIndexPath' ");
     }
-    
-    
-//    if (controller == self.collectionFetchedRC) {
-//        NSMutableDictionary *change = [[NSMutableDictionary alloc] init];
-//        switch(type) {
-//            case NSFetchedResultsChangeInsert:
-//                change[@(type)] = newIndexPath;
-//                break;
-//            case NSFetchedResultsChangeDelete:
-//                change[@(type)] = indexPath;
-//                break;
-//            case NSFetchedResultsChangeMove:
-//                change[@(type)] = @[indexPath, newIndexPath];
-//                break;
-//            case NSFetchedResultsChangeUpdate:
-//                change[@(type)] = indexPath;
-//                break;
-//            default:
-//                break;
-//        }
-//        [self.itemChanges addObject:change];
-//    }
     
 }
 
@@ -321,57 +330,40 @@
 {
     if (controller == self.tableFetchedRC) {
         [self.tableView endUpdates];
-    }
-    
-    if (controller == self.collectionFetchedRC) {
-        [self.collectionView reloadData];
-//        [self.collectionView performBatchUpdates: ^{
-//            UICollectionView *collectionView = self.collectionView;
-//            for (NSDictionary *change in self.itemChanges) {
-//                [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-//                    NSFetchedResultsChangeType type = [key unsignedIntegerValue];
-//                    switch(type) {
-//                        case NSFetchedResultsChangeInsert:
-//                            [collectionView insertItemsAtIndexPaths:@[obj]];
-//                            break;
-//                        case NSFetchedResultsChangeDelete:
-//                            [collectionView deleteItemsAtIndexPaths:@[obj]];
-//                            break;
-//                        case NSFetchedResultsChangeMove:
-//                            [collectionView moveItemAtIndexPath:obj[0] toIndexPath:obj[1]];
-//                            break;
-//                        case NSFetchedResultsChangeUpdate:
-//                            [collectionView reloadItemsAtIndexPaths:@[obj]];
-//                            break;
-//                        default:
-//                            break;
-//                    }
-//                }];
-//            }
-//        } completion:^(BOOL finished) {
-//            self.itemChanges = nil;;
-//        }];
-        
+    }else if (controller == self.collectionFetchedRC) {
+        [self.collectionView performBatchUpdates: ^{
+            for (NSDictionary *change in self.itemChanges) {
+                [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+                    NSFetchedResultsChangeType type = [key unsignedIntegerValue];
+                    switch(type) {
+                        case NSFetchedResultsChangeInsert:
+                            [self.collectionView insertItemsAtIndexPaths:@[obj]];
+                            break;
+                        case NSFetchedResultsChangeDelete:
+                            [self.collectionView deleteItemsAtIndexPaths:@[obj]];
+                            break;
+                        case NSFetchedResultsChangeMove:
+                            [self.collectionView moveItemAtIndexPath:obj[0] toIndexPath:obj[1]];
+                            break;
+                        case NSFetchedResultsChangeUpdate:
+                            [self.collectionView reloadItemsAtIndexPaths:@[obj]];
+                            break;
+                        default:
+                            break;
+                    }
+                }];
+            }
+        } completion:^(BOOL finished) {
+            self.itemChanges = nil;;
+        }];
+    }else{
+        NSAssert(false, @"Unkown Error in 'controllerDidChangeContent' ");
     }
 }
 
-*/
-
-// /*
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
-    if (controller == self.tableFetchedRC) {
-        [self.tableView reloadData];
-    }
-    
-    if (controller == self.collectionFetchedRC) {
-        [self.collectionView reloadData];
-    }
+- (void)configureTableViewCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
+    return;
 }
- 
-// */
-
-
-- (void)configureTableViewCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{}
 
 @end
 
