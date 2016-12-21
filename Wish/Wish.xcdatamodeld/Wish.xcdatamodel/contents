@@ -3,6 +3,7 @@
     <entity name="Circle" representedClassName="Circle" parentEntity="MSBase" syncable="YES">
         <attribute name="circleType" optional="YES" attributeType="Integer 16" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="isFollowable" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="isMember" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="newPlanCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="nFans" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="nFansToday" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -68,7 +69,7 @@
         <attribute name="progress" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Circle" positionX="-8631" positionY="-409" width="128" height="148"/>
+        <element name="Circle" positionX="-8631" positionY="-409" width="128" height="165"/>
         <element name="Comment" positionX="-9108" positionY="-63" width="128" height="103"/>
         <element name="Feed" positionX="-9108" positionY="-306" width="128" height="148"/>
         <element name="Message" positionX="-8642" positionY="-223" width="128" height="118"/>

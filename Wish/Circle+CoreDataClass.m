@@ -74,6 +74,12 @@
         circle.isFollowable = [iscanwatch boolValue] ? @YES : @NO;
     }
     
+    id isMember = info[@"ismember"];
+    if (isMember) {
+        circle.isMember = [isMember boolValue] ? @YES : @NO;
+    }
+
+    
     id planCounts = info[@"plancount"];
     if (planCounts && ![circle.newPlanCount isEqualToNumber:@([planCounts integerValue])]) {
         circle.newPlanCount = @([planCounts integerValue]);

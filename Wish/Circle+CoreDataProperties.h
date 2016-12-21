@@ -2,7 +2,7 @@
 //  Circle+CoreDataProperties.h
 //  Stories
 //
-//  Created by Xinyi Zhuang on 10/8/16.
+//  Created by Xinyi Zhuang on 21/12/2016.
 //  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //
 
@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSNumber *nFans;
 @property (nullable, nonatomic, copy) NSNumber *nFansToday;
 @property (nullable, nonatomic, copy) NSString *ownerId;
+@property (nullable, nonatomic, copy) NSNumber *isMember;
 @property (nullable, nonatomic, retain) NSSet<Plan *> *plans;
 
 @end

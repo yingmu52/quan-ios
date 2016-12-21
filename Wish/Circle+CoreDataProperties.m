@@ -2,7 +2,7 @@
 //  Circle+CoreDataProperties.m
 //  Stories
 //
-//  Created by Xinyi Zhuang on 10/8/16.
+//  Created by Xinyi Zhuang on 21/12/2016.
 //  Copyright © 2016 Xinyi Zhuang. All rights reserved.
 //
 
@@ -20,6 +20,7 @@
 @dynamic nFans;
 @dynamic nFansToday;
 @dynamic ownerId;
+@dynamic isMember;
 @dynamic plans;
 
 @end

@@ -48,12 +48,6 @@
     [self setupHeaderView];
     [self loadMoreData];
     
-    
-    //主人态有创建事件入口
-    if ([self.circle.ownerId isEqualToString:[User uid]]){
-        [self setupPostViewEntry];
-    }
-    
 }
 
 
@@ -112,6 +106,11 @@
                 [self.collectionView reloadData];
                 self.collectionFetchedRC.delegate = nil;
             }
+        }
+        
+        //成员身份有创建事件入口
+        if (!self.cameraButton && self.circle.isMember.boolValue) {
+            [self setupPostViewEntry];
         }
     }];
 }
