@@ -309,7 +309,9 @@
 (NSFetchedResultsController *)controller
 {
     [super controllerDidChangeContent:controller];
-    [self.headerView updateHeaderWithPlan:self.plan];
+    if (controller == self.tableFetchedRC) {
+        [self.headerView updateHeaderWithPlan:self.plan];
+    }
 }
 
 

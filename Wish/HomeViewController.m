@@ -196,8 +196,8 @@ ViewForEmptyEventDelegate,StationViewControllerDelegate>
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [super controllerDidChangeContent:controller];
     if (controller == self.collectionFetchedRC) {
-        [super controllerDidChangeContent:controller];
         if (!controller.fetchedObjects.count){
             [self setUpEmptyView];
         }else{

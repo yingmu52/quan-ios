@@ -260,6 +260,13 @@
                 [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]
                               withRowAnimation:UITableViewRowAnimationNone];
                 break;
+            case NSFetchedResultsChangeUpdate:
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+                              withRowAnimation:UITableViewRowAnimationNone];
+                break;
+            case NSFetchedResultsChangeMove:
+                [self.tableView moveSection:sectionIndex toSection:sectionIndex];
+                break;
             default:
                 break;
         }

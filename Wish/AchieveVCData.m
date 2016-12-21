@@ -82,7 +82,8 @@
 - (void)controllerDidChangeContent:
 (NSFetchedResultsController *)controller
 {
-    if (self.tableFetchedRC.fetchedObjects.count == 0) {
+    [super controllerDidChangeContent:controller];
+    if (self.tableFetchedRC.fetchedObjects.count == 0 && controller == self.tableFetchedRC) {
         [self setupEmptySign];
     }
 }

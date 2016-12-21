@@ -117,15 +117,16 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
     [super controllerDidChangeContent:controller];
-    
-    //展示最左边第一项
-    [UIView animateWithDuration:0.5 animations:^{
-        NSIndexPath *selectedPath = self.collectionView.indexPathsForSelectedItems.lastObject;
-        [self.collectionView deselectItemAtIndexPath:selectedPath
-                                            animated:YES];
-        [self.collectionView setContentOffset:CGPointZero
-                                     animated:YES];
-    }];
+    if (controller == self.collectionFetchedRC) {
+        //展示最左边第一项
+        [UIView animateWithDuration:0.5 animations:^{
+            NSIndexPath *selectedPath = self.collectionView.indexPathsForSelectedItems.lastObject;
+            [self.collectionView deselectItemAtIndexPath:selectedPath
+                                                animated:YES];
+            [self.collectionView setContentOffset:CGPointZero
+                                         animated:YES];
+        }];
+    }
     
 }
 

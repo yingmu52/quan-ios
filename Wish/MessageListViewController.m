@@ -173,7 +173,9 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
     [super controllerDidChangeContent:controller];
-    self.navigationItem.rightBarButtonItem.enabled = controller.fetchedObjects.count > 0;
+    if (controller == self.tableFetchedRC) {
+        self.navigationItem.rightBarButtonItem.enabled = controller.fetchedObjects.count > 0;
+    }
 }
 
 
