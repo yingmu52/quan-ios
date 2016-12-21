@@ -937,9 +937,15 @@
         
         NSDictionary *planInfo = [responseJson valueForKeyPath:@"data.plan"];
         NSDictionary *ownerInfo = [responseJson valueForKeyPath:@"data.man"];
+        NSDictionary *circleInfo = [responseJson valueForKeyPath:@"data.plan.quan"];
+        
         Plan *plan = [Plan updatePlanFromServer:planInfo
                                       ownerInfo:ownerInfo
                            managedObjectContext:workerContext];
+        
+        plan.circle = [Circle updateCircleWithInfo:circleInfo
+                              managedObjectContext:workerContext];
+        
         
         NSArray *feeds = [responseJson valueForKeyPath:@"data.feedsList"];
         
