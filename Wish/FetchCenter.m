@@ -1592,9 +1592,9 @@
                      [self.delegate didFailUploadingImage:image];
                  }
                  
-                 [FIRAnalytics logEventWithName:@"ImageUploadFailure" parameters:@{@"resp": resp.descMsg? resp.descMsg : @"no message",
-                                                                                   @"local file id":fileId,
-                                                                                   @"size":@(imageData.length/1024.0f)}];
+                 [FIRAnalytics logEventWithName:@"ImageUploadFailure"
+                                     parameters:@{@"resp": resp.descMsg? resp.descMsg : @"no message",
+                                                  @"size":@(imageData.length/1024.0f)}];
              }
              
              //NSLog(@"上传图片失败，code:%d desc:%@", resp.retCode, resp.descMsg);

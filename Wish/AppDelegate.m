@@ -255,8 +255,9 @@
         }];
     }
     NSString *value = [NSString stringWithFormat:@"received url:%@",url];
-    [FIRAnalytics logEventWithName:@"JoinedCircle" parameters:@{@"value":value,
-                                                                @"if-successed":handleSucceed ? @"Yes" : @"No"}];
+    [FIRAnalytics logEventWithName:@"JoinedCircle"
+                        parameters:@{@"value":value,
+                                     @"successed":handleSucceed ? @"Yes" : @"No"}];
 
     return handleSucceed;
 }

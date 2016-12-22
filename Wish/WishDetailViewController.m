@@ -398,7 +398,8 @@
     if (feed.picUrls.length == 0) {
         [FIRAnalytics logEventWithName:@"WishDetailViewInvalidFeed"
                             parameters:@{@"feedId":feed.mUID,
-                                         @"title":feed.mTitle}];
+                                         @"planId":feed.plan.mUID,
+                                         @"circleId":feed.plan.circle.mUID ? feed.plan.circle.mUID : @"no circle id"}];
     }
     
     cell.textView.text = feed.mTitle;
