@@ -240,7 +240,7 @@
     if (controller == self.tableFetchedRC) {
         [self.tableView beginUpdates];
     }else if (controller == self.collectionFetchedRC) {
-        self.itemChanges = [[NSMutableArray alloc] init];
+//        self.itemChanges = [[NSMutableArray alloc] init];
     }else{
         NSAssert(false, @"Unkown Error in 'controllerWillChangeContent' ");
     }
@@ -306,24 +306,24 @@
         }
         
     }else if (controller == self.collectionFetchedRC) {
-        NSMutableDictionary *change = [[NSMutableDictionary alloc] init];
-        switch(type) {
-            case NSFetchedResultsChangeInsert:
-                change[@(type)] = newIndexPath;
-                break;
-            case NSFetchedResultsChangeDelete:
-                change[@(type)] = indexPath;
-                break;
-            case NSFetchedResultsChangeMove:
-                change[@(type)] = @[indexPath, newIndexPath];
-                break;
-            case NSFetchedResultsChangeUpdate:
-                change[@(type)] = indexPath;
-                break;
-            default:
-                break;
-        }
-        [self.itemChanges addObject:change];
+//        NSMutableDictionary *change = [[NSMutableDictionary alloc] init];
+//        switch(type) {
+//            case NSFetchedResultsChangeInsert:
+//                change[@(type)] = newIndexPath;
+//                break;
+//            case NSFetchedResultsChangeDelete:
+//                change[@(type)] = indexPath;
+//                break;
+//            case NSFetchedResultsChangeMove:
+//                change[@(type)] = @[indexPath, newIndexPath];
+//                break;
+//            case NSFetchedResultsChangeUpdate:
+//                change[@(type)] = indexPath;
+//                break;
+//            default:
+//                break;
+//        }
+//        [self.itemChanges addObject:change];
     }else{
         NSAssert(false, @"Unkown Error in 'didChangeObject:atIndexPath' ");
     }
@@ -335,34 +335,35 @@
     if (controller == self.tableFetchedRC) {
         [self.tableView endUpdates];
     }else if (controller == self.collectionFetchedRC) {
-        __weak typeof(self) weakSelf = self;
-        [self.collectionView performBatchUpdates: ^{
-            for (NSDictionary *change in self.itemChanges) {
-                [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-                    NSFetchedResultsChangeType type = [key unsignedIntegerValue];
-                    switch(type) {
-                        case NSFetchedResultsChangeInsert:
-                            [weakSelf.collectionView insertItemsAtIndexPaths:@[obj]];
-                            break;
-                        case NSFetchedResultsChangeDelete:
-                            [weakSelf.collectionView deleteItemsAtIndexPaths:@[obj]];
-                            break;
-                        case NSFetchedResultsChangeMove:{
-                            [weakSelf.collectionView deleteItemsAtIndexPaths:@[obj]];
-                            [weakSelf.collectionView insertItemsAtIndexPaths:@[obj]];
-                        }
-                            break;
-                        case NSFetchedResultsChangeUpdate:
-                            [weakSelf.collectionView reloadItemsAtIndexPaths:@[obj]];
-                            break;
-                        default:
-                            break;
-                    }
-                }];
-            }
-        } completion:^(BOOL finished) {
-            self.itemChanges = nil;
-        }];
+        [self.collectionView reloadData];
+////        __weak typeof(self) weakSelf = self;
+////        [self.collectionView performBatchUpdates: ^{
+////            for (NSDictionary *change in self.itemChanges) {
+////                [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+////                    NSFetchedResultsChangeType type = [key unsignedIntegerValue];
+////                    switch(type) {
+////                        case NSFetchedResultsChangeInsert:
+////                            [weakSelf.collectionView insertItemsAtIndexPaths:@[obj]];
+////                            break;
+////                        case NSFetchedResultsChangeDelete:
+////                            [weakSelf.collectionView deleteItemsAtIndexPaths:@[obj]];
+////                            break;
+////                        case NSFetchedResultsChangeMove:{
+////                            [weakSelf.collectionView deleteItemsAtIndexPaths:@[obj]];
+////                            [weakSelf.collectionView insertItemsAtIndexPaths:@[obj]];
+////                        }
+////                            break;
+////                        case NSFetchedResultsChangeUpdate:
+////                            [weakSelf.collectionView reloadItemsAtIndexPaths:@[obj]];
+////                            break;
+////                        default:
+////                            break;
+////                    }
+////                }];
+////            }
+//        } completion:^(BOOL finished) {
+//            self.itemChanges = nil;
+//        }];
     }else{
         NSAssert(false, @"Unkown Error in 'controllerDidChangeContent' ");
     }
