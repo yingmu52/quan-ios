@@ -1790,7 +1790,7 @@
 
 - (NSURL *)urlWithImageID:(NSString *)imageId size:(FetchCenterImageSize)size{
     
-    NSString *base = [NSString stringWithFormat:@"http://shier-%@.image.myqcloud.com/%@",YOUTU_APP_ID,imageId];
+    NSString *base = [NSString stringWithFormat:@"https://shier-%@.image.myqcloud.com/%@",YOUTU_APP_ID,imageId];
     NSString *url = (size == FetchCenterImageSizeOriginal) ? base : [base stringByAppendingFormat:@"/%@",@(size)];
 //    if (imageId.length > 30) { //优图id
 //    

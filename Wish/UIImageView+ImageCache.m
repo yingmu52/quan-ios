@@ -14,21 +14,19 @@
     NSURL *url = [[FetchCenter new] urlWithImageID:imageId size:size];
 
     [self sd_setImageWithURL:url
-                   completed:^(UIImage *image,
-                               NSError *error,
-                               SDImageCacheType cacheType,
-                               NSURL *imageURL)
-     {
-         if (error) {
-             [FetchCenter reportToIssueLog:[NSString stringWithFormat:@"图片下载失败\n %@ \n %@ \n",error,imageURL]];
-             
-             [FIRAnalytics logEventWithName:@"ImageViewDownloadFailure"
-                                 parameters:@{@"error":error.description,
-                                              @"url":url.absoluteString,
-                                              @"imageURL":imageURL.absoluteString}];
-         }
-     }];
-
+            placeholderImage:nil
+                     options:SDWebImageRetryFailed
+                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
+    {
+        if (error) {
+            [FetchCenter reportToIssueLog:[NSString stringWithFormat:@"图片下载失败\n %@ \n %@ \n",error,imageURL]];
+            
+            [FIRAnalytics logEventWithName:@"ImageViewDownloadFailure"
+                                parameters:@{@"error":error.description,
+                                             @"url":url.absoluteString,
+                                             @"imageURL":imageURL.absoluteString}];
+        }
+    }];
     /*
     self.image = nil; //重复使用cell时，需要清空图像
     
@@ -89,7 +87,7 @@
     //图片地址拼接
     NSURL *url = [[FetchCenter new] urlWithImageID:imageId size:size];
     
-    [self sd_setImageWithURL:url forState:UIControlStateNormal completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [self sd_setImageWithURL:url forState:UIControlStateNormal placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if (error) {
             [FetchCenter reportToIssueLog:[NSString stringWithFormat:@"图片下载失败\n %@ \n %@ \n",error,imageURL]];
             [FIRAnalytics logEventWithName:@"ButtonImageViewDownloadFailure"
