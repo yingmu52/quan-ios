@@ -264,9 +264,6 @@
                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:sectionIndex]
                               withRowAnimation:UITableViewRowAnimationNone];
                 break;
-//            case NSFetchedResultsChangeMove:
-//                [self.tableView moveSection:sectionIndex toSection:sectionIndex];
-//                break;
             default:
                 break;
         }
@@ -299,9 +296,10 @@
                 [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
             }
                 break;
-//             case NSFetchedResultsChangeMove:
-//                [self.tableView moveRowAtIndexPath:indexPath toIndexPath:newIndexPath];
-//                break;
+             case NSFetchedResultsChangeMove:
+                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+                break;
                 
             default:
                 break;
@@ -337,22 +335,25 @@
     if (controller == self.tableFetchedRC) {
         [self.tableView endUpdates];
     }else if (controller == self.collectionFetchedRC) {
+        __weak typeof(self) weakSelf = self;
         [self.collectionView performBatchUpdates: ^{
             for (NSDictionary *change in self.itemChanges) {
                 [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
                     NSFetchedResultsChangeType type = [key unsignedIntegerValue];
                     switch(type) {
                         case NSFetchedResultsChangeInsert:
-                            [self.collectionView insertItemsAtIndexPaths:@[obj]];
+                            [weakSelf.collectionView insertItemsAtIndexPaths:@[obj]];
                             break;
                         case NSFetchedResultsChangeDelete:
-                            [self.collectionView deleteItemsAtIndexPaths:@[obj]];
+                            [weakSelf.collectionView deleteItemsAtIndexPaths:@[obj]];
                             break;
-                        case NSFetchedResultsChangeMove:
-                            [self.collectionView moveItemAtIndexPath:obj[0] toIndexPath:obj[1]];
+                        case NSFetchedResultsChangeMove:{
+                            [weakSelf.collectionView deleteItemsAtIndexPaths:@[obj]];
+                            [weakSelf.collectionView insertItemsAtIndexPaths:@[obj]];
+                        }
                             break;
                         case NSFetchedResultsChangeUpdate:
-                            [self.collectionView reloadItemsAtIndexPaths:@[obj]];
+                            [weakSelf.collectionView reloadItemsAtIndexPaths:@[obj]];
                             break;
                         default:
                             break;
@@ -360,7 +361,7 @@
                 }];
             }
         } completion:^(BOOL finished) {
-            self.itemChanges = nil;;
+            self.itemChanges = nil;
         }];
     }else{
         NSAssert(false, @"Unkown Error in 'controllerDidChangeContent' ");
