@@ -123,6 +123,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)didFailSendingRequest{
+    [self setUpNavigationItem]; // reset button
+}
+
 
 - (IBAction)imageButtonPressed {
     [self.imagePicker showImagePickerForUploadProfileImage:self type:UIImagePickerControllerSourceTypePhotoLibrary];
