@@ -30,9 +30,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    //向后台拉取优图签名
-    [self.fetchCenter requestSignature:nil];
-    
     //向微信注册
     [WXApi registerApp:WECHATAppID];
     

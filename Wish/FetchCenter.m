@@ -1035,38 +1035,41 @@
             progress:(FetchCenterPostRequestUploadImagesReceivedPercentage)progressBlock
           completion:(FetchCenterPostRequestUploadImagesCompleted)completionBlock{
     
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
-    dispatch_async(queue, ^{
-        NSMutableDictionary *imageIdMaps = [NSMutableDictionary dictionary];
-        dispatch_apply(images.count, queue, ^(size_t index){
-            [self postImageWithOperation:images[index]
-                                complete:^(NSString *fetchedId)
-             {
-                 if (fetchedId){
-                     [imageIdMaps addEntriesFromDictionary:@{fetchedId:@(index)}];
-                     if (imageIdMaps.allKeys.count == images.count) {
-                         NSLog(@"%@",imageIdMaps);
-                         NSArray *sorted = [[imageIdMaps allKeys] sortedArrayUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
-                             return [imageIdMaps[obj1] compare:imageIdMaps[obj2]];
-                         }];
-                         NSLog(@"\n%@\n",sorted);
-                         
-                         dispatch_main_async_safe(^{
-                             if (completionBlock) {
-                                 completionBlock(sorted);
-                             }
-                         });
-
-                     }else{
-                         dispatch_main_async_safe(^{
-                             CGFloat progress = (imageIdMaps.allKeys.count - 1e-3) / images.count;
-                             progressBlock(progress);
-                         });
+    [self requestSignature:^(NSString *signature) { //先获取签名
+        
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
+        dispatch_async(queue, ^{
+            NSMutableDictionary *imageIdMaps = [NSMutableDictionary dictionary];
+            dispatch_apply(images.count, queue, ^(size_t index){
+                [self postImageWithOperation:images[index]
+                                    complete:^(NSString *fetchedId)
+                 {
+                     if (fetchedId){
+                         [imageIdMaps addEntriesFromDictionary:@{fetchedId:@(index)}];
+                         if (imageIdMaps.allKeys.count == images.count) {
+                             NSLog(@"%@",imageIdMaps);
+                             NSArray *sorted = [[imageIdMaps allKeys] sortedArrayUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
+                                 return [imageIdMaps[obj1] compare:imageIdMaps[obj2]];
+                             }];
+                             NSLog(@"\n%@\n",sorted);
+                             
+                             dispatch_main_async_safe(^{
+                                 if (completionBlock) {
+                                     completionBlock(sorted);
+                                 }
+                             });
+                             
+                         }else{
+                             dispatch_main_async_safe(^{
+                                 CGFloat progress = (imageIdMaps.allKeys.count - 1e-3) / images.count;
+                                 progressBlock(progress);
+                             });
+                         }
                      }
-                 }
-             }];
+                 }];
+            });
         });
-    });
+    }];
     
 }
 

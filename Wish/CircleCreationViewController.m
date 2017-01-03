@@ -75,10 +75,15 @@
             [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
             UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
-            [self.fetchCenter postImageWithOperation:resizedImage complete:^(NSString *fetchedId) {
+            
+            [self.fetchCenter uploadImages:@[resizedImage]
+                                  progress:nil
+                                completion:^(NSArray *imageIds) {
+                NSString *fetchedId = imageIds.lastObject;
                 //创建圈子
                 [self createCircle:fetchedId sender:sender];
             }];
+            
         }else{
             [self createCircle:nil sender:sender];
         }

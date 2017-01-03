@@ -32,6 +32,7 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
+    
     [self setupViews];
     
     //add observer to detect keyboard height

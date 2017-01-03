@@ -79,10 +79,16 @@
             [self.coverImageView.image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
             UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
-            [self.fetchCenter postImageWithOperation:resizedImage complete:^(NSString *fetchedId) {
+            
+            
+            [self.fetchCenter uploadImages:@[resizedImage]
+                                  progress:nil
+                                completion:^(NSArray *imageIds) {
+                NSString *fetchedId = imageIds.lastObject;
                 //更新圈子
                 [self updateCircle:fetchedId sender:sender];
             }];
+            
         }else{
             if ([self.titleTextField.text isEqualToString:self.circle.mTitle] &&
                 [self.detailTextView.text isEqualToString:self.circle.mDescription]) {
