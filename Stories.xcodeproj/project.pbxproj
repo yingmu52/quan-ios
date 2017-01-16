@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31FF4EAC1E2CEF8D00186150 /* UIImage+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FF4EAB1E2CEF8D00186150 /* UIImage+Size.m */; };
 		A00055501D9B108600658E6B /* CircleDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A000554F1D9B108600658E6B /* CircleDetailViewController.m */; };
 		A01431B41D715E870099258C /* DACircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A01431B11D715E870099258C /* DACircularProgressView.m */; };
 		A01431B51D715E870099258C /* DALabeledCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A01431B31D715E870099258C /* DALabeledCircularProgressView.m */; };
@@ -330,6 +331,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		31FF4EAA1E2CEF8D00186150 /* UIImage+Size.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Size.h"; sourceTree = "<group>"; };
+		31FF4EAB1E2CEF8D00186150 /* UIImage+Size.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Size.m"; sourceTree = "<group>"; };
 		A000554E1D9B108600658E6B /* CircleDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleDetailViewController.h; sourceTree = "<group>"; };
 		A000554F1D9B108600658E6B /* CircleDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleDetailViewController.m; sourceTree = "<group>"; };
 		A01431B01D715E870099258C /* DACircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DACircularProgressView.h; sourceTree = "<group>"; };
@@ -1214,6 +1217,8 @@
 				A0F7D4201B84E851003CCB34 /* LICENSE */,
 				A0F7D4221B84E851003CCB34 /* UIImage+Alpha.h */,
 				A0F7D4231B84E851003CCB34 /* UIImage+Alpha.m */,
+				31FF4EAA1E2CEF8D00186150 /* UIImage+Size.h */,
+				31FF4EAB1E2CEF8D00186150 /* UIImage+Size.m */,
 				A0F7D4261B84E851003CCB34 /* UIImage+RoundedCorner.h */,
 				A0F7D4271B84E851003CCB34 /* UIImage+RoundedCorner.m */,
 				A0F7D4281B84E851003CCB34 /* UIImage-Categories.podspec */,
@@ -1754,6 +1759,7 @@
 				A0C15C9E1D4CB9350094BEF9 /* UIScrollView+MJExtension.m in Sources */,
 				A030105D1BABC6AA0041E2CF /* QBVideoIndicatorView.m in Sources */,
 				A0D102391B84EC03006B0E4E /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */,
+				31FF4EAC1E2CEF8D00186150 /* UIImage+Size.m in Sources */,
 				A0D102311B84EB6A006B0E4E /* UIImageView+HighlightedWebCache.m in Sources */,
 				A0D1021B1B84EB6A006B0E4E /* SDImageCache.m in Sources */,
 				A0D102211B84EB6A006B0E4E /* SDWebImageDownloader.m in Sources */,

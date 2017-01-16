@@ -7,6 +7,7 @@
 //
 
 #import "FetchCenter.h"
+#import "UIImage+Size.h"
 
 #define PROJECT @"/superplan/"
 
@@ -1548,11 +1549,14 @@
     NSString *filePath = [paths[0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg",uuidString]];
     
     //压缩图片
-    NSData *imageData = UIImageJPEGRepresentation(image,0.5);
+    UIImage *scaleImage = [self scaleImage:image];
+    NSData *scaleImageData = UIImageJPEGRepresentation(scaleImage, 0.7);
+    
+    NSData *imageData = scaleImageData;//UIImageJPEGRepresentation(image,0.5);
 
     CGFloat originalSize = UIImagePNGRepresentation(image).length/1024.0f; //in KB
     NSLog(@"original size %@ KB", @(originalSize));
-    NSLog(@"compressed size %@ KB", @(imageData.length/1024.0f));
+    NSLog(@"compressed size %@ KB, scale size %@ kb", @(imageData.length/1024.0f), @(scaleImageData.length / 1024.0f));
     NSAssert(imageData.length, @"0 size image");
     
     if ([imageData writeToFile:filePath atomically:YES]) {
@@ -1636,6 +1640,35 @@
          }];
     }
     
+}
+
+- (UIImage *)scaleImage:(UIImage *)image
+{
+    if (!image) {
+        return nil;
+    }
+    CGFloat scale = [image normalScaleFactor];
+    CGFloat imageWidth = image.drawSize.width * scale;
+    CGFloat imageHeight = image.drawSize.height * scale;
+    
+    if (imageWidth < 0.5) {
+        imageWidth = 0.5;
+    }
+    
+    if (imageHeight < 0.5) {
+        imageHeight = 0.5;
+    }
+    
+    CGSize scaleSize = {imageWidth, imageHeight};
+    BOOL hasAlpha = [image isAlphaChanelImage];
+    
+    UIGraphicsBeginImageContextWithOptions(scaleSize, hasAlpha, 0.0);
+    [image drawInRect:CGRectMake(0, 0, scaleSize.width, scaleSize.height)];
+    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return result;
 }
 
 
