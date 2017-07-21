@@ -39,6 +39,9 @@
     self.tableView.mj_header = nil;
     //不要用beginRefreshing 因为会很淫荡地跳到页面下方
     [self loadMoreData];
+	
+	self.tableView.rowHeight = UITableViewAutomaticDimension;
+	self.tableView.estimatedRowHeight = 60;
 }
 
 
@@ -240,14 +243,6 @@
 }
 
 #pragma mark - table view
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [tableView fd_heightForCellWithIdentifier:FEEDDETAILCELLID
-                                    cacheByIndexPath:indexPath
-                                       configuration:^(id cell) {
-        [self configureCell:cell indexPath:indexPath];
-    }];
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.tableFetchedRC.fetchedObjects.count;

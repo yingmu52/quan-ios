@@ -1,10 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -17,28 +20,28 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="标题" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="24" translatesAutoresizingMaskIntoConstraints="NO" id="v4m-2y-Be7" userLabel="title">
-                        <rect key="frame" x="56" y="10" width="24" height="15"/>
+                        <rect key="frame" x="56" y="8" width="297" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="40" placeholderIntrinsicHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="Q6l-h6-w8m" customClass="NZCircularImageView">
-                        <rect key="frame" x="8" y="16" width="40" height="40"/>
-                        <color key="backgroundColor" red="0.91372549020000005" green="0.91372549020000005" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <rect key="frame" x="8" y="8" width="40" height="40"/>
+                        <color key="backgroundColor" red="0.89248216152191162" green="0.89245545864105225" blue="0.8924705982208252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="Q6l-h6-w8m" secondAttribute="height" multiplier="1:1" id="dmK-hH-Eh1"/>
                             <constraint firstAttribute="height" constant="40" id="lzf-hj-VRK"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="32" translatesAutoresizingMaskIntoConstraints="NO" id="LAI-2f-sgd">
-                        <rect key="frame" x="363" y="12" width="29" height="12"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="32" translatesAutoresizingMaskIntoConstraints="NO" id="LAI-2f-sgd">
+                        <rect key="frame" x="363" y="9.5" width="29" height="12"/>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textView userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="测试测试，测试测试，测试测试，测试测试，测试测试，测试测试，测试测" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eFD-9N-zmS">
-                        <rect key="frame" x="56" y="33" width="336" height="58"/>
-                        <color key="textColor" red="0.1647058824" green="0.1647058824" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <textView userInteractionEnabled="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" scrollEnabled="NO" editable="NO" text="测试测试，测试测试，测试测试，测试测试，测试测试，测试测试，测试测" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eFD-9N-zmS">
+                        <rect key="frame" x="56" y="31" width="336" height="60"/>
+                        <color key="textColor" red="0.12343944609165192" green="0.12343578040599823" blue="0.12343788146972656" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
@@ -50,7 +53,7 @@
                     <constraint firstItem="v4m-2y-Be7" firstAttribute="top" secondItem="xVs-pO-lbH" secondAttribute="top" constant="10" id="HZC-Q9-43D">
                         <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                     </constraint>
-                    <constraint firstItem="LAI-2f-sgd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="v4m-2y-Be7" secondAttribute="trailing" constant="10" id="dsa-2n-uzN"/>
+                    <constraint firstItem="LAI-2f-sgd" firstAttribute="leading" secondItem="v4m-2y-Be7" secondAttribute="trailing" constant="10" id="dsa-2n-uzN"/>
                     <constraint firstAttribute="bottomMargin" secondItem="eFD-9N-zmS" secondAttribute="bottom" id="eSe-tl-MQA"/>
                     <constraint firstItem="Q6l-h6-w8m" firstAttribute="leading" secondItem="xVs-pO-lbH" secondAttribute="leadingMargin" id="gK3-c7-MyY">
                         <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
